@@ -4,15 +4,15 @@
 <title>AdThwart Options</title>
 <style type="text/css" media="screen">
 body {
-	font-size: 75%;
-	font-family: Helvetica, Arial, sans-serif;
+    font-size: 75%;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 h1 {
-	font-size: 150%;
-	font-weight: bold;
-	padding: 0;
-	margin: 0;
+    font-size: 150%;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
 }
 
 h2 {
@@ -58,20 +58,20 @@ function loadOptions() {
 }
 
 function saveOptions() {
-	var shouldShowIcon = document.getElementById("shouldShowIcon");
-	localStorage["shouldShowIcon"] = shouldShowIcon.checked;
+    var shouldShowIcon = document.getElementById("shouldShowIcon");
+    localStorage["shouldShowIcon"] = shouldShowIcon.checked;
 	
-	// Grab contents of userFiltersBox as an array and JSONify it
+    // Grab contents of userFiltersBox as an array and JSONify it
     var userFiltersBox = document.getElementById("userFiltersBox");
     var userFilters = [];
     for (var i = 0; i < userFiltersBox.length; i++)
         userFilters.push(userFiltersBox.options[i].value);
     localStorage["userFilters"] = JSON.stringify(userFilters);
 	
-	// Tell background.html to show/hide icon
-	chrome.extension.sendRequest({reqtype: "refresh-page-icon"}, function(response) {});
-	// Reload filters
-	chrome.extension.sendRequest({reqtype: "reload-filters"}, function(response) {});
+    // Tell background.html to show/hide icon
+    chrome.extension.sendRequest({reqtype: "refresh-page-icon"}, function(response) {});
+    // Reload filters
+    chrome.extension.sendRequest({reqtype: "reload-filters"}, function(response) {});
 }
 
 function appendFilterToListBox(filterText) {
