@@ -1,0 +1,311 @@
+<html>
+<script>
+var abp = {};
+</script>
+<script src="adblockplus/chrome/content/filterClasses.js"/>
+<script src="adblockplus/chrome/content/filterStorage.js"/>
+<script src="adblockplus/chrome/content/elemhide.js"/>
+<script src="adblockplus/chrome/content/filterListener.js"/>
+<script src="adblockplus/chrome/content/matcher.js"/>
+<script>
+
+var lastDomainChecked = "";
+var lastDomainExcluded = false;
+var clickHideFilters = null;
+
+function extractDomainFromURL(url) {
+    var domain = url.match(/:\/\/(.[^\/]+)/)[1];
+	return domain;
+}
+
+// Misnamed! This actually returns an object
+function getOptionsArray(optName) {
+	var thing = localStorage[optName];
+	if(typeof thing != "string") {
+		// Initialize storage
+		localStorage[optName] = JSON.stringify({});
+		return {};
+	}
+	var parsed = JSON.parse(thing);
+	return parsed;
+}
+
+function saveOptionsArray(optName, data) {
+	//console.log("Saving " + optName + " = " + JSON.stringify(data));
+	localStorage[optName] = JSON.stringify(data);
+}
+
+function addFilter(filterText) {
+	var userFilters = localStorage["userFilters"];
+	if(typeof userFilters == "undefined")
+	    userFilters = JSON.stringify(["qux.us###annoying_AdDiv", "qux.us##.ad_class"]);
+	userFilters = JSON.parse(userFilters);
+	userFilters.push(filterText);
+	localStorage["userFilters"] = JSON.stringify(userFilters);
+    abp.filterListener.addFilter(Filter.fromText(filterText));
+}
+
+function removeDomainFromExclusionList(domain) {
+	var excludedDomains = getOptionsArray("excludedDomains");
+	//console.log("Trying to remove " + domain);
+	if(domain in excludedDomains) {
+		delete excludedDomains[domain];
+	}
+	saveOptionsArray("excludedDomains", excludedDomains);
+	lastDomainChecked = "";
+}
+
+function addDomainToExclusionList(domain) {
+	//console.log("Adding " + domain + " to exclusion list");
+	var excludedDomains = getOptionsArray("excludedDomains");
+	excludedDomains[domain.toLowerCase()] = true;
+	saveOptionsArray("excludedDomains", excludedDomains);
+	lastDomainChecked = "";
+}
+
+// Returns true if this domain or any parent domain is in the exclusion list
+function isDomainExcluded(docDomain) {
+    if(!docDomain)
+        return false;
+    docDomain = docDomain.replace(/\.+$/, "").toLowerCase();
+
+	// Cache the last domain that was asked for so we don't
+	// do all this JSON nonsense on every query
+	if(docDomain == lastDomainChecked)
+		return lastDomainExcluded;
+    var excludedDomains = getOptionsArray("excludedDomains");
+    lastDomainChecked = docDomain;
+
+    while (true) {
+        // console.log("Trying " + docDomain);
+        if (docDomain in excludedDomains) {
+            lastDomainExcluded = true;
+            return true;
+        }
+
+        var nextDot = docDomain.indexOf(".");
+        if (nextDot < 0)
+            break;
+        docDomain = docDomain.substr(nextDot + 1);
+    }
+    lastDomainExcluded = false;
+    return false;
+}
+
+function toggleDomainExclusion(tabId) {
+    chrome.tabs.sendRequest(tabId, {reqtype: "get-domain"}, function(response) {
+	    var excluded = isDomainExcluded(response.domain);
+	    if(excluded)
+	        removeDomainFromExclusionList(response.domain);
+	    else
+	        addDomainToExclusionList(response.domain);
+    });
+}
+
+// Adds or removes page action icon according to options.
+// Show devil if enabled, apathetic face otherwise.
+function refreshIcon(tabId) {
+	chrome.tabs.sendRequest(tabId, {reqtype: "get-domain"}, function(response) {
+	    var excluded = isDomainExcluded(response.domain);
+		iconFilename = excluded ? "emotes/face-plain-19.png" : "emotes/face-devilish-19.png";
+		chrome.pageAction.setIcon({tabId: tabId, path: iconFilename});
+		title = "AdThwart is " + (excluded ? "disabled" : "enabled") + " for " + response.domain;
+		chrome.pageAction.setTitle({tabId: tabId, title: title});
+
+		var shouldShowIcon = localStorage["shouldShowIcon"];
+		if(typeof shouldShowIcon != "undefined" && shouldShowIcon == "false") {
+			// console.log("Hiding page icon for " + tabId);
+			chrome.pageAction.hide(tabId);
+		} else {
+			// console.log("Showing page icon " + iconFilename + " for " + tabId + " " + response.domain);
+			chrome.pageAction.show(tabId);
+		}
+		
+	});
+}
+
+// The general strategy here is to load the filters and set up the machinery for
+// deciding whether to block a given element once here, and let content scripts
+// query us about individual elements.
+
+// Loads the filter list from disk and stores it in a global variable
+function loadFiltersRawText(filename) {
+	// I guess we have to load local files through XMLHttpRequest?
+	// Who knows, I'm not very good at this anyhow.
+	listUrl = chrome.extension.getURL(filename);
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", listUrl, false);
+	xhr.send();
+	return xhr.responseText;
+}
+
+function reloadFilters() {
+    abp.filterListener.clear();
+    // Get the filter files list from localStorage. If there is no such list in localStorage,
+    // make and save the default one and continue
+    var filterFiles = getOptionsArray("filterFiles")
+    var numFiles = 0; for(var i in filterFiles) numFiles++;
+    if(numFiles == 0) {
+        filterFiles = {"easylist.txt": true, "extras.txt": true};
+        saveOptionsArray("filterFiles", filterFiles);
+    }
+
+    for(var file in filterFiles) {
+        // Don't load disabled filter lists
+        if(filterFiles[file] == false)
+            continue;
+        var FiltersRawText = loadFiltersRawText(file);
+        // Shove it over to the ABP code to parse
+        var filters = FiltersRawText.split('\n');
+        for (i in filters) {
+        	f = filters[i];
+        	// Ignore zero-length and commented-out lines
+        	if(f.length == 0)
+        		continue;
+        	switch(f[0]) {
+        		case '[':
+        		case '!':
+        			continue;
+        	}
+        	abp.filterListener.addFilter(Filter.fromText(f));
+        }
+    }
+
+    // Add user filters
+    userFilters = localStorage["userFilters"];
+    if(typeof userFilters != "undefined") {
+        userFilters = JSON.parse(userFilters);
+        for(var i = 0; i < userFilters.length; i++) {
+            abp.filterListener.addFilter(Filter.fromText(userFilters[i]));
+        }
+    }
+}
+
+reloadFilters();
+
+// Respond to requests about whether to block particular DOM elements
+// We'll use a "long-lived" connection since we'll be asked about tons of elements
+chrome.extension.onConnect.addListener(function(port) {
+	port.onMessage.addListener(function(msg) {
+	    //if(isDomainExcluded(msg.domain))
+	    //    return;
+	    if(msg.reqtype == "should-block-list?") {
+	        var numElements = msg.urls.length;
+	        blockList = new Array();
+	        for(var i = 0; i < numElements; i++) {
+	            /* // TODO: Disable whitelist filters for the time being...we'll fix this
+	            if(whitelistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, false)) {
+	                if(msg.urls[i].match(/eyewonder/)) {
+    	                //DEBUG
+    	                var rar = blacklistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, true);
+    	                console.log(msg.urls[i] + " " + rar);
+    	                if(rar)
+    	                    console.log("Boo!");
+                    }
+	                continue;
+                } */
+	            if(blacklistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, true)) {
+				    blockList.push(msg.serials[i]);
+			    }
+            }
+            port.postMessage({shouldBlockList: blockList});
+        }
+	});
+});
+
+var lastTabId = 0;
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+    if(request.reqtype == "insert-css") {
+        if(request.file) {
+            chrome.tabs.insertCSS(null, {file: request.file, allFrames: true});
+        }
+        else
+            chrome.tabs.insertCSS(null, {code: request.code, allFrames: true});
+    } else if(request.reqtype == "get-elemhide-selectors") {
+		if(isDomainExcluded(request.domain) == false) {
+		    var selectors = abp.elemhide.getSelectorsToHide(request.domain);
+		    sendResponse({selectors: selectors});
+	    }
+		else
+		    sendResponse({});
+    } else if(request.reqtype == "set-domain-enabled-state") {
+		// Enable/disable ad blocking for a particular domain
+		chrome.tabs.get(lastTabId, function(tab) {
+		    /*
+			// Get the domain being displayed in the current tab
+			chrome.tabs.sendRequest(tab.id, {reqtype: "get-window-hostname"}, function(response) {
+				if(request.enabled)
+					removeDomainFromExclusionList(response.domain);
+				else
+					addDomainToExclusionList(response.domain);
+				// Update icon to reflect exclusion state of domain
+				refreshIcon(tab.id);
+			}); */
+			var domain = extractDomainFromURL(tab.url);
+			if(request.enabled)
+			    removeDomainFromExclusionList(domain);
+			else
+			    addDomainToExclusionList(domain);
+			refreshIcon(tab.id);
+		});
+	} else if(request.reqtype == "get-domain-enabled-state") {
+		// Returns whether this domain is in the exclusion list.
+		// The page action popup asks us this.
+		if(sender.tab) {
+		    //console.log("sender tab id " + sender.tab.id + " " + sender.tab.url);
+			sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(sender.tab.url))});
+			return;
+	    }
+		chrome.tabs.get(lastTabId, function(tab) {
+		    /*
+			chrome.tabs.sendRequest(tab.id, {reqtype: "get-domain"}, function(response) {
+				sendResponse({enabled: !isDomainExcluded(response.domain)});
+				//refreshIcon(tab.id);
+			}); */
+			//console.log("gdes " + tab.id +" " + tab.url);
+			sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(tab.url))});
+		});
+	} else if(request.reqtype == "refresh-page-icon") {
+		// Show page icon according to the user option
+		refreshIcon(lastTabId);
+		sendResponse({});
+	} else if(request.reqtype == "reload-filters") {
+	    reloadFilters();
+	} else if(request.reqtype == "cache-filters") {
+		clickHideFilters = request.filters;
+	} else if(request.reqtype == "apply-cached-filters") {
+		for(var i = 0; i < clickHideFilters.length; i++)
+			addFilter(clickHideFilters[i]);
+		clickHideFilters = null; // clear them for next time around
+	} else if(request.reqtype == "get-cached-filters") {
+        // Popup is asking for ABP filters constructed from whatever the user 
+        // chose during clickHide
+        sendResponse({filters: clickHideFilters});
+    } else {
+		sendResponse({comment: "Something broke! (Unknown message)"}); // allow cleanup of listener
+	}
+});
+
+// Show icon as page action
+chrome.tabs.onSelectionChanged.addListener(function(tabId) {
+	lastTabId = tabId;
+    refreshIcon(tabId);
+
+	// Also, cancel any pending click hide stuff
+	clickHideFilters = null;
+	chrome.tabs.sendRequest(tabId, {reqtype: "clickhide-deactivate"})
+});
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+	lastTabId = tabId;
+    refreshIcon(tabId);
+});
+
+// Show page action on current tab
+chrome.tabs.getSelected(null, function(tab) {
+	lastTabId = tab.id;
+    refreshIcon(tab.id);
+});
+
+</script>
+</html>
