@@ -23,7 +23,7 @@
  		"matches": ["http://*/*", "https://*/*"],
 		"css": ["initial-block.css"],
 		"run_at": "document_start",
-		"all_frames": false
+		"all_frames": true
 	},
  	{
  		"matches": ["http://*/*", "https://*/*"],
