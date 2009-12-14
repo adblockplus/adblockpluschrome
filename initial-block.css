@@ -1,4 +1,4 @@
-img, object { visibility: hidden }
+img, object, iframe, embed { visibility: hidden }
 #A9AdsMiddleBoxTop,
 #A9AdsOutOfStockWidgetTop,
 #A9AdsServicesWidgetTop,
