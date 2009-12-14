@@ -1,0 +1,10 @@
+facebook.com##.adcolumn
+myspace.com###googlead2
+myspace.com##.googleafc
+penny-arcade.com##.funding-horizontal
+penny-arcade.com##.funding-vertical
+prohardver.hu##.adbox
+sydsvenskan.se##.ad
+metal.de##td[align="right"][width="950"]
+metal.de##td[valign="top"][width="160"][rowspan="2"]
+qux.us##.adthwartinstalled

@@ -1,0 +1,163 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+<title>AdThwart Options</title>
+<style type="text/css" media="screen">
+body {
+	font-size: 75%;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 0;
+}
+
+h2 {
+    font-size: 120%;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+}
+
+td {
+    vertical-align: top;
+    text-align: left;
+}
+
+p {
+    margin-top: 0.5em;
+}
+
+.rawFilters {
+    display: none;
+}
+
+</style>
+<script type="text/javascript" charset="utf-8">
+function loadOptions() {
+	// Show icon in address bar?
+	var shouldShowIcon = localStorage["shouldShowIcon"];
+	if(typeof shouldShowIcon == "undefined")
+	    document.getElementById("shouldShowIcon").checked = true;
+	else
+	    document.getElementById("shouldShowIcon").checked = (shouldShowIcon == "true");
+		
+	// User-entered filters
+	var userFilters = localStorage["userFilters"];
+	if(typeof userFilters == "undefined")
+	    userFilters = JSON.stringify(["qux.us###annoying_AdDiv", "qux.us##.ad_class"]);
+	userFilters = JSON.parse(userFilters);
+    // Populate list box with filter strings
+    for(var i = 0; i < userFilters.length; i++)
+        appendFilterToListBox(userFilters[i]);
+		
+	saveOptions(); // Save any defaults that were created
+}
+
+function saveOptions() {
+	var shouldShowIcon = document.getElementById("shouldShowIcon");
+	localStorage["shouldShowIcon"] = shouldShowIcon.checked;
+	
+	// Grab contents of userFiltersBox as an array and JSONify it
+    var userFiltersBox = document.getElementById("userFiltersBox");
+    var userFilters = [];
+    for (var i = 0; i < userFiltersBox.length; i++)
+        userFilters.push(userFiltersBox.options[i].value);
+    localStorage["userFilters"] = JSON.stringify(userFilters);
+	
+	// Tell background.html to show/hide icon
+	chrome.extension.sendRequest({reqtype: "refresh-page-icon"}, function(response) {});
+	// Reload filters
+	chrome.extension.sendRequest({reqtype: "reload-filters"}, function(response) {});
+}
+
+function appendFilterToListBox(filterText) {
+    var elt = document.createElement("option");
+    elt.text = filterText;
+    elt.value = filterText;
+    document.getElementById("userFiltersBox").add(elt, null);
+}
+
+// Adds filter text that user typed to the selection box
+function addTypedFilter() {
+    var filterText = document.getElementById("newFilter").value.split(' ').join('');
+    // ABP filters don't have whitespace
+    if(filterText == "") return;
+    appendFilterToListBox(filterText);
+    saveOptions();
+}
+
+// Removes all currently selected filters
+function removeSelectedFilters() {
+    var userFiltersBox = document.getElementById("userFiltersBox");
+    for (var i = userFiltersBox.length-1; i >= 0; i--) {
+        if (userFiltersBox.options[i].selected)
+            userFiltersBox.remove(i);
+    }
+    saveOptions();
+}
+
+function showFiltersInRawFormat() {
+    $(".rawFilters").show();
+	var userFilters = localStorage["userFilters"];
+    if(typeof userFilters != "undefined") {
+    	userFilters = JSON.parse(userFilters);
+        document.getElementById("rawFiltersText").value = userFilters.join("\n");
+    }
+}
+
+function importRawFiltersText() {
+    $("#userFiltersBox").children().remove();
+    var filters = document.getElementById("rawFiltersText").value.split("\n");
+    console.log("filters length " + filters.length);
+    for(var i = 0; i < filters.length; i++) {
+        var text = filters[i].replace(/\s+$/, "").replace(/^\s+/, "");
+        if(text.length > 0)
+            appendFilterToListBox(filters[i]);
+    }
+}
+
+</script>
+</head>
+<body onload="loadOptions()">
+<h1>AdThwart Options</h1>
+<p><input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar</p>
+
+<!--
+<h2>Enabled filter lists</h2>
+<p>
+<input type="checkbox" id="filtlist_easylist" onClick="saveOptions()" />EasyList<br/>
+<input type="checkbox" id="filtlist_easylistgermany" onClick="saveOptions()" />EasyList Germany<br/>
+<input type="checkbox" id="filtlist_easylistkorea" onClick="saveOptions()" />EasyList Korea<br/>
+</p>
+<p>The original sources of these lists are available <a href="http://adblockplus.org/en/subscriptions">here</a>.</p>
+-->
+<h2>Advanced: Add your own filters</h2>
+<p>Your filter must follow the <a href="http://adblockplus.org/en/filters">AdBlock Plus filter syntax</a>. Due to limitations in Chrome, certain filter types may not work (yet!).</p>
+
+<table>
+<tr><td>
+<input type="text" value="" id="newFilter" style="width:400px"></td>
+<td><button onClick="addTypedFilter()">Add</button></td></tr>
+<tr><td>
+<select id="userFiltersBox" size="20" style="width: 400px; background: white;">
+</select>
+</td><td>
+<button onClick="removeSelectedFilters()">Remove selected</button></td></tr>
+
+<tr><td>
+<div style="font-size: 60%; text-align: right"><a onClick="showFiltersInRawFormat()" href="#">Edit filters as raw text</a></div>
+</td></tr>
+<tr><td>
+<div class="rawFilters" style="width: 400px">
+<textarea id="rawFiltersText" style="width: 100%; height: 300px"></textarea>   
+</div></td>
+<td><div class="rawFilters"><button onClick="importRawFiltersText()">Apply changes</button></div></td>
+</tr></table>
+
+<p>See the <a href="http://qux.us/adthwart">AdThwart website</a> for more information about AdThwart.</p>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css" media="screen">
+body {
+	font-size: 75%;
+	font-family: Helvetica, Arial, sans-serif;
+	min-width: 170px;
+}
+
+a { text-decoration: none }
+a:hover { color: #eeeeff }
+
+#filtersList {
+	border: 1px dotted gray;
+	padding: 1px;
+	font-size: 75%;
+	display: none;
+}
+
+.fakeButton {
+	background: #333399;
+	padding: 3px;
+	border: 2px solid #eeeeff;
+	color: #ffffff;
+	display: inline;
+}
+
+.spacer {
+	height: 7px;
+	width: 5px;
+	display: block;
+}
+</style>
+
+<script type="text/javascript" charset="utf-8">
+
+var clickHideIsActive = false;
+
+function dbg(msg) {
+	document.getElementById("debugmsg").innerHTML = msg;
+}
+
+function init() {
+	clickHideInactiveStuff();
+	// Ask content script whether clickhide is active. If so, show cancel button.
+	// If that isn't the case, ask background.html whether it has cached filters. If so,
+	// ask the user whether she wants those filters.
+	// Otherwise, we are in default state.
+	chrome.windows.getCurrent(function(w) {
+    	chrome.tabs.getSelected(w.id, function(tab) {
+			chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-active?"}, function(response) {
+				if(response.isActive) {
+					clickHideActiveStuff();
+				} else {
+					chrome.extension.sendRequest({reqtype: "get-cached-filters"}, function(response2) {
+						if(response2.filters) {
+							// Yay, we have some ABP filters cached. Ask the user whether she wants them
+							var filtersList = document.getElementById("filtersList");
+							filtersList.innerHTML = "";
+							for(var i = 0; i < response2.filters.length; i++)
+								filtersList.innerHTML += response2.filters[i] + "<br/>";
+							clickHideRulesPendingStuff();
+						} else
+							clickHideInactiveStuff();
+					});
+				}
+			});
+	  	});
+	});
+
+	chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
+		document.getElementById("enabled").checked = response.enabled;
+		document.getElementById("enabledCheckboxAndLabel").style.display = "block";
+	});
+	chrome.extension.sendRequest({reqtype: "refresh-page-icon"});
+	
+}
+
+function addFilters() {
+	filters = [];
+	// background.html saved the filters for us
+	chrome.extension.sendRequest({reqtype: "apply-cached-filters", filters: filters});
+	clickHideInactiveStuff();
+	// Tell content script to nuke that element
+	chrome.windows.getCurrent(function(w) {
+    	chrome.tabs.getSelected(w.id, function(tab) {
+			chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-deactivate"});
+			chrome.tabs.sendRequest(tab.id, {reqtype: "remove-ads-again"});
+		});
+	});
+	document.getElementById("mustReloadMsg").style.display = "block";
+}
+
+function toggleEnabled() {
+	// Rely on background.html to divine what domain is in the current tab
+	var checked = document.getElementById("enabled").checked;
+	
+	chrome.extension.sendRequest({reqtype: "set-domain-enabled-state", enabled: checked});
+}
+
+function activateClickHide() {
+	clickHideActiveStuff();
+	chrome.windows.getCurrent(function(w) {
+    	chrome.tabs.getSelected(w.id, function(tab) {
+			chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-activate"});
+		});
+	});
+}
+
+function cancelClickHide() {
+	// Tell background.html to toss its clickhide filters
+	chrome.extension.sendRequest({reqtype: "cache-filters", filters: null});
+	clickHideInactiveStuff();
+	chrome.windows.getCurrent(function(w) {
+    	chrome.tabs.getSelected(w.id, function(tab) {
+			chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-deactivate"})
+		});
+	});
+}
+
+function clickHideActiveStuff() {
+	document.getElementById("enabledCheckboxAndLabel").style.display = "none";
+	document.getElementById("clickHideInactiveStuff").style.display = "none";
+	document.getElementById("clickHideRulesPendingStuff").style.display = "none";
+	document.getElementById("clickHideActiveStuff").style.display = "inherit";
+}
+
+function clickHideInactiveStuff() {
+	document.getElementById("enabledCheckboxAndLabel").style.display = "block";
+	document.getElementById("clickHideActiveStuff").style.display = "none";
+	document.getElementById("clickHideRulesPendingStuff").style.display = "none";
+	document.getElementById("clickHideInactiveStuff").style.display = "inherit";
+}
+
+function clickHideRulesPendingStuff() {
+	document.getElementById("enabledCheckboxAndLabel").style.display = "none";
+	document.getElementById("clickHideActiveStuff").style.display = "none";
+	document.getElementById("clickHideInactiveStuff").style.display = "none";
+	document.getElementById("clickHideRulesPendingStuff").style.display = "inherit";
+}
+
+</script>
+</head>
+<body id="main" onload="init()">
+<div id="enabledCheckboxAndLabel" style="display:none"><input id="enabled" type="checkbox" checked onClick="toggleEnabled()">Enabled for this site</div>
+<div id="mustReloadMsg" style="display:none">New filters added; see Options to manage them.</div>
+<div id="clickHideInactiveStuff" style="display: none">	
+<div class="spacer"></div>
+<a href="#"><div id="clickHideButton" class="fakeButton" onClick="activateClickHide()">Easy create filter</div></a>
+</div>
+	
+<div id="clickHideActiveStuff" style="display: none">
+<div id="clickHideMsg">Click on an element on the page, or hover over it and press Alt+B. Then return to this menu.</div>
+<div class="spacer"></div>
+<a href="#"><div id="cancelButton" class="fakeButton" onClick="cancelClickHide()">Cancel</div></a>
+</div>
+
+<div id="clickHideRulesPendingStuff" style="display: none">
+<div id="confirmRulesMsg">Add filter(s)?</div>
+<div id="filtersList" style="display: block">...</div>
+<div class="spacer"></div>
+<a href="#"><div id="confirmAddRulesButton" class="fakeButton" onClick="addFilters()">Add</div></a>
+<a href="#"><div id="cancelAddRulesButton" class="fakeButton" onClick="cancelClickHide()">Cancel</div></a>
+
+</div>
+
+</body>
+</html>

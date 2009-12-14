@@ -1,0 +1,36 @@
+{
+	"name": "AdThwart",
+	"version": "0.3.2",
+	"description": "Blocks ads on websites. Includes the EasyList ad filter list as of 12 Dec 2009.",
+	"page_action": {
+		"default icon": "emotes/face-devilish-19.png",
+		"default title": "AdThwart",
+		"popup": "popup.html"
+	},
+	"icons": {
+		"16": "emotes/face-devilish-16.png",
+		"32": "emotes/face-devilish-32.png",
+		"48": "emotes/face-devilish-48.png",
+		"128": "emotes/face-devilish-128.png"
+	},
+	"permissions": [
+		"tabs", "http://*/*", "https://*/*"
+	],
+	"background_page": "background.html",
+	"options_page": "options.html",
+	"content_scripts": [
+      	{
+      		"matches": ["http://*/*", "https://*/*"],
+      		"css": ["initial-block.css"],
+      		"js": ["jquery-1.3.2.min.js", "blocker_css.js"],
+      		"run_at": "document_start",
+      		"all_frames": true
+      	},
+    	{
+    		"matches": ["http://*/*", "https://*/*"],
+    		"js": ["blocker.js"],
+    		"run_at": "document_end",
+    		"all_frames": true
+    	}
+	], "update_url": "http://qux.us/adthwart/updates.xml"
+}
