@@ -47,7 +47,6 @@ function addFilter(filterText) {
 
 function removeDomainFromExclusionList(domain) {
 	var excludedDomains = getOptionsArray("excludedDomains");
-	//console.log("Trying to remove " + domain);
 	if(domain in excludedDomains) {
 		delete excludedDomains[domain];
 	}
@@ -56,7 +55,6 @@ function removeDomainFromExclusionList(domain) {
 }
 
 function addDomainToExclusionList(domain) {
-	//console.log("Adding " + domain + " to exclusion list");
 	var excludedDomains = getOptionsArray("excludedDomains");
 	excludedDomains[domain.toLowerCase()] = true;
 	saveOptionsArray("excludedDomains", excludedDomains);
@@ -67,7 +65,9 @@ function addDomainToExclusionList(domain) {
 function isDomainExcluded(docDomain) {
     if(!docDomain)
         return false;
+        
     docDomain = docDomain.replace(/\.+$/, "").toLowerCase();
+    //console.log("isDomainExcluded: " + docDomain);
 
 	// Cache the last domain that was asked for so we don't
 	// do all this JSON nonsense on every query
@@ -77,7 +77,6 @@ function isDomainExcluded(docDomain) {
     lastDomainChecked = docDomain;
 
     while (true) {
-        // console.log("Trying " + docDomain);
         if (docDomain in excludedDomains) {
             lastDomainExcluded = true;
             return true;
@@ -105,22 +104,20 @@ function toggleDomainExclusion(tabId) {
 // Adds or removes page action icon according to options.
 // Show devil if enabled, apathetic face otherwise.
 function refreshIcon(tabId) {
-	chrome.tabs.sendRequest(tabId, {reqtype: "get-domain"}, function(response) {
-	    var excluded = isDomainExcluded(response.domain);
+    chrome.tabs.get(tabId, function(tab) {
+        var domain = extractDomainFromURL(tab.url);
+	    var excluded = isDomainExcluded(domain);
 		iconFilename = excluded ? "emotes/face-plain-19.png" : "emotes/face-devilish-19.png";
 		chrome.pageAction.setIcon({tabId: tabId, path: iconFilename});
-		title = "AdThwart is " + (excluded ? "disabled" : "enabled") + " for " + response.domain;
+		title = "AdThwart is " + (excluded ? "disabled" : "enabled") + " for " + domain;
 		chrome.pageAction.setTitle({tabId: tabId, title: title});
 
 		var shouldShowIcon = localStorage["shouldShowIcon"];
 		if(typeof shouldShowIcon != "undefined" && shouldShowIcon == "false") {
-			// console.log("Hiding page icon for " + tabId);
 			chrome.pageAction.hide(tabId);
 		} else {
-			// console.log("Showing page icon " + iconFilename + " for " + tabId + " " + response.domain);
 			chrome.pageAction.show(tabId);
 		}
-		
 	});
 }
 
@@ -222,12 +219,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         else
             chrome.tabs.insertCSS(null, {code: request.code, allFrames: true});
     } else if(request.reqtype == "get-elemhide-selectors") {
-		if(isDomainExcluded(request.domain) == false) {
-		    var selectors = abp.elemhide.getSelectorsToHide(request.domain);
-		    sendResponse({selectors: selectors});
-	    }
-		else
-		    sendResponse({});
+	    var selectors = abp.elemhide.getSelectorsToHide(request.domain);
+	    sendResponse({selectors: selectors});
     } else if(request.reqtype == "set-domain-enabled-state") {
 		// Enable/disable ad blocking for a particular domain
 		chrome.tabs.get(lastTabId, function(tab) {

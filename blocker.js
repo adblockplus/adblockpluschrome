@@ -16,6 +16,7 @@ var allSelectors = null; // Cache the selectors
 var port = chrome.extension.connect({name: "filter-query"});
 
 function nukeSingleElement(elt) {
+    console.log("nukeSingleElement " + document.domain );
     if(elt.innerHTML) elt.innerHTML = "";
     if(elt.innerText) elt.innerText = "";
     // Probably vain attempt to stop scripts
@@ -27,7 +28,7 @@ function nukeSingleElement(elt) {
 	//if(pn) pn.removeChild(elt);
 
 	// Get rid of OBJECT tag enclosing EMBED tag
-	if(pn && pn.tagName == "OBJECT" && pn.parentNode)
+	if(pn && pn.tagName == "OBJECT" && pn.parentNode && pn.parentNode.tagName == "EMBED")
 		pn.parentNode.removeChild(pn);    
 }
 
@@ -48,15 +49,15 @@ port.onMessage.addListener(function(msg) {
                 }
             }
         } else { // Restore visibility of all elements
-            // console.log("Showing all in " + document.domain + " " + elementCache.length);
+            //console.log("Showing all in " + document.domain + " " + elementCache.length);
             for(var i = 0; i < elementCache.length; i++) {
                 //console.log(elementCache[i].tagName + " ");
                 elementCache[i].style.visibility = "inherit";
             }
         }
         
-    } /*else if(msg.shouldBlockList) {
-        // Old and busted?
+    } else if(false && msg.shouldBlockList) {
+        // Old code from when we weren't hiding everything and revealing non-ads
         // console.log("Nuking a list of things! " + msg.shouldBlockList.length);
         for(var i = 0; i < msg.shouldBlockList.length; i++) {
             var elt = elementCache[msg.shouldBlockList[i]];
@@ -65,7 +66,7 @@ port.onMessage.addListener(function(msg) {
             nukeSingleElement(elt);
         }
         delete msg.shouldBlockList;
-    } */
+    }
 });
 
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
@@ -203,7 +204,7 @@ function clickHide_mouseClick(e) {
     if(currentElement == null)
         return;
 
-    // Construct ABP rule(s). The popup will retrieve these.
+    // Construct ABP filter(s). The popup will retrieve these.
     // Only one ID
     var elementId = currentElement.id ? currentElement.id.split(' ').join('') : null;
     // Can have multiple classes...
@@ -221,6 +222,7 @@ function clickHide_mouseClick(e) {
         }
     }
     
+    // Save the filters that the user created
 	chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
 
     // Highlight the unlucky elements
@@ -236,12 +238,6 @@ function clickHide_mouseClick(e) {
     clickHide_rulesPending();
 }
 
-// Re-removes some ads when a node is inserted
-// Slow!
-function handleNodeInserted(e) {
-    nukeElements();
-}
-
 // Called when a new filter is added.
 // It would be a click-to-hide filter, so it's only an elemhide filter.
 function removeAdsAgain() {
@@ -252,15 +248,20 @@ function removeAdsAgain() {
     }
 }
 
+function foo() {
+    nukeElements();
+}
+
 function nukeElements() {
-    elts = $("img,object");
+    elts = $("img,object,iframe");
 	types = new Array();
 	urls = new Array();
 	serials = new Array();
 	elementCache = new Array();
 	for(i = 0; i < elts.length; i++) {
 		elementCache.push(elts[i]);
-		url = elts[i].getAttribute("src");
+		//var url = elts[i].tagName == "OBJECT" ? elts[i].getAttribute("data") : elts[i].getAttribute("src");
+		var url = elts[i].getAttribute("src");
 		if(url) {
 		    // TODO: Some rules don't include the domain, and the blacklist
 		    // matcher doesn't match on queries that don't include the domain
@@ -271,28 +272,35 @@ function nukeElements() {
 	    }
 		serial++;
 	}
-	
+	// Ask background.html which of these elements we should nuke
 	port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
-	
-	if(enabled)	$("[id^=google_ads_div],[id^=bbccom_mpu]").remove();
+	// Special case many Google and BBC ads.
+	// TODO: move this into a user-editable list
+    if(enabled) $("[id^=google_ads_div],[id^=bbccom_mpu],[id^=bbccom_leaderboard]").remove();
 	
 }
 // DOMContentLoaded seems to fire earlier than the Chrome-specific
 // document_end thing that is specified in manifest.json. I don't know if that's
 // actually true but anecdotally it looks better.
-//document.addEventListener("DOMContentLoaded", nukeElements, false);
-//window.addEventListener("DOMNodeInserted", handleNodeInserted, false);
+
 chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
     enabled = response.enabled;
-    console.log(enabled + " for " + document.domain);
+    console.log("Ads " + enabled + " for " + document.domain);
+    // Nuke (or show) ads by src
     nukeElements();
-    
-    if(!enabled) {
-        document.addEventListener("DOMNodeInserted", function(e) {
-            console.log("Added a node!");
-            e.relatedNode.style.visibility = "inherit";
-        }, false);
-    }
-    // Restore visibility of img,object,iframe elements
-    //chrome.extension.sendRequest({reqtype: "insert-css", file: "initial-restore.css"});
+    //document.addEventListener("DOMNodeInserted", foo, false);
+    // Restore the ads if ad blocking is disabled for this domain. How sad!
+    chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
+        var elts = $(response.selectors.join(","));
+        if(!enabled) {
+            console.log("Showing ads! " + response.selectors.length + " "  + elts.length);
+            for(var i = 0; i < elts.length; i++) {
+                console.log(elts[i]);
+                elts[i].style.visibility = "inherit";
+            }
+        } else {
+            for(var i = 0; i < elts.length; i++)
+                elts[i].style.visibility = "hidden";
+        }
+    });
 });

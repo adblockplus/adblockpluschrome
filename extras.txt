@@ -1,8 +1,11 @@
 facebook.com##.adcolumn
+facebook.com###pagelet_adbox
 myspace.com###googlead2
 myspace.com##.googleafc
 penny-arcade.com##.funding-horizontal
 penny-arcade.com##.funding-vertical
+reddit.com###ad
+##adsquare
 prohardver.hu##.adbox
 sydsvenskan.se##.ad
 metal.de##td[align="right"][width="950"]
