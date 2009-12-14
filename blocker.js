@@ -23,9 +23,10 @@ function nukeSingleElement(elt) {
     if(elt.src) elt.src = "";
     if(elt.language) elt.language = "Blocked!";
     elt.style.width = elt.style.height = "0px !important";
+    elt.style.visibility = "hidden";
 
 	var pn = elt.parentNode;
-	//if(pn) pn.removeChild(elt);
+	// if(pn) pn.removeChild(elt);
 
 	// Get rid of OBJECT tag enclosing EMBED tag
 	if(pn && pn.tagName == "OBJECT" && pn.parentNode && pn.parentNode.tagName == "EMBED")
