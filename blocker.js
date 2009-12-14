@@ -298,9 +298,10 @@ chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(res
                 elts[i].style.visibility = "inherit";
             }
         } else {
-            for(var i = 0; i < elts.length; i++)
+            for(var i = 0; i < elts.length; i++) {
                 elts[i].style.visibility = "hidden";
                 elts[i].style.display = "none";
+            }
         }
     });
 });
