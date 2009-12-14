@@ -291,7 +291,8 @@ chrome.tabs.onSelectionChanged.addListener(function(tabId) {
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	lastTabId = tabId;
-    refreshIcon(tabId);
+	
+	if(changeInfo.status == "complete") refreshIcon(tabId);
 });
 
 // Show page action on current tab
