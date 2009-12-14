@@ -249,11 +249,12 @@ function removeAdsAgain() {
 
 // Block ads in nodes inserted by scripts
 function handleNodeInserted(e) {
-    nukeElements(e.relatedNode);
+    nukeElements(e.relatedNode.parentNode);
+    //nukeElements(document);
 }
 
 function nukeElements(parent) {
-    elts = $("img,object,iframe", parent);
+    elts = $("img,object,iframe,embed", parent);
 	types = new Array();
 	urls = new Array();
 	serials = new Array();
