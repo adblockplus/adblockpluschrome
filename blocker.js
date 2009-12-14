@@ -8,7 +8,7 @@ var TypeMap = {
 
 var enabled = false;
 var serial = 0; // ID number for elements, indexes elementCache
-var elementCache = {}; // Keeps track of elements that we may want to get rid of
+var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
 var elementCacheOrigDisplay = {};
 var allSelectors = null; // Cache the selectors
 
@@ -16,7 +16,7 @@ var allSelectors = null; // Cache the selectors
 var port = chrome.extension.connect({name: "filter-query"});
 
 function nukeSingleElement(elt) {
-    console.log("nukeSingleElement " + document.domain );
+    //console.log("nukeSingleElement " + document.domain );
     if(elt.innerHTML) elt.innerHTML = "";
     if(elt.innerText) elt.innerText = "";
     // Probably vain attempt to stop scripts
@@ -51,7 +51,6 @@ port.onMessage.addListener(function(msg) {
         } else { // Restore visibility of all elements
             //console.log("Showing all in " + document.domain + " " + elementCache.length);
             for(var i = 0; i < elementCache.length; i++) {
-                //console.log(elementCache[i].tagName + " ");
                 elementCache[i].style.visibility = "inherit";
             }
         }
@@ -248,16 +247,17 @@ function removeAdsAgain() {
     }
 }
 
-function foo() {
-    nukeElements();
+// Block ads in nodes inserted by scripts
+function handleNodeInserted(e) {
+    nukeElements(e.relatedNode);
 }
 
-function nukeElements() {
-    elts = $("img,object,iframe");
+function nukeElements(parent) {
+    elts = $("img,object,iframe", parent);
 	types = new Array();
 	urls = new Array();
 	serials = new Array();
-	elementCache = new Array();
+//	elementCache = new Array();
 	for(i = 0; i < elts.length; i++) {
 		elementCache.push(elts[i]);
 		//var url = elts[i].tagName == "OBJECT" ? elts[i].getAttribute("data") : elts[i].getAttribute("src");
@@ -285,17 +285,14 @@ function nukeElements() {
 
 chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
     enabled = response.enabled;
-    console.log("Ads " + enabled + " for " + document.domain);
     // Nuke (or show) ads by src
-    nukeElements();
-    //document.addEventListener("DOMNodeInserted", foo, false);
+    nukeElements(document);
+    document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
     // Restore the ads if ad blocking is disabled for this domain. How sad!
     chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
         var elts = $(response.selectors.join(","));
         if(!enabled) {
-            console.log("Showing ads! " + response.selectors.length + " "  + elts.length);
             for(var i = 0; i < elts.length; i++) {
-                console.log(elts[i]);
                 elts[i].style.visibility = "inherit";
             }
         } else {
