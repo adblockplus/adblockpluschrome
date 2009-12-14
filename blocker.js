@@ -299,6 +299,7 @@ chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(res
         } else {
             for(var i = 0; i < elts.length; i++)
                 elts[i].style.visibility = "hidden";
+                elts[i].style.display = "none";
         }
     });
 });
