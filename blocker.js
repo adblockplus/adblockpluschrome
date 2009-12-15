@@ -167,7 +167,7 @@ function clickHide_mouseOver(e) {
     if(clickHide_activated == false)
         return;
     
-    if((e.target.id && e.target.id != "") || (e.target.className && e.target.className != "")) {
+    if(e.target.id || e.target.className) {
         currentElement = e.target;
         currentElement_border = e.target.style.border;
         currentElement_backgroundColor = e.target.style.backgroundColor;
@@ -177,7 +177,7 @@ function clickHide_mouseOver(e) {
 }
 
 function clickHide_mouseOut(e) {
-    if(clickHide_activated == false || currentElement == null)
+    if(!clickHide_activated || !currentElement)
         return;
     
     currentElement.style.border = currentElement_border;
@@ -185,6 +185,7 @@ function clickHide_mouseOut(e) {
 }
 
 function clickHide_keyUp(e) {
+    // Ctrl+Shift+E
     if(e.ctrlKey && e.shiftKey && e.keyCode == 69)
         clickHide_mouseClick(e);
 }
@@ -193,14 +194,14 @@ function clickHide_keyUp(e) {
 // We should have ABP rules ready for when the
 // popup asks for them.
 function clickHide_mouseClick(e) {
-    if(clickHide_activated == false)
+    if(!clickHide_activated)
         return;
         
     // Eat the click event - could be a stray click
     e.preventDefault();
     e.stopPropagation();
     // If we don't have an element, let the user keep trying
-    if(currentElement == null)
+    if(!currentElement)
         return;
 
     // Construct ABP filter(s). The popup will retrieve these.
@@ -210,11 +211,11 @@ function clickHide_mouseClick(e) {
     var elementClasses = currentElement.className ? currentElement.className.split(' ') : null;
     clickHideFilters = new Array();
     selectorList = new Array();
-    if(elementId && elementId != "") {
+    if(elementId) {
         clickHideFilters.push(document.domain + "###" + elementId);
         selectorList.push("#" + elementId);
     }
-    if(elementClasses && elementClasses.length > 0) {
+    if(elementClasses) {
         for(var i = 0; i < elementClasses.length; i++) {
             clickHideFilters.push(document.domain + "##." + elementClasses[i]);
             selectorList.push("." + elementClasses[i]);
@@ -292,7 +293,7 @@ function nukeElements(parent) {
 	types = new Array();
 	urls = new Array();
 	serials = new Array();
-	for(i = 0; i < elts.length; i++) {
+	for(var i = 0; i < elts.length; i++) {
 		elementCache.push(elts[i]);
 		var url;
 		// Check children of object nodes for "param" nodes with name="movie" that specify a URL
