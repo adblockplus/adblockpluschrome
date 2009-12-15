@@ -1,9 +1,12 @@
+mail.live.com###SkyscraperContent
 facebook.com##.adcolumn
 facebook.com###pagelet_adbox
 myspace.com###googlead2
 myspace.com##.googleafc
 penny-arcade.com##.funding-horizontal
 penny-arcade.com##.funding-vertical
+###bbccom_mpu
+###bbccom_leaderboard
 reddit.com###ad
 ##adsquare
 prohardver.hu##.adbox
