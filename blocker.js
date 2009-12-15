@@ -185,7 +185,7 @@ function clickHide_mouseOut(e) {
 }
 
 function clickHide_keyUp(e) {
-    if(e.altKey && e.keyCode == 66)
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 69)
         clickHide_mouseClick(e);
 }
 
