@@ -40,10 +40,9 @@ p {
 function loadOptions() {
 	// Show icon in address bar?
 	var shouldShowIcon = localStorage["shouldShowIcon"];
-	if(typeof shouldShowIcon == "undefined")
-	    document.getElementById("shouldShowIcon").checked = true;
-	else
-	    document.getElementById("shouldShowIcon").checked = (shouldShowIcon == "true");
+	document.getElementById("shouldShowIcon").checked = typeof shouldShowIcon == "undefined" ? true : shouldShowIcon == "true";
+    // Experimental features enabled?
+	document.getElementById("experimental").checked = typeof localStorage["experimental"] == "undefined" ? false : localStorage["experimental"] == "true";
 		
 	// User-entered filters
 	var userFilters = localStorage["userFilters"];
@@ -58,8 +57,8 @@ function loadOptions() {
 }
 
 function saveOptions() {
-    var shouldShowIcon = document.getElementById("shouldShowIcon");
-    localStorage["shouldShowIcon"] = shouldShowIcon.checked;
+    localStorage["shouldShowIcon"] = document.getElementById("shouldShowIcon").checked;
+    localStorage["experimental"] = document.getElementById("experimental").checked;
 	
     // Grab contents of userFiltersBox as an array and JSONify it
     var userFiltersBox = document.getElementById("userFiltersBox");
@@ -125,7 +124,7 @@ function importRawFiltersText() {
 <body onload="loadOptions()">
 <h1>AdThwart Options</h1>
 <p><input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar</p>
-
+<p><input type="checkbox" id="experimental" onClick="saveOptions()" /> Experimental: Hide most ads on initial page load</p>
 <!--
 <h2>Enabled filter lists</h2>
 <p>
@@ -136,7 +135,7 @@ function importRawFiltersText() {
 <p>The original sources of these lists are available <a href="http://adblockplus.org/en/subscriptions">here</a>.</p>
 -->
 <h2>Advanced: Add your own filters</h2>
-<p>Your filter must follow the <a href="http://adblockplus.org/en/filters">AdBlock Plus filter syntax</a>. Due to limitations in Chrome, certain filter types may not work (yet!).</p>
+<p>Your filter must follow the <a href="http://adblockplus.org/en/filters">AdBlock Plus filter syntax</a>. Certain filter types may not work (yet!).</p>
 
 <table>
 <tr><td>

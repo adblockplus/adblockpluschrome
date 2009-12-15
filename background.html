@@ -212,15 +212,11 @@ chrome.extension.onConnect.addListener(function(port) {
 
 var lastTabId = 0;
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    if(request.reqtype == "insert-css") {
-        if(request.file) {
-            chrome.tabs.insertCSS(null, {file: request.file, allFrames: true});
-        }
-        else
-            chrome.tabs.insertCSS(null, {code: request.code, allFrames: true});
-    } else if(request.reqtype == "get-elemhide-selectors") {
+    if(request.reqtype == "get-elemhide-selectors") {
 	    var selectors = abp.elemhide.getSelectorsToHide(request.domain);
 	    sendResponse({selectors: selectors});
+    } else if(request.reqtype == "get-experimental-enabled-state") {
+        sendResponse({experimentalEnabled: localStorage["experimental"] == "true"});
     } else if(request.reqtype == "set-domain-enabled-state") {
 		// Enable/disable ad blocking for a particular domain
 		chrome.tabs.get(lastTabId, function(tab) {

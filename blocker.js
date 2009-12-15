@@ -7,10 +7,14 @@ var TypeMap = {
 };
 
 var enabled = false;
+var experimentalEnabled = false;
 var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
 var elementCacheOrigDisplay = {};
-var allSelectors = null; // Cache the selectors
+var elemhideSelectors = null; // Cache the selectors
+// var date = new Date();
+// var lastInsertedNodeTime = 0;
+var handleNodeInsertedTimeoutID = 0;
 
 // Open a port to the extension
 var port = chrome.extension.connect({name: "filter-query"});
@@ -23,13 +27,13 @@ function nukeSingleElement(elt) {
     if(elt.src) elt.src = "";
     if(elt.language) elt.language = "Blocked!";
     elt.style.width = elt.style.height = "0px !important";
-    elt.style.visibility = "hidden";
+    elt.style.visibility = "hidden !important";
 
 	var pn = elt.parentNode;
-	// if(pn) pn.removeChild(elt);
+	//if(pn) pn.removeChild(elt);
 
 	// Get rid of OBJECT tag enclosing EMBED tag
-	if(pn && pn.tagName == "OBJECT" && pn.parentNode && pn.parentNode.tagName == "EMBED")
+	if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT")
 		pn.parentNode.removeChild(pn);    
 }
 
@@ -47,7 +51,8 @@ port.onMessage.addListener(function(msg) {
             }
         }
         // Take away our injected CSS, leaving only ads hidden
-        document.styleSheets[0].disabled = true;
+        if(experimentalEnabled)
+            document.documentElement.removeChild(styleElm);
         
     } else if(false && msg.shouldBlockList) {
         // Old code from when we weren't hiding everything and revealing non-ads
@@ -143,11 +148,11 @@ function clickHide_rulesPending() {
 
 function clickHide_deactivate() {
     if(currentElement) {
-        //currentElement.style.border = currentElement_border;
-        //currentElement.style.backgroundColor = currentElement_backgroundColor;
+        unhighlightElements();
+        currentElement.style.border = currentElement_border;
+        currentElement.style.backgroundColor = currentElement_backgroundColor;
         currentElement = null;
         clickHideFilters = null;
-        unhighlightElements();
     }
     clickHide_activated = false;
     document.removeEventListener("mouseover", clickHide_mouseOver, false);
@@ -155,7 +160,6 @@ function clickHide_deactivate() {
     document.removeEventListener("click", clickHide_mouseClick, false);
     document.removeEventListener("keyup", clickHide_keyUp, false);
 }
-
 
 function clickHide_mouseOver(e) {
     if(clickHide_activated == false)
@@ -233,29 +237,65 @@ function clickHide_mouseClick(e) {
 
 // Called when a new filter is added.
 // It would be a click-to-hide filter, so it's only an elemhide filter.
+// Since this rarely happens, we can afford to do a full run of ad removal.
 function removeAdsAgain() {
-    if(enabled) {
-        allSelectors = null;
-        loadSelectorsAndAddCSS();
-        nukeElements();
-    }
+    chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
+        if(response.enabled) {
+            elemhideSelectors = null; // Dirty
+            hideElements(document);
+            nukeElements(document);
+        }
+    });
 }
 
 // Block ads in nodes inserted by scripts
 function handleNodeInserted(e) {
-    //TODO: This is ridiculously slow. Perhaps only allow it to run a few times a second?
-    //nukeElements(e.relatedNode);
+    // Can't run hideElements every time a node is inserted - big CPU/heap impact
+    // TODO: cache selectors, marking them dirty in removeAdsAgain().
+    // Set nukeElements to fire at most once a second
+    if(enabled && handleNodeInsertedTimeoutID == 0) {
+        handleNodeInsertedTimeoutID = setTimeout(nukeAndHideElements, 1000);
+    }
+}
+
+function hideBySelectors(selectors, parent) {
+    var elts = $(selectors.join(","), parent);
+    if(enabled) {
+        for(var i = 0; i < elts.length; i++) {
+            elts[i].style.visibility = "hidden";
+            elts[i].style.display = "none";
+        }
+    }
+}
+
+function nukeAndHideElements(parent) {
+    hideElements(parent);
+    nukeElements(parent);
+}
+
+function hideElements(parent) {
+    if(elemhideSelectors == null) {
+        chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
+            elemhideSelectors = response.selectors;
+            hideBySelectors(elemhideSelectors, parent);
+        });
+    } else {
+        hideBySelectors(elemhideSelectors, parent);
+    }
 }
 
 function nukeElements(parent) {
     elts = $("img,object,iframe,embed", parent);
+    // console.log("nukeElements " + elts.length);
 	types = new Array();
 	urls = new Array();
 	serials = new Array();
 	for(i = 0; i < elts.length; i++) {
 		elementCache.push(elts[i]);
-		//var url = elts[i].tagName == "OBJECT" ? elts[i].getAttribute("data") : elts[i].getAttribute("src");
-		var url = elts[i].getAttribute("src");
+		// TODO: Also, check children of object nodes for "param" nodes with name="movie" that specify a URL
+		// in value attribute
+		var url = elts[i].tagName == "OBJECT" ? elts[i].getAttribute("data") : elts[i].getAttribute("src");
+		//var url = elts[i].getAttribute("src");
 		if(url) {
 		    // TODO: Some rules don't include the domain, and the blacklist
 		    // matcher doesn't match on queries that don't include the domain
@@ -270,29 +310,24 @@ function nukeElements(parent) {
 	port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
 	// Special case many Google and BBC ads.
 	// TODO: move this into a user-editable list
-    if(enabled) $("[id^=google_ads_div],[id^=bbccom_mpu],[id^=bbccom_leaderboard]").remove();
+    if(enabled) $("object[width=\"728\" height=\"90\"],[id^=google_ads_div],[id^=ad_],[id^=AD_]").remove();
 	
+	handleNodeInsertedTimeoutID = 0;
 }
-// DOMContentLoaded seems to fire earlier than the Chrome-specific
-// document_end thing that is specified in manifest.json. I don't know if that's
-// actually true but anecdotally it looks better.
 
-chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
-    enabled = response.enabled;
-    // Nuke (or show) ads by src
-    nukeElements(document);
-    document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
-    // Restore the ads if ad blocking is disabled for this domain. How sad!
-    chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
-        var elts = $(response.selectors.join(","));
-        if(!enabled) {
-            // Take away injected CSS that hides stuff
-            document.styleSheets[0].disabled = true;
-        } else {
-            for(var i = 0; i < elts.length; i++) {
-                elts[i].style.visibility = "hidden";
-                elts[i].style.display = "none";
-            }
+chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, function(response2) {
+    experimentalEnabled = response2.experimentalEnabled;
+    chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
+        enabled = response.enabled;
+        if(enabled) {
+            // Hide ads by selector using CSS
+            hideElements(document);
+            // Nuke ads by src
+            nukeElements(document);
+            document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
+        } else if (experimentalEnabled) {
+            // Disabled, so take away initially injected stylesheet
+            document.documentElement.removeChild(styleElm);
         }
     });
 });
