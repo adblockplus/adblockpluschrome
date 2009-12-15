@@ -42,7 +42,9 @@ function loadOptions() {
 	var shouldShowIcon = localStorage["shouldShowIcon"];
 	document.getElementById("shouldShowIcon").checked = typeof shouldShowIcon == "undefined" ? true : shouldShowIcon == "true";
     // Experimental features enabled?
-	document.getElementById("experimental").checked = typeof localStorage["experimental"] == "undefined" ? false : localStorage["experimental"] == "true";
+    // If first-time user, turn experimental features on with some probability.
+    // This probability will be scaled to 1 as time goes on if users don't complain.
+	document.getElementById("experimental").checked = typeof localStorage["experimental"] == "undefined" ? (Math.random() < 0.1) : localStorage["experimental"] == "true";
 		
 	// User-entered filters
 	var userFilters = localStorage["userFilters"];
