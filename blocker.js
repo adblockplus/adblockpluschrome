@@ -292,10 +292,17 @@ function nukeElements(parent) {
 	serials = new Array();
 	for(i = 0; i < elts.length; i++) {
 		elementCache.push(elts[i]);
-		// TODO: Also, check children of object nodes for "param" nodes with name="movie" that specify a URL
+		var url;
+		// Check children of object nodes for "param" nodes with name="movie" that specify a URL
 		// in value attribute
-		var url = elts[i].tagName == "OBJECT" ? elts[i].getAttribute("data") : elts[i].getAttribute("src");
-		//var url = elts[i].getAttribute("src");
+		if(elts[i].tagName == "OBJECT" && !(url = elts[i].getAttribute("data"))) {
+		    // No data attribute, look in PARAM child tags
+		    var params = $("param[name=\"movie\"]", elts[i]);
+		    if(params) url = params[0].getAttribute("value");
+	    } else {
+	        url = elts[i].getAttribute("src");
+        }
+
 		if(url) {
 		    // TODO: Some rules don't include the domain, and the blacklist
 		    // matcher doesn't match on queries that don't include the domain
