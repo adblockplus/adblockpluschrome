@@ -12,9 +12,8 @@ var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
 var elementCacheOrigDisplay = {};
 var elemhideSelectorsString = null; // Cache the selectors
-// var date = new Date();
-// var lastInsertedNodeTime = 0;
-var handleNodeInsertedTimeoutID = 0;
+var nukeElementsTimeoutID = 0;
+var hideElementsTimeoutID = 0;
 
 // Open a port to the extension
 var port = chrome.extension.connect({name: "filter-query"});
@@ -253,27 +252,37 @@ function removeAdsAgain() {
 
 // Block ads in nodes inserted by scripts
 function handleNodeInserted(e) {
-    // Can't run hideElements every time a node is inserted - big CPU/heap impact
-    // TODO: cache selectors, marking them dirty in removeAdsAgain().
-    // Remove ads at most once a second. If no timeout set, set one.
-    if(enabled && handleNodeInsertedTimeoutID == 0) {
-        handleNodeInsertedTimeoutID = setTimeout(hideAndNukeElements, 1000);
+    // Remove ads relatively infrequently. If no timeout set, set one.
+    if(enabled) { 
+        if(nukeElementsTimeoutID == 0)
+            nukeElementsTimeoutID = setTimeout(nukeElements, 1000);
+        // Querying with all those selectors takes a lot of time (whether with
+        // jQuery or querySelectorsAll) so do this even more rarely
+        if(hideElementsTimeoutID == 0)
+            hideElementsTimeoutID = setTimeout(hideElements, 5000);
     }
 }
 
 function hideAndNukeElements(parent) {
-    hideElements(parent);
+    //var now = new Date().getTime();
+    hideElements(parent); // Really slow!
     nukeElements(parent);
+    //console.log("That took " + ((new Date()).getTime() - now) + " ms");
 }
 
+// Slow! Don't call this too often.
 function hideBySelectorsString(selectorsString, parent) {
-    var elts = $(selectorsString, parent);
+    //var now = new Date().getTime();
     if(enabled) {
+        var elts = $(selectorsString, parent);
+        //if(!parent) parent = document;
+        //var elts = parent.querySelectorAll(selectorsString);
         for(var i = 0; i < elts.length; i++) {
             elts[i].style.visibility = "hidden";
             elts[i].style.display = "none";
         }
     }
+    //console.log("That took " + ((new Date()).getTime() - now) + " ms");
 }
 
 function hideElements(parent) {
@@ -323,7 +332,7 @@ function nukeElements(parent) {
 	// TODO: move this into a user-editable list
     if(enabled) $("object[width=\"728\" height=\"90\"],[id^=google_ads_div],[id^=ad_],[id^=AD_]").remove();
 	
-	handleNodeInsertedTimeoutID = 0;
+	nukeElementsTimeoutID = 0;
 }
 
 chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, function(response2) {
