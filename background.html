@@ -220,16 +220,6 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     } else if(request.reqtype == "set-domain-enabled-state") {
 		// Enable/disable ad blocking for a particular domain
 		chrome.tabs.get(lastTabId, function(tab) {
-		    /*
-			// Get the domain being displayed in the current tab
-			chrome.tabs.sendRequest(tab.id, {reqtype: "get-window-hostname"}, function(response) {
-				if(request.enabled)
-					removeDomainFromExclusionList(response.domain);
-				else
-					addDomainToExclusionList(response.domain);
-				// Update icon to reflect exclusion state of domain
-				refreshIcon(tab.id);
-			}); */
 			var domain = extractDomainFromURL(tab.url);
 			if(request.enabled)
 			    removeDomainFromExclusionList(domain);
@@ -241,17 +231,10 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 		// Returns whether this domain is in the exclusion list.
 		// The page action popup asks us this.
 		if(sender.tab) {
-		    //console.log("sender tab id " + sender.tab.id + " " + sender.tab.url);
 			sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(sender.tab.url))});
 			return;
 	    }
 		chrome.tabs.get(lastTabId, function(tab) {
-		    /*
-			chrome.tabs.sendRequest(tab.id, {reqtype: "get-domain"}, function(response) {
-				sendResponse({enabled: !isDomainExcluded(response.domain)});
-				//refreshIcon(tab.id);
-			}); */
-			//console.log("gdes " + tab.id +" " + tab.url);
 			sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(tab.url))});
 		});
 	} else if(request.reqtype == "refresh-page-icon") {

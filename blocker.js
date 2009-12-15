@@ -15,6 +15,16 @@ var elemhideSelectorsString = null; // Cache the selectors
 var nukeElementsTimeoutID = 0;
 var hideElementsTimeoutID = 0;
 
+// Click-to-hide stuff
+var clickHide_activated = false;
+var currentElement = null;
+var currentElement_border = "";
+var currentElement_backgroundColor;
+var clickHideFilters = null;
+var highlightedElementsSelector = null;
+var highlightedElementsBorders = null;
+var highlightedElementsBGColors = null;
+
 // Open a port to the extension
 var port = chrome.extension.connect({name: "filter-query"});
 
@@ -60,8 +70,6 @@ port.onMessage.addListener(function(msg) {
         // console.log("Nuking a list of things! " + msg.shouldBlockList.length);
         for(var i = 0; i < msg.shouldBlockList.length; i++) {
             var elt = elementCache[msg.shouldBlockList[i]];
-            // if(elt.tagName == "IMG")
-            //     console.log(msg.shouldBlockList[i] + "!!! " + elt.tagName + ":" + elt.src + " #" + elt.id + " ." + elt.className);
             nukeSingleElement(elt);
         }
         delete msg.shouldBlockList;
@@ -73,8 +81,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     if(request.reqtype == "get-domain") {
         sendResponse({domain: document.domain});
     } else if(request.reqtype == "clickhide-active?") {
-        // Return any rules we might have constructed
-        sendResponse({isActive: clickHide_activated, filters: clickHideFilters});
+        // No longer used...
+        sendResponse({isActive: clickHide_activated});
     } else if(request.reqtype == "clickhide-activate") {
         clickHide_activate();
     } else if(request.reqtype == "clickhide-deactivate") {
@@ -85,24 +93,15 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         sendResponse({});
 });
 
-var clickHide_activated = false;
-var currentElement = null;
-var currentElement_border = "";
-var currentElement_backgroundColor;
-var clickHideFilters = null;
-var highlightedElementsSelector = null;
-var highlightedElementsBorders = null;
-var highlightedElementsBGColors = null;
-
 function highlightElements(selectorString) {
     if(highlightedElementsSelector)
         unhighlightElements();
     
     highlightedElements = document.querySelectorAll(selectorString);
     highlightedElementsSelector = selectorString;
-    
     highlightedElementsBorders = new Array();
     highlightedElementsBGColors = new Array();
+
     for(var i = 0; i < highlightedElements.length; i++) {
         highlightedElementsBorders[i] = highlightedElements[i].style.border;
         highlightedElementsBGColors[i] = highlightedElements[i].style.backgroundColor;
@@ -155,6 +154,7 @@ function clickHide_deactivate() {
         currentElement = null;
         clickHideFilters = null;
     }
+    
     clickHide_activated = false;
     document.removeEventListener("mouseover", clickHide_mouseOver, false);
     document.removeEventListener("mouseout", clickHide_mouseOut, false);
@@ -202,7 +202,7 @@ function clickHide_mouseClick(e) {
     // If we don't have an element, let the user keep trying
     if(!currentElement)
         return;
-
+        
     // Construct ABP filter(s). The popup will retrieve these.
     // Only one ID
     var elementId = currentElement.id ? currentElement.id.split(' ').join('') : null;
