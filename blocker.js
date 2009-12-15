@@ -51,7 +51,7 @@ port.onMessage.addListener(function(msg) {
             }
         }
         // Take away our injected CSS, leaving only ads hidden
-        if(experimentalEnabled) {
+        if(experimentalEnabled && styleElm) {
             document.documentElement.removeChild(styleElm);
             styleElm = null;
         }
