@@ -39,22 +39,15 @@ port.onMessage.addListener(function(msg) {
         if(enabled == true) {
             var ptr = 0;
             for(var i = 0; i < elementCache.length; i++) {
-                var elt = elementCache[i];
                 if(i == msg.shouldBlockList[ptr]) {
                     // It's an ad, nuke it
-                    nukeSingleElement(elt);
+                    nukeSingleElement(elementCache[i]);
                     ptr++;
-                } else {
-                    // Not an ad, show it
-                    elt.style.visibility = "inherit";
                 }
             }
-        } else { // Restore visibility of all elements
-            //console.log("Showing all in " + document.domain + " " + elementCache.length);
-            for(var i = 0; i < elementCache.length; i++) {
-                elementCache[i].style.visibility = "inherit";
-            }
         }
+        // Take away our injected CSS, leaving only ads hidden
+        document.styleSheets[0].disabled = true;
         
     } else if(false && msg.shouldBlockList) {
         // Old code from when we weren't hiding everything and revealing non-ads
@@ -250,8 +243,8 @@ function removeAdsAgain() {
 
 // Block ads in nodes inserted by scripts
 function handleNodeInserted(e) {
-    nukeElements(e.relatedNode.parentNode);
-    //nukeElements(document);
+    //TODO: This is ridiculously slow. Perhaps only allow it to run a few times a second?
+    //nukeElements(e.relatedNode);
 }
 
 function nukeElements(parent) {
@@ -259,7 +252,6 @@ function nukeElements(parent) {
 	types = new Array();
 	urls = new Array();
 	serials = new Array();
-//	elementCache = new Array();
 	for(i = 0; i < elts.length; i++) {
 		elementCache.push(elts[i]);
 		//var url = elts[i].tagName == "OBJECT" ? elts[i].getAttribute("data") : elts[i].getAttribute("src");
@@ -294,9 +286,8 @@ chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(res
     chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
         var elts = $(response.selectors.join(","));
         if(!enabled) {
-            for(var i = 0; i < elts.length; i++) {
-                elts[i].style.visibility = "inherit";
-            }
+            // Take away injected CSS that hides stuff
+            document.styleSheets[0].disabled = true;
         } else {
             for(var i = 0; i < elts.length; i++) {
                 elts[i].style.visibility = "hidden";
