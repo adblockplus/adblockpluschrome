@@ -51,8 +51,10 @@ port.onMessage.addListener(function(msg) {
             }
         }
         // Take away our injected CSS, leaving only ads hidden
-        if(experimentalEnabled)
+        if(experimentalEnabled) {
             document.documentElement.removeChild(styleElm);
+            styleElm = null;
+        }
         
     } else if(false && msg.shouldBlockList) {
         // Old code from when we weren't hiding everything and revealing non-ads
@@ -298,7 +300,8 @@ function nukeElements(parent) {
 		if(elts[i].tagName == "OBJECT" && !(url = elts[i].getAttribute("data"))) {
 		    // No data attribute, look in PARAM child tags
 		    var params = $("param[name=\"movie\"]", elts[i]);
-		    if(params) url = params[0].getAttribute("value");
+		    // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
+		    if(params[0]) url = params[0].getAttribute("value");
 	    } else {
 	        url = elts[i].getAttribute("src");
         }
@@ -332,9 +335,10 @@ chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, functi
             // Nuke ads by src
             nukeElements(document);
             document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
-        } else if (experimentalEnabled) {
+        } else if (experimentalEnabled && styleElm) {
             // Disabled, so take away initially injected stylesheet
             document.documentElement.removeChild(styleElm);
+            styleElm = null;
         }
     });
 });
