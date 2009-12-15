@@ -11,7 +11,7 @@ var experimentalEnabled = false;
 var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
 var elementCacheOrigDisplay = {};
-var elemhideSelectors = null; // Cache the selectors
+var elemhideSelectorsString = null; // Cache the selectors
 // var date = new Date();
 // var lastInsertedNodeTime = 0;
 var handleNodeInsertedTimeoutID = 0;
@@ -244,7 +244,7 @@ function clickHide_mouseClick(e) {
 function removeAdsAgain() {
     chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
         if(response.enabled) {
-            elemhideSelectors = null; // Dirty
+            elemhideSelectorsString = null; // Cache is dirty
             hideElements(document);
             nukeElements(document);
         }
@@ -255,14 +255,19 @@ function removeAdsAgain() {
 function handleNodeInserted(e) {
     // Can't run hideElements every time a node is inserted - big CPU/heap impact
     // TODO: cache selectors, marking them dirty in removeAdsAgain().
-    // Set nukeElements to fire at most once a second
+    // Remove ads at most once a second. If no timeout set, set one.
     if(enabled && handleNodeInsertedTimeoutID == 0) {
-        handleNodeInsertedTimeoutID = setTimeout(nukeAndHideElements, 1000);
+        handleNodeInsertedTimeoutID = setTimeout(hideAndNukeElements, 1000);
     }
 }
 
-function hideBySelectors(selectors, parent) {
-    var elts = $(selectors.join(","), parent);
+function hideAndNukeElements(parent) {
+    hideElements(parent);
+    nukeElements(parent);
+}
+
+function hideBySelectorsString(selectorsString, parent) {
+    var elts = $(selectorsString, parent);
     if(enabled) {
         for(var i = 0; i < elts.length; i++) {
             elts[i].style.visibility = "hidden";
@@ -271,19 +276,14 @@ function hideBySelectors(selectors, parent) {
     }
 }
 
-function nukeAndHideElements(parent) {
-    hideElements(parent);
-    nukeElements(parent);
-}
-
 function hideElements(parent) {
-    if(elemhideSelectors == null) {
+    if(elemhideSelectorsString == null) {
         chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
-            elemhideSelectors = response.selectors;
-            hideBySelectors(elemhideSelectors, parent);
+            elemhideSelectorsString = response.selectors.join(",");
+            hideBySelectorsString(elemhideSelectorsString, parent);
         });
     } else {
-        hideBySelectors(elemhideSelectors, parent);
+        hideBySelectorsString(elemhideSelectorsString, parent);
     }
 }
 
