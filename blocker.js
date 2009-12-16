@@ -59,20 +59,22 @@ port.onMessage.addListener(function(msg) {
                 }
             }
         }
+        // DEBUG: list stylesheets
+        // console.log(document.styleSheets.length + " stylesheets " + document.URL);
+        // for(var i = 0; i < document.styleSheets.length; i++) {
+        //     console.log(document.styleSheets[i]);
+        // }
+        
         // Take away our injected CSS, leaving only ads hidden
-        if(experimentalEnabled && styleElm) {
+        if(styleElm) {
             document.documentElement.removeChild(styleElm);
             styleElm = null;
+            // DEBUG: list stylesheets
+            // console.log(document.styleSheets.length + " stylesheets after removing styleElm " + document.URL);
+            // for(var i = 0; i < document.styleSheets.length; i++) {
+            //     console.log(document.styleSheets[i]);
+            // }
         }
-        
-    } else if(false && msg.shouldBlockList) {
-        // Old code from when we weren't hiding everything and revealing non-ads
-        // console.log("Nuking a list of things! " + msg.shouldBlockList.length);
-        for(var i = 0; i < msg.shouldBlockList.length; i++) {
-            var elt = elementCache[msg.shouldBlockList[i]];
-            nukeSingleElement(elt);
-        }
-        delete msg.shouldBlockList;
     }
 });
 
@@ -275,8 +277,6 @@ function hideBySelectorsString(selectorsString, parent) {
     //var now = new Date().getTime();
     if(enabled) {
         var elts = $(selectorsString, parent);
-        //if(!parent) parent = document;
-        //var elts = parent.querySelectorAll(selectorsString);
         for(var i = 0; i < elts.length; i++) {
             elts[i].style.visibility = "hidden";
             elts[i].style.display = "none";
@@ -330,9 +330,11 @@ function nukeElements(parent) {
 	port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
 	// Special case many Google and BBC ads.
 	// TODO: move this into a user-editable list
-    if(enabled) $("object[width=\"728\" height=\"90\"],[id^=google_ads_div],[id^=AdBrite],[id^=ad_],[id^=AD_]").remove();
+    if(enabled) { 
+        $("object[width=\"728\" height=\"90\"],[id^=google_ads_div],[id^=AdBrite],[id^=ad_],[id^=AD_]").remove();
+    }
 	
-	nukeElementsTimeoutID = 0;
+    nukeElementsTimeoutID = 0;
 }
 
 chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, function(response2) {
@@ -345,10 +347,11 @@ chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, functi
             // Nuke ads by src
             nukeElements(document);
             document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
-        } else if (experimentalEnabled && styleElm) {
+        } else if (styleElm) {
             // Disabled, so take away initially injected stylesheet
             document.documentElement.removeChild(styleElm);
             styleElm = null;
         }
+        
     });
 });
