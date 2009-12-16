@@ -1,10 +1,10 @@
 [Adblock Plus 1.1]
-! Checksum: 0xVCIMu6qnJ/wv1sWLgzug
+! Checksum: Pf1dl9SEWYTg5LxQOaED0A
 !
 ! Rick752's EasyList - Global English ad blocking subscription
 ! https://easylist.adblockplus.org/
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
-! Last modified: 16 Dec 2009 21:20 UTC
+! Last modified: 16 Dec 2009 22:00 UTC
 ! Expires: 5 days (updates automatically every 5 days)
 !
 ! Please report unblocked ads or mistakenly blocked content:
@@ -957,6 +957,7 @@ z/adx.js
 ###ad_middle
 ###ad_rectangle
 ###ad_related_links_div_program
+###ad_sidebar1
 ###ad_sidebar2
 ###ad_sidebar3
 ###ad_space
@@ -2573,6 +2574,7 @@ z/adx.js
 ||banners.expressindia.com^
 ||banners.sys-con.com^
 ||bbc.co.uk^*/bbccom.js?
+||dimshare.com/empire.
 ||bit-tech.net/style/skin/$stylesheet
 ||blackberryforums.net/banners/
 ||bloomberg.com^*/banner.js
