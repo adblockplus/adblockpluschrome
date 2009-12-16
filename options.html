@@ -38,13 +38,11 @@ p {
 </style>
 <script type="text/javascript" charset="utf-8">
 function loadOptions() {
-	// Show icon in address bar?
+	// Show icon in address bar? True by default
 	var shouldShowIcon = localStorage["shouldShowIcon"];
 	document.getElementById("shouldShowIcon").checked = typeof shouldShowIcon == "undefined" ? true : shouldShowIcon == "true";
-    // Experimental features enabled?
-    // If first-time user, turn experimental features on with some probability.
-    // This probability will be scaled to 1 as time goes on if users don't complain.
-	document.getElementById("experimental").checked = typeof localStorage["experimental"] == "undefined" ? (Math.random() < 0.1) : localStorage["experimental"] == "true";
+    // Experimental features enabled? False by default
+	document.getElementById("experimental").checked = typeof localStorage["experimental"] == "undefined" ? false : localStorage["experimental"] == "true";
 		
 	// User-entered filters
 	var userFilters = localStorage["userFilters"];

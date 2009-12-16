@@ -216,7 +216,14 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	    var selectors = abp.elemhide.getSelectorsToHide(request.domain);
 	    sendResponse({selectors: selectors});
     } else if(request.reqtype == "get-experimental-enabled-state") {
-        sendResponse({experimentalEnabled: localStorage["experimental"] == "true", enabled: sender.tab ? !isDomainExcluded(extractDomainFromURL(sender.tab.url)) : true});
+		var experimentalEnabled = localStorage["experimental"];
+		// Turn on initial-load ad hiding with some probability for new/upgrading users.
+		// This probability will be increased over time if users don't complain too much.
+		if(!experimentalEnabled) {
+			experimentalEnabled = (Math.random() < 0.1);
+			localStorage["experimental"] = experimentalEnabled;
+		}
+        sendResponse({experimentalEnabled: experimentalEnabled, enabled: sender.tab ? !isDomainExcluded(extractDomainFromURL(sender.tab.url)) : true});
     } else if(request.reqtype == "set-domain-enabled-state") {
 		// Enable/disable ad blocking for a particular domain
 		chrome.tabs.get(lastTabId, function(tab) {
