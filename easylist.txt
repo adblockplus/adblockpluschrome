@@ -1,10 +1,10 @@
 [Adblock Plus 1.1]
-! Checksum: XdIbxBWoI42lnADZa+cEBA
+! Checksum: 0xVCIMu6qnJ/wv1sWLgzug
 !
 ! Rick752's EasyList - Global English ad blocking subscription
 ! https://easylist.adblockplus.org/
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
-! Last modified: 15 Dec 2009 22:10 UTC
+! Last modified: 16 Dec 2009 21:20 UTC
 ! Expires: 5 days (updates automatically every 5 days)
 !
 ! Please report unblocked ads or mistakenly blocked content:
@@ -957,7 +957,10 @@ z/adx.js
 ###ad_middle
 ###ad_rectangle
 ###ad_related_links_div_program
+###ad_sidebar2
+###ad_sidebar3
 ###ad_space
+###ad_top
 ~amnestyusa.org###ad_wrapper
 ###ad_YieldManager-300x250
 ###adbottom
@@ -1341,7 +1344,7 @@ z/adx.js
 ###yn-gmy-ad-lrec
 ###ygrp-sponsored-links
 ###yreSponsoredLinks
-##.AdBox
+~co-operative.coop##.AdBox
 ##.AdContainerBox308
 ##.AdSpace
 ~buy.com##.AdTitle
@@ -1479,6 +1482,7 @@ z/adx.js
 ##.ad_mrec_title_article
 ##.ad_notice
 ##.ad_p360
+##.ad_post
 ##.ad_right
 ##.ad_sidebar
 ##.ad_skyscraper
@@ -1564,7 +1568,9 @@ z/adx.js
 ##.advert_leaderboard
 ##.advertise
 ##.advertiser
+##.advertise-homestrip
 ##.advertise-horz
+##.advertise-leaderboard
 ##.advertise-vert
 ##.advertiseContainer
 ##.advertisement
@@ -1622,6 +1628,7 @@ z/adx.js
 ##.bottomrightrailAd
 ##.boxAd
 ##.box_ad
+##.box_content_ad
 ##.box_content_ads
 ~blurst.com##.boxad
 ##.bps-ad-wrapper
@@ -2911,7 +2918,9 @@ destructoid.com##div[style="overflow: hidden; width: 300px; height: 250px;"]
 deviantart.com###adso-magnifico
 deviantart.com##.ad-blocking-makes-fella-confused
 deviantart.com##.hidoframe
+deviantart.com##.promo-text
 deviantart.com##.sleekadbubble
+deviantart.com##div[gmi-name="ad_zone"]
 deviantart.com##div[style="float: right; position: relative; width: 410px; text-align: left;"]
 digitalspy.co.uk###rhs728 > table[width="300"][height="250"]
 digitalspy.co.uk##div[style="border-style: solid; border-color: rgb(209, 209, 225); border-width: 0pt 0pt 1px 1px; margin: 0pt 0pt 10px 10px; padding: 0pt 0pt 7px 7px; float: right; width: 300px;"]
@@ -3493,6 +3502,7 @@ tesco.com###dartRightSkipper
 tesco.com##.dart
 tgdaily.com###right-banner
 thatvideogameblog.com##table[width="310"][height="260"]
+theaa.com###unanimis1
 theage.com.au##.ad
 thecelebritycafe.com##table[width="135"][height="240"]
 thecellfreak.com##.banheader
