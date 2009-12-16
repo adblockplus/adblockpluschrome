@@ -1,7 +1,7 @@
 {
 	"name": "AdThwart",
-	"version": "0.4.1",
-	"description": "Blocks ads on websites. Includes the EasyList ad filter list as of 15 Dec 2009.",
+	"version": "0.4.4",
+	"description": "Blocks ads on websites. Includes the EasyList ad filter list as of 16 Dec 2009.",
 	"page_action": {
 		"default icon": "emotes/face-devilish-19.png",
 		"default title": "AdThwart",
