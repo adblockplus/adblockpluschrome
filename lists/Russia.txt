@@ -5,7 +5,7 @@
 !Лицензия: http://creativecommons.org/licenses/by-sa/3.0/
 !Основная подписка для территории России
 !
-!version 1.640 16.12.2009
+!version 1.641 17.12.2009
 !Expires after 3 days
 !
 !Исключения
@@ -526,7 +526,6 @@ http://images.encyclopediadramatica.com/images/2/23/*
 http://images.encyclopediadramatica.com/images/7/78/Pedobearplush.jpg
 http://images.encyclopediadramatica.com/images/b/ba/Banner_*
 http://images.encyclopediadramatica.com/images/e/ea/Ed-logo-shirt-color-ad-ani.gif
-http://images.letitbit.net/vipfile/ban*.gif
 http://images.rambler.ru/*
 http://images.rambler.ru/upl/*/*.swf
 http://images.rambler.ru/upl/partners/*
@@ -617,7 +616,6 @@ http://lbs.km.ru:443/*
 http://legal.m2k.ru/cgi-bin/*
 http://lenamila.com
 http://lesobank.ru
-http://letitbit.net/images/promo/*
 http://levonevski.net/*.swf
 http://lichinka.ru/js/*
 http://lichinka.ru/random/*
@@ -815,6 +813,7 @@ http://partners.vsemayki.ru/img/*
 http://pc-ebooks.com/b/*
 http://pc-software.ru/*.js
 http://pcmag.ru/upload/*.swf
+http://mp3hall.net/*.swf
 http://pcmag.ru/upload/bx/*
 http://pcweek.ru/upload/*/160x100*.gif
 http://peel-down.ru/*.swf
@@ -997,7 +996,6 @@ http://russianwoodshed.com
 http://ruszona.ru/*.jpg
 http://rutube.ru/b/*
 http://ruwm.ru/*
-http://rz.letitbit.net/4s/*
 http://s.bash.org.ru/img/*.swf*
 http://s.bash.org.ru/img/bpg.ru-*
 http://s.ladoshki.com/p/a/banners/*
@@ -1486,7 +1484,6 @@ http://www.tekstov.com/baner.gif
 http://www.tekstov.com/js.js
 http://www.terralab.ru/upload/bx/*
 http://www.tgbr.in/*swf
-http://images.letitbit.net/images/promo/*
 http://www.overclockers.ru/images/*.png
 http://www.tgbr.in/ban/*
 http://www.tns-counter.ru/*
@@ -1597,16 +1594,13 @@ webex.ru
 www.animenfo.com/radio/meganimedvd.swf
 zaycev.net/m3_images/
 !
-!Правила скрытия версия 0.11 от Ru AdList
+!Правила скрытия версия 0.12 от Ru AdList
 !Все правила были составлены людьми занимающиеся Ru AdList
 !За что им большое спасибо!
 !
-2baksa.net,2baksa.ws##A[href*="/go.php?url="]
-2baksa.net,2baksa.ws##A.icq[target="_blank"]
-2baksa.net,2baksa.ws##DIV.leftel > A[target="_blank"]
-2baksa.net,2baksa.ws##DIV[style^="clear"] > A[href^="mailto:"] > IMG
-2baksa.net,2baksa.ws##TABLE[width="500"][height="200"][border="0"]
-2baksa.net,2baksa.ws##TBODY > TR > TD.td_blocks + TD > *:not(DIV)
+2baksa.net,2baksa.ws##A[href*="/go.php?url="]:not([href*=".webmoney."]):not([href*=".google."])
+2baksa.net,2baksa.ws##TD.td_blocks + TD > *:not([style*="px 5px 10px;"]):not(.smalltext):not(.theme-news-home-title):not(.pageswitch):not(#container):not([style="padding-left: 3px;"])
+2baksa.net,2baksa.ws##TD.td_blocks + TD > DIV > DIV[style*="clear:"][style*="float:"]
 3dnews.ru##DIV.mbanner
 ag.ru##DIV[id="top_campaign"][class="top_s_bar"]
 ag.ru##DIV.newsbot.bbg + BR + CENTER
@@ -1631,10 +1625,10 @@ binmovie.ru##TD.block_text[align="center"]
 catode.ru##DIV > DIV#wrapper > DIV#right > DIV.block:last-child
 catode.ru##DIV#fixed > DIV#bottomWrapper > DIV.dashed
 catode.ru##DIV#wrapper > DIV#container > DIV#content > DIV#left > DIV.block:last-child
-catode.ru/$object
 citysmile.ru##DIV[style="text-align: justify; font-size: 9pt;"]
 citysmile.ru##TABLE.informer_skyfoto
 citysmile.ru##TABLE[style="border: medium none rgb(255, 0, 0);"] > TBODY:first-child:last-child
+computerra.ru##TABLE._reachbanner_ TD[width="240"]:last-child
 copypast.ru##TD#fishi
 cwer.ru##DIV#wrap > DIV#leftside:first-child > DIV#block-block-15
 cwer.ru##DIV#wrap > DIV#rightside > DIV#block-blockcache-49 > *
@@ -1645,16 +1639,12 @@ cyber39.ru##DIV#top:first-child
 depositfiles.com##DIV#download_url + DIV[style="margin: 2em auto 0pt; width: 300px;"]
 depositfiles.com##DIV[id^="zhlobam_net"]
 digital.ru##DIV[class*="Banner"]
-dreamprogs.net##DIV.block_right:not(:last-child)
-dreamprogs.net##DIV#container > DIV#left > DIV.block:last-child
+dimonvideo.ru##BODY > TABLE NOINDEX > DIV
 dreamprogs.net##DIV.content DIV:first-child + NOINDEX
 dreamprogs.net##DIV.content DIV#lfwar:first-child
-dreamprogs.net##DIV#left > DIV:first-child + * + DIV
 dreamprogs.net##DIV#topbanner
 dump.ru##A[rel="nofollow"][target="_blank"] > IMG
-dverizamki.org/$object
 dwg.ru##BODY > TABLE > TBODY > TR:nth-child(3) > TD:nth-child(5)
-||dwg.ru/img/*$object
 dwg.ru##TD[background="../img/back22.gif"] > TABLE
 emuparadise.org##DIV#rmiad
 emuparadise.org##DIV#yo
@@ -1666,7 +1656,10 @@ epidem.ru##A[href="http://onlinetrax.ru"]
 epidem.ru##DIV[id*="AdBar"]
 epidem.ru##TD[width="131"] > P
 exler.ru##DIV[id^="Banner"]
-ferra.ru/include/priceru_advert_vertelca.php?
+exnews.org##NOINDEX > DIV[class$="body"]
+exnews.org##TD.column + TD CENTER
+fanacmilan.com##DIV[id^="adText"]
+ferra.ru##DIV.notik,DIV.oki
 file-online.ru##DIV.block_text
 fishki.net##A[href^="http:"]:not([href*="fishki.net"]):not([href*=".live"]) *:not([src*="bonus"]):not([src*="fishki_net"])
 fishki.net##BODY > TABLE TR:first-child > TD:first-child > DIV.baner_l + * + * + * + DIV.block
@@ -1676,12 +1669,10 @@ fishki.net##DIV#line + TABLE TR:first-child > TD:last-child > SCRIPT[src*="xajax
 fishki.net##DIV#line + TABLE TR:first-child > TD:last-child > SCRIPT[src*="xajax"] + TABLE + BR + TABLE
 fishki.net##IFRAME
 forum.ixbt.com##TABLE.top_ad2
-forum.ixbt.com##TD[align="center"][style="padding-right: 8px;"]
 forum.ru-board.com##BODY > CENTER TABLE:first-child
 forum.ru-board.com##BODY > LINK:first-child + * + TABLE[width="100%"][height="67"]
 forum.ru-board.com##BODY > TABLE[cellpadding="2"] TD.sh1[align="left"]:first-child
 forums.overclockers.ru##BODY > STYLE:first-child + TABLE,FORM.headerspace + TABLE,FORM#jumpbox + TABLE
-forums.overclockers.ru##TABLE[width="100%"][height="67"]
 forum.tomsknet.ru##TABLE.banner.nocp
 foto.mail.ru##DIV.brd
 foto.rambler.ru##DIV.pi_b2
@@ -1693,7 +1684,6 @@ fullgames.ru##DIV#footer + TABLE TD#main > CENTER:first-child
 fullgames.ru##DIV#footer + TABLE TD#main > INDEX > CENTER
 fullgames.ru##DIV#jbe_top
 fullgames.ru##DIV#up + TABLE TD#right
-game-torrent.info/forum/$object
 gelbooru.com##DIV[id^="note-box"]
 gismeteo.com,gismeteo.ru##DIV[class*="bnr"]
 gismeteo.com,gismeteo.ru##DIV[class^="container rian_block"]
@@ -1719,13 +1709,10 @@ ifolder.ru##DIV[class^="adb_vsem_"]
 ifolder.ru##DIV.inner
 imagereverb.com##IFRAME
 images.google.com,images.google.ru##TABLE[style^="padding: 8px; background: rgb(255, 248, 221) none repeat scroll 0%"]
-/images/mid/h-anons.$domain=hardwareportal.ru|hwp.ru
 itc.ua##DIV#ad_top
 itc.ua##DIV.b240x350
 itnews.com.ua##TR + * > TD[bgcolor="#ebebeb"][style="height: 96px;"]:first-child
-ixbt.com##DIV.offer
 ixbt.com##H4#nl_header
-forum.ixbt.com##TABLE.top_ad2
 keep4u.ru##DIV#r_bottom
 keep4u.ru##DIV#r_top
 keep4u.ru##DIV[style="text-align: justify;"]
@@ -1736,16 +1723,18 @@ kinobaza.net##*[href^="http://kinobaza.net/ero"]
 kinobaza.net##TABLE DIV.story:last-child
 kinobaza.net##TD.rightside:last-child > DIV[style="padding-left: 6px; padding-top: 10px;"]
 kinobaza.net##*[width="600"] DIV
-kinopoisk.ru##DIV.branding,A[class*="brand"]
+kleo.ru##DIV#color + TABLE
+kotomatrix.ru##NOINDEX > A[target="_blank"] > IMG
 kp.ru##DIV.banner-middle
 legalwarez.ru,soft-teleport.ru##DIV#dle-content > DIV > P[align="justify"][style="margin: 0pt 0px;"]
 legalwarez.ru,soft-teleport.ru##TABLE#table4,TABLE#table46,TABLE#table6,TABLE#table65
-lequroz.ru/$image
-letitbit.net/$third-party,subdocument
+lifehacker.ru##DIV#banner-column
+lifehacker.ru##IMG[alt="Ads"]
 livejournal.com##*[class^="adv"]
 livejournal.com##*[class*="-adv"]
 livejournal.com##DIV[class^="ljad"]
 macovod.net##DIV#top-band-2
+macradar.ru/*_ad.
 macradar.ru##DIV.reclame
 mail.google.com##div[class~="oM"]
 mail.rambler.ru##DIV#banner-right
@@ -1767,11 +1756,8 @@ muzoff.ru##A[href^="http:"]:not([href*="muzoff.ru"])
 muzoff.ru##DIV#ibp
 newestsoft.com##A[href="http://reviewsoft.ru/"]
 newestsoft.com##DIV.mk_body_bg > TABLE[bgcolor="#ffffff"][style="border: 1px solid rgb(193, 209, 253);"]
-ngs.ru##*#advblock
-ngs.ru##*[class*="adv-top"]
-ngs.ru##*[class*="banner"]
-ngs.ru##*[class*="ban-top"]
-ngs.ru##DIV.adv
+new-films.biz##DIV#dle-content > NOINDEX
+ngs.ru##*#advblock,*[class*="adv-top"],*[class*="banner"],*[class*="ban-top"],DIV.adv
 ngs.ru##DIV[align="center"] > NOINDEX
 ngs.ru##DIV > OBJECT > A > IMG,TABLE#nbs-block,TD.blank-td + TD.nb
 nnm-club.ru##CENTER > TABLE[id^="mc_"]
@@ -1779,30 +1765,29 @@ nnm.ru##A#branding_link
 nnm.ru##*[class*="banner"]
 nnm.ru##DIV#rightMenu
 nnm.ru##*[id*="banner"]
-nn.ru##A[href*="nn.ru/nnbs.php?id="]
-nn.ru##DIV#rPanPad > DIV#rPan
 novafilm.tv##DIV[style="display: block;"]
 nvworld.ru##DIV.adv
 nyaatorrents.org##DIV[class$="ad"]
 ochevidec.net##A[href^="http:"]:not([href*="ochevidec.net"]):not([href*="livejournal"]):not([href*="icq"])
 ochevidec.net##IFRAME
 opennet.ru##CENTER#adv
-opensharing.ru##DIV[id*="banner"],DIV#content CENTER > A[target="_blank"],DIV#sidebar CENTER > A
+opensharing.ru,opensharing.org##DIV[id*="banner"],DIV#content CENTER > A[target="_blank"],DIV#sidebar CENTER > A
 oper.ru##DIV.banners,DIV#onlinedengi
-overclockers.ru##IFRAME
-overclockers.ru##IMG[src$="/images/spacer.gif"] + TABLE + TABLE A[target="_blank"],DIV.nou > TABLE DIV[align="center"]
-overclockers.ru##BODY > IMG[src$="/images/spacer.gif"]:first-child + TABLE,TABLE.navbg + DIV[align="center"]
+!Первое правило (до запятой) так же влияет на forums.overclockers.ru.
+overclockers.ru##TABLE[width="100%"][height="67"],TABLE.navbg + DIV[align="center"]
 overclockers.ru##DIV.small + * + DIV P > TABLE TABLE > TBODY > TR > TD > *:not([id^="vote"]),IMG[src="/images/kva_rek_int.png"]
-overclockers.ru##TABLE[width="100%"][height="68"]
+overclockers.ru##IFRAME
+overclockers.ru##IMG[src$="/images/spacer.gif"] + TABLE + TABLE A[target="_blank"],DIV.nou > TABLE DIV[align="center"],DIV.nou CENTER > TABLE
+pics.goods.turist.ru/turist.goods_pics/$domain=~turist.ru
 pindosoff.net##DIV[class^="copyright"] > NOINDEX
 pindosoff.net##DIV#dle-content > TABLE:first-child TD.copy
 pindosoff.net##TD.nav A[target="_blank"]
 pirat.ca##DIV[id^="sidebar"] DIV[class^="spacer_"] + DIV[align="left"] > DIV[align="left"] > DIV[class^="spacer_"] + DIV[align="left"]
+pixshock.net##P[style="text-align: center;"]
 pochta.ru##DIV.bottomadvert
 pochta.ru##DIV.gamesBlock
 pochta.ru##DIV.loveplanet
 pochta.ru##DIV#tionline
-prikol.ru##OBJECT#headlinebanner
 qwe.ru##BODY > TABLE > TBODY > TR > TD.default_menu TABLE[width="500"] DIV
 qwe.ru##BODY > TABLE > TBODY > TR > TD > DIV.border + * + * + * + * + * + * + * + DIV.border
 qwe.ru##DIV.caption + DIV.bodytable > TABLE[width="100%"] TD
@@ -1815,13 +1800,11 @@ rbc.ru##DIV.fullContainer > DIV[class^="pseudo"] > DIV.header:not(.layout):first
 rbc.ru##DIV.topBanner
 rl-team.net##DIV.border_all.tiban
 rpgcodex.net##CENTER > IFRAME
-r.radikal.ru/STATIC/PLASTIC_MEDIA/$object
 russianews.ru##TD.chapterbans[width="15%"]:last-child
-samlab.ws##A.name:not([href*="samlab.ws"])
-samlab.ws##*[class*="banner"],*[id*="banner"]
 samlab.ws##DIV#left > DIV:nth-child(n+3)
 samlab.ws##DIV.main > DIV:not(.about):first-child
 samlab.ws##DIV.main > TABLE
+samlab.ws##OL#soft-new A[target="_blank"] > IMG
 samlab.ws##LI.soft-day:not(:first-child) > DIV.box
 scteam.ru##A[target="blank"] > SPAN
 scteam.ru##TD[valign="top"] > BR + * + * + * + * + * + TABLE[width="100%"] > TBODY > TR:first-child > TD[style="border-left: 1px solid rgb(249, 170, 49); border-right: 1px solid rgb(249, 170, 49); border-bottom: 1px solid rgb(249, 170, 49); padding: 5px;"]:first-child
@@ -1833,12 +1816,15 @@ sfw.org.ua##TR:first-child + TR > TD[valign="top"] > TABLE:first-child + * + * +
 sitehistory.ru##NOINDEX A
 slo.ru##CENTER > TABLE:first-child:last-child *
 smart60.ru##CENTER > DIV,CENTER > TABLE
-soft-best.ws##IFRAME
+soft-best.ws##NOINDEX
+soft-best.ws/$object
 soft-free.ru##A[href="http://goldfin.ru"]
 soft-free.ru##TD + * FORM + * + * + * + * + * + * TD.modulecontent
 softoroom.net##DIV[id^="fo_cblock"]
+sport-express.ru##DIV[style*=".sport-express.ru/img/banners/"]
 styanulo.ru##DIV.banner
 tehnosila.ru##DIV#banner_street
+terabit.biz##NOINDEX
 tfile.ru##DIV[id$="_ban"]
 tfile.ru##IFRAME
 tfile.ru##TABLE#home_c TD#lcol:first-child
@@ -1847,26 +1833,38 @@ torrents.ru##DIV.tCenter.mrg_12
 torrents.ru##IFRAME
 torrents.ru##TD#sidebar1 DIV.tCenter > FORM
 torrents.ru##TR#f-11:last-child
+torrentz.com##DIV.download > H2 + DL
+torrentz.com##DIV[style="width: 1000px; margin: 0pt auto;"]
+translate.ru/App_Themes/Default/begLoad/
 translate.ru##DIV#b_adv
 translate.ru##DIV.bgn_content
 translate.ru##DIV#ctl00_SiteContent_trasnlform_OurPartners
 turist.rbc.ru##DIV.advertBlock
 tutu.ru##TD.plink:first-child:last-child
+ukr.net##DIV[id*="Banner"]
+upload/bx/*$domain=hardwareportal.ru|hwp.ru
+upload/*/mega-announce$domain=hardwareportal.ru|hwp.ru
 uploder.ws##CENTER:last-child
+uploder.ws/static/*0x
 videofiles.com.ua##CENTER
 videosaver.ru##DIV#ad
 vkontakte.ru##A.ad_box
 vkontakte.ru##DIV#sideBar > DIV.leftAd
 vkontakte.ru##DIV[style="margin-top: 3px; font-size: 10px; text-align: center;"] > A[href="help.php?page=target"]
+voffka.com##DIV.blog > DIV[align="center"]:last-child
+voffka.com##NOINDEX
 webpark.ru##DIV#Experts
 webpark.ru##DIV.kontent A[target^="_blank"][href^="http:"]:not([href*="webpark.ru"]) IMG
 webpark.ru##IFRAME
 webpark.ru##NOINDEX TABLE,DIV[style*="height:"][style*="00px"]:first-child
 webplanet.ru##DIV.marketnews
 webplanet.ru##IFRAME
+x-console.com##A[href*="=banner&"]:not([href*=".x-console.com%2Fmagazine"]),*[id*="banner"],*[class*="banner"]
 x-torrents.ru##TD.reklam
 yandex.ru##*#direct
 yandex.ru##DIV.ad,DIV.go-ad-all,DIV.intadv,DIV#banner
+yaplakal.com##DIV[style*="/top-line-bg.gif"]
+yaplakal.com##NOINDEX
 youtube.com##DIV[class*="ad-div"]
 zadolba.li##P.banner
 zaycev.net##DIV[class^="menu"]
@@ -1875,9 +1873,11 @@ zaycev.net#IFRAME
 zaycev.net##*:not([nowrap="nowrap"]) > A[href^="http:"]:not([href*="zaycev.net"])
 zaycev.net##TABLE.advlinks
 zhmak.info##A[rel="nofollow"]
+zhmak.info##DIV[id*="_adv"]
 zhmak.info##TD[valign="top"] > NOINDEX
 zoneofgames.ru$object
 zr.ru##DIV.br
+
 !
 !Дополнительные правила скрытия элементов не входящие в RuAdlist.
 !Данные правила составлены пользователями Morpeh Rus List в 
@@ -1977,6 +1977,7 @@ tabulorasa.info##TD[style="padding: 10px;"]
 samouchka.net##DIV.topbanner
 cyberforum.ru##DIV[style="padding: 3px; border: 1px solid rgb(0, 51, 153);"]
 oplati.ru##TD[style="margin-right: 0pt;"]
+mp3hall.net##IMG:first-child:last-child
 !
 !Полная блокировка сайта. 
 !Версия 0.002
