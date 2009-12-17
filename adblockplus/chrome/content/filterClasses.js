@@ -636,7 +636,7 @@ ElemHideFilter.fromText = function(text, domain, tagName, attrRules, selector)
         }
         else {
           if (id)
-            return new InvalidFilter(text, abp.getString("filter_elemhide_duplicate_id"));
+            return new InvalidFilter(text, "filter_elemhide_duplicate_id");
           else
             id = rule;
         }
@@ -648,7 +648,7 @@ ElemHideFilter.fromText = function(text, domain, tagName, attrRules, selector)
     else if (tagName || additional)
       selector = tagName + additional;
     else
-      return new InvalidFilter(text, abp.getString("filter_elemhide_nocriteria"));
+      return new InvalidFilter(text, "filter_elemhide_nocriteria");
   }
   return new ElemHideFilter(text, domain, selector);
 }
