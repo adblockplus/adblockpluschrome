@@ -137,21 +137,29 @@ function loadFiltersRawText(filename) {
 }
 
 function reloadFilters() {
+    // TODO: Must also change the same array in options.html, which is
+    // a crappy solution but will fix later.
+    var filterFiles = {
+    //    "easylist": "easylist.txt"; // Always enabled
+        "germany": "easylistgermany.txt",
+        "russia": "Russia.txt",
+        "china": "adblock.txt"
+    };
+    
     abp.filterListener.clear();
-    // Get the filter files list from localStorage. If there is no such list in localStorage,
-    // make and save the default one and continue
-    var filterFiles = getOptionsArray("filterFiles")
-    var numFiles = 0; for(var i in filterFiles) numFiles++;
-    if(numFiles == 0) {
-        filterFiles = {"easylist.txt": true, "extras.txt": true};
-        saveOptionsArray("filterFiles", filterFiles);
+    var filesToLoad = new Array();
+    filesToLoad.push("easylist.txt");
+    filesToLoad.push("extras.txt");
+    var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {};
+    for(var key in filterFilesEnabled) {
+        if(filterFilesEnabled[key])
+            filesToLoad.push(filterFiles[key]);
     }
+    
+    console.log(filesToLoad);
 
-    for(var file in filterFiles) {
-        // Don't load disabled filter lists
-        if(filterFiles[file] == false)
-            continue;
-        var FiltersRawText = loadFiltersRawText(file);
+    for(var j = 0; j < filesToLoad.length; j++) {
+        var FiltersRawText = loadFiltersRawText(filesToLoad[j]);
         // Shove it over to the ABP code to parse
         var filters = FiltersRawText.split('\n');
         for (i in filters) {
@@ -167,7 +175,7 @@ function reloadFilters() {
         	abp.filterListener.addFilter(Filter.fromText(f));
         }
     }
-
+    
     // Add user filters
     userFilters = localStorage["userFilters"];
     if(typeof userFilters != "undefined") {

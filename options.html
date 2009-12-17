@@ -37,12 +37,26 @@ p {
 
 </style>
 <script type="text/javascript" charset="utf-8">
+
+var filterFiles = {
+//    "easylist": "easylist.txt"; // Always enabled
+    "germany": "easylistgermany.txt",
+    "russia": "Russia.txt",
+    "china": "adblock.txt"
+};
+
 function loadOptions() {
 	// Show icon in address bar? True by default
 	var shouldShowIcon = localStorage["shouldShowIcon"];
 	document.getElementById("shouldShowIcon").checked = typeof shouldShowIcon == "undefined" ? true : shouldShowIcon == "true";
     // Experimental features enabled? False by default
 	document.getElementById("experimental").checked = typeof localStorage["experimental"] == "undefined" ? false : localStorage["experimental"] == "true";
+	
+	// Filter lists
+	var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {};
+	for(var key in filterFilesEnabled) {
+	    document.getElementById(key).checked = filterFilesEnabled[key];
+    }
 		
 	// User-entered filters
 	var userFilters = localStorage["userFilters"];
@@ -59,6 +73,12 @@ function loadOptions() {
 function saveOptions() {
     localStorage["shouldShowIcon"] = document.getElementById("shouldShowIcon").checked;
     localStorage["experimental"] = document.getElementById("experimental").checked;
+    
+    // Filter lists
+    var filterFilesEnabled = {}
+	for(var key in filterFiles)
+	     filterFilesEnabled[key] = document.getElementById(key).checked;
+	localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
 	
     // Grab contents of userFiltersBox as an array and JSONify it
     var userFiltersBox = document.getElementById("userFiltersBox");
@@ -125,15 +145,15 @@ function importRawFiltersText() {
 <h1>AdThwart Options</h1>
 <p><input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar</p>
 <p><input type="checkbox" id="experimental" onClick="saveOptions()" /> Experimental: Hide most ads on initial page load</p>
-<!--
-<h2>Enabled filter lists</h2>
+<h2>Filter lists</h2>
+<p>Enable as few as possible for the best speed. EasyList is always enabled; the rest are supplements to it.</p>
 <p>
-<input type="checkbox" id="filtlist_easylist" onClick="saveOptions()" />EasyList<br/>
-<input type="checkbox" id="filtlist_easylistgermany" onClick="saveOptions()" />EasyList Germany<br/>
-<input type="checkbox" id="filtlist_easylistkorea" onClick="saveOptions()" />EasyList Korea<br/>
+<input type="checkbox" id="easylist" checked disabled />EasyList by Ares2, Rick752<br/>
+<input type="checkbox" id="germany" onClick="saveOptions()" />EasyList Germany by Ares2<br/>
+<input type="checkbox" id="china" onClick="saveOptions()" />ChinaList by Lian<br/>
+<input type="checkbox" id="russia" onClick="saveOptions()" />Morpeh Rus List by Alexandr Mikhalkin<br/>
 </p>
 <p>The original sources of these lists are available <a href="http://adblockplus.org/en/subscriptions">here</a>.</p>
--->
 <h2>Advanced: Add your own filters</h2>
 <p>Your filter must follow the <a href="http://adblockplus.org/en/filters">AdBlock Plus filter syntax</a>. Certain filter types may not work (yet!).</p>
 
