@@ -129,7 +129,7 @@ function refreshIcon(tabId) {
 function loadFiltersRawText(filename) {
 	// I guess we have to load local files through XMLHttpRequest?
 	// Who knows, I'm not very good at this anyhow.
-	listUrl = chrome.extension.getURL(filename);
+	listUrl = chrome.extension.getURL("lists/" + filename);
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", listUrl, false);
 	xhr.send();
