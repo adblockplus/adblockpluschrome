@@ -1,10 +1,10 @@
 [Adblock Plus 1.1]
-! Checksum: Pf1dl9SEWYTg5LxQOaED0A
+! Checksum: 7csVwmgozN6gbc34Gpg5ag
 !
 ! Rick752's EasyList - Global English ad blocking subscription
 ! https://easylist.adblockplus.org/
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
-! Last modified: 16 Dec 2009 22:00 UTC
+! Last modified: 17 Dec 2009 07:10 UTC
 ! Expires: 5 days (updates automatically every 5 days)
 !
 ! Please report unblocked ads or mistakenly blocked content:
@@ -1176,6 +1176,7 @@ z/adx.js
 ###leftSectionAd300-100
 ###left_adspace
 ###leftad
+###leftads
 ###LeftAdF1
 ###LeftAdF2
 ###linkAds
@@ -1305,6 +1306,7 @@ z/adx.js
 ###top-ads
 ###top-ads-tabs
 ###topAd
+###topads
 ###topAd728x90
 ###topAdBanner
 ###topAdSenseDiv
@@ -3315,6 +3317,8 @@ p2pnet.net###sidebar2
 pcauthority.com.au##.featured-retailers
 pcmag.com###homeRegionPremiumPartner
 pcmag.com###w_leaderboard
+pcmag.com##.content-links
+pcmag.com##.partners
 pcpro.co.uk###skyScrapper
 pcpro.co.uk##.mpuBox
 pcpro.co.uk##a[target="_blank"][href^="http://ad.doubleclick.net/clk;"]
@@ -3580,6 +3584,8 @@ uploading.com##div[style="background: rgb(246, 246, 246) none repeat scroll 0% 0
 uploading.com##div[style="margin: -2px auto 19px; display: block; position: relative;"]
 urbandictionary.com###rollup
 urbandictionary.com##.zazzle_links
+urlesque.com##.sidebarBanner
+urlesque.com##.topBanner
 usatoday.com###footerSponsorOne
 usatoday.com###footerSponsorTwo
 userscripts.org##.sponsor
