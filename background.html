@@ -139,22 +139,31 @@ function loadFiltersRawText(filename) {
 function reloadFilters() {
     // TODO: Must also change the same array in options.html, which is
     // a crappy solution but will fix later.
-    var filterFiles = {
-    //    "easylist": "easylist.txt"; // Always enabled
-        "germany": "easylistgermany.txt",
-        "russia": "Russia.txt",
-        "china": "adblock.txt"
-    };
+	var filterFiles = {
+	    "easylist": "easylist.txt",
+		"extras": "extras.txt",
+	    "germany": "easylistgermany.txt",
+	    "russia": "Russia.txt",
+	    "china": "adblock.txt",
+		"france": "liste_fr.txt",
+		"korea": "corset.txt",
+		"romania": "menetzrolist.txt"
+	};
     
     abp.filterListener.clear();
     var filesToLoad = new Array();
-    filesToLoad.push("easylist.txt");
-    filesToLoad.push("extras.txt");
     var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {};
     for(var key in filterFilesEnabled) {
         if(filterFilesEnabled[key])
             filesToLoad.push(filterFiles[key]);
     }
+
+	// Previous versions didn't store info about EasyList and extras.txt, so turn them on by default
+	if(!("easylist" in filterFilesEnabled)) {
+		filterFilesEnabled["easylist"] = true;
+		filterFilesEnabled["extras"] = true;
+		localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
+	}
     
     // console.log(filesToLoad);
 
@@ -229,7 +238,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 		// This probability will be increased over time if users don't complain too much.
                 // !foo works because if it's set, it must be a string
 		if(!experimentalEnabled) {
-			experimentalEnabled = (Math.random() < 0.3) ? "true" : "false";
+			experimentalEnabled = (Math.random() < 0.5) ? "true" : "false";
 			localStorage["experimental"] = experimentalEnabled;
 		}
         sendResponse({experimentalEnabled: experimentalEnabled == "true", enabled: sender.tab ? !isDomainExcluded(extractDomainFromURL(sender.tab.url)) : true});

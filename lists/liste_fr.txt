@@ -1,0 +1,94 @@
+++ -	2009-12-17 17:13:31.282470000 -0500
+! Checksum: AsB9BPUDzXSrP3TUegc8aw
+! NOTE: This file is a combination of multiple subscriptions
+! Last modified: 17 Dec 2009 22:00 UTC
+!
+! *** Fetched from: http://lian.info.tm/liste_fr.txt ***
+! Liste Fr ~ Filtres francophones complementaires
+! License: http://creativecommons.org/licenses/by-nc-sa/3.0/
+! Contact: http://lian.info.tm/forum
+!
+! - BLOCAGE CLASSIQUE -
+!
+@@|*.nouvelobs.com/*@Top
+@@/openad.tf1.fr/realmedia/ads/adstream_mjx.ads/*/video/*$script
+@@|http://www3.smartadserver.com/call/pubi/*$domain=player.canalplus.fr
+||adnext.fr^$third-party
+||affilipub.com^$third-party
+||autoreflex.com^profils/1004/images/fond*$background
+||smart2.allocine.fr/call2/pubjall/
+||allosponsor.com^$third-party
+||reussissonsensemble.fr^$third-party
+||blogbang.com^d.php$third-party
+||box.shopoon.fr^$third-party
+||cashtrafic.com^$third-party
+||cdiscount.com^include/css/op_skin/
+/cdn.cnetnetworks.fr/ads/*/fond.jpg$domain=gamekult.com
+||clickintext.net^$third-party
+||edintorni.net^$third-party
+||easy-dating.org/PROMO
+||easyrencontre.com/promo
+||a2dfp.net^$third-party
+||ebuzzing.com^$third-party
+||elwatan.com/IMG/swf/
+.export.kelkoo.fr/$frame
+||fastecard.net^*/pub
+fr.ard.yahoo.com/
+images.fan-de-cinema.com/habillage/
+images.gamekult.com/images/pubs/
+||jeuxvideo.com^*/avatar/$~stylesheet
+.les-horaires.fr/ajax/staytuned.popup.php?city=
+ohm.adstronic.net/
+optimized-by.rubiconproject.com/*$domain=apps.facebook.com
+outils.yesmessenger.com/
+/pp.free.fr
+/pub/trictrac/*
+||pubdirecte.com^$third-party
+sbx.pagesjaunes.fr/
+script.banstex.com/
+||sochr.com^$third-party
+||static.p-comme-performance.com^$third-party
+||tootrash.com^$third-party
+||track.effiliation.com^$third-party
+video.unrulymedia.com/
+||weborama.fr^*.js$third-party
+||wedoo.com^$third-party
+||wipub.com^$third-party
+!
+! - BLOCAGE ELEMENTS - 
+! 
+cdiscount.com##DIV#ConteneurBackMaull
+cdiscount.com##TABLE.ptnlnk_table 
+clubic.com#DIV(id=h_pub_fine)
+dailymotion.com#DIV(class=dm_widget_advert_iabrighttitle)
+fr.yahoo.com#DIV(id=marketplace)
+google.fr#TD(id=rhsline)
+leboncoin.fr##DIV[style="width: 189px; float: left; margin-left: 8px;"]
+lefigaro.fr##DIV#boxshop3
+lemonde.fr##DIV#talentsBlock
+maps.google.fr##DIV.ad
+ratp.info##DIV#mega_banner_box
+sports.orange.fr#DIV(id=adTop2)
+voila.fr#TR(class=footer_tr)
+! *** easylist.txt ***
+/adshandler.
+/gt6skyadtop.
+/mbn_ad.
+/realmedia/ads/*
+###banner728x90
+##.burstContentAdIndex
+##.relatedAds
+||webgains.com^$third-party
+||pbsrc.com^*/sponsor/
+mydesert.com##.articleflex
+mydesert.com##.leaderboard-container
+mydesert.com##.leaderboard-container-top
+p2pnet.net###sidebar > ul:first-child + table[width="19%"]
+p2pnet.net##td[align="center"][width="100%"] > a[style="border: 0px none ; margin: 0px;"][target="_blank"] > img
+photobucket.com##.bannerContainer
+toptenreviews.com##.google_add_container
+visaliatimesdelta.com##.articleflex
+visaliatimesdelta.com##.leaderboard-container
+visaliatimesdelta.com##.leaderboard-container-top
+@@||oas.five.tv/realmedia/ads/adstream_sx.ads/demand.five.tv/$object_subrequest
+@@||yimg.com^*/java/promotions/js/ad_eo_1.1.js$script

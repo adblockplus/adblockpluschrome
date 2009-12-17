@@ -38,11 +38,16 @@ p {
 </style>
 <script type="text/javascript" charset="utf-8">
 
+// If you change this, also change this in background.html
 var filterFiles = {
-//    "easylist": "easylist.txt"; // Always enabled
+    "easylist": "easylist.txt",
+	"extras": "extras.txt",
     "germany": "easylistgermany.txt",
     "russia": "Russia.txt",
-    "china": "adblock.txt"
+    "china": "adblock.txt",
+	"france": "liste_fr.txt",
+	"korea": "corset.txt",
+	"romania": "menetzrolist.txt"
 };
 
 function loadOptions() {
@@ -52,8 +57,8 @@ function loadOptions() {
     // Experimental features enabled? False by default
 	document.getElementById("experimental").checked = typeof localStorage["experimental"] == "undefined" ? false : localStorage["experimental"] == "true";
 	
-	// Filter lists
-	var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {};
+	// Filter lists - EasyList enabled by default
+	var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {"easylist": true };
 	for(var key in filterFilesEnabled) {
 	    document.getElementById(key).checked = filterFilesEnabled[key];
     }
@@ -135,8 +140,9 @@ function importRawFiltersText() {
     for(var i = 0; i < filters.length; i++) {
         var text = filters[i].replace(/\s+$/, "").replace(/^\s+/, "");
         if(text.length > 0) {
+			// Filter out "comment" characters
 			switch(text[0]) {
-				case '(': // Filter out "comment" characters
+				case '(': 
 				case '[':
 				case '!':
 					break;
@@ -152,15 +158,21 @@ function importRawFiltersText() {
 </head>
 <body onload="loadOptions()">
 <h1>AdThwart Options</h1>
-<p><input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar</p>
-<p><input type="checkbox" id="experimental" onClick="saveOptions()" /> Experimental: Hide most ads on initial page load</p>
-<h2>Filter lists</h2>
-<p>Enable as few as possible for the best speed. EasyList is always enabled; the rest are supplements to it.</p>
 <p>
-<input type="checkbox" id="easylist" checked disabled />EasyList by Ares2, Rick752<br/>
+<input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar<br/>
+<input type="checkbox" id="experimental" onClick="saveOptions()" /> Experimental: Hide most ads on initial page load
+</p>
+<h2>Filter lists</h2>
+<p>Enable as few as possible for the best speed. EasyList is the primary list; others are supplements to it.</p>
+<p>
+<input type="checkbox" id="easylist" onClick="saveOptions()" />EasyList by Ares2 and Rick752<br/>
+<input type="checkbox" id="extras" onClick="saveOptions()" /><a id="extras_url">AdThwart extras</a><br/>
 <input type="checkbox" id="germany" onClick="saveOptions()" />EasyList Germany by Ares2<br/>
-<input type="checkbox" id="china" onClick="saveOptions()" />ChinaList by Lian<br/>
+<input type="checkbox" id="france" onClick="saveOptions()" />Liste FR by Lian<br/>
+<input type="checkbox" id="china" onClick="saveOptions()" />ChinaList by Gythialy<br/>
 <input type="checkbox" id="russia" onClick="saveOptions()" />Morpeh Rus List by Alexandr Mikhalkin<br/>
+<input type="checkbox" id="korea" onClick="saveOptions()" />Corset by Brian Yi<br/>
+<input type="checkbox" id="romania" onClick="saveOptions()" />ROList by MenetZ<br/>
 </p>
 <p>The original sources of these lists are available <a href="http://adblockplus.org/en/subscriptions">here</a>.</p>
 <h2>Advanced: Add your own filters</h2>
@@ -188,4 +200,9 @@ function importRawFiltersText() {
 
 <p>See the <a href="http://qux.us/adthwart">AdThwart website</a> for more information about AdThwart.</p>
 </body>
+<script type="text/javascript" charset="utf-8">
+// Set URL of extras.txt in A HREF
+document.getElementById("extras_url").href = chrome.extension.getURL("lists/extras.txt");
+</script>
+
 </html>
