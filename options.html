@@ -131,12 +131,21 @@ function showFiltersInRawFormat() {
 function importRawFiltersText() {
     $("#userFiltersBox").children().remove();
     var filters = document.getElementById("rawFiltersText").value.split("\n");
-    console.log("filters length " + filters.length);
+    // console.log("filters length " + filters.length);
     for(var i = 0; i < filters.length; i++) {
         var text = filters[i].replace(/\s+$/, "").replace(/^\s+/, "");
-        if(text.length > 0)
-            appendFilterToListBox(filters[i]);
+        if(text.length > 0) {
+			switch(text[0]) {
+				case '(': // Filter out "comment" characters
+				case '[':
+				case '!':
+					break;
+				default:
+	            	appendFilterToListBox(text);
+			}
+		}
     }
+	saveOptions();
 }
 
 </script>
