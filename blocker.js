@@ -294,6 +294,9 @@ function hideElements(parent) {
     } else {
         hideBySelectorsString(elemhideSelectorsString, parent);
     }
+    
+    // Allow running again after some interval
+    hideElementsTimeoutID = 0;
 }
 
 function nukeElements(parent) {
