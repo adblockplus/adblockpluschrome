@@ -276,8 +276,9 @@ function hideBySelectorsString(selectorsString, parent) {
     if(enabled) {
         var elts = $(selectorsString, parent);
         for(var i = 0; i < elts.length; i++) {
-            elts[i].style.visibility = "hidden";
-            elts[i].style.display = "none";
+            // TODO: Sometimes style isn't defined, for some reason...
+            try { elts[i].style.visibility = "hidden"; } catch(err) {}
+            try { elts[i].style.display = "none"; } catch(err) {}
         }
     }
     //console.log("That took " + ((new Date()).getTime() - now) + " ms");
