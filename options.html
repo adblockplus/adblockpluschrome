@@ -47,7 +47,8 @@ var filterFiles = {
     "china": "adblock.txt",
 	"france": "liste_fr.txt",
 	"korea": "corset.txt",
-	"romania": "menetzrolist.txt"
+	"romania": "menetzrolist.txt",
+	"italy": "filtri.txt"
 };
 
 function loadOptions() {
@@ -163,16 +164,18 @@ function importRawFiltersText() {
 <input type="checkbox" id="experimental" onClick="saveOptions()" /> Experimental: Hide most ads on initial page load
 </p>
 <h2>Filter lists</h2>
-<p>Enable as few as possible for the best speed. EasyList is the primary list and should generally be enabled; others are supplements to it.</p>
+<p>Enable as few as possible for the best speed. EasyList is the primary list.</p>
 <p>
 <input type="checkbox" id="easylist" onClick="saveOptions()" />EasyList by Ares2 and Rick752<br/>
 <input type="checkbox" id="extras" onClick="saveOptions()" /><a id="extras_url">AdThwart extras</a><br/>
 <input type="checkbox" id="germany" onClick="saveOptions()" />EasyList Germany by Ares2<br/>
-<input type="checkbox" id="france" onClick="saveOptions()" />Liste FR by Lian<br/>
+<input type="checkbox" id="france" onClick="saveOptions()" />Liste FR (France) by Lian<br/>
 <input type="checkbox" id="china" onClick="saveOptions()" />ChinaList by Gythialy<br/>
-<input type="checkbox" id="russia" onClick="saveOptions()" />Morpeh Rus List by Alexandr Mikhalkin<br/>
-<input type="checkbox" id="korea" onClick="saveOptions()" />Corset by Brian Yi<br/>
-<input type="checkbox" id="romania" onClick="saveOptions()" />ROList by MenetZ<br/>
+<input type="checkbox" id="russia" onClick="saveOptions()" />Morpeh Rus List (Russia) by Alexandr Mikhalkin<br/>
+<input type="checkbox" id="korea" onClick="saveOptions()" />Corset (Korea) by Brian Yi<br/>
+<input type="checkbox" id="romania" onClick="saveOptions()" />ROList (Romania) by MenetZ<br/>
+<input type="checkbox" id="italy" onClick="saveOptions()" />Xfiles (Italy) by Gioxx<br/>
+
 </p>
 <p>The original sources of these lists are available <a href="http://adblockplus.org/en/subscriptions">here</a>.</p>
 <h2>Advanced: Add your own filters</h2>
