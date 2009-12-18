@@ -1,10 +1,10 @@
 [Adblock Plus 1.1]
-! Checksum: HtU6PgVIazcYzo3m1kJTTg
+! Checksum: 8wg9zObUO+TpoHOY/L+/rg
 !
 ! EasyList Germany - Deutsche Ergänzung zu EasyList
 ! https://easylist.adblockplus.org/
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
-! Last modified: 16 Dec 2009 22:20 UTC
+! Last modified: 17 Dec 2009 22:10 UTC
 ! Expires: 5 days (updates automatically every 5 days)
 !
 ! Bitte melde ungeblockte Werbung und fälschlicherweise geblockte Dinge:
@@ -342,7 +342,7 @@ studentshelp.de/*/geldfunk.swf
 travian.ws/banners/
 !---------------Seitenspezifische Regeln zum Verstecken von Werbung(süberbleibseln)----------------!
 ! *** easylistgermany_specific_hide.txt ***
-cyn123people.at,123people.de##.l_banner
+123people.at,123people.de##.l_banner
 123people.de#div(class=sponsor_line)
 1und1.de##div[class^="adv "]
 1und1.de#a(href*=/usenext/)
@@ -427,7 +427,7 @@ computerwoche.de#div(id^=banner)
 creativeproxy.uimserv.net###contentContainer
 cynamite.de##.Right_Content_MediumRectangle
 cynamite.de##.geiz_table
-cynamite.de###nointelliTXT
+cynamite.de###rect_anz
 cynamite.de#div(class^=sqoops_)
 cynamite.de##div[style*="width: 160px;"][style*="height: 600px;"][style*="text-align: center;"]
 cynamite.de#table(background*=/metaboli/)
