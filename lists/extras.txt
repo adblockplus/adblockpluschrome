@@ -10,6 +10,7 @@ penny-arcade.com##.funding-horizontal
 penny-arcade.com##.funding-vertical
 ###bbccom_mpu
 ###bbccom_leaderboard
+###bbccom_adsense_middle
 reddit.com###ad
 sciencedaily.com###googlephoto
 sciencedaily.com###googlerelated

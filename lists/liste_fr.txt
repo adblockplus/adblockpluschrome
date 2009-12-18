@@ -1,7 +1,7 @@
-++ -	2009-12-17 17:13:31.282470000 -0500
-! Checksum: AsB9BPUDzXSrP3TUegc8aw
+++ -	2009-12-17 22:56:32.088628184 -0500
+! Checksum: SOuzcIAWPlQ7KpouJfdVpQ
 ! NOTE: This file is a combination of multiple subscriptions
-! Last modified: 17 Dec 2009 22:00 UTC
+! Last modified: 18 Dec 2009 00:00 UTC
 !
 ! *** Fetched from: http://lian.info.tm/liste_fr.txt ***
 ! Liste Fr ~ Filtres francophones complementaires
@@ -71,24 +71,3 @@ ratp.info##DIV#mega_banner_box
 sports.orange.fr#DIV(id=adTop2)
 voila.fr#TR(class=footer_tr)
 ! *** easylist.txt ***
-/adshandler.
-/gt6skyadtop.
-/mbn_ad.
-/realmedia/ads/*
-###banner728x90
-##.burstContentAdIndex
-##.relatedAds
-||webgains.com^$third-party
-||pbsrc.com^*/sponsor/
-mydesert.com##.articleflex
-mydesert.com##.leaderboard-container
-mydesert.com##.leaderboard-container-top
-p2pnet.net###sidebar > ul:first-child + table[width="19%"]
-p2pnet.net##td[align="center"][width="100%"] > a[style="border: 0px none ; margin: 0px;"][target="_blank"] > img
-photobucket.com##.bannerContainer
-toptenreviews.com##.google_add_container
-visaliatimesdelta.com##.articleflex
-visaliatimesdelta.com##.leaderboard-container
-visaliatimesdelta.com##.leaderboard-container-top
-@@||oas.five.tv/realmedia/ads/adstream_sx.ads/demand.five.tv/$object_subrequest
-@@||yimg.com^*/java/promotions/js/ad_eo_1.1.js$script
