@@ -1,7 +1,7 @@
 [Adblock Plus 1.1]
-!  Checksum: +hZgKr1Tr7mNkDH8Ibas6w
+!  Checksum: M1Xlqudzv3GfTgVNHN4KbQ
 !  Adblock Plus List with Main Focus on Chinese Sites.
-!  Last Modified:  Wed, 16 Dec 2009 21:42:30 +0800
+!  Last Modified:  Fri, 18 Dec 2009 22:44:43 +0800
 !         ----http://adblock-chinalist.googlecode.com/
 !coding: utf-8, expires: 5 days
 !----GNU LGPL Licensed, NO WARRANTY but Best Wishes----
@@ -479,10 +479,9 @@ xc.macd.cn/
 
 !---Mop
 dzh.mop.com/static/$object
-tj.pet.mop.com/click.html
 tt.mop.com/club/$object
 tt.mop.com##div.mt5
-union.mop.com/
+txt.mop.com/*/*/ad/$script
 ||yx.mop.com^$third-party
 
 !---驱动之家
@@ -1033,7 +1032,17 @@ chinatimes.com##DIV.text-ad,.ad
 chinatimes.com/2009Cti/Common/2009Cti-News-Ads-Right/
 chinatimes.com/2007Cti/2007Cti-News/Common/2007Cti-News-Ads-listBanner/
 ||ce.cn/ce/newmain/ad/
+ce.cn##div#toprad
 */fileftp/$object,domain=chinanews.com.cn|chinanews.com
+cdnews.com.tw/upload/200*/ad_
+||cnyes.com/cnyesad/
+||cnyes.com/promote/
+||cnyes.com/usastock/txtad_js.aspx
+cnyes.com##DIV[class^="ad_ns"],[class^="cyads"]
+cnyes.com##a[href^="http://ad.cnyes.com/cnYESAD/"]
+chinayescache.com/sys/js/ad.js
+chinayes.com##DIV[class^="AD"],#biz
+chinayes.com##TABLE#tAD_header_4
 .daqi.com/clicklog.js
 img.epochtimes.com/i6/ad/
 news.epochtimes.com.tw/Rbanner.swf
@@ -1301,6 +1310,8 @@ tomatolei.com/images/yingfu.gif
 ttads.ttplayer.com/chtml/www.ttplayer.com.bottom.htm
 tz513.com$object
 tz513.com/ad/
+||adv*.travel-web.com.tw/
+travel-web.com.tw/Temp/Adv/
 ||visionunion.com/admin/data/ad/
 webcars.com.cn/js/InsertFlashAd$script
 soft.winzheng.com/u/_sponsor/$script

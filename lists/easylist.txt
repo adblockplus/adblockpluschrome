@@ -1,10 +1,10 @@
 [Adblock Plus 1.1]
-! Checksum: ZUUUMmOvjtrfV+UpY8y0Qw
+! Checksum: yN3Z6RcVIL1d7hzIk+6gfA
 !
 ! Rick752's EasyList - Global English ad blocking subscription
 ! https://easylist.adblockplus.org/
 ! License: http://creativecommons.org/licenses/by-sa/3.0/
-! Last modified: 18 Dec 2009 00:00 UTC
+! Last modified: 18 Dec 2009 19:40 UTC
 ! Expires: 5 days (updates automatically every 5 days)
 !
 ! Please report unblocked ads or mistakenly blocked content:
@@ -277,6 +277,7 @@
 /advertise/*
 /advertisement.
 /advertisement-
+/advertisement_
 /advertisements/*
 /advertisementview/*
 /advertising.
@@ -612,6 +613,7 @@
 /system/ad/*
 /systemad.
 /systemad_
+/tags.asp?advertising=
 /testingad.
 /textad.
 /textad?
@@ -927,6 +929,7 @@ z/adx.js
 ###adSenseModule
 ###adSlider
 ###adSpace300_ifrMain
+###adSpot-Leader
 ###adSpot-sponsoredlinks
 ###adSpot-textbox1
 ###adSpot-widestrip
@@ -945,6 +948,7 @@ z/adx.js
 ###ad_468_60
 ###ad_728_foot
 ###ad_728x90
+###ad_anchor
 ###ad_banner_top
 ###ad_bar
 ###ad_box_colspan
@@ -952,15 +956,19 @@ z/adx.js
 ~academics.de###ad_container
 ###ad_head
 ###ad_island
+###ad_leader
 ###ad_leaderBoard
 ###ad_leaderboard
+###ad_lwr_square
 ###ad_middle
 ###ad_rectangle
 ###ad_related_links_div_program
 ###ad_sidebar1
 ###ad_sidebar2
 ###ad_sidebar3
+###ad_skyscraper
 ###ad_space
+###ad_square
 ###ad_top
 ~amnestyusa.org###ad_wrapper
 ###ad_YieldManager-300x250
@@ -973,6 +981,7 @@ z/adx.js
 ###adheader
 ###adlinkws
 ###admid
+###admiddle3center
 ###admiddle3left
 ###adposition-C
 ###adposition3
@@ -1110,6 +1119,7 @@ z/adx.js
 ###divWrapper_Ad
 ###div_video_ads
 ###dlads
+###download_ads
 ###ds-mpu
 ###exads
 ###featuredAdContainer2
@@ -1123,6 +1133,9 @@ z/adx.js
 ~investopedia.com###footer_ads
 ###footerAdDiv
 ###fusionad
+###ft-ad
+###ft-ad-1
+###ft-ad-container
 ###ga_300x250
 ###game-info-ad
 ###global_header_ad_area
@@ -1541,12 +1554,24 @@ z/adx.js
 ##.adsTextHouse
 ##.ads_728x90
 ##.ads_container
+##.ads_disc_anchor
+##.ads_disc_leader
+##.ads_disc_lwr_square
+##.ads_disc_skyscraper
+##.ads_disc_square
 ##.ads_div
+##.ads_disc_anchor
+##.ads_disc_leader
+##.ads_disc_lwr_square
+##.ads_disc_skyscraper
+##.ads_disc_square
+##.side_ad
 ##.adscreen
 ##.adsection_a2
 ##.adsense
 ##.adsense-heading
 ##.adsenseContainer
+##.adsImages
 ##.adsingle
 ##.adslogan
 ##.adspace
@@ -1597,6 +1622,7 @@ z/adx.js
 ##.affiliate-sidebar
 ##.affiliateAdvertText
 ##.agi-adsaleslinks
+##.alt_ad
 ##.anchorAd
 ##.aolSponsoredLinks
 ##.aopsadvert
@@ -1692,6 +1718,9 @@ z/adx.js
 ##.footerTextAd
 ##.footer_ad
 ##.footer_ads
+##.footer_block_ad
+##.footer_line_ad
+##.ft-ad
 ##.ftdContentAd
 ##.full_ad_box
 ##.g3rtn-ad-site
@@ -2654,12 +2683,14 @@ z/adx.js
 ||maannews.net/adv/
 ||manoramaonline.com/advt/
 ||majorgeeks.com^*/banners/
+||medhelp.org/hserver/$subdocument
 ||media.abc.com/video/ads/$object_subrequest
 ||mediafire.com^*/linkto/default-$subdocument
 ||mediafire.com^*/remove_ads.gif
 ||mediamgr.ugo.com^
 ||merriam-webster.com^*/accipiter.js
 ||mgnetwork.com/dealtaker/
+||mixpod.com/ad/
 ||mmorpg.com/images/skins/
 ||mp3mediaworld.com*/!
 ||msn.com/?adunitid
@@ -2957,6 +2988,7 @@ ecommercetimes.com##.slink-text
 ecommercetimes.com##.slink-title
 ecommercetimes.com##.story-cip
 economist.com###classified_wrapper
+economist.com###footer-classifieds
 economist.com###leaderboard
 economist.com###top_banner
 edn.com###headerwildcard
@@ -3588,6 +3620,7 @@ tucsoncitizen.com##.bigbox_container
 tucsoncitizen.com##.leaderboard_container_top
 tucsoncitizen.com##.skyscraper_container
 tutsplus.com###AdobeBanner
+tvguide.co.uk##table[width="160"][height="620"]
 tv.yahoo.com##.spons
 u-file.net##.spottt_tb
 uploading.com##div[style="background: rgb(246, 246, 246) none repeat scroll 0% 0%; width: 35%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous; height: 254px;"]
