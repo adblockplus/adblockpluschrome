@@ -32,7 +32,6 @@ function getOptionsArray(optName) {
 }
 
 function saveOptionsArray(optName, data) {
-	//console.log("Saving " + optName + " = " + JSON.stringify(data));
 	localStorage[optName] = JSON.stringify(data);
 }
 
@@ -68,7 +67,6 @@ function isDomainExcluded(docDomain) {
         return false;
         
     docDomain = docDomain.replace(/\.+$/, "").toLowerCase();
-    //console.log("isDomainExcluded: " + docDomain);
 
 	// Cache the last domain that was asked for so we don't
 	// do all this JSON nonsense on every query
@@ -166,8 +164,6 @@ function reloadFilters() {
 		localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
 	}
     
-    // console.log(filesToLoad);
-
     for(var j = 0; j < filesToLoad.length; j++) {
         var FiltersRawText = loadFiltersRawText(filesToLoad[j]);
         // Shove it over to the ABP code to parse
@@ -208,17 +204,11 @@ chrome.extension.onConnect.addListener(function(port) {
 	        var numElements = msg.urls.length;
 	        blockList = new Array();
 	        for(var i = 0; i < numElements; i++) {
-	            /* // TODO: Disable whitelist filters for the time being...we'll fix this
-	            if(whitelistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, false)) {
-	                if(msg.urls[i].match(/eyewonder/)) {
-    	                //DEBUG
-    	                var rar = blacklistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, true);
-    	                console.log(msg.urls[i] + " " + rar);
-    	                if(rar)
-    	                    console.log("Boo!");
-                    }
-	                continue;
-                } */
+	            // TODO: Does whitelist matching actually work?
+	            // if(whitelistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, false)) {
+	            //     continue;
+	            // }
+				//var f;
 	            if(blacklistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, true)) {
 				    blockList.push(msg.serials[i]);
 			    }

@@ -1,9 +1,18 @@
-// ABP content type flags - ignored for now
+// ABP content type flags
 var TypeMap = {
   OTHER: 1, SCRIPT: 2, IMAGE: 4, STYLESHEET: 8, OBJECT: 16,
   SUBDOCUMENT: 32, DOCUMENT: 64, BACKGROUND: 256, XBL: 512,
   PING: 1024, XMLHTTPREQUEST: 2048, OBJECT_SUBREQUEST: 4096,
   DTD: 8192, MEDIA: 16384, FONT: 32768, ELEMHIDE: 0xFFFD
+};
+
+var TagToType = {
+    "SCRIPT": TypeMap.SCRIPT,
+    "IMG": TypeMap.IMAGE,
+    "STYLE": TypeMap.STYLESHEET,
+    "OBJECT": TypeMap.OBJECT,
+    "EMBED": TypeMap.OBJECT,
+    "IFRAME": TypeMap.SUBDOCUMENT
 };
 
 var enabled = false;
@@ -33,7 +42,7 @@ function nukeSingleElement(elt) {
     if(elt.innerHTML) elt.innerHTML = "";
     if(elt.innerText) elt.innerText = "";
     // Probably vain attempt to stop scripts
-    if(elt.src) elt.src = "";
+    if(elt.tagName == "SCRIPT" && elt.src) elt.src = "";
     if(elt.language) elt.language = "Blocked!";
     elt.style.width = elt.style.height = "0px !important";
     elt.style.visibility = "hidden !important";
@@ -59,21 +68,10 @@ port.onMessage.addListener(function(msg) {
                 }
             }
         }
-        // DEBUG: list stylesheets
-        // console.log(document.styleSheets.length + " stylesheets " + document.URL);
-        // for(var i = 0; i < document.styleSheets.length; i++) {
-        //     console.log(document.styleSheets[i]);
-        // }
-        
         // Take away our injected CSS, leaving only ads hidden
         if(styleElm) {
             document.documentElement.removeChild(styleElm);
             styleElm = null;
-            // DEBUG: list stylesheets
-            // console.log(document.styleSheets.length + " stylesheets after removing styleElm " + document.URL);
-            // for(var i = 0; i < document.styleSheets.length; i++) {
-            //     console.log(document.styleSheets[i]);
-            // }
         }
     }
 });
@@ -323,7 +321,9 @@ function nukeElements(parent) {
 		    // TODO: Some rules don't include the domain, and the blacklist
 		    // matcher doesn't match on queries that don't include the domain
 		    if(!url.match(/^http/)) url = "http://" + document.domain + url;
-    		types.push(4); // TypeMap constants are ignored for now
+		    // Guaranteed by call to $() above to be one of img, iframe, object, embed
+		    // and therefore in this list
+    		types.push(TagToType[elts[i].tagName]);
     		urls.push(url);
     		serials.push(serial);
 	    }

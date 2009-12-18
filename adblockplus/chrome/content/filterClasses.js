@@ -385,7 +385,8 @@ RegExpFilter.prototype =
   {
     return (this.regexp.test(location) &&
 //            (RegExpFilter.typeMap[contentType] & this.contentType) != 0 &&
-            (this.thirdParty == null || this.thirdParty == thirdParty) &&
+            (contentType & this.contentType) != 0 && // Avoid a string-indexed lookup
+//            (this.thirdParty == null || this.thirdParty == thirdParty) &&
             this.isActiveOnDomain(docDomain));
   }
 };
@@ -415,8 +416,9 @@ RegExpFilter.fromText = function(text)
   {
     options = RegExp.$1.toUpperCase().split(",");
     text = text.replace(Filter.optionsRegExp, "");
-    for (var option in options)
+    for (var i = 0; i < options.length; i++) // (var option in options)
     {
+      option = options[i];
       var value;
       // [option, value] = option.split("=");
 			rar = option.split("=");
