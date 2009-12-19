@@ -125,6 +125,13 @@ function refreshIcon(tabId) {
 // deciding whether to block a given element once here, and let content scripts
 // query us about individual elements.
 
+function downloadFilterList(url) {
+	new FilterListFetcher(url, function(fetcher) {
+		if(!fetcher.error)
+			reloadFilters();
+	});
+}
+
 // Loads the filter list from disk (or localStorage) and stores it in a global variable
 function loadFiltersRawText(filename) {
 	// Check filename for http prefix and if so load from localStorage instead
@@ -132,15 +139,20 @@ function loadFiltersRawText(filename) {
 		if(typeof localStorage[filename] == "string") {
 			var list = JSON.parse(localStorage[filename]);
 			//console.log("Using cached: " + filename + " last updated " + list.lastUpdated);
-			if(!list.error) return list.text;
+			if(!list.error) {
+				var now = new Date().getTime();
+				// If it's been > 3 days since last update, download it again
+				if((now - list.lastUpdated) > (3 * 86400 * 1000000)) {
+					console.log("Too old, so redownloading " + filename);
+					downloadFilterList(filename);
+				}
+				return list.text;
+			}
 		} else {
-			// TODO: This filter list was never downloaded
-			new FilterListFetcher(filename, function(fetcher) {
-				// This is kept from running away by the fetcher actually storing the filter
-				// list data, which is checked for above.
-				if(!fetcher.error)
-					reloadFilters();
-			});
+			// This filter list was never downloaded, so download it
+			// This is kept from running away by the fetcher actually storing the filter
+			// list data, which is checked for above.
+			downloadFilterList(filename);			
 			return ""; // Return nothing for now
 		}
 	}
