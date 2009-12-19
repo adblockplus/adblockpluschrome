@@ -85,7 +85,6 @@ function loadOptions() {
     // Populate list box with filter strings
     for(var i = 0; i < userFilters.length; i++)
         appendFilterToListBox(userFilters[i]);
-		
 	
 	saveOptions(); // Save any defaults that were created
 }
@@ -255,7 +254,7 @@ function checkAllFilterLists() {
 
 </script>
 </head>
-<body onload="loadOptions(); checkAllFilterLists()">
+<body id="AToptions" onload="loadOptions(); checkAllFilterLists()">
 <h1>AdThwart Options</h1>
 <p>
 <input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar<br/>
@@ -270,7 +269,7 @@ function checkAllFilterLists() {
 
 <input type="checkbox" id="germany" onClick="checkFilterList('germany'); saveOptions()" />EasyList Germany by Ares2 <span id="germany_msg" class="flMsg"></span><br/>
 
-<input type="checkbox" id="france" onClick= "checkFilterList('france'); saveOptions()" />EasyList plus dListe FR (France) by Lian <span id="france_msg" class="flMsg"></span><br/>
+<input type="checkbox" id="france" onClick= "checkFilterList('france'); saveOptions()" />EasyList plus Liste FR (France) by Lian <span id="france_msg" class="flMsg"></span><br/>
 
 <input type="checkbox" id="fanboy" onClick="checkFilterList('fanboy'); saveOptions()" />Fanboy's list (New Zealand) <span id="fanboy_msg" class="flMsg"></span><br/>
 
@@ -319,10 +318,17 @@ function checkAllFilterLists() {
 </tr></table>
 
 <p>See the <a href="http://qux.us/adthwart">AdThwart website</a> for more information about AdThwart.</p>
+
+<div id="bg" style="position: absolute; z-index: -100; right: 0px; bottom: 0px; opacity: 0.05; width:720; height:720;">
+<img id="devilBg"/>
+</div>
+
 </body>
 <script type="text/javascript" charset="utf-8">
 // Set URL of extras.txt in A HREF
 document.getElementById("extras_url").href = chrome.extension.getURL("lists/extras.txt");
+$("#bg").css("background", "url(" + chrome.extension.getURL("emotes/face-devilish.svg") + ") no-repeat 100 250");
+
 </script>
 
 </html>
