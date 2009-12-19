@@ -2,11 +2,12 @@
 <script>
 var abp = {};
 </script>
-<script src="adblockplus/chrome/content/filterClasses.js"/>
-<script src="adblockplus/chrome/content/filterStorage.js"/>
-<script src="adblockplus/chrome/content/elemhide.js"/>
-<script src="adblockplus/chrome/content/filterListener.js"/>
-<script src="adblockplus/chrome/content/matcher.js"/>
+<script type="text/javascript" src="adblockplus/chrome/content/filterClasses.js"/>
+<script type="text/javascript" src="adblockplus/chrome/content/filterStorage.js"/>
+<script type="text/javascript" src="adblockplus/chrome/content/elemhide.js"/>
+<script type="text/javascript" src="adblockplus/chrome/content/filterListener.js"/>
+<script type="text/javascript" src="adblockplus/chrome/content/matcher.js"/>
+<script type="text/javascript" src="filterupdate.js"/>
 <script>
 
 var lastDomainChecked = "";
@@ -124,33 +125,40 @@ function refreshIcon(tabId) {
 // deciding whether to block a given element once here, and let content scripts
 // query us about individual elements.
 
-// Loads the filter list from disk and stores it in a global variable
+// Loads the filter list from disk (or localStorage) and stores it in a global variable
 function loadFiltersRawText(filename) {
+	// Check filename for http prefix and if so load from localStorage instead
+	if(filename.match(/^http/)) {
+		if(typeof localStorage[filename] == "string") {
+			var list = JSON.parse(localStorage[filename]);
+			//console.log("Using cached: " + filename + " last updated " + list.lastUpdated);
+			if(!list.error) return list.text;
+		} else {
+			// TODO: This filter list was never downloaded
+			new FilterListFetcher(filename, function(fetcher) {
+				// This is kept from running away by the fetcher actually storing the filter
+				// list data, which is checked for above.
+				if(!fetcher.error)
+					reloadFilters();
+			});
+			return ""; // Return nothing for now
+		}
+	}
+	
 	// I guess we have to load local files through XMLHttpRequest?
 	// Who knows, I'm not very good at this anyhow.
 	listUrl = chrome.extension.getURL("lists/" + filename);
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", listUrl, false);
-	xhr.send();
+	xhr.send(null);
 	return xhr.responseText;
 }
 
+// Clears the ABP matchers of filters and reloads them.
+// This will also download and cache filter lists as necessary.
 function reloadFilters() {
-    // TODO: Must also change the same array in options.html, which is
-    // a crappy solution but will fix later.
-	var filterFiles = {
-	    "easylist": "easylist.txt",
-		"extras": "extras.txt",
-	    "germany": "easylistgermany.txt",
-	    "russia": "Russia.txt",
-	    "china": "adblock.txt",
-		"france": "liste_fr.txt",
-		"korea": "corset.txt",
-		"romania": "menetzrolist.txt",
-		"italy": "filtri.txt"
-	};
-    
     abp.filterListener.clear();
+	// TODO: A misnomer - can contain http(s) URLS as well
     var filesToLoad = new Array();
     var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {};
     for(var key in filterFilesEnabled) {
@@ -199,16 +207,13 @@ reloadFilters();
 // We'll use a "long-lived" connection since we'll be asked about tons of elements
 chrome.extension.onConnect.addListener(function(port) {
 	port.onMessage.addListener(function(msg) {
-	    //if(isDomainExcluded(msg.domain))
-	    //    return;
 	    if(msg.reqtype == "should-block-list?") {
 	        var numElements = msg.urls.length;
 	        blockList = new Array();
 	        for(var i = 0; i < numElements; i++) {
 	            // TODO: Does whitelist matching actually work?
-	            // if(whitelistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, false)) {
-	            //     continue;
-	            // }
+	            if(whitelistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, false))
+	            	continue;
 				//var f;
 				// TODO: Implement thirdParty check
 	            if(blacklistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, true)) {
@@ -229,7 +234,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 		var experimentalEnabled = localStorage["experimental"];
 		// Turn on initial-load ad hiding with some probability for new/upgrading users.
 		// This probability will be increased over time if users don't complain too much.
-                // !foo works because if it's set, it must be a string
+        // !foo works because if it's set, it must be a string
 		if(!experimentalEnabled) {
 			experimentalEnabled = (Math.random() < 0.5) ? "true" : "false";
 			localStorage["experimental"] = experimentalEnabled;
