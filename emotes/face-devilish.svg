@@ -319,7 +319,7 @@
      id="layer1"
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
-<g transform="scale(15, 15)">
+<g transform="scale(7, 7)" opacity="0.05">
     <path
        style="opacity:1;color:#000000;fill:url(#linearGradient2289);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.99999988;stroke-linecap:round;stroke-linejoin:round;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible"
        d="M 27.435547,37.514338 C 27.435547,37.514338 44.227293,38.187142 46.595268,31.409748 C 48.183817,26.863153 41.593613,24.041455 41.032451,20.967267 C 40.47129,17.893077 44.350623,18.673824 44.350623,18.673824 L 44.984979,19.942537 L 47.278422,17.209925 L 43.179504,16.673162 L 43.96025,17.990671 C 43.96025,17.990671 40.178509,17.380713 40.056519,20.674487 C 39.934527,23.96826 46.709243,28.164771 44.367004,31.409748 C 42.024765,34.654725 30.687562,33.654393 30.687562,33.654393 L 27.435547,37.514338 z "
