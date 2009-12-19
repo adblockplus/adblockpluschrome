@@ -254,7 +254,8 @@ function checkAllFilterLists() {
 
 </script>
 </head>
-<body id="AToptions" onload="loadOptions(); checkAllFilterLists()">
+<body onload="loadOptions(); checkAllFilterLists()">
+<div>
 <h1>AdThwart Options</h1>
 <p>
 <input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar<br/>
@@ -318,17 +319,14 @@ function checkAllFilterLists() {
 </tr></table>
 
 <p>See the <a href="http://qux.us/adthwart">AdThwart website</a> for more information about AdThwart.</p>
-
-<div id="bg" style="position: absolute; z-index: -100; right: 0px; bottom: 0px; opacity: 0.05; width:720; height:720;">
-<img id="devilBg"/>
 </div>
 
 </body>
 <script type="text/javascript" charset="utf-8">
 // Set URL of extras.txt in A HREF
 document.getElementById("extras_url").href = chrome.extension.getURL("lists/extras.txt");
-$("#bg").css("background", "url(" + chrome.extension.getURL("emotes/face-devilish.svg") + ") no-repeat 100 250");
-
+// Put a devil in the user filters box
+$("#userFiltersBox").css("background", "url(" + chrome.extension.getURL("emotes/face-devilish.svg") + ") no-repeat 150 150");
 </script>
 
 </html>
