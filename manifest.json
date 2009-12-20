@@ -3,15 +3,15 @@
 	"version": "0.5.2",
 	"description": "Blocks ads on websites. Supports EasyList and many other filter lists.",
 	"page_action": {
-		"default icon": "emotes/face-devilish-19.png",
+		"default icon": "icons/face-devilish-19.png",
 		"default title": "AdThwart",
 		"popup": "popup.html"
 	},
 	"icons": {
-		"16": "emotes/face-devilish-16.png",
-		"32": "emotes/face-devilish-32.png",
-		"48": "emotes/face-devilish-48.png",
-		"128": "emotes/face-devilish-128.png"
+		"16": "icons/face-devilish-16.png",
+		"32": "icons/face-devilish-32.png",
+		"48": "icons/face-devilish-48.png",
+		"128": "icons/face-devilish-128.png"
 	},
 	"permissions": [
 		"tabs", "http://*/*", "https://*/*"

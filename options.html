@@ -68,14 +68,19 @@ function loadOptions() {
     // Experimental features enabled? False by default
 	document.getElementById("experimental").checked = typeof localStorage["experimental"] == "undefined" ? false : localStorage["experimental"] == "true";
 	
-	// Filter lists - EasyList enabled by default
+	// Load user filter URLs
+	loadUserFilterURLs();
+	for(key in filterFiles) {
+		if(!key.match(/^user_/))
+			continue;
+		addUserURLEntry(key, filterFiles[key]);
+	}
+
+	// Filter lists enabled state
 	var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {"easylist": true };
 	for(var key in filterFilesEnabled) {
 	    document.getElementById(key).checked = filterFilesEnabled[key];
     }
-
-	// TODO: When user-entered URLs are implemented, load these
-
 		
 	// User-entered filters
 	var userFilters = localStorage["userFilters"];
@@ -94,10 +99,16 @@ function saveOptions() {
     localStorage["experimental"] = document.getElementById("experimental").checked;
     
     // Filter lists
-    var filterFilesEnabled = {}
-	for(var key in filterFiles)
-	     filterFilesEnabled[key] = document.getElementById(key).checked;
+    var filterFilesEnabled = {};
+	var userFilterURLs = {};
+	for(var key in filterFiles) {
+		filterFilesEnabled[key] = document.getElementById(key).checked;
+		if(key.match(/^user_/)) {
+			userFilterURLs[key] = document.getElementById(key + "_url").innerHTML;
+		}
+	}
 	localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
+	localStorage["userFilterURLs"] = JSON.stringify(userFilterURLs);
 	
     // Grab contents of userFiltersBox as an array and JSONify it
     var userFiltersBox = document.getElementById("userFiltersBox");
@@ -220,7 +231,7 @@ function updateFilterList(key) {
 			$("#" + fetcher.name + "_msg").text(fetcher.error).css("color", "#a03030").css("display", "inline");
 			document.getElementById(key).checked = false;
 		} else {
-			$("#" + fetcher.name + "_msg").text("Up to date").css("display", "inline");
+			$("#" + fetcher.name + "_msg").css("color", "#b0b0b0").text("Up to date").css("display", "inline");
 		}
     });
 }
@@ -234,7 +245,7 @@ function checkFilterList(key) {
 	if(url in localStorage) {
 		var list = JSON.parse(localStorage[url]);
 		if(!list.error)
-			$("#" + key + "_msg").text("Last updated at " + saneDateString(list.lastUpdated)).css("display", "inline");
+			$("#" + key + "_msg").css("color", "#b0b0b0").text("Last updated at " + saneDateString(list.lastUpdated)).css("display", "inline");
 		else {
 			// Display error only if checked
 			if(document.getElementById(key).checked) {
@@ -253,6 +264,54 @@ function checkAllFilterLists() {
 		checkFilterList(key);
 	}
 }
+
+function deleteUserURLEntry(key) {
+	if(key in filterFiles)
+		delete filterFiles[key];
+	var foo = document.getElementById(key + "_div");
+	document.getElementById("userFilterLists").removeChild(foo);
+	saveOptions();
+}
+
+function addUserURLEntry(key, url) {
+	var checkbox = document.createElement('input');
+	checkbox.type = "checkbox";
+	checkbox.id = key;
+	checkbox.checked = true;
+	checkbox.addEventListener("click", function() { checkFilterList(key); saveOptions(); });
+	var label = document.createElement('span');
+	label.id = key + "_url";
+	label.innerHTML = url;
+	var del = document.createElement('span');
+	del.innerHTML = ' <a href="#" onClick="deleteUserURLEntry(\'' + key + '\')">[delete]</a> ';
+	//<span id="easylist_msg" class="flMsg"></span>
+	// Status message
+	var msg = document.createElement("span");
+	msg.id = key + "_msg";
+	msg.class = "flMsg";
+	var div = document.createElement('div');
+	div.id = key + "_div";
+	div.appendChild(checkbox);
+	div.appendChild(label);
+	div.appendChild(del);
+	div.appendChild(msg);
+	document.getElementById("userFilterLists").appendChild(div);
+	
+}
+
+function addUserURLFromBox() {
+	var key = "user_" + (new Date()).getTime();
+	var url = document.getElementById("newURL").value;
+	if(!url.match(/^http/) && !url.match(/^file/))
+		return;
+	addUserURLEntry(key, url);
+	document.getElementById("newURL").value = "";
+	filterFiles[key] = url;
+	// Trigger download
+	updateFilterList(key);
+	saveOptions();
+}
+
 
 </script>
 </head>
@@ -293,8 +352,15 @@ function checkAllFilterLists() {
 <input type="checkbox" id="poland" onClick="checkFilterList('poland'); saveOptions()" />BSI Lista Polska (Poland) 
 <span id="poland_msg" class="flMsg">OK</span><br/>
 
-<input type="checkbox" id="extras" onClick="saveOptions()" /><a id="extras_url">Extra filters</a> included with AdThwart<br/>
+<input type="checkbox" id="extras" onClick="saveOptions()" /><a id="extras_url">Extra filters</a> included with AdThwart
 
+<div id="userFilterLists" style="margin-bottom: 8px"></div>
+
+<div id="addURLField">
+<input type="text" value="" id="newURL" style="width:400px">
+<button onClick="addUserURLFromBox()">Add URL</button><br/>
+</div>
+<br/>
 <h2>Advanced: Add your own filters</h2>
 <p>Your filter must follow the <a href="http://adblockplus.org/en/filters">AdBlock Plus filter syntax</a>. Certain filter types, like object-subrequest, won't work.</p>
 
@@ -326,7 +392,7 @@ function checkAllFilterLists() {
 // Set URL of extras.txt in A HREF
 document.getElementById("extras_url").href = chrome.extension.getURL("lists/extras.txt");
 // Put a devil in the user filters box
-$("#userFiltersBox").css("background", "url(" + chrome.extension.getURL("emotes/face-devilish.svg") + ") no-repeat 150 150");
+$("#userFiltersBox").css("background", "url(" + chrome.extension.getURL("icons/face-devilish.svg") + ") no-repeat 150 150");
 </script>
 
 </html>
