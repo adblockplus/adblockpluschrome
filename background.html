@@ -154,6 +154,7 @@ function loadFiltersRawText(filename) {
 			// This filter list was never downloaded, so download it
 			// This is kept from running away by the fetcher actually storing the filter
 			// list data, which is checked for above.
+			console.log("Downloading filter list " + filename);
 			downloadFilterList(filename);			
 			return ""; // Return nothing for now, it'll be reloaded later
 		}
@@ -176,10 +177,6 @@ function reloadFilters() {
     // filterFilesEnabled is a bit of a misnomer - can include URLs too.
     // But if we change it, we'll break current installations
     var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {};
-    for(var key in filterFilesEnabled) {
-        if(filterFilesEnabled[key])
-            urlsToLoad.push(filterFiles[key]);
-    }
 
 	// Previous versions didn't store info about EasyList and extras.txt, so turn them on by default
 	if(!("easylist" in filterFilesEnabled)) {
@@ -187,6 +184,11 @@ function reloadFilters() {
 		filterFilesEnabled["extras"] = true;
 		localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
 	}
+
+    for(var key in filterFilesEnabled) {
+        if(filterFilesEnabled[key])
+            urlsToLoad.push(filterFiles[key]);
+    }
     
     for(var j = 0; j < urlsToLoad.length; j++) {
         var FiltersRawText = loadFiltersRawText(urlsToLoad[j]);
