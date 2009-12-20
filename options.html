@@ -112,6 +112,7 @@ function saveOptions() {
     chrome.extension.sendRequest({reqtype: "reload-filters"}, function(response) {});
 }
 
+// Add a filter string to the list box.
 function appendFilterToListBox(filterText) {
     var elt = document.createElement("option");
     elt.text = filterText;
@@ -138,6 +139,7 @@ function removeSelectedFilters() {
     saveOptions();
 }
 
+// Shows raw filters box and fills it with the current user filters
 function showFiltersInRawFormat() {
     $(".rawFilters").show();
 	var userFilters = localStorage["userFilters"];
@@ -264,17 +266,17 @@ function checkAllFilterLists() {
 <h2>Filter lists</h2>
 <p>Enable as few as possible for the best speed. The original sources of these lists are available <a href="http://adblockplus.org/en/subscriptions">here</a>.</p>
 
-<p><button onclick="updateFilterLists()">Update to latest versions</button><br/>
+<p>Out-of-date lists are updated when Chrome is started or AdThwart is reloaded. Or, you can <button onclick="updateFilterLists()">Update now</button>.<br/>
 <br/>
 <input type="checkbox" id="easylist" onClick="checkFilterList('easylist'); saveOptions()" />EasyList by Ares2 and Rick752 <span id="easylist_msg" class="flMsg"></span><br/>
 
 <input type="checkbox" id="germany" onClick="checkFilterList('germany'); saveOptions()" />EasyList Germany by Ares2 <span id="germany_msg" class="flMsg"></span><br/>
 
+<input type="checkbox" id="fanboy" onClick="checkFilterList('fanboy'); saveOptions()" />Fanboy's list <span id="fanboy_msg" class="flMsg"></span><br/>
+
+<input type="checkbox" id="fanboy_es" onClick="checkFilterList('fanboy_es'); saveOptions()" />Spain supplement to Fanboy's list<span id="fanboy_es_msg" class="flMsg"></span><br/>
+
 <input type="checkbox" id="france" onClick= "checkFilterList('france'); saveOptions()" />EasyList + Liste FR (France) by Lian <span id="france_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="fanboy" onClick="checkFilterList('fanboy'); saveOptions()" />Fanboy's list (New Zealand) <span id="fanboy_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="fanboy_es" onClick="checkFilterList('fanboy_es'); saveOptions()" />Fanboy's list &mdash; Spain addon <span id="fanboy_es_msg" class="flMsg"></span><br/>
 
 <input type="checkbox" id="china" onClick=  "checkFilterList('china'); saveOptions()" />ChinaList by Gythialy <span id="china_msg" class="flMsg"></span><br/>
 
@@ -291,9 +293,7 @@ function checkAllFilterLists() {
 <input type="checkbox" id="poland" onClick="checkFilterList('poland'); saveOptions()" />BSI Lista Polska (Poland) 
 <span id="poland_msg" class="flMsg">OK</span><br/>
 
-<input type="checkbox" id="extras" onClick="saveOptions()" /><a id="extras_url">AdThwart extras</a> (included)<br/>
-
-
+<input type="checkbox" id="extras" onClick="saveOptions()" /><a id="extras_url">Extra filters</a> included with AdThwart<br/>
 
 <h2>Advanced: Add your own filters</h2>
 <p>Your filter must follow the <a href="http://adblockplus.org/en/filters">AdBlock Plus filter syntax</a>. Certain filter types, like object-subrequest, won't work.</p>
