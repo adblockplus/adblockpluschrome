@@ -91,6 +91,7 @@ function isDomainExcluded(docDomain) {
     return false;
 }
 
+// Toggles whether ad blocking is turned on for the domain the given tab is showing
 function toggleDomainExclusion(tabId) {
     chrome.tabs.sendRequest(tabId, {reqtype: "get-domain"}, function(response) {
 	    var excluded = isDomainExcluded(response.domain);
@@ -125,6 +126,7 @@ function refreshIcon(tabId) {
 // deciding whether to block a given element once here, and let content scripts
 // query us about individual elements.
 
+// Downloads a filter list from a particular URL
 function downloadFilterList(url) {
 	new FilterListFetcher(url, function(fetcher) {
 		if(!fetcher.error)
@@ -153,7 +155,7 @@ function loadFiltersRawText(filename) {
 			// This is kept from running away by the fetcher actually storing the filter
 			// list data, which is checked for above.
 			downloadFilterList(filename);			
-			return ""; // Return nothing for now
+			return ""; // Return nothing for now, it'll be reloaded later
 		}
 	}
 	
@@ -170,12 +172,13 @@ function loadFiltersRawText(filename) {
 // This will also download and cache filter lists as necessary.
 function reloadFilters() {
     abp.filterListener.clear();
-	// TODO: A misnomer - can contain http(s) URLS as well
-    var filesToLoad = new Array();
+    var urlsToLoad = new Array();
+    // filterFilesEnabled is a bit of a misnomer - can include URLs too.
+    // But if we change it, we'll break current installations
     var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {};
     for(var key in filterFilesEnabled) {
         if(filterFilesEnabled[key])
-            filesToLoad.push(filterFiles[key]);
+            urlsToLoad.push(filterFiles[key]);
     }
 
 	// Previous versions didn't store info about EasyList and extras.txt, so turn them on by default
@@ -185,8 +188,8 @@ function reloadFilters() {
 		localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
 	}
     
-    for(var j = 0; j < filesToLoad.length; j++) {
-        var FiltersRawText = loadFiltersRawText(filesToLoad[j]);
+    for(var j = 0; j < urlsToLoad.length; j++) {
+        var FiltersRawText = loadFiltersRawText(urlsToLoad[j]);
         // Shove it over to the ABP code to parse
         var filters = FiltersRawText.split('\n');
         for (i in filters) {
