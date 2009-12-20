@@ -15,8 +15,23 @@ var filterFiles = {
 	"fanboy_es": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-esp.txt"
 };
 
+// Adds entries in filterFiles for any user filters
+function loadUserFilterURLs() {
+    // Get rid of all user_* entries; we'll restore them from localStorage
+    for(key in filterFiles) {
+        if(key.match(/^user_/))
+            delete filterFiles[key];
+    }
+    // Read from localStorage
+    if(typeof localStorage["userFilterURLs"] != "string")
+        return; // Nothing there
+    var urls = JSON.parse(localStorage["userFilterURLs"]);
+    
+    for(key in urls)
+        filterFiles[key] = urls[key];
+}
+
 function FilterListFetcher(nameOrUrl, callback) {
-    // TODO: Check if we've fetched this list recently. If so, return cached copy instead
     this.name = nameOrUrl;
     // Accept name as URL if it starts with http
     this.url = nameOrUrl.match(/^http/) ? nameOrUrl : filterFiles[nameOrUrl];
@@ -28,7 +43,7 @@ function FilterListFetcher(nameOrUrl, callback) {
         if(this.readyState != 4) return;
         if(this.status == 200) {
             // Check if it's actually a filter set
-            if(this.responseText.match(/^\[Adblock/)) {
+            if(this.responseText.match(/\[Adblock/)) {
                 localStorage[fetcher.url] = JSON.stringify({lastUpdated: (new Date()).getTime(), text: this.responseText});
                 fetcher.callback(fetcher);
                 return;
@@ -44,6 +59,11 @@ function FilterListFetcher(nameOrUrl, callback) {
             return;
         }
     }
-    this.xhr.open("GET", this.url, true);
-    this.xhr.send(null);
+    try {
+        this.xhr.open("GET", this.url, true);
+        this.xhr.send(null);
+    } catch(e) {
+        fetcher.error = "Error. Hm.";
+        fetcher.callback(fetcher);        
+    }
 }
