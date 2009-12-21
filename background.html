@@ -106,6 +106,7 @@ function toggleDomainExclusion(tabId) {
 // Show devil if enabled, apathetic face otherwise.
 function refreshIcon(tabId) {
     chrome.tabs.get(tabId, function(tab) {
+        if(!tab) return; // Tab not found? Give up
         var domain = extractDomainFromURL(tab.url);
 	    var excluded = isDomainExcluded(domain);
 		iconFilename = excluded ? "icons/face-plain-19.png" : "icons/face-devilish-19.png";
@@ -264,6 +265,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     } else if(request.reqtype == "set-domain-enabled-state") {
 		// Enable/disable ad blocking for a particular domain
 		chrome.tabs.get(lastTabId, function(tab) {
+		    if(!tab) return;
 			var domain = extractDomainFromURL(tab.url);
 			if(request.enabled)
 			    removeDomainFromExclusionList(domain);
@@ -279,6 +281,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 			return;
 	    }
 		chrome.tabs.get(lastTabId, function(tab) {
+		    if(!tab) return;
 			sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(tab.url))});
 		});
 	} else if(request.reqtype == "refresh-page-icon") {
@@ -320,6 +323,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 // Show page action on current tab
 chrome.tabs.getSelected(null, function(tab) {
+    if(!tab) return;
 	lastTabId = tab.id;
     refreshIcon(tab.id);
 });
