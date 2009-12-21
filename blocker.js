@@ -335,7 +335,7 @@ function nukeElements(parent) {
 	// Special case many Google and BBC ads.
 	// TODO: move this into a user-editable list
     if(enabled) { 
-        $("object[width=\"728\" height=\"90\"],[id^=google_ads_div],[id^=AdBrite],[id^=AD_]").remove();
+//        $("object[width=\"728\" height=\"90\"],[id^=google_ads_div],[id^=AdBrite],[id^=AD_]").remove();
     }
 	
     nukeElementsTimeoutID = 0;
