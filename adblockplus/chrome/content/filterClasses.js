@@ -107,8 +107,9 @@ Filter.fromText = function(text)
     return Filter.knownFilters[text];
 
   var ret;
-  if (Filter.elemhideRegExp.test(text))
+  if (Filter.elemhideRegExp.test(text)) {
     ret = ElemHideFilter.fromText(text, RegExp.$1, RegExp.$2, RegExp.$3, RegExp.$4);
+  }
   else if (text[0] == "!")
     ret = new CommentFilter(text);
   else
@@ -629,7 +630,8 @@ ElemHideFilter.fromText = function(text, domain, tagName, attrRules, selector)
     var additional = "";
     if (attrRules) {
       attrRules = attrRules.match(/\([\w\-]+(?:[$^*]?=[^\(\)"]*)?\)/g);
-      for (var rule in attrRules) {
+      for (var i = 0; i < attrRules.length; i++) { // (var rule in attrRules) {
+        var rule = attrRules[i];
         rule = rule.substr(1, rule.length - 2);
         var separatorPos = rule.indexOf("=");
         if (separatorPos > 0) {
@@ -651,6 +653,8 @@ ElemHideFilter.fromText = function(text, domain, tagName, attrRules, selector)
       selector = tagName + additional;
     else
       return new InvalidFilter(text, "filter_elemhide_nocriteria");
+      
   }
+
   return new ElemHideFilter(text, domain, selector);
 }

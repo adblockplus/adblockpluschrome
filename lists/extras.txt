@@ -20,3 +20,4 @@ sydsvenskan.se##.ad
 metal.de##td[align="right"][width="950"]
 metal.de##td[valign="top"][width="160"][rowspan="2"]
 qux.us##.adthwartinstalled
+||msads.net$third-party

@@ -156,7 +156,6 @@ var elemhide =
     for (i in this.filters)
     {
       var filter = this.filters[i];
-     // console.log(filter.selector);
       var domain = filter.selectorDomain || "";
 
       var list;
@@ -181,7 +180,6 @@ var elemhide =
       var list = domains[domain];
       for (i in list) {
         selector = list[i];
-	//console.log(selector);
         rules.push(selector + "{" + cssTemplate.replace("%ID%", list[selector]) + "}\n");
       }
 
