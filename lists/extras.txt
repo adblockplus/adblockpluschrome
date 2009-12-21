@@ -8,9 +8,10 @@ myspace.com###googlead2
 myspace.com##.googleafc
 penny-arcade.com##.funding-horizontal
 penny-arcade.com##.funding-vertical
-###bbccom_mpu
-###bbccom_leaderboard
-###bbccom_adsense_middle
+bbc.co.uk###bbccom_mpu
+bbc.co.uk###bbccom_leaderboard
+bbc.co.uk###bbccom_adsense_middle
+##div[id^=google_ads_div]
 reddit.com###ad
 sciencedaily.com###googlephoto
 sciencedaily.com###googlerelated
