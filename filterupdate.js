@@ -31,6 +31,9 @@ function loadUserFilterURLs() {
         filterFiles[key] = urls[key];
 }
 
+// TODO: In case of error fetching a filter list, check to see whether
+// we already have a copy cached, and leave it there.
+// At present the cached copy can be deleted.
 function FilterListFetcher(nameOrUrl, callback) {
     this.name = nameOrUrl;
     // Accept name as URL if it starts with http
