@@ -287,12 +287,13 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 	} else if(request.reqtype == "refresh-page-icon") {
 		// Show page icon according to the user option
 		refreshIcon(lastTabId);
-		sendResponse({});
 	} else if(request.reqtype == "reload-filters") {
+	    // Reloads filter lists and user filters
 	    reloadFilters();
 	} else if(request.reqtype == "cache-filters") {
 		clickHideFilters = request.filters;
 	} else if(request.reqtype == "apply-cached-filters") {
+	    // Cached filters are from click to hide
 		for(var i = 0; i < clickHideFilters.length; i++)
 			addFilter(clickHideFilters[i]);
 		clickHideFilters = null; // clear them for next time around

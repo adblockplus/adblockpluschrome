@@ -15,7 +15,7 @@ var TagToType = {
     "IFRAME": TypeMap.SUBDOCUMENT
 };
 
-var enabled = false;
+var enabled = false; // Enabled for this particular domain.
 var experimentalEnabled = false;
 var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
@@ -37,6 +37,7 @@ var highlightedElementsBGColors = null;
 // Open a port to the extension
 var port = chrome.extension.connect({name: "filter-query"});
 
+// Nuke a particular element.
 function nukeSingleElement(elt) {
     //console.log("nukeSingleElement " + document.domain );
     if(elt.innerHTML) elt.innerHTML = "";
@@ -88,11 +89,14 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     } else if(request.reqtype == "clickhide-deactivate") {
         clickHide_deactivate();
     } else if(request.reqtype == "remove-ads-again") {
+        // Called when a new filter is added
         removeAdsAgain();
     } else
         sendResponse({});
 });
 
+// Highlight elements according to selector string. This would include
+// all elements that would be affected by proposed filters.
 function highlightElements(selectorString) {
     if(highlightedElementsSelector)
         unhighlightElements();
@@ -110,6 +114,8 @@ function highlightElements(selectorString) {
     }
 }
 
+// Unhighlight all elements, including those that would be affected by
+// the proposed filters
 function unhighlightElements() {
     if(highlightedElementsSelector == null)
         return;
@@ -146,6 +152,7 @@ function clickHide_rulesPending() {
     document.removeEventListener("keyup", clickHide_keyUp, false);
 }
 
+// Turn off click-to-hide
 function clickHide_deactivate() {
     if(currentElement) {
         unhighlightElements();
@@ -162,6 +169,7 @@ function clickHide_deactivate() {
     document.removeEventListener("keyup", clickHide_keyUp, false);
 }
 
+// Hovering over an element so highlight it
 function clickHide_mouseOver(e) {
     if(clickHide_activated == false)
         return;
@@ -175,6 +183,7 @@ function clickHide_mouseOver(e) {
     }
 }
 
+// No longer hovering over this element so unhighlight it
 function clickHide_mouseOut(e) {
     if(!clickHide_activated || !currentElement)
         return;
@@ -183,6 +192,7 @@ function clickHide_mouseOut(e) {
     currentElement.style.backgroundColor = currentElement_backgroundColor;
 }
 
+// Selects the currently hovered-over filter
 function clickHide_keyUp(e) {
     // Ctrl+Shift+E
     if(e.ctrlKey && e.shiftKey && e.keyCode == 69)
@@ -196,7 +206,7 @@ function clickHide_mouseClick(e) {
     if(!clickHide_activated)
         return;
         
-    // Eat the click event - could be a stray click
+    // Eat the click event - could be a stray click. This doesn't always work.
     e.preventDefault();
     e.stopPropagation();
     // If we don't have an element, let the user keep trying
@@ -243,7 +253,7 @@ function clickHide_mouseClick(e) {
 function removeAdsAgain() {
     chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
         if(response.enabled) {
-            elemhideSelectorsString = null; // Cache is dirty
+            elemhideSelectorsString = null; // Cache is dirty since we added a new filter
             hideElements(document);
             nukeElements(document);
         }
@@ -263,13 +273,7 @@ function handleNodeInserted(e) {
     }
 }
 
-function hideAndNukeElements(parent) {
-    //var now = new Date().getTime();
-    hideElements(parent); // Really slow!
-    nukeElements(parent);
-    //console.log("That took " + ((new Date()).getTime() - now) + " ms");
-}
-
+// Hides elements matched by a 
 // Slow! Don't call this too often.
 function hideBySelectorsString(selectorsString, parent) {
     //var now = new Date().getTime();
@@ -284,6 +288,8 @@ function hideBySelectorsString(selectorsString, parent) {
     //console.log("That took " + ((new Date()).getTime() - now) + " ms");
 }
 
+// Grabs CSS selector string for all element-hide filters, caches it, and hides matching elements.
+// This can be quite slow, ~300 ms or more.
 function hideElements(parent) {
     if(elemhideSelectorsString == null) {
         chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
@@ -298,6 +304,8 @@ function hideElements(parent) {
     hideElementsTimeoutID = 0;
 }
 
+// Hides/removes image and Flash elements according to the external resources they load.
+// (e.g. src attribute)
 function nukeElements(parent) {
     elts = $("img,object,iframe,embed", parent);
     // console.log("nukeElements " + elts.length);
