@@ -1,6 +1,6 @@
 <html>
 <head>
-<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="jquery-1.4a2.min.js"></script>
 <script type="text/javascript" src="filterupdate.js"></script>
 <title>AdThwart Options</title>
 <style type="text/css" media="screen">
@@ -118,9 +118,9 @@ function saveOptions() {
     localStorage["userFilters"] = JSON.stringify(userFilters);
 	
     // Tell background.html to show/hide icon
-    chrome.extension.sendRequest({reqtype: "refresh-page-icon"}, function(response) {});
+    chrome.extension.sendRequest({reqtype: "refresh-page-icon"});
     // Reload filters
-    chrome.extension.sendRequest({reqtype: "reload-filters"}, function(response) {});
+    chrome.extension.sendRequest({reqtype: "reload-filters"});
 }
 
 // Add a filter string to the list box.
