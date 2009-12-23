@@ -1,4 +1,4 @@
-// If you change this, also change this in background.html
+// List of suggested filter lists
 var filterFiles = {
     "easylist": "http://easylist.adblockplus.org/easylist.txt", // "easylist.txt",
 	"extras": "extras.txt",
@@ -15,7 +15,8 @@ var filterFiles = {
 	"fanboy_es": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-esp.txt"
 };
 
-// Adds entries in filterFiles for any user filters
+// Adds entries in filterFiles for any user filters. Other functions will
+// reference filterFiles directly, even though global variables are evil.
 function loadUserFilterURLs() {
     // Get rid of all user_* entries; we'll restore them from localStorage
     for(key in filterFiles) {
