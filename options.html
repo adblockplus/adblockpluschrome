@@ -61,6 +61,7 @@ p {
 </style>
 <script type="text/javascript" charset="utf-8">
 
+// Loads options from localStorage and sets UI elements accordingly
 function loadOptions() {
 	// Show icon in address bar? True by default
 	var shouldShowIcon = localStorage["shouldShowIcon"];
@@ -94,6 +95,7 @@ function loadOptions() {
 	saveOptions(); // Save any defaults that were created
 }
 
+// Reads options from UI elements and saves them in localStorage
 function saveOptions() {
     localStorage["shouldShowIcon"] = document.getElementById("shouldShowIcon").checked;
     localStorage["experimental"] = document.getElementById("experimental").checked;
