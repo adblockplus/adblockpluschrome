@@ -259,12 +259,14 @@ function checkFilterList(key) {
 	}
 }
 
+// Check to see if all filter lists are up to date
 function checkAllFilterLists() {
 	for(key in filterFiles) {
 		checkFilterList(key);
 	}
 }
 
+// Deletes an entry for a filter list URL from the UI
 function deleteUserURLEntry(key) {
 	if(key in filterFiles)
 		delete filterFiles[key];
@@ -273,6 +275,7 @@ function deleteUserURLEntry(key) {
 	saveOptions();
 }
 
+// Adds an entry for a filter list URL to the UI
 function addUserURLEntry(key, url) {
 	var checkbox = document.createElement('input');
 	checkbox.type = "checkbox";
