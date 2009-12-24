@@ -144,7 +144,7 @@ function loadFiltersRawText(filename) {
 			if(!list.error) {
 				var now = new Date().getTime();
 				// If it's been > 3 days since last update, download it again
-				if((now - list.lastUpdated) > (3 * 86400 * 1000000)) {
+				if((now - list.lastUpdated) > (3 * 86400 * 1000)) {
 					console.log("Too old, so redownloading " + filename);
 					downloadFilterList(filename);
 				}
