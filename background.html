@@ -13,6 +13,9 @@ var abp = {};
 var lastDomainChecked = "";
 var lastDomainExcluded = false;
 var clickHideFilters = null;
+// List of URLs currently being downloaded; used to prevent multiple requests
+// for the same URL from actually causing multiple downloads
+var downloading = {};
 
 function extractDomainFromURL(url) {
 	if(!url) return "";
@@ -129,9 +132,13 @@ function refreshIcon(tabId) {
 
 // Downloads a filter list from a particular URL
 function downloadFilterList(url) {
+    downloading[url] = true;
 	new FilterListFetcher(url, function(fetcher) {
-		if(!fetcher.error)
+		if(!fetcher.error) {
+		    // Take this URL out of currently-being-downloaded list
+		    delete downloading[url];
 			reloadFilters();
+		}
 	});
 }
 
@@ -142,20 +149,27 @@ function loadFiltersRawText(filename) {
 		if(typeof localStorage[filename] == "string") {
 			var list = JSON.parse(localStorage[filename]);
 			//console.log("Using cached: " + filename + " last updated " + list.lastUpdated);
+			// If there was an error loading the list before, don't try again now, let the user
+			// update manually. This is so we won't pound a filter list's server if the
+			// maintainer moves the file.
 			if(!list.error) {
 				var now = new Date().getTime();
-				// If it's been > 3 days since last update, download it again
-				if((now - list.lastUpdated) > (3 * 86400 * 1000000)) {
+				// If it's been > 3 days since last update, download it again, but only
+				// if we aren't currently downloading it at the moment
+				if(((now - list.lastUpdated) > (3 * 86400 * 1000)) && !downloading[filename]) {
 					console.log("Too old, so redownloading " + filename);
 					downloadFilterList(filename);
 				}
-				return list.text;
 			}
+			// If there is any text for the filter list, return it, otherwise return a
+			// blank string rather than undefined. This depends on the fetcher not
+			// filling list.text with garbage on an unsuccessful fetch.
+			return list.text ? list.text : "";
 		} else {
 			// This filter list was never downloaded, so download it
 			// This is kept from running away by the fetcher actually storing the filter
 			// list data, which is checked for above.
-			console.log("Downloading filter list " + filename);
+			console.log("First time download: " + filename);
 			downloadFilterList(filename);			
 			return ""; // Return nothing for now, it'll be reloaded later
 		}
