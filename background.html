@@ -1,5 +1,5 @@
 <html>
-<script>
+<script type="text/javascript">
 var abp = {};
 </script>
 <script type="text/javascript" src="adblockplus/chrome/content/filterClasses.js"/>
@@ -10,21 +10,26 @@ var abp = {};
 <script type="text/javascript" src="filterupdate.js"/>
 <script>
 
+// Caches the last answer for isDomainExcluded()
 var lastDomainChecked = "";
 var lastDomainExcluded = false;
+// Last set of user-specified click-to-hide filters
 var clickHideFilters = null;
 // List of URLs currently being downloaded; used to prevent multiple requests
 // for the same URL from actually causing multiple downloads
 var downloading = {};
 
+// Extracts a domain name from a URL
 function extractDomainFromURL(url) {
 	if(!url) return "";
     var domain = url.match(/:\/\/(.[^\/]+)/)[1];
 	return domain;
 }
 
-// Misnamed! This actually returns an object
-function getOptionsArray(optName) {
+// Returns an associative array object of the given name loaded from localStorage.
+// We do this because apparently localStorage only does strings, so we have to
+// JSONify everything
+function getOptionsObject(optName) {
 	var thing = localStorage[optName];
 	if(typeof thing != "string") {
 		// Initialize storage
@@ -35,10 +40,12 @@ function getOptionsArray(optName) {
 	return parsed;
 }
 
-function saveOptionsArray(optName, data) {
+// JSONifies and saves an associative array object in localStorage
+function saveOptionsObject(optName, data) {
 	localStorage[optName] = JSON.stringify(data);
 }
 
+// Adds a specified filter to the list of user filters
 function addFilter(filterText) {
 	var userFilters = localStorage["userFilters"];
 	if(typeof userFilters == "undefined")
@@ -49,19 +56,21 @@ function addFilter(filterText) {
     abp.filterListener.addFilter(Filter.fromText(filterText));
 }
 
+// Enables ad blocking for the specified domain
 function removeDomainFromExclusionList(domain) {
-	var excludedDomains = getOptionsArray("excludedDomains");
+	var excludedDomains = getOptionsObject("excludedDomains");
 	if(domain in excludedDomains) {
 		delete excludedDomains[domain];
 	}
-	saveOptionsArray("excludedDomains", excludedDomains);
+	saveOptionsObject("excludedDomains", excludedDomains);
 	lastDomainChecked = "";
 }
 
+// Disables ad blocking for the specified domain
 function addDomainToExclusionList(domain) {
-	var excludedDomains = getOptionsArray("excludedDomains");
+	var excludedDomains = getOptionsObject("excludedDomains");
 	excludedDomains[domain.toLowerCase()] = true;
-	saveOptionsArray("excludedDomains", excludedDomains);
+	saveOptionsObject("excludedDomains", excludedDomains);
 	lastDomainChecked = "";
 }
 
@@ -76,7 +85,7 @@ function isDomainExcluded(docDomain) {
 	// do all this JSON nonsense on every query
 	if(docDomain == lastDomainChecked)
 		return lastDomainExcluded;
-    var excludedDomains = getOptionsArray("excludedDomains");
+    var excludedDomains = getOptionsObject("excludedDomains");
     lastDomainChecked = docDomain;
 
     while (true) {
@@ -193,11 +202,12 @@ function reloadFilters() {
 	// Make sure user filter URLs are in filterFiles
 	loadUserFilterURLs();
 
-    // filterFilesEnabled is a bit of a misnomer - can include URLs too.
+    // filterFilesEnabled is a bit of a misnomer - can include URLs too, and it
+    // includes the enabled state of the particular filter set.
     // But if we change it, we'll break current installations
     var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {};
 
-	// Previous versions didn't store info about EasyList and extras.txt, so turn them on by default
+	// Previous versions didn't store info about EasyList and extras.txt, so turn them on by default.
 	if(!("easylist" in filterFilesEnabled)) {
 		filterFilesEnabled["easylist"] = true;
 		filterFilesEnabled["extras"] = true;
