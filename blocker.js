@@ -19,7 +19,6 @@ var enabled = false; // Enabled for this particular domain.
 var experimentalEnabled = false;
 var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
-var elementCacheOrigDisplay = {};
 var elemhideSelectorsString = null; // Cache the selectors
 var nukeElementsTimeoutID = 0;
 var hideElementsTimeoutID = 0;
@@ -39,7 +38,7 @@ var port = chrome.extension.connect({name: "filter-query"});
 
 // Nuke a particular element.
 function nukeSingleElement(elt) {
-    //console.log("nukeSingleElement " + document.domain );
+    //console.log("nukeSingleElement " + document.domain);
     if(elt.innerHTML) elt.innerHTML = "";
     if(elt.innerText) elt.innerText = "";
     // Probably vain attempt to stop scripts
@@ -288,26 +287,32 @@ function hideBySelectorsString(selectorsString, parent) {
     //console.log("That took " + ((new Date()).getTime() - now) + " ms");
 }
 
-// Grabs CSS selector string for all element-hide filters, caches it, and hides matching elements.
-// This can be quite slow, ~300 ms or more.
-function hideElements(parent) {
+// Retrieves elemhide selectors if necessary before calling the callback function
+function withElemhideSelectors(callback) {
     if(elemhideSelectorsString == null) {
         chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
             elemhideSelectorsString = response.selectors.join(",");
-            hideBySelectorsString(elemhideSelectorsString, parent);
+            callback();
         });
-    } else {
+    } else
+        callback();
+}
+
+// Grabs CSS selector string for all element-hide filters, caches it, and hides matching elements.
+// This can be quite slow, ~300 ms or more.
+function hideElements(parent) {
+    withElemhideSelectors(function() {
+        // Make sure elemhideSelectorsString is there
         hideBySelectorsString(elemhideSelectorsString, parent);
-    }
-    
-    // Allow running again after some interval
-    hideElementsTimeoutID = 0;
+        // Allow running again after some interval
+        hideElementsTimeoutID = 0;
+    });
 }
 
 // Hides/removes image and Flash elements according to the external resources they load.
 // (e.g. src attribute)
 function nukeElements(parent) {
-    elts = $("img,object,iframe,embed", parent);
+    var elts = $("img,object,iframe,embed", parent);
     // console.log("nukeElements " + elts.length);
     types = new Array();
     urls = new Array();
@@ -359,6 +364,5 @@ chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, functi
             document.documentElement.removeChild(styleElm);
             styleElm = null;
         }
-        
     });
 });
