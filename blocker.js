@@ -48,12 +48,12 @@ function nukeSingleElement(elt) {
     elt.style.width = elt.style.height = "0px !important";
     elt.style.visibility = "hidden !important";
 
-	var pn = elt.parentNode;
-	//if(pn) pn.removeChild(elt);
+    var pn = elt.parentNode;
+    //if(pn) pn.removeChild(elt);
 
-	// Get rid of OBJECT tag enclosing EMBED tag
-	if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT")
-		pn.parentNode.removeChild(pn);    
+    // Get rid of OBJECT tag enclosing EMBED tag
+    if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT")
+        pn.parentNode.removeChild(pn);    
 }
 
 // Set up message handlers. These remove undesirable elements from the page.
@@ -232,7 +232,7 @@ function clickHide_mouseClick(e) {
     }
     
     // Save the filters that the user created
-	chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
+    chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
 
     // Highlight the unlucky elements
     // Restore currentElement's border and bgcolor so that highlightElements won't save those
@@ -309,38 +309,38 @@ function hideElements(parent) {
 function nukeElements(parent) {
     elts = $("img,object,iframe,embed", parent);
     // console.log("nukeElements " + elts.length);
-	types = new Array();
-	urls = new Array();
-	serials = new Array();
-	for(var i = 0; i < elts.length; i++) {
-		elementCache.push(elts[i]);
-		var url;
-		// Check children of object nodes for "param" nodes with name="movie" that specify a URL
-		// in value attribute
-		if(elts[i].tagName == "OBJECT" && !(url = elts[i].getAttribute("data"))) {
-		    // No data attribute, look in PARAM child tags
-		    var params = $("param[name=\"movie\"]", elts[i]);
-		    // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
-		    if(params[0]) url = params[0].getAttribute("value");
-	    } else {
-	        url = elts[i].getAttribute("src");
+    types = new Array();
+    urls = new Array();
+    serials = new Array();
+    for(var i = 0; i < elts.length; i++) {
+        elementCache.push(elts[i]);
+        var url;
+        // Check children of object nodes for "param" nodes with name="movie" that specify a URL
+        // in value attribute
+        if(elts[i].tagName == "OBJECT" && !(url = elts[i].getAttribute("data"))) {
+            // No data attribute, look in PARAM child tags
+            var params = $("param[name=\"movie\"]", elts[i]);
+            // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
+            if(params[0]) url = params[0].getAttribute("value");
+        } else {
+            url = elts[i].getAttribute("src");
         }
 
-		if(url) {
-		    // TODO: Some rules don't include the domain, and the blacklist
-		    // matcher doesn't match on queries that don't include the domain
-		    if(!url.match(/^http/)) url = "http://" + document.domain + url;
-		    // Guaranteed by call to $() above to be one of img, iframe, object, embed
-		    // and therefore in this list
-    		types.push(TagToType[elts[i].tagName]);
-    		urls.push(url);
-    		serials.push(serial);
-	    }
-		serial++;
-	}
-	// Ask background.html which of these elements we should nuke
-	port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
-	
+        if(url) {
+            // TODO: Some rules don't include the domain, and the blacklist
+            // matcher doesn't match on queries that don't include the domain
+            if(!url.match(/^http/)) url = "http://" + document.domain + url;
+            // Guaranteed by call to $() above to be one of img, iframe, object, embed
+            // and therefore in this list
+            types.push(TagToType[elts[i].tagName]);
+            urls.push(url);
+            serials.push(serial);
+        }
+        serial++;
+    }
+    // Ask background.html which of these elements we should nuke
+    port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
+    
     nukeElementsTimeoutID = 0;
 }
 
