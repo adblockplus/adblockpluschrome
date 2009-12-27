@@ -361,5 +361,8 @@ chrome.tabs.getSelected(null, function(tab) {
     refreshIcon(tab);
 });
 
+// Reload filters every four hours, which will trigger the autoupdate
+setInterval(reloadFilters, 4 * 60 * 60 * 1000);
+
 </script>
 </html>
