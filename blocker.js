@@ -340,11 +340,6 @@ function nukeElements(parent) {
 	}
 	// Ask background.html which of these elements we should nuke
 	port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
-	// Special case many Google and BBC ads.
-	// TODO: move this into a user-editable list
-    // if(enabled) { 
-    //     $("object[width=\"728\" height=\"90\"],[id^=google_ads_div],[id^=AdBrite],[id^=AD_]").remove();
-    // }
 	
     nukeElementsTimeoutID = 0;
 }
