@@ -271,7 +271,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 		// This probability will be increased over time if users don't complain too much.
         // !foo works because if it's set, it must be a string
 		if(!experimentalEnabled) {
-			experimentalEnabled = (Math.random() < 0.5) ? "true" : "false";
+			# experimentalEnabled = (Math.random() < 0.5) ? "true" : "false";
+			experimentalEnabled = "true";
 			localStorage["experimental"] = experimentalEnabled;
 		}
         sendResponse({experimentalEnabled: experimentalEnabled == "true", enabled: sender.tab ? !isDomainExcluded(extractDomainFromURL(sender.tab.url)) : true});
