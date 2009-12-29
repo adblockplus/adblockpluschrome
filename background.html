@@ -1,5 +1,5 @@
 <html>
-<script>
+<script type="text/javascript">
 var abp = {};
 </script>
 <script type="text/javascript" src="adblockplus/chrome/content/filterClasses.js"/>
@@ -10,59 +10,68 @@ var abp = {};
 <script type="text/javascript" src="filterupdate.js"/>
 <script>
 
+// Caches the last answer for isDomainExcluded()
 var lastDomainChecked = "";
 var lastDomainExcluded = false;
+// Last set of user-specified click-to-hide filters
 var clickHideFilters = null;
 // List of URLs currently being downloaded; used to prevent multiple requests
 // for the same URL from actually causing multiple downloads
 var downloading = {};
 
+// Extracts a domain name from a URL
 function extractDomainFromURL(url) {
-	if(!url) return "";
+    if(!url) return "";
     var domain = url.match(/:\/\/(.[^\/]+)/)[1];
-	return domain;
+    return domain;
 }
 
-// Misnamed! This actually returns an object
-function getOptionsArray(optName) {
-	var thing = localStorage[optName];
-	if(typeof thing != "string") {
-		// Initialize storage
-		localStorage[optName] = JSON.stringify({});
-		return {};
-	}
-	var parsed = JSON.parse(thing);
-	return parsed;
+// Returns an associative array object of the given name loaded from localStorage.
+// We do this because apparently localStorage only does strings, so we have to
+// JSONify everything
+function getOptionsObject(optName) {
+    var thing = localStorage[optName];
+    if(typeof thing != "string") {
+        // Initialize storage
+        localStorage[optName] = JSON.stringify({});
+        return {};
+    }
+    var parsed = JSON.parse(thing);
+    return parsed;
 }
 
-function saveOptionsArray(optName, data) {
-	localStorage[optName] = JSON.stringify(data);
+// JSONifies and saves an associative array object in localStorage
+function saveOptionsObject(optName, data) {
+    localStorage[optName] = JSON.stringify(data);
 }
 
+// Adds a specified filter to the list of user filters
 function addFilter(filterText) {
-	var userFilters = localStorage["userFilters"];
-	if(typeof userFilters == "undefined")
-	    userFilters = JSON.stringify(["qux.us###annoying_AdDiv", "qux.us##.ad_class"]);
-	userFilters = JSON.parse(userFilters);
-	userFilters.push(filterText);
-	localStorage["userFilters"] = JSON.stringify(userFilters);
+    var userFilters = localStorage["userFilters"];
+    if(typeof userFilters == "undefined")
+        userFilters = JSON.stringify(["qux.us###annoying_AdDiv", "qux.us##.ad_class"]);
+    userFilters = JSON.parse(userFilters);
+    userFilters.push(filterText);
+    localStorage["userFilters"] = JSON.stringify(userFilters);
     abp.filterListener.addFilter(Filter.fromText(filterText));
 }
 
+// Enables ad blocking for the specified domain
 function removeDomainFromExclusionList(domain) {
-	var excludedDomains = getOptionsArray("excludedDomains");
-	if(domain in excludedDomains) {
-		delete excludedDomains[domain];
-	}
-	saveOptionsArray("excludedDomains", excludedDomains);
-	lastDomainChecked = "";
+    var excludedDomains = getOptionsObject("excludedDomains");
+    if(domain in excludedDomains) {
+        delete excludedDomains[domain];
+    }
+    saveOptionsObject("excludedDomains", excludedDomains);
+    lastDomainChecked = "";
 }
 
+// Disables ad blocking for the specified domain
 function addDomainToExclusionList(domain) {
-	var excludedDomains = getOptionsArray("excludedDomains");
-	excludedDomains[domain.toLowerCase()] = true;
-	saveOptionsArray("excludedDomains", excludedDomains);
-	lastDomainChecked = "";
+    var excludedDomains = getOptionsObject("excludedDomains");
+    excludedDomains[domain.toLowerCase()] = true;
+    saveOptionsObject("excludedDomains", excludedDomains);
+    lastDomainChecked = "";
 }
 
 // Returns true if this domain or any parent domain is in the exclusion list
@@ -72,11 +81,11 @@ function isDomainExcluded(docDomain) {
         
     docDomain = docDomain.replace(/\.+$/, "").toLowerCase();
 
-	// Cache the last domain that was asked for so we don't
-	// do all this JSON nonsense on every query
-	if(docDomain == lastDomainChecked)
-		return lastDomainExcluded;
-    var excludedDomains = getOptionsArray("excludedDomains");
+    // Cache the last domain that was asked for so we don't
+    // do all this JSON nonsense on every query
+    if(docDomain == lastDomainChecked)
+        return lastDomainExcluded;
+    var excludedDomains = getOptionsObject("excludedDomains");
     lastDomainChecked = docDomain;
 
     while (true) {
@@ -97,32 +106,39 @@ function isDomainExcluded(docDomain) {
 // Toggles whether ad blocking is turned on for the domain the given tab is showing
 function toggleDomainExclusion(tabId) {
     chrome.tabs.sendRequest(tabId, {reqtype: "get-domain"}, function(response) {
-	    var excluded = isDomainExcluded(response.domain);
-	    if(excluded)
-	        removeDomainFromExclusionList(response.domain);
-	    else
-	        addDomainToExclusionList(response.domain);
+        var excluded = isDomainExcluded(response.domain);
+        if(excluded)
+            removeDomainFromExclusionList(response.domain);
+        else
+            addDomainToExclusionList(response.domain);
     });
+}
+
+function refreshIconByTabId(tabId) {
+    chrome.tabs.get(tabId, function(tab) { refreshIcon(tab)});
 }
 
 // Adds or removes page action icon according to options.
 // Show devil if enabled, apathetic face otherwise.
-function refreshIcon(tabId) {
-    chrome.tabs.get(tabId, function(tab) {
-        var domain = extractDomainFromURL(tab.url);
-	    var excluded = isDomainExcluded(domain);
-		iconFilename = excluded ? "icons/face-plain-19.png" : "icons/face-devilish-19.png";
-		chrome.pageAction.setIcon({tabId: tabId, path: iconFilename});
-		title = "AdThwart is " + (excluded ? "disabled" : "enabled") + " for " + domain;
-		chrome.pageAction.setTitle({tabId: tabId, title: title});
-
-		var shouldShowIcon = localStorage["shouldShowIcon"];
-		if(typeof shouldShowIcon != "undefined" && shouldShowIcon == "false") {
-			chrome.pageAction.hide(tabId);
-		} else {
-			chrome.pageAction.show(tabId);
-		}
-	});
+function refreshIcon(tab) {
+    // Hide icon for chrome:// URLs
+    if(tab.url.match(/^chrome:\/\//)) {
+        chrome.pageAction.hide(tab.id);
+        return;
+    }
+    
+    var domain = extractDomainFromURL(tab.url);
+    var excluded = isDomainExcluded(domain);
+    iconFilename = excluded ? "icons/face-plain-19.png" : "icons/face-devilish-19.png";
+    chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
+    title = "AdThwart is " + (excluded ? "disabled" : "enabled") + " for " + domain;
+    chrome.pageAction.setTitle({tabId: tab.id, title: title});
+    var shouldShowIcon = localStorage["shouldShowIcon"];
+    if(typeof shouldShowIcon != "undefined" && shouldShowIcon == "false") {
+        chrome.pageAction.hide(tab.id);
+    } else {
+        chrome.pageAction.show(tab.id);
+    }
 }
 
 // The general strategy here is to load the filters and set up the machinery for
@@ -132,55 +148,55 @@ function refreshIcon(tabId) {
 // Downloads a filter list from a particular URL
 function downloadFilterList(url) {
     downloading[url] = true;
-	new FilterListFetcher(url, function(fetcher) {
-		if(!fetcher.error) {
-		    // Take this URL out of currently-being-downloaded list
-		    delete downloading[url];
-			reloadFilters();
-		}
-	});
+    new FilterListFetcher(url, function(fetcher) {
+        if(!fetcher.error) {
+            // Take this URL out of currently-being-downloaded list
+            delete downloading[url];
+            reloadFilters();
+        }
+    });
 }
 
 // Loads the filter list from disk (or localStorage) and stores it in a global variable
 function loadFiltersRawText(filename) {
-	// Check filename for http prefix and if so load from localStorage instead
-	if(filename.match(/^http/)) {
-		if(typeof localStorage[filename] == "string") {
-			var list = JSON.parse(localStorage[filename]);
-			//console.log("Using cached: " + filename + " last updated " + list.lastUpdated);
-			// If there was an error loading the list before, don't try again now, let the user
-			// update manually. This is so we won't pound a filter list's server if the
-			// maintainer moves the file.
-			if(!list.error) {
-				var now = new Date().getTime();
-				// If it's been > 3 days since last update, download it again, but only
-				// if we aren't currently downloading it at the moment
-				if(((now - list.lastUpdated) > (3 * 86400 * 1000)) && !downloading[filename]) {
-					console.log("Too old, so redownloading " + filename);
-					downloadFilterList(filename);
-				}
-			}
-			// If there is any text for the filter list, return it, otherwise return a
-			// blank string rather than undefined. This depends on the fetcher not
-			// filling list.text with garbage on an unsuccessful fetch.
-			return list.text ? list.text : "";
-		} else {
-			// This filter list was never downloaded, so download it
-			// This is kept from running away by the fetcher actually storing the filter
-			// list data, which is checked for above.
-			console.log("First time download: " + filename);
-			downloadFilterList(filename);			
-			return ""; // Return nothing for now, it'll be reloaded later
-		}
-	}
-	
-	// I guess we have to load local files through XMLHttpRequest?
-	// Who knows, I'm not very good at this anyhow.
-	listUrl = chrome.extension.getURL("lists/" + filename);
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", listUrl, false);
-	xhr.send(null);
-	return xhr.responseText;
+    // Check filename for http prefix and if so load from localStorage instead
+    if(filename.match(/^http/)) {
+        if(typeof localStorage[filename] == "string") {
+            var list = JSON.parse(localStorage[filename]);
+            //console.log("Using cached: " + filename + " last updated " + list.lastUpdated);
+            // If there was an error loading the list before, don't try again now, let the user
+            // update manually. This is so we won't pound a filter list's server if the
+            // maintainer moves the file.
+            if(!list.error) {
+                var now = new Date().getTime();
+                // If it's been > 3 days since last update, download it again, but only
+                // if we aren't currently downloading it at the moment
+                if(((now - list.lastUpdated) > (3 * 86400 * 1000)) && !downloading[filename]) {
+                    console.log("Too old, so redownloading " + filename);
+                    downloadFilterList(filename);
+                }
+            }
+            // If there is any text for the filter list, return it, otherwise return a
+            // blank string rather than undefined. This depends on the fetcher not
+            // filling list.text with garbage on an unsuccessful fetch.
+            return list.text ? list.text : "";
+        } else {
+            // This filter list was never downloaded, so download it
+            // This is kept from running away by the fetcher actually storing the filter
+            // list data, which is checked for above.
+            console.log("First time download: " + filename);
+            downloadFilterList(filename);           
+            return ""; // Return nothing for now, it'll be reloaded later
+        }
+    }
+    
+    // I guess we have to load local files through XMLHttpRequest?
+    // Who knows, I'm not very good at this anyhow.
+    listUrl = chrome.extension.getURL("lists/" + filename);
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", listUrl, false);
+    xhr.send(null);
+    return xhr.responseText;
 }
 
 // Clears the ABP matchers of filters and reloads them.
@@ -188,20 +204,21 @@ function loadFiltersRawText(filename) {
 function reloadFilters() {
     abp.filterListener.clear();
     var urlsToLoad = new Array();
-	
-	// Make sure user filter URLs are in filterFiles
-	loadUserFilterURLs();
+    
+    // Make sure user filter URLs are in filterFiles
+    loadUserFilterURLs();
 
-    // filterFilesEnabled is a bit of a misnomer - can include URLs too.
+    // filterFilesEnabled is a bit of a misnomer - can include URLs too, and it
+    // includes the enabled state of the particular filter set.
     // But if we change it, we'll break current installations
     var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {};
 
-	// Previous versions didn't store info about EasyList and extras.txt, so turn them on by default
-	if(!("easylist" in filterFilesEnabled)) {
-		filterFilesEnabled["easylist"] = true;
-		filterFilesEnabled["extras"] = true;
-		localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
-	}
+    // Previous versions didn't store info about EasyList and extras.txt, so turn them on by default.
+    if(!("easylist" in filterFilesEnabled)) {
+        filterFilesEnabled["easylist"] = true;
+        filterFilesEnabled["extras"] = true;
+        localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
+    }
 
     for(var key in filterFilesEnabled) {
         if(filterFilesEnabled[key])
@@ -213,16 +230,16 @@ function reloadFilters() {
         // Shove it over to the ABP code to parse
         var filters = FiltersRawText.split('\n');
         for (i in filters) {
-        	f = filters[i];
-        	// Ignore zero-length and commented-out lines
-        	if(f.length == 0)
-        		continue;
-        	switch(f[0]) {
-        		case '[':
-        		case '!':
-        			continue;
-        	}
-        	abp.filterListener.addFilter(Filter.fromText(f));
+            f = filters[i];
+            // Ignore zero-length and commented-out lines
+            if(f.length == 0)
+                continue;
+            switch(f[0]) {
+                case '[':
+                case '!':
+                    continue;
+            }
+            abp.filterListener.addFilter(Filter.fromText(f));
         }
     }
     
@@ -241,31 +258,32 @@ reloadFilters();
 // Respond to requests about whether to block particular DOM elements
 // We'll use a "long-lived" connection since we'll be asked about tons of elements
 chrome.extension.onConnect.addListener(function(port) {
-	port.onMessage.addListener(function(msg) {
-	    if(msg.reqtype == "should-block-list?") {
-	        var numElements = msg.urls.length;
-	        blockList = new Array();
-	        for(var i = 0; i < numElements; i++) {
-	            // TODO: Does whitelist matching actually work?
-	            if(whitelistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, false))
-	            	continue;
-				//var f;
-				// TODO: Implement thirdParty check
-	            if(blacklistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, true)) {
-				    blockList.push(msg.serials[i]);
-			    }
+    port.onMessage.addListener(function(msg) {
+        if(msg.reqtype == "should-block-list?") {
+            var numElements = msg.urls.length;
+            blockList = new Array();
+            for(var i = 0; i < numElements; i++) {
+                // TODO: Does whitelist matching actually work?
+                if(whitelistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, false))
+                    continue;
+                //var f;
+                // TODO: Implement thirdParty check
+                if(blacklistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, true)) {
+                    blockList.push(msg.serials[i]);
+                }
             }
             port.postMessage({shouldBlockList: blockList});
         }
-	});
+    });
 });
 
 var lastTabId = 0;
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     if(request.reqtype == "get-elemhide-selectors") {
-	    var selectors = abp.elemhide.getSelectorsToHide(request.domain);
-	    sendResponse({selectors: selectors});
+        var selectors = abp.elemhide.getSelectorsToHide(request.domain);
+        sendResponse({selectors: selectors});
     } else if(request.reqtype == "get-experimental-enabled-state") {
+<<<<<<< HEAD
 		var experimentalEnabled = localStorage["experimental"];
 		// Turn on initial-load ad hiding with some probability for new/upgrading users.
 		// This probability will be increased over time if users don't complain too much.
@@ -276,68 +294,88 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 			localStorage["experimental"] = experimentalEnabled;
 		}
         sendResponse({experimentalEnabled: experimentalEnabled == "true", enabled: sender.tab ? !isDomainExcluded(extractDomainFromURL(sender.tab.url)) : true});
+=======
+        var experimentalEnabled = localStorage["experimental"];
+        if(!experimentalEnabled) {
+            // Just turn it on by default for new users
+            experimentalEnabled = "true";
+            localStorage["experimental"] = experimentalEnabled;
+        }
+        var selectors = null;
+        var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
+        if(experimentalEnabled == "true")
+            selectors = abp.elemhide.getSelectorsToHide(domain);
+        sendResponse({experimentalEnabled: experimentalEnabled == "true", enabled: sender.tab ? !isDomainExcluded(domain) : true, selectors: selectors});
+>>>>>>> newjq
     } else if(request.reqtype == "set-domain-enabled-state") {
-		// Enable/disable ad blocking for a particular domain
-		chrome.tabs.get(lastTabId, function(tab) {
-			var domain = extractDomainFromURL(tab.url);
-			if(request.enabled)
-			    removeDomainFromExclusionList(domain);
-			else
-			    addDomainToExclusionList(domain);
-			refreshIcon(tab.id);
-		});
-	} else if(request.reqtype == "get-domain-enabled-state") {
-		// Returns whether this domain is in the exclusion list.
-		// The page action popup asks us this.
-		if(sender.tab) {
-			sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(sender.tab.url))});
-			return;
-	    }
-		chrome.tabs.get(lastTabId, function(tab) {
-			sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(tab.url))});
-		});
-	} else if(request.reqtype == "refresh-page-icon") {
-		// Show page icon according to the user option
-		refreshIcon(lastTabId);
-		sendResponse({});
-	} else if(request.reqtype == "reload-filters") {
-	    reloadFilters();
-	} else if(request.reqtype == "cache-filters") {
-		clickHideFilters = request.filters;
-	} else if(request.reqtype == "apply-cached-filters") {
-		for(var i = 0; i < clickHideFilters.length; i++)
-			addFilter(clickHideFilters[i]);
-		clickHideFilters = null; // clear them for next time around
-	} else if(request.reqtype == "get-cached-filters") {
+        // Enable/disable ad blocking for a particular domain
+        chrome.tabs.get(lastTabId, function(tab) {
+            if(!tab) return;
+            var domain = extractDomainFromURL(tab.url);
+            if(request.enabled)
+                removeDomainFromExclusionList(domain);
+            else
+                addDomainToExclusionList(domain);
+            refreshIcon(tab);
+        });
+    } else if(request.reqtype == "get-domain-enabled-state") {
+        // Returns whether this domain is in the exclusion list.
+        // The page action popup asks us this.
+        if(sender.tab) {
+            sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(sender.tab.url))});
+            return;
+        }
+        chrome.tabs.get(lastTabId, function(tab) {
+            if(!tab) return;
+            sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(tab.url))});
+        });
+    } else if(request.reqtype == "refresh-page-icon") {
+        // Show page icon according to the user option
+        refreshIconByTabId(lastTabId);
+    } else if(request.reqtype == "reload-filters") {
+        // Reloads filter lists and user filters
+        reloadFilters();
+    } else if(request.reqtype == "cache-filters") {
+        clickHideFilters = request.filters;
+    } else if(request.reqtype == "apply-cached-filters") {
+        // Cached filters are from click to hide
+        for(var i = 0; i < clickHideFilters.length; i++)
+            addFilter(clickHideFilters[i]);
+        clickHideFilters = null; // clear them for next time around
+    } else if(request.reqtype == "get-cached-filters") {
         // Popup is asking for ABP filters constructed from whatever the user 
         // chose during clickHide
         sendResponse({filters: clickHideFilters});
     } else {
-		sendResponse({comment: "Something broke! (Unknown message)"}); // allow cleanup of listener
-	}
+        sendResponse({comment: "Something broke! (Unknown message)"}); // allow cleanup of listener
+    }
 });
 
 // Show icon as page action
 chrome.tabs.onSelectionChanged.addListener(function(tabId) {
-	lastTabId = tabId;
-    refreshIcon(tabId);
+    lastTabId = tabId;
+    refreshIconByTabId(tabId);
 
-	// Also, cancel any pending click hide stuff
-	clickHideFilters = null;
-	chrome.tabs.sendRequest(tabId, {reqtype: "clickhide-deactivate"})
+    // Also, cancel any pending click hide stuff
+    clickHideFilters = null;
+    chrome.tabs.sendRequest(tabId, {reqtype: "clickhide-deactivate"})
 });
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-	lastTabId = tabId;
-	
-	if(changeInfo.status == "complete") refreshIcon(tabId);
+    lastTabId = tabId;
+    
+    if(changeInfo.status == "complete") refreshIcon(tab);
 });
 
 // Show page action on current tab
 chrome.tabs.getSelected(null, function(tab) {
-	lastTabId = tab.id;
-    refreshIcon(tab.id);
+    if(!tab) return;
+    lastTabId = tab.id;
+    refreshIcon(tab);
 });
+
+// Reload filters every four hours, which will trigger the autoupdate
+setInterval(reloadFilters, 4 * 60 * 60 * 1000);
 
 </script>
 </html>

@@ -15,12 +15,10 @@ var TagToType = {
     "IFRAME": TypeMap.SUBDOCUMENT
 };
 
-var enabled = false;
+var enabled = false; // Enabled for this particular domain.
 var experimentalEnabled = false;
 var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
-var elementCacheOrigDisplay = {};
-var elemhideSelectorsString = null; // Cache the selectors
 var nukeElementsTimeoutID = 0;
 var hideElementsTimeoutID = 0;
 
@@ -37,8 +35,9 @@ var highlightedElementsBGColors = null;
 // Open a port to the extension
 var port = chrome.extension.connect({name: "filter-query"});
 
+// Nuke a particular element.
 function nukeSingleElement(elt) {
-    //console.log("nukeSingleElement " + document.domain );
+    //console.log("nukeSingleElement " + document.domain);
     if(elt.innerHTML) elt.innerHTML = "";
     if(elt.innerText) elt.innerText = "";
     // Probably vain attempt to stop scripts
@@ -47,32 +46,38 @@ function nukeSingleElement(elt) {
     elt.style.width = elt.style.height = "0px !important";
     elt.style.visibility = "hidden !important";
 
-	var pn = elt.parentNode;
-	//if(pn) pn.removeChild(elt);
+    var pn = elt.parentNode;
+    //if(pn) pn.removeChild(elt);
 
-	// Get rid of OBJECT tag enclosing EMBED tag
-	if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT")
-		pn.parentNode.removeChild(pn);    
+    // Get rid of OBJECT tag enclosing EMBED tag
+    if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT")
+        pn.parentNode.removeChild(pn);    
+}
+
+// Disable our initial-block stylesheet. Removing styleElm doesn't always work!
+function removeInitialBlockStylesheet() {
+    if(!styleElm) return;
+    for(var i = 0; i < document.styleSheets.length; i++) {
+        if(document.styleSheets[i].title === "__adthwart__") {
+            document.styleSheets[i].disabled = true;
+        }
+    }    
+    styleElm == null;    
 }
 
 // Set up message handlers. These remove undesirable elements from the page.
 port.onMessage.addListener(function(msg) {
-    if(msg.shouldBlockList) {
-        if(enabled == true) {
-            var ptr = 0;
-            for(var i = 0; i < elementCache.length; i++) {
-                if(i == msg.shouldBlockList[ptr]) {
-                    // It's an ad, nuke it
-                    nukeSingleElement(elementCache[i]);
-                    ptr++;
-                }
+    if(msg.shouldBlockList && enabled == true) {
+        var ptr = 0;
+        for(var i = 0; i < elementCache.length; i++) {
+            if(i == msg.shouldBlockList[ptr]) {
+                // It's an ad, nuke it
+                nukeSingleElement(elementCache[i]);
+                ptr++;
             }
         }
         // Take away our injected CSS, leaving only ads hidden
-        if(styleElm) {
-            document.documentElement.removeChild(styleElm);
-            styleElm = null;
-        }
+        removeInitialBlockStylesheet();
     }
 });
 
@@ -88,11 +93,14 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     } else if(request.reqtype == "clickhide-deactivate") {
         clickHide_deactivate();
     } else if(request.reqtype == "remove-ads-again") {
+        // Called when a new filter is added
         removeAdsAgain();
     } else
         sendResponse({});
 });
 
+// Highlight elements according to selector string. This would include
+// all elements that would be affected by proposed filters.
 function highlightElements(selectorString) {
     if(highlightedElementsSelector)
         unhighlightElements();
@@ -110,6 +118,8 @@ function highlightElements(selectorString) {
     }
 }
 
+// Unhighlight all elements, including those that would be affected by
+// the proposed filters
 function unhighlightElements() {
     if(highlightedElementsSelector == null)
         return;
@@ -146,6 +156,7 @@ function clickHide_rulesPending() {
     document.removeEventListener("keyup", clickHide_keyUp, false);
 }
 
+// Turn off click-to-hide
 function clickHide_deactivate() {
     if(currentElement) {
         unhighlightElements();
@@ -162,6 +173,7 @@ function clickHide_deactivate() {
     document.removeEventListener("keyup", clickHide_keyUp, false);
 }
 
+// Hovering over an element so highlight it
 function clickHide_mouseOver(e) {
     if(clickHide_activated == false)
         return;
@@ -175,6 +187,7 @@ function clickHide_mouseOver(e) {
     }
 }
 
+// No longer hovering over this element so unhighlight it
 function clickHide_mouseOut(e) {
     if(!clickHide_activated || !currentElement)
         return;
@@ -183,6 +196,7 @@ function clickHide_mouseOut(e) {
     currentElement.style.backgroundColor = currentElement_backgroundColor;
 }
 
+// Selects the currently hovered-over filter
 function clickHide_keyUp(e) {
     // Ctrl+Shift+E
     if(e.ctrlKey && e.shiftKey && e.keyCode == 69)
@@ -196,7 +210,7 @@ function clickHide_mouseClick(e) {
     if(!clickHide_activated)
         return;
         
-    // Eat the click event - could be a stray click
+    // Eat the click event - could be a stray click. This doesn't always work.
     e.preventDefault();
     e.stopPropagation();
     // If we don't have an element, let the user keep trying
@@ -222,7 +236,7 @@ function clickHide_mouseClick(e) {
     }
     
     // Save the filters that the user created
-	chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
+    chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
 
     // Highlight the unlucky elements
     // Restore currentElement's border and bgcolor so that highlightElements won't save those
@@ -243,7 +257,7 @@ function clickHide_mouseClick(e) {
 function removeAdsAgain() {
     chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
         if(response.enabled) {
-            elemhideSelectorsString = null; // Cache is dirty
+            elemhideSelectorsString = null; // Cache is dirty since we added a new filter
             hideElements(document);
             nukeElements(document);
         }
@@ -263,13 +277,7 @@ function handleNodeInserted(e) {
     }
 }
 
-function hideAndNukeElements(parent) {
-    //var now = new Date().getTime();
-    hideElements(parent); // Really slow!
-    nukeElements(parent);
-    //console.log("That took " + ((new Date()).getTime() - now) + " ms");
-}
-
+// Hides elements matched by a selectors string
 // Slow! Don't call this too often.
 function hideBySelectorsString(selectorsString, parent) {
     //var now = new Date().getTime();
@@ -284,78 +292,79 @@ function hideBySelectorsString(selectorsString, parent) {
     //console.log("That took " + ((new Date()).getTime() - now) + " ms");
 }
 
-function hideElements(parent) {
+// Retrieves elemhide selectors if necessary before calling the callback function
+function withElemhideSelectors(callback) {
     if(elemhideSelectorsString == null) {
         chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
             elemhideSelectorsString = response.selectors.join(",");
-            hideBySelectorsString(elemhideSelectorsString, parent);
+            callback();
         });
-    } else {
-        hideBySelectorsString(elemhideSelectorsString, parent);
-    }
-    
-    // Allow running again after some interval
-    hideElementsTimeoutID = 0;
+    } else
+        callback();
 }
 
+// Grabs CSS selector string for all element-hide filters, caches it, and hides matching elements.
+// This can be quite slow, ~300 ms or more.
+function hideElements(parent) {
+    withElemhideSelectors(function() {
+        // Make sure elemhideSelectorsString is there
+        hideBySelectorsString(elemhideSelectorsString, parent);
+        // Allow running again after some interval
+        hideElementsTimeoutID = 0;
+    });
+}
+
+// Hides/removes image and Flash elements according to the external resources they load.
+// (e.g. src attribute)
 function nukeElements(parent) {
-    elts = $("img,object,iframe,embed", parent);
+    var elts = $("img,object,iframe,embed", parent);
     // console.log("nukeElements " + elts.length);
-	types = new Array();
-	urls = new Array();
-	serials = new Array();
-	for(var i = 0; i < elts.length; i++) {
-		elementCache.push(elts[i]);
-		var url;
-		// Check children of object nodes for "param" nodes with name="movie" that specify a URL
-		// in value attribute
-		if(elts[i].tagName == "OBJECT" && !(url = elts[i].getAttribute("data"))) {
-		    // No data attribute, look in PARAM child tags
-		    var params = $("param[name=\"movie\"]", elts[i]);
-		    // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
-		    if(params[0]) url = params[0].getAttribute("value");
-	    } else {
-	        url = elts[i].getAttribute("src");
+    var types = new Array();
+    var urls = new Array();
+    var serials = new Array();
+    for(var i = 0; i < elts.length; i++) {
+        elementCache.push(elts[i]);
+        var url;
+        // Check children of object nodes for "param" nodes with name="movie" that specify a URL
+        // in value attribute
+        if(elts[i].tagName == "OBJECT" && !(url = elts[i].getAttribute("data"))) {
+            // No data attribute, look in PARAM child tags
+            var params = $("param[name=\"movie\"]", elts[i]);
+            // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
+            if(params[0]) url = params[0].getAttribute("value");
+        } else {
+            url = elts[i].getAttribute("src");
         }
 
-		if(url) {
-		    // TODO: Some rules don't include the domain, and the blacklist
-		    // matcher doesn't match on queries that don't include the domain
-		    if(!url.match(/^http/)) url = "http://" + document.domain + url;
-		    // Guaranteed by call to $() above to be one of img, iframe, object, embed
-		    // and therefore in this list
-    		types.push(TagToType[elts[i].tagName]);
-    		urls.push(url);
-    		serials.push(serial);
-	    }
-		serial++;
-	}
-	// Ask background.html which of these elements we should nuke
-	port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
-	// Special case many Google and BBC ads.
-	// TODO: move this into a user-editable list
-    // if(enabled) { 
-    //     $("object[width=\"728\" height=\"90\"],[id^=google_ads_div],[id^=AdBrite],[id^=AD_]").remove();
-    // }
-	
+        if(url) {
+            // TODO: Some rules don't include the domain, and the blacklist
+            // matcher doesn't match on queries that don't include the domain
+            if(!url.match(/^http/)) url = "http://" + document.domain + url;
+            // Guaranteed by call to $() above to be one of img, iframe, object, embed
+            // and therefore in this list
+            types.push(TagToType[elts[i].tagName]);
+            urls.push(url);
+            serials.push(serial);
+        }
+        serial++;
+    }
+    // Ask background.html which of these elements we should nuke
+    port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
+    
     nukeElementsTimeoutID = 0;
 }
 
-chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, function(response2) {
-    experimentalEnabled = response2.experimentalEnabled;
-    chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
-        enabled = response.enabled;
-        if(enabled) {
-            // Hide ads by selector using CSS
-            hideElements(document);
-            // Nuke ads by src
-            nukeElements(document);
-            document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
-        } else if (styleElm) {
-            // Disabled, so take away initially injected stylesheet
-            document.documentElement.removeChild(styleElm);
-            styleElm = null;
-        }
-        
-    });
+chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, function(response) {
+    experimentalEnabled = response.experimentalEnabled;
+    enabled = response.enabled;
+    if(enabled) {
+        // Hide ads by selector using CSS
+        hideElements(document);
+        // Nuke ads by src
+        nukeElements(document);
+        document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
+    } else {
+        // Disabled, so take away initially injected stylesheet
+        removeInitialBlockStylesheet();
+    }
 });
