@@ -19,7 +19,6 @@ var enabled = false; // Enabled for this particular domain.
 var experimentalEnabled = false;
 var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
-var elemhideSelectorsString = null; // Cache the selectors
 var nukeElementsTimeoutID = 0;
 var hideElementsTimeoutID = 0;
 
@@ -55,6 +54,16 @@ function nukeSingleElement(elt) {
         pn.parentNode.removeChild(pn);    
 }
 
+// Disable our initial-block stylesheet. Removing styleElm doesn't always work!
+function removeInitialBlockStylesheet() {
+    if(!styleElm) return;
+    for(var i = 0; i < document.styleSheets.length; i++) {
+        if(document.styleSheets[i].title === "__adthwart__")
+            document.styleSheets[i].disabled = true;
+    }    
+    styleElm == null;    
+}
+
 // Set up message handlers. These remove undesirable elements from the page.
 port.onMessage.addListener(function(msg) {
     if(msg.shouldBlockList) {
@@ -69,10 +78,7 @@ port.onMessage.addListener(function(msg) {
             }
         }
         // Take away our injected CSS, leaving only ads hidden
-        if(styleElm) {
-            document.documentElement.removeChild(styleElm);
-            styleElm = null;
-        }
+        removeInitialBlockStylesheet();
     }
 });
 
@@ -359,10 +365,9 @@ chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, functi
             // Nuke ads by src
             nukeElements(document);
             document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
-        } else if (styleElm) {
+        } else {
             // Disabled, so take away initially injected stylesheet
-            document.documentElement.removeChild(styleElm);
-            styleElm = null;
+            removeInitialBlockStylesheet();
         }
     });
 });

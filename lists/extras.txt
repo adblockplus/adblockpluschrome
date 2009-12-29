@@ -1,4 +1,3 @@
-##.adroll-block
 google.com###mbEnd[width="30%"]
 mail.google.com##.oM
 mail.live.com###SkyscraperContent
