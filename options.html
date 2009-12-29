@@ -90,7 +90,20 @@ function loadOptions() {
 	userFilters = JSON.parse(userFilters);
     // Populate list box with filter strings
     for(var i = 0; i < userFilters.length; i++)
-        appendFilterToListBox(userFilters[i]);
+        appendToListBox("userFiltersBox", userFilters[i]);
+        
+    // Excluded domains - sort these alphabetically
+    var excludedDomains = localStorage["excludedDomains"];
+    if(typeof excludedDomains == "string") {
+        excludedDomains = JSON.parse(excludedDomains);
+        var buf = [];
+        for(var domain in excludedDomains)
+            buf.push(domain);
+        buf.sort();
+        console.log(buf);
+        for(var i = 0; i < buf.length; i++)
+            appendToListBox("excludedDomainsBox", buf[i]);
+    }
 	
 	saveOptions(); // Save any defaults that were created
 }
@@ -105,7 +118,7 @@ function saveOptions() {
 	var userFilterURLs = {};
 	for(var key in filterFiles) {
 		filterFilesEnabled[key] = document.getElementById(key).checked;
-		if(key.match(/^user_/)) {
+		if(key.match(/^user_/)) { // User-added filter?
 			userFilterURLs[key] = document.getElementById(key + "_url").innerHTML;
 		}
 	}
@@ -123,14 +136,21 @@ function saveOptions() {
     // chrome.extension.sendRequest({reqtype: "refresh-page-icon"});
     // Reload filters
     chrome.extension.sendRequest({reqtype: "reload-filters"});
+    
+    // Excluded domains
+    var excludedDomainsBox = document.getElementById("excludedDomainsBox");
+    var excludedDomains = {};
+    for (var i = 0; i < excludedDomainsBox.length; i++)
+        excludedDomains[excludedDomainsBox.options[i].value] = true;
+    localStorage["excludedDomains"] = JSON.stringify(excludedDomains);    
 }
 
 // Add a filter string to the list box.
-function appendFilterToListBox(filterText) {
+function appendToListBox(boxId, text) {
     var elt = document.createElement("option");
-    elt.text = filterText;
-    elt.value = filterText;
-    document.getElementById("userFiltersBox").add(elt, null);
+    elt.text = text;
+    elt.value = text;
+    document.getElementById(boxId).add(elt, null);
 }
 
 // Adds filter text that user typed to the selection box
@@ -138,7 +158,17 @@ function addTypedFilter() {
     var filterText = document.getElementById("newFilter").value.split(' ').join('');
     // ABP filters don't have whitespace
     if(filterText == "") return;
-    appendFilterToListBox(filterText);
+    appendToListBox("userFiltersBox", filterText);
+    saveOptions();
+}
+
+// Removes currently selected whitelisted domains
+function removeSelectedExcludedDomain() {
+    var excludedDomainsBox = document.getElementById("excludedDomainsBox");
+    for (var i = excludedDomainsBox.length-1; i >= 0; i--) {
+        if (excludedDomainsBox.options[i].selected)
+            excludedDomainsBox.remove(i);
+    }
     saveOptions();
 }
 
@@ -177,7 +207,7 @@ function importRawFiltersText() {
 				case '!':
 					break;
 				default:
-	            	appendFilterToListBox(text);
+	            	appendToListBox("userFiltersBox", text);
 			}
 		}
     }
@@ -330,7 +360,7 @@ function addUserURLFromBox() {
 <h2>Filter lists</h2>
 <p>Enable as few as possible for the best speed. The original sources of these lists are available <a href="http://adblockplus.org/en/subscriptions">here</a>.</p>
 
-<p>Out-of-date lists are updated when Chrome is started. Or, you can <button onclick="updateFilterLists()">Update now</button>.<br/>
+<p>Out-of-date lists are updated periodically. Or, you can <button onclick="updateFilterLists()">Update now</button>.<br/>
 <br/>
 <input type="checkbox" id="easylist" onClick="checkFilterList('easylist'); saveOptions()" /><a href="http://easylist.adblockplus.org/">EasyList</a> by Ares2 and Rick752 <span id="easylist_msg" class="flMsg"></span><br/>
 
@@ -340,17 +370,17 @@ function addUserURLFromBox() {
 
 <input type="checkbox" id="fanboy_es" onClick="checkFilterList('fanboy_es'); saveOptions()" />Spain supplement to Fanboy's list <span id="fanboy_es_msg" class="flMsg"></span><br/>
 
-<input type="checkbox" id="france" onClick= "checkFilterList('france'); saveOptions()" />EasyList + Liste FR (France) by Lian <span id="france_msg" class="flMsg"></span><br/>
+<input type="checkbox" id="france" onClick="checkFilterList('france'); saveOptions()" />EasyList + Liste FR (France) by Lian <span id="france_msg" class="flMsg"></span><br/>
 
-<input type="checkbox" id="china" onClick=  "checkFilterList('china'); saveOptions()" /><a href="http://code.google.com/p/adblock-chinalist/">ChinaList</a> by Gythialy <span id="china_msg" class="flMsg"></span><br/>
+<input type="checkbox" id="china" onClick="checkFilterList('china'); saveOptions()" /><a href="http://code.google.com/p/adblock-chinalist/">ChinaList</a> by Gythialy <span id="china_msg" class="flMsg"></span><br/>
 
 <input type="checkbox" id="russia" onClick= "checkFilterList('russia'); saveOptions()" /><a href="http://adblockplus.mihalkin.ru/">Morpeh Rus List</a> (Russia) by Alexandr Mikhalkin <span id="russia_msg" class="flMsg"></span><br/>
 
-<input type="checkbox" id="korea" onClick=  "checkFilterList('korea'); saveOptions()" /><a href="http://brianyi.com/corset/">Corset</a> (Korea) by Brian Yi <span id="korea_msg" class="flMsg"></span><br/>
+<input type="checkbox" id="korea" onClick="checkFilterList('korea'); saveOptions()" /><a href="http://brianyi.com/corset/">Corset</a> (Korea) by Brian Yi <span id="korea_msg" class="flMsg"></span><br/>
 
 <input type="checkbox" id="romania" onClick="checkFilterList('romania'); saveOptions()" /><a href="http://www.picpoc.ro/">ROList</a> (Romania) by MenetZ <span id="romania_msg" class="flMsg"></span><br/>
 
-<input type="checkbox" id="italy" onClick=  "checkFilterList('italy'); saveOptions()" /><a href="http://gfsolone.com/realizzazioni/altro/abp-x-files">Xfiles</a> (Italy) by Gioxx <span id="italy_msg" class="flMsg"></span><br/>
+<input type="checkbox" id="italy" onClick="checkFilterList('italy'); saveOptions()" /><a href="http://gfsolone.com/realizzazioni/altro/abp-x-files">Xfiles</a> (Italy) by Gioxx <span id="italy_msg" class="flMsg"></span><br/>
 
 <input type="checkbox" id="vietnam" onClick="checkFilterList('vietnam'); saveOptions()" />Viet Nam list <span id="vietnam_msg" class="flMsg"></span><br/>
 
@@ -365,6 +395,17 @@ function addUserURLFromBox() {
 <input type="text" value="" id="newURL" style="width:400px">
 <button onClick="addUserURLFromBox()">Add URL</button><br/>
 </div>
+<br/>
+
+<h2>Whitelisted sites</h2>
+
+<p>You have disabled AdThwart for these sites.</p>
+
+<table><tr><td>
+<select id="excludedDomainsBox" size="10" style="width:300px; background: white;">
+</select></td><td>
+<button onClick="removeSelectedExcludedDomain()">Remove selected</button>
+</td></tr></table>
 <br/>
 <h2>Advanced: Add your own filters</h2>
 <p>Your filter must follow the <a href="http://adblockplus.org/en/filters">AdBlock Plus filter syntax</a>. Certain filter types, like object-subrequest, are not supported.</p>
