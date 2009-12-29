@@ -1,6 +1,6 @@
 {
 	"name": "AdThwart",
-	"version": "0.5.8",
+	"version": "0.5.10",
 	"description": "Blocks ads on websites. Supports EasyList and many other filter lists.",
 	"page_action": {
 		"default icon": "icons/face-devilish-19.png",
@@ -31,5 +31,5 @@
  		"run_at": "document_end",
  		"all_frames": true
  	}
-	], "update_url": "http://qux.us/adthwart/updates.xml"
+	]
 }
