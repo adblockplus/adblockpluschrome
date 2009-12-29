@@ -290,9 +290,10 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
             localStorage["experimental"] = experimentalEnabled;
         }
         var selectors = null;
+        var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
         if(experimentalEnabled == "true")
-            selectors = abp.elemhide.getSelectorsToHide(request.domain);
-        sendResponse({experimentalEnabled: experimentalEnabled == "true", enabled: sender.tab ? !isDomainExcluded(extractDomainFromURL(sender.tab.url)) : true, selectors: selectors});
+            selectors = abp.elemhide.getSelectorsToHide(domain);
+        sendResponse({experimentalEnabled: experimentalEnabled == "true", enabled: sender.tab ? !isDomainExcluded(domain) : true, selectors: selectors});
     } else if(request.reqtype == "set-domain-enabled-state") {
         // Enable/disable ad blocking for a particular domain
         chrome.tabs.get(lastTabId, function(tab) {
