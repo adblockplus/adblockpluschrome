@@ -58,23 +58,22 @@ function nukeSingleElement(elt) {
 function removeInitialBlockStylesheet() {
     if(!styleElm) return;
     for(var i = 0; i < document.styleSheets.length; i++) {
-        if(document.styleSheets[i].title === "__adthwart__")
+        if(document.styleSheets[i].title === "__adthwart__") {
             document.styleSheets[i].disabled = true;
+        }
     }    
     styleElm == null;    
 }
 
 // Set up message handlers. These remove undesirable elements from the page.
 port.onMessage.addListener(function(msg) {
-    if(msg.shouldBlockList) {
-        if(enabled == true) {
-            var ptr = 0;
-            for(var i = 0; i < elementCache.length; i++) {
-                if(i == msg.shouldBlockList[ptr]) {
-                    // It's an ad, nuke it
-                    nukeSingleElement(elementCache[i]);
-                    ptr++;
-                }
+    if(msg.shouldBlockList && enabled == true) {
+        var ptr = 0;
+        for(var i = 0; i < elementCache.length; i++) {
+            if(i == msg.shouldBlockList[ptr]) {
+                // It's an ad, nuke it
+                nukeSingleElement(elementCache[i]);
+                ptr++;
             }
         }
         // Take away our injected CSS, leaving only ads hidden
@@ -278,7 +277,7 @@ function handleNodeInserted(e) {
     }
 }
 
-// Hides elements matched by a 
+// Hides elements matched by a selectors string
 // Slow! Don't call this too often.
 function hideBySelectorsString(selectorsString, parent) {
     //var now = new Date().getTime();
@@ -320,9 +319,9 @@ function hideElements(parent) {
 function nukeElements(parent) {
     var elts = $("img,object,iframe,embed", parent);
     // console.log("nukeElements " + elts.length);
-    types = new Array();
-    urls = new Array();
-    serials = new Array();
+    var types = new Array();
+    var urls = new Array();
+    var serials = new Array();
     for(var i = 0; i < elts.length; i++) {
         elementCache.push(elts[i]);
         var url;
@@ -355,19 +354,17 @@ function nukeElements(parent) {
     nukeElementsTimeoutID = 0;
 }
 
-chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, function(response2) {
-    experimentalEnabled = response2.experimentalEnabled;
-    chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
-        enabled = response.enabled;
-        if(enabled) {
-            // Hide ads by selector using CSS
-            hideElements(document);
-            // Nuke ads by src
-            nukeElements(document);
-            document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
-        } else {
-            // Disabled, so take away initially injected stylesheet
-            removeInitialBlockStylesheet();
-        }
-    });
+chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, function(response) {
+    experimentalEnabled = response.experimentalEnabled;
+    enabled = response.enabled;
+    if(enabled) {
+        // Hide ads by selector using CSS
+        hideElements(document);
+        // Nuke ads by src
+        nukeElements(document);
+        document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
+    } else {
+        // Disabled, so take away initially injected stylesheet
+        removeInitialBlockStylesheet();
+    }
 });
