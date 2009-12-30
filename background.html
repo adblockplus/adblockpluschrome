@@ -283,18 +283,6 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         var selectors = abp.elemhide.getSelectorsToHide(request.domain);
         sendResponse({selectors: selectors});
     } else if(request.reqtype == "get-experimental-enabled-state") {
-<<<<<<< HEAD
-		var experimentalEnabled = localStorage["experimental"];
-		// Turn on initial-load ad hiding with some probability for new/upgrading users.
-		// This probability will be increased over time if users don't complain too much.
-        // !foo works because if it's set, it must be a string
-		if(!experimentalEnabled) {
-			// experimentalEnabled = (Math.random() < 0.5) ? "true" : "false";
-			experimentalEnabled = "true";
-			localStorage["experimental"] = experimentalEnabled;
-		}
-        sendResponse({experimentalEnabled: experimentalEnabled == "true", enabled: sender.tab ? !isDomainExcluded(extractDomainFromURL(sender.tab.url)) : true});
-=======
         var experimentalEnabled = localStorage["experimental"];
         if(!experimentalEnabled) {
             // Just turn it on by default for new users
@@ -306,7 +294,6 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         if(experimentalEnabled == "true")
             selectors = abp.elemhide.getSelectorsToHide(domain);
         sendResponse({experimentalEnabled: experimentalEnabled == "true", enabled: sender.tab ? !isDomainExcluded(domain) : true, selectors: selectors});
->>>>>>> newjq
     } else if(request.reqtype == "set-domain-enabled-state") {
         // Enable/disable ad blocking for a particular domain
         chrome.tabs.get(lastTabId, function(tab) {
