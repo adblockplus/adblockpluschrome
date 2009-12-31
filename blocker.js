@@ -167,6 +167,7 @@ function clickHide_deactivate() {
     }
     
     clickHide_activated = false;
+    if(!document) return; // This can happen inside a nuked iframe...I think
     document.removeEventListener("mouseover", clickHide_mouseOver, false);
     document.removeEventListener("mouseout", clickHide_mouseOut, false);
     document.removeEventListener("click", clickHide_mouseClick, false);
