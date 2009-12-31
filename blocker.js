@@ -47,7 +47,7 @@ function nukeSingleElement(elt) {
     elt.style.visibility = "hidden !important";
 
     var pn = elt.parentNode;
-    //if(pn) pn.removeChild(elt);
+    if(pn) pn.removeChild(elt);
 
     // Get rid of OBJECT tag enclosing EMBED tag
     if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT")
