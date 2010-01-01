@@ -105,7 +105,7 @@ function highlightElements(selectorString) {
     if(highlightedElementsSelector)
         unhighlightElements();
     
-    highlightedElements = document.querySelectorAll(selectorString);
+    highlightedElements = $(selectorString);
     highlightedElementsSelector = selectorString;
     highlightedElementsBorders = new Array();
     highlightedElementsBGColors = new Array();
@@ -123,7 +123,7 @@ function highlightElements(selectorString) {
 function unhighlightElements() {
     if(highlightedElementsSelector == null)
         return;
-    highlightedElements = document.querySelectorAll(highlightedElementsSelector);
+    highlightedElements = $(highlightedElementsSelector);
     for(var i = 0; i < highlightedElements.length; i++) {
         highlightedElements[i].style.border = highlightedElementsBorders[i];
         highlightedElements[i].style.backgroundColor = highlightedElementsBGColors[i];
