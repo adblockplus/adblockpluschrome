@@ -133,6 +133,8 @@ function unhighlightElements() {
 
 // Turn on the choose element to create filter thing
 function clickHide_activate() {
+    if(document == null) return;
+    
     if(currentElement) {
         currentElement.style.border = currentElement_border;
         currentElement.style.backgroundColor = currentElement_backgroundColor;
@@ -359,8 +361,9 @@ chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, functi
     experimentalEnabled = response.experimentalEnabled;
     enabled = response.enabled;
     if(enabled) {
-        // Hide ads by selector using CSS
-        hideElements(document);
+        // Hide ads by selector using CSS if we didn't do it before
+        if(!experimentalEnabled)
+            hideElements(document);
         // Nuke ads by src
         nukeElements(document);
         document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
