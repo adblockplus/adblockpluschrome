@@ -12,6 +12,7 @@ bbc.co.uk###bbccom_leaderboard
 bbc.co.uk###bbccom_adsense_middle
 ##div[id^=google_ads_div]
 reddit.com###ad
+hulu.com###banner_c
 flyertalk.com###forum_top_ad
 sciencedaily.com###googlephoto
 sciencedaily.com###googlerelated
