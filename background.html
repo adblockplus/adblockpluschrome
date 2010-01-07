@@ -230,7 +230,8 @@ function reloadFilters() {
         // Shove it over to the ABP code to parse
         var filters = FiltersRawText.split('\n');
         for (i in filters) {
-            f = filters[i];
+            // Remove any extra newline-type characters
+            f = filters[i].replace(/[\r\n]/, '');
             // Ignore zero-length and commented-out lines
             if(f.length == 0)
                 continue;
