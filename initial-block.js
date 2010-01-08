@@ -11,7 +11,7 @@ chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, functi
     if(response.enabled && response.experimentalEnabled) {
         elemhideSelectorsString = response.selectors.join(",");
         styleElm.innerText = "img { visibility: hidden !important } iframe { display: none !important } " + FLASH_SELECTORS + " { display: none !important } ";
-        elemhideStyleElm.innerText = elemhideSelectorsString + " { visibility: hidden !important }";
+        elemhideStyleElm.innerText = elemhideSelectorsString + " { display: none !important }";
     }
     document.documentElement.insertBefore(elemhideStyleElm, null);
     document.documentElement.insertBefore(styleElm, null);
