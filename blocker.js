@@ -290,7 +290,7 @@ function hideBySelectorsString(selectorsString, parent) {
             // TODO: Sometimes style isn't defined, for some reason...
             try { elts[i].style.visibility = "hidden"; } catch(err) {}
             // display:none causes a reflow, which can be annoying
-            // try { elts[i].style.display = "none"; } catch(err) {}
+            try { elts[i].style.display = "none"; } catch(err) {}
         }
     }
     //console.log("That took " + ((new Date()).getTime() - now) + " ms");
