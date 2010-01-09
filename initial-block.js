@@ -6,7 +6,6 @@ var FLASH_SELECTORS = '__adthwart__, embed[type*="application/x-shockwave-flash"
 var styleElm = document.createElement("style");
 styleElm.title = "__adthwart__"; // So we know which one to remove later
 styleElm.innerText = "__adthwart__, img { visibility: hidden !important } __adthwart__, iframe { display: none !important } " + FLASH_SELECTORS + " { display: none !important } ";
-document.documentElement.insertBefore(styleElm, null);
 
 var elemhideStyleElm = document.createElement("style");
 elemhideStyleElm.title = "__adthwart__elemhide";
@@ -14,8 +13,9 @@ chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, functi
     if(response.enabled && response.experimentalEnabled) {
         elemhideSelectorsString = response.selectors.join(",");
         elemhideStyleElm.innerText = elemhideSelectorsString + " { display: none !important }";
-        //styleElm.innerText = styleElm.innerText + elemhideSelectorsString + " { display: none !important }";
+        styleElm.innerText = styleElm.innerText + elemhideSelectorsString + " { display: none !important }";
     }
+    document.documentElement.insertBefore(styleElm, null);
     // This doesn't actually appear to be added
-    document.documentElement.insertBefore(elemhideStyleElm, styleElm);
+    //document.documentElement.insertBefore(elemhideStyleElm, styleElm);
 });
