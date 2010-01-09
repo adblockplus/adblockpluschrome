@@ -5,16 +5,17 @@ var FLASH_SELECTORS = '__adthwart__, embed[type*="application/x-shockwave-flash"
 // and elemhide filters (won't be disabled later)
 var styleElm = document.createElement("style");
 styleElm.title = "__adthwart__"; // So we know which one to remove later
-//var elemhideStyleElm = document.createElement("style");
-//elemhideStyleElm.title = "__adthwart__elemhide";
+styleElm.innerText = "__adthwart__, img { visibility: hidden !important } __adthwart__, iframe { display: none !important } " + FLASH_SELECTORS + " { display: none !important } ";
+document.documentElement.insertBefore(styleElm, null);
+
+var elemhideStyleElm = document.createElement("style");
+elemhideStyleElm.title = "__adthwart__elemhide";
 chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, function(response) {
     if(response.enabled && response.experimentalEnabled) {
         elemhideSelectorsString = response.selectors.join(",");
-        styleElm.innerText = "__adthwart__, img { visibility: hidden !important } __adthwart__, iframe { display: none !important } " + FLASH_SELECTORS + " { display: none !important } ";
-        // elemhideStyleElm.innerText = elemhideSelectorsString + " { display: none !important }";
-        styleElm.innerText = styleElm.innerText + elemhideSelectorsString + " { display: none !important }";
+        elemhideStyleElm.innerText = elemhideSelectorsString + " { display: none !important }";
+        //styleElm.innerText = styleElm.innerText + elemhideSelectorsString + " { display: none !important }";
     }
-    // Wow. Apparently we can't inject more than one style element; only the first one will stick
-    //document.documentElement.insertBefore(elemhideStyleElm, null);
-    document.documentElement.insertBefore(styleElm, null);
+    // This doesn't actually appear to be added
+    document.documentElement.insertBefore(elemhideStyleElm, styleElm);
 });
