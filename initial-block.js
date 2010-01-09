@@ -13,6 +13,6 @@ chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, functi
         styleElm.innerText = "img { visibility: hidden !important } iframe { display: none !important } " + FLASH_SELECTORS + " { display: none !important } ";
         elemhideStyleElm.innerText = elemhideSelectorsString + " { display: none !important }";
     }
-    document.documentElement.insertBefore(elemhideStyleElm, null);
     document.documentElement.insertBefore(styleElm, null);
+    document.documentElement.insertBefore(elemhideStyleElm, null);
 });
