@@ -59,7 +59,8 @@ function removeInitialBlockStylesheet() {
     if(!styleElm) return;
     for(var i = 0; i < document.styleSheets.length; i++) {
         if(document.styleSheets[i].title === "__adthwart__") {
-            // document.styleSheets[i].disabled = true;
+            document.styleSheets[i].disabled = true;
+            /*
             var ss = document.styleSheets[i];
             var rules = document.styleSheets[i].cssRules;
             for(var j = 0; j < rules.length; j++) {
@@ -68,7 +69,7 @@ function removeInitialBlockStylesheet() {
                     ss.deleteRule(j);
                     j--;
                 }
-            }
+            } */
         }
     }    
     styleElm == null;    
@@ -372,7 +373,7 @@ chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, functi
     enabled = response.enabled;
     if(enabled) {
         // Hide ads by selector using CSS if we didn't do it before
-        if(!experimentalEnabled)
+        // if(!experimentalEnabled) // FIXME
             hideElements(document);
         // Nuke ads by src
         nukeElements(document);

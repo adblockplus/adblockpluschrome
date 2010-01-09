@@ -1,6 +1,6 @@
 {
 	"name": "AdThwart",
-	"version": "0.6.11",
+	"version": "0.6.12",
 	"description": "Block ads on websites. Supports EasyList and many other ad blocker filter lists.",
 	"page_action": {
 		"default icon": "icons/face-devilish-19.png",
@@ -21,13 +21,13 @@
 	"content_scripts": [
 	{
  		"matches": ["http://*/*", "https://*/*"],
-		"js": ["initial-block.js"],
+		"js": ["jquery-1.4a2.min.js", "initial-block.js"],
 		"run_at": "document_start",
 		"all_frames": true
 	},
  	{
  		"matches": ["http://*/*", "https://*/*"],
- 		"js": ["jquery-1.4a2.min.js", "blocker.js"],
+ 		"js": ["blocker.js"],
  		"run_at": "document_end",
  		"all_frames": true
  	}
