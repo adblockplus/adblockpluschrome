@@ -54,12 +54,21 @@ function nukeSingleElement(elt) {
         pn.parentNode.removeChild(pn);    
 }
 
-// Disable our initial-block stylesheet. Removing styleElm doesn't always work!
+// Disable our initial-block rules. Removing styleElm doesn't always work!
 function removeInitialBlockStylesheet() {
     if(!styleElm) return;
     for(var i = 0; i < document.styleSheets.length; i++) {
         if(document.styleSheets[i].title === "__adthwart__") {
-            document.styleSheets[i].disabled = true;
+            // document.styleSheets[i].disabled = true;
+            var ss = document.styleSheets[i];
+            var rules = document.styleSheets[i].cssRules;
+            for(var j = 0; j < rules.length; j++) {
+                // console.log(rules[0]);
+                if(rules[j].selectorText.match(/__adthwart__/)) {
+                    ss.deleteRule(j);
+                    j--;
+                }
+            }
         }
     }    
     styleElm == null;    
