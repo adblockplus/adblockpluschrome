@@ -100,7 +100,6 @@ function loadOptions() {
         for(var domain in excludedDomains)
             buf.push(domain);
         buf.sort();
-        console.log(buf);
         for(var i = 0; i < buf.length; i++)
             appendToListBox("excludedDomainsBox", buf[i]);
     }
