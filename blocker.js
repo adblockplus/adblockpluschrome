@@ -329,6 +329,20 @@ function hideElements(parent) {
     });
 }
 
+// Converts relative to absolute URL
+// e.g.: foo.swf on http://example.com/whatever/bar.html
+//  -> http://example.com/whatever/foo.swf 
+function relativeToAbsoluteUrl(url) {
+    // Leading / means absolute path
+    if(url[0] == '/')
+        return document.location.protocol + "//" + document.location.host + url;
+
+    // Remove filename and add relative URL to it
+    var base = document.baseURI.match(/.+\//);
+    if(!base) return document.baseURI + "/" + url;
+    return base[0] + url;
+}
+
 // Hides/removes image and Flash elements according to the external resources they load.
 // (e.g. src attribute)
 function nukeElements(parent) {
@@ -357,9 +371,11 @@ function nukeElements(parent) {
         }
 
         if(url) {
-            // TODO: Some rules don't include the domain, and the blacklist
+            // Some rules don't include the domain, and the blacklist
             // matcher doesn't match on queries that don't include the domain
-            if(!url.match(/^http/)) url = "http://" + document.domain + url;
+            // if(!url.match(/^http/)) url = "http://" + document.domain + url;
+            if(!url.match(/^http/)) url = relativeToAbsoluteUrl(url);
+            // console.log(url);
             // Guaranteed by call to $() above to be one of img, iframe, object, embed
             // and therefore in this list
             types.push(TagToType[elts[i].tagName]);
