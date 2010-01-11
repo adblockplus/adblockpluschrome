@@ -57,7 +57,7 @@ function nukeSingleElement(elt) {
 // Disable our initial-block rules. Removing styleElm doesn't always work!
 function removeInitialBlockStylesheet() {
     if(!styleElm) return;
-    document.documentElement.insertBefore(elemhideStyleElm, null);
+    // document.documentElement.insertBefore(elemhideStyleElm, null);
     for(var i = 0; i < document.styleSheets.length; i++) {
         if(document.styleSheets[i].title === "__adthwart__") {
             document.styleSheets[i].disabled = true;
