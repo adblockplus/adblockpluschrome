@@ -343,10 +343,16 @@ function nukeElements(parent) {
         // Check children of object nodes for "param" nodes with name="movie" that specify a URL
         // in value attribute
         if(elts[i].tagName == "OBJECT" && !(url = elts[i].getAttribute("data"))) {
-            // No data attribute, look in PARAM child tags
+            // No data attribute, look in PARAM child tags for a URL for the swf file
             var params = $("param[name=\"movie\"]", elts[i]);
             // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
-            if(params[0]) url = params[0].getAttribute("value");
+            if(params[0])
+                url = params[0].getAttribute("value");
+            else {
+                params = $("param[name=\"src\"]", elts[i]);
+                console.log(params);
+                if(params[0]) url = params[0].getAttribute("value");
+            }
         } else {
             url = elts[i].getAttribute("src");
         }
