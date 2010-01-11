@@ -350,7 +350,6 @@ function nukeElements(parent) {
                 url = params[0].getAttribute("value");
             else {
                 params = $("param[name=\"src\"]", elts[i]);
-                console.log(params);
                 if(params[0]) url = params[0].getAttribute("value");
             }
         } else {
