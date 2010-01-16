@@ -61,13 +61,23 @@ p {
 </style>
 <script type="text/javascript" charset="utf-8">
 
+function loadCheckbox(id) {
+    console.log(typeof localStorage[id] + " " + id + " " + localStorage[id]);
+	document.getElementById(id).checked = typeof localStorage[id] == "undefined" ? false : localStorage[id] == "true";
+}
+
+function saveCheckbox(id) {
+    localStorage[id] = document.getElementById(id).checked;
+}
+
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions() {
 	// Show icon in address bar? True by default
 	var shouldShowIcon = localStorage["shouldShowIcon"];
 	document.getElementById("shouldShowIcon").checked = typeof shouldShowIcon == "undefined" ? true : shouldShowIcon == "true";
-    // Experimental features enabled? False by default
-	document.getElementById("experimental").checked = typeof localStorage["experimental"] == "undefined" ? false : localStorage["experimental"] == "true";
+	loadCheckbox("initialHideImg");
+	loadCheckbox("initialHideFlash");
+	loadCheckbox("initialHideIframe");
 	
 	// Load user filter URLs
 	loadUserFilterURLs();
@@ -109,8 +119,10 @@ function loadOptions() {
 
 // Reads options from UI elements and saves them in localStorage
 function saveOptions() {
-    localStorage["shouldShowIcon"] = document.getElementById("shouldShowIcon").checked;
-    localStorage["experimental"] = document.getElementById("experimental").checked;
+	saveCheckbox("shouldShowIcon");
+	saveCheckbox("initialHideImg");
+	saveCheckbox("initialHideFlash");
+	saveCheckbox("initialHideIframe");
     
     // Filter lists
     var filterFilesEnabled = {};
@@ -354,7 +366,10 @@ function addUserURLFromBox() {
 <h1>AdThwart Options</h1>
 <p>
 <input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar<br/>
-<input type="checkbox" id="experimental" onClick="saveOptions()" /> Hide all images and Flash while ads are removed (prevents ads from appearing momentarily)
+<input type="checkbox" id="initialHideImg" onClick="saveOptions()" /> Hide images while ads are removed<br/>
+<input type="checkbox" id="initialHideFlash" onClick="saveOptions()" /> Hide Flash objects while ads are removed<br/>
+<input type="checkbox" id="initialHideIframe" onClick="saveOptions()" /> Hide iframes while ads are removed<br/>
+<!-- <input type="checkbox" id="experimental" onClick="saveOptions()" /> Hide all images and Flash while ads are removed (prevents ads from appearing momentarily) -->
 </p>
 <h2>Filter lists</h2>
 <p>Enable as few as possible for the best speed. The original sources of these lists are available <a href="http://adblockplus.org/en/subscriptions">here</a>.</p>
