@@ -16,7 +16,6 @@ var TagToType = {
 };
 
 var enabled = false; // Enabled for this particular domain.
-var experimentalEnabled = false;
 var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
 var nukeElementsTimeoutID = 0;
@@ -390,13 +389,11 @@ function nukeElements(parent) {
     nukeElementsTimeoutID = 0;
 }
 
-chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, function(response) {
-    experimentalEnabled = response.experimentalEnabled;
+chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
     enabled = response.enabled;
     if(enabled) {
-        // Hide ads by selector using CSS if we didn't do it before
-        // if(!experimentalEnabled) // FIXME
-            hideElements(document);
+        // Hide ads by selector using CSS
+        hideElements(document);
         // Nuke ads by src
         nukeElements(document);
         document.addEventListener("DOMNodeInserted", handleNodeInserted, false);

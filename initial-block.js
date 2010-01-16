@@ -5,17 +5,25 @@ var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*="
 // and elemhide filters (won't be disabled later)
 var styleElm = document.createElement("style");
 styleElm.title = "__adthwart__"; // So we know which one to remove later
-styleElm.innerText = "img { visibility: hidden !important } iframe { display: none !important } " + FLASH_SELECTORS + " { display: none !important } ";
+//styleElm.innerText = "img { visibility: hidden !important } iframe { display: none !important } " + FLASH_SELECTORS + " { display: none !important } ";
+styleElm.innerText = "";
 
 var elemhideStyleElm = document.createElement("style");
 elemhideStyleElm.title = "__adthwart__elemhide";
-chrome.extension.sendRequest({reqtype: "get-experimental-enabled-state"}, function(response) {
-    if(response.enabled && response.experimentalEnabled) {
+chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response) {
+    if(response.enabled) {
         elemhideSelectorsString = response.selectors.join(",");
         elemhideStyleElm.innerText = elemhideSelectorsString + " { display: none !important }";
-        styleElm.innerText = styleElm.innerText + elemhideSelectorsString + " { display: none !important }";
+        // console.log(response.initialHideImg + " " + response.initialHideFlash + " " + response.initialHideIframe);
+        if(response.initialHideImg)
+            styleElm.innerText += "img { visibility: hidden !important } ";
+        if(response.initialHideFlash)
+            styleElm.innerText += FLASH_SELECTORS + " { display: none !important } ";
+        if(response.initialHideIframe)
+            styleElm.innerText += "iframe { display: none !important } ";
+        styleElm.innerText += elemhideSelectorsString + " { display: none !important }";
         document.documentElement.insertBefore(styleElm, null);
+        // This doesn't actually appear to be added
+        //document.documentElement.insertBefore(elemhideStyleElm, styleElm);
     }
-    // This doesn't actually appear to be added
-    //document.documentElement.insertBefore(elemhideStyleElm, styleElm);
 });

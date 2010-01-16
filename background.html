@@ -45,6 +45,40 @@ function saveOptionsObject(optName, data) {
     localStorage[optName] = JSON.stringify(data);
 }
 
+// Returns true if the specified option is defined in localStorage
+function optionExists(opt) {
+    return (typeof localStorage[opt] != "undefined");
+}
+
+// Checks whether the option exists in localStorage, and if it doesn't, set it to
+// the specified value
+function defaultOptionValue(opt, val) {
+    if(!optionExists(opt))
+        localStorage[opt] = val;
+}
+
+// Sets options to defaults, upgrading old options from previous versions as necessary
+function setDefaultOptions() {
+   // Default to hiding everything initially, except for images because the vast majority of images
+   // on a given page are probably not ads.
+   defaultOptionValue("initialHideFlash", "true");
+   defaultOptionValue("initialHideImg", "false");
+   defaultOptionValue("initialHideIframe", "true");
+
+   // If user had older version installed, set new options accordingly and remove old options
+   if(optionExists("experimental")) {
+       if(localStorage["experimental"] == "false") {
+           localStorage["initialHideFlash"] = "false";
+           localStorage["initialHideImg"] = "false";
+           localStorage["initialHideIframe"] = "false";
+       }
+       delete localStorage["experimental"];
+   }
+}
+
+// Upgrade options before we do anything else.
+setDefaultOptions(); 
+
 // Adds a specified filter to the list of user filters
 function addFilter(filterText) {
     var userFilters = localStorage["userFilters"];
@@ -291,18 +325,13 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     if(request.reqtype == "get-elemhide-selectors") {
         var selectors = abp.elemhide.getSelectorsToHide(request.domain);
         sendResponse({selectors: selectors});
-    } else if(request.reqtype == "get-experimental-enabled-state") {
-        var experimentalEnabled = localStorage["experimental"];
-        if(!experimentalEnabled) {
-            // Just turn it on by default for new users
-            experimentalEnabled = "true";
-            localStorage["experimental"] = experimentalEnabled;
-        }
+    } else if(request.reqtype == "get-initialhide-options") {
         var selectors = null;
         var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
-        if(experimentalEnabled == "true")
+        var enabled = sender.tab ? !isDomainExcluded(domain) : true;
+        if(enabled)
             selectors = abp.elemhide.getSelectorsToHide(domain);
-        sendResponse({experimentalEnabled: experimentalEnabled == "true", enabled: sender.tab ? !isDomainExcluded(domain) : true, selectors: selectors});
+        sendResponse({initialHideFlash: localStorage["initialHideFlash"] == "true", initialHideImg: localStorage["initialHideImg"] == "true", initialHideIframe: localStorage["initialHideIframe"] == "true", selectors: selectors, enabled: enabled});        
     } else if(request.reqtype == "set-domain-enabled-state") {
         // Enable/disable ad blocking for a particular domain
         chrome.tabs.get(lastTabId, function(tab) {

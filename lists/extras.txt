@@ -23,3 +23,6 @@ metal.de##td[valign="top"][width="160"][rowspan="2"]
 qux.us##.adthwartinstalled
 ||msads.net$third-party
 ds.serving-sys.com/BurstingRes
+heise.de##.skyscraper
+amazon.com##.advertisingTable
+menshealth.com###slide_ad
