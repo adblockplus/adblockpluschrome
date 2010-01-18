@@ -278,7 +278,7 @@ function handleNodeInserted(e) {
         // Querying with all those selectors takes a lot of time (whether with
         // jQuery or querySelectorsAll) so do this even more rarely
         if(hideElementsTimeoutID == 0)
-            hideElementsTimeoutID = setTimeout(hideElements, 5000);
+            hideElementsTimeoutID = setTimeout(hideElements, 4000);
     }
 }
 
