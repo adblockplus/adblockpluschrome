@@ -55,21 +55,11 @@ function nukeSingleElement(elt) {
 
 // Disable our initial-block rules. Removing styleElm doesn't always work!
 function removeInitialBlockStylesheet() {
-    if(!styleElm) return;
+    if(typeof styleElm == "undefined" || !styleElm) return;
     // document.documentElement.insertBefore(elemhideStyleElm, null);
     for(var i = 0; i < document.styleSheets.length; i++) {
         if(document.styleSheets[i].title === "__adthwart__") {
             document.styleSheets[i].disabled = true;
-            /*
-            var ss = document.styleSheets[i];
-            var rules = document.styleSheets[i].cssRules;
-            for(var j = 0; j < rules.length; j++) {
-                // console.log(rules[0]);
-                if(rules[j].selectorText.match(/__adthwart__/)) {
-                    ss.deleteRule(j);
-                    j--;
-                }
-            } */
         }
     }    
     styleElm == null;    
@@ -280,7 +270,9 @@ function removeAdsAgain() {
 // Block ads in nodes inserted by scripts
 function handleNodeInserted(e) {
     // Remove ads relatively infrequently. If no timeout set, set one.
-    if(enabled) { 
+    if(enabled) {
+        // If the user clicked on something recently, it probably caused this
+        // node to be inserted, so try removing ads in it
         if(nukeElementsTimeoutID == 0)
             nukeElementsTimeoutID = setTimeout(nukeElements, 1000);
         // Querying with all those selectors takes a lot of time (whether with
@@ -308,13 +300,14 @@ function hideBySelectorsString(selectorsString, parent) {
 
 // Retrieves elemhide selectors if necessary before calling the callback function
 function withElemhideSelectors(callback) {
-    if(elemhideSelectorsString == null) {
+    if(typeof elemhideSelectorsString != "undefined" && elemhideSelectorsString) {
+        callback();
+    } else {
         chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
             elemhideSelectorsString = response.selectors.join(",");
             callback();
         });
-    } else
-        callback();
+    }
 }
 
 // Grabs CSS selector string for all element-hide filters, caches it, and hides matching elements.
