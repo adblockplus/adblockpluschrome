@@ -1,5 +1,3 @@
-google.com###mbEnd[width="30%"]
-mail.google.com##.oM
 mail.live.com###SkyscraperContent
 facebook.com##.adcolumn
 facebook.com###pagelet_adbox
@@ -26,3 +24,4 @@ ds.serving-sys.com/BurstingRes
 heise.de##.skyscraper
 amazon.com##.advertisingTable
 menshealth.com###slide_ad
+

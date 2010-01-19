@@ -270,18 +270,19 @@ function reloadFilters() {
             if(f.length == 0)
                 continue;
             
-            // XXX: Special-case ignoring rules that cause strange effects
-            // This one ruins CC/BCC in Gmail somehow, until page is reloaded. No idea what's going on here,
-            // Probably a Chrome bug.
-            // ~all.google.domains##div[style="font-size: small; background-color: rgb(255, 249, 221);"]
-            if(f.match(/255, 249, 221/))
-                continue;
-                
             switch(f[0]) {
                 case '[':
                 case '!':
                     continue;
             }
+
+            // XXX: Special-case ignoring rules that cause strange effects
+            // These ruin CC/BCC in Gmail by preventing display of those fields...somehow.
+            // Possibly a Chrome bug. For example:
+            // ~all.google.domains##div[style="font-size: small; background-color: rgb(255, 249, 221);"]
+            if(f.match(/all.google.domains.+rgb/))
+                continue;
+
             abp.filterListener.addFilter(Filter.fromText(f));
         }
     }
