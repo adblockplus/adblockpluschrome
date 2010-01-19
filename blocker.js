@@ -53,16 +53,14 @@ function nukeSingleElement(elt) {
         pn.parentNode.removeChild(pn);    
 }
 
-// Disable our initial-block rules. Removing styleElm doesn't always work!
+// Replaces our stylesheet with elemhide rules. This would in principle
+// nuke the initial image, iframe, Flash hiding rules.
 function removeInitialBlockStylesheet() {
     if(typeof styleElm == "undefined" || !styleElm) return;
-    // document.documentElement.insertBefore(elemhideStyleElm, null);
-    for(var i = 0; i < document.styleSheets.length; i++) {
-        if(document.styleSheets[i].title === "__adthwart__") {
-            document.styleSheets[i].disabled = true;
-        }
-    }    
-    styleElm == null;    
+    var theStyleElm = $("style[title=\"__adthwart__\"]").get(0);
+    if(theStyleElm) {
+        theStyleElm.innerText = elemhideStyleElm.innerText;
+    }
 }
 
 // Set up message handlers. These remove undesirable elements from the page.
@@ -277,8 +275,9 @@ function handleNodeInserted(e) {
             nukeElementsTimeoutID = setTimeout(nukeElements, 1000);
         // Querying with all those selectors takes a lot of time (whether with
         // jQuery or querySelectorsAll) so do this even more rarely
-        if(hideElementsTimeoutID == 0)
-            hideElementsTimeoutID = setTimeout(hideElements, 4000);
+        // Not doing this because it should be in the injected stylesheet already
+        //if(hideElementsTimeoutID == 0)
+        //    hideElementsTimeoutID = setTimeout(hideElements, 4000);
     }
 }
 
@@ -386,12 +385,10 @@ chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(res
     enabled = response.enabled;
     if(enabled) {
         // Hide ads by selector using CSS
-        hideElements(document);
+        // Don't need to do this anymore, assuming the style element inserted above sticks
+        // hideElements(document);
         // Nuke ads by src
         nukeElements(document);
         document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
-    } else {
-        // Disabled, so take away initially injected stylesheet
-        removeInitialBlockStylesheet();
     }
 });
