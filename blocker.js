@@ -42,7 +42,7 @@ function nukeSingleElement(elt) {
     // Probably vain attempt to stop scripts
     if(elt.tagName == "SCRIPT" && elt.src) elt.src = "";
     if(elt.language) elt.language = "Blocked!";
-    elt.style.width = elt.style.height = "0px !important";
+    elt.style.display = "none !important";
     elt.style.visibility = "hidden !important";
 
     var pn = elt.parentNode;
@@ -270,8 +270,6 @@ function removeAdsAgain() {
 function handleNodeInserted(e) {
     // Remove ads relatively infrequently. If no timeout set, set one.
     if(enabled) {
-        // If the user clicked on something recently, it probably caused this
-        // node to be inserted, so try removing ads in it
         if(nukeElementsTimeoutID == 0)
             nukeElementsTimeoutID = setTimeout(nukeElements, 1000);
         // Querying with all those selectors takes a lot of time (whether with
