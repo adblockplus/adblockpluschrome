@@ -20,7 +20,7 @@ chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(resp
         if(response.initialHideFlash)
             styleElm.innerText += FLASH_SELECTORS + " { display: none !important } ";
         if(response.initialHideIframe)
-            styleElm.innerText += "iframe { display: none !important } ";
+            styleElm.innerText += "iframe { visibility: hidden !important } ";
         styleElm.innerText += elemhideSelectorsString + " { display: none !important }";
         document.documentElement.insertBefore(styleElm, null);
         // This doesn't actually appear to be added
