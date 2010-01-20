@@ -55,12 +55,13 @@ function nukeSingleElement(elt) {
 
 // Replaces our stylesheet with elemhide rules. This would in principle
 // nuke the initial image, iframe, Flash hiding rules.
+// Sometimes there is, for some reason, more than one AdThwart stylesheet,
+// so we replace all that we find.
 function removeInitialBlockStylesheet() {
     if(typeof styleElm == "undefined" || !styleElm) return;
-    var theStyleElm = $("style[title=\"__adthwart__\"]").get(0);
-    if(theStyleElm) {
-        theStyleElm.innerText = elemhideStyleElm.innerText;
-    }
+    var theStyleElm = $("style[title=\"__adthwart__\"]").each(function(i) {
+        this.innerText = elemhideStyleElm.innerText;
+    });
 }
 
 // Set up message handlers. These remove undesirable elements from the page.
