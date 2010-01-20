@@ -1,7 +1,7 @@
 {
 	"name": "AdThwart",
-	"version": "0.6.22",
-	"description": "Blocks ads on websites. Supports EasyList and many other ad blocker filter lists.",
+	"version": "0.6.23",
+	"description": "Blocks ads on websites. Uses the Firefox AdBlock Plus filter engine.",
 	"page_action": {
 		"default icon": "icons/face-devilish-19.png",
 		"default title": "AdThwart",
