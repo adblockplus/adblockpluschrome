@@ -385,8 +385,8 @@ chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(res
     enabled = response.enabled;
     if(enabled) {
         // Hide ads by selector using CSS
-        // Don't need to do this anymore, assuming the style element inserted above sticks
-        // hideElements(document);
+        // In some weird cases the elemhide style element might not stick, so we do this.
+        $(elemhideSelectorsString).hide();
         // Nuke ads by src
         nukeElements(document);
         document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
