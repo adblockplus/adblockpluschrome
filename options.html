@@ -78,6 +78,7 @@ function loadOptions() {
 	loadCheckbox("initialHideImg");
 	loadCheckbox("initialHideFlash");
 	loadCheckbox("initialHideIframe");
+	loadCheckbox("disableInlineTextAds");
 	
 	// Load user filter URLs
 	loadUserFilterURLs();
@@ -123,6 +124,7 @@ function saveOptions() {
 	saveCheckbox("initialHideImg");
 	saveCheckbox("initialHideFlash");
 	saveCheckbox("initialHideIframe");
+	saveCheckbox("disableInlineTextAds");
     
     // Filter lists
     var filterFilesEnabled = {};
@@ -369,7 +371,7 @@ function addUserURLFromBox() {
 <input type="checkbox" id="initialHideImg" onClick="saveOptions()" /> Hide images while ads are removed<br/>
 <input type="checkbox" id="initialHideFlash" onClick="saveOptions()" /> Hide Flash objects while ads are removed<br/>
 <input type="checkbox" id="initialHideIframe" onClick="saveOptions()" /> Hide iframes while ads are removed<br/>
-<!-- <input type="checkbox" id="experimental" onClick="saveOptions()" /> Hide all images and Flash while ads are removed (prevents ads from appearing momentarily) -->
+<input type="checkbox" id="disableInlineTextAds" onClick="saveOptions()" /> <a href="http://userscripts.org/scripts/show/3637">Disable inline text ads</a><br/>
 </p>
 <h2>Filter lists</h2>
 <p>Enable as few as possible for the best speed. The original sources of these lists are available <a href="http://adblockplus.org/en/subscriptions">here</a>.</p>
@@ -388,7 +390,7 @@ function addUserURLFromBox() {
 
 <input type="checkbox" id="china" onClick="checkFilterList('china'); saveOptions()" /><a href="http://code.google.com/p/adblock-chinalist/">ChinaList</a> by Gythialy <span id="china_msg" class="flMsg"></span><br/>
 
-<input type="checkbox" id="russia" onClick= "checkFilterList('russia'); saveOptions()" /><a href="http://adblockplus.mihalkin.ru/">Morpeh Rus List</a> (Russia) by Alexandr Mikhalkin <span id="russia_msg" class="flMsg"></span><br/>
+<input type="checkbox" id="russia" onClick= "checkFilterList('russia'); saveOptions()" /><a href="http://code.google.com/p/ruadlist/">RuAdList</a> <span id="russia_msg" class="flMsg"></span><br/>
 
 <input type="checkbox" id="korea" onClick="checkFilterList('korea'); saveOptions()" /><a href="http://brianyi.com/corset/">Corset</a> (Korea) by Brian Yi <span id="korea_msg" class="flMsg"></span><br/>
 
