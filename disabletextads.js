@@ -6,6 +6,11 @@
 // @include       http://*
 // ==/UserScript==
 
+chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response2) {
+    if(response2.enabled) {
+        chrome.extension.sendRequest({reqtype: "get-localstorage-option", name: "disableInlineTextAds"}, function(response) {
+            if(response.value === "true") {
+
 var disableTextAds = {
 
   blockAds: function(elt) {
@@ -115,8 +120,6 @@ var disableTextAds = {
     }
   };
 
-if(localStorage["disableTextAds"] === "true") {
-
   document.addEventListener('DOMNodeInserted', function(event) { disableTextAds.blockAds(event.target); }, true);
 
   // Handle the cases that don't trigger our DOMNodeInserted hook.
@@ -136,5 +139,7 @@ if(localStorage["disableTextAds"] === "true") {
       anchor.parentNode.replaceChild(document.createTextNode(anchor.textContent), anchor);
     }
   }, false);
-
-}
+            }
+        });
+    }
+});

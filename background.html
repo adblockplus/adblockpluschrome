@@ -64,6 +64,7 @@ function setDefaultOptions() {
    defaultOptionValue("initialHideFlash", "true");
    defaultOptionValue("initialHideImg", "false");
    defaultOptionValue("initialHideIframe", "true");
+   defaultOptionValue("disableInlineTextAds", "true");
 
    // If user had older version installed, set new options accordingly and remove old options
    if(optionExists("experimental")) {
@@ -332,7 +333,9 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         var enabled = sender.tab ? !isDomainExcluded(domain) : true;
         if(enabled)
             selectors = abp.elemhide.getSelectorsToHide(domain);
-        sendResponse({initialHideFlash: localStorage["initialHideFlash"] == "true", initialHideImg: localStorage["initialHideImg"] == "true", initialHideIframe: localStorage["initialHideIframe"] == "true", selectors: selectors, enabled: enabled});        
+        sendResponse({initialHideFlash: localStorage["initialHideFlash"] == "true", initialHideImg: localStorage["initialHideImg"] == "true", initialHideIframe: localStorage["initialHideIframe"] == "true", selectors: selectors, enabled: enabled});
+    } else if(request.reqtype == "get-localstorage-option") {
+        sendResponse({value: localStorage[request.name]});
     } else if(request.reqtype == "set-domain-enabled-state") {
         // Enable/disable ad blocking for a particular domain
         chrome.tabs.get(lastTabId, function(tab) {
