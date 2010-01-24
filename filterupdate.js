@@ -3,7 +3,7 @@ var filterFiles = {
     "easylist": "http://easylist.adblockplus.org/easylist.txt", // "easylist.txt",
 	"extras": "extras.txt",
     "germany": "https://easylist-downloads.adblockplus.org/easylistgermany.txt", // "easylistgermany.txt",
-    "russia": "http://adblockplus.mihalkin.ru/Russia.txt", // "Russia.txt",
+    "russia": "http://ruadlist.googlecode.com/svn/trunk/adblock.txt",
     "china": "http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", // "adblock.txt",
 	"france": "https://easylist-downloads.adblockplus.org/liste_fr+easylist.txt", // "liste_fr.txt",
 	"korea": "http://brianyi.com/corset.txt", // "corset.txt",
