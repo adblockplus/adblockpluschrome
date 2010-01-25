@@ -24,4 +24,6 @@ ds.serving-sys.com/BurstingRes
 heise.de##.skyscraper
 amazon.com##.advertisingTable
 menshealth.com###slide_ad
-
+encyclopediadramatica.com##iframe
+encyclopediadramatica.com##img[width="468"][height="60"]
+encyclopediadramatica.com###siteNotice
