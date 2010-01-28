@@ -62,7 +62,7 @@ p {
 <script type="text/javascript" charset="utf-8">
 
 function loadCheckbox(id) {
-    console.log(typeof localStorage[id] + " " + id + " " + localStorage[id]);
+    // console.log(typeof localStorage[id] + " " + id + " " + localStorage[id]);
 	document.getElementById(id).checked = typeof localStorage[id] == "undefined" ? false : localStorage[id] == "true";
 }
 
@@ -401,9 +401,9 @@ function addUserURLFromBox() {
 <input type="checkbox" id="vietnam" onClick="checkFilterList('vietnam'); saveOptions()" />Viet Nam list by Nguyen Manh Hung <span id="vietnam_msg" class="flMsg"></span><br/>
 
 <input type="checkbox" id="poland" onClick="checkFilterList('poland'); saveOptions()" />BSI Lista Polska (Poland) 
-<span id="poland_msg" class="flMsg">OK</span><br/>
+<span id="poland_msg" class="flMsg"></span><br/>
 
-<input type="checkbox" id="extras" onClick="saveOptions()" /><a id="extras_url">Extra filters</a> included with AdThwart
+<input type="checkbox" id="extras" onClick="checkFilterList('extras'); saveOptions()" /><a href="http://adthwart.appspot.com/filters?n=extras">AdThwart extra filters</a> <span id="extras_msg" class="flMsg"></span><br/>
 
 <div id="userFilterLists" style="margin-bottom: 8px"></div>
 

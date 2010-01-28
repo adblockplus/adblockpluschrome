@@ -16,7 +16,7 @@ var disableTextAds = {
     blockAds: function(elt) {
         var target = elt;
         var childNode;
-    
+        
         switch(elt.nodeName.toLowerCase()) {
         // EchoTopic and ResultLinks wrap their inserted links in a <nobr> tag.
         case 'nobr':
@@ -112,7 +112,7 @@ var disableTextAds = {
 document.addEventListener('DOMNodeInserted', function(event) { disableTextAds.blockAds(event.target); }, true);
 
 // Handle the cases that don't trigger our DOMNodeInserted hook.
-window.addEventListener("load", function(event) { 
+window.addEventListener("load", function(event) {
     // According to LingoSpot, setting this global variable will disable all ads.  Doesn't actually see to have any effect.
     //unsafeWindow.LINGOSPOT_DISABLED = true;
 
