@@ -126,10 +126,14 @@ window.addEventListener("load", function(event) {
         var anchor = links.snapshotItem(i);
         anchor.parentNode.replaceChild(document.createTextNode(anchor.textContent), anchor);
     }
+
 }, false);
+
+// Look again for links - for some reason this doesn't always work if run in the window.load handler
+$("a").each(function(i) { disableTextAds.blockAds(this); });
 
 // Chrome calls
             }
         });
     }
-});
+}); 
