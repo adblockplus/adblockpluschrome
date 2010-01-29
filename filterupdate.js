@@ -62,6 +62,7 @@ function FilterListFetcher(nameOrUrl, callback) {
             fetcher.callback(fetcher);
             return;
         }
+        // TODO: Doesn't actually do anything in case of other errors
     }
     try {
         this.xhr.open("GET", this.url, true);
