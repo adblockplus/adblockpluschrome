@@ -386,7 +386,21 @@ chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(res
         // Hide ads by selector using CSS
         // In some weird cases the elemhide style element might not stick, so we do this.
         hideElements(document);
-        // Nuke ads by src
+        
+        // Special-case YouTube video ads because they are so popular.
+        // (ad_|watermark|invideo|infringe).*?=.+?(&|$)
+        if(document.domain.match(/youtube.com$/)) {
+            console.log("Special-casing YouTube. Blech. " + document.domain);
+            var elt = document.getElementById("movie_player");
+            if(elt) {
+                var newFlashVars = elt.getAttribute("flashvars").replace(/(ad_|watermark|invideo|infringe).*?=.+?(&|$)/gi, "");
+                var replacement = elt.cloneNode(true);
+                replacement.setAttribute("flashvars", newFlashVars + "&invideo=false");
+                elt.parentNode.replaceChild(replacement, elt);
+            }
+        }        
+        
+        // Nuke ads by src. This will also cause removal of initial-block stylesheet.
         nukeElements(document);
         document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
     }
