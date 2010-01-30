@@ -21,6 +21,9 @@ var elementCache = new Array(); // Keeps track of elements that we may want to g
 var nukeElementsTimeoutID = 0;
 var hideElementsTimeoutID = 0;
 
+// Special cases
+var isYouTube = false;
+
 // Click-to-hide stuff
 var clickHide_activated = false;
 var currentElement = null;
@@ -36,7 +39,6 @@ var port = chrome.extension.connect({name: "filter-query"});
 
 // Nuke a particular element.
 function nukeSingleElement(elt) {
-    //console.log("nukeSingleElement " + document.domain);
     if(elt.innerHTML) elt.innerHTML = "";
     if(elt.innerText) elt.innerText = "";
     // Probably vain attempt to stop scripts
@@ -277,6 +279,10 @@ function handleNodeInserted(e) {
         // Not doing this because it should be in the injected stylesheet already
         //if(hideElementsTimeoutID == 0)
         //    hideElementsTimeoutID = setTimeout(hideElements, 4000);
+    
+        if(isYouTube && e.target.id == "movie_player") {
+            handleYouTubeFlashPlayer(e.target);
+        }
     }
 }
 
@@ -293,7 +299,7 @@ function hideBySelectorsString(selectorsString, parent) {
             try { elts[i].style.display = "none"; } catch(err) {}
         }
     }
-    //console.log("That took " + ((new Date()).getTime() - now) + " ms");
+    // console.log("That took " + ((new Date()).getTime() - now) + " ms");
 }
 
 // Retrieves elemhide selectors if necessary before calling the callback function
@@ -337,7 +343,6 @@ function relativeToAbsoluteUrl(url) {
 // (e.g. src attribute)
 function nukeElements(parent) {
     var elts = $("img,object,iframe,embed", parent);
-    // console.log("nukeElements " + elts.length);
     var types = new Array();
     var urls = new Array();
     var serials = new Array();
@@ -363,9 +368,7 @@ function nukeElements(parent) {
         if(url) {
             // Some rules don't include the domain, and the blacklist
             // matcher doesn't match on queries that don't include the domain
-            // if(!url.match(/^http/)) url = "http://" + document.domain + url;
             if(!url.match(/^http/)) url = relativeToAbsoluteUrl(url);
-            // console.log(url);
             // Guaranteed by call to $() above to be one of img, iframe, object, embed
             // and therefore in this list
             types.push(TagToType[elts[i].tagName]);
@@ -380,6 +383,20 @@ function nukeElements(parent) {
     nukeElementsTimeoutID = 0;
 }
 
+// flashvars is URL-encoded and dictates what ads will be shown in this video.
+function handleYouTubeFlashPlayer(elt) {
+    if(isYouTube && elt) {
+        var newFlashVars = elt.getAttribute("flashvars").replace(/&(ad_|prerolls|watermark|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi, "&");
+        var replacement = elt.cloneNode(true);
+        // Doing this stuff apparently fires a DOMNodeInserted, which will cause infinite recursion into this function.
+        // So we inhibit it using isYouTube.
+        isYouTube = false;
+        replacement.setAttribute("flashvars", newFlashVars + "&invideo=false&autoplay=1");
+        elt.parentNode.replaceChild(replacement, elt);
+        isYouTube = true;
+    }
+}
+
 chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
     enabled = response.enabled;
     if(enabled) {
@@ -388,16 +405,10 @@ chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(res
         hideElements(document);
         
         // Special-case YouTube video ads because they are so popular.
-        // (ad_|watermark|invideo|infringe).*?=.+?(&|$)
         if(document.domain.match(/youtube.com$/)) {
-            console.log("Special-casing YouTube. Blech. " + document.domain);
+            isYouTube = true;
             var elt = document.getElementById("movie_player");
-            if(elt) {
-                var newFlashVars = elt.getAttribute("flashvars").replace(/(ad_|watermark|invideo|infringe).*?=.+?(&|$)/gi, "");
-                var replacement = elt.cloneNode(true);
-                replacement.setAttribute("flashvars", newFlashVars + "&invideo=false");
-                elt.parentNode.replaceChild(replacement, elt);
-            }
+            handleYouTubeFlashPlayer(elt);
         }        
         
         // Nuke ads by src. This will also cause removal of initial-block stylesheet.
