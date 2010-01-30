@@ -386,12 +386,15 @@ function nukeElements(parent) {
 // flashvars is URL-encoded and dictates what ads will be shown in this video.
 function handleYouTubeFlashPlayer(elt) {
     if(isYouTube && elt) {
-        var newFlashVars = elt.getAttribute("flashvars").replace(/&(ad_|prerolls|watermark|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi, "&");
+        var re = /&(ad_|prerolls|watermark|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi;
+        // WTF. replace() just gives up after a while, missing things near the end of the string. So we run it again.
+        var newFlashVars = elt.getAttribute("flashvars").replace(re, "&").replace(re, "&");
         var replacement = elt.cloneNode(true);
-        // Doing this stuff apparently fires a DOMNodeInserted, which will cause infinite recursion into this function.
+        // Doing this stuff fires a DOMNodeInserted, which will cause infinite recursion into this function.
         // So we inhibit it using isYouTube.
         isYouTube = false;
         replacement.setAttribute("flashvars", newFlashVars + "&invideo=false&autoplay=1");
+        //console.log(replacement.getAttribute("flashvars"));
         elt.parentNode.replaceChild(replacement, elt);
         isYouTube = true;
     }
