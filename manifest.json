@@ -1,6 +1,6 @@
 {
 	"name": "AdThwart",
-	"version": "0.7.3",
+	"version": "0.7.4",
 	"description": "Blocks ads using the Firefox AdBlock Plus filter engine. Kiss ads goodbye and browse in peace!",
 	"page_action": {
 		"default icon": "icons/face-devilish-19.png",
@@ -27,7 +27,7 @@
 	},
  	{
  		"matches": ["http://*/*", "https://*/*"],
- 		"js": ["jquery-1.4.min.js", "blocker.js", "disabletextads.js"],
+ 		"js": ["jquery-1.4.1.min.js", "blocker.js", "disabletextads.js"],
  		"run_at": "document_end",
  		"all_frames": true
  	}
