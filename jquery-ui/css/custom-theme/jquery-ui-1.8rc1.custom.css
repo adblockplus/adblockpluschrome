@@ -338,7 +338,7 @@ button.ui-button-icons-only { width: 3.2em; }
 .ui-button .ui-button-text { display: block; line-height: 1.2;  }
 .ui-button-text-only .ui-button-text { padding: .4em 1em; }
 .ui-button-icon-only .ui-button-text, .ui-button-icons-only .ui-button-text { padding: .4em; text-indent: -9999999px; }
-.ui-button-text-icon .ui-button-text, .ui-button-text-icons .ui-button-text { padding: .4em 0.5em .4em 1.4em; }
+.ui-button-text-icon .ui-button-text, .ui-button-text-icons .ui-button-text { padding: .4em 0.4em .4em 1.4em; }
 .ui-button-text-icons .ui-button-text { padding-right: 1.8em; }
 /* no icon support for input elements, provide padding by default */
 input.ui-button { padding: .4em 1em; }
