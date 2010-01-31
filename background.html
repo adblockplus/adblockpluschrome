@@ -156,23 +156,20 @@ function refreshIconByTabId(tabId) {
 // Adds or removes page action icon according to options.
 // Show devil if enabled, apathetic face otherwise.
 function refreshIcon(tab) {
-    // Hide icon for chrome:// URLs
-    if(tab.url.match(/^chrome:\/\//)) {
-        chrome.pageAction.hide(tab.id);
-        return;
-    }
-    
     var domain = extractDomainFromURL(tab.url);
     var excluded = isDomainExcluded(domain);
     iconFilename = excluded ? "icons/face-plain-19.png" : "icons/face-devilish-19.png";
     chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
-    title = "AdThwart is " + (excluded ? "disabled" : "enabled") + " for " + domain;
-    chrome.pageAction.setTitle({tabId: tab.id, title: title});
-    var shouldShowIcon = localStorage["shouldShowIcon"];
-    if(typeof shouldShowIcon != "undefined" && shouldShowIcon == "false") {
-        chrome.pageAction.hide(tab.id);
-    } else {
-        chrome.pageAction.show(tab.id);
+    var title = "AdThwart is " + (excluded ? "disabled" : "enabled") + " for " + domain;
+    // Don't show icon for chrome*:// pages
+    if(tab.url.substring(0, 6) != "chrome") {
+        chrome.pageAction.setTitle({tabId: tab.id, title: title});
+        var shouldShowIcon = localStorage["shouldShowIcon"];
+        if(typeof shouldShowIcon != "undefined" && shouldShowIcon == "false") {
+            chrome.pageAction.hide(tab.id);
+        } else {
+            chrome.pageAction.show(tab.id);
+        }
     }
 }
 
