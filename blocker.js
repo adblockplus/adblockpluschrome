@@ -1,3 +1,6 @@
+// This file (c) T. Joseph <ttjoseph@gmail.com>
+// Everyone can use, modify and distribute this file without restriciton.
+
 // ABP content type flags
 var TypeMap = {
   OTHER: 1, SCRIPT: 2, IMAGE: 4, STYLESHEET: 8, OBJECT: 16,

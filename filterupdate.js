@@ -1,3 +1,6 @@
+// This file (c) T. Joseph <ttjoseph@gmail.com>
+// Everyone can use, modify and distribute this file without restriciton.
+
 // List of suggested filter lists
 var filterFiles = {
     "easylist": "http://easylist.adblockplus.org/easylist.txt", // "easylist.txt",
