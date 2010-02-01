@@ -65,6 +65,7 @@ function setDefaultOptions() {
    defaultOptionValue("initialHideImg", "false");
    defaultOptionValue("initialHideIframe", "true");
    defaultOptionValue("disableInlineTextAds", "true");
+   defaultOptionValue("specialCaseYouTube", "true");
 
    // If user had older version installed, set new options accordingly and remove old options
    if(optionExists("experimental")) {
@@ -348,7 +349,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         // Returns whether this domain is in the exclusion list.
         // The page action popup asks us this.
         if(sender.tab) {
-            sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(sender.tab.url))});
+            sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(sender.tab.url)), specialCaseYouTube: localStorage["specialCaseYouTube"] == "true"});
             return;
         }
         chrome.tabs.get(lastTabId, function(tab) {
