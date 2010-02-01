@@ -1,5 +1,5 @@
 // This file (c) T. Joseph <ttjoseph@gmail.com>
-// Everyone can use, modify and distribute this file without restriciton.
+// Everyone can use, modify and distribute this file without restriction.
 
 // ABP content type flags
 var TypeMap = {

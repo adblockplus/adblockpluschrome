@@ -1,5 +1,5 @@
 // This file (c) T. Joseph <ttjoseph@gmail.com>
-// Everyone can use, modify and distribute this file without restriciton.
+// Everyone can use, modify and distribute this file without restriction.
 
 var elemhideSelectorsString = null; // Cache the elemhide selectors
 var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"]';
