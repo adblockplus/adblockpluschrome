@@ -69,6 +69,7 @@ function loadOptions() {
 	loadCheckbox("initialHideFlash");
 	loadCheckbox("initialHideIframe");
 	loadCheckbox("disableInlineTextAds");
+	loadCheckbox("specialCaseYouTube");
 	
 	// Load user filter URLs
 	loadUserFilterURLs();
@@ -115,6 +116,7 @@ function saveOptions() {
 	saveCheckbox("initialHideFlash");
 	saveCheckbox("initialHideIframe");
 	saveCheckbox("disableInlineTextAds");
+	saveCheckbox("specialCaseYouTube");
     
     // Filter lists
     var filterFilesEnabled = {};
@@ -448,6 +450,7 @@ $(function() {
 <input type="checkbox" id="initialHideFlash" onClick="saveOptions()" /> Hide Flash objects while ads are removed<br/>
 <input type="checkbox" id="initialHideIframe" onClick="saveOptions()" /> Hide iframes while ads are removed<br/>
 <input type="checkbox" id="disableInlineTextAds" onClick="saveOptions()" /> <a href="http://userscripts.org/scripts/show/3637">Disable inline text ads</a><br/>
+<input type="checkbox" id="specialCaseYouTube" onClick="saveOptions()" /> Block ads inside YouTube videos<br/>
 </div>
 </div>
 

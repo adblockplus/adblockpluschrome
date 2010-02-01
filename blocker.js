@@ -22,7 +22,8 @@ var nukeElementsTimeoutID = 0;
 var hideElementsTimeoutID = 0;
 
 // Special cases
-var isYouTube = false;
+var specialCaseYouTube = false;
+var pageIsYouTube = false;
 
 // Click-to-hide stuff
 var clickHide_activated = false;
@@ -280,7 +281,7 @@ function handleNodeInserted(e) {
         //if(hideElementsTimeoutID == 0)
         //    hideElementsTimeoutID = setTimeout(hideElements, 4000);
     
-        if(isYouTube && e.target.id == "movie_player") {
+        if(pageIsYouTube && e.target.id == "movie_player") {
             handleYouTubeFlashPlayer(e.target);
         }
     }
@@ -385,23 +386,24 @@ function nukeElements(parent) {
 
 // flashvars is URL-encoded and dictates what ads will be shown in this video.
 function handleYouTubeFlashPlayer(elt) {
-    if(isYouTube && elt) {
+    if(specialCaseYouTube && pageIsYouTube && elt) {
         var re = /&(ad_|prerolls|watermark|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi;
         // WTF. replace() just gives up after a while, missing things near the end of the string. So we run it again.
         var newFlashVars = elt.getAttribute("flashvars").replace(re, "&").replace(re, "&");
         var replacement = elt.cloneNode(true);
         // Doing this stuff fires a DOMNodeInserted, which will cause infinite recursion into this function.
-        // So we inhibit it using isYouTube.
-        isYouTube = false;
+        // So we inhibit it using pageIsYouTube.
+        pageIsYouTube = false;
         replacement.setAttribute("flashvars", newFlashVars + "&invideo=false&autoplay=1");
         //console.log(replacement.getAttribute("flashvars"));
         elt.parentNode.replaceChild(replacement, elt);
-        isYouTube = true;
+        pageIsYouTube = true;
     }
 }
 
 chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
     enabled = response.enabled;
+    specialCaseYouTube = response.specialCaseYouTube;
     if(enabled) {
         // Hide ads by selector using CSS
         // In some weird cases the elemhide style element might not stick, so we do this.
@@ -409,7 +411,7 @@ chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(res
         
         // Special-case YouTube video ads because they are so popular.
         if(document.domain.match(/youtube.com$/)) {
-            isYouTube = true;
+            pageIsYouTube = true;
             var elt = document.getElementById("movie_player");
             handleYouTubeFlashPlayer(elt);
         }        
