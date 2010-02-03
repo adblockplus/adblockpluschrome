@@ -390,7 +390,7 @@ function nukeElements(parent) {
 // flashvars is URL-encoded and dictates what ads will be shown in this video.
 function handleYouTubeFlashPlayer(elt) {
     if(specialCaseYouTube && pageIsYouTube && elt) {
-        var re = /&(ad_|prerolls|watermark|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi;
+        var re = /&(ad_|prerolls|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi;
         // WTF. replace() just gives up after a while, missing things near the end of the string. So we run it again.
         var newFlashVars = elt.getAttribute("flashvars").replace(re, "&").replace(re, "&");
         var replacement = elt.cloneNode(true);
