@@ -3,7 +3,7 @@
 
 // List of suggested filter lists
 var filterFiles = {
-    "easylist": "http://easylist.adblockplus.org/easylist.txt", // "easylist.txt",
+    "easylist": "http://easylist-downloads.adblockplus.org/easylist.txt", // "easylist.txt",
 	"extras": "http://adthwart.appspot.com/filters?n=extras",
     "germany": "https://easylist-downloads.adblockplus.org/easylistgermany.txt", // "easylistgermany.txt",
     "russia": "http://ruadlist.googlecode.com/svn/trunk/adblock.txt",
