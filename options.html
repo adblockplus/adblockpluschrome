@@ -10,6 +10,7 @@
 body {
     max-width: 700px;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
 }
 
 td {
@@ -368,7 +369,7 @@ $(function() {
 <li><a href="#tab-filterlists">Filter lists</a></li>
 <li><a href="#tab-userfilters">Add your own filters</a></li>
 <li><a href="#tab-whitelisted">Whitelisted sites</a></li>
-<li><a href="#tab-generaloptions">General options</a></li>
+<li><a href="#tab-general">General</a></li>
 </ul>
 
 <div id="tab-filterlists">
@@ -445,13 +446,17 @@ Add a Firefox AdBlock Plus <a href="http://adblockplus.org/en/subscriptions">fil
 
 </div>
 
-<div id="tab-generaloptions">
+<div id="tab-general">
 <input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar<br/>
 <input type="checkbox" id="initialHideImg" onClick="saveOptions()" /> Hide images while ads are removed<br/>
 <input type="checkbox" id="initialHideFlash" onClick="saveOptions()" /> Hide Flash objects while ads are removed<br/>
 <input type="checkbox" id="initialHideIframe" onClick="saveOptions()" /> Hide iframes while ads are removed<br/>
 <input type="checkbox" id="disableInlineTextAds" onClick="saveOptions()" /> <a href="http://userscripts.org/scripts/show/3637">Disable inline text ads</a><br/>
 <input type="checkbox" id="specialCaseYouTube" onClick="saveOptions()" /> Block ads inside YouTube videos<br/>
+
+<br/>
+Found a bug in AdThwart? Please <a href="http://code.google.com/p/adthwart/issues/entry">report it here</a>.
+
 </div>
 </div>
 
