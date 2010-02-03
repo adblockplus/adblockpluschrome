@@ -325,7 +325,6 @@ function addUserURLEntry(key, url) {
 	label.innerHTML = url;
 	var del = document.createElement('span');
 	del.innerHTML = ' <a href="#" onClick="deleteUserURLEntry(\'' + key + '\')">[delete]</a> ';
-	//<span id="easylist_msg" class="flMsg"></span>
 	// Status message
 	var msg = document.createElement("span");
 	msg.id = key + "_msg";
@@ -343,6 +342,12 @@ function addUserURLEntry(key, url) {
 function addUserURLFromBox() {
 	var key = "user_" + (new Date()).getTime();
 	var url = document.getElementById("newURL").value;
+	
+	// Extract URL from ABP subscription link
+	var matches;
+	if(matches = url.match(/^abp:subscribe.*[\?&]location=(.+?)(&|$)/i))
+		url = decodeURIComponent(matches[1]);
+
 	if(!url.match(/^http/) && !url.match(/^file/))
 		return;
 	addUserURLEntry(key, url);
