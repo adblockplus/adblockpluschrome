@@ -14,7 +14,7 @@ var filterFiles = {
 	"italy": "http://mozilla.gfsolone.com/filtri.txt", // "filtri.txt",
 	"vietnam": "http://adblockplus-vietnam.googlecode.com/svn/trunk/abpvn.txt",
 	"poland": "http://www.bsi.info.pl/filtrABP.txt",
-	"fanboy": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-current-expanded.txt",
+	// "fanboy": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-current-expanded.txt",
 	"fanboy_es": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-esp.txt"
 };
 
