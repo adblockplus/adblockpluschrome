@@ -372,14 +372,14 @@ $(function() {
 </ul>
 
 <div id="tab-filterlists">
-<p>Enable as few as possible for the best speed.</p>
+<p>Enable only the filter lists you need &mdash; too many can make Chrome unresponsive.</p>
 <p>Out-of-date lists are updated periodically. Or, you can <button class="refreshButton" onclick="updateFilterLists()">Update now.</button><br/>
 <br/>
 <input type="checkbox" id="easylist" onClick="checkFilterList('easylist'); saveOptions()" /><a href="http://easylist.adblockplus.org/">EasyList</a> by Ares2 and Rick752 <span id="easylist_msg" class="flMsg"></span><br/>
 
 <input type="checkbox" id="germany" onClick="checkFilterList('germany'); saveOptions()" />EasyList Germany by Ares2 <span id="germany_msg" class="flMsg"></span><br/>
 
-<input type="checkbox" id="fanboy" onClick="checkFilterList('fanboy'); saveOptions()" /><a href="http://fanboy.co.nz/adblock/">Fanboy's Adblock list</a> <span id="fanboy_msg" class="flMsg"></span><br/>
+<input type="checkbox" id="fanboy" disabled /><span id="fanboy_msg" class="flMsg" style="display: inline">Fanboy's list does not work well with AdThwart and has been removed</span><br/>
 
 <input type="checkbox" id="fanboy_es" onClick="checkFilterList('fanboy_es'); saveOptions()" />Fanboy's Español/Português supplement <span id="fanboy_es_msg" class="flMsg"></span><br/>
 
