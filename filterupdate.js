@@ -3,12 +3,12 @@
 
 // List of suggested filter lists
 var filterFiles = {
-    "easylist": "http://easylist-downloads.adblockplus.org/easylist.txt", // "easylist.txt",
+    "easylist": "http://easylist.adblockplus.org/easylist.txt", // "easylist.txt",
 	"extras": "http://adthwart.appspot.com/filters?n=extras",
-    "germany": "https://easylist-downloads.adblockplus.org/easylistgermany.txt", // "easylistgermany.txt",
+    "germany": "http://easylist.adblockplus.org/easylistgermany.txt", // "easylistgermany.txt",
     "russia": "http://ruadlist.googlecode.com/svn/trunk/adblock.txt",
     "china": "http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", // "adblock.txt",
-	"france": "https://easylist-downloads.adblockplus.org/liste_fr+easylist.txt", // "liste_fr.txt",
+	"france": "http://adblockplus.mozdev.org/easylist/liste_fr+easylist.txt", // "liste_fr.txt",
 	"korea": "http://brianyi.com/corset.txt", // "corset.txt",
 	"romania": "http://www.picpoc.ro/menetzrolist.txt", // "menetzrolist.txt",
 	"italy": "http://mozilla.gfsolone.com/filtri.txt", // "filtri.txt",
