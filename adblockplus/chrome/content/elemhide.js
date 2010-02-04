@@ -131,16 +131,6 @@ var elemhide =
             	selectors.push(sel);
         }
         return selectors;
-  },
-
-  get_css_data: function(domain) {
-	var cssData = "";
-	for (i in this.filters) {
-		sel = this.filters[i].selector;
-		if(this.filters[i].isActiveOnDomain(domain) && (sel[0] == '#' || sel[0] == '.'))
-			cssData += sel + " { display:none !important }\n";
-	}
-	return cssData;
-  },
+  }
 };
 abp.elemhide = elemhide;
