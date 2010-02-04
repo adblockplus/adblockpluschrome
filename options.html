@@ -159,6 +159,12 @@ function appendToListBox(boxId, text) {
     document.getElementById(boxId).add(elt, null);
 }
 
+function addWhitelistDomain() {
+    var domain = document.getElementById("newWhitelistDomain").value.split(' ').join('');
+    appendToListBox("excludedDomainsBox", domain);
+    saveOptions();
+}
+
 // Adds filter text that user typed to the selection box
 function addTypedFilter() {
     var filterText = document.getElementById("newFilter").value.split(' ').join('');
@@ -373,7 +379,7 @@ $(function() {
 <div id="tabs"><ul>
 <li><a href="#tab-filterlists">Filter lists</a></li>
 <li><a href="#tab-userfilters">Add your own filters</a></li>
-<li><a href="#tab-whitelisted">Whitelisted sites</a></li>
+<li><a href="#tab-whitelisted">Whitelisted domains</a></li>
 <li><a href="#tab-general">General</a></li>
 </ul>
 
@@ -418,9 +424,15 @@ Add a Firefox AdBlock Plus <a href="http://adblockplus.org/en/subscriptions">fil
 </div>
 
 <div id="tab-whitelisted">
-<p>You have disabled AdThwart for these sites.</p>
+<p>AdThwart is disabled for the domains listed below. You can add a domain either via the AdThwart icon in
+the address bar or by typing the domain (not a URL) in the box and clicking the "Add domain" button.</p>
 
-<table><tr><td>
+<table>
+<tr><td>
+<input type="text" value="" id="newWhitelistDomain" style="width:400px"></td>
+<td><button class="addButton" onClick="addWhitelistDomain()">Add domain</button></td></tr>
+
+<tr><td>
 <select id="excludedDomainsBox" size="10" style="width:400px; background: white;">
 </select></td><td>
 <button class="removeButton" onClick="removeSelectedExcludedDomain()">Remove selected</button>
