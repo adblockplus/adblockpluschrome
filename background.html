@@ -289,6 +289,14 @@ function reloadFilters() {
             if(f.match(/all.google.domains.+rgb/))
                 continue;
 
+            // XXX: Special-case certain filters that break airmiles.ca, probably
+            // due to broken interactions of Chrome's CSS selector engine with our
+            // inserted stylesheet
+            if(f.indexOf('a[href^="') == 2) {
+                f = "~airmiles.ca" + f;
+                console.log(f);
+            }
+
             abp.filterListener.addFilter(Filter.fromText(f));
         }
     }
