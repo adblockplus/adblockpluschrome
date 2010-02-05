@@ -292,6 +292,8 @@ function reloadFilters() {
             // XXX: Special-case certain filters that break airmiles.ca, probably
             // due to broken interactions of Chrome's CSS selector engine with our
             // inserted stylesheet
+            // TODO: Appears to be fixed in Chromium as of 5.0.317.0 (38075), so
+            // remove this special case when stable Chrome catches up
             if(f.indexOf('a[href^="') == 2)
                 f = "~airmiles.ca" + f;
 
