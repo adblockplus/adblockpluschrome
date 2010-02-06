@@ -22,7 +22,6 @@ var enabled = false; // Enabled for this particular domain.
 var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
 var nukeElementsTimeoutID = 0;
-var hideElementsTimeoutID = 0;
 
 // Special cases
 var specialCaseYouTube = false;
@@ -66,7 +65,7 @@ function nukeSingleElement(elt) {
 function removeInitialBlockStylesheet() {
     if(typeof styleElm == "undefined" || !styleElm) return;
     var theStyleElm = $("style[title=\"__adthwart__\"]").each(function(i) {
-        this.innerText = elemhideStyleElm.innerText;
+        this.innerText = getElemhideCSSString();
     });
 }
 
@@ -263,12 +262,11 @@ function clickHide_mouseClick(e) {
 // It would be a click-to-hide filter, so it's only an elemhide filter.
 // Since this rarely happens, we can afford to do a full run of ad removal.
 function removeAdsAgain() {
-    chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
-        if(response.enabled) {
-            elemhideSelectorsString = null; // Cache is dirty since we added a new filter
-            hideElements(document);
-            nukeElements(document);
-        }
+    chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
+        // Retrieve new set of selectors and build selector strings
+        makeSelectorStrings(response.selectors);
+        hideBySelectorStrings(document);
+        nukeElements(document);
     });
 }
 
@@ -278,11 +276,6 @@ function handleNodeInserted(e) {
     if(enabled) {
         if(nukeElementsTimeoutID == 0)
             nukeElementsTimeoutID = setTimeout(nukeElements, 1000);
-        // Querying with all those selectors takes a lot of time (whether with
-        // jQuery or querySelectorsAll) so do this even more rarely
-        // Not doing this because it should be in the injected stylesheet already
-        //if(hideElementsTimeoutID == 0)
-        //    hideElementsTimeoutID = setTimeout(hideElements, 4000);
     
         if(pageIsYouTube && e.target.id == "movie_player") {
             handleYouTubeFlashPlayer(e.target);
@@ -290,43 +283,19 @@ function handleNodeInserted(e) {
     }
 }
 
-// Hides elements matched by a selectors string
-// Slow! Don't call this too often.
-function hideBySelectorsString(selectorsString, parent) {
-    //var now = new Date().getTime();
+function hideBySelectorStrings(parent) {
     if(enabled) {
-        var elts = $(selectorsString, parent);
-        for(var i = 0; i < elts.length; i++) {
-            // TODO: Sometimes style isn't defined, for some reason...
-            try { elts[i].style.visibility = "hidden"; } catch(err) {}
-            // display:none causes a reflow, which can be annoying
-            try { elts[i].style.display = "none"; } catch(err) {}
-        }
+        // var now = new Date().getTime();
+        for(i in elemhideSelectorStrings) {
+            var elts = $(elemhideSelectorStrings[i], parent).get();
+            for(var i = 0; i < elts.length; i++) {
+                // TODO: Sometimes style isn't defined, for some reason...
+                try { elts[i].style.visibility = "hidden"; } catch(err) {}
+                try { elts[i].style.display = "none"; } catch(err) {}
+            }
+        }        
+        // console.log("That took " + ((new Date()).getTime() - now) + " ms");
     }
-    // console.log("That took " + ((new Date()).getTime() - now) + " ms");
-}
-
-// Retrieves elemhide selectors if necessary before calling the callback function
-function withElemhideSelectors(callback) {
-    if(typeof elemhideSelectorsString != "undefined" && elemhideSelectorsString) {
-        callback();
-    } else {
-        chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
-            elemhideSelectorsString = response.selectors.join(",");
-            callback();
-        });
-    }
-}
-
-// Grabs CSS selector string for all element-hide filters, caches it, and hides matching elements.
-// This can be quite slow, ~300 ms or more.
-function hideElements(parent) {
-    withElemhideSelectors(function() {
-        // Make sure elemhideSelectorsString is there
-        hideBySelectorsString(elemhideSelectorsString, parent);
-        // Allow running again after some interval
-        hideElementsTimeoutID = 0;
-    });
 }
 
 // Converts relative to absolute URL
@@ -410,7 +379,7 @@ chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(res
     if(enabled) {
         // Hide ads by selector using CSS
         // In some weird cases the elemhide style element might not stick, so we do this.
-        hideElements(document);
+        hideBySelectorStrings(document);
         
         // Special-case YouTube video ads because they are so popular.
         if(document.domain.match(/youtube.com$/)) {
