@@ -288,6 +288,7 @@ function hideBySelectorStrings(parent) {
         // var now = new Date().getTime();
         for(i in elemhideSelectorStrings) {
             var elts = $(elemhideSelectorStrings[i], parent).get();
+            if(!elts) continue;
             for(var i = 0; i < elts.length; i++) {
                 // TODO: Sometimes style isn't defined, for some reason...
                 try { elts[i].style.visibility = "hidden"; } catch(err) {}
