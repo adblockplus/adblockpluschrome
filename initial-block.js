@@ -9,10 +9,10 @@ var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*="
 // So we split the elemhide selectors into groups.
 function makeSelectorStrings(selectors) {
     var ptr = 0;
+    if(!selectors) return;
     for(i = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE) {
         elemhideSelectorStrings[ptr++] = selectors.slice(i, i + SELECTOR_GROUP_SIZE).join(",");
     }
-    elemhideSelectorsString = selectors.join(",");
 }
 
 // Makes a string containing CSS rules for elemhide filters
