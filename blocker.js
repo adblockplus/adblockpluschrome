@@ -368,7 +368,6 @@ function handleYouTubeFlashPlayer(elt) {
         // So we inhibit it using pageIsYouTube.
         pageIsYouTube = false;
         replacement.setAttribute("flashvars", newFlashVars + "&invideo=false&autoplay=1");
-        //console.log(replacement.getAttribute("flashvars"));
         elt.parentNode.replaceChild(replacement, elt);
         pageIsYouTube = true;
     }
