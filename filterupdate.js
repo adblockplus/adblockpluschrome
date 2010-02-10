@@ -60,7 +60,7 @@ function FilterListFetcher(nameOrUrl, callback) {
                 var lastUpdated = this.responseText.match(/Last modified:\s+(.+)/i);
                 var now = (new Date()).getTime();
                 lastUpdated = lastUpdated ? lastUpdated = Date.parse(lastUpdated[1]) : now;
-                var expires = this.responseText.match(/Expires:\s+(\d+) days/i);
+                var expires = this.responseText.match(/Expires:\s+(\d+) day/i);
                 expires = expires ? parseInt(expires[1]) * 86400 * 1000 : DEFAULT_EXPIRE_TIME; // Milliseconds in n days
                 // Clamp the expire time to a predefined range to defend against bad input
                 expires = expires > MAX_EXPIRE_TIME ? MAX_EXPIRE_TIME : expires;
