@@ -21,7 +21,7 @@ var filterFiles = {
 // Default filter list expiration time is 3 days (specified in milliseconds)
 // But, in case that is garbled in the filter list, clamp it to a predefined range
 var DEFAULT_EXPIRE_TIME =  3 * 86400 * 1000;
-var MIN_EXPIRE_TIME = 2 * 86400 * 1000;
+var MIN_EXPIRE_TIME = 1 * 86400 * 1000;
 var MAX_EXPIRE_TIME = 14 * 86400 * 1000;
 
 // Adds entries in filterFiles for any user filters. Other functions will
