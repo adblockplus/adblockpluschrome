@@ -201,15 +201,16 @@ function loadFiltersRawText(filename) {
     if(filename.match(/^http/)) {
         if(typeof localStorage[filename] == "string") {
             var list = JSON.parse(localStorage[filename]);
-            //console.log("Using cached: " + filename + " last updated " + list.lastUpdated);
             // If there was an error loading the list before, don't try again now, let the user
             // update manually. This is so we won't pound a filter list's server if the
             // maintainer moves the file.
             if(!list.error) {
+                // Check whether it's time to redownload the list.
+                // If list specifies its expiry time, use that. Otherwise default to 3 days.
                 var now = new Date().getTime();
-                // If it's been > 3 days since last update, download it again, but only
-                // if we aren't currently downloading it at the moment
-                if(((now - list.lastUpdated) > (3 * 86400 * 1000)) && !downloading[filename]) {
+                var expires = list.expires ? list.expires : DEFAULT_EXPIRE_TIME;
+                // If the list is expired and we aren't currently downloading it already, redownload it.
+                if(((now - list.lastUpdated) > expires) && !downloading[filename]) {
                     console.log("Too old, so redownloading " + filename);
                     downloadFilterList(filename);
                 }

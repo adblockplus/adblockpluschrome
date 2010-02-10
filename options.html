@@ -288,8 +288,13 @@ function checkFilterList(key) {
 	var url = filterFiles[key];
 	if(url in localStorage) {
 		var list = JSON.parse(localStorage[url]);
-		if(!list.error)
-			$("#" + key + "_msg").css("color", "#b0b0b0").text("Last updated at " + saneDateString(list.lastUpdated)).css("display", "inline");
+		if(!list.error) {
+		    // We didn't used to store lastDownloaded, so we check for its existence and fall back on lastUpdated if necessary
+		    // lastDownloaded: Last time the list was downloaded
+		    // lastUpdated: Last time the list reports that it was updated, or else the last time it was downloaded
+		    var lastDownloaded = list.lastDownloaded ? list.lastDownloaded : list.lastUpdated;
+			$("#" + key + "_msg").css("color", "#b0b0b0").text("Last updated at " + saneDateString(lastDownloaded)).css("display", "inline");
+		}
 		else {
 			// Display error only if checked
 			if(document.getElementById(key).checked) {

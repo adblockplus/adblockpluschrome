@@ -18,6 +18,12 @@ var filterFiles = {
 	"fanboy_es": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-esp.txt"
 };
 
+// Default filter list expiration time is 3 days (specified in milliseconds)
+// But, in case that is garbled in the filter list, clamp it to a predefined range
+var DEFAULT_EXPIRE_TIME =  3 * 86400 * 1000;
+var MIN_EXPIRE_TIME = 2 * 86400 * 1000;
+var MAX_EXPIRE_TIME = 14 * 86400 * 1000;
+
 // Adds entries in filterFiles for any user filters. Other functions will
 // reference filterFiles directly, even though global variables are evil.
 function loadUserFilterURLs() {
@@ -51,7 +57,22 @@ function FilterListFetcher(nameOrUrl, callback) {
         if(this.status == 200) {
             // Check if it's actually a filter set
             if(this.responseText.match(/\[Adblock/)) {
-                localStorage[fetcher.url] = JSON.stringify({lastUpdated: (new Date()).getTime(), text: this.responseText});
+                var lastUpdated = this.responseText.match(/Last modified:\s+(.+)/i);
+                var now = (new Date()).getTime();
+                lastUpdated = lastUpdated ? lastUpdated = Date.parse(lastUpdated[1]) : now;
+                var expires = this.responseText.match(/Expires:\s+(\d+) days/i);
+                expires = expires ? parseInt(expires[1]) * 86400 * 1000 : DEFAULT_EXPIRE_TIME; // Milliseconds in n days
+                // Clamp the expire time to a predefined range to defend against bad input
+                expires = expires > MAX_EXPIRE_TIME ? MAX_EXPIRE_TIME : expires;
+                expires = expires < MIN_EXPIRE_TIME ? MIN_EXPIRE_TIME : expires; 
+                // If the list we just downloaded is expired, mark its lastUpdated time as now or we will
+                // think the list is too old on every update check and keep trying to download it, which would pound
+                // that server, which wouldn't be very nice. Also, if the list claims it was updated in the
+                // future, don't believe it.
+                if((now - lastUpdated) > expires || lastUpdated > now)
+                    lastUpdated = now;
+                
+                localStorage[fetcher.url] = JSON.stringify({lastDownloaded: now, lastUpdated: lastUpdated, expires: expires, text: this.responseText});
                 fetcher.callback(fetcher);
                 return;
             } else {
