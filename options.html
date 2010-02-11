@@ -8,6 +8,7 @@
 <title>AdThwart Options</title>
 <style type="text/css" media="screen">
 body {
+    -webkit-user-select: none;
     max-width: 700px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
@@ -412,7 +413,7 @@ $(function() {
 
 <input type="checkbox" id="vietnam" onClick="checkFilterList('vietnam'); saveOptions()" />Việt Nam list by NGUYỄN Mạnh Hùng <span id="vietnam_msg" class="flMsg"></span><br/>
 
-<input type="checkbox" id="poland" onClick="checkFilterList('poland'); saveOptions()" />BSI Lista Polska (Polski) 
+<input type="checkbox" id="poland" onClick="checkFilterList('poland'); saveOptions()" />PLgeneral (Polski) by Krzysztof Niecko 
 <span id="poland_msg" class="flMsg"></span><br/>
 
 <input type="checkbox" id="extras" onClick="checkFilterList('extras'); saveOptions()" /><a href="http://adthwart.appspot.com/filters?n=extras">AdThwart extra filters</a> <span id="extras_msg" class="flMsg"></span><br/>
@@ -466,7 +467,7 @@ the address bar or by typing the domain (not a URL) in the box and clicking the 
 
 </div>
 
-<div id="tab-general">
+<div id="tab-general" style="-webkit-user-select: text">
 <input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar<br/>
 <input type="checkbox" id="initialHideImg" onClick="saveOptions()" /> Hide images while ads are removed<br/>
 <input type="checkbox" id="initialHideFlash" onClick="saveOptions()" /> Hide Flash objects while ads are removed<br/>
