@@ -357,21 +357,38 @@ function nukeElements(parent) {
     nukeElementsTimeoutID = 0;
 }
 
-// flashvars is URL-encoded and dictates what ads will be shown in this video.
+// flashvars is URL-encoded and dictates what ads will be shown in this video. So we modify it.
 function handleYouTubeFlashPlayer(elt) {
     if(specialCaseYouTube && pageIsYouTube && elt) {
-        // Check for the presence of ad-related flashvars so we don't replace the movie player object unnecessarily
+        var origFlashVars = elt.getAttribute("flashvars");
+        // In the new YouTube design, flashvars could be in a <param> child node
+        var inParam = false;
+        if(!origFlashVars) {
+            origFlashVars = elt.querySelector('param[name="flashvars"]');
+            // Give up if we still can't find it
+            if(!origFlashVars)
+                return;
+            inParam = true;
+            origFlashVars = origFlashVars.getAttribute("value");
+        }
+        // Don't mess with the movie player object if we don't actually find any ads
         var adCheckRE = /&(ad_|prerolls|invideo|interstitial).*?=.+?(&|$)/gi;
-        if(!elt.getAttribute("flashvars").match(adCheckRE))
+        if(!origFlashVars.match(adCheckRE))
             return;
         // WTF. replace() just gives up after a while, missing things near the end of the string. So we run it again.
         var re = /&(ad_|prerolls|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi;
-        var newFlashVars = elt.getAttribute("flashvars").replace(re, "&").replace(re, "&");
-        var replacement = elt.cloneNode(true);
+        var newFlashVars = origFlashVars.replace(re, "&").replace(re, "&") + "&invideo=false&autoplay=1";
+        var replacement = elt.cloneNode(true); // Clone child nodes also
         // Doing this stuff fires a DOMNodeInserted, which will cause infinite recursion into this function.
         // So we inhibit it using pageIsYouTube.
         pageIsYouTube = false;
-        replacement.setAttribute("flashvars", newFlashVars + "&invideo=false&autoplay=1");
+        if(inParam) {
+            // Grab new <param> and set its flashvars
+            newParam = replacement.querySelector('param[name="flashvars"]');;
+            newParam.setAttribute("value", newFlashVars);
+        } else {
+            replacement.setAttribute("flashvars", newFlashVars);
+        }
         elt.parentNode.replaceChild(replacement, elt);
         pageIsYouTube = true;
     }
