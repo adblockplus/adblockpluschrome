@@ -60,6 +60,8 @@ var disableTextAds = {
             switch(a_class) {
             // Infolinks
             case 'IL_LINK_STYLE':
+            // Heyos
+            case 'contextual':
                 childNode = elt.firstChild;
                 break;
 
