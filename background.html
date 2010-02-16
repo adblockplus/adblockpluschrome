@@ -144,6 +144,23 @@ function isDomainExcluded(docDomain) {
     return false;
 }
 
+function isDomainInList(domain, listName) {
+    if(!domain)
+        return false;
+
+    var list = getOptionsObject(listName);
+        
+    domain = domain.replace(/\.+$/, "").toLowerCase();
+
+    while (true) {
+        if (domain in list) return true;
+        var nextDot = domain.indexOf(".");
+        if (nextDot < 0) break;
+        domain = domain.substr(nextDot + 1);
+    }
+    return false;
+}
+
 // Toggles whether ad blocking is turned on for the domain the given tab is showing
 function toggleDomainExclusion(tabId) {
     chrome.tabs.sendRequest(tabId, {reqtype: "get-domain"}, function(response) {
@@ -242,6 +259,7 @@ function loadFiltersRawText(filename) {
 // This will also download and cache filter lists as necessary.
 function reloadFilters() {
     abp.filterListener.clear();
+    saveOptionsObject("noCSSInjectDomains", {}); // Clear no-inject list
     var urlsToLoad = new Array();
     
     // Make sure user filter URLs are in filterFiles
@@ -284,7 +302,16 @@ function reloadFilters() {
             
             switch(f[0]) {
                 case '[':
+                    continue;
                 case '!':
+                    // Handle no-CSS-inject domains. This is a workaround for a Chrome bug
+                    // that breaks site layouts when a stylesheet is injected.
+                    var x;
+                    if(x = f.match(/^!NI (.+)$/)) {
+                        ni = getOptionsObject("noCSSInjectDomains");
+                        ni[x[1]] = true;
+                        saveOptionsObject("noCSSInjectDomains", ni);
+                    }
                     continue;
             }
 
@@ -349,10 +376,14 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     } else if(request.reqtype == "get-initialhide-options") {
         var selectors = null;
         var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
+        var shouldInject = true;
         var enabled = sender.tab ? !isDomainExcluded(domain) : true;
-        if(enabled)
+        if(enabled) {
             selectors = abp.elemhide.getSelectorsToHide(domain);
-        sendResponse({initialHideFlash: localStorage["initialHideFlash"] == "true", initialHideImg: localStorage["initialHideImg"] == "true", initialHideIframe: localStorage["initialHideIframe"] == "true", selectors: selectors, enabled: enabled});
+            if(isDomainInList(domain, "noCSSInjectDomains"))
+                shouldInject = false;
+        }
+        sendResponse({initialHideFlash: localStorage["initialHideFlash"] == "true", initialHideImg: localStorage["initialHideImg"] == "true", initialHideIframe: localStorage["initialHideIframe"] == "true", selectors: selectors, enabled: enabled, shouldInject: shouldInject});
     } else if(request.reqtype == "get-localstorage-option") {
         sendResponse({value: localStorage[request.name]});
     } else if(request.reqtype == "set-domain-enabled-state") {
