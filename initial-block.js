@@ -44,6 +44,7 @@ chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(resp
         if(response.initialHideIframe)
             styleElm.innerText += "iframe { visibility: hidden !important } ";
         styleElm.innerText += getElemhideCSSString();
-        document.documentElement.insertBefore(styleElm, null);
+        if(response.shouldInject)
+	    document.documentElement.insertBefore(styleElm, null);
     }
 });
