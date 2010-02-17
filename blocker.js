@@ -284,7 +284,8 @@ function handleNodeInserted(e) {
 }
 
 function hideBySelectorStrings(parent) {
-    if(enabled) {
+    // In rare cases (don't know which ones exactly), initial-block.js might not have been run. 
+    if(enabled && elemhideSelectorStrings) {
         // var now = new Date().getTime();
         for(i in elemhideSelectorStrings) {
             var elts = $(elemhideSelectorStrings[i], parent).get();
