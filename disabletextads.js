@@ -45,7 +45,7 @@ var disableTextAds = {
                 break;
         
                 default:
-                if (elt.firstChild.nodeName.toLowerCase() == 'a') {
+                if (elt.firstChild && elt.firstChild.nodeName.toLowerCase() == 'a') {
                     if (elt.getAttribute('class') != null && elt.getAttribute('class').search(/lx-link/) >= 0) {
                         childNode = elt.firstChild.firstChild;
                         break;          
