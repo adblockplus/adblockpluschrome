@@ -10,6 +10,11 @@ var abp = {};
 <script type="text/javascript" src="filterupdate.js"/>
 <script>
 
+// Special-case domains for which we should only inject their specific
+// selectors, due to Chrome selector handling bugginess
+// TODO: Put this in the AdThwart filter list, like !NI
+var onlyInjectDomainSpecificSelectors = {"mail.google.com": true};
+
 // Caches the last answer for isDomainExcluded()
 var lastDomainChecked = "";
 var lastDomainExcluded = false;
@@ -379,7 +384,10 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         var shouldInject = true;
         var enabled = sender.tab ? !isDomainExcluded(domain) : true;
         if(enabled) {
-            selectors = abp.elemhide.getSelectorsToHide(domain);
+            if(domain in onlyInjectDomainSpecificSelectors) {
+                selectors = abp.elemhide.getDomainSpecificSelectorsToHide(domain);
+            } else
+                selectors = abp.elemhide.getSelectorsToHide(domain);
             if(isDomainInList(domain, "noCSSInjectDomains"))
                 shouldInject = false;
         }
