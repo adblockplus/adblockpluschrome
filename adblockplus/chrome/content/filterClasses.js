@@ -295,9 +295,11 @@ ActiveFilter.prototype =
 
     docDomain = docDomain.replace(/\.+$/, "").toUpperCase();
 
-    for (var domain in this.includeDomains)
-      if (domain != docDomain && domain.indexOf("." + docDomain) != domain.length - docDomain.length - 1)
+    for (var domain in this.includeDomains) {
+      x = domain.indexOf("." + docDomain);
+      if (domain != docDomain && (x < 0 || x != domain.length - docDomain.length - 1))
         return false;
+    }
 
     return true;
   },

@@ -131,9 +131,9 @@ var elemhide =
             	selectors.push(sel);
         }
         return selectors;
-  }
+  },
   
-  getOnlyDomainSpecificSelectorsToHide: function(domain) {
+  getDomainSpecificSelectorsToHide: function(domain) {
       var selectors = new Array();
       for (i in this.filters) {
           sel = this.filters[i].selector;
