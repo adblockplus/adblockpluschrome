@@ -127,10 +127,20 @@ var elemhide =
         var selectors = new Array();
         for (i in this.filters) {
             sel = this.filters[i].selector;
-            if(this.filters[i].isActiveOnDomain(domain) /* && (sel[0] == '#' || sel[0] == '.') */)
+            if(this.filters[i].isActiveOnDomain(domain))
             	selectors.push(sel);
         }
         return selectors;
+  }
+  
+  getOnlyDomainSpecificSelectorsToHide: function(domain) {
+      var selectors = new Array();
+      for (i in this.filters) {
+          sel = this.filters[i].selector;
+          if(this.filters[i].isActiveOnlyOnDomain(domain))
+          	selectors.push(sel);
+      }
+      return selectors;
   }
 };
 abp.elemhide = elemhide;
