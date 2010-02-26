@@ -69,11 +69,12 @@ function defaultOptionValue(opt, val) {
 
 // Sets options to defaults, upgrading old options from previous versions as necessary
 function setDefaultOptions() {
-   // Default to hiding everything initially, except for images because the vast majority of images
-   // on a given page are probably not ads.
-   defaultOptionValue("initialHideFlash", "true");
-   defaultOptionValue("initialHideImg", "false");
-   defaultOptionValue("initialHideIframe", "true");
+   // We're not giving the users these options anymore.
+   // Assuming little backlash we'll remove all code mentioning these
+   // options in a future revision.
+   localStorage["initialHideFlash"] = "true";
+   localStorage["initialHideImg"] = "false";
+   localStorage["initialHideIframe"] = "true";
    defaultOptionValue("disableInlineTextAds", "true");
    defaultOptionValue("specialCaseYouTube", "true");
 
