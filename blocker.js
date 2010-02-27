@@ -191,6 +191,13 @@ function clickHide_mouseOver(e) {
         currentElement_backgroundColor = e.target.style.backgroundColor;
         e.target.style.border = "1px solid #d6d84b";
         e.target.style.backgroundColor = "#f8fa47";
+        
+        // TODO: save old context menu
+        e.target.oncontextmenu = function(ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            clickHide_mouseClick(ev);
+        };
     }
 }
 
@@ -201,6 +208,9 @@ function clickHide_mouseOut(e) {
     
     currentElement.style.border = currentElement_border;
     currentElement.style.backgroundColor = currentElement_backgroundColor;
+    
+    // TODO: restore old context menu
+    currentElement.oncontextmenu = function(ev) {};
 }
 
 // Selects the currently hovered-over filter
@@ -217,9 +227,6 @@ function clickHide_mouseClick(e) {
     if(!clickHide_activated)
         return;
         
-    // Eat the click event - could be a stray click. This doesn't always work.
-    e.preventDefault();
-    e.stopPropagation();
     // If we don't have an element, let the user keep trying
     if(!currentElement)
         return;
