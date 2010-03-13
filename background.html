@@ -20,6 +20,7 @@ var lastDomainChecked = "";
 var lastDomainExcluded = false;
 // Last set of user-specified click-to-hide filters
 var clickHideFilters = null;
+var clickHideActive = false;
 // List of URLs currently being downloaded; used to prevent multiple requests
 // for the same URL from actually causing multiple downloads
 var downloading = {};
@@ -430,10 +431,12 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         for(var i = 0; i < clickHideFilters.length; i++)
             addFilter(clickHideFilters[i]);
         clickHideFilters = null; // clear them for next time around
+    } else if(request.reqtype == "set-clickhide-active") {
+        clickHideActive = request.active;
     } else if(request.reqtype == "get-cached-filters") {
         // Popup is asking for ABP filters constructed from whatever the user 
         // chose during clickHide
-        sendResponse({filters: clickHideFilters});
+        sendResponse({filters: clickHideFilters, active: clickHideActive});
     } else {
         sendResponse({comment: "Something broke! (Unknown message)"}); // allow cleanup of listener
     }

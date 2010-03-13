@@ -93,8 +93,11 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         // No longer used...
         sendResponse({isActive: clickHide_activated});
     } else if(request.reqtype == "clickhide-activate") {
+        // So that popup can figure out what it's supposed to show
+        chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: true});
         clickHide_activate();
     } else if(request.reqtype == "clickhide-deactivate") {
+        chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: false});
         clickHide_deactivate();
     } else if(request.reqtype == "remove-ads-again") {
         // Called when a new filter is added
@@ -135,6 +138,33 @@ function unhighlightElements() {
     highlightedElementsSelector = null;
 }
 
+// Adds a fully-transparent overlay by default
+function addFlashOverlay(index, elt) {
+    if(elt == null) elt = index;
+    // If this element is enclosed in an object tag, we prefer to block that instead
+    if(!elt || elt.parentNode.tagName == 'OBJECT')
+        return;
+        
+    // check for URL
+    var url = getFlashOrIframeURL(elt);
+    if(!elt.className && !elt.id && !url)
+        return;
+    var thisStyle = getComputedStyle(elt, null);
+    var overlay = document.createElement('div');
+    overlay.prisoner = elt;
+    overlay.prisonerURL = url;
+    overlay.className = "__adthwart__overlay";
+    overlay.setAttribute('style', 'opacity:0.5; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box;');
+        
+    // We use a zero-size enclosing div to position the overlay box correctly
+    var outer = document.createElement('div');
+    outer.setAttribute('style', 'position:relative; width: 0x; height: 0px;');
+    outer.appendChild(overlay);        
+    elt.parentNode.insertBefore(outer, elt);
+    elt.overlayOuter = outer;
+    return outer;
+}
+
 // Turn on the choose element to create filter thing
 function clickHide_activate() {
     if(document == null) return;
@@ -145,6 +175,10 @@ function clickHide_activate() {
         currentElement = null;
         clickHideFilters = null;
     }
+    
+    // Add overlays for Flash elements so user can actually click them
+    $('object,embed').map(addFlashOverlay);
+    
     clickHide_activated = true;
     document.addEventListener("mouseover", clickHide_mouseOver, false);
     document.addEventListener("mouseout", clickHide_mouseOut, false);
@@ -178,6 +212,9 @@ function clickHide_deactivate() {
     document.removeEventListener("mouseout", clickHide_mouseOut, false);
     document.removeEventListener("click", clickHide_mouseClick, false);
     document.removeEventListener("keyup", clickHide_keyUp, false);
+    
+    // Remove overlays
+    $('.__adthwart__overlay').remove();
 }
 
 // Hovering over an element so highlight it
@@ -191,7 +228,7 @@ function clickHide_mouseOver(e) {
         currentElement_backgroundColor = e.target.style.backgroundColor;
         e.target.style.border = "1px solid #d6d84b";
         e.target.style.backgroundColor = "#f8fa47";
-        
+
         // TODO: save old context menu
         e.target.oncontextmenu = function(ev) {
             ev.preventDefault();
@@ -224,18 +261,21 @@ function clickHide_keyUp(e) {
 // We should have ABP rules ready for when the
 // popup asks for them.
 function clickHide_mouseClick(e) {
-    if(!clickHide_activated)
+    if(!currentElement || !clickHide_activated)
         return;
         
-    // If we don't have an element, let the user keep trying
-    if(!currentElement)
-        return;
+    var elt = currentElement;
+    var url = null;
+    if(currentElement.className && currentElement.className == "__adthwart__overlay") {
+        elt = currentElement.prisoner;
+        url = currentElement.prisonerURL;
+    }
         
-    // Construct ABP filter(s). The popup will retrieve these.
+    // Construct filters. The popup will retrieve these.
     // Only one ID
-    var elementId = currentElement.id ? currentElement.id.split(' ').join('') : null;
+    var elementId = elt.id ? elt.id.split(' ').join('') : null;
     // Can have multiple classes...
-    var elementClasses = currentElement.className ? currentElement.className.split(' ') : null;
+    var elementClasses = elt.className ? elt.className.split(' ') : null;
     clickHideFilters = new Array();
     selectorList = new Array();
     if(elementId) {
@@ -247,6 +287,10 @@ function clickHide_mouseClick(e) {
             clickHideFilters.push(document.domain + "##." + elementClasses[i]);
             selectorList.push("." + elementClasses[i]);
         }
+    }
+    if(url) {
+        clickHideFilters.push(relativeToAbsoluteUrl(url));
+        selectorList.push(elt.tagName + '[src="' + url + '"]');
     }
     
     // Save the filters that the user created
@@ -311,6 +355,11 @@ function hideBySelectorStrings(parent) {
 // e.g.: foo.swf on http://example.com/whatever/bar.html
 //  -> http://example.com/whatever/foo.swf 
 function relativeToAbsoluteUrl(url) {
+    if(!url)
+        return url;
+    // If URL is already absolute, don't mess with it
+    if(url.match(/^http/))
+        return url;
     // Leading / means absolute path
     if(url[0] == '/')
         return document.location.protocol + "//" + document.location.host + url;
@@ -319,6 +368,27 @@ function relativeToAbsoluteUrl(url) {
     var base = document.baseURI.match(/.+\//);
     if(!base) return document.baseURI + "/" + url;
     return base[0] + url;
+}
+
+// Extracts source URL from an OBJECT, EMBED, or IFRAME
+function getFlashOrIframeURL(elt) {
+    // Check children of object nodes for "param" nodes with name="movie" that specify a URL
+    // in value attribute
+    var url;
+    if(elt.tagName == "OBJECT" && !(url = elt.getAttribute("data"))) {
+        // No data attribute, look in PARAM child tags for a URL for the swf file
+        var params = $("param[name=\"movie\"]", elt);
+        // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
+        if(params[0])
+            url = params[0].getAttribute("value");
+        else {
+            params = $("param[name=\"src\"]", elt);
+            if(params[0]) url = params[0].getAttribute("value");
+        }
+    } else {
+        url = elt.getAttribute("src");
+    }
+    return url;
 }
 
 // Hides/removes image and Flash elements according to the external resources they load.
@@ -330,27 +400,11 @@ function nukeElements(parent) {
     var serials = new Array();
     for(var i = 0; i < elts.length; i++) {
         elementCache.push(elts[i]);
-        var url;
-        // Check children of object nodes for "param" nodes with name="movie" that specify a URL
-        // in value attribute
-        if(elts[i].tagName == "OBJECT" && !(url = elts[i].getAttribute("data"))) {
-            // No data attribute, look in PARAM child tags for a URL for the swf file
-            var params = $("param[name=\"movie\"]", elts[i]);
-            // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
-            if(params[0])
-                url = params[0].getAttribute("value");
-            else {
-                params = $("param[name=\"src\"]", elts[i]);
-                if(params[0]) url = params[0].getAttribute("value");
-            }
-        } else {
-            url = elts[i].getAttribute("src");
-        }
-
+        var url = getFlashOrIframeURL(elts[i]);
         if(url) {
             // Some rules don't include the domain, and the blacklist
             // matcher doesn't match on queries that don't include the domain
-            if(!url.match(/^http/)) url = relativeToAbsoluteUrl(url);
+            url = relativeToAbsoluteUrl(url);
             // Guaranteed by call to $() above to be one of img, iframe, object, embed
             // and therefore in this list
             types.push(TagToType[elts[i].tagName]);
