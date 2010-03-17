@@ -138,11 +138,11 @@ function unhighlightElements() {
     highlightedElementsSelector = null;
 }
 
-// Adds a fully-transparent overlay by default
+// Add an overlay to an element, which is probably a Flash object
 function addFlashOverlay(index, elt) {
     if(elt == null) elt = index;
     // If this element is enclosed in an object tag, we prefer to block that instead
-    if(!elt || elt.parentNode.tagName == 'OBJECT')
+    if(!elt /* || elt.parentNode.tagName == 'OBJECT' */)
         return;
         
     // check for URL
