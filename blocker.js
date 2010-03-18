@@ -451,8 +451,13 @@ function handleYouTubeFlashPlayer(elt) {
         } else {
             replacement.setAttribute("flashvars", newFlashVars);
         }
-        elt.parentNode.replaceChild(replacement, elt);
-        pageIsYouTube = true;
+        // Wait a little bit before replacing the node - Flash Player doesn't like being
+        // reinitialized too soon, apparently. Thanks to Michael Gundlach for this idea.
+        setTimeout(function() {
+            elt.parentNode.replaceChild(replacement, elt);
+            pageIsYouTube = true;
+        }, 750);
+        
     }
 }
 
