@@ -66,13 +66,6 @@ function loadOptions() {
 	var shouldShowIcon = localStorage["shouldShowIcon"];
 	document.getElementById("shouldShowIcon").checked = typeof shouldShowIcon == "undefined" ? true : shouldShowIcon == "true";
 	
-	// Don't give users these options anymore, because
-	// - Users don't understand implications of them
-	// - No longer have to test all combinations of on/off
-	// - No real point to having them anymore - defaults work fine
-	// loadCheckbox("initialHideImg");
-	// loadCheckbox("initialHideFlash");
-	// loadCheckbox("initialHideIframe");
 	loadCheckbox("disableInlineTextAds");
 	loadCheckbox("specialCaseYouTube");
 	
@@ -117,10 +110,6 @@ function loadOptions() {
 // Reads options from UI elements and saves them in localStorage
 function saveOptions() {
 	saveCheckbox("shouldShowIcon");
-	// No longer supporting the following three options
-	// saveCheckbox("initialHideImg");
-	// saveCheckbox("initialHideFlash");
-	// saveCheckbox("initialHideIframe");
 	saveCheckbox("disableInlineTextAds");
 	saveCheckbox("specialCaseYouTube");
     
@@ -472,11 +461,6 @@ the address bar or by typing the domain (not a URL) in the box and clicking the 
 
 <div id="tab-general">
 <input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /> Show icon in address bar<br/>
-<!-- TODO: Remove these in a future revision
-<input type="checkbox" id="initialHideImg" onClick="saveOptions()" /> Hide images while ads are removed<br/>
-<input type="checkbox" id="initialHideFlash" onClick="saveOptions()" /> Hide Flash objects while ads are removed<br/>
-<input type="checkbox" id="initialHideIframe" onClick="saveOptions()" /> Hide iframes while ads are removed<br/>
--->
 <input type="checkbox" id="disableInlineTextAds" onClick="saveOptions()" /> <a href="http://userscripts.org/scripts/show/3637">Disable inline text ads</a><br/>
 <input type="checkbox" id="specialCaseYouTube" onClick="saveOptions()" /> Block ads inside YouTube videos (does not work with the FlashBlock extension)<br/>
 

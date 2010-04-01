@@ -70,25 +70,13 @@ function defaultOptionValue(opt, val) {
 
 // Sets options to defaults, upgrading old options from previous versions as necessary
 function setDefaultOptions() {
-   // We're not giving the users these options anymore.
-   // Assuming little backlash we'll remove all code mentioning these
-   // options in a future revision.
-   localStorage["initialHideFlash"] = "true";
-   localStorage["initialHideImg"] = "false";
-   localStorage["initialHideIframe"] = "true";
    defaultOptionValue("disableInlineTextAds", "true");
    defaultOptionValue("specialCaseYouTube", "true");
    defaultOptionValue("excludedDomains", JSON.stringify({"acid3.acidtests.org": true}));
 
-   // If user had older version installed, set new options accordingly and remove old options
-   if(optionExists("experimental")) {
-       if(localStorage["experimental"] == "false") {
-           localStorage["initialHideFlash"] = "false";
-           localStorage["initialHideImg"] = "false";
-           localStorage["initialHideIframe"] = "false";
-       }
+   // If user had older version installed, get rid of old option
+   if(optionExists("experimental"))
        delete localStorage["experimental"];
-   }
 }
 
 // Upgrade options before we do anything else.
@@ -394,7 +382,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
             if(isDomainInList(domain, "noCSSInjectDomains"))
                 shouldInject = false;
         }
-        sendResponse({initialHideFlash: localStorage["initialHideFlash"] == "true", initialHideImg: localStorage["initialHideImg"] == "true", initialHideIframe: localStorage["initialHideIframe"] == "true", selectors: selectors, enabled: enabled, shouldInject: shouldInject});
+        sendResponse({selectors: selectors, enabled: enabled, shouldInject: shouldInject});
     } else if(request.reqtype == "get-localstorage-option") {
         sendResponse({value: localStorage[request.name]});
     } else if(request.reqtype == "set-domain-enabled-state") {
