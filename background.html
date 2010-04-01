@@ -78,6 +78,7 @@ function setDefaultOptions() {
    localStorage["initialHideIframe"] = "true";
    defaultOptionValue("disableInlineTextAds", "true");
    defaultOptionValue("specialCaseYouTube", "true");
+   defaultOptionValue("excludedDomains", JSON.stringify({"acid3.acidtests.org": true});
 
    // If user had older version installed, set new options accordingly and remove old options
    if(optionExists("experimental")) {
