@@ -451,8 +451,15 @@ function handleYouTubeFlashPlayer(elt) {
         } else {
             replacement.setAttribute("flashvars", newFlashVars);
         }
-        elt.parentNode.replaceChild(replacement, elt);
-        pageIsYouTube = true;
+        // Add a delay between removing and re-adding the movie player to make it more
+        // likely it will reinitialize properly.
+        // Thanks Michael Gundlach and fryn for this idea and code
+        var parent = elt.parentNode;
+        parent.removeChild(elt);
+        setTimeout(function(parent, replacement) {
+        	parent.appendChild(replacement);
+        	pageIsYouTube = true;
+        }, 500, parent, replacement);
     }
 }
 
