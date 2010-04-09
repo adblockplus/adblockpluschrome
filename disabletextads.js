@@ -20,10 +20,12 @@ var disableTextAds = {
         switch(elt.nodeName.toLowerCase()) {
         // EchoTopic and ResultLinks wrap their inserted links in a <nobr> tag.
         case 'nobr':
-            if (elt.firstChild.getAttribute('class') == "tfTextLink") { //EchoTopic
-                childNode = elt.firstChild.firstChild;
-            } else if (elt.firstChild.hasAttribute('id') && elt.firstChild.getAttribute('id').search(/RLLINK/) >= 0) { //ResultLinks
-                childNode = elt.firstChild.firstChild;        
+            if (elt.firstChild && elt.firstChild.nodeName != '#text') {
+                if (elt.firstChild.getAttribute('class') == "tfTextLink") { //EchoTopic
+                    childNode = elt.firstChild.firstChild;
+                } else if (elt.firstChild.hasAttribute('id') && elt.firstChild.getAttribute('id').search(/RLLINK/) >= 0) { //ResultLinks
+                    childNode = elt.firstChild.firstChild;        
+                }
             }
             break;
 
