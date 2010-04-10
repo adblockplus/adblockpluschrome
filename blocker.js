@@ -89,9 +89,6 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     // background.html might want to know this document's domain
     if(request.reqtype == "get-domain") {
         sendResponse({domain: document.domain});
-    } else if(request.reqtype == "clickhide-active?") {
-        // No longer used...
-        sendResponse({isActive: clickHide_activated});
     } else if(request.reqtype == "clickhide-activate") {
         // So that popup can figure out what it's supposed to show
         chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: true});
