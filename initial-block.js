@@ -32,7 +32,6 @@ styleElm.title = "__adthwart__"; // So we know which one to remove later
 chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response) {
     makeSelectorStrings(response.selectors);
     if(response.enabled) {
-        styleElm.innerText += "img { visibility: hidden !important } ";
         if(!document.domain.match(/youtube.com$/i)) {
             // XXX: YouTube's new design apparently doesn't load the movie player if we hide it.
             // I'm guessing Chrome doesn't bother to load the Flash object if it isn't displayed,
