@@ -9,7 +9,7 @@ var filterFiles = {
     "russia": "http://ruadlist.googlecode.com/svn/trunk/adblock.txt",
     "china": "http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", // "adblock.txt",
 	"france": "http://adblockplus.mozdev.org/easylist/liste_fr+easylist.txt", // "liste_fr.txt",
-	"korea": "http://corset-abp.googlecode.com/svn/trunk/corset.txt", // "corset.txt",
+	"korea": "http://abp-corset.googlecode.com/hg/corset.txt", // "corset.txt",
 	"romania": "http://www.picpoc.ro/menetzrolist.txt", // "menetzrolist.txt",
 	"italy": "http://mozilla.gfsolone.com/filtri.txt", // "filtri.txt",
 	"vietnam": "http://adblockplus-vietnam.googlecode.com/svn/trunk/abpvn.txt",
