@@ -24,25 +24,27 @@ function getElemhideCSSString() {
     return s;
 }
 
-// Use a style element for elemhide selectors and to hide page elements that might be ads.
-// We'll remove the latter CSS rules later.
-var styleElm = document.createElement("style");
-styleElm.title = "__adthwart__"; // So we know which one to remove later
+// Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
+if (document instanceof HTMLDocument) {
+    // Use a style element for elemhide selectors and to hide page elements that might be ads.
+    // We'll remove the latter CSS rules later.
+    var styleElm = document.createElement("style");
+    styleElm.title = "__adthwart__"; // So we know which one to remove later
 
-if (document instanceof HTMLDocument)
-chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response) {
-    makeSelectorStrings(response.selectors);
-    if(response.enabled) {
-        if(!document.domain.match(/youtube.com$/i)) {
-            // XXX: YouTube's new design apparently doesn't load the movie player if we hide it.
-            // I'm guessing Chrome doesn't bother to load the Flash object if it isn't displayed,
-            // but later removing that CSS rule doesn't cause it to actually be loaded. The
-            // rest of the Internet - and YouTube's old design - seem to be OK, though, so I dunno.
-            styleElm.innerText += FLASH_SELECTORS + " { display: none !important } ";
+    chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response) {
+        makeSelectorStrings(response.selectors);
+        if(response.enabled) {
+            if(!document.domain.match(/youtube.com$/i)) {
+                // XXX: YouTube's new design apparently doesn't load the movie player if we hide it.
+                // I'm guessing Chrome doesn't bother to load the Flash object if it isn't displayed,
+                // but later removing that CSS rule doesn't cause it to actually be loaded. The
+                // rest of the Internet - and YouTube's old design - seem to be OK, though, so I dunno.
+                styleElm.innerText += FLASH_SELECTORS + " { display: none !important } ";
+            }
+            styleElm.innerText += "iframe { visibility: hidden !important } ";
+            styleElm.innerText += getElemhideCSSString();
+            if(response.shouldInject)
+    	        document.documentElement.insertBefore(styleElm, null);
         }
-        styleElm.innerText += "iframe { visibility: hidden !important } ";
-        styleElm.innerText += getElemhideCSSString();
-        if(response.shouldInject)
-	        document.documentElement.insertBefore(styleElm, null);
-    }
-});
+    });
+}
