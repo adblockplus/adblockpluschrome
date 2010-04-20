@@ -29,6 +29,7 @@ function getElemhideCSSString() {
 var styleElm = document.createElement("style");
 styleElm.title = "__adthwart__"; // So we know which one to remove later
 
+if (document instanceof HTMLDocument)
 chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response) {
     makeSelectorStrings(response.selectors);
     if(response.enabled) {
