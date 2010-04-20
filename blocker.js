@@ -22,6 +22,7 @@ var enabled = false; // Enabled for this particular domain.
 var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
 var nukeElementsTimeoutID = 0;
+var nukeElementsLastTime = 0;
 
 // Special cases
 var specialCaseYouTube = false;
@@ -323,7 +324,7 @@ function handleNodeInserted(e) {
     // Remove ads relatively infrequently. If no timeout set, set one.
     if(enabled) {
         if(nukeElementsTimeoutID == 0)
-            nukeElementsTimeoutID = setTimeout(nukeElements, 1000);
+            nukeElementsTimeoutID = setTimeout(nukeElements, (Date.now() - nukeElementsLastTime > 1000) ? 1 : 1000);
     
         if(pageIsYouTube && e.target.id == "movie_player") {
             handleYouTubeFlashPlayer(e.target);
@@ -414,6 +415,7 @@ function nukeElements(parent) {
     port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
     
     nukeElementsTimeoutID = 0;
+    nukeElementsLastTime = Date.now();
 }
 
 // flashvars is URL-encoded and dictates what ads will be shown in this video. So we modify it.
