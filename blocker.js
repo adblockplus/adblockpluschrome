@@ -38,10 +38,8 @@ var highlightedElementsSelector = null;
 var highlightedElementsBorders = null;
 var highlightedElementsBGColors = null;
 
-// Open a port to the extension
+// Port to background.htm
 var port;
-if (document instanceof HTMLDocument)
-    port = chrome.extension.connect({name: "filter-query"});
 
 // Nuke a particular element.
 function nukeSingleElement(elt) {
@@ -71,42 +69,6 @@ function removeInitialBlockStylesheet() {
         this.innerText = getElemhideCSSString();
     });
 }
-
-// Set up message handlers. These remove undesirable elements from the page.
-if (port)
-port.onMessage.addListener(function(msg) {
-    if(msg.shouldBlockList && enabled == true) {
-        var ptr = 0;
-        for(var i = 0; i < elementCache.length; i++) {
-            if(i == msg.shouldBlockList[ptr]) {
-                // It's an ad, nuke it
-                nukeSingleElement(elementCache[i]);
-                ptr++;
-            }
-        }
-        // Take away our injected CSS, leaving only ads hidden
-        removeInitialBlockStylesheet();
-    }
-});
-
-if (document instanceof HTMLDocument)
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    // background.html might want to know this document's domain
-    if(request.reqtype == "get-domain") {
-        sendResponse({domain: document.domain});
-    } else if(request.reqtype == "clickhide-activate") {
-        // So that popup can figure out what it's supposed to show
-        chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: true});
-        clickHide_activate();
-    } else if(request.reqtype == "clickhide-deactivate") {
-        chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: false});
-        clickHide_deactivate();
-    } else if(request.reqtype == "remove-ads-again") {
-        // Called when a new filter is added
-        removeAdsAgain();
-    } else
-        sendResponse({});
-});
 
 // Highlight elements according to selector string. This would include
 // all elements that would be affected by proposed filters.
@@ -471,24 +433,62 @@ function handleYouTubeFlashPlayer(elt) {
     }
 }
 
-if (document instanceof HTMLDocument)
-chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
-    enabled = response.enabled;
-    specialCaseYouTube = response.specialCaseYouTube;
-    if(enabled) {
-        // Hide ads by selector using CSS
-        // In some weird cases the elemhide style element might not stick, so we do this.
-        hideBySelectorStrings(document);
-        
-        // Special-case YouTube video ads because they are so popular.
-        if(document.domain.match(/youtube.com$/)) {
-            pageIsYouTube = true;
-            var elt = document.getElementById("movie_player");
-            handleYouTubeFlashPlayer(elt);
-        }        
-        
-        // Nuke ads by src. This will also cause removal of initial-block stylesheet.
-        nukeElements(document);
-        document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
-    }
-});
+// Content scripts are apparently invoked on non-HTML documents, so we have to
+// check for that before doing stuff
+if (document instanceof HTMLDocument) {
+    port = chrome.extension.connect({name: "filter-query"});
+    // Set up message handlers. These remove undesirable elements from the page.
+    port.onMessage.addListener(function(msg) {
+        if(msg.shouldBlockList && enabled == true) {
+            var ptr = 0;
+            for(var i = 0; i < elementCache.length; i++) {
+                if(i == msg.shouldBlockList[ptr]) {
+                    // It's an ad, nuke it
+                    nukeSingleElement(elementCache[i]);
+                    ptr++;
+                }
+            }
+            // Take away our injected CSS, leaving only ads hidden
+            removeInitialBlockStylesheet();
+        }
+    });
+    
+    chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+        // background.html might want to know this document's domain
+        if(request.reqtype == "get-domain") {
+            sendResponse({domain: document.domain});
+        } else if(request.reqtype == "clickhide-activate") {
+            // So that popup can figure out what it's supposed to show
+            chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: true});
+            clickHide_activate();
+        } else if(request.reqtype == "clickhide-deactivate") {
+            chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: false});
+            clickHide_deactivate();
+        } else if(request.reqtype == "remove-ads-again") {
+            // Called when a new filter is added
+            removeAdsAgain();
+        } else
+            sendResponse({});
+    });
+
+    chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
+        enabled = response.enabled;
+        specialCaseYouTube = response.specialCaseYouTube;
+        if(enabled) {
+            // Hide ads by selector using CSS
+            // In some weird cases the elemhide style element might not stick, so we do this.
+            hideBySelectorStrings(document);
+
+            // Special-case YouTube video ads because they are so popular.
+            if(document.domain.match(/youtube.com$/)) {
+                pageIsYouTube = true;
+                var elt = document.getElementById("movie_player");
+                handleYouTubeFlashPlayer(elt);
+            }        
+
+            // Nuke ads by src. This will also cause removal of initial-block stylesheet.
+            nukeElements(document);
+            document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
+        }
+    });
+}
