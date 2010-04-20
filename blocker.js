@@ -39,7 +39,9 @@ var highlightedElementsBorders = null;
 var highlightedElementsBGColors = null;
 
 // Open a port to the extension
-var port = chrome.extension.connect({name: "filter-query"});
+var port;
+if (document instanceof HTMLDocument)
+    port = chrome.extension.connect({name: "filter-query"});
 
 // Nuke a particular element.
 function nukeSingleElement(elt) {
@@ -71,6 +73,7 @@ function removeInitialBlockStylesheet() {
 }
 
 // Set up message handlers. These remove undesirable elements from the page.
+if (port)
 port.onMessage.addListener(function(msg) {
     if(msg.shouldBlockList && enabled == true) {
         var ptr = 0;
@@ -86,6 +89,7 @@ port.onMessage.addListener(function(msg) {
     }
 });
 
+if (document instanceof HTMLDocument)
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     // background.html might want to know this document's domain
     if(request.reqtype == "get-domain") {
@@ -467,6 +471,7 @@ function handleYouTubeFlashPlayer(elt) {
     }
 }
 
+if (document instanceof HTMLDocument)
 chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
     enabled = response.enabled;
     specialCaseYouTube = response.specialCaseYouTube;
