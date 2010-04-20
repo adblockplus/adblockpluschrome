@@ -7,6 +7,7 @@
 // @include       http://*
 // ==/UserScript==
 
+if (document instanceof HTMLDocument)
 chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response2) {
     if(response2.enabled) {
         chrome.extension.sendRequest({reqtype: "get-localstorage-option", name: "disableInlineTextAds"}, function(response) {
