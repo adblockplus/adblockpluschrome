@@ -58,7 +58,7 @@ function FilterListFetcher(nameOrUrl, callback) {
             if(this.responseText.match(/\[Adblock/)) {
                 var lastUpdated = this.responseText.match(/Last modified:\s+(.+)/i);
                 var now = (new Date()).getTime();
-                lastUpdated = lastUpdated ? lastUpdated = Date.parse(lastUpdated[1]) : now;
+                lastUpdated = lastUpdated ? Date.parse(lastUpdated[1]) : now;
                 var expires = this.responseText.match(/Expires:\s+(\d+) day/i);
                 expires = expires ? parseInt(expires[1]) * 86400 * 1000 : DEFAULT_EXPIRE_TIME; // Milliseconds in n days
                 // Clamp the expire time to a predefined range to defend against bad input

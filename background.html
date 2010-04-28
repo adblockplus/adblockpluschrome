@@ -223,6 +223,12 @@ function loadFiltersRawText(filename) {
                 var now = new Date().getTime();
                 var expires = list.expires ? list.expires : DEFAULT_EXPIRE_TIME;
                 // If the list is expired and we aren't currently downloading it already, redownload it.
+                // We may have saved a null for lastUpdated due to a bug, so replace that with now
+                if(!list.lastUpdated) {
+                    console.log("Fixing null lastUpdated filename for " + filename);
+                    list.lastUpdated = now;
+                    localStorage[filename] = JSON.stringify(list);
+                }
                 if(((now - list.lastUpdated) > expires) && !downloading[filename]) {
                     console.log("Too old, so redownloading " + filename);
                     downloadFilterList(filename);
