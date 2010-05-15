@@ -1,6 +1,6 @@
 {
     "last_updated": {
-        "message": "Last updated $timestr$ $datestr$",
+        "message": "Last updated $timestr$ $datestr$"
     },
     "time_string": {
         "message": "at $time$"
