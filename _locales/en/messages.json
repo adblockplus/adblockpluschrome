@@ -1,17 +1,4 @@
 {
-    "last_updated": {
-        "message": "Last updated $timestr$ $datestr$"
-    },
-    "time_string": {
-        "message": "at $time$"
-    },
-    "date_string": {
-        "message": "on $date$"
-    },
-    "today": {
-        "message": "today"
-    },
-    
     "options": {
         "message": "AdThwart Options"
     },
