@@ -33,6 +33,7 @@ a:hover { color: #eeeeff }
 }
 </style>
 
+<script type="text/javascript" src="i18n.js"></script>
 <script type="text/javascript" charset="utf-8">
 
 function dbg(msg) {
@@ -40,6 +41,9 @@ function dbg(msg) {
 }
 
 function init() {
+    // Fill in i18n strings
+    loadI18nStrings();
+    
 	// Ask content script whether clickhide is active. If so, show cancel button.
 	// If that isn't the case, ask background.html whether it has cached filters. If so,
 	// ask the user whether she wants those filters.
@@ -137,25 +141,25 @@ function clickHideRulesPendingStuff() {
 </script>
 </head>
 <body id="main" onload="init()">
-<div id="enabledCheckboxAndLabel" style="display:none"><input id="enabled" type="checkbox" checked onClick="toggleEnabled()"><label for="enabled">Enabled for this site</label></div>
-<div id="mustReloadMsg" style="display:none">New filters added; see <a id="options_url" target="_blank">Options</a> to manage them.</div>
+<div id="enabledCheckboxAndLabel" style="display:none"><input id="enabled" type="checkbox" checked onClick="toggleEnabled()"><label for="enabled"><span class="i18n_enabled_for_site"></span></label></div>
+<div id="mustReloadMsg" style="display:none"><span class="i18n_new_filters_added"></span></div>
 <div id="clickHideInactiveStuff" style="display: none">	
 <div class="spacer"></div>
-<button id="clickHideButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="activateClickHide()">Easy create filter</button>
+<button id="clickHideButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="activateClickHide()"><span class="i18n_easy_create_filter"></span></button>
 </div>
 	
 <div id="clickHideActiveStuff" style="display: none">
-<div id="clickHideMsg">After closing this menu, click (or right-click) an element on the page, or hover over it and press Ctrl+Shift+E. Then return to this menu.</div>
+<div id="clickHideMsg"><span class="i18n_clickhide_instructions"></span></div>
 <div class="spacer"></div>
-<button id="cancelButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="cancelClickHide()">Cancel</button>
+<button id="cancelButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="cancelClickHide()"><span class="i18n_cancel"></span></button>
 </div>
 
 <div id="clickHideRulesPendingStuff" style="display: none">
-<div id="confirmRulesMsg">Add filter(s)?</div>
+<div id="confirmRulesMsg"><span class="i18n_add_filters_msg"></span></div>
 <div id="filtersList" style="display: block">...</div>
 <div class="spacer"></div>
-<button id="confirmAddRulesButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="addFilters()">Add</button>
-<button id="cancelAddRulesButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="cancelClickHide()">Cancel</button>
+<button id="confirmAddRulesButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="addFilters()"><span class="i18n_add"></span></button>
+<button id="cancelAddRulesButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="cancelClickHide()"><span class="i18n_cancel"></button>
 
 </div>
 <script type="text/javascript" charset="utf-8">

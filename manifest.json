@@ -1,7 +1,8 @@
 {
 	"name": "AdThwart",
-	"version": "0.8.17",
+	"version": "0.9.0",
 	"description": "Blocks ads using the Firefox AdBlock Plus filter engine. Kiss ads goodbye and browse in peace!",
+	"default_locale": "en",
 	"page_action": {
 		"default icon": "icons/face-devilish-19.png",
 		"default title": "AdThwart",
