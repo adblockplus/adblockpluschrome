@@ -71,7 +71,7 @@
 	    "message": "Your filter must follow the <a href='http://adblockplus.org/en/filters'>AdBlock Plus filter syntax</a>. Certain filter types, like object-subrequest, are not supported."
 	},
 	"disabled_for_these_domains": {
-        "message": "AdThwart is disabled for the domains listed below. You can add a domain either via the AdThwart icon intf the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
+        "message": "AdThwart is disabled for the domains listed below. You can add a domain either via the AdThwart icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
     },
 	"found_a_bug": {
         "message": "Found a bug in AdThwart? Please <a href='http://code.google.com/p/adthwart/issues/entry'>report it here</a>."
