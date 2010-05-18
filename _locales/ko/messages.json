@@ -10,7 +10,7 @@
        "message": "필터 추가"
    },
    "whitelisted_domains": {
-       "message": "도메인들",
+       "message": "도메인",
        "description": "This is a tab heading."
    },
    "general": {
@@ -43,10 +43,10 @@
    },
 
        "enable_only_the": {
-           "message": "원하는 필터만 활성화 시키세요. 너무 많은 필터는 크롬의 반응을 어렵게 할수 있습니다."
+           "message": "원하는 필터만 활성화 시키세요. 너무 많은 필터는 크롬의 반응을 느리게 할수 있습니다."
        },
        "out_of_date_lists": {
-           "message": "주기적으로 오래된 리스트가 업데이트 됩니다."
+           "message": "주기적으로 최신 리스트로 업데이트 됩니다."
        },
        "update_now": {
            "message": "지금 업데이트"
