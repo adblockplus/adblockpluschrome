@@ -180,9 +180,9 @@ function clickHide_deactivate() {
     
     // Remove overlays
     var overlays = document.querySelectorAll('.__adthwart__overlay');
-		for (var i=0; i<overlays.length; i++) {
-			overlays[i].remove();
-		}
+	for (var i=0; i<overlays.length; i++) {
+		overlays[i].remove();
+	}
 }
 
 // Hovering over an element so highlight it
