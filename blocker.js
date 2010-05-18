@@ -353,7 +353,7 @@ function getFlashOrIframeURL(elt) {
             params = elt.querySelectorAll("param[name=\"src\"]");
             if(params[0]) url = params[0].getAttribute("value");
         }
-    } else {
+    } else if(!url) {
         url = elt.getAttribute("src");
     }
     return url;
