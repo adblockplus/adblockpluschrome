@@ -338,8 +338,8 @@ function relativeToAbsoluteUrl(url) {
     return base[0] + url;
 }
 
-// Extracts source URL from an OBJECT, EMBED, or IFRAME
-function getFlashOrIframeURL(elt) {
+// Extracts source URL from an IMG, OBJECT, EMBED, or IFRAME
+function getElementURL(elt) {
     // Check children of object nodes for "param" nodes with name="movie" that specify a URL
     // in value attribute
     var url;
@@ -367,20 +367,20 @@ function nukeElements(parent) {
     var types = new Array();
     var urls = new Array();
     var serials = new Array();
+    var url;
     for(var i = 0; i < elts.length; i++) {
-        elementCache.push(elts[i]);
-        var url = getFlashOrIframeURL(elts[i]);
-        if(url) {
+        if(url = getElementURL(elts[i])) {
             // Some rules don't include the domain, and the blacklist
             // matcher doesn't match on queries that don't include the domain
             url = relativeToAbsoluteUrl(url);
             // Guaranteed by call to querySelectorAll() above to be one of img, iframe, object, embed
-            // and therefore in this list
+            // and therefore we put it in this list
+            elementCache.push(elts[i]);
             types.push(TagToType[elts[i].tagName]);
             urls.push(url);
             serials.push(serial);
+            serial++;
         }
-        serial++;
     }
     // Ask background.html which of these elements we should nuke
     port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
