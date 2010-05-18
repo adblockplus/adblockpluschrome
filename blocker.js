@@ -104,14 +104,13 @@ function unhighlightElements() {
 }
 
 // Add an overlay to an element, which is probably a Flash object
-function addFlashOverlay(index, elt) {
-    if(elt == null) elt = index;
+function addFlashOverlay(elt) {
     // If this element is enclosed in an object tag, we prefer to block that instead
     if(!elt /* || elt.parentNode.tagName == 'OBJECT' */)
         return;
         
     // check for URL
-    var url = getFlashOrIframeURL(elt);
+    var url = getElementURL(elt);
     if(!elt.className && !elt.id && !url)
         return;
     var thisStyle = getComputedStyle(elt, null);
@@ -142,7 +141,9 @@ function clickHide_activate() {
     }
     
     // Add overlays for Flash elements so user can actually click them
-    $('object,embed').map(addFlashOverlay);
+    var elts = document.querySelectorAll('object,embed');
+    for(var i=0; i<elts.length; i++)
+        addFlashOverlay(elts[i]);
     
     clickHide_activated = true;
     document.addEventListener("mouseover", clickHide_mouseOver, false);
