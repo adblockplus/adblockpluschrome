@@ -65,9 +65,10 @@ function nukeSingleElement(elt) {
 // so we replace all that we find.
 function removeInitialBlockStylesheet() {
     if(typeof styleElm == "undefined" || !styleElm) return;
-    var theStyleElm = $("style[title=\"__adthwart__\"]").each(function(i) {
-        this.innerText = getElemhideCSSString();
-    });
+    var theStyleElm = document.querySelectorAll("style[title=\"__adthwart__\"]");
+    for( var i=0; i<theStyleElm.length; i++ ) {
+	    theStyleElm[i].innerText = getElemhideCSSString();
+    }
 }
 
 // Highlight elements according to selector string. This would include
@@ -76,7 +77,7 @@ function highlightElements(selectorString) {
     if(highlightedElementsSelector)
         unhighlightElements();
     
-    highlightedElements = $(selectorString);
+    highlightedElements = document.querySelectorAll(selectorString);
     highlightedElementsSelector = selectorString;
     highlightedElementsBorders = new Array();
     highlightedElementsBGColors = new Array();
@@ -94,7 +95,7 @@ function highlightElements(selectorString) {
 function unhighlightElements() {
     if(highlightedElementsSelector == null)
         return;
-    highlightedElements = $(highlightedElementsSelector);
+    highlightedElements = document.querySelectorAll(highlightedElementsSelector);
     for(var i = 0; i < highlightedElements.length; i++) {
         highlightedElements[i].style.border = highlightedElementsBorders[i];
         highlightedElements[i].style.backgroundColor = highlightedElementsBGColors[i];
@@ -178,7 +179,10 @@ function clickHide_deactivate() {
     document.removeEventListener("keyup", clickHide_keyUp, false);
     
     // Remove overlays
-    $('.__adthwart__overlay').remove();
+    var overlays = document.querySelectorAll('.__adthwart__overlay');
+		for (var i=0; i<overlays.length; i++) {
+			overlays[i].remove();
+		}
 }
 
 // Hovering over an element so highlight it
@@ -303,7 +307,7 @@ function hideBySelectorStrings(parent) {
     if(enabled && typeof(elemhideSelectorStrings) != "undefined") {
         // var now = new Date().getTime();
         for(i in elemhideSelectorStrings) {
-            var elts = $(elemhideSelectorStrings[i], parent).get();
+            var elts = parent.querySelectorAll(elemhideSelectorStrings[i]);
             if(!elts) continue;
             for(var i = 0; i < elts.length; i++) {
                 // TODO: Sometimes style isn't defined, for some reason...
@@ -341,12 +345,12 @@ function getFlashOrIframeURL(elt) {
     var url;
     if(elt.tagName == "OBJECT" && !(url = elt.getAttribute("data"))) {
         // No data attribute, look in PARAM child tags for a URL for the swf file
-        var params = $("param[name=\"movie\"]", elt);
+        var params = elt.querySelectorAll("param[name=\"movie\"]");
         // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
         if(params[0])
             url = params[0].getAttribute("value");
         else {
-            params = $("param[name=\"src\"]", elt);
+            params = elt.querySelectorAll("param[name=\"src\"]");
             if(params[0]) url = params[0].getAttribute("value");
         }
     } else {
@@ -358,7 +362,8 @@ function getFlashOrIframeURL(elt) {
 // Hides/removes image and Flash elements according to the external resources they load.
 // (e.g. src attribute)
 function nukeElements(parent) {
-    var elts = $("img,object,iframe,embed", parent);
+    if(typeof parent == 'undefined' ) { return; }
+    var elts = parent.querySelectorAll("img,object,iframe,embed");
     var types = new Array();
     var urls = new Array();
     var serials = new Array();
@@ -369,7 +374,7 @@ function nukeElements(parent) {
             // Some rules don't include the domain, and the blacklist
             // matcher doesn't match on queries that don't include the domain
             url = relativeToAbsoluteUrl(url);
-            // Guaranteed by call to $() above to be one of img, iframe, object, embed
+            // Guaranteed by call to querySelectorAll() above to be one of img, iframe, object, embed
             // and therefore in this list
             types.push(TagToType[elts[i].tagName]);
             urls.push(url);
