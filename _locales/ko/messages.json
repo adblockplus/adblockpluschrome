@@ -1,0 +1,105 @@
+{
+   "options": {
+       "message": "AdThwart 옵션"
+   },
+   "filter_lists": {
+       "message": "필터 리스트",
+       "description": "This is a tab heading."
+   },
+   "add_your_own_filters": {
+       "message": "필터 추가"
+   },
+   "whitelisted_domains": {
+       "message": "도메인들",
+       "description": "This is a tab heading."
+   },
+   "general": {
+       "message": "일반",
+       "description": "This is a tab heading."
+   },
+
+   "add": {
+       "message": "추가",
+       "description": "This is the label for the 'Add' buttons."
+   },
+   "add_domain_button": {
+       "message": "도메인 추가"
+   },
+   "add_filter_button": {
+       "message": "필터 추가"
+   },
+   "add_url_button": {
+       "message": "URL 추가"
+   },
+   "remove_button": {
+       "message": "선택사항 삭제",
+       "description": "This is the label for the 'Remove selected' buttons."
+   },
+   "edit_filters_raw": {
+       "message": "필터 수정"
+   },
+   "apply_changes": {
+       "message": "변경사항 적용"
+   },
+
+       "enable_only_the": {
+           "message": "원하는 필터만 활성화 시키세요. 너무 많은 필터는 크롬의 반응을 어렵게 할수 있습니다."
+       },
+       "out_of_date_lists": {
+           "message": "주기적으로 오래된 리스트가 업데이트 됩니다."
+       },
+       "update_now": {
+           "message": "지금 업데이트"
+       },
+       "add_a_filter_list": {
+           "message": "파이어팍스 AdBlock Plus 구독 <a href='http://adblockplus.org/en/subscriptions'>filter list</a>:"
+       },
+       "filter_must_follow_syntax": {
+           "message": "당신의 필터는 AdBlock Plus 필터의 신택스를 따라야 합니다. <a href='http://adblockplus.org/en/filters'> </a>. 특정 필터 타입은 지원되지 않습니다. "
+       },
+       "disabled_for_these_domains": {
+       "message": "AdThwart가 다음의 도메인들에 대해서 비활성화 되었습니다. 주소바의 AdThwart 아이콘을 클릭하거나 도메인을 (URL이 아닌) 직접 타이핑해서 새로운 도메인을 추가할 수 있습니다."
+   },
+       "found_a_bug": {
+       "message": "버그를 발견하셨나요? 다음 주소로 버그신고를 해주시면 감사하겠습니다: <a href='http://code.google.com/p/adthwart/issues/entry'>http://code.google.com/p/adthwart/issues/entry</a>"
+   },
+
+
+   "show_icon": {
+       "message": "주소 바에 아이콘 보이기"
+   },
+   "disable_inline": {
+       "message": "인라인 텍스트 광고를 비활성화 합니다."
+   },
+   "block_youtube": {
+       "message": "유투브 동영상안의 광고를 막습니다. (플래시블락 확장자에게는 영향을 주지 않음)"
+   },
+
+   "enabled_for_site": {
+       "message": "이 사이트에 대해서 활성화하기",
+       "description": "Popup balloon checkbox label"
+   },
+   "easy_create_filter": {
+       "message": "쉬운 필터 만들기",
+       "description": "Button label in popup balloon"
+   },
+   "cancel": {
+       "message": "취소",
+       "description": "Cancel button label"
+   },
+   "clickhide_instructions": {
+       "message": "이 팝업창을 닫은후에 페이지위의 아무 개체를 클릭하거나 (혹은 우측버튼 클릭) 마우스를 대고 있다가 Ctrl+Shift+E를 누르세요. 그리고 다시 팝업창으로 돌아오세요."
+   },
+   "add_filters_msg": {
+       "message": "필터 추가?"
+   },
+   "new_filters_added": {
+       "message": "새로운 필터가 추가되었습니다. 필터 관리를 위해서 다음을 보세요 <a id='options_url' target='_blank'>Options</a>"
+   },
+
+       
+       "hovercraft": {
+               "message": "내 하버크래프트는 뱀장어로 가득해요.",
+               "description": "This is a sample translatable string. It happens to have comedic value."
+       }
+}
