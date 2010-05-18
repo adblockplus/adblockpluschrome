@@ -135,9 +135,9 @@ window.addEventListener("load", function(event) {
 }, false);
 
 // Look again for links - for some reason this doesn't always work if run in the window.load handler
-var linkElems = document.querySelectorAll("a");
-for (var i=0; i<linkElems.snapshotLength; i++) { 
-	disableTextAds.blockAds(linkElems[i]);
+var testElems = document.querySelectorAll("a.IL_LINK_STYLE, a.contextual, a.kLink, a[itxtdid], nobr, ispan, span.IL_AD");
+for (var i=0; i<testElems.snapshotLength; i++) { 
+	disableTextAds.blockAds(testElems[i]);
 }
 
 // Chrome calls
