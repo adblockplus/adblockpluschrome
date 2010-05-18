@@ -135,7 +135,10 @@ window.addEventListener("load", function(event) {
 }, false);
 
 // Look again for links - for some reason this doesn't always work if run in the window.load handler
-$("a").each(function(i) { disableTextAds.blockAds(this); });
+var linkElems = document.querySelectorAll("a");
+for (var i=0; i<linkElems.snapshotLength; i++) { 
+	disableTextAds.blockAds(linkElems[i]);
+}
 
 // Chrome calls
             }

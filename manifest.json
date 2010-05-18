@@ -27,7 +27,7 @@
 	},
  	{
  		"matches": ["http://*/*", "https://*/*"],
- 		"js": ["jquery-1.4.2.min.js", "blocker.js", "disabletextads.js"],
+ 		"js": ["blocker.js", "disabletextads.js"],
  		"run_at": "document_end",
  		"all_frames": true
  	}
