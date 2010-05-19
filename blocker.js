@@ -363,7 +363,8 @@ function getElementURL(elt) {
 // Hides/removes image and Flash elements according to the external resources they load.
 // (e.g. src attribute)
 function nukeElements(parent) {
-    if(typeof parent == 'undefined' ) { return; }
+    if(typeof parent == 'undefined')
+        parent = document;
     var elts = parent.querySelectorAll("img,object,iframe,embed");
     var types = new Array();
     var urls = new Array();
