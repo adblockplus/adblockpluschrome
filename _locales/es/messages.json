@@ -7,7 +7,7 @@
 		"description": "This is a tab heading."
 	},
 	"add_your_own_filters": {
-		"message": "Añade tus propios filtros"
+		"message": "AÃ±ade tus propios filtros"
 	},
 	"whitelisted_domains": {
 		"message": "Dominios autorizados",
@@ -18,17 +18,17 @@
 		"description": "This is a tab heading."
 	},
 	"add": {
-		"message": "Añadir",
+		"message": "AÃ±adir",
 		"description": "This is the label for the 'Add' buttons."
 	},
 	"add_domain_button": {
-		"message": "Añadir dominio"
+		"message": "AÃ±adir dominio"
 	},
 	"add_filter_button": {
-		"message": "Añadir filtro"
+		"message": "AÃ±adir filtro"
 	},
 	"add_url_button": {
-		"message": "Añadir URL"
+		"message": "AÃ±adir URL"
 	},
 	"remove_button": {
 		"message": "Eliminar",
@@ -41,41 +41,41 @@
 		"message": "Aplicar cambios"
 	},
 	"enable_only_the": {
-		"message": "Activa únicamente las listas que necesitas. Activar demasiadas listas puede hacer que Chrome deje de responder." 
+		"message": "Activa Ãºnicamente las listas que necesitas. Activar demasiadas listas puede hacer que Chrome deje de responder." 
 	},
 	"out_of_date_lists": {
-		"message": "Las listas obsoletas se actualizarán periódicamente."
+		"message": "Las listas obsoletas se actualizarÃ¡n periÃ³dicamente."
 	},
 	"update_now": {
 		"message": "Actualizar ahora"
 	},
 	"add_a_filter_list": {
-		"message": "Suscríbete a <a href='http://adblockplus.org/en/subscriptions'>una lista de filtros</a> en formato Firefox AdBlock Plus:"
+		"message": "SuscrÃ­bete a <a href='http://adblockplus.org/en/subscriptions'>una lista de filtros</a> en formato Firefox AdBlock Plus:"
 	},
 	"filter_must_follow_syntax": {
-		"message": "Tu filtro debe seguir la <a href='http://adblockplus.org/en/filters'>sintaxis para filtros de AdBlock Plus</a>. Algunos tipos de filtros, como object-subrequest, no están soportados."
+		"message": "Tu filtro debe seguir la <a href='http://adblockplus.org/en/filters'>sintaxis para filtros de AdBlock Plus</a>. Algunos tipos de filtros, como object-subrequest, no estÃ¡n soportados."
 	},
 	"disabled_for_these_domains": {
-		"message": "AdThwart está desactivado para los dominios mostrados a continuación. Puedes añadir un dominio usando el ícono de AdThwart en la barra de direcciones o escribiendo el dominio (no la URL) en el cuadro de texto y dando clic en el botón \"Añadir dominio\"."
+		"message": "AdThwart estÃ¡ desactivado para los dominios mostrados a continuaciÃ³n. Puedes aÃ±adir un dominio usando el Ã­cono de AdThwart en la barra de direcciones o escribiendo el dominio (no la URL) en el cuadro de texto y dando clic en el botÃ³n \"AÃ±adir dominio\"."
 	},
 	"found_a_bug": {
-		"message": "¿Encontraste un bug en AdThwart o tienes una mejor traducción? Por favor <a href='http://code.google.com/p/adthwart/issues/entry'>repórtalo aquí</a>."
+		"message": "Â¿Encontraste un bug en AdThwart o tienes una mejor traducciÃ³n? Por favor <a href='http://code.google.com/p/adthwart/issues/entry'>repÃ³rtalo aquÃ­</a>."
 	},
 	"show_icon": {
-		"message": "Mostrar ícono en la barra de direcciones"
+		"message": "Mostrar Ã­cono en la barra de direcciones"
 	},
 	"disable_inline": {
-		"message": "Desactivar la publicidad en las líneas de texto"
+		"message": "Desactivar la publicidad en las lÃ­neas de texto"
     },
 	"block_youtube": {
-		"message": "Desactivar anuncios dentro de los vídeos de YouTube (no funciona junto con la extensión FlashBlock)"
+		"message": "Desactivar anuncios dentro de los vÃ­deos de YouTube (no funciona junto con la extensiÃ³n FlashBlock)"
 	},
 	"enabled_for_site": {
 		"message": "Activado para este sitio",
 		"description": "Popup balloon checkbox label"
 	},
 	"easy_create_filter": {
-		"message": "Crear un filtro fácilmente",
+		"message": "Crear un filtro fÃ¡cilmente",
 		"description": "Button label in popup balloon"
 	},
 	"cancel": {
@@ -83,16 +83,16 @@
 		"description": "Cancel button label"
 	},
 	"clickhide_instructions": {
-		"message": "Después de cerrar este menú desplegable, da clic (o clic derecho) en un elemento de la página, o coloca el puntero encima de un elemento y presiona Ctrl+Shift+E. Luego regresa a este menú desplegable."
+		"message": "DespuÃ©s de cerrar este menÃº desplegable, da clic (o clic derecho) en un elemento de la pÃ¡gina, o coloca el puntero encima de un elemento y presiona Ctrl+Shift+E. Luego regresa a este menÃº desplegable."
 	},
 	"add_filters_msg": {
-		"message": "¿Añadir filtro(s)?"
+		"message": "Â¿AÃ±adir filtro(s)?"
 	},
 	"new_filters_added": {
-		"message": "Nuevos filtros añadidos; revisa las <a id='options_url' target='_blank'>Opciones</a> para administrarlos."
+		"message": "Nuevos filtros aÃ±adidos; revisa las <a id='options_url' target='_blank'>Opciones</a> para administrarlos."
 	},
 	"hovercraft": {
-		"message": "Mi aerodeslizador está lleno de anguilas.",
+		"message": "Mi aerodeslizador estÃ¡ lleno de anguilas.",
 		"description": "This is a sample translatable string. It happens to have comedic value."
 	}
 }
