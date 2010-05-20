@@ -1,0 +1,98 @@
+{
+	"options": {
+		"message": "Opciones de AdThwart"
+	},
+	"filter_lists": {
+		"message": "Lista de filtros",
+		"description": "This is a tab heading."
+	},
+	"add_your_own_filters": {
+		"message": "Añade tus propios filtros"
+	},
+	"whitelisted_domains": {
+		"message": "Dominios autorizados",
+		"description": "This is a tab heading."
+	},
+	"general": {
+		"message": "General",
+		"description": "This is a tab heading."
+	},
+	"add": {
+		"message": "Añadir",
+		"description": "This is the label for the 'Add' buttons."
+	},
+	"add_domain_button": {
+		"message": "Añadir dominio"
+	},
+	"add_filter_button": {
+		"message": "Añadir filtro"
+	},
+	"add_url_button": {
+		"message": "Añadir URL"
+	},
+	"remove_button": {
+		"message": "Eliminar",
+		"description": "This is the label for the 'Remove selected' buttons."
+	},
+	"edit_filters_raw": {
+		"message": "Modificar los filtros como texto"
+	},
+	"apply_changes": {
+		"message": "Aplicar cambios"
+	},
+	"enable_only_the": {
+		"message": "Activa únicamente las listas que necesitas. Activar demasiadas listas puede hacer que Chrome deje de responder." 
+	},
+	"out_of_date_lists": {
+		"message": "Las listas obsoletas se actualizarán periódicamente."
+	},
+	"update_now": {
+		"message": "Actualizar ahora"
+	},
+	"add_a_filter_list": {
+		"message": "Suscríbete a <a href='http://adblockplus.org/en/subscriptions'>una lista de filtros</a> en formato Firefox AdBlock Plus:"
+	},
+	"filter_must_follow_syntax": {
+		"message": "Tu filtro debe seguir la <a href='http://adblockplus.org/en/filters'>sintaxis para filtros de AdBlock Plus</a>. Algunos tipos de filtros, como object-subrequest, no están soportados."
+	},
+	"disabled_for_these_domains": {
+		"message": "AdThwart está desactivado para los dominios mostrados a continuación. Puedes añadir un dominio usando el ícono de AdThwart en la barra de direcciones o escribiendo el dominio (no la URL) en el cuadro de texto y dando clic en el botón \"Añadir dominio\"."
+	},
+	"found_a_bug": {
+		"message": "¿Encontraste un bug en AdThwart o tienes una mejor traducción? Por favor <a href='http://code.google.com/p/adthwart/issues/entry'>repórtalo aquí</a>."
+	},
+	"show_icon": {
+		"message": "Mostrar ícono en la barra de direcciones"
+	},
+	"disable_inline": {
+		"message": "Desactivar la publicidad en las líneas de texto"
+    },
+	"block_youtube": {
+		"message": "Desactivar anuncios dentro de los vídeos de YouTube (no funciona junto con la extensión FlashBlock)"
+	},
+	"enabled_for_site": {
+		"message": "Activado para este sitio",
+		"description": "Popup balloon checkbox label"
+	},
+	"easy_create_filter": {
+		"message": "Crear un filtro fácilmente",
+		"description": "Button label in popup balloon"
+	},
+	"cancel": {
+		"message": "Cancelar",
+		"description": "Cancel button label"
+	},
+	"clickhide_instructions": {
+		"message": "Después de cerrar este menú desplegable, da clic (o clic derecho) en un elemento de la página, o coloca el puntero encima de un elemento y presiona Ctrl+Shift+E. Luego regresa a este menú desplegable."
+	},
+	"add_filters_msg": {
+		"message": "¿Añadir filtro(s)?"
+	},
+	"new_filters_added": {
+		"message": "Nuevos filtros añadidos; revisa las <a id='options_url' target='_blank'>Opciones</a> para administrarlos."
+	},
+	"hovercraft": {
+		"message": "Mi aerodeslizador está lleno de anguilas.",
+		"description": "This is a sample translatable string. It happens to have comedic value."
+	}
+}
