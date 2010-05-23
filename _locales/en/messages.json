@@ -1,4 +1,7 @@
 {
+	"description": {
+		"message": "Blocks ads using the Firefox AdBlock Plus filter engine. Kiss ads goodbye and browse in peace!"
+	},
     "options": {
         "message": "AdThwart Options"
     },
