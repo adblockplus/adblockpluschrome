@@ -1,4 +1,7 @@
 {
+    "description": {
+        "message": "Suppression des publicités utilisant le moteur de Firefox AdBlock Plus. Dites adieu publicités et naviguez en paix!"
+    },
     "options": {
         "message": "Paramètres AdThwart"
     },
