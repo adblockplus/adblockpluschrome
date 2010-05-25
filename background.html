@@ -356,12 +356,12 @@ chrome.extension.onConnect.addListener(function(port) {
             var numElements = msg.urls.length;
             blockList = new Array();
             for(var i = 0; i < numElements; i++) {
-                // TODO: Does whitelist matching actually work?
-                if(whitelistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, false))
+                // thirdParty is true if the domain of the element URL does not match the domain of the
+                // document. This allows filters to allow people to visit ads directly and still see them.
+                var thirdParty = !(msg.domain === extractDomainFromURL(msg.urls[i]));
+                if(whitelistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, thirdParty))
                     continue;
-                //var f;
-                // TODO: Implement thirdParty check
-                if(blacklistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, true)) {
+                if(blacklistMatcher.matchesAny(msg.urls[i], msg.types[i], msg.domain, thirdParty)) {
                     blockList.push(msg.serials[i]);
                 }
             }
