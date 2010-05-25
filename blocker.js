@@ -371,7 +371,10 @@ function nukeElements(parent) {
     var serials = new Array();
     var url;
     for(var i = 0; i < elts.length; i++) {
-        if(url = getElementURL(elts[i])) {
+        url = getElementURL(elts[i]);
+        // If the URL of the element is the same as the document URI, the user is trying to directly
+        // view the ad for some reason and so we won't block it.
+        if(url && url != document.baseURI) {
             // Some rules don't include the domain, and the blacklist
             // matcher doesn't match on queries that don't include the domain
             url = relativeToAbsoluteUrl(url);
