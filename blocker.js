@@ -440,9 +440,26 @@ function handleYouTubeFlashPlayer(elt) {
     }
 }
 
+// Returns true if the current document is *really* an HTML document, as opposed to
+// a Chrome fabrication for standalone images, videos, etc.
+// This will allow us to view things directly that are explicitly
+// blocked by filters. The third-party filter qualifier would also help this.
+function isReallyHTMLDocument() {
+    try {
+        // If the baseURI matches the src of the first element, this is probably
+        // a Chrome-generated DOM for something like a standalone image or video,
+        // so we shouldn't block stuff
+        return !(document.body.firstChild.src === document.baseURI);
+    } catch(e) {
+        // If there isn't a body child with a firstChild, this probably isn't a document
+        // with ads in it
+        return false;
+    }
+}
+
 // Content scripts are apparently invoked on non-HTML documents, so we have to
 // check for that before doing stuff
-if (document instanceof HTMLDocument) {
+if (document instanceof HTMLDocument && isReallyHTMLDocument()) {
     port = chrome.extension.connect({name: "filter-query"});
     // Set up message handlers. These remove undesirable elements from the page.
     port.onMessage.addListener(function(msg) {
