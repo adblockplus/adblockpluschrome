@@ -133,21 +133,12 @@ function addElementOverlay(elt) {
 // Show dialog asking user whether she wants to add the proposed filters derived
 // from selected page element
 function clickHide_showDialog(left, top, filters) {
-    console.log(left, top);
-    top -= 50;
-    if((left + 400) > window.innerWidth) 
-        left = window.innerWidth - 400;
-    else
-        left -= 150;
-    if(left < 0) left = 0;
-    if(top < 0) top = 0;
-    console.log(left,window.innerWidth);
     // Make it a little more centered, but clamp to left side of document
     var filtersString = filters.toString().replace(/,/g, '<br/>');
         
     clickHideFiltersDialog = document.createElement('div');
-    clickHideFiltersDialog.setAttribute('style', '-webkit-user-select:none ; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt; color: #505050 !important; position: fixed; left:' + left + 'px; top:' + top + 'px ; max-width: 400px ; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
-    clickHideFiltersDialog.innerHTML = '<table><tr><td style="padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td>' + chrome.i18n.getMessage('add_filters_msg') + '</td></tr></table><div style="border:1px solid #c0c0c0; padding:3px; min-width: 200px; max-width: 350px; font-size:8pt !important; line-height: 10pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div>';
+    clickHideFiltersDialog.setAttribute('style', 'visibility:hidden; -webkit-user-select:none; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt; color: #505050 !important; position: fixed; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
+    clickHideFiltersDialog.innerHTML = '<table><tr><td style="padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td>' + chrome.i18n.getMessage('add_filters_msg') + '</td></tr></table><div style="border:1px solid #c0c0c0; padding:3px; min-width: 200px; font-size:8pt !important; line-height: 10pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div>';
 
     buttonsDiv = document.createElement('div');
     buttonsDiv.setAttribute('style', 'text-align: right');
@@ -184,15 +175,29 @@ function clickHide_showDialog(left, top, filters) {
     
     // Make dialog partly transparent when mouse isn't over it so user has a better
     // view of what's going to be blocked
-    // clickHideFiltersDialog.onmouseout = function() {
-    //     clickHideFiltersDialog.style.setProperty("opacity", "0.7");
-    // }
-    // clickHideFiltersDialog.onmouseover = function() {
-    //     clickHideFiltersDialog.style.setProperty("opacity", "1.0");
-    // } 
+    clickHideFiltersDialog.onmouseout = function() {
+        clickHideFiltersDialog.style.setProperty("opacity", "0.7");
+    }
+    clickHideFiltersDialog.onmouseover = function() {
+        clickHideFiltersDialog.style.setProperty("opacity", "1.0");
+    } 
     
     clickHideFiltersDialog.appendChild(buttonsDiv);
     document.body.appendChild(clickHideFiltersDialog);
+    // Now we know what the dimensions of the dialog are, we can position it
+    // so it doesn't extend past the visible document boundaries
+    var s = window.getComputedStyle(clickHideFiltersDialog);
+    var w = parseInt(s.width);
+    top -= 50;
+    if((left + w) > window.innerWidth) 
+        left = window.innerWidth - w;
+    else
+        left -= 150;
+    if(left < 0) left = 0;
+    if(top < 0) top = 0;
+    clickHideFiltersDialog.style.left = left + "px";
+    clickHideFiltersDialog.style.top = top + "px";
+    clickHideFiltersDialog.style.visibility = "visible";
 }
 
 // Turn on the choose element to create filter thing
@@ -313,7 +318,6 @@ function clickHide_mouseClick(e) {
     var elementClasses = null;
     if(elt.className) {
         elementClasses = elt.className.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '').split(' ');
-        console.log("!" + elementClasses + "!");
     }
     clickHideFilters = new Array();
     selectorList = new Array();
