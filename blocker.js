@@ -305,8 +305,9 @@ function clickHide_mouseClick(e) {
     // Construct filters. The popup will retrieve these.
     // Only one ID
     var elementId = elt.id ? elt.id.split(' ').join('') : null;
-    // Can have multiple classes...
-    var elementClasses = elt.className ? elt.className.split(' ') : null;
+    // Can have multiple classes, and there might be extraneous whitespace
+    var elementClasses = elt.className.replace(/\s+/g, ' ').replace(/^\s/, '').replace(/\s$/, '');
+    elementClasses = elt.className ? elt.className.split(' ') : null;
     clickHideFilters = new Array();
     selectorList = new Array();
     if(elementId) {
