@@ -133,11 +133,15 @@ function addElementOverlay(elt) {
 // Show dialog asking user whether she wants to add the proposed filters derived
 // from selected page element
 function clickHide_showDialog(left, top, filters) {
+    console.log(left, top);
     top -= 50;
-    left -= 150;
-    if((left-400) > document.width) left -= 400;
+    if((left + 400) > window.innerWidth) 
+        left = window.innerWidth - 400;
+    else
+        left -= 150;
     if(left < 0) left = 0;
     if(top < 0) top = 0;
+    console.log(left,window.innerWidth);
     // Make it a little more centered, but clamp to left side of document
     var filtersString = filters.toString().replace(/,/g, '<br/>');
         
