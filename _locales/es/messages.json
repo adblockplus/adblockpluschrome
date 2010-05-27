@@ -86,7 +86,7 @@
 		"description": "Cancel button label"
 	},
 	"clickhide_instructions": {
-		"message": "Después de cerrar este menú desplegable, da clic (o clic derecho) en un elemento de la página, o coloca el puntero encima de un elemento y presiona Ctrl+Shift+E. Luego regresa a este menú desplegable."
+		"message": "Después de cerrar este menú desplegable, da clic (o clic derecho) en un elemento de la página."
 	},
 	"add_filters_msg": {
 		"message": "¿Añadir filtro(s)?"

@@ -91,7 +91,7 @@
         "description": "Cancel button label"
     },
     "clickhide_instructions": {
-        "message": "Après avoir clôturé ce popup, cliquez (ou droit-cliquez) un element sur la page. Revenez alors à ce popup."
+        "message": "Après avoir clôturé ce popup, cliquez (ou droit-cliquez) un element sur la page."
     },
     "add_filters_msg": {
         "message": "Ajouter filtre(s)?"
