@@ -135,7 +135,7 @@ function addElementOverlay(elt) {
 function clickHide_showDialog(left, top, filters) {
     top -= 50;
     left -= 150;
-    if((left-350) > document.width) left -= 350;
+    if((left-400) > document.width) left -= 400;
     if(left < 0) left = 0;
     if(top < 0) top = 0;
     // Make it a little more centered, but clamp to left side of document
