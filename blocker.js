@@ -119,7 +119,7 @@ function addFlashOverlay(elt) {
     overlay.prisoner = elt;
     overlay.prisonerURL = url;
     overlay.className = "__adthwart__overlay";
-    overlay.setAttribute('style', 'opacity:0.5; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box;');
+    overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box;');
         
     // We use a zero-size enclosing div to position the overlay box correctly
     var outer = document.createElement('div');
@@ -142,7 +142,7 @@ function clickHide_showDialog(left, top, filters) {
     var filtersString = filters.toString().replace(/,/g, '<br/>');
         
     clickHideFiltersDialog = document.createElement('div');
-    clickHideFiltersDialog.setAttribute('style', '-webkit-user-select:none ; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt ; position: fixed; left:' + left + 'px; top:' + top + 'px ; max-width: 400px ; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
+    clickHideFiltersDialog.setAttribute('style', '-webkit-user-select:none ; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt; color: #505050 !important; position: fixed; left:' + left + 'px; top:' + top + 'px ; max-width: 400px ; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
     clickHideFiltersDialog.innerHTML = '<table><tr><td style="padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td>' + chrome.i18n.getMessage('add_filters_msg') + '</td></tr></table><div style="border:1px solid #c0c0c0; padding:3px; min-width: 200px; max-width: 350px; font-size:8pt !important; line-height: 10pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div>';
 
     buttonsDiv = document.createElement('div');
@@ -203,7 +203,7 @@ function clickHide_activate() {
     }
     
     // Add overlays for Flash elements so user can actually click them
-    var elts = document.querySelectorAll('object,embed');
+    var elts = document.querySelectorAll('object,embed,img,iframe');
     for(var i=0; i<elts.length; i++)
         addFlashOverlay(elts[i]);
     
