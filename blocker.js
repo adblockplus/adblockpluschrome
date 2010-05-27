@@ -135,16 +135,17 @@ function whee(s) {
 }
 
 function showClickHideFiltersDialog(left, top, filters) {
-    top -= 100;
+    top -= 50;
     left -= 150;
     if((left-350) > document.width) left -= 350;
     if(left < 0) left = 0;
     if(top < 0) top = 0;
     // Make it a little more centered, but clamp to left side of document
-    var filtersString = filters.toString().replace(',', '<br/>');
+    var filtersString = filters.toString().replace(/,/g, '<br/>');
+        
     clickHideFiltersDialog = document.createElement('div');
-    clickHideFiltersDialog.setAttribute('style', '-webkit-user-select:none ; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt ; position: absolute; left:' + left + 'px; top:' + top + 'px ; max-width: 350px ; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
-    clickHideFiltersDialog.innerHTML = '<table><tr><td style="vertical-align: top; padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td style="vertical-align: top">' + chrome.i18n.getMessage('add_filters_msg') + '<br/><div style="overflow:auto; max-width: 275px; font-size:8pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div></td></tr></table>';
+    clickHideFiltersDialog.setAttribute('style', '-webkit-user-select:none ; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt ; position: fixed; left:' + left + 'px; top:' + top + 'px ; max-width: 350px ; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
+    clickHideFiltersDialog.innerHTML = '<table><tr><td style="vertical-align: top; padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td style="vertical-align: top">' + chrome.i18n.getMessage('add_filters_msg') + '<br/><div style="margin-top:5px; border:1px solid #c0c0c0; padding:3px; overflow:auto; max-width: 275px; font-size:8pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div></td></tr></table>';
 //    <div style="text-align:right"><button id="add">' + chrome.i18n.getMessage('add') + '</button> ' + chrome.i18n.getMessage('cancel') + '</div>
     buttonsDiv = document.createElement('div');
     buttonsDiv.setAttribute('style', 'padding-right: 5px; text-align: right');
