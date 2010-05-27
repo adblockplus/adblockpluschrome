@@ -241,7 +241,7 @@ function clickHide_deactivate() {
     // Remove overlays
     var overlays = document.querySelectorAll('.__adthwart__overlay');
 	for (var i=0; i<overlays.length; i++) {
-		overlays[i].parent.removeChild(overlays[i]);
+		overlays[i].parentNode.removeChild(overlays[i]);
 	}
 }
 
