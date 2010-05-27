@@ -88,7 +88,7 @@
        "description": "Cancel button label"
    },
    "clickhide_instructions": {
-       "message": "이 팝업창을 닫은후에 페이지위의 아무 개체를 클릭하거나 (혹은 우측버튼 클릭) 마우스를 대고 있다가 Ctrl+Shift+E를 누르세요. 그리고 다시 팝업창으로 돌아오세요."
+       "message": "이 팝업창을 닫은후에 페이지위의 아무 개체를 클릭하거나 (혹은 우측버튼 클릭)."
    },
    "add_filters_msg": {
        "message": "필터 추가?"
