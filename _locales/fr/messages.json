@@ -21,7 +21,7 @@
         "description": "This is a tab heading."
     },
     
-    "add_button": {
+    "add": {
         "message": "Ajouter",
         "description": "This is the label for the generic 'Add' buttons."
     },
