@@ -442,10 +442,6 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 chrome.tabs.onSelectionChanged.addListener(function(tabId) {
     lastTabId = tabId;
     refreshIconByTabId(tabId);
-
-    // Also, cancel any pending click hide stuff
-    clickHideFilters = null;
-    chrome.tabs.sendRequest(tabId, {reqtype: "clickhide-deactivate"})
 });
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
