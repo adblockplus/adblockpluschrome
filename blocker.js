@@ -37,6 +37,7 @@ var clickHideFilters = null;
 var highlightedElementsSelector = null;
 var highlightedElementsBorders = null;
 var highlightedElementsBGColors = null;
+var clickHideFiltersDialog = null;
 
 // Port to background.htm
 var port;
@@ -48,8 +49,8 @@ function nukeSingleElement(elt) {
     // Probably vain attempt to stop scripts
     if(elt.tagName == "SCRIPT" && elt.src) elt.src = "";
     if(elt.language) elt.language = "Blocked!";
-    elt.style.display = "none !important";
-    elt.style.visibility = "hidden !important";
+    elt.style.display = "none ";
+    elt.style.visibility = "hidden ";
 
     var pn = elt.parentNode;
     if(pn) pn.removeChild(elt);
@@ -129,6 +130,64 @@ function addFlashOverlay(elt) {
     return outer;
 }
 
+function whee(s) {
+    alert("What's going on.");
+}
+
+function showClickHideFiltersDialog(left, top, filters) {
+    top -= 100;
+    left -= 150;
+    if((left-350) > document.width) left -= 350;
+    if(left < 0) left = 0;
+    if(top < 0) top = 0;
+    // Make it a little more centered, but clamp to left side of document
+    var filtersString = filters.toString().replace(',', '<br/>');
+    clickHideFiltersDialog = document.createElement('div');
+    clickHideFiltersDialog.setAttribute('style', '-webkit-user-select:none ; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt ; position: absolute; left:' + left + 'px; top:' + top + 'px ; max-width: 350px ; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
+    clickHideFiltersDialog.innerHTML = '<table><tr><td style="vertical-align: top; padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td style="vertical-align: top">' + chrome.i18n.getMessage('add_filters_msg') + '<br/><div style="overflow:auto; max-width: 275px; font-size:8pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div></td></tr></table>';
+//    <div style="text-align:right"><button id="add">' + chrome.i18n.getMessage('add') + '</button> ' + chrome.i18n.getMessage('cancel') + '</div>
+    buttonsDiv = document.createElement('div');
+    buttonsDiv.setAttribute('style', 'padding-right: 5px; text-align: right');
+    addButton = document.createElement('button');
+    addButton.setAttribute("style", "padding: 3px; font-size: 8pt");
+    addButton.innerText = chrome.i18n.getMessage('add');
+    addButton.onclick = function() {
+        // Save the filters that the user created
+        chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
+    	chrome.extension.sendRequest({reqtype: "apply-cached-filters", filters: filters});
+    	clickHide_deactivate();
+    	removeAdsAgain();
+    	clickHideFiltersDialog.setAttribute('style', 'visibility: hidden');
+    	document.body.removeChild(clickHideFiltersDialog);
+    	clickHideFiltersDialog = null;
+    };
+    cancelButton = document.createElement('button');
+    cancelButton.setAttribute("style", "padding: 3px; font-size: 8pt");
+    cancelButton.innerText = chrome.i18n.getMessage('cancel');
+    cancelButton.onclick = function() {
+        // Tell popup (indirectly) to shut up about easy create filter
+        chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: false});
+        clickHide_deactivate();
+    	clickHideFiltersDialog.setAttribute('style', 'visibility: hidden');
+    	document.body.removeChild(clickHideFiltersDialog);
+    	clickHideFiltersDialog = null;
+    }
+    buttonsDiv.appendChild(addButton);
+    buttonsDiv.appendChild(cancelButton);
+    
+    // Make dialog partly transparent when mouse isn't over it so user has a better
+    // view of what's going to be blocked
+    // clickHideFiltersDialog.onmouseout = function() {
+    //     clickHideFiltersDialog.style.setProperty("opacity", "0.7");
+    // }
+    // clickHideFiltersDialog.onmouseover = function() {
+    //     clickHideFiltersDialog.style.setProperty("opacity", "1.0");
+    // } 
+    
+    clickHideFiltersDialog.appendChild(buttonsDiv);
+    document.body.appendChild(clickHideFiltersDialog);
+}
+
 // Turn on the choose element to create filter thing
 function clickHide_activate() {
     if(document == null) return;
@@ -182,7 +241,7 @@ function clickHide_deactivate() {
     // Remove overlays
     var overlays = document.querySelectorAll('.__adthwart__overlay');
 	for (var i=0; i<overlays.length; i++) {
-		overlays[i].remove();
+		overlays[i].parent.removeChild(overlays[i]);
 	}
 }
 
@@ -262,8 +321,8 @@ function clickHide_mouseClick(e) {
         selectorList.push(elt.tagName + '[src="' + url + '"]');
     }
     
-    // Save the filters that the user created
-    chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
+    // Show popup
+    showClickHideFiltersDialog(e.clientX, e.clientY, clickHideFilters);
 
     // Highlight the unlucky elements
     // Restore currentElement's border and bgcolor so that highlightElements won't save those
