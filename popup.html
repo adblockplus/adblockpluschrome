@@ -95,6 +95,8 @@ function activateClickHide() {
 	chrome.windows.getCurrent(function(w) {
     	chrome.tabs.getSelected(w.id, function(tab) {
 			chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-activate"});
+			// Close the popup after a few seconds, so user doesn't have to
+			setTimeout(window.close, 5000);
 		});
 	});
 }
