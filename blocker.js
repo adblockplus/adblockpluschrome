@@ -105,7 +105,7 @@ function unhighlightElements() {
 }
 
 // Add an overlay to an element, which is probably a Flash object
-function addFlashOverlay(elt) {
+function addElementOverlay(elt) {
     // If this element is enclosed in an object tag, we prefer to block that instead
     if(!elt /* || elt.parentNode.tagName == 'OBJECT' */)
         return;
@@ -205,7 +205,7 @@ function clickHide_activate() {
     // Add overlays for Flash elements so user can actually click them
     var elts = document.querySelectorAll('object,embed,img,iframe');
     for(var i=0; i<elts.length; i++)
-        addFlashOverlay(elts[i]);
+        addElementOverlay(elts[i]);
     
     clickHide_activated = true;
     document.addEventListener("mouseover", clickHide_mouseOver, false);
