@@ -426,6 +426,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         for(var i = 0; i < clickHideFilters.length; i++)
             addFilter(clickHideFilters[i]);
         clickHideFilters = null; // clear them for next time around
+        clickHideActive = false; // Deactivate clickhide
     } else if(request.reqtype == "set-clickhide-active") {
         clickHideActive = request.active;
     } else if(request.reqtype == "get-cached-filters") {
@@ -449,7 +450,7 @@ chrome.tabs.onSelectionChanged.addListener(function(tabId) {
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     lastTabId = tabId;
-    
+    chrome.tabs.sendRequest(tabId, {reqtype: "clickhide-deactivate"})
     if(changeInfo.status == "complete") refreshIcon(tab);
 });
 
