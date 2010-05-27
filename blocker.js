@@ -306,8 +306,11 @@ function clickHide_mouseClick(e) {
     // Only one ID
     var elementId = elt.id ? elt.id.split(' ').join('') : null;
     // Can have multiple classes, and there might be extraneous whitespace
-    var elementClasses = elt.className.replace(/\s+/g, ' ').replace(/^\s/, '').replace(/\s$/, '');
-    elementClasses = elt.className ? elt.className.split(' ') : null;
+    var elementClasses = null;
+    if(elt.className) {
+        elementClasses = elt.className.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '').split(' ');
+        console.log("!" + elementClasses + "!");
+    }
     clickHideFilters = new Array();
     selectorList = new Array();
     if(elementId) {
