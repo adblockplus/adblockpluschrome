@@ -130,11 +130,9 @@ function addFlashOverlay(elt) {
     return outer;
 }
 
-function whee(s) {
-    alert("What's going on.");
-}
-
-function showClickHideFiltersDialog(left, top, filters) {
+// Show dialog asking user whether she wants to add the proposed filters derived
+// from selected page element
+function clickHide_showDialog(left, top, filters) {
     top -= 50;
     left -= 150;
     if((left-350) > document.width) left -= 350;
@@ -144,13 +142,17 @@ function showClickHideFiltersDialog(left, top, filters) {
     var filtersString = filters.toString().replace(/,/g, '<br/>');
         
     clickHideFiltersDialog = document.createElement('div');
-    clickHideFiltersDialog.setAttribute('style', '-webkit-user-select:none ; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt ; position: fixed; left:' + left + 'px; top:' + top + 'px ; max-width: 350px ; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
-    clickHideFiltersDialog.innerHTML = '<table><tr><td style="vertical-align: top; padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td style="vertical-align: top">' + chrome.i18n.getMessage('add_filters_msg') + '<br/><div style="margin-top:5px; border:1px solid #c0c0c0; padding:3px; overflow:auto; max-width: 275px; font-size:8pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div></td></tr></table>';
-//    <div style="text-align:right"><button id="add">' + chrome.i18n.getMessage('add') + '</button> ' + chrome.i18n.getMessage('cancel') + '</div>
+    clickHideFiltersDialog.setAttribute('style', '-webkit-user-select:none ; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt ; position: fixed; left:' + left + 'px; top:' + top + 'px ; max-width: 400px ; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
+    clickHideFiltersDialog.innerHTML = '<table><tr><td style="vertical-align: top; padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td style="vertical-align: top">' + chrome.i18n.getMessage('add_filters_msg') + '<br/><div style="margin-top:5px; border:1px solid #c0c0c0; padding:3px; overflow:auto; max-width: 350px; font-size:8pt !important; line-height: 10pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div></td></tr></table>';
+
     buttonsDiv = document.createElement('div');
-    buttonsDiv.setAttribute('style', 'padding-right: 5px; text-align: right');
-    addButton = document.createElement('button');
-    addButton.setAttribute("style", "padding: 3px; font-size: 8pt");
+    buttonsDiv.setAttribute('style', 'text-align: right');
+    function makeButton() {
+        var b = document.createElement('button');
+        b.setAttribute("style", "background: #f0f0f0; padding: 3px; margin-left: 5px; font-size: 8pt");
+        return b;
+    }
+    var addButton = makeButton();
     addButton.innerText = chrome.i18n.getMessage('add');
     addButton.onclick = function() {
         // Save the filters that the user created
@@ -162,8 +164,8 @@ function showClickHideFiltersDialog(left, top, filters) {
     	document.body.removeChild(clickHideFiltersDialog);
     	clickHideFiltersDialog = null;
     };
-    cancelButton = document.createElement('button');
-    cancelButton.setAttribute("style", "padding: 3px; font-size: 8pt");
+    var cancelButton = makeButton();
+    cancelButton.setAttribute("style", "background: #f0f0f0; padding: 3px; margin-left: 5px; font-size: 8pt");
     cancelButton.innerText = chrome.i18n.getMessage('cancel');
     cancelButton.onclick = function() {
         // Tell popup (indirectly) to shut up about easy create filter
@@ -323,7 +325,7 @@ function clickHide_mouseClick(e) {
     }
     
     // Show popup
-    showClickHideFiltersDialog(e.clientX, e.clientY, clickHideFilters);
+    clickHide_showDialog(e.clientX, e.clientY, clickHideFilters);
 
     // Highlight the unlucky elements
     // Restore currentElement's border and bgcolor so that highlightElements won't save those
