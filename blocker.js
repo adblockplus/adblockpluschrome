@@ -445,6 +445,10 @@ function nukeElements(parent) {
     var urls = new Array();
     var serials = new Array();
     var url;
+    // Reinitialize elementCache since we won't reuse what's already in there
+    delete elementCache;
+    serial = 0;
+    elementCache = new Array();
     for(var i = 0; i < elts.length; i++) {
         url = getElementURL(elts[i]);
         // If the URL of the element is the same as the document URI, the user is trying to directly
@@ -464,6 +468,10 @@ function nukeElements(parent) {
     }
     // Ask background.html which of these elements we should nuke
     port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
+    // Clean up a bit in case GC doesn't do it
+    delete urls;
+    delete types;
+    delete serials;
     
     nukeElementsTimeoutID = 0;
     nukeElementsLastTime = Date.now();
