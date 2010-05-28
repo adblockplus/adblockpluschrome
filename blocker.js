@@ -189,8 +189,8 @@ function clickHide_showDialog(left, top, filters) {
     var s = window.getComputedStyle(clickHideFiltersDialog);
     var w = parseInt(s.width);
     top -= 50;
-    if((left + w) > window.innerWidth) 
-        left = window.innerWidth - w;
+    if((left + w) > document.documentElement.clientWidth) 
+        left = document.documentElement.clientWidth - w;
     else
         left -= 150;
     if(left < 0) left = 0;
