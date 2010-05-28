@@ -97,7 +97,7 @@
        "description": "Cancel button label"
    },
    "clickhide_instructions": {
-       "message": "После закрытие всплывающей рекламы, нажми (or right-click) на элемент на сранице."
+       "message": "После закрытие всплывающей рекламы, нажми (или right-click) на элемент на сранице."
    },
    "add_filters_msg": {
        "message": "Добавить Фильтр(ы)?"
