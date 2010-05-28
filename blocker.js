@@ -31,11 +31,11 @@ var pageIsYouTube = false;
 // Click-to-hide stuff
 var clickHide_activated = false;
 var currentElement = null;
-var currentElement_border = "";
+var currentElement_boxShadow = null;
 var currentElement_backgroundColor;
 var clickHideFilters = null;
 var highlightedElementsSelector = null;
-var highlightedElementsBorders = null;
+var highlightedElementsBoxShadows = null;
 var highlightedElementsBGColors = null;
 var clickHideFiltersDialog = null;
 
@@ -80,13 +80,13 @@ function highlightElements(selectorString) {
     
     highlightedElements = document.querySelectorAll(selectorString);
     highlightedElementsSelector = selectorString;
-    highlightedElementsBorders = new Array();
+    highlightedElementsBoxShadows = new Array();
     highlightedElementsBGColors = new Array();
 
     for(var i = 0; i < highlightedElements.length; i++) {
-        highlightedElementsBorders[i] = highlightedElements[i].style.border;
+        highlightedElementsBoxShadows[i] = highlightedElements[i].style.getPropertyValue("-webkit-box-shadow");
         highlightedElementsBGColors[i] = highlightedElements[i].style.backgroundColor;
-        highlightedElements[i].style.border = "1px solid #fd6738";
+        highlightedElements[i].style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #fd6738");
         highlightedElements[i].style.backgroundColor = "#f6e1e5";
     }
 }
@@ -98,7 +98,7 @@ function unhighlightElements() {
         return;
     highlightedElements = document.querySelectorAll(highlightedElementsSelector);
     for(var i = 0; i < highlightedElements.length; i++) {
-        highlightedElements[i].style.border = highlightedElementsBorders[i];
+        highlightedElements[i].style.setProperty("-webkit-box-shadow", highlightedElementsBoxShadows[i]);
         highlightedElements[i].style.backgroundColor = highlightedElementsBGColors[i];
     }
     highlightedElementsSelector = null;
@@ -204,8 +204,9 @@ function clickHide_showDialog(left, top, filters) {
 function clickHide_activate() {
     if(document == null) return;
     
+    // If we already had a selected element, restore its appearance
     if(currentElement) {
-        currentElement.style.border = currentElement_border;
+        currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
         currentElement.style.backgroundColor = currentElement_backgroundColor;
         currentElement = null;
         clickHideFilters = null;
@@ -237,7 +238,7 @@ function clickHide_rulesPending() {
 function clickHide_deactivate() {
     if(currentElement) {
         unhighlightElements();
-        currentElement.style.border = currentElement_border;
+        currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
         currentElement.style.backgroundColor = currentElement_backgroundColor;
         currentElement = null;
         clickHideFilters = null;
@@ -264,9 +265,9 @@ function clickHide_mouseOver(e) {
     
     if(e.target.id || e.target.className) {
         currentElement = e.target;
-        currentElement_border = e.target.style.border;
+        currentElement_boxShadow = e.target.style.getPropertyValue("-webkit-box-shadow");
         currentElement_backgroundColor = e.target.style.backgroundColor;
-        e.target.style.border = "1px solid #d6d84b";
+        e.target.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #d6d84b");
         e.target.style.backgroundColor = "#f8fa47";
 
         // TODO: save old context menu
@@ -283,7 +284,7 @@ function clickHide_mouseOut(e) {
     if(!clickHide_activated || !currentElement)
         return;
     
-    currentElement.style.border = currentElement_border;
+    currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
     currentElement.style.backgroundColor = currentElement_backgroundColor;
     
     // TODO: restore old context menu
@@ -340,11 +341,11 @@ function clickHide_mouseClick(e) {
     clickHide_showDialog(e.clientX, e.clientY, clickHideFilters);
 
     // Highlight the unlucky elements
-    // Restore currentElement's border and bgcolor so that highlightElements won't save those
-    currentElement.style.border = currentElement_border;
+    // Restore currentElement's box-shadow and bgcolor so that highlightElements won't save those
+    currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
     currentElement.style.backgroundColor = currentElement_backgroundColor;
     highlightElements(selectorList.join(","));
-    currentElement.style.border = "1px solid #fd1708";
+    currentElement.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #fd1708");
     currentElement.style.backgroundColor = "#f6a1b5";
 
     // Half-deactivate click-hide so the user has a chance to click the page action icon.
