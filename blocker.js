@@ -138,7 +138,7 @@ function clickHide_showDialog(left, top, filters) {
         
     clickHideFiltersDialog = document.createElement('div');
     clickHideFiltersDialog.setAttribute('style', 'visibility:hidden; -webkit-user-select:none; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt; color: #505050 !important; position: fixed; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
-    clickHideFiltersDialog.innerHTML = '<table><tr><td style="padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td>' + chrome.i18n.getMessage('add_filters_msg') + '</td></tr></table><div style="border:1px solid #c0c0c0; padding:3px; min-width: 200px; font-size:8pt !important; line-height: 10pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div>';
+    clickHideFiltersDialog.innerHTML = '<table style="margin:0px"><tr><td style="padding:0; background: #ffffff; padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td style="padding:0; background: #ffffff; text-align: left">' + chrome.i18n.getMessage('add_filters_msg') + '</td></tr></table><div style="border:1px solid #c0c0c0; padding:3px; min-width: 200px; font-size:8pt !important; line-height: 10pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div>';
 
     buttonsDiv = document.createElement('div');
     buttonsDiv.setAttribute('style', 'text-align: right');
