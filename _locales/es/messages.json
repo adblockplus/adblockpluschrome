@@ -31,6 +31,10 @@
 		    "date": { "content" : "$2" }
 		}
 	},
+	"today": {
+	    "message": "de hoy",
+	    "description": "Word for 'today', as in 'Last updated today'"
+	},
 	"add_your_own_filters": {
 		"message": "Añade tus propios filtros"
 	},

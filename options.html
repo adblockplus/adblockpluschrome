@@ -236,10 +236,10 @@ function saneTimeDateStrings(when) {
 	var monthNames = JSON.parse(chrome.i18n.getMessage("month_names"));
 	var d = new Date(when);
 	var h = d.getHours();
-	var ampm = "am";
+	var ampm = "a.m.";
 	if(h > 12) {
 		h -= 12;
-		ampm = "pm";
+		ampm = "p.m.";
 	}
 	if(h == 0)
 		h = 12;
