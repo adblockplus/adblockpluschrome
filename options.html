@@ -251,15 +251,8 @@ function saneDateString(when) {
 	if(d.getDate() == now.getDate() && d.getMonth() == now.getMonth() && d.getFullYear() == now.getFullYear())
 		dateString = "today";
 	else
-		//dateString = d.getDate() + " " + monthNames[d.getMonth()] + " " + d.getFullYear();
-		dateString = sprintf(chrome.i18n.getMessage("date_format"), [d.getDate(), monthNames[d.getMonth()], + d.getFullYear()]);
+		dateString = chrome.i18n.getMessage("date_format", [d.getDate(), monthNames[d.getMonth()], d.getFullYear()]);
 	
-/*
-	return {
-		'time': timeString,
-		'date': dateString
-	};
-*/
 	return [timeString, dateString];
 }
 
@@ -296,7 +289,7 @@ function checkFilterList(key) {
 		    // lastUpdated: Last time the list reports that it was updated, or else the last time it was downloaded
 		    var lastDownloaded = list.lastDownloaded ? list.lastDownloaded : list.lastUpdated;
 			var sanedDateString = saneDateString(lastDownloaded); 
-			$("#" + key + "_msg").css("color", "#b0b0b0").text(i18n_sprintf("last_updated_at", sanedDateString)).css("display", "inline");
+			$("#" + key + "_msg").css("color", "#b0b0b0").text(chrome.i18n.getMessage("last_updated_at", sanedDateString)).css("display", "inline");
 		}
 		else {
 			// Display error only if checked
