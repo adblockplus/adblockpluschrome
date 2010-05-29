@@ -1,4 +1,7 @@
 {
+   "description": {
+       "message": "Blocks ads using the Firefox AdBlock Plus filter engine. Kiss ads goodbye and browse in peace!"
+   },
    "options": {
        "message": "AdThwart 옵션"
    },
@@ -52,7 +55,10 @@
            "message": "지금 업데이트"
        },
        "add_a_filter_list": {
-           "message": "파이어팍스 AdBlock Plus 구독 <a href='http://adblockplus.org/en/subscriptions'>filter list</a>:"
+           "message": "파이어팍스 AdBlock Plus 구독 <a href='$url$'>filter list</a>:",
+            "placeholders": {
+   	            "url": { "content" : "$1" }
+   	        }
        },
        "filter_must_follow_syntax": {
            "message": "당신의 필터는 AdBlock Plus 필터의 신택스를 따라야 합니다. <a href='http://adblockplus.org/en/filters'> </a>. 특정 필터 타입은 지원되지 않습니다. "

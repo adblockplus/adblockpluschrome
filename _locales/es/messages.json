@@ -2,12 +2,38 @@
 	"description": {
 		"message": "Bloquea anuncios publicitarios usando el motor de filtros de Firefox AdBlock Plus. Dales un beso de despedida a los anuncios y navega con tranquilidad!"
 	},
+	"month_names": {
+		"message": "[\"Ene\", \"Feb\", \"Mar\", \"Abr\", \"May\", \"Jun\", \"Jul\", \"Ago\", \"Sep\", \"Oct\", \"Nov\", \"Dic\"]",
+		"description": "Month short names."
+	},
+	"date_format": {	
+		"message": "de $month$ $day$ de $year$",
+		"description": "Date format, including month, day and year.",
+		"placeholders": {
+		    "day": { "content" : "$1" },
+	        "month": { "content" : "$2" },
+		    "year": { "content" : "$3" }
+		}
+	},
+	
 	"options": {
 		"message": "Opciones de AdThwart"
 	},
 	"filter_lists": {
 		"message": "Lista de filtros",
 		"description": "This is a tab heading."
+	},
+	"last_updated_at": {
+		"message": "Última actualización a las $time$ $date$.",
+		"description": "Last updated at time on date.",
+		"placeholders": {
+		    "time": { "content" : "$1" },
+		    "date": { "content" : "$2" }
+		}
+	},
+	"today": {
+	    "message": "de hoy",
+	    "description": "Word for 'today', as in 'Last updated today'"
 	},
 	"add_your_own_filters": {
 		"message": "Añade tus propios filtros"
@@ -53,7 +79,10 @@
 		"message": "Actualizar ahora"
 	},
 	"add_a_filter_list": {
-		"message": "Suscríbete a <a href='http://adblockplus.org/en/subscriptions'>una lista de filtros</a> en formato Firefox AdBlock Plus:"
+		"message": "Suscríbete a <a href='$url$'>una lista de filtros</a> en formato Firefox AdBlock Plus:",
+		"placeholders": {
+	        "url": { "content" : "$1" }
+	    }
 	},
 	"filter_must_follow_syntax": {
 		"message": "Tu filtro debe seguir la <a href='http://adblockplus.org/en/filters'>sintaxis para filtros de AdBlock Plus</a>. Algunos tipos de filtros, como object-subrequest, no están soportados."
