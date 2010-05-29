@@ -30,6 +30,10 @@
 		    "date": { "content" : "$2" }
 		}
 	},
+	"today": {
+	    "message": "today",
+	    "description": "Word for 'today', as in 'Last updated today'"
+	},
     "add_your_own_filters": {
         "message": "Add your own filters"
     },
