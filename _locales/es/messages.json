@@ -2,12 +2,24 @@
 	"description": {
 		"message": "Bloquea anuncios publicitarios usando el motor de filtros de Firefox AdBlock Plus. Dales un beso de despedida a los anuncios y navega con tranquilidad!"
 	},
+	"month_names": {
+		"message": "[\"Ene\", \"Feb\", \"Mar\", \"Abr\", \"May\", \"Jun\", \"Jul\", \"Ago\", \"Sep\", \"Oct\", \"Nov\", \"Dic\"]",
+		"description": "Month short names."
+	},
+	"date_format": {
+		"message": "{0} {1} {2}",
+		"description": "User {0} for day, {1} for month and {2} for year."
+	},
 	"options": {
 		"message": "Opciones de AdThwart"
 	},
 	"filter_lists": {
 		"message": "Lista de filtros",
 		"description": "This is a tab heading."
+	},
+	"last_updated_at": {
+		"message": "Última actualización a las {0} del {1}.",
+		"description": "Last updated at {0} on {1}. Use {0} for time and {1} for date."
 	},
 	"add_your_own_filters": {
 		"message": "Añade tus propios filtros"
