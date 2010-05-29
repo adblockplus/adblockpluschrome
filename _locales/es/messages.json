@@ -7,7 +7,7 @@
 		"description": "Month short names."
 	},
 	"date_format": {
-		"message": "{0} {1} {2}",
+		"message": "{1} {0} de {2}",
 		"description": "User {0} for day, {1} for month and {2} for year."
 	},
 	"options": {
@@ -18,7 +18,7 @@
 		"description": "This is a tab heading."
 	},
 	"last_updated_at": {
-		"message": "Última actualización a las {0} del {1}.",
+		"message": "Última actualización a las {0} de {1}.",
 		"description": "Last updated at {0} on {1}. Use {0} for time and {1} for date."
 	},
 	"add_your_own_filters": {
