@@ -97,10 +97,10 @@
        "description": "Cancel button label"
    },
    "clickhide_instructions": {
-       "message": "После закрытие всплывающей рекламы, нажми (или right-click) на элемент на сранице."
+       "message": "После закрытия этого всплывающего окна щёлкните левой или правой кнопкой мыши по элементу на странице."
    },
    "add_filters_msg": {
-       "message": "Добавить Фильтр(ы)?"
+       "message": "Добавить фильтр(ы)?"
    },
    "new_filters_added": {
        "message": "Новый фильтр добавлен; смотри на <a id='options_url' target='_blank'>Настройки</a> чтобы что исправить."
