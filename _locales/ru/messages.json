@@ -58,8 +58,11 @@
     },
 
     "add_a_filter_list": {
-        "message": "Подписка на <a href='http://adblockplus.org/en/subscriptions'>список фильтров</a> Firefox AdBlock Plus:"
-        },
+        "message": "Подписка на <a href='$url$'>список фильтров</a> Firefox AdBlock Plus:",
+        "placeholders": {
+	        "url": { "content" : "$1" }
+	    }
+    },
 
     "filter_must_follow_syntax": {
             "message": "Ваш фильтр должен соответствовать <a href='http://adblockplus.org/en/filters'>синтаксису AdBlock Plus</a>. Фильтры некоторых типов, например, с подзапросом объекта, не поддерживаются."

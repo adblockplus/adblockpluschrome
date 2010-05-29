@@ -231,14 +231,14 @@ function updateFilterLists() {
 
 
 // Provides a more readable string of the current date and time
-var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-function saneDateString(when) {
+function saneTimeDateStrings(when) {
+	var monthNames = JSON.parse(chrome.i18n.getMessage("month_names"));
 	var d = new Date(when);
 	var h = d.getHours();
-	var ampm = "am";
+	var ampm = "a.m.";
 	if(h > 12) {
 		h -= 12;
-		ampm = "pm";
+		ampm = "p.m.";
 	}
 	if(h == 0)
 		h = 12;
@@ -248,11 +248,11 @@ function saneDateString(when) {
 	var timeString = h + ":" + m + " " + ampm;
 	var now = new Date();
 	if(d.getDate() == now.getDate() && d.getMonth() == now.getMonth() && d.getFullYear() == now.getFullYear())
-		dateString = " today";
+		dateString = chrome.i18n.getMessage("today");
 	else
-		dateString = " on " + d.getDate() + " " + monthNames[d.getMonth()] + " " + d.getFullYear();
+		dateString = chrome.i18n.getMessage("date_format", [d.getDate(), monthNames[d.getMonth()], d.getFullYear()]);
 	
-	return(timeString + dateString);
+	return [timeString, dateString];
 }
 
 // Updates a single filter list and informs the user what happened
@@ -269,7 +269,9 @@ function updateFilterList(key) {
 			$("#" + fetcher.name + "_msg").text(fetcher.error).css("color", "#a03030").css("display", "inline");
 			document.getElementById(key).checked = false;
 		} else {
-			$("#" + fetcher.name + "_msg").css("color", "#b0b0b0").text("Updated just now").css("display", "inline");
+			// $("#" + fetcher.name + "_msg").css("color", "#b0b0b0").text("Updated just now").css("display", "inline");
+			// Force display of "updated now" message
+			checkFilterList(key);
 		}
     });
 }
@@ -287,7 +289,8 @@ function checkFilterList(key) {
 		    // lastDownloaded: Last time the list was downloaded
 		    // lastUpdated: Last time the list reports that it was updated, or else the last time it was downloaded
 		    var lastDownloaded = list.lastDownloaded ? list.lastDownloaded : list.lastUpdated;
-			$("#" + key + "_msg").css("color", "#b0b0b0").text("Last updated at " + saneDateString(lastDownloaded)).css("display", "inline");
+			var timeDate = saneTimeDateStrings(lastDownloaded); 
+			$("#" + key + "_msg").css("color", "#b0b0b0").text(chrome.i18n.getMessage("last_updated_at", timeDate)).css("display", "inline");
 		}
 		else {
 			// Display error only if checked
@@ -413,8 +416,8 @@ $(function() {
 
 <div id="userFilterLists" style="margin-bottom: 8px"></div>
 
-<div id="addURLField">
-<span class="i18n_add_a_filter_list"></span><br/>
+<div id="addURLField">	
+<span class="i18n_add_a_filter_list">"http://adblockplus.org/en/subscriptions"</span><br/>
 <input type="text" value="" id="newURL" style="width:400px">
 <button class="addButton" onClick="addUserURLFromBox()"><span class="i18n_add_url_button"></span></button><br/>
 </div>
