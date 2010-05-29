@@ -58,7 +58,7 @@
     },
 
     "add_a_filter_list": {
-        "message": "Подписка на Firefox AdBlock Plus <a href='http://adblockplus.org/en/subscriptions'>список фильтров</a>:"
+        "message": "Подписка на Firefox AdBlock Plus <a href='{0}'>список фильтров</a>:"
         },
 
     "filter_must_follow_syntax": {

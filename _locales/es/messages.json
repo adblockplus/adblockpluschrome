@@ -65,7 +65,7 @@
 		"message": "Actualizar ahora"
 	},
 	"add_a_filter_list": {
-		"message": "Suscríbete a <a href='http://adblockplus.org/en/subscriptions'>una lista de filtros</a> en formato Firefox AdBlock Plus:"
+		"message": "Suscríbete a <a href='{0}'>una lista de filtros</a> en formato Firefox AdBlock Plus:"
 	},
 	"filter_must_follow_syntax": {
 		"message": "Tu filtro debe seguir la <a href='http://adblockplus.org/en/filters'>sintaxis para filtros de AdBlock Plus</a>. Algunos tipos de filtros, como object-subrequest, no están soportados."
