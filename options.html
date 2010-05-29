@@ -5,6 +5,7 @@
 <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8rc1.custom.min.js"></script> 
 <script type="text/javascript" src="filterupdate.js"></script>
+<script type="text/javascript" src="util.js"></script>
 <script type="text/javascript" src="i18n.js"></script>
 <title>AdThwart Options</title>
 <style type="text/css" media="screen">
@@ -231,8 +232,8 @@ function updateFilterLists() {
 
 
 // Provides a more readable string of the current date and time
-var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 function saneDateString(when) {
+	var monthNames = JSON.parse(chrome.i18n.getMessage("month_names"));
 	var d = new Date(when);
 	var h = d.getHours();
 	var ampm = "am";
@@ -248,11 +249,18 @@ function saneDateString(when) {
 	var timeString = h + ":" + m + " " + ampm;
 	var now = new Date();
 	if(d.getDate() == now.getDate() && d.getMonth() == now.getMonth() && d.getFullYear() == now.getFullYear())
-		dateString = " today";
+		dateString = "today";
 	else
-		dateString = " on " + d.getDate() + " " + monthNames[d.getMonth()] + " " + d.getFullYear();
+		//dateString = d.getDate() + " " + monthNames[d.getMonth()] + " " + d.getFullYear();
+		dateString = sprintf(chrome.i18n.getMessage("date_format"), [d.getDate(), monthNames[d.getMonth()], + d.getFullYear()]);
 	
-	return(timeString + dateString);
+/*
+	return {
+		'time': timeString,
+		'date': dateString
+	};
+*/
+	return [timeString, dateString];
 }
 
 // Updates a single filter list and informs the user what happened
@@ -287,7 +295,8 @@ function checkFilterList(key) {
 		    // lastDownloaded: Last time the list was downloaded
 		    // lastUpdated: Last time the list reports that it was updated, or else the last time it was downloaded
 		    var lastDownloaded = list.lastDownloaded ? list.lastDownloaded : list.lastUpdated;
-			$("#" + key + "_msg").css("color", "#b0b0b0").text("Last updated at " + saneDateString(lastDownloaded)).css("display", "inline");
+			var sanedDateString = saneDateString(lastDownloaded); 
+			$("#" + key + "_msg").css("color", "#b0b0b0").text(sprintf(chrome.i18n.getMessage("last_updated_at"), sanedDateString)).css("display", "inline");
 		}
 		else {
 			// Display error only if checked
@@ -413,7 +422,7 @@ $(function() {
 
 <div id="userFilterLists" style="margin-bottom: 8px"></div>
 
-<div id="addURLField">
+<div id="addURLField">	
 <span class="i18n_add_a_filter_list"></span><br/>
 <input type="text" value="" id="newURL" style="width:400px">
 <button class="addButton" onClick="addUserURLFromBox()"><span class="i18n_add_url_button"></span></button><br/>

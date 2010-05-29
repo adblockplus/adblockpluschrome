@@ -6,6 +6,7 @@ function loadI18nStrings_jquery() {
 function loadI18nStrings() {
     var nodes = document.querySelectorAll("[class^='i18n_']");
     for(var i = 0; i < nodes.length; i++) {
-        nodes[i].innerHTML = chrome.i18n.getMessage(nodes[i].className.substring(5));
+		var arguments = JSON.parse("[" + nodes[i].innerHTML + "]");
+		nodes[i].innerHTML = sprintf(chrome.i18n.getMessage(nodes[i].className.substring(5)), arguments);			
     }
 }
