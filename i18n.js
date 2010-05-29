@@ -7,6 +7,11 @@ function loadI18nStrings() {
     var nodes = document.querySelectorAll("[class^='i18n_']");
     for(var i = 0; i < nodes.length; i++) {
 		var arguments = JSON.parse("[" + nodes[i].innerHTML + "]");
-		nodes[i].innerHTML = sprintf(chrome.i18n.getMessage(nodes[i].className.substring(5)), arguments);			
+		nodes[i].innerHTML = i18n_sprintf(nodes[i].className.substring(5), arguments);			
     }
+}
+
+function i18n_sprintf(msg, arr)
+{ 
+	return sprintf(chrome.i18n.getMessage(msg), arr);
 }
