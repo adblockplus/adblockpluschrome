@@ -390,7 +390,7 @@ RegExpFilter.prototype =
     return (this.regexp.test(location) &&
 //            (RegExpFilter.typeMap[contentType] & this.contentType) != 0 &&
             (contentType & this.contentType) != 0 && // Avoid a string-indexed lookup
-//            (this.thirdParty == null || this.thirdParty == thirdParty) &&
+            (this.thirdParty == null || this.thirdParty == thirdParty) &&
             this.isActiveOnDomain(docDomain));
   }
 };

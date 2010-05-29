@@ -91,7 +91,7 @@
         "description": "Cancel button label"
     },
     "clickhide_instructions": {
-        "message": "After closing this popup, click (or right-click) an element on the page, or hover over it and press Ctrl+Shift+E. Then return to this popup."
+        "message": "After closing this popup, click (or right-click) an element on the page."
     },
     "add_filters_msg": {
         "message": "Add filter(s)?"

@@ -51,14 +51,7 @@ function init() {
 	chrome.windows.getCurrent(function(w) {
     	chrome.tabs.getSelected(w.id, function(tab) {
 			chrome.extension.sendRequest({reqtype: "get-cached-filters"}, function(response2) {
-				if(response2.filters) {
-					// Yay, we have some ABP filters cached. Ask the user whether she wants them
-					var filtersList = document.getElementById("filtersList");
-					filtersList.innerHTML = "";
-					for(var i = 0; i < response2.filters.length; i++)
-						filtersList.innerHTML += response2.filters[i] + "<br/>";
-					clickHideRulesPendingStuff();
-				} else if(response2.active) {
+				if(response2.active) {
 				    clickHideActiveStuff();
 				} else
 					clickHideInactiveStuff();
@@ -102,6 +95,8 @@ function activateClickHide() {
 	chrome.windows.getCurrent(function(w) {
     	chrome.tabs.getSelected(w.id, function(tab) {
 			chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-activate"});
+			// Close the popup after a few seconds, so user doesn't have to
+			setTimeout(window.close, 5000);
 		});
 	});
 }
@@ -120,22 +115,13 @@ function cancelClickHide() {
 function clickHideActiveStuff() {
 	document.getElementById("enabledCheckboxAndLabel").style.display = "none";
 	document.getElementById("clickHideInactiveStuff").style.display = "none";
-	document.getElementById("clickHideRulesPendingStuff").style.display = "none";
 	document.getElementById("clickHideActiveStuff").style.display = "inherit";
 }
 
 function clickHideInactiveStuff() {
 	document.getElementById("enabledCheckboxAndLabel").style.display = "block";
 	document.getElementById("clickHideActiveStuff").style.display = "none";
-	document.getElementById("clickHideRulesPendingStuff").style.display = "none";
 	document.getElementById("clickHideInactiveStuff").style.display = "inherit";
-}
-
-function clickHideRulesPendingStuff() {
-	document.getElementById("enabledCheckboxAndLabel").style.display = "none";
-	document.getElementById("clickHideActiveStuff").style.display = "none";
-	document.getElementById("clickHideInactiveStuff").style.display = "none";
-	document.getElementById("clickHideRulesPendingStuff").style.display = "inherit";
 }
 
 </script>
@@ -153,13 +139,6 @@ function clickHideRulesPendingStuff() {
 <div class="spacer"></div>
 <button id="cancelButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="cancelClickHide()"><span class="i18n_cancel"></span></button>
 </div>
-
-<div id="clickHideRulesPendingStuff" style="display: none">
-<div id="confirmRulesMsg"><span class="i18n_add_filters_msg"></span></div>
-<div id="filtersList" style="display: block">...</div>
-<div class="spacer"></div>
-<button id="confirmAddRulesButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="addFilters()"><span class="i18n_add"></span></button>
-<button id="cancelAddRulesButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="cancelClickHide()"><span class="i18n_cancel"></button>
 
 </div>
 <script type="text/javascript" charset="utf-8">
