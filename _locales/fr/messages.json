@@ -1,7 +1,7 @@
 {
-	"description": {
-		"message": "Blocks ads using the Firefox AdBlock Plus filter engine. Kiss ads goodbye and browse in peace!"
-	},
+    "description": {
+        "message": "Suppression des publicités utilisant le moteur de Firefox AdBlock Plus. Dites adieu publicités et naviguez en paix!"
+    },
     "options": {
         "message": "Paramètres AdThwart"
     },
@@ -21,7 +21,7 @@
         "description": "This is a tab heading."
     },
     
-    "add_button": {
+    "add": {
         "message": "Ajouter",
         "description": "This is the label for the generic 'Add' buttons."
     },
@@ -91,7 +91,7 @@
         "description": "Cancel button label"
     },
     "clickhide_instructions": {
-        "message": "Après avoir clôturé ce popup, cliquez (ou droit-cliquez) un element sur la page. Revenez alors à ce popup."
+        "message": "Après avoir clôturé ce popup, cliquez (ou droit-cliquez) un element sur la page."
     },
     "add_filters_msg": {
         "message": "Ajouter filtre(s)?"

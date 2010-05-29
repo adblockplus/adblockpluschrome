@@ -31,12 +31,13 @@ var pageIsYouTube = false;
 // Click-to-hide stuff
 var clickHide_activated = false;
 var currentElement = null;
-var currentElement_border = "";
+var currentElement_boxShadow = null;
 var currentElement_backgroundColor;
 var clickHideFilters = null;
 var highlightedElementsSelector = null;
-var highlightedElementsBorders = null;
+var highlightedElementsBoxShadows = null;
 var highlightedElementsBGColors = null;
+var clickHideFiltersDialog = null;
 
 // Port to background.htm
 var port;
@@ -48,8 +49,8 @@ function nukeSingleElement(elt) {
     // Probably vain attempt to stop scripts
     if(elt.tagName == "SCRIPT" && elt.src) elt.src = "";
     if(elt.language) elt.language = "Blocked!";
-    elt.style.display = "none !important";
-    elt.style.visibility = "hidden !important";
+    elt.style.display = "none ";
+    elt.style.visibility = "hidden ";
 
     var pn = elt.parentNode;
     if(pn) pn.removeChild(elt);
@@ -79,13 +80,13 @@ function highlightElements(selectorString) {
     
     highlightedElements = document.querySelectorAll(selectorString);
     highlightedElementsSelector = selectorString;
-    highlightedElementsBorders = new Array();
+    highlightedElementsBoxShadows = new Array();
     highlightedElementsBGColors = new Array();
 
     for(var i = 0; i < highlightedElements.length; i++) {
-        highlightedElementsBorders[i] = highlightedElements[i].style.border;
+        highlightedElementsBoxShadows[i] = highlightedElements[i].style.getPropertyValue("-webkit-box-shadow");
         highlightedElementsBGColors[i] = highlightedElements[i].style.backgroundColor;
-        highlightedElements[i].style.border = "1px solid #fd6738";
+        highlightedElements[i].style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #fd6738");
         highlightedElements[i].style.backgroundColor = "#f6e1e5";
     }
 }
@@ -97,14 +98,14 @@ function unhighlightElements() {
         return;
     highlightedElements = document.querySelectorAll(highlightedElementsSelector);
     for(var i = 0; i < highlightedElements.length; i++) {
-        highlightedElements[i].style.border = highlightedElementsBorders[i];
+        highlightedElements[i].style.setProperty("-webkit-box-shadow", highlightedElementsBoxShadows[i]);
         highlightedElements[i].style.backgroundColor = highlightedElementsBGColors[i];
     }
     highlightedElementsSelector = null;
 }
 
 // Add an overlay to an element, which is probably a Flash object
-function addFlashOverlay(elt) {
+function addElementOverlay(elt) {
     // If this element is enclosed in an object tag, we prefer to block that instead
     if(!elt /* || elt.parentNode.tagName == 'OBJECT' */)
         return;
@@ -118,7 +119,7 @@ function addFlashOverlay(elt) {
     overlay.prisoner = elt;
     overlay.prisonerURL = url;
     overlay.className = "__adthwart__overlay";
-    overlay.setAttribute('style', 'opacity:0.5; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box;');
+    overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box;');
         
     // We use a zero-size enclosing div to position the overlay box correctly
     var outer = document.createElement('div');
@@ -129,21 +130,92 @@ function addFlashOverlay(elt) {
     return outer;
 }
 
+// Show dialog asking user whether she wants to add the proposed filters derived
+// from selected page element
+function clickHide_showDialog(left, top, filters) {
+    // Make it a little more centered, but clamp to left side of document
+    var filtersString = filters.toString().replace(/,/g, '<br/>');
+        
+    clickHideFiltersDialog = document.createElement('div');
+    clickHideFiltersDialog.setAttribute('style', 'visibility:hidden; -webkit-user-select:none; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt; color: #505050 !important; position: fixed; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
+    clickHideFiltersDialog.innerHTML = '<table style="margin:0px"><tr><td style="padding:0; background: #ffffff; padding-right: 5px"><img src="' + chrome.extension.getURL('icons/face-devilish-32.png') + '"/></td><td style="padding:0; background: #ffffff; text-align: left">' + chrome.i18n.getMessage('add_filters_msg') + '</td></tr></table><div style="border:1px solid #c0c0c0; padding:3px; min-width: 200px; font-size:8pt !important; line-height: 10pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div>';
+
+    buttonsDiv = document.createElement('div');
+    buttonsDiv.setAttribute('style', 'text-align: right');
+    function makeButton() {
+        var b = document.createElement('button');
+        b.setAttribute("style", "background: #f0f0f0; padding: 3px; margin-left: 5px; font-size: 8pt");
+        return b;
+    }
+    var addButton = makeButton();
+    addButton.innerText = chrome.i18n.getMessage('add');
+    addButton.onclick = function() {
+        // Save the filters that the user created
+        chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
+    	chrome.extension.sendRequest({reqtype: "apply-cached-filters", filters: filters});
+    	clickHide_deactivate();
+    	removeAdsAgain();
+    	clickHideFiltersDialog.setAttribute('style', 'visibility: hidden');
+    	document.body.removeChild(clickHideFiltersDialog);
+    	clickHideFiltersDialog = null;
+    };
+    var cancelButton = makeButton();
+    cancelButton.setAttribute("style", "background: #f0f0f0; padding: 3px; margin-left: 5px; font-size: 8pt");
+    cancelButton.innerText = chrome.i18n.getMessage('cancel');
+    cancelButton.onclick = function() {
+        // Tell popup (indirectly) to shut up about easy create filter
+        chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: false});
+        clickHide_deactivate();
+    	clickHideFiltersDialog.setAttribute('style', 'visibility: hidden');
+    	document.body.removeChild(clickHideFiltersDialog);
+    	clickHideFiltersDialog = null;
+    }
+    buttonsDiv.appendChild(addButton);
+    buttonsDiv.appendChild(cancelButton);
+    
+    // Make dialog partly transparent when mouse isn't over it so user has a better
+    // view of what's going to be blocked
+    clickHideFiltersDialog.onmouseout = function() {
+        clickHideFiltersDialog.style.setProperty("opacity", "0.7");
+    }
+    clickHideFiltersDialog.onmouseover = function() {
+        clickHideFiltersDialog.style.setProperty("opacity", "1.0");
+    } 
+    
+    clickHideFiltersDialog.appendChild(buttonsDiv);
+    document.body.appendChild(clickHideFiltersDialog);
+    // Now we know what the dimensions of the dialog are, we can position it
+    // so it doesn't extend past the visible document boundaries
+    var s = window.getComputedStyle(clickHideFiltersDialog);
+    var w = parseInt(s.width);
+    top -= 50;
+    if((left + w) > document.documentElement.clientWidth) 
+        left = document.documentElement.clientWidth - w;
+    else
+        left -= 150;
+    if(left < 0) left = 0;
+    if(top < 0) top = 0;
+    clickHideFiltersDialog.style.left = left + "px";
+    clickHideFiltersDialog.style.top = top + "px";
+    clickHideFiltersDialog.style.visibility = "visible";
+}
+
 // Turn on the choose element to create filter thing
 function clickHide_activate() {
     if(document == null) return;
     
+    // If we already had a selected element, restore its appearance
     if(currentElement) {
-        currentElement.style.border = currentElement_border;
+        currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
         currentElement.style.backgroundColor = currentElement_backgroundColor;
         currentElement = null;
         clickHideFilters = null;
     }
     
     // Add overlays for Flash elements so user can actually click them
-    var elts = document.querySelectorAll('object,embed');
+    var elts = document.querySelectorAll('object,embed,img,iframe');
     for(var i=0; i<elts.length; i++)
-        addFlashOverlay(elts[i]);
+        addElementOverlay(elts[i]);
     
     clickHide_activated = true;
     document.addEventListener("mouseover", clickHide_mouseOver, false);
@@ -166,7 +238,7 @@ function clickHide_rulesPending() {
 function clickHide_deactivate() {
     if(currentElement) {
         unhighlightElements();
-        currentElement.style.border = currentElement_border;
+        currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
         currentElement.style.backgroundColor = currentElement_backgroundColor;
         currentElement = null;
         clickHideFilters = null;
@@ -182,7 +254,7 @@ function clickHide_deactivate() {
     // Remove overlays
     var overlays = document.querySelectorAll('.__adthwart__overlay');
 	for (var i=0; i<overlays.length; i++) {
-		overlays[i].remove();
+		overlays[i].parentNode.removeChild(overlays[i]);
 	}
 }
 
@@ -193,9 +265,9 @@ function clickHide_mouseOver(e) {
     
     if(e.target.id || e.target.className) {
         currentElement = e.target;
-        currentElement_border = e.target.style.border;
+        currentElement_boxShadow = e.target.style.getPropertyValue("-webkit-box-shadow");
         currentElement_backgroundColor = e.target.style.backgroundColor;
-        e.target.style.border = "1px solid #d6d84b";
+        e.target.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #d6d84b");
         e.target.style.backgroundColor = "#f8fa47";
 
         // TODO: save old context menu
@@ -212,7 +284,7 @@ function clickHide_mouseOut(e) {
     if(!clickHide_activated || !currentElement)
         return;
     
-    currentElement.style.border = currentElement_border;
+    currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
     currentElement.style.backgroundColor = currentElement_backgroundColor;
     
     // TODO: restore old context menu
@@ -243,8 +315,11 @@ function clickHide_mouseClick(e) {
     // Construct filters. The popup will retrieve these.
     // Only one ID
     var elementId = elt.id ? elt.id.split(' ').join('') : null;
-    // Can have multiple classes...
-    var elementClasses = elt.className ? elt.className.split(' ') : null;
+    // Can have multiple classes, and there might be extraneous whitespace
+    var elementClasses = null;
+    if(elt.className) {
+        elementClasses = elt.className.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '').split(' ');
+    }
     clickHideFilters = new Array();
     selectorList = new Array();
     if(elementId) {
@@ -262,15 +337,15 @@ function clickHide_mouseClick(e) {
         selectorList.push(elt.tagName + '[src="' + url + '"]');
     }
     
-    // Save the filters that the user created
-    chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
+    // Show popup
+    clickHide_showDialog(e.clientX, e.clientY, clickHideFilters);
 
     // Highlight the unlucky elements
-    // Restore currentElement's border and bgcolor so that highlightElements won't save those
-    currentElement.style.border = currentElement_border;
+    // Restore currentElement's box-shadow and bgcolor so that highlightElements won't save those
+    currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
     currentElement.style.backgroundColor = currentElement_backgroundColor;
     highlightElements(selectorList.join(","));
-    currentElement.style.border = "1px solid #fd1708";
+    currentElement.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #fd1708");
     currentElement.style.backgroundColor = "#f6a1b5";
 
     // Half-deactivate click-hide so the user has a chance to click the page action icon.
@@ -370,8 +445,15 @@ function nukeElements(parent) {
     var urls = new Array();
     var serials = new Array();
     var url;
+    // Reinitialize elementCache since we won't reuse what's already in there
+    delete elementCache;
+    serial = 0;
+    elementCache = new Array();
     for(var i = 0; i < elts.length; i++) {
-        if(url = getElementURL(elts[i])) {
+        url = getElementURL(elts[i]);
+        // If the URL of the element is the same as the document URI, the user is trying to directly
+        // view the ad for some reason and so we won't block it.
+        if(url && url != document.baseURI) {
             // Some rules don't include the domain, and the blacklist
             // matcher doesn't match on queries that don't include the domain
             url = relativeToAbsoluteUrl(url);
@@ -386,6 +468,10 @@ function nukeElements(parent) {
     }
     // Ask background.html which of these elements we should nuke
     port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
+    // Clean up a bit in case GC doesn't do it
+    delete urls;
+    delete types;
+    delete serials;
     
     nukeElementsTimeoutID = 0;
     nukeElementsLastTime = Date.now();
