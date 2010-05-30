@@ -2,6 +2,20 @@
     "description": {
         "message": "Suppression des publicités utilisant le moteur de Firefox AdBlock Plus. Dites adieu publicités et naviguez en paix!"
     },
+    "month_names": {
+		"message": "[\"Jan\", \"Fév\", \"Mar\", \"Avr\", \"Mai\", \"Jun\", \"Jul\", \"Aou\", \"Sep\", \"Oct\", \"Nov\", \"Déc\"]",
+		"description": "Month short names."
+	},
+	"date_format": {	
+		"message": "le $day$ $month$ $year$",
+		"description": "Date format, including month, day and year.",
+		"placeholders": {
+		    "day": { "content" : "$1" },
+	        "month": { "content" : "$2" },
+		    "year": { "content" : "$3" }
+		}
+	},
+	
     "options": {
         "message": "Paramètres AdThwart"
     },
@@ -9,6 +23,18 @@
         "message": "Liste de filtres",
         "description": "This is a tab heading."
     },
+    "last_updated_at": {
+		"message": "Dérnier actualisé à $time$ $date$.",
+		"description": "Last updated at time on date.",
+		"placeholders": {
+		    "time": { "content" : "$1" },
+		    "date": { "content" : "$2" }
+		}
+	},
+	"today": {
+	    "message": "aujourd'hui",
+	    "description": "Word for 'today', as in 'Last updated today'"
+	},
     "add_your_own_filters": {
         "message": "Ajouter vos propres filtres"
     },
