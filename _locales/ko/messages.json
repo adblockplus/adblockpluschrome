@@ -61,13 +61,19 @@
    	        }
        },
        "filter_must_follow_syntax": {
-           "message": "당신의 필터는 AdBlock Plus 필터의 신택스를 따라야 합니다. <a href='http://adblockplus.org/en/filters'> </a>. 특정 필터 타입은 지원되지 않습니다. "
+           "message": "당신의 필터는 AdBlock Plus 필터의 신택스를 따라야 합니다. <a href='$url$'> </a>. 특정 필터 타입은 지원되지 않습니다. ",
+   	    "placeholders": {
+   	        "url": { "content" : "$1" }
+   	    }
        },
        "disabled_for_these_domains": {
        "message": "AdThwart가 다음의 도메인들에 대해서 비활성화 되었습니다. 주소바의 AdThwart 아이콘을 클릭하거나 도메인을 (URL이 아닌) 직접 타이핑해서 새로운 도메인을 추가할 수 있습니다."
    },
        "found_a_bug": {
-       "message": "버그를 발견하셨나요? 다음 주소로 버그신고를 해주시면 감사하겠습니다: <a href='http://code.google.com/p/adthwart/issues/entry'>Report bug</a>"
+       "message": "버그를 발견하셨나요? 다음 주소로 버그신고를 해주시면 감사하겠습니다: <a href='$url$'>Report bug</a>",
+	    "placeholders": {
+	        "url": { "content" : "$1" }
+	    }
    },
 
 
