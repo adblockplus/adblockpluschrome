@@ -533,14 +533,8 @@ if (document instanceof HTMLDocument) {
     // Set up message handlers. These remove undesirable elements from the page.
     port.onMessage.addListener(function(msg) {
         if(msg.shouldBlockList && enabled == true) {
-            var ptr = 0;
-            for(var i = 0; i < elementCache.length; i++) {
-                if(i == msg.shouldBlockList[ptr]) {
-                    // It's an ad, nuke it
-                    nukeSingleElement(elementCache[i]);
-                    ptr++;
-                }
-            }
+            for(var i = 0; i < msg.shouldBlockList.length; i++)
+                nukeSingleElement(elementCache[msg.shouldBlockList[i]]);
             // Take away our injected CSS, leaving only ads hidden
             removeInitialBlockStylesheet();
         }
