@@ -104,30 +104,41 @@ function unhighlightElements() {
     highlightedElementsSelector = null;
 }
 
-// Add an overlay to an element, which is probably a Flash object
+// Gets the absolute position of an element by walking up the DOM tree,
+// adding up offsets.
+// I hope there's a better way because it just seems absolutely stupid
+// that the DOM wouldn't have a direct way to get this, given that it
+// has hundreds and hundreds of other methods that do random junk.
+function getAbsolutePosition(elt) {
+    var l = t = 0;
+    for(; elt; elt = elt.offsetParent) {
+        l += elt.offsetLeft;
+        t += elt.offsetTop;
+    }
+    return [l, t];
+}
+
+// Adds an overlay to an element, which is probably a Flash object
 function addElementOverlay(elt) {
     // If this element is enclosed in an object tag, we prefer to block that instead
-    if(!elt /* || elt.parentNode.tagName == 'OBJECT' */)
-        return;
+    if(!elt) return;
         
-    // check for URL
+    // If element doesn't have at least one of class name, ID or URL, give up
+    // because we don't know how to construct a filter rule for it
     var url = getElementURL(elt);
-    if(!elt.className && !elt.id && !url)
-        return;
+    if(!elt.className && !elt.id && !url) return;
     var thisStyle = getComputedStyle(elt, null);
     var overlay = document.createElement('div');
     overlay.prisoner = elt;
     overlay.prisonerURL = url;
     overlay.className = "__adthwart__overlay";
-    overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box;');
-        
-    // We use a zero-size enclosing div to position the overlay box correctly
-    var outer = document.createElement('div');
-    outer.setAttribute('style', 'position:relative; width: 0x; height: 0px;');
-    outer.appendChild(overlay);        
-    elt.parentNode.insertBefore(outer, elt);
-    elt.overlayOuter = outer;
-    return outer;
+    overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box; z-index: 9998');
+    var pos = getAbsolutePosition(elt);
+    overlay.style.left = pos[0] + "px";
+    overlay.style.top = pos[1] + "px";
+    // elt.parentNode.appendChild(overlay, elt);
+    document.body.appendChild(overlay);
+    return overlay;
 }
 
 // Show dialog asking user whether she wants to add the proposed filters derived
@@ -212,7 +223,7 @@ function clickHide_activate() {
         clickHideFilters = null;
     }
     
-    // Add overlays for Flash elements so user can actually click them
+    // Add overlays for elements with URLs so user can easily click them
     var elts = document.querySelectorAll('object,embed,img,iframe');
     for(var i=0; i<elts.length; i++)
         addElementOverlay(elts[i]);
