@@ -12,7 +12,7 @@ var TypeMap = {
 var TagToType = {
     "SCRIPT": TypeMap.SCRIPT,
     "IMG": TypeMap.IMAGE,
-    "STYLE": TypeMap.STYLESHEET,
+    "LINK": TypeMap.STYLESHEET,
     "OBJECT": TypeMap.OBJECT,
     "EMBED": TypeMap.OBJECT,
     "IFRAME": TypeMap.SUBDOCUMENT
@@ -430,7 +430,7 @@ function getElementURL(elt) {
             if(params[0]) url = params[0].getAttribute("value");
         }
     } else if(!url) {
-        url = elt.getAttribute("src");
+        url = elt.getAttribute("src") || elt.getAttribute("href"); 
     }
     return url;
 }
@@ -440,7 +440,7 @@ function getElementURL(elt) {
 function nukeElements(parent) {
     if(typeof parent == 'undefined')
         parent = document;
-    var elts = parent.querySelectorAll("img,object,iframe,embed");
+    var elts = parent.querySelectorAll("img,object,iframe,embed,link");
     var types = new Array();
     var urls = new Array();
     var serials = new Array();
