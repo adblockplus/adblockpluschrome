@@ -85,13 +85,19 @@
 	    }
 	},
 	"filter_must_follow_syntax": {
-		"message": "Tu filtro debe seguir la <a href='http://adblockplus.org/en/filters'>sintaxis para filtros de AdBlock Plus</a>. Algunos tipos de filtros, como object-subrequest, no están soportados."
+		"message": "Tu filtro debe seguir la <a href='$url$'>sintaxis para filtros de AdBlock Plus</a>. Algunos tipos de filtros, como object-subrequest, no están soportados.",
+	    "placeholders": {
+	        "url": { "content" : "$1" }
+	    }
 	},
 	"disabled_for_these_domains": {
 		"message": "AdThwart está desactivado para los dominios mostrados a continuación. Puedes añadir un dominio usando el ícono de AdThwart en la barra de direcciones o escribiendo el dominio (no la URL) en el cuadro de texto y dando clic en el botón \"Añadir dominio\"."
 	},
 	"found_a_bug": {
-		"message": "¿Encontraste un bug en AdThwart o tienes una mejor traducción? Por favor <a href='http://code.google.com/p/adthwart/issues/entry'>repórtalo aquí</a>."
+		"message": "¿Encontraste un bug en AdThwart o tienes una mejor traducción? Por favor <a href='$url$'>repórtalo aquí</a>.",
+	    "placeholders": {
+	        "url": { "content" : "$1" }
+	    }
 	},
 	"show_icon": {
 		"message": "Mostrar ícono en la barra de direcciones"

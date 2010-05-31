@@ -65,7 +65,10 @@
     },
 
     "filter_must_follow_syntax": {
-            "message": "Ваш фильтр должен соответствовать <a href='http://adblockplus.org/en/filters'>синтаксису AdBlock Plus</a>. Фильтры некоторых типов, например, с подзапросом объекта, не поддерживаются."
+            "message": "Ваш фильтр должен соответствовать <a href='$url$'>синтаксису AdBlock Plus</a>. Фильтры некоторых типов, например, с подзапросом объекта, не поддерживаются.",
+    	    "placeholders": {
+    	        "url": { "content" : "$1" }
+    	    }
 },
 
     "disabled_for_these_domains": {
@@ -73,7 +76,10 @@
     },
 
     "found_a_bug": {
-        "message": "Нашли ошибку в AdThwart? Пожалуйста, <a href='http://code.google.com/p/adthwart/issues/entry'>сообщите об этом здесь</a>."
+        "message": "Нашли ошибку в AdThwart? Пожалуйста, <a href='$url$'>сообщите об этом здесь</a>.",
+	    "placeholders": {
+	        "url": { "content" : "$1" }
+	    }
    },
 
 
