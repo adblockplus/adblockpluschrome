@@ -3,7 +3,7 @@
         "message": "Suppression des publicités utilisant le moteur de Firefox AdBlock Plus. Dites adieu publicités et naviguez en paix!"
     },
     "month_names": {
-		"message": "[\"Jan\", \"Fév\", \"Mar\", \"Avr\", \"Mai\", \"Jun\", \"Jul\", \"Aou\", \"Sep\", \"Oct\", \"Nov\", \"Déc\"]",
+		"message": "[\"jan\", \"fév\", \"mar\", \"avr\", \"mai\", \"jun\", \"jul\", \"aou\", \"sep\", \"oct\", \"nov\", \"déc\"]",
 		"description": "Month short names."
 	},
 	"date_format": {	
