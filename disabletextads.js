@@ -118,12 +118,6 @@ document.addEventListener('DOMNodeInserted', function(event) { disableTextAds.bl
 
 // Handle the cases that don't trigger our DOMNodeInserted hook.
 window.addEventListener("load", function(event) {
-    // According to LingoSpot, setting this global variable will disable all ads.  Doesn't actually see to have any effect.
-    //unsafeWindow.LINGOSPOT_DISABLED = true;
-
-    // Thanks to Descriptor for yet another way to block LingoSpot; doesn't on every page, unfortunately.
-    // Still, it should reduce runtime for pages where it works.
-    //unsafeWindow.tf_maxKeywords = 0;
 
     // Unfortunately, Linkworth has decided to remove their container div, so we're stuck crawling the entire document body.  Meh.
     var links = document.evaluate("//a[@class='lw_cad_link' or @itxtdid]", document.body, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
@@ -132,12 +126,15 @@ window.addEventListener("load", function(event) {
         anchor.parentNode.replaceChild(document.createTextNode(anchor.textContent), anchor);
     }
 
+    // Look again for links after a delay in case a script takes a while to add them
+    setTimeout(function() {
+        var testElems = document.querySelectorAll("a.IL_LINK_STYLE, a.contextual, a.kLink, a[itxtdid], nobr, ispan, span.IL_AD");
+        for (var i=0; i<testElems.length; i++)
+        	disableTextAds.blockAds(testElems[i]);
+    }, 1000);
+
 }, false);
 
-// Look again for links - for some reason this doesn't always work if run in the window.load handler
-var testElems = document.querySelectorAll("a.IL_LINK_STYLE, a.contextual, a.kLink, a[itxtdid], nobr, ispan, span.IL_AD");
-for (var i=0; i<testElems.length; i++)
-	disableTextAds.blockAds(testElems[i]);
 
 // Chrome calls
             }
