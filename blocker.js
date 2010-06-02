@@ -202,17 +202,18 @@ function clickHide_showDialog(left, top, filters) {
     
     clickHideFiltersDialog.appendChild(buttonsDiv);
     document.body.appendChild(clickHideFiltersDialog);
-    // Now we know what the dimensions of the dialog are, we can position it
-    // so it doesn't extend past the visible document boundaries
-    var s = window.getComputedStyle(clickHideFiltersDialog);
-    var w = parseInt(s.width);
-    top -= 50;
-    if((left + w) > document.documentElement.clientWidth) 
-        left = document.documentElement.clientWidth - w;
-    else
-        left -= 150;
-    if(left < 0) left = 0;
-    if(top < 0) top = 0;
+    // // Now we know what the dimensions of the dialog are, we can position it
+    // // so it doesn't extend past the visible document boundaries
+    // var s = window.getComputedStyle(clickHideFiltersDialog);
+    // var w = parseInt(s.width);
+    // top -= 50;
+    // if((left + w) > document.documentElement.clientWidth) 
+    //     left = document.documentElement.clientWidth - w;
+    // else
+    //     left -= 150;
+    // if(left < 0) left = 0;
+    // if(top < 0) top = 0;
+    left = top = 50; // Position in upper-left all the time
     clickHideFiltersDialog.style.left = left + "px";
     clickHideFiltersDialog.style.top = top + "px";
     clickHideFiltersDialog.style.visibility = "visible";
