@@ -144,8 +144,15 @@ function addElementOverlay(elt) {
 // Show dialog asking user whether she wants to add the proposed filters derived
 // from selected page element
 function clickHide_showDialog(left, top, filters) {
-    // Make it a little more centered, but clamp to left side of document
-    var filtersString = filters.toString().replace(/,/g, '<br/>');
+    // Limit the length the filters string shown so it doesn't clip
+    var filtersString = "";
+    for(var i = 0; i < filters.length; i++) {
+        if(filters[i].length > 80)
+            filtersString += filters[i].substring(0, 80) + "&hellip;";
+        else
+            filtersString += filters[i];
+        filtersString += "<br/>";
+    }
         
     clickHideFiltersDialog = document.createElement('div');
     clickHideFiltersDialog.setAttribute('style', 'visibility:hidden; -webkit-user-select:none; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt; color: #505050 !important; position: fixed; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
