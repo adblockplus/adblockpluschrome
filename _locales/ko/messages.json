@@ -6,7 +6,7 @@
        "message": "AdThwart 옵션"
    },
    "filter_lists": {
-       "message": "필터 리스트",
+       "message": "필터 목록",
        "description": "This is a tab heading."
    },
    "add_your_own_filters": {
@@ -46,16 +46,16 @@
    },
 
        "enable_only_the": {
-           "message": "원하는 필터만 활성화 시키세요. 너무 많은 필터는 크롬의 반응을 느리게 할수 있습니다."
+           "message": "필요한 필터만 활성화하십시오. 필터가 너무 많으면 크롬의 반응이 느려질 수 있습니다."
        },
        "out_of_date_lists": {
-           "message": "주기적으로 최신 리스트로 업데이트 됩니다."
+           "message": "최신 목록으로 주기적인 업데이트가 됩니다."
        },
        "update_now": {
            "message": "지금 업데이트"
        },
        "add_a_filter_list": {
-           "message": "파이어팍스 AdBlock Plus 구독 <a href='$url$'>filter list</a>:",
+           "message": "파이어폭스의 Adblock Plus <a href='$url$'>구독 필터 목록</a>:",
             "placeholders": {
    	            "url": { "content" : "$1" }
    	        }
