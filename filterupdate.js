@@ -46,7 +46,7 @@ function loadUserFilterURLs() {
 function FilterListFetcher(nameOrUrl, callback) {
     this.name = nameOrUrl;
     // Accept name as URL if it starts with http
-    this.url = nameOrUrl.match(/^http/) ? nameOrUrl : filterFiles[nameOrUrl];
+    this.url = nameOrUrl.match(/^http/i) ? nameOrUrl : filterFiles[nameOrUrl];
     this.callback = callback;
     this.xhr = new XMLHttpRequest();
     this.error = false;

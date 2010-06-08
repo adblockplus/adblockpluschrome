@@ -211,7 +211,7 @@ function downloadFilterList(url) {
 // Loads the filter list from disk (or localStorage) and stores it in a global variable
 function loadFiltersRawText(filename) {
     // Check filename for http prefix and if so load from localStorage instead
-    if(filename.match(/^http/)) {
+    if(filename.match(/^http/i)) {
         if(typeof localStorage[filename] == "string") {
             var list = JSON.parse(localStorage[filename]);
             // If there was an error loading the list before, don't try again now, let the user
