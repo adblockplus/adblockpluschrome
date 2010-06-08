@@ -421,7 +421,7 @@ function relativeToAbsoluteUrl(url) {
     if(!url)
         return url;
     // If URL is already absolute, don't mess with it
-    if(url.match(/^http/))
+    if(url.match(/^http/i))
         return url;
     // Leading / means absolute path
     if(url[0] == '/')

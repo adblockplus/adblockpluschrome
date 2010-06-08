@@ -258,7 +258,7 @@ function saneTimeDateStrings(when) {
 // Updates a single filter list and informs the user what happened
 function updateFilterList(key) {
 	// Checkbox not checked? Not a URL?
-	if(document.getElementById(key).checked == false || !filterFiles[key].match(/^http/))
+	if(document.getElementById(key).checked == false || !filterFiles[key].match(/^http/i))
 		return;
 	
 	// Hide status message
@@ -356,7 +356,7 @@ function addUserURLFromBox() {
 	if(matches = url.match(/^abp:subscribe.*[\?&]location=(.+?)(&|$)/i))
 		url = decodeURIComponent(matches[1]);
 
-	if(!url.match(/^http/) && !url.match(/^file/))
+	if(!url.match(/^http/i) && !url.match(/^file/))
 		return;
 	addUserURLEntry(key, url);
 	document.getElementById("newURL").value = "";
