@@ -230,7 +230,6 @@ function updateFilterLists() {
 	}
 }
 
-
 // Provides a more readable string of the current date and time
 function saneTimeDateStrings(when) {
 	var monthNames = JSON.parse(chrome.i18n.getMessage("month_names"));
@@ -270,7 +269,6 @@ function updateFilterList(key) {
 			$("#" + fetcher.name + "_msg").text(fetcher.error).css("color", "#a03030").css("display", "inline");
 			document.getElementById(key).checked = false;
 		} else {
-			// $("#" + fetcher.name + "_msg").css("color", "#b0b0b0").text("Updated just now").css("display", "inline");
 			// Force display of "updated now" message
 			checkFilterList(key);
 		}
@@ -369,6 +367,7 @@ function addFilterListEntry(key) {
 	document.getElementById("filterLists").appendChild(div);
 }
 
+// Adds and saves the user-entered filter list URL
 function addUserURLFromBox() {
 	var key = "user_" + (new Date()).getTime();
 	var url = document.getElementById("newURL").value;
@@ -388,6 +387,7 @@ function addUserURLFromBox() {
 	saveOptions();
 }
 
+// Display jQuery UI elements
 $(function() { 
     $('#tabs').tabs(); 
     $('button').button(); 
