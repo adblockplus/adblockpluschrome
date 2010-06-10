@@ -80,7 +80,7 @@ function loadOptions() {
 	}
 
 	// Filter lists enabled state
-	var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {"easylist": true };
+	var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {"easylist": true, "extras": true };
 	for(var key in filterFilesEnabled) {
 	    document.getElementById(key).checked = filterFilesEnabled[key];
     }
@@ -351,7 +351,6 @@ function addFilterListEntry(key) {
 	var checkbox = document.createElement('input');
 	checkbox.type = "checkbox";
 	checkbox.id = key;
-	checkbox.checked = true;
 	checkbox.addEventListener("click", function() { checkFilterList(key); saveOptions(); });
 	var label = document.createElement('span');
 	if(filterListAuthors[key])
