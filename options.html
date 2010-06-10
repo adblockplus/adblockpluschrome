@@ -4,7 +4,7 @@
 <link type="text/css" href="jquery-ui/css/custom-theme/jquery-ui-1.8rc1.custom.css" rel="stylesheet" />	
 <script type="text/javascript" src="jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8rc1.custom.min.js"></script> 
-<script type="text/javascript" src="filterupdate.js"></script>
+<script type="text/javascript" src="filterupdate.js" charset="utf-8"></script>
 <script type="text/javascript" src="i18n.js"></script>
 <title>AdThwart Options</title>
 <style type="text/css" media="screen">
@@ -74,8 +74,9 @@ function loadOptions() {
 	loadUserFilterURLs();
 	for(key in filterFiles) {
 		if(!key.match(/^user_/))
-			continue;
-		addUserURLEntry(key, filterFiles[key]);
+			addFilterListEntry(key);
+		else
+		    addUserURLEntry(key, filterFiles[key]);
 	}
 
 	// Filter lists enabled state
@@ -344,7 +345,28 @@ function addUserURLEntry(key, url) {
 	div.appendChild(del);
 	div.appendChild(msg);
 	document.getElementById("userFilterLists").appendChild(div);
-	
+}
+
+// Adds an entry for a filter list to the UI.
+// TODO: Merge this with addUserURLEntry() as this is too much duplicated code
+function addFilterListEntry(key) {
+	var checkbox = document.createElement('input');
+	checkbox.type = "checkbox";
+	checkbox.id = key;
+	checkbox.checked = true;
+	checkbox.addEventListener("click", function() { checkFilterList(key); saveOptions(); });
+	var label = document.createElement('span');
+	label.innerHTML = filterListTitles[key] + (filterListAuthors[key] ? " by " + filterListAuthors[key] : "") + " ";
+	// Status message
+	var msg = document.createElement("span");
+	msg.id = key + "_msg";
+	msg.class = "flMsg";
+	var div = document.createElement('div');
+	div.id = key + "_div";
+	div.appendChild(checkbox);
+	div.appendChild(label);
+	div.appendChild(msg);
+	document.getElementById("filterLists").appendChild(div);
 }
 
 function addUserURLFromBox() {
@@ -388,32 +410,10 @@ $(function() {
 <div id="tab-filterlists">
 <p><span class="i18n_enable_only_the"></span></p>
 <p><span class="i18n_out_of_date_lists"></span> <button class="refreshButton" onclick="updateFilterLists()"><span class="i18n_update_now"></span></button><br/>
+<!-- Placeholder for list of suggested filter lists -->
+<div id="filterLists"></div>
 <br/>
-<input type="checkbox" id="easylist" onClick="checkFilterList('easylist'); saveOptions()" /><a href="http://easylist.adblockplus.org/">EasyList</a> by Ares2, Michael, and Erunno <span id="easylist_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="germany" onClick="checkFilterList('germany'); saveOptions()" />EasyList Germany by Ares2 and Erunno<span id="germany_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="fanboy_es" onClick="checkFilterList('fanboy_es'); saveOptions()" />Fanboy's Español/Português supplement <span id="fanboy_es_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="france" onClick="checkFilterList('france'); saveOptions()" />EasyList + Liste FR (Français) by Lian <span id="france_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="china" onClick="checkFilterList('china'); saveOptions()" /><a href="http://code.google.com/p/adblock-chinalist/">ChinaList</a> (汉语) by Gythialy <span id="china_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="russia" onClick= "checkFilterList('russia'); saveOptions()" /><a href="http://code.google.com/p/ruadlist/">RuAdList</a> (Русский, Українська) <span id="russia_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="korea" onClick="checkFilterList('korea'); saveOptions()" /><a href="http://corset.tistory.com">Corset</a> (한국어) by maybee <span id="korea_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="romania" onClick="checkFilterList('romania'); saveOptions()" /><a href="http://www.picpoc.ro/">ROList</a> (Românesc) by MenetZ <span id="romania_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="italy" onClick="checkFilterList('italy'); saveOptions()" /><a href="http://gfsolone.com/realizzazioni/altro/abp-x-files">Xfiles</a> (Italiano) by Gioxx <span id="italy_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="vietnam" onClick="checkFilterList('vietnam'); saveOptions()" />Việt Nam list by NGUYỄN Mạnh Hùng <span id="vietnam_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="poland" onClick="checkFilterList('poland'); saveOptions()" />PLgeneral (Polski) by Krzysztof Niecko 
-<span id="poland_msg" class="flMsg"></span><br/>
-
-<input type="checkbox" id="extras" onClick="checkFilterList('extras'); saveOptions()" /><a href="http://adthwart.appspot.com/filters?n=extras">AdThwart extra filters</a> <span id="extras_msg" class="flMsg"></span><br/>
-
+<!-- Placeholder for user's filter list URLs -->
 <div id="userFilterLists" style="margin-bottom: 8px"></div>
 
 <div id="addURLField">	
