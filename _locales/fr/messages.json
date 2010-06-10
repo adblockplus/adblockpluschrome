@@ -31,6 +31,14 @@
 		    "date": { "content" : "$2" }
 		}
 	},
+	"filter_list_desc": {
+		"message": "$title$ par $author$",
+		"description": "e.g. FooList by Mr. Foo",
+		"placeholders": {
+		    "title": { "content" : "$1" },
+		    "author": { "content" : "$2" }
+		}
+	},
 	"today": {
 	    "message": "aujourd'hui",
 	    "description": "Word for 'today', as in 'Last updated today'"
