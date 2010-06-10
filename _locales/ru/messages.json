@@ -12,6 +12,14 @@
    "add_your_own_filters": {
        "message": "Добавить свои фильтры"
    },
+   	"filter_list_desc": {
+		"message": "$title$. $author$.",
+		"description": "e.g. FooList by Mr. Foo",
+		"placeholders": {
+		    "title": { "content" : "$1" },
+		    "author": { "content" : "$2" }
+		}
+	},
    "whitelisted_domains": {
        "message": "Белый список доменов",
        "description": "This is a tab heading."

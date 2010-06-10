@@ -354,7 +354,11 @@ function addFilterListEntry(key) {
 	checkbox.checked = true;
 	checkbox.addEventListener("click", function() { checkFilterList(key); saveOptions(); });
 	var label = document.createElement('span');
-	label.innerHTML = filterListTitles[key] + (filterListAuthors[key] ? " by " + filterListAuthors[key] : "") + " ";
+	if(filterListAuthors[key])
+	    label.innerHTML = chrome.i18n.getMessage("filter_list_desc", [filterListTitles[key], filterListAuthors[key]]);
+	else 
+	    label.innerHTML = filterListTitles[key];
+	label.innerHTML += " "; // Space to separate status message from description
 	// Status message
 	var msg = document.createElement("span");
 	msg.id = key + "_msg";
