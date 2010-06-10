@@ -26,7 +26,7 @@ var filterListTitles = {
     "russia": '<a href="http://code.google.com/p/ruadlist/">RuAdList</a> (Русский, Українська)',
     "korea": '<a href="http://corset.tistory.com">Corset</a> (한국어)',
     "romania": '<a href="http://www.picpoc.ro/">ROList</a> (Românesc)',
-    "italy": '<a href="http://gfsolone.com/realizzazioni/altro/abp-x-files">Xfiles</a> (Italiano)',
+    "italy": '<a href="http://gfsolone.com/realizzazioni/altro/abp-x-files">X Files</a> (Italiano)',
     "vietnam": 'Việt Nam list',
     "poland": 'PLgeneral (Polski)',
     "extras": '<a href="http://adthwart.appspot.com/filters?n=extras">AdThwart extra filters</a>'
