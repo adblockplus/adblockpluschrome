@@ -4,17 +4,44 @@
 // List of suggested filter lists
 var filterFiles = {
     "easylist": "http://easylist.adblockplus.org/easylist.txt", // "easylist.txt",
-	"extras": "http://adthwart.appspot.com/filters?n=extras",
     "germany": "http://easylist.adblockplus.org/easylistgermany.txt", // "easylistgermany.txt",
-    "russia": "http://ruadlist.googlecode.com/svn/trunk/adblock.txt",
-    "china": "http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", // "adblock.txt",
+	"fanboy_es": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-esp.txt",
 	"france": "http://adblockplus.mozdev.org/easylist/liste_fr+easylist.txt", // "liste_fr.txt",
+    "china": "http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", // "adblock.txt",
+    "russia": "http://ruadlist.googlecode.com/svn/trunk/adblock.txt",
 	"korea": "http://abp-corset.googlecode.com/hg/corset.txt", // "corset.txt",
 	"romania": "http://www.picpoc.ro/menetzrolist.txt", // "menetzrolist.txt",
 	"italy": "http://mozilla.gfsolone.com/filtri.txt", // "filtri.txt",
 	"vietnam": "http://adblockplus-vietnam.googlecode.com/svn/trunk/abpvn.txt",
 	"poland": "http://www.niecko.pl/adblock/adblock.txt", // PLgeneral
-	"fanboy_es": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-esp.txt"
+	"extras": "http://adthwart.appspot.com/filters?n=extras"
+};
+
+var filterListTitles = {
+    "easylist": '<a href="http://easylist.adblockplus.org/">EasyList</a>',
+    "germany": 'EasyList Germany',
+    "fanboy_es": "Fanboy's Español/Português supplement",
+    "france": 'EasyList + Liste FR (Français)',
+    "china": '<a href="http://code.google.com/p/adblock-chinalist/">ChinaList</a> (汉语)',
+    "russia": '<a href="http://code.google.com/p/ruadlist/">RuAdList</a> (Русский, Українська)',
+    "korea": '<a href="http://corset.tistory.com">Corset</a> (한국어)',
+    "romania": '<a href="http://www.picpoc.ro/">ROList</a> (Românesc)',
+    "italy": '<a href="http://gfsolone.com/realizzazioni/altro/abp-x-files">Xfiles</a> (Italiano)',
+    "vietnam": 'Việt Nam list',
+    "poland": 'PLgeneral (Polski)',
+    "extras": '<a href="http://adthwart.appspot.com/filters?n=extras">AdThwart extra filters</a>'
+};
+
+var filterListAuthors = {
+    "easylist": 'Ares2, Michael, and Erunno',
+    "germany": 'Ares2 and Erunno',
+    "france": 'Lian',
+    "china": 'Gythialy',
+    "korea": 'maybee',
+    "romania": 'MenetZ',
+    "italy": 'Gioxx',
+    "vietnam": 'NGUYỄN Mạnh Hùng',
+    "poland": 'Krzysztof Niecko'
 };
 
 // Default filter list expiration time is 3 days (specified in milliseconds)
