@@ -331,7 +331,7 @@ function addUserURLEntry(key, url) {
 	label.id = key + "_url";
 	label.innerHTML = url;
 	var del = document.createElement('span');
-	del.innerHTML = ' <a href="#" onClick="deleteUserURLEntry(\'' + key + '\')">[delete]</a> ';
+	del.innerHTML = ' <a href="#" onClick="deleteUserURLEntry(\'' + key + '\')">[' + chrome.i18n.getMessage("delete") + ']</a> ';
 	// Status message
 	var msg = document.createElement("span");
 	msg.id = key + "_msg";
