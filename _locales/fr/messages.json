@@ -68,6 +68,10 @@
     "add_url_button": {
         "message": "Ajouter URL"
     },
+    "delete": {
+        "message": "supprimer",
+        "description": "Word for 'delete'."
+    },
     "remove_button": {
         "message": "Supprimer",
         "description": "This is the label for the 'Remove selected' buttons."

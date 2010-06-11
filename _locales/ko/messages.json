@@ -38,6 +38,10 @@
        "message": "선택사항 삭제",
        "description": "This is the label for the 'Remove selected' buttons."
    },
+   "delete": {
+       "message": "삭제",
+       "description": "Word for 'delete'."
+   },
    "edit_filters_raw": {
        "message": "필터 수정"
    },
