@@ -117,24 +117,17 @@ var disableTextAds = {
 document.addEventListener('DOMNodeInserted', function(event) { disableTextAds.blockAds(event.target); }, true);
 
 // Handle the cases that don't trigger our DOMNodeInserted hook.
-window.addEventListener("load", function(event) {
 
-    // Unfortunately, Linkworth has decided to remove their container div, so we're stuck crawling the entire document body.  Meh.
-    var links = document.evaluate("//a[@class='lw_cad_link' or @itxtdid]", document.body, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
-    for (var i=0; i<links.snapshotLength; i++) { 
-        var anchor = links.snapshotItem(i);
-        anchor.parentNode.replaceChild(document.createTextNode(anchor.textContent), anchor);
-    }
+// Linkworth has decided to remove their container div, so we're stuck crawling the entire document body.  Meh.
+var links = document.evaluate("//a[@class='lw_cad_link' or @itxtdid]", document.body, null, XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE, null);
+for (var i=0; i<links.snapshotLength; i++) { 
+    var anchor = links.snapshotItem(i);
+    anchor.parentNode.replaceChild(document.createTextNode(anchor.textContent), anchor);
+}
 
-    // Look again for links after a delay in case a script takes a while to add them
-    setTimeout(function() {
-        var testElems = document.querySelectorAll("a.IL_LINK_STYLE, a.contextual, a.kLink, a[itxtdid], nobr, ispan, span.IL_AD");
-        for (var i=0; i<testElems.length; i++)
-        	disableTextAds.blockAds(testElems[i]);
-    }, 1000);
-
-}, false);
-
+var testElems = document.querySelectorAll("a.IL_LINK_STYLE, a.contextual, a.kLink, a[itxtdid], nobr, ispan, span.IL_AD");
+for (var i=0; i<testElems.length; i++)
+	disableTextAds.blockAds(testElems[i]);
 
 // Chrome calls
             }
