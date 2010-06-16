@@ -4,6 +4,7 @@
 var elemhideSelectorStrings = []; // Cache the elemhide selector strings
 var SELECTOR_GROUP_SIZE = 20;
 var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"]';
+var TEMP_adservers = null;
 
 // WebKit apparently chokes when the selector list in a CSS rule is huge.
 // So we split the elemhide selectors into groups.
@@ -54,7 +55,6 @@ function TEMP_isAdServer(docDomain) {
   return false;
 }
 
-
 // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
 if (document instanceof HTMLDocument) {
     // Use a style element for elemhide selectors and to hide page elements that might be ads.
@@ -76,13 +76,20 @@ if (document instanceof HTMLDocument) {
             styleElm.innerText += getElemhideCSSString();
             if(response.shouldInject)
     	        document.documentElement.insertBefore(styleElm, null);
-    	        
-            // document.addEventListener("beforeload", function (e) {
-            //     // Primitive version of third-party chec
-            //     if(!TEMP_isAdServer(document.domain) && TEMP_isAdServer(TEMP_extractDomainFromURL(e.url))) {
-            //         e.preventDefault();
-            //     }
-            // }, true);
+
+            // HACK to hopefully block stuff on beforeload event.
+            // Because we are in an asynchronous callback, the page may be partially loaded before
+            // the event handler gets attached. So some things might get through at the beginning.
+            if(response.beforeloadBlocking) {
+                TEMP_adservers = response.TEMP_adservers;
+                document.addEventListener("beforeload", function (e) {
+                    var eltDomain = TEMP_extractDomainFromURL(e.url);
+                    // Primitive version of third-party check
+                    if(eltDomain && !TEMP_isAdServer(document.domain) && TEMP_isAdServer(eltDomain)) {
+                        e.preventDefault();
+                    }
+                }, true);
+            }
         }
     });
 }

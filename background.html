@@ -10,6 +10,7 @@ var abp = {};
 <script type="text/javascript" src="adblockplus/filterListener.js"/>
 <script type="text/javascript" src="adblockplus/matcher.js"/>
 <script type="text/javascript" src="filterupdate.js"/>
+<script type="text/javascript" src="TEMP_adservers.js"/>
 <script>
 
 // Special-case domains for which we should only inject their specific
@@ -74,6 +75,7 @@ function defaultOptionValue(opt, val) {
 function setDefaultOptions() {
    defaultOptionValue("disableInlineTextAds", "true");
    defaultOptionValue("specialCaseYouTube", "true");
+   defaultOptionValue("beforeloadBlocking", "true");
    defaultOptionValue("excludedDomains", JSON.stringify({"acid3.acidtests.org": true}));
 
    // If user had older version installed, get rid of old option
@@ -390,7 +392,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
             if(isDomainInList(domain, "noCSSInjectDomains"))
                 shouldInject = false;
         }
-        sendResponse({selectors: selectors, enabled: enabled, shouldInject: shouldInject});
+        var beforeloadBlocking = localStorage["beforeloadBlocking"] == "true";
+        sendResponse({selectors: selectors, enabled: enabled, shouldInject: shouldInject, beforeloadBlocking: beforeloadBlocking, TEMP_adservers: beforeloadBlocking ? TEMP_adservers : null});
     } else if(request.reqtype == "get-localstorage-option") {
         sendResponse({value: localStorage[request.name]});
     } else if(request.reqtype == "set-domain-enabled-state") {
