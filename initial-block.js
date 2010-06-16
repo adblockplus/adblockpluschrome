@@ -24,6 +24,37 @@ function getElemhideCSSString() {
     return s;
 }
 
+// Extracts a domain name from a URL
+function TEMP_extractDomainFromURL(url) {
+    if(!url) return "";
+    x = url.substr(url.indexOf("://") + 3);
+    x = x.substr(0, x.indexOf("/"));
+    x = x.substr(x.indexOf("@") + 1);
+    colPos = x.indexOf(":");
+    if(colPos >= 0)
+        x = x.substr(0, colPos);
+    return x;
+}
+
+// Horrible hack
+function TEMP_isAdServer(docDomain) {
+  if (!docDomain)
+    return (!this.includeDomains);
+
+  docDomain = docDomain.replace(/\.+$/, "").toLowerCase();
+
+  for(;;) {
+    if (docDomain in TEMP_adservers)
+      return true;
+    var nextDot = docDomain.indexOf(".");
+    if(nextDot < 0)
+      break;
+    docDomain = docDomain.substr(nextDot + 1);
+  }
+  return false;
+}
+
+
 // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
 if (document instanceof HTMLDocument) {
     // Use a style element for elemhide selectors and to hide page elements that might be ads.
@@ -48,3 +79,10 @@ if (document instanceof HTMLDocument) {
         }
     });
 }
+
+document.addEventListener("beforeload", function (e) {
+    // Primitive version of third-party check
+    if(!TEMP_isAdServer(document.domain) && TEMP_isAdServer(TEMP_extractDomainFromURL(e.url))) {
+        e.preventDefault();
+    }
+}, true);
