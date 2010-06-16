@@ -110,7 +110,8 @@ function unhighlightElements() {
 // that the DOM wouldn't have a direct way to get this, given that it
 // has hundreds and hundreds of other methods that do random junk.
 function getAbsolutePosition(elt) {
-    var l = t = 0;
+    var l = 0;
+    var t = 0;
     for(; elt; elt = elt.offsetParent) {
         l += elt.offsetLeft;
         t += elt.offsetTop;
@@ -138,7 +139,6 @@ function addElementOverlay(elt) {
     overlay.style.top = pos[1] + "px";
     // elt.parentNode.appendChild(overlay, elt);
     document.body.appendChild(overlay);
-    return overlay;
 }
 
 // Show dialog asking user whether she wants to add the proposed filters derived
@@ -203,20 +203,9 @@ function clickHide_showDialog(left, top, filters) {
     
     clickHideFiltersDialog.appendChild(buttonsDiv);
     document.body.appendChild(clickHideFiltersDialog);
-    // // Now we know what the dimensions of the dialog are, we can position it
-    // // so it doesn't extend past the visible document boundaries
-    // var s = window.getComputedStyle(clickHideFiltersDialog);
-    // var w = parseInt(s.width);
-    // top -= 50;
-    // if((left + w) > document.documentElement.clientWidth) 
-    //     left = document.documentElement.clientWidth - w;
-    // else
-    //     left -= 150;
-    // if(left < 0) left = 0;
-    // if(top < 0) top = 0;
-    left = top = 50; // Position in upper-left all the time
-    clickHideFiltersDialog.style.left = left + "px";
-    clickHideFiltersDialog.style.top = top + "px";
+    // Position in upper-left all the time
+    clickHideFiltersDialog.style.left = "50px";
+    clickHideFiltersDialog.style.top = "50px";
     clickHideFiltersDialog.style.visibility = "visible";
 }
 
@@ -524,7 +513,7 @@ function handleYouTubeFlashPlayer(elt) {
         pageIsYouTube = false;
         if(inParam) {
             // Grab new <param> and set its flashvars
-            newParam = replacement.querySelector('param[name="flashvars"]');;
+            newParam = replacement.querySelector('param[name="flashvars"]');
             newParam.setAttribute("value", newFlashVars);
         } else {
             replacement.setAttribute("flashvars", newFlashVars);

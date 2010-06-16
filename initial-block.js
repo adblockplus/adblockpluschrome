@@ -11,7 +11,7 @@ var TEMP_adservers = null;
 function makeSelectorStrings(selectors) {
     var ptr = 0;
     if(!selectors) return;
-    for(i = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE) {
+    for(var i = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE) {
         elemhideSelectorStrings[ptr++] = selectors.slice(i, i + SELECTOR_GROUP_SIZE).join(",");
     }
 }
@@ -19,7 +19,7 @@ function makeSelectorStrings(selectors) {
 // Makes a string containing CSS rules for elemhide filters
 function getElemhideCSSString() {
     var s = "";
-    for(i in elemhideSelectorStrings) {
+    for(var i in elemhideSelectorStrings) {
         s += elemhideSelectorStrings[i] + " { display: none !important } ";
     }
     return s;
@@ -28,7 +28,7 @@ function getElemhideCSSString() {
 // Extracts a domain name from a URL
 function TEMP_extractDomainFromURL(url) {
     if(!url) return "";
-    x = url.substr(url.indexOf("://") + 3);
+    var x = url.substr(url.indexOf("://") + 3);
     x = x.substr(0, x.indexOf("/"));
     x = x.substr(x.indexOf("@") + 1);
     colPos = x.indexOf(":");
