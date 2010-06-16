@@ -2,10 +2,40 @@
 // We want to use the shiny new beforeload DOM event to block page resource loads.
 // Sadly, Chrome's message passing, as far as I know, is not synchronous, so the
 // response from background.html does not occur in time to prevent the event from happening. 
-// So we load this stupid giant variable as a content script so the beforeload handler
+// So we load this stupid variable as a content script so the beforeload handler
 // use it.
-// I hope V8 turns this giant global variable into a hash table for speed of lookup.
+// Presumably this is represented by the VM as a hashtable or something.
 var TEMP_adservers = {
+"ad.doubleclick.net": true,
+"atdmt.com": true,
+"clickintext.com": true,
+"da.feedsportal.com": true,
+"g.doubleclick.net": true,
+"2mdn.net": true,
+"adbrite.com": true,
+"adfusion.com": true,
+"adsonar.com": true,
+"atwola.com": true,
+"falkag.net": true,
+"fastclick.net": true,
+"intellitxt.com": true,
+"kontera.com": true,
+"linkworth.com": true,
+"msads.net": true,
+"pagead2.googlesyndication.com": true,
+"pheedo.com": true,
+"projectwonderful.com": true,
+"googleadservices.com": true,
+"pubmatic.com": true,
+"vibrantmedia.com": true,
+"yieldmanager.com": true,
+"yieldmanager.net": true,
+"zedo.com": true
+};
+
+// Original master list, derived from EasyList, that was causing problems with some sites
+// (because we only checked against domain name rather than doing the full ABP filer check)
+/* TEMP_adservers = {
 "ad.doubleclick.net": true,
 "espn.vad.go.com": true,
 "2mdn.net": true,
@@ -113,7 +143,6 @@ var TEMP_adservers = {
 "advertlets.com": true,
 "advertserve.com": true,
 "advertstatic.com": true,
-"advg.jp/$third-party": true,
 "adviva.net": true,
 "advpoints.com": true,
 "adxpower.com": true,
@@ -645,4 +674,4 @@ var TEMP_adservers = {
 "zeads.com": true,
 "zedo.com": true,
 "zoomdirect.com.au": true,
-"zxxds.net": true};
+"zxxds.net": true}; */

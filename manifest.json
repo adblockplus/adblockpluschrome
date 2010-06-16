@@ -1,6 +1,6 @@
 {
 	"name": "AdThwart",
-	"version": "0.9.17",
+	"version": "0.9.18",
 	"description": "__MSG_description__",
 	"default_locale": "en",
 	"page_action": {
@@ -22,7 +22,7 @@
 	"content_scripts": [
 	{
  		"matches": ["http://*/*", "https://*/*"],
-		"js": ["TEMP_adservers.js", "initial-block.js"],
+		"js": ["initial-block.js"],
 		"run_at": "document_start",
 		"all_frames": true
 	},
