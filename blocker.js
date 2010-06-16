@@ -163,8 +163,8 @@ function clickHide_showDialog(left, top, filters) {
     function makeButton(id) {
         var b = document.createElement('button');
 		b.setAttribute("id", id);
-		b.setAttribute("class", "us-qux-adthwart-ui-button us-qux-adthwart-ui-widget us-qux-adthwart-ui-state-default us-qux-adthwart-ui-corner-all us-qux-adthwart-ui-button-text-only");
-        b.setAttribute("style", "background: #f0f0f0; padding: 3px; margin-left: 5px; font-size: 8pt");
+        // Use the jQuery UI style for the button explicitly
+        b.setAttribute("style", "padding: 3px; margin-left: 5px; font-size: 8pt; border: 1px solid #d3d3d3; background: #e6e6e6 url(" + chrome.extension.getURL("jquery-ui/css/custom-theme/images/ui-bg_glass_75_e6e6e6_1x400.png") + ") 50% 50% repeat-x; color: #555555; -webkit-border-radius: 4px;");
         return b;
     }
     var addButton = makeButton("addButton");
