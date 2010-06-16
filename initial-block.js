@@ -39,9 +39,6 @@ function TEMP_extractDomainFromURL(url) {
 
 // Horrible hack
 function TEMP_isAdServer(docDomain) {
-  if (!docDomain)
-    return (!this.includeDomains);
-
   docDomain = docDomain.replace(/\.+$/, "").toLowerCase();
 
   for(;;) {
