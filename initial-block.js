@@ -76,13 +76,13 @@ if (document instanceof HTMLDocument) {
             styleElm.innerText += getElemhideCSSString();
             if(response.shouldInject)
     	        document.documentElement.insertBefore(styleElm, null);
+    	        
+            document.addEventListener("beforeload", function (e) {
+                // Primitive version of third-party chec
+                if(!TEMP_isAdServer(document.domain) && TEMP_isAdServer(TEMP_extractDomainFromURL(e.url))) {
+                    e.preventDefault();
+                }
+            }, true);
         }
     });
 }
-
-document.addEventListener("beforeload", function (e) {
-    // Primitive version of third-party check
-    if(!TEMP_isAdServer(document.domain) && TEMP_isAdServer(TEMP_extractDomainFromURL(e.url))) {
-        e.preventDefault();
-    }
-}, true);
