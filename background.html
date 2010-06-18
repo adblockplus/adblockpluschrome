@@ -374,12 +374,21 @@ chrome.extension.onConnect.addListener(function(port) {
     });
 });
 
-var lastTabId = 0;
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    if(request.reqtype == "get-elemhide-selectors") {
+var requestDispatchTable = {
+    // Respnd to query about single element
+    "should-block?": function(request, sender, sendResponse) {
+        var thirdParty = !(request.domain === extractDomainFromURL(request.url));
+        if(whitelistMatcher.matchesAny(request.url, request.type, request.domain, thirdParty)) {
+            sendResponse({block: false});
+        } else if(blacklistMatcher.matchesAny(request.url, request.type, request.domain, thirdParty)) {
+            sendResponse({block: true});
+        }
+    },
+    "get-elemhide-selectors": function(request, sender, sendResponse) {
         var selectors = abp.elemhide.getSelectorsToHide(request.domain);
         sendResponse({selectors: selectors});
-    } else if(request.reqtype == "get-initialhide-options") {
+    },
+    "get-initialhide-options": function(request, sender, sendResponse) {
         var selectors = null;
         var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
         var shouldInject = true;
@@ -394,9 +403,11 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         }
         var beforeloadBlocking = localStorage["beforeloadBlocking"] == "true";
         sendResponse({selectors: selectors, enabled: enabled, shouldInject: shouldInject, beforeloadBlocking: beforeloadBlocking, TEMP_adservers: beforeloadBlocking ? TEMP_adservers : null});
-    } else if(request.reqtype == "get-localstorage-option") {
+    },
+    "get-localstorage-option": function(request, sender, sendResponse) {
         sendResponse({value: localStorage[request.name]});
-    } else if(request.reqtype == "set-domain-enabled-state") {
+    },
+    "set-domain-enabled-state": function(request, sender, sendResponse) {
         // Enable/disable ad blocking for a particular domain
         chrome.tabs.get(lastTabId, function(tab) {
             if(!tab) return;
@@ -407,7 +418,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
                 addDomainToExclusionList(domain);
             refreshIcon(tab);
         });
-    } else if(request.reqtype == "get-domain-enabled-state") {
+    },
+    "get-domain-enabled-state": function(request, sender, sendResponse) {
         // Returns whether this domain is in the exclusion list.
         // The page action popup asks us this.
         if(sender.tab) {
@@ -418,30 +430,44 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
             if(!tab) return;
             sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(tab.url))});
         });
-    } else if(request.reqtype == "refresh-page-icon") {
+    },
+    "refresh-page-icon": function(request, sender, sendResponse) {
         // Show page icon according to the user option
         refreshIconByTabId(lastTabId);
-    } else if(request.reqtype == "reload-filters") {
+    },
+    "reload-filters": function(request, sender, sendResponse) {
         // Reloads filter lists and user filters
         reloadFilters();
-    } else if(request.reqtype == "cache-filters") {
+    },
+    "cache-filters": function(request, sender, sendResponse) {
         clickHideFilters = request.filters;
-    } else if(request.reqtype == "apply-cached-filters") {
+    },
+    "apply-cached-filters": function(request, sender, sendResponse) {
         // Cached filters are from click to hide
         for(var i = 0; i < clickHideFilters.length; i++)
             addFilter(clickHideFilters[i]);
         clickHideFilters = null; // clear them for next time around
         clickHideActive = false; // Deactivate clickhide
-    } else if(request.reqtype == "set-clickhide-active") {
+    },
+    "set-clickhide-active": function(request, sender, sendResponse) {
         clickHideActive = request.active;
-    } else if(request.reqtype == "get-cached-filters") {
+    },
+    "get-cached-filters": function(request, sender, sendResponse) {
         // Popup is asking for ABP filters constructed from whatever the user 
         // chose during clickHide
         sendResponse({filters: clickHideFilters, active: clickHideActive});
-    } else {
-        sendResponse({comment: "Something broke! (Unknown message)"}); // allow cleanup of listener
     }
+};
+
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+    if(request.reqtype in requestDispatchTable) {
+        requestDispatchTable[request.reqtype](request, sender, sendResponse)
+    }
+    else
+        sendResponse({});
 });
+
+var lastTabId = 0;
 
 // Show icon as page action
 chrome.tabs.onSelectionChanged.addListener(function(tabId) {
