@@ -1,6 +1,23 @@
 // This file (c) T. Joseph <ttjoseph@gmail.com>
 // Everyone can use, modify and distribute this file without restriction.
 
+// ABP content type flags
+var TypeMap = {
+  OTHER: 1, SCRIPT: 2, IMAGE: 4, STYLESHEET: 8, OBJECT: 16,
+  SUBDOCUMENT: 32, DOCUMENT: 64, BACKGROUND: 256, XBL: 512,
+  PING: 1024, XMLHTTPREQUEST: 2048, OBJECT_SUBREQUEST: 4096,
+  DTD: 8192, MEDIA: 16384, FONT: 32768, ELEMHIDE: 0xFFFD
+};
+
+var TagToType = {
+    "SCRIPT": TypeMap.SCRIPT,
+    "IMG": TypeMap.IMAGE,
+    "LINK": TypeMap.STYLESHEET,
+    "OBJECT": TypeMap.OBJECT,
+    "EMBED": TypeMap.OBJECT,
+    "IFRAME": TypeMap.SUBDOCUMENT
+};
+
 var elemhideSelectorStrings = []; // Cache the elemhide selector strings
 var SELECTOR_GROUP_SIZE = 20;
 var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"]';
@@ -23,6 +40,21 @@ function getElemhideCSSString() {
         s += elemhideSelectorStrings[i] + " { display: none !important } ";
     }
     return s;
+}
+
+// Remove a particular element.
+function nukeSingleElement(elt) {
+    if(elt.innerHTML) elt.innerHTML = "";
+    if(elt.innerText) elt.innerText = "";
+    elt.style.display = "none";
+    elt.style.visibility = "hidden";
+
+    var pn = elt.parentNode;
+    if(pn) pn.removeChild(elt);
+
+    // Get rid of OBJECT tag enclosing EMBED tag
+    if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT")
+        pn.parentNode.removeChild(pn);
 }
 
 // Extracts a domain name from a URL
@@ -84,6 +116,14 @@ if (document instanceof HTMLDocument) {
                     // Primitive version of third-party check
                     if(eltDomain && !TEMP_isAdServer(document.domain) && TEMP_isAdServer(eltDomain)) {
                         e.preventDefault();
+                    } else {
+                        // If it isn't a known ad server, we have to ask the backend, which won't
+                        // return in time for preventDefault().
+                        chrome.extension.sendRequest({reqtype: "should-block?", url: e.url, type: TagToType[e.target.tagName], domain: document.domain}, function(response) {
+                            if(response.block) {
+                                nukeSingleElement(e.target);
+                            }
+                        });
                     }
                 }, true);
             }

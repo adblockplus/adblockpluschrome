@@ -1,23 +1,6 @@
 // This file (c) T. Joseph <ttjoseph@gmail.com>
 // Everyone can use, modify and distribute this file without restriction.
 
-// ABP content type flags
-var TypeMap = {
-  OTHER: 1, SCRIPT: 2, IMAGE: 4, STYLESHEET: 8, OBJECT: 16,
-  SUBDOCUMENT: 32, DOCUMENT: 64, BACKGROUND: 256, XBL: 512,
-  PING: 1024, XMLHTTPREQUEST: 2048, OBJECT_SUBREQUEST: 4096,
-  DTD: 8192, MEDIA: 16384, FONT: 32768, ELEMHIDE: 0xFFFD
-};
-
-var TagToType = {
-    "SCRIPT": TypeMap.SCRIPT,
-    "IMG": TypeMap.IMAGE,
-    "LINK": TypeMap.STYLESHEET,
-    "OBJECT": TypeMap.OBJECT,
-    "EMBED": TypeMap.OBJECT,
-    "IFRAME": TypeMap.SUBDOCUMENT
-};
-
 var enabled = false; // Enabled for this particular domain.
 var serial = 0; // ID number for elements, indexes elementCache
 var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
@@ -41,24 +24,6 @@ var clickHideFiltersDialog = null;
 
 // Port to background.htm
 var port;
-
-// Nuke a particular element.
-function nukeSingleElement(elt) {
-    if(elt.innerHTML) elt.innerHTML = "";
-    if(elt.innerText) elt.innerText = "";
-    // Probably vain attempt to stop scripts
-    if(elt.tagName == "SCRIPT" && elt.src) elt.src = "";
-    if(elt.language) elt.language = "Blocked!";
-    elt.style.display = "none ";
-    elt.style.visibility = "hidden ";
-
-    var pn = elt.parentNode;
-    if(pn) pn.removeChild(elt);
-
-    // Get rid of OBJECT tag enclosing EMBED tag
-    if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT")
-        pn.parentNode.removeChild(pn);    
-}
 
 // Replaces our stylesheet with elemhide rules. This would in principle
 // nuke the initial image, iframe, Flash hiding rules.
@@ -378,8 +343,8 @@ function removeAdsAgain() {
 function handleNodeInserted(e) {
     // Remove ads relatively infrequently. If no timeout set, set one.
     if(enabled) {
-        if(nukeElementsTimeoutID == 0)
-            nukeElementsTimeoutID = setTimeout(nukeElements, (Date.now() - nukeElementsLastTime > 1000) ? 1 : 1000);
+//        if(nukeElementsTimeoutID == 0)
+//            nukeElementsTimeoutID = setTimeout(nukeElements, (Date.now() - nukeElementsLastTime > 1000) ? 1 : 1000);
     
         if(pageIsYouTube && e.target.id == "movie_player") {
             handleYouTubeFlashPlayer(e.target);
