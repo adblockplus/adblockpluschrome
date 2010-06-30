@@ -496,7 +496,8 @@ function handleYouTubeFlashPlayer(elt) {
     		// the timeout and another video would have been inserted.
     		// This results in the wrong (first) video being shown, but it's better
     		// than two videos at once.
-    		if (parent.firstChild) parent.innerHTML = "";
+    		while(parent.firstChild)
+    		    parent.removeChild(parent.firstChild);
         	parent.appendChild(replacement);
         	pageIsYouTube = true;
         }, 200, parent, replacement);
