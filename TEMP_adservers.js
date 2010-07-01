@@ -12,6 +12,7 @@ var TEMP_adservers = {
 "cdn.undertone.com": true,
 "clickintext.com": true,
 "da.feedsportal.com": true,
+"edintorni.net": true,
 "g.doubleclick.net": true,
 "2mdn.net": true,
 "adbrite.com": true,
