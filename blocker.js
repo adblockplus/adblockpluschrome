@@ -25,16 +25,14 @@ var clickHideFiltersDialog = null;
 // Port to background.htm
 var port;
 
-// Replaces our stylesheet with elemhide rules. This would in principle
-// nuke the initial image, iframe, Flash hiding rules.
+// We only remove the initial-hide stylesheet, leaving the elemhide stylesheet in place
 // Sometimes there is, for some reason, more than one AdThwart stylesheet,
 // so we replace all that we find.
-function removeInitialBlockStylesheet() {
-    if(typeof styleElm == "undefined" || !styleElm) return;
-    var theStyleElm = document.querySelectorAll("style[title=\"__adthwart__\"]");
-    for( var i=0; i<theStyleElm.length; i++ ) {
-	    theStyleElm[i].innerText = getElemhideCSSString();
-    }
+function removeInitialHideStylesheet() {
+    if(typeof initialHideElt == "undefined" || !initialHideElt) return;
+    var elts = document.querySelectorAll("style[__adthwart__='InitialHide']");
+    for(var i=0; i<elts.length; i++)
+	    elts[i].innerText = "";
 }
 
 // Highlight elements according to selector string. This would include
@@ -513,8 +511,8 @@ if (document instanceof HTMLDocument) {
         if(msg.shouldBlockList && enabled == true) {
             for(var i = 0; i < msg.shouldBlockList.length; i++)
                 nukeSingleElement(elementCache[msg.shouldBlockList[i]]);
-            // Take away our injected CSS, leaving only ads hidden
-            removeInitialBlockStylesheet();
+            // Take away our initial-hide CSS, leaving only ads hidden
+            removeInitialHideStylesheet();
         }
     });
     

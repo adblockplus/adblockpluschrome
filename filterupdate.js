@@ -29,7 +29,7 @@ var filterListTitles = {
     "italy": '<a href="http://gfsolone.com/realizzazioni/altro/abp-x-files">X Files</a> (Italiano)',
     "vietnam": 'Việt Nam list',
     "poland": 'PLgeneral (Polski)',
-    "extras": '<a href="http://adthwart.appspot.com/filters?n=extras">AdThwart extra filters</a>'
+    "extras": '<a href="http://adthwart.appspot.com/filters?n=extras">AdThwart recommended filters</a>'
 };
 
 var filterListAuthors = {

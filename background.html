@@ -75,7 +75,6 @@ function defaultOptionValue(opt, val) {
 function setDefaultOptions() {
    defaultOptionValue("disableInlineTextAds", "true");
    defaultOptionValue("specialCaseYouTube", "true");
-   defaultOptionValue("beforeloadBlocking", "true");
    defaultOptionValue("excludedDomains", JSON.stringify({"acid3.acidtests.org": true}));
 
    // If user had older version installed, get rid of old option
@@ -265,7 +264,7 @@ function loadFiltersRawText(filename) {
 // This will also download and cache filter lists as necessary.
 function reloadFilters() {
     abp.filterListener.clear();
-    saveOptionsObject("noCSSInjectDomains", {}); // Clear no-inject list
+    saveOptionsObject("priorityAdServers", {}); // Clear no-inject list
     var urlsToLoad = new Array();
     
     // Make sure user filter URLs are in filterFiles
@@ -310,13 +309,12 @@ function reloadFilters() {
                 case '[':
                     continue;
                 case '!':
-                    // Handle no-CSS-inject domains. This is a workaround for a Chrome bug
-                    // that breaks site layouts when a stylesheet is injected.
+                    // Allow for adding to TEMP_adservers
                     var x;
-                    if(x = f.match(/^!NI (.+)$/)) {
-                        var ni = getOptionsObject("noCSSInjectDomains");
-                        ni[x[1]] = true;
-                        saveOptionsObject("noCSSInjectDomains", ni);
+                    if(x = f.match(/^!AS (.+)$/)) {
+                        var tmp = getOptionsObject("priorityAdServers");
+                        tmp[x[1]] = true;
+                        saveOptionsObject("priorityAdServers", tmp);
                     }
                     continue;
             }
@@ -367,7 +365,7 @@ chrome.extension.onConnect.addListener(function(port) {
 });
 
 var requestDispatchTable = {
-    // Respnd to query about single element
+    // Respond to query about single element
     "should-block?": function(request, sender, sendResponse) {
         var thirdParty = !(request.domain === extractDomainFromURL(request.url));
         if(whitelistMatcher.matchesAny(request.url, request.type, request.domain, thirdParty)) {
@@ -383,18 +381,22 @@ var requestDispatchTable = {
     "get-initialhide-options": function(request, sender, sendResponse) {
         var selectors = null;
         var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
-        var shouldInject = true;
         var enabled = sender.tab ? !isDomainExcluded(domain) : true;
         if(enabled) {
             if(domain in onlyInjectDomainSpecificSelectors) {
                 selectors = abp.elemhide.getDomainSpecificSelectorsToHide(domain);
             } else
                 selectors = abp.elemhide.getSelectorsToHide(domain);
-            if(isDomainInList(domain, "noCSSInjectDomains"))
-                shouldInject = false;
         }
-        var beforeloadBlocking = localStorage["beforeloadBlocking"] == "true";
-        sendResponse({selectors: selectors, enabled: enabled, shouldInject: shouldInject, beforeloadBlocking: beforeloadBlocking, TEMP_adservers: beforeloadBlocking ? TEMP_adservers : null});
+        // Merge the filter-list supplied priority ad servers with the hardcoded ones
+        var priorityAdServers = getOptionsObject("priorityAdServers");
+        var allPriorityAdServers = {};
+        for(var i in priorityAdServers)
+            allPriorityAdServers[i] = true;
+        for(var i in TEMP_adservers)
+            allPriorityAdServers[i] = true;
+        sendResponse({selectors: selectors, enabled: enabled, priorityAdServers: allPriorityAdServers});
+        delete allPriorityAdServers;
     },
     "get-localstorage-option": function(request, sender, sendResponse) {
         sendResponse({value: localStorage[request.name]});
