@@ -69,7 +69,6 @@ function loadOptions() {
 	
 	loadCheckbox("disableInlineTextAds");
 	loadCheckbox("specialCaseYouTube");
-	loadCheckbox("beforeloadBlocking");
 	
 	// Load user filter URLs
 	loadUserFilterURLs();
@@ -115,7 +114,6 @@ function saveOptions() {
 	saveCheckbox("shouldShowIcon");
 	saveCheckbox("disableInlineTextAds");
 	saveCheckbox("specialCaseYouTube");
-	saveCheckbox("beforeloadBlocking");
     
     // Filter lists
     var filterFilesEnabled = {};
@@ -474,7 +472,6 @@ $(function() {
 <input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /><span class="i18n_show_icon"></span><br/>
 <input type="checkbox" id="disableInlineTextAds" onClick="saveOptions()" /><a href="http://userscripts.org/scripts/show/3637"><span class="i18n_disable_inline"></span></a><br/>
 <input type="checkbox" id="specialCaseYouTube" onClick="saveOptions()" /><span class="i18n_block_youtube"></span><br/>
-<input type="checkbox" id="beforeloadBlocking" onClick="saveOptions()" />Experimental: Block some ads before they load<br/>
 
 <br/>
 <span class="i18n_found_a_bug">"http://code.google.com/p/adthwart/issues/entry"</span>

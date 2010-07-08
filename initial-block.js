@@ -88,46 +88,56 @@ function TEMP_isAdServer(docDomain) {
 if (document instanceof HTMLDocument) {
     // Use a style element for elemhide selectors and to hide page elements that might be ads.
     // We'll remove the latter CSS rules later.
-    var styleElm = document.createElement("style");
-    styleElm.title = "__adthwart__"; // So we know which one to remove later
+    var initialHideElt = document.createElement("style");
+    var elemhideElt = document.createElement("style");
+    elemhideElt.setAttribute("__adthwart__", "ElemHide");
+    
+    // So we know which one to remove later. We can't use the title attribute because:
+    // On sites where there is a <script> before a <link> or <style>, the styles are recalculated
+    // an extra time because scripts can change styles. When this happens, the first stylesheet
+    // with a title is considered to be the preferred stylesheet and the others are considered
+    // to be alternates and thus ignored. This is a moronic way to specify the preferred stylesheet
+    // and this is just another example of how miserably bad W3C is at designing the DOM.
+    // The only reason this wasn't broken to start with was that WebKit didn't notice the title
+    // attribute on the __adthwart__ style element without the extra style recalc triggered by the
+    // script tag. Sheesh.
+    initialHideElt.setAttribute("__adthwart__", "InitialHide");
 
     chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response) {
         makeSelectorStrings(response.selectors);
+        elemhideElt.innerText += getElemhideCSSString();
         if(response.enabled) {
             if(!document.domain.match(/youtube.com$/i)) {
                 // XXX: YouTube's new design apparently doesn't load the movie player if we hide it.
                 // I'm guessing Chrome doesn't bother to load the Flash object if it isn't displayed,
                 // but later removing that CSS rule doesn't cause it to actually be loaded. The
                 // rest of the Internet - and YouTube's old design - seem to be OK, though, so I dunno.
-                styleElm.innerText += FLASH_SELECTORS + " { display: none !important } ";
+                initialHideElt.innerText += FLASH_SELECTORS + " { display: none !important } ";
             }
-            styleElm.innerText += "iframe { visibility: hidden !important } ";
-            styleElm.innerText += getElemhideCSSString();
-            if(response.shouldInject)
-    	        document.documentElement.insertBefore(styleElm, null);
+            initialHideElt.innerText += "iframe { visibility: hidden !important } ";
+	        document.documentElement.insertBefore(initialHideElt, null);
+	        document.documentElement.insertBefore(elemhideElt, null);
 
             // HACK to hopefully block stuff on beforeload event.
             // Because we are in an asynchronous callback, the page may be partially loaded before
             // the event handler gets attached. So some things might get through at the beginning.
-            if(response.beforeloadBlocking) {
-                TEMP_adservers = response.TEMP_adservers;
-                document.addEventListener("beforeload", function (e) {
-                    var eltDomain = TEMP_extractDomainFromURL(e.url);
-                    // Primitive version of third-party check
-                    if(eltDomain && !TEMP_isAdServer(document.domain) && TEMP_isAdServer(eltDomain)) {
-                        e.preventDefault();
-                        if(e.target) nukeSingleElement(e.target);
-                    } else {
-                        // If it isn't a known ad server, we have to ask the backend, which won't
-                        // return in time for preventDefault().
-                        chrome.extension.sendRequest({reqtype: "should-block?", url: e.url, type: TagToType[e.target.tagName], domain: document.domain}, function(response) {
-                            if(response.block) {
-                                nukeSingleElement(e.target);
-                            }
-                        });
-                    }
-                }, true);
-            }
+            TEMP_adservers = response.priorityAdServers;
+            document.addEventListener("beforeload", function (e) {
+                var eltDomain = TEMP_extractDomainFromURL(e.url);
+                // Primitive version of third-party check
+                if(eltDomain && !TEMP_isAdServer(document.domain) && TEMP_isAdServer(eltDomain)) {
+                    e.preventDefault();
+                    if(e.target) nukeSingleElement(e.target);
+                } else {
+                    // If it isn't a known ad server, we have to ask the backend, which won't
+                    // return in time for preventDefault().
+                    chrome.extension.sendRequest({reqtype: "should-block?", url: e.url, type: TagToType[e.target.tagName], domain: document.domain}, function(response) {
+                        if(response.block) {
+                            nukeSingleElement(e.target);
+                        }
+                    });
+                }
+            }, true);
         }
     });
 }
