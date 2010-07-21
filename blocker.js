@@ -341,8 +341,9 @@ function removeAdsAgain() {
 function handleNodeInserted(e) {
     // Remove ads relatively infrequently. If no timeout set, set one.
     if(enabled) {
-//        if(nukeElementsTimeoutID == 0)
-//            nukeElementsTimeoutID = setTimeout(nukeElements, (Date.now() - nukeElementsLastTime > 1000) ? 1 : 1000);
+        if(nukeElementsTimeoutID == 0) {
+            nukeElementsTimeoutID = setTimeout(nukeElements, (Date.now() - nukeElementsLastTime > 1000) ? 1 : 1000);
+        }
     
         if(pageIsYouTube && e.target.id == "movie_player") {
             handleYouTubeFlashPlayer(e.target);
