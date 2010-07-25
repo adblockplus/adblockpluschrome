@@ -232,31 +232,6 @@ function updateFilterLists() {
 	chrome.extension.sendRequest({reqtype: "reload-filters"});
 }
 
-// Provides a more readable string of the current date and time
-function saneTimeDateStrings(when) {
-	var monthNames = JSON.parse(chrome.i18n.getMessage("month_names"));
-	var d = new Date(when);
-	var h = d.getHours();
-	var ampm = "a.m.";
-	if(h > 12) {
-		h -= 12;
-		ampm = "p.m.";
-	}
-	if(h == 0)
-		h = 12;
-	var m = d.getMinutes();
-	if(m < 10)
-		m = "0" + m;
-	var timeString = h + ":" + m + " " + ampm;
-	var now = new Date();
-	if(d.getDate() == now.getDate() && d.getMonth() == now.getMonth() && d.getFullYear() == now.getFullYear())
-		dateString = chrome.i18n.getMessage("today");
-	else
-		dateString = chrome.i18n.getMessage("date_format", [d.getDate(), monthNames[d.getMonth()], d.getFullYear()]);
-	
-	return [timeString, dateString];
-}
-
 // Updates a single filter list and informs the user what happened
 function updateFilterList(key) {
 	// Checkbox not checked? Not a URL?
@@ -290,7 +265,7 @@ function checkFilterList(key) {
 		    // lastDownloaded: Last time the list was downloaded
 		    // lastUpdated: Last time the list reports that it was updated, or else the last time it was downloaded
 		    var lastDownloaded = list.lastDownloaded ? list.lastDownloaded : list.lastUpdated;
-			var timeDate = saneTimeDateStrings(lastDownloaded); 
+			var timeDate = i18n_timeDateStrings(lastDownloaded); 
 			$("#" + key + "_msg").css("color", "#b0b0b0").text(chrome.i18n.getMessage("last_updated_at", timeDate)).css("display", "inline");
 		}
 		else {
