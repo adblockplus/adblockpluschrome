@@ -14,6 +14,7 @@ var filterFiles = {
 	"italy": "http://mozilla.gfsolone.com/filtri.txt", // "filtri.txt",
 	"vietnam": "http://adblockplus-vietnam.googlecode.com/svn/trunk/abpvn.txt",
 	"poland": "http://www.niecko.pl/adblock/adblock.txt", // PLgeneral
+	"hungary": "http://pete.teamlupus.hu/hufilter.txt", // hufilter
 	"extras": "http://adthwart.appspot.com/filters?n=extras"
 };
 
@@ -29,6 +30,7 @@ var filterListTitles = {
     "italy": '<a href="http://gfsolone.com/realizzazioni/altro/abp-x-files">X Files</a> (Italiano)',
     "vietnam": 'Việt Nam list',
     "poland": 'PLgeneral (Polski)',
+    "hungary": 'hufilter (Magyar)',
     "extras": '<a href="http://adthwart.appspot.com/filters?n=extras">AdThwart recommended filters</a>'
 };
 
@@ -41,7 +43,8 @@ var filterListAuthors = {
     "romania": 'MenetZ',
     "italy": 'Gioxx',
     "vietnam": 'NGUYỄN Mạnh Hùng',
-    "poland": 'Krzysztof Niecko'
+    "poland": 'Krzysztof Niecko',
+    "hungary": 'Szabó Péter'
 };
 
 // Default filter list expiration time is 3 days (specified in milliseconds)
