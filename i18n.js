@@ -19,7 +19,7 @@ function i18n_time(h, m) {
         return h + "h" + m;
     } else {
         var ampm = "a.m.";
-    	if(h > 12) {
+    	if(h >= 12) {
     		h -= 12;
     		ampm = "p.m.";
     	}
