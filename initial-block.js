@@ -115,7 +115,7 @@ if (document instanceof HTMLDocument) {
                 initialHideElt.innerText += FLASH_SELECTORS + " { display: none !important } ";
             }
             initialHideElt.innerText += "iframe { visibility: hidden !important } ";
-	        document.documentElement.insertBefore(initialHideElt, null);
+            if(!response.noInitialHide) document.documentElement.insertBefore(initialHideElt, null);
 	        document.documentElement.insertBefore(elemhideElt, null);
 
             // HACK to hopefully block stuff on beforeload event.

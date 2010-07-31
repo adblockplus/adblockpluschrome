@@ -315,6 +315,11 @@ function reloadFilters() {
                         var tmp = getOptionsObject("priorityAdServers");
                         tmp[x[1]] = true;
                         saveOptionsObject("priorityAdServers", tmp);
+                    } else if(x = f.match(/^!NI (.+)$/)) {
+                        // No Inject is now No Initialhide
+                        var tmp = getOptionsObject("noInitialHideDomains");
+                        tmp[x[1]] = true;
+                        saveOptionsObject("noInitialHideDomains", tmp);
                     }
                     continue;
             }
@@ -390,12 +395,13 @@ var requestDispatchTable = {
         }
         // Merge the filter-list supplied priority ad servers with the hardcoded ones
         var priorityAdServers = getOptionsObject("priorityAdServers");
+        var noInitialHide = isDomainInList(domain, "noInitialHideDomains");
         var allPriorityAdServers = {};
         for(var i in priorityAdServers)
             allPriorityAdServers[i] = true;
         for(var i in TEMP_adservers)
             allPriorityAdServers[i] = true;
-        sendResponse({selectors: selectors, enabled: enabled, priorityAdServers: allPriorityAdServers});
+        sendResponse({selectors: selectors, enabled: enabled, priorityAdServers: allPriorityAdServers, noInitialHide: noInitialHide});
         delete allPriorityAdServers;
     },
     "get-localstorage-option": function(request, sender, sendResponse) {
