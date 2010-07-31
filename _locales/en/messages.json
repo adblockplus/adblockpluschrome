@@ -107,7 +107,7 @@
         "message": "AdThwart is disabled for the domains listed below. You can add a domain either via the AdThwart icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
     },
 	"found_a_bug": {
-        "message": "Found a bug in AdThwart? Please <a href='$url$'>report it here</a>.",
+        "message": "Found a bug? Want to translate AdThwart into your language? Please <a href='$url$'>file a request here</a>.",
 	    "placeholders": {
 	        "url": { "content" : "$1" }
 	    }
