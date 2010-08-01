@@ -367,6 +367,9 @@ function addUserURLFromBox() {
 	saveOptions();
 }
 
+// Set page title to i18n version of "AdThwart Options"
+document.title = chrome.i18n.getMessage("options");
+
 // Display jQuery UI elements
 $(function() { 
     $('#tabs').tabs(); 
