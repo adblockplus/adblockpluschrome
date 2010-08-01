@@ -13,15 +13,15 @@ function loadI18nStrings() {
 }
 
 function i18n_time(h, m) {
-    locale = chrome.i18n.getMessage("@@ui_locale");
-	if(m < 10) m = "0" + m;
+    var locale = chrome.i18n.getMessage("@@ui_locale");
+    if(m < 10) m = "0" + m;
     if(locale == "fr") {
         return h + "h" + m;
     } else {
         var ampm = "a.m.";
     	if(h >= 12) {
-    		h -= 12;
-    		ampm = "p.m.";
+            h -= 12;
+            ampm = "p.m.";
     	}
     	if(h == 0) h = 12;
     	return(h + ":" + m + " " + ampm);
@@ -35,9 +35,9 @@ function i18n_timeDateStrings(when) {
 	var timeString = i18n_time(d.getHours(), d.getMinutes());
 	var now = new Date();
 	if(d.getDate() == now.getDate() && d.getMonth() == now.getMonth() && d.getFullYear() == now.getFullYear())
-		dateString = chrome.i18n.getMessage("today");
+            dateString = chrome.i18n.getMessage("today");
 	else
-		dateString = chrome.i18n.getMessage("date_format", [d.getDate(), monthNames[d.getMonth()], d.getFullYear()]);
+            dateString = chrome.i18n.getMessage("date_format", [d.getDate(), monthNames[d.getMonth()], d.getFullYear()]);
 	
 	return [timeString, dateString];
 }
