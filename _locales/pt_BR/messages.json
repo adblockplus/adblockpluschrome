@@ -1,0 +1,154 @@
+{
+	"description": {
+		"message": "Bloqueador de propagandas usando o mecanismo de filtragem do AdBlock Plus para o Firefox. Dê um beijo de despedida nelas e navegue em paz!"
+	},
+	"month_names": {
+		"message": "[\"Jan\", \"Fev\", \"Mar\", \"Abr\", \"Mai\", \"Jun\", \"Jul\", \"Ago\", \"Set\", \"Out\", \"Nov\", \"Dez\"]",
+		"description": "Abreviação de cada nome do mês."
+	},
+	"date_format": {	
+		"message": "em $day$ de $month$, $year$",
+		"description": "ex: em 1 de Abr, 2011",
+		"placeholders": {
+		    "day": { "content" : "$1" },
+	        "month": { "content" : "$2" },
+		    "year": { "content" : "$3" }
+		}
+	},
+    "options": {
+        "message": "Opções do AdThwart"
+    },
+    "filter_lists": {
+        "message": "Lista de Filtros",
+        "description": "Essa é uma aba do menu."
+    },
+	"last_updated_at": {
+		"message": "Última atualização às $time$ $date$",
+		"description": "ex: Última atualização às 3:00pm, em 1 de Abr, 2011",
+		"placeholders": {
+		    "time": { "content" : "$1" },
+		    "date": { "content" : "$2" }
+		}
+	},
+	"filter_list_desc": {
+		"message": "$title$ por $author$",
+		"description": "ex: FooList por Mr. Foo",
+		"placeholders": {
+		    "title": { "content" : "$1" },
+		    "author": { "content" : "$2" }
+		}
+	},
+	"today": {
+	    "message": "hoje",
+	    "description": "Palavra para expressar 'hoje', como em 'Última atualização hoje'"
+	},
+    "add_your_own_filters": {
+        "message": "Adicione seus próprios filtros"
+    },
+    "whitelisted_domains": {
+        "message": "Domínios permitidos",
+        "description": "Essa é uma aba do menu."
+    },
+    "general": {
+        "message": "Geral",
+        "description": "Essa é uma aba do menu."
+    },
+
+    "add": {
+        "message": "Adicionar",
+        "description": "Esse é o rótulo para os botões de 'Adicionar'."
+    },
+    "add_domain_button": {
+        "message": "Adicionar domínio"
+    },
+    "add_filter_button": {
+        "message": "Adicionar filtro"
+    },
+    "add_url_button": {
+        "message": "Adicionar URL"
+    },
+    "delete": {
+        "message": "deletar",
+        "description": "Palavra para expressar 'deletar'."
+    },
+    "remove_button": {
+        "message": "Remover selecionados",
+        "description": "Esse é o rótulo para os botões de 'Remover selecionados'."
+    },
+    "edit_filters_raw": {
+        "message": "Editar filtros manualmente"
+    },
+    "apply_changes": {
+        "message": "Aplicar mudanças"
+    },
+
+	"enable_only_the": {
+	    "message": "Habilitar somente as listas de filtros que você precisa. Muitos filtros simultâneos podem causar o travamento do seu Chrome."
+	},
+	"out_of_date_lists": {
+	    "message": "Listas obsoletas são atualizadas periodicamente."
+	},
+	"update_now": {
+	    "message": "Atualizar agora"
+	},
+	"add_a_filter_list": {
+	    "message": "Inscrever-se para uma <a href='$url$'>lista de filtro</a> do Firefox AdBlock Plus:",
+	    "placeholders": {
+	        "url": { "content" : "$1" }
+	    }
+	},
+	"filter_must_follow_syntax": {
+	    "message": "Seu filtro deve seguir a <a href='$url$'>sintaxe de filtro do AdBlock Plus</a>. Certos tipos de filtro como requisições realizadas por plugins, por exemplo o Flash, não são suportadas.",
+	    "placeholders": {
+	        "url": { "content" : "$1" }
+	    }
+	},
+	"disabled_for_these_domains": {
+        "message": "O AdThwart está desabilitado para os domínios abaixo. Você pode adicionar um domínio, tanto pelo ícone do AdThwart na barra de endereços, quanto digitando o domínio (não a URL) dentro da caixa e clicando no botão \"Adicionar domínio\"."
+    },
+	"found_a_bug": {
+        "message": "Encontrou um bug? Por favor <a href='$url$'>nos informe a falha por aqui</a>.",
+	    "placeholders": {
+	        "url": { "content" : "$1" }
+	    }
+    },
+    
+    
+    "show_icon": {
+        "message": "Mostrar ícone na barra de endereços"
+    },
+    "disable_inline": {
+        "message": "Desativar propagandas de texto em linha"
+    },
+    "block_youtube": {
+        "message": "Bloquear propagandas dentro de vídeos do YouTube. (não funciona com a extensão FlashBlock)"
+    },
+    
+    "enabled_for_site": {
+        "message": "Habilitado para esse site",
+        "description": "Rótulo para a caixa de verificação em formato de balão que surge ao clicar no ícone do AdThwart"
+    },
+    "easy_create_filter": {
+        "message": "Crie fácil um filtro",
+        "description": "Rótulo para o botão dentro do balão que surge ao clicar no ícone do AdThwart"
+    },
+    "cancel": {
+        "message": "Cancelar",
+        "description": "Rótulo para o botão de Cancelar"
+    },
+    "clickhide_instructions": {
+        "message": "Após o encerramento desta janela, clique (ou dê um clique com o botão direito) em um elemento da página."
+    },
+    "add_filters_msg": {
+        "message": "Adicionar filtro(s)?"
+    },
+    "new_filters_added": {
+        "message": "Novos filtros adicionados; veja em <a id='options_url' target='_blank'>Opções</a> para gerenciá-los."
+    },
+    
+	
+	"hovercraft": {
+		"message": "Meu hovercraft está cheio de enguias.",
+		"description": "Esse é um exemplo de string que pode ser interpretável. Foi citada apenas como uma brincadeira."
+	}
+}
