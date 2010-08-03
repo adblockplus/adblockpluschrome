@@ -105,12 +105,12 @@ function FilterListFetcher(nameOrUrl, callback) {
                 fetcher.callback(fetcher);
                 return;
             } else {
-                fetcher.error = "Not a filter list";
+                fetcher.error = chrome.i18n.getMessage("not_a_filter_list");
                 fetcher.callback(fetcher);
                 return;
             }
         } else if(this.status == 404) {
-            fetcher.error = "Not found on server";
+            fetcher.error = chrome.i18n.getMessage("not_found_on_server");
             localStorage[fetcher.url] = JSON.stringify({lastUpdated: (new Date()).getTime(), error: fetcher.error});
             fetcher.callback(fetcher);
             return;
