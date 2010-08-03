@@ -360,8 +360,10 @@ function hideBySelectorStrings(parent) {
             if(!elts) continue;
             for(var i = 0; i < elts.length; i++) {
                 // TODO: Sometimes style isn't defined, for some reason...
-                try { elts[i].style.visibility = "hidden"; } catch(err) {}
-                try { elts[i].style.display = "none"; } catch(err) {}
+                if(elts[i].style) {
+                    elts[i].style.setProperty("visibility", "hidden");
+                    elts[i].style.setProperty("display", "none");
+                }
             }
         }        
         // console.log("That took " + ((new Date()).getTime() - now) + " ms");
