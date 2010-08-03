@@ -30,6 +30,14 @@
 		    "date": { "content" : "$2" }
 		}
 	},
+	"not_a_filter_list": {
+        "message": "Não é uma lista de filtro",
+        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
+    },
+    "not_found_on_server": {
+        "message": "Não encontrado no servidor",
+        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
+    },
 	"filter_list_desc": {
 		"message": "$title$ por $author$",
 		"description": "ex: FooList por Mr. Foo",
