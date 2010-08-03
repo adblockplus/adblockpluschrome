@@ -121,26 +121,26 @@ var elemhide =
     this.isDirty = true;
   },
   
-    // Returns a list of CSS selectors that should be hidden
-    getSelectorsToHide: function(domain) {
-        // TODO: cache by domain
-        var selectors = new Array();
-        for (i in this.filters) {
-            sel = this.filters[i].selector;
-            if(this.filters[i].isActiveOnDomain(domain))
-            	selectors.push(sel);
-        }
-        return selectors;
+  // Returns a list of CSS selectors that should be hidden
+  getSelectorsToHide: function(domain) {
+    // TODO: cache by domain
+    var selectors = new Array();
+    for (var i in this.filters) {
+      var sel = this.filters[i].selector;
+      if(this.filters[i].isActiveOnDomain(domain))
+      	selectors.push(sel);
+    }
+    return selectors;
   },
   
   getDomainSpecificSelectorsToHide: function(domain) {
-      var selectors = new Array();
-      for (i in this.filters) {
-          sel = this.filters[i].selector;
-          if(this.filters[i].isActiveOnlyOnDomain(domain))
-          	selectors.push(sel);
-      }
-      return selectors;
+    var selectors = new Array();
+    for (var i in this.filters) {
+      var sel = this.filters[i].selector;
+      if(this.filters[i].isActiveOnlyOnDomain(domain))
+        selectors.push(sel);
+    }
+    return selectors;
   }
 };
 abp.elemhide = elemhide;
