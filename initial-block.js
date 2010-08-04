@@ -57,6 +57,25 @@ function nukeSingleElement(elt) {
         pn.parentNode.removeChild(pn);
 }
 
+// Converts relative to absolute URL
+// e.g.: foo.swf on http://example.com/whatever/bar.html
+//  -> http://example.com/whatever/foo.swf 
+function relativeToAbsoluteUrl(url) {
+    if(!url)
+        return url;
+    // If URL is already absolute, don't mess with it
+    if(url.match(/^http/i))
+        return url;
+    // Leading / means absolute path
+    if(url[0] == '/')
+        return document.location.protocol + "//" + document.location.host + url;
+
+    // Remove filename and add relative URL to it
+    var base = document.baseURI.match(/.+\//);
+    if(!base) return document.baseURI + "/" + url;
+    return base[0] + url;
+}
+
 // Extracts a domain name from a URL
 function TEMP_extractDomainFromURL(url) {
     if(!url) return "";
@@ -131,7 +150,9 @@ if (document instanceof HTMLDocument) {
                 } else {
                     // If it isn't a known ad server, we have to ask the backend, which won't
                     // return in time for preventDefault().
-                    chrome.extension.sendRequest({reqtype: "should-block?", url: e.url, type: TagToType[e.target.tagName], domain: document.domain}, function(response) {
+                    // We don't normalize the URL here because the backend will do it.
+                    var url = relativeToAbsoluteUrl(e.url);
+                    chrome.extension.sendRequest({reqtype: "should-block?", url: url, type: TagToType[e.target.tagName], domain: document.domain}, function(response) {
                         if(response.block) {
                             nukeSingleElement(e.target);
                         }
