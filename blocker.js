@@ -370,25 +370,6 @@ function hideBySelectorStrings(parent) {
     }
 }
 
-// Converts relative to absolute URL
-// e.g.: foo.swf on http://example.com/whatever/bar.html
-//  -> http://example.com/whatever/foo.swf 
-function relativeToAbsoluteUrl(url) {
-    if(!url)
-        return url;
-    // If URL is already absolute, don't mess with it
-    if(url.match(/^http/i))
-        return url;
-    // Leading / means absolute path
-    if(url[0] == '/')
-        return document.location.protocol + "//" + document.location.host + url;
-
-    // Remove filename and add relative URL to it
-    var base = document.baseURI.match(/.+\//);
-    if(!base) return document.baseURI + "/" + url;
-    return base[0] + url;
-}
-
 // Extracts source URL from an IMG, OBJECT, EMBED, or IFRAME
 function getElementURL(elt) {
     // Check children of object nodes for "param" nodes with name="movie" that specify a URL
