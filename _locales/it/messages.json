@@ -1,0 +1,162 @@
+{
+    "description": {
+        "message": "Blocca la pubblicità usando il motore di Firefox AdBlock Plus. Dite addio alla pubblicà e navigate in pace!"
+    },
+    "month_names": {
+        "message": "[\"Gen\", \"Feb\", \"Mar\", \"Apr\", \"Mag\", \"Giu\", \"Lug\", \"Ago\", \"Set\", \"Ott\", \"Nov\", \"Dic\"]",
+        "description": "Month short names."
+    },
+    "date_format": {    
+        "message": "il $day$ $month$ $year$",
+        "description": "e.g. Apr 1, 2011",
+        "placeholders": {
+            "day": { "content" : "$1" },
+            "month": { "content" : "$2" },
+            "year": { "content" : "$3" }
+        }
+    },
+    "options": {
+        "message": "Opzioni di AdThwart"
+    },
+    "filter_lists": {
+        "message": "Liste di filtri",
+        "description": "This is a tab heading."
+    },
+    "last_updated_at": {
+        "message": "Ultimo aggiornamento $time$ $date$",
+        "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+        "placeholders": {
+            "time": { "content" : "$1" },
+            "date": { "content" : "$2" }
+        }
+    },
+    "not_a_filter_list": {
+        "message": "Non è un elenco di filtri",
+        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
+    },
+    "not_found_on_server": {
+        "message": "Non trovato sul server",
+        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
+    },
+    "filter_list_desc": {
+        "message": "$title$ di  $author$",
+        "description": "e.g. FooList by Mr. Foo",
+        "placeholders": {
+            "title": { "content" : "$1" },
+            "author": { "content" : "$2" }
+        }
+    },
+    "today": {
+        "message": "oggi",
+        "description": "Word for 'today', as in 'Last updated today'"
+    },
+    "add_your_own_filters": {
+        "message": "Aggiungi filtri personalizzati"
+    },
+    "whitelisted_domains": {
+        "message": "Domini permessi",
+        "description": "This is a tab heading."
+    },
+    "general": {
+        "message": "Generale",
+        "description": "This is a tab heading."
+    },
+
+    "add": {
+        "message": "Aggiungi",
+        "description": "This is the label for the 'Add' buttons."
+    },
+    "add_domain_button": {
+        "message": "Aggiungi dominio"
+    },
+    "add_filter_button": {
+        "message": "Aggiungi filtro"
+    },
+    "add_url_button": {
+        "message": "Aggiungi URL"
+    },
+    "delete": {
+        "message": "cancella",
+        "description": "Word for 'delete'."
+    },
+    "remove_button": {
+        "message": "Rimuovi selezionato",
+        "description": "This is the label for the 'Remove selected' buttons."
+    },
+    "edit_filters_raw": {
+        "message": "Modifica i filtri come testo"
+    },
+    "apply_changes": {
+        "message": "Applica modifiche"
+    },
+
+    "enable_only_the": {
+        "message": "Abilita solo le liste di filtri di cui hai bisogno. Troppe potrebbero rallentare Chrome."
+    },
+    "out_of_date_lists": {
+        "message": "Le liste scadute verranno aggiornate automaticamente."
+    },
+    "update_now": {
+        "message": "Aggiorna adesso"
+    },
+    "add_a_filter_list": {
+        "message": "Sottoscrivi una <a href='$url$'>lista di filtri</a> in formato Firefox AdBlock Plus:",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "filter_must_follow_syntax": {
+        "message": "I filtri personalizzati devono seguire <a href='$url$'>la sintassi di AdBlock Plus</a>. Certi tipi di filtro, come object-subrequest, non sono supportati.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "disabled_for_these_domains": {
+        "message": "AdThwart è disabilitato per i domini elencati qui in basso. Puoi aggiungere un dominio anche tramite l'icona di AdThwart nella barra degli indirizzi o digitando un dominio (non un URL) nell'apposito campo e premendo il pulante \"Aggiungi dominio\"."
+    },
+    "found_a_bug": {
+        "message": "Hai trovato un bug? Vuoi tradurre AdThwart nella tua lingua? Per favore <a href='$url$'>compila questa rischiesta</a>.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    
+    
+    "show_icon": {
+        "message": "Mosta l'icona nella barra degli indirizzi"
+    },
+    "disable_inline": {
+        "message": "Disabilita la pubblicità integrata nel testo"
+    },
+    "block_youtube": {
+        "message": "Blocca la pubblicità nei video YouTube (non funziona con l'estensione FlashBlock)"
+    },
+    
+    "enabled_for_site": {
+        "message": "Abilitato per questo sito",
+        "description": "Popup balloon checkbox label"
+    },
+    "easy_create_filter": {
+        "message": "Creazione facile di un filtro",
+        "description": "Button label in popup balloon"
+    },
+    "cancel": {
+        "message": "Annulla",
+        "description": "Cancel button label"
+    },
+    "clickhide_instructions": {
+        "message": "Dopo la chiusura di questo pop-up, cliccate (o clic destro) su un elemento sulla pagina."
+    },
+    "add_filters_msg": {
+        "message": "Aggiungi filtro(i)?"
+    },
+    "new_filters_added": {
+        "message": "Nuovi filtri aggiunti; vedi <a id='options_url' target='_blank'>Opzioni</a> per gestirli."
+    },
+    
+    
+    "hovercraft": {
+        "message": "Il mio hovercraft è pieno di anguille.",
+        "description": "This is a sample translatable string. It happens to have comedic value."
+    }
+}
