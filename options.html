@@ -9,7 +9,7 @@
 <title>AdThwart Options</title>
 <style type="text/css" media="screen">
 body {
-    max-width: 700px;
+    max-width: 750px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
 }
@@ -401,7 +401,7 @@ $(function() {
 
 <div id="addURLField">	
 <span class="i18n_add_a_filter_list">"http://adblockplus.org/en/subscriptions"</span><br/>
-<input type="text" value="" id="newURL" style="width:400px">
+<input type="text" value="" id="newURL" style="width:500px">
 <button class="addButton" onClick="addUserURLFromBox()"><span class="i18n_add_url_button"></span></button><br/>
 </div>
 </div>
@@ -410,12 +410,12 @@ $(function() {
 <p id="i18n_disabled_for_these_domains"></p>
 
 <table>
-<tr><td>
-<input type="text" value="" id="newWhitelistDomain" style="width:400px"></td>
+<tr><td style="max-width:100%">
+<input type="text" value="" id="newWhitelistDomain" style="width:100%"></td>
 <td><button class="addButton" onClick="addWhitelistDomain()"><span class="i18n_add_domain_button"></span></button></td></tr>
 
 <tr><td>
-<select id="excludedDomainsBox" size="10" style="width:400px; background: white;">
+<select id="excludedDomainsBox" size="10" style="width:500px; background: white;">
 </select></td><td>
 <button class="removeButton" onClick="removeSelectedExcludedDomain()"><span class="i18n_remove_button"></span></button>
 </td></tr></table>
