@@ -5,17 +5,17 @@
 var filterFiles = {
     "easylist": "http://easylist.adblockplus.org/easylist.txt", // "easylist.txt",
     "germany": "http://easylist.adblockplus.org/easylistgermany.txt", // "easylistgermany.txt",
-	"fanboy_es": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-esp.txt",
-	"france": "http://adblockplus.mozdev.org/easylist/liste_fr+easylist.txt", // "liste_fr.txt",
+    "fanboy_es": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-esp.txt",
+    "france": "http://adblockplus.mozdev.org/easylist/liste_fr+easylist.txt", // "liste_fr.txt",
     "china": "http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", // "adblock.txt",
     "russia": "http://ruadlist.googlecode.com/svn/trunk/adblock.txt",
-	"korea": "http://abp-corset.googlecode.com/hg/corset.txt", // "corset.txt",
-	"romania": "http://www.picpoc.ro/menetzrolist.txt", // "menetzrolist.txt",
-	"italy": "http://mozilla.gfsolone.com/filtri.txt", // "filtri.txt",
-	"vietnam": "http://adblockplus-vietnam.googlecode.com/svn/trunk/abpvn.txt",
-	"poland": "http://www.niecko.pl/adblock/adblock.txt", // PLgeneral
-	"hungary": "http://pete.teamlupus.hu/hufilter.txt", // hufilter
-	"extras": "http://adthwart.appspot.com/filters?n=extras"
+    "korea": "http://abp-corset.googlecode.com/hg/corset.txt", // "corset.txt",
+    "romania": "http://www.picpoc.ro/menetzrolist.txt", // "menetzrolist.txt",
+    "italy": "http://mozilla.gfsolone.com/filtri.txt", // "filtri.txt",
+    "vietnam": "http://adblockplus-vietnam.googlecode.com/svn/trunk/abpvn.txt",
+    "poland": "http://www.niecko.pl/adblock/adblock.txt", // PLgeneral
+    "hungary": "http://pete.teamlupus.hu/hufilter.txt", // hufilter
+    "extras": "http://adthwart.appspot.com/filters?n=extras"
 };
 
 var filterListTitles = {
@@ -58,8 +58,7 @@ var MAX_EXPIRE_TIME = 14 * 86400 * 1000;
 function loadUserFilterURLs() {
     // Get rid of all user_* entries; we'll restore them from localStorage
     for(key in filterFiles) {
-        if(key.match(/^user_/))
-            delete filterFiles[key];
+        if(key.match(/^user_/)) delete filterFiles[key];
     }
     // Read from localStorage
     if(typeof localStorage["userFilterURLs"] != "string")
