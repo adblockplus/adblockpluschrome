@@ -1,0 +1,162 @@
+{
+    "description": {
+        "message": "Blockt Werbung mithilfe der Firefox AdBlock Plus - Engine. Sagen Sie Werbung auf Wiedersehen und surfen Sie in Ruhe!"
+    },
+    "month_names": {
+        "message": "[\"Jaen\", \"Feb\", \"Maer\", \"Apr\", \"Mai\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Okt\", \"Nov\", \"Dez\"]",
+        "description": "Monat - Abkuerzungen."
+    },
+    "date_format": {    
+        "message": "$day$.$month$ $year$",
+        "description": "z.B. 1.Apr 2011",
+        "placeholders": {
+            "day": { "content" : "$1" },
+            "month": { "content" : "$2" },
+            "year": { "content" : "$3" }
+        }
+    },
+    "options": {
+        "message": "AdThwart Optionen"
+    },
+    "filter_lists": {
+        "message": "Filter Liste",
+        "description": "Das ist ein Reiter-Name."
+    },
+    "last_updated_at": {
+        "message": "Zuletzt aktualisiert am $date$ um $time$",
+        "description": "z.B. Zuletzt aktualisiert am 1.Apr 2011 um 12:51",
+        "placeholders": {
+            "time": { "content" : "$1" },
+            "date": { "content" : "$2" }
+        }
+    },
+    "not_a_filter_list": {
+        "message": "Ungueltige Filter Liste",
+        "description": "In der Datei options.html wird ein Fehler angezeigt, wenn man eine ungueltige Filter Liste angibt."
+    },
+    "not_found_on_server": {
+        "message": "Filter Liste nicht auf Server gefunden",
+        "description": "In der Datei options.html wird ein Fehler angezeigt, wenn man eine FIlter Liste nciht auf dem Server gefunden wird."
+    },
+    "filter_list_desc": {
+        "message": "$title$ von $author$",
+        "description": "z.B. FooList von Mr. Foo",
+        "placeholders": {
+            "title": { "content" : "$1" },
+            "author": { "content" : "$2" }
+        }
+    },
+    "today": {
+        "message": "",
+        "description": "Wort fuer 'today' 'Last updated at 12:51, today' (Im Deutschen nicht zu gebrauchen)"
+    },
+    "add_your_own_filters": {
+        "message": "Eigene Filter hinzufuegen"
+    },
+    "whitelisted_domains": {
+        "message": "Ausnahme",
+        "description": "Das ist ein Reiter-Name."
+    },
+    "general": {
+        "message": "Allgemein",
+        "description": "Das ist ein Reiter-Name."
+    },
+
+    "add": {
+        "message": "Hinzufuegen",
+        "description": "Name fuer die 'Hinzufuegen'-Buttons."
+    },
+    "add_domain_button": {
+        "message": "Domain hinzufuegen"
+    },
+    "add_filter_button": {
+        "message": "Filter hinzufuegen"
+    },
+    "add_url_button": {
+        "message": "URL hinzufuegen"
+    },
+    "delete": {
+        "message": "loeschen",
+        "description": "Wort fuer 'loeschen'."
+    },
+    "remove_button": {
+        "message": "Ausgewaehlte entfernen",
+        "description": "Name fuer die 'Ausgewaehlte entfernen'-Buttons."
+    },
+    "edit_filters_raw": {
+        "message": "Filter als reinen Text editieren"
+    },
+    "apply_changes": {
+        "message": "Änderungen uebernehmen"
+    },
+
+    "enable_only_the": {
+        "message": "Waehlen Sie nur die Filter aus, die Sie brauchen. Bei zu vielen Filtern kann Google Chrome langsamer werden."
+    },
+    "out_of_date_lists": {
+        "message": "Abgelaufene Filter werden regelmaeßig aktualisiert."
+    },
+    "update_now": {
+        "message": "Jetzt updaten"
+    },
+    "add_a_filter_list": {
+        "message": "Fuegen Sie ein Firefox AdBlock Plus <a href='$url$'>Filter Liste</a> hinzu:",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "filter_must_follow_syntax": {
+        "message": "Ihr Filter muss nach der <a href='$url$'>AdBlock Plus Filter Syntax</a> geschrieben werden. Manche Filter Arten, wie object-subrequest (Anfragen, die von Plugins gestartet werden), werden nicht unterstuetzt.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "disabled_for_these_domains": {
+        "message": "AdThwart wird fuer die unten aufgelisteten Domains deaktiviert. Sie koennen eine Domain via AdThwart-Icon in der Adressleiste hinzufuegen oder Sie schreiben eine Domain in die Textzeile und druecken auf \"Domain hinzufuegen\"."
+    },
+    "found_a_bug": {
+        "message": "Sie haben einen Bug gefunden oder wollen AdThwart in eine andere Sprache uebersetzen? Bitte schreiben Sie <a href='$url$'>hier</a> ihre Anfrage.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    
+    
+    "show_icon": {
+        "message": "Zeige Icon in der Adressleiste"
+    },
+    "disable_inline": {
+        "message": "Blocke Inline Text Werbung"
+    },
+    "block_youtube": {
+        "message": "Blocke Werbung in YouTube Videos (funktioniert nicht mit der FlashBlock Erweiterung)"
+    },
+    
+    "enabled_for_site": {
+        "message": "Fuer diese Seite aktivieren",
+        "description": "AdThwart-Icon Kontextmenue"
+    },
+    "easy_create_filter": {
+        "message": "Einfach Filter erstellen",
+        "description": "AdThwart-Icon Kontextmenue"
+    },
+    "cancel": {
+        "message": "Abbrechen",
+        "description": "Name fuer den 'Abbrechen'-Button"
+    },
+    "clickhide_instructions": {
+        "message": "Nachdem Sie dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
+    },
+    "add_filters_msg": {
+        "message": "Filter hinzufuegen?"
+    },
+    "new_filters_added": {
+        "message": "Neue Filter hinzugefuegt; klicken Sie auf <a id='options_url' target='_blank'>Optionen</a> um sie zu verwalten."
+    },
+    
+    
+    "hovercraft": {
+        "message": "Mein Luftkissenfahrzeug ist voller Aale.",
+        "description": "Das ist ein einfach uebersetzbarer Text. Er ist nur zum Spaß da."
+    }
+}
