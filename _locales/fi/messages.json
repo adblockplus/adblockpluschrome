@@ -1,0 +1,162 @@
+﻿{
+    "description": {
+        "message": "Estä mainokset käyttäen Firefox AdBlock Plussan suodatinmenetelmää. Hyvästele mainokset ja jatka surffailua rauhassa!"
+    },
+    "month_names": {
+        "message": "[\"Tammi\", \"Helmi\", \"Maalis\", \"Huhti\", \"Touko\", \"Kesä\", \"Heinä\", \"Elo\", \"Syys\", \"Loka\", \"Marras\", \"Joulu\"]",
+        "description": "Month short names."
+    },
+    "date_format": {    
+        "message": "on $month$ $day$, $year$",
+        "description": "e.g. Apr 1, 2011",
+        "placeholders": {
+            "day": { "content" : "$1" },
+            "month": { "content" : "$2" },
+            "year": { "content" : "$3" }
+        }
+    },
+    "options": {
+        "message": "AdThwart asetukset"
+    },
+    "filter_lists": {
+        "message": "Suodatinlistat",
+        "description": "This is a tab heading."
+    },
+    "last_updated_at": {
+        "message": "Viimeksi päivitetty $time$ $date$",
+        "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+        "placeholders": {
+            "time": { "content" : "$1" },
+            "date": { "content" : "$2" }
+        }
+    },
+    "not_a_filter_list": {
+        "message": "Ei suodatinlista",
+        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
+    },
+    "not_found_on_server": {
+        "message": "Palvelinta ei löydetty",
+        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
+    },
+    "filter_list_desc": {
+        "message": "$title$ by $author$",
+        "description": "e.g. FooList by Mr. Foo",
+        "placeholders": {
+            "title": { "content" : "$1" },
+            "author": { "content" : "$2" }
+        }
+    },
+    "today": {
+        "message": "tänään",
+        "description": "Word for 'today', as in 'Last updated today'"
+    },
+    "add_your_own_filters": {
+        "message": "Lisää omia suodattimia"
+    },
+    "whitelisted_domains": {
+        "message": "Sallitut sivut",
+        "description": "This is a tab heading."
+    },
+    "general": {
+        "message": "Yleiset",
+        "description": "This is a tab heading."
+    },
+
+    "add": {
+        "message": "Lisää",
+        "description": "This is the label for the 'Add' buttons."
+    },
+    "add_domain_button": {
+        "message": "Lisää sivu"
+    },
+    "add_filter_button": {
+        "message": "Lisää suodatin"
+    },
+    "add_url_button": {
+        "message": "Lisää URL"
+    },
+    "delete": {
+        "message": "Poista",
+        "description": "Word for 'delete'."
+    },
+    "remove_button": {
+        "message": "Poista valitut",
+        "description": "This is the label for the 'Remove selected' buttons."
+    },
+    "edit_filters_raw": {
+        "message": "Editoi suodattimia tekstimuodossa"
+    },
+    "apply_changes": {
+        "message": "Hyväksy muutokset"
+    },
+
+    "enable_only_the": {
+        "message": "Valitse ainoastaan ne suodatinlistat joita tarvitset. Liian moni lista voi tehdä Chromesta epävakaan."
+    },
+    "out_of_date_lists": {
+        "message": "Vanhentuneet listat päivitetään säännöllisesti."
+    },
+    "update_now": {
+        "message": "Päivitä nyt"
+    },
+    "add_a_filter_list": {
+        "message": "Tilaa Firefox AdBlock Plus <a href='$url$'>suodatinlistoja</a>:",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "filter_must_follow_syntax": {
+        "message": "Suodattimen täytyy seurata <a href='$url$'>AdBlock Plus suodatinkaavaa</a>. Tietyt suodatinyypit, kuten objektien alapyynnöt, eivät ole tuettuja.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "disabled_for_these_domains": {
+        "message": "AdThwart ei estä mainoksia sivuilla jotka ovat alla listattuna. Voit lisätä sivun joko AdThwart kuvakkeesta osoiteriviltä tai kirjoittamalla sivun (ei osoitetta) laatikkoon ja klikkaamalla \"lisää sivu\" nappia."
+    },
+    "found_a_bug": {
+        "message": "Löysitkö vian? Haluatko kääntää AdThwartin omalle kielellesi? Ole hyvä ja <a href='$url$'>kirjoita hakemus täällä</a>.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    
+    
+    "show_icon": {
+        "message": "Näytä kuva osoiterivillä"
+    },
+    "disable_inline": {
+        "message": "Estä tekstimainokset"
+    },
+    "block_youtube": {
+        "message": "Estä YouTube videoiden sisaiset mainokset (ei toimi Flash Block laajennuksen kanssa)"
+    },
+    
+    "enabled_for_site": {
+        "message": "Käytössä tällä sivulla",
+        "description": "Popup balloon checkbox label"
+    },
+    "easy_create_filter": {
+        "message": "Lisää suodatin",
+        "description": "Button label in popup balloon"
+    },
+    "cancel": {
+        "message": "Peruuta",
+        "description": "Cancel button label"
+    },
+    "clickhide_instructions": {
+        "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
+    },
+    "add_filters_msg": {
+        "message": "Lisää suodatin?"
+    },
+    "new_filters_added": {
+        "message": "Uusi suodatin lisätty; mene <a id='options_url' target='_blank'>asetuksiin</a> editoidaksesi niitä."
+    },
+    
+    
+    "hovercraft": {
+        "message": "Ilmatyynyalukseni on täynnä ankeriaita.",
+        "description": "This is a sample translatable string. It happens to have comedic value."
+    }
+}
