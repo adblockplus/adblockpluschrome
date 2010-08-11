@@ -312,10 +312,15 @@ function reloadFilters() {
     // filterFilesEnabled is a bit of a misnomer - can include URLs too, and it
     // includes the enabled state of the particular filter set.
     // But if we change it, we'll break current installations
-    var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {};
+    var filterFilesEnabled = {};
+    var firstRun = true;
+    if(typeof localStorage["filterFilesEnabled"] == "string") {
+        filterFilesEnabled = JSON.parse(localStorage["filterFilesEnabled"]);
+        firstRun = false;
+    }
 
     // Previous versions didn't store info about EasyList and extras.txt, so turn them on by default.
-    if(!("easylist" in filterFilesEnabled)) {
+    if(firstRun) {
         // Enable filter lists according to the current locale. This will only run on
         // fresh installations.
         var locale = chrome.i18n.getMessage("@@ui_locale");
