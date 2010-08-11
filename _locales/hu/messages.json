@@ -107,7 +107,7 @@
         "message": "Az AdThwart le van tiltva az alább felsorolt területeken. Egy domaint megadhatsz az AdThwart ikonra kattintva a címsorban, vagy beírhatod a donaint (nem az URL-t) a dobozba és kattints a  \"Add domain\" gombra."
     },
 	"found_a_bug": {
-        "message": "Találtál egy hibát az AdTwart-ban? Kérlek <a href='$url$'>jelentsd itt</a>.",
+        "message": "Találtál egy hibát az AdThwart-ban? Kérlek <a href='$url$'>jelentsd itt</a>.",
 	    "placeholders": {
 	        "url": { "content" : "$1" }
 	    }
