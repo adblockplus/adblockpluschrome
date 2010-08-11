@@ -96,7 +96,7 @@ function addElementOverlay(elt) {
     overlay.prisoner = elt;
     overlay.prisonerURL = url;
     overlay.className = "__adthwart__overlay";
-    overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box; z-index: 2147483647');
+    overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box; z-index: 99999');
     var pos = getAbsolutePosition(elt);
     overlay.style.left = pos[0] + "px";
     overlay.style.top = pos[1] + "px";
