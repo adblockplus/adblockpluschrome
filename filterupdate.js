@@ -52,7 +52,7 @@ var filterListAuthors = {
 var defaultFilterListsByLocale = {
     "de": ['easylist', 'germany'],
     "es": ['easylist', 'fanboy_es'],
-    "fr": ['easylist', 'france'],
+    "fr": ['france'],
     "hu": ['easylist', 'hungary'],
     "it": ['easylist', 'italy'],
     "ko": ['easylist', 'korea'],
