@@ -48,21 +48,23 @@ var filterListAuthors = {
 };
 
 // Filter lists turned on by default, guessed based on i18n reported locale.
-// "easylist" and "extras" are on by default everywhere, so they aren't included here.
+// "easylist" and "extras" should be on by default everywhere, so it isn't included here.
 var defaultFilterListsByLocale = {
-    "de": ['germany'],
-    "es": ['fanboy_es'],
-    "fr": ['france'],
-    "hu": ['hungary'],
-    "it": ['italy'],
-    "ko": ['korea'],
-    "po": ['poland'],
-    "pt": ['fanboy_es'],
-    "pt_BR": ['fanboy_es'],
-    "ro": ['romania'],
-    "ru": ['russia'],
-    "vn": ['vietnam'],
-    "zh": ['china']
+    "de": ['easylist', 'germany'],
+    "es": ['easylist', 'fanboy_es'],
+    "fr": ['easylist', 'france'],
+    "hu": ['easylist', 'hungary'],
+    "it": ['easylist', 'italy'],
+    "ko": ['easylist', 'korea'],
+    "po": ['easylist', 'poland'],
+    "pt": ['easylist', 'fanboy_es'],
+    "pt_BR": ['easylist', 'fanboy_es'],
+    "ro": ['easylist', 'romania'],
+    "ru": ['easylist', 'russia'],
+    "vn": ['easylist', 'vietnam'],
+    "zh": ['easylist', 'china'],
+    "zh_CN": ['easylist', 'china'],
+    "zh_TW": ['easylist', 'china']
 };
 
 // Default filter list expiration time is 3 days (specified in milliseconds)

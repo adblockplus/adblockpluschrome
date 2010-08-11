@@ -320,11 +320,13 @@ function reloadFilters() {
         // fresh installations.
         var locale = chrome.i18n.getMessage("@@ui_locale");
         if(locale in defaultFilterListsByLocale) {
-            for(var i = 0; i < defaultFilterListsByLocale[locale]; i++) {
+            for(var i = 0; i < defaultFilterListsByLocale[locale].length; i++) {
                 filterFilesEnabled[defaultFilterListsByLocale[locale][i]] = true;
             }
+        } else {
+            // Turn on EasyList if we didn't special-case this locale
+            filterFilesEnabled["easylist"] = true;
         }
-        filterFilesEnabled["easylist"] = true;
         filterFilesEnabled["extras"] = true;
         localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
     }
