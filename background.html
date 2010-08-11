@@ -316,6 +316,14 @@ function reloadFilters() {
 
     // Previous versions didn't store info about EasyList and extras.txt, so turn them on by default.
     if(!("easylist" in filterFilesEnabled)) {
+        // Enable filter lists according to the current locale. This will only run on
+        // fresh installations.
+        var locale = chrome.i18n.getMessage("@@ui_locale");
+        if(locale in defaultFilterListsByLocale) {
+            for(var i = 0; i < defaultFilterListsByLocale[locale]; i++) {
+                filterFilesEnabled[defaultFilterListsByLocale[locale][i]] = true;
+            }
+        }
         filterFilesEnabled["easylist"] = true;
         filterFilesEnabled["extras"] = true;
         localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);

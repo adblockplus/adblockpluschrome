@@ -47,6 +47,24 @@ var filterListAuthors = {
     "hungary": 'Szabó Péter'
 };
 
+// Filter lists turned on by default, guessed based on i18n reported locale.
+// "easylist" and "extras" are on by default everywhere, so they aren't included here.
+var defaultFilterListsByLocale = {
+    "de": ['germany'],
+    "es": ['fanboy_es'],
+    "fr": ['france'],
+    "hu": ['hungary'],
+    "it": ['italy'],
+    "ko": ['korea'],
+    "po": ['poland'],
+    "pt": ['fanboy_es'],
+    "pt_BR": ['fanboy_es'],
+    "ro": ['romania'],
+    "ru": ['russia'],
+    "vn": ['vietnam'],
+    "zh": ['china']
+};
+
 // Default filter list expiration time is 3 days (specified in milliseconds)
 // But, in case that is garbled in the filter list, clamp it to a predefined range
 var DEFAULT_EXPIRE_TIME =  3 * 86400 * 1000;
