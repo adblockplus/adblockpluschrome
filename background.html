@@ -221,7 +221,7 @@ function refreshIcon(tab) {
     var excluded = isDomainExcluded(domain);
     iconFilename = excluded ? "icons/face-devilish-grayed-19.png" : "icons/face-devilish-19.png";
     chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
-    var title = "AdThwart is " + (excluded ? "disabled" : "enabled") + " for " + domain;
+    var title = "AdThwart";
     // Don't show icon for chrome*:// pages
     if(tab.url.substring(0, 6) != "chrome") {
         chrome.pageAction.setTitle({tabId: tab.id, title: title});
