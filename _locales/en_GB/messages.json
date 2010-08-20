@@ -1,0 +1,11 @@
+{
+    "date_format": {    
+        "message": "on $day$ $month$ $year$",
+        "description": "e.g. Apr 1, 2011",
+        "placeholders": {
+            "day": { "content" : "$1" },
+            "month": { "content" : "$2" },
+            "year": { "content" : "$3" }
+        }
+    }
+}
