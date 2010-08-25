@@ -61,7 +61,7 @@ var defaultFilterListsByLocale = {
     "pt_BR": ['easylist', 'fanboy_es'],
     "ro": ['easylist', 'romania'],
     "ru": ['easylist', 'russia'],
-    "vn": ['easylist', 'vietnam'],
+    "vi": ['easylist', 'vietnam'],
     "zh": ['easylist', 'china'],
     "zh_CN": ['easylist', 'china'],
     "zh_TW": ['easylist', 'china']
