@@ -100,7 +100,7 @@
 	    }
 	},
 	"filter_must_follow_syntax": {
-	    "message": "Il faut que votre filtre suivre <a href='$url$'>le syntaxe AdBlock Plus</a>. Certains types de filtre, comme object-subrequest, ne sont pas supportés.",
+	    "message": "Il faut que votre filtre suive <a href='$url$'>le syntaxe AdBlock Plus</a>. Certains types de filtre, comme object-subrequest, ne sont pas supportés.",
 	    "placeholders": {
 	        "url": { "content" : "$1" }
 	    }
