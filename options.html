@@ -163,8 +163,8 @@ function addWhitelistDomain() {
 
 // Adds filter text that user typed to the selection box
 function addTypedFilter() {
-    var filterText = document.getElementById("newFilter").value.split(' ').join('');
-    // ABP filters don't have whitespace
+    var filterText = document.getElementById("newFilter").value.replace(/^\s*(.+?)\s*$/g, "$1");
+    // ABP filters accept also CSS selectors, spaces are allowed inside filter
     if(filterText == "") return;
     appendToListBox("userFiltersBox", filterText);
     saveOptions();
