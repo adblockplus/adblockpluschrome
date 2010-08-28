@@ -10,7 +10,6 @@ var abp = {};
 <script type="text/javascript" src="adblockplus/filterListener.js"></script>
 <script type="text/javascript" src="adblockplus/matcher.js"></script>
 <script type="text/javascript" src="filterupdate.js"></script>
-<script type="text/javascript" src="TEMP_adservers.js"></script>
 <script type="text/javascript" charset="utf-8">
 
 // Special-case domains for which we should only inject their specific
@@ -27,6 +26,9 @@ var clickHideActive = false;
 // List of URLs currently being downloaded; used to prevent multiple requests
 // for the same URL from actually causing multiple downloads
 var downloading = {};
+// Hopefully temporary list of ad servers that we can use simple string
+// matching for instead of querying the blocking engine (see initial-block.js)
+var TEMP_adservers = {};
 
 // Extracts a domain name from a URL
 function extractDomainFromURL(url) {
