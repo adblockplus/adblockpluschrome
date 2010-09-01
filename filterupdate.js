@@ -8,7 +8,7 @@ var filterFiles = {
     "fanboy_es": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-esp.txt",
     "france": "http://adblockplus.mozdev.org/easylist/liste_fr+easylist.txt", // "liste_fr.txt",
     "china": "http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", // "adblock.txt",
-    "russia": "http://ruadlist.googlecode.com/svn/trunk/adblock.txt",
+    "russia": "http://ruadlist.googlecode.com/svn/trunk/advblock.txt",
     "korea": "http://abp-corset.googlecode.com/hg/corset.txt", // "corset.txt",
     "romania": "http://www.picpoc.ro/menetzrolist.txt", // "menetzrolist.txt",
     "italy": "http://mozilla.gfsolone.com/filtri.txt", // "filtri.txt",
