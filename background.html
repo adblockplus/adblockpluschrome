@@ -414,7 +414,12 @@ chrome.extension.onConnect.addListener(function(port) {
                 var url = normalizeURL(msg.urls[i]);
                 // thirdParty is true if the domain of the element URL does not match the domain of the
                 // document. This allows filters to allow people to visit ads directly and still see them.
-                var thirdParty = !(msg.domain === extractDomainFromURL(msg.urls[i]));
+                // Requests to www.foo.com from document at foo.com are not considered third-party.
+                // To avoid situation where requests to barfoo.com from document at foo.com are
+                // also not considered third-party, we prepend a dot to each string before matching.
+                // e.g. .www.foo.com contains .foo.com but .www.barfoo.com does not
+                var reqDomain = "." + extractDomainFromURL(msg.urls[i]);
+                var thirdParty = !(reqDomain.match("\\." + msg.domain + "$"));
                 if(whitelistMatcher.matchesAny(url, msg.types[i], msg.domain, thirdParty))
                     continue;
                 if(blacklistMatcher.matchesAny(url, msg.types[i], msg.domain, thirdParty)) {
