@@ -1,121 +1,162 @@
 {
-   "description": {
-       "message": "Blocks ads using the Firefox AdBlock Plus filter engine. Kiss ads goodbye and browse in peace!"
-   },
-   "options": {
-       "message": "AdThwart 옵션"
-   },
-   "filter_lists": {
-       "message": "필터 목록",
-       "description": "This is a tab heading."
-   },
-   "add_your_own_filters": {
-       "message": "필터 추가"
-   },
-   "whitelisted_domains": {
-       "message": "도메인",
-       "description": "This is a tab heading."
-   },
-   "general": {
-       "message": "일반",
-       "description": "This is a tab heading."
-   },
+    "description": {
+        "message": "파이어폭스의 Adblock Plus 필터를 이용해 광고를 제거합니다. 광고와 작별 인사를, 브라우저에는 쾌적함을!"
+    },
+    "month_names": {
+        "message": "[\"1월\", \"2월\", \"3월\", \"4월\", \"5월\", \"6월\", \"7월\", \"8월\", \"9월\", \"10월\", \"11월\", \"12월\"]",
+        "description": "Month short names."
+    },
+    "date_format": {    
+        "message": "$year$년 $month$ $day$일",
+        "description": "e.g. Apr 1, 2011",
+        "placeholders": {
+            "day": { "content" : "$1" },
+            "month": { "content" : "$2" },
+            "year": { "content" : "$3" }
+        }
+    },
+    "options": {
+        "message": "AdThwart - 애드스워트 옵션"
+    },
+    "filter_lists": {
+        "message": "구독 필터",
+        "description": "This is a tab heading."
+    },
+    "last_updated_at": {
+        "message": "$date$ $time$에 마지막으로 업데이트됨",
+        "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+        "placeholders": {
+            "time": { "content" : "$1" },
+            "date": { "content" : "$2" }
+        }
+    },
+    "not_a_filter_list": {
+        "message": "구독 필터의 올바른 형식이 아닙니다.",
+        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
+    },
+    "not_found_on_server": {
+        "message": "서버에 구독 필터가 존재하지 않습니다.",
+        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
+    },
+    "filter_list_desc": {
+        "message": "$title$ - 필터 유지자 : $author$",
+        "description": "e.g. FooList by Mr. Foo",
+        "placeholders": {
+            "title": { "content" : "$1" },
+            "author": { "content" : "$2" }
+        }
+    },
+    "today": {
+        "message": "오늘",
+        "description": "Word for 'today', as in 'Last updated today'"
+    },
+    "add_your_own_filters": {
+        "message": "사용자 필터"
+    },
+    "whitelisted_domains": {
+        "message": "허용 도메인",
+        "description": "This is a tab heading."
+    },
+    "general": {
+        "message": "일반",
+        "description": "This is a tab heading."
+    },
 
-   "add": {
-       "message": "추가",
-       "description": "This is the label for the 'Add' buttons."
-   },
-   "add_domain_button": {
-       "message": "도메인 추가"
-   },
-   "add_filter_button": {
-       "message": "필터 추가"
-   },
-   "add_url_button": {
-       "message": "URL 추가"
-   },
-   "remove_button": {
-       "message": "선택사항 삭제",
-       "description": "This is the label for the 'Remove selected' buttons."
-   },
-   "delete": {
-       "message": "삭제",
-       "description": "Word for 'delete'."
-   },
-   "edit_filters_raw": {
-       "message": "필터 수정"
-   },
-   "apply_changes": {
-       "message": "변경사항 적용"
-   },
+    "add": {
+        "message": "추가",
+        "description": "This is the label for the 'Add' buttons."
+    },
+    "add_domain_button": {
+        "message": "도메인 추가"
+    },
+    "add_filter_button": {
+        "message": "필터 추가"
+    },
+    "add_url_button": {
+        "message": "URL 추가"
+    },
+    "delete": {
+        "message": "삭제",
+        "description": "Word for 'delete'."
+    },
+    "remove_button": {
+        "message": "선택된 항목 제거",
+        "description": "This is the label for the 'Remove selected' buttons."
+    },
+    "edit_filters_raw": {
+        "message": "필터 편집"
+    },
+    "apply_changes": {
+        "message": "적용"
+    },
 
-       "enable_only_the": {
-           "message": "필요한 필터만 활성화하십시오. 필터가 너무 많으면 크롬의 반응이 느려질 수 있습니다."
-       },
-       "out_of_date_lists": {
-           "message": "최신 목록으로 주기적인 업데이트가 됩니다."
-       },
-       "update_now": {
-           "message": "지금 업데이트"
-       },
-       "add_a_filter_list": {
-           "message": "파이어폭스의 Adblock Plus <a href='$url$'>구독 필터 목록</a>:",
-            "placeholders": {
-   	            "url": { "content" : "$1" }
-   	        }
-       },
-       "filter_must_follow_syntax": {
-           "message": "당신의 필터는 AdBlock Plus 필터의 신택스를 따라야 합니다. <a href='$url$'> </a>. 특정 필터 타입은 지원되지 않습니다. ",
-   	    "placeholders": {
-   	        "url": { "content" : "$1" }
-   	    }
-       },
-       "disabled_for_these_domains": {
-       "message": "AdThwart가 다음의 도메인들에 대해서 비활성화 되었습니다. 주소바의 AdThwart 아이콘을 클릭하거나 도메인을 (URL이 아닌) 직접 타이핑해서 새로운 도메인을 추가할 수 있습니다."
-   },
-       "found_a_bug": {
-       "message": "버그를 발견하셨나요? 다음 주소로 버그신고를 해주시면 감사하겠습니다: <a href='$url$'>Report bug</a>",
-	    "placeholders": {
-	        "url": { "content" : "$1" }
-	    }
-   },
-
-
-   "show_icon": {
-       "message": "주소 바에 아이콘 보이기"
-   },
-   "disable_inline": {
-       "message": "인라인 텍스트 광고를 비활성화 합니다."
-   },
-   "block_youtube": {
-       "message": "유투브 동영상안의 광고를 막습니다. (플래시블락 확장자에게는 영향을 주지 않음)"
-   },
-
-   "enabled_for_site": {
-       "message": "이 사이트에 대해서 활성화하기",
-       "description": "Popup balloon checkbox label"
-   },
-   "easy_create_filter": {
-       "message": "쉬운 필터 만들기",
-       "description": "Button label in popup balloon"
-   },
-   "cancel": {
-       "message": "취소",
-       "description": "Cancel button label"
-   },
-   "clickhide_instructions": {
-       "message": "이 팝업창을 닫은후에 페이지위의 아무 개체를 클릭하거나 (혹은 우측버튼 클릭)."
-   },
-   "add_filters_msg": {
-       "message": "필터 추가?"
-   },
-   "new_filters_added": {
-       "message": "새로운 필터가 추가되었습니다. 필터 관리를 위해서 다음을 보세요 <a id='options_url' target='_blank'>Options</a>"
-   },
-
-       
-       "hovercraft": {
-               "message": "내 하버크래프트는 뱀장어로 가득해요.",
-               "description": "This is a sample translatable string. It happens to have comedic value."
-       }
+    "enable_only_the": {
+        "message": "필요한 구독 필터만 구독하십시오. 불필요한 구독 필터를 너무 많이 구독하면 크롬의 로딩 속도가 느려지거나 어떤 문제가 발생 수 있습니다."
+    },
+    "out_of_date_lists": {
+        "message": "구독 필터는 주기적으로 자동 업데이트됩니다."
+    },
+    "update_now": {
+        "message": "지금 업데이트"
+    },
+    "add_a_filter_list": {
+        "message": "파이어폭스의 AdBlock Plus 구독 필터 추가 : <a href='$url$'>구독 필터 전체 목록</a>",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "filter_must_follow_syntax": {
+        "message": "사용자 필터는 <a href='$url$'>AdBlock Plus의 필터 작성 방법</a>을 따라야 합니다. 필터의 특정 구문은 지원하지 않습니다.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "disabled_for_these_domains": {
+        "message": "AdThwart가 다음의 도메인에서는 광고를 제거하지 않습니다. 주소 표시줄의 AdThwart 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"Add domain\" 버튼을 클릭합니다."
+    },
+    "found_a_bug": {
+        "message": "버그를 발견하셨습니까? 애드스워트를 여러분의 언어로 번역하고 싶습니까? 다음 주소로 연락을 주십시오 : <a href='$url$'>문의하기</a>",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    
+    
+    "show_icon": {
+        "message": "주소 표시줄에 아이콘 보이기"
+    },
+    "disable_inline": {
+        "message": "인라인 텍스트 광고를 보지 않음"
+    },
+    "block_youtube": {
+        "message": "유튜브 동영상 내부 광고를 차단함 [플래시블록(FlashBlock) 확장 프로그램으로는 작동하지 않음]"
+    },
+    
+    "enabled_for_site": {
+        "message": "이 사이트에 필터를 적용함",
+        "description": "Popup balloon checkbox label"
+    },
+    "easy_create_filter": {
+        "message": "광고 영역 숨김",
+        "description": "Button label in popup balloon"
+    },
+    "cancel": {
+        "message": "취소",
+        "description": "Cancel button label"
+    },
+    "clickhide_instructions": {
+        "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
+    },
+    "add_filters_msg": {
+        "message": "새 필터를 추가하시겠습니까?"
+    },
+    "new_filters_added": {
+        "message": "새 필터가 추가되었습니다. 필터 관리 : <a id='options_url' target='_blank'>옵션</a>"
+    },
+    
+    
+    "hovercraft": {
+        "message": "메이비는 최고의 팔색조 가수이다.",
+        "description": "This is a sample translatable string. It happens to have comedic value."
+    }
 }
