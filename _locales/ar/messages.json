@@ -1,0 +1,162 @@
+{
+    "description": {
+        "message": "منع الإعلانات بإستخدام محرك الفلاتر الخاص بـ Firefox AdBlock Plus. قبل الإعلانات وداعأ ومتصفحك في سلام!"
+    },
+    "month_names": {
+        "message": "[\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"]",
+        "description": "Month short names."
+    },
+    "date_format": {    
+        "message": "on $month$ $day$, $year$",
+        "description": "e.g. Apr 1, 2011",
+        "placeholders": {
+            "day": { "content" : "$1" },
+            "month": { "content" : "$2" },
+            "year": { "content" : "$3" }
+        }
+    },
+    "options": {
+        "message": "AdThwart خصائص"
+    },
+    "filter_lists": {
+        "message": "قائمة الفلاتر",
+        "description": "This is a tab heading."
+    },
+    "last_updated_at": {
+        "message": "أخر تحديث في $time$ $date$",
+        "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+        "placeholders": {
+            "time": { "content" : "$1" },
+            "date": { "content" : "$2" }
+        }
+    },
+    "not_a_filter_list": {
+        "message": "ليست قائمة فلاتر",
+        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
+    },
+    "not_found_on_server": {
+        "message": "لم يتم إيجاده على الخادم",
+        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
+    },
+    "filter_list_desc": {
+        "message": "$title$ بواسطة $author$",
+        "description": "e.g. FooList by Mr. Foo",
+        "placeholders": {
+            "title": { "content" : "$1" },
+            "author": { "content" : "$2" }
+        }
+    },
+    "today": {
+        "message": "اليوم",
+        "description": "Word for 'today', as in 'Last updated today'"
+    },
+    "add_your_own_filters": {
+        "message": "أضف الفلاتر الخاصة بك"
+    },
+    "whitelisted_domains": {
+        "message": "نطاقات القائمة البيضاء",
+        "description": "This is a tab heading."
+    },
+    "general": {
+        "message": "عـام",
+        "description": "This is a tab heading."
+    },
+
+    "add": {
+        "message": "أضف",
+        "description": "This is the label for the 'Add' buttons."
+    },
+    "add_domain_button": {
+        "message": "أضف نطاق"
+    },
+    "add_filter_button": {
+        "message": "أضف فلتر"
+    },
+    "add_url_button": {
+        "message": "أضف رابط"
+    },
+    "delete": {
+        "message": "حذف",
+        "description": "Word for 'delete'."
+    },
+    "remove_button": {
+        "message": "حذف المختارة",
+        "description": "This is the label for the 'Remove selected' buttons."
+    },
+    "edit_filters_raw": {
+        "message": "تعديل الفلاتر كـ raw text"
+    },
+    "apply_changes": {
+        "message": "تطبيق التغييرات"
+    },
+
+    "enable_only_the": {
+        "message": "فعل قائمة الفلاتر اللي تحتاجها فقط. تفعبل الكثير منها من الممكن أن يجعل Chrome لا يستجيب"
+    },
+    "out_of_date_lists": {
+        "message": "القوائم القديمة تحدث دورياً."
+    },
+    "update_now": {
+        "message": "التحديث الان"
+    },
+    "add_a_filter_list": {
+        "message": "إشترك لـ Firefox AdBlock Plus <a href='$url$'>قائمة الفلتر</a>:",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "filter_must_follow_syntax": {
+        "message": "الفلتر الخاص بك يجب أن يتبع <a href='$url$'>AdBlock Plus تركيب الفلتر</a>. أنواع معينة من الفلاتر, مثل object-subrequest, غير مدعومه.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "disabled_for_these_domains": {
+        "message": "AdThwart معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال الضغط على أيقونة AdThwart في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"Add domain\"."
+    },
+    "found_a_bug": {
+        "message": "هل وجدت خطأ برمجي؟ تريد ترجمة AdThwart إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    
+    
+    "show_icon": {
+        "message": "أظهر الأيقونة في شريط العنوان"
+    },
+    "disable_inline": {
+        "message": "تعطيل الإعلانات المضمنة في النص"
+    },
+    "block_youtube": {
+        "message": "منع الإعلانات داخل YouTube videos (لا تعمل مع إضافة FlashBlock)"
+    },
+    
+    "enabled_for_site": {
+        "message": "فعل لهذا الموقع",
+        "description": "Popup balloon checkbox label"
+    },
+    "easy_create_filter": {
+        "message": "إنشاء فلتر بسهوله",
+        "description": "Button label in popup balloon"
+    },
+    "cancel": {
+        "message": "إلغاء",
+        "description": "Cancel button label"
+    },
+    "clickhide_instructions": {
+        "message": "بعد إغلاق هذه النافذة. إضغط (او إضغط بالزر اليمين) على أحد العناصر في الصفحة"
+    },
+    "add_filters_msg": {
+        "message": "إضافة الفلاتر؟"
+    },
+    "new_filters_added": {
+        "message": "تم إضافة فلتر جديد; انظر <a id='options_url' target='_blank'>الخصائص</a> للتحكم بها."
+    },
+    
+    
+    "hovercraft": {
+        "message": "My hovercraft is full of eels.",
+        "description": "This is a sample translatable string. It happens to have comedic value."
+    }
+}
