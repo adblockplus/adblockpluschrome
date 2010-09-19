@@ -15,7 +15,7 @@
 		"128": "icons/face-devilish-128.png"
 	},
 	"permissions": [
-		"tabs", "http://*/*", "https://*/*"
+		"tabs", "http://*/*", "https://*/*", "contextMenus"
 	],
 	"background_page": "background.html",
 	"options_page": "options.html",

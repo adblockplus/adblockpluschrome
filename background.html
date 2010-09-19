@@ -556,6 +556,11 @@ chrome.tabs.getSelected(null, function(tab) {
     refreshIcon(tab);
 });
 
+// Set up context menu for user selection of elements to block
+chrome.contextMenus.create({'title': 'Block Element', 'contexts': ['all'], 'onclick': function(info, tab) {
+    console.log(info);
+}});
+
 // Reload filters every four hours, which will trigger the autoupdate
 setInterval(reloadFilters, 4 * 60 * 60 * 1000);
 
