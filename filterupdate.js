@@ -23,7 +23,7 @@ var filterListTitles = {
     "germany": 'EasyList Germany',
     "fanboy_es": "Fanboy's Español/Português supplement",
     "france": 'EasyList + Liste FR (Français)',
-    "china": '<a href="http://code.google.com/p/adblock-chinalist/">ChinaList</a> (汉语)',
+    "china": '<a href="http://code.google.com/p/adblock-chinalist/">ChinaList</a> (中文)',
     "russia": '<a href="http://code.google.com/p/ruadlist/">RuAdList</a> (Русский, Українська)',
     "korea": '<a href="http://corset.tistory.com">Corset</a> (한국어)',
     "romania": '<a href="http://www.picpoc.ro/">ROList</a> (Românesc)',
