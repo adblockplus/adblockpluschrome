@@ -21,6 +21,7 @@ var highlightedElementsSelector = null;
 var highlightedElementsBoxShadows = null;
 var highlightedElementsBGColors = null;
 var clickHideFiltersDialog = null;
+var lastRightClickEvent = null;
 
 // Port to background.htm
 var port;
@@ -136,6 +137,8 @@ function clickHide_showDialog(left, top, filters) {
         // Save the filters that the user created
         chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
     	chrome.extension.sendRequest({reqtype: "apply-cached-filters", filters: filters});
+    	// Explicitly get rid of currentElement in case removeAdsAgain() doesn't catch it
+    	if(currentElement.parentNode) currentElement.parentNode.removeChild(currentElement);
     	clickHide_deactivate();
     	removeAdsAgain();
     	clickHideFiltersDialog.setAttribute('style', 'visibility: hidden');
@@ -230,12 +233,18 @@ function clickHide_deactivate() {
 	}
 }
 
+function clickHide_elementClickHandler(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    clickHide_mouseClick(ev);
+}
+
 // Hovering over an element so highlight it
 function clickHide_mouseOver(e) {
     if(clickHide_activated == false)
         return;
     
-    if(e.target.id || e.target.className) {
+    if(e.target.id || e.target.className || e.target.src) {
         currentElement = e.target;
         currentElement_boxShadow = e.target.style.getPropertyValue("-webkit-box-shadow");
         currentElement_backgroundColor = e.target.style.backgroundColor;
@@ -243,11 +252,7 @@ function clickHide_mouseOver(e) {
         e.target.style.backgroundColor = "#f8fa47";
 
         // TODO: save old context menu
-        e.target.oncontextmenu = function(ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
-            clickHide_mouseClick(ev);
-        };
+        e.target.addEventListener("contextmenu", clickHide_elementClickHandler, false);
     }
 }
 
@@ -260,7 +265,7 @@ function clickHide_mouseOut(e) {
     currentElement.style.backgroundColor = currentElement_backgroundColor;
     
     // TODO: restore old context menu
-    currentElement.oncontextmenu = function(ev) {};
+    currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, false);
 }
 
 // Selects the currently hovered-over filter
@@ -276,14 +281,15 @@ function clickHide_keyUp(e) {
 function clickHide_mouseClick(e) {
     if(!currentElement || !clickHide_activated)
         return;
-        
+
     var elt = currentElement;
     var url = null;
     if(currentElement.className && currentElement.className == "__adthwart__overlay") {
         elt = currentElement.prisoner;
         url = currentElement.prisonerURL;
+    } else if(elt.src) {
+        url = elt.src;
     }
-        
     // Construct filters. The popup will retrieve these.
     // Only one ID
     var elementId = elt.id ? elt.id.split(' ').join('') : null;
@@ -489,6 +495,14 @@ function handleYouTubeFlashPlayer(elt) {
 // Content scripts are apparently invoked on non-HTML documents, so we have to
 // check for that before doing stuff
 if (document instanceof HTMLDocument) {
+    // Use a contextmenu handler to save the last element the user right-clicked on.
+    // To make things easier, we actually save the DOM event.
+    // We have to do this because the contextMenu API only provides a URL, not the actual
+    // DOM element.
+    document.addEventListener('contextmenu', function(e) {
+        lastRightClickEvent = e;
+    }, false);
+    
     port = chrome.extension.connect({name: "filter-query"});
     // Set up message handlers. These remove undesirable elements from the page.
     port.onMessage.addListener(function(msg) {
@@ -511,6 +525,20 @@ if (document instanceof HTMLDocument) {
         } else if(request.reqtype == "clickhide-deactivate") {
             chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: false});
             clickHide_deactivate();
+        } else if(request.reqtype == "clickhide-new-filter") {
+            // This request would have come from the chrome.contextMenu handler, so we
+            // simulate the user having chosen the element to get rid of via the usual means.
+            clickHide_activated = true;
+            clickHideFilters = [request.filter];
+            // We hope the URL we are given is the same as the one in the element referenced
+            // by lastRightClickEvent.target. If not, we just discard
+            var url = relativeToAbsoluteUrl(lastRightClickEvent.target.src);
+            if(request.filter === url) {
+                clickHide_mouseOver(lastRightClickEvent);
+                clickHide_mouseClick(lastRightClickEvent);
+            } else {
+                console.log("clickhide-new-filter: URLs don't match.", url, lastRightClickEvent.target.src);
+            }
         } else if(request.reqtype == "remove-ads-again") {
             // Called when a new filter is added
             removeAdsAgain();
