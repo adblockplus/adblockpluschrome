@@ -409,7 +409,6 @@ function reloadFilters() {
 // also not considered third-party, we prepend a dot to each string before matching.
 // e.g. .www.foo.com contains .foo.com but .www.barfoo.com does not
 function isThirdParty(url, docDomain) {
-    url = normalizeURL(url);
     var reqDomain = "." + extractDomainFromURL(url);
     var thirdParty = !(reqDomain.match("\\." + docDomain + "$"));
 }
@@ -424,7 +423,8 @@ chrome.extension.onConnect.addListener(function(port) {
             var numElements = msg.urls.length;
             blockList = new Array();
             for(var i = 0; i < numElements; i++) {
-                var thirdParty = isThirdParty(msg.urls[i], msg.domain);
+                var url = normalizeURL(msg.urls[i]);
+                var thirdParty = isThirdParty(url, msg.domain);
                 if(whitelistMatcher.matchesAny(url, msg.types[i], msg.domain, thirdParty))
                     continue;
                 if(blacklistMatcher.matchesAny(url, msg.types[i], msg.domain, thirdParty)) {
@@ -439,10 +439,11 @@ chrome.extension.onConnect.addListener(function(port) {
 var requestDispatchTable = {
     // Respond to query about single element
     "should-block?": function(request, sender, sendResponse) {
-        var thirdParty = isThirdParty(request.url, request.domain);
-        if(whitelistMatcher.matchesAny(request.url, request.type, request.domain, thirdParty)) {
+        var url = normalizeURL(request.url);
+        var thirdParty = isThirdParty(url, request.domain);
+        if(whitelistMatcher.matchesAny(url, request.type, request.domain, thirdParty)) {
             sendResponse({block: false});
-        } else if(blacklistMatcher.matchesAny(request.url, request.type, request.domain, thirdParty)) {
+        } else if(blacklistMatcher.matchesAny(url, request.type, request.domain, thirdParty)) {
             sendResponse({block: true});
         }
     },
