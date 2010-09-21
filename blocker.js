@@ -31,15 +31,13 @@ var port;
 function removeInitialHideStylesheet() {
     if(typeof initialHideElt == "undefined" || !initialHideElt) return;
     var elts = document.querySelectorAll("style[__adthwart__='InitialHide']");
-    for(var i=0; i<elts.length; i++)
-	    elts[i].innerText = "";
+    for(var i=0; i<elts.length; i++) elts[i].innerText = "";
 }
 
 // Highlight elements according to selector string. This would include
 // all elements that would be affected by proposed filters.
 function highlightElements(selectorString) {
-    if(highlightedElementsSelector)
-        unhighlightElements();
+    if(highlightedElementsSelector) unhighlightElements();
     
     highlightedElements = document.querySelectorAll(selectorString);
     highlightedElementsSelector = selectorString;
@@ -57,8 +55,7 @@ function highlightElements(selectorString) {
 // Unhighlight all elements, including those that would be affected by
 // the proposed filters
 function unhighlightElements() {
-    if(highlightedElementsSelector == null)
-        return;
+    if(highlightedElementsSelector == null) return;
     highlightedElements = document.querySelectorAll(highlightedElementsSelector);
     for(var i = 0; i < highlightedElements.length; i++) {
         highlightedElements[i].style.setProperty("-webkit-box-shadow", highlightedElementsBoxShadows[i]);
@@ -232,8 +229,7 @@ function clickHide_deactivate() {
 
 // Hovering over an element so highlight it
 function clickHide_mouseOver(e) {
-    if(clickHide_activated == false)
-        return;
+    if(clickHide_activated == false) return;
     
     if(e.target.id || e.target.className) {
         currentElement = e.target;
@@ -253,8 +249,7 @@ function clickHide_mouseOver(e) {
 
 // No longer hovering over this element so unhighlight it
 function clickHide_mouseOut(e) {
-    if(!clickHide_activated || !currentElement)
-        return;
+    if(!clickHide_activated || !currentElement) return;
     
     currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
     currentElement.style.backgroundColor = currentElement_backgroundColor;
@@ -274,8 +269,7 @@ function clickHide_keyUp(e) {
 // We should have ABP rules ready for when the
 // popup asks for them.
 function clickHide_mouseClick(e) {
-    if(!currentElement || !clickHide_activated)
-        return;
+    if(!currentElement || !clickHide_activated) return;
         
     var elt = currentElement;
     var url = null;
@@ -351,6 +345,8 @@ function handleNodeInserted(e) {
     }
 }
 
+// Explicitly hides elements by their selector strings.
+// Theoretically the injected stylesheet should do this but for some reason that doesn't always work.
 function hideBySelectorStrings(parent) {
     // In rare cases (don't know which ones exactly), initial-block.js might not have been run. 
     if(enabled && typeof(elemhideSelectorStrings) != "undefined") {
@@ -394,8 +390,7 @@ function getElementURL(elt) {
 // Hides/removes image and Flash elements according to the external resources they load.
 // (e.g. src attribute)
 function nukeElements(parent) {
-    if(typeof parent == 'undefined')
-        parent = document;
+    if(typeof parent == 'undefined') parent = document;
     var elts = parent.querySelectorAll("img,object,iframe,embed,link");
     var types = new Array();
     var urls = new Array();
@@ -406,6 +401,7 @@ function nukeElements(parent) {
     serial = 0;
     elementCache = new Array();
     for(var i = 0; i < elts.length; i++) {
+        // The URL is normalized in the background script so we don't need to do it here
         url = getElementURL(elts[i]);
         // If the URL of the element is the same as the document URI, the user is trying to directly
         // view the ad for some reason and so we won't block it.
@@ -443,6 +439,7 @@ function handleYouTubeFlashPlayer(elt) {
     // If we don't wait for the original to load before we nuke it, the replacement SWF object
     // may not load properly.
     var injectedScript = document.createElement("script");
+    // Annoyingly, JavaScript has no heredoc-like feature, so we resort to this ugly hack
     injectedScript.innerHTML = ["// AdThwart ad-removal code. Hi Mom!",
     "// This is invoked with e.target == the movie_player object, from which ads must be removed",
     "function _AT_removeYouTubeAds(e) {",
@@ -485,12 +482,12 @@ function handleYouTubeFlashPlayer(elt) {
     "   // Prevent infinite recursion from DOMNodeInserted event",
     "   _AT_NowWorking = true;",
     "   elt.style.display = 'none';",
-	"   // Empty container - user may have clicked another video during",
-	"   // the timeout and another video would have been inserted.",
-	"   // This results in the wrong (first) video being shown, but it's better",
-	"   // than two videos at once. In any event now we remove it all.",
-	"   var parent = elt.parentNode;",
-	"   while(parent.firstChild) parent.removeChild(parent.firstChild);",
+    "   // Empty container - user may have clicked another video during",
+    "   // the timeout and another video would have been inserted.",
+    "   // This results in the wrong (first) video being shown, but it's better",
+    "   // than two videos at once. In any event now we remove it all.",
+    "   var parent = elt.parentNode;",
+    "   while(parent.firstChild) parent.removeChild(parent.firstChild);",
     "   parent.appendChild(replacement);",
     "   _AT_WaitedTime = 0;",
     "   _AT_NowWorking = false;",
