@@ -435,55 +435,73 @@ function nukeElements(parent) {
 
 // flashvars is URL-encoded and dictates what ads will be shown in this video. So we modify it.
 function handleYouTubeFlashPlayer(elt) {
-    if(specialCaseYouTube && pageIsYouTube && elt) {
-        var origFlashVars = elt.getAttribute("flashvars");
-        // In the new YouTube design, flashvars could be in a <param> child node
-        var inParam = false;
-        if(!origFlashVars) {
-            origFlashVars = elt.querySelector('param[name="flashvars"]');
-            // Give up if we still can't find it
-            if(!origFlashVars)
-                return;
-            inParam = true;
-            origFlashVars = origFlashVars.getAttribute("value");
-        }
-        // Don't mess with the movie player object if we don't actually find any ads
-        var adCheckRE = /&(ad_|prerolls|invideo|interstitial).*?=.+?(&|$)/gi;
-        if(!origFlashVars.match(adCheckRE))
-            return;
-        // WTF. replace() just gives up after a while, missing things near the end of the string. So we run it again.
-        var re = /&(ad_|prerolls|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi;
-        var newFlashVars = origFlashVars.replace(re, "&").replace(re, "&") + "&invideo=false&autoplay=1";
-        var replacement = elt.cloneNode(true); // Clone child nodes also
-        // Doing this stuff fires a DOMNodeInserted, which will cause infinite recursion into this function.
-        // So we inhibit it using pageIsYouTube.
-        pageIsYouTube = false;
-        if(inParam) {
-            // Grab new <param> and set its flashvars
-            newParam = replacement.querySelector('param[name="flashvars"]');
-            newParam.setAttribute("value", newFlashVars);
-        } else {
-            replacement.setAttribute("flashvars", newFlashVars);
-        }
-        // Add a delay between removing and re-adding the movie player to make it more
-        // likely it will reinitialize properly.
-        // Thanks Michael Gundlach and fryn for this idea and code
-        var parent = elt.parentNode;
-        // This seems to make Flash reload better; not sure why
-        elt.style.visibility = "hidden";
-        parent.removeChild(elt);
-        
-        setTimeout(function(parent, replacement) {
-    		// Empty container - user may have clicked another video during
-    		// the timeout and another video would have been inserted.
-    		// This results in the wrong (first) video being shown, but it's better
-    		// than two videos at once.
-    		while(parent.firstChild)
-    		    parent.removeChild(parent.firstChild);
-        	parent.appendChild(replacement);
-        	pageIsYouTube = true;
-        }, 200, parent, replacement);
-    }
+    if(!(specialCaseYouTube && pageIsYouTube && elt)) return;
+    pageIsYouTube = false; // Don't inject more than once
+    // Inject a script into the page so we can access its JavaScript context
+    // This allows us to check whether the SWF object is done loading by checking whether
+    // its getDuration() method exists.
+    // If we don't wait for the original to load before we nuke it, the replacement SWF object
+    // may not load properly.
+    var injectedScript = document.createElement("script");
+    injectedScript.innerHTML = ["// AdThwart ad-removal code. Hi Mom!",
+    "// This is invoked with e.target == the movie_player object, from which ads must be removed",
+    "function _AT_removeYouTubeAds(e) {",
+    "if(!e.target || e.target.id != 'movie_player' || _AT_NowWorking) return;",
+    "var elt = e.target;",
+    "var origFlashVars = elt.getAttribute(\"flashvars\");",
+    "// In the new YouTube design, flashvars could be in a <param> child node",
+    "var inParam = false;",
+    "if(!origFlashVars) {",
+    "    origFlashVars = elt.querySelector('param[name=\"flashvars\"]');",
+    "    // Give up if we still can't find it",
+    "    if(!origFlashVars) return;",
+    "    inParam = true;",
+    "    origFlashVars = origFlashVars.getAttribute(\"value\");",
+    "}",
+    "// Don't mess with the movie player object if we don't actually find any ads",
+    "var adCheckRE = /&(ad_|prerolls|invideo|interstitial).*?=.+?(&|$)/gi;",
+    "if(!origFlashVars.match(adCheckRE)) return;",
+    "// WTF. replace() just gives up after a while, missing things near the end of the string. So we run it again.",
+    "var re = /&(ad_|prerolls|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi;",
+    "var newFlashVars = origFlashVars.replace(re, \"&\").replace(re, \"&\") + \"&invideo=false&autoplay=1\";",
+    "var replacement = elt.cloneNode(true); // Clone child nodes also",
+    "if(inParam) {",
+    "    // Grab new <param> and set its flashvars",
+    "    newParam = replacement.querySelector('param[name=\"flashvars\"]');",
+    "    newParam.setAttribute(\"value\", newFlashVars);",
+    "} else {",
+    "    replacement.setAttribute(\"flashvars\", newFlashVars);",
+    "}",
+    "function doReplacement(elt, replacement) {",
+    "   // Wait for player object to be ready - it is when its methods exist",
+    "   // We can't do this from the content script context...hence this injected code",
+    "   try { elt.getDuration(); } catch(err) {",
+    "       _AT_WaitedTime += 100;",
+    "       setTimeout(doReplacement, 100, elt, replacement);",
+    "       // Eventually give up waiting for movie_player to load to avoid being disruptive.",
+    "       // Also useful if getDuration is ever removed, to prevent waiting forever.",
+    "       if(_AT_WaitedTime < 1000) return;",
+    "   }",
+    "   // Prevent infinite recursion from DOMNodeInserted event",
+    "   _AT_NowWorking = true;",
+    "   elt.style.display = 'none';",
+	"   // Empty container - user may have clicked another video during",
+	"   // the timeout and another video would have been inserted.",
+	"   // This results in the wrong (first) video being shown, but it's better",
+	"   // than two videos at once. In any event now we remove it all.",
+	"   var parent = elt.parentNode;",
+	"   while(parent.firstChild) parent.removeChild(parent.firstChild);",
+    "   parent.appendChild(replacement);",
+    "   _AT_WaitedTime = 0;",
+    "   _AT_NowWorking = false;",
+    "};",
+    "setTimeout(doReplacement, 100, elt, replacement);",
+    "}",
+    "_AT_NowWorking = false;",
+    "_AT_WaitedTime = 0;",
+    "_AT_removeYouTubeAds({target: document.getElementById('movie_player')});",
+    "document.addEventListener('DOMNodeInserted', _AT_removeYouTubeAds, false);"].join('\n');
+    document.body.appendChild(injectedScript);
 }
 
 // Content scripts are apparently invoked on non-HTML documents, so we have to
