@@ -351,8 +351,8 @@ function hideBySelectorStrings(parent) {
     // In rare cases (don't know which ones exactly), initial-block.js might not have been run. 
     if(enabled && typeof(elemhideSelectorStrings) != "undefined") {
         // var now = new Date().getTime();
-        for(i in elemhideSelectorStrings) {
-            var elts = parent.querySelectorAll(elemhideSelectorStrings[i]);
+        for(var j in elemhideSelectorStrings) {
+            var elts = parent.querySelectorAll(elemhideSelectorStrings[j]);
             if(!elts) continue;
             for(var i = 0; i < elts.length; i++) {
                 // TODO: Sometimes style isn't defined, for some reason...
