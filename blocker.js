@@ -539,7 +539,9 @@ if (document instanceof HTMLDocument) {
         if(enabled) {
             // Hide ads by selector using CSS
             // In some weird cases the elemhide style element might not stick, so we do this.
-            hideBySelectorStrings(document);
+            // XXX: Turning this off for now, on a hunch that it wasn't sticking because of
+            // the injected stylesheet title attribute, which we no longer use
+            // hideBySelectorStrings(document);
 
             // Special-case YouTube video ads because they are so popular.
             if(document.domain.match(/youtube.com$/)) {
