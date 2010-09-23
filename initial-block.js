@@ -23,6 +23,8 @@ var SELECTOR_GROUP_SIZE = 20;
 var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"]';
 var TEMP_adservers = null;
 
+var savedBeforeloadEvents = new Array();
+
 // WebKit apparently chokes when the selector list in a CSS rule is huge.
 // So we split the elemhide selectors into groups.
 function makeSelectorStrings(selectors) {
@@ -53,23 +55,21 @@ function nukeSingleElement(elt) {
     if(pn) pn.removeChild(elt);
 
     // Get rid of OBJECT tag enclosing EMBED tag
-    if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT")
+    if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT") {
         pn.parentNode.removeChild(pn);
+    }
 }
 
 // Converts relative to absolute URL
 // e.g.: foo.swf on http://example.com/whatever/bar.html
 //  -> http://example.com/whatever/foo.swf 
 function relativeToAbsoluteUrl(url) {
-    if(!url)
-        return url;
     // If URL is already absolute, don't mess with it
-    if(url.match(/^http/i))
-        return url;
+    if(!url || url.match(/^http/i)) return url;
     // Leading / means absolute path
-    if(url[0] == '/')
+    if(url[0] == '/') {
         return document.location.protocol + "//" + document.location.host + url;
-
+    }
     // Remove filename and add relative URL to it
     var base = document.baseURI.match(/.+\//);
     if(!base) return document.baseURI + "/" + url;
@@ -89,19 +89,46 @@ function TEMP_extractDomainFromURL(url) {
 }
 
 // Horrible hack
-function TEMP_isAdServer(docDomain) {
-  docDomain = docDomain.replace(/\.+$/, "").toLowerCase();
+function TEMP_isAdServer(domain) {
+  domain = domain.replace(/\.+$/, "").toLowerCase();
 
   for(;;) {
-    if (docDomain in TEMP_adservers)
-      return true;
-    var nextDot = docDomain.indexOf(".");
-    if(nextDot < 0)
-      break;
-    docDomain = docDomain.substr(nextDot + 1);
+    if (domain in TEMP_adservers)  return true;
+    var nextDot = domain.indexOf(".");
+    if(nextDot < 0) break;
+    domain = domain.substr(nextDot + 1);
   }
   return false;
 }
+
+// This beforeload handler is used before we hear back from the background process about
+// whether we're enabled etc. It saves the events so we can replay them to the normal
+// beforeload handler once we know whether we're enabled - to catch ads that might have
+// snuck by.
+function saveBeforeloadEvent(e) {
+    savedBeforeloadEvents.push(e);
+}
+
+// Responds to beforeload events by nuking the element if it's an ad.
+// First just checks the server to avoid an asynchronous call to the back end.
+// If it isn't a known ad server, we have to ask the backend, which won't
+// return in time for preventDefault().
+// We don't normalize the URL here because the backend will do it.
+function beforeloadHandler(e) {
+    var eltDomain = TEMP_extractDomainFromURL(e.url);
+    // Primitive version of third-party check
+    if(eltDomain && !TEMP_isAdServer(document.domain) && TEMP_isAdServer(eltDomain)) {
+        e.preventDefault();
+        if(e.target) nukeSingleElement(e.target);
+    } else {
+        var url = relativeToAbsoluteUrl(e.url);
+        chrome.extension.sendRequest({reqtype: "should-block?", url: url, type: TagToType[e.target.tagName], domain: document.domain}, function(response) {
+            if(response.block) nukeSingleElement(e.target);
+        });
+    }
+}
+
+document.addEventListener("beforeload", saveBeforeloadEvent, true);
 
 // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
 if (document instanceof HTMLDocument) {
@@ -141,24 +168,13 @@ if (document instanceof HTMLDocument) {
             // Because we are in an asynchronous callback, the page may be partially loaded before
             // the event handler gets attached. So some things might get through at the beginning.
             TEMP_adservers = response.priorityAdServers;
-            document.addEventListener("beforeload", function (e) {
-                var eltDomain = TEMP_extractDomainFromURL(e.url);
-                // Primitive version of third-party check
-                if(eltDomain && !TEMP_isAdServer(document.domain) && TEMP_isAdServer(eltDomain)) {
-                    e.preventDefault();
-                    if(e.target) nukeSingleElement(e.target);
-                } else {
-                    // If it isn't a known ad server, we have to ask the backend, which won't
-                    // return in time for preventDefault().
-                    // We don't normalize the URL here because the backend will do it.
-                    var url = relativeToAbsoluteUrl(e.url);
-                    chrome.extension.sendRequest({reqtype: "should-block?", url: url, type: TagToType[e.target.tagName], domain: document.domain}, function(response) {
-                        if(response.block) {
-                            nukeSingleElement(e.target);
-                        }
-                    });
-                }
-            }, true);
+            document.removeEventListener("beforeload", saveBeforeloadEvent, true);
+            document.addEventListener("beforeload", beforeloadHandler, true);
+            // Replay the events that were saved while we were waiting to learn whether we are enabled
+            for(var i = 0; i < savedBeforeloadEvents.length; i++) {
+                beforeloadHandler(savedBeforeloadEvents[i]);
+            }
+            delete savedBeforeloadEvents;
         }
     });
 }
