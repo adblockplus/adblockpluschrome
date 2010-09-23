@@ -1,0 +1,175 @@
+﻿{
+   "add": {
+      "description": "This is the label for the 'Add' buttons.",
+      "message": "Dodaj"
+   },
+   "add_a_filter_list": {
+      "message": "Subskrybuj <a href='$url$'>inne filtry</a> Firefox AdBlock Plus:",
+      "placeholders": {
+         "url": {
+            "content": "$1"
+         }
+      }
+   },
+   "add_domain_button": {
+      "message": "Dodaj domene"
+   },
+   "add_filter_button": {
+      "message": "Dodaj filtr"
+   },
+   "add_filters_msg": {
+      "message": "Dodać taki filtr?"
+   },
+   "add_url_button": {
+      "message": "Dodaj URL"
+   },
+   "add_your_own_filters": {
+      "message": "Dodaj własne filtry"
+   },
+   "apply_changes": {
+      "message": "Zakceptuj zmiany"
+   },
+   "block_youtube": {
+      "message": "Blokuj reklamy w filmach YouTube (nie działa z rozszerzeniem FlashBlock)"
+   },
+   "cancel": {
+      "description": "Cancel button label",
+      "message": "Anuluj"
+   },
+   "clickhide_instructions": {
+      "message": "Po zamknięciu tego okna, kliknij lewym (lub prawym) przyciskiem myszy w niechciany element na stronie."
+   },
+   "date_format": {
+      "description": "e.g. Apr 1, 2011",
+      "message": "$day$ $month$. $year$ roku",
+      "placeholders": {
+         "day": {
+            "content": "$1"
+         },
+         "month": {
+            "content": "$2"
+         },
+         "year": {
+            "content": "$3"
+         }
+      }
+   },
+   "delete": {
+      "description": "Word for 'delete'.",
+      "message": "Usuń"
+   },
+   "description": {
+      "message": "Blokuj reklamy korzystając z filtrów AdBlock Plus. Pożegnaj się z reklamami i serwuj w spokoju!"
+   },
+   "disable_inline": {
+      "message": "Wyłącz reklamy tekstowe"
+   },
+   "disabled_for_these_domains": {
+      "message": "AdThwart is disabled for the domains listed below. You can add a domain either via the AdThwart icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
+   },
+   "easy_create_filter": {
+      "description": "Button label in popup balloon",
+      "message": "Kreator filtrów"
+   },
+   "edit_filters_raw": {
+      "message": "Edytuj filtry jako zwykły tekst"
+   },
+   "enable_only_the": {
+      "message": "Włącz tylko te filtry których potrzebujesz. Za duża ilość może spowolnić działanie przeglądarki."
+   },
+   "enabled_for_site": {
+      "description": "Popup balloon checkbox label",
+      "message": "Włącz dla tej strony"
+   },
+   "filter_list_desc": {
+      "description": "e.g. FooList by Mr. Foo",
+      "message": "$title$ by $author$",
+      "placeholders": {
+         "author": {
+            "content": "$2"
+         },
+         "title": {
+            "content": "$1"
+         }
+      }
+   },
+   "filter_lists": {
+      "description": "This is a tab heading.",
+      "message": "Listy filtrów"
+   },
+   "filter_must_follow_syntax": {
+      "message": "Twój filtr musi być zgodny <a href='$url$'>ze składnią filtru AdBlock Plus</a>. Niektóre typy filtrów, jak obiect-subrequest, nie są obsługiwane.",
+      "placeholders": {
+         "url": {
+            "content": "$1"
+         }
+      }
+   },
+   "found_a_bug": {
+      "message": "Znalazłeś błąd? Zgłoś proszę <a href='$url$'>problem tutaj</a>.",
+      "placeholders": {
+         "url": {
+            "content": "$1"
+         }
+      }
+   },
+   "general": {
+      "description": "This is a tab heading.",
+      "message": "Ogólne"
+   },
+   "hovercraft": {
+      "description": "This is a sample translatable string. It happens to have comedic value.",
+      "message": "My hovercraft is full of eels."
+   },
+   "last_updated_at": {
+      "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+      "message": "Ostatnia aktualizacja: $date$ o $time$",
+      "placeholders": {
+         "date": {
+            "content": "$2"
+         },
+         "time": {
+            "content": "$1"
+         }
+      }
+   },
+   "month_names": {
+      "description": "Month short names.",
+      "message": "[\"Sty\", \"Lu\", \"Mar\", \"Kwi\", \"Maj\", \"Cze\", \"Lip\", \"Sie\", \"Wrz\", \"Pa\", \"Li\", \"Gr\"]"
+   },
+   "new_filters_added": {
+      "message": "Dodano nowe filtry; Zajrzyj do <a id='options_url' target='_blank'>Opcji</a>."
+   },
+   "not_a_filter_list": {
+      "description": "In options.html, error displayed when filter list fetcher receives something not a filter list",
+      "message": "Brak listy filtrów"
+   },
+   "not_found_on_server": {
+      "description": "In options.html, error displayed when filter list fetcher can't find filter list on server",
+      "message": "Nie znaleziono serwera"
+   },
+   "options": {
+      "message": "AdThwart Opcje"
+   },
+   "out_of_date_lists": {
+      "message": "Po pewnym czasie filtry aktualizowane są automatycznie."
+   },
+   "remove_button": {
+      "description": "This is the label for the 'Remove selected' buttons.",
+      "message": "Usuń zaznaczone"
+   },
+   "show_icon": {
+      "message": "Pokazuj ikonę na pasku adresu"
+   },
+   "today": {
+      "description": "Word for 'today', as in 'Last updated today'",
+      "message": "dzisiaj"
+   },
+   "update_now": {
+      "message": "Zaktualizuj"
+   },
+   "whitelisted_domains": {
+      "description": "This is a tab heading.",
+      "message": "Wykluczone strony"
+   }
+}
