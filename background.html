@@ -558,7 +558,7 @@ chrome.tabs.getSelected(null, function(tab) {
 });
 
 // Set up context menu for user selection of elements to block
-chrome.contextMenus.create({'title': 'Block Element', 'contexts': ['all'], 'onclick': function(info, tab) {
+chrome.contextMenus.create({'title': 'Block Element', 'contexts': ['image', 'video', 'audio'], 'onclick': function(info, tab) {
     if(info.srcUrl) {
         chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl});
     }
