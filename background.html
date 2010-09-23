@@ -9,6 +9,7 @@ var abp = {};
 <script type="text/javascript" src="adblockplus/elemhide.js"></script>
 <script type="text/javascript" src="adblockplus/filterListener.js"></script>
 <script type="text/javascript" src="adblockplus/matcher.js"></script>
+<script type="text/javascript" src="md5.js"></script>
 <script type="text/javascript" src="filterupdate.js"></script>
 <script type="text/javascript" charset="utf-8">
 
@@ -274,7 +275,7 @@ function loadFiltersRawText(filename) {
                     localStorage[filename] = JSON.stringify(list);
                 }
                 if(((now - list.lastUpdated) > expires) && !downloading[filename]) {
-                    console.log("Too old, so redownloading " + filename);
+                    // console.log("Too old, so redownloading " + filename);
                     downloadFilterList(filename);
                 }
             }
@@ -286,7 +287,7 @@ function loadFiltersRawText(filename) {
             // This filter list was never downloaded, so download it
             // This is kept from running away by the fetcher actually storing the filter
             // list data, which is checked for above.
-            console.log("First time download: " + filename);
+            // console.log("First time download: " + filename);
             downloadFilterList(filename);           
             return ""; // Return nothing for now, it'll be reloaded later
         }

@@ -32,15 +32,13 @@ var port;
 function removeInitialHideStylesheet() {
     if(typeof initialHideElt == "undefined" || !initialHideElt) return;
     var elts = document.querySelectorAll("style[__adthwart__='InitialHide']");
-    for(var i=0; i<elts.length; i++)
-	    elts[i].innerText = "";
+    for(var i=0; i<elts.length; i++) elts[i].innerText = "";
 }
 
 // Highlight elements according to selector string. This would include
 // all elements that would be affected by proposed filters.
 function highlightElements(selectorString) {
-    if(highlightedElementsSelector)
-        unhighlightElements();
+    if(highlightedElementsSelector) unhighlightElements();
     
     highlightedElements = document.querySelectorAll(selectorString);
     highlightedElementsSelector = selectorString;
@@ -58,8 +56,7 @@ function highlightElements(selectorString) {
 // Unhighlight all elements, including those that would be affected by
 // the proposed filters
 function unhighlightElements() {
-    if(highlightedElementsSelector == null)
-        return;
+    if(highlightedElementsSelector == null) return;
     highlightedElements = document.querySelectorAll(highlightedElementsSelector);
     for(var i = 0; i < highlightedElements.length; i++) {
         highlightedElements[i].style.setProperty("-webkit-box-shadow", highlightedElementsBoxShadows[i]);
@@ -241,8 +238,7 @@ function clickHide_elementClickHandler(ev) {
 
 // Hovering over an element so highlight it
 function clickHide_mouseOver(e) {
-    if(clickHide_activated == false)
-        return;
+    if(clickHide_activated == false) return;
     
     if(e.target.id || e.target.className || e.target.src) {
         currentElement = e.target;
@@ -258,8 +254,7 @@ function clickHide_mouseOver(e) {
 
 // No longer hovering over this element so unhighlight it
 function clickHide_mouseOut(e) {
-    if(!clickHide_activated || !currentElement)
-        return;
+    if(!clickHide_activated || !currentElement) return;
     
     currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
     currentElement.style.backgroundColor = currentElement_backgroundColor;
@@ -279,9 +274,8 @@ function clickHide_keyUp(e) {
 // We should have ABP rules ready for when the
 // popup asks for them.
 function clickHide_mouseClick(e) {
-    if(!currentElement || !clickHide_activated)
-        return;
-
+    if(!currentElement || !clickHide_activated) return;
+        
     var elt = currentElement;
     var url = null;
     if(currentElement.className && currentElement.className == "__adthwart__overlay") {
@@ -357,12 +351,14 @@ function handleNodeInserted(e) {
     }
 }
 
+// Explicitly hides elements by their selector strings.
+// Theoretically the injected stylesheet should do this but for some reason that doesn't always work.
 function hideBySelectorStrings(parent) {
     // In rare cases (don't know which ones exactly), initial-block.js might not have been run. 
     if(enabled && typeof(elemhideSelectorStrings) != "undefined") {
         // var now = new Date().getTime();
-        for(i in elemhideSelectorStrings) {
-            var elts = parent.querySelectorAll(elemhideSelectorStrings[i]);
+        for(var j in elemhideSelectorStrings) {
+            var elts = parent.querySelectorAll(elemhideSelectorStrings[j]);
             if(!elts) continue;
             for(var i = 0; i < elts.length; i++) {
                 // TODO: Sometimes style isn't defined, for some reason...
@@ -400,8 +396,7 @@ function getElementURL(elt) {
 // Hides/removes image and Flash elements according to the external resources they load.
 // (e.g. src attribute)
 function nukeElements(parent) {
-    if(typeof parent == 'undefined')
-        parent = document;
+    if(typeof parent == 'undefined') parent = document;
     var elts = parent.querySelectorAll("img,object,iframe,embed,link");
     var types = new Array();
     var urls = new Array();
@@ -412,6 +407,7 @@ function nukeElements(parent) {
     serial = 0;
     elementCache = new Array();
     for(var i = 0; i < elts.length; i++) {
+        // The URL is normalized in the background script so we don't need to do it here
         url = getElementURL(elts[i]);
         // If the URL of the element is the same as the document URI, the user is trying to directly
         // view the ad for some reason and so we won't block it.
@@ -441,55 +437,74 @@ function nukeElements(parent) {
 
 // flashvars is URL-encoded and dictates what ads will be shown in this video. So we modify it.
 function handleYouTubeFlashPlayer(elt) {
-    if(specialCaseYouTube && pageIsYouTube && elt) {
-        var origFlashVars = elt.getAttribute("flashvars");
-        // In the new YouTube design, flashvars could be in a <param> child node
-        var inParam = false;
-        if(!origFlashVars) {
-            origFlashVars = elt.querySelector('param[name="flashvars"]');
-            // Give up if we still can't find it
-            if(!origFlashVars)
-                return;
-            inParam = true;
-            origFlashVars = origFlashVars.getAttribute("value");
-        }
-        // Don't mess with the movie player object if we don't actually find any ads
-        var adCheckRE = /&(ad_|prerolls|invideo|interstitial).*?=.+?(&|$)/gi;
-        if(!origFlashVars.match(adCheckRE))
-            return;
-        // WTF. replace() just gives up after a while, missing things near the end of the string. So we run it again.
-        var re = /&(ad_|prerolls|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi;
-        var newFlashVars = origFlashVars.replace(re, "&").replace(re, "&") + "&invideo=false&autoplay=1";
-        var replacement = elt.cloneNode(true); // Clone child nodes also
-        // Doing this stuff fires a DOMNodeInserted, which will cause infinite recursion into this function.
-        // So we inhibit it using pageIsYouTube.
-        pageIsYouTube = false;
-        if(inParam) {
-            // Grab new <param> and set its flashvars
-            newParam = replacement.querySelector('param[name="flashvars"]');
-            newParam.setAttribute("value", newFlashVars);
-        } else {
-            replacement.setAttribute("flashvars", newFlashVars);
-        }
-        // Add a delay between removing and re-adding the movie player to make it more
-        // likely it will reinitialize properly.
-        // Thanks Michael Gundlach and fryn for this idea and code
-        var parent = elt.parentNode;
-        // This seems to make Flash reload better; not sure why
-        elt.style.visibility = "hidden";
-        parent.removeChild(elt);
-        
-        setTimeout(function(parent, replacement) {
-    		// Empty container - user may have clicked another video during
-    		// the timeout and another video would have been inserted.
-    		// This results in the wrong (first) video being shown, but it's better
-    		// than two videos at once.
-    		while(parent.firstChild)
-    		    parent.removeChild(parent.firstChild);
-        	parent.appendChild(replacement);
-        	pageIsYouTube = true;
-        }, 200, parent, replacement);
-    }
+    if(!(specialCaseYouTube && pageIsYouTube && elt)) return;
+    pageIsYouTube = false; // Don't inject more than once
+    // Inject a script into the page so we can access its JavaScript context
+    // This allows us to check whether the SWF object is done loading by checking whether
+    // its getDuration() method exists.
+    // If we don't wait for the original to load before we nuke it, the replacement SWF object
+    // may not load properly.
+    var injectedScript = document.createElement("script");
+    // Annoyingly, JavaScript has no heredoc-like feature, so we resort to this ugly hack
+    injectedScript.innerHTML = ["// AdThwart ad-removal code. Hi Mom!",
+    "// This is invoked with e.target == the movie_player object, from which ads must be removed",
+    "function _AT_removeYouTubeAds(e) {",
+    "if(!e.target || e.target.id != 'movie_player' || _AT_NowWorking) return;",
+    "var elt = e.target;",
+    "var origFlashVars = elt.getAttribute(\"flashvars\");",
+    "// In the new YouTube design, flashvars could be in a <param> child node",
+    "var inParam = false;",
+    "if(!origFlashVars) {",
+    "    origFlashVars = elt.querySelector('param[name=\"flashvars\"]');",
+    "    // Give up if we still can't find it",
+    "    if(!origFlashVars) return;",
+    "    inParam = true;",
+    "    origFlashVars = origFlashVars.getAttribute(\"value\");",
+    "}",
+    "// Don't mess with the movie player object if we don't actually find any ads",
+    "var adCheckRE = /&(ad_|prerolls|invideo|interstitial).*?=.+?(&|$)/gi;",
+    "if(!origFlashVars.match(adCheckRE)) return;",
+    "// WTF. replace() just gives up after a while, missing things near the end of the string. So we run it again.",
+    "var re = /&(ad_|prerolls|invideo|interstitial|watermark|infringe).*?=.+?(&|$)/gi;",
+    "var newFlashVars = origFlashVars.replace(re, \"&\").replace(re, \"&\") + \"&invideo=false&autoplay=1\";",
+    "var replacement = elt.cloneNode(true); // Clone child nodes also",
+    "if(inParam) {",
+    "    // Grab new <param> and set its flashvars",
+    "    newParam = replacement.querySelector('param[name=\"flashvars\"]');",
+    "    newParam.setAttribute(\"value\", newFlashVars);",
+    "} else {",
+    "    replacement.setAttribute(\"flashvars\", newFlashVars);",
+    "}",
+    "function doReplacement(elt, replacement) {",
+    "   // Wait for player object to be ready - it is when its methods exist",
+    "   // We can't do this from the content script context...hence this injected code",
+    "   try { elt.getDuration(); } catch(err) {",
+    "       _AT_WaitedTime += 100;",
+    "       setTimeout(doReplacement, 100, elt, replacement);",
+    "       // Eventually give up waiting for movie_player to load to avoid being disruptive.",
+    "       // Also useful if getDuration is ever removed, to prevent waiting forever.",
+    "       if(_AT_WaitedTime < 1000) return;",
+    "   }",
+    "   // Prevent infinite recursion from DOMNodeInserted event",
+    "   _AT_NowWorking = true;",
+    "   elt.style.display = 'none';",
+    "   // Empty container - user may have clicked another video during",
+    "   // the timeout and another video would have been inserted.",
+    "   // This results in the wrong (first) video being shown, but it's better",
+    "   // than two videos at once. In any event now we remove it all.",
+    "   var parent = elt.parentNode;",
+    "   while(parent.firstChild) parent.removeChild(parent.firstChild);",
+    "   parent.appendChild(replacement);",
+    "   _AT_WaitedTime = 0;",
+    "   _AT_NowWorking = false;",
+    "};",
+    "setTimeout(doReplacement, 100, elt, replacement);",
+    "}",
+    "_AT_NowWorking = false;",
+    "_AT_WaitedTime = 0;",
+    "_AT_removeYouTubeAds({target: document.getElementById('movie_player')});",
+    "document.addEventListener('DOMNodeInserted', _AT_removeYouTubeAds, false);"].join('\n');
+    document.body.appendChild(injectedScript);
 }
 
 // Content scripts are apparently invoked on non-HTML documents, so we have to
@@ -552,7 +567,9 @@ if (document instanceof HTMLDocument) {
         if(enabled) {
             // Hide ads by selector using CSS
             // In some weird cases the elemhide style element might not stick, so we do this.
-            hideBySelectorStrings(document);
+            // XXX: Turning this off for now, on a hunch that it wasn't sticking because of
+            // the injected stylesheet title attribute, which we no longer use
+            // hideBySelectorStrings(document);
 
             // Special-case YouTube video ads because they are so popular.
             if(document.domain.match(/youtube.com$/)) {
