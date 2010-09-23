@@ -61,7 +61,6 @@
         "message": "General",
         "description": "This is a tab heading."
     },
-
     "add": {
         "message": "Add",
         "description": "This is the label for the 'Add' buttons."
@@ -120,8 +119,6 @@
             "url": { "content" : "$1" }
         }
     },
-    
-    
     "show_icon": {
         "message": "Show icon in address bar"
     },
@@ -153,7 +150,10 @@
     "new_filters_added": {
         "message": "New filters added; see <a id='options_url' target='_blank'>Options</a> to manage them."
     },
-    
+    "block_element": {
+        "message": "Block Element",
+        "description": "Label for 'Block Element' context menu item"
+    },
     
     "hovercraft": {
         "message": "My hovercraft is full of eels.",
