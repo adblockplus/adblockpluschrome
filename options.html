@@ -137,8 +137,8 @@ function saveOptions() {
 	
     // Tell background.html to show/hide icon
     // chrome.extension.sendRequest({reqtype: "refresh-page-icon"});
-    // Reload filters
-    chrome.extension.sendRequest({reqtype: "reload-filters"});
+    // Reload filters and force display of status message
+    chrome.extension.sendRequest({reqtype: "reload-filters"}, function() { checkAllFilterLists(); });
     
     // Excluded domains
     var excludedDomainsBox = document.getElementById("excludedDomainsBox");
@@ -266,8 +266,11 @@ function checkFilterList(key) {
 		    // lastDownloaded: Last time the list was downloaded
 		    // lastUpdated: Last time the list reports that it was updated, or else the last time it was downloaded
 		    var lastDownloaded = list.lastDownloaded ? list.lastDownloaded : list.lastUpdated;
-			var timeDate = i18n_timeDateStrings(lastDownloaded); 
-			$("#" + key + "_msg").css("color", "#b0b0b0").text(chrome.i18n.getMessage("last_updated_at", timeDate)).css("display", "inline");
+			var timeDate = i18n_timeDateStrings(lastDownloaded);
+			// Only display status message if checked
+			if(document.getElementById(key).checked) {
+			    $("#" + key + "_msg").css("color", "#b0b0b0").text(chrome.i18n.getMessage("last_updated_at", timeDate)).css("display", "inline");
+		    }
 		}
 		else {
 			// Display error only if checked
@@ -304,7 +307,7 @@ function addUserURLEntry(key, url) {
 	checkbox.type = "checkbox";
 	checkbox.id = key;
 	checkbox.checked = true;
-	checkbox.addEventListener("click", function() { checkFilterList(key); saveOptions(); });
+	checkbox.addEventListener("click", function() { saveOptions(); });
 	var label = document.createElement('span');
 	label.id = key + "_url";
 	label.innerHTML = url;
@@ -329,7 +332,7 @@ function addFilterListEntry(key) {
 	var checkbox = document.createElement('input');
 	checkbox.type = "checkbox";
 	checkbox.id = key;
-	checkbox.addEventListener("click", function() { checkFilterList(key); saveOptions(); });
+	checkbox.addEventListener("click", function() { saveOptions(); });
 	var label = document.createElement('span');
 	if(filterListAuthors[key])
 	    label.innerHTML = chrome.i18n.getMessage("filter_list_desc", [filterListTitles[key], filterListAuthors[key]]);
