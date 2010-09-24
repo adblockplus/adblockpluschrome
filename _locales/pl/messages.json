@@ -29,6 +29,10 @@
    "apply_changes": {
       "message": "Zakceptuj zmiany"
    },
+   "block_element": {
+    "message": "Blokuj Element",
+    "description": "Label for 'Block Element' context menu item"
+   },
    "block_youtube": {
       "message": "Blokuj reklamy w filmach YouTube (nie działa z rozszerzeniem FlashBlock)"
    },
