@@ -507,6 +507,7 @@ var requestDispatchTable = {
     "reload-filters": function(request, sender, sendResponse) {
         // Reloads filter lists and user filters
         reloadFilters();
+        sendResponse({});
     },
     "cache-filters": function(request, sender, sendResponse) {
         clickHideFilters = request.filters;
