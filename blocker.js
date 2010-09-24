@@ -83,7 +83,7 @@ function getAbsolutePosition(elt) {
 // Adds an overlay to an element, which is probably a Flash object
 function addElementOverlay(elt) {
     // If this element is enclosed in an object tag, we prefer to block that instead
-    if(!elt) return;
+    if(!elt) return null;
         
     // If element doesn't have at least one of class name, ID or URL, give up
     // because we don't know how to construct a filter rule for it
@@ -100,6 +100,7 @@ function addElementOverlay(elt) {
     overlay.style.top = pos[1] + "px";
     // elt.parentNode.appendChild(overlay, elt);
     document.body.appendChild(overlay);
+    return overlay;
 }
 
 // Show dialog asking user whether she wants to add the proposed filters derived
@@ -239,7 +240,7 @@ function clickHide_elementClickHandler(ev) {
 // Hovering over an element so highlight it
 function clickHide_mouseOver(e) {
     if(clickHide_activated == false) return;
-    
+
     if(e.target.id || e.target.className || e.target.src) {
         currentElement = e.target;
         currentElement_boxShadow = e.target.style.getPropertyValue("-webkit-box-shadow");
@@ -316,7 +317,9 @@ function clickHide_mouseClick(e) {
     // Restore currentElement's box-shadow and bgcolor so that highlightElements won't save those
     currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
     currentElement.style.backgroundColor = currentElement_backgroundColor;
+    // Highlight the elements specified by selector in yellow
     highlightElements(selectorList.join(","));
+    // Now, actually highlight the element the user clicked on in red
     currentElement.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #fd1708");
     currentElement.style.backgroundColor = "#f6a1b5";
 
@@ -549,10 +552,16 @@ if (document instanceof HTMLDocument) {
             // by lastRightClickEvent.target. If not, we just discard
             var url = relativeToAbsoluteUrl(lastRightClickEvent.target.src);
             if(request.filter === url) {
-                clickHide_mouseOver(lastRightClickEvent);
+                // Coerce red highlighted overlay on top of element to remove.
+                // TODO: Wow, the design of the clickHide stuff is really dumb - gotta fix it sometime
+                currentElement = addElementOverlay(lastRightClickEvent.target);
+                // clickHide_mouseOver(lastRightClickEvent);
                 clickHide_mouseClick(lastRightClickEvent);
             } else {
                 console.log("clickhide-new-filter: URLs don't match.", url, lastRightClickEvent.target.src);
+                // Restore previous state
+                clickHide_activated = false;
+                clickHideFilters = null;                
             }
         } else if(request.reqtype == "remove-ads-again") {
             // Called when a new filter is added
