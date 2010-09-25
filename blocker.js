@@ -596,7 +596,7 @@ if (document instanceof HTMLDocument) {
             if(bodyBackground && bodyBackground.substr(0, 4) == "url(") {
                 bodyBackground = bodyBackground.substr(4, bodyBackground.length-5);
                 chrome.extension.sendRequest({reqtype: "should-block?", type: TypeMap.BACKGROUND, url: bodyBackground}, function(response) {
-                    document.body.style.setProperty("background-image", "none");
+                    if(response.block) document.body.style.setProperty("background-image", "none");
                 });
             }
         }
