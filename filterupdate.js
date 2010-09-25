@@ -135,14 +135,14 @@ function FilterListFetcher(nameOrUrl, callback) {
                 if(expires.length > 2) unit = expires[2]; // Is a unit specified? If so, grab it
                 if(unit.match(/hour/)) unitLength = 3600; // in seconds
                 expires = expires ? parseInt(expires[1]) * unitLength * 1000 : DEFAULT_EXPIRE_TIME; // in milliseconds
-                // Clamp the expire time to a predefined range to defend against bad input
-                // unless it's the AdThwart server, which we trust. This is a really weak
+
+                // Min expire time is a day unless it's the AdThwart server. This is a really weak
                 // authentication mechanism but the worst a lying server could do is
-                // cause a DDoS on itself
-                if(this.getResponseHeader("X-AdThwart") == "") {
-                    expires = expires > MAX_EXPIRE_TIME ? MAX_EXPIRE_TIME : expires;
-                    expires = expires < MIN_EXPIRE_TIME ? MIN_EXPIRE_TIME : expires;
-                }
+                // cause a DDoS on itself. Now that is limited as well.
+                var myMinExpireTime = MIN_EXPIRE_TIME;
+                if(this.getResponseHeader("X-AdThwart") != "") myMinExpireTime = 4 * 3600 * 1000; // 4 hours
+                expires = expires < myMinExpireTime ? myMinExpireTime : expires;
+                expires = expires > MAX_EXPIRE_TIME ? MAX_EXPIRE_TIME : expires;
                 // If the list we just downloaded is expired, mark its lastUpdated time as now or we will
                 // think the list is too old on every update check and keep trying to download it, which would pound
                 // that server, which wouldn't be very nice. Also, if the list claims it was updated in the
