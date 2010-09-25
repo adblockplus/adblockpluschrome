@@ -444,9 +444,12 @@ var requestDispatchTable = {
         var thirdParty = isThirdParty(url, request.domain);
         if(whitelistMatcher.matchesAny(url, request.type, request.domain, thirdParty)) {
             sendResponse({block: false});
+            return;
         } else if(blacklistMatcher.matchesAny(url, request.type, request.domain, thirdParty)) {
             sendResponse({block: true});
         }
+        // If it didn't match either matcher, then it's not an ad
+        sendResponse({block: false});
     },
     "get-elemhide-selectors": function(request, sender, sendResponse) {
         var selectors = abp.elemhide.getSelectorsToHide(request.domain);
