@@ -62,6 +62,17 @@ function saveCheckbox(id) {
     localStorage[id] = document.getElementById(id).checked;
 }
 
+function showUserFilters() {
+    var userFilters = localStorage["userFilters"];
+    if(typeof userFilters == "undefined")
+	    userFilters = JSON.stringify(["qux.us###annoying_AdDiv", "qux.us##.ad_class"]);
+    userFilters = JSON.parse(userFilters);
+    // Populate list box with filter strings
+    $("#userFiltersBox").children().remove();
+    for(var i = 0; i < userFilters.length; i++)
+        appendToListBox("userFiltersBox", userFilters[i]);
+}
+
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions() {
 	// Show icon in address bar? True by default
@@ -87,13 +98,7 @@ function loadOptions() {
     }
 		
 	// User-entered filters
-	var userFilters = localStorage["userFilters"];
-	if(typeof userFilters == "undefined")
-	    userFilters = JSON.stringify(["qux.us###annoying_AdDiv", "qux.us##.ad_class"]);
-	userFilters = JSON.parse(userFilters);
-    // Populate list box with filter strings
-    for(var i = 0; i < userFilters.length; i++)
-        appendToListBox("userFiltersBox", userFilters[i]);
+	showUserFilters();
         
     // Excluded domains - sort these alphabetically
     var excludedDomains = localStorage["excludedDomains"];
@@ -382,6 +387,16 @@ $(function() {
     $('.addButton').button('option', 'icons', {primary: 'ui-icon-plus'});
     $('.removeButton').button('option', 'icons', {primary: 'ui-icon-minus'});
 });
+
+
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+    if(request.reqtype == "refresh-user-filters-box") {
+        // Invoked when user adds clickHide filters
+        showUserFilters();
+        sendResponse({});
+    }
+});
+
 </script>
 </head>
 <body onload="loadI18nStrings(); loadOptions(); checkAllFilterLists()">
