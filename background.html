@@ -411,7 +411,7 @@ function reloadFilters() {
 // e.g. .www.foo.com contains .foo.com but .www.barfoo.com does not
 function isThirdParty(url, docDomain) {
     var reqDomain = "." + extractDomainFromURL(url);
-    var thirdParty = !(reqDomain.match("\\." + docDomain + "$"));
+    return !(reqDomain.match("\\." + docDomain + "$"));
 }
 
 reloadFilters();
