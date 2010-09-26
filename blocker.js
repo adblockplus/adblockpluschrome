@@ -142,6 +142,8 @@ function clickHide_showDialog(left, top, filters) {
     	clickHideFiltersDialog.setAttribute('style', 'visibility: hidden');
     	document.body.removeChild(clickHideFiltersDialog);
     	clickHideFiltersDialog = null;
+    	// Tell options.html to refresh its user filters listbox
+    	chrome.extension.sendRequest({reqtype: "refresh-user-filters-box"});
     };
     var cancelButton = makeButton("cancelButton");
     cancelButton.innerText = chrome.i18n.getMessage('cancel');
