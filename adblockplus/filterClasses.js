@@ -425,7 +425,7 @@ RegExpFilter.fromText = function(text)
       option = options[i];
       var value;
       // [option, value] = option.split("=");
-			rar = option.split("=");
+			var rar = option.split("=");
 			option = rar[0];
 			value = rar[1];
       option = option.replace(/-/, "_");
