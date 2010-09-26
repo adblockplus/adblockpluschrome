@@ -71,6 +71,7 @@ var defaultFilterListsByLocale = {
 // But, in case that is garbled in the filter list, clamp it to a predefined range
 var DEFAULT_EXPIRE_TIME =  3 * 86400 * 1000;
 var MIN_EXPIRE_TIME = 1 * 86400 * 1000;
+var ADTHWART_MIN_EXPIRE_TIME = 4 * 3600 * 1000;
 var MAX_EXPIRE_TIME = 14 * 86400 * 1000;
 
 // Adds entries in filterFiles for any user filters. Other functions will
@@ -117,8 +118,13 @@ function FilterListFetcher(nameOrUrl, callback) {
             if(this.responseText.match(/^AdThwart-OK\:/)) {
                 var now = (new Date()).getTime();
                 var currentFilters = JSON.parse(localStorage[fetcher.url]);
-                localStorage[fetcher.url] = JSON.stringify({lastDownloaded: now, lastUpdated: currentFilters.lastUpdated, expires: currentFilters.expires, text: currentFilters.text});
-                // console.log("Local copy up to date, not redownloading", fetcher.url);
+                var expires = currentFilters.expires, lastUpdated = currentFilters.lastUpdated;
+                expires = expires < ADTHWART_MIN_EXPIRE_TIME ? ADTHWART_MIN_EXPIRE_TIME : expires;
+                // Avoid pounding server (see below)
+                if((now - lastUpdated) > expires || lastUpdated > now)
+                    lastUpdated = now;
+                localStorage[fetcher.url] = JSON.stringify({lastDownloaded: now, lastUpdated: lastUpdated, expires: expires, text: currentFilters.text});
+                // console.log(expires, "Local copy up to date, not redownloading", fetcher.url);
                 fetcher.callback(fetcher);
                 return;
             }
@@ -128,7 +134,7 @@ function FilterListFetcher(nameOrUrl, callback) {
                 var lastUpdated = this.responseText.match(/Last modified:\s+(.+)/i);
                 var now = (new Date()).getTime();
                 lastUpdated = lastUpdated ? Date.parse(lastUpdated[1]) : now;
-                var expires = this.responseText.match(/Expires:\s+(\d+) (.+)/i);
+                var expires = this.responseText.match(/Expires:\s+(\d+)\s+(\w+)/i);
                 var unit = "day";
                 var unitLength = 86400; // Default to units of days
                 if(!expires) expires = ["", "3", "days"]; // Default to 3 days if Expires field is unparseable
@@ -140,7 +146,7 @@ function FilterListFetcher(nameOrUrl, callback) {
                 // authentication mechanism but the worst a lying server could do is
                 // cause a DDoS on itself. Now that is limited as well.
                 var myMinExpireTime = MIN_EXPIRE_TIME;
-                if(this.getResponseHeader("X-AdThwart") != "") myMinExpireTime = 4 * 3600 * 1000; // 4 hours
+                if(this.getResponseHeader("X-AdThwart") != "") myMinExpireTime = ADTHWART_MIN_EXPIRE_TIME; // 4 hours
                 expires = expires < myMinExpireTime ? myMinExpireTime : expires;
                 expires = expires > MAX_EXPIRE_TIME ? MAX_EXPIRE_TIME : expires;
                 // If the list we just downloaded is expired, mark its lastUpdated time as now or we will
