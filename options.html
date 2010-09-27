@@ -75,10 +75,9 @@ function showUserFilters() {
 
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions() {
-	// Show icon in address bar? True by default
-	var shouldShowIcon = localStorage["shouldShowIcon"];
-	document.getElementById("shouldShowIcon").checked = typeof shouldShowIcon == "undefined" ? true : shouldShowIcon == "true";
-	
+	// Show icon in address bar?
+	loadCheckbox("shouldShowIcon");
+	loadCheckbox("shouldShowBlockElementMenu");
 	loadCheckbox("disableInlineTextAds");
 	loadCheckbox("specialCaseYouTube");
 	
@@ -118,6 +117,7 @@ function loadOptions() {
 // Reads options from UI elements and saves them in localStorage
 function saveOptions() {
 	saveCheckbox("shouldShowIcon");
+	saveCheckbox("shouldShowBlockElementMenu");
 	saveCheckbox("disableInlineTextAds");
 	saveCheckbox("specialCaseYouTube");
     
@@ -140,8 +140,8 @@ function saveOptions() {
         userFilters.push(userFiltersBox.options[i].value);
     localStorage["userFilters"] = JSON.stringify(userFilters);
 	
-    // Tell background.html to show/hide icon
-    // chrome.extension.sendRequest({reqtype: "refresh-page-icon"});
+    // Tell background.html to show/hide context menu
+    chrome.extension.sendRequest({reqtype: "refresh-context-menu"});
     // Reload filters and force display of status message
     chrome.extension.sendRequest({reqtype: "reload-filters"}, function() { checkAllFilterLists(); });
     
@@ -467,6 +467,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 
 <div id="tab-general">
 <input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /><span class="i18n_show_icon"></span><br/>
+<input type="checkbox" id="shouldShowBlockElementMenu" onClick="saveOptions()" /><span class="i18n_show_block_element_menu"></span><br/>
 <input type="checkbox" id="disableInlineTextAds" onClick="saveOptions()" /><a href="http://userscripts.org/scripts/show/3637"><span class="i18n_disable_inline"></span></a><br/>
 <input type="checkbox" id="specialCaseYouTube" onClick="saveOptions()" /><span class="i18n_block_youtube"></span><br/>
 
