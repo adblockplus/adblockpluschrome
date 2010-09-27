@@ -215,13 +215,9 @@ function toggleDomainExclusion(tabId) {
     });
 }
 
-function refreshIconByTabId(tabId) {
-    chrome.tabs.get(tabId, function(tab) { refreshIcon(tab)});
-}
-
 // Adds or removes page action icon according to options.
 // Show devil if enabled, apathetic face otherwise.
-function refreshIcon(tab) {
+function refreshIconAndContextMenu(tab) {
     var domain = extractDomainFromURL(tab.url);
     var excluded = isDomainExcluded(domain);
     iconFilename = excluded ? "icons/face-devilish-grayed-19.png" : "icons/face-devilish-19.png";
@@ -236,6 +232,8 @@ function refreshIcon(tab) {
         } else {
             chrome.pageAction.show(tab.id);
         }
+        // Set context menu status according to whether current tab has whitelisted domain
+        excluded ? chrome.contextMenus.removeAll() : showContextMenu();
     }
 }
 
@@ -444,7 +442,7 @@ chrome.extension.onConnect.addListener(function(port) {
 });
 
 // Set up context menu for user selection of elements to block
-function refreshContextMenu() {
+function showContextMenu() {
     chrome.contextMenus.removeAll();
     if(typeof localStorage["shouldShowBlockElementMenu"] == "string" && localStorage["shouldShowBlockElementMenu"] == "true") {
         chrome.contextMenus.create({'title': chrome.i18n.getMessage('block_element'), 'contexts': ['image', 'video', 'audio'], 'onclick': function(info, tab) {
@@ -506,7 +504,7 @@ var requestDispatchTable = {
                 removeDomainFromExclusionList(domain);
             else
                 addDomainToExclusionList(domain);
-            refreshIcon(tab);
+            refreshIconAndContextMenu(tab);
         });
     },
     "get-domain-enabled-state": function(request, sender, sendResponse) {
@@ -523,11 +521,8 @@ var requestDispatchTable = {
     },
     "refresh-page-icon": function(request, sender, sendResponse) {
         // Show page icon according to the user option
-        refreshIconByTabId(lastTabId);
-    },
-    "refresh-context-menu": function(request, sender, sendResponse) {
-        // Show or hide context menu item according to the user option
-        refreshContextMenu();
+        chrome.tabs.get(lastTabId, function(tab) { refreshIconAndContextMenu(tab)});
+        
     },
     "reload-filters": function(request, sender, sendResponse) {
         // Reloads filter lists and user filters
@@ -567,25 +562,21 @@ var lastTabId = 0;
 // Show icon as page action
 chrome.tabs.onSelectionChanged.addListener(function(tabId) {
     lastTabId = tabId;
-    refreshIconByTabId(tabId);
+    chrome.tabs.get(tabId, function(tab) { refreshIconAndContextMenu(tab)});
 });
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     lastTabId = tabId;
     chrome.tabs.sendRequest(tabId, {reqtype: "clickhide-deactivate"})
-    if(changeInfo.status == "complete") refreshIcon(tab);
+    if(changeInfo.status == "complete") refreshIconAndContextMenu(tab);
 });
 
 // Show page action on current tab
 chrome.tabs.getSelected(null, function(tab) {
     if(!tab) return;
     lastTabId = tab.id;
-    refreshIcon(tab);
+    refreshIconAndContextMenu(tab);
 });
-
-// Show context menu (or hide it) at least once.
-// After this, the only time this needs to be changed is when the user changes the option.
-refreshContextMenu();
 
 // Reload filters every four hours, which will trigger the autoupdate
 setInterval(reloadFilters, 4 * 60 * 60 * 1000);

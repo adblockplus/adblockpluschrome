@@ -140,8 +140,6 @@ function saveOptions() {
         userFilters.push(userFiltersBox.options[i].value);
     localStorage["userFilters"] = JSON.stringify(userFilters);
 	
-    // Tell background.html to show/hide context menu
-    chrome.extension.sendRequest({reqtype: "refresh-context-menu"});
     // Reload filters and force display of status message
     chrome.extension.sendRequest({reqtype: "reload-filters"}, function() { checkAllFilterLists(); });
     
