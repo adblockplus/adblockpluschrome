@@ -308,7 +308,11 @@ function loadFiltersRawText(filename) {
 // This will also download and cache filter lists as necessary.
 function reloadFilters() {
     abp.filterListener.clear();
-    saveOptionsObject("priorityAdServers", {}); // Clear no-inject list
+    saveOptionsObject("priorityAdServers", {}); // Clear priority ad servers list
+    // XXX: Fix for mail.live.com quirk (Hotmail) - doesn't load properly otherwise
+    // Hardcoding it here in case adthwart.appspot.com goes over quota again and the
+    // !NI filter is not available
+    saveOptionsObject("noInitialHideDomains", {"mail.live.com": true});
     var urlsToLoad = new Array();
     
     // Make sure user filter URLs are in filterFiles
