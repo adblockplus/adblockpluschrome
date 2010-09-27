@@ -584,6 +584,10 @@ chrome.tabs.getSelected(null, function(tab) {
     refreshIcon(tab);
 });
 
+// Show context menu (or hide it) at least once.
+// After this, the only time this needs to be changed is when the user changes the option.
+refreshContextMenu();
+
 // Reload filters every four hours, which will trigger the autoupdate
 setInterval(reloadFilters, 4 * 60 * 60 * 1000);
 
