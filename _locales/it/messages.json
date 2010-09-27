@@ -157,6 +157,9 @@
             "message": "Blocca Elemento",
             "description": "Label for 'Block Element' context menu item"
     },
+    "show_block_element_menu": {
+        "message": "Mostra 'Blocca Elemento' nel menu contestuale"
+    },
     
     "hovercraft": {
         "message": "Il mio hovercraft è pieno di anguille.",
