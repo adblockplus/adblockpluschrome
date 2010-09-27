@@ -122,6 +122,9 @@
     "show_icon": {
         "message": "Show icon in address bar"
     },
+    "show_block_element_menu": {
+        "message": "Show 'Block Element' right-click menu item"
+    },
     "disable_inline": {
         "message": "Disable inline text ads"
     },

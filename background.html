@@ -115,12 +115,14 @@ function defaultOptionValue(opt, val) {
 
 // Sets options to defaults, upgrading old options from previous versions as necessary
 function setDefaultOptions() {
-   defaultOptionValue("disableInlineTextAds", "true");
-   defaultOptionValue("specialCaseYouTube", "true");
-   defaultOptionValue("excludedDomains", JSON.stringify({"acid3.acidtests.org": true}));
+    defaultOptionValue("shouldShowIcon", "true");
+    defaultOptionValue("shouldShowBlockElementMenu", "true");
+    defaultOptionValue("disableInlineTextAds", "true");
+    defaultOptionValue("specialCaseYouTube", "true");
+    defaultOptionValue("excludedDomains", JSON.stringify({"acid3.acidtests.org": true}));
 
-   // If user had older version installed, get rid of old option
-   if(optionExists("experimental"))
+    // If user had older version installed, get rid of old option
+    if(optionExists("experimental"))
        delete localStorage["experimental"];
 }
 
@@ -437,6 +439,19 @@ chrome.extension.onConnect.addListener(function(port) {
     });
 });
 
+// Set up context menu for user selection of elements to block
+function refreshContextMenu() {
+    if(typeof localStorage["shouldShowBlockElementMenu"] == "string" && localStorage["shouldShowBlockElementMenu"] == "true") {
+        chrome.contextMenus.create({'title': chrome.i18n.getMessage('block_element'), 'contexts': ['image', 'video', 'audio'], 'onclick': function(info, tab) {
+            if(info.srcUrl) {
+                chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl});
+            }
+        }});
+    } else {
+        chrome.contextMenus.removeAll();
+    }
+}
+
 var requestDispatchTable = {
     // Respond to query about single element
     "should-block?": function(request, sender, sendResponse) {
@@ -507,6 +522,10 @@ var requestDispatchTable = {
         // Show page icon according to the user option
         refreshIconByTabId(lastTabId);
     },
+    "refresh-context-menu": function(request, sender, sendResponse) {
+        // Show or hide context menu item according to the user option
+        refreshContextMenu();
+    },
     "reload-filters": function(request, sender, sendResponse) {
         // Reloads filter lists and user filters
         reloadFilters();
@@ -560,13 +579,6 @@ chrome.tabs.getSelected(null, function(tab) {
     lastTabId = tab.id;
     refreshIcon(tab);
 });
-
-// Set up context menu for user selection of elements to block
-chrome.contextMenus.create({'title': chrome.i18n.getMessage('block_element'), 'contexts': ['image', 'video', 'audio'], 'onclick': function(info, tab) {
-    if(info.srcUrl) {
-        chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl});
-    }
-}});
 
 // Reload filters every four hours, which will trigger the autoupdate
 setInterval(reloadFilters, 4 * 60 * 60 * 1000);
