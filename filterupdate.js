@@ -15,7 +15,7 @@ var filterFiles = {
     "vietnam": "http://adblockplus-vietnam.googlecode.com/svn/trunk/abpvn.txt",
     "poland": "http://www.niecko.pl/adblock/adblock.txt", // PLgeneral
     "hungary": "http://pete.teamlupus.hu/hufilter.txt", // hufilter
-    "extras": "http://adthwart.appspot.com/filters?n=extras"
+    "extras": "http://adthwart.qux.us/filters/recommended.txt"
 };
 
 var filterListTitles = {
@@ -31,7 +31,7 @@ var filterListTitles = {
     "vietnam": 'Việt Nam list',
     "poland": 'PLgeneral (Polski)',
     "hungary": 'hufilter (Magyar)',
-    "extras": '<a href="http://adthwart.appspot.com/filters?n=extras">AdThwart recommended filters</a>'
+    "extras": '<a href="' + filterFiles["extras"] + '">AdThwart recommended filters</a>'
 };
 
 var filterListAuthors = {
@@ -129,7 +129,7 @@ function FilterListFetcher(nameOrUrl, callback) {
             // If server thinks we are up to date based on the MD5 has we reported, just nudge
             // the last updated time and call it a day
             if(this.responseText.match(/^AdThwart-OK\:/)) {
-                // console.log(expires, "Local copy up to date, not redownloading", fetcher.url);
+                console.log(expires, "Local copy up to date, not redownloading", fetcher.url);
                 nudgeUpdatedTime_AdThwart(fetcher.url);
                 fetcher.callback(fetcher);
                 return;
