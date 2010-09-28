@@ -1,7 +1,7 @@
 {
    "add": {
       "description": "This is the label for the 'Add' buttons.",
-      "message": "Add"
+      "message": "新增"
    },
    "add_a_filter_list": {
       "message": "訂閱 Firefox AdBlock Plus 的 <a href='$url$'>過濾清單</a>:",
@@ -29,12 +29,16 @@
    "apply_changes": {
       "message": "套用變更"
    },
+   "block_element": {
+      "description": "Label for 'Block Element' context menu item",
+      "message": "阻擋網頁元素"
+   },
    "block_youtube": {
-      "message": "阻擋在YouTube影片的廣告（不執行 FlashBlock 的擴充功能）"
+      "message": "阻擋YouTube影片的廣告（不執行 FlashBlock 的擴充功能）"
    },
    "cancel": {
       "description": "Cancel button label",
-      "message": "Cancel"
+      "message": "取消"
    },
    "clickhide_instructions": {
       "message": "此彈出訊息關閉後，請點擊頁面上的元素。"
@@ -75,7 +79,7 @@
       "message": "編輯過濾器的網址"
    },
    "enable_only_the": {
-      "message": "請只啟用您需的過濾器清單。啟用太多會使讓瀏覽器無回應。"
+      "message": "請只啟用您需的過濾器清單。啟用太多會使瀏覽器無回應。"
    },
    "enabled_for_site": {
       "description": "Popup balloon checkbox label",
@@ -106,7 +110,7 @@
       }
    },
    "found_a_bug": {
-      "message": "發現錯誤？要翻譯 AdThwart 成你的語言？請至 <a href='$url$'>file a request here</a>.",
+      "message": "發現錯誤？要翻譯 AdThwart 成你的語言？請至 <a href='$url$'>此處詢問檔案</a>.",
       "placeholders": {
          "url": {
             "content": "$1"
@@ -123,7 +127,7 @@
    },
    "last_updated_at": {
       "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
-      "message": "Last Updated at $time$ $date$",
+      "message": "最後更新於 $time$ $date$",
       "placeholders": {
          "date": {
             "content": "$2"
@@ -149,7 +153,7 @@
       "message": "伺服器找不到"
    },
    "options": {
-      "message": "AdThwart 选项"
+      "message": "AdThwart 選項"
    },
    "out_of_date_lists": {
       "message": "定期更新最新清單。"
@@ -158,12 +162,15 @@
       "description": "This is the label for the 'Remove selected' buttons.",
       "message": "刪除選擇"
    },
+   "show_block_element_menu": {
+      "message": "右鍵選單顯示「阻擋網頁元素」"
+   },
    "show_icon": {
       "message": "顯示圖示於網址列"
    },
    "today": {
       "description": "Word for 'today', as in 'Last updated today'",
-      "message": "Today"
+      "message": "今日"
    },
    "update_now": {
       "message": "更新"
