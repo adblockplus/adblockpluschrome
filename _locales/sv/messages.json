@@ -1,0 +1,165 @@
+{
+    "description": {
+        "message": "Blockerar reklam med hjälp av Firefox AdBlock Plus filtreringsmotor. Säg adjö till reklamen och surfa i fred!"
+    },
+    "month_names": {
+        "message": "[\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"Maj\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Okt\", \"Nov\", \"Dec\"]",
+        "description": "Month short names."
+    },
+    "date_format": {    
+        "message": "den $day$ $month$ $year$",
+        "description": "e.g. Apr 1, 2011",
+        "placeholders": {
+            "day": { "content" : "$1" },
+            "month": { "content" : "$2" },
+            "year": { "content" : "$3" }
+        }
+    },
+    "options": {
+        "message": "AdThwart Alternativ"
+    },
+    "filter_lists": {
+        "message": "Filterlistor",
+        "description": "This is a tab heading."
+    },
+    "last_updated_at": {
+        "message": "Senast uppdaterad $date$ $time$",
+        "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+        "placeholders": {
+            "time": { "content" : "$1" },
+            "date": { "content" : "$2" }
+        }
+    },
+    "not_a_filter_list": {
+        "message": "Ingen filterlista",
+        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
+    },
+    "not_found_on_server": {
+        "message": "Kan inte hittas på servern",
+        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
+    },
+    "filter_list_desc": {
+        "message": "$title$ av $author$",
+        "description": "e.g. FooList by Mr. Foo",
+        "placeholders": {
+            "title": { "content" : "$1" },
+            "author": { "content" : "$2" }
+        }
+    },
+    "today": {
+        "message": "i dag",
+        "description": "Word for 'today', as in 'Last updated today'"
+    },
+    "add_your_own_filters": {
+        "message": "Lägg till dina egna filter"
+    },
+    "whitelisted_domains": {
+        "message": "Vitlistade domäner",
+        "description": "This is a tab heading."
+    },
+    "general": {
+        "message": "Allmänt",
+        "description": "This is a tab heading."
+    },
+    "add": {
+        "message": "Lägg till",
+        "description": "This is the label for the 'Add' buttons."
+    },
+    "add_domain_button": {
+        "message": "Lägg till domän"
+    },
+    "add_filter_button": {
+        "message": "Lägg till filter"
+    },
+    "add_url_button": {
+        "message": "Lägg till URL"
+    },
+    "delete": {
+        "message": "Ta bort",
+        "description": "Word for 'delete'."
+    },
+    "remove_button": {
+        "message": "Ta bort markerad",
+        "description": "This is the label for the 'Remove selected' buttons."
+    },
+    "edit_filters_raw": {
+        "message": "Redigera filter som ren text"
+    },
+    "apply_changes": {
+        "message": "Verkställ ändringar"
+    },
+
+    "enable_only_the": {
+        "message": "Aktivera bara dom filter du behöver. För många kan få Chrome att sluta svara."
+    },
+    "out_of_date_lists": {
+        "message": "Inaktuella listor uppdateras periodiskt."
+    },
+    "update_now": {
+        "message": "Uppdatera nu"
+    },
+    "add_a_filter_list": {
+        "message": "Prenumerera på en Firefox AdBlock Plus <a href='$url$'>filterlista</a>:",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "filter_must_follow_syntax": {
+        "message": "Ditt filter måste följa <a href='$url$'>AdBlock Plus filter-syntax</a>. Särskilda filtertyper, som object-subrequest, stöds ej.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "disabled_for_these_domains": {
+        "message": "AdThwart är inaktiverad för domänerna i denna lista. Du kan lägga till en domän via AdThwart-ikonen i adressfältet eller genom att skriva domännamnet (inte URL) i textboxen och klicka på \"Lägg till domän\"."
+    },
+    "found_a_bug": {
+        "message": "Hittat ett fel eller vill du översätta AdThwart till ett annat språk? Vänligen, <a href='$url$'>meddela här</a>.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "show_icon": {
+        "message": "Visa ikon i adressfältet"
+    },
+    "show_block_element_menu": {
+        "message": "Visa 'Blockera objekt' i högerklicksmeny"
+    },
+    "disable_inline": {
+        "message": "Inaktivera infogade textannonser"
+    },
+    "block_youtube": {
+        "message": "Blockera annonser i YouTube-videos (fungerar inte med FlashBlock-tillägg)"
+    },
+    
+    "enabled_for_site": {
+        "message": "Aktiverad för den här sidan",
+        "description": "Popup balloon checkbox label"
+    },
+    "easy_create_filter": {
+        "message": "Skapa filter",
+        "description": "Button label in popup balloon"
+    },
+    "cancel": {
+        "message": "Avbryt",
+        "description": "Cancel button label"
+    },
+    "clickhide_instructions": {
+        "message": "När denna popup stängs, klicka (eller högerklicka) ett objekt på sidan."
+    },
+    "add_filters_msg": {
+        "message": "Lägga till filter?"
+    },
+    "new_filters_added": {
+        "message": "Nya filter tillagda; se <a id='options_url' target='_blank'>Alternativ</a> för att hantera dom."
+    },
+    "block_element": {
+        "message": "Blockera objekt",
+        "description": "Label for 'Block Element' context menu item"
+    },
+    
+    "hovercraft": {
+        "message": "Min svävare är full av ål.",
+        "description": "This is a sample translatable string. It happens to have comedic value."
+    }
+}
