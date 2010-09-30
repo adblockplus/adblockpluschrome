@@ -1,6 +1,6 @@
 {
 	"name": "AdThwart",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "__MSG_description__",
 	"default_locale": "en",
 	"page_action": {
