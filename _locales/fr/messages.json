@@ -138,7 +138,7 @@
         "description": "Cancel button label"
     },
     "clickhide_instructions": {
-        "message": "Après avoir clôturé ce popup, cliquez (ou droit-cliquez) un element sur la page."
+        "message": "Après avoir clôturé ce popup, cliquez (ou droit-cliquez) un élément sur la page."
     },
     "add_filters_msg": {
         "message": "Ajouter filtre(s)?"
@@ -146,8 +146,13 @@
     "new_filters_added": {
         "message": "Nouveaux filtres ajoutés. Regardez <a id='options_url' target='_blank'>Paramètres</a> pour les contrôler."
     },
-    
-		
+    "block_element": {
+        "message": "Supprimer l'élément"
+    },
+    "show_block_element_menu": {
+        "message": "Afficher 'Supprimer l'élément' dans le menu clic-droit"
+    },
+
 	"hovercraft": {
 		"message": "Mon aéroglisseur est plein d'anguilles.",
 		"description": "This is a sample translatable string. It happens to have comedic value."
