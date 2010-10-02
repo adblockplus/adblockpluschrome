@@ -45,7 +45,7 @@
   },
   "date_format": {
      "description": "e.g. Apr 1, 2011",
-     "message": "$year$年 $month$月 $day$日",
+     "message": "$year$年 $month$ $day$日",
      "placeholders": {
         "day": {
            "content": "$1"
