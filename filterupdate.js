@@ -90,28 +90,6 @@ function loadUserFilterURLs() {
         filterFiles[key] = urls[key];
 }
 
-// Filter update protocol:
-// 
-// When fetching a filter list, we send an HTTP header X-AdThwart-My-MD5 with the MD5 digest of
-// our local copy of the filter list. The server uses that to decide whether we already have the
-// latest version. If so, it sends a string starting with "AdThwart-OK:". We can just keep
-// the data we already have in this case.
-// This saves bandwidth for the AdThwart server without interfering with non-AdThwart filter 
-// list servers.
-
-// Nudges the last updated time for a particular URL to now if necessary
-// Also sets lower bound on expiry time
-function nudgeUpdatedTime_AdThwart(url) {
-    var now = (new Date()).getTime();
-    var currentFilters = JSON.parse(localStorage[url]);
-    var expires = currentFilters.expires, lastUpdated = currentFilters.lastUpdated;
-    expires = expires < ADTHWART_MIN_EXPIRE_TIME ? ADTHWART_MIN_EXPIRE_TIME : expires;
-    // Avoid pounding server (see below)
-    if((now - lastUpdated) > expires || lastUpdated > now)
-        lastUpdated = now;
-    localStorage[url] = JSON.stringify({lastDownloaded: now, lastUpdated: lastUpdated, expires: expires, text: currentFilters.text});
-}
-
 // TODO: In case of error fetching a filter list, check to see whether
 // we already have a copy cached, and leave it there.
 // At present the cached copy can be deleted.
@@ -126,15 +104,6 @@ function FilterListFetcher(nameOrUrl, callback) {
     this.xhr.onreadystatechange = function() {
         if(this.readyState != 4) return;
         if(this.status == 200) {
-            // If server thinks we are up to date based on the MD5 has we reported, just nudge
-            // the last updated time and call it a day
-            if(this.responseText.match(/^AdThwart-OK\:/)) {
-                console.log(expires, "Local copy up to date, not redownloading", fetcher.url);
-                nudgeUpdatedTime_AdThwart(fetcher.url);
-                fetcher.callback(fetcher);
-                return;
-            }
-            
             // Check if it's actually a filter set and if so, save it along with its expiry information
             if(this.responseText.match(/\[Adblock/)) {
                 var lastUpdated = this.responseText.match(/Last modified:\s+(.+)/i);
@@ -178,14 +147,11 @@ function FilterListFetcher(nameOrUrl, callback) {
         } else if(this.status == 503) {
             // Most likely a 503 means quota exceeded on the server
             // XXX: We aren't signaling an error here because we don't want to disable checking of this filter list
-            nudgeUpdatedTime_AdThwart(fetcher.url);
         }
         // TODO: Doesn't actually do anything in case of other errors
     }
     try {
-        // If we already have a copy of this filter list, calculate its MD5 hash.
-        // We'll send this in an HTTP header. This way, the server doesn't have to
-        // send the whole filter list if the client already has it.
+        // Send MD5 hash of what we have at the moment
         var currentFilters = null, md5hash = null;
         if(typeof localStorage[this.url] == "string") currentFilters = JSON.parse(localStorage[this.url]);
         if(currentFilters && currentFilters.text) md5hash = MD5.hash(currentFilters.text);
