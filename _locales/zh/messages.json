@@ -45,7 +45,7 @@
   },
   "date_format": {
      "description": "e.g. Apr 1, 2011",
-     "message": "$year$年 $month$ $day$日",
+     "message": "$year$年 $month$月 $day$日",
      "placeholders": {
         "day": {
            "content": "$1"
@@ -139,7 +139,7 @@
   },
   "month_names": {
      "description": "Month short names.",
-     "message": "[\"1月\", \"2月\", \"3月\", \"4月\", \"5月\", \"6月\", \"7月\", \"8月\", \"9月\", \"10月\", \"11月\", \"12月\"]"
+     "message": "[\"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\"]"
   },
   "new_filters_added": {
      "message": "您已新增過濾器。 請至 <a id='options_url' target='_blank'>AdThwart 選項</a> 管理它們。"
