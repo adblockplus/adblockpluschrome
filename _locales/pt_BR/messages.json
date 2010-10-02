@@ -153,6 +153,13 @@
     "new_filters_added": {
         "message": "Novos filtros adicionados; veja em <a id='options_url' target='_blank'>Opções</a> para gerenciá-los."
     },
+    "block_element": {
+        "message": "Bloquear Elemento",
+        "description": "Legenda para o item 'Bloquear Elemento' no menu de contexto" 
+    },
+    "show_block_element_menu": {
+        "message": "Mostrar 'Bloquear Elemento' no menu ao clicar com o botão direito"
+    },
     
 	
 	"hovercraft": {
