@@ -1,182 +1,182 @@
 {
-  "add": {
-     "description": "This is the label for the 'Add' buttons.",
-     "message": "新增"
-  },
-  "add_a_filter_list": {
-     "message": "訂閱 Firefox AdBlock Plus 的 <a href='$url$'>過濾清單</a>:",
-     "placeholders": {
-        "url": {
-           "content": "$1"
-        }
-     }
-  },
-  "add_domain_button": {
-     "message": "新增域名"
-  },
-  "add_filter_button": {
-     "message": "新增過濾器"
-  },
-  "add_filters_msg": {
-     "message": "新增過濾器?"
-  },
-  "add_url_button": {
-     "message": "新增 URL"
-  },
-  "add_your_own_filters": {
-     "message": "黑名單"
-  },
-  "apply_changes": {
-     "message": "套用變更"
-  },
-  "block_element": {
-     "description": "Label for 'Block Element' context menu item",
-     "message": "阻擋網頁元素"
-  },
-  "block_youtube": {
-     "message": "阻擋YouTube影片的廣告（不執行 FlashBlock 的擴充功能）"
-  },
-  "cancel": {
-     "description": "Cancel button label",
-     "message": "取消"
-  },
-  "clickhide_instructions": {
-     "message": "此彈出訊息關閉後，請點擊頁面上的元素。"
-  },
-  "date_format": {
-     "description": "e.g. Apr 1, 2011",
-     "message": "$year$年 $month$月 $day$日",
-     "placeholders": {
-        "day": {
-           "content": "$1"
-        },
-        "month": {
-           "content": "$2"
-        },
-        "year": {
-           "content": "$3"
-        }
-     }
-  },
-  "delete": {
-     "description": "Word for 'delete'.",
-     "message": "刪除"
-  },
-  "description": {
-     "message": "使用 Firefox 的 AdBlock Plus 阻擋廣告過濾引擎。跟廣告告別並在和平中瀏覽！"
-  },
-  "disable_inline": {
-     "message": "禁用行列內的文字廣告"
-  },
-  "disabled_for_these_domains": {
-     "message": "AdThwart 將不在以下域名啟用。 您可以透過 AdThwart 位於導覽列的圖示新增域名，或者 在以下方格內輸入域名（注意：非網址），然後點擊 \"新增域名\" 。"
-  },
-  "easy_create_filter": {
-     "description": "Button label in popup balloon",
-     "message": "簡單建立過濾"
-  },
-  "edit_filters_raw": {
-     "message": "編輯過濾器的網址"
-  },
-  "enable_only_the": {
-     "message": "請只啟用您需的過濾器清單。啟用太多會使瀏覽器無回應。"
-  },
-  "enabled_for_site": {
-     "description": "Popup balloon checkbox label",
-     "message": "該網站啟用過濾"
-  },
-  "filter_list_desc": {
-     "description": "e.g. FooList by Mr. Foo",
-     "message": "$title$ 作者： $author$",
-     "placeholders": {
-        "author": {
-           "content": "$2"
-        },
-        "title": {
-           "content": "$1"
-        }
-     }
-  },
-  "filter_lists": {
-     "description": "This is a tab heading.",
-     "message": "過濾清單"
-  },
-  "filter_must_follow_syntax": {
-     "message": "您的過濾器必須遵循 <a href='$url$'>AdBlock Plus filter syntax</a> 過濾器的語法。某些過濾類型，如 object-subrequest 不支持。",
-     "placeholders": {
-        "url": {
-           "content": "$1"
-        }
-     }
-  },
-  "found_a_bug": {
-     "message": "發現錯誤？要翻譯 AdThwart 成你的語言？請至 <a href='$url$'>此處詢問檔案</a>.",
-     "placeholders": {
-        "url": {
-           "content": "$1"
-        }
-     }
-  },
-  "general": {
-     "description": "This is a tab heading.",
-     "message": "一般"
-  },
-  "hovercraft": {
-     "description": "This is a sample translatable string. It happens to have comedic value.",
-     "message": "My hovercraft is full of eels."
-  },
-  "last_updated_at": {
-     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
-     "message": "最後更新於 $time$ $date$",
-     "placeholders": {
-        "date": {
-           "content": "$2"
-        },
-        "time": {
-           "content": "$1"
-        }
-     }
-  },
-  "month_names": {
-     "description": "Month short names.",
-     "message": "[\"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\"]"
-  },
-  "new_filters_added": {
-     "message": "您已新增過濾器。 請至 <a id='options_url' target='_blank'>AdThwart 選項</a> 管理它們。"
-  },
-  "not_a_filter_list": {
-     "description": "In options.html, error displayed when filter list fetcher receives something not a filter list",
-     "message": "不是一個過濾清單"
-  },
-  "not_found_on_server": {
-     "description": "In options.html, error displayed when filter list fetcher can't find filter list on server",
-     "message": "伺服器找不到"
-  },
-  "options": {
-     "message": "AdThwart 選項"
-  },
-  "out_of_date_lists": {
-     "message": "定期更新最新清單。"
-  },
-  "remove_button": {
-     "description": "This is the label for the 'Remove selected' buttons.",
-     "message": "刪除選擇"
-  },
-  "show_block_element_menu": {
-     "message": "右鍵選單顯示「阻擋網頁元素」"
-  },
-  "show_icon": {
-     "message": "顯示圖示於網址列"
-  },
-  "today": {
-     "description": "Word for 'today', as in 'Last updated today'",
-     "message": "今日"
-  },
-  "update_now": {
-     "message": "更新"
-  },
-  "whitelisted_domains": {
-     "description": "This is a tab heading.",
-     "message": "白名單"
-  }
+   "add":{
+       "description":"This is the label for the 'Add' buttons.",
+       "message":"新增"
+   },
+   "add_a_filter_list":{
+       "message":"訂閱 Firefox AdBlock Plus 的 <a href='$url$'>過濾清單</a>:",
+       "placeholders":{
+             "url":{
+                   "content":"$1"
+         }
+      }
+   },
+   "add_domain_button":{
+       "message":"新增域名"
+   },
+   "add_filter_button":{
+       "message":"新增過濾器"
+   },
+   "add_filters_msg":{
+       "message":"新增過濾器?"
+   },
+   "add_url_button":{
+       "message":"新增網址"
+   },
+   "add_your_own_filters":{
+       "message":"黑名單"
+   },
+   "apply_changes":{
+       "message":"套用變更"
+   },
+   "block_element":{
+       "description":"Label for 'Block Element' context menu item",
+       "message":"阻擋網頁元素"
+   },
+   "block_youtube":{
+       "message":"阻擋 YouTube 影片的廣告（不執行 FlashBlock 的擴充功能）"
+   },
+   "cancel":{
+       "description":"Cancel button label",
+       "message":"取消"
+   },
+   "clickhide_instructions":{
+       "message":"此彈出訊息關閉後，請點擊頁面上的元素。"
+   },
+   "date_format":{
+       "description":"e.g. Apr 1, 2011",
+       "message":"$year$年$month$月$day$日",
+       "placeholders":{
+             "day":{
+                   "content":"$1"
+         },
+             "month":{
+                   "content":"$2"
+         },
+             "year":{
+                   "content":"$3"
+         }
+      }
+   },
+   "delete":{
+       "description":"Word for 'delete'.",
+       "message":"刪除"
+   },
+   "description":{
+       "message":"使用 Firefox 的 AdBlock Plus 阻擋廣告過濾引擎。跟廣告告別並在和平中瀏覽！"
+   },
+   "disable_inline":{
+       "message":"阻擋文字廣告"
+   },
+   "disabled_for_these_domains":{
+       "message":"AdThwart 將不在以下域名啟用。 您可以透過 AdThwart 於網址列的圖示新增域名，或者 在以下方格內輸入域名（注意：非網址），然後點擊「新增域名」。"
+   },
+   "easy_create_filter":{
+       "description":"Button label in popup balloon",
+       "message":"簡單建立過濾器"
+   },
+   "edit_filters_raw":{
+       "message":"以純文本編輯過濾器"
+   },
+   "enable_only_the":{
+       "message":"請只啟用您需要的過濾器清單。啟用太多會使瀏覽器無回應。"
+   },
+   "enabled_for_site":{
+       "description":"Popup balloon checkbox label",
+       "message":"該網站啟用過濾"
+   },
+   "filter_list_desc":{
+       "description":"e.g. FooList by Mr. Foo",
+       "message":"$title$ 作者：$author$",
+       "placeholders":{
+             "author":{
+                   "content":"$2"
+         },
+             "title":{
+                   "content":"$1"
+         }
+      }
+   },
+   "filter_lists":{
+       "description":"This is a tab heading.",
+       "message":"過濾清單"
+   },
+   "filter_must_follow_syntax":{
+       "message":"您的過濾器必須遵循 <a href='$url$'>AdBlock Plus filter syntax</a> 過濾器的語法。某些過濾類型，如 object-subrequest 不支持。",
+       "placeholders":{
+             "url":{
+                   "content":"$1"
+         }
+      }
+   },
+   "found_a_bug":{
+       "message":"發現錯誤？要翻譯 AdThwart 成你的語言？請至 <a href='$url$'>此處詢問</a>.",
+       "placeholders":{
+             "url":{
+                   "content":"$1"
+         }
+      }
+   },
+   "general":{
+       "description":"This is a tab heading.",
+       "message":"一般"
+   },
+   "hovercraft":{
+       "description":"This is a sample translatable string. It happens to have comedic value.",
+       "message":"My hovercraft is full of eels."
+   },
+   "last_updated_at":{
+       "description":"e.g. Last updated at 3:00pm on Apr 1, 2011",
+       "message":"最後更新於 $date$ $time$",
+       "placeholders":{
+             "date":{
+                   "content":"$2"
+         },
+             "time":{
+                   "content":"$1"
+         }
+      }
+   },
+   "month_names":{
+       "description":"Month short names.",
+       "message":"[\"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\"]"
+   },
+   "new_filters_added":{
+       "message":"您已新增過濾器。 請至 <a id='options_url' target='_blank'>AdThwart 選項</a> 管理過濾器。"
+   },
+   "not_a_filter_list":{
+       "description":"In options.html, error displayed when filter list fetcher receives something not a filter list",
+       "message":"不是一個過濾清單"
+   },
+   "not_found_on_server":{
+       "description":"In options.html, error displayed when filter list fetcher can't find filter list on server",
+       "message":"伺服器找不到"
+   },
+   "options":{
+       "message":"AdThwart 選項"
+   },
+   "out_of_date_lists":{
+       "message":"定期更新最新清單。"
+   },
+   "remove_button":{
+       "description":"This is the label for the 'Remove selected' buttons.",
+       "message":"刪除選擇"
+   },
+   "show_block_element_menu":{
+       "message":"右鍵選單顯示「阻擋網頁元素」"
+   },
+   "show_icon":{
+       "message":"顯示圖示於網址列"
+   },
+   "today":{
+       "description":"Word for 'today', as in 'Last updated today'",
+       "message":"今日"
+   },
+   "update_now":{
+       "message":"更新"
+   },
+   "whitelisted_domains":{
+       "description":"This is a tab heading.",
+       "message":"白名單"
+   }
 }
