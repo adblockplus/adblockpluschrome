@@ -18,6 +18,16 @@ var TagToType = {
     "IFRAME": TypeMap.SUBDOCUMENT
 };
 
+// Merely listening to the beforeload event messes up various websites that zoom thumbnail images
+// and load replace them with full size images (e.g. Highslide, t.sina.com.cn. issue 166). This
+// could be a Chrome bug, or else people depending on behavior that is not guaranteed by standards.
+// So for these cases we avoid listening to beforeload and instead depend on handleNodeInserted()
+// in blocker.js to get rid of ads by element src URL.
+// Unfortunately we can't do this with filter rules because we would need to query the backend to
+// check our domain, which cannot respond in time due to the lack of synchronous message passing.
+var BEFORELOAD_MALFUNCTION_DOMAINS = {"t.sina.com.cn": true};
+var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
+
 var elemhideSelectorStrings = []; // Cache the elemhide selector strings
 var SELECTOR_GROUP_SIZE = 20;
 var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"]';
@@ -128,7 +138,9 @@ function beforeloadHandler(e) {
     }
 }
 
-document.addEventListener("beforeload", saveBeforeloadEvent, true);
+if(!workaroundBeforeloadMalfunction) {
+    document.addEventListener("beforeload", saveBeforeloadEvent, true);
+}
 
 // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
 if (document instanceof HTMLDocument) {
@@ -168,13 +180,15 @@ if (document instanceof HTMLDocument) {
             // Because we are in an asynchronous callback, the page may be partially loaded before
             // the event handler gets attached. So some things might get through at the beginning.
             TEMP_adservers = response.priorityAdServers;
-            document.removeEventListener("beforeload", saveBeforeloadEvent, true);
-            document.addEventListener("beforeload", beforeloadHandler, true);
-            // Replay the events that were saved while we were waiting to learn whether we are enabled
-            for(var i = 0; i < savedBeforeloadEvents.length; i++) {
-                beforeloadHandler(savedBeforeloadEvents[i]);
+            if(!workaroundBeforeloadMalfunction) {
+                document.removeEventListener("beforeload", saveBeforeloadEvent, true);
+                document.addEventListener("beforeload", beforeloadHandler, true);
+                // Replay the events that were saved while we were waiting to learn whether we are enabled
+                for(var i = 0; i < savedBeforeloadEvents.length; i++) {
+                    beforeloadHandler(savedBeforeloadEvents[i]);
+                }
+                delete savedBeforeloadEvents;
             }
-            delete savedBeforeloadEvents;
         }
     });
 }
