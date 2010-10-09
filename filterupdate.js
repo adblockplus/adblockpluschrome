@@ -10,7 +10,7 @@ var filterFiles = {
     "china": "http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", // "adblock.txt",
     "russia": "http://ruadlist.googlecode.com/svn/trunk/advblock.txt",
     "korea": "http://abp-corset.googlecode.com/hg/corset.txt", // "corset.txt",
-    "romania": "http://www.picpoc.ro/menetzrolist.txt", // "menetzrolist.txt",
+    "romania": "http://www.zoso.ro/pages/rolist.txt", // "menetzrolist.txt",
     "italy": "http://mozilla.gfsolone.com/filtri.txt", // "filtri.txt",
     "vietnam": "http://adblockplus-vietnam.googlecode.com/svn/trunk/abpvn.txt",
     "poland": "http://www.niecko.pl/adblock/adblock.txt", // PLgeneral
