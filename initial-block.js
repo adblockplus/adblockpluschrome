@@ -25,7 +25,7 @@ var TagToType = {
 // in blocker.js to get rid of ads by element src URL.
 // Unfortunately we can't do this with filter rules because we would need to query the backend to
 // check our domain, which cannot respond in time due to the lack of synchronous message passing.
-var BEFORELOAD_MALFUNCTION_DOMAINS = {"t.sina.com.cn": true};
+var BEFORELOAD_MALFUNCTION_DOMAINS = {"t.sina.com.cn": true, "prazsketramvaje.cz": true};
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
 var elemhideSelectorStrings = []; // Cache the elemhide selector strings
