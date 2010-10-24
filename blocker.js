@@ -227,7 +227,7 @@ function clickHide_deactivate() {
     document.removeEventListener("keyup", clickHide_keyUp, false);
     
     // Remove overlays
-    var overlays = document.querySelectorAll('.__adthwart__overlay');
+    var overlays = document.getElementsByClassName('__adthwart__overlay');
 	for (var i=0; i<overlays.length; i++) {
 		overlays[i].parentNode.removeChild(overlays[i]);
 	}
