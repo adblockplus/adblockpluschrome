@@ -551,21 +551,42 @@ if (document instanceof HTMLDocument) {
             // This request would have come from the chrome.contextMenu handler, so we
             // simulate the user having chosen the element to get rid of via the usual means.
             clickHide_activated = true;
+            // FIXME: clickHideFilters is erased in clickHide_mouseClick anyway, so why set it?
             clickHideFilters = [request.filter];
             // We hope the URL we are given is the same as the one in the element referenced
             // by lastRightClickEvent.target. If not, we just discard
-            var url = relativeToAbsoluteUrl(lastRightClickEvent.target.src);
+            var target = lastRightClickEvent.target;
+            var url = relativeToAbsoluteUrl(target.src);
+            // If we don't have the element with a src URL same as the filter, look for it.
+            // Chrome's context menu API is terrible. Why can't it give us the friggin' element
+            // to start with?
+            if(request.filter !== url) {
+                // Grab all elements with a src attribute.
+                // This won't work for all object/embed tags, but the context menu API doesn't
+                // work on those, so we're OK for now.
+                var elts = document.querySelectorAll('[src]');
+                for(var i=0; i<elts.length; i++) {
+                    url = relativeToAbsoluteUrl(elts[i].src);
+                    if(request.filter === url) {
+                        // This is hopefully our element. In case of multiple elements
+                        // with the same src, only one will be highlighted.
+                        target = elts[i];
+                        break;
+                    }
+                }
+            }
+            // Following test will be true if we found the element with the filter URL
             if(request.filter === url) {
                 // Coerce red highlighted overlay on top of element to remove.
                 // TODO: Wow, the design of the clickHide stuff is really dumb - gotta fix it sometime
-                currentElement = addElementOverlay(lastRightClickEvent.target);
+                currentElement = addElementOverlay(target);
                 // clickHide_mouseOver(lastRightClickEvent);
                 clickHide_mouseClick(lastRightClickEvent);
             } else {
-                console.log("clickhide-new-filter: URLs don't match.", url, lastRightClickEvent.target.src);
+                console.log("clickhide-new-filter: URLs don't match. Couldn't find that element.", request.filter, url, lastRightClickEvent.target.src);
                 // Restore previous state
                 clickHide_activated = false;
-                clickHideFilters = null;                
+                clickHideFilters = null;
             }
         } else if(request.reqtype == "remove-ads-again") {
             // Called when a new filter is added
