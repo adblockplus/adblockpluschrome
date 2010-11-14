@@ -443,14 +443,15 @@ chrome.extension.onConnect.addListener(function(port) {
 
 // Set up context menu for user selection of elements to block
 function showContextMenu() {
-    chrome.contextMenus.removeAll();
-    if(typeof localStorage["shouldShowBlockElementMenu"] == "string" && localStorage["shouldShowBlockElementMenu"] == "true") {
-        chrome.contextMenus.create({'title': chrome.i18n.getMessage('block_element'), 'contexts': ['image', 'video', 'audio'], 'onclick': function(info, tab) {
-            if(info.srcUrl) {
-                chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl});
-            }
-        }});
-    }
+    chrome.contextMenus.removeAll(function() {
+        if(typeof localStorage["shouldShowBlockElementMenu"] == "string" && localStorage["shouldShowBlockElementMenu"] == "true") {
+            chrome.contextMenus.create({'title': chrome.i18n.getMessage('block_element'), 'contexts': ['image', 'video', 'audio'], 'onclick': function(info, tab) {
+                if(info.srcUrl) {
+                    chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl});
+                }
+            }});
+        }
+    });
 }
 
 var requestDispatchTable = {
