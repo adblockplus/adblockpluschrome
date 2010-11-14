@@ -126,7 +126,7 @@ function clickHide_showDialog(left, top, filters) {
         var b = document.createElement('button');
 		b.setAttribute("id", id);
         // Use the jQuery UI style for the button explicitly
-        b.setAttribute("style", "padding: 3px; margin-left: 5px; font-size: 8pt; border: 1px solid #d3d3d3; background: #e6e6e6 url(" + chrome.extension.getURL("jquery-ui/css/custom-theme/images/ui-bg_glass_75_e6e6e6_1x400.png") + ") 50% 50% repeat-x; color: #555555; -webkit-border-radius: 4px; font-family: Helvetica, Arial, sans-serif;");
+        b.setAttribute("style", "padding: 3px; margin-left: 5px; font-size: 8pt; border: 1px solid #d3d3d3; background: #e6e6e6 url(" + chrome.extension.getURL("jquery-ui/css/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png") + ") 50% 50% repeat-x; color: #555555; -webkit-border-radius: 4px; font-family: Helvetica, Arial, sans-serif;");
         return b;
     }
     var addButton = makeButton("addButton");
