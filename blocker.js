@@ -545,6 +545,9 @@ if (document instanceof HTMLDocument) {
             chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: false});
             clickHide_deactivate();
         } else if(request.reqtype == "clickhide-new-filter") {
+            // The request is received by all frames, so ignore it if we're not the frame the
+            // user right-clicked in
+            if(!lastRightClickEvent) return;
             // This request would have come from the chrome.contextMenu handler, so we
             // simulate the user having chosen the element to get rid of via the usual means.
             clickHide_activated = true;
