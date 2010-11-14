@@ -227,10 +227,9 @@ function clickHide_deactivate() {
     document.removeEventListener("keyup", clickHide_keyUp, false);
     
     // Remove overlays
-    var overlays = document.getElementsByClassName('__adthwart__overlay');
-	for (var i=0; i<overlays.length; i++) {
-		overlays[i].parentNode.removeChild(overlays[i]);
-	}
+    // For some reason iterating over the array returend by getElementsByClassName() doesn't work
+    var elt;
+    while(elt = document.querySelector('.__adthwart__overlay')) elt.parentNode.removeChild(elt);
 }
 
 function clickHide_elementClickHandler(ev) {
