@@ -323,6 +323,15 @@ function reloadFilters() {
     var firstRun = true;
     if(typeof localStorage["filterFilesEnabled"] == "string") {
         filterFilesEnabled = JSON.parse(localStorage["filterFilesEnabled"]);
+        // XXX: Auto-enable recommended filters.
+        // We do this because server issues with adthwart.qux.us caused 404 errors for some
+        // users and options.html will disable lists that aren't found on the server.
+        // So we may have lost some users who may not have noticed. Anyway everybody should
+        // have the recommended filters enabled. This change still allows disabling for the
+        // current session, but next time AdThwart is reloaded it will be reenabled.
+        filterFilesEnabled["extras"] = true;
+        localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
+        
         firstRun = false;
     }
 
