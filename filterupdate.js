@@ -81,13 +81,10 @@ function loadUserFilterURLs() {
     for(key in filterFiles) {
         if(key.match(/^user_/)) delete filterFiles[key];
     }
-    // Read from localStorage
-    if(typeof localStorage["userFilterURLs"] != "string")
-        return; // Nothing there
+    // Read the user filter URLs from localStorage
+    if(typeof localStorage["userFilterURLs"] != "string") return; // Nothing there
     var urls = JSON.parse(localStorage["userFilterURLs"]);
-    
-    for(key in urls)
-        filterFiles[key] = urls[key];
+    for(key in urls) filterFiles[key] = urls[key];
 }
 
 // TODO: In case of error fetching a filter list, check to see whether
