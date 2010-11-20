@@ -123,7 +123,7 @@
 		"message": "Mostrar ícono en la barra de direcciones"
 	},
 	"show_block_element_menu": {
-        "message": "Mostrar la opción 'Bloquear Elemento' en el menú contextual"
+        "message": "Mostrar la opción \"Bloquear Elemento\" en el menú contextual"
     },
 	"disable_inline": {
 		"message": "Desactivar la publicidad en las líneas de texto"
