@@ -114,6 +114,9 @@
 	"show_icon": {
 		"message": "Mostrar ícono en la barra de direcciones"
 	},
+	"show_block_element_menu": {
+        "message": "Mostrar \"Bloquear elemento\" al hacer clic derecho en un elemento del menú"
+    },
 	"disable_inline": {
 		"message": "Desactivar la publicidad en las líneas de texto"
     },
@@ -141,6 +144,11 @@
 	"new_filters_added": {
 		"message": "Nuevos filtros añadidos; revisa las <a id='options_url' target='_blank'>Opciones</a> para administrarlos."
 	},
+	"block_element": {
+        "message": "Bloquear elemento",
+        "description": "Label for 'Block Element' context menu item"
+    },
+    
 	"hovercraft": {
 		"message": "Mi aerodeslizador está lleno de anguilas.",
 		"description": "This is a sample translatable string. It happens to have comedic value."
