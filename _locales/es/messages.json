@@ -1,6 +1,6 @@
 {
 	"description": {
-		"message": "Bloquea anuncios publicitarios usando el motor de filtros de Firefox AdBlock Plus. Dales un beso de despedida a los anuncios y navega con tranquilidad!"
+		"message": "Bloquea anuncios publicitarios usando el motor de filtros de Firefox AdBlock Plus. ¡Dales un beso de despedida a los anuncios y navega con tranquilidad!"
 	},
 	"month_names": {
 		"message": "[\"Ene\", \"Feb\", \"Mar\", \"Abr\", \"May\", \"Jun\", \"Jul\", \"Ago\", \"Sep\", \"Oct\", \"Nov\", \"Dic\"]",
@@ -31,6 +31,14 @@
 		    "date": { "content" : "$2" }
 		}
 	},
+    "not_a_filter_list": {
+        "message": "No es una lista de filtros",
+        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
+    },
+    "not_found_on_server": {
+        "message": "No se ha encontrado en el servidor",
+        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
+    },	
 	"filter_list_desc": {
 		"message": "$title$ por $author$",
 		"description": "e.g. FooList by Mr. Foo",
@@ -114,6 +122,9 @@
 	"show_icon": {
 		"message": "Mostrar ícono en la barra de direcciones"
 	},
+	"show_block_element_menu": {
+        "message": "Mostrar la opción 'Bloquear Elemento' en el menú contextual"
+    },
 	"disable_inline": {
 		"message": "Desactivar la publicidad en las líneas de texto"
     },
@@ -141,6 +152,10 @@
 	"new_filters_added": {
 		"message": "Nuevos filtros añadidos; revisa las <a id='options_url' target='_blank'>Opciones</a> para administrarlos."
 	},
+	"block_element": {
+        "message": "Bloquear Elemento",
+        "description": "Label for 'Block Element' context menu item"
+    },
 	"hovercraft": {
 		"message": "Mi aerodeslizador está lleno de anguilas.",
 		"description": "This is a sample translatable string. It happens to have comedic value."
