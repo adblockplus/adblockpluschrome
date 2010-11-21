@@ -91,7 +91,7 @@
     },
 
     "enable_only_the": {
-        "message": "필요한 구독 필터만 구독하십시오. 불필요한 구독 필터를 너무 많이 구독하면 크롬의 로딩 속도가 느려지거나 어떤 문제가 발생 수 있습니다."
+        "message": "필요한 구독 필터만 구독하십시오. 구독 필터를 필요 이상으로 많이 구독하면 웹 페이지의 로딩 속도가 저하될 수 있습니다."
     },
     "out_of_date_lists": {
         "message": "구독 필터는 주기적으로 자동 업데이트됩니다."
@@ -100,7 +100,7 @@
         "message": "지금 업데이트"
     },
     "add_a_filter_list": {
-        "message": "파이어폭스의 AdBlock Plus 구독 필터 추가 : <a href='$url$'>구독 필터 전체 목록</a>",
+        "message": "AdBlock Plus의 구독 필터 추가 : <a href='$url$'>구독 필터 전체 목록</a>",
         "placeholders": {
             "url": { "content" : "$1" }
         }
@@ -112,7 +112,7 @@
         }
     },
     "disabled_for_these_domains": {
-        "message": "AdThwart가 다음의 도메인에서는 광고를 제거하지 않습니다. 주소 표시줄의 AdThwart 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"Add domain\" 버튼을 클릭합니다."
+        "message": "다음 도메인에서는 광고를 제거하지 않습니다. 주소 표시줄의 애드스워트 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
     },
     "found_a_bug": {
         "message": "버그를 발견하셨습니까? 애드스워트를 여러분의 언어로 번역하고 싶습니까? 다음 주소로 연락을 주십시오 : <a href='$url$'>문의하기</a>",
@@ -120,16 +120,17 @@
             "url": { "content" : "$1" }
         }
     },
-    
-    
     "show_icon": {
         "message": "주소 표시줄에 아이콘 보이기"
+    },
+    "show_block_element_menu": {
+        "message": "문맥 메뉴에 '요소 숨김' 항목 보이기"
     },
     "disable_inline": {
         "message": "인라인 텍스트 광고를 보지 않음"
     },
     "block_youtube": {
-        "message": "유튜브 동영상 내부 광고를 차단함 [플래시블록(FlashBlock) 확장 프로그램으로는 작동하지 않음]"
+        "message": "유튜브 동영상 내부 광고를 차단함 [플래시블록(FlashBlock)으로 차단할 수 없음]"
     },
     
     "enabled_for_site": {
@@ -153,7 +154,10 @@
     "new_filters_added": {
         "message": "새 필터가 추가되었습니다. 필터 관리 : <a id='options_url' target='_blank'>옵션</a>"
     },
-    
+    "block_element": {
+        "message": "요소 숨김",
+        "description": "Label for 'Block Element' context menu item"
+    },
     
     "hovercraft": {
         "message": "메이비는 최고의 팔색조 가수이다.",
