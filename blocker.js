@@ -139,9 +139,6 @@ function clickHide_showDialog(left, top, filters) {
     	if(currentElement.parentNode) currentElement.parentNode.removeChild(currentElement);
     	clickHide_deactivate();
     	removeAdsAgain();
-    	clickHideFiltersDialog.setAttribute('style', 'visibility: hidden');
-    	document.body.removeChild(clickHideFiltersDialog);
-    	clickHideFiltersDialog = null;
     	// Tell options.html to refresh its user filters listbox
     	chrome.extension.sendRequest({reqtype: "refresh-user-filters-box"});
     };
@@ -151,9 +148,6 @@ function clickHide_showDialog(left, top, filters) {
         // Tell popup (indirectly) to shut up about easy create filter
         chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: false});
         clickHide_deactivate();
-    	clickHideFiltersDialog.setAttribute('style', 'visibility: hidden');
-    	document.body.removeChild(clickHideFiltersDialog);
-    	clickHideFiltersDialog = null;
     }
     buttonsDiv.appendChild(addButton);
     buttonsDiv.appendChild(cancelButton);
@@ -211,6 +205,12 @@ function clickHide_rulesPending() {
 
 // Turn off click-to-hide
 function clickHide_deactivate() {
+    if(clickHideFiltersDialog) {
+        clickHideFiltersDialog.setAttribute('style', 'visibility: hidden');
+        document.body.removeChild(clickHideFiltersDialog);
+        clickHideFiltersDialog = null;
+    }
+
     if(currentElement) {
         unhighlightElements();
         currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
