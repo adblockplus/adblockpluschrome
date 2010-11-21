@@ -195,17 +195,20 @@ function removeSelectedFilters() {
 }
 
 // Shows raw filters box and fills it with the current user filters
-function showFiltersInRawFormat() {
-    $(".rawFilters").show();
-	var userFilters = localStorage["userFilters"];
-    if(typeof userFilters != "undefined") {
-    	userFilters = JSON.parse(userFilters);
-        document.getElementById("rawFiltersText").value = userFilters.join("\n");
-    }
+function toggleFiltersInRawFormat() {
+    $(".rawFilters").toggle();
+    if($(".rawFilters").is(":visible")) {
+		var userFilters = localStorage["userFilters"];
+		if(typeof userFilters != "undefined") {
+			userFilters = JSON.parse(userFilters);
+			document.getElementById("rawFiltersText").value = userFilters.join("\n");
+		}
+	}
 }
 
 // Imports filters in the raw text box
 function importRawFiltersText() {
+    $(".rawFilters").hide();
     $("#userFiltersBox").children().remove();
     var filters = document.getElementById("rawFiltersText").value.split("\n");
     for(var i = 0; i < filters.length; i++) {
@@ -452,7 +455,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 <span class="i18n_remove_button"></span></button></td></tr>
 
 <tr><td>
-<div style="font-size: 90%; text-align: right"><a onClick="showFiltersInRawFormat()" href="#"><span class="i18n_edit_filters_raw"></span></a></div>
+<div style="font-size: 90%; text-align: right"><a onClick="toggleFiltersInRawFormat()" href="#"><span class="i18n_edit_filters_raw"></span></a></div>
 </td></tr>
 <tr><td>
 <div class="rawFilters" style="width: 500px">
