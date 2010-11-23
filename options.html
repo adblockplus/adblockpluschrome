@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="text/css" href="jquery-ui/css/smoothness/jquery-ui-1.8.6.custom.css" rel="stylesheet" />	
+<link type="text/css" href="jquery-ui/css/smoothness/jquery-ui-1.8.6.custom.css" rel="stylesheet" />    
 <script type="text/javascript" src="jquery-ui/js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.6.custom.min.js"></script> 
 <script type="text/javascript" src="i18n.js" charset="utf-8"></script>
@@ -30,32 +30,32 @@ p {
 }
 
 .okMsg {
-	display: none;
-	color: #ffffff;
-	background: #30e030;
-	font-weight: bold;
-	padding: 3px;
+    display: none;
+    color: #ffffff;
+    background: #30e030;
+    font-weight: bold;
+    padding: 3px;
 }
 
 .errMsg {
-	display: none;
-	color: #ffffff;
-	background: #e03030;
-	font-weight:bold;
-	padding:3px;
+    display: none;
+    color: #ffffff;
+    background: #e03030;
+    font-weight:bold;
+    padding:3px;
 }
 
 /* Filter list entry status message */
 .flMsg {
-	display: none;
-	color: #b0b0b0;
+    display: none;
+    color: #b0b0b0;
 }
 
 </style>
 <script type="text/javascript" charset="utf-8">
 
 function loadCheckbox(id) {
-	document.getElementById(id).checked = typeof localStorage[id] == "undefined" ? false : localStorage[id] == "true";
+    document.getElementById(id).checked = typeof localStorage[id] == "undefined" ? false : localStorage[id] == "true";
 }
 
 function saveCheckbox(id) {
@@ -65,7 +65,7 @@ function saveCheckbox(id) {
 function showUserFilters() {
     var userFilters = localStorage["userFilters"];
     if(typeof userFilters == "undefined")
-	    userFilters = JSON.stringify(["qux.us###annoying_AdDiv", "qux.us##.ad_class"]);
+        userFilters = JSON.stringify(["qux.us###annoying_AdDiv", "qux.us##.ad_class"]);
     userFilters = JSON.parse(userFilters);
     // Populate list box with filter strings
     $("#userFiltersBox").children().remove();
@@ -75,29 +75,29 @@ function showUserFilters() {
 
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions() {
-	// Show icon in address bar?
-	loadCheckbox("shouldShowIcon");
-	loadCheckbox("shouldShowBlockElementMenu");
-	loadCheckbox("disableInlineTextAds");
-	loadCheckbox("specialCaseYouTube");
-	
-	// Load user filter URLs
-	loadUserFilterURLs();
-	for(key in filterFiles) {
-		if(!key.match(/^user_/))
-			addFilterListEntry(key);
-		else
-		    addUserURLEntry(key, filterFiles[key]);
-	}
-
-	// Filter lists enabled state
-	var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {"easylist": true, "extras": true };
-	for(var key in filterFilesEnabled) {
-	    document.getElementById(key).checked = filterFilesEnabled[key];
+    // Show icon in address bar?
+    loadCheckbox("shouldShowIcon");
+    loadCheckbox("shouldShowBlockElementMenu");
+    loadCheckbox("disableInlineTextAds");
+    loadCheckbox("specialCaseYouTube");
+    
+    // Load user filter URLs
+    loadUserFilterURLs();
+    for(key in filterFiles) {
+        if(!key.match(/^user_/))
+            addFilterListEntry(key);
+        else
+            addUserURLEntry(key, filterFiles[key]);
     }
-		
-	// User-entered filters
-	showUserFilters();
+
+    // Filter lists enabled state
+    var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {"easylist": true, "extras": true };
+    for(var key in filterFilesEnabled) {
+        document.getElementById(key).checked = filterFilesEnabled[key];
+    }
+        
+    // User-entered filters
+    showUserFilters();
         
     // Excluded domains - sort these alphabetically
     var excludedDomains = localStorage["excludedDomains"];
@@ -110,36 +110,36 @@ function loadOptions() {
         for(var i = 0; i < buf.length; i++)
             appendToListBox("excludedDomainsBox", buf[i]);
     }
-	
-	saveOptions(); // Save any defaults that were created
+    
+    saveOptions(); // Save any defaults that were created
 }
 
 // Reads options from UI elements and saves them in localStorage
 function saveOptions() {
-	saveCheckbox("shouldShowIcon");
-	saveCheckbox("shouldShowBlockElementMenu");
-	saveCheckbox("disableInlineTextAds");
-	saveCheckbox("specialCaseYouTube");
+    saveCheckbox("shouldShowIcon");
+    saveCheckbox("shouldShowBlockElementMenu");
+    saveCheckbox("disableInlineTextAds");
+    saveCheckbox("specialCaseYouTube");
     
     // Filter lists
     var filterFilesEnabled = {};
-	var userFilterURLs = {};
-	for(var key in filterFiles) {
-		filterFilesEnabled[key] = document.getElementById(key).checked;
-		if(key.match(/^user_/)) { // User-added filter?
-			userFilterURLs[key] = document.getElementById(key + "_url").innerHTML;
-		}
-	}
-	localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
-	localStorage["userFilterURLs"] = JSON.stringify(userFilterURLs);
-	
+    var userFilterURLs = {};
+    for(var key in filterFiles) {
+        filterFilesEnabled[key] = document.getElementById(key).checked;
+        if(key.match(/^user_/)) { // User-added filter?
+            userFilterURLs[key] = document.getElementById(key + "_url").innerHTML;
+        }
+    }
+    localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
+    localStorage["userFilterURLs"] = JSON.stringify(userFilterURLs);
+    
     // Grab contents of userFiltersBox as an array and JSONify it
     var userFiltersBox = document.getElementById("userFiltersBox");
     var userFilters = [];
     for (var i = 0; i < userFiltersBox.length; i++)
         userFilters.push(userFiltersBox.options[i].value);
     localStorage["userFilters"] = JSON.stringify(userFilters);
-	
+    
     // Reload filters and force display of status message
     chrome.extension.sendRequest({reqtype: "reload-filters"}, function() { checkAllFilterLists(); });
     
@@ -198,12 +198,12 @@ function removeSelectedFilters() {
 function toggleFiltersInRawFormat() {
     $(".rawFilters").toggle();
     if($(".rawFilters").is(":visible")) {
-		var userFilters = localStorage["userFilters"];
-		if(typeof userFilters != "undefined") {
-			userFilters = JSON.parse(userFilters);
-			document.getElementById("rawFiltersText").value = userFilters.join("\n");
-		}
-	}
+        var userFilters = localStorage["userFilters"];
+        if(typeof userFilters != "undefined") {
+            userFilters = JSON.parse(userFilters);
+            document.getElementById("rawFiltersText").value = userFilters.join("\n");
+        }
+    }
 }
 
 // Imports filters in the raw text box
@@ -214,167 +214,167 @@ function importRawFiltersText() {
     for(var i = 0; i < filters.length; i++) {
         var text = filters[i].replace(/\s+$/, "").replace(/^\s+/, "");
         if(text.length > 0) {
-			// Filter out "comment" characters
-			switch(text[0]) {
-				case '(': 
-				case '[':
-				case '!':
-					break;
-				default:
-	            	appendToListBox("userFiltersBox", text);
-			}
-		}
+            // Filter out "comment" characters
+            switch(text[0]) {
+                case '(': 
+                case '[':
+                case '!':
+                    break;
+                default:
+                    appendToListBox("userFiltersBox", text);
+            }
+        }
     }
-	saveOptions();
+    saveOptions();
 }
 
 // Called when user explicitly requests filter list updates
 function updateFilterLists() {
-	for(key in filterFiles) {
-		// Hide status message
-		$("#" + key + "_msg").css("display", "none");
-		updateFilterList(key);
-	}
-	// Now that we've updatd the filter lists, make sure they are loaded
-	chrome.extension.sendRequest({reqtype: "reload-filters"});
+    for(key in filterFiles) {
+        // Hide status message
+        $("#" + key + "_msg").css("display", "none");
+        updateFilterList(key);
+    }
+    // Now that we've updatd the filter lists, make sure they are loaded
+    chrome.extension.sendRequest({reqtype: "reload-filters"});
 }
 
 // Updates a single filter list and informs the user what happened
 function updateFilterList(key) {
-	// Checkbox not checked? Not a URL?
-	if(document.getElementById(key).checked == false || !filterFiles[key].match(/^http/i))
-		return;
-	
-	// Hide status message
-	$("#" + key + "_msg").css("display", "none");
+    // Checkbox not checked? Not a URL?
+    if(document.getElementById(key).checked == false || !filterFiles[key].match(/^http/i))
+        return;
+    
+    // Hide status message
+    $("#" + key + "_msg").css("display", "none");
 
     new FilterListFetcher(key, function(fetcher) {
-		if(fetcher.error) {
-			$("#" + fetcher.name + "_msg").text(fetcher.error).css("color", "#a03030").css("display", "inline");
-			document.getElementById(key).checked = false;
-		} else {
-			// Force display of "updated now" message
-			checkFilterList(key);
-		}
+        if(fetcher.error) {
+            $("#" + fetcher.name + "_msg").text(fetcher.error).css("color", "#a03030").css("display", "inline");
+            document.getElementById(key).checked = false;
+        } else {
+            // Force display of "updated now" message
+            checkFilterList(key);
+        }
     });
 }
 
 // Checks into our possible cached copy of this filter list and updates the UI accordingly
 function checkFilterList(key) {
-	// Hide status message
-	$("#" + key + "_msg").css("display", "none");
-	
-	var url = filterFiles[key];
-	if(url in localStorage) {
-		var list = JSON.parse(localStorage[url]);
-		if(!list.error) {
-		    // We didn't used to store lastDownloaded, so we check for its existence and fall back on lastUpdated if necessary
-		    // lastDownloaded: Last time the list was downloaded
-		    // lastUpdated: Last time the list reports that it was updated, or else the last time it was downloaded
-		    var lastDownloaded = list.lastDownloaded ? list.lastDownloaded : list.lastUpdated;
-			var timeDate = i18n_timeDateStrings(lastDownloaded);
-			// Only display status message if checked
-			if(document.getElementById(key).checked) {
-			    $("#" + key + "_msg").css("color", "#b0b0b0").text(chrome.i18n.getMessage("last_updated_at", timeDate)).css("display", "inline");
-		    }
-		}
-		else {
-			// Display error only if checked
-			if(document.getElementById(key).checked) {
-				$("#" + key + "_msg").text(list.error).css("color", "#a03030").css("display", "inline");
-			}
-		}
-	} else {
-		// If we don't have this filter list but it's enabled, fetch it
-		if(document.getElementById(key).checked == true)
-			updateFilterList(key);
-	}
+    // Hide status message
+    $("#" + key + "_msg").css("display", "none");
+    
+    var url = filterFiles[key];
+    if(url in localStorage) {
+        var list = JSON.parse(localStorage[url]);
+        if(!list.error) {
+            // We didn't used to store lastDownloaded, so we check for its existence and fall back on lastUpdated if necessary
+            // lastDownloaded: Last time the list was downloaded
+            // lastUpdated: Last time the list reports that it was updated, or else the last time it was downloaded
+            var lastDownloaded = list.lastDownloaded ? list.lastDownloaded : list.lastUpdated;
+            var timeDate = i18n_timeDateStrings(lastDownloaded);
+            // Only display status message if checked
+            if(document.getElementById(key).checked) {
+                $("#" + key + "_msg").css("color", "#b0b0b0").text(chrome.i18n.getMessage("last_updated_at", timeDate)).css("display", "inline");
+            }
+        }
+        else {
+            // Display error only if checked
+            if(document.getElementById(key).checked) {
+                $("#" + key + "_msg").text(list.error).css("color", "#a03030").css("display", "inline");
+            }
+        }
+    } else {
+        // If we don't have this filter list but it's enabled, fetch it
+        if(document.getElementById(key).checked == true)
+            updateFilterList(key);
+    }
 }
 
 // Check to see if all filter lists are up to date
 function checkAllFilterLists() {
-	for(key in filterFiles) {
-		checkFilterList(key);
-	}
+    for(key in filterFiles) {
+        checkFilterList(key);
+    }
 }
 
 // Deletes an entry for a filter list URL from the UI
 function deleteUserURLEntry(key) {
-	if(key in filterFiles)
-		delete filterFiles[key];
-	var foo = document.getElementById(key + "_div");
-	document.getElementById("userFilterLists").removeChild(foo);
-	saveOptions();
+    if(key in filterFiles)
+        delete filterFiles[key];
+    var foo = document.getElementById(key + "_div");
+    document.getElementById("userFilterLists").removeChild(foo);
+    saveOptions();
 }
 
 // Adds an entry for a filter list URL to the UI
 function addUserURLEntry(key, url) {
-	var checkbox = document.createElement('input');
-	checkbox.type = "checkbox";
-	checkbox.id = key;
-	checkbox.checked = true;
-	checkbox.addEventListener("click", function() { saveOptions(); });
-	var label = document.createElement('span');
-	label.id = key + "_url";
-	label.innerHTML = url;
-	var del = document.createElement('span');
-	del.innerHTML = ' <a href="#" onClick="deleteUserURLEntry(\'' + key + '\')">[' + chrome.i18n.getMessage("delete") + ']</a> ';
-	// Status message
-	var msg = document.createElement("span");
-	msg.id = key + "_msg";
-	msg.class = "flMsg";
-	var div = document.createElement('div');
-	div.id = key + "_div";
-	div.appendChild(checkbox);
-	div.appendChild(label);
-	div.appendChild(del);
-	div.appendChild(msg);
-	document.getElementById("userFilterLists").appendChild(div);
+    var checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+    checkbox.id = key;
+    checkbox.checked = true;
+    checkbox.addEventListener("click", function() { saveOptions(); });
+    var label = document.createElement('span');
+    label.id = key + "_url";
+    label.innerHTML = url;
+    var del = document.createElement('span');
+    del.innerHTML = ' <a href="#" onClick="deleteUserURLEntry(\'' + key + '\')">[' + chrome.i18n.getMessage("delete") + ']</a> ';
+    // Status message
+    var msg = document.createElement("span");
+    msg.id = key + "_msg";
+    msg.class = "flMsg";
+    var div = document.createElement('div');
+    div.id = key + "_div";
+    div.appendChild(checkbox);
+    div.appendChild(label);
+    div.appendChild(del);
+    div.appendChild(msg);
+    document.getElementById("userFilterLists").appendChild(div);
 }
 
 // Adds an entry for a filter list to the UI.
 // TODO: Merge this with addUserURLEntry() as this is too much duplicated code
 function addFilterListEntry(key) {
-	var checkbox = document.createElement('input');
-	checkbox.type = "checkbox";
-	checkbox.id = key;
-	checkbox.addEventListener("click", function() { saveOptions(); });
-	var label = document.createElement('span');
-	if(filterListAuthors[key])
-	    label.innerHTML = chrome.i18n.getMessage("filter_list_desc", [filterListTitles[key], filterListAuthors[key]]);
-	else 
-	    label.innerHTML = filterListTitles[key];
-	label.innerHTML += " "; // Space to separate status message from description
-	// Status message
-	var msg = document.createElement("span");
-	msg.id = key + "_msg";
-	msg.class = "flMsg";
-	var div = document.createElement('div');
-	div.id = key + "_div";
-	div.appendChild(checkbox);
-	div.appendChild(label);
-	div.appendChild(msg);
-	document.getElementById("filterLists").appendChild(div);
+    var checkbox = document.createElement('input');
+    checkbox.type = "checkbox";
+    checkbox.id = key;
+    checkbox.addEventListener("click", function() { saveOptions(); });
+    var label = document.createElement('span');
+    if(filterListAuthors[key])
+        label.innerHTML = chrome.i18n.getMessage("filter_list_desc", [filterListTitles[key], filterListAuthors[key]]);
+    else 
+        label.innerHTML = filterListTitles[key];
+    label.innerHTML += " "; // Space to separate status message from description
+    // Status message
+    var msg = document.createElement("span");
+    msg.id = key + "_msg";
+    msg.class = "flMsg";
+    var div = document.createElement('div');
+    div.id = key + "_div";
+    div.appendChild(checkbox);
+    div.appendChild(label);
+    div.appendChild(msg);
+    document.getElementById("filterLists").appendChild(div);
 }
 
 // Adds and saves the user-entered filter list URL
 function addUserURLFromBox() {
-	var key = "user_" + (new Date()).getTime();
-	var url = document.getElementById("newURL").value;
-	
-	// Extract URL from ABP subscription link
-	var matches;
-	if(matches = url.match(/^abp:\/*?subscribe.*[\?&]location=(.+?)(&|$)/i))
-		url = decodeURIComponent(matches[1]);
+    var key = "user_" + (new Date()).getTime();
+    var url = document.getElementById("newURL").value;
+    
+    // Extract URL from ABP subscription link
+    var matches;
+    if(matches = url.match(/^abp:\/*?subscribe.*[\?&]location=(.+?)(&|$)/i))
+        url = decodeURIComponent(matches[1]);
 
-	if(!url.match(/^http/i) && !url.match(/^file/))
-		return;
-	addUserURLEntry(key, url);
-	document.getElementById("newURL").value = "";
-	filterFiles[key] = url;
-	// Trigger download
-	updateFilterList(key);
-	saveOptions();
+    if(!url.match(/^http/i) && !url.match(/^file/))
+        return;
+    addUserURLEntry(key, url);
+    document.getElementById("newURL").value = "";
+    filterFiles[key] = url;
+    // Trigger download
+    updateFilterList(key);
+    saveOptions();
 }
 
 // Set page title to i18n version of "AdThwart Options"
@@ -419,7 +419,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 <!-- Placeholder for user's filter list URLs -->
 <div id="userFilterLists" style="margin-bottom: 8px"></div>
 
-<div id="addURLField">	
+<div id="addURLField">  
 <span class="i18n_add_a_filter_list">"http://adblockplus.org/en/subscriptions"</span><br/>
 <input type="text" value="" id="newURL" style="width:500px">
 <button class="addButton" onClick="addUserURLFromBox()"><span class="i18n_add_url_button"></span></button><br/>
