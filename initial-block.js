@@ -70,6 +70,45 @@ function nukeSingleElement(elt) {
     }
 }
 
+// This function Copyright (c) 2008 Jeni Tennison, from jquery.uri.js
+// and licensed under the MIT license. See jquery-*.min.js for details.
+function removeDotSegments(u) {
+    var r = '', m = [];
+    if (/\./.test(u)) {
+      while (u !== undefined && u !== '') {
+        if (u === '.' || u === '..') {
+          u = '';
+        } else if (/^\.\.\//.test(u)) { // starts with ../
+          u = u.substring(3);
+        } else if (/^\.\//.test(u)) { // starts with ./
+          u = u.substring(2);
+        } else if (/^\/\.(\/|$)/.test(u)) { // starts with /./ or consists of /.
+          u = '/' + u.substring(3);
+        } else if (/^\/\.\.(\/|$)/.test(u)) { // starts with /../ or consists of /..
+          u = '/' + u.substring(4);
+          r = r.replace(/\/?[^\/]+$/, '');
+        } else {
+          m = u.match(/^(\/?[^\/]*)(\/.*)?$/);
+          u = m[2];
+          r = r + m[1];
+        }
+      }
+      return r;
+    } else {
+      return u;
+    }
+}
+
+// Does some degree of URL normalization
+function normalizeURL(url) {
+    var components = url.match(/(.+:\/\/.+?)\/(.*)/);
+    if(!components) return url;
+    var newPath = removeDotSegments(components[2]);
+    if(newPath.length == 0) return components[1];
+    if(newPath[0] != '/') newPath = '/' + newPath;
+    return components[1] + newPath;
+}
+
 // Converts relative to absolute URL
 // e.g.: foo.swf on http://example.com/whatever/bar.html
 //  -> http://example.com/whatever/foo.swf 
