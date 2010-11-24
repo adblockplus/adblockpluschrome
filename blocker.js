@@ -286,6 +286,10 @@ function clickHide_mouseClick(e) {
     } else if(elt.src) {
         url = elt.src;
     }
+    
+    // The URL is not always normalized, so do it here
+    url = normalizeURL(relativeToAbsoluteUrl(url));
+    
     // Construct filters. The popup will retrieve these.
     // Only one ID
     var elementId = elt.id ? elt.id.split(' ').join('') : null;
