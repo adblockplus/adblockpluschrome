@@ -1,0 +1,165 @@
+﻿{
+    "description": {
+        "message": "Chặn quảng cáo bằng cách dùng bộ lọc AdBlock Plus của Firefox. Vĩnh biệt quảng cáo!"
+    },
+    "month_names": {
+        "message": "[\"Tháng 1\", \"Tháng 2\", \"Tháng 3\", \"Tháng 4\", \"Tháng 5\", \"Tháng 6\", \"Tháng 7\", \"Tháng 8\", \"Tháng 9\", \"Tháng 10\", \"Tháng 11\", \"Tháng 12\"]",
+        "description": "Month short names."
+    },
+    "date_format": {    
+        "message": "vào ngày $day$ $month$, $year$",
+        "description": "e.g. Apr 1, 2011",
+        "placeholders": {
+            "day": { "content" : "$1" },
+            "month": { "content" : "$2" },
+            "year": { "content" : "$3" }
+        }
+    },
+    "options": {
+        "message": "Cấu hình AdThwart"
+    },
+    "filter_lists": {
+        "message": "Danh sách các bộ lọc",
+        "description": "This is a tab heading."
+    },
+    "last_updated_at": {
+        "message": "cập nhật lần cuối cùng lúc $time$ $date$",
+        "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+        "placeholders": {
+            "time": { "content" : "$1" },
+            "date": { "content" : "$2" }
+        }
+    },
+    "not_a_filter_list": {
+        "message": "Không phải là một danh sách bộ lọc",
+        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
+    },
+    "not_found_on_server": {
+        "message": "Không tìm thấy trên máy chủ",
+        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
+    },
+    "filter_list_desc": {
+        "message": "$title$ của $author$",
+        "description": "e.g. FooList by Mr. Foo",
+        "placeholders": {
+            "title": { "content" : "$1" },
+            "author": { "content" : "$2" }
+        }
+    },
+    "today": {
+        "message": "hôm nay",
+        "description": "Word for 'today', as in 'Last updated today'"
+    },
+    "add_your_own_filters": {
+        "message": "Thêm bộ lọc của bạn"
+    },
+    "whitelisted_domains": {
+        "message": "Danh Sách Trắng",
+        "description": "This is a tab heading."
+    },
+    "general": {
+        "message": "Tổng quan",
+        "description": "This is a tab heading."
+    },
+    "add": {
+        "message": "Thêm",
+        "description": "This is the label for the 'Add' buttons."
+    },
+    "add_domain_button": {
+        "message": "Thêm tên miền"
+    },
+    "add_filter_button": {
+        "message": "Thêm bộ lọc"
+    },
+    "add_url_button": {
+        "message": "Thêm URL"
+    },
+    "delete": {
+        "message": "xóa",
+        "description": "Word for 'delete'."
+    },
+    "remove_button": {
+        "message": "Xóa cái vừa chọn",
+        "description": "This is the label for the 'Remove selected' buttons."
+    },
+    "edit_filters_raw": {
+        "message": "Chỉnh sửa bộ lọc như văn bản thô"
+    },
+    "apply_changes": {
+        "message": "Lưu các thay đổi"
+    },
+
+    "enable_only_the": {
+        "message": "Chỉ sử dụng danh sách các bộ lọc mà bạn cần. Dùng quá nhiều bộ lọc sẽ khiến Chrome bị treo."
+    },
+    "out_of_date_lists": {
+        "message": "Các danh sách cũ đã được cập nhật định kỳ."
+    },
+    "update_now": {
+        "message": "cập nhật ngay"
+    },
+    "add_a_filter_list": {
+        "message": "Đăng ký cập nhật <a href='$url$'>danh sách bộ lọc</a> từ AdBlock Plus của Firefox:",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "filter_must_follow_syntax": {
+        "message": "bộ lọc của bạn phải tuân theo <a href='$url$'>cú pháp của bộ lọc AdBlock Plus</a>. Các kiểu bộ lọc cụ thể, như yêu cầu đối tượng phụ, không được chấp nhận.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "disabled_for_these_domains": {
+        "message": "AdThwart không hoạt động ở các tên miền dưới đây. Bạn có thể thêm một tên miền nhờ biểu tượng AdThwart nằm trên thanh địa chỉ, hoặc gõ tên miền (không phải là URL) trong khung bên dưới và ấn nút \"Thêm tên miền\"."
+    },
+    "found_a_bug": {
+        "message": "Bạn phát hiện thấy lỗi? Bạn muuốn dịch AdThwart sang ngôn ngữ của bạn? Hãy <a href='$url$'>gửi yêu cầu tại đây</a>.",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "show_icon": {
+        "message": "Hiển thị biểu tượng ở thanh địa chỉ"
+    },
+    "show_block_element_menu": {
+        "message": "Hiển thị lệnh 'Block Element' ở trình đơn khi ấn chuột phải"
+    },
+    "disable_inline": {
+        "message": "Chặn trực tiếp các quảng cáo chữ"
+    },
+    "block_youtube": {
+        "message": "Chặn quảng cáo trong các đọan phim trên YouTube (không hoạt động nếu bạn cài tiện ích FlashBlock)"
+    },
+    
+    "enabled_for_site": {
+        "message": "Hoạt động trên trang này",
+        "description": "Popup balloon checkbox label"
+    },
+    "easy_create_filter": {
+        "message": "Tạo bộ lọc một cách dễ dàng",
+        "description": "Button label in popup balloon"
+    },
+    "cancel": {
+        "message": "Hủy bỏ",
+        "description": "Cancel button label"
+    },
+    "clickhide_instructions": {
+        "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
+    },
+    "add_filters_msg": {
+        "message": "Bạn có muốn thêm bộ lọc này không?"
+    },
+    "new_filters_added": {
+        "message": "Các bộ lọc mới đã được thêm; hãy mở <a id='options_url' target='_blank'>Cấu hình</a> để quản lý chúng."
+    },
+    "block_element": {
+        "message": "Khóa đối tượng này",
+        "description": "Label for 'Block Element' context menu item"
+    },
+    
+    "hovercraft": {
+        "message": "Thuyền của tôi toàn là lươn.",
+        "description": "This is a sample translatable string. It happens to have comedic value."
+    }
+}
