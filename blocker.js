@@ -286,9 +286,10 @@ function clickHide_mouseClick(e) {
     } else if(elt.src) {
         url = elt.src;
     }
-    
+
+    // Only normalize when the element contains a URL (issue 328.)
     // The URL is not always normalized, so do it here
-    url = normalizeURL(relativeToAbsoluteUrl(url));
+    if(url) url = normalizeURL(relativeToAbsoluteUrl(url));
     
     // Construct filters. The popup will retrieve these.
     // Only one ID
