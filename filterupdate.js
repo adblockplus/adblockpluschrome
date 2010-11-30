@@ -148,16 +148,7 @@ function FilterListFetcher(nameOrUrl, callback) {
         // TODO: Doesn't actually do anything in case of other errors
     }
     try {
-        // Send MD5 hash of what we have at the moment
-        var currentFilters = null, md5hash = null;
-        if(typeof localStorage[this.url] == "string") currentFilters = JSON.parse(localStorage[this.url]);
-        if(currentFilters && currentFilters.text) md5hash = MD5.hash(currentFilters.text);
-        // Have to call open() before setting the header for some reason
         this.xhr.open("GET", this.url, true);
-        if(md5hash) {
-            // console.log(md5hash, currentFilters.text.length);
-            this.xhr.setRequestHeader("X-AdThwart-My-MD5", md5hash);
-        }
         this.xhr.send(null);
     } catch(e) {
         fetcher.error = "Useless error message: " + e;
