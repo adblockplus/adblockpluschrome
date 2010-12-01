@@ -219,7 +219,7 @@ function toggleDomainExclusion(tabId) {
 function refreshIconAndContextMenu(tab) {
     var domain = extractDomainFromURL(tab.url);
     var excluded = isDomainExcluded(domain);
-    iconFilename = excluded ? "icons/face-devilish-grayed-19.png" : "icons/face-devilish-19.png";
+    iconFilename = excluded ? "icons/abp-16-whitelisted.png" : "icons/abp-16.png";
     chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
     var title = "AdThwart";
     // Don't show icon for chrome*:// pages
