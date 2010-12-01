@@ -69,7 +69,7 @@
       "message": "Wyłącz reklamy tekstowe"
    },
    "disabled_for_these_domains": {
-      "message": "AdThwart is disabled for the domains listed below. You can add a domain either via the AdThwart icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
+      "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
    },
    "easy_create_filter": {
       "description": "Button label in popup balloon",
@@ -153,7 +153,7 @@
       "message": "Nie znaleziono serwera"
    },
    "options": {
-      "message": "AdThwart Opcje"
+      "message": "Adblock Plus Opcje"
    },
    "out_of_date_lists": {
       "message": "Po pewnym czasie filtry aktualizowane są automatycznie."

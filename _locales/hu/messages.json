@@ -16,7 +16,7 @@
 		}
 	},
     "options": {
-        "message": "AdThwart Beállításai"
+        "message": "Adblock Plus Beállításai"
     },
     "filter_lists": {
         "message": "Szűrő lista",
@@ -104,10 +104,10 @@
 	    }
 	},
 	"disabled_for_these_domains": {
-        "message": "Az AdThwart le van tiltva az alább felsorolt területeken. Egy domaint megadhatsz az AdThwart ikonra kattintva a címsorban, vagy beírhatod a donaint (nem az URL-t) a dobozba és kattints a  \"Add domain\" gombra."
+        "message": "Az Adblock Plus le van tiltva az alább felsorolt területeken. Egy domaint megadhatsz az Adblock Plus ikonra kattintva a címsorban, vagy beírhatod a donaint (nem az URL-t) a dobozba és kattints a  \"Add domain\" gombra."
     },
 	"found_a_bug": {
-        "message": "Találtál egy hibát az AdThwart-ban? Kérlek <a href='$url$'>jelentsd itt</a>.",
+        "message": "Találtál egy hibát az Adblock Plus-ban? Kérlek <a href='$url$'>jelentsd itt</a>.",
 	    "placeholders": {
 	        "url": { "content" : "$1" }
 	    }

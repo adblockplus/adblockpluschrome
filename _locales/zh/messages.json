@@ -16,7 +16,7 @@
         }
     },
     "options": {
-        "message": "AdThwart 選項"
+        "message": "Adblock Plus 選項"
     },
     "filter_lists": {
         "message": "過濾清單",
@@ -111,16 +111,16 @@
         }
     },
     "disabled_for_these_domains": {
-        "message": "AdThwart 將不在以下域名啟用。您可以透過 AdThwart 於網址列的圖示新增域名，或者 在以下欄位輸入域名（非網址），然後點擊「新增域名」。"
+        "message": "Adblock Plus 將不在以下域名啟用。您可以透過 Adblock Plus 於網址列的圖示新增域名，或者 在以下欄位輸入域名（非網址），然後點擊「新增域名」。"
     },
     "found_a_bug": {
-        "message": "發現錯誤？要翻譯 AdThwart？ 請至 <a href='$url$'>此處詢問</a>。",
+        "message": "發現錯誤？要翻譯 Adblock Plus？ 請至 <a href='$url$'>此處詢問</a>。",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "show_icon": {
-        "message": "網址列顯示 AdThwart 圖示"
+        "message": "網址列顯示 Adblock Plus 圖示"
     },
     "show_block_element_menu": {
         "message": "右鍵選單顯示「阻擋網頁元素」"
@@ -151,7 +151,7 @@
         "message": "新增過濾規則？"
     },
     "new_filters_added": {
-        "message": "您已新增過濾規則。 請至 <a id='options_url' target='_blank'>AdThwart 選項</a> 管理過濾規則。"
+        "message": "您已新增過濾規則。 請至 <a id='options_url' target='_blank'>Adblock Plus 選項</a> 管理過濾規則。"
     },
     "block_element": {
         "message": "阻擋網頁元素",

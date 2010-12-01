@@ -16,7 +16,7 @@
 		}
 	},
     "options": {
-        "message": "Opções do AdThwart"
+        "message": "Opções do Adblock Plus"
     },
     "filter_lists": {
         "message": "Lista de Filtros",
@@ -112,7 +112,7 @@
 	    }
 	},
 	"disabled_for_these_domains": {
-        "message": "O AdThwart está desabilitado para os domínios abaixo. Você pode adicionar um domínio, tanto pelo ícone do AdThwart na barra de endereços, quanto digitando o domínio (não a URL) dentro da caixa e clicando no botão \"Adicionar domínio\"."
+        "message": "O Adblock Plus está desabilitado para os domínios abaixo. Você pode adicionar um domínio, tanto pelo ícone do Adblock Plus na barra de endereços, quanto digitando o domínio (não a URL) dentro da caixa e clicando no botão \"Adicionar domínio\"."
     },
 	"found_a_bug": {
         "message": "Encontrou um bug? Por favor <a href='$url$'>nos informe a falha por aqui</a>.",
@@ -134,11 +134,11 @@
     
     "enabled_for_site": {
         "message": "Habilitado para esse site",
-        "description": "Rótulo para a caixa de verificação em formato de balão que surge ao clicar no ícone do AdThwart"
+        "description": "Rótulo para a caixa de verificação em formato de balão que surge ao clicar no ícone do Adblock Plus"
     },
     "easy_create_filter": {
         "message": "Crie fácil um filtro",
-        "description": "Rótulo para o botão dentro do balão que surge ao clicar no ícone do AdThwart"
+        "description": "Rótulo para o botão dentro do balão que surge ao clicar no ícone do Adblock Plus"
     },
     "cancel": {
         "message": "Cancelar",

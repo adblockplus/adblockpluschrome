@@ -16,7 +16,7 @@
         }
     },
     "options": {
-        "message": "AdThwart خصائص"
+        "message": "Adblock Plus خصائص"
     },
     "filter_lists": {
         "message": "قائمة الفلاتر",
@@ -112,10 +112,10 @@
         }
     },
     "disabled_for_these_domains": {
-        "message": "AdThwart معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال الضغط على أيقونة AdThwart في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"Add domain\"."
+        "message": "Adblock Plus معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال الضغط على أيقونة Adblock Plus في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"Add domain\"."
     },
     "found_a_bug": {
-        "message": "هل وجدت خطأ برمجي؟ تريد ترجمة AdThwart إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.",
+        "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.",
         "placeholders": {
             "url": { "content" : "$1" }
         }

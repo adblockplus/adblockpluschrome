@@ -16,7 +16,7 @@
         }
     },
     "options": {
-        "message": "Opzioni di AdThwart"
+        "message": "Opzioni di Adblock Plus"
     },
     "filter_lists": {
         "message": "Liste di filtri",
@@ -112,10 +112,10 @@
         }
     },
     "disabled_for_these_domains": {
-        "message": "AdThwart è disabilitato per i domini elencati qui in basso. Puoi aggiungere un dominio anche tramite l'icona di AdThwart nella barra degli indirizzi o digitando un dominio (non un URL) nell'apposito campo e premendo il pulante \"Aggiungi dominio\"."
+        "message": "Adblock Plus è disabilitato per i domini elencati qui in basso. Puoi aggiungere un dominio anche tramite l'icona di Adblock Plus nella barra degli indirizzi o digitando un dominio (non un URL) nell'apposito campo e premendo il pulante \"Aggiungi dominio\"."
     },
     "found_a_bug": {
-        "message": "Hai trovato un bug? Vuoi tradurre AdThwart nella tua lingua? Per favore <a href='$url$'>compila questa rischiesta</a>.",
+        "message": "Hai trovato un bug? Vuoi tradurre Adblock Plus nella tua lingua? Per favore <a href='$url$'>compila questa rischiesta</a>.",
         "placeholders": {
             "url": { "content" : "$1" }
         }
