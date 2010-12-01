@@ -1,165 +1,165 @@
 {
-    "description": {
-        "message": "Blocks ads using the Firefox AdBlock Plus filter engine. Kiss ads goodbye and browse in peace!"
-    },
-    "month_names": {
-        "message": "[\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"]",
-        "description": "Month short names."
-    },
-    "date_format": {    
-        "message": "on $month$ $day$, $year$",
-        "description": "e.g. Apr 1, 2011",
-        "placeholders": {
-            "day": { "content" : "$1" },
-            "month": { "content" : "$2" },
-            "year": { "content" : "$3" }
-        }
-    },
-    "options": {
-        "message": "Adblock Plus Options"
-    },
-    "filter_lists": {
-        "message": "Filter lists",
-        "description": "This is a tab heading."
-    },
-    "last_updated_at": {
-        "message": "Last updated at $time$ $date$",
-        "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
-        "placeholders": {
-            "time": { "content" : "$1" },
-            "date": { "content" : "$2" }
-        }
-    },
-    "not_a_filter_list": {
-        "message": "Not a filter list",
-        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
-    },
-    "not_found_on_server": {
-        "message": "Not found on server",
-        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
-    },
-    "filter_list_desc": {
-        "message": "$title$ by $author$",
-        "description": "e.g. FooList by Mr. Foo",
-        "placeholders": {
-            "title": { "content" : "$1" },
-            "author": { "content" : "$2" }
-        }
-    },
-    "today": {
-        "message": "today",
-        "description": "Word for 'today', as in 'Last updated today'"
-    },
-    "add_your_own_filters": {
-        "message": "Add your own filters"
-    },
-    "whitelisted_domains": {
-        "message": "Whitelisted domains",
-        "description": "This is a tab heading."
-    },
-    "general": {
-        "message": "General",
-        "description": "This is a tab heading."
-    },
-    "add": {
-        "message": "Add",
-        "description": "This is the label for the 'Add' buttons."
-    },
-    "add_domain_button": {
-        "message": "Add domain"
-    },
-    "add_filter_button": {
-        "message": "Add filter"
-    },
-    "add_url_button": {
-        "message": "Add URL"
-    },
-    "delete": {
-        "message": "delete",
-        "description": "Word for 'delete'."
-    },
-    "remove_button": {
-        "message": "Remove selected",
-        "description": "This is the label for the 'Remove selected' buttons."
-    },
-    "edit_filters_raw": {
-        "message": "Edit filters as raw text"
-    },
-    "apply_changes": {
-        "message": "Apply changes"
-    },
-
-    "enable_only_the": {
-        "message": "Enable only the filter lists you need. Too many can make Chrome unresponsive."
-    },
-    "out_of_date_lists": {
-        "message": "Out-of-date lists are updated periodically."
-    },
-    "update_now": {
-        "message": "Update now"
-    },
-    "add_a_filter_list": {
-        "message": "Subscribe to a Firefox AdBlock Plus <a href='$url$'>filter list</a>:",
-        "placeholders": {
-            "url": { "content" : "$1" }
-        }
-    },
-    "filter_must_follow_syntax": {
-        "message": "Your filter must follow the <a href='$url$'>AdBlock Plus filter syntax</a>. Certain filter types, like object-subrequest, are not supported.",
-        "placeholders": {
-            "url": { "content" : "$1" }
-        }
-    },
-    "disabled_for_these_domains": {
-        "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
-    },
-    "found_a_bug": {
-        "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a href='$url$'>file a request here</a>.",
-        "placeholders": {
-            "url": { "content" : "$1" }
-        }
-    },
-    "show_icon": {
-        "message": "Show icon in address bar"
-    },
-    "show_block_element_menu": {
-        "message": "Show 'Block Element' right-click menu item"
-    },
-    "disable_inline": {
-        "message": "Disable inline text ads"
-    },
-    "block_youtube": {
-        "message": "Block ads inside YouTube videos (does not work with the FlashBlock extension)"
-    },
-    
-    "enabled_for_site": {
-        "message": "Enabled for this site",
-        "description": "Popup balloon checkbox label"
-    },
-    "easy_create_filter": {
-        "message": "Easy create filter",
-        "description": "Button label in popup balloon"
-    },
-    "cancel": {
-        "message": "Cancel",
-        "description": "Cancel button label"
-    },
-    "clickhide_instructions": {
-        "message": "After closing this popup, click (or right-click) an element on the page."
-    },
-    "add_filters_msg": {
-        "message": "Add filter(s)?"
-    },
-    "new_filters_added": {
-        "message": "New filters added; see <a id='options_url' target='_blank'>Options</a> to manage them."
-    },
-    "block_element": {
-        "message": "Block Element",
-        "description": "Label for 'Block Element' context menu item"
-    },
-    
-    "hovercraft": {
-        "message": "My hovercraft is full of eels.",
-        "description": "This is a sample translatable string. It happens to have comedic value."
+  "description": {
+    "message": "Blocks ads using the Firefox AdBlock Plus filter engine. Kiss ads goodbye and browse in peace!"
+  },
+  "month_names": {
+    "message": "[\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"]",
+    "description": "Month short names."
+  },
+  "date_format": {    
+    "message": "on $month$ $day$, $year$",
+    "description": "e.g. Apr 1, 2011",
+    "placeholders": {
+      "day": { "content" : "$1" },
+      "month": { "content" : "$2" },
+      "year": { "content" : "$3" }
     }
+  },
+  "options": {
+    "message": "Adblock Plus Options"
+  },
+  "filter_lists": {
+    "message": "Filter lists",
+    "description": "This is a tab heading."
+  },
+  "last_updated_at": {
+    "message": "Last updated at $time$ $date$",
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+    "placeholders": {
+      "time": { "content" : "$1" },
+      "date": { "content" : "$2" }
+    }
+  },
+  "not_a_filter_list": {
+    "message": "Not a filter list",
+    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
+  },
+  "not_found_on_server": {
+    "message": "Not found on server",
+    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
+  },
+  "filter_list_desc": {
+    "message": "$title$ by $author$",
+    "description": "e.g. FooList by Mr. Foo",
+    "placeholders": {
+      "title": { "content" : "$1" },
+      "author": { "content" : "$2" }
+    }
+  },
+  "today": {
+    "message": "today",
+    "description": "Word for 'today', as in 'Last updated today'"
+  },
+  "add_your_own_filters": {
+    "message": "Add your own filters"
+  },
+  "whitelisted_domains": {
+    "message": "Whitelisted domains",
+    "description": "This is a tab heading."
+  },
+  "general": {
+    "message": "General",
+    "description": "This is a tab heading."
+  },
+  "add": {
+    "message": "Add",
+    "description": "This is the label for the 'Add' buttons."
+  },
+  "add_domain_button": {
+    "message": "Add domain"
+  },
+  "add_filter_button": {
+    "message": "Add filter"
+  },
+  "add_url_button": {
+    "message": "Add URL"
+  },
+  "delete": {
+    "message": "delete",
+    "description": "Word for 'delete'."
+  },
+  "remove_button": {
+    "message": "Remove selected",
+    "description": "This is the label for the 'Remove selected' buttons."
+  },
+  "edit_filters_raw": {
+    "message": "Edit filters as raw text"
+  },
+  "apply_changes": {
+    "message": "Apply changes"
+  },
+
+  "enable_only_the": {
+    "message": "Enable only the filter lists you need. Too many can make Chrome unresponsive."
+  },
+  "out_of_date_lists": {
+    "message": "Out-of-date lists are updated periodically."
+  },
+  "update_now": {
+    "message": "Update now"
+  },
+  "add_a_filter_list": {
+    "message": "Subscribe to a Firefox AdBlock Plus <a href='$url$'>filter list</a>:",
+    "placeholders": {
+      "url": { "content" : "$1" }
+    }
+  },
+  "filter_must_follow_syntax": {
+    "message": "Your filter must follow the <a href='$url$'>AdBlock Plus filter syntax</a>. Certain filter types, like object-subrequest, are not supported.",
+    "placeholders": {
+      "url": { "content" : "$1" }
+    }
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
+  },
+  "found_a_bug": {
+    "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a href='$url$'>file a request here</a>.",
+    "placeholders": {
+      "url": { "content" : "$1" }
+    }
+  },
+  "show_icon": {
+    "message": "Show icon in address bar"
+  },
+  "show_block_element_menu": {
+    "message": "Show 'Block Element' right-click menu item"
+  },
+  "disable_inline": {
+    "message": "Disable inline text ads"
+  },
+  "block_youtube": {
+    "message": "Block ads inside YouTube videos (does not work with the FlashBlock extension)"
+  },
+  
+  "enabled_for_site": {
+    "message": "Enabled for this site",
+    "description": "Popup balloon checkbox label"
+  },
+  "easy_create_filter": {
+    "message": "Easy create filter",
+    "description": "Button label in popup balloon"
+  },
+  "cancel": {
+    "message": "Cancel",
+    "description": "Cancel button label"
+  },
+  "clickhide_instructions": {
+    "message": "After closing this popup, click (or right-click) an element on the page."
+  },
+  "add_filters_msg": {
+    "message": "Add filter(s)?"
+  },
+  "new_filters_added": {
+    "message": "New filters added; see <a id='options_url' target='_blank'>Options</a> to manage them."
+  },
+  "block_element": {
+    "message": "Block Element",
+    "description": "Label for 'Block Element' context menu item"
+  },
+  
+  "hovercraft": {
+    "message": "My hovercraft is full of eels.",
+    "description": "This is a sample translatable string. It happens to have comedic value."
+  }
 }

@@ -127,7 +127,7 @@ for (var i=0; i<links.snapshotLength; i++) {
 
 var testElems = document.querySelectorAll("a.IL_LINK_STYLE, a.contextual, a.kLink, a[itxtdid], nobr, ispan, span.IL_AD");
 for (var i=0; i<testElems.length; i++)
-	disableTextAds.blockAds(testElems[i]);
+  disableTextAds.blockAds(testElems[i]);
 
 // Chrome calls
             }

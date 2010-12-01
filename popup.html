@@ -2,24 +2,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="text/css" href="jquery-ui/css/smoothness/jquery-ui-1.8.6.custom.css" rel="stylesheet" />	
+<link type="text/css" href="jquery-ui/css/smoothness/jquery-ui-1.8.6.custom.css" rel="stylesheet" />
 <style type="text/css" media="screen">
 body {
-	font-size: 75%;
-	font-family: Helvetica, Arial, sans-serif;
-	min-width: 170px;
-	background: #ffffff;
-	color: #000000;
+  font-size: 75%;
+  font-family: Helvetica, Arial, sans-serif;
+  min-width: 170px;
+  background: #ffffff;
+  color: #000000;
 }
 
 a { text-decoration: none }
 a:hover { color: #eeeeff }
 
 #filtersList {
-	border: 1px dotted gray;
-	padding: 1px;
-	font-size: 75%;
-	display: none;
+  border: 1px dotted gray;
+  padding: 1px;
+  font-size: 75%;
+  display: none;
 }
 
 .ui-button {
@@ -27,9 +27,9 @@ a:hover { color: #eeeeff }
 }
 
 .spacer {
-	height: 7px;
-	width: 5px;
-	display: block;
+  height: 7px;
+  width: 5px;
+  display: block;
 }
 </style>
 
@@ -37,91 +37,91 @@ a:hover { color: #eeeeff }
 <script type="text/javascript" charset="utf-8">
 
 function dbg(msg) {
-	document.getElementById("debugmsg").innerHTML = msg;
+  document.getElementById("debugmsg").innerHTML = msg;
 }
 
 function init() {
     // Fill in i18n strings
     loadI18nStrings();
     
-	// Ask content script whether clickhide is active. If so, show cancel button.
-	// If that isn't the case, ask background.html whether it has cached filters. If so,
-	// ask the user whether she wants those filters.
-	// Otherwise, we are in default state.
-	chrome.windows.getCurrent(function(w) {
-    	chrome.tabs.getSelected(w.id, function(tab) {
-			chrome.extension.sendRequest({reqtype: "get-cached-filters"}, function(response2) {
-				if(response2.active) {
-				    clickHideActiveStuff();
-				} else
-					clickHideInactiveStuff();
-		    });
-			
-	  	});
-	});
+  // Ask content script whether clickhide is active. If so, show cancel button.
+  // If that isn't the case, ask background.html whether it has cached filters. If so,
+  // ask the user whether she wants those filters.
+  // Otherwise, we are in default state.
+  chrome.windows.getCurrent(function(w) {
+      chrome.tabs.getSelected(w.id, function(tab) {
+      chrome.extension.sendRequest({reqtype: "get-cached-filters"}, function(response2) {
+        if(response2.active) {
+            clickHideActiveStuff();
+        } else
+          clickHideInactiveStuff();
+        });
 
-	chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
-		document.getElementById("enabled").checked = response.enabled;
-		document.getElementById("enabledCheckboxAndLabel").style.display = "block";
-	});
-	chrome.extension.sendRequest({reqtype: "refresh-page-icon"});
-	
+      });
+  });
+
+  chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
+    document.getElementById("enabled").checked = response.enabled;
+    document.getElementById("enabledCheckboxAndLabel").style.display = "block";
+  });
+  chrome.extension.sendRequest({reqtype: "refresh-page-icon"});
+
 }
 
 function addFilters() {
-	filters = [];
-	// background.html saved the filters for us
-	chrome.extension.sendRequest({reqtype: "apply-cached-filters", filters: filters});
-	clickHideInactiveStuff();
-	// Tell content script to nuke that element
-	chrome.windows.getCurrent(function(w) {
-    	chrome.tabs.getSelected(w.id, function(tab) {
-			chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-deactivate"});
-			chrome.tabs.sendRequest(tab.id, {reqtype: "remove-ads-again"});
-		});
-	});
-	document.getElementById("mustReloadMsg").style.display = "block";
+  filters = [];
+  // background.html saved the filters for us
+  chrome.extension.sendRequest({reqtype: "apply-cached-filters", filters: filters});
+  clickHideInactiveStuff();
+  // Tell content script to nuke that element
+  chrome.windows.getCurrent(function(w) {
+      chrome.tabs.getSelected(w.id, function(tab) {
+      chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-deactivate"});
+      chrome.tabs.sendRequest(tab.id, {reqtype: "remove-ads-again"});
+    });
+  });
+  document.getElementById("mustReloadMsg").style.display = "block";
 }
 
 function toggleEnabled() {
-	// Rely on background.html to divine what domain is in the current tab
-	var checked = document.getElementById("enabled").checked;
-	
-	chrome.extension.sendRequest({reqtype: "set-domain-enabled-state", enabled: checked});
+  // Rely on background.html to divine what domain is in the current tab
+  var checked = document.getElementById("enabled").checked;
+
+  chrome.extension.sendRequest({reqtype: "set-domain-enabled-state", enabled: checked});
 }
 
 function activateClickHide() {
-	clickHideActiveStuff();
-	chrome.windows.getCurrent(function(w) {
-    	chrome.tabs.getSelected(w.id, function(tab) {
-			chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-activate"});
-			// Close the popup after a few seconds, so user doesn't have to
-			setTimeout(window.close, 5000);
-		});
-	});
+  clickHideActiveStuff();
+  chrome.windows.getCurrent(function(w) {
+      chrome.tabs.getSelected(w.id, function(tab) {
+      chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-activate"});
+      // Close the popup after a few seconds, so user doesn't have to
+      setTimeout(window.close, 5000);
+    });
+  });
 }
 
 function cancelClickHide() {
-	// Tell background.html to toss its clickhide filters
-	chrome.extension.sendRequest({reqtype: "cache-filters", filters: null});
-	clickHideInactiveStuff();
-	chrome.windows.getCurrent(function(w) {
-    	chrome.tabs.getSelected(w.id, function(tab) {
-			chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-deactivate"})
-		});
-	});
+  // Tell background.html to toss its clickhide filters
+  chrome.extension.sendRequest({reqtype: "cache-filters", filters: null});
+  clickHideInactiveStuff();
+  chrome.windows.getCurrent(function(w) {
+      chrome.tabs.getSelected(w.id, function(tab) {
+      chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-deactivate"})
+    });
+  });
 }
 
 function clickHideActiveStuff() {
-	document.getElementById("enabledCheckboxAndLabel").style.display = "none";
-	document.getElementById("clickHideInactiveStuff").style.display = "none";
-	document.getElementById("clickHideActiveStuff").style.display = "inherit";
+  document.getElementById("enabledCheckboxAndLabel").style.display = "none";
+  document.getElementById("clickHideInactiveStuff").style.display = "none";
+  document.getElementById("clickHideActiveStuff").style.display = "inherit";
 }
 
 function clickHideInactiveStuff() {
-	document.getElementById("enabledCheckboxAndLabel").style.display = "block";
-	document.getElementById("clickHideActiveStuff").style.display = "none";
-	document.getElementById("clickHideInactiveStuff").style.display = "inherit";
+  document.getElementById("enabledCheckboxAndLabel").style.display = "block";
+  document.getElementById("clickHideActiveStuff").style.display = "none";
+  document.getElementById("clickHideInactiveStuff").style.display = "inherit";
 }
 
 </script>
@@ -129,11 +129,11 @@ function clickHideInactiveStuff() {
 <body id="main" onload="init()">
 <div id="enabledCheckboxAndLabel" style="display:none"><input id="enabled" type="checkbox" checked onClick="toggleEnabled()"><label for="enabled"><span class="i18n_enabled_for_site"></span></label></div>
 <div id="mustReloadMsg" style="display:none"><span class="i18n_new_filters_added"></span></div>
-<div id="clickHideInactiveStuff" style="display: none">	
+<div id="clickHideInactiveStuff" style="display: none">
 <div class="spacer"></div>
 <button id="clickHideButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="activateClickHide()"><span class="i18n_easy_create_filter"></span></button>
 </div>
-	
+
 <div id="clickHideActiveStuff" style="display: none">
 <div id="clickHideMsg"><span class="i18n_clickhide_instructions"></span></div>
 <div class="spacer"></div>

@@ -128,7 +128,7 @@ var elemhide =
     for (var i in this.filters) {
       var sel = this.filters[i].selector;
       if(this.filters[i].isActiveOnDomain(domain))
-      	selectors.push(sel);
+        selectors.push(sel);
     }
     return selectors;
   },
