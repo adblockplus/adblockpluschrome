@@ -1,20 +1,20 @@
 ﻿{
-	"description": {
-		"message": "Blokkolja a reklámokat a Firefox AdBlock Plus szűrő segítségével. Mondj búcsút a reklámoknak és böngéssz békében!"
-	},
-	"month_names": {
-		"message": "[\"Jan\", \"Feb\", \"Már\", \"Ápr\", \"Máj\", \"Jún\", \"Júl\", \"Aug\", \"Szep\", \"Okt\", \"Nov\", \"Dec\"]",
-		"description": "Month short names."
-	},
-	"date_format": {	
-		"message": "$year$. $month$ $day$.",
-		"description": "Date format, including month, day and year.",
-		"placeholders": {
-		    "day": { "content" : "$1" },
-	        "month": { "content" : "$2" },
-		    "year": { "content" : "$3" }
-		}
-	},
+  "description": {
+    "message": "Blokkolja a reklámokat a Firefox AdBlock Plus szűrő segítségével. Mondj búcsút a reklámoknak és böngéssz békében!"
+  },
+  "month_names": {
+    "message": "[\"Jan\", \"Feb\", \"Már\", \"Ápr\", \"Máj\", \"Jún\", \"Júl\", \"Aug\", \"Szep\", \"Okt\", \"Nov\", \"Dec\"]",
+    "description": "Month short names."
+  },
+  "date_format": {  
+    "message": "$year$. $month$ $day$.",
+    "description": "Date format, including month, day and year.",
+    "placeholders": {
+        "day": { "content" : "$1" },
+          "month": { "content" : "$2" },
+        "year": { "content" : "$3" }
+    }
+  },
     "options": {
         "message": "Adblock Plus Beállításai"
     },
@@ -22,26 +22,26 @@
         "message": "Szűrő lista",
         "description": "This is a tab heading."
     },
-	"last_updated_at": {
-		"message": "Utoljára ekkor lett frissítve: $time$ $date$",
-		"description": "Last updated at time on date.",
-		"placeholders": {
-		    "time": { "content" : "$1" },
-		    "date": { "content" : "$2" }
-		}
-	},
-	"filter_list_desc": {
-		"message": "$title$ a $author$ -tól",
-		"description": "pl. FooList a Mr. Foo -tól",
-		"placeholders": {
-		    "title": { "content" : "$1" },
-		    "author": { "content" : "$2" }
-		}
-	},
-	"today": {
-	    "message": "ma",
-	    "description": "Word for 'today', as in 'Last updated today'"
-	},
+  "last_updated_at": {
+    "message": "Utoljára ekkor lett frissítve: $time$ $date$",
+    "description": "Last updated at time on date.",
+    "placeholders": {
+        "time": { "content" : "$1" },
+        "date": { "content" : "$2" }
+    }
+  },
+  "filter_list_desc": {
+    "message": "$title$ a $author$ -tól",
+    "description": "pl. FooList a Mr. Foo -tól",
+    "placeholders": {
+        "title": { "content" : "$1" },
+        "author": { "content" : "$2" }
+    }
+  },
+  "today": {
+      "message": "ma",
+      "description": "Word for 'today', as in 'Last updated today'"
+  },
     "add_your_own_filters": {
         "message": "Add hozzá a saját szűrőidet"
     },
@@ -82,35 +82,35 @@
         "message": "Változtatások alkalmazása"
     },
 
-	"enable_only_the": {
-	    "message": "Csak azokat a szűrőket engedélyezd, amelyekre szükséged van. A túl sok szűrő miatt a Chrome lefagyhat."
-	},
-	"out_of_date_lists": {
-	    "message": "Az elavult listák időközönként frissülnek."
-	},
-	"update_now": {
-	    "message": "Frissítés most"
-	},
-	"add_a_filter_list": {
-	    "message": "Feliratkozás a Firefox AdBlock Plus-ra <a href='$url$'>filter list</a>:",
-	    "placeholders": {
-	        "url": { "content" : "$1" }
-	    }
-	},
-	"filter_must_follow_syntax": {
-	    "message": "A szűrődnek követnie kell a <a href='$url$'>AdBlock Plus filter syntax</a>. Bizonyos típusú szűrők, mint az 'object-subrequest', nem támogatottak.",
-	    "placeholders": {
-	        "url": { "content" : "$1" }
-	    }
-	},
-	"disabled_for_these_domains": {
+  "enable_only_the": {
+      "message": "Csak azokat a szűrőket engedélyezd, amelyekre szükséged van. A túl sok szűrő miatt a Chrome lefagyhat."
+  },
+  "out_of_date_lists": {
+      "message": "Az elavult listák időközönként frissülnek."
+  },
+  "update_now": {
+      "message": "Frissítés most"
+  },
+  "add_a_filter_list": {
+      "message": "Feliratkozás a Firefox AdBlock Plus-ra <a href='$url$'>filter list</a>:",
+      "placeholders": {
+          "url": { "content" : "$1" }
+      }
+  },
+  "filter_must_follow_syntax": {
+      "message": "A szűrődnek követnie kell a <a href='$url$'>AdBlock Plus filter syntax</a>. Bizonyos típusú szűrők, mint az 'object-subrequest', nem támogatottak.",
+      "placeholders": {
+          "url": { "content" : "$1" }
+      }
+  },
+  "disabled_for_these_domains": {
         "message": "Az Adblock Plus le van tiltva az alább felsorolt területeken. Egy domaint megadhatsz az Adblock Plus ikonra kattintva a címsorban, vagy beírhatod a donaint (nem az URL-t) a dobozba és kattints a  \"Add domain\" gombra."
     },
-	"found_a_bug": {
+  "found_a_bug": {
         "message": "Találtál egy hibát az Adblock Plus-ban? Kérlek <a href='$url$'>jelentsd itt</a>.",
-	    "placeholders": {
-	        "url": { "content" : "$1" }
-	    }
+      "placeholders": {
+          "url": { "content" : "$1" }
+      }
     },
     
     
@@ -146,9 +146,9 @@
         "message": "Új szűrők hozzáadva; lásd <a id='options_url' target='_blank'>Options</a> a szerkesztéshez."
     },
     
-	
-	"hovercraft": {
-		"message": "A légpárnás hajóm tele van angolnával",
-		"description": "This is a sample translatable string. It happens to have comedic value."
-	}
+  
+  "hovercraft": {
+    "message": "A légpárnás hajóm tele van angolnával",
+    "description": "This is a sample translatable string. It happens to have comedic value."
+  }
 }

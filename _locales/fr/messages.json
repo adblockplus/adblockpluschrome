@@ -3,19 +3,19 @@
         "message": "Suppression des publicités utilisant le moteur de Firefox AdBlock Plus. Dites adieu publicités et naviguez en paix!"
     },
     "month_names": {
-		"message": "[\"jan\", \"fév\", \"mar\", \"avr\", \"mai\", \"jun\", \"jul\", \"aou\", \"sep\", \"oct\", \"nov\", \"déc\"]",
-		"description": "Month short names."
-	},
-	"date_format": {	
-		"message": "le $day$ $month$ $year$",
-		"description": "Date format, including month, day and year.",
-		"placeholders": {
-		    "day": { "content" : "$1" },
-	        "month": { "content" : "$2" },
-		    "year": { "content" : "$3" }
-		}
-	},
-	
+    "message": "[\"jan\", \"fév\", \"mar\", \"avr\", \"mai\", \"jun\", \"jul\", \"aou\", \"sep\", \"oct\", \"nov\", \"déc\"]",
+    "description": "Month short names."
+  },
+  "date_format": {  
+    "message": "le $day$ $month$ $year$",
+    "description": "Date format, including month, day and year.",
+    "placeholders": {
+        "day": { "content" : "$1" },
+          "month": { "content" : "$2" },
+        "year": { "content" : "$3" }
+    }
+  },
+  
     "options": {
         "message": "Paramètres Adblock Plus"
     },
@@ -24,25 +24,25 @@
         "description": "This is a tab heading."
     },
     "last_updated_at": {
-		"message": "Dernière actualisation $date$ à $time$",
-		"description": "Last updated at time on date.",
-		"placeholders": {
-		    "time": { "content" : "$1" },
-		    "date": { "content" : "$2" }
-		}
-	},
-	"filter_list_desc": {
-		"message": "$title$ par $author$",
-		"description": "e.g. FooList by Mr. Foo",
-		"placeholders": {
-		    "title": { "content" : "$1" },
-		    "author": { "content" : "$2" }
-		}
-	},
-	"today": {
-	    "message": "aujourd'hui",
-	    "description": "Word for 'today', as in 'Last updated today'"
-	},
+    "message": "Dernière actualisation $date$ à $time$",
+    "description": "Last updated at time on date.",
+    "placeholders": {
+        "time": { "content" : "$1" },
+        "date": { "content" : "$2" }
+    }
+  },
+  "filter_list_desc": {
+    "message": "$title$ par $author$",
+    "description": "e.g. FooList by Mr. Foo",
+    "placeholders": {
+        "title": { "content" : "$1" },
+        "author": { "content" : "$2" }
+    }
+  },
+  "today": {
+      "message": "aujourd'hui",
+      "description": "Word for 'today', as in 'Last updated today'"
+  },
     "add_your_own_filters": {
         "message": "Ajouter vos propres filtres"
     },
@@ -84,35 +84,35 @@
     },
 
             
-	"enable_only_the": {
-	    "message": "Choisissez seulement les listes dont vous avez besoin. Trop de script tuent le script&nbsp;!"
-	},
-	"out_of_date_lists": {
-	    "message": "Les listes périmées seront actualisées automatiquement."
-	},
-	"update_now": {
-	    "message": "Actualiser maintenant"
-	},
-	"add_a_filter_list": {
-	    "message": "S'abonner à <a href='$url$'>une liste</a> utilisant le format de Firefox AdBlock Plus&nbsp;:",
-	    "placeholders": {
-	        "url": { "content" : "$1" }
-	    }
-	},
-	"filter_must_follow_syntax": {
-	    "message": "Il faut que votre filtre suive <a href='$url$'>le syntaxe AdBlock Plus</a>. Certains types de filtre, comme object-subrequest, ne sont pas supportés.",
-	    "placeholders": {
-	        "url": { "content" : "$1" }
-	    }
-	},
-	"disabled_for_these_domains": {
+  "enable_only_the": {
+      "message": "Choisissez seulement les listes dont vous avez besoin. Trop de script tuent le script&nbsp;!"
+  },
+  "out_of_date_lists": {
+      "message": "Les listes périmées seront actualisées automatiquement."
+  },
+  "update_now": {
+      "message": "Actualiser maintenant"
+  },
+  "add_a_filter_list": {
+      "message": "S'abonner à <a href='$url$'>une liste</a> utilisant le format de Firefox AdBlock Plus&nbsp;:",
+      "placeholders": {
+          "url": { "content" : "$1" }
+      }
+  },
+  "filter_must_follow_syntax": {
+      "message": "Il faut que votre filtre suive <a href='$url$'>le syntaxe AdBlock Plus</a>. Certains types de filtre, comme object-subrequest, ne sont pas supportés.",
+      "placeholders": {
+          "url": { "content" : "$1" }
+      }
+  },
+  "disabled_for_these_domains": {
         "message": "Adblock Plus est inactivé pour les domaines ci-dessous. Vous pouvez ajouter une domaine soit par l'icon Adblock Plus dans la barre d'adresse ou en tapant la domaine (pas URL) dans la zone et cliquant sur le bouton \"Ajouter\"."
     },
-	"found_a_bug": {
+  "found_a_bug": {
         "message": "Avez-vous trouvé un bug ou une mauvaise traduction dans Adblock Plus&nbsp;? S'il-vous-plaît, <a href='$url$'>enregistrez-le ici</a>.",
-	    "placeholders": {
-	        "url": { "content" : "$1" }
-	    }
+      "placeholders": {
+          "url": { "content" : "$1" }
+      }
     },
     
     "show_icon": {
@@ -153,8 +153,8 @@
         "message": "Afficher 'Supprimer l'élément' dans le menu clic-droit"
     },
 
-	"hovercraft": {
-		"message": "Mon aéroglisseur est plein d'anguilles.",
-		"description": "This is a sample translatable string. It happens to have comedic value."
-	}
+  "hovercraft": {
+    "message": "Mon aéroglisseur est plein d'anguilles.",
+    "description": "This is a sample translatable string. It happens to have comedic value."
+  }
 }

@@ -12,14 +12,14 @@
    "add_your_own_filters": {
        "message": "Добавить свои фильтры"
    },
-   	"filter_list_desc": {
-		"message": "$title$. $author$.",
-		"description": "e.g. FooList by Mr. Foo",
-		"placeholders": {
-		    "title": { "content" : "$1" },
-		    "author": { "content" : "$2" }
-		}
-	},
+     "filter_list_desc": {
+    "message": "$title$. $author$.",
+    "description": "e.g. FooList by Mr. Foo",
+    "placeholders": {
+        "title": { "content" : "$1" },
+        "author": { "content" : "$2" }
+    }
+  },
    "whitelisted_domains": {
        "message": "Белый список доменов",
        "description": "This is a tab heading."
@@ -72,15 +72,15 @@
     "add_a_filter_list": {
         "message": "Подписка на <a href='$url$'>список фильтров</a> Firefox AdBlock Plus:",
         "placeholders": {
-	        "url": { "content" : "$1" }
-	    }
+          "url": { "content" : "$1" }
+      }
     },
 
     "filter_must_follow_syntax": {
             "message": "Ваш фильтр должен соответствовать <a href='$url$'>синтаксису AdBlock Plus</a>. Фильтры некоторых типов, например, с подзапросом объекта, не поддерживаются.",
-    	    "placeholders": {
-    	        "url": { "content" : "$1" }
-    	    }
+          "placeholders": {
+              "url": { "content" : "$1" }
+          }
 },
 
     "disabled_for_these_domains": {
@@ -89,9 +89,9 @@
 
     "found_a_bug": {
         "message": "Нашли ошибку в Adblock Plus? Пожалуйста, <a href='$url$'>сообщите об этом здесь</a>.",
-	    "placeholders": {
-	        "url": { "content" : "$1" }
-	    }
+      "placeholders": {
+          "url": { "content" : "$1" }
+      }
    },
 
 

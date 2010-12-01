@@ -207,7 +207,7 @@ function ActiveFilter(text, domains)
   {
     for (i in domains)
     {
-	  domain = domains[i];
+      domain = domains[i];
       if (domain == "")
         continue;
 
@@ -425,9 +425,9 @@ RegExpFilter.fromText = function(text)
       option = options[i];
       var value;
       // [option, value] = option.split("=");
-			var rar = option.split("=");
-			option = rar[0];
-			value = rar[1];
+      var rar = option.split("=");
+      option = rar[0];
+      value = rar[1];
       option = option.replace(/-/, "_");
       if (option in RegExpFilter.typeMap)
       {
@@ -478,7 +478,7 @@ RegExpFilter.fromText = function(text)
     regexp = ".*";
 
   if (constructor == WhitelistFilter && (contentType == null || (contentType & RegExpFilter.typeMap.DOCUMENT)) && 
-	(!options || options.indexOf("DOCUMENT") < 0) && !/^\|?[\w\-]+:/.test(text))
+      (!options || options.indexOf("DOCUMENT") < 0) && !/^\|?[\w\-]+:/.test(text))
   {
     // Exception filters shouldnt apply to pages by default unless they start with a protocol name
     if (contentType == null)
