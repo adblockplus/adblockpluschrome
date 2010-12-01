@@ -215,15 +215,14 @@ function toggleDomainExclusion(tabId) {
 }
 
 // Adds or removes page action icon according to options.
-// Show devil if enabled, apathetic face otherwise.
 function refreshIconAndContextMenu(tab) {
     var domain = extractDomainFromURL(tab.url);
     var excluded = isDomainExcluded(domain);
     iconFilename = excluded ? "icons/abp-16-whitelisted.png" : "icons/abp-16.png";
     chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
     var title = "Adblock Plus";
-    // Don't show icon for chrome*:// pages
-    if(tab.url.substring(0, 6) != "chrome") {
+    // Only show icon for pages we can influence (http: and https:)
+    if(/^https?:/.test(tab.url)) {
         chrome.pageAction.setTitle({tabId: tab.id, title: title});
         var shouldShowIcon = localStorage["shouldShowIcon"];
         if(typeof shouldShowIcon != "undefined" && shouldShowIcon == "false") {
