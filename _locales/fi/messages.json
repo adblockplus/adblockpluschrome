@@ -16,7 +16,7 @@
         }
     },
     "options": {
-        "message": "AdThwart asetukset"
+        "message": "Adblock Plus asetukset"
     },
     "filter_lists": {
         "message": "Suodatinlistat",
@@ -112,10 +112,10 @@
         }
     },
     "disabled_for_these_domains": {
-        "message": "AdThwart ei estä mainoksia sivuilla jotka ovat alla listattuna. Voit lisätä sivun joko AdThwart kuvakkeesta osoiteriviltä tai kirjoittamalla sivun (ei osoitetta) laatikkoon ja klikkaamalla \"lisää sivu\" nappia."
+        "message": "Adblock Plus ei estä mainoksia sivuilla jotka ovat alla listattuna. Voit lisätä sivun joko Adblock Plus kuvakkeesta osoiteriviltä tai kirjoittamalla sivun (ei osoitetta) laatikkoon ja klikkaamalla \"lisää sivu\" nappia."
     },
     "found_a_bug": {
-        "message": "Löysitkö vian? Haluatko kääntää AdThwartin omalle kielellesi? Ole hyvä ja <a href='$url$'>kirjoita hakemus täällä</a>.",
+        "message": "Löysitkö vian? Haluatko kääntää Adblock Plusin omalle kielellesi? Ole hyvä ja <a href='$url$'>kirjoita hakemus täällä</a>.",
         "placeholders": {
             "url": { "content" : "$1" }
         }

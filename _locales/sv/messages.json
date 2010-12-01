@@ -16,7 +16,7 @@
         }
     },
     "options": {
-        "message": "AdThwart Alternativ"
+        "message": "Adblock Plus Alternativ"
     },
     "filter_lists": {
         "message": "Filterlistor",
@@ -111,10 +111,10 @@
         }
     },
     "disabled_for_these_domains": {
-        "message": "AdThwart är inaktiverad för domänerna i denna lista. Du kan lägga till en domän via AdThwart-ikonen i adressfältet eller genom att skriva domännamnet (inte URL) i textboxen och klicka på \"Lägg till domän\"."
+        "message": "Adblock Plus är inaktiverad för domänerna i denna lista. Du kan lägga till en domän via Adblock Plus-ikonen i adressfältet eller genom att skriva domännamnet (inte URL) i textboxen och klicka på \"Lägg till domän\"."
     },
     "found_a_bug": {
-        "message": "Hittat ett fel eller vill du översätta AdThwart till ett annat språk? Vänligen, <a href='$url$'>meddela här</a>.",
+        "message": "Hittat ett fel eller vill du översätta Adblock Plus till ett annat språk? Vänligen, <a href='$url$'>meddela här</a>.",
         "placeholders": {
             "url": { "content" : "$1" }
         }

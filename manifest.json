@@ -1,12 +1,12 @@
 {
-	"name": "AdThwart",
+	"name": "Adblock Plus",
 	"version": "1.0.20",
 	"minimum_chrome_version": "6.0",
 	"description": "__MSG_description__",
 	"default_locale": "en",
 	"page_action": {
 		"default icon": "icons/abp-16.png",
-		"default title": "AdThwart",
+		"default title": "Adblock Plus",
 		"popup": "popup.html"
 	},
 	"icons": {

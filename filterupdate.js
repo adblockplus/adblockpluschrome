@@ -53,7 +53,7 @@ var filterListTitles = {
     "vietnam": 'Việt Nam list',
     "poland": 'PLgeneral (Polski)',
     "hungary": 'hufilter (Magyar)',
-    "extras": '<a href="' + filterFiles["extras"] + '">AdThwart recommended filters</a>'
+    "extras": '<a href="' + filterFiles["extras"] + '">Recommended filters for Google Chrome</a>'
 };
 
 var filterListAuthors = {

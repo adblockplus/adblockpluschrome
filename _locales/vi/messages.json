@@ -16,7 +16,7 @@
         }
     },
     "options": {
-        "message": "Cấu hình AdThwart"
+        "message": "Cấu hình Adblock Plus"
     },
     "filter_lists": {
         "message": "Danh sách các bộ lọc",
@@ -111,10 +111,10 @@
         }
     },
     "disabled_for_these_domains": {
-        "message": "AdThwart không hoạt động ở các tên miền dưới đây. Bạn có thể thêm một tên miền nhờ biểu tượng AdThwart nằm trên thanh địa chỉ, hoặc gõ tên miền (không phải là URL) trong khung bên dưới và ấn nút \"Thêm tên miền\"."
+        "message": "Adblock Plus không hoạt động ở các tên miền dưới đây. Bạn có thể thêm một tên miền nhờ biểu tượng Adblock Plus nằm trên thanh địa chỉ, hoặc gõ tên miền (không phải là URL) trong khung bên dưới và ấn nút \"Thêm tên miền\"."
     },
     "found_a_bug": {
-        "message": "Bạn phát hiện thấy lỗi? Bạn muuốn dịch AdThwart sang ngôn ngữ của bạn? Hãy <a href='$url$'>gửi yêu cầu tại đây</a>.",
+        "message": "Bạn phát hiện thấy lỗi? Bạn muuốn dịch Adblock Plus sang ngôn ngữ của bạn? Hãy <a href='$url$'>gửi yêu cầu tại đây</a>.",
         "placeholders": {
             "url": { "content" : "$1" }
         }

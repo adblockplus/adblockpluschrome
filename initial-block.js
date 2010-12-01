@@ -209,7 +209,7 @@ if (document instanceof HTMLDocument) {
     // We'll remove the latter CSS rules later.
     var initialHideElt = document.createElement("style");
     var elemhideElt = document.createElement("style");
-    elemhideElt.setAttribute("__adthwart__", "ElemHide");
+    elemhideElt.setAttribute("__adblockplus__", "ElemHide");
     
     // So we know which one to remove later. We can't use the title attribute because:
     // On sites where there is a <script> before a <link> or <style>, the styles are recalculated
@@ -218,9 +218,9 @@ if (document instanceof HTMLDocument) {
     // to be alternates and thus ignored. This is a moronic way to specify the preferred stylesheet
     // and this is just another example of how miserably bad W3C is at designing the DOM.
     // The only reason this wasn't broken to start with was that WebKit didn't notice the title
-    // attribute on the __adthwart__ style element without the extra style recalc triggered by the
+    // attribute on the __adblockplus__ style element without the extra style recalc triggered by the
     // script tag. Sheesh.
-    initialHideElt.setAttribute("__adthwart__", "InitialHide");
+    initialHideElt.setAttribute("__adblockplus__", "InitialHide");
 
     chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response) {
         makeSelectorStrings(response.selectors);

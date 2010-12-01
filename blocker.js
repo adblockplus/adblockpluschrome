@@ -49,11 +49,11 @@ var lastRightClickEvent = null;
 var port;
 
 // We only remove the initial-hide stylesheet, leaving the elemhide stylesheet in place
-// Sometimes there is, for some reason, more than one AdThwart stylesheet,
+// Sometimes there is, for some reason, more than one Adblock Plus stylesheet,
 // so we replace all that we find.
 function removeInitialHideStylesheet() {
     if(typeof initialHideElt == "undefined" || !initialHideElt) return;
-    var elts = document.querySelectorAll("style[__adthwart__='InitialHide']");
+    var elts = document.querySelectorAll("style[__adblockplus__='InitialHide']");
     for(var i=0; i<elts.length; i++) elts[i].innerText = "";
 }
 
@@ -115,7 +115,7 @@ function addElementOverlay(elt) {
     var overlay = document.createElement('div');
     overlay.prisoner = elt;
     overlay.prisonerURL = url;
-    overlay.className = "__adthwart__overlay";
+    overlay.className = "__adblockplus__overlay";
     overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box; z-index: 99999');
     var pos = getAbsolutePosition(elt);
     overlay.style.left = pos[0] + "px";
@@ -251,7 +251,7 @@ function clickHide_deactivate() {
     // Remove overlays
     // For some reason iterating over the array returend by getElementsByClassName() doesn't work
     var elt;
-    while(elt = document.querySelector('.__adthwart__overlay')) elt.parentNode.removeChild(elt);
+    while(elt = document.querySelector('.__adblockplus__overlay')) elt.parentNode.removeChild(elt);
 }
 
 function clickHide_elementClickHandler(ev) {
@@ -302,7 +302,7 @@ function clickHide_mouseClick(e) {
         
     var elt = currentElement;
     var url = null;
-    if(currentElement.className && currentElement.className == "__adthwart__overlay") {
+    if(currentElement.className && currentElement.className == "__adblockplus__overlay") {
         elt = currentElement.prisoner;
         url = currentElement.prisonerURL;
     } else if(elt.src) {
@@ -477,7 +477,7 @@ function handleYouTubeFlashPlayer(elt) {
     // may not load properly.
     var injectedScript = document.createElement("script");
     // Annoyingly, JavaScript has no heredoc-like feature, so we resort to this ugly hack
-    injectedScript.innerHTML = ["// AdThwart ad-removal code. Hi Mom!",
+    injectedScript.innerHTML = ["// Adblock Plus ad-removal code.",
     "// This is invoked with e.target == the movie_player object, from which ads must be removed",
     "function _AT_removeYouTubeAds(e) {",
     "if(!e.target || e.target.id != 'movie_player' || _AT_NowWorking) return;",

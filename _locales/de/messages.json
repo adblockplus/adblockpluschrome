@@ -69,10 +69,10 @@
       "message": "Blocke Inline Text Werbung"
    },
    "disabled_for_these_domains": {
-      "message": "AdThwart wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain via AdThwart-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in die Textzeile und drücken auf \"Domain hinzufügen\"."
+      "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain via Adblock Plus-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in die Textzeile und drücken auf \"Domain hinzufügen\"."
    },
    "easy_create_filter": {
-      "description": "AdThwart-Icon Kontextmenü",
+      "description": "Adblock Plus-Icon Kontextmenü",
       "message": "Einfach Filter erstellen"
    },
    "edit_filters_raw": {
@@ -82,7 +82,7 @@
       "message": "Falls Sie einen langsamen Computer haben, wählen Sie bitte nur Filter aus, die Sie wirklich brauchen."
    },
    "enabled_for_site": {
-      "description": "AdThwart-Icon Kontextmenü",
+      "description": "Adblock Plus-Icon Kontextmenü",
       "message": "Für diese Seite aktivieren"
    },
    "filter_list_desc": {
@@ -110,7 +110,7 @@
       }
    },
    "found_a_bug": {
-      "message": "Sie haben einen Bug gefunden oder wollen AdThwart in eine andere Sprache übersetzen? Bitte schreiben Sie <a href='$url$'>hier</a> ihre Anfrage.",
+      "message": "Sie haben einen Bug gefunden oder wollen Adblock Plus in eine andere Sprache übersetzen? Bitte schreiben Sie <a href='$url$'>hier</a> ihre Anfrage.",
       "placeholders": {
          "url": {
             "content": "$1"
@@ -153,7 +153,7 @@
       "message": "Filter Liste nicht auf Server gefunden"
    },
    "options": {
-      "message": "AdThwart Optionen"
+      "message": "Adblock Plus Optionen"
    },
    "out_of_date_lists": {
       "message": "Abgelaufene Filter werden regelmäßig aktualisiert."

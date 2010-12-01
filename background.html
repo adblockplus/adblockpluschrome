@@ -221,7 +221,7 @@ function refreshIconAndContextMenu(tab) {
     var excluded = isDomainExcluded(domain);
     iconFilename = excluded ? "icons/abp-16-whitelisted.png" : "icons/abp-16.png";
     chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
-    var title = "AdThwart";
+    var title = "Adblock Plus";
     // Don't show icon for chrome*:// pages
     if(tab.url.substring(0, 6) != "chrome") {
         chrome.pageAction.setTitle({tabId: tab.id, title: title});
