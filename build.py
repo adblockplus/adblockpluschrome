@@ -19,8 +19,10 @@ Options:
 def addToZip(zip, dir, baseName):
   for file in os.listdir(dir):
     filelc = file.lower()
-    if file.startswith('.') or filelc.endswith('.py') or filelc.endswith('.crx') or filelc.endswith('.zip'):
-      # skip special files, Python scripts, existing archives
+    if (file.startswith('.') or filelc.endswith('.py') or
+        filelc.endswith('.crx') or filelc.endswith('.zip') or
+        filelc.endswith('.sh') or filelc.endswith('.bat')):
+      # skip special files, scripts, existing archives
       continue
     filePath = os.path.join(dir, file)
     if os.path.isdir(filePath):
