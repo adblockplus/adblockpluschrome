@@ -48,15 +48,16 @@ var lastRightClickEvent = null;
 // Port to background.htm
 var port;
 
-// We only remove the initial-hide stylesheet, leaving the elemhide stylesheet in place
-// Sometimes there is, for some reason, more than one Adblock Plus stylesheet,
-// so we replace all that we find.
-function removeInitialHideStylesheet() {
-  if (typeof initialHideElt == "undefined" || !initialHideElt)
+// We only remove the initial-hide stylesheet, leaving the elemhide stylesheet
+// in place.
+function removeInitialHideStylesheet()
+{
+  // initialHideElt variable should have been set in initial-block.js
+  if (typeof initialHideElt == "undefined" || initialHideElt == null)
     return;
-  var elts = document.querySelectorAll("style[__adblockplus__='InitialHide']");
-  for (var i=0; i<elts.length; i++)
-    elts[i].innerText = "";
+  if (initialHideElt.parentNode)
+    initialHideElt.parentNode.removeChild(initialHideElt);
+  initialHideElt = null;
 }
 
 // Highlight elements according to selector string. This would include

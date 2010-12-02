@@ -213,31 +213,23 @@ if(!workaroundBeforeloadMalfunction) {
 }
 
 // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
-if (document instanceof HTMLDocument) {
-  // Use a style element for elemhide selectors and to hide page elements that might be ads.
-  // We'll remove the latter CSS rules later.
-  var initialHideElt = document.createElement("style");
-  var elemhideElt = document.createElement("style");
-  elemhideElt.setAttribute("__adblockplus__", "ElemHide");
-  
-  // So we know which one to remove later. We can't use the title attribute because:
-  // On sites where there is a <script> before a <link> or <style>, the styles are recalculated
-  // an extra time because scripts can change styles. When this happens, the first stylesheet
-  // with a title is considered to be the preferred stylesheet and the others are considered
-  // to be alternates and thus ignored. This is a moronic way to specify the preferred stylesheet
-  // and this is just another example of how miserably bad W3C is at designing the DOM.
-  // The only reason this wasn't broken to start with was that WebKit didn't notice the title
-  // attribute on the __adblockplus__ style element without the extra style recalc triggered by the
-  // script tag. Sheesh.
-  initialHideElt.setAttribute("__adblockplus__", "InitialHide");
-
-  chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response) {
-    if(response.enabled) {
+var initialHideElt = null;
+if (document instanceof HTMLDocument)
+{
+  chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response)
+  {
+    if(response.enabled)
+    {
+      // Add a style element for elemhide selectors.
+      var elemhideElt = document.createElement("style");
       elemhideElt.innerText = generateElemhideCSSString(response.selectors);
       document.documentElement.appendChild(elemhideElt);
 
       if (!response.noInitialHide)
       {
+        // Initially hide page elements that might be ads, this style element
+        // will be removed later.
+        initialHideElt = document.createElement("style");
         initialHideElt.innerText = FLASH_SELECTORS + " { display: none !important } "
           + "iframe { visibility: hidden !important }";
         document.documentElement.appendChild(initialHideElt);
