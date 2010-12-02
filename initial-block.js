@@ -236,16 +236,12 @@ if (document instanceof HTMLDocument) {
       elemhideElt.innerText = generateElemhideCSSString(response.selectors);
       document.documentElement.appendChild(elemhideElt);
 
-      if(!document.domain.match(/youtube.com$/i)) {
-        // XXX: YouTube's new design apparently doesn't load the movie player if we hide it.
-        // I'm guessing Chrome doesn't bother to load the Flash object if it isn't displayed,
-        // but later removing that CSS rule doesn't cause it to actually be loaded. The
-        // rest of the Internet - and YouTube's old design - seem to be OK, though, so I dunno.
-        initialHideElt.innerText += FLASH_SELECTORS + " { display: none !important } ";
-      }
-      initialHideElt.innerText += "iframe { visibility: hidden !important } ";
-      if(!response.noInitialHide)
+      if (!response.noInitialHide)
+      {
+        initialHideElt.innerText = FLASH_SELECTORS + " { display: none !important } "
+          + "iframe { visibility: hidden !important }";
         document.documentElement.appendChild(initialHideElt);
+      }
 
       // HACK to hopefully block stuff on beforeload event.
       // Because we are in an asynchronous callback, the page may be partially loaded before
