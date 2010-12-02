@@ -50,31 +50,27 @@ var TagToType = {
 var BEFORELOAD_MALFUNCTION_DOMAINS = {"t.sina.com.cn": true, "prazsketramvaje.cz": true, "xnachat.com": true, "tuenti.com": true};
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS || ("www." + document.domain) in BEFORELOAD_MALFUNCTION_DOMAINS;
 
-var elemhideSelectorStrings = []; // Cache the elemhide selector strings
 var SELECTOR_GROUP_SIZE = 20;
 var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"]';
 var TEMP_adservers = null;
 
 var savedBeforeloadEvents = new Array();
 
-// WebKit apparently chokes when the selector list in a CSS rule is huge.
-// So we split the elemhide selectors into groups.
-function makeSelectorStrings(selectors) {
-  var ptr = 0;
-  if(!selectors)
-    return;
-  for(var i = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE) {
-    elemhideSelectorStrings[ptr++] = selectors.slice(i, i + SELECTOR_GROUP_SIZE).join(",");
-  }
-}
-
 // Makes a string containing CSS rules for elemhide filters
-function getElemhideCSSString() {
-  var s = "";
-  for(var i in elemhideSelectorStrings) {
-    s += elemhideSelectorStrings[i] + " { display: none !important } ";
+function generateElemhideCSSString(selectors)
+{
+  if (!selectors)
+    return "";
+
+  // WebKit apparently chokes when the selector list in a CSS rule is huge.
+  // So we split the elemhide selectors into groups.
+  var result = [];
+  for (var i = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE)
+  {
+    selector = selectors.slice(i, i + SELECTOR_GROUP_SIZE).join(", ");
+    result.push(selector + " { display: none !important; }");
   }
-  return s;
+  return result.join(" ");
 }
 
 // Remove a particular element.
@@ -236,9 +232,10 @@ if (document instanceof HTMLDocument) {
   initialHideElt.setAttribute("__adblockplus__", "InitialHide");
 
   chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response) {
-    makeSelectorStrings(response.selectors);
-    elemhideElt.innerText += getElemhideCSSString();
     if(response.enabled) {
+      elemhideElt.innerText = generateElemhideCSSString(response.selectors);
+      document.documentElement.appendChild(elemhideElt);
+
       if(!document.domain.match(/youtube.com$/i)) {
         // XXX: YouTube's new design apparently doesn't load the movie player if we hide it.
         // I'm guessing Chrome doesn't bother to load the Flash object if it isn't displayed,
@@ -248,8 +245,7 @@ if (document instanceof HTMLDocument) {
       }
       initialHideElt.innerText += "iframe { visibility: hidden !important } ";
       if(!response.noInitialHide)
-        document.documentElement.insertBefore(initialHideElt, null);
-      document.documentElement.insertBefore(elemhideElt, null);
+        document.documentElement.appendChild(initialHideElt);
 
       // HACK to hopefully block stuff on beforeload event.
       // Because we are in an asynchronous callback, the page may be partially loaded before
