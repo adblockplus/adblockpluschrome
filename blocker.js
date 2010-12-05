@@ -14,7 +14,7 @@
  * The Original Code is Adblock Plus for Chrome.
  *
  * The Initial Developer of the Original Code is
- * T. Joseph <ttjoseph@gmail.com>.
+ * T. Joseph <tom@adblockplus.org>.
  * Portions created by the Initial Developer are Copyright (C) 2009-2010
  * the Initial Developer. All Rights Reserved.
  *
