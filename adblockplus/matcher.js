@@ -19,7 +19,7 @@
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- * T. Joseph <ttjoseph@gmail.com>
+ * T. Joseph <tom@adblockplus.org>
  *
  * ***** END LICENSE BLOCK ***** */
 
