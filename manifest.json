@@ -29,7 +29,7 @@
     },
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["blocker.js", "disabletextads.js"],
+      "js": ["blocker.js", "removetextads.js"],
       "run_at": "document_end",
       "all_frames": true
     }

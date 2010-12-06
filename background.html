@@ -510,9 +510,10 @@ var requestDispatchTable = {
         // Returns whether this domain is in the exclusion list.
         // The page action popup asks us this.
         if(sender.tab) {
-            sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(sender.tab.url)), specialCaseYouTube: localStorage["specialCaseYouTube"] == "true"});
+            sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(sender.tab.url)), specialCaseYouTube: localStorage["specialCaseYouTube"] == "true", disableInlineTextAds: localStorage["disableInlineTextAds"] == "true"});
             return;
         }
+        // Only called from popup
         chrome.tabs.get(lastTabId, function(tab) {
             if(!tab) return;
             sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(tab.url))});
