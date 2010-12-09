@@ -206,7 +206,7 @@ if(!workaroundBeforeloadMalfunction) {
 
 // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
 var initialHideElt = null;
-if (document instanceof HTMLDocument)
+if (document.documentElement instanceof HTMLElement)
 {
   chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response)
   {
