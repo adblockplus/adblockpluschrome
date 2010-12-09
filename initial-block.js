@@ -23,21 +23,13 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// ABP content type flags
-var TypeMap = {
-  OTHER: 1, SCRIPT: 2, IMAGE: 4, STYLESHEET: 8, OBJECT: 16,
-  SUBDOCUMENT: 32, DOCUMENT: 64, BACKGROUND: 256, XBL: 512,
-  PING: 1024, XMLHTTPREQUEST: 2048, OBJECT_SUBREQUEST: 4096,
-  DTD: 8192, MEDIA: 16384, FONT: 32768, ELEMHIDE: 0xFFFD
-};
-
 var TagToType = {
-  "SCRIPT": TypeMap.SCRIPT,
-  "IMG": TypeMap.IMAGE,
-  "LINK": TypeMap.STYLESHEET,
-  "OBJECT": TypeMap.OBJECT,
-  "EMBED": TypeMap.OBJECT,
-  "IFRAME": TypeMap.SUBDOCUMENT
+  "SCRIPT": "SCRIPT",
+  "IMG": "IMAGE",
+  "LINK": "STYLESHEET",
+  "OBJECT": "OBJECT",
+  "EMBED": "OBJECT",
+  "IFRAME": "SUBDOCUMENT"
 };
 
 // Merely listening to the beforeload event messes up various websites that zoom thumbnail images
