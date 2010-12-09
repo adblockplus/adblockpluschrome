@@ -79,7 +79,7 @@ function nukeSingleElement(elt) {
     pn.removeChild(elt);
 
   // Get rid of OBJECT tag enclosing EMBED tag
-  if(pn && pn.tagName == "EMBED" && pn.parentNode && pn.parentNode.tagName == "OBJECT") {
+  if(pn && pn.localName.toUpperCase() == "EMBED" && pn.parentNode && pn.parentNode.localName.toUpperCase() == "OBJECT") {
     pn.parentNode.removeChild(pn);
   }
 }
@@ -193,7 +193,7 @@ function beforeloadHandler(e) {
       nukeSingleElement(e.target);
   } else {
     var url = relativeToAbsoluteUrl(e.url);
-    chrome.extension.sendRequest({reqtype: "should-block?", url: url, type: TagToType[e.target.tagName], domain: document.domain}, function(response) {
+    chrome.extension.sendRequest({reqtype: "should-block?", url: url, type: TagToType[e.target.localName.toUpperCase()], domain: document.domain}, function(response) {
       if(response.block)
         nukeSingleElement(e.target);
     });
