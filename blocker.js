@@ -562,8 +562,10 @@ function handleYouTubeFlashPlayer(elt) {
 }
 
 // Content scripts are apparently invoked on non-HTML documents, so we have to
-// check for that before doing stuff
-if (document instanceof HTMLDocument) {
+// check for that before doing stuff. |document instanceof HTMLDocument| check
+// will fail on some sites like planet.mozilla.org, have to test the root element.
+if (document.documentElement instanceof HTMLElement)
+{
   // Use a contextmenu handler to save the last element the user right-clicked on.
   // To make things easier, we actually save the DOM event.
   // We have to do this because the contextMenu API only provides a URL, not the actual
