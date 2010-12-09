@@ -671,7 +671,7 @@ if (document instanceof HTMLDocument) {
       var bodyBackground = getComputedStyle(document.body).getPropertyValue("background-image");
       if(bodyBackground && bodyBackground.substr(0, 4) == "url(") {
         bodyBackground = bodyBackground.substr(4, bodyBackground.length-5);
-        chrome.extension.sendRequest({reqtype: "should-block?", type: TypeMap.BACKGROUND, url: bodyBackground}, function(response) {
+        chrome.extension.sendRequest({reqtype: "should-block?", type: "IMAGE", url: bodyBackground}, function(response) {
           if(response.block)
             document.body.style.setProperty("background-image", "none");
         });

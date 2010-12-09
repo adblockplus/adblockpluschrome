@@ -4,11 +4,12 @@
 <script type="text/javascript">
 var abp = {};
 </script>
-<script type="text/javascript" src="adblockplus/filterClasses.js"></script>
-<script type="text/javascript" src="adblockplus/filterStorage.js"></script>
-<script type="text/javascript" src="adblockplus/elemhide.js"></script>
-<script type="text/javascript" src="adblockplus/filterListener.js"></script>
-<script type="text/javascript" src="adblockplus/matcher.js"></script>
+<script type="text/javascript" src="adblockplus/patches.js"></script>
+<script type="text/javascript" src="adblockplus/FilterClasses.jsm"></script>
+<script type="text/javascript" src="adblockplus/FilterStorage.jsm"></script>
+<script type="text/javascript" src="adblockplus/ElemHide.jsm"></script>
+<script type="text/javascript" src="adblockplus/FilterListener.jsm"></script>
+<script type="text/javascript" src="adblockplus/Matcher.jsm"></script>
 <script type="text/javascript" src="filterupdate.js"></script>
 <script type="text/javascript" charset="utf-8">
 
@@ -128,6 +129,17 @@ function setDefaultOptions() {
 // Upgrade options before we do anything else.
 setDefaultOptions(); 
 
+// Fake filter subscriptions for the filters we are adding (temporary hack)
+var fakeSubscriptions = [{disabled: false}];
+
+// Creates filter object from text and sets its subscriptions
+function initFilter(text)
+{
+  var result = Filter.fromText(text);
+  result.subscriptions = fakeSubscriptions;
+  return result;
+}
+
 // Adds a specified filter to the list of user filters
 function addFilter(filterText) {
     var userFilters = localStorage["userFilters"];
@@ -136,7 +148,7 @@ function addFilter(filterText) {
     userFilters = JSON.parse(userFilters);
     userFilters.push(filterText);
     localStorage["userFilters"] = JSON.stringify(userFilters);
-    abp.filterListener.addFilter(Filter.fromText(filterText));
+    FilterListener.triggerFilterObserver("add", [initFilter(filterText)]);
 }
 
 // Enables ad blocking for the specified domain
@@ -303,7 +315,8 @@ function loadFiltersRawText(filename) {
 // Clears the ABP matchers of filters and reloads them.
 // This will also download and cache filter lists as necessary.
 function reloadFilters() {
-    abp.filterListener.clear();
+    defaultMatcher.clear();
+    ElemHide.clear();
     saveOptionsObject("priorityAdServers", {}); // Clear priority ad servers list
     // XXX: Fix for mail.live.com quirk (Hotmail) - doesn't load properly otherwise
     // Hardcoding it here in case adthwart.appspot.com goes over quota again and the
@@ -390,7 +403,7 @@ function reloadFilters() {
             if(f.match(/all.google.domains.+rgb/))
                 continue;
 
-            abp.filterListener.addFilter(Filter.fromText(f));
+            FilterListener.triggerFilterObserver("add", [initFilter(f)]);
         }
     }
     
@@ -399,7 +412,7 @@ function reloadFilters() {
     if(typeof userFilters != "undefined") {
         userFilters = JSON.parse(userFilters);
         for(var i = 0; i < userFilters.length; i++) {
-            abp.filterListener.addFilter(Filter.fromText(userFilters[i]));
+            FilterListener.triggerFilterObserver("add", [initFilter(userFilters[i])]);
         }
     }
 }
@@ -416,6 +429,9 @@ function isThirdParty(url, docDomain) {
     return !(reqDomain.match("\\." + docDomain + "$"));
 }
 
+// Switch FilterListener into batch mode to prevent it from calling ElemHide.apply()
+FilterListener.batchMode = true;
+
 reloadFilters();
 
 // Respond to requests about whether to block particular DOM elements
@@ -428,11 +444,9 @@ chrome.extension.onConnect.addListener(function(port) {
             for(var i = 0; i < numElements; i++) {
                 var url = normalizeURL(msg.urls[i]);
                 var thirdParty = isThirdParty(url, msg.domain);
-                if(whitelistMatcher.matchesAny(url, msg.types[i], msg.domain, thirdParty))
-                    continue;
-                if(blacklistMatcher.matchesAny(url, msg.types[i], msg.domain, thirdParty)) {
+                var match = defaultMatcher.matchesAny(url, msg.types[i], msg.domain, thirdParty);
+                if (match instanceof BlockingFilter)
                     blockList.push(msg.serials[i]);
-                }
             }
             port.postMessage({shouldBlockList: blockList});
         }
@@ -457,29 +471,19 @@ var requestDispatchTable = {
     "should-block?": function(request, sender, sendResponse) {
         var url = normalizeURL(request.url);
         var thirdParty = isThirdParty(url, request.domain);
-        if(whitelistMatcher.matchesAny(url, request.type, request.domain, thirdParty)) {
-            sendResponse({block: false});
-            return;
-        } else if(blacklistMatcher.matchesAny(url, request.type, request.domain, thirdParty)) {
-            sendResponse({block: true});
-        }
-        // If it didn't match either matcher, then it's not an ad
-        sendResponse({block: false});
+        var match = defaultMatcher.matchesAny(url, request.type, request.domain, thirdParty);
+        sendResponse({block: match instanceof BlockingFilter});
     },
     "get-elemhide-selectors": function(request, sender, sendResponse) {
-        var selectors = abp.elemhide.getSelectorsToHide(request.domain);
+        var selectors = ElemHide.getSelectorsForDomain(request.domain, false);
         sendResponse({selectors: selectors});
     },
     "get-initialhide-options": function(request, sender, sendResponse) {
         var selectors = null;
         var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
         var enabled = sender.tab ? !isDomainExcluded(domain) : true;
-        if(enabled) {
-            if(domain in onlyInjectDomainSpecificSelectors) {
-                selectors = abp.elemhide.getDomainSpecificSelectorsToHide(domain);
-            } else
-                selectors = abp.elemhide.getSelectorsToHide(domain);
-        }
+        if(enabled)
+          selectors = ElemHide.getSelectorsForDomain(domain, domain in onlyInjectDomainSpecificSelectors);
         // Merge the filter-list supplied priority ad servers with the hardcoded ones
         var priorityAdServers = getOptionsObject("priorityAdServers");
         var noInitialHide = isDomainInList(domain, "noInitialHideDomains");
