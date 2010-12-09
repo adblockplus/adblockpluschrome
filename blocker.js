@@ -350,7 +350,7 @@ function clickHide_mouseClick(e) {
   }
   if(url) {
     clickHideFilters.push(relativeToAbsoluteUrl(url));
-    selectorList.push(elt.tagName + '[src="' + url + '"]');
+    selectorList.push(elt.localName + '[src="' + url + '"]');
   }
   
   // Show popup
@@ -424,7 +424,7 @@ function getElementURL(elt) {
   // Check children of object nodes for "param" nodes with name="movie" that specify a URL
   // in value attribute
   var url;
-  if(elt.tagName == "OBJECT" && !(url = elt.getAttribute("data"))) {
+  if(elt.localName.toUpperCase() == "OBJECT" && !(url = elt.getAttribute("data"))) {
     // No data attribute, look in PARAM child tags for a URL for the swf file
     var params = elt.querySelectorAll("param[name=\"movie\"]");
     // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
@@ -467,7 +467,7 @@ function nukeElements(parent) {
       // Guaranteed by call to querySelectorAll() above to be one of img, iframe, object, embed
       // and therefore we put it in this list
       elementCache.push(elts[i]);
-      types.push(TagToType[elts[i].tagName]);
+      types.push(TagToType[elts[i].localName.toUpperCase()]);
       urls.push(url);
       serials.push(serial);
       serial++;
