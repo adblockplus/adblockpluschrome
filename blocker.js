@@ -563,7 +563,8 @@ function handleYouTubeFlashPlayer(elt) {
 
 // Content scripts are apparently invoked on non-HTML documents, so we have to
 // check for that before doing stuff. |document instanceof HTMLDocument| check
-// will fail on some sites like planet.mozilla.org, have to test the root element.
+// will fail on some sites like planet.mozilla.org because WebKit creates
+// Document instances for XHTML documents, have to test the root element.
 if (document.documentElement instanceof HTMLElement)
 {
   // Use a contextmenu handler to save the last element the user right-clicked on.
