@@ -132,6 +132,43 @@ function addElementOverlay(elt) {
   return overlay;
 }
 
+// Allow dragging of the clickhide dialog box. This is nice to have for blocking elements
+// inside small iframes that are too narrow to completely contain the clickhide dialog box.
+// This way the user can drag the box over to click one of its buttons.
+// Not a perfect solution but better than nothing.
+var draggedElement = null;
+var dragMouseOffset = null;
+var docUserSelect; // Saves value of document-wide -webkit-user-select
+
+function dragEnd(e) {
+  if(draggedElement) {
+    document.removeEventListener("mouseup", dragEnd, false);
+    document.removeEventListener("mousemove", dragMove, false);
+    document.documentElement.style.setProperty('-webkit-user-select', docUserSelect);
+    draggedElement = null;
+  }
+}
+
+function dragStart(e) {
+  draggedElement = e.target;
+  var pos = getAbsolutePosition(e.target);
+  dragMouseOffset = [e.pageX - pos[0], e.pageY - pos[1]];
+  document.addEventListener("mouseup", dragEnd, false);
+  document.addEventListener("mousemove", dragMove, false);
+  // Make document un-highlightable during drag. Otherwise, if user drags too fast and 
+  // the mouse pointer leaves the bounds of the dialog box, text selection on the page 
+  // will be triggered, and that is ugly
+  docUserSelect = document.documentElement.style.getPropertyCSSValue('-webkit-user-select');
+  document.documentElement.style.setProperty('-webkit-user-select', 'none');
+}
+
+function dragMove(e) {
+  if(draggedElement) {
+    draggedElement.style.left = (e.pageX - dragMouseOffset[0]) + "px";
+    draggedElement.style.top = (e.pageY - dragMouseOffset[1]) + "px";
+  }
+}
+
 // Show dialog asking user whether she wants to add the proposed filters derived
 // from selected page element
 function clickHide_showDialog(left, top, filters) {
@@ -197,6 +234,8 @@ function clickHide_showDialog(left, top, filters) {
   clickHideFiltersDialog.style.left = "50px";
   clickHideFiltersDialog.style.top = "50px";
   clickHideFiltersDialog.style.visibility = "visible";
+  
+  clickHideFiltersDialog.addEventListener('mousedown', dragStart, false);
 }
 
 // Turn on the choose element to create filter thing
