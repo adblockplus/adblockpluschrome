@@ -27,9 +27,11 @@ var clickHideActive = false;
 // List of URLs currently being downloaded; used to prevent multiple requests
 // for the same URL from actually causing multiple downloads
 var downloading = {};
-// Hopefully temporary list of ad servers that we can use simple string
+// For filters of thet form ||foo.com^$third-party, we can use simple string
 // matching for instead of querying the blocking engine (see initial-block.js)
-var TEMP_adservers = {};
+// which can be done synchronously, in time to actually block loading the resource
+var priorityAdServers = {};
+var priorityAdServersRegExp = /\|\|([\w\.]+)\^\$third-party/i;
 
 // Extracts a domain name from a URL
 function extractDomainFromURL(url) {
@@ -136,7 +138,16 @@ var fakeSubscriptions = [{disabled: false}];
 function initFilter(text)
 {
   var result = Filter.fromText(text);
-  result.subscriptions = fakeSubscriptions;
+  var server;
+  if(result)
+  {
+    result.subscriptions = fakeSubscriptions;
+    // Filters of the form ||foo.com^$third-party can be handled synchronously
+    // in initial-block.js:beforeloadHandler() as a special case. This allows
+    // resources from those servers to be actually blocked from downloading.
+    if(server = text.match(priorityAdServersRegExp))
+      priorityAdServers[server[1]] = true;
+  }
   return result;
 }
 
@@ -317,7 +328,7 @@ function loadFiltersRawText(filename) {
 function reloadFilters() {
     defaultMatcher.clear();
     ElemHide.clear();
-    saveOptionsObject("priorityAdServers", {}); // Clear priority ad servers list
+    priorityAdServers = {};
     // XXX: Fix for mail.live.com quirk (Hotmail) - doesn't load properly otherwise
     // Hardcoding it here in case adthwart.appspot.com goes over quota again and the
     // !NI filter is not available
@@ -381,13 +392,8 @@ function reloadFilters() {
                 case '[':
                     continue;
                 case '!':
-                    // Allow for adding to TEMP_adservers
-                    var x;
-                    if(x = f.match(/^!AS (.+)$/)) {
-                        var tmp = getOptionsObject("priorityAdServers");
-                        tmp[x[1]] = true;
-                        saveOptionsObject("priorityAdServers", tmp);
-                    } else if(x = f.match(/^!NI (.+)$/)) {
+                    // Allow specifying domains that should not use the initialhide stylesheet
+                    if(x = f.match(/^!NI (.+)$/)) {
                         // No Inject is now No Initialhide
                         var tmp = getOptionsObject("noInitialHideDomains");
                         tmp[x[1]] = true;
@@ -485,15 +491,8 @@ var requestDispatchTable = {
         if(enabled)
           selectors = ElemHide.getSelectorsForDomain(domain, domain in onlyInjectDomainSpecificSelectors);
         // Merge the filter-list supplied priority ad servers with the hardcoded ones
-        var priorityAdServers = getOptionsObject("priorityAdServers");
         var noInitialHide = isDomainInList(domain, "noInitialHideDomains");
-        var allPriorityAdServers = {};
-        for(var i in priorityAdServers)
-            allPriorityAdServers[i] = true;
-        for(var i in TEMP_adservers)
-            allPriorityAdServers[i] = true;
-        sendResponse({selectors: selectors, enabled: enabled, priorityAdServers: allPriorityAdServers, noInitialHide: noInitialHide});
-        delete allPriorityAdServers;
+        sendResponse({selectors: selectors, enabled: enabled, priorityAdServers: priorityAdServers, noInitialHide: noInitialHide});
     },
     "get-localstorage-option": function(request, sender, sendResponse) {
         sendResponse({value: localStorage[request.name]});
