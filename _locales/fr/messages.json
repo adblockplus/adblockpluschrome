@@ -106,7 +106,7 @@
       }
   },
   "disabled_for_these_domains": {
-        "message": "Adblock Plus est inactivé pour les domaines ci-dessous. Vous pouvez ajouter une domaine soit par l'icon Adblock Plus dans la barre d'adresse ou en tapant la domaine (pas URL) dans la zone et cliquant sur le bouton \"Ajouter\"."
+        "message": "Adblock Plus est inactivé pour les domaines ci-dessous. Vous pouvez ajouter un domaine soit par l'icon Adblock Plus dans la barre d'adresse ou en tapant le domaine (pas l'URL) dans la zone et cliquant sur le bouton \"Ajouter\"."
     },
   "found_a_bug": {
         "message": "Avez-vous trouvé un bug ou une mauvaise traduction dans Adblock Plus&nbsp;? S'il-vous-plaît, <a href='$url$'>enregistrez-le ici</a>.",
