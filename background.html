@@ -239,6 +239,8 @@ function toggleDomainExclusion(tabId) {
 
 // Adds or removes page action icon according to options.
 function refreshIconAndContextMenu(tab) {
+    // The tab could have been closed by the time this function is called
+    if(!tab) return;
     var domain = extractDomainFromURL(tab.url);
     var excluded = isDomainExcluded(domain);
     iconFilename = excluded ? "icons/abp-16-whitelisted.png" : "icons/abp-16.png";
