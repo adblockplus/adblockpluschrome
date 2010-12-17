@@ -31,7 +31,7 @@ var downloading = {};
 // matching for instead of querying the blocking engine (see initial-block.js)
 // which can be done synchronously, in time to actually block loading the resource
 var priorityAdServers = {};
-var priorityAdServersRegExp = /\|\|([\w\.]+)\^\$third-party/i;
+var priorityAdServersRegExp = /\|\|([^@\*\/]+)\^\$third-party$/i;
 
 // Extracts a domain name from a URL
 function extractDomainFromURL(url) {
@@ -145,8 +145,8 @@ function initFilter(text)
     // Filters of the form ||foo.com^$third-party can be handled synchronously
     // in initial-block.js:beforeloadHandler() as a special case. This allows
     // resources from those servers to be actually blocked from downloading.
-    if(server = text.match(priorityAdServersRegExp))
-      priorityAdServers[server[1]] = true;
+    if (priorityAdServersRegExp.test(text))
+      priorityAdServers[RegExp.$1] = true;
   }
   return result;
 }
