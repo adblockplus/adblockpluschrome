@@ -93,7 +93,6 @@ var defaultFilterListsByLocale = {
 // But, in case that is garbled in the filter list, clamp it to a predefined range
 var DEFAULT_EXPIRE_TIME =  3 * 86400 * 1000;
 var MIN_EXPIRE_TIME = 1 * 86400 * 1000;
-var ADTHWART_MIN_EXPIRE_TIME = 4 * 3600 * 1000;
 var MAX_EXPIRE_TIME = 14 * 86400 * 1000;
 
 // Adds entries in filterFiles for any user filters. Other functions will
@@ -143,14 +142,8 @@ function FilterListFetcher(nameOrUrl, callback) {
           unitLength = 3600; // in seconds
         expires = expires ? parseInt(expires[1]) * unitLength * 1000 : DEFAULT_EXPIRE_TIME; // in milliseconds
 
-        // Min expire time is a day unless it's the AdThwart server. This is a really weak
-        // authentication mechanism but the worst a lying server could do is
-        // cause a DDoS on itself. Now that is limited as well.
-        var myMinExpireTime = MIN_EXPIRE_TIME;
-        if(this.getResponseHeader("X-AdThwart") != "")
-          myMinExpireTime = ADTHWART_MIN_EXPIRE_TIME; // 4 hours
-        expires = expires < myMinExpireTime ? myMinExpireTime : expires;
-        expires = expires > MAX_EXPIRE_TIME ? MAX_EXPIRE_TIME : expires;
+        expires = Math.max(expires, MIN_EXPIRE_TIME);
+        expires = Math.min(expires, MAX_EXPIRE_TIME);
         // If the list we just downloaded is expired, mark its lastUpdated time as now or we will
         // think the list is too old on every update check and keep trying to download it, which would pound
         // that server, which wouldn't be very nice. Also, if the list claims it was updated in the
