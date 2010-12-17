@@ -32,11 +32,11 @@ var TagToType = {
   "IFRAME": "SUBDOCUMENT"
 };
 
-// Merely listening to the beforeload event messes up various websites that zoom thumbnail images
-// and load replace them with full size images (e.g. Highslide, t.sina.com.cn. issue 166). This
-// could be a Chrome bug, or else people depending on behavior that is not guaranteed by standards.
-// So for these cases we avoid listening to beforeload and instead depend on handleNodeInserted()
-// in blocker.js to get rid of ads by element src URL.
+// Merely listening to the beforeload event messes up various websites (see
+// http://code.google.com/p/chromium/issues/detail?id=56204#c10 and
+// https://bugs.webkit.org/show_bug.cgi?id=45586). So for these cases we avoid
+// listening to beforeload and instead depend on handleNodeInserted() in
+// blocker.js to get rid of ads by element src URL.
 // Unfortunately we can't do this with filter rules because we would need to query the backend to
 // check our domain, which cannot respond in time due to the lack of synchronous message passing.
 var BEFORELOAD_MALFUNCTION_DOMAINS = {"t.sina.com.cn": true, "prazsketramvaje.cz": true, "xnachat.com": true, "tuenti.com": true};
