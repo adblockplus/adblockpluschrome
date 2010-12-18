@@ -25,19 +25,18 @@
 
 // List of suggested filter lists
 var filterFiles = {
-  "easylist": "http://easylist.adblockplus.org/easylist.txt", // "easylist.txt",
-  "germany": "http://easylist.adblockplus.org/easylistgermany.txt", // "easylistgermany.txt",
+  "easylist": "https://easylist-downloads.adblockplus.org/easylist.txt", // "easylist.txt",
+  "germany": "https://easylist-downloads.adblockplus.org/easylistgermany.txt", // "easylistgermany.txt",
   "fanboy_es": "http://www.fanboy.co.nz/adblock/fanboy-adblocklist-esp.txt",
-  "france": "http://adblockplus.mozdev.org/easylist/liste_fr+easylist.txt", // "liste_fr.txt",
+  "france": "http://lian.info.tm/liste_fr.txt", // "liste_fr.txt",
   "china": "http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", // "adblock.txt",
   "russia": "http://ruadlist.googlecode.com/svn/trunk/advblock.txt",
   "korea": "http://abp-corset.googlecode.com/hg/corset.txt", // "corset.txt",
   "romania": "http://www.zoso.ro/pages/rolist.txt", // "menetzrolist.txt",
   "italy": "http://mozilla.gfsolone.com/filtri.txt", // "filtri.txt",
-  "vietnam": "http://adblockplus-vietnam.googlecode.com/svn/trunk/abpvn.txt",
   "poland": "http://www.niecko.pl/adblock/adblock.txt", // PLgeneral
   "hungary": "http://pete.teamlupus.hu/hufilter.txt", // hufilter
-  "extras": "http://adthwart.qux.us/filters/recommended.txt"
+  "extras": "https://easylist-downloads.adblockplus.org/chrome_supplement.txt"
 };
 
 var filterListTitles = {
@@ -50,7 +49,6 @@ var filterListTitles = {
   "korea": '<a href="http://corset.tistory.com">Corset</a> (한국어)',
   "romania": '<a href="http://www.picpoc.ro/">ROList</a> (Românesc)',
   "italy": '<a href="http://gfsolone.com/realizzazioni/altro/abp-x-files">X Files</a> (Italiano)',
-  "vietnam": 'Việt Nam list',
   "poland": 'PLgeneral (Polski)',
   "hungary": 'hufilter (Magyar)',
   "extras": '<a href="' + filterFiles["extras"] + '">Recommended filters for Google Chrome</a>'
@@ -64,7 +62,6 @@ var filterListAuthors = {
   "korea": 'maybee',
   "romania": 'MenetZ',
   "italy": 'Gioxx',
-  "vietnam": 'NGUYỄN Mạnh Hùng',
   "poland": 'Krzysztof Niecko',
   "hungary": 'Szabó Péter'
 };
