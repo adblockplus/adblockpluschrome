@@ -4,6 +4,7 @@
   "minimum_chrome_version": "6.0",
   "description": "__MSG_description__",
   "default_locale": "en",
+  "update_url": "https://adblockplus.org/devbuilds/adblockpluschrome/updates.xml",
   "page_action": {
     "default icon": "icons/abp-16.png",
     "default title": "Adblock Plus",
