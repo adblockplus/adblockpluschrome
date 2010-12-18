@@ -289,7 +289,7 @@ function loadFiltersRawText(filename) {
                 // Check whether it's time to redownload the list.
                 // If list specifies its expiry time, use that. Otherwise default to 3 days.
                 var now = new Date().getTime();
-                var expires = list.expires ? list.expires : DEFAULT_EXPIRE_TIME;
+                var expires = list.expires ? list.expires : DEFAULT_EXPIRATION_INTERVAL * MILLISECONDS_IN_SECOND;
                 // If the list is expired and we aren't currently downloading it already, redownload it.
                 // We may have saved a null for lastUpdated due to a bug, so replace that with now
                 if(!list.lastUpdated) {

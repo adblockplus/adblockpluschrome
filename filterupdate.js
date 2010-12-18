@@ -91,9 +91,13 @@ var defaultFilterListsByLocale = {
 
 // Default filter list expiration time is 3 days (specified in milliseconds)
 // But, in case that is garbled in the filter list, clamp it to a predefined range
-var DEFAULT_EXPIRE_TIME =  3 * 86400 * 1000;
-var MIN_EXPIRE_TIME = 1 * 86400 * 1000;
-var MAX_EXPIRE_TIME = 14 * 86400 * 1000;
+const MILLISECONDS_IN_SECOND = 1000;
+const SECONDS_IN_MINUTE = 60;
+const SECONDS_IN_HOUR = 60 * SECONDS_IN_MINUTE;
+const SECONDS_IN_DAY = 24 * SECONDS_IN_HOUR;
+const MIN_EXPIRATION_INTERVAL = 1 * SECONDS_IN_DAY;
+const DEFAULT_EXPIRATION_INTERVAL =  3 * SECONDS_IN_DAY;
+const MAX_EXPIRATION_INTERVAL = 14 * SECONDS_IN_DAY;
 
 // Adds entries in filterFiles for any user filters. Other functions will
 // reference filterFiles directly, even though global variables are evil.
@@ -127,31 +131,24 @@ function FilterListFetcher(nameOrUrl, callback) {
       return;
     if(this.status == 200) {
       // Check if it's actually a filter set and if so, save it along with its expiry information
-      if(this.responseText.match(/\[Adblock/)) {
-        var lastUpdated = this.responseText.match(/Last modified:\s+(.+)/i);
-        var now = (new Date()).getTime();
-        lastUpdated = lastUpdated ? Date.parse(lastUpdated[1]) : now;
-        var expires = this.responseText.match(/Expires:\s+(\d+)\s+(\w+)/i);
-        var unit = "day";
-        var unitLength = 86400; // Default to units of days
-        if(!expires)
-          expires = ["", "3", "days"]; // Default to 3 days if Expires field is unparseable
-        if(expires.length > 2)
-          unit = expires[2]; // Is a unit specified? If so, grab it
-        if(unit.match(/hour/))
-          unitLength = 3600; // in seconds
-        expires = expires ? parseInt(expires[1]) * unitLength * 1000 : DEFAULT_EXPIRE_TIME; // in milliseconds
+      var result = this.responseText;
+      if (result.match(/\[Adblock/))
+      {
+        var expires = DEFAULT_EXPIRATION_INTERVAL;
+        if (/\bExpires\s*(?::|after)\s*(\d+)\s*(h)?/i.test(result))
+        {
+          var interval = parseInt(RegExp.$1);
+          if (RegExp.$2)
+            interval *= SECONDS_IN_HOUR;
+          else
+            interval *= SECONDS_IN_DAY;
 
-        expires = Math.max(expires, MIN_EXPIRE_TIME);
-        expires = Math.min(expires, MAX_EXPIRE_TIME);
-        // If the list we just downloaded is expired, mark its lastUpdated time as now or we will
-        // think the list is too old on every update check and keep trying to download it, which would pound
-        // that server, which wouldn't be very nice. Also, if the list claims it was updated in the
-        // future, don't believe it.
-        if((now - lastUpdated) > expires || lastUpdated > now)
-          lastUpdated = now;
-        
-        localStorage[fetcher.url] = JSON.stringify({lastDownloaded: now, lastUpdated: lastUpdated, expires: expires, text: this.responseText});
+          if (interval > 0)
+            expires = interval;
+        }
+        expires *= MILLISECONDS_IN_SECOND;
+
+        localStorage[fetcher.url] = JSON.stringify({lastDownloaded: Date.now(), lastUpdated: Date.now(), expires: expires, text: result});
         fetcher.callback(fetcher);
         return;
       } else {
@@ -161,7 +158,7 @@ function FilterListFetcher(nameOrUrl, callback) {
       }
     } else if(this.status == 404) {
       fetcher.error = chrome.i18n.getMessage("not_found_on_server");
-      localStorage[fetcher.url] = JSON.stringify({lastUpdated: (new Date()).getTime(), error: fetcher.error});
+      localStorage[fetcher.url] = JSON.stringify({lastUpdated: Date.now(), error: fetcher.error});
       fetcher.callback(fetcher);
       return;
     } else if(this.status == 503) {
