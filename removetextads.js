@@ -48,7 +48,7 @@ function removeTextAdFromElement(elt) {
     // EchoTopic and ResultLinks
     case 'NOBR':
       var fc = elt.firstChild;
-      if(fc && fc.localName != '#text' && (fc.className == 'tfTextLink' || fc.id.indexOf('RLLINK') >= 0)) {
+      if(fc && fc.nodeName != '#text' && (fc.className == 'tfTextLink' || fc.id.indexOf('RLLINK') >= 0)) {
         keepNode = fc.firstChild;
       }
       break;
