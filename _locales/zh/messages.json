@@ -2,19 +2,6 @@
     "description": {
         "message": "使用 Firefox AdBlock Plus 的廣告過濾引擎。告別廣告，開心瀏覽!"
     },
-    "month_names": {
-        "message": "[\"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\", \"10\", \"11\", \"12\"]",
-        "description": "Month short names."
-    },
-    "date_format": {    
-        "message": "$year$年$month$月$day$日",
-        "description": "e.g. Apr 1, 2011",
-        "placeholders": {
-            "day": { "content" : "$1" },
-            "month": { "content" : "$2" },
-            "year": { "content" : "$3" }
-        }
-    },
     "options": {
         "message": "Adblock Plus 選項"
     },
@@ -28,6 +15,13 @@
         "placeholders": {
             "time": { "content" : "$1" },
             "date": { "content" : "$2" }
+        }
+    },
+    "last_updated_at_today": {
+        "message": "最近更新於 $time$ 今日",
+        "description": "e.g. Last updated at 3:00pm today",
+        "placeholders": {
+            "time": { "content" : "$1" }
         }
     },
     "not_a_filter_list": {
@@ -45,10 +39,6 @@
             "title": { "content" : "$1" },
             "author": { "content" : "$2" }
         }
-    },
-    "today": {
-        "message": "今日",
-        "description": "Word for 'today', as in 'Last updated today'"
     },
     "add_your_own_filters": {
         "message": "黑名單"

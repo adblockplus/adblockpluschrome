@@ -1,4 +1,4 @@
-﻿{
+{
    "add": {
       "description": "This is the label for the 'Add' buttons.",
       "message": "Dodaj"
@@ -42,21 +42,6 @@
    },
    "clickhide_instructions": {
       "message": "Po zamknięciu tego okna, kliknij lewym (lub prawym) przyciskiem myszy w niechciany element na stronie."
-   },
-   "date_format": {
-      "description": "e.g. Apr 1, 2011",
-      "message": "$day$ $month$. $year$ roku",
-      "placeholders": {
-         "day": {
-            "content": "$1"
-         },
-         "month": {
-            "content": "$2"
-         },
-         "year": {
-            "content": "$3"
-         }
-      }
    },
    "delete": {
       "description": "Word for 'delete'.",
@@ -137,9 +122,12 @@
          }
       }
    },
-   "month_names": {
-      "description": "Month short names.",
-      "message": "[\"Sty\", \"Lu\", \"Mar\", \"Kwi\", \"Maj\", \"Cze\", \"Lip\", \"Sie\", \"Wrz\", \"Pa\", \"Li\", \"Gr\"]"
+   "last_updated_at_today": {
+      "message": "Ostatnia aktualizacja: dzisiaj o $time$",
+      "description": "e.g. Last updated at 3:00pm today",
+      "placeholders": {
+         "time": { "content" : "$1" }
+      }
    },
    "new_filters_added": {
       "message": "Dodano nowe filtry; Zajrzyj do <a id='options_url' target='_blank'>Opcji</a>."
@@ -164,10 +152,6 @@
    },
    "show_icon": {
       "message": "Pokazuj ikonę na pasku adresu"
-   },
-   "today": {
-      "description": "Word for 'today', as in 'Last updated today'",
-      "message": "dzisiaj"
    },
    "update_now": {
       "message": "Zaktualizuj"

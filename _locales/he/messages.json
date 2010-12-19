@@ -2,19 +2,6 @@
     "description": {
         "message": "תוסף שחוסם פרסומות באמצעות המנגנון של המסנן AdBlock Plus ל־Firefox. נשקו את הפרסומות לשלום!"
     },
-    "month_names": {
-        "message": "[\"ינו\", \"פבר\", \"מרץ\", \"אפר\", \"מאי\", \"יונ\", \"יול\", \"אוג\", \"ספט\", \"אוק\", \"נוב\", \"דצמ\"]",
-        "description": "Month short names."
-    },
-    "date_format": {    
-        "message": "ב־ $day$ ב$month$, $year$",
-        "description": "e.g. Apr 1, 2011",
-        "placeholders": {
-            "day": { "content" : "$1" },
-            "month": { "content" : "$2" },
-            "year": { "content" : "$3" }
-        }
-    },
     "options": {
         "message": "אפשרויות Adblock Plus"
     },
@@ -28,6 +15,13 @@
         "placeholders": {
             "time": { "content" : "$1" },
             "date": { "content" : "$2" }
+        }
+    },
+    "last_updated_at_today": {
+        "message": "עודכנה לאחרונה בשעה $time$ ב־היום",
+        "description": "e.g. Last updated at 3:00pm today",
+        "placeholders": {
+            "time": { "content" : "$1" }
         }
     },
     "not_a_filter_list": {
@@ -45,10 +39,6 @@
             "title": { "content" : "$1" },
             "author": { "content" : "$2" }
         }
-    },
-    "today": {
-        "message": "היום",
-        "description": "Word for 'today', as in 'Last updated today'"
     },
     "add_your_own_filters": {
         "message": "הוספת מסננים משלך"
