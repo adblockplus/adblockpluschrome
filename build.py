@@ -20,8 +20,15 @@ Options:
 def removeUpdateURL(fileName, fileData):
   if fileName == 'manifest.json':
     return re.sub(r'\s*"update_url"\s*:\s*"[^"]*",', '', fileData)
-  else:
-    return fileData
+  return fileData
+
+def addBuildNumber(fileName, fileData):
+  if fileName == 'manifest.json':
+    revision, dummy = subprocess.Popen(['hg', 'id', '-n'], stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
+    revision = re.sub(r'\D', '', revision)
+    if len(revision) > 0:
+      return re.sub(r'("version"\s*:\s*"[^"]*)(",)', r'\1.%s\2' % revision, fileData)
+  return fileData
 
 def addToZip(zip, filters, dir, baseName):
   for file in os.listdir(dir):
@@ -96,6 +103,8 @@ if __name__ == '__main__':
   filters = []
   if isRelease:
     filters.append(removeUpdateURL)
+  else:
+    filters.append(addBuildNumber)
 
   zipdata = packDirectory(inputdir, filters)
   signature = None
