@@ -26,7 +26,7 @@
 // in the beforeload handler.
 function removeTextAdFromElement(elt) {
   var keepNode;
-  switch(elt.nodeName) {
+  switch(elt.localName.toUpperCase()) {
     // AdBrite
     case 'ISPAN':
       if(elt.id.indexOf('AdBriteInlineAd_') >= 0) {
@@ -40,7 +40,7 @@ function removeTextAdFromElement(elt) {
       if(!fc) break;
       if(elt.className == 'IL_AD') {
         keepNode = fc;
-      } else if(fc.nodeName == 'A' && fc.className.indexOf('lx-link') >= 0) {
+      } else if(fc.localName.toUpperCase() == 'A' && fc.className.indexOf('lx-link') >= 0) {
         keepNode = fc.firstChild;
       }
       break;
@@ -48,7 +48,7 @@ function removeTextAdFromElement(elt) {
     // EchoTopic and ResultLinks
     case 'NOBR':
       var fc = elt.firstChild;
-      if(fc && fc.nodeName != '#text' && (fc.className == 'tfTextLink' || fc.id.indexOf('RLLINK') >= 0)) {
+      if(fc && fc.localName != '#text' && (fc.className == 'tfTextLink' || fc.id.indexOf('RLLINK') >= 0)) {
         keepNode = fc.firstChild;
       }
       break;
