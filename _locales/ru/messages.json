@@ -9,6 +9,21 @@
        "message": "Список фильтров",
        "description": "This is a tab heading."
    },
+  "last_updated_at": {
+    "message": "Последнее обновление: $date$ в $time$",
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+    "placeholders": {
+      "time": { "content" : "$1" },
+      "date": { "content" : "$2" }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Последнее обновление: сегодня в $time$",
+    "description": "e.g. Last updated at 3:00pm today",
+    "placeholders": {
+      "time": { "content" : "$1" }
+    }
+  },
    "add_your_own_filters": {
        "message": "Добавить свои фильтры"
    },

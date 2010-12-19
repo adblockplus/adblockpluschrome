@@ -43,21 +43,6 @@
    "clickhide_instructions": {
       "message": "Nachdem Sie dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
    },
-   "date_format": {
-      "description": "z.B. 1.Apr 2011",
-      "message": "$day$.$month$ $year$",
-      "placeholders": {
-         "day": {
-            "content": "$1"
-         },
-         "month": {
-            "content": "$2"
-         },
-         "year": {
-            "content": "$3"
-         }
-      }
-   },
    "delete": {
       "description": "Wort für 'löschen'.",
       "message": "löschen"
@@ -137,9 +122,12 @@
          }
       }
    },
-   "month_names": {
-      "description": "Monat - Abkürzungen.",
-      "message": "[\"Jan\", \"Feb\", \"Mär\", \"Apr\", \"Mai\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Okt\", \"Nov\", \"Dez\"]"
+   "last_updated_at_today": {
+      "description": "e.g. Last updated at 3:00pm today",
+      "message": "Zuletzt aktualisiert: heute um $time$",
+      "placeholders": {
+         "time": { "content" : "$1" }
+      }
    },
    "new_filters_added": {
       "message": "Neue Filter hinzugefügt; klicken Sie auf <a id='options_url' target='_blank'>Optionen</a> um sie zu verwalten."
@@ -167,10 +155,6 @@
    },
    "show_icon": {
       "message": "Zeige Icon in der Adressleiste"
-   },
-   "today": {
-      "description": "Wort für 'Heute' z.B. Zuletzt aktualisiert: Heute um 12:51",
-      "message": "Heute"
    },
    "update_now": {
       "message": "Jetzt updaten"

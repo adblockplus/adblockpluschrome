@@ -2,19 +2,6 @@
     "description": {
         "message": "Blockerar reklam med hjälp av Firefox AdBlock Plus filtreringsmotor. Säg adjö till reklamen och surfa i fred!"
     },
-    "month_names": {
-        "message": "[\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"Maj\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Okt\", \"Nov\", \"Dec\"]",
-        "description": "Month short names."
-    },
-    "date_format": {    
-        "message": "den $day$ $month$ $year$",
-        "description": "e.g. Apr 1, 2011",
-        "placeholders": {
-            "day": { "content" : "$1" },
-            "month": { "content" : "$2" },
-            "year": { "content" : "$3" }
-        }
-    },
     "options": {
         "message": "Adblock Plus Alternativ"
     },
@@ -23,11 +10,18 @@
         "description": "This is a tab heading."
     },
     "last_updated_at": {
-        "message": "Senast uppdaterad $date$ $time$",
+        "message": "Senast uppdaterad den $date$ $time$",
         "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
         "placeholders": {
             "time": { "content" : "$1" },
             "date": { "content" : "$2" }
+        }
+    },
+    "last_updated_at_today": {
+        "message": "Senast uppdaterad i dag $time$",
+        "description": "e.g. Last updated at 3:00pm today",
+        "placeholders": {
+            "time": { "content" : "$1" }
         }
     },
     "not_a_filter_list": {
@@ -45,10 +39,6 @@
             "title": { "content" : "$1" },
             "author": { "content" : "$2" }
         }
-    },
-    "today": {
-        "message": "i dag",
-        "description": "Word for 'today', as in 'Last updated today'"
     },
     "add_your_own_filters": {
         "message": "Lägg till dina egna filter"

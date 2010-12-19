@@ -2,19 +2,6 @@
     "description": {
         "message": "파이어폭스의 Adblock Plus 필터를 이용해 광고를 차단합니다. 광고와 작별 인사를, 브라우저에는 쾌적함을!"
     },
-    "month_names": {
-        "message": "[\"1월\", \"2월\", \"3월\", \"4월\", \"5월\", \"6월\", \"7월\", \"8월\", \"9월\", \"10월\", \"11월\", \"12월\"]",
-        "description": "Month short names."
-    },
-    "date_format": {    
-        "message": "$year$년 $month$ $day$일",
-        "description": "e.g. Apr 1, 2011",
-        "placeholders": {
-            "day": { "content" : "$1" },
-            "month": { "content" : "$2" },
-            "year": { "content" : "$3" }
-        }
-    },
     "options": {
         "message": "Adblock Plus - 애드블록 플러스 옵션"
     },
@@ -28,6 +15,13 @@
         "placeholders": {
             "time": { "content" : "$1" },
             "date": { "content" : "$2" }
+        }
+    },
+    "last_updated_at_today": {
+        "message": "오늘 $time$에 마지막으로 업데이트됨",
+        "description": "e.g. Last updated at 3:00pm today",
+        "placeholders": {
+            "time": { "content" : "$1" }
         }
     },
     "not_a_filter_list": {
@@ -45,10 +39,6 @@
             "title": { "content" : "$1" },
             "author": { "content" : "$2" }
         }
-    },
-    "today": {
-        "message": "오늘",
-        "description": "Word for 'today', as in 'Last updated today'"
     },
     "add_your_own_filters": {
         "message": "사용자 필터"

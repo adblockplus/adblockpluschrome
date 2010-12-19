@@ -1,19 +1,6 @@
-﻿{
+{
     "description": {
         "message": "Estä mainokset käyttäen Firefox AdBlock Plussan suodatinmenetelmää. Hyvästele mainokset ja jatka surffailua rauhassa!"
-    },
-    "month_names": {
-        "message": "[\"Tammi\", \"Helmi\", \"Maalis\", \"Huhti\", \"Touko\", \"Kesä\", \"Heinä\", \"Elo\", \"Syys\", \"Loka\", \"Marras\", \"Joulu\"]",
-        "description": "Month short names."
-    },
-    "date_format": {    
-        "message": "$day$ $month$ $year$",
-        "description": "e.g. Apr 1, 2011",
-        "placeholders": {
-            "day": { "content" : "$1" },
-            "month": { "content" : "$2" },
-            "year": { "content" : "$3" }
-        }
     },
     "options": {
         "message": "Adblock Plus asetukset"
@@ -28,6 +15,13 @@
         "placeholders": {
             "time": { "content" : "$1" },
             "date": { "content" : "$2" }
+        }
+    },
+    "last_updated_at_today": {
+        "message": "Viimeksi päivitetty $time$ tänään",
+        "description": "e.g. Last updated at 3:00pm today",
+        "placeholders": {
+            "time": { "content" : "$1" }
         }
     },
     "not_a_filter_list": {
@@ -45,10 +39,6 @@
             "title": { "content" : "$1" },
             "author": { "content" : "$2" }
         }
-    },
-    "today": {
-        "message": "tänään",
-        "description": "Word for 'today', as in 'Last updated today'"
     },
     "add_your_own_filters": {
         "message": "Lisää omia suodattimia"

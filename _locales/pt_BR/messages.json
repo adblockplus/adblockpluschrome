@@ -2,19 +2,6 @@
   "description": {
     "message": "Bloqueador de propagandas usando o mecanismo de filtragem do AdBlock Plus para o Firefox. Dê um beijo de despedida nelas e navegue em paz!"
   },
-  "month_names": {
-    "message": "[\"Jan\", \"Fev\", \"Mar\", \"Abr\", \"Mai\", \"Jun\", \"Jul\", \"Ago\", \"Set\", \"Out\", \"Nov\", \"Dez\"]",
-    "description": "Abreviação de cada nome do mês."
-  },
-  "date_format": {  
-    "message": "em $day$ de $month$, $year$",
-    "description": "ex: em 1 de Abr, 2011",
-    "placeholders": {
-        "day": { "content" : "$1" },
-          "month": { "content" : "$2" },
-        "year": { "content" : "$3" }
-    }
-  },
     "options": {
         "message": "Opções do Adblock Plus"
     },
@@ -23,11 +10,18 @@
         "description": "Essa é uma aba do menu."
     },
   "last_updated_at": {
-    "message": "Última atualização às $time$ $date$",
+    "message": "Última atualização às $time$ em $date$",
     "description": "ex: Última atualização às 3:00pm, em 1 de Abr, 2011",
     "placeholders": {
         "time": { "content" : "$1" },
         "date": { "content" : "$2" }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Última atualização às $time$ hoje",
+    "description": "e.g. Last updated at 3:00pm today",
+    "placeholders": {
+      "time": { "content" : "$1" }
     }
   },
   "not_a_filter_list": {
@@ -45,10 +39,6 @@
         "title": { "content" : "$1" },
         "author": { "content" : "$2" }
     }
-  },
-  "today": {
-      "message": "hoje",
-      "description": "Palavra para expressar 'hoje', como em 'Última atualização hoje'"
   },
     "add_your_own_filters": {
         "message": "Adicione seus próprios filtros"

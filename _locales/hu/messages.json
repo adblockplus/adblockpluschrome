@@ -1,19 +1,6 @@
-﻿{
+{
   "description": {
     "message": "Blokkolja a reklámokat a Firefox AdBlock Plus szűrő segítségével. Mondj búcsút a reklámoknak és böngéssz békében!"
-  },
-  "month_names": {
-    "message": "[\"Jan\", \"Feb\", \"Már\", \"Ápr\", \"Máj\", \"Jún\", \"Júl\", \"Aug\", \"Szep\", \"Okt\", \"Nov\", \"Dec\"]",
-    "description": "Month short names."
-  },
-  "date_format": {  
-    "message": "$year$. $month$ $day$.",
-    "description": "Date format, including month, day and year.",
-    "placeholders": {
-        "day": { "content" : "$1" },
-          "month": { "content" : "$2" },
-        "year": { "content" : "$3" }
-    }
   },
     "options": {
         "message": "Adblock Plus Beállításai"
@@ -30,6 +17,13 @@
         "date": { "content" : "$2" }
     }
   },
+  "last_updated_at_today": {
+    "message": "Utoljára ekkor lett frissítve: $time$ ma",
+    "description": "e.g. Last updated at 3:00pm today",
+    "placeholders": {
+      "time": { "content" : "$1" }
+    }
+  },
   "filter_list_desc": {
     "message": "$title$ a $author$ -tól",
     "description": "pl. FooList a Mr. Foo -tól",
@@ -37,10 +31,6 @@
         "title": { "content" : "$1" },
         "author": { "content" : "$2" }
     }
-  },
-  "today": {
-      "message": "ma",
-      "description": "Word for 'today', as in 'Last updated today'"
   },
     "add_your_own_filters": {
         "message": "Add hozzá a saját szűrőidet"

@@ -57,14 +57,14 @@ function i18n_time(h, m) {
 
 // Provides a more readable string of the current date and time
 function i18n_timeDateStrings(when) {
-  var monthNames = JSON.parse(chrome.i18n.getMessage("month_names"));
   var d = new Date(when);
-  var timeString = i18n_time(d.getHours(), d.getMinutes());
+  var timeString = d.toLocaleTimeString();
+
   var now = new Date();
-  if(d.getDate() == now.getDate() && d.getMonth() == now.getMonth() && d.getFullYear() == now.getFullYear())
-    dateString = chrome.i18n.getMessage("today");
+  if(d.toDateString() == now.toDateString())
+    dateString = null;
   else
-    dateString = chrome.i18n.getMessage("date_format", [d.getDate(), monthNames[d.getMonth()], d.getFullYear()]);
+    dateString = d.toLocaleDateString();
   
   return [timeString, dateString];
 }
