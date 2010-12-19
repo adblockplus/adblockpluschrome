@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import sys, os, subprocess
+import sys, os, subprocess, re
 from getopt import getopt, GetoptError
 from StringIO import StringIO
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -14,9 +14,16 @@ Options:
   -h      --help        Print this message and exit
   -i dir  --input=dir   Directory to be packaged
   -k file --key=file    File containing the private key
+          --release     Create a release build, not a development build
 ''' % os.path.basename(sys.argv[0])
 
-def addToZip(zip, dir, baseName):
+def removeUpdateURL(fileName, fileData):
+  if fileName == 'manifest.json':
+    return re.sub(r'\s*"update_url"\s*:\s*"[^"]*",', '', fileData)
+  else:
+    return fileData
+
+def addToZip(zip, filters, dir, baseName):
   for file in os.listdir(dir):
     filelc = file.lower()
     if (file.startswith('.') or filelc.endswith('.py') or
@@ -26,14 +33,20 @@ def addToZip(zip, dir, baseName):
       continue
     filePath = os.path.join(dir, file)
     if os.path.isdir(filePath):
-      addToZip(zip, filePath, baseName + file + '/')
+      addToZip(zip, filters, filePath, baseName + file + '/')
     else:
-      zip.write(filePath, baseName + file)
+      handle = open(filePath, 'rb')
+      fileData = handle.read()
+      handle.close()
 
-def packDirectory(dir):
+      for filter in filters:
+        fileData = filter(baseName + file, fileData)
+      zip.writestr(baseName + file, fileData)
+
+def packDirectory(dir, filters):
   buffer = StringIO()
   zip = ZipFile(buffer, 'w', ZIP_DEFLATED)
-  addToZip(zip, dir, '')
+  addToZip(zip, filters, dir, '')
   zip.close()
   return buffer.getvalue()
 
@@ -58,25 +71,33 @@ def writePackage(outputFile, pubkey, signature, zipdata):
 
 if __name__ == '__main__':
   try:
-    opts, args = getopt(sys.argv[1:], 'hi:k:', ['help', 'inputdir=', 'key='])
+    opts, args = getopt(sys.argv[1:], 'hi:k:', ['help', 'inputdir=', 'key=', 'release'])
+    if len(args) != 1:
+      raise GetoptError('Need exactly one output file name')
   except GetoptError, e:
     print str(e)
     usage()
     sys.exit(2)
 
-  if len(args) != 1 or '-h' in opts or '--help' in opts:
-    usage()
-    sys.exit()
-
   inputdir = os.path.dirname(os.path.abspath(sys.argv[0]))
   keyfile = None
+  isRelease = False
   for option, value in opts:
-    if option in ('-i', '--inputdir'):
+    if option in ('-h', '--help'):
+      usage()
+      sys.exit()
+    elif option in ('-i', '--inputdir'):
       inputdir = value
     elif option in ('-k', '--key'):
       keyfile = value
+    elif option in ('--release'):
+      isRelease = True
 
-  zipdata = packDirectory(inputdir)
+  filters = []
+  if isRelease:
+    filters.append(removeUpdateURL)
+
+  zipdata = packDirectory(inputdir, filters)
   signature = None
   pubkey = None
   if keyfile != None:
