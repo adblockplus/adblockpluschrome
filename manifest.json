@@ -1,6 +1,6 @@
 {
   "name": "Adblock Plus for Google Chrome™ (Beta)",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "minimum_chrome_version": "6.0",
   "description": "__MSG_description__",
   "default_locale": "en",
