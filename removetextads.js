@@ -25,6 +25,9 @@
 // Explicitly removes inline text ads, in case we were unable to block the ad script itself
 // in the beforeload handler.
 function removeTextAdFromElement(elt) {
+  // The DOMNodeInserted hooks means we get called for #text nodes, which means localName is null.
+  // We don't touch those
+  if(!elt.localName) return;
   var keepNode;
   switch(elt.localName.toUpperCase()) {
     // AdBrite
@@ -40,7 +43,7 @@ function removeTextAdFromElement(elt) {
       if(!fc) break;
       if(elt.className == 'IL_AD') {
         keepNode = fc;
-      } else if(fc.localName.toUpperCase() == 'A' && fc.className.indexOf('lx-link') >= 0) {
+      } else if(fc.localName && fc.localName.toUpperCase() == 'A' && fc.className.indexOf('lx-link') >= 0) {
         keepNode = fc.firstChild;
       }
       break;
