@@ -159,7 +159,9 @@ function addFilter(filterText) {
     userFilters = JSON.parse(userFilters);
     userFilters.push(filterText);
     localStorage["userFilters"] = JSON.stringify(userFilters);
-    FilterListener.triggerFilterObserver("add", [initFilter(filterText)]);
+    var filter = initFilter(filterText);
+    if (filter)
+      FilterListener.triggerFilterObserver("add", [filter]);
 }
 
 // Enables ad blocking for the specified domain
@@ -411,7 +413,9 @@ function reloadFilters() {
             if(f.match(/all.google.domains.+rgb/))
                 continue;
 
-            FilterListener.triggerFilterObserver("add", [initFilter(f)]);
+            var filter = initFilter(f);
+            if (filter)
+              FilterListener.triggerFilterObserver("add", [filter]);
         }
     }
     
@@ -419,9 +423,7 @@ function reloadFilters() {
     userFilters = localStorage["userFilters"];
     if(typeof userFilters != "undefined") {
         userFilters = JSON.parse(userFilters);
-        for(var i = 0; i < userFilters.length; i++) {
-            FilterListener.triggerFilterObserver("add", [initFilter(userFilters[i])]);
-        }
+        FilterListener.triggerFilterObserver("add", userFilters.map(initFilter).filter(function(filter) {return filter;}));
     }
 }
 
