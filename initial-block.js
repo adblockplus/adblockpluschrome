@@ -40,7 +40,7 @@ var TagToType = {
 // Unfortunately we can't do this with filter rules because we would need to query the backend to
 // check our domain, which cannot respond in time due to the lack of synchronous message passing.
 var BEFORELOAD_MALFUNCTION_DOMAINS = {"t.sina.com.cn": true, "prazsketramvaje.cz": true, "xnachat.com": true, "www.tuenti.com": true, "www.nwjv.de": true};
-var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS || ("www." + document.domain) in BEFORELOAD_MALFUNCTION_DOMAINS;
+var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
 var SELECTOR_GROUP_SIZE = 20;
 var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"]';
