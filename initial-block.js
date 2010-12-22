@@ -73,15 +73,6 @@ function nukeSingleElement(elt) {
     elt.innerText = "";
   elt.style.display = "none";
   elt.style.visibility = "hidden";
-
-  var pn = elt.parentNode;
-  if(pn)
-    pn.removeChild(elt);
-
-  // Get rid of OBJECT tag enclosing EMBED tag
-  if(pn && pn.localName.toUpperCase() == "EMBED" && pn.parentNode && pn.parentNode.localName.toUpperCase() == "OBJECT") {
-    pn.parentNode.removeChild(pn);
-  }
 }
 
 // This function Copyright (c) 2008 Jeni Tennison, from jquery.uri.js
