@@ -416,8 +416,7 @@ function clickHide_mouseClick(e) {
 function removeAdsAgain() {
   chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
     // Retrieve new set of selectors and build selector strings
-    makeSelectorStrings(response.selectors);
-    hideBySelectorStrings(document);
+    hideBySelectorString(document, response.selectors.join(","));
     nukeElements(document);
   });
 }
@@ -437,24 +436,14 @@ function handleNodeInserted(e) {
 }
 
 // Explicitly hides elements by their selector strings.
-// Theoretically the injected stylesheet should do this but for some reason that doesn't always work.
-function hideBySelectorStrings(parent) {
-  // In rare cases (don't know which ones exactly), initial-block.js might not have been run. 
-  if(enabled && typeof(elemhideSelectorStrings) != "undefined") {
-    // var now = new Date().getTime();
-    for(var j in elemhideSelectorStrings) {
-      var elts = parent.querySelectorAll(elemhideSelectorStrings[j]);
-      if(!elts)
-        continue;
-      for(var i = 0; i < elts.length; i++) {
-        // TODO: Sometimes style isn't defined, for some reason...
-        if(elts[i].style) {
-          elts[i].style.setProperty("visibility", "hidden");
-          elts[i].style.setProperty("display", "none");
-        }
-      }
-    }        
-    // console.log("That took " + ((new Date()).getTime() - now) + " ms");
+// This is called when user adds a new filter via the click-to-hide interface.
+function hideBySelectorString(parent, selectorString) {
+  if(enabled && selectorString) {
+    var elts = parent.querySelectorAll(selectorString);
+    for(var i = 0; i < elts.length; i++) {
+      // TODO: Sometimes style isn't defined, for some reason...
+      if(elts[i].style) elts[i].style.setProperty("display", "none");
+    }
   }
 }
 
@@ -692,12 +681,6 @@ if (document.documentElement instanceof HTMLElement)
     enabled = response.enabled;
     specialCaseYouTube = response.specialCaseYouTube;
     if(enabled) {
-      // Hide ads by selector using CSS
-      // In some weird cases the elemhide style element might not stick, so we do this.
-      // XXX: Turning this off for now, on a hunch that it wasn't sticking because of
-      // the injected stylesheet title attribute, which we no longer use
-      // hideBySelectorStrings(document);
-
       // Special-case YouTube video ads because they are so popular.
       if(document.domain.match(/youtube.com$/)) {
         pageIsYouTube = true;
