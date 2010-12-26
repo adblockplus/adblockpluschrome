@@ -546,7 +546,7 @@ function handleYouTubeFlashPlayer(elt) {
   "if(!origFlashVars.match(adCheckRE))",
   "  return;",
   "// WTF. replace() just gives up after a while, missing things near the end of the string. So we run it again.",
-  "var re = /&(ad_|prerolls|invideo|interstitial|watermark|infringe|mpu).*?=.+?(&|$)/gi;",
+  "var re = /&(ad_|prerolls|invideo|interstitial|watermark|infringe|mpu|tpas_ad_type_id).*?=.+?(&|$)/gi;",
   "var newFlashVars = origFlashVars.replace(re, \"&\").replace(re, \"&\") + \"&invideo=false&autoplay=1\";",
   "var replacement = elt.cloneNode(true); // Clone child nodes also",
   "if(inParam) {",
