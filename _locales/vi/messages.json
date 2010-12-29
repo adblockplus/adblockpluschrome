@@ -1,6 +1,7 @@
 {
     "description": {
-        "message": "Chặn quảng cáo bằng cách dùng bộ lọc AdBlock Plus của Firefox. Vĩnh biệt quảng cáo!"
+        "message": "Chặn quảng cáo bằng cách dùng bộ lọc Adblock Plus
+ của Firefox. Vĩnh biệt quảng cáo!"
     },
     "options": {
         "message": "Cấu hình Adblock Plus"
@@ -90,13 +91,15 @@
         "message": "cập nhật ngay"
     },
     "add_a_filter_list": {
-        "message": "Đăng ký cập nhật <a href='$url$'>danh sách bộ lọc</a> từ AdBlock Plus của Firefox:",
+        "message": "Đăng ký cập nhật <a href='$url$'>danh sách bộ lọc</a> từ Adblock Plus
+ của Firefox:",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "filter_must_follow_syntax": {
-        "message": "bộ lọc của bạn phải tuân theo <a href='$url$'>cú pháp của bộ lọc AdBlock Plus</a>. Các kiểu bộ lọc cụ thể, như yêu cầu đối tượng phụ, không được chấp nhận.",
+        "message": "bộ lọc của bạn phải tuân theo <a href='$url$'>cú pháp của bộ lọc Adblock Plus
+</a>. Các kiểu bộ lọc cụ thể, như yêu cầu đối tượng phụ, không được chấp nhận.",
         "placeholders": {
             "url": { "content" : "$1" }
         }

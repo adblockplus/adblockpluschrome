@@ -1,6 +1,7 @@
 {
   "description": {
-    "message": "Blokkolja a reklámokat a Firefox AdBlock Plus szűrő segítségével. Mondj búcsút a reklámoknak és böngéssz békében!"
+    "message": "Blokkolja a reklámokat a Firefox Adblock Plus
+ szűrő segítségével. Mondj búcsút a reklámoknak és böngéssz békében!"
   },
     "options": {
         "message": "Adblock Plus Beállításai"
@@ -82,13 +83,15 @@
       "message": "Frissítés most"
   },
   "add_a_filter_list": {
-      "message": "Feliratkozás a Firefox AdBlock Plus-ra <a href='$url$'>filter list</a>:",
+      "message": "Feliratkozás a Firefox Adblock Plus
+-ra <a href='$url$'>filter list</a>:",
       "placeholders": {
           "url": { "content" : "$1" }
       }
   },
   "filter_must_follow_syntax": {
-      "message": "A szűrődnek követnie kell a <a href='$url$'>AdBlock Plus filter syntax</a>. Bizonyos típusú szűrők, mint az 'object-subrequest', nem támogatottak.",
+      "message": "A szűrődnek követnie kell a <a href='$url$'>Adblock Plus
+ filter syntax</a>. Bizonyos típusú szűrők, mint az 'object-subrequest', nem támogatottak.",
       "placeholders": {
           "url": { "content" : "$1" }
       }

@@ -1,6 +1,7 @@
 {
   "description": {
-    "message": "Blocks ads using the Firefox AdBlock Plus filter engine. Kiss ads goodbye and browse in peace!"
+    "message": "Blocks ads using the Firefox Adblock Plus
+ filter engine. Kiss ads goodbye and browse in peace!"
   },
   "options": {
     "message": "Adblock Plus Options"
@@ -89,13 +90,15 @@
     "message": "Update now"
   },
   "add_a_filter_list": {
-    "message": "Subscribe to a Firefox AdBlock Plus <a href='$url$'>filter list</a>:",
+    "message": "Subscribe to a Firefox Adblock Plus
+ <a href='$url$'>filter list</a>:",
     "placeholders": {
       "url": { "content" : "$1" }
     }
   },
   "filter_must_follow_syntax": {
-    "message": "Your filter must follow the <a href='$url$'>AdBlock Plus filter syntax</a>. Certain filter types, like object-subrequest, are not supported.",
+    "message": "Your filter must follow the <a href='$url$'>Adblock Plus
+ filter syntax</a>. Certain filter types, like object-subrequest, are not supported.",
     "placeholders": {
       "url": { "content" : "$1" }
     }

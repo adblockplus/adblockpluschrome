@@ -90,13 +90,15 @@
         "message": "지금 업데이트"
     },
     "add_a_filter_list": {
-        "message": "AdBlock Plus의 구독 필터 추가 : <a href='$url$'>구독 필터 전체 목록</a>",
+        "message": "Adblock Plus
+의 구독 필터 추가 : <a href='$url$'>구독 필터 전체 목록</a>",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "filter_must_follow_syntax": {
-        "message": "사용자 필터는 <a href='$url$'>AdBlock Plus의 필터 작성 방법</a>을 따라야 합니다. 필터의 특정 구문은 지원하지 않습니다.",
+        "message": "사용자 필터는 <a href='$url$'>Adblock Plus
+의 필터 작성 방법</a>을 따라야 합니다. 필터의 특정 구문은 지원하지 않습니다.",
         "placeholders": {
             "url": { "content" : "$1" }
         }
