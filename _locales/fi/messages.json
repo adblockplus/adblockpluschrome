@@ -1,6 +1,7 @@
 {
     "description": {
-        "message": "Estä mainokset käyttäen Firefox AdBlock Plussan suodatinmenetelmää. Hyvästele mainokset ja jatka surffailua rauhassa!"
+        "message": "Estä mainokset käyttäen Firefox Adblock Plus
+san suodatinmenetelmää. Hyvästele mainokset ja jatka surffailua rauhassa!"
     },
     "options": {
         "message": "Adblock Plus asetukset"
@@ -90,13 +91,15 @@
         "message": "Päivitä nyt"
     },
     "add_a_filter_list": {
-        "message": "Tilaa Firefox AdBlock Plus <a href='$url$'>suodatinlistoja</a>:",
+        "message": "Tilaa Firefox Adblock Plus
+ <a href='$url$'>suodatinlistoja</a>:",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "filter_must_follow_syntax": {
-        "message": "Suodattimen täytyy seurata <a href='$url$'>AdBlock Plus suodatinkaavaa</a>. Tietyt suodatinyypit, kuten objektien alapyynnöt, eivät ole tuettuja.",
+        "message": "Suodattimen täytyy seurata <a href='$url$'>Adblock Plus
+ suodatinkaavaa</a>. Tietyt suodatinyypit, kuten objektien alapyynnöt, eivät ole tuettuja.",
         "placeholders": {
             "url": { "content" : "$1" }
         }

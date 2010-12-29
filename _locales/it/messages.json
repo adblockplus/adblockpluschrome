@@ -1,6 +1,7 @@
 {
     "description": {
-        "message": "Blocca la pubblicità usando il motore di Firefox AdBlock Plus. Dite addio alla pubblicità e navigate in pace!"
+        "message": "Blocca la pubblicità usando il motore di Firefox Adblock Plus
+. Dite addio alla pubblicità e navigate in pace!"
     },
     "options": {
         "message": "Opzioni di Adblock Plus"
@@ -90,13 +91,15 @@
         "message": "Aggiorna adesso"
     },
     "add_a_filter_list": {
-        "message": "Sottoscrivi una <a href='$url$'>lista di filtri</a> in formato Firefox AdBlock Plus:",
+        "message": "Sottoscrivi una <a href='$url$'>lista di filtri</a> in formato Firefox Adblock Plus
+:",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "filter_must_follow_syntax": {
-        "message": "I filtri personalizzati devono seguire <a href='$url$'>la sintassi di AdBlock Plus</a>. Certi tipi di filtro, come object-subrequest, non sono supportati.",
+        "message": "I filtri personalizzati devono seguire <a href='$url$'>la sintassi di Adblock Plus
+</a>. Certi tipi di filtro, come object-subrequest, non sono supportati.",
         "placeholders": {
             "url": { "content" : "$1" }
         }

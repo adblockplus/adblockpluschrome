@@ -1,6 +1,7 @@
 {
     "description": {
-        "message": "Blockerar reklam med hjälp av Firefox AdBlock Plus filtreringsmotor. Säg adjö till reklamen och surfa i fred!"
+        "message": "Blockerar reklam med hjälp av Firefox Adblock Plus
+ filtreringsmotor. Säg adjö till reklamen och surfa i fred!"
     },
     "options": {
         "message": "Adblock Plus Alternativ"
@@ -89,13 +90,15 @@
         "message": "Uppdatera nu"
     },
     "add_a_filter_list": {
-        "message": "Prenumerera på en Firefox AdBlock Plus <a href='$url$'>filterlista</a>:",
+        "message": "Prenumerera på en Firefox Adblock Plus
+ <a href='$url$'>filterlista</a>:",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "filter_must_follow_syntax": {
-        "message": "Ditt filter måste följa <a href='$url$'>AdBlock Plus filter-syntax</a>. Särskilda filtertyper, som object-subrequest, stöds ej.",
+        "message": "Ditt filter måste följa <a href='$url$'>Adblock Plus
+ filter-syntax</a>. Särskilda filtertyper, som object-subrequest, stöds ej.",
         "placeholders": {
             "url": { "content" : "$1" }
         }

@@ -1,6 +1,7 @@
 {
     "description": {
-        "message": "Блокировать рекламу с помощью фильтра, основанного на Firefox AdBlock Plus. Попрощайтесь с интернет-баннерами навсегда!"
+        "message": "Блокировать рекламу с помощью фильтра, основанного на Firefox Adblock Plus
+. Попрощайтесь с интернет-баннерами навсегда!"
         },
    "options": {
        "message": "Настройки Adblock Plus"
@@ -85,14 +86,16 @@
     },
 
     "add_a_filter_list": {
-        "message": "Подписка на <a href='$url$'>список фильтров</a> Firefox AdBlock Plus:",
+        "message": "Подписка на <a href='$url$'>список фильтров</a> Firefox Adblock Plus
+:",
         "placeholders": {
           "url": { "content" : "$1" }
       }
     },
 
     "filter_must_follow_syntax": {
-            "message": "Ваш фильтр должен соответствовать <a href='$url$'>синтаксису AdBlock Plus</a>. Фильтры некоторых типов, например, с подзапросом объекта, не поддерживаются.",
+            "message": "Ваш фильтр должен соответствовать <a href='$url$'>синтаксису Adblock Plus
+</a>. Фильтры некоторых типов, например, с подзапросом объекта, не поддерживаются.",
           "placeholders": {
               "url": { "content" : "$1" }
           }
