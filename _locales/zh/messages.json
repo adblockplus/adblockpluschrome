@@ -1,10 +1,10 @@
 {
    "add": {
       "description": "This is the label for the 'Add' buttons.",
-      "message": "\u6DFB\u52A0"
+      "message": "添加"
    },
    "add_a_filter_list": {
-      "message": "\u8BA2\u9605Firefox Adblock Plus\u7684\u003Ca href='$url$'\u003E\u8FC7\u6EE4\u6E05\u5355\u003C/a\u003E:",
+      "message": "订阅Firefox Adblock Plus的<a href='$url$'>过滤清单</a>:",
       "placeholders": {
          "url": {
             "content": "$1"
@@ -12,67 +12,67 @@
       }
    },
    "add_domain_button": {
-      "message": "\u6DFB\u52A0\u57DF\u540D"
+      "message": "添加域名"
    },
    "add_filter_button": {
-      "message": "\u6DFB\u52A0\u8FC7\u6EE4\u89C4\u5219"
+      "message": "添加过滤规则"
    },
    "add_filters_msg": {
-      "message": "\u6DFB\u52A0\u8FC7\u6EE4\u89C4\u5219\uFF1F"
+      "message": "添加过滤规则？"
    },
    "add_url_button": {
-      "message": "\u6DFB\u52A0URL"
+      "message": "添加URL"
    },
    "add_your_own_filters": {
-      "message": "\u81EA\u5B9A\u4E49\u8FC7\u6EE4"
+      "message": "自定义过滤"
    },
    "apply_changes": {
-      "message": "\u5E94\u7528"
+      "message": "应用"
    },
    "block_element": {
       "description": "Label for 'Block Element' context menu item",
-      "message": "\u5C4F\u853D\u6B64\u5143\u7D20"
+      "message": "屏蔽此元素"
    },
    "block_youtube": {
-      "message": "\u5C4F\u853DYouTube\u89C6\u9891\u4E2D\u7684\u5E7F\u544A\u0028\u4E0E\u6269\u5C55FlashBlock\u4E0D\u517C\u5BB9\u0029"
+      "message": "屏蔽YouTube视频中的广告(与扩展FlashBlock不兼容)"
    },
    "cancel": {
       "description": "Cancel button label",
-      "message": "\u53D6\u6D88"
+      "message": "取消"
    },
    "clickhide_instructions": {
-      "message": "\u8BF7\u70B9\u51FB\uFF08\u6216\u53F3\u51FB\uFF09\u8981\u5C4F\u853D\u7684\u5143\u7D20"
+      "message": "请点击（或右击）要屏蔽的元素"
    },
    "delete": {
       "description": "Word for 'delete'.",
-      "message": "\u5220\u9664"
+      "message": "删除"
    },
    "description": {
-      "message": "\u4F7F\u7528Firefox Adblock Plus\u8FC7\u6EE4\u5E7F\u544A\u3002\u4F7F\u4F60\u544A\u522B\u5E7F\u544A\uFF0C\u8212\u5FC3\u6D4F\u89C8\u7F51\u9875\uFF01!"
+      "message": "使用Firefox Adblock Plus过滤广告。使你告别广告，舒心浏览网页！!"
    },
    "disable_inline": {
-      "message": "\u5C4F\u853D\u5E7F\u544A\u94FE\u63A5"
+      "message": "屏蔽广告链接"
    },
    "disabled_for_these_domains": {
-      "message": "Adblock Plus\u5C06\u4E0D\u8FC7\u6EE4\u4EE5\u4E0B\u57DF\u540D\u3002\u60A8\u53EF\u4EE5\u901A\u8FC7\u5730\u5740\u680F\u7684\u6309\u94AE\u6DFB\u52A0\uFF0C\u4E5F\u53EF\u5728\u4E0B\u9762\u8F93\u5165\u57DF\u540D\u0028URL\u65E0\u6548\u0029\u5E76\u6DFB\u52A0\u3002\u0020\u005B\u6CE8\u005D\u003A\u0055\u0052\u004C\u7684\u6392\u9664\u53EF\u5728\u201C\u81EA\u5B9A\u4E49\u8FC7\u6EE4\u201D\u4E2D\u6DFB\u52A0\u3002"
+      "message": "Adblock Plus将不过滤以下域名。您可以通过地址栏的按钮添加，也可在下面输入域名(URL无效)并添加。 [注]:URL的排除可在“自定义过滤”中添加。"
    },
    "easy_create_filter": {
       "description": "Button label in popup balloon",
-      "message": "\u8F7B\u677E\u5EFA\u7ACB\u8FC7\u6EE4\u89C4\u5219"
+      "message": "轻松建立过滤规则"
    },
    "edit_filters_raw": {
-      "message": "\u4EE5\u7EAF\u6587\u672C\u7F16\u8F91"
+      "message": "以纯文本编辑"
    },
    "enable_only_the": {
-      "message": "\u8BF7\u53EA\u542F\u7528\u60A8\u9700\u8981\u7684\u8FC7\u6EE4\u6E05\u5355\uFF0C\u5F00\u542F\u8FC7\u591A\u4F1A\u4F7F\u6D4F\u89C8\u5668\u53D8\u6162\u3002"
+      "message": "请只启用您需要的过滤清单，开启过多会使浏览器变慢。"
    },
    "enabled_for_site": {
       "description": "Popup balloon checkbox label",
-      "message": "\u5BF9\u8BE5\u7F51\u7AD9\u542F\u7528\u8FC7\u6EE4"
+      "message": "对该网站启用过滤"
    },
    "filter_list_desc": {
       "description": "e.g. FooList by Mr. Foo",
-      "message": "$title$ \u4F5C\u8005\uFF1A$author$",
+      "message": "$title$ 作者：$author$",
       "placeholders": {
          "author": {
             "content": "$2"
@@ -84,10 +84,10 @@
    },
    "filter_lists": {
       "description": "This is a tab heading.",
-      "message": "\u8FC7\u6EE4\u6E05\u5355"
+      "message": "过滤清单"
    },
    "filter_must_follow_syntax": {
-      "message": "\u60A8\u7684\u8FC7\u6EE4\u89C4\u5219\u5FC5\u987B\u9075\u5FAA\u003Ca href='$url$'\u003EAdblock Plus\u7684\u8BED\u6CD5\u003C/a\u003E\u3002\u5BF9\u4E8E\u67D0\u4E9B\u8FC7\u6EE4\u7C7B\u578B\uFF0C\u5982object-subrequest\u662F\u4E0D\u652F\u6301\u7684\u3002",
+      "message": "您的过滤规则必须遵循<a href='$url$'>Adblock Plus的语法</a>。对于某些过滤类型，如object-subrequest是不支持的。",
       "placeholders": {
          "url": {
             "content": "$1"
@@ -95,7 +95,7 @@
       }
    },
    "found_a_bug": {
-      "message": "\u53D1\u73B0\u9519\u8BEF\uFF1F\u8981\u7FFB\u8BD1Adblock Plus\uFF1F \u8BF7\u81F3\u003Ca href='$url$'\u003E\u6B64\u5904\u8BE2\u95EE\u003C/a\u003E\u3002",
+      "message": "发现错误？要翻译Adblock Plus？ 请至<a href='$url$'>此处询问</a>。",
       "placeholders": {
          "url": {
             "content": "$1"
@@ -104,7 +104,7 @@
    },
    "general": {
       "description": "This is a tab heading.",
-      "message": "\u5E38\u89C4"
+      "message": "常规"
    },
    "hovercraft": {
       "description": "This is a sample translatable string. It happens to have comedic value.",
@@ -112,7 +112,7 @@
    },
    "last_updated_at": {
       "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
-      "message": "\u6700\u8FD1\u66F4\u65B0\u4E8E $time$ $date$",
+      "message": "最近更新于 $time$ $date$",
       "placeholders": {
          "date": {
             "content": "$2"
@@ -124,7 +124,7 @@
    },
    "last_updated_at_today": {
       "description": "e.g. Last updated at 3:00pm today",
-      "message": "\u6700\u8FD1\u66F4\u65B0\u4E8E $time$ \u4ECA\u65E5",
+      "message": "最近更新于 $time$ 今日",
       "placeholders": {
          "time": {
             "content": "$1"
@@ -132,37 +132,37 @@
       }
    },
    "new_filters_added": {
-      "message": "\u60A8\u5DF2\u6DFB\u52A0\u8FC7\u6EE4\u89C4\u5219\u3002 \u8BF7\u81F3\u003Ca id='options_url' target='_blank'\u003EAdblock Plus\u9009\u9879\u003C/a\u003E \u7BA1\u7406\u8FC7\u6EE4\u89C4\u5219\u3002"
+      "message": "您已添加过滤规则。 请至<a id='options_url' target='_blank'>Adblock Plus选项</a> 管理过滤规则。"
    },
    "not_a_filter_list": {
       "description": "In options.html, error displayed when filter list fetcher receives something not a filter list",
-      "message": "\u9519\u8BEF\uFF1A\u8FC7\u6EE4\u6E05\u5355\u65E0\u6548"
+      "message": "错误：过滤清单无效"
    },
    "not_found_on_server": {
       "description": "In options.html, error displayed when filter list fetcher can't find filter list on server",
-      "message": "\u9519\u8BEF\uFF1A\u670D\u52A1\u5668\u627E\u4E0D\u5230"
+      "message": "错误：服务器找不到"
    },
    "options": {
-      "message": "\u8BBE\u7F6E\u9009\u9879"
+      "message": "设置选项"
    },
    "out_of_date_lists": {
-      "message": "\u8FC7\u6EE4\u6E05\u5355\u4F1A\u5B9A\u671F\u81EA\u52A8\u66F4\u65B0"
+      "message": "过滤清单会定期自动更新"
    },
    "remove_button": {
       "description": "This is the label for the 'Remove selected' buttons.",
-      "message": "\u5220\u9664\u5DF2\u9009\u62E9"
+      "message": "删除已选择"
    },
    "show_block_element_menu": {
-      "message": "\u6DFB\u52A0\u5230\u53F3\u9375\u83DC\u5355"
+      "message": "添加到右鍵菜单"
    },
    "show_icon": {
-      "message": "\u5728\u5730\u5740\u680F\u663E\u793A\u6309\u94AE"
+      "message": "在地址栏显示按钮"
    },
    "update_now": {
-      "message": "\u7ACB\u5373\u66F4\u65B0"
+      "message": "立即更新"
    },
    "whitelisted_domains": {
       "description": "This is a tab heading.",
-      "message": "\u6392\u9664\u57DF\u540D"
+      "message": "排除域名"
    }
 }
