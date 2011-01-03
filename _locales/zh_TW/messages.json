@@ -1,0 +1,158 @@
+{
+    "description": {
+        "message": "使用 Firefox Adblock Plus
+ 的廣告過濾引擎。告別廣告，開心瀏覽!"
+    },
+    "options": {
+        "message": "Adblock Plus 選項"
+    },
+    "filter_lists": {
+        "message": "過濾清單",
+        "description": "This is a tab heading."
+    },
+    "last_updated_at": {
+        "message": "最近更新於 $time$ $date$",
+        "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+        "placeholders": {
+            "time": { "content" : "$1" },
+            "date": { "content" : "$2" }
+        }
+    },
+    "last_updated_at_today": {
+        "message": "最近更新於 $time$ 今日",
+        "description": "e.g. Last updated at 3:00pm today",
+        "placeholders": {
+            "time": { "content" : "$1" }
+        }
+    },
+    "not_a_filter_list": {
+        "message": "錯誤：過濾清單無效",
+        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
+    },
+    "not_found_on_server": {
+        "message": "錯誤：伺服器找不到",
+        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
+    },
+    "filter_list_desc": {
+        "message": "$title$ 作者：$author$",
+        "description": "e.g. FooList by Mr. Foo",
+        "placeholders": {
+            "title": { "content" : "$1" },
+            "author": { "content" : "$2" }
+        }
+    },
+    "add_your_own_filters": {
+        "message": "黑名單"
+    },
+    "whitelisted_domains": {
+        "message": "白名單",
+        "description": "This is a tab heading."
+    },
+    "general": {
+        "message": "一般",
+        "description": "This is a tab heading."
+    },
+    "add": {
+        "message": "新增",
+        "description": "This is the label for the 'Add' buttons."
+    },
+    "add_domain_button": {
+        "message": "新增域名"
+    },
+    "add_filter_button": {
+        "message": "新增過濾規則"
+    },
+    "add_url_button": {
+        "message": "新增網址"
+    },
+    "delete": {
+        "message": "刪除",
+        "description": "Word for 'delete'."
+    },
+    "remove_button": {
+        "message": "刪除已選擇",
+        "description": "This is the label for the 'Remove selected' buttons."
+    },
+    "edit_filters_raw": {
+        "message": "以純文本編輯"
+    },
+    "apply_changes": {
+        "message": "套用"
+    },
+
+    "enable_only_the": {
+        "message": "請只啟用您需要的過濾清單。啟用過多會使瀏覽器無回應。"
+    },
+    "out_of_date_lists": {
+        "message": "過濾清單會定期自動更新。"
+    },
+    "update_now": {
+        "message": "立即更新"
+    },
+    "add_a_filter_list": {
+        "message": "訂閱 Firefox Adblock Plus
+ 的 <a href='$url$'>過濾清單</a>:",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "filter_must_follow_syntax": {
+        "message": "您的過濾規則必須遵循 <a href='$url$'>Adblock Plus
+ 的語法</a>。特定的過濾類型，像是 object-subrequest 不支援。",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "disabled_for_these_domains": {
+        "message": "Adblock Plus 將不在以下域名啟用。您可以透過 Adblock Plus 於網址列的圖示新增域名，或者 在以下欄位輸入域名（非網址），然後點擊「新增域名」。"
+    },
+    "found_a_bug": {
+        "message": "發現錯誤？要翻譯 Adblock Plus？ 請至 <a href='$url$'>此處詢問</a>。",
+        "placeholders": {
+            "url": { "content" : "$1" }
+        }
+    },
+    "show_icon": {
+        "message": "網址列顯示 Adblock Plus 圖示"
+    },
+    "show_block_element_menu": {
+        "message": "右鍵選單顯示「阻擋網頁元素」"
+    },
+    "disable_inline": {
+        "message": "阻擋文字廣告"
+    },
+    "block_youtube": {
+        "message": "阻擋 YouTube 影片廣告（不能與 FlashBlock 擴充套件相容）"
+    },
+    
+    "enabled_for_site": {
+        "message": "該網站啟用過濾",
+        "description": "Popup balloon checkbox label"
+    },
+    "easy_create_filter": {
+        "message": "簡單建立過濾規則",
+        "description": "Button label in popup balloon"
+    },
+    "cancel": {
+        "message": "取消",
+        "description": "Cancel button label"
+    },
+    "clickhide_instructions": {
+        "message": "此彈出訊息關閉後，請點選網頁上的元素。"
+    },
+    "add_filters_msg": {
+        "message": "新增過濾規則？"
+    },
+    "new_filters_added": {
+        "message": "您已新增過濾規則。 請至 <a id='options_url' target='_blank'>Adblock Plus 選項</a> 管理過濾規則。"
+    },
+    "block_element": {
+        "message": "阻擋網頁元素",
+        "description": "Label for 'Block Element' context menu item"
+    },
+    
+    "hovercraft": {
+        "message": "My hovercraft is full of eels.",
+        "description": "This is a sample translatable string. It happens to have comedic value."
+    }
+}
