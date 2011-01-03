@@ -1,158 +1,168 @@
 {
-    "description": {
-        "message": "使用 Firefox Adblock Plus
- 的廣告過濾引擎。告別廣告，開心瀏覽!"
-    },
-    "options": {
-        "message": "Adblock Plus 選項"
-    },
-    "filter_lists": {
-        "message": "過濾清單",
-        "description": "This is a tab heading."
-    },
-    "last_updated_at": {
-        "message": "最近更新於 $time$ $date$",
-        "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
-        "placeholders": {
-            "time": { "content" : "$1" },
-            "date": { "content" : "$2" }
-        }
-    },
-    "last_updated_at_today": {
-        "message": "最近更新於 $time$ 今日",
-        "description": "e.g. Last updated at 3:00pm today",
-        "placeholders": {
-            "time": { "content" : "$1" }
-        }
-    },
-    "not_a_filter_list": {
-        "message": "錯誤：過濾清單無效",
-        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
-    },
-    "not_found_on_server": {
-        "message": "錯誤：伺服器找不到",
-        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
-    },
-    "filter_list_desc": {
-        "message": "$title$ 作者：$author$",
-        "description": "e.g. FooList by Mr. Foo",
-        "placeholders": {
-            "title": { "content" : "$1" },
-            "author": { "content" : "$2" }
-        }
-    },
-    "add_your_own_filters": {
-        "message": "黑名單"
-    },
-    "whitelisted_domains": {
-        "message": "白名單",
-        "description": "This is a tab heading."
-    },
-    "general": {
-        "message": "一般",
-        "description": "This is a tab heading."
-    },
-    "add": {
-        "message": "新增",
-        "description": "This is the label for the 'Add' buttons."
-    },
-    "add_domain_button": {
-        "message": "新增域名"
-    },
-    "add_filter_button": {
-        "message": "新增過濾規則"
-    },
-    "add_url_button": {
-        "message": "新增網址"
-    },
-    "delete": {
-        "message": "刪除",
-        "description": "Word for 'delete'."
-    },
-    "remove_button": {
-        "message": "刪除已選擇",
-        "description": "This is the label for the 'Remove selected' buttons."
-    },
-    "edit_filters_raw": {
-        "message": "以純文本編輯"
-    },
-    "apply_changes": {
-        "message": "套用"
-    },
-
-    "enable_only_the": {
-        "message": "請只啟用您需要的過濾清單。啟用過多會使瀏覽器無回應。"
-    },
-    "out_of_date_lists": {
-        "message": "過濾清單會定期自動更新。"
-    },
-    "update_now": {
-        "message": "立即更新"
-    },
-    "add_a_filter_list": {
-        "message": "訂閱 Firefox Adblock Plus
- 的 <a href='$url$'>過濾清單</a>:",
-        "placeholders": {
-            "url": { "content" : "$1" }
-        }
-    },
-    "filter_must_follow_syntax": {
-        "message": "您的過濾規則必須遵循 <a href='$url$'>Adblock Plus
- 的語法</a>。特定的過濾類型，像是 object-subrequest 不支援。",
-        "placeholders": {
-            "url": { "content" : "$1" }
-        }
-    },
-    "disabled_for_these_domains": {
-        "message": "Adblock Plus 將不在以下域名啟用。您可以透過 Adblock Plus 於網址列的圖示新增域名，或者 在以下欄位輸入域名（非網址），然後點擊「新增域名」。"
-    },
-    "found_a_bug": {
-        "message": "發現錯誤？要翻譯 Adblock Plus？ 請至 <a href='$url$'>此處詢問</a>。",
-        "placeholders": {
-            "url": { "content" : "$1" }
-        }
-    },
-    "show_icon": {
-        "message": "網址列顯示 Adblock Plus 圖示"
-    },
-    "show_block_element_menu": {
-        "message": "右鍵選單顯示「阻擋網頁元素」"
-    },
-    "disable_inline": {
-        "message": "阻擋文字廣告"
-    },
-    "block_youtube": {
-        "message": "阻擋 YouTube 影片廣告（不能與 FlashBlock 擴充套件相容）"
-    },
-    
-    "enabled_for_site": {
-        "message": "該網站啟用過濾",
-        "description": "Popup balloon checkbox label"
-    },
-    "easy_create_filter": {
-        "message": "簡單建立過濾規則",
-        "description": "Button label in popup balloon"
-    },
-    "cancel": {
-        "message": "取消",
-        "description": "Cancel button label"
-    },
-    "clickhide_instructions": {
-        "message": "此彈出訊息關閉後，請點選網頁上的元素。"
-    },
-    "add_filters_msg": {
-        "message": "新增過濾規則？"
-    },
-    "new_filters_added": {
-        "message": "您已新增過濾規則。 請至 <a id='options_url' target='_blank'>Adblock Plus 選項</a> 管理過濾規則。"
-    },
-    "block_element": {
-        "message": "阻擋網頁元素",
-        "description": "Label for 'Block Element' context menu item"
-    },
-    
-    "hovercraft": {
-        "message": "My hovercraft is full of eels.",
-        "description": "This is a sample translatable string. It happens to have comedic value."
-    }
+   "add": {
+      "description": "This is the label for the 'Add' buttons.",
+      "message": "\u6DFB\u52A0"
+   },
+   "add_a_filter_list": {
+      "message": "\u8BA2\u9605Firefox Adblock Plus\u7684\u003Ca href='$url$'\u003E\u8FC7\u6EE4\u6E05\u5355\u003C/a\u003E:",
+      "placeholders": {
+         "url": {
+            "content": "$1"
+         }
+      }
+   },
+   "add_domain_button": {
+      "message": "\u6DFB\u52A0\u57DF\u540D"
+   },
+   "add_filter_button": {
+      "message": "\u6DFB\u52A0\u8FC7\u6EE4\u89C4\u5219"
+   },
+   "add_filters_msg": {
+      "message": "\u6DFB\u52A0\u8FC7\u6EE4\u89C4\u5219\uFF1F"
+   },
+   "add_url_button": {
+      "message": "\u6DFB\u52A0URL"
+   },
+   "add_your_own_filters": {
+      "message": "\u81EA\u5B9A\u4E49\u8FC7\u6EE4"
+   },
+   "apply_changes": {
+      "message": "\u5E94\u7528"
+   },
+   "block_element": {
+      "description": "Label for 'Block Element' context menu item",
+      "message": "\u5C4F\u853D\u6B64\u5143\u7D20"
+   },
+   "block_youtube": {
+      "message": "\u5C4F\u853DYouTube\u89C6\u9891\u4E2D\u7684\u5E7F\u544A\u0028\u4E0E\u6269\u5C55FlashBlock\u4E0D\u517C\u5BB9\u0029"
+   },
+   "cancel": {
+      "description": "Cancel button label",
+      "message": "\u53D6\u6D88"
+   },
+   "clickhide_instructions": {
+      "message": "\u8BF7\u70B9\u51FB\uFF08\u6216\u53F3\u51FB\uFF09\u8981\u5C4F\u853D\u7684\u5143\u7D20"
+   },
+   "delete": {
+      "description": "Word for 'delete'.",
+      "message": "\u5220\u9664"
+   },
+   "description": {
+      "message": "\u4F7F\u7528Firefox Adblock Plus\u8FC7\u6EE4\u5E7F\u544A\u3002\u4F7F\u4F60\u544A\u522B\u5E7F\u544A\uFF0C\u8212\u5FC3\u6D4F\u89C8\u7F51\u9875\uFF01!"
+   },
+   "disable_inline": {
+      "message": "\u5C4F\u853D\u5E7F\u544A\u94FE\u63A5"
+   },
+   "disabled_for_these_domains": {
+      "message": "Adblock Plus\u5C06\u4E0D\u8FC7\u6EE4\u4EE5\u4E0B\u57DF\u540D\u3002\u60A8\u53EF\u4EE5\u901A\u8FC7\u5730\u5740\u680F\u7684\u6309\u94AE\u6DFB\u52A0\uFF0C\u4E5F\u53EF\u5728\u4E0B\u9762\u8F93\u5165\u57DF\u540D\u0028URL\u65E0\u6548\u0029\u5E76\u6DFB\u52A0\u3002\u0020\u005B\u6CE8\u005D\u003A\u0055\u0052\u004C\u7684\u6392\u9664\u53EF\u5728\u201C\u81EA\u5B9A\u4E49\u8FC7\u6EE4\u201D\u4E2D\u6DFB\u52A0\u3002"
+   },
+   "easy_create_filter": {
+      "description": "Button label in popup balloon",
+      "message": "\u8F7B\u677E\u5EFA\u7ACB\u8FC7\u6EE4\u89C4\u5219"
+   },
+   "edit_filters_raw": {
+      "message": "\u4EE5\u7EAF\u6587\u672C\u7F16\u8F91"
+   },
+   "enable_only_the": {
+      "message": "\u8BF7\u53EA\u542F\u7528\u60A8\u9700\u8981\u7684\u8FC7\u6EE4\u6E05\u5355\uFF0C\u5F00\u542F\u8FC7\u591A\u4F1A\u4F7F\u6D4F\u89C8\u5668\u53D8\u6162\u3002"
+   },
+   "enabled_for_site": {
+      "description": "Popup balloon checkbox label",
+      "message": "\u5BF9\u8BE5\u7F51\u7AD9\u542F\u7528\u8FC7\u6EE4"
+   },
+   "filter_list_desc": {
+      "description": "e.g. FooList by Mr. Foo",
+      "message": "$title$ \u4F5C\u8005\uFF1A$author$",
+      "placeholders": {
+         "author": {
+            "content": "$2"
+         },
+         "title": {
+            "content": "$1"
+         }
+      }
+   },
+   "filter_lists": {
+      "description": "This is a tab heading.",
+      "message": "\u8FC7\u6EE4\u6E05\u5355"
+   },
+   "filter_must_follow_syntax": {
+      "message": "\u60A8\u7684\u8FC7\u6EE4\u89C4\u5219\u5FC5\u987B\u9075\u5FAA\u003Ca href='$url$'\u003EAdblock Plus\u7684\u8BED\u6CD5\u003C/a\u003E\u3002\u5BF9\u4E8E\u67D0\u4E9B\u8FC7\u6EE4\u7C7B\u578B\uFF0C\u5982object-subrequest\u662F\u4E0D\u652F\u6301\u7684\u3002",
+      "placeholders": {
+         "url": {
+            "content": "$1"
+         }
+      }
+   },
+   "found_a_bug": {
+      "message": "\u53D1\u73B0\u9519\u8BEF\uFF1F\u8981\u7FFB\u8BD1Adblock Plus\uFF1F \u8BF7\u81F3\u003Ca href='$url$'\u003E\u6B64\u5904\u8BE2\u95EE\u003C/a\u003E\u3002",
+      "placeholders": {
+         "url": {
+            "content": "$1"
+         }
+      }
+   },
+   "general": {
+      "description": "This is a tab heading.",
+      "message": "\u5E38\u89C4"
+   },
+   "hovercraft": {
+      "description": "This is a sample translatable string. It happens to have comedic value.",
+      "message": "My hovercraft is full of eels."
+   },
+   "last_updated_at": {
+      "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+      "message": "\u6700\u8FD1\u66F4\u65B0\u4E8E $time$ $date$",
+      "placeholders": {
+         "date": {
+            "content": "$2"
+         },
+         "time": {
+            "content": "$1"
+         }
+      }
+   },
+   "last_updated_at_today": {
+      "description": "e.g. Last updated at 3:00pm today",
+      "message": "\u6700\u8FD1\u66F4\u65B0\u4E8E $time$ \u4ECA\u65E5",
+      "placeholders": {
+         "time": {
+            "content": "$1"
+         }
+      }
+   },
+   "new_filters_added": {
+      "message": "\u60A8\u5DF2\u6DFB\u52A0\u8FC7\u6EE4\u89C4\u5219\u3002 \u8BF7\u81F3\u003Ca id='options_url' target='_blank'\u003EAdblock Plus\u9009\u9879\u003C/a\u003E \u7BA1\u7406\u8FC7\u6EE4\u89C4\u5219\u3002"
+   },
+   "not_a_filter_list": {
+      "description": "In options.html, error displayed when filter list fetcher receives something not a filter list",
+      "message": "\u9519\u8BEF\uFF1A\u8FC7\u6EE4\u6E05\u5355\u65E0\u6548"
+   },
+   "not_found_on_server": {
+      "description": "In options.html, error displayed when filter list fetcher can't find filter list on server",
+      "message": "\u9519\u8BEF\uFF1A\u670D\u52A1\u5668\u627E\u4E0D\u5230"
+   },
+   "options": {
+      "message": "\u8BBE\u7F6E\u9009\u9879"
+   },
+   "out_of_date_lists": {
+      "message": "\u8FC7\u6EE4\u6E05\u5355\u4F1A\u5B9A\u671F\u81EA\u52A8\u66F4\u65B0"
+   },
+   "remove_button": {
+      "description": "This is the label for the 'Remove selected' buttons.",
+      "message": "\u5220\u9664\u5DF2\u9009\u62E9"
+   },
+   "show_block_element_menu": {
+      "message": "\u6DFB\u52A0\u5230\u53F3\u9375\u83DC\u5355"
+   },
+   "show_icon": {
+      "message": "\u5728\u5730\u5740\u680F\u663E\u793A\u6309\u94AE"
+   },
+   "update_now": {
+      "message": "\u7ACB\u5373\u66F4\u65B0"
+   },
+   "whitelisted_domains": {
+      "description": "This is a tab heading.",
+      "message": "\u6392\u9664\u57DF\u540D"
+   }
 }
