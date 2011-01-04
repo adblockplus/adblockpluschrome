@@ -48,7 +48,7 @@
       "message": "删除"
    },
    "description": {
-      "message": "使用Firefox Adblock Plus过滤广告。使你告别广告，舒心浏览网页！!"
+      "message": "使用Firefox AdBlock Plus过滤广告。使您告别广告，舒心浏览网页！"
    },
    "disable_inline": {
       "message": "屏蔽广告链接"
@@ -95,7 +95,7 @@
       }
    },
    "found_a_bug": {
-      "message": "发现错误？要翻译Adblock Plus？ 请至<a href='$url$'>此处询问</a>。",
+      "message": "发现错误？需要帮助？请前往<a href='$url$'>此处</a>",
       "placeholders": {
          "url": {
             "content": "$1"
