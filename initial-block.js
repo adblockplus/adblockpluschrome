@@ -43,7 +43,7 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {"t.sina.com.cn": true, "prazsketramvaje.cz
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
 var SELECTOR_GROUP_SIZE = 20;
-var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[src*=".swf"],object[codebase*="swflash.cab"],object[classid*="D27CDB6E-AE6D-11cf-96B8-444553540000"],object[classid*="d27cdb6e-ae6d-11cf-96b8-444553540000"]';
+var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[data*=".swf"],object[src*=".swf"]';
 var TEMP_adservers = null;
 
 var savedBeforeloadEvents = new Array();
