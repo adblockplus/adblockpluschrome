@@ -17,14 +17,14 @@ Options:
           --release     Create a release build, not a development build
 ''' % os.path.basename(sys.argv[0])
 
-def removeUpdateURL(fileName, fileData):
+def removeUpdateURL(dir, fileName, fileData):
   if fileName == 'manifest.json':
     return re.sub(r'\s*"update_url"\s*:\s*"[^"]*",', '', fileData)
   return fileData
 
-def addBuildNumber(fileName, fileData):
+def addBuildNumber(dir, fileName, fileData):
   if fileName == 'manifest.json':
-    revision, dummy = subprocess.Popen(['hg', 'id', '-n'], stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
+    revision, dummy = subprocess.Popen(['hg', '-R', dir, 'id', '-n'], stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
     revision = re.sub(r'\D', '', revision)
     if len(revision) > 0:
       return re.sub(r'("version"\s*:\s*"[^"]*)(",)', r'\1.%s\2' % revision, fileData)
@@ -48,7 +48,7 @@ def addToZip(zip, filters, dir, baseName):
       handle.close()
 
       for filter in filters:
-        fileData = filter(baseName + file, fileData)
+        fileData = filter(dir, baseName + file, fileData)
       zip.writestr(baseName + file, fileData)
 
 def packDirectory(dir, filters):
