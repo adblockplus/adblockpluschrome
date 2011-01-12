@@ -65,7 +65,7 @@ def signBinary(zipdata, keyFile):
   return signature
 
 def getPublicKey(keyFile):
-  pubkey, dummy = subprocess.Popen(['openssl', 'rsa', '-pubout', '-outform', 'DER', '-in', keyFile], stdout=subprocess.PIPE).communicate()
+  pubkey, dummy = subprocess.Popen(['openssl', 'rsa', '-pubout', '-outform', 'DER', '-in', keyFile], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
   return pubkey
 
 def writePackage(outputFile, pubkey, signature, zipdata):
