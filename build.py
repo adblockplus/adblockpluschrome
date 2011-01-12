@@ -33,7 +33,8 @@ def addBuildNumber(fileName, fileData):
 def addToZip(zip, filters, dir, baseName):
   for file in os.listdir(dir):
     filelc = file.lower()
-    if (file.startswith('.') or filelc.endswith('.py') or
+    if (file.startswith('.') or
+        filelc.endswith('.py') or filelc.endswith('.pyc') or
         filelc.endswith('.crx') or filelc.endswith('.zip') or
         filelc.endswith('.sh') or filelc.endswith('.bat')):
       # skip special files, scripts, existing archives
