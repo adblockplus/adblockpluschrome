@@ -65,7 +65,7 @@ function generateElemhideCSSString(selectors)
   return result.join(" ");
 }
 
-// Remove a particular element.
+// Hides a single element
 function nukeSingleElement(elt) {
   if(elt.innerHTML)
     elt.innerHTML = "";
@@ -73,6 +73,10 @@ function nukeSingleElement(elt) {
     elt.innerText = "";
   elt.style.display = "none";
   elt.style.visibility = "hidden";
+  // If this is a LINK tag, it's probably a stylesheet, so disable it. Actually removing
+  // it seems to intermittently break page rendering.
+  if(elt.localName && elt.localName.toUpperCase() == "LINK")
+    elt.setAttribute("disabled", "");
 }
 
 // This function Copyright (c) 2008 Jeni Tennison, from jquery.uri.js
