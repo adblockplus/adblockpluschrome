@@ -613,7 +613,7 @@ if (document.documentElement instanceof HTMLElement)
       removeInitialHideStylesheet();
     }
   });
-  
+
   chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     // background.html might want to know this document's domain
     if(request.reqtype == "get-domain") {
@@ -690,7 +690,8 @@ if (document.documentElement instanceof HTMLElement)
 
       // Nuke ads by src. This will also cause removal of initial-block stylesheet.
       nukeElements(document);
-      document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
+      if (workaroundBeforeloadMalfunction || pageIsYouTube)
+        document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
 
       // Nuke background if it's an ad
       var bodyBackground = getComputedStyle(document.body).getPropertyValue("background-image");
