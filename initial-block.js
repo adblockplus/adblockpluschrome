@@ -39,7 +39,17 @@ var TagToType = {
 // blocker.js to get rid of ads by element src URL.
 // Unfortunately we can't do this with filter rules because we would need to query the backend to
 // check our domain, which cannot respond in time due to the lack of synchronous message passing.
-var BEFORELOAD_MALFUNCTION_DOMAINS = {"t.sina.com.cn": true, "prazsketramvaje.cz": true, "xnachat.com": true, "www.tuenti.com": true, "www.nwjv.de": true, "www.redfin.com": true, "www.nubert.de": true};
+var BEFORELOAD_MALFUNCTION_DOMAINS = {
+  "t.sina.com.cn": true,
+  "prazsketramvaje.cz": true,
+  "xnachat.com": true,
+  "www.tuenti.com": true,
+  "www.nwjv.de": true,
+  "www.redfin.com": true,
+  "www.nubert.de": true,
+  "shop.ww.kz": true,
+  "www.shop.ww.kz": true
+};
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
 var SELECTOR_GROUP_SIZE = 20;
