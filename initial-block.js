@@ -53,7 +53,7 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
 var SELECTOR_GROUP_SIZE = 20;
-var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"],embed[src*=".swf"],object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[data*=".swf"],object[src*=".swf"]';
+var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"]:not([src^="main.swf?opf="]),embed[src*=".swf"]:not([src^="main.swf?opf="]),object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[data*=".swf"],object[src*=".swf"]';
 var TEMP_adservers = null;
 
 var savedBeforeloadEvents = new Array();
