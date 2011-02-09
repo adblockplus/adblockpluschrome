@@ -48,7 +48,10 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "www.redfin.com": true,
   "www.nubert.de": true,
   "shop.ww.kz": true,
-  "www.shop.ww.kz": true
+  "www.shop.ww.kz": true,
+  "www.meinvz.net": true,
+  "www.studivz.net": true,
+  "www.schuelervz.net": true
 };
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
