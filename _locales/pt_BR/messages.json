@@ -1,7 +1,6 @@
 {
   "description": {
-    "message": "Bloqueador de propagandas usando o mecanismo de filtragem do Adblock Plus
- para o Firefox. Dê um beijo de despedida nelas e navegue em paz!"
+    "message": "Bloqueador de propagandas usando o mecanismo de filtragem do Adblock Plus para o Firefox. Dê um beijo de despedida nelas e navegue em paz!"
   },
     "options": {
         "message": "Opções do Adblock Plus"
@@ -91,15 +90,13 @@
       "message": "Atualizar agora"
   },
   "add_a_filter_list": {
-      "message": "Inscrever-se para uma <a href='$url$'>lista de filtro</a> do Firefox Adblock Plus
-:",
+      "message": "Inscrever-se para uma <a href='$url$'>lista de filtro</a> do Firefox Adblock Plus:",
       "placeholders": {
           "url": { "content" : "$1" }
       }
   },
   "filter_must_follow_syntax": {
-      "message": "Seu filtro deve seguir a <a href='$url$'>sintaxe de filtro do Adblock Plus
-</a>. Certos tipos de filtro como requisições realizadas por plugins, por exemplo o Flash, não são suportadas.",
+      "message": "Seu filtro deve seguir a <a href='$url$'>sintaxe de filtro do Adblock Plus</a>. Certos tipos de filtro como requisições realizadas por plugins, por exemplo o Flash, não são suportadas.",
       "placeholders": {
           "url": { "content" : "$1" }
       }
@@ -122,7 +119,7 @@
         "message": "Desativar propagandas de texto em linha"
     },
     "block_youtube": {
-        "message": "Bloquear propagandas dentro de vídeos do YouTube. (não funciona com a extensão FlashBlock)"
+        "message": "Bloquear propagandas dentro de vídeos do YouTube"
     },
     
     "enabled_for_site": {

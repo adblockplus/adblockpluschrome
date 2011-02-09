@@ -4,8 +4,7 @@
       "message": "Hinzufügen"
    },
    "add_a_filter_list": {
-      "message": "Fügen Sie eine Firefox Adblock Plus
- <a href='$url$'>Filter Liste</a> hinzu:",
+      "message": "Fügen Sie eine Firefox Adblock Plus <a href='$url$'>Filter Liste</a> hinzu:",
       "placeholders": {
          "url": {
             "content": "$1"
@@ -35,7 +34,7 @@
       "message": "Element blocken"
    },
    "block_youtube": {
-      "message": "Blocke Werbung in YouTube Videos (funktioniert nicht mit der FlashBlock Erweiterung)"
+      "message": "Blocke Werbung in YouTube Videos"
    },
    "cancel": {
       "description": "Name für den 'Abbrechen'-Button",
@@ -49,8 +48,7 @@
       "message": "löschen"
    },
    "description": {
-      "message": "Blockt Werbung mithilfe der Firefox Adblock Plus
- - Engine. Sagen Sie Werbung auf Wiedersehen und surfen Sie in Ruhe!"
+      "message": "Blockt Werbung mithilfe der Firefox Adblock Plus - Engine. Sagen Sie Werbung auf Wiedersehen und surfen Sie in Ruhe!"
    },
    "disable_inline": {
       "message": "Blocke Inline Text Werbung"
@@ -89,8 +87,7 @@
       "message": "Filter Liste"
    },
    "filter_must_follow_syntax": {
-      "message": "Ihr Filter muss nach der <a href='$url$'>Adblock Plus
- Filter Syntax</a> geschrieben werden. Manche Filter Arten, wie object-subrequest (Anfragen, die von Plugins gestartet werden), werden nicht unterstützt.",
+      "message": "Ihr Filter muss nach der <a href='$url$'>Adblock Plus Filter Syntax</a> geschrieben werden. Manche Filter Arten, wie object-subrequest (Anfragen, die von Plugins gestartet werden), werden nicht unterstützt.",
       "placeholders": {
          "url": {
             "content": "$1"

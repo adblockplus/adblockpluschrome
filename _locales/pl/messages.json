@@ -4,8 +4,7 @@
       "message": "Dodaj"
    },
    "add_a_filter_list": {
-      "message": "Subskrybuj <a href='$url$'>inne filtry</a> Firefox Adblock Plus
-:",
+      "message": "Subskrybuj <a href='$url$'>inne filtry</a> Firefox Adblock Plus:",
       "placeholders": {
          "url": {
             "content": "$1"
@@ -35,7 +34,7 @@
     "description": "Label for 'Block Element' context menu item"
    },
    "block_youtube": {
-      "message": "Blokuj reklamy w filmach YouTube (nie działa z rozszerzeniem FlashBlock)"
+      "message": "Blokuj reklamy w filmach YouTube"
    },
    "cancel": {
       "description": "Cancel button label",
@@ -49,8 +48,7 @@
       "message": "Usuń"
    },
    "description": {
-      "message": "Blokuj reklamy korzystając z filtrów Adblock Plus
-. Pożegnaj się z reklamami i serwuj w spokoju!"
+      "message": "Blokuj reklamy korzystając z filtrów Adblock Plus. Pożegnaj się z reklamami i serwuj w spokoju!"
    },
    "disable_inline": {
       "message": "Wyłącz reklamy tekstowe"
@@ -89,8 +87,7 @@
       "message": "Listy filtrów"
    },
    "filter_must_follow_syntax": {
-      "message": "Twój filtr musi być zgodny <a href='$url$'>ze składnią filtru Adblock Plus
-</a>. Niektóre typy filtrów, jak obiect-subrequest, nie są obsługiwane.",
+      "message": "Twój filtr musi być zgodny <a href='$url$'>ze składnią filtru Adblock Plus</a>. Niektóre typy filtrów, jak obiect-subrequest, nie są obsługiwane.",
       "placeholders": {
          "url": {
             "content": "$1"

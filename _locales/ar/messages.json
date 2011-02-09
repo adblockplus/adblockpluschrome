@@ -1,7 +1,6 @@
 {
     "description": {
-        "message": "منع الإعلانات بإستخدام محرك الفلاتر الخاص بـ Firefox Adblock Plus
-. قبل الإعلانات وداعأ ومتصفحك في سلام!"
+        "message": "منع الإعلانات بإستخدام محرك الفلاتر الخاص بـ Firefox Adblock Plus. قبل الإعلانات وداعأ ومتصفحك في سلام!"
     },
     "options": {
         "message": "Adblock Plus خصائص"
@@ -91,15 +90,13 @@
         "message": "التحديث الان"
     },
     "add_a_filter_list": {
-        "message": "إشترك لـ Firefox Adblock Plus
- <a href='$url$'>قائمة الفلتر</a>:",
+        "message": "إشترك لـ Firefox Adblock Plus <a href='$url$'>قائمة الفلتر</a>:",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "filter_must_follow_syntax": {
-        "message": "الفلتر الخاص بك يجب أن يتبع <a href='$url$'>Adblock Plus
- تركيب الفلتر</a>. أنواع معينة من الفلاتر, مثل object-subrequest, غير مدعومه.",
+        "message": "الفلتر الخاص بك يجب أن يتبع <a href='$url$'>Adblock Plus تركيب الفلتر</a>. أنواع معينة من الفلاتر, مثل object-subrequest, غير مدعومه.",
         "placeholders": {
             "url": { "content" : "$1" }
         }
@@ -122,7 +119,7 @@
         "message": "تعطيل الإعلانات المضمنة في النص"
     },
     "block_youtube": {
-        "message": "منع الإعلانات داخل YouTube videos (لا تعمل مع إضافة FlashBlock)"
+        "message": "منع الإعلانات داخل YouTube videos"
     },
     
     "enabled_for_site": {

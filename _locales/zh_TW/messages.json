@@ -1,7 +1,6 @@
 {
     "description": {
-        "message": "使用 Firefox Adblock Plus
- 的廣告過濾引擎。告別廣告，開心瀏覽!"
+        "message": "使用 Firefox Adblock Plus 的廣告過濾引擎。告別廣告，開心瀏覽!"
     },
     "options": {
         "message": "Adblock Plus 選項"
@@ -90,15 +89,13 @@
         "message": "立即更新"
     },
     "add_a_filter_list": {
-        "message": "訂閱 Firefox Adblock Plus
- 的 <a href='$url$'>過濾清單</a>:",
+        "message": "訂閱 Firefox Adblock Plus 的 <a href='$url$'>過濾清單</a>:",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "filter_must_follow_syntax": {
-        "message": "您的過濾規則必須遵循 <a href='$url$'>Adblock Plus
- 的語法</a>。特定的過濾類型，像是 object-subrequest 不支援。",
+        "message": "您的過濾規則必須遵循 <a href='$url$'>Adblock Plus 的語法</a>。特定的過濾類型，像是 object-subrequest 不支援。",
         "placeholders": {
             "url": { "content" : "$1" }
         }
@@ -122,7 +119,7 @@
         "message": "阻擋文字廣告"
     },
     "block_youtube": {
-        "message": "阻擋 YouTube 影片廣告（不能與 FlashBlock 擴充套件相容）"
+        "message": "阻擋 YouTube 影片廣告"
     },
     
     "enabled_for_site": {
