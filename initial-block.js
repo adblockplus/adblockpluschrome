@@ -59,7 +59,7 @@ var TEMP_adservers = null;
 var savedBeforeloadEvents = new Array();
 
 // YouTube special case option
-if (/\byoutube\.com$/.test(document.domain))
+if (/\byoutube(-nocookie)?\.com$/.test(document.domain))
 {
   chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response)
   {
