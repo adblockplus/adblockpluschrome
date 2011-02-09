@@ -1,7 +1,6 @@
 {
     "description": {
-        "message": "Suppression des publicités utilisant le moteur de Firefox Adblock Plus
-. Dites adieu publicités et naviguez en paix!"
+        "message": "Suppression des publicités utilisant le moteur de Firefox Adblock Plus. Dites adieu publicités et naviguez en paix!"
     },
   
     "options": {
@@ -85,15 +84,13 @@
       "message": "Actualiser maintenant"
   },
   "add_a_filter_list": {
-      "message": "S'abonner à <a href='$url$'>une liste</a> utilisant le format de Firefox Adblock Plus
-&nbsp;:",
+      "message": "S'abonner à <a href='$url$'>une liste</a> utilisant le format de Firefox Adblock Plus&nbsp;:",
       "placeholders": {
           "url": { "content" : "$1" }
       }
   },
   "filter_must_follow_syntax": {
-      "message": "Il faut que votre filtre suive <a href='$url$'>le syntaxe Adblock Plus
-</a>. Certains types de filtre, comme object-subrequest, ne sont pas supportés.",
+      "message": "Il faut que votre filtre suive <a href='$url$'>le syntaxe Adblock Plus</a>. Certains types de filtre, comme object-subrequest, ne sont pas supportés.",
       "placeholders": {
           "url": { "content" : "$1" }
       }
@@ -115,7 +112,7 @@
         "message": "Retirer les publicités integrées des textes"
     },
     "block_youtube": {
-        "message": "Retirer les publicités dans les vidéos YouTube (ne fonctionne pas avec l'extension FlashBlock)"
+        "message": "Retirer les publicités dans les vidéos YouTube"
     },
     
     "enabled_for_site": {

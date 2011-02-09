@@ -1,7 +1,6 @@
 {
     "description": {
-        "message": "Blocca la pubblicità usando il motore di Firefox Adblock Plus
-. Dite addio alla pubblicità e navigate in pace!"
+        "message": "Blocca la pubblicità usando il motore di Firefox Adblock Plus. Dite addio alla pubblicità e navigate in pace!"
     },
     "options": {
         "message": "Opzioni di Adblock Plus"
@@ -91,15 +90,13 @@
         "message": "Aggiorna adesso"
     },
     "add_a_filter_list": {
-        "message": "Sottoscrivi una <a href='$url$'>lista di filtri</a> in formato Firefox Adblock Plus
-:",
+        "message": "Sottoscrivi una <a href='$url$'>lista di filtri</a> in formato Firefox Adblock Plus:",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "filter_must_follow_syntax": {
-        "message": "I filtri personalizzati devono seguire <a href='$url$'>la sintassi di Adblock Plus
-</a>. Certi tipi di filtro, come object-subrequest, non sono supportati.",
+        "message": "I filtri personalizzati devono seguire <a href='$url$'>la sintassi di Adblock Plus</a>. Certi tipi di filtro, come object-subrequest, non sono supportati.",
         "placeholders": {
             "url": { "content" : "$1" }
         }
@@ -122,7 +119,7 @@
         "message": "Disabilita la pubblicità integrata nel testo"
     },
     "block_youtube": {
-        "message": "Blocca la pubblicità nei video YouTube (non funziona con l'estensione FlashBlock)"
+        "message": "Blocca la pubblicità nei video YouTube"
     },
     
     "enabled_for_site": {

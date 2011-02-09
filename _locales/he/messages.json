@@ -1,7 +1,6 @@
 {
     "description": {
-        "message": "תוסף שחוסם פרסומות באמצעות המנגנון של המסנן Adblock Plus
- ל־Firefox. נשקו את הפרסומות לשלום!"
+        "message": "תוסף שחוסם פרסומות באמצעות המנגנון של המסנן Adblock Plus ל־Firefox. נשקו את הפרסומות לשלום!"
     },
     "options": {
         "message": "אפשרויות Adblock Plus"
@@ -91,15 +90,13 @@
         "message": "עדכון כעת"
     },
     "add_a_filter_list": {
-        "message": "הרשמה ל<a href='$url$'>רשימת המסננים</a> של Adblock Plus
- ל־Firefox:",
+        "message": "הרשמה ל<a href='$url$'>רשימת המסננים</a> של Adblock Plus ל־Firefox:",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "filter_must_follow_syntax": {
-        "message": "על המסנן שלך לציית ל<a href='$url$'>כללי התחביר של מסנני Adblock Plus
-</a>.",
+        "message": "על המסנן שלך לציית ל<a href='$url$'>כללי התחביר של מסנני Adblock Plus</a>.",
         "placeholders": {
             "url": { "content" : "$1" }
         }
@@ -122,7 +119,7 @@
         "message": "ביטול פרסומות טקסט"
     },
     "block_youtube": {
-        "message": "חסימת פרסומות בתוך סרטוני YouTube (אינו תואם להרחבה FlashBlock)"
+        "message": "חסימת פרסומות בתוך סרטוני YouTube"
     },
     
     "enabled_for_site": {
