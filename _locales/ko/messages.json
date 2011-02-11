@@ -25,7 +25,7 @@
         }
     },
     "not_a_filter_list": {
-        "message": "구독 필터의 올바른 형식이 아닙니다.",
+        "message": "올바른 형식의 구독 필터가 아닙니다.",
         "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
     },
     "not_found_on_server": {
@@ -70,7 +70,7 @@
         "description": "Word for 'delete'."
     },
     "remove_button": {
-        "message": "선택된 항목 제거",
+        "message": "선택 항목 제거",
         "description": "This is the label for the 'Remove selected' buttons."
     },
     "edit_filters_raw": {
@@ -81,7 +81,7 @@
     },
 
     "enable_only_the": {
-        "message": "필요한 구독 필터만 추가하십시오. 구독 필터를 필요 이상으로 많이 추가하면 페이지의 로딩 속도가 저하될 수 있습니다."
+        "message": "필요한 구독 필터만 추가하십시오. 구독 필터를 필요 이상으로 많이 추가하면 페이지의 로딩 속도가 느려질 수 있습니다."
     },
     "out_of_date_lists": {
         "message": "구독 필터는 주기적으로 자동 업데이트됩니다."
@@ -90,45 +90,45 @@
         "message": "지금 업데이트"
     },
     "add_a_filter_list": {
-        "message": "Adblock Plus 의 구독 필터 추가 : <a href='$url$'>구독 필터 전체 목록</a>",
+        "message": "애드블록 플러스의 구독 필터 추가 : <a href='$url$'>전체 구독 필터 목록</a>",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "filter_must_follow_syntax": {
-        "message": "사용자 필터는 <a href='$url$'>Adblock Plus 의 필터 작성 방법</a>을 따라야 합니다. 필터의 특정 구문은 지원하지 않습니다.",
+        "message": "사용자 필터는 <a href='$url$'>애드블록 플러스의 필터 작성 방법</a>을 따라야 합니다. 필터의 특정 구문은 지원하지 않습니다.",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "disabled_for_these_domains": {
-        "message": "다음 도메인에서는 광고를 차단하지 않습니다. 주소 표시줄의 애드블록 플러스의 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
+        "message": "다음 도메인에서는 광고를 차단하지 않습니다. 주소 표시줄의 애드블록 플러스 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
     },
     "found_a_bug": {
-        "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? 다음 주소로 연락하십시오 : <a href='$url$'>연락하기</a>",
+        "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? <a href='$url$'>연락하기</a>",
         "placeholders": {
             "url": { "content" : "$1" }
         }
     },
     "show_icon": {
-        "message": "주소 표시줄에 아이콘 보이기"
+        "message": "주소 표시줄에 아이콘 표시"
     },
     "show_block_element_menu": {
-        "message": "문맥 메뉴에 '요소 숨김' 항목 보이기"
+        "message": "문맥 메뉴에 '요소 숨김' 항목 표시"
     },
     "disable_inline": {
         "message": "인라인 텍스트 광고를 보지 않음"
     },
     "block_youtube": {
-        "message": "유튜브 동영상 내부 광고를 차단함 [플래시블록"
+        "message": "유튜브 동영상 내부의 광고 차단"
     },
     
     "enabled_for_site": {
-        "message": "이 사이트에 필터를 적용함",
+        "message": "이 사이트에 필터 적용",
         "description": "Popup balloon checkbox label"
     },
     "easy_create_filter": {
-        "message": "광고 영역 숨김",
+        "message": "광고 영역 숨기기",
         "description": "Button label in popup balloon"
     },
     "cancel": {
