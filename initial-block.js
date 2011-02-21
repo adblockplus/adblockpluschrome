@@ -51,7 +51,8 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "www.shop.ww.kz": true,
   "www.meinvz.net": true,
   "www.studivz.net": true,
-  "www.schuelervz.net": true
+  "www.schuelervz.net": true,
+  "www.wien.gv.at": true
 };
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
