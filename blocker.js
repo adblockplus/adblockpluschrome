@@ -24,8 +24,6 @@
  * ***** END LICENSE BLOCK ***** */
 
 var enabled = false; // Enabled for this particular domain.
-var serial = 0; // ID number for elements, indexes elementCache
-var elementCache = new Array(); // Keeps track of elements that we may want to get rid of
 var nukeElementsTimeoutID = 0;
 var nukeElementsLastTime = 0;
 
@@ -40,9 +38,6 @@ var highlightedElementsBoxShadows = null;
 var highlightedElementsBGColors = null;
 var clickHideFiltersDialog = null;
 var lastRightClickEvent = null;
-
-// Port to background.htm
-var port;
 
 // We only remove the initial-hide stylesheet, leaving the elemhide stylesheet
 // in place.
@@ -410,10 +405,12 @@ function clickHide_mouseClick(e) {
 // It would be a click-to-hide filter, so it's only an elemhide filter.
 // Since this rarely happens, we can afford to do a full run of ad removal.
 function removeAdsAgain() {
-  chrome.extension.sendRequest({reqtype: "get-elemhide-selectors", domain: document.domain}, function(response) {
+  chrome.extension.sendRequest({reqtype: "get-selectors"}, function(response)
+  {
     // Retrieve new set of selectors and build selector strings
-    hideBySelectorString(document, response.selectors.join(","));
-    nukeElements(document);
+    if (response.selectors)
+      hideBySelectorString(document, response.selectors.join(","));
+    nukeElements();
   });
 }
 
@@ -463,42 +460,18 @@ function getElementURL(elt) {
 
 // Hides/removes image and Flash elements according to the external resources they load.
 // (e.g. src attribute)
-function nukeElements(parent) {
-  if(typeof parent == 'undefined')
-    parent = document;
-  var elts = parent.querySelectorAll("img,object,iframe,embed,link");
-  var types = new Array();
-  var urls = new Array();
-  var serials = new Array();
-  var url;
-  // Reinitialize elementCache since we won't reuse what's already in there
-  delete elementCache;
-  serial = 0;
-  elementCache = new Array();
-  for(var i = 0; i < elts.length; i++) {
+function nukeElements()
+{
+  var elts = document.querySelectorAll("img,object,iframe,embed,link");
+  for (var i = 0; i < elts.length; i++)
+  {
     // The URL is normalized in the background script so we don't need to do it here
-    url = getElementURL(elts[i]);
+    var url = getElementURL(elts[i]);
     // If the URL of the element is the same as the document URI, the user is trying to directly
     // view the ad for some reason and so we won't block it.
-    if(url && url != document.baseURI) {
-      // Some rules don't include the domain, and the blacklist
-      // matcher doesn't match on queries that don't include the domain
-      url = relativeToAbsoluteUrl(url);
-      // Guaranteed by call to querySelectorAll() above to be one of img, iframe, object, embed
-      // and therefore we put it in this list
-      elementCache.push(elts[i]);
-      types.push(TagToType[elts[i].localName.toUpperCase()]);
-      urls.push(url);
-      serials.push(serial);
-      serial++;
-    }
+    if (url && url != document.baseURI && shouldBlock(url, TagToType[elts[i].localName.toUpperCase()]))
+      nukeSingleElement(elts[i]);
   }
-  // Ask background.html which of these elements we should nuke
-  port.postMessage({reqtype: "should-block-list?", urls: urls, types: types, serials: serials, domain: document.domain});
-  // Clean up a bit in case GC doesn't do it
-  delete urls;
-  delete types;
-  delete serials;
   
   nukeElementsTimeoutID = 0;
   nukeElementsLastTime = Date.now();
@@ -518,17 +491,6 @@ if (document.documentElement instanceof HTMLElement)
     lastRightClickEvent = e;
   }, false);
   
-  port = chrome.extension.connect({name: "filter-query"});
-  // Set up message handlers. These remove undesirable elements from the page.
-  port.onMessage.addListener(function(msg) {
-    if(msg.shouldBlockList && enabled == true) {
-      for(var i = 0; i < msg.shouldBlockList.length; i++)
-        nukeSingleElement(elementCache[msg.shouldBlockList[i]]);
-      // Take away our initial-hide CSS, leaving only ads hidden
-      removeInitialHideStylesheet();
-    }
-  });
-
   chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     // background.html might want to know this document's domain
     if(request.reqtype == "get-domain") {
@@ -592,23 +554,24 @@ if (document.documentElement instanceof HTMLElement)
       sendResponse({});
   });
 
-  chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
+  chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response)
+  {
     enabled = response.enabled;
-    if(enabled) {
-      // Nuke ads by src. This will also cause removal of initial-block stylesheet.
-      nukeElements(document);
+    if(enabled)
+    {
       if (workaroundBeforeloadMalfunction)
+      {
+        // Too bad, we cannot block properly - resort to crawling the document
+        // for ads.
+        nukeElements();
         document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
+      }
+      removeInitialHideStylesheet();
 
       // Nuke background if it's an ad
-      var bodyBackground = getComputedStyle(document.body).getPropertyValue("background-image");
-      if(bodyBackground && bodyBackground.substr(0, 4) == "url(") {
-        bodyBackground = bodyBackground.substr(4, bodyBackground.length-5);
-        chrome.extension.sendRequest({reqtype: "should-block?", type: "IMAGE", url: bodyBackground}, function(response) {
-          if(response.block)
-            document.body.style.setProperty("background-image", "none");
-        });
-      }
+      var bodyBackground = getComputedStyle(document.body).backgroundImage;
+      if (bodyBackground && /^url\((.*)\)$/ && shouldBlock(RegExp.$1, "IMAGE"))
+        document.body.style.setProperty("background-image", "none");
     }
   });
 

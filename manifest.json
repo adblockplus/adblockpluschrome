@@ -24,7 +24,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["initial-block.js"],
+      "js": ["adblockplus/patches.js", "adblockplus/FilterClasses.jsm", "adblockplus/Matcher.jsm", "initial-block.js"],
       "run_at": "document_start",
       "all_frames": true
     },
