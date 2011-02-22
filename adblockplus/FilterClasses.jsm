@@ -59,10 +59,10 @@
   Filter.regexpRegExp = /^(@@)?\/.*\/(?:\$~?[\w\-]+(?:=[^,\s]+)?(?:,~?[\w\-]+(?:=[^,\s]+)?)*)?$/;
   Filter.optionsRegExp = /\$(~?[\w\-]+(?:=[^,\s]+)?(?:,~?[\w\-]+(?:=[^,\s]+)?)*)$/;
   Filter.fromText = (function (text) {
-    if (!/\S/.test(text))
-      return null;
     if (text in Filter.knownFilters)
       return Filter.knownFilters[text];
+    if (!/\S/.test(text))
+      return null;
     var ret;
     if (Filter.elemhideRegExp.test(text))
       ret = ElemHideFilter.fromText(text, RegExp["$1"], RegExp["$2"], RegExp["$3"], RegExp["$4"]);
@@ -240,7 +240,6 @@
     domainSeparator: "|",
     regexpSource: null,
     regexp: null,
-    shortcut: null,
     contentType: 2147483647,
     matchCase: false,
     thirdParty: null,
@@ -249,7 +248,7 @@
       if (source[0] == "*")
         source = source.substr(1);
       var pos = source.length - 1;
-      if (source[pos] == "*")
+      if (pos >= 0 && source[pos] == "*")
         source = source.substr(0, pos);
       source = source.replace(/\^\|$/, "^").replace(/\W/g, "\\$&").replace(/\\\*/g, ".*").replace(/\\\^/g, "(?:[\\x00-\\x24\\x26-\\x2C\\x2F\\x3A-\\x40\\x5B-\\x5E\\x60\\x7B-\\x80]|$)").replace(/^\\\|\\\|/, "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?").replace(/^\\\|/, "^").replace(/\\\|$/, "$");
       var regexp = new RegExp(source, this.matchCase ? "" : "i");
@@ -259,7 +258,10 @@
     }
     ,
     matches: function (location, contentType, docDomain, thirdParty) {
-      return (this.regexp.test(location) && (RegExpFilter.typeMap[contentType] & this.contentType) != 0 && (this.thirdParty == null || this.thirdParty == thirdParty) && this.isActiveOnDomain(docDomain));
+      if (this.regexp.test(location) && (RegExpFilter.typeMap[contentType] & this.contentType) != 0 && (this.thirdParty == null || this.thirdParty == thirdParty) && this.isActiveOnDomain(docDomain)) {
+        return true;
+      }
+      return false;
     }
     
   });
@@ -347,9 +349,10 @@
     MEDIA: 16384,
     FONT: 32768,
     BACKGROUND: 4,
+    DONOTTRACK: 536870912,
     ELEMHIDE: 1073741824
   };
-  RegExpFilter.prototype.contentType &= ~RegExpFilter.typeMap.ELEMHIDE;
+  RegExpFilter.prototype.contentType &= ~(RegExpFilter.typeMap.ELEMHIDE | RegExpFilter.typeMap.DONOTTRACK);
   function BlockingFilter(text, regexpSource, contentType, matchCase, domains, thirdParty, collapse) {
     RegExpFilter.call(this, text, regexpSource, contentType, matchCase, domains, thirdParty);
     this.collapse = collapse;
@@ -372,8 +375,7 @@
   ElemHideFilter.prototype = _extend0(ActiveFilter, {
     domainSeparator: ",",
     selectorDomain: null,
-    selector: null,
-    key: null
+    selector: null
   });
   ElemHideFilter.fromText = (function (text, domain, tagName, attrRules, selector) {
     if (!selector) {
