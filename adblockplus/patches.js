@@ -67,6 +67,15 @@ function FilterListenerPatch()
   }
 }
 
+function MatcherPatch()
+{
+  // Very ugly - we need to rewrite _checkEntryMatch() function to make sure
+  // it calls Filter.fromText() instead of assuming that the filter exists.
+  var origFunction = Matcher.prototype._checkEntryMatch.toString();
+  var newFunction = origFunction.replace(/\bFilter\.knownFilters\[(.*?)\];/g, "Filter.fromText($1);");
+  eval("Matcher.prototype._checkEntryMatch = " + newFunction);
+}
+
 Components =
 {
   interfaces: {},

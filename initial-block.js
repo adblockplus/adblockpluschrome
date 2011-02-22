@@ -58,7 +58,6 @@ var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_
 
 var SELECTOR_GROUP_SIZE = 20;
 var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"]:not([src^="main.swf?opf="]),embed[src*=".swf"]:not([src^="main.swf?opf="]),object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[data*=".swf"],object[src*=".swf"]';
-var TEMP_adservers = null;
 
 var savedBeforeloadEvents = new Array();
 
@@ -71,7 +70,7 @@ if (/\byoutube(-nocookie)?\.com$/.test(document.domain))
     {
       document.addEventListener("beforeload", function(e)
       {
-        var eltDomain = TEMP_extractDomainFromURL(e.url);
+        var eltDomain = extractDomainFromURL(e.url);
         if (e.target && /\bytimg\.com$/.test(eltDomain) &&
             /^(embed|object)$/.test(e.target.localName) &&
             e.target.hasAttribute("flashvars"))
@@ -159,7 +158,8 @@ function removeDotSegments(u) {
 }
 
 // Does some degree of URL normalization
-function normalizeURL(url) {
+function normalizeURL(url)
+{
   var components = url.match(/(.+:\/\/.+?)\/(.*)/);
   if(!components)
     return url;
@@ -190,9 +190,11 @@ function relativeToAbsoluteUrl(url) {
 }
 
 // Extracts a domain name from a URL
-function TEMP_extractDomainFromURL(url) {
+function extractDomainFromURL(url)
+{
   if(!url)
     return "";
+
   var x = url.substr(url.indexOf("://") + 3);
   x = x.substr(0, x.indexOf("/"));
   x = x.substr(x.indexOf("@") + 1);
@@ -202,18 +204,23 @@ function TEMP_extractDomainFromURL(url) {
   return x;
 }
 
-// Horrible hack
-function TEMP_isAdServer(domain) {
-  domain = domain.replace(/\.+$/, "").toLowerCase();
+// Primitive third-party check, needs to be replaced by something more elaborate
+// later.
+function isThirdParty(requestHost, documentHost)
+{
+  // Remove trailing dots
+  requestHost = requestHost.replace(/\.+$/, "");
+  documentHost = documentHost.replace(/\.+$/, "");
 
-  for(;;) {
-    if (domain in TEMP_adservers)  return true;
-    var nextDot = domain.indexOf(".");
-    if(nextDot < 0)
-      break;
-    domain = domain.substr(nextDot + 1);
-  }
-  return false;
+  // Extract domain name - leave IP addresses unchanged, otherwise leave only
+  // the last two parts of the host name
+  var documentDomain = documentHost
+  if (!/^\d+(\.\d+)*$/.test(documentDomain) && /([^\.]+\.[^\.]+)$/.test(documentDomain))
+    documentDomain = RegExp.$1;
+  if (requestHost.length > documentDomain.length)
+    return (requestHost.substr(requestHost.length - documentDomain.length - 1) != "." + documentDomain);
+  else
+    return (requestHost != documentDomain);
 }
 
 // This beforeload handler is used before we hear back from the background process about
@@ -224,31 +231,35 @@ function saveBeforeloadEvent(e) {
   savedBeforeloadEvents.push(e);
 }
 
-// Responds to beforeload events by nuking the element if it's an ad.
-// First just checks the server to avoid an asynchronous call to the back end.
-// If it isn't a known ad server, we have to ask the backend, which won't
-// return in time for preventDefault().
-// We don't normalize the URL here because the backend will do it.
-function beforeloadHandler(e) {
-  var eltDomain = TEMP_extractDomainFromURL(e.url);
-  // Primitive version of third-party check
-  if(eltDomain && !TEMP_isAdServer(document.domain) && TEMP_isAdServer(eltDomain))
+/**
+ * Tests whether a request needs to be blocked.
+ */
+function shouldBlock(/**String*/ url, /**String*/ type)
+{
+  var url = relativeToAbsoluteUrl(url);
+  var requestHost = extractDomainFromURL(url);
+  var documentHost = window.location.hostname;
+  var thirdParty = isThirdParty(requestHost, documentHost);
+  var match = defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
+  return (match && match instanceof BlockingFilter);
+}
+
+/**
+ * Responds to beforeload events by preventing load and nuking the element if
+ * it's an ad.
+ */
+function beforeloadHandler(/**Event*/ e)
+{
+  if (shouldBlock(e.url, TagToType[e.target.localName.toUpperCase()]))
   {
     e.preventDefault();
-    if(e.target)
+    if (e.target)
       nukeSingleElement(e.target);
-  }
-  else
-  {
-    var url = relativeToAbsoluteUrl(e.url);
-    chrome.extension.sendRequest({reqtype: "should-block?", url: url, type: TagToType[e.target.localName.toUpperCase()], domain: document.domain}, function(response) {
-      if(response.block)
-        nukeSingleElement(e.target);
-    });
   }
 }
 
-if(!workaroundBeforeloadMalfunction) {
+if (!workaroundBeforeloadMalfunction)
+{
   document.addEventListener("beforeload", saveBeforeloadEvent, true);
 }
 
@@ -256,14 +267,23 @@ if(!workaroundBeforeloadMalfunction) {
 var initialHideElt = null;
 if (document.documentElement instanceof HTMLElement)
 {
-  chrome.extension.sendRequest({reqtype: "get-initialhide-options"}, function(response)
+  var startTime = Date.now();
+  chrome.extension.sendRequest({reqtype: "get-settings"}, function(response)
   {
-    if(response.enabled)
+    if (response.enabled)
     {
-      // Add a style element for elemhide selectors.
-      var elemhideElt = document.createElement("style");
-      elemhideElt.innerText = generateElemhideCSSString(response.selectors);
-      document.documentElement.appendChild(elemhideElt);
+      defaultMatcher.fromCache(JSON.parse(response.matcherData));
+
+      if (!workaroundBeforeloadMalfunction)
+      {
+        document.removeEventListener("beforeload", saveBeforeloadEvent, true);
+        document.addEventListener("beforeload", beforeloadHandler, true);
+
+        // Replay the events that were saved while we were waiting to learn whether we are enabled
+        for(var i = 0; i < savedBeforeloadEvents.length; i++)
+          beforeloadHandler(savedBeforeloadEvents[i]);
+        delete savedBeforeloadEvents;
+      }
 
       if (!response.noInitialHide)
       {
@@ -274,20 +294,17 @@ if (document.documentElement instanceof HTMLElement)
           + "iframe { visibility: hidden !important }";
         document.documentElement.appendChild(initialHideElt);
       }
+    }
+  });
 
-      // HACK to hopefully block stuff on beforeload event.
-      // Because we are in an asynchronous callback, the page may be partially loaded before
-      // the event handler gets attached. So some things might get through at the beginning.
-      TEMP_adservers = response.priorityAdServers;
-      if(!workaroundBeforeloadMalfunction) {
-        document.removeEventListener("beforeload", saveBeforeloadEvent, true);
-        document.addEventListener("beforeload", beforeloadHandler, true);
-        // Replay the events that were saved while we were waiting to learn whether we are enabled
-        for(var i = 0; i < savedBeforeloadEvents.length; i++) {
-          beforeloadHandler(savedBeforeloadEvents[i]);
-        }
-        delete savedBeforeloadEvents;
-      }
+  chrome.extension.sendRequest({reqtype: "get-selectors"}, function(response)
+  {
+    if (response.selectors)
+    {
+      // Add a style element for elemhide selectors.
+      var elemhideElt = document.createElement("style");
+      elemhideElt.innerText = generateElemhideCSSString(response.selectors);
+      document.documentElement.appendChild(elemhideElt);
     }
   });
 }
