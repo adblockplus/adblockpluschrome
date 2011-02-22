@@ -57,7 +57,6 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
 var SELECTOR_GROUP_SIZE = 20;
-var FLASH_SELECTORS = 'embed[type*="application/x-shockwave-flash"]:not([src^="main.swf?opf="]),embed[src*=".swf"]:not([src^="main.swf?opf="]),object[type*="application/x-shockwave-flash"],object[codetype*="application/x-shockwave-flash"],object[data*=".swf"],object[src*=".swf"]';
 
 var savedBeforeloadEvents = new Array();
 
@@ -264,7 +263,6 @@ if (!workaroundBeforeloadMalfunction)
 }
 
 // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
-var initialHideElt = null;
 if (document.documentElement instanceof HTMLElement)
 {
   var startTime = Date.now();
@@ -283,16 +281,6 @@ if (document.documentElement instanceof HTMLElement)
         for(var i = 0; i < savedBeforeloadEvents.length; i++)
           beforeloadHandler(savedBeforeloadEvents[i]);
         delete savedBeforeloadEvents;
-      }
-
-      if (!response.noInitialHide)
-      {
-        // Initially hide page elements that might be ads, this style element
-        // will be removed later.
-        initialHideElt = document.createElement("style");
-        initialHideElt.innerText = FLASH_SELECTORS + " { display: none !important } "
-          + "iframe { visibility: hidden !important }";
-        document.documentElement.appendChild(initialHideElt);
       }
     }
   });
