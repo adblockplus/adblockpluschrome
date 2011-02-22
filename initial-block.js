@@ -265,7 +265,6 @@ if (!workaroundBeforeloadMalfunction)
 // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
 if (document.documentElement instanceof HTMLElement)
 {
-  var startTime = Date.now();
   chrome.extension.sendRequest({reqtype: "get-settings"}, function(response)
   {
     if (response.enabled)
