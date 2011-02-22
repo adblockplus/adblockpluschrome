@@ -27,6 +27,7 @@
 var filterFiles = {
   "easylist": "https://easylist-downloads.adblockplus.org/easylist.txt", // "easylist.txt",
   "germany": "https://easylist-downloads.adblockplus.org/easylistgermany.txt", // "easylistgermany.txt",
+  "fanboy": "https://secure.fanboy.co.nz/fanboy-adblock.txt",
   "fanboy_es": "https://secure.fanboy.co.nz/fanboy-espanol.txt",
   "france": "https://easylist-downloads.adblockplus.org/liste_fr+easylist.txt", // "liste_fr.txt",
   "china": "http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", // "adblock.txt",
@@ -42,6 +43,7 @@ var filterFiles = {
 var filterListTitles = {
   "easylist": '<a href="http://easylist.adblockplus.org/">EasyList</a>',
   "germany": 'EasyList Germany',
+  "fanboy": '<a href="http://www.fanboy.co.nz/adblock/">Fanboy\'s List</a>',
   "fanboy_es": "Fanboy's Español/Português supplement",
   "france": 'EasyList + Liste FR (Français)',
   "china": '<a href="http://code.google.com/p/adblock-chinalist/">ChinaList</a> (中文)',
@@ -57,6 +59,7 @@ var filterListTitles = {
 var filterListAuthors = {
   "easylist": 'Michael, Ares2, Erunno, Khrin, MonztA',
   "germany": 'Ares2, Erunno, MonztA',
+  "fanboy": 'fanboy, Nitrox',
   "fanboy_es": 'fanboy, Nitrox',
   "france": 'Lian',
   "china": 'Gythialy',
