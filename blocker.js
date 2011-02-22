@@ -39,18 +39,6 @@ var highlightedElementsBGColors = null;
 var clickHideFiltersDialog = null;
 var lastRightClickEvent = null;
 
-// We only remove the initial-hide stylesheet, leaving the elemhide stylesheet
-// in place.
-function removeInitialHideStylesheet()
-{
-  // initialHideElt variable should have been set in initial-block.js
-  if (typeof initialHideElt == "undefined" || initialHideElt == null)
-    return;
-  if (initialHideElt.parentNode)
-    initialHideElt.parentNode.removeChild(initialHideElt);
-  initialHideElt = null;
-}
-
 // Highlight elements according to selector string. This would include
 // all elements that would be affected by proposed filters.
 function highlightElements(selectorString) {
@@ -566,7 +554,6 @@ if (document.documentElement instanceof HTMLElement)
         nukeElements();
         document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
       }
-      removeInitialHideStylesheet();
 
       // Nuke background if it's an ad
       var bodyBackground = getComputedStyle(document.body).backgroundImage;
