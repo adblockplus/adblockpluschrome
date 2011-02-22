@@ -26,12 +26,11 @@
 // This file has been generated automatically from Adblock Plus source code
 //
 
-(function (_patchFunc13) {
+(function (_patchFunc12) {
   const formatVersion = 3;
-  var sourceFile = null;
-  var subscriptionObservers = [];
-  var filterObservers = [];
+  var observers = [];
   var FilterStorage = {
+    sourceFile: null,
     fileProperties: {
       __proto__: null
     },
@@ -39,53 +38,24 @@
     knownSubscriptions: {
       __proto__: null
     },
-    startup: function () {
-      FilterStorage.loadFromDisk();
-      Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService).addObserver(FilterStoragePrivate, "browser:purge-session-history", true);
-    }
-    ,
-    shutdown: function () {
-      FilterStorage.saveToDisk();
-    }
-    ,
-    addSubscriptionObserver: function (observer) {
-      if (subscriptionObservers.indexOf(observer) >= 0)
+    addObserver: function (observer) {
+      if (observers.indexOf(observer) >= 0)
         return ;
-      subscriptionObservers.push(observer);
+      observers.push(observer);
     }
     ,
-    removeSubscriptionObserver: function (observer) {
-      var index = subscriptionObservers.indexOf(observer);
+    removeObserver: function (observer) {
+      var index = observers.indexOf(observer);
       if (index >= 0)
-        subscriptionObservers.splice(index, 1);
+        observers.splice(index, 1);
     }
     ,
-    triggerSubscriptionObservers: function (action, subscriptions) {
+    triggerObservers: function (action, items, additionalData) {
       for (var _loopIndex0 = 0;
-      _loopIndex0 < subscriptionObservers.length; ++ _loopIndex0) {
-        var observer = subscriptionObservers[_loopIndex0];
-        observer(action, subscriptions);
+      _loopIndex0 < observers.length; ++ _loopIndex0) {
+        var observer = observers[_loopIndex0];
+        observer(action, items, additionalData);
       }
-    }
-    ,
-    triggerFilterObservers: function (action, filters, additionalData) {
-      for (var _loopIndex1 = 0;
-      _loopIndex1 < filterObservers.length; ++ _loopIndex1) {
-        var observer = filterObservers[_loopIndex1];
-        observer(action, filters, additionalData);
-      }
-    }
-    ,
-    addFilterObserver: function (observer) {
-      if (filterObservers.indexOf(observer) >= 0)
-        return ;
-      filterObservers.push(observer);
-    }
-    ,
-    removeFilterObserver: function (observer) {
-      var index = filterObservers.indexOf(observer);
-      if (index >= 0)
-        filterObservers.splice(index, 1);
     }
     ,
     addSubscription: function (subscription, silent) {
@@ -95,7 +65,7 @@
       FilterStorage.knownSubscriptions[subscription.url] = subscription;
       addSubscriptionFilters(subscription);
       if (!silent)
-        FilterStorage.triggerSubscriptionObservers("add", [subscription]);
+        FilterStorage.triggerObservers("subscriptions add", [subscription]);
     }
     ,
     removeSubscription: function (subscription, silent) {
@@ -106,7 +76,7 @@
           FilterStorage.subscriptions.splice(i--, 1);
           delete FilterStorage.knownSubscriptions[subscription.url];
           if (!silent)
-            FilterStorage.triggerSubscriptionObservers("remove", [subscription]);
+            FilterStorage.triggerObservers("subscriptions remove", [subscription]);
           return ;
         }
       }
@@ -117,20 +87,20 @@
       subscription.oldFilters = subscription.filters;
       subscription.filters = filters;
       addSubscriptionFilters(subscription);
-      FilterStorage.triggerSubscriptionObservers("update", [subscription]);
+      FilterStorage.triggerObservers("subscriptions update", [subscription]);
       delete subscription.oldFilters;
       if (subscription instanceof SpecialSubscription && !subscription.filters.length && subscription.disabled) {
         subscription.disabled = false;
-        FilterStorage.triggerSubscriptionObservers("enable", [subscription]);
+        FilterStorage.triggerObservers("subscriptions enable", [subscription]);
       }
     }
     ,
     addFilter: function (filter, insertBefore, silent) {
       var subscription = null;
       if (!subscription) {
-        for (var _loopIndex2 = 0;
-        _loopIndex2 < FilterStorage.subscriptions.length; ++ _loopIndex2) {
-          var s = FilterStorage.subscriptions[_loopIndex2];
+        for (var _loopIndex1 = 0;
+        _loopIndex1 < FilterStorage.subscriptions.length; ++ _loopIndex1) {
+          var s = FilterStorage.subscriptions[_loopIndex1];
           if (s instanceof SpecialSubscription && s.isFilterAllowed(filter)) {
             if (s.filters.indexOf(filter) >= 0)
               return ;
@@ -150,7 +120,7 @@
        else
         subscription.filters.push(filter);
       if (!silent)
-        FilterStorage.triggerFilterObservers("add", [filter], insertBefore);
+        FilterStorage.triggerObservers("filters add", [filter], insertBefore);
     }
     ,
     removeFilter: function (filter, silent) {
@@ -164,11 +134,11 @@
               filter.subscriptions.splice(i, 1);
               subscription.filters.splice(j, 1);
               if (!silent)
-                FilterStorage.triggerFilterObservers("remove", [filter]);
+                FilterStorage.triggerObservers("filters remove", [filter]);
               if (!subscription.filters.length && subscription.disabled) {
                 subscription.disabled = false;
                 if (!silent)
-                  FilterStorage.triggerSubscriptionObservers("enable", [subscription]);
+                  FilterStorage.triggerObservers("subscriptions enable", [subscription]);
               }
               return ;
             }
@@ -182,88 +152,94 @@
         return ;
       filter.hitCount++;
       filter.lastHit = Date.now();
-      FilterStorage.triggerFilterObservers("hit", [filter]);
+      FilterStorage.triggerObservers("filters hit", [filter]);
     }
     ,
     resetHitCounts: function (filters) {
       if (!filters) {
         filters = [];
-        for (var _loopIndex4 = 0;
-        _loopIndex4 < Filter.knownFilters.length; ++ _loopIndex4) {
-          var filter = Filter.knownFilters[_loopIndex4];
+        for (var _loopIndex3 = 0;
+        _loopIndex3 < Filter.knownFilters.length; ++ _loopIndex3) {
+          var filter = Filter.knownFilters[_loopIndex3];
           filters.push(filter);
         }
       }
-      for (var _loopIndex3 = 0;
-      _loopIndex3 < filters.length; ++ _loopIndex3) {
-        var filter = filters[_loopIndex3];
+      for (var _loopIndex2 = 0;
+      _loopIndex2 < filters.length; ++ _loopIndex2) {
+        var filter = filters[_loopIndex2];
         filter.hitCount = 0;
         filter.lastHit = 0;
       }
-      FilterStorage.triggerFilterObservers("hit", filters);
+      FilterStorage.triggerObservers("filters hit", filters);
     }
     ,
-    loadFromDisk: function () {
-      FilterStorage.subscriptions = [];
-      FilterStorage.knownSubscriptions = {
-        
-      };
-      function getFileByPath(path) {
-        if (!path)
-          return null;
-        try {
-          var file = Cc["@mozilla.org/file/local;1"].createInstance(Ci.nsILocalFile);
-          file.initWithPath(path);
-          return file;
-        }
-        catch (e){}
-        try {
-          var profileDir = Utils.dirService.get("ProfD", Ci.nsIFile);
-          var file = Cc["@mozilla.org/file/local;1"].createInstance(Ci.nsILocalFile);
-          file.setRelativeDescriptor(profileDir, path);
-          return file;
-        }
-        catch (e){}
-        return null;
+    loadFromDisk: function (silent) {
+      if (Prefs.patternsfile) {
+        FilterStorage.sourceFile = Utils.resolveFilePath(Prefs.patternsfile);
       }
-      sourceFile = getFileByPath(Prefs.patternsfile);
-      if (!sourceFile) {
+      if (!FilterStorage.sourceFile) {
+        FilterStorage.sourceFile = Utils.resolveFilePath(Prefs.data_directory);
+        if (FilterStorage.sourceFile)
+          FilterStorage.sourceFile.append("patterns.ini");
+      }
+      if (!FilterStorage.sourceFile) {
         try {
-          sourceFile = getFileByPath(Prefs.getDefaultBranch.getCharPref("patternsfile"));
+          FilterStorage.sourceFile = Utils.resolveFilePath(Prefs.defaultBranch.getCharPref("data_directory"));
+          if (FilterStorage.sourceFile)
+            FilterStorage.sourceFile.append("patterns.ini");
         }
         catch (e){}
       }
-      if (!sourceFile)
-        dump("Adblock Plus: Failed to resolve filter file location from extensions.adblockplus.patternsfile preference\n");
-      var realSourceFile = sourceFile;
+      if (!FilterStorage.sourceFile)
+        Cu.reportError("Adblock Plus: Failed to resolve filter file location from extensions.adblockplus.patternsfile preference");
+      var realSourceFile = FilterStorage.sourceFile;
       if (!realSourceFile || !realSourceFile.exists()) {
         var patternsURL = Utils.ioService.newURI("chrome://adblockplus-defaults/content/patterns.ini", null, null);
         patternsURL = Utils.chromeRegistry.convertChromeURL(patternsURL);
         if (patternsURL instanceof Ci.nsIFileURL)
           realSourceFile = patternsURL.file;
       }
-      var stream = null;
-      try {
-        if (realSourceFile && realSourceFile.exists()) {
-          var fileStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance(Ci.nsIFileInputStream);
-          fileStream.init(realSourceFile, 1, 292, 0);
-          stream = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
-          stream.init(fileStream, "UTF-8", 16384, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
-          stream = stream.QueryInterface(Ci.nsIUnicharLineInputStream);
+      var userFilters = null;
+      var backup = 0;
+      while (true) {
+        FilterStorage.subscriptions = [];
+        FilterStorage.knownSubscriptions = {
+          
+        };
+        try {
+          if (realSourceFile && realSourceFile.exists()) {
+            var fileStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance(Ci.nsIFileInputStream);
+            fileStream.init(realSourceFile, 1, 292, 0);
+            var stream = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
+            stream.init(fileStream, "UTF-8", 16384, 0);
+            stream = stream.QueryInterface(Ci.nsIUnicharLineInputStream);
+            userFilters = parseIniFile(stream);
+            stream.close();
+            if (!FilterStorage.subscriptions.length) {
+              throw "No data in the file";
+            }
+          }
+          break;
+        }
+        catch (e){
+          Cu.reportError("Adblock Plus: Failed to read filters from file " + realSourceFile.path);
+          Cu.reportError(e);
+        }
+        realSourceFile = FilterStorage.sourceFile;
+        if (realSourceFile) {
+          var part1 = realSourceFile.leafName;
+          var part2 = "";
+          if (/^(.*)(\.\w+)$/.test(part1)) {
+            part1 = RegExp["$1"];
+            part2 = RegExp["$2"];
+          }
+          realSourceFile = realSourceFile.clone();
+          realSourceFile.leafName = part1 + "-backup" + (++ backup) + part2;
         }
       }
-      catch (e){
-        dump("Adblock Plus: Failed to read filters from file " + realSourceFile.path + ": " + e + "\n");
-        stream = null;
-      }
-      var userFilters = null;
-      if (stream) {
-        userFilters = parseIniFile(stream);
-        stream.close();
-      }
-      for (var _loopIndex5 = 0;
-      _loopIndex5 < ["~il~", "~wl~", "~fl~", "~eh~"].length; ++ _loopIndex5) {
-        var specialSubscription = ["~il~", "~wl~", "~fl~", "~eh~"][_loopIndex5];
+      for (var _loopIndex4 = 0;
+      _loopIndex4 < ["~il~", "~wl~", "~fl~", "~eh~"].length; ++ _loopIndex4) {
+        var specialSubscription = ["~il~", "~wl~", "~fl~", "~eh~"][_loopIndex4];
         if (!(specialSubscription in FilterStorage.knownSubscriptions)) {
           var subscription = Subscription.fromURL(specialSubscription);
           if (subscription)
@@ -271,82 +247,74 @@
         }
       }
       if (userFilters) {
-        for (var _loopIndex6 = 0;
-        _loopIndex6 < userFilters.length; ++ _loopIndex6) {
-          var filter = userFilters[_loopIndex6];
+        for (var _loopIndex5 = 0;
+        _loopIndex5 < userFilters.length; ++ _loopIndex5) {
+          var filter = userFilters[_loopIndex5];
           filter = Filter.fromText(filter);
           if (filter)
             FilterStorage.addFilter(filter, null, true);
         }
       }
-      FilterStorage.triggerSubscriptionObservers("reload", FilterStorage.subscriptions);
+      if (!silent)
+        FilterStorage.triggerObservers("load");
     }
     ,
     saveToDisk: function () {
-      if (!sourceFile)
+      if (!FilterStorage.sourceFile)
         return ;
+      FilterStorage.triggerObservers("beforesave");
       try {
-        sourceFile.normalize();
+        FilterStorage.sourceFile.normalize();
       }
       catch (e){}
       try {
-        sourceFile.parent.create(Ci.nsIFile.DIRECTORY_TYPE, 493);
+        FilterStorage.sourceFile.parent.create(Ci.nsIFile.DIRECTORY_TYPE, 493);
       }
       catch (e){}
-      var tempFile = sourceFile.clone();
+      var tempFile = FilterStorage.sourceFile.clone();
       tempFile.leafName += "-temp";
-      var stream;
+      var fileStream, stream;
       try {
-        var fileStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
+        fileStream = Cc["@mozilla.org/network/safe-file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
         fileStream.init(tempFile, 2 | 8 | 32, 420, 0);
         stream = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
         stream.init(fileStream, "UTF-8", 16384, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
       }
       catch (e){
-        dump("Adblock Plus: failed to create file " + tempFile.path + ": " + e + "\n");
+        Cu.reportError(e);
         return ;
       }
       const maxBufLength = 1024;
       var buf = ["# Adblock Plus preferences", "version=" + formatVersion];
+      if ("cacheTimestamp" in FilterStorage.fileProperties)
+        buf.push("cacheTimestamp=" + FilterStorage.fileProperties.cacheTimestamp);
       var lineBreak = Utils.getLineBreak();
       function writeBuffer() {
-        try {
-          stream.writeString(buf.join(lineBreak) + lineBreak);
-          buf = [];
-          return true;
-        }
-        catch (e){
-          stream.close();
-          dump("Adblock Plus: failed to write to file " + tempFile.path + ": " + e + "\n");
-          try {
-            tempFile.remove(false);
-          }
-          catch (e2){}
-          return false;
-        }
+        stream.writeString(buf.join(lineBreak) + lineBreak);
+        buf.splice(0, buf.length);
       }
       var saved = {
         __proto__: null
       };
-      for (var _loopIndex7 = 0;
-      _loopIndex7 < FilterStorage.subscriptions.length; ++ _loopIndex7) {
-        var subscription = FilterStorage.subscriptions[_loopIndex7];
+      for (var _loopIndex6 = 0;
+      _loopIndex6 < FilterStorage.subscriptions.length; ++ _loopIndex6) {
+        var subscription = FilterStorage.subscriptions[_loopIndex6];
         if (subscription instanceof ExternalSubscription)
           continue;
-        for (var _loopIndex9 = 0;
-        _loopIndex9 < subscription.filters.length; ++ _loopIndex9) {
-          var filter = subscription.filters[_loopIndex9];
+        for (var _loopIndex8 = 0;
+        _loopIndex8 < subscription.filters.length; ++ _loopIndex8) {
+          var filter = subscription.filters[_loopIndex8];
           if (!(filter.text in saved)) {
             filter.serialize(buf);
             saved[filter.text] = filter;
-            if (buf.length > maxBufLength && !writeBuffer())
-              return ;
+            if (buf.length > maxBufLength)
+              writeBuffer();
           }
         }
       }
-      for (var _loopIndex8 = 0;
-      _loopIndex8 < FilterStorage.subscriptions.length; ++ _loopIndex8) {
-        var subscription = FilterStorage.subscriptions[_loopIndex8];
+      for (var _loopIndex7 = 0;
+      _loopIndex7 < FilterStorage.subscriptions.length; ++ _loopIndex7) {
+        var subscription = FilterStorage.subscriptions[_loopIndex7];
         if (subscription instanceof ExternalSubscription)
           continue;
         buf.push("");
@@ -355,23 +323,20 @@
           buf.push("", "[Subscription filters]");
           subscription.serializeFilters(buf);
         }
-        if (buf.length > maxBufLength && !writeBuffer())
-          return ;
+        if (buf.length > maxBufLength)
+          writeBuffer();
       }
       try {
         stream.writeString(buf.join(lineBreak) + lineBreak);
-        stream.close();
+        stream.flush();
+        fileStream.QueryInterface(Ci.nsISafeOutputStream).finish();
       }
       catch (e){
-        dump("Adblock Plus: failed to close file " + tempFile.path + ": " + e + "\n");
-        try {
-          tempFile.remove(false);
-        }
-        catch (e2){}
+        Cu.reportError(e);
         return ;
       }
-      if (sourceFile.exists()) {
-        var part1 = sourceFile.leafName;
+      if (FilterStorage.sourceFile.exists()) {
+        var part1 = FilterStorage.sourceFile.leafName;
         var part2 = "";
         if (/^(.*)(\.\w+)$/.test(part1)) {
           part1 = RegExp["$1"];
@@ -379,13 +344,13 @@
         }
         var doBackup = (Prefs.patternsbackups > 0);
         if (doBackup) {
-          var lastBackup = sourceFile.clone();
+          var lastBackup = FilterStorage.sourceFile.clone();
           lastBackup.leafName = part1 + "-backup1" + part2;
           if (lastBackup.exists() && (Date.now() - lastBackup.lastModifiedTime) / 3600000 < Prefs.patternsbackupinterval)
             doBackup = false;
         }
         if (doBackup) {
-          var backupFile = sourceFile.clone();
+          var backupFile = FilterStorage.sourceFile.clone();
           backupFile.leafName = part1 + "-backup" + Prefs.patternsbackups + part2;
           try {
             backupFile.remove(false);
@@ -401,36 +366,26 @@
           }
         }
       }
-      tempFile.moveTo(sourceFile.parent, sourceFile.leafName);
+      tempFile.moveTo(FilterStorage.sourceFile.parent, FilterStorage.sourceFile.leafName);
+      FilterStorage.triggerObservers("save");
     }
     
-  };
-  var FilterStoragePrivate = {
-    observe: function (subject, topic, data) {
-      if (topic == "browser:purge-session-history" && Prefs.clearStatsOnHistoryPurge) {
-        FilterStorage.resetHitCounts();
-        FilterStorage.saveToDisk();
-        Prefs.recentReports = "[]";
-      }
-    }
-    ,
-    QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
   };
   function addSubscriptionFilters(subscription) {
     if (!(subscription.url in FilterStorage.knownSubscriptions))
       return ;
-    for (var _loopIndex10 = 0;
-    _loopIndex10 < subscription.filters.length; ++ _loopIndex10) {
-      var filter = subscription.filters[_loopIndex10];
+    for (var _loopIndex9 = 0;
+    _loopIndex9 < subscription.filters.length; ++ _loopIndex9) {
+      var filter = subscription.filters[_loopIndex9];
       filter.subscriptions.push(subscription);
     }
   }
   function removeSubscriptionFilters(subscription) {
     if (!(subscription.url in FilterStorage.knownSubscriptions))
       return ;
-    for (var _loopIndex11 = 0;
-    _loopIndex11 < subscription.filters.length; ++ _loopIndex11) {
-      var filter = subscription.filters[_loopIndex11];
+    for (var _loopIndex10 = 0;
+    _loopIndex10 < subscription.filters.length; ++ _loopIndex10) {
+      var filter = subscription.filters[_loopIndex10];
       var i = filter.subscriptions.indexOf(subscription);
       if (i >= 0)
         filter.subscriptions.splice(i, 1);
@@ -477,9 +432,9 @@
               case "subscription patterns": {
                 if (FilterStorage.subscriptions.length) {
                   var subscription = FilterStorage.subscriptions[FilterStorage.subscriptions.length - 1];
-                  for (var _loopIndex12 = 0;
-                  _loopIndex12 < curObj.length; ++ _loopIndex12) {
-                    var text = curObj[_loopIndex12];
+                  for (var _loopIndex11 = 0;
+                  _loopIndex11 < curObj.length; ++ _loopIndex11) {
+                    var text = curObj[_loopIndex11];
                     var filter = Filter.fromText(text);
                     if (filter) {
                       subscription.filters.push(filter);
@@ -527,8 +482,8 @@
     }
     return userFilters;
   }
-  if (typeof _patchFunc13 != "undefined")
-    eval("(" + _patchFunc13.toString() + ")()");
+  if (typeof _patchFunc12 != "undefined")
+    eval("(" + _patchFunc12.toString() + ")()");
   window.FilterStorage = FilterStorage;
 }
 )(window.FilterStoragePatch);

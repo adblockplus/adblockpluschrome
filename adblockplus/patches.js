@@ -33,9 +33,9 @@ function ElemHidePatch()
   ElemHide.getSelectorsForDomain = function(/**String*/ domain, /**Boolean*/ specificOnly)
   {
     var result = [];
-    for (var i = 0; i < filters.length; i++)
+    for (var key in filterByKey)
     {
-      var filter = filters[i];
+      var filter = Filter.knownFilters[filterByKey[key]];
       if (specificOnly && !filter.includeDomains)
         continue;
 

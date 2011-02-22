@@ -26,33 +26,35 @@
 // This file has been generated automatically from Adblock Plus source code
 //
 
-(function (_patchFunc1) {
-  var filters = [];
-  var knownFilters = {
-    __proto__: null
-  };
-  var keys = {
+(function (_patchFunc0) {
+  var filterByKey = {
     __proto__: null
   };
   var styleURL = null;
   var ElemHide = {
     isDirty: false,
-    startup: function () {
+    applied: false,
+    keyByFilter: {
+      __proto__: null
+    },
+    init: function () {
       Prefs.addListener(function (name) {
         if (name == "enabled")
           ElemHide.apply();
       }
       );
+      var styleFile = Utils.resolveFilePath(Prefs.data_directory);
+      styleFile.append("elemhide.css");
+      styleURL = Utils.ioService.newFileURI(styleFile).QueryInterface(Ci.nsIFileURL);
       var registrar = Components.manager.QueryInterface(Ci.nsIComponentRegistrar);
       registrar.registerFactory(ElemHidePrivate.classID, ElemHidePrivate.classDescription, "@mozilla.org/network/protocol/about;1?what=" + ElemHidePrivate.aboutPrefix, ElemHidePrivate);
     }
     ,
     clear: function () {
-      filters = [];
-      knownFilters = {
+      filterByKey = {
         
       };
-      keys = {
+      ElemHide.keyByFilter = {
         
       };
       ElemHide.isDirty = false;
@@ -60,86 +62,150 @@
     }
     ,
     add: function (filter) {
-      if (filter.text in knownFilters)
+      if (filter.text in ElemHide.keyByFilter)
         return ;
-      filters.push(filter);
+      var key;
       do {
-        filter.key = Math.random().toFixed(15).substr(5);
+        key = Math.random().toFixed(15).substr(5);
       }
-      while (filter.key in keys);
-      keys[filter.key] = filter;
-      knownFilters[filter.text] = true;
+      while (key in filterByKey);
+      filterByKey[key] = filter.text;
+      ElemHide.keyByFilter[filter.text] = key;
       ElemHide.isDirty = true;
     }
     ,
     remove: function (filter) {
-      if (!(filter.text in knownFilters))
+      if (!(filter.text in ElemHide.keyByFilter))
         return ;
-      var index = filters.indexOf(filter);
-      if (index >= 0)
-        filters.splice(index, 1);
-      delete keys[filter.key];
-      delete knownFilters[filter.text];
+      var key = ElemHide.keyByFilter[filter.text];
+      delete filterByKey[key];
+      delete ElemHide.keyByFilter[filter.text];
       ElemHide.isDirty = true;
     }
     ,
     apply: function () {
-      if (!styleURL && (!Prefs.enabled || !filters.length))
-        return ;
-      ElemHide.unapply();
-      ElemHide.isDirty = false;
+      if (ElemHide.applied)
+        ElemHide.unapply();
       if (!Prefs.enabled) {
         return ;
       }
-      var domains = {
-        __proto__: null
-      };
-      for (var _loopIndex0 = 0;
-      _loopIndex0 < filters.length; ++ _loopIndex0) {
-        var filter = filters[_loopIndex0];
-        var domain = filter.selectorDomain || "";
-        var list;
-        if (domain in domains)
-          list = domains[domain];
-         else {
-          list = {
-            
-          };
-          domains[domain] = list;
+      if (ElemHide.isDirty) {
+        ElemHide.isDirty = false;
+        var domains = {
+          __proto__: null
+        };
+        var hasFilters = false;
+        for (var key in filterByKey) {
+          var filter = Filter.knownFilters[filterByKey[key]];
+          var domain = filter.selectorDomain || "";
+          var list;
+          if (domain in domains)
+            list = domains[domain];
+           else {
+            list = {
+              
+            };
+            domains[domain] = list;
+          }
+          list[filter.selector] = key;
+          hasFilters = true;
         }
-        list[filter.selector] = filter.key;
-      }
-      var cssData = "";
-      var cssTemplate = "-moz-binding: url(about:" + ElemHidePrivate.aboutPrefix + "?%ID%#dummy) !important;";
-      for (var domain in domains) {
-        var rules = [];
-        var list = domains[domain];
-        for (var selector in list)
-          rules.push(selector + "{" + cssTemplate.replace("%ID%", list[selector]) + "}\n");
-        if (domain)
-          cssData += "@-moz-document domain(\"" + domain.split(",").join("\"),domain(\"") + "\"){\n" + rules.join("") + "}\n";
-         else {
-          cssData += "@-moz-document url-prefix(\"http://\"),url-prefix(\"https://\")," + "url-prefix(\"mailbox://\"),url-prefix(\"imap://\")," + "url-prefix(\"news://\"),url-prefix(\"snews://\"){\n" + rules.join("") + "}\n";
+        if (!hasFilters) {
+          return ;
         }
-      }
-      if (cssData) {
         try {
-          styleURL = Utils.ioService.newURI("data:text/css;charset=utf8,/*** Adblock Plus ***/" + encodeURIComponent("\n" + cssData), null, null);
-          Utils.styleService.loadAndRegisterSheet(styleURL, Ci.nsIStyleSheetService.USER_SHEET);
+          styleURL.file.parent.create(Ci.nsIFile.DIRECTORY_TYPE, 493);
         }
         catch (e){}
-        ;
+        var stream;
+        try {
+          stream = Cc["@mozilla.org/network/safe-file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
+          stream.init(styleURL.file, 2 | 8 | 32, 420, 0);
+        }
+        catch (e){
+          Cu.reportError(e);
+          return ;
+        }
+        var buf = [];
+        var maxBufLen = 1024;
+        function escapeChar(match) {
+          return "\\" + match.charCodeAt(0).toString(16) + " ";
+        }
+        function writeString(str, forceWrite) {
+          buf.push(str);
+          if (buf.length >= maxBufLen || forceWrite) {
+            var output = buf.join("").replace(/[^\x01-\x7F]/g, escapeChar);
+            stream.write(output, output.length);
+            buf.splice(0, buf.length);
+          }
+        }
+        var cssTemplate = "-moz-binding: url(about:" + ElemHidePrivate.aboutPrefix + "?%ID%#dummy) !important;";
+        for (var domain in domains) {
+          var rules = [];
+          var list = domains[domain];
+          if (domain)
+            writeString("@-moz-document domain(\"" + domain.split(",").join("\"),domain(\"") + "\"){\n");
+           else {
+            writeString("@-moz-document url-prefix(\"http://\"),url-prefix(\"https://\"),url-prefix(\"mailbox://\"),url-prefix(\"imap://\"),url-prefix(\"news://\"),url-prefix(\"snews://\"){\n");
+          }
+          for (var selector in list)
+            writeString(selector + "{" + cssTemplate.replace("%ID%", list[selector]) + "}\n");
+          writeString("}\n");
+        }
+        writeString("", true);
+        try {
+          stream.QueryInterface(Ci.nsISafeOutputStream).finish();
+        }
+        catch (e){
+          Cu.reportError(e);
+          return ;
+        }
+      }
+      try {
+        Utils.styleService.loadAndRegisterSheet(styleURL, Ci.nsIStyleSheetService.USER_SHEET);
+        ElemHide.applied = true;
+      }
+      catch (e){
+        Cu.reportError(e);
       }
     }
     ,
     unapply: function () {
-      if (styleURL) {
+      if (ElemHide.applied) {
         try {
           Utils.styleService.unregisterSheet(styleURL, Ci.nsIStyleSheetService.USER_SHEET);
         }
-        catch (e){}
-        styleURL = null;
+        catch (e){
+          Cu.reportError(e);
+        }
+        ElemHide.applied = false;
       }
+    }
+    ,
+    toCache: function (cache) {
+      cache.elemhide = {
+        filterByKey: filterByKey
+      };
+    }
+    ,
+    fromCache: function (cache) {
+      filterByKey = cache.elemhide.filterByKey;
+      filterByKey.__proto__ = null;
+      delete ElemHide.keyByFilter;
+      ElemHide.__defineGetter__("keyByFilter", function () {
+        var result = {
+          __proto__: null
+        };
+        for (var k in filterByKey)
+          result[filterByKey[k]] = k;
+        return ElemHide.keyByFilter = result;
+      }
+      );
+      ElemHide.__defineSetter__("keyByFilter", function (value) {
+        delete ElemHide.keyByFilter;
+        return ElemHide.keyByFilter = value;
+      }
+      );
     }
     
   };
@@ -204,10 +270,9 @@
     ,
     open: function () {
       var data = "<bindings xmlns='http://www.mozilla.org/xbl'><binding id='dummy'/></bindings>";
-      var filter = keys[this.key];
-      if (filter) {
+      if (this.key in filterByKey) {
         var wnd = Utils.getRequestWindow(this);
-        if (wnd && wnd.document && !Policy.processNode(wnd, wnd.document, Policy.type.ELEMHIDE, filter))
+        if (wnd && wnd.document && !Policy.processNode(wnd, wnd.document, Policy.type.ELEMHIDE, Filter.knownFilters[filterByKey[this.key]]))
           data = "<bindings xmlns='http://www.mozilla.org/xbl'/>";
       }
       var stream = Cc["@mozilla.org/io/string-input-stream;1"].createInstance(Ci.nsIStringInputStream);
@@ -233,8 +298,8 @@
     ,
     QueryInterface: XPCOMUtils.generateQI([Ci.nsIChannel, Ci.nsIRequest])
   };
-  if (typeof _patchFunc1 != "undefined")
-    eval("(" + _patchFunc1.toString() + ")()");
+  if (typeof _patchFunc0 != "undefined")
+    eval("(" + _patchFunc0.toString() + ")()");
   window.ElemHide = ElemHide;
 }
 )(window.ElemHidePatch);
