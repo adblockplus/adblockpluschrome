@@ -557,7 +557,7 @@ if (document.documentElement instanceof HTMLElement)
 
       // Nuke background if it's an ad
       var bodyBackground = getComputedStyle(document.body).backgroundImage;
-      if (bodyBackground && /^url\((.*)\)$/ && shouldBlock(RegExp.$1, "IMAGE"))
+      if (bodyBackground && /^url\((.*)\)$/.test(bodyBackground) && shouldBlock(RegExp.$1, "IMAGE"))
         document.body.style.setProperty("background-image", "none");
     }
   });
