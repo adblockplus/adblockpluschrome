@@ -376,13 +376,6 @@ function reloadFilters() {
         localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
     }
     
-    // We've gotten rid of Fanboy's list, so migrate those users to EasyList
-    if(filterFilesEnabled["fanboy"] == true) {
-        filterFilesEnabled["easylist"] = true;
-        delete filterFilesEnabled["fanboy"];
-        localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
-    }
-
     for(var key in filterFilesEnabled) {
         if(filterFilesEnabled[key])
             urlsToLoad.push(filterFiles[key]);
