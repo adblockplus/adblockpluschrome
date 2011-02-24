@@ -60,42 +60,6 @@ var SELECTOR_GROUP_SIZE = 20;
 
 var savedBeforeloadEvents = new Array();
 
-// YouTube special case option
-if (/\byoutube(-nocookie)?\.com$/.test(document.domain))
-{
-  chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response)
-  {
-    if (response.enabled && response.specialCaseYouTube)
-    {
-      document.addEventListener("beforeload", function(e)
-      {
-        var eltDomain = extractDomainFromURL(e.url);
-        if (e.target && /\bytimg\.com$/.test(eltDomain) &&
-            /^(embed|object)$/.test(e.target.localName) &&
-            e.target.hasAttribute("flashvars"))
-        {
-          // Remove a bunch of known parameters from flashvars attribute of the player
-          var flashVars = e.target.getAttribute("flashvars").split("&");
-          var newVars = [];
-          for (var i = 0; i < flashVars.length; i++)
-            if (!/^(ad\d*_|instream|infringe|invideo|interstitial|mpu|prerolls|tpas_ad_type_id|trueview|watermark)/.test(flashVars[i]))
-              newVars.push(flashVars[i]);
-          if (newVars.length != flashVars.length)
-          {
-            e.target.setAttribute("flashvars", newVars.join("&"));
-
-            // Remove the node and insert it back, the variables won't be reloaded otherwise
-            var parent = e.target.parentNode;
-            var insertBefore = e.target.nextSibling;
-            parent.removeChild(e.target);
-            parent.insertBefore(e.target, insertBefore);
-          }
-        }
-      }, true);
-    }
-  });
-}
-
 // Makes a string containing CSS rules for elemhide filters
 function generateElemhideCSSString(selectors)
 {
