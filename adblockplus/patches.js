@@ -76,7 +76,7 @@ function MatcherPatch()
   eval("Matcher.prototype._checkEntryMatch = " + newFunction);
 }
 
-Components =
+var Components =
 {
   interfaces: {},
   classes: {},
@@ -87,22 +87,22 @@ Components =
   {
     return null;
   }
-}
+};
 const Cc = Components.classes;
 const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
-Utils =
+var Utils =
 {
   systemPrincipal: null,
   getString: function(id)
   {
     return id;
   }
-}
+};
 
-XPCOMUtils =
+var XPCOMUtils =
 {
   generateQI: function() {}
-}
+};
