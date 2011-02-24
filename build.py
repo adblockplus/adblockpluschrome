@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import sys, os, subprocess, re
+import sys, os, subprocess, re, json
 from getopt import getopt, GetoptError
 from StringIO import StringIO
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -17,17 +17,37 @@ Options:
           --release     Create a release build, not a development build
 ''' % os.path.basename(sys.argv[0])
 
-def removeUpdateURL(dir, fileName, fileData):
+def removeUpdateURL(zip, dir, fileName, fileData):
   if fileName == 'manifest.json':
     return re.sub(r'\s*"update_url"\s*:\s*"[^"]*",', '', fileData)
   return fileData
 
-def addBuildNumber(dir, fileName, fileData):
+def addBuildNumber(zip, dir, fileName, fileData):
   if fileName == 'manifest.json':
     revision, dummy = subprocess.Popen(['hg', '-R', dir, 'id', '-n'], stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
     revision = re.sub(r'\D', '', revision)
     if len(revision) > 0:
       return re.sub(r'("version"\s*:\s*"[^"]*)(",)', r'\1.%s\2' % revision, fileData)
+  return fileData
+
+def mergeContentScripts(zip, dir, fileName, fileData):
+  if fileName == 'manifest.json':
+    data = json.loads(fileData)
+    if 'content_scripts' in data:
+      scriptIndex = 1
+      for contentScript in data['content_scripts']:
+        if 'js' in contentScript:
+          scriptData = ''
+          for scriptFile in contentScript['js']:
+            parts = [dir] + scriptFile.split('/')
+            scriptPath = os.path.join(*parts)
+            handle = open(scriptPath, 'rb')
+            scriptData += handle.read()
+            handle.close()
+          contentScript['js'] = ['contentScript' + str(scriptIndex) + '.js']
+          zip.writestr('contentScript' + str(scriptIndex) + '.js', scriptData)
+          scriptIndex += 1
+    return json.dumps(data)
   return fileData
 
 def addToZip(zip, filters, dir, baseName):
@@ -39,6 +59,10 @@ def addToZip(zip, filters, dir, baseName):
         filelc.endswith('.sh') or filelc.endswith('.bat')):
       # skip special files, scripts, existing archives
       continue
+    if file.startswith('include.'):
+      # skip includes, they will be added by other means
+      continue
+
     filePath = os.path.join(dir, file)
     if os.path.isdir(filePath):
       addToZip(zip, filters, filePath, baseName + file + '/')
@@ -48,7 +72,7 @@ def addToZip(zip, filters, dir, baseName):
       handle.close()
 
       for filter in filters:
-        fileData = filter(dir, baseName + file, fileData)
+        fileData = filter(zip, dir, baseName + file, fileData)
       zip.writestr(baseName + file, fileData)
 
 def packDirectory(dir, filters):
@@ -106,6 +130,7 @@ if __name__ == '__main__':
     filters.append(removeUpdateURL)
   else:
     filters.append(addBuildNumber)
+  filters.append(mergeContentScripts)
 
   zipdata = packDirectory(inputdir, filters)
   signature = None

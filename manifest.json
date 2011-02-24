@@ -24,19 +24,19 @@
   "content_scripts": [
     {
       "matches": ["http://*.youtube.com/*", "https://*.youtube.com/*", "http://*.youtube-nocookie.com/*", "https://*.youtube-nocookie.com/*"],
-      "js": ["youtube-block.js"],
+      "js": ["include.youtube.js"],
       "run_at": "document_start",
       "all_frames": true
     },
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["adblockplus/patches.js", "adblockplus/FilterClasses.jsm", "adblockplus/Matcher.jsm", "initial-block.js"],
+      "js": ["adblockplus/patches.js", "adblockplus/FilterClasses.jsm", "adblockplus/Matcher.jsm", "include.preload.js"],
       "run_at": "document_start",
       "all_frames": true
     },
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["blocker.js", "removetextads.js"],
+      "js": ["include.postload.js", "include.textads.js"],
       "run_at": "document_end",
       "all_frames": true
     }
