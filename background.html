@@ -16,7 +16,7 @@ var abp = {};
 // Special-case domains for which we should only inject their specific
 // selectors, due to Chrome selector handling bugginess
 // TODO: Put this in the AdThwart filter list, like !NI
-var onlyInjectDomainSpecificSelectors = {"mail.google.com": true};
+var onlyInjectDomainSpecificSelectors = ["mail.google.com", "mail.yahoo.com"];
 
 // Caches the last answer for isDomainExcluded()
 var lastDomainChecked = "";
@@ -442,7 +442,19 @@ var requestDispatchTable = {
       var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
       var enabled = sender.tab ? !isDomainExcluded(domain) : true;
       if (enabled)
-        sendResponse({selectors: ElemHide.getSelectorsForDomain(domain, domain in onlyInjectDomainSpecificSelectors)});
+      {
+        var onlySpecific = false;
+        for (var i = 0; i < onlyInjectDomainSpecificSelectors.length; i++)
+        {
+          var specificDomain = onlyInjectDomainSpecificSelectors[i];
+          if (domain == specificDomain || (domain.length > specificDomain.length &&
+                                           domain.substr(domain.length - specificDomain.length - 1) == "." + specificDomain))
+          {
+            onlySpecific = true;
+          }
+        }
+        sendResponse({selectors: ElemHide.getSelectorsForDomain(domain, onlySpecific)});
+      }
       else
         sendResponse({selectors: null});
     },
