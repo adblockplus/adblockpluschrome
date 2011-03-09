@@ -142,7 +142,7 @@ function initFilter(text)
 function addFilter(filterText) {
     var userFilters = localStorage["userFilters"];
     if(typeof userFilters == "undefined")
-        userFilters = JSON.stringify(["qux.us###annoying_AdDiv", "qux.us##.ad_class"]);
+        userFilters = JSON.stringify(["www.example.com###ad_div", "||ads.example.net^$third-party"]);
     userFilters = JSON.parse(userFilters);
     // Don't add this filter if it's already there
     if(userFilters.indexOf(filterText) < 0)
