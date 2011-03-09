@@ -435,7 +435,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 <td><button class="addButton" onClick="addWhitelistDomain()"><span class="i18n_add_domain_button"></span></button></td></tr>
 
 <tr><td>
-<select id="excludedDomainsBox" size="10" style="width:500px; background: white;">
+<select id="excludedDomainsBox" size="10" multiple style="width:500px; background: white;">
 </select></td><td>
 <button class="removeButton" onClick="removeSelectedExcludedDomain()"><span class="i18n_remove_button"></span></button>
 </td></tr></table>
@@ -448,7 +448,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 <input type="text" value="" id="newFilter" style="width:500px"></td>
 <td><button class="addButton" onClick="addTypedFilter()"><span class="i18n_add_filter_button"></span></button></td></tr>
 <tr><td>
-<select id="userFiltersBox" size="20" style="width: 500px; background: white;">
+<select id="userFiltersBox" size="20" multiple style="width: 500px; background: white;">
 </select>
 </td><td>
 <button class="removeButton" onClick="removeSelectedFilters()">
