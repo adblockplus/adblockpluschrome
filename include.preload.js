@@ -226,10 +226,12 @@ if (!workaroundBeforeloadMalfunction)
   document.addEventListener("beforeload", saveBeforeloadEvent, true);
 }
 
+var elemhideElt = null;
+
 // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
 if (document.documentElement instanceof HTMLElement)
 {
-  chrome.extension.sendRequest({reqtype: "get-settings"}, function(response)
+  chrome.extension.sendRequest({reqtype: "get-settings", matcher: true}, function(response)
   {
     if (response.enabled)
     {
@@ -248,12 +250,12 @@ if (document.documentElement instanceof HTMLElement)
     }
   });
 
-  chrome.extension.sendRequest({reqtype: "get-selectors"}, function(response)
+  chrome.extension.sendRequest({reqtype: "get-settings", selectors: true}, function(response)
   {
     if (response.selectors)
     {
       // Add a style element for elemhide selectors.
-      var elemhideElt = document.createElement("style");
+      elemhideElt = document.createElement("style");
       elemhideElt.innerText = generateElemhideCSSString(response.selectors);
       document.documentElement.appendChild(elemhideElt);
     }

@@ -150,7 +150,10 @@ function addFilter(filterText) {
     localStorage["userFilters"] = JSON.stringify(userFilters);
     var filter = initFilter(filterText);
     if (filter)
+    {
+      cachedMatcherData = null;
       FilterListener.triggerFilterObserver("add", [filter]);
+    }
 }
 
 // Enables ad blocking for the specified domain
@@ -431,17 +434,12 @@ var requestDispatchTable = {
     "get-settings": function(request, sender, sendResponse)
     {
       var matcherData = null;
+      var selectors = null;
       var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
       var enabled = sender.tab ? !isDomainExcluded(domain) : true;
-      if(enabled)
+      if (enabled && request.matcher)
         matcherData = getMatcherData();
-      sendResponse({enabled: enabled, matcherData: matcherData});
-    },
-    "get-selectors": function(request, sender, sendResponse)
-    {
-      var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
-      var enabled = sender.tab ? !isDomainExcluded(domain) : true;
-      if (enabled)
+      if (enabled && request.selectors)
       {
         var onlySpecific = false;
         for (var i = 0; i < onlyInjectDomainSpecificSelectors.length; i++)
@@ -453,10 +451,9 @@ var requestDispatchTable = {
             onlySpecific = true;
           }
         }
-        sendResponse({selectors: ElemHide.getSelectorsForDomain(domain, onlySpecific)});
+        selectors = ElemHide.getSelectorsForDomain(domain, onlySpecific);
       }
-      else
-        sendResponse({selectors: null});
+      sendResponse({enabled: enabled, matcherData: matcherData, selectors: selectors});
     },
     "set-domain-enabled-state": function(request, sender, sendResponse) {
         // Enable/disable ad blocking for a particular domain
