@@ -396,12 +396,16 @@ function clickHide_mouseClick(e) {
 // Called when a new filter is added.
 // It would be a click-to-hide filter, so it's only an elemhide filter.
 // Since this rarely happens, we can afford to do a full run of ad removal.
-function removeAdsAgain() {
-  chrome.extension.sendRequest({reqtype: "get-selectors"}, function(response)
+function removeAdsAgain()
+{
+  chrome.extension.sendRequest({reqtype: "get-settings", matcher: true, selectors: true}, function(response)
   {
     // Retrieve new set of selectors and build selector strings
-    if (response.selectors)
-      hideBySelectorString(document, response.selectors.join(","));
+    if (elemhideElt)
+      elemhideElt.innerText = (response.selectors ? generateElemhideCSSString(response.selectors) : "");
+    defaultMatcher.clear();
+    if (response.matcherData)
+      defaultMatcher.fromCache(JSON.parse(response.matcherData));
     nukeElements();
   });
 }
@@ -413,18 +417,6 @@ function handleNodeInserted(e)
   if(enabled && nukeElementsTimeoutID == 0)
   {
     nukeElementsTimeoutID = setTimeout(nukeElements, (Date.now() - nukeElementsLastTime > 1000) ? 1 : 1000);
-  }
-}
-
-// Explicitly hides elements by their selector strings.
-// This is called when user adds a new filter via the click-to-hide interface.
-function hideBySelectorString(parent, selectorString) {
-  if(enabled && selectorString) {
-    var elts = parent.querySelectorAll(selectorString);
-    for(var i = 0; i < elts.length; i++) {
-      // TODO: Sometimes style isn't defined, for some reason...
-      if(elts[i].style) elts[i].style.setProperty("display", "none");
-    }
   }
 }
 
