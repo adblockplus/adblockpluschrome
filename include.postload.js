@@ -181,8 +181,12 @@ function clickHide_showDialog(left, top, filters) {
     chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
     chrome.extension.sendRequest({reqtype: "apply-cached-filters", filters: filters});
     // Explicitly get rid of currentElement in case removeAdsAgain() doesn't catch it
-    if(currentElement.parentNode)
+    if(currentElement.parentNode) {
       currentElement.parentNode.removeChild(currentElement);
+      // currentElement may actually be our overlay if right-click element selection was used
+      if(currentElement.prisoner && currentElement.prisoner.parentNode)
+        currentElement.prisoner.parentNode.removeChild(currentElement.prisoner);
+    }
     clickHide_deactivate();
     removeAdsAgain();
     // Tell options.html to refresh its user filters listbox
