@@ -250,7 +250,7 @@ if (document.documentElement instanceof HTMLElement)
     }
   });
 
-  chrome.extension.sendRequest({reqtype: "get-settings", selectors: true}, function(response)
+  chrome.extension.sendRequest({reqtype: "get-settings", selectors: true, host: window.location.hostname}, function(response)
   {
     if (response.selectors)
     {

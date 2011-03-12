@@ -398,7 +398,7 @@ function clickHide_mouseClick(e) {
 // Since this rarely happens, we can afford to do a full run of ad removal.
 function removeAdsAgain()
 {
-  chrome.extension.sendRequest({reqtype: "get-settings", matcher: true, selectors: true}, function(response)
+  chrome.extension.sendRequest({reqtype: "get-settings", matcher: true, selectors: true, host: window.location.hostname}, function(response)
   {
     // Retrieve new set of selectors and build selector strings
     if (elemhideElt)
