@@ -442,16 +442,17 @@ var requestDispatchTable = {
       if (enabled && request.selectors)
       {
         var onlySpecific = false;
+        var host = request.host;
         for (var i = 0; i < onlyInjectDomainSpecificSelectors.length; i++)
         {
           var specificDomain = onlyInjectDomainSpecificSelectors[i];
-          if (domain == specificDomain || (domain.length > specificDomain.length &&
-                                           domain.substr(domain.length - specificDomain.length - 1) == "." + specificDomain))
+          if (host == specificDomain || (host.length > specificDomain.length &&
+                                         host.substr(host.length - specificDomain.length - 1) == "." + specificDomain))
           {
             onlySpecific = true;
           }
         }
-        selectors = ElemHide.getSelectorsForDomain(domain, onlySpecific);
+        selectors = ElemHide.getSelectorsForDomain(host, onlySpecific);
       }
       sendResponse({enabled: enabled, matcherData: matcherData, selectors: selectors});
     },
