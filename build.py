@@ -19,7 +19,9 @@ Options:
 
 def removeUpdateURL(zip, dir, fileName, fileData):
   if fileName == 'manifest.json':
-    return re.sub(r'\s*"update_url"\s*:\s*"[^"]*",', '', fileData)
+    data = json.loads(fileData)
+    del data['update_url']
+    return json.dumps(data)
   return fileData
 
 def addBuildNumber(zip, dir, fileName, fileData):
@@ -27,7 +29,11 @@ def addBuildNumber(zip, dir, fileName, fileData):
     revision, dummy = subprocess.Popen(['hg', '-R', dir, 'id', '-n'], stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
     revision = re.sub(r'\D', '', revision)
     if len(revision) > 0:
-      return re.sub(r'("version"\s*:\s*"[^"]*)(",)', r'\1.%s\2' % revision, fileData)
+      data = json.loads(fileData)
+      while data['version'].count('.') < 2:
+        data['version'] += '.0'
+      data['version'] += '.' + revision
+      return json.dumps(data)
   return fileData
 
 def mergeContentScripts(zip, dir, fileName, fileData):
