@@ -235,13 +235,14 @@ if (document.documentElement instanceof HTMLElement)
 {
   chrome.extension.sendRequest({reqtype: "get-settings", matcher: true}, function(response)
   {
+    document.removeEventListener("beforeload", saveBeforeloadEvent, true);
+
     if (response.enabled)
     {
       defaultMatcher.fromCache(JSON.parse(response.matcherData));
 
       if (!workaroundBeforeloadMalfunction)
       {
-        document.removeEventListener("beforeload", saveBeforeloadEvent, true);
         document.addEventListener("beforeload", beforeloadHandler, true);
 
         // Replay the events that were saved while we were waiting to learn whether we are enabled
