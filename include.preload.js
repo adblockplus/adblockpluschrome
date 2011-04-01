@@ -58,7 +58,8 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "www.lojagloboesporte.com": true,
   "www.netshoes.com.br": true,
   "victorinox.com": true,
-  "www.victorinox.com": true
+  "www.victorinox.com": true,
+  "www.edmontonjournal.com": true
 };
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
