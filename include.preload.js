@@ -60,6 +60,15 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "victorinox.com": true,
   "www.victorinox.com": true,
   "www.edmontonjournal.com": true,
+  "www.timescolonist.com": true,
+  "www.theprovince.com": true,
+  "www.vancouversun.com": true,
+  "www.calgaryherald.com": true,
+  "www.leaderpost.com": true,
+  "www.thestarphoenix.com": true,
+  "www.windsorstar.com": true,
+  "www.ottawacitizen.com": true,
+  "www.montrealgazette.com": true,
   "shop.advanceautoparts.com": true
 };
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
