@@ -1,4 +1,7 @@
 {
+  "name": {
+    "message": "Adblock Plus para Google Chrome™ (Beta)"
+  },
   "description": {
     "message": "Bloquea anuncios publicitarios usando el motor de filtros de Firefox Adblock Plus. ¡Dales un beso de despedida a los anuncios y navega con tranquilidad!"
   },

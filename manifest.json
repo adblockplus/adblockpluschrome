@@ -1,5 +1,5 @@
 {
-  "name": "Adblock Plus for Google Chrome™ (Beta)",
+  "name": "__MSG_name__",
   "version": "1.1.2",
   "minimum_chrome_version": "6.0",
   "description": "__MSG_description__",

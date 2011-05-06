@@ -1,4 +1,7 @@
 {
+  "name": {
+    "message": "Adblock Plus for Google Chrome™ (Beta)"
+  },
   "description": {
     "message": "Blocks ads using the Firefox Adblock Plus filter engine. Kiss ads goodbye and browse in peace!"
   },
