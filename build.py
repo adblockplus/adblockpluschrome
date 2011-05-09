@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import sys, os, subprocess, re, json
+import sys, os, subprocess, re, json, M2Crypto
 from getopt import getopt, GetoptError
 from StringIO import StringIO
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -91,13 +91,14 @@ def packDirectory(dir, filters):
 
 def signBinary(zipdata, keyFile):
   if not os.path.exists(keyFile):
-    subprocess.Popen(['openssl', 'genrsa', '-out', keyFile, '1024'], stdout=subprocess.PIPE).communicate()
-  signature, dummy = subprocess.Popen(['openssl', 'sha1', '-sha1', '-binary', '-sign', keyFile], stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate(zipdata)
-  return signature
+    M2Crypto.RSA.gen_key(1024, 65537, callback=lambda x: None).save_key(keyFile, cipher=None)
+  key = M2Crypto.EVP.load_key(keyFile)
+  key.sign_init()
+  key.sign_update(zipdata)
+  return key.final()
 
 def getPublicKey(keyFile):
-  pubkey, dummy = subprocess.Popen(['openssl', 'rsa', '-pubout', '-outform', 'DER', '-in', keyFile], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
-  return pubkey
+  return M2Crypto.EVP.load_key(keyFile).as_der()
 
 def writePackage(outputFile, pubkey, signature, zipdata):
   file = open(outputFile, 'wb')
