@@ -14,6 +14,8 @@ Options:
   -h      --help        Print this message and exit
   -i dir  --input=dir   Directory to be packaged
   -k file --key=file    File containing the private key
+  -b num  --build=num   Use given build number (if omitted the build
+                        number will be retrieved from Mercurial)
           --release     Create a release build, not a development build
 ''' % os.path.basename(sys.argv[0])
 
@@ -24,10 +26,11 @@ def removeUpdateURL(zip, dir, fileName, fileData):
     return json.dumps(data)
   return fileData
 
-def addBuildNumber(zip, dir, fileName, fileData):
+def addBuildNumber(revision, zip, dir, fileName, fileData):
   if fileName == 'manifest.json':
-    revision, dummy = subprocess.Popen(['hg', '-R', dir, 'id', '-n'], stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
-    revision = re.sub(r'\D', '', revision)
+    if not revision:
+      revision, dummy = subprocess.Popen(['hg', '-R', dir, 'id', '-n'], stdin=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
+      revision = re.sub(r'\D', '', revision)
     if len(revision) > 0:
       data = json.loads(fileData)
       while data['version'].count('.') < 2:
@@ -111,7 +114,7 @@ def writePackage(outputFile, pubkey, signature, zipdata):
 
 if __name__ == '__main__':
   try:
-    opts, args = getopt(sys.argv[1:], 'hi:k:', ['help', 'inputdir=', 'key=', 'release'])
+    opts, args = getopt(sys.argv[1:], 'hi:b:k:', ['help', 'inputdir=', 'build=', 'key=', 'release'])
     if len(args) != 1:
       raise GetoptError('Need exactly one output file name')
   except GetoptError, e:
@@ -120,6 +123,7 @@ if __name__ == '__main__':
     sys.exit(2)
 
   inputdir = os.path.dirname(os.path.abspath(sys.argv[0]))
+  buildNum = None
   keyfile = None
   isRelease = False
   for option, value in opts:
@@ -128,6 +132,8 @@ if __name__ == '__main__':
       sys.exit()
     elif option in ('-i', '--inputdir'):
       inputdir = value
+    elif option in ('-b', '--build'):
+      buildNum = value
     elif option in ('-k', '--key'):
       keyfile = value
     elif option in ('--release'):
@@ -137,7 +143,7 @@ if __name__ == '__main__':
   if isRelease:
     filters.append(removeUpdateURL)
   else:
-    filters.append(addBuildNumber)
+    filters.append(lambda zip, dir, fileName, fileData: addBuildNumber(buildNum, zip, dir, fileName, fileData))
   filters.append(mergeContentScripts)
 
   zipdata = packDirectory(inputdir, filters)
