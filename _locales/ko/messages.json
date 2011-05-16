@@ -1,6 +1,9 @@
 {
+    "name": {
+        "message": "Adblock Plus for Google Chrome™ (베타)"
+    },
     "description": {
-        "message": "파이어폭스의 Adblock Plus 필터를 이용해 광고를 차단합니다. 광고와 작별 인사를, 브라우저에는 쾌적함을!"
+        "message": "침입형 광고, 이제 안녕! Adblock Plus 확장 프로그램을 이제 구글 크롬에서 이용하십시오."
     },
     "options": {
         "message": "Adblock Plus - 애드블록 플러스 옵션"
