@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import sys, os, subprocess, re, json, M2Crypto
+import sys, os, subprocess, re, json
 from getopt import getopt, GetoptError
 from StringIO import StringIO
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -93,6 +93,7 @@ def packDirectory(dir, filters):
   return buffer.getvalue()
 
 def signBinary(zipdata, keyFile):
+  import M2Crypto
   if not os.path.exists(keyFile):
     M2Crypto.RSA.gen_key(1024, 65537, callback=lambda x: None).save_key(keyFile, cipher=None)
   key = M2Crypto.EVP.load_key(keyFile)
@@ -101,6 +102,7 @@ def signBinary(zipdata, keyFile):
   return key.final()
 
 def getPublicKey(keyFile):
+  import M2Crypto
   return M2Crypto.EVP.load_key(keyFile).as_der()
 
 def writePackage(outputFile, pubkey, signature, zipdata):
