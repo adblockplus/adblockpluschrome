@@ -71,7 +71,8 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "www.montrealgazette.com": true,
   "shop.advanceautoparts.com": true,
   "www.clove.co.uk": true,
-  "www.e-shop.gr": true
+  "www.e-shop.gr": true,
+  "www.ebuyer.com": true
 };
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
