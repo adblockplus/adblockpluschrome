@@ -64,8 +64,6 @@ function init() {
     document.getElementById("enabled").checked = response.enabled;
     document.getElementById("enabledCheckboxAndLabel").style.display = "block";
   });
-  chrome.extension.sendRequest({reqtype: "refresh-page-icon"});
-
 }
 
 function addFilters() {
