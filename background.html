@@ -481,11 +481,6 @@ var requestDispatchTable = {
             sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(tab.url))});
         });
     },
-    "refresh-page-icon": function(request, sender, sendResponse) {
-        // Show page icon according to the user option
-        chrome.tabs.get(lastTabId, function(tab) { refreshIconAndContextMenu(tab)});
-        
-    },
     "reload-filters": function(request, sender, sendResponse) {
         // Reloads filter lists and user filters
         reloadFilters();
@@ -521,23 +516,19 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 
 var lastTabId = 0;
 
-// Show icon as page action
-chrome.tabs.onSelectionChanged.addListener(function(tabId) {
-    lastTabId = tabId;
-    chrome.tabs.get(tabId, function(tab) { refreshIconAndContextMenu(tab)});
+// Show icon as page action for all tabs that already exist
+chrome.windows.getAll({populate: true}, function(windows)
+{
+  for (var i = 0; i < windows.length; i++)
+    for (var j = 0; j < windows[i].tabs.length; j++)
+      refreshIconAndContextMenu(windows[i].tabs[j]);
 });
 
+// Update icon if a tab changes location
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     lastTabId = tabId;
     chrome.tabs.sendRequest(tabId, {reqtype: "clickhide-deactivate"})
-    if(changeInfo.status == "complete") refreshIconAndContextMenu(tab);
-});
-
-// Show page action on current tab
-chrome.tabs.getSelected(null, function(tab) {
-    if(!tab) return;
-    lastTabId = tab.id;
-    refreshIconAndContextMenu(tab);
+    if(changeInfo.status == "loading") refreshIconAndContextMenu(tab);
 });
 
 // Reload filters every four hours, which will trigger the autoupdate
