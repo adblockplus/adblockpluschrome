@@ -17,7 +17,7 @@
     "128": "icons/abp-128.png"
   },
   "permissions": [
-    "tabs", "http://*/*", "https://*/*", "contextMenus"
+    "tabs", "http://*/*", "https://*/*", "contextMenus", "unlimitedStorage"
   ],
   "background_page": "background.html",
   "options_page": "options.html",
