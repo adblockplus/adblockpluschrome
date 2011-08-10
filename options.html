@@ -126,7 +126,7 @@ function saveOptions() {
     for(var key in filterFiles) {
         filterFilesEnabled[key] = document.getElementById(key).checked;
         if(key.match(/^user_/)) { // User-added filter?
-            userFilterURLs[key] = document.getElementById(key + "_url").innerHTML;
+            userFilterURLs[key] = document.getElementById(key + "_url").textContent;
         }
     }
     localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
@@ -316,9 +316,12 @@ function addUserURLEntry(key, url) {
     checkbox.addEventListener("click", function() { saveOptions(); });
     var label = document.createElement('span');
     label.id = key + "_url";
-    label.innerHTML = url;
+    label.textContent = url + " ";
     var del = document.createElement('span');
-    del.innerHTML = ' <a href="#" onClick="deleteUserURLEntry(\'' + key + '\')">[' + chrome.i18n.getMessage("delete") + ']</a> ';
+    del.appendChild(document.createElement("a"));
+    del.firstChild.href = "#";
+    del.firstChild.addEventListener("click", function() { deleteUserURLEntry(key);});
+    del.firstChild.textContent = "[" + chrome.i18n.getMessage("delete") + "]";
     // Status message
     var msg = document.createElement("span");
     msg.id = key + "_msg";
