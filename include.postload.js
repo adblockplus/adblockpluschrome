@@ -151,13 +151,18 @@ function dragMove(e) {
 // Show dialog asking user whether she wants to add the proposed filters derived
 // from selected page element
 function clickHide_showDialog(left, top, filters) {
+  function escapeHTML(str)
+  {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
   // Limit the length the filters string shown so it doesn't clip
   var filtersString = "";
   for(var i = 0; i < filters.length; i++) {
     if(filters[i].length > 80)
-      filtersString += filters[i].substring(0, 80) + "&hellip;";
+      filtersString += escapeHTML(filters[i].substring(0, 80)) + "&hellip;";
     else
-      filtersString += filters[i];
+      filtersString += escapeHTML(filters[i]);
     filtersString += "<br/>";
   }
       
