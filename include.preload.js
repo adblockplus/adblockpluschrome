@@ -72,7 +72,9 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "shop.advanceautoparts.com": true,
   "www.clove.co.uk": true,
   "www.e-shop.gr": true,
-  "www.ebuyer.com": true
+  "www.ebuyer.com": true,
+  "www.satchef.de": true,
+  "www.brueckenkopf-online.com": true
 };
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
