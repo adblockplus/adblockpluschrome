@@ -74,7 +74,9 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "www.e-shop.gr": true,
   "www.ebuyer.com": true,
   "www.satchef.de": true,
-  "www.brueckenkopf-online.com": true
+  "www.brueckenkopf-online.com": true,
+  "bestrepack.net": true,
+  "www.bestrepack.net": true
 };
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
