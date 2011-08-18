@@ -76,7 +76,14 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "www.satchef.de": true,
   "www.brueckenkopf-online.com": true,
   "bestrepack.net": true,
-  "www.bestrepack.net": true
+  "www.bestrepack.net": true,
+  "notebookhp.ru": true,
+  "www.notebookhp.ru": true,
+  "mp3dostavka.ru": true,
+  "www.mp3dostavka.ru": true,
+  "avikomp.ru": true,
+  "www.avikomp.ru": true,
+  "www.mtonline.ru": true,
 };
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
