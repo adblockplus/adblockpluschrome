@@ -66,7 +66,8 @@ def addToZip(zip, filters, dir, baseName):
         file == 'buildtools' or
         filelc.endswith('.py') or filelc.endswith('.pyc') or
         filelc.endswith('.crx') or filelc.endswith('.zip') or
-        filelc.endswith('.sh') or filelc.endswith('.bat')):
+        filelc.endswith('.sh') or filelc.endswith('.bat') or
+        filelc.endswith('.txt')):
       # skip special files, scripts, existing archives
       continue
     if file.startswith('include.'):
