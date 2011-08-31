@@ -84,6 +84,7 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "avikomp.ru": true,
   "www.avikomp.ru": true,
   "www.mtonline.ru": true,
+  "www.allwear.com": true,
 };
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
