@@ -11,18 +11,36 @@ def usage():
   print '''Usage: %s outputfile
 
 Options:
-  -h      --help        Print this message and exit
-  -i dir  --input=dir   Directory to be packaged
-  -k file --key=file    File containing the private key
-  -b num  --build=num   Use given build number (if omitted the build
-                        number will be retrieved from Mercurial)
-          --release     Create a release build, not a development build
+  -h      --help          Print this message and exit
+  -i dir  --input=dir     Directory to be packaged
+  -k file --key=file      File containing the private key
+  -b num  --build=num     Use given build number (if omitted the build
+                          number will be retrieved from Mercurial)
+          --release       Create a release build, not a development build
+          --experimental  Enable use of experimental APIs
 ''' % os.path.basename(sys.argv[0])
 
 def removeUpdateURL(zip, dir, fileName, fileData):
   if fileName == 'manifest.json':
     data = json.loads(fileData)
     del data['update_url']
+    return json.dumps(data)
+  return fileData
+
+def useExperimentalUpdateURL(zip, dir, fileName, fileData):
+  if fileName == 'manifest.json':
+    data = json.loads(fileData)
+    if 'update_url' in data:
+      index = data['update_url'].rfind('/')
+      if index >= 0:
+        data['update_url'] = data['update_url'][0:index] + '-experimental' + data['update_url'][index:]
+        return json.dumps(data)
+  return fileData
+
+def removeExperimentalPermissions(zip, dir, fileName, fileData):
+  if fileName == 'manifest.json':
+    data = json.loads(fileData)
+    data['permissions'] = filter(lambda p: p != 'experimental', data['permissions'])
     return json.dumps(data)
   return fileData
 
@@ -117,7 +135,7 @@ def writePackage(outputFile, pubkey, signature, zipdata):
 
 if __name__ == '__main__':
   try:
-    opts, args = getopt(sys.argv[1:], 'hi:b:k:', ['help', 'inputdir=', 'build=', 'key=', 'release'])
+    opts, args = getopt(sys.argv[1:], 'hi:b:k:', ['help', 'inputdir=', 'build=', 'key=', 'release', 'experimental'])
     if len(args) != 1:
       raise GetoptError('Need exactly one output file name')
   except GetoptError, e:
@@ -129,6 +147,7 @@ if __name__ == '__main__':
   buildNum = None
   keyfile = None
   isRelease = False
+  allowExperimental = False
   for option, value in opts:
     if option in ('-h', '--help'):
       usage()
@@ -141,12 +160,18 @@ if __name__ == '__main__':
       keyfile = value
     elif option in ('--release'):
       isRelease = True
+    elif option in ('--experimental'):
+      allowExperimental = True
 
   filters = []
   if isRelease:
     filters.append(removeUpdateURL)
   else:
     filters.append(lambda zip, dir, fileName, fileData: addBuildNumber(buildNum, zip, dir, fileName, fileData))
+    if allowExperimental:
+      filters.append(useExperimentalUpdateURL)
+  if not allowExperimental:
+    filters.append(removeExperimentalPermissions)
   filters.append(mergeContentScripts)
 
   zipdata = packDirectory(inputdir, filters)
