@@ -58,7 +58,7 @@ function forgetTab(tabId)
 }
 
 // Primitive third-party check, needs to be replaced by something more elaborate
-// later.
+// later. This is a copy of the function in include.preload.js.
 function isThirdParty(requestHost, documentHost)
 {
   // Remove trailing dots
