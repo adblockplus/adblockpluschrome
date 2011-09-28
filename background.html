@@ -534,6 +534,27 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 // Reload filters every four hours, which will trigger the autoupdate
 setInterval(reloadFilters, 4 * 60 * 60 * 1000);
 
+// Only load webrequest.js if we have the necessary permissions
+var hasExperimentalPermissions = false;
+try
+{
+  var dummy = function(){};
+  chrome.experimental.webRequest.onBeforeRequest.addListener(dummy);
+  chrome.experimental.webRequest.onBeforeRequest.removeListener(dummy);
+  hasExperimentalPermissions = true;
+}
+catch (e) {}
+
+if (hasExperimentalPermissions)
+{
+  window.addEventListener("load", function()
+  {
+    var script = document.createElement("script");
+    script.setAttribute("src", "webrequest.js");
+    document.body.appendChild(script);
+  }, false);
+}
+
 </script>
 </head>
 </html>
