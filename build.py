@@ -34,8 +34,7 @@ def useExperimentalUpdateURL(zip, dir, fileName, fileData):
       index = data['update_url'].rfind('/')
       if index >= 0:
         data['update_url'] = data['update_url'][0:index] + '-experimental' + data['update_url'][index:]
-    if 'name' in data:
-      data['name'] += ' experimental build'
+    data['name'] += ' experimental build'
     return json.dumps(data)
   return fileData
 
@@ -43,6 +42,11 @@ def removeExperimentalPermissions(zip, dir, fileName, fileData):
   if fileName == 'manifest.json':
     data = json.loads(fileData)
     data['permissions'] = filter(lambda p: p != 'experimental', data['permissions'])
+    if 'content_scripts' in data:
+      for script in data['content_scripts']:
+        if 'js' in script:
+          script['js'] = filter(lambda s: s != 'include.experimental.js', script['js'])
+
     return json.dumps(data)
   return fileData
 

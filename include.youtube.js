@@ -23,6 +23,12 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+var isExperimental;
+
+// Don't do anything in experimental builds, webRequest API will handle this
+if (isExperimental == true)
+  return;
+
 // YouTube special case option
 var shouldRemoveYouTubeAds = undefined;
 var savedPlayer, savedPlayerVars;

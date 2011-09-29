@@ -24,13 +24,13 @@
   "content_scripts": [
     {
       "matches": ["http://*.youtube.com/*", "https://*.youtube.com/*", "http://*.youtube-nocookie.com/*", "https://*.youtube-nocookie.com/*"],
-      "js": ["include.youtube.js"],
+      "js": ["include.experimental.js", "include.youtube.js"],
       "run_at": "document_start",
       "all_frames": true
     },
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["adblockplus/patches.js", "adblockplus/FilterClasses.jsm", "adblockplus/Matcher.jsm", "include.preload.js"],
+      "js": ["adblockplus/patches.js", "adblockplus/FilterClasses.jsm", "adblockplus/Matcher.jsm", "include.experimental.js", "include.preload.js"],
       "run_at": "document_start",
       "all_frames": true
     },
