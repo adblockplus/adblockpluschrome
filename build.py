@@ -34,7 +34,9 @@ def useExperimentalUpdateURL(zip, dir, fileName, fileData):
       index = data['update_url'].rfind('/')
       if index >= 0:
         data['update_url'] = data['update_url'][0:index] + '-experimental' + data['update_url'][index:]
-        return json.dumps(data)
+    if 'name' in data:
+      data['name'] += ' experimental build'
+    return json.dumps(data)
   return fileData
 
 def removeExperimentalPermissions(zip, dir, fileName, fileData):
