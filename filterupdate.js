@@ -44,12 +44,12 @@ var filterListTitles = {
   "easylist": '<a href="http://easylist.adblockplus.org/">EasyList</a>',
   "germany": 'EasyList Germany',
   "fanboy": '<a href="http://www.fanboy.co.nz/adblock/">Fanboy\'s List</a>',
-  "fanboy_es": "Fanboy's Español/Português supplement",
-  "france": 'EasyList + Liste FR (Français)',
-  "china": '<a href="http://code.google.com/p/adblock-chinalist/">ChinaList</a> (中文)',
-  "russia": '<a href="http://code.google.com/p/ruadlist/">RU AdList</a> (Русский, Українська)',
-  "korea": '<a href="http://corset.tistory.com/">Corset</a> (한국어)',
-  "romania": '<a href="http://www.picpoc.ro/">ROList</a> (Românesc)',
+  "fanboy_es": "Fanboy's Espa\xF1ol/Portugu\xEAs supplement",
+  "france": 'EasyList + Liste FR (Fran\xE7ais)',
+  "china": '<a href="http://code.google.com/p/adblock-chinalist/">ChinaList</a> (\u4E2D\u6587)',
+  "russia": '<a href="http://code.google.com/p/ruadlist/">RU AdList</a> (\u0420\u0443\u0441\u0441\u043A\u0438\u0439, \u0423\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430)',
+  "korea": '<a href="http://corset.tistory.com/">Corset</a> (\uD55C\uAD6D\uC5B4)',
+  "romania": '<a href="http://www.picpoc.ro/">ROList</a> (Rom\xE2nesc)',
   "italy": '<a href="http://mozilla.gfsolone.com/">Xfiles</a> (Italiano)',
   "poland": '<a href="http://www.niecko.pl/adblock/">PLgeneral</a> (Polski)',
   "hungary": '<a href="http://pete.teamlupus.hu/site/?pg=hufilter">hufilter</a> (Magyar)',
@@ -68,7 +68,7 @@ var filterListAuthors = {
   "romania": 'MenetZ, Zoso',
   "italy": 'Gioxx',
   "poland": 'Krzysztof Niecko',
-  "hungary": 'Szabó Péter'
+  "hungary": 'Szab\xF3 P\xE9ter'
 };
 
 // Filter lists turned on by default, guessed based on i18n reported locale.
