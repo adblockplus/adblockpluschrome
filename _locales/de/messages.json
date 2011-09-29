@@ -41,7 +41,7 @@
       "message": "Abbrechen"
    },
    "clickhide_instructions": {
-      "message": "Nachdem Sie dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
+      "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
    },
    "delete": {
       "description": "Wort für 'löschen'.",
