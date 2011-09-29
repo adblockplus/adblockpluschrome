@@ -280,9 +280,9 @@ if (document.documentElement instanceof HTMLElement)
         // Replay the events that were saved while we were waiting to learn whether we are enabled
         for(var i = 0; i < savedBeforeloadEvents.length; i++)
           beforeloadHandler(savedBeforeloadEvents[i]);
-        delete savedBeforeloadEvents;
       }
     }
+    delete savedBeforeloadEvents;
   });
 
   chrome.extension.sendRequest({reqtype: "get-settings", selectors: true, host: window.location.hostname}, function(response)
