@@ -23,6 +23,8 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+var isExperimental;
+
 var TagToType = {
   "SCRIPT": "SCRIPT",
   "IMG": "IMAGE",
@@ -39,6 +41,7 @@ var TagToType = {
 // blocker.js to get rid of ads by element src URL.
 // Unfortunately we can't do this with filter rules because we would need to query the backend to
 // check our domain, which cannot respond in time due to the lack of synchronous message passing.
+
 var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "t.sina.com.cn": true,
   "prazsketramvaje.cz": true,
@@ -255,7 +258,7 @@ function beforeloadHandler(/**Event*/ e)
   }
 }
 
-if (!workaroundBeforeloadMalfunction)
+if (isExperimental != true && !workaroundBeforeloadMalfunction)
 {
   document.addEventListener("beforeload", saveBeforeloadEvent, true);
 }
@@ -265,25 +268,30 @@ var elemhideElt = null;
 // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
 if (document.documentElement instanceof HTMLElement)
 {
-  chrome.extension.sendRequest({reqtype: "get-settings", matcher: true}, function(response)
+  // Blocking from content script is unnecessary in experimental builds, it is
+  // done though webRequest API.
+  if (isExperimental != true)
   {
-    document.removeEventListener("beforeload", saveBeforeloadEvent, true);
-
-    if (response.enabled)
+    chrome.extension.sendRequest({reqtype: "get-settings", matcher: true}, function(response)
     {
-      defaultMatcher.fromCache(JSON.parse(response.matcherData));
+      document.removeEventListener("beforeload", saveBeforeloadEvent, true);
 
-      if (!workaroundBeforeloadMalfunction)
+      if (response.enabled)
       {
-        document.addEventListener("beforeload", beforeloadHandler, true);
+        defaultMatcher.fromCache(JSON.parse(response.matcherData));
 
-        // Replay the events that were saved while we were waiting to learn whether we are enabled
-        for(var i = 0; i < savedBeforeloadEvents.length; i++)
-          beforeloadHandler(savedBeforeloadEvents[i]);
+        if (!workaroundBeforeloadMalfunction)
+        {
+          document.addEventListener("beforeload", beforeloadHandler, true);
+
+          // Replay the events that were saved while we were waiting to learn whether we are enabled
+          for(var i = 0; i < savedBeforeloadEvents.length; i++)
+            beforeloadHandler(savedBeforeloadEvents[i]);
+        }
       }
-    }
-    delete savedBeforeloadEvents;
-  });
+      delete savedBeforeloadEvents;
+    });
+  }
 
   chrome.extension.sendRequest({reqtype: "get-settings", selectors: true, host: window.location.hostname}, function(response)
   {

@@ -538,29 +538,32 @@ if (document.documentElement instanceof HTMLElement)
       }
     } else if(request.reqtype == "remove-ads-again") {
       // Called when a new filter is added
-      removeAdsAgain();
+      if (isExperimental != true)
+        removeAdsAgain();
     } else
       sendResponse({});
   });
 
-  chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response)
+  if (isExperimental != true)
   {
-    enabled = response.enabled;
-    if(enabled)
+    chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response)
     {
-      if (workaroundBeforeloadMalfunction)
+      enabled = response.enabled;
+      if(enabled)
       {
-        // Too bad, we cannot block properly - resort to crawling the document
-        // for ads.
-        nukeElements();
-        document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
+        if (workaroundBeforeloadMalfunction)
+        {
+          // Too bad, we cannot block properly - resort to crawling the document
+          // for ads.
+          nukeElements();
+          document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
+        }
+
+        // Nuke background if it's an ad
+        var bodyBackground = getComputedStyle(document.body).backgroundImage;
+        if (bodyBackground && /^url\((.*)\)$/.test(bodyBackground) && shouldBlock(RegExp.$1, "IMAGE"))
+          document.body.style.setProperty("background-image", "none", "important");
       }
-
-      // Nuke background if it's an ad
-      var bodyBackground = getComputedStyle(document.body).backgroundImage;
-      if (bodyBackground && /^url\((.*)\)$/.test(bodyBackground) && shouldBlock(RegExp.$1, "IMAGE"))
-        document.body.style.setProperty("background-image", "none", "important");
-    }
-  });
-
+    });
+  }
 }
