@@ -104,5 +104,11 @@ function processRequest(type, url, documentUrl, topUrl)
     // maybe we have a subrequest here.
     match = defaultMatcher.matchesAny(url, "OBJECT_SUBREQUEST", documentHost, thirdParty);
   }
+  else if (!match && type == "OTHER")
+  {
+    // Chrome puts HTML5 audio/video requests into the "other" category,
+    // maybe we have a media request here.
+    match = defaultMatcher.matchesAny(url, "MEDIA", documentHost, thirdParty);
+  }
   return (match instanceof BlockingFilter);
 }
