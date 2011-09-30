@@ -98,17 +98,5 @@ function processRequest(type, url, documentUrl, topUrl)
   var documentHost = extractDomainFromURL(documentUrl);
   var thirdParty = isThirdParty(requestHost, documentHost);
   var match = defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
-  if (!match && type == "OBJECT")
-  {
-    // Chrome doesn't distinguish between objects and object subrequests,
-    // maybe we have a subrequest here.
-    match = defaultMatcher.matchesAny(url, "OBJECT_SUBREQUEST", documentHost, thirdParty);
-  }
-  else if (!match && type == "OTHER")
-  {
-    // Chrome puts HTML5 audio/video requests into the "other" category,
-    // maybe we have a media request here.
-    match = defaultMatcher.matchesAny(url, "MEDIA", documentHost, thirdParty);
-  }
   return (match instanceof BlockingFilter);
 }
