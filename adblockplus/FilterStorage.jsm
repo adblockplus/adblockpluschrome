@@ -30,7 +30,32 @@
   const formatVersion = 3;
   var observers = [];
   var FilterStorage = {
-    sourceFile: null,
+    get sourceFile() {
+      var file = null;
+      if (Prefs.patternsfile) {
+        file = Utils.resolveFilePath(Prefs.patternsfile);
+      }
+      if (!file) {
+        file = Utils.resolveFilePath(Prefs.data_directory);
+        if (file)
+          file.append("patterns.ini");
+      }
+      if (!file) {
+        try {
+          file = Utils.resolveFilePath(Prefs.defaultBranch.getCharPref("data_directory"));
+          if (file)
+            FilterStorage.sourceFile.append("patterns.ini");
+        }
+        catch (e){}
+      }
+      if (!file)
+        Cu.reportError("Adblock Plus: Failed to resolve filter file location from extensions.adblockplus.patternsfile preference");
+      this.__defineGetter__("sourceFile", function () {
+        return file;
+      });
+      return this.sourceFile;
+    }
+    ,
     fileProperties: {
       __proto__: null
     },
@@ -174,24 +199,6 @@
     }
     ,
     loadFromDisk: function (silent) {
-      if (Prefs.patternsfile) {
-        FilterStorage.sourceFile = Utils.resolveFilePath(Prefs.patternsfile);
-      }
-      if (!FilterStorage.sourceFile) {
-        FilterStorage.sourceFile = Utils.resolveFilePath(Prefs.data_directory);
-        if (FilterStorage.sourceFile)
-          FilterStorage.sourceFile.append("patterns.ini");
-      }
-      if (!FilterStorage.sourceFile) {
-        try {
-          FilterStorage.sourceFile = Utils.resolveFilePath(Prefs.defaultBranch.getCharPref("data_directory"));
-          if (FilterStorage.sourceFile)
-            FilterStorage.sourceFile.append("patterns.ini");
-        }
-        catch (e){}
-      }
-      if (!FilterStorage.sourceFile)
-        Cu.reportError("Adblock Plus: Failed to resolve filter file location from extensions.adblockplus.patternsfile preference");
       var realSourceFile = FilterStorage.sourceFile;
       if (!realSourceFile || !realSourceFile.exists()) {
         var patternsURL = Utils.ioService.newURI("chrome://adblockplus-defaults/content/patterns.ini", null, null);
@@ -262,7 +269,6 @@
     saveToDisk: function () {
       if (!FilterStorage.sourceFile)
         return ;
-      FilterStorage.triggerObservers("beforesave");
       try {
         FilterStorage.sourceFile.normalize();
       }
@@ -286,8 +292,6 @@
       }
       const maxBufLength = 1024;
       var buf = ["# Adblock Plus preferences", "version=" + formatVersion];
-      if ("cacheTimestamp" in FilterStorage.fileProperties)
-        buf.push("cacheTimestamp=" + FilterStorage.fileProperties.cacheTimestamp);
       var lineBreak = Utils.getLineBreak();
       function writeBuffer() {
         stream.writeString(buf.join(lineBreak) + lineBreak);

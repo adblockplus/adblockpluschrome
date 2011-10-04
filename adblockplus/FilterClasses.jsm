@@ -28,7 +28,7 @@
 
 (function (_patchFunc5) {
   function _extend0(baseClass, props) {
-    var dummyConstructor = function () { };
+    var dummyConstructor = function () {};
     dummyConstructor.prototype = baseClass.prototype;
     var result = new dummyConstructor();
     for (var k in props)
@@ -113,13 +113,13 @@
   }
   InvalidFilter.prototype = _extend0(Filter, {
     reason: null,
-    serialize: function (buffer) { }
+    serialize: function (buffer) {}
   });
   function CommentFilter(text) {
     Filter.call(this, text);
   }
   CommentFilter.prototype = _extend0(Filter, {
-    serialize: function (buffer) { }
+    serialize: function (buffer) {}
   });
   function ActiveFilter(text, domains) {
     Filter.call(this, text);
@@ -250,7 +250,7 @@
       var pos = source.length - 1;
       if (pos >= 0 && source[pos] == "*")
         source = source.substr(0, pos);
-      source = source.replace(/\^\|$/, "^").replace(/\W/g, "\\$&").replace(/\\\*/g, ".*").replace(/\\\^/g, "(?:[\\x00-\\x24\\x26-\\x2C\\x2F\\x3A-\\x40\\x5B-\\x5E\\x60\\x7B-\\x80]|$)").replace(/^\\\|\\\|/, "^[\\w\\-]+:\\/+(?!\\/)(?:[^\\/]+\\.)?").replace(/^\\\|/, "^").replace(/\\\|$/, "$");
+      source = source.replace(/\^\|$/, "^").replace(/\W/g, "\\$&").replace(/\\\*/g, ".*").replace(/\\\^/g, "(?:[\\x00-\\x24\\x26-\\x2C\\x2F\\x3A-\\x40\\x5B-\\x5E\\x60\\x7B-\\x80]|$)").replace(/^\\\|\\\|/, "^[\\w\\-]+:\\/+(?!\\/)(?:[^.\\/]+\\.)*?").replace(/^\\\|/, "^").replace(/\\\|$/, "$");
       var regexp = new RegExp(source, this.matchCase ? "" : "i");
       delete this.regexp;
       delete this.regexpSource;
@@ -349,10 +349,11 @@
     MEDIA: 16384,
     FONT: 32768,
     BACKGROUND: 4,
+    POPUP: 268435456,
     DONOTTRACK: 536870912,
     ELEMHIDE: 1073741824
   };
-  RegExpFilter.prototype.contentType &= ~(RegExpFilter.typeMap.ELEMHIDE | RegExpFilter.typeMap.DONOTTRACK);
+  RegExpFilter.prototype.contentType &= ~(RegExpFilter.typeMap.ELEMHIDE | RegExpFilter.typeMap.DONOTTRACK | RegExpFilter.typeMap.POPUP);
   function BlockingFilter(text, regexpSource, contentType, matchCase, domains, thirdParty, collapse) {
     RegExpFilter.call(this, text, regexpSource, contentType, matchCase, domains, thirdParty);
     this.collapse = collapse;

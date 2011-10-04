@@ -86,87 +86,96 @@
     apply: function () {
       if (ElemHide.applied)
         ElemHide.unapply();
-      if (!Prefs.enabled) {
-        return ;
-      }
-      if (ElemHide.isDirty) {
-        ElemHide.isDirty = false;
-        var domains = {
-          __proto__: null
-        };
-        var hasFilters = false;
-        for (var key in filterByKey) {
-          var filter = Filter.knownFilters[filterByKey[key]];
-          var domain = filter.selectorDomain || "";
-          var list;
-          if (domain in domains)
-            list = domains[domain];
-           else {
-            list = {
-              
-            };
-            domains[domain] = list;
-          }
-          list[filter.selector] = key;
-          hasFilters = true;
-        }
-        if (!hasFilters) {
-          return ;
-        }
-        try {
-          styleURL.file.parent.create(Ci.nsIFile.DIRECTORY_TYPE, 493);
-        }
-        catch (e){}
-        var stream;
-        try {
-          stream = Cc["@mozilla.org/network/safe-file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
-          stream.init(styleURL.file, 2 | 8 | 32, 420, 0);
-        }
-        catch (e){
-          Cu.reportError(e);
-          return ;
-        }
-        var buf = [];
-        var maxBufLen = 1024;
-        function escapeChar(match) {
-          return "\\" + match.charCodeAt(0).toString(16) + " ";
-        }
-        function writeString(str, forceWrite) {
-          buf.push(str);
-          if (buf.length >= maxBufLen || forceWrite) {
-            var output = buf.join("").replace(/[^\x01-\x7F]/g, escapeChar);
-            stream.write(output, output.length);
-            buf.splice(0, buf.length);
-          }
-        }
-        var cssTemplate = "-moz-binding: url(about:" + ElemHidePrivate.aboutPrefix + "?%ID%#dummy) !important;";
-        for (var domain in domains) {
-          var rules = [];
-          var list = domains[domain];
-          if (domain)
-            writeString("@-moz-document domain(\"" + domain.split(",").join("\"),domain(\"") + "\"){\n");
-           else {
-            writeString("@-moz-document url-prefix(\"http://\"),url-prefix(\"https://\"),url-prefix(\"mailbox://\"),url-prefix(\"imap://\"),url-prefix(\"news://\"),url-prefix(\"snews://\"){\n");
-          }
-          for (var selector in list)
-            writeString(selector + "{" + cssTemplate.replace("%ID%", list[selector]) + "}\n");
-          writeString("}\n");
-        }
-        writeString("", true);
-        try {
-          stream.QueryInterface(Ci.nsISafeOutputStream).finish();
-        }
-        catch (e){
-          Cu.reportError(e);
-          return ;
-        }
-      }
       try {
-        Utils.styleService.loadAndRegisterSheet(styleURL, Ci.nsIStyleSheetService.USER_SHEET);
-        ElemHide.applied = true;
+        if (!Prefs.enabled) {
+          return ;
+        }
+        if (ElemHide.isDirty) {
+          ElemHide.isDirty = false;
+          var domains = {
+            __proto__: null
+          };
+          var hasFilters = false;
+          for (var key in filterByKey) {
+            var filter = Filter.knownFilters[filterByKey[key]];
+            if (!filter) {
+              delete filterByKey[key];
+              continue;
+            }
+            var domain = filter.selectorDomain || "";
+            var list;
+            if (domain in domains)
+              list = domains[domain];
+             else {
+              list = {
+                
+              };
+              domains[domain] = list;
+            }
+            list[filter.selector] = key;
+            hasFilters = true;
+          }
+          if (!hasFilters) {
+            return ;
+          }
+          try {
+            styleURL.file.parent.create(Ci.nsIFile.DIRECTORY_TYPE, 493);
+          }
+          catch (e){}
+          var stream;
+          try {
+            stream = Cc["@mozilla.org/network/safe-file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
+            stream.init(styleURL.file, 2 | 8 | 32, 420, 0);
+          }
+          catch (e){
+            Cu.reportError(e);
+            return ;
+          }
+          var buf = [];
+          var maxBufLen = 1024;
+          function escapeChar(match) {
+            return "\\" + match.charCodeAt(0).toString(16) + " ";
+          }
+          function writeString(str, forceWrite) {
+            buf.push(str);
+            if (buf.length >= maxBufLen || forceWrite) {
+              var output = buf.join("").replace(/[^\x01-\x7F]/g, escapeChar);
+              stream.write(output, output.length);
+              buf.splice(0, buf.length);
+            }
+          }
+          var cssTemplate = "-moz-binding: url(about:" + ElemHidePrivate.aboutPrefix + "?%ID%#dummy) !important;";
+          for (var domain in domains) {
+            var rules = [];
+            var list = domains[domain];
+            if (domain)
+              writeString("@-moz-document domain(\"" + domain.split(",").join("\"),domain(\"") + "\"){\n");
+             else {
+              writeString("@-moz-document url-prefix(\"http://\"),url-prefix(\"https://\"),url-prefix(\"mailbox://\"),url-prefix(\"imap://\"),url-prefix(\"news://\"),url-prefix(\"snews://\"){\n");
+            }
+            for (var selector in list)
+              writeString(selector + "{" + cssTemplate.replace("%ID%", list[selector]) + "}\n");
+            writeString("}\n");
+          }
+          writeString("", true);
+          try {
+            stream.QueryInterface(Ci.nsISafeOutputStream).finish();
+          }
+          catch (e){
+            Cu.reportError(e);
+            return ;
+          }
+        }
+        try {
+          Utils.styleService.loadAndRegisterSheet(styleURL, Ci.nsIStyleSheetService.USER_SHEET);
+          ElemHide.applied = true;
+        }
+        catch (e){
+          Cu.reportError(e);
+        }
       }
-      catch (e){
-        Cu.reportError(e);
+      finally {
+        FilterStorage.triggerObservers("elemhideupdate");
       }
     }
     ,
@@ -180,6 +189,13 @@
         }
         ElemHide.applied = false;
       }
+    }
+    ,
+    get styleURL() {
+      return ElemHide.applied ? styleURL.spec : null;
+    },
+    getFilterByKey: function (key) {
+      return (key in filterByKey ? Filter.knownFilters[filterByKey[key]] : null);
     }
     ,
     toCache: function (cache) {
@@ -220,7 +236,7 @@
     }
     ,
     getURIFlags: function (uri) {
-      return Ci.nsIAboutModule.HIDE_FROM_ABOUTABOUT;
+      return ("HIDE_FROM_ABOUTABOUT" in Ci.nsIAboutModule ? Ci.nsIAboutModule.HIDE_FROM_ABOUTABOUT : 0);
     }
     ,
     newChannel: function (uri) {
