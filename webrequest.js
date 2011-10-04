@@ -89,6 +89,8 @@ function processRequest(type, url, documentUrl, topUrl)
     var whitelist = defaultMatcher.matchesAny(topUrl, "DOCUMENT", topHost, false);
     if (whitelist instanceof WhitelistFilter)
       return false;
+    if (isDomainExcluded(topHost))
+      return false;
   }
 
   if (!documentUrl)
