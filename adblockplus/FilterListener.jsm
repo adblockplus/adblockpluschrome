@@ -54,44 +54,41 @@
           var json = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
           var cache = json.decodeFromStream(stream, "UTF-8");
           stream.close();
-          if (cache.version == cacheVersion) {
+          if (cache.version == cacheVersion && cache.patternsTimestamp == FilterStorage.sourceFile.clone().lastModifiedTime) {
             defaultMatcher.fromCache(cache);
             ElemHide.fromCache(cache);
-          }
-          var loadDone = false;
-          function trapProperty(obj, prop) {
-            var origValue = obj[prop];
-            delete obj[prop];
-            obj.__defineGetter__(prop, function () {
+            var loadDone = false;
+            function trapProperty(obj, prop) {
+              var origValue = obj[prop];
               delete obj[prop];
-              obj[prop] = origValue;
-              if (!loadDone) {
-                loadDone = true;
-                FilterStorage.loadFromDisk(true);
-                if (FilterStorage.fileProperties.cacheTimestamp != cache.timestamp) {
-                  FilterStorage.triggerObservers("load");
+              obj.__defineGetter__(prop, function () {
+                delete obj[prop];
+                obj[prop] = origValue;
+                if (!loadDone) {
+                  loadDone = true;
+                  FilterStorage.loadFromDisk(true);
                 }
+                return obj[prop];
               }
-              return obj[prop];
+              );
+              obj.__defineSetter__(prop, function (value) {
+                delete obj[prop];
+                return obj[prop] = value;
+              }
+              );
             }
-            );
-            obj.__defineSetter__(prop, function (value) {
-              delete obj[prop];
-              return obj[prop] = value;
+            for (var _loopIndex0 = 0;
+            _loopIndex0 < ["fileProperties", "subscriptions", "knownSubscriptions", "addSubscription", "removeSubscription", "updateSubscriptionFilters", "addFilter", "removeFilter", "increaseHitCount", "resetHitCounts"].length; ++ _loopIndex0) {
+              var prop = ["fileProperties", "subscriptions", "knownSubscriptions", "addSubscription", "removeSubscription", "updateSubscriptionFilters", "addFilter", "removeFilter", "increaseHitCount", "resetHitCounts"][_loopIndex0];
+              trapProperty(FilterStorage, prop);
             }
-            );
+            trapProperty(Filter, "fromText");
+            trapProperty(Filter, "knownFilters");
+            trapProperty(Subscription, "fromURL");
+            trapProperty(Subscription, "knownSubscriptions");
+            initialized = true;
+            ElemHide.apply();
           }
-          for (var _loopIndex0 = 0;
-          _loopIndex0 < ["fileProperties", "subscriptions", "knownSubscriptions", "addSubscription", "removeSubscription", "updateSubscriptionFilters", "addFilter", "removeFilter", "increaseHitCount", "resetHitCounts"].length; ++ _loopIndex0) {
-            var prop = ["fileProperties", "subscriptions", "knownSubscriptions", "addSubscription", "removeSubscription", "updateSubscriptionFilters", "addFilter", "removeFilter", "increaseHitCount", "resetHitCounts"][_loopIndex0];
-            trapProperty(FilterStorage, prop);
-          }
-          trapProperty(Filter, "fromText");
-          trapProperty(Filter, "knownFilters");
-          trapProperty(Subscription, "fromURL");
-          trapProperty(Subscription, "knownSubscriptions");
-          initialized = true;
-          ElemHide.apply();
         }
         catch (e){
           Cu.reportError(e);
@@ -105,7 +102,6 @@
     shutdown: function () {
       if (isDirty)
         FilterStorage.saveToDisk();
-      Utils.observerService.removeObserver(FilterListenerPrivate, "browser:purge-session-history");
     }
     ,
     get batchMode() {
@@ -204,14 +200,12 @@
     if (action == "add" || action == "enable" || action == "remove" || action == "disable") {
       subscriptionFilter = null;
       var method = (action == "add" || action == "enable" ? addFilter : removeFilter);
-      if (action != "enable" && action != "disable") {
-        filters = filters.filter(function (filter) {
-          return ((action == "add") == filter.subscriptions.some(function (subscription) {
-            return !subscription.disabled;
-          }));
-        }
-        );
+      filters = filters.filter(function (filter) {
+        return ((action != "remove") == filter.subscriptions.some(function (subscription) {
+          return !subscription.disabled;
+        }));
       }
+      );
       filters.forEach(method);
       flushElemHide();
     }
@@ -230,10 +224,11 @@
       flushElemHide();
     }
      else
-      if (action == "beforesave") {
+      if (action == "save") {
+        isDirty = false;
         var cache = {
           version: cacheVersion,
-          timestamp: Date.now()
+          patternsTimestamp: FilterStorage.sourceFile.clone().lastModifiedTime
         };
         defaultMatcher.toCache(cache);
         ElemHide.toCache(cache);
@@ -246,21 +241,23 @@
         try {
           var fileStream = Cc["@mozilla.org/network/file-output-stream;1"].createInstance(Ci.nsIFileOutputStream);
           fileStream.init(cacheFile, 2 | 8 | 32, 420, 0);
-          var stream = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
-          stream.init(fileStream, "UTF-8", 16384, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
           var json = Cc["@mozilla.org/dom/json;1"].createInstance(Ci.nsIJSON);
-          stream.writeString(json.encode(cache));
-          stream.close();
-          FilterStorage.fileProperties.cacheTimestamp = cache.timestamp;
+          if (Utils.versionComparator.compare(Utils.platformVersion, "5.0") >= 0) {
+            json.encodeToStream(fileStream, "UTF-8", false, cache);
+            fileStream.close();
+          }
+           else {
+            var stream = Cc["@mozilla.org/intl/converter-output-stream;1"].createInstance(Ci.nsIConverterOutputStream);
+            stream.init(fileStream, "UTF-8", 16384, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
+            stream.writeString(json.encode(cache));
+            stream.close();
+          }
         }
         catch (e){
           delete FilterStorage.fileProperties.cacheTimestamp;
           Cu.reportError(e);
         }
       }
-       else
-        if (action == "save")
-          isDirty = false;
   }
   if (typeof _patchFunc5 != "undefined")
     eval("(" + _patchFunc5.toString() + ")()");

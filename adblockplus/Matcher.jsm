@@ -139,12 +139,26 @@
       var list = this.filterByKeyword[keyword];
       if (typeof list == "string") {
         var filter = Filter.knownFilters[list];
+        if (!filter) {
+          delete this.filterByKeyword[keyword];
+          return null;
+        }
         return (filter.matches(location, contentType, docDomain, thirdParty) ? filter : null);
       }
        else {
-        for (var i = 0, l = list.length;
-        i < l; i++) {
+        for (var i = 0;
+        i < list.length; i++) {
           var filter = Filter.knownFilters[list[i]];
+          if (!filter) {
+            if (list.length == 1) {
+              delete this.filterByKeyword[keyword];
+              return null;
+            }
+             else {
+              list.splice(i--, 1);
+              continue;
+            }
+          }
           if (filter.matches(location, contentType, docDomain, thirdParty))
             return filter;
         }
