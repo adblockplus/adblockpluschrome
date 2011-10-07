@@ -272,51 +272,40 @@ function downloadFilterList(url) {
 
 // Loads the filter list from disk (or localStorage) and stores it in a global variable
 function loadFiltersRawText(filename) {
-    // Check filename for http prefix and if so load from localStorage instead
-    if(filename.match(/^http/i)) {
-        if(typeof localStorage[filename] == "string") {
-            var list = JSON.parse(localStorage[filename]);
-            // If there was an error loading the list before, don't try again now, let the user
-            // update manually. This is so we won't pound a filter list's server if the
-            // maintainer moves the file.
-            if(!list.error) {
-                // Check whether it's time to redownload the list.
-                // If list specifies its expiry time, use that. Otherwise default to 3 days.
-                var now = new Date().getTime();
-                var expires = list.expires ? list.expires : DEFAULT_EXPIRATION_INTERVAL * MILLISECONDS_IN_SECOND;
-                // If the list is expired and we aren't currently downloading it already, redownload it.
-                // We may have saved a null for lastUpdated due to a bug, so replace that with now
-                if(!list.lastUpdated) {
-                    console.log("Fixing null lastUpdated filename for " + filename);
-                    list.lastUpdated = now;
-                    localStorage[filename] = JSON.stringify(list);
-                }
-                if(((now - list.lastUpdated) > expires) && !downloading[filename]) {
-                    // console.log("Too old, so redownloading " + filename);
-                    downloadFilterList(filename);
-                }
-            }
-            // If there is any text for the filter list, return it, otherwise return a
-            // blank string rather than undefined. This depends on the fetcher not
-            // filling list.text with garbage on an unsuccessful fetch.
-            return list.text ? list.text : "";
-        } else {
-            // This filter list was never downloaded, so download it
-            // This is kept from running away by the fetcher actually storing the filter
-            // list data, which is checked for above.
-            // console.log("First time download: " + filename);
-            downloadFilterList(filename);           
-            return ""; // Return nothing for now, it'll be reloaded later
-        }
+  if(typeof localStorage[filename] == "string") {
+    var list = JSON.parse(localStorage[filename]);
+    // If there was an error loading the list before, don't try again now, let the user
+    // update manually. This is so we won't pound a filter list's server if the
+    // maintainer moves the file.
+    if(!list.error) {
+      // Check whether it's time to redownload the list.
+      // If list specifies its expiry time, use that. Otherwise default to 3 days.
+      var now = new Date().getTime();
+      var expires = list.expires ? list.expires : DEFAULT_EXPIRATION_INTERVAL * MILLISECONDS_IN_SECOND;
+      // If the list is expired and we aren't currently downloading it already, redownload it.
+      // We may have saved a null for lastUpdated due to a bug, so replace that with now
+      if(!list.lastUpdated) {
+        console.log("Fixing null lastUpdated filename for " + filename);
+        list.lastUpdated = now;
+        localStorage[filename] = JSON.stringify(list);
+      }
+      if(((now - list.lastUpdated) > expires) && !downloading[filename]) {
+        // console.log("Too old, so redownloading " + filename);
+        downloadFilterList(filename);
+      }
     }
-    
-    // I guess we have to load local files through XMLHttpRequest?
-    // Who knows, I'm not very good at this anyhow.
-    listUrl = chrome.extension.getURL("lists/" + filename);
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", listUrl, false);
-    xhr.send(null);
-    return xhr.responseText;
+    // If there is any text for the filter list, return it, otherwise return a
+    // blank string rather than undefined. This depends on the fetcher not
+    // filling list.text with garbage on an unsuccessful fetch.
+    return list.text ? list.text : "";
+  } else {
+    // This filter list was never downloaded, so download it
+    // This is kept from running away by the fetcher actually storing the filter
+    // list data, which is checked for above.
+    // console.log("First time download: " + filename);
+    downloadFilterList(filename);           
+    return ""; // Return nothing for now, it'll be reloaded later
+  }
 }
 
 /**
