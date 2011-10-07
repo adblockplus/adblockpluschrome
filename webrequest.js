@@ -30,7 +30,6 @@ function onBeforeRequest(details)
 
 function onBeforeSendHeaders(details)
 {
-  console.log(details.requestHeaders);
   var match = defaultMatcher.matchesAny(details.url, "DONOTTRACK", null, false);
   if (match && match instanceof BlockingFilter)
   {
