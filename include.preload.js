@@ -214,7 +214,7 @@ function isThirdParty(requestHost, documentHost)
 
   // Extract domain name - leave IP addresses unchanged, otherwise leave only
   // the last two parts of the host name
-  var documentDomain = documentHost
+  var documentDomain = documentHost;
   if (!/^\d+(\.\d+)*$/.test(documentDomain) && /([^\.]+\.[^\.]+)$/.test(documentDomain))
     documentDomain = RegExp.$1;
   if (requestHost.length > documentDomain.length)

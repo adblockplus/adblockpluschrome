@@ -124,6 +124,9 @@
   "block_youtube": {
     "message": "Block ads inside YouTube videos"
   },
+  "hide_placeholers": {
+    "message": "Hide placeholders of blocked elements"
+  },
   
   "enabled_for_site": {
     "message": "Enabled for this site",

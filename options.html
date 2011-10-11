@@ -54,7 +54,7 @@ p {
 <script type="text/javascript" charset="utf-8">
 
 function loadCheckbox(id) {
-    document.getElementById(id).checked = typeof localStorage[id] == "undefined" ? false : localStorage[id] == "true";
+    document.getElementById(id).checked = typeof localStorage[id] == "undefined" ? true : localStorage[id] == "true";
 }
 
 function saveCheckbox(id) {
@@ -79,7 +79,13 @@ function loadOptions() {
     loadCheckbox("shouldShowBlockElementMenu");
     loadCheckbox("disableInlineTextAds");
     loadCheckbox("specialCaseYouTube");
-    
+    loadCheckbox("hidePlaceholders");
+
+    if (chrome.extension.getBackgroundPage().hasExperimentalPermissions)
+      document.getElementById("specialCaseYouTubeContainer").style.display = "none";
+    else
+      document.getElementById("hidePlaceholdersContainer").style.display = "none";
+
     // Load user filter URLs
     loadUserFilterURLs();
     for(key in filterFiles) {
@@ -119,7 +125,8 @@ function saveOptions() {
     saveCheckbox("shouldShowBlockElementMenu");
     saveCheckbox("disableInlineTextAds");
     saveCheckbox("specialCaseYouTube");
-    
+    saveCheckbox("hidePlaceholders");
+
     // Filter lists
     var filterFilesEnabled = {};
     var userFilterURLs = {};
@@ -470,13 +477,25 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 </div>
 
 <div id="tab-general">
-<input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /><span class="i18n_show_icon"></span><br/>
-<input type="checkbox" id="shouldShowBlockElementMenu" onClick="saveOptions()" /><span class="i18n_show_block_element_menu"></span><br/>
-<input type="checkbox" id="disableInlineTextAds" onClick="saveOptions()" /><span class="i18n_disable_inline"></span><br/>
-<input type="checkbox" id="specialCaseYouTube" onClick="saveOptions()" /><span class="i18n_block_youtube"></span><br/>
+<p>
+  <div id="shouldShowIconContainer">
+    <input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /><span class="i18n_show_icon"></span>
+  </div>
+  <div id="shouldShowBlockElementMenuContainer">
+    <input type="checkbox" id="shouldShowBlockElementMenu" onClick="saveOptions()" /><span class="i18n_show_block_element_menu"></span>
+  </div>
+  <div id="disableInlineTextAdsContainer">
+    <input type="checkbox" id="disableInlineTextAds" onClick="saveOptions()" /><span class="i18n_disable_inline"></span>
+  </div>
+  <div id="specialCaseYouTubeContainer">
+    <input type="checkbox" id="specialCaseYouTube" onClick="saveOptions()" /><span class="i18n_block_youtube"></span>
+  </div>
+  <div id="hidePlaceholdersContainer">
+    <input type="checkbox" id="hidePlaceholders" onClick="saveOptions()" /><span class="i18n_hide_placeholers"></span>
+  </div>
+</p>
 
-<br/>
-<span class="i18n_found_a_bug">"https://adblockplus.org/forum/viewforum.php?f=10"</span>
+<p class="i18n_found_a_bug">"https://adblockplus.org/forum/viewforum.php?f=10"</p>
 
 </div>
 </div>
