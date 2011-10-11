@@ -25,7 +25,21 @@ function onBeforeRequest(details)
   if (type == "SUBDOCUMENT")
     documentUrl = topUrl;
 
-  return {cancel: processRequest(type, details.url, documentUrl, topUrl)};
+  var filter = checkRequest(type, details.url, documentUrl, topUrl);
+  if (filter instanceof BlockingFilter)
+  {
+    var collapse = filter.collapse;
+    if (collapse == null)
+      collapse = (localStorage["hidePlaceholders"] != "false");
+    if (collapse && type == "SUBDOCUMENT")
+      return {redirectUrl: "about:blank"};
+    else if (collapse && type == "IMAGE")
+      return {redirectUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="};
+    else
+      return {cancel: true};
+  }
+  else
+    return {};
 }
 
 function onBeforeSendHeaders(details)
@@ -83,7 +97,7 @@ function isThirdParty(requestHost, documentHost)
 
   // Extract domain name - leave IP addresses unchanged, otherwise leave only
   // the last two parts of the host name
-  var documentDomain = documentHost
+  var documentDomain = documentHost;
   if (!/^\d+(\.\d+)*$/.test(documentDomain) && /([^\.]+\.[^\.]+)$/.test(documentDomain))
     documentDomain = RegExp.$1;
   if (requestHost.length > documentDomain.length)
@@ -92,7 +106,7 @@ function isThirdParty(requestHost, documentHost)
     return (requestHost != documentDomain);
 }
 
-function processRequest(type, url, documentUrl, topUrl)
+function checkRequest(type, url, documentUrl, topUrl)
 {
   if (topUrl)
   {
@@ -115,6 +129,5 @@ function processRequest(type, url, documentUrl, topUrl)
   var requestHost = extractDomainFromURL(url);
   var documentHost = extractDomainFromURL(documentUrl);
   var thirdParty = isThirdParty(requestHost, documentHost);
-  var match = defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
-  return (match instanceof BlockingFilter);
+  return defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
 }
