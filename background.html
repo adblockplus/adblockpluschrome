@@ -401,11 +401,6 @@ function reloadFilters() {
     }
 }
 
-// Switch FilterListener into batch mode to prevent it from calling ElemHide.apply()
-FilterListener.batchMode = true;
-
-reloadFilters();
-
 // Set up context menu for user selection of elements to block
 function showContextMenu() {
     chrome.contextMenus.removeAll(function() {
@@ -547,6 +542,11 @@ if (hasExperimentalPermissions)
     document.body.appendChild(script);
   }, false);
 }
+
+// Switch FilterListener into batch mode to prevent it from calling ElemHide.apply()
+FilterListener.batchMode = true;
+
+reloadFilters();
 
 </script>
 </head>
