@@ -237,7 +237,7 @@ function refreshIconAndContextMenu(tab) {
     if(!tab) return;
     var domain = extractDomainFromURL(tab.url);
     var excluded = isDomainExcluded(domain);
-    iconFilename = excluded ? "icons/abp-16-whitelisted.png" : "icons/abp-16.png";
+    iconFilename = excluded ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
     chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
     var title = "Adblock Plus";
     // Only show icon for pages we can influence (http: and https:)
