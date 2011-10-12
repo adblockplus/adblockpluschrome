@@ -6,7 +6,7 @@
   "default_locale": "en",
   "update_url": "https://adblockplus.org/devbuilds/adblockpluschrome/updates.xml",
   "page_action": {
-    "default icon": "icons/abp-16.png",
+    "default icon": "icons/abp-19.png",
     "default title": "Adblock Plus",
     "popup": "popup.html"
   },
