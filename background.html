@@ -24,6 +24,10 @@ FilterStorage.addObserver(function(action)
       executeFirstRunActions();
     localStorage["currentVersion"] = Utils.addonVersion;
   }
+  else if (/^(filters|subscriptions)\b/.test(action))
+  {
+    cachedMatcherData = null;
+  }
 });
 
 // Special-case domains for which we should only inject their specific
