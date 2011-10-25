@@ -1,310 +1,167 @@
 <html>
 <head>
-<meta http-equiv="Content-Script-Type" content="text/javascript, charset=UTF-8">
-<script type="text/javascript">
-var abp = {};
-</script>
+
 <script type="text/javascript" src="adblockplus/patches.js"></script>
 <script type="text/javascript" src="adblockplus/FilterClasses.jsm"></script>
+<script type="text/javascript" src="adblockplus/SubscriptionClasses.jsm"></script>
 <script type="text/javascript" src="adblockplus/FilterStorage.jsm"></script>
 <script type="text/javascript" src="adblockplus/ElemHide.jsm"></script>
 <script type="text/javascript" src="adblockplus/FilterListener.jsm"></script>
 <script type="text/javascript" src="adblockplus/Matcher.jsm"></script>
+<script type="text/javascript" src="adblockplus/Synchronizer.jsm"></script>
 <script type="text/javascript" src="filterupdate.js"></script>
-<script type="text/javascript" charset="utf-8">
+
+<script type="text/javascript">
+
+FilterListener.startup();
+Synchronizer.startup();
+
+FilterStorage.addObserver(function(action)
+{
+  if (action == "load")
+  {
+    importOldData();
+    if (!localStorage["currentVersion"])
+      executeFirstRunActions();
+    localStorage["currentVersion"] = Utils.addonVersion;
+  }
+});
 
 // Special-case domains for which we should only inject their specific
 // selectors, due to Chrome selector handling bugginess
 // TODO: Put this in the AdThwart filter list, like !NI
 var onlyInjectDomainSpecificSelectors = ["mail.google.com", "mail.yahoo.com"];
 
-// Caches the last answer for isDomainExcluded()
-var lastDomainChecked = "";
-var lastDomainExcluded = false;
-// Last set of user-specified click-to-hide filters
-var clickHideFilters = null;
-var clickHideActive = false;
-// List of URLs currently being downloaded; used to prevent multiple requests
-// for the same URL from actually causing multiple downloads
-var downloading = {};
-
 // Extracts a domain name from a URL
-function extractDomainFromURL(url) {
-    if(!url) return "";
-    var x = url.substr(url.indexOf("://") + 3);
-    x = x.substr(0, x.indexOf("/"));
-    x = x.substr(x.indexOf("@") + 1);
-    colPos = x.indexOf(":");
-    if(colPos >= 0)
-        x = x.substr(0, colPos);
-    return x;
+function extractDomainFromURL(url)
+{
+  if (!url)
+    return "";
+
+  if (extractDomainFromURL._lastURL == url)
+    return extractDomainFromURL._lastDomain;
+
+  var x = url.substr(url.indexOf("://") + 3);
+  x = x.substr(0, x.indexOf("/"));
+  x = x.substr(x.indexOf("@") + 1);
+  colPos = x.indexOf(":");
+  if (colPos >= 0)
+    x = x.substr(0, colPos);
+
+  extractDomainFromURL._lastURL = url;
+  extractDomainFromURL._lastDomain = x;
+  return x;
 }
 
 // This function Copyright (c) 2008 Jeni Tennison, from jquery.uri.js
 // and licensed under the MIT license. See jquery-*.min.js for details.
-function removeDotSegments(u) {
-    var r = '', m = [];
-    if (/\./.test(u)) {
-      while (u !== undefined && u !== '') {
-        if (u === '.' || u === '..') {
-          u = '';
-        } else if (/^\.\.\//.test(u)) { // starts with ../
-          u = u.substring(3);
-        } else if (/^\.\//.test(u)) { // starts with ./
-          u = u.substring(2);
-        } else if (/^\/\.(\/|$)/.test(u)) { // starts with /./ or consists of /.
-          u = '/' + u.substring(3);
-        } else if (/^\/\.\.(\/|$)/.test(u)) { // starts with /../ or consists of /..
-          u = '/' + u.substring(4);
-          r = r.replace(/\/?[^\/]+$/, '');
-        } else {
-          m = u.match(/^(\/?[^\/]*)(\/.*)?$/);
-          u = m[2];
-          r = r + m[1];
-        }
+function removeDotSegments(u)
+{
+  var r = '', m = [];
+  if (/\./.test(u))
+  {
+    while (u !== undefined && u !== '')
+    {
+      if (u === '.' || u === '..') {
+        u = '';
+      } else if (/^\.\.\//.test(u)) { // starts with ../
+        u = u.substring(3);
+      } else if (/^\.\//.test(u)) { // starts with ./
+        u = u.substring(2);
+      } else if (/^\/\.(\/|$)/.test(u)) { // starts with /./ or consists of /.
+        u = '/' + u.substring(3);
+      } else if (/^\/\.\.(\/|$)/.test(u)) { // starts with /../ or consists of /..
+        u = '/' + u.substring(4);
+        r = r.replace(/\/?[^\/]+$/, '');
+      } else {
+        m = u.match(/^(\/?[^\/]*)(\/.*)?$/);
+        u = m[2];
+        r = r + m[1];
       }
-      return r;
-    } else {
-      return u;
     }
+    return r;
+  }
+  else
+    return u;
 }
 
 // Does some degree of URL normalization
-function normalizeURL(url) {
-    var components = url.match(/(.+:\/\/.+?)\/(.*)/);
-    if(!components) return url;
-    var newPath = removeDotSegments(components[2]);
-    if(newPath.length == 0) return components[1];
-    if(newPath[0] != '/') newPath = '/' + newPath;
-    return components[1] + newPath;
-}
-
-// Returns an associative array object of the given name loaded from localStorage.
-// We do this because apparently localStorage only does strings, so we have to
-// JSONify everything
-function getOptionsObject(optName) {
-    var thing = localStorage[optName];
-    if(typeof thing != "string") {
-        // Initialize storage
-        localStorage[optName] = JSON.stringify({});
-        return {};
-    }
-    var parsed = JSON.parse(thing);
-    return parsed;
-}
-
-// JSONifies and saves an associative array object in localStorage
-function saveOptionsObject(optName, data) {
-    localStorage[optName] = JSON.stringify(data);
-}
-
-// Returns true if the specified option is defined in localStorage
-function optionExists(opt) {
-    return (typeof localStorage[opt] != "undefined");
-}
-
-// Checks whether the option exists in localStorage, and if it doesn't, set it to
-// the specified value
-function defaultOptionValue(opt, val) {
-    if(!optionExists(opt))
-        localStorage[opt] = val;
+function normalizeURL(url)
+{
+  var components = url.match(/(.+:\/\/.+?)\/(.*)/);
+  if (!components)
+    return url;
+  var newPath = removeDotSegments(components[2]);
+  if (newPath.length == 0)
+    return components[1];
+  if (newPath[0] != '/')
+    newPath = '/' + newPath;
+  return components[1] + newPath;
 }
 
 // Sets options to defaults, upgrading old options from previous versions as necessary
-function setDefaultOptions() {
-    defaultOptionValue("shouldShowIcon", "true");
-    defaultOptionValue("shouldShowBlockElementMenu", "true");
-    defaultOptionValue("disableInlineTextAds", "true");
-    defaultOptionValue("specialCaseYouTube", "true");
-    defaultOptionValue("excludedDomains", JSON.stringify({"acid3.acidtests.org": true}));
+function setDefaultOptions()
+{
+  function defaultOptionValue(opt, val)
+  {
+    if(!(opt in localStorage))
+      localStorage[opt] = val;
+  }
 
-    // If user had older version installed, get rid of old option
-    if(optionExists("experimental"))
-       delete localStorage["experimental"];
+  defaultOptionValue("shouldShowIcon", "true");
+  defaultOptionValue("shouldShowBlockElementMenu", "true");
+  defaultOptionValue("disableInlineTextAds", "true");
+  defaultOptionValue("specialCaseYouTube", "true");
+
+  // If user had older version installed, get rid of old option
+  if("experimental" in localStorage)
+    delete localStorage["experimental"];
 }
 
 // Upgrade options before we do anything else.
 setDefaultOptions(); 
 
-// Fake filter subscriptions for the filters we are adding (temporary hack)
-var fakeSubscriptions = [{disabled: false}];
-
-// Creates filter object from text and sets its subscriptions
-function initFilter(text)
+/**
+ * Checks whether a page is whitelisted.
+ * @param url {String}
+ * @return {Filter} filter that matched the URL or null if not whitelisted
+ */
+function isWhitelisted(url)
 {
-  var result = Filter.fromText(text);
-  if(result)
-    result.subscriptions = fakeSubscriptions;
-  return result;
-}
+  // Ignore fragment identifier
+  var index = url.indexOf("#");
+  if (index >= 0)
+    url = url.substring(0, index);
 
-// Adds a specified filter to the list of user filters
-function addFilter(filterText) {
-    var userFilters = localStorage["userFilters"];
-    if(typeof userFilters == "undefined")
-        userFilters = JSON.stringify(["www.example.com###ad_div", "||ads.example.net^$third-party"]);
-    userFilters = JSON.parse(userFilters);
-    // Don't add this filter if it's already there
-    if(userFilters.indexOf(filterText) < 0)
-      userFilters.push(filterText);
-    localStorage["userFilters"] = JSON.stringify(userFilters);
-    var filter = initFilter(filterText);
-    if (filter)
-    {
-      cachedMatcherData = null;
-      FilterListener.triggerFilterObserver("add", [filter]);
-    }
-}
-
-// Enables ad blocking for the specified domain
-function removeDomainFromExclusionList(domain) {
-    var excludedDomains = getOptionsObject("excludedDomains");
-    if(domain in excludedDomains) {
-        delete excludedDomains[domain];
-    }
-    saveOptionsObject("excludedDomains", excludedDomains);
-    lastDomainChecked = "";
-}
-
-// Disables ad blocking for the specified domain
-function addDomainToExclusionList(domain) {
-    var excludedDomains = getOptionsObject("excludedDomains");
-    excludedDomains[domain.toLowerCase()] = true;
-    saveOptionsObject("excludedDomains", excludedDomains);
-    lastDomainChecked = "";
-}
-
-// Returns true if this domain or any parent domain is in the exclusion list
-function isDomainExcluded(docDomain) {
-    if(!docDomain)
-        return false;
-        
-    docDomain = docDomain.replace(/\.+$/, "").toLowerCase();
-
-    // Cache the last domain that was asked for so we don't
-    // do all this JSON nonsense on every query
-    if(docDomain == lastDomainChecked)
-        return lastDomainExcluded;
-    var excludedDomains = getOptionsObject("excludedDomains");
-    lastDomainChecked = docDomain;
-
-    while (true) {
-        if (docDomain in excludedDomains) {
-            lastDomainExcluded = true;
-            return true;
-        }
-
-        var nextDot = docDomain.indexOf(".");
-        if (nextDot < 0)
-            break;
-        docDomain = docDomain.substr(nextDot + 1);
-    }
-    lastDomainExcluded = false;
-    return false;
-}
-
-function isDomainInList(domain, listName) {
-    if(!domain)
-        return false;
-
-    var list = getOptionsObject(listName);
-        
-    domain = domain.replace(/\.+$/, "").toLowerCase();
-
-    while (true) {
-        if (domain in list) return true;
-        var nextDot = domain.indexOf(".");
-        if (nextDot < 0) break;
-        domain = domain.substr(nextDot + 1);
-    }
-    return false;
-}
-
-// Toggles whether ad blocking is turned on for the domain the given tab is showing
-function toggleDomainExclusion(tabId) {
-    chrome.tabs.sendRequest(tabId, {reqtype: "get-domain"}, function(response) {
-        var excluded = isDomainExcluded(response.domain);
-        if(excluded)
-            removeDomainFromExclusionList(response.domain);
-        else
-            addDomainToExclusionList(response.domain);
-    });
+  var result = defaultMatcher.matchesAny(url, "DOCUMENT", extractDomainFromURL(url), false);
+  return (result instanceof WhitelistFilter ? result : null);
 }
 
 // Adds or removes page action icon according to options.
-function refreshIconAndContextMenu(tab) {
-    // The tab could have been closed by the time this function is called
-    if(!tab) return;
-    var domain = extractDomainFromURL(tab.url);
-    var excluded = isDomainExcluded(domain);
-    iconFilename = excluded ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
-    chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
-    var title = "Adblock Plus";
-    // Only show icon for pages we can influence (http: and https:)
-    if(/^https?:/.test(tab.url)) {
-        chrome.pageAction.setTitle({tabId: tab.id, title: title});
-        var shouldShowIcon = localStorage["shouldShowIcon"];
-        if(typeof shouldShowIcon != "undefined" && shouldShowIcon == "false") {
-            chrome.pageAction.hide(tab.id);
-        } else {
-            chrome.pageAction.show(tab.id);
-        }
-        // Set context menu status according to whether current tab has whitelisted domain
-        excluded ? chrome.contextMenus.removeAll() : showContextMenu();
-    }
-}
+function refreshIconAndContextMenu(tab)
+{
+  // The tab could have been closed by the time this function is called
+  if(!tab)
+    return;
 
-// The general strategy here is to load the filters and set up the machinery for
-// deciding whether to block a given element once here, and let content scripts
-// query us about individual elements.
+  var excluded = isWhitelisted(tab.url);
+  iconFilename = excluded ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
+  chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
 
-// Downloads a filter list from a particular URL
-function downloadFilterList(url) {
-    downloading[url] = true;
-    new FilterListFetcher(url, function(fetcher) {
-        if(!fetcher.error) {
-            // Take this URL out of currently-being-downloaded list
-            delete downloading[url];
-            reloadFilters();
-        }
-    });
-}
+  // Only show icon for pages we can influence (http: and https:)
+  if(/^https?:/.test(tab.url))
+  {
+    chrome.pageAction.setTitle({tabId: tab.id, title: "Adblock Plus"});
+    if ("shouldShowIcon" in localStorage && localStorage["shouldShowIcon"] == "false")
+      chrome.pageAction.hide(tab.id);
+    else
+      chrome.pageAction.show(tab.id);
 
-// Loads the filter list from disk (or localStorage) and stores it in a global variable
-function loadFiltersRawText(filename) {
-  if(typeof localStorage[filename] == "string") {
-    var list = JSON.parse(localStorage[filename]);
-    // If there was an error loading the list before, don't try again now, let the user
-    // update manually. This is so we won't pound a filter list's server if the
-    // maintainer moves the file.
-    if(!list.error) {
-      // Check whether it's time to redownload the list.
-      // If list specifies its expiry time, use that. Otherwise default to 3 days.
-      var now = new Date().getTime();
-      var expires = list.expires ? list.expires : DEFAULT_EXPIRATION_INTERVAL * MILLISECONDS_IN_SECOND;
-      // If the list is expired and we aren't currently downloading it already, redownload it.
-      // We may have saved a null for lastUpdated due to a bug, so replace that with now
-      if(!list.lastUpdated) {
-        console.log("Fixing null lastUpdated filename for " + filename);
-        list.lastUpdated = now;
-        localStorage[filename] = JSON.stringify(list);
-      }
-      if(((now - list.lastUpdated) > expires) && !downloading[filename]) {
-        // console.log("Too old, so redownloading " + filename);
-        downloadFilterList(filename);
-      }
-    }
-    // If there is any text for the filter list, return it, otherwise return a
-    // blank string rather than undefined. This depends on the fetcher not
-    // filling list.text with garbage on an unsuccessful fetch.
-    return list.text ? list.text : "";
-  } else {
-    // This filter list was never downloaded, so download it
-    // This is kept from running away by the fetcher actually storing the filter
-    // list data, which is checked for above.
-    // console.log("First time download: " + filename);
-    downloadFilterList(filename);           
-    return ""; // Return nothing for now, it'll be reloaded later
+    // Set context menu status according to whether current tab has whitelisted domain
+    if (excluded)
+      chrome.contextMenus.removeAll();
+    else
+      showContextMenu();
   }
 }
 
@@ -330,97 +187,280 @@ function getMatcherData()
   return cachedMatcherData;
 }
 
-// Clears the ABP matchers of filters and reloads them.
-// This will also download and cache filter lists as necessary.
-function reloadFilters() {
-    defaultMatcher.clear();
-    ElemHide.clear();
-    cachedMatcherData = null;
-    var urlsToLoad = new Array();
-    
-    // Make sure user filter URLs are in filterFiles
-    loadUserFilterURLs();
+/**
+ * Old versions stored filter data in the localStorage object, this will import
+ * it into FilterStorage properly.
+ */
+function importOldData()
+{
+  var hadChanges = false;
 
-    // filterFilesEnabled is a bit of a misnomer - can include URLs too, and it
-    // includes the enabled state of the particular filter set.
-    // But if we change it, we'll break current installations
-    var filterFilesEnabled = {};
-    var firstRun = true;
-    if(typeof localStorage["filterFilesEnabled"] == "string") {
-        filterFilesEnabled = JSON.parse(localStorage["filterFilesEnabled"]);
-        firstRun = false;
+  function addSubscription(url, title)
+  {
+    try
+    {
+      var subscription = Subscription.fromURL(url);
+      if (subscription && !(subscription.url in FilterStorage.knownSubscriptions))
+      {
+        if (title)
+          subscription.title = title;
+        FilterStorage.addSubscription(subscription);
+        Synchronizer.execute(subscription);
+        hadChanges = true;
+      }
     }
+    catch (e)
+    {
+      reportError(e);
+    }
+  }
 
-    // Previous versions didn't store info about EasyList and extras.txt, so turn them on by default.
-    if(firstRun) {
-        // Enable filter lists according to the current locale. This will only run on
-        // fresh installations.
-        var locale = chrome.i18n.getMessage("@@ui_locale");
-        if(locale in defaultFilterListsByLocale) {
-            for(var i = 0; i < defaultFilterListsByLocale[locale].length; i++) {
-                filterFilesEnabled[defaultFilterListsByLocale[locale][i]] = true;
-            }
-        } else {
-            // Turn on EasyList if we didn't special-case this locale
-            filterFilesEnabled["easylist"] = true;
+  // Import user-defined subscriptions
+  if (typeof localStorage["userFilterURLs"] == "string")
+  {
+    try
+    {
+      var urls = JSON.parse(localStorage["userFilterURLs"]);
+      for (var key in urls)
+        addSubscription(urls[key]);
+      delete localStorage["userFilterURLs"];
+    }
+    catch (e)
+    {
+      reportError(e);
+    }
+  }
+
+  // Now import predefined subscriptions if enabled
+  if (typeof localStorage["filterFilesEnabled"] == "string")
+  {
+    try
+    {
+      var subscriptions = JSON.parse(localStorage["filterFilesEnabled"]);
+      if (subscriptions.korea)
+        subscriptions.easylist = true;
+      if (subscriptions.france)
+      {
+        addSubscription("https://easylist-downloads.adblockplus.org/liste_fr+easylist.txt", "Liste FR+EasyList");
+        subscriptions.easylist = false;
+      }
+      if (subscriptions.germany)
+      {
+        if (subscriptions.easylist)
+          addSubscription("https://easylist-downloads.adblockplus.org/easylistgermany+easylist.txt", "EasyList Germany+EasyList");
+        else
+          addSubscription("https://easylist-downloads.adblockplus.org/easylistgermany.txt", "EasyList Germany");
+        subscriptions.easylist = false;
+      }
+      if (subscriptions.china)
+      {
+        if (subscriptions.easylist)
+          addSubscription("https://easylist-downloads.adblockplus.org/chinalist+easylist.txt", "ChinaList+EasyList");
+        else
+          addSubscription("http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", "ChinaList");
+        subscriptions.easylist = false;
+      }
+      if (subscriptions.russia)
+      {
+        if (subscriptions.easylist)
+          addSubscription("https://easylist-downloads.adblockplus.org/ruadlist+easylist.txt", "RU AdList+EasyList");
+        else
+          addSubscription("https://ruadlist.googlecode.com/svn/trunk/advblock.txt", "RU AdList");
+        subscriptions.easylist = false;
+      }
+      if (subscriptions.romania)
+      {
+        if (subscriptions.easylist)
+          addSubscription("https://easylist-downloads.adblockplus.org/rolist+easylist.txt", "ROList+EasyList");
+        else
+          addSubscription("http://www.zoso.ro/pages/rolist.txt", "ROList");
+        subscriptions.easylist = false;
+      }
+      if (subscriptions.easylist)
+        addSubscription("https://easylist-downloads.adblockplus.org/easylist.txt", "EasyList");
+      if (subscriptions.fanboy)
+        addSubscription("https://secure.fanboy.co.nz/fanboy-adblock.txt", "Fanboy's List");
+      if (subscriptions.fanboy_es)
+        addSubscription("https://secure.fanboy.co.nz/fanboy-espanol.txt", "Fanboy's Espa\xF1ol/Portugu\xEAs");
+      if (subscriptions.italy)
+        addSubscription("http://mozilla.gfsolone.com/filtri.txt", "Xfiles");
+      if (subscriptions.poland)
+        addSubscription("http://www.niecko.pl/adblock/adblock.txt", "PLgeneral");
+      if (subscriptions.hungary)
+        addSubscription("http://pete.teamlupus.hu/hufilter.txt", "hufilter");
+      if (subscriptions.extras)
+        addSubscription("https://easylist-downloads.adblockplus.org/chrome_supplement.txt", "Recommended filters for Google Chrome");
+
+      delete localStorage["filterFilesEnabled"];
+    }
+    catch (e)
+    {
+      reportError(e);
+    }
+  }
+
+  // Import user filters
+  if(typeof localStorage["userFilters"] == "string")
+  {
+    try
+    {
+      var userFilters = JSON.parse(localStorage["userFilters"]);
+      for (var i = 0; i < userFilters.length; i++)
+      {
+        var filterText = userFilters[i];
+
+        // Skip useless default filters
+        if (filterText == "qux.us###annoying_AdDiv" || filterText == "qux.us##.ad_class")
+          continue;
+
+        var filter = Filter.fromText(filterText);
+        FilterStorage.addFilter(filter);
+        hadChanges = true;
+      }
+      delete localStorage["userFilters"];
+    }
+    catch (e)
+    {
+      reportError(e);
+    }
+  }
+
+  // Import "excluded domains"
+  if(typeof localStorage["excludedDomains"] == "string")
+  {
+    try
+    {
+      var excludedDomains = JSON.parse(localStorage["excludedDomains"]);
+      for (var domain in excludedDomains)
+      {
+        var filterText = "@@||" + domain + "^$document";
+        var filter = Filter.fromText(filterText);
+        FilterStorage.addFilter(filter);
+        hadChanges = true;
+      }
+      delete localStorage["excludedDomains"];
+    }
+    catch (e)
+    {
+      reportError(e);
+    }
+  }
+
+  // Delete downloaded subscription data
+  try
+  {
+    for (var key in localStorage)
+      if (/^https?:/.test(key))
+        delete localStorage[key];
+  }
+  catch (e)
+  {
+    reportError(e);
+  }
+
+  if (hadChanges)
+    FilterStorage.saveToDisk();
+}
+
+/**
+ * This function is called first time the extension runs after installation.
+ * It will add the default filter subscription.
+ */
+function executeFirstRunActions()
+{
+  // Don't do anything if the user has a subscription already
+  var hasSubscriptions = FilterStorage.subscriptions.some(function(subscription) {return subscription instanceof DownloadableSubscription});
+  if (hasSubscriptions)
+    return;
+
+  // Load subscriptions data
+  var request = new XMLHttpRequest();
+  request.open("GET", "subscriptions.xml");
+  request.onload = function()
+  {
+    var subscriptions = request.responseXML.documentElement.getElementsByTagName("subscription");
+    var selectedItem = null;
+    var selectedPrefix = null;
+    var matchCount = 0;
+    for (var i = 0; i < subscriptions.length; i++)
+    {
+      var subscription = subscriptions[i];
+      if (!selectedItem)
+        selectedItem = subscription;
+
+      var prefix = Utils.checkLocalePrefixMatch(subscription.getAttribute("prefixes"));
+      if (prefix)
+      {
+        if (!selectedPrefix || selectedPrefix.length < prefix.length)
+        {
+          selectedItem = subscription;
+          selectedPrefix = prefix;
+          matchCount = 1;
         }
-        filterFilesEnabled["extras"] = true;
-        localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
-    }
-    
-    for(var key in filterFilesEnabled) {
-        if(filterFilesEnabled[key])
-            urlsToLoad.push(filterFiles[key]);
-    }
-    
-    for(var j = 0; j < urlsToLoad.length; j++) {
-        var FiltersRawText = loadFiltersRawText(urlsToLoad[j]);
-        // Shove it over to the ABP code to parse
-        var filters = FiltersRawText.split('\n');
-        for (var i in filters) {
-            // Remove any extra newline-type characters
-            var f = filters[i].replace(/[\r\n]/, '');
-            // Ignore zero-length and commented-out lines
-            if(f.length == 0)
-                continue;
-            
-            if (f[0] == "[")
-              continue;
+        else if (selectedPrefix && selectedPrefix.length == prefix.length)
+        {
+          matchCount++;
 
-            var filter = initFilter(f);
-            if (filter)
-              FilterListener.triggerFilterObserver("add", [filter]);
+          // If multiple items have a matching prefix of the same length:
+          // Select one of the items randomly, probability should be the same
+          // for all items. So we replace the previous match here with
+          // probability 1/N (N being the number of matches).
+          if (Math.random() * matchCount < 1)
+          {
+            selectedItem = subscription;
+            selectedPrefix = prefix;
+          }
         }
+      }
     }
-    
-    // Add user filters
-    userFilters = localStorage["userFilters"];
-    if(typeof userFilters != "undefined") {
-        userFilters = JSON.parse(userFilters);
-        FilterListener.triggerFilterObserver("add", userFilters.map(initFilter).filter(function(filter) {return filter;}));
+
+    var subscription = (selectedItem ? Subscription.fromURL(selectedItem.getAttribute("url")) : null);
+    if (subscription)
+    {
+      subscription.disabled = false;
+      subscription.title = selectedItem.getAttribute("title");
+      subscription.homepage = selectedItem.getAttribute("homepage");
+      if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
+        Synchronizer.execute(subscription);
+      FilterStorage.addSubscription(subscription);
     }
+
+    subscription = Subscription.fromURL("https://easylist-downloads.adblockplus.org/chrome_supplement.txt");
+    subscription.disabled = false;
+    subscription.title = "Recommended filters for Google Chrome"
+    if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
+      Synchronizer.execute(subscription);
+    FilterStorage.addSubscription(subscription);
+
+    FilterStorage.saveToDisk();
+  };
+  request.send(null);
 }
 
 // Set up context menu for user selection of elements to block
-function showContextMenu() {
-    chrome.contextMenus.removeAll(function() {
-        if(typeof localStorage["shouldShowBlockElementMenu"] == "string" && localStorage["shouldShowBlockElementMenu"] == "true") {
-            chrome.contextMenus.create({'title': chrome.i18n.getMessage('block_element'), 'contexts': ['image', 'video', 'audio'], 'onclick': function(info, tab) {
-                if(info.srcUrl) {
-                    chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl});
-                }
-            }});
-        }
-    });
+function showContextMenu()
+{
+  chrome.contextMenus.removeAll(function()
+  {
+    if(typeof localStorage["shouldShowBlockElementMenu"] == "string" && localStorage["shouldShowBlockElementMenu"] == "true")
+    {
+      chrome.contextMenus.create({'title': chrome.i18n.getMessage('block_element'), 'contexts': ['image', 'video', 'audio'], 'onclick': function(info, tab)
+      {
+        if(info.srcUrl)
+            chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl});
+      }});
+    }
+  });
 }
 
-var requestDispatchTable = {
-    "get-settings": function(request, sender, sendResponse)
-    {
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
+{
+  switch (request.reqtype)
+  {
+    case "get-settings":
       var matcherData = null;
       var selectors = null;
-      var domain = sender.tab ? extractDomainFromURL(sender.tab.url) : "";
-      var enabled = sender.tab ? !isDomainExcluded(domain) : true;
+      var enabled = sender.tab ? !isWhitelisted(sender.tab.url) : true;
       if (enabled && request.matcher)
         matcherData = getMatcherData();
       if (enabled && request.selectors)
@@ -439,66 +479,29 @@ var requestDispatchTable = {
         selectors = ElemHide.getSelectorsForDomain(host, onlySpecific);
       }
       sendResponse({enabled: enabled, matcherData: matcherData, selectors: selectors});
-    },
-    "set-domain-enabled-state": function(request, sender, sendResponse) {
-        // Enable/disable ad blocking for a particular domain
-        chrome.tabs.get(lastTabId, function(tab) {
-            if(!tab) return;
-            var domain = extractDomainFromURL(tab.url);
-            if(request.enabled)
-                removeDomainFromExclusionList(domain);
-            else
-                addDomainToExclusionList(domain);
-            refreshIconAndContextMenu(tab);
-        });
-    },
-    "get-domain-enabled-state": function(request, sender, sendResponse) {
-        // Returns whether this domain is in the exclusion list.
-        // The page action popup asks us this.
-        if(sender.tab) {
-            sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(sender.tab.url)), specialCaseYouTube: localStorage["specialCaseYouTube"] == "true", disableInlineTextAds: localStorage["disableInlineTextAds"] == "true"});
-            return;
-        }
-        // Only called from popup
-        chrome.tabs.get(lastTabId, function(tab) {
-            if(!tab) return;
-            sendResponse({enabled: !isDomainExcluded(extractDomainFromURL(tab.url))});
-        });
-    },
-    "reload-filters": function(request, sender, sendResponse) {
-        // Reloads filter lists and user filters
-        reloadFilters();
-        sendResponse({});
-    },
-    "cache-filters": function(request, sender, sendResponse) {
-        clickHideFilters = request.filters;
-    },
-    "apply-cached-filters": function(request, sender, sendResponse) {
-        // Cached filters are from click to hide
-        for(var i = 0; i < clickHideFilters.length; i++)
-            addFilter(clickHideFilters[i]);
-        clickHideFilters = null; // clear them for next time around
-        clickHideActive = false; // Deactivate clickhide
-    },
-    "set-clickhide-active": function(request, sender, sendResponse) {
-        clickHideActive = request.active;
-    },
-    "get-cached-filters": function(request, sender, sendResponse) {
-        // Popup is asking for ABP filters constructed from whatever the user 
-        // chose during clickHide
-        sendResponse({filters: clickHideFilters, active: clickHideActive});
-    }
-};
-
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    if(request.reqtype in requestDispatchTable) {
-        requestDispatchTable[request.reqtype](request, sender, sendResponse)
-    }
-    else
-        sendResponse({});
+      break;
+    case "get-domain-enabled-state":
+      // Returns whether this domain is in the exclusion list.
+      // The page action popup asks us this.
+      if(sender.tab)
+      {
+        sendResponse({enabled: !isWhitelisted(sender.tab.url), specialCaseYouTube: localStorage["specialCaseYouTube"] == "true", disableInlineTextAds: localStorage["disableInlineTextAds"] == "true"});
+        return;
+      }
+      break;
+    case "add-filters":
+      if (request.filters && request.filters.length)
+      {
+        for (var i = 0; i < request.filters.length; i++)
+          FilterStorage.addFilter(Filter.fromText(request.filters[i]));
+        FilterStorage.saveToDisk();
+      }
+      break;
+    default:
+      sendResponse({});
+      break;
+  }
 });
-
-var lastTabId = 0;
 
 // Show icon as page action for all tabs that already exist
 chrome.windows.getAll({populate: true}, function(windows)
@@ -509,14 +512,12 @@ chrome.windows.getAll({populate: true}, function(windows)
 });
 
 // Update icon if a tab changes location
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    lastTabId = tabId;
-    chrome.tabs.sendRequest(tabId, {reqtype: "clickhide-deactivate"})
-    if(changeInfo.status == "loading") refreshIconAndContextMenu(tab);
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
+{
+  chrome.tabs.sendRequest(tabId, {reqtype: "clickhide-deactivate"})
+  if(changeInfo.status == "loading")
+    refreshIconAndContextMenu(tab);
 });
-
-// Reload filters every four hours, which will trigger the autoupdate
-setInterval(reloadFilters, 4 * 60 * 60 * 1000);
 
 // Only load webrequest.js if we have the necessary permissions
 var hasExperimentalPermissions = false;
@@ -543,11 +544,7 @@ if (hasExperimentalPermissions)
   }, false);
 }
 
-// Switch FilterListener into batch mode to prevent it from calling ElemHide.apply()
-FilterListener.batchMode = true;
-
-reloadFilters();
-
 </script>
+
 </head>
 </html>
