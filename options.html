@@ -5,7 +5,6 @@
 <script type="text/javascript" src="jquery-ui/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>
 <script type="text/javascript" src="i18n.js" charset="utf-8"></script>
-<script type="text/javascript" src="filterupdate.js" charset="utf-8"></script>
 <title>Adblock Plus Options</title>
 <style type="text/css" media="screen">
 body {
@@ -24,8 +23,42 @@ p {
     margin-top: 0.5em;
 }
 
-.rawFilters {
-    display: none;
+#subscriptionTemplate,
+#addSubscriptionContainer,
+#customSubscriptionContainer
+{
+  display: none;
+}
+
+.subscription
+{
+  margin: 3px 0px;
+}
+
+.subscriptionRemoveButton,
+.subscriptionEnabledContainer,
+.subscriptionTitle
+{
+  margin-right: 1em;
+}
+
+.subscriptionRemoveButton
+{
+  font-weight: bold !important;
+  color: #FF0000 !important;
+}
+
+.subscriptionUpdate
+{
+  color: #B0B0B0;
+}
+.subscriptionUpdate.error
+{
+  color: #FF0000;
+}
+
+#rawFilters {
+  display: none;
 }
 
 .okMsg {
@@ -53,318 +86,506 @@ p {
 </style>
 <script type="text/javascript" charset="utf-8">
 
-function loadCheckbox(id) {
-    document.getElementById(id).checked = typeof localStorage[id] == "undefined" ? true : localStorage[id] == "true";
-}
-
-function saveCheckbox(id) {
-    localStorage[id] = document.getElementById(id).checked;
-}
-
-function showUserFilters() {
-    var userFilters = localStorage["userFilters"];
-    if(typeof userFilters == "undefined")
-        userFilters = JSON.stringify(["qux.us###annoying_AdDiv", "qux.us##.ad_class"]);
-    userFilters = JSON.parse(userFilters);
-    // Populate list box with filter strings
-    $("#userFiltersBox").children().remove();
-    for(var i = 0; i < userFilters.length; i++)
-        appendToListBox("userFiltersBox", userFilters[i]);
-}
+var backgroundPage = chrome.extension.getBackgroundPage();
+var imports = ["FilterStorage", "Subscription", "SpecialSubscription",
+               "DownloadableSubscription", "Filter", "WhitelistFilter",
+               "Synchronizer", "Utils", "hasExperimentalPermissions"];
+for (var i = 0; i < imports.length; i++)
+  window[imports[i]] = backgroundPage[imports[i]];
 
 // Loads options from localStorage and sets UI elements accordingly
-function loadOptions() {
-    // Show icon in address bar?
-    loadCheckbox("shouldShowIcon");
-    loadCheckbox("shouldShowBlockElementMenu");
-    loadCheckbox("disableInlineTextAds");
-    loadCheckbox("specialCaseYouTube");
-    loadCheckbox("hidePlaceholders");
+function loadOptions()
+{
+  FilterStorage.addObserver(onFilterChange);
 
-    if (chrome.extension.getBackgroundPage().hasExperimentalPermissions)
-      document.getElementById("specialCaseYouTubeContainer").style.display = "none";
-    else
-      document.getElementById("hidePlaceholdersContainer").style.display = "none";
+  // Popuplate option checkboxes
+  initCheckbox("shouldShowIcon");
+  initCheckbox("shouldShowBlockElementMenu");
+  initCheckbox("disableInlineTextAds");
+  initCheckbox("specialCaseYouTube");
+  initCheckbox("hidePlaceholders");
 
-    // Load user filter URLs
-    loadUserFilterURLs();
-    for(key in filterFiles) {
-        if(!key.match(/^user_/))
-            addFilterListEntry(key);
-        else
-            addUserURLEntry(key, filterFiles[key]);
-    }
+  if (hasExperimentalPermissions)
+    document.getElementById("specialCaseYouTubeContainer").style.display = "none";
+  else
+    document.getElementById("hidePlaceholdersContainer").style.display = "none";
 
-    // Filter lists enabled state
-    var filterFilesEnabled = typeof localStorage["filterFilesEnabled"] == "string" ? JSON.parse(localStorage["filterFilesEnabled"]) : {"easylist": true, "extras": true };
-    for(var key in filterFilesEnabled) {
-        document.getElementById(key).checked = filterFilesEnabled[key];
-    }
-        
-    // User-entered filters
-    showUserFilters();
-        
-    // Excluded domains - sort these alphabetically
-    var excludedDomains = localStorage["excludedDomains"];
-    if(typeof excludedDomains == "string") {
-        excludedDomains = JSON.parse(excludedDomains);
-        var buf = [];
-        for(var domain in excludedDomains)
-            buf.push(domain);
-        buf.sort();
-        for(var i = 0; i < buf.length; i++)
-            appendToListBox("excludedDomainsBox", buf[i]);
-    }
-    
-    saveOptions(); // Save any defaults that were created
+  // Load user filter URLs
+  for (var i = 0; i < FilterStorage.subscriptions.length; i++)
+  {
+    var subscription = FilterStorage.subscriptions[i];
+    if (subscription instanceof SpecialSubscription)
+      continue;
+
+    addSubscriptionEntry(subscription);
+  }
+
+  // User-entered filters
+  showUserFilters();
+
+  // Load recommended subscriptions
+  loadRecommendations();
 }
 
-// Reads options from UI elements and saves them in localStorage
-function saveOptions() {
-    saveCheckbox("shouldShowIcon");
-    saveCheckbox("shouldShowBlockElementMenu");
-    saveCheckbox("disableInlineTextAds");
-    saveCheckbox("specialCaseYouTube");
-    saveCheckbox("hidePlaceholders");
+// Cleans up when the options window is closed
+function unloadOptions()
+{
+  FilterStorage.removeObserver(onFilterChange);
+}
 
-    // Filter lists
-    var filterFilesEnabled = {};
-    var userFilterURLs = {};
-    for(var key in filterFiles) {
-        filterFilesEnabled[key] = document.getElementById(key).checked;
-        if(key.match(/^user_/)) { // User-added filter?
-            userFilterURLs[key] = document.getElementById(key + "_url").textContent;
-        }
+function initCheckbox(id)
+{
+  var checkbox = document.getElementById(id);
+  checkbox.checked = typeof localStorage[id] == "undefined" ? true : localStorage[id] == "true";
+  checkbox.addEventListener("click", function()
+  {
+    localStorage[id] = checkbox.checked;
+  }, false);
+}
+
+function showUserFilters()
+{
+  var filters = [];
+  var exceptions = [];
+  for (var i = 0; i < FilterStorage.subscriptions.length; i++)
+  {
+    var subscription = FilterStorage.subscriptions[i];
+    if (!(subscription instanceof SpecialSubscription))
+      continue;
+
+    for (var j = 0; j < subscription.filters.length; j++)
+    {
+      var filter = subscription.filters[j];
+      if (filter instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(filter.text))
+        exceptions.push(RegExp.$1)
+      else
+        filters.push(filter.text);
     }
-    localStorage["filterFilesEnabled"] = JSON.stringify(filterFilesEnabled);
-    localStorage["userFilterURLs"] = JSON.stringify(userFilterURLs);
-    
-    // Grab contents of userFiltersBox as an array and JSONify it
-    var userFiltersBox = document.getElementById("userFiltersBox");
-    var userFilters = [];
-    for (var i = 0; i < userFiltersBox.length; i++)
-        userFilters.push(userFiltersBox.options[i].value);
-    localStorage["userFilters"] = JSON.stringify(userFilters);
-    
-    // Reload filters and force display of status message
-    chrome.extension.sendRequest({reqtype: "reload-filters"}, function() { checkAllFilterLists(); });
-    
-    // Excluded domains
-    var excludedDomainsBox = document.getElementById("excludedDomainsBox");
-    var excludedDomains = {};
-    for (var i = 0; i < excludedDomainsBox.length; i++)
-        excludedDomains[excludedDomainsBox.options[i].value] = true;
-    localStorage["excludedDomains"] = JSON.stringify(excludedDomains);    
+  }
+
+  populateList("userFiltersBox", filters);
+  populateList("excludedDomainsBox", exceptions);
+}
+
+function loadRecommendations()
+{
+  var request = new XMLHttpRequest();
+  request.open("GET", "subscriptions.xml");
+  request.onload = function()
+  {
+    var selectedIndex = 0;
+    var selectedPrefix = null;
+    var matchCount = 0;
+
+    var list = document.getElementById("subscriptionSelector");
+    var elements = request.responseXML.documentElement.getElementsByTagName("subscription");
+    for (var i = 0; i < elements.length; i++)
+    {
+      var element = elements[i];
+      var option = document.createElement("option");
+      option.text = element.getAttribute("title");
+      option._data = {
+        title: element.getAttribute("title"),
+        url: element.getAttribute("url"),
+        homepage: element.getAttribute("homepage")
+      };
+
+      var prefix = Utils.checkLocalePrefixMatch(element.getAttribute("prefixes"));
+      if (prefix)
+      {
+        option.style.fontWeight = "bold";
+        option.style.backgroundColor = "#FFE0E0";
+        option.style.color = "#000000";
+        if (!selectedPrefix || selectedPrefix.length < prefix.length)
+        {
+          selectedIndex = i;
+          selectedPrefix = prefix;
+          matchCount = 1;
+        }
+        else if (selectedPrefix && selectedPrefix.length == prefix.length)
+        {
+          matchCount++;
+
+          // If multiple items have a matching prefix of the same length:
+          // Select one of the items randomly, probability should be the same
+          // for all items. So we replace the previous match here with
+          // probability 1/N (N being the number of matches).
+          if (Math.random() * matchCount < 1)
+          {
+            selectedIndex = i;
+            selectedPrefix = prefix;
+          }
+        }
+      }
+      list.appendChild(option);
+    }
+
+    var option = document.createElement("option");
+    option.text = chrome.i18n.getMessage("subscriptionSelection_other_label") + "\u2026";
+    option._data = null;
+    list.appendChild(option);
+
+    list.selectedIndex = selectedIndex;
+  };
+  request.send(null);
+}
+
+function startSubscriptionSelection()
+{
+  $("#addSubscriptionContainer").show();
+  $("#addSubscriptionButton").hide();
+  $("#subscriptionSelector").focus();
+  updateSubscriptionSelection();
+}
+
+function updateSubscriptionSelection()
+{
+  var list = document.getElementById("subscriptionSelector");
+  var data = list.options[list.selectedIndex]._data;
+  if (data)
+    $("#customSubscriptionContainer").hide();
+  else
+  {
+    $("#customSubscriptionContainer").show();
+    $("#customSubscriptionTitle").focus();
+  }
+}
+
+function addSubscription()
+{
+  var list = document.getElementById("subscriptionSelector");
+  var data = list.options[list.selectedIndex]._data;
+  if (data)
+    doAddSubscription(data.url, data.title, data.homepage);
+  else
+  {
+    var url = document.getElementById("customSubscriptionLocation").value.replace(/^\s+/, "").replace(/\s+$/, "");
+    if (!/^https?:/i.test(url))
+    {
+      alert(chrome.i18n.getMessage("global_subscription_invalid_location"));
+      $("#customSubscriptionLocation").focus();
+      return;
+    }
+
+    var title = document.getElementById("customSubscriptionTitle").value.replace(/^\s+/, "").replace(/\s+$/, "");
+    if (!title)
+      title = url;
+
+    doAddSubscription(url, title, null);
+  }
+
+  $("#addSubscriptionContainer").hide();
+  $("#customSubscriptionContainer").hide();
+  $("#addSubscriptionButton").show();
+}
+
+function doAddSubscription(url, title, homepage)
+{
+  if (url in FilterStorage.knownSubscriptions)
+    return;
+
+  var subscription = Subscription.fromURL(url);
+  if (!subscription)
+    return;
+
+  subscription.title = title;
+  if (homepage)
+    subscription.homepage = homepage;
+  FilterStorage.addSubscription(subscription);
+
+  if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
+    Synchronizer.execute(subscription);
+
+  window.setTimeout(FilterStorage.saveToDisk, 0);
+}
+
+function findSubscriptionElement(subscription)
+{
+  var children = document.getElementById("filterLists").childNodes;
+  for (var i = 0; i < children.length; i++)
+    if (children[i]._subscription == subscription)
+      return children[i];
+  return null;
+}
+
+function updateSubscriptionInfo(element)
+{
+  var subscription = element._subscription;
+
+  var lastUpdate = element.getElementsByClassName("subscriptionUpdate")[0];
+  lastUpdate.classList.remove("error");
+  if (Synchronizer.isExecuting(subscription.url))
+    lastUpdate.textContent = chrome.i18n.getMessage("global_subscription_status_lastdownload_inprogress");
+  else if (subscription.downloadStatus && subscription.downloadStatus != "synchronize_ok")
+  {
+    lastUpdate.textContent = chrome.i18n.getMessage("global_" + subscription.downloadStatus);
+    lastUpdate.classList.add("error");
+  }
+  else if (subscription.lastSuccess > 0)
+  {
+    var timeDate = i18n_timeDateStrings(subscription.lastSuccess * 1000);
+    var messageID = (timeDate[1] ? "last_updated_at" : "last_updated_at_today");
+    lastUpdate.textContent = chrome.i18n.getMessage(messageID, timeDate);
+  }
+}
+
+function onFilterChange(action, items)
+{
+  switch (action)
+  {
+    case "subscriptions updateinfo":
+    case "subscriptions update":
+      for (var i = 0; i < items.length; i++)
+      {
+        var element = findSubscriptionElement(items[i]);
+        if (element)
+          updateSubscriptionInfo(element);
+      }
+      break;
+    case "subscriptions add":
+      for (var i = 0; i < items.length; i++)
+      {
+        var subscription = items[i];
+        if (subscription instanceof SpecialSubscription || findSubscriptionElement(subscription))
+          continue;
+
+        addSubscriptionEntry(subscription);
+      }
+      break;
+    case "subscriptions remove":
+      for (var i = 0; i < items.length; i++)
+      {
+        var element = findSubscriptionElement(items[i]);
+        if (element)
+          element.parentNode.removeChild(element);
+      }
+      break;
+    case "filters add":
+      for (var i = 0; i < items.length; i++)
+      {
+        var filter = items[i];
+        if (filter instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(filter.text))
+          appendToListBox("excludedDomainsBox", RegExp.$1);
+        else
+          appendToListBox("userFiltersBox", filter.text);
+      }
+      break;
+    case "filters remove":
+      for (var i = 0; i < items.length; i++)
+      {
+        var filter = items[i];
+        if (filter instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(filter.text))
+          removeFromListBox("excludedDomainsBox", RegExp.$1);
+        else
+          removeFromListBox("userFiltersBox", filter.text);
+      }
+      break;
+  }
+}
+
+// Populates a list box with a number of entries
+function populateList(id, entries)
+{
+  var list = document.getElementById(id);
+  while (list.lastChild)
+    list.removeChild(list.lastChild);
+
+  entries.sort();
+  for (var i = 0; i < entries.length; i++)
+  {
+    var option = document.createElement("option");
+    option.text = entries[i];
+    option.value = entries[i];
+    list.appendChild(option);
+  }
 }
 
 // Add a filter string to the list box.
-function appendToListBox(boxId, text) {
-    var elt = document.createElement("option");
-    elt.text = text;
-    elt.value = text;
-    document.getElementById(boxId).add(elt, null);
+function appendToListBox(boxId, text)
+{
+  var elt = document.createElement("option");
+  elt.text = text;
+  elt.value = text;
+  document.getElementById(boxId).appendChild(elt);
 }
 
-function addWhitelistDomain() {
-    var domain = document.getElementById("newWhitelistDomain").value.split(' ').join('');
-    appendToListBox("excludedDomainsBox", domain);
-    saveOptions();
+// Remove a filter string from a list box.
+function removeFromListBox(boxId, text)
+{
+  var elt = document.createElement("option");
+  elt.text = text;
+  elt.value = text;
+  var list = document.getElementById(boxId);
+  for (var i = 0; i < list.length; i++)
+    if (list.options[i].value == text)
+      list.remove(i--);
+}
+
+function addWhitelistDomain()
+{
+  var domain = document.getElementById("newWhitelistDomain").value.replace(/\s/g, "");
+  document.getElementById("newWhitelistDomain").value = "";
+  if (!domain)
+    return;
+
+  var filterText = "@@||" + domain + "^$document";
+  FilterStorage.addFilter(Filter.fromText(filterText));
+  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 // Adds filter text that user typed to the selection box
-function addTypedFilter() {
-    var filterText = document.getElementById("newFilter").value.replace(/^\s*(.+?)\s*$/g, "$1");
-    // ABP filters accept also CSS selectors, spaces are allowed inside filter
-    if(filterText == "") return;
-    appendToListBox("userFiltersBox", filterText);
-    saveOptions();
+function addTypedFilter()
+{
+  var filterText = Filter.normalize(document.getElementById("newFilter").value);
+  document.getElementById("newFilter").value = "";
+  if (!filterText)
+    return;
+
+  FilterStorage.addFilter(Filter.fromText(filterText));
+  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 // Removes currently selected whitelisted domains
-function removeSelectedExcludedDomain() {
-    var excludedDomainsBox = document.getElementById("excludedDomainsBox");
-    for (var i = excludedDomainsBox.length-1; i >= 0; i--) {
-        if (excludedDomainsBox.options[i].selected)
-            excludedDomainsBox.remove(i);
-    }
-    saveOptions();
+function removeSelectedExcludedDomain()
+{
+  var excludedDomainsBox = document.getElementById("excludedDomainsBox");
+  var remove = [];
+  for (var i = 0; i < excludedDomainsBox.length; i++)
+    if (excludedDomainsBox.options[i].selected)
+      remove.push(excludedDomainsBox.options[i].value);
+  if (!remove.length)
+    return;
+
+  for (var i = 0; i < remove.length; i++)
+    FilterStorage.removeFilter(Filter.fromText("@@||" + remove[i] + "^$document"));
+  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 // Removes all currently selected filters
-function removeSelectedFilters() {
-    var userFiltersBox = document.getElementById("userFiltersBox");
-    for (var i = userFiltersBox.length-1; i >= 0; i--) {
-        if (userFiltersBox.options[i].selected)
-            userFiltersBox.remove(i);
-    }
-    saveOptions();
+function removeSelectedFilters()
+{
+  var userFiltersBox = document.getElementById("userFiltersBox");
+  var remove = [];
+  for (var i = 0; i < userFiltersBox.length; i++)
+    if (userFiltersBox.options[i].selected)
+      remove.push(userFiltersBox.options[i].value);
+  if (!remove.length)
+    return;
+
+  for (var i = 0; i < remove.length; i++)
+    FilterStorage.removeFilter(Filter.fromText(remove[i]));
+  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 // Shows raw filters box and fills it with the current user filters
-function toggleFiltersInRawFormat() {
-    $(".rawFilters").toggle();
-    if($(".rawFilters").is(":visible")) {
-        var userFilters = localStorage["userFilters"];
-        if(typeof userFilters != "undefined") {
-            userFilters = JSON.parse(userFilters);
-            document.getElementById("rawFiltersText").value = userFilters.join("\n");
-        }
-    }
+function toggleFiltersInRawFormat()
+{
+  $("#rawFilters").toggle();
+  if ($("#rawFilters").is(":visible"))
+  {
+    var userFiltersBox = document.getElementById("userFiltersBox");
+    var text = "";
+    for (var i = 0; i < userFiltersBox.length; i++)
+      text += userFiltersBox.options[i].value + "\n";
+    document.getElementById("rawFiltersText").value = text;
+  }
 }
 
 // Imports filters in the raw text box
-function importRawFiltersText() {
-    $(".rawFilters").hide();
-    $("#userFiltersBox").children().remove();
-    var filters = document.getElementById("rawFiltersText").value.split("\n");
-    for(var i = 0; i < filters.length; i++) {
-        var text = filters[i].replace(/\s+$/, "").replace(/^\s+/, "");
-        if(text.length > 0) {
-            // Filter out "comment" characters
-            switch(text[0]) {
-                case '(': 
-                case '[':
-                case '!':
-                    break;
-                default:
-                    appendToListBox("userFiltersBox", text);
-            }
-        }
+function importRawFiltersText()
+{
+  $("#rawFilters").hide();
+  var filters = document.getElementById("rawFiltersText").value.split("\n");
+  var seenFilter = {__proto__: null};
+  for (var i = 0; i < filters.length; i++)
+  {
+    var text = Filter.normalize(filters[i]);
+    if (!text)
+      continue;
+
+    // Don't import filter list header
+    if (/^\[/.test(text))
+      continue;
+
+    FilterStorage.addFilter(Filter.fromText(text));
+    seenFilter[text] = true;
+  }
+
+  var remove = [];
+  for (var i = 0; i < FilterStorage.subscriptions.length; i++)
+  {
+    var subscription = FilterStorage.subscriptions[i];
+    if (!(subscription instanceof SpecialSubscription))
+      continue;
+
+    for (var j = 0; j < subscription.filters.length; j++)
+    {
+      var filter = subscription.filters[j];
+      if (filter instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(filter.text))
+        continue;
+
+      if (!(filter.text in seenFilter))
+        remove.push(filter);
     }
-    saveOptions();
+  }
+  for (var i = 0; i < remove.length; i++)
+    FilterStorage.removeFilter(remove[i]);
+
+  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 // Called when user explicitly requests filter list updates
-function updateFilterLists() {
-    for(key in filterFiles) {
-        // Hide status message
-        $("#" + key + "_msg").css("display", "none");
-        updateFilterList(key);
-    }
-    // Now that we've updatd the filter lists, make sure they are loaded
-    chrome.extension.sendRequest({reqtype: "reload-filters"});
+function updateFilterLists()
+{
+  for (var i = 0; i < FilterStorage.subscriptions.length; i++)
+  {
+    var subscription = FilterStorage.subscriptions[i];
+    if (subscription instanceof DownloadableSubscription)
+      Synchronizer.execute(subscription, true, true);
+  }
 }
 
-// Updates a single filter list and informs the user what happened
-function updateFilterList(key) {
-    // Checkbox not checked? Not a URL?
-    if(document.getElementById(key).checked == false || !filterFiles[key].match(/^http/i))
-        return;
-    
-    // Hide status message
-    $("#" + key + "_msg").css("display", "none");
+// Adds a subscription entry to the UI.
+function addSubscriptionEntry(subscription)
+{
+  var template = document.getElementById("subscriptionTemplate");
+  var element = template.cloneNode(true);
+  element.removeAttribute("id");
+  element._subscription = subscription;
 
-    new FilterListFetcher(key, function(fetcher) {
-        if(fetcher.error) {
-            $("#" + fetcher.name + "_msg").text(fetcher.error).css("color", "#a03030").css("display", "inline");
-            document.getElementById(key).checked = false;
-        } else {
-            // Force display of "updated now" message
-            checkFilterList(key);
-        }
-    });
-}
+  var removeButton = element.getElementsByClassName("subscriptionRemoveButton")[0];
+  removeButton.setAttribute("title", removeButton.textContent);
+  removeButton.textContent = "\u2715";
+  removeButton.addEventListener("click", function()
+  {
+    if (!confirm(chrome.i18n.getMessage("global_remove_subscription_warning")))
+      return;
 
-// Checks into our possible cached copy of this filter list and updates the UI accordingly
-function checkFilterList(key) {
-    // Hide status message
-    $("#" + key + "_msg").css("display", "none");
-    
-    var url = filterFiles[key];
-    if(url in localStorage) {
-        var list = JSON.parse(localStorage[url]);
-        if(!list.error) {
-            // We didn't used to store lastDownloaded, so we check for its existence and fall back on lastUpdated if necessary
-            // lastDownloaded: Last time the list was downloaded
-            // lastUpdated: Last time the list reports that it was updated, or else the last time it was downloaded
-            var lastDownloaded = list.lastDownloaded ? list.lastDownloaded : list.lastUpdated;
-            // Only display status message if checked
-            if(document.getElementById(key).checked) {
-                var timeDate = i18n_timeDateStrings(lastDownloaded);
-                var messageID = (timeDate[1] ? "last_updated_at" : "last_updated_at_today");
-                $("#" + key + "_msg").css("color", "#b0b0b0").text(chrome.i18n.getMessage(messageID, timeDate)).css("display", "inline");
-            }
-        }
-        else {
-            // Display error only if checked
-            if(document.getElementById(key).checked) {
-                $("#" + key + "_msg").text(list.error).css("color", "#a03030").css("display", "inline");
-            }
-        }
-    } else {
-        // If we don't have this filter list but it's enabled, fetch it
-        if(document.getElementById(key).checked == true)
-            updateFilterList(key);
-    }
-}
+    FilterStorage.removeSubscription(subscription);
+    window.setTimeout(FilterStorage.saveToDisk, 0);
+  }, false);
 
-// Check to see if all filter lists are up to date
-function checkAllFilterLists() {
-    for(key in filterFiles) {
-        checkFilterList(key);
-    }
-}
+  var enabled = element.getElementsByClassName("subscriptionEnabled")[0];
+  enabled.checked = !subscription.disabled;
+  enabled.addEventListener("click", function()
+  {
+    if (subscription.disabled == !enabled.checked)
+      return;
 
-// Deletes an entry for a filter list URL from the UI
-function deleteUserURLEntry(key) {
-    if(key in filterFiles)
-        delete filterFiles[key];
-    var foo = document.getElementById(key + "_div");
-    document.getElementById("userFilterLists").removeChild(foo);
-    saveOptions();
-}
+    subscription.disabled = !enabled.checked;
+    FilterStorage.triggerObservers(subscription.disabled ? "subscriptions disable" : "subscriptions enable", [subscription]);
+    window.setTimeout(FilterStorage.saveToDisk, 0);
+  }, false);
 
-// Adds an entry for a filter list URL to the UI
-function addUserURLEntry(key, url) {
-    var checkbox = document.createElement('input');
-    checkbox.type = "checkbox";
-    checkbox.id = key;
-    checkbox.checked = true;
-    checkbox.addEventListener("click", function() { saveOptions(); });
-    var label = document.createElement('span');
-    label.id = key + "_url";
-    label.textContent = url + " ";
-    var del = document.createElement('span');
-    del.appendChild(document.createElement("a"));
-    del.firstChild.href = "#";
-    del.firstChild.addEventListener("click", function() { deleteUserURLEntry(key);});
-    del.firstChild.textContent = "[" + chrome.i18n.getMessage("delete") + "]";
-    // Status message
-    var msg = document.createElement("span");
-    msg.id = key + "_msg";
-    msg.class = "flMsg";
-    var div = document.createElement('div');
-    div.id = key + "_div";
-    div.appendChild(checkbox);
-    div.appendChild(label);
-    div.appendChild(del);
-    div.appendChild(msg);
-    document.getElementById("userFilterLists").appendChild(div);
-}
+  var title = element.getElementsByClassName("subscriptionTitle")[0];
+  title.textContent = subscription.title;
+  title.setAttribute("title", subscription.url);
+  if (subscription.homepage)
+    title.href = subscription.homepage;
 
-// Adds an entry for a filter list to the UI.
-// TODO: Merge this with addUserURLEntry() as this is too much duplicated code
-function addFilterListEntry(key) {
-    var checkbox = document.createElement('input');
-    checkbox.type = "checkbox";
-    checkbox.id = key;
-    checkbox.addEventListener("click", function() { saveOptions(); });
-    var label = document.createElement('span');
-    if(filterListAuthors[key])
-        label.innerHTML = chrome.i18n.getMessage("filter_list_desc", [filterListTitles[key], filterListAuthors[key]]);
-    else 
-        label.innerHTML = filterListTitles[key];
-    label.innerHTML += " "; // Space to separate status message from description
-    // Status message
-    var msg = document.createElement("span");
-    msg.id = key + "_msg";
-    msg.class = "flMsg";
-    var div = document.createElement('div');
-    div.id = key + "_div";
-    div.appendChild(checkbox);
-    div.appendChild(label);
-    div.appendChild(msg);
-    document.getElementById("filterLists").appendChild(div);
+  updateSubscriptionInfo(element);
+
+  document.getElementById("filterLists").appendChild(element);
 }
 
 // Adds and saves the user-entered filter list URL
@@ -400,104 +621,162 @@ $(function() {
 });
 
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    if(request.reqtype == "refresh-user-filters-box") {
-        // Invoked when user adds clickHide filters
-        showUserFilters();
-        sendResponse({});
-    }
-});
-
 </script>
 </head>
-<body onload="loadI18nStrings(); loadOptions(); checkAllFilterLists()">
-<table><tr><td style="padding-right: 8px"><img src="icons/abp-32.png"></td><td><h1><span class="i18n_options"></span></h1></td></tr></table>
-
-<div id="tabs"><ul>
-<li><a href="#tab-filterlists"><span class="i18n_filter_lists"></span></a></li>
-<li><a href="#tab-userfilters"><span class="i18n_add_your_own_filters"></span></a></li>
-<li><a href="#tab-whitelisted"><span class="i18n_whitelisted_domains"></span></a></li>
-<li><a href="#tab-general"><span class="i18n_general"></span></a></li>
-</ul>
-
-<div id="tab-filterlists">
-<p><span class="i18n_enable_only_the"></span></p>
-<p><span class="i18n_out_of_date_lists"></span> <button class="refreshButton" onclick="updateFilterLists()"><span class="i18n_update_now"></span></button><br/>
-<!-- Placeholder for list of suggested filter lists -->
-<div id="filterLists"></div>
-<br/>
-<!-- Placeholder for user's filter list URLs -->
-<div id="userFilterLists" style="margin-bottom: 8px"></div>
-
-<div id="addURLField">  
-<span class="i18n_add_a_filter_list">"http://adblockplus.org/en/subscriptions"</span><br/>
-<input type="text" value="" id="newURL" style="width:500px">
-<button class="addButton" onClick="addUserURLFromBox()"><span class="i18n_add_url_button"></span></button><br/>
-</div>
-</div>
-
-<div id="tab-whitelisted">
-<p class="i18n_disabled_for_these_domains"></p>
-
+<body onload="loadI18nStrings(); loadOptions();" onunload="unloadOptions();">
 <table>
-<tr><td style="max-width:100%">
-<input type="text" value="" id="newWhitelistDomain" style="width:100%"></td>
-<td><button class="addButton" onClick="addWhitelistDomain()"><span class="i18n_add_domain_button"></span></button></td></tr>
+  <tr>
+    <td style="padding-right: 8px">
+      <img src="icons/abp-32.png">
+    </td>
+    <td>
+      <h1><span class="i18n_options"></span></h1>
+    </td>
+  </tr>
+</table>
 
-<tr><td>
-<select id="excludedDomainsBox" size="10" multiple style="width:500px; background: white;">
-</select></td><td>
-<button class="removeButton" onClick="removeSelectedExcludedDomain()"><span class="i18n_remove_button"></span></button>
-</td></tr></table>
+<div id="tabs">
+  <ul>
+    <li><a href="#tab-filterlists"><span class="i18n_filter_lists"></span></a></li>
+    <li><a href="#tab-userfilters"><span class="i18n_add_your_own_filters"></span></a></li>
+    <li><a href="#tab-whitelisted"><span class="i18n_whitelisted_domains"></span></a></li>
+    <li><a href="#tab-general"><span class="i18n_general"></span></a></li>
+  </ul>
+
+  <div id="tab-filterlists">
+    <p>
+      <span class="i18n_enable_only_the"></span>
+    </p>
+    <p>
+      <span class="i18n_out_of_date_lists"></span>
+      <button class="refreshButton" onclick="updateFilterLists()"><span class="i18n_update_now"></span></button><br />
+
+      <!-- Subscription entry template -->
+      <div id="subscriptionTemplate" class="subscription">
+        <button class="i18n_settings_remove_label subscriptionRemoveButton"></button>
+        <span class="subscriptionEnabledContainer">
+          <input class="subscriptionEnabled" type="checkbox" /> <span class="i18n_settings_enabled_column"></span>
+        </span>
+        <a class="subscriptionTitle"></a>
+        <span class="subscriptionUpdate"></span>
+      </div>
+
+      <!-- Placeholder for list of subscriptions -->
+      <div id="filterLists"></div>
+      <br />
+
+      <!-- Placeholder for user's filter list URLs -->
+      <div id="userFilterLists" style="margin-bottom: 8px"></div>
+
+      <p id="addSubscriptionButton">
+        <button class="addButton" onclick="startSubscriptionSelection();"><span class="i18n_settings_addsubscription_label"></span></button>
+      </p>
+      <div id="addSubscriptionContainer">
+        <span class="i18n_subscriptionSelection_subscriptionSelector_label"></span><br />
+        <select id="subscriptionSelector" onchange="updateSubscriptionSelection();" style="width:500px"></select>
+        <button class="addButton" onclick="addSubscription()"><span class="i18n_subscriptionSelection_addSubscription_label"></span></button>
+      </div>
+      <div id="customSubscriptionContainer">
+        <p>
+          <span class="i18n_subscriptionSelection_title_label"></span><br />
+          <input type="text" id="customSubscriptionTitle" style="width:500px" />
+        </p>
+        <p>
+          <span class="i18n_subscriptionSelection_location_label"></span><br />
+          <input type="text" id="customSubscriptionLocation" style="width:500px" />
+        </p>
+      </div>
+    </p>
+  </div>
+
+  <div id="tab-whitelisted">
+    <p class="i18n_disabled_for_these_domains"></p>
+
+    <form action="#" onsubmit="addWhitelistDomain();return false;">
+    <table>
+      <tr>
+        <td style="max-width:100%">
+          <input type="text" value="" id="newWhitelistDomain" style="width:100%">
+        </td>
+        <td>
+          <button class="addButton" type="submit"><span class="i18n_add_domain_button"></span></button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <select id="excludedDomainsBox" size="10" multiple style="width:500px; background: white;"></select>
+        </td>
+        <td>
+          <button class="removeButton" onclick="removeSelectedExcludedDomain()"><span class="i18n_remove_button"></span></button>
+        </td>
+      </tr>
+    </table>
+    </form>
+  </div>
+
+  <div id="tab-userfilters">
+    <p class="i18n_filter_must_follow_syntax">"http://adblockplus.org/en/filters"</p>
+
+    <form action="#" onsubmit="addTypedFilter();return false;">
+    <table>
+      <tr>
+        <td>
+          <input type="text" value="" id="newFilter" style="width:500px">
+        </td>
+        <td>
+          <button class="addButton" type="submit"><span class="i18n_add_filter_button"></span></button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <select id="userFiltersBox" size="20" multiple style="width: 500px; background: white;"></select>
+        </td>
+        <td>
+          <button class="removeButton" onclick="removeSelectedFilters()"><span class="i18n_remove_button"></span></button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size: 90%; text-align: right"><a onclick="toggleFiltersInRawFormat()" href="#"><span class="i18n_edit_filters_raw"></span></a></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="rawFilters" style="width: 500px">
+            <textarea id="rawFiltersText" style="width: 100%; height: 300px"></textarea>
+          </div>
+        </td>
+        <td>
+          <div class="rawFilters"><button onclick="importRawFiltersText()"><span class="i18n_apply_changes"></span></button></div>
+        </td>
+      </tr>
+    </table>
+    </form>
+  </div>
+
+  <div id="tab-general">
+    <p>
+      <div id="shouldShowIconContainer">
+        <input type="checkbox" id="shouldShowIcon" /><span class="i18n_show_icon"></span>
+      </div>
+      <div id="shouldShowBlockElementMenuContainer">
+        <input type="checkbox" id="shouldShowBlockElementMenu" /><span class="i18n_show_block_element_menu"></span>
+      </div>
+      <div id="disableInlineTextAdsContainer">
+        <input type="checkbox" id="disableInlineTextAds" /><span class="i18n_disable_inline"></span>
+      </div>
+      <div id="specialCaseYouTubeContainer">
+        <input type="checkbox" id="specialCaseYouTube" /><span class="i18n_block_youtube"></span>
+      </div>
+      <div id="hidePlaceholdersContainer">
+        <input type="checkbox" id="hidePlaceholders" /><span class="i18n_hide_placeholers"></span>
+      </div>
+    </p>
+
+    <p class="i18n_found_a_bug">"https://adblockplus.org/forum/viewforum.php?f=10"</p>
+  </div>
 </div>
-<div id="tab-userfilters">
-<p class="i18n_filter_must_follow_syntax">"http://adblockplus.org/en/filters"</p>
 
-<table>
-<tr><td>
-<input type="text" value="" id="newFilter" style="width:500px"></td>
-<td><button class="addButton" onClick="addTypedFilter()"><span class="i18n_add_filter_button"></span></button></td></tr>
-<tr><td>
-<select id="userFiltersBox" size="20" multiple style="width: 500px; background: white;">
-</select>
-</td><td>
-<button class="removeButton" onClick="removeSelectedFilters()">
-<span class="i18n_remove_button"></span></button></td></tr>
-
-<tr><td>
-<div style="font-size: 90%; text-align: right"><a onClick="toggleFiltersInRawFormat()" href="#"><span class="i18n_edit_filters_raw"></span></a></div>
-</td></tr>
-<tr><td>
-<div class="rawFilters" style="width: 500px">
-<textarea id="rawFiltersText" style="width: 100%; height: 300px"></textarea>   
-</div></td>
-<td><div class="rawFilters"><button onClick="importRawFiltersText()"><span class="i18n_apply_changes"></span></button></div></td>
-</tr></table>
-
-</div>
-
-<div id="tab-general">
-<p>
-  <div id="shouldShowIconContainer">
-    <input type="checkbox" id="shouldShowIcon" onClick="saveOptions()" /><span class="i18n_show_icon"></span>
-  </div>
-  <div id="shouldShowBlockElementMenuContainer">
-    <input type="checkbox" id="shouldShowBlockElementMenu" onClick="saveOptions()" /><span class="i18n_show_block_element_menu"></span>
-  </div>
-  <div id="disableInlineTextAdsContainer">
-    <input type="checkbox" id="disableInlineTextAds" onClick="saveOptions()" /><span class="i18n_disable_inline"></span>
-  </div>
-  <div id="specialCaseYouTubeContainer">
-    <input type="checkbox" id="specialCaseYouTube" onClick="saveOptions()" /><span class="i18n_block_youtube"></span>
-  </div>
-  <div id="hidePlaceholdersContainer">
-    <input type="checkbox" id="hidePlaceholders" onClick="saveOptions()" /><span class="i18n_hide_placeholers"></span>
-  </div>
-</p>
-
-<p class="i18n_found_a_bug">"https://adblockplus.org/forum/viewforum.php?f=10"</p>
-
-</div>
-</div>
 </body>
 </html>

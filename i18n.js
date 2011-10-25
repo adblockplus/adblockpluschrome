@@ -30,10 +30,11 @@ function loadI18nStrings() {
   var nodes = document.querySelectorAll("[class^='i18n_']");
   for(var i = 0; i < nodes.length; i++) {
     var arguments = JSON.parse("[" + nodes[i].textContent + "]");
+    var stringName = nodes[i].className.split(/\s/)[0].substring(5);
     if(arguments.length > 0)
-      nodes[i].innerHTML = chrome.i18n.getMessage(nodes[i].className.substring(5), arguments);
+      nodes[i].innerHTML = chrome.i18n.getMessage(stringName, arguments);
     else
-      nodes[i].innerHTML = chrome.i18n.getMessage(nodes[i].className.substring(5));
+      nodes[i].innerHTML = chrome.i18n.getMessage(stringName);
   }
 }
 

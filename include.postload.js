@@ -181,27 +181,24 @@ function clickHide_showDialog(left, top, filters) {
   }
   var addButton = makeButton("addButton");
   addButton.innerText = chrome.i18n.getMessage('add');
-  addButton.onclick = function() {
+  addButton.onclick = function()
+  {
     // Save the filters that the user created
-    chrome.extension.sendRequest({reqtype: "cache-filters", filters: clickHideFilters});
-    chrome.extension.sendRequest({reqtype: "apply-cached-filters", filters: filters});
+    chrome.extension.sendRequest({reqtype: "add-filters", filters: filters});
     // Explicitly get rid of currentElement in case removeAdsAgain() doesn't catch it
-    if(currentElement.parentNode) {
+    if (currentElement.parentNode)
+    {
       currentElement.parentNode.removeChild(currentElement);
       // currentElement may actually be our overlay if right-click element selection was used
-      if(currentElement.prisoner && currentElement.prisoner.parentNode)
+      if (currentElement.prisoner && currentElement.prisoner.parentNode)
         currentElement.prisoner.parentNode.removeChild(currentElement.prisoner);
     }
     clickHide_deactivate();
-    removeAdsAgain();
-    // Tell options.html to refresh its user filters listbox
-    chrome.extension.sendRequest({reqtype: "refresh-user-filters-box"});
   };
   var cancelButton = makeButton("cancelButton");
-  cancelButton.innerText = chrome.i18n.getMessage('cancel');
-  cancelButton.onclick = function() {
-    // Tell popup (indirectly) to shut up about easy create filter
-    chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: false});
+  cancelButton.innerText = chrome.i18n.getMessage("cancel");
+  cancelButton.onclick = function()
+  {
     clickHide_deactivate();
   }
   buttonsDiv.appendChild(addButton);
@@ -480,68 +477,72 @@ if (document.documentElement instanceof HTMLElement)
     lastRightClickEvent = e;
   }, false);
   
-  chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    // background.html might want to know this document's domain
-    if(request.reqtype == "get-domain") {
-      sendResponse({domain: document.domain});
-    } else if(request.reqtype == "clickhide-activate") {
-      // So that popup can figure out what it's supposed to show
-      chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: true});
-      clickHide_activate();
-    } else if(request.reqtype == "clickhide-deactivate") {
-      chrome.extension.sendRequest({reqtype: "set-clickhide-active", active: false});
-      clickHide_deactivate();
-    } else if(request.reqtype == "clickhide-new-filter") {
-      // The request is received by all frames, so ignore it if we're not the frame the
-      // user right-clicked in
-      if(!lastRightClickEvent)
-        return;
-      // This request would have come from the chrome.contextMenu handler, so we
-      // simulate the user having chosen the element to get rid of via the usual means.
-      clickHide_activated = true;
-      // FIXME: clickHideFilters is erased in clickHide_mouseClick anyway, so why set it?
-      clickHideFilters = [request.filter];
-      // We hope the URL we are given is the same as the one in the element referenced
-      // by lastRightClickEvent.target. If not, we just discard
-      var target = lastRightClickEvent.target;
-      var url = relativeToAbsoluteUrl(target.src);
-      // If we don't have the element with a src URL same as the filter, look for it.
-      // Chrome's context menu API is terrible. Why can't it give us the friggin' element
-      // to start with?
-      if(request.filter !== url) {
-        // Grab all elements with a src attribute.
-        // This won't work for all object/embed tags, but the context menu API doesn't
-        // work on those, so we're OK for now.
-        var elts = document.querySelectorAll('[src]');
-        for(var i=0; i<elts.length; i++) {
-          url = relativeToAbsoluteUrl(elts[i].src);
-          if(request.filter === url) {
-            // This is hopefully our element. In case of multiple elements
-            // with the same src, only one will be highlighted.
-            target = elts[i];
-            break;
+  chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
+  {
+    switch (request.reqtype)
+    {
+      case "get-clickhide-state":
+        sendResponse({active: clickHide_activated});
+        break;
+      case "clickhide-activate":
+        clickHide_activate();
+        break;
+      case "clickhide-deactivate":
+        clickHide_deactivate();
+        break;
+      case "clickhide-new-filter":
+        // The request is received by all frames, so ignore it if we're not the frame the
+        // user right-clicked in
+        if(!lastRightClickEvent)
+          return;
+        // We hope the URL we are given is the same as the one in the element referenced
+        // by lastRightClickEvent.target. If not, we just discard
+        var target = lastRightClickEvent.target;
+        var url = relativeToAbsoluteUrl(target.src);
+        // If we don't have the element with a src URL same as the filter, look for it.
+        // Chrome's context menu API is terrible. Why can't it give us the friggin' element
+        // to start with?
+        if(request.filter !== url) {
+          // Grab all elements with a src attribute.
+          // This won't work for all object/embed tags, but the context menu API doesn't
+          // work on those, so we're OK for now.
+          var elts = document.querySelectorAll('[src]');
+          for(var i=0; i<elts.length; i++) {
+            url = relativeToAbsoluteUrl(elts[i].src);
+            if(request.filter === url) {
+              // This is hopefully our element. In case of multiple elements
+              // with the same src, only one will be highlighted.
+              target = elts[i];
+              break;
+            }
           }
         }
-      }
-      // Following test will be true if we found the element with the filter URL
-      if(request.filter === url) {
-        // Coerce red highlighted overlay on top of element to remove.
-        // TODO: Wow, the design of the clickHide stuff is really dumb - gotta fix it sometime
-        currentElement = addElementOverlay(target);
-        // clickHide_mouseOver(lastRightClickEvent);
-        clickHide_mouseClick(lastRightClickEvent);
-      } else {
-        console.log("clickhide-new-filter: URLs don't match. Couldn't find that element.", request.filter, url, lastRightClickEvent.target.src);
-        // Restore previous state
-        clickHide_activated = false;
-        clickHideFilters = null;
-      }
-    } else if(request.reqtype == "remove-ads-again") {
-      // Called when a new filter is added
-      if (isExperimental != true)
-        removeAdsAgain();
-    } else
-      sendResponse({});
+        // Following test will be true if we found the element with the filter URL
+        if(request.filter === url)
+        {
+          // This request would have come from the chrome.contextMenu handler, so we
+          // simulate the user having chosen the element to get rid of via the usual means.
+          clickHide_activated = true;
+          // FIXME: clickHideFilters is erased in clickHide_mouseClick anyway, so why set it?
+          clickHideFilters = [request.filter];
+          // Coerce red highlighted overlay on top of element to remove.
+          // TODO: Wow, the design of the clickHide stuff is really dumb - gotta fix it sometime
+          currentElement = addElementOverlay(target);
+          // clickHide_mouseOver(lastRightClickEvent);
+          clickHide_mouseClick(lastRightClickEvent);
+        }
+        else
+          console.log("clickhide-new-filter: URLs don't match. Couldn't find that element.", request.filter, url, lastRightClickEvent.target.src);
+        break;
+      case "remove-ads-again":
+        // Called when a new filter is added
+        if (isExperimental != true)
+          removeAdsAgain();
+        break;
+      default:
+        sendResponse({});
+        break;
+    }
   });
 
   if (isExperimental != true)

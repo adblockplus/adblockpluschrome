@@ -108,20 +108,8 @@ function isThirdParty(requestHost, documentHost)
 
 function checkRequest(type, url, documentUrl, topUrl)
 {
-  if (topUrl)
-  {
-    // Ignore fragment identifier
-    var index = topUrl.indexOf("#");
-    if (index >= 0)
-      topUrl = topUrl.substring(0, index);
-
-    var topHost = extractDomainFromURL(topUrl);
-    var whitelist = defaultMatcher.matchesAny(topUrl, "DOCUMENT", topHost, false);
-    if (whitelist instanceof WhitelistFilter)
-      return false;
-    if (isDomainExcluded(topHost))
-      return false;
-  }
+  if (topUrl && isWhitelisted(topUrl))
+    return false;
 
   if (!documentUrl)
     documentUrl = topUrl;
