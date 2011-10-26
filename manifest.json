@@ -30,7 +30,7 @@
     },
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["adblockplus/patches.js", "adblockplus/FilterClasses.jsm", "adblockplus/Matcher.jsm", "include.experimental.js", "include.preload.js"],
+      "js": ["modules/patches.js", "modules/FilterClasses.jsm", "modules/Matcher.jsm", "include.experimental.js", "include.preload.js"],
       "run_at": "document_start",
       "all_frames": true
     },
