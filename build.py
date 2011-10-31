@@ -24,7 +24,7 @@ def removeUpdateURL(zip, dir, fileName, fileData):
   if fileName == 'manifest.json':
     data = json.loads(fileData)
     del data['update_url']
-    return json.dumps(data)
+    return json.dumps(data, sort_keys=True, indent=2)
   return fileData
 
 def useExperimentalUpdateURL(zip, dir, fileName, fileData):
@@ -35,7 +35,7 @@ def useExperimentalUpdateURL(zip, dir, fileName, fileData):
       if index >= 0:
         data['update_url'] = data['update_url'][0:index] + '-experimental' + data['update_url'][index:]
     data['name'] += ' experimental build'
-    return json.dumps(data)
+    return json.dumps(data, sort_keys=True, indent=2)
   return fileData
 
 def removeExperimentalPermissions(zip, dir, fileName, fileData):
@@ -47,7 +47,7 @@ def removeExperimentalPermissions(zip, dir, fileName, fileData):
         if 'js' in script:
           script['js'] = filter(lambda s: s != 'include.experimental.js', script['js'])
 
-    return json.dumps(data)
+    return json.dumps(data, sort_keys=True, indent=2)
   return fileData
 
 def addBuildNumber(revision, zip, dir, fileName, fileData):
@@ -60,7 +60,7 @@ def addBuildNumber(revision, zip, dir, fileName, fileData):
       while data['version'].count('.') < 2:
         data['version'] += '.0'
       data['version'] += '.' + revision
-      return json.dumps(data)
+      return json.dumps(data, sort_keys=True, indent=2)
   return fileData
 
 def mergeContentScripts(zip, dir, fileName, fileData):
@@ -80,7 +80,7 @@ def mergeContentScripts(zip, dir, fileName, fileData):
           contentScript['js'] = ['contentScript' + str(scriptIndex) + '.js']
           zip.writestr('contentScript' + str(scriptIndex) + '.js', scriptData)
           scriptIndex += 1
-    return json.dumps(data)
+    return json.dumps(data, sort_keys=True, indent=2)
   return fileData
 
 def addToZip(zip, filters, dir, baseName):
