@@ -1,207 +1,219 @@
 {
-  "name": {
-    "message": "Adblock Plus for Google Chrome™ (Beta)"
-  },
-  "description": {
-    "message": "Ads were yesterday! The successful extension Adblock Plus is now available for Google Chrome™."
-  },
-  "options": {
-    "message": "Adblock Plus Options"
-  },
-  "filter_lists": {
-    "message": "Filter lists",
-    "description": "This is a tab heading."
-  },
-  "last_updated_at": {
-    "message": "Last updated at $time$ on $date$",
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
-    "placeholders": {
-      "time": { "content" : "$1" },
-      "date": { "content" : "$2" }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Last updated at $time$ today",
-    "description": "e.g. Last updated at 3:00pm today",
-    "placeholders": {
-      "time": { "content" : "$1" }
-    }
-  },
-  "not_a_filter_list": {
-    "message": "Not a filter list",
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
-  },
-  "not_found_on_server": {
-    "message": "Not found on server",
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
-  },
-  "filter_list_desc": {
-    "message": "$title$ by $author$",
-    "description": "e.g. FooList by Mr. Foo",
-    "placeholders": {
-      "title": { "content" : "$1" },
-      "author": { "content" : "$2" }
-    }
-  },
-  "add_your_own_filters": {
-    "message": "Add your own filters"
-  },
-  "whitelisted_domains": {
-    "message": "Whitelisted domains",
-    "description": "This is a tab heading."
-  },
-  "general": {
-    "message": "General",
-    "description": "This is a tab heading."
-  },
   "add": {
-    "message": "Add",
-    "description": "This is the label for the 'Add' buttons."
-  },
+    "description": "This is the label for the 'Add' buttons.", 
+    "message": "Add"
+  }, 
+  "add_a_filter_list": {
+    "message": "Subscribe to a Firefox Adblock Plus <a href='$url$'>filter list</a>:", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
   "add_domain_button": {
     "message": "Add domain"
-  },
+  }, 
   "add_filter_button": {
     "message": "Add filter"
-  },
-  "add_url_button": {
-    "message": "Add URL"
-  },
-  "delete": {
-    "message": "delete",
-    "description": "Word for 'delete'."
-  },
-  "remove_button": {
-    "message": "Remove selected",
-    "description": "This is the label for the 'Remove selected' buttons."
-  },
-  "edit_filters_raw": {
-    "message": "Edit filters as raw text"
-  },
-  "apply_changes": {
-    "message": "Apply changes"
-  },
-
-  "enable_only_the": {
-    "message": "Enable only the filter lists you need. Too many can make Chrome unresponsive."
-  },
-  "out_of_date_lists": {
-    "message": "Out-of-date lists are updated periodically."
-  },
-  "update_now": {
-    "message": "Update now"
-  },
-  "add_a_filter_list": {
-    "message": "Subscribe to a Firefox Adblock Plus <a href='$url$'>filter list</a>:",
-    "placeholders": {
-      "url": { "content" : "$1" }
-    }
-  },
-  "filter_must_follow_syntax": {
-    "message": "Your filter must follow the <a href='$url$'>Adblock Plus filter syntax</a>. Certain filter types, like object-subrequest, are not supported.",
-    "placeholders": {
-      "url": { "content" : "$1" }
-    }
-  },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
-  },
-  "found_a_bug": {
-    "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a href='$url$'>file a request here</a>.",
-    "placeholders": {
-      "url": { "content" : "$1" }
-    }
-  },
-  "show_icon": {
-    "message": "Show icon in address bar"
-  },
-  "show_block_element_menu": {
-    "message": "Show 'Block Element' right-click menu item"
-  },
-  "disable_inline": {
-    "message": "Disable inline text ads"
-  },
-  "block_youtube": {
-    "message": "Block ads inside YouTube videos"
-  },
-  "hide_placeholers": {
-    "message": "Hide placeholders of blocked elements"
-  },
-  
-  "enabled_for_site": {
-    "message": "Enabled for this site",
-    "description": "Popup balloon checkbox label"
-  },
-  "easy_create_filter": {
-    "message": "Easy create filter",
-    "description": "Button label in popup balloon"
-  },
-  "cancel": {
-    "message": "Cancel",
-    "description": "Cancel button label"
-  },
-  "clickhide_instructions": {
-    "message": "After closing this popup, click (or right-click) an element on the page."
-  },
+  }, 
   "add_filters_msg": {
     "message": "Add filter(s)?"
-  },
-  "new_filters_added": {
-    "message": "New filters added; see <a id='options_url' target='_blank'>Options</a> to manage them."
-  },
+  }, 
+  "add_url_button": {
+    "message": "Add URL"
+  }, 
+  "add_your_own_filters": {
+    "message": "Add your own filters"
+  }, 
+  "apply_changes": {
+    "message": "Apply changes"
+  }, 
   "block_element": {
-    "message": "Block Element",
-    "description": "Label for 'Block Element' context menu item"
-  },
-
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Downloading..."
-  },
-  "global_subscription_invalid_location": {
-    "message": "Filter list location is neither a valid URL nor a valid file name."
-  },
-  "global_synchronize_invalid_url": {
-    "message": "Failed, not a valid address"
-  },
-  "global_synchronize_connection_error": {
-    "message": "Failed, download failure"
-  },
-  "global_synchronize_invalid_data": {
-    "message": "Failed, not a valid filters list"
-  },
-  "global_synchronize_checksum_mismatch": {
-    "message": "Failed, checksum mismatch"
-  },
+    "description": "Label for 'Block Element' context menu item", 
+    "message": "Block Element"
+  }, 
+  "block_youtube": {
+    "message": "Block ads inside YouTube videos"
+  }, 
+  "cancel": {
+    "description": "Cancel button label", 
+    "message": "Cancel"
+  }, 
+  "clickhide_instructions": {
+    "message": "After closing this popup, click (or right-click) an element on the page."
+  }, 
+  "delete": {
+    "description": "Word for 'delete'.", 
+    "message": "delete"
+  }, 
+  "description": {
+    "message": "Ads were yesterday! The successful extension Adblock Plus is now available for Google Chrome™."
+  }, 
+  "disable_inline": {
+    "message": "Disable inline text ads"
+  }, 
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
+  }, 
+  "easy_create_filter": {
+    "description": "Button label in popup balloon", 
+    "message": "Easy create filter"
+  }, 
+  "edit_filters_raw": {
+    "message": "Edit filters as raw text"
+  }, 
+  "enable_only_the": {
+    "message": "Enable only the filter lists you need. Too many can make Chrome unresponsive."
+  }, 
+  "enabled_for_site": {
+    "description": "Popup balloon checkbox label", 
+    "message": "Enabled for this site"
+  }, 
+  "filter_list_desc": {
+    "description": "e.g. FooList by Mr. Foo", 
+    "message": "$title$ by $author$", 
+    "placeholders": {
+      "author": {
+        "content": "$2"
+      }, 
+      "title": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "filter_lists": {
+    "description": "This is a tab heading.", 
+    "message": "Filter lists"
+  }, 
+  "filter_must_follow_syntax": {
+    "message": "Your filter must follow the <a href='$url$'>Adblock Plus filter syntax</a>. Certain filter types, like object-subrequest, are not supported.", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "found_a_bug": {
+    "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a href='$url$'>file a request here</a>.", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "general": {
+    "description": "This is a tab heading.", 
+    "message": "General"
+  }, 
   "global_remove_subscription_warning": {
     "message": "Do you really want to remove this subscription?"
-  },
-  "settings_enabled_column": {
-    "message": "Enabled"
-  },
-  "settings_remove_label": {
-    "message": "Delete"
-  },
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Filter list location is neither a valid URL nor a valid file name."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Downloading..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Failed, checksum mismatch"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Failed, download failure"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Failed, not a valid filters list"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Failed, not a valid address"
+  }, 
+  "hide_placeholers": {
+    "message": "Hide placeholders of blocked elements"
+  }, 
+  "hovercraft": {
+    "description": "This is a sample translatable string. It happens to have comedic value.", 
+    "message": "My hovercraft is full of eels."
+  }, 
+  "last_updated_at": {
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
+    "message": "Last updated at $time$ on $date$", 
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      }, 
+      "time": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "last_updated_at_today": {
+    "description": "e.g. Last updated at 3:00pm today", 
+    "message": "Last updated at $time$ today", 
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "name": {
+    "message": "Adblock Plus for Google Chrome™ (Beta)"
+  }, 
+  "new_filters_added": {
+    "message": "New filters added; see <a id='options_url' target='_blank'>Options</a> to manage them."
+  }, 
+  "not_a_filter_list": {
+    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
+    "message": "Not a filter list"
+  }, 
+  "not_found_on_server": {
+    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
+    "message": "Not found on server"
+  }, 
+  "options": {
+    "message": "Adblock Plus Options"
+  }, 
+  "out_of_date_lists": {
+    "message": "Out-of-date lists are updated periodically."
+  }, 
+  "remove_button": {
+    "description": "This is the label for the 'Remove selected' buttons.", 
+    "message": "Remove selected"
+  }, 
   "settings_addsubscription_label": {
     "message": "Add filter subscription"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Please choose a filter subscription from the list:"
-  },
+  }, 
+  "settings_enabled_column": {
+    "message": "Enabled"
+  }, 
+  "settings_remove_label": {
+    "message": "Delete"
+  }, 
+  "show_block_element_menu": {
+    "message": "Show 'Block Element' right-click menu item"
+  }, 
+  "show_icon": {
+    "message": "Show icon in address bar"
+  }, 
   "subscriptionSelection_addSubscription_label": {
     "message": "Add subscription"
-  },
-  "subscriptionSelection_other_label": {
-    "message": "Add a different subscription"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Subscription title:"
-  },
+  }, 
   "subscriptionSelection_location_label": {
     "message": "Filter list location:"
-  },
-
-  "hovercraft": {
-    "message": "My hovercraft is full of eels.",
-    "description": "This is a sample translatable string. It happens to have comedic value."
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Add a different subscription"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Please choose a filter subscription from the list:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Subscription title:"
+  }, 
+  "update_now": {
+    "message": "Update now"
+  }, 
+  "whitelisted_domains": {
+    "description": "This is a tab heading.", 
+    "message": "Whitelisted domains"
   }
 }

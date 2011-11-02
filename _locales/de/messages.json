@@ -1,169 +1,171 @@
 {
-   "add": {
-      "description": "Name für die 'Hinzufügen'-Buttons.",
-      "message": "Hinzufügen"
-   },
-   "add_a_filter_list": {
-      "message": "Fügen Sie eine Firefox Adblock Plus <a href='$url$'>Filter Liste</a> hinzu:",
-      "placeholders": {
-         "url": {
-            "content": "$1"
-         }
+  "add": {
+    "description": "Name für die 'Hinzufügen'-Buttons.", 
+    "message": "Hinzufügen"
+  }, 
+  "add_a_filter_list": {
+    "message": "Fügen Sie eine Firefox Adblock Plus <a href='$url$'>Filter Liste</a> hinzu:", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
       }
-   },
-   "add_domain_button": {
-      "message": "Domain hinzufügen"
-   },
-   "add_filter_button": {
-      "message": "Filter hinzufügen"
-   },
-   "add_filters_msg": {
-      "message": "Filter hinzufügen?"
-   },
-   "add_url_button": {
-      "message": "URL hinzufügen"
-   },
-   "add_your_own_filters": {
-      "message": "Eigene Filter hinzufügen"
-   },
-   "apply_changes": {
-      "message": "Änderungen übernehmen"
-   },
-   "block_element": {
-      "description": "Name für Kontextmenü-Eintrag 'Element blocken'",
-      "message": "Element blocken"
-   },
-   "block_youtube": {
-      "message": "Blocke Werbung in YouTube Videos"
-   },
-   "cancel": {
-      "description": "Name für den 'Abbrechen'-Button",
-      "message": "Abbrechen"
-   },
-   "clickhide_instructions": {
-      "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
-   },
-   "delete": {
-      "description": "Wort für 'löschen'.",
-      "message": "löschen"
-   },
-   "description": {
-      "message": "Werbung war gestern! Die bewährte Adblock Plus Erweiterung ist jetzt auch für Google Chrome™ verfügbar."
-   },
-   "disable_inline": {
-      "message": "Blocke Inline Text Werbung"
-   },
-   "disabled_for_these_domains": {
-      "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain via Adblock Plus-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in die Textzeile und drücken auf \"Domain hinzufügen\"."
-   },
-   "easy_create_filter": {
-      "description": "Adblock Plus-Icon Kontextmenü",
-      "message": "Einfach Filter erstellen"
-   },
-   "edit_filters_raw": {
-      "message": "Filter als reinen Text editieren"
-   },
-   "enable_only_the": {
-      "message": "Falls Sie einen langsamen Computer haben, wählen Sie bitte nur Filter aus, die Sie wirklich brauchen."
-   },
-   "enabled_for_site": {
-      "description": "Adblock Plus-Icon Kontextmenü",
-      "message": "Für diese Seite aktivieren"
-   },
-   "filter_list_desc": {
-      "description": "z.B. FooList von Mr. Foo",
-      "message": "$title$ von $author$",
-      "placeholders": {
-         "author": {
-            "content": "$2"
-         },
-         "title": {
-            "content": "$1"
-         }
+    }
+  }, 
+  "add_domain_button": {
+    "message": "Domain hinzufügen"
+  }, 
+  "add_filter_button": {
+    "message": "Filter hinzufügen"
+  }, 
+  "add_filters_msg": {
+    "message": "Filter hinzufügen?"
+  }, 
+  "add_url_button": {
+    "message": "URL hinzufügen"
+  }, 
+  "add_your_own_filters": {
+    "message": "Eigene Filter hinzufügen"
+  }, 
+  "apply_changes": {
+    "message": "Änderungen übernehmen"
+  }, 
+  "block_element": {
+    "description": "Name für Kontextmenü-Eintrag 'Element blocken'", 
+    "message": "Element blocken"
+  }, 
+  "block_youtube": {
+    "message": "Blocke Werbung in YouTube Videos"
+  }, 
+  "cancel": {
+    "description": "Name für den 'Abbrechen'-Button", 
+    "message": "Abbrechen"
+  }, 
+  "clickhide_instructions": {
+    "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
+  }, 
+  "delete": {
+    "description": "Wort für 'löschen'.", 
+    "message": "löschen"
+  }, 
+  "description": {
+    "message": "Werbung war gestern! Die bewährte Adblock Plus Erweiterung ist jetzt auch für Google Chrome™ verfügbar."
+  }, 
+  "disable_inline": {
+    "message": "Blocke Inline Text Werbung"
+  }, 
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain via Adblock Plus-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in die Textzeile und drücken auf \"Domain hinzufügen\"."
+  }, 
+  "easy_create_filter": {
+    "description": "Adblock Plus-Icon Kontextmenü", 
+    "message": "Einfach Filter erstellen"
+  }, 
+  "edit_filters_raw": {
+    "message": "Filter als reinen Text editieren"
+  }, 
+  "enable_only_the": {
+    "message": "Falls Sie einen langsamen Computer haben, wählen Sie bitte nur Filter aus, die Sie wirklich brauchen."
+  }, 
+  "enabled_for_site": {
+    "description": "Adblock Plus-Icon Kontextmenü", 
+    "message": "Für diese Seite aktivieren"
+  }, 
+  "filter_list_desc": {
+    "description": "z.B. FooList von Mr. Foo", 
+    "message": "$title$ von $author$", 
+    "placeholders": {
+      "author": {
+        "content": "$2"
+      }, 
+      "title": {
+        "content": "$1"
       }
-   },
-   "filter_lists": {
-      "description": "Das ist ein Reiter-Name.",
-      "message": "Filter Liste"
-   },
-   "filter_must_follow_syntax": {
-      "message": "Ihr Filter muss nach der <a href='$url$'>Adblock Plus Filter Syntax</a> geschrieben werden. Manche Filter Arten, wie object-subrequest (Anfragen, die von Plugins gestartet werden), werden nicht unterstützt.",
-      "placeholders": {
-         "url": {
-            "content": "$1"
-         }
+    }
+  }, 
+  "filter_lists": {
+    "description": "Das ist ein Reiter-Name.", 
+    "message": "Filter Liste"
+  }, 
+  "filter_must_follow_syntax": {
+    "message": "Ihr Filter muss nach der <a href='$url$'>Adblock Plus Filter Syntax</a> geschrieben werden. Manche Filter Arten, wie object-subrequest (Anfragen, die von Plugins gestartet werden), werden nicht unterstützt.", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
       }
-   },
-   "found_a_bug": {
-      "message": "Sie haben einen Bug gefunden oder wollen Adblock Plus in eine andere Sprache übersetzen? Bitte schreiben Sie <a href='$url$'>hier</a> ihre Anfrage.",
-      "placeholders": {
-         "url": {
-            "content": "$1"
-         }
+    }
+  }, 
+  "found_a_bug": {
+    "message": "Sie haben einen Bug gefunden oder wollen Adblock Plus in eine andere Sprache übersetzen? Bitte schreiben Sie <a href='$url$'>hier</a> ihre Anfrage.", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
       }
-   },
-   "general": {
-      "description": "Das ist ein Reiter-Name.",
-      "message": "Allgemein"
-   },
-   "hovercraft": {
-      "description": "Das ist ein einfach übersetzbarer Text. Er ist nur zum Spaß da.",
-      "message": "Mein Luftkissenfahrzeug ist voller Aale."
-   },
-   "last_updated_at": {
-      "description": "z.B. Zuletzt aktualisiert: 1. Apr 2011 um 12:51",
-      "message": "Zuletzt aktualisiert: $date$ um $time$",
-      "placeholders": {
-         "date": {
-            "content": "$2"
-         },
-         "time": {
-            "content": "$1"
-         }
+    }
+  }, 
+  "general": {
+    "description": "Das ist ein Reiter-Name.", 
+    "message": "Allgemein"
+  }, 
+  "hovercraft": {
+    "description": "Das ist ein einfach übersetzbarer Text. Er ist nur zum Spaß da.", 
+    "message": "Mein Luftkissenfahrzeug ist voller Aale."
+  }, 
+  "last_updated_at": {
+    "description": "z.B. Zuletzt aktualisiert: 1. Apr 2011 um 12:51", 
+    "message": "Zuletzt aktualisiert: $date$ um $time$", 
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      }, 
+      "time": {
+        "content": "$1"
       }
-   },
-   "last_updated_at_today": {
-      "description": "e.g. Last updated at 3:00pm today",
-      "message": "Zuletzt aktualisiert: heute um $time$",
-      "placeholders": {
-         "time": { "content" : "$1" }
+    }
+  }, 
+  "last_updated_at_today": {
+    "description": "e.g. Last updated at 3:00pm today", 
+    "message": "Zuletzt aktualisiert: heute um $time$", 
+    "placeholders": {
+      "time": {
+        "content": "$1"
       }
-   },
-   "name": {
-      "message": "Adblock Plus für Google Chrome™ (Beta)"
-   },
-   "new_filters_added": {
-      "message": "Neue Filter hinzugefügt; klicken Sie auf <a id='options_url' target='_blank'>Optionen</a> um sie zu verwalten."
-   },
-   "not_a_filter_list": {
-      "description": "In der Datei options.html wird ein Fehler angezeigt, wenn man eine ungültige Filter Liste angibt.",
-      "message": "Ungültige Filter Liste"
-   },
-   "not_found_on_server": {
-      "description": "In der Datei options.html wird ein Fehler angezeigt, wenn man eine FIlter Liste nicht auf dem Server gefunden wird.",
-      "message": "Filter Liste nicht auf Server gefunden"
-   },
-   "options": {
-      "message": "Adblock Plus Optionen"
-   },
-   "out_of_date_lists": {
-      "message": "Abgelaufene Filter werden regelmäßig aktualisiert."
-   },
-   "remove_button": {
-      "description": "Name für die 'Ausgewählte entfernen'-Buttons.",
-      "message": "Ausgewählte entfernen"
-   },
-   "show_block_element_menu": {
-      "message": "Zeige Rechtsklickmenü-Eintrag 'Element blocken'"
-   },
-   "show_icon": {
-      "message": "Zeige Icon in der Adressleiste"
-   },
-   "update_now": {
-      "message": "Jetzt updaten"
-   },
-   "whitelisted_domains": {
-      "description": "Das ist ein Reiter-Name.",
-      "message": "Ausnahmen"
-   }
+    }
+  }, 
+  "name": {
+    "message": "Adblock Plus für Google Chrome™ (Beta)"
+  }, 
+  "new_filters_added": {
+    "message": "Neue Filter hinzugefügt; klicken Sie auf <a id='options_url' target='_blank'>Optionen</a> um sie zu verwalten."
+  }, 
+  "not_a_filter_list": {
+    "description": "In der Datei options.html wird ein Fehler angezeigt, wenn man eine ungültige Filter Liste angibt.", 
+    "message": "Ungültige Filter Liste"
+  }, 
+  "not_found_on_server": {
+    "description": "In der Datei options.html wird ein Fehler angezeigt, wenn man eine FIlter Liste nicht auf dem Server gefunden wird.", 
+    "message": "Filter Liste nicht auf Server gefunden"
+  }, 
+  "options": {
+    "message": "Adblock Plus Optionen"
+  }, 
+  "out_of_date_lists": {
+    "message": "Abgelaufene Filter werden regelmäßig aktualisiert."
+  }, 
+  "remove_button": {
+    "description": "Name für die 'Ausgewählte entfernen'-Buttons.", 
+    "message": "Ausgewählte entfernen"
+  }, 
+  "show_block_element_menu": {
+    "message": "Zeige Rechtsklickmenü-Eintrag 'Element blocken'"
+  }, 
+  "show_icon": {
+    "message": "Zeige Icon in der Adressleiste"
+  }, 
+  "update_now": {
+    "message": "Jetzt updaten"
+  }, 
+  "whitelisted_domains": {
+    "description": "Das ist ein Reiter-Name.", 
+    "message": "Ausnahmen"
+  }
 }

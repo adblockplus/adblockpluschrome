@@ -1,152 +1,161 @@
 {
-    "description": {
-        "message": "תוסף שחוסם פרסומות באמצעות המנגנון של המסנן Adblock Plus ל־Firefox. נשקו את הפרסומות לשלום!"
-    },
-    "options": {
-        "message": "אפשרויות Adblock Plus"
-    },
-    "filter_lists": {
-        "message": "רשימות המסננים",
-        "description": "This is a tab heading."
-    },
-    "last_updated_at": {
-        "message": "עודכנה לאחרונה בשעה $time$ ב־$date$",
-        "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
-        "placeholders": {
-            "time": { "content" : "$1" },
-            "date": { "content" : "$2" }
-        }
-    },
-    "last_updated_at_today": {
-        "message": "עודכנה לאחרונה בשעה $time$ ב־היום",
-        "description": "e.g. Last updated at 3:00pm today",
-        "placeholders": {
-            "time": { "content" : "$1" }
-        }
-    },
-    "not_a_filter_list": {
-        "message": "אינה רשימת מסננים",
-        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
-    },
-    "not_found_on_server": {
-        "message": "לא נמצא בשרת",
-        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
-    },
-    "filter_list_desc": {
-        "message": "$title$ מבית $author$",
-        "description": "e.g. FooList by Mr. Foo",
-        "placeholders": {
-            "title": { "content" : "$1" },
-            "author": { "content" : "$2" }
-        }
-    },
-    "add_your_own_filters": {
-        "message": "הוספת מסננים משלך"
-    },
-    "whitelisted_domains": {
-        "message": "שמות מתחם מורשים",
-        "description": "This is a tab heading."
-    },
-    "general": {
-        "message": "כללי",
-        "description": "This is a tab heading."
-    },
-
-    "add": {
-        "message": "הוספה",
-        "description": "This is the label for the 'Add' buttons."
-    },
-    "add_domain_button": {
-        "message": "הוספת שם מתחם"
-    },
-    "add_filter_button": {
-        "message": "הוספת מסנן"
-    },
-    "add_url_button": {
-        "message": "הוספת כתובת"
-    },
-    "delete": {
-        "message": "מחיקה",
-        "description": "Word for 'delete'."
-    },
-    "remove_button": {
-        "message": "הסרת הבחירה",
-        "description": "This is the label for the 'Remove selected' buttons."
-    },
-    "edit_filters_raw": {
-        "message": "עריכת מסננים כטקסט גולמי"
-    },
-    "apply_changes": {
-        "message": "החלת השינויים"
-    },
-
-    "enable_only_the": {
-        "message": "מומלץ להפעיל רק את רשימות המסננים בהן יש צורך. יותר מדי רשימות עלולות לפגוע בביצועי הדפדפן."
-    },
-    "out_of_date_lists": {
-        "message": "רשימות שאינן עדכניות מתעדכנות באופן תדיר."
-    },
-    "update_now": {
-        "message": "עדכון כעת"
-    },
-    "add_a_filter_list": {
-        "message": "הרשמה ל<a href='$url$'>רשימת המסננים</a> של Adblock Plus ל־Firefox:",
-        "placeholders": {
-            "url": { "content" : "$1" }
-        }
-    },
-    "filter_must_follow_syntax": {
-        "message": "על המסנן שלך לציית ל<a href='$url$'>כללי התחביר של מסנני Adblock Plus</a>.",
-        "placeholders": {
-            "url": { "content" : "$1" }
-        }
-    },
-    "disabled_for_these_domains": {
-        "message": "Adblock Plus מנוטרל עבור שמות המתחם המופיעים להלן. ניתן להוסיף שם מתחם או דרך הסמל של Adblock Plus שבשורת הכתובות או על ידי הקלדת שם המתחם (לא הכתובת) בתיבה וללחוץ על הלחצן \"הוספת שם מתחם\"."
-    },
-    "found_a_bug": {
-        "message": "מצאת באג? ברצונך ליצור תרגום של Adblock Plus לשפתך? נא <a href='$url$'>לציין את בקשתך כאן</a>.",
-        "placeholders": {
-            "url": { "content" : "$1" }
-        }
-    },
-    
-    
-    "show_icon": {
-        "message": "הצגת סמל בסרגל הכתובות"
-    },
-    "disable_inline": {
-        "message": "ביטול פרסומות טקסט"
-    },
-    "block_youtube": {
-        "message": "חסימת פרסומות בתוך סרטוני YouTube"
-    },
-    
-    "enabled_for_site": {
-        "message": "פעיל עבור אתר זה",
-        "description": "Popup balloon checkbox label"
-    },
-    "easy_create_filter": {
-        "message": "יצירת מסנן בקלות",
-        "description": "Button label in popup balloon"
-    },
-    "cancel": {
-        "message": "ביטול",
-        "description": "Cancel button label"
-    },
-    "clickhide_instructions": {
-        "message": "לאחר סגירת חלונית זו, יש ללחוץ (לא משנה באיזה לחצן) על רכיב בעמוד זה."
-    },
-    "add_filters_msg": {
-        "message": "האם להוסיף מסנן/ים?"
-    },
-    "new_filters_added": {
-        "message": "נוספו מסננים חדשים; ניתן לנהל אותם דרך ה<a id='options_url' target='_blank'>אפשרויות</a>."
-    },
-    
-    
-    "hovercraft": {
-        "message": "הרחפת שלי מלאה בצלופחים.",
-        "description": "This is a sample translatable string. It happens to have comedic value."
+  "add": {
+    "description": "This is the label for the 'Add' buttons.", 
+    "message": "הוספה"
+  }, 
+  "add_a_filter_list": {
+    "message": "הרשמה ל<a href='$url$'>רשימת המסננים</a> של Adblock Plus ל־Firefox:", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
     }
+  }, 
+  "add_domain_button": {
+    "message": "הוספת שם מתחם"
+  }, 
+  "add_filter_button": {
+    "message": "הוספת מסנן"
+  }, 
+  "add_filters_msg": {
+    "message": "האם להוסיף מסנן/ים?"
+  }, 
+  "add_url_button": {
+    "message": "הוספת כתובת"
+  }, 
+  "add_your_own_filters": {
+    "message": "הוספת מסננים משלך"
+  }, 
+  "apply_changes": {
+    "message": "החלת השינויים"
+  }, 
+  "block_youtube": {
+    "message": "חסימת פרסומות בתוך סרטוני YouTube"
+  }, 
+  "cancel": {
+    "description": "Cancel button label", 
+    "message": "ביטול"
+  }, 
+  "clickhide_instructions": {
+    "message": "לאחר סגירת חלונית זו, יש ללחוץ (לא משנה באיזה לחצן) על רכיב בעמוד זה."
+  }, 
+  "delete": {
+    "description": "Word for 'delete'.", 
+    "message": "מחיקה"
+  }, 
+  "description": {
+    "message": "תוסף שחוסם פרסומות באמצעות המנגנון של המסנן Adblock Plus ל־Firefox. נשקו את הפרסומות לשלום!"
+  }, 
+  "disable_inline": {
+    "message": "ביטול פרסומות טקסט"
+  }, 
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus מנוטרל עבור שמות המתחם המופיעים להלן. ניתן להוסיף שם מתחם או דרך הסמל של Adblock Plus שבשורת הכתובות או על ידי הקלדת שם המתחם (לא הכתובת) בתיבה וללחוץ על הלחצן \"הוספת שם מתחם\"."
+  }, 
+  "easy_create_filter": {
+    "description": "Button label in popup balloon", 
+    "message": "יצירת מסנן בקלות"
+  }, 
+  "edit_filters_raw": {
+    "message": "עריכת מסננים כטקסט גולמי"
+  }, 
+  "enable_only_the": {
+    "message": "מומלץ להפעיל רק את רשימות המסננים בהן יש צורך. יותר מדי רשימות עלולות לפגוע בביצועי הדפדפן."
+  }, 
+  "enabled_for_site": {
+    "description": "Popup balloon checkbox label", 
+    "message": "פעיל עבור אתר זה"
+  }, 
+  "filter_list_desc": {
+    "description": "e.g. FooList by Mr. Foo", 
+    "message": "$title$ מבית $author$", 
+    "placeholders": {
+      "author": {
+        "content": "$2"
+      }, 
+      "title": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "filter_lists": {
+    "description": "This is a tab heading.", 
+    "message": "רשימות המסננים"
+  }, 
+  "filter_must_follow_syntax": {
+    "message": "על המסנן שלך לציית ל<a href='$url$'>כללי התחביר של מסנני Adblock Plus</a>.", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "found_a_bug": {
+    "message": "מצאת באג? ברצונך ליצור תרגום של Adblock Plus לשפתך? נא <a href='$url$'>לציין את בקשתך כאן</a>.", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "general": {
+    "description": "This is a tab heading.", 
+    "message": "כללי"
+  }, 
+  "hovercraft": {
+    "description": "This is a sample translatable string. It happens to have comedic value.", 
+    "message": "הרחפת שלי מלאה בצלופחים."
+  }, 
+  "last_updated_at": {
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
+    "message": "עודכנה לאחרונה בשעה $time$ ב־$date$", 
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      }, 
+      "time": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "last_updated_at_today": {
+    "description": "e.g. Last updated at 3:00pm today", 
+    "message": "עודכנה לאחרונה בשעה $time$ ב־היום", 
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "new_filters_added": {
+    "message": "נוספו מסננים חדשים; ניתן לנהל אותם דרך ה<a id='options_url' target='_blank'>אפשרויות</a>."
+  }, 
+  "not_a_filter_list": {
+    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
+    "message": "אינה רשימת מסננים"
+  }, 
+  "not_found_on_server": {
+    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
+    "message": "לא נמצא בשרת"
+  }, 
+  "options": {
+    "message": "אפשרויות Adblock Plus"
+  }, 
+  "out_of_date_lists": {
+    "message": "רשימות שאינן עדכניות מתעדכנות באופן תדיר."
+  }, 
+  "remove_button": {
+    "description": "This is the label for the 'Remove selected' buttons.", 
+    "message": "הסרת הבחירה"
+  }, 
+  "show_icon": {
+    "message": "הצגת סמל בסרגל הכתובות"
+  }, 
+  "update_now": {
+    "message": "עדכון כעת"
+  }, 
+  "whitelisted_domains": {
+    "description": "This is a tab heading.", 
+    "message": "שמות מתחם מורשים"
+  }
 }

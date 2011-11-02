@@ -1,159 +1,168 @@
 {
+  "add": {
+    "description": "Esse é o rótulo para os botões de 'Adicionar'.", 
+    "message": "Adicionar"
+  }, 
+  "add_a_filter_list": {
+    "message": "Inscrever-se para uma <a href='$url$'>lista de filtro</a> do Firefox Adblock Plus:", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "add_domain_button": {
+    "message": "Adicionar domínio"
+  }, 
+  "add_filter_button": {
+    "message": "Adicionar filtro"
+  }, 
+  "add_filters_msg": {
+    "message": "Adicionar filtro(s)?"
+  }, 
+  "add_url_button": {
+    "message": "Adicionar URL"
+  }, 
+  "add_your_own_filters": {
+    "message": "Adicione seus próprios filtros"
+  }, 
+  "apply_changes": {
+    "message": "Aplicar mudanças"
+  }, 
+  "block_element": {
+    "description": "Legenda para o item 'Bloquear Elemento' no menu de contexto", 
+    "message": "Bloquear Elemento"
+  }, 
+  "block_youtube": {
+    "message": "Bloquear propagandas dentro de vídeos do YouTube"
+  }, 
+  "cancel": {
+    "description": "Rótulo para o botão de Cancelar", 
+    "message": "Cancelar"
+  }, 
+  "clickhide_instructions": {
+    "message": "Após o encerramento desta janela, clique (ou dê um clique com o botão direito) em um elemento da página."
+  }, 
+  "delete": {
+    "description": "Palavra para expressar 'deletar'.", 
+    "message": "deletar"
+  }, 
   "description": {
     "message": "Bloqueador de propagandas usando o mecanismo de filtragem do Adblock Plus para o Firefox. Dê um beijo de despedida nelas e navegue em paz!"
-  },
-    "options": {
-        "message": "Opções do Adblock Plus"
-    },
-    "filter_lists": {
-        "message": "Lista de Filtros",
-        "description": "Essa é uma aba do menu."
-    },
-  "last_updated_at": {
-    "message": "Última atualização às $time$ em $date$",
-    "description": "ex: Última atualização às 3:00pm, em 1 de Abr, 2011",
-    "placeholders": {
-        "time": { "content" : "$1" },
-        "date": { "content" : "$2" }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Última atualização às $time$ hoje",
-    "description": "e.g. Last updated at 3:00pm today",
-    "placeholders": {
-      "time": { "content" : "$1" }
-    }
-  },
-  "not_a_filter_list": {
-        "message": "Não é uma lista de filtro",
-        "description": "In options.html, error displayed when filter list fetcher receives something not a filter list"
-    },
-    "not_found_on_server": {
-        "message": "Não encontrado no servidor",
-        "description": "In options.html, error displayed when filter list fetcher can't find filter list on server"
-    },
-  "filter_list_desc": {
-    "message": "$title$ por $author$",
-    "description": "ex: FooList por Mr. Foo",
-    "placeholders": {
-        "title": { "content" : "$1" },
-        "author": { "content" : "$2" }
-    }
-  },
-    "add_your_own_filters": {
-        "message": "Adicione seus próprios filtros"
-    },
-    "whitelisted_domains": {
-        "message": "Domínios permitidos",
-        "description": "Essa é uma aba do menu."
-    },
-    "general": {
-        "message": "Geral",
-        "description": "Essa é uma aba do menu."
-    },
-
-    "add": {
-        "message": "Adicionar",
-        "description": "Esse é o rótulo para os botões de 'Adicionar'."
-    },
-    "add_domain_button": {
-        "message": "Adicionar domínio"
-    },
-    "add_filter_button": {
-        "message": "Adicionar filtro"
-    },
-    "add_url_button": {
-        "message": "Adicionar URL"
-    },
-    "delete": {
-        "message": "deletar",
-        "description": "Palavra para expressar 'deletar'."
-    },
-    "remove_button": {
-        "message": "Remover selecionados",
-        "description": "Esse é o rótulo para os botões de 'Remover selecionados'."
-    },
-    "edit_filters_raw": {
-        "message": "Editar filtros manualmente"
-    },
-    "apply_changes": {
-        "message": "Aplicar mudanças"
-    },
-
-  "enable_only_the": {
-      "message": "Habilitar somente as listas de filtros que você precisa. Muitos filtros simultâneos podem causar o travamento do seu Chrome."
-  },
-  "out_of_date_lists": {
-      "message": "Listas obsoletas são atualizadas periodicamente."
-  },
-  "update_now": {
-      "message": "Atualizar agora"
-  },
-  "add_a_filter_list": {
-      "message": "Inscrever-se para uma <a href='$url$'>lista de filtro</a> do Firefox Adblock Plus:",
-      "placeholders": {
-          "url": { "content" : "$1" }
-      }
-  },
-  "filter_must_follow_syntax": {
-      "message": "Seu filtro deve seguir a <a href='$url$'>sintaxe de filtro do Adblock Plus</a>. Certos tipos de filtro como requisições realizadas por plugins, por exemplo o Flash, não são suportadas.",
-      "placeholders": {
-          "url": { "content" : "$1" }
-      }
-  },
+  }, 
+  "disable_inline": {
+    "message": "Desativar propagandas de texto em linha"
+  }, 
   "disabled_for_these_domains": {
-        "message": "O Adblock Plus está desabilitado para os domínios abaixo. Você pode adicionar um domínio, tanto pelo ícone do Adblock Plus na barra de endereços, quanto digitando o domínio (não a URL) dentro da caixa e clicando no botão \"Adicionar domínio\"."
-    },
-  "found_a_bug": {
-        "message": "Encontrou um bug? Por favor <a href='$url$'>nos informe a falha por aqui</a>.",
-      "placeholders": {
-          "url": { "content" : "$1" }
+    "message": "O Adblock Plus está desabilitado para os domínios abaixo. Você pode adicionar um domínio, tanto pelo ícone do Adblock Plus na barra de endereços, quanto digitando o domínio (não a URL) dentro da caixa e clicando no botão \"Adicionar domínio\"."
+  }, 
+  "easy_create_filter": {
+    "description": "Rótulo para o botão dentro do balão que surge ao clicar no ícone do Adblock Plus", 
+    "message": "Crie fácil um filtro"
+  }, 
+  "edit_filters_raw": {
+    "message": "Editar filtros manualmente"
+  }, 
+  "enable_only_the": {
+    "message": "Habilitar somente as listas de filtros que você precisa. Muitos filtros simultâneos podem causar o travamento do seu Chrome."
+  }, 
+  "enabled_for_site": {
+    "description": "Rótulo para a caixa de verificação em formato de balão que surge ao clicar no ícone do Adblock Plus", 
+    "message": "Habilitado para esse site"
+  }, 
+  "filter_list_desc": {
+    "description": "ex: FooList por Mr. Foo", 
+    "message": "$title$ por $author$", 
+    "placeholders": {
+      "author": {
+        "content": "$2"
+      }, 
+      "title": {
+        "content": "$1"
       }
-    },
-    
-    
-    "show_icon": {
-        "message": "Mostrar ícone na barra de endereços"
-    },
-    "disable_inline": {
-        "message": "Desativar propagandas de texto em linha"
-    },
-    "block_youtube": {
-        "message": "Bloquear propagandas dentro de vídeos do YouTube"
-    },
-    
-    "enabled_for_site": {
-        "message": "Habilitado para esse site",
-        "description": "Rótulo para a caixa de verificação em formato de balão que surge ao clicar no ícone do Adblock Plus"
-    },
-    "easy_create_filter": {
-        "message": "Crie fácil um filtro",
-        "description": "Rótulo para o botão dentro do balão que surge ao clicar no ícone do Adblock Plus"
-    },
-    "cancel": {
-        "message": "Cancelar",
-        "description": "Rótulo para o botão de Cancelar"
-    },
-    "clickhide_instructions": {
-        "message": "Após o encerramento desta janela, clique (ou dê um clique com o botão direito) em um elemento da página."
-    },
-    "add_filters_msg": {
-        "message": "Adicionar filtro(s)?"
-    },
-    "new_filters_added": {
-        "message": "Novos filtros adicionados; veja em <a id='options_url' target='_blank'>Opções</a> para gerenciá-los."
-    },
-    "block_element": {
-        "message": "Bloquear Elemento",
-        "description": "Legenda para o item 'Bloquear Elemento' no menu de contexto" 
-    },
-    "show_block_element_menu": {
-        "message": "Mostrar 'Bloquear Elemento' no menu ao clicar com o botão direito"
-    },
-    
-  
+    }
+  }, 
+  "filter_lists": {
+    "description": "Essa é uma aba do menu.", 
+    "message": "Lista de Filtros"
+  }, 
+  "filter_must_follow_syntax": {
+    "message": "Seu filtro deve seguir a <a href='$url$'>sintaxe de filtro do Adblock Plus</a>. Certos tipos de filtro como requisições realizadas por plugins, por exemplo o Flash, não são suportadas.", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "found_a_bug": {
+    "message": "Encontrou um bug? Por favor <a href='$url$'>nos informe a falha por aqui</a>.", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "general": {
+    "description": "Essa é uma aba do menu.", 
+    "message": "Geral"
+  }, 
   "hovercraft": {
-    "message": "Meu hovercraft está cheio de enguias.",
-    "description": "Esse é um exemplo de string que pode ser interpretável. Foi citada apenas como uma brincadeira."
+    "description": "Esse é um exemplo de string que pode ser interpretável. Foi citada apenas como uma brincadeira.", 
+    "message": "Meu hovercraft está cheio de enguias."
+  }, 
+  "last_updated_at": {
+    "description": "ex: Última atualização às 3:00pm, em 1 de Abr, 2011", 
+    "message": "Última atualização às $time$ em $date$", 
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      }, 
+      "time": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "last_updated_at_today": {
+    "description": "e.g. Last updated at 3:00pm today", 
+    "message": "Última atualização às $time$ hoje", 
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "new_filters_added": {
+    "message": "Novos filtros adicionados; veja em <a id='options_url' target='_blank'>Opções</a> para gerenciá-los."
+  }, 
+  "not_a_filter_list": {
+    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
+    "message": "Não é uma lista de filtro"
+  }, 
+  "not_found_on_server": {
+    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
+    "message": "Não encontrado no servidor"
+  }, 
+  "options": {
+    "message": "Opções do Adblock Plus"
+  }, 
+  "out_of_date_lists": {
+    "message": "Listas obsoletas são atualizadas periodicamente."
+  }, 
+  "remove_button": {
+    "description": "Esse é o rótulo para os botões de 'Remover selecionados'.", 
+    "message": "Remover selecionados"
+  }, 
+  "show_block_element_menu": {
+    "message": "Mostrar 'Bloquear Elemento' no menu ao clicar com o botão direito"
+  }, 
+  "show_icon": {
+    "message": "Mostrar ícone na barra de endereços"
+  }, 
+  "update_now": {
+    "message": "Atualizar agora"
+  }, 
+  "whitelisted_domains": {
+    "description": "Essa é uma aba do menu.", 
+    "message": "Domínios permitidos"
   }
 }

@@ -1,152 +1,156 @@
 {
-  "name": {
-    "message": "Adblock Plus для Google Chrome™ (бета)"
-  },
+  "add": {
+    "description": "This is the label for the 'Add' buttons.", 
+    "message": "Добавить"
+  }, 
+  "add_a_filter_list": {
+    "message": "Подписка на <a href='$url$'>список фильтров</a> Firefox Adblock Plus:", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "add_domain_button": {
+    "message": "Добавить домен"
+  }, 
+  "add_filter_button": {
+    "message": "Добавить фильтр"
+  }, 
+  "add_filters_msg": {
+    "message": "Добавить фильтр(ы)?"
+  }, 
+  "add_url_button": {
+    "message": "Добавить URL"
+  }, 
+  "add_your_own_filters": {
+    "message": "Добавить свои фильтры"
+  }, 
+  "apply_changes": {
+    "message": "Применить изменения"
+  }, 
+  "block_youtube": {
+    "message": "Блокировать рекламу в видео на YouTube"
+  }, 
+  "cancel": {
+    "description": "Cancel button label", 
+    "message": "Отменить"
+  }, 
+  "clickhide_instructions": {
+    "message": "После закрытия этого всплывающего окна щёлкните левой или правой кнопкой мыши элемент на странице."
+  }, 
+  "delete": {
+    "description": "Word for 'delete'.", 
+    "message": "удалить"
+  }, 
   "description": {
     "message": "Реклама? Это было раньше! Популярное расширение Adblock Plus теперь есть и для Google Chrome™."
-  },
-   "options": {
-       "message": "Настройки Adblock Plus"
-   },
-   "filter_lists": {
-       "message": "Список фильтров",
-       "description": "This is a tab heading."
-   },
+  }, 
+  "disable_inline": {
+    "message": "Скрыть элемент текстовой рекламы на странице"
+  }, 
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus выключен для этих доменов. Дополнительные домены можно добавить, щёлкнув иконку Adblock Plus на адресной строке или напечатав название домена (не ссылку) в данной области и нажав на кнопку \"Добавить домен\""
+  }, 
+  "easy_create_filter": {
+    "description": "Button label in popup balloon", 
+    "message": "Быстро создать фильтр"
+  }, 
+  "edit_filters_raw": {
+    "message": "Редактировать фильтры в текстовом режиме"
+  }, 
+  "enable_only_the": {
+    "message": "Включите только фильтры, которые вам нужны. С большим количеством фильтров Chrome может тормозить."
+  }, 
+  "enabled_for_site": {
+    "description": "Popup balloon checkbox label", 
+    "message": "Включить для этого сайта"
+  }, 
+  "filter_list_desc": {
+    "description": "e.g. FooList by Mr. Foo", 
+    "message": "$title$. $author$.", 
+    "placeholders": {
+      "author": {
+        "content": "$2"
+      }, 
+      "title": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "filter_lists": {
+    "description": "This is a tab heading.", 
+    "message": "Список фильтров"
+  }, 
+  "filter_must_follow_syntax": {
+    "message": "Ваш фильтр должен соответствовать <a href='$url$'>синтаксису Adblock Plus</a>. Фильтры некоторых типов, например, с подзапросом объекта, не поддерживаются.", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "found_a_bug": {
+    "message": "Нашли ошибку в Adblock Plus? Пожалуйста, <a href='$url$'>сообщите об этом здесь</a>.", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  }, 
+  "general": {
+    "description": "This is a tab heading.", 
+    "message": "Общие"
+  }, 
+  "hovercraft": {
+    "description": "This is a sample translatable string. It happens to have comedic value.", 
+    "message": "Мое судно на воздушной подушке заполнено угрями."
+  }, 
   "last_updated_at": {
-    "message": "Последнее обновление: $date$ в $time$",
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
+    "message": "Последнее обновление: $date$ в $time$", 
     "placeholders": {
-      "time": { "content" : "$1" },
-      "date": { "content" : "$2" }
+      "date": {
+        "content": "$2"
+      }, 
+      "time": {
+        "content": "$1"
+      }
     }
-  },
+  }, 
   "last_updated_at_today": {
-    "message": "Последнее обновление: сегодня в $time$",
-    "description": "e.g. Last updated at 3:00pm today",
+    "description": "e.g. Last updated at 3:00pm today", 
+    "message": "Последнее обновление: сегодня в $time$", 
     "placeholders": {
-      "time": { "content" : "$1" }
-    }
-  },
-   "add_your_own_filters": {
-       "message": "Добавить свои фильтры"
-   },
-     "filter_list_desc": {
-    "message": "$title$. $author$.",
-    "description": "e.g. FooList by Mr. Foo",
-    "placeholders": {
-        "title": { "content" : "$1" },
-        "author": { "content" : "$2" }
-    }
-  },
-   "whitelisted_domains": {
-       "message": "Белый список доменов",
-       "description": "This is a tab heading."
-   },
-   "general": {
-       "message": "Общие",
-       "description": "This is a tab heading."
-   },
-
-   "add": {
-       "message": "Добавить",
-       "description": "This is the label for the 'Add' buttons."
-   },
-   "add_domain_button": {
-       "message": "Добавить домен"
-   },
-   "add_filter_button": {
-       "message": "Добавить фильтр"
-   },
-   "add_url_button": {
-       "message": "Добавить URL"
-   },
-   "delete": {
-       "message": "удалить",
-       "description": "Word for 'delete'."
-   },
-   "remove_button": {
-       "message": "Удалить",
-       "description": "This is the label for the 'Remove selected' buttons."
-   },
-   "edit_filters_raw": {
-       "message": "Редактировать фильтры в текстовом режиме"
-   },
-   "apply_changes": {
-       "message": "Применить изменения"
-   },
-
-    "enable_only_the": {
-        "message": "Включите только фильтры, которые вам нужны. С большим количеством фильтров Chrome может тормозить."
-    },
-    
-    "out_of_date_lists": {
-        "message": "Устаревшие списки периодически обновляются."
-    },
-
-    "update_now": {
-        "message": "Обновить сейчас"
-    },
-
-    "add_a_filter_list": {
-        "message": "Подписка на <a href='$url$'>список фильтров</a> Firefox Adblock Plus:",
-        "placeholders": {
-          "url": { "content" : "$1" }
+      "time": {
+        "content": "$1"
       }
-    },
-
-    "filter_must_follow_syntax": {
-            "message": "Ваш фильтр должен соответствовать <a href='$url$'>синтаксису Adblock Plus</a>. Фильтры некоторых типов, например, с подзапросом объекта, не поддерживаются.",
-          "placeholders": {
-              "url": { "content" : "$1" }
-          }
-    },
-
-    "disabled_for_these_domains": {
-        "message": "Adblock Plus выключен для этих доменов. Дополнительные домены можно добавить, щёлкнув иконку Adblock Plus на адресной строке или напечатав название домена (не ссылку) в данной области и нажав на кнопку \"Добавить домен\""
-    },
-
-    "found_a_bug": {
-        "message": "Нашли ошибку в Adblock Plus? Пожалуйста, <a href='$url$'>сообщите об этом здесь</a>.",
-      "placeholders": {
-          "url": { "content" : "$1" }
-      }
-   },
-
-
-   "show_icon": {
-       "message": "Показать иконку на адресной строке"
-   },
-   "disable_inline": {
-       "message": "Скрыть элемент текстовой рекламы на странице"
-   },
-   "block_youtube": {
-       "message": "Блокировать рекламу в видео на YouTube"
-   },
-
-   "enabled_for_site": {
-       "message": "Включить для этого сайта",
-       "description": "Popup balloon checkbox label"
-   },
-   "easy_create_filter": {
-       "message": "Быстро создать фильтр",
-       "description": "Button label in popup balloon"
-   },
-   "cancel": {
-       "message": "Отменить",
-       "description": "Cancel button label"
-   },
-   "clickhide_instructions": {
-       "message": "После закрытия этого всплывающего окна щёлкните левой или правой кнопкой мыши элемент на странице."
-   },
-   "add_filters_msg": {
-       "message": "Добавить фильтр(ы)?"
-   },
-   "new_filters_added": {
-       "message": "Новый фильтр добавлен; перейдите в <a id='options_url' target='_blank'>Настройки</a> для редактирования."
-   },
-
-"hovercraft": {
-    "message": "Мое судно на воздушной подушке заполнено угрями.",
-    "description": "This is a sample translatable string. It happens to have comedic value."
-   }
+    }
+  }, 
+  "name": {
+    "message": "Adblock Plus для Google Chrome™ (бета)"
+  }, 
+  "new_filters_added": {
+    "message": "Новый фильтр добавлен; перейдите в <a id='options_url' target='_blank'>Настройки</a> для редактирования."
+  }, 
+  "options": {
+    "message": "Настройки Adblock Plus"
+  }, 
+  "out_of_date_lists": {
+    "message": "Устаревшие списки периодически обновляются."
+  }, 
+  "remove_button": {
+    "description": "This is the label for the 'Remove selected' buttons.", 
+    "message": "Удалить"
+  }, 
+  "show_icon": {
+    "message": "Показать иконку на адресной строке"
+  }, 
+  "update_now": {
+    "message": "Обновить сейчас"
+  }, 
+  "whitelisted_domains": {
+    "description": "This is a tab heading.", 
+    "message": "Белый список доменов"
+  }
 }
