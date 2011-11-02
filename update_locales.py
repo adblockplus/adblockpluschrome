@@ -72,7 +72,7 @@ if __name__ == '__main__':
 #   '': 'fil', ???
     'fr': 'fr',
     'he': 'he',
-#   '': 'hi', ???
+    'hi-IN': 'hi',
     'hr': 'hr',
     'hu': 'hu',
     'id': 'id',
