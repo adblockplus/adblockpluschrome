@@ -86,13 +86,13 @@
     "message": "Die eingegebene Adresse ist weder eine gültige Web-Adresse, noch ein gültiger Dateiname."
   }, 
   "global_subscription_status_lastdownload_inprogress": {
-    "message": "jetzt..."
+    "message": "Wird heruntergeladen..."
   }, 
   "global_synchronize_checksum_mismatch": {
     "message": "Fehler, Prüfsumme ist falsch, möglicherweise ein Übertragungsfehler"
   }, 
   "global_synchronize_connection_error": {
-    "message": "Fehler, Download gescheitert"
+    "message": "Fehler, Download fehlgeschlagen"
   }, 
   "global_synchronize_invalid_data": {
     "message": "Fehler, keine gültige Filterliste"
