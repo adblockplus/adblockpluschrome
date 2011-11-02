@@ -1,168 +1,168 @@
 {
-   "add": {
-      "description": "This is the label for the 'Add' buttons.",
-      "message": "添加"
-   },
-   "add_a_filter_list": {
-      "message": "订阅Firefox Adblock Plus的<a href='$url$'>过滤清单</a>:",
-      "placeholders": {
-         "url": {
-            "content": "$1"
-         }
+  "add": {
+    "description": "This is the label for the 'Add' buttons.", 
+    "message": "添加"
+  }, 
+  "add_a_filter_list": {
+    "message": "订阅Firefox Adblock Plus的<a href='$url$'>过滤清单</a>:", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
       }
-   },
-   "add_domain_button": {
-      "message": "添加域名"
-   },
-   "add_filter_button": {
-      "message": "添加过滤规则"
-   },
-   "add_filters_msg": {
-      "message": "添加过滤规则？"
-   },
-   "add_url_button": {
-      "message": "添加URL"
-   },
-   "add_your_own_filters": {
-      "message": "自定义过滤"
-   },
-   "apply_changes": {
-      "message": "应用"
-   },
-   "block_element": {
-      "description": "Label for 'Block Element' context menu item",
-      "message": "屏蔽此元素"
-   },
-   "block_youtube": {
-      "message": "屏蔽YouTube视频中的广告"
-   },
-   "cancel": {
-      "description": "Cancel button label",
-      "message": "取消"
-   },
-   "clickhide_instructions": {
-      "message": "请点击（或右击）要屏蔽的元素"
-   },
-   "delete": {
-      "description": "Word for 'delete'.",
-      "message": "删除"
-   },
-   "description": {
-      "message": "使用Firefox AdBlock Plus过滤广告。使您告别广告，舒心浏览网页！"
-   },
-   "disable_inline": {
-      "message": "屏蔽广告链接"
-   },
-   "disabled_for_these_domains": {
-      "message": "Adblock Plus将不过滤以下域名。您可以通过地址栏的按钮添加，也可在下面输入域名(URL无效)并添加。 [注]:URL的排除可在“自定义过滤”中添加。"
-   },
-   "easy_create_filter": {
-      "description": "Button label in popup balloon",
-      "message": "轻松建立过滤规则"
-   },
-   "edit_filters_raw": {
-      "message": "以纯文本编辑"
-   },
-   "enable_only_the": {
-      "message": "请只启用您需要的过滤清单，开启过多会使浏览器变慢。"
-   },
-   "enabled_for_site": {
-      "description": "Popup balloon checkbox label",
-      "message": "对该网站启用过滤"
-   },
-   "filter_list_desc": {
-      "description": "e.g. FooList by Mr. Foo",
-      "message": "$title$ 作者：$author$",
-      "placeholders": {
-         "author": {
-            "content": "$2"
-         },
-         "title": {
-            "content": "$1"
-         }
+    }
+  }, 
+  "add_domain_button": {
+    "message": "添加域名"
+  }, 
+  "add_filter_button": {
+    "message": "添加过滤规则"
+  }, 
+  "add_filters_msg": {
+    "message": "添加过滤规则？"
+  }, 
+  "add_url_button": {
+    "message": "添加URL"
+  }, 
+  "add_your_own_filters": {
+    "message": "自定义过滤"
+  }, 
+  "apply_changes": {
+    "message": "应用"
+  }, 
+  "block_element": {
+    "description": "Label for 'Block Element' context menu item", 
+    "message": "屏蔽此元素"
+  }, 
+  "block_youtube": {
+    "message": "屏蔽YouTube视频中的广告"
+  }, 
+  "cancel": {
+    "description": "Cancel button label", 
+    "message": "取消"
+  }, 
+  "clickhide_instructions": {
+    "message": "请点击（或右击）要屏蔽的元素"
+  }, 
+  "delete": {
+    "description": "Word for 'delete'.", 
+    "message": "删除"
+  }, 
+  "description": {
+    "message": "使用Firefox AdBlock Plus过滤广告。使您告别广告，舒心浏览网页！"
+  }, 
+  "disable_inline": {
+    "message": "屏蔽广告链接"
+  }, 
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus将不过滤以下域名。您可以通过地址栏的按钮添加，也可在下面输入域名(URL无效)并添加。 [注]:URL的排除可在“自定义过滤”中添加。"
+  }, 
+  "easy_create_filter": {
+    "description": "Button label in popup balloon", 
+    "message": "轻松建立过滤规则"
+  }, 
+  "edit_filters_raw": {
+    "message": "以纯文本编辑"
+  }, 
+  "enable_only_the": {
+    "message": "请只启用您需要的过滤清单，开启过多会使浏览器变慢。"
+  }, 
+  "enabled_for_site": {
+    "description": "Popup balloon checkbox label", 
+    "message": "对该网站启用过滤"
+  }, 
+  "filter_list_desc": {
+    "description": "e.g. FooList by Mr. Foo", 
+    "message": "$title$ 作者：$author$", 
+    "placeholders": {
+      "author": {
+        "content": "$2"
+      }, 
+      "title": {
+        "content": "$1"
       }
-   },
-   "filter_lists": {
-      "description": "This is a tab heading.",
-      "message": "过滤清单"
-   },
-   "filter_must_follow_syntax": {
-      "message": "您的过滤规则必须遵循<a href='$url$'>Adblock Plus的语法</a>。对于某些过滤类型，如object-subrequest是不支持的。",
-      "placeholders": {
-         "url": {
-            "content": "$1"
-         }
+    }
+  }, 
+  "filter_lists": {
+    "description": "This is a tab heading.", 
+    "message": "过滤清单"
+  }, 
+  "filter_must_follow_syntax": {
+    "message": "您的过滤规则必须遵循<a href='$url$'>Adblock Plus的语法</a>。对于某些过滤类型，如object-subrequest是不支持的。", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
       }
-   },
-   "found_a_bug": {
-      "message": "发现错误？需要帮助？请前往<a href='$url$'>此处</a>",
-      "placeholders": {
-         "url": {
-            "content": "$1"
-         }
+    }
+  }, 
+  "found_a_bug": {
+    "message": "发现错误？需要帮助？请前往<a href='$url$'>此处</a>", 
+    "placeholders": {
+      "url": {
+        "content": "$1"
       }
-   },
-   "general": {
-      "description": "This is a tab heading.",
-      "message": "常规"
-   },
-   "hovercraft": {
-      "description": "This is a sample translatable string. It happens to have comedic value.",
-      "message": "My hovercraft is full of eels."
-   },
-   "last_updated_at": {
-      "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
-      "message": "最近更新于 $time$ $date$",
-      "placeholders": {
-         "date": {
-            "content": "$2"
-         },
-         "time": {
-            "content": "$1"
-         }
+    }
+  }, 
+  "general": {
+    "description": "This is a tab heading.", 
+    "message": "常规"
+  }, 
+  "hovercraft": {
+    "description": "This is a sample translatable string. It happens to have comedic value.", 
+    "message": "My hovercraft is full of eels."
+  }, 
+  "last_updated_at": {
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
+    "message": "最近更新于 $time$ $date$", 
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      }, 
+      "time": {
+        "content": "$1"
       }
-   },
-   "last_updated_at_today": {
-      "description": "e.g. Last updated at 3:00pm today",
-      "message": "最近更新于 $time$ 今日",
-      "placeholders": {
-         "time": {
-            "content": "$1"
-         }
+    }
+  }, 
+  "last_updated_at_today": {
+    "description": "e.g. Last updated at 3:00pm today", 
+    "message": "最近更新于 $time$ 今日", 
+    "placeholders": {
+      "time": {
+        "content": "$1"
       }
-   },
-   "new_filters_added": {
-      "message": "您已添加过滤规则。 请至<a id='options_url' target='_blank'>Adblock Plus选项</a> 管理过滤规则。"
-   },
-   "not_a_filter_list": {
-      "description": "In options.html, error displayed when filter list fetcher receives something not a filter list",
-      "message": "错误：过滤清单无效"
-   },
-   "not_found_on_server": {
-      "description": "In options.html, error displayed when filter list fetcher can't find filter list on server",
-      "message": "错误：服务器找不到"
-   },
-   "options": {
-      "message": "设置选项"
-   },
-   "out_of_date_lists": {
-      "message": "过滤清单会定期自动更新"
-   },
-   "remove_button": {
-      "description": "This is the label for the 'Remove selected' buttons.",
-      "message": "删除已选择"
-   },
-   "show_block_element_menu": {
-      "message": "添加到右鍵菜单"
-   },
-   "show_icon": {
-      "message": "在地址栏显示按钮"
-   },
-   "update_now": {
-      "message": "立即更新"
-   },
-   "whitelisted_domains": {
-      "description": "This is a tab heading.",
-      "message": "排除域名"
-   }
+    }
+  }, 
+  "new_filters_added": {
+    "message": "您已添加过滤规则。 请至<a id='options_url' target='_blank'>Adblock Plus选项</a> 管理过滤规则。"
+  }, 
+  "not_a_filter_list": {
+    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
+    "message": "错误：过滤清单无效"
+  }, 
+  "not_found_on_server": {
+    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
+    "message": "错误：服务器找不到"
+  }, 
+  "options": {
+    "message": "设置选项"
+  }, 
+  "out_of_date_lists": {
+    "message": "过滤清单会定期自动更新"
+  }, 
+  "remove_button": {
+    "description": "This is the label for the 'Remove selected' buttons.", 
+    "message": "删除已选择"
+  }, 
+  "show_block_element_menu": {
+    "message": "添加到右鍵菜单"
+  }, 
+  "show_icon": {
+    "message": "在地址栏显示按钮"
+  }, 
+  "update_now": {
+    "message": "立即更新"
+  }, 
+  "whitelisted_domains": {
+    "description": "This is a tab heading.", 
+    "message": "排除域名"
+  }
 }
