@@ -3,14 +3,6 @@
     "description": "This is the label for the 'Add' buttons.", 
     "message": "新增"
   }, 
-  "add_a_filter_list": {
-    "message": "訂閱 Firefox Adblock Plus 的 <a href='$url$'>過濾清單</a>:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "新增域名"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "新增過濾規則？"
-  }, 
-  "add_url_button": {
-    "message": "新增網址"
   }, 
   "add_your_own_filters": {
     "message": "黑名單"
@@ -42,10 +31,6 @@
   }, 
   "clickhide_instructions": {
     "message": "此彈出訊息關閉後，請點選網頁上的元素。"
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "刪除"
   }, 
   "description": {
     "message": "使用 Firefox Adblock Plus 的廣告過濾引擎。告別廣告，開心瀏覽!"
@@ -69,18 +54,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "該網站啟用過濾"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$ 作者：$author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -106,9 +79,26 @@
     "description": "This is a tab heading.", 
     "message": "一般"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "My hovercraft is full of eels."
+  "global_remove_subscription_warning": {
+    "message": "您確定要移除此訂閱項目嗎？"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "過濾條件集網址或檔名無效。"
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "下載中..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "失敗，檢查碼不符"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "失敗，檔案下載失敗"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "失敗，無效的過濾條件集"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "失敗，無效的位址"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -131,16 +121,11 @@
       }
     }
   }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
   "new_filters_added": {
     "message": "您已新增過濾規則。 請至 <a id='options_url' target='_blank'>Adblock Plus 選項</a> 管理過濾規則。"
-  }, 
-  "not_a_filter_list": {
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
-    "message": "錯誤：過濾清單無效"
-  }, 
-  "not_found_on_server": {
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
-    "message": "錯誤：伺服器找不到"
   }, 
   "options": {
     "message": "Adblock Plus 選項"
@@ -152,11 +137,32 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "刪除已選擇"
   }, 
+  "settings_addsubscription_label": {
+    "message": "訂閱過濾條件集"
+  }, 
+  "settings_enabled_column": {
+    "message": "已啟用"
+  }, 
+  "settings_remove_label": {
+    "message": "刪除"
+  }, 
   "show_block_element_menu": {
     "message": "右鍵選單顯示「阻擋網頁元素」"
   }, 
   "show_icon": {
     "message": "網址列顯示 Adblock Plus 圖示"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "新增過濾條件集"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "新增其他訂閱來源"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "請從清單中選擇過濾條件集:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "訂閱項目名稱:"
   }, 
   "update_now": {
     "message": "立即更新"

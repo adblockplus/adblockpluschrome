@@ -1,0 +1,47 @@
+{
+  "global_remove_subscription_warning": {
+    "message": "คุณแน่ใจหรือว่าต้องการลบนามข้างท้ายนี้"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "ตำแหน่งรายชื่อตัวกรองไม่ใช่ทั้งยูอาร์แอลที่ถูกต้องและชื่อแฟ้มที่ถูกต้อง"
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "กำลังดาวน์โหลด..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "ล้มเหลว checksum จับผิดคู่"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "ล้มเหลว การดาวน์โหลดล้มเหลว"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "ล้มเหลว ไม่มีรายชื่อตัวกรองที่ถูกต้อง"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "ล้มเหลว ไม่มีที่อยู่ที่ถูกต้อง"
+  }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
+  "settings_addsubscription_label": {
+    "message": "เพิ่มนามข้างท้ายตัวกรอง"
+  }, 
+  "settings_enabled_column": {
+    "message": "เปิดการใช้งาน"
+  }, 
+  "settings_remove_label": {
+    "message": "ลบ"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "เพิ่มนามข้างท้ายตัวกรอง"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "เพิ่มนามข้างท้าย"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "กรุณาเลือกนามข้างท้ายตัวกรองจากรายชื่อ:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "ชื่อ:"
+  }
+}

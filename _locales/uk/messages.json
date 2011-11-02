@@ -1,0 +1,47 @@
+{
+  "global_remove_subscription_warning": {
+    "message": "Ви впевнені, що хочете вилучити цю підписку?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Не вдалося розпізнати введену адресу ні як інтернет адресу, ні як шлях до файлу."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Завантажується…"
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Помилка, не збіглась контрольна сума"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Помилка, неможливо викачати"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Помилка, не список фільтрів"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Помилка, невірна адреса"
+  }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
+  "settings_addsubscription_label": {
+    "message": "Додати підписку"
+  }, 
+  "settings_enabled_column": {
+    "message": "Увімкнено"
+  }, 
+  "settings_remove_label": {
+    "message": "Вилучити"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Додати підписку"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Додати іншу підписку"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Будь ласка виберіть фільтрову підписку з переліку:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Назва підписки:"
+  }
+}

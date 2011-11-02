@@ -1,47 +1,47 @@
 {
   "global_remove_subscription_warning": {
-    "message": "Do you really want to remove this subscription?"
+    "message": "Kas oled kindel, et soovid selle tellimuse eemaldata?"
   }, 
   "global_subscription_invalid_location": {
-    "message": "Filter list location is neither a valid URL nor a valid file name."
+    "message": "Filtrite nimekirja asukoht on kas vigane URL või failinimi."
   }, 
   "global_subscription_status_lastdownload_inprogress": {
-    "message": "Downloading..."
+    "message": "Laen alla..."
   }, 
   "global_synchronize_checksum_mismatch": {
-    "message": "Failed: checksum mismatch"
+    "message": "Nurjus, kontrollsumma ei klapi"
   }, 
   "global_synchronize_connection_error": {
-    "message": "Failed: download failure"
+    "message": "Nurjus, allalaadimise viga"
   }, 
   "global_synchronize_invalid_data": {
-    "message": "Failed: not a valid filters list"
+    "message": "Nurjus, vale filtrite nimekiri"
   }, 
   "global_synchronize_invalid_url": {
-    "message": "Failed: not a valid address"
+    "message": "Nurjus, vale aadress"
   }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
   "settings_addsubscription_label": {
-    "message": "Add filter subscription"
+    "message": "Lisa filtrite tellimus"
   }, 
   "settings_enabled_column": {
-    "message": "Enabled"
+    "message": "Lubatud"
   }, 
   "settings_remove_label": {
-    "message": "Delete"
+    "message": "Kustuta"
   }, 
   "subscriptionSelection_addSubscription_label": {
-    "message": "Add subscription"
+    "message": "Lisa tellimus"
   }, 
   "subscriptionSelection_other_label": {
-    "message": "Add a different subscription"
+    "message": "Lisa muu tellimus"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Please choose a filter subscription from the list:"
+    "message": "Vali nimekirjast sobiv filtrite tellimus:"
   }, 
   "subscriptionSelection_title_label": {
-    "message": "Subscription title:"
+    "message": "Tellimuse pealkiri:"
   }
 }

@@ -3,14 +3,6 @@
     "description": "This is the label for the generic 'Add' buttons.", 
     "message": "Ajouter"
   }, 
-  "add_a_filter_list": {
-    "message": "S'abonner à <a href='$url$'>une liste</a> utilisant le format de Firefox Adblock Plus&nbsp;:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "Ajouter domaine"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "Ajouter filtre(s)?"
-  }, 
-  "add_url_button": {
-    "message": "Ajouter URL"
   }, 
   "add_your_own_filters": {
     "message": "Ajouter vos propres filtres"
@@ -41,10 +30,6 @@
   }, 
   "clickhide_instructions": {
     "message": "Après avoir clôturé ce popup, cliquez (ou droit-cliquez) un élément sur la page."
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "supprimer"
   }, 
   "description": {
     "message": "Suppression des publicités utilisant le moteur de Firefox Adblock Plus. Dites adieu publicités et naviguez en paix!"
@@ -68,18 +53,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "Activé pour ce site"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$ par $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -105,9 +78,26 @@
     "description": "This is a tab heading.", 
     "message": "Général"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "Mon aéroglisseur est plein d'anguilles."
+  "global_remove_subscription_warning": {
+    "message": "Souhaitez-vous vraiment vous désabonner ?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "L'adresse indiquant l'emplacement de la liste de filtres n'est ni une URL valide, ni un nom de fichier valide."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Téléchargement en cours…"
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Échec, le checksum ne correspond pas !"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Échec, erreur lors du téléchargement !"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Échec, ceci n'est pas une liste de filtres valide !"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Échec, ceci n'est pas une adresse valide !"
   }, 
   "last_updated_at": {
     "description": "Last updated at time on date.", 
@@ -130,6 +120,9 @@
       }
     }
   }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
   "new_filters_added": {
     "message": "Nouveaux filtres ajoutés. Regardez <a id='options_url' target='_blank'>Paramètres</a> pour les contrôler."
   }, 
@@ -143,11 +136,32 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Supprimer"
   }, 
+  "settings_addsubscription_label": {
+    "message": "S&apos;abonner à la liste de filtres"
+  }, 
+  "settings_enabled_column": {
+    "message": "Activé"
+  }, 
+  "settings_remove_label": {
+    "message": "Supprimer"
+  }, 
   "show_block_element_menu": {
     "message": "Afficher 'Supprimer l'élément' dans le menu clic-droit"
   }, 
   "show_icon": {
     "message": "Afficher l'icone dans la barre d'adresse"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Ajouter l'abonnement"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Ajouter un autre abonnement"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Veuillez choisir un abonnement dans la liste suivante :"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Nom de l'abonnement :"
   }, 
   "update_now": {
     "message": "Actualiser maintenant"

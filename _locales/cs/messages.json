@@ -1,0 +1,47 @@
+{
+  "global_remove_subscription_warning": {
+    "message": "Skutečně si přejete odstranit tuto sadu cizích filtrů ?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Zadaná adresa seznamu cizích filtrů je buď nesprávná URL nebo obsahuje nesprávné jméno souboru."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Stahuji..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Chyba, neodpovídá kontrolní součet"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Chyba, nepodařilo se stáhnout soubor"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Chyba, stažený soubor není souborem filtrů Adblock Plus"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Chyba, toto je nekorektní adresa."
+  }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
+  "settings_addsubscription_label": {
+    "message": "Přidat cizí filtry"
+  }, 
+  "settings_enabled_column": {
+    "message": "Aktivní"
+  }, 
+  "settings_remove_label": {
+    "message": "Smazat"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Přidat cizí sadu filtrů"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Přidat další sadu cizích filtrů"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Prosím vyberte cizí sadu filtrů ze seznamu:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Označení cizích filtrů:"
+  }
+}

@@ -1,47 +1,47 @@
 {
   "global_remove_subscription_warning": {
-    "message": "Do you really want to remove this subscription?"
+    "message": "Weet u zeker dat u dit abonnement wilt verwijderen?"
   }, 
   "global_subscription_invalid_location": {
-    "message": "Filter list location is neither a valid URL nor a valid file name."
+    "message": "Deze filterlijstlocatie is geen geldige URL en ook geen geldige bestandsnaam."
   }, 
   "global_subscription_status_lastdownload_inprogress": {
-    "message": "Downloading..."
+    "message": "Downloaden…"
   }, 
   "global_synchronize_checksum_mismatch": {
-    "message": "Failed: checksum mismatch"
+    "message": "Mislukt, afwijkend controlecijfer"
   }, 
   "global_synchronize_connection_error": {
-    "message": "Failed: download failure"
+    "message": "Mislukt, downloadprobleem"
   }, 
   "global_synchronize_invalid_data": {
-    "message": "Failed: not a valid filters list"
+    "message": "Mislukt, geen geldige filterlijst"
   }, 
   "global_synchronize_invalid_url": {
-    "message": "Failed: not a valid address"
+    "message": "Mislukt, geen geldig adres"
   }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
   "settings_addsubscription_label": {
-    "message": "Add filter subscription"
+    "message": "Filterabonnement toevoegen"
   }, 
   "settings_enabled_column": {
-    "message": "Enabled"
+    "message": "Ingeschakeld"
   }, 
   "settings_remove_label": {
-    "message": "Delete"
+    "message": "Verwijderen"
   }, 
   "subscriptionSelection_addSubscription_label": {
-    "message": "Add subscription"
+    "message": "Abonneren"
   }, 
   "subscriptionSelection_other_label": {
-    "message": "Add a different subscription"
+    "message": "Een ander abonnement toevoegen"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Please choose a filter subscription from the list:"
+    "message": "Kies a.u.b. een filterabonnement uit de lijst:"
   }, 
   "subscriptionSelection_title_label": {
-    "message": "Subscription title:"
+    "message": "Abonnementstitel:"
   }
 }

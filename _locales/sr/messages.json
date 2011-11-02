@@ -1,0 +1,47 @@
+{
+  "global_remove_subscription_warning": {
+    "message": "Да ли заиста желите да уклоните ову претплату?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Неисправна адреса и име датотеке са списком филтера."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Преузимање..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Неуспело, неслагање извештаја"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Неуспело, грешка у преузимању"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Неуспело, није листа филтера"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Неуспело, неисправна адреса"
+  }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
+  "settings_addsubscription_label": {
+    "message": "Додај претплату на филтер"
+  }, 
+  "settings_enabled_column": {
+    "message": "Омогућен"
+  }, 
+  "settings_remove_label": {
+    "message": "Избриши"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Додај претплату"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Додај другу претплату"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Изаберите једну претплату на филтер са списка:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Назив претплате:"
+  }
+}

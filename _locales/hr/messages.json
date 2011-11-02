@@ -1,47 +1,47 @@
 {
   "global_remove_subscription_warning": {
-    "message": "Do you really want to remove this subscription?"
+    "message": "Želite li zbilja ukloniti ovu pretplatu?"
   }, 
   "global_subscription_invalid_location": {
-    "message": "Filter list location is neither a valid URL nor a valid file name."
+    "message": "Mjesto popisa filtera nije niti valjana web adresa niti naziv datoteke."
   }, 
   "global_subscription_status_lastdownload_inprogress": {
-    "message": "Downloading..."
+    "message": "Preuzimanje..."
   }, 
   "global_synchronize_checksum_mismatch": {
-    "message": "Failed: checksum mismatch"
+    "message": "Neuspješno, neusklađenost checksum-a."
   }, 
   "global_synchronize_connection_error": {
-    "message": "Failed: download failure"
+    "message": "Neuspjeh, neuspjelo preuzimanje"
   }, 
   "global_synchronize_invalid_data": {
-    "message": "Failed: not a valid filters list"
+    "message": "Neuspjeh, neispravan popis filtera"
   }, 
   "global_synchronize_invalid_url": {
-    "message": "Failed: not a valid address"
+    "message": "Neuspjeh, neispravna adresa"
   }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
   "settings_addsubscription_label": {
-    "message": "Add filter subscription"
+    "message": "Dodaj pretplatu na filter"
   }, 
   "settings_enabled_column": {
-    "message": "Enabled"
+    "message": "Omogućeno"
   }, 
   "settings_remove_label": {
-    "message": "Delete"
+    "message": "Obriši"
   }, 
   "subscriptionSelection_addSubscription_label": {
-    "message": "Add subscription"
+    "message": "Dodati pretplatu"
   }, 
   "subscriptionSelection_other_label": {
-    "message": "Add a different subscription"
+    "message": "Dodajte drugu pretplatu"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Please choose a filter subscription from the list:"
+    "message": "Molimo odaberite pretplatu na filter sa popisa:"
   }, 
   "subscriptionSelection_title_label": {
-    "message": "Subscription title:"
+    "message": "Naslov pretplate:"
   }
 }

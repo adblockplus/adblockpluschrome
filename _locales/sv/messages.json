@@ -3,14 +3,6 @@
     "description": "This is the label for the 'Add' buttons.", 
     "message": "Lägg till"
   }, 
-  "add_a_filter_list": {
-    "message": "Prenumerera på en Firefox Adblock Plus <a href='$url$'>filterlista</a>:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "Lägg till domän"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "Lägga till filter?"
-  }, 
-  "add_url_button": {
-    "message": "Lägg till URL"
   }, 
   "add_your_own_filters": {
     "message": "Lägg till dina egna filter"
@@ -42,10 +31,6 @@
   }, 
   "clickhide_instructions": {
     "message": "När denna popup stängs, klicka (eller högerklicka) ett objekt på sidan."
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "Ta bort"
   }, 
   "description": {
     "message": "Blockerar reklam med hjälp av Firefox Adblock Plus filtreringsmotor. Säg adjö till reklamen och surfa i fred!"
@@ -69,18 +54,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "Aktiverad för den här sidan"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$ av $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -106,9 +79,26 @@
     "description": "This is a tab heading.", 
     "message": "Allmänt"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "Min svävare är full av ål."
+  "global_remove_subscription_warning": {
+    "message": "Vill du verkligen ta bort denna prenumeration?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Platsen du angivit är antingen ogiltig eller så har du angivit ett felaktigt filnamn."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Laddar ner…"
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Fel kontrollsumma"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Fel vid nerladdning"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Fel vid validering av filter"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Ogiltig adress"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -131,16 +121,11 @@
       }
     }
   }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
   "new_filters_added": {
     "message": "Nya filter tillagda; se <a id='options_url' target='_blank'>Alternativ</a> för att hantera dom."
-  }, 
-  "not_a_filter_list": {
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
-    "message": "Ingen filterlista"
-  }, 
-  "not_found_on_server": {
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
-    "message": "Kan inte hittas på servern"
   }, 
   "options": {
     "message": "Adblock Plus Alternativ"
@@ -152,11 +137,32 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Ta bort markerad"
   }, 
+  "settings_addsubscription_label": {
+    "message": "Lägg till filterprenumeration"
+  }, 
+  "settings_enabled_column": {
+    "message": "På"
+  }, 
+  "settings_remove_label": {
+    "message": "Ta bort"
+  }, 
   "show_block_element_menu": {
     "message": "Visa 'Blockera objekt' i högerklicksmeny"
   }, 
   "show_icon": {
     "message": "Visa ikon i adressfältet"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Lägg till filterprenumeration"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Lägg till en ny prenumeration"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Var vänlig välj en filterprenumeration från listan:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Rubrik för prenumeration:"
   }, 
   "update_now": {
     "message": "Uppdatera nu"

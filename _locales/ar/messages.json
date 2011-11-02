@@ -3,14 +3,6 @@
     "description": "This is the label for the 'Add' buttons.", 
     "message": "أضف"
   }, 
-  "add_a_filter_list": {
-    "message": "إشترك لـ Firefox Adblock Plus <a href='$url$'>قائمة الفلتر</a>:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "أضف نطاق"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "إضافة الفلاتر؟"
-  }, 
-  "add_url_button": {
-    "message": "أضف رابط"
   }, 
   "add_your_own_filters": {
     "message": "أضف الفلاتر الخاصة بك"
@@ -38,10 +27,6 @@
   }, 
   "clickhide_instructions": {
     "message": "بعد إغلاق هذه النافذة. إضغط (او إضغط بالزر اليمين) على أحد العناصر في الصفحة"
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "حذف"
   }, 
   "description": {
     "message": "منع الإعلانات بإستخدام محرك الفلاتر الخاص بـ Firefox Adblock Plus. قبل الإعلانات وداعأ ومتصفحك في سلام!"
@@ -65,18 +50,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "فعل لهذا الموقع"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$ بواسطة $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -102,9 +75,26 @@
     "description": "This is a tab heading.", 
     "message": "عـام"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "My hovercraft is full of eels."
+  "global_remove_subscription_warning": {
+    "message": "هل أنت حقاً راغب بإزالة هذا الاشتراك؟"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "موقع قائمة الفلتر ليس صحيح كعنوان ويب و لا كاسم ملف"
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "جاري التحميل"
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "فشل، عدم تطابق checksum"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "فشل الأمر بسبب فشل التحميل"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "فشل الأمر، ليست قائمة فلاتر صحيحة"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "فشل الأمر، ليس عنوان صحيح"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -127,16 +117,11 @@
       }
     }
   }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
   "new_filters_added": {
     "message": "تم إضافة فلتر جديد; انظر <a id='options_url' target='_blank'>الخصائص</a> للتحكم بها."
-  }, 
-  "not_a_filter_list": {
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
-    "message": "ليست قائمة فلاتر"
-  }, 
-  "not_found_on_server": {
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
-    "message": "لم يتم إيجاده على الخادم"
   }, 
   "options": {
     "message": "Adblock Plus خصائص"
@@ -148,8 +133,29 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "حذف المختارة"
   }, 
+  "settings_addsubscription_label": {
+    "message": "إضافة اشتراك إلى فلتر"
+  }, 
+  "settings_enabled_column": {
+    "message": "مشغل"
+  }, 
+  "settings_remove_label": {
+    "message": "حذف"
+  }, 
   "show_icon": {
     "message": "أظهر الأيقونة في شريط العنوان"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "إضافة اشتراك"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "إضافة اشتراك آخر"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "الرجاء اختيار اشتراك فلتر من القائمة:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "عنوان الاشتراك"
   }, 
   "update_now": {
     "message": "التحديث الان"

@@ -1,0 +1,47 @@
+{
+  "global_remove_subscription_warning": {
+    "message": "Наистина ли искате да премахнете този абонамент?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Местоположението на списъка с филтри или не е валиден URL или не е валидно името на файла."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Изтегляне..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Грешка, несъвпадение на контролната сума"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Грешка, неуспешно изтегляне"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Грешка, невалиден списък с филтри"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Грешка, невалиден адрес"
+  }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
+  "settings_addsubscription_label": {
+    "message": "Добави абонамент за филтър"
+  }, 
+  "settings_enabled_column": {
+    "message": "Включен"
+  }, 
+  "settings_remove_label": {
+    "message": "Изтрий"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Добави абонамент"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Добави друг абонамент"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Моля изберете абонамент за филтър от списъка:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Заглавие на абонамента:"
+  }
+}

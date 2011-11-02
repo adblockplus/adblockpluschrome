@@ -1,0 +1,47 @@
+{
+  "global_remove_subscription_warning": {
+    "message": "Θέλετε να απομακρύνετε αυτή τη συνδρομή;"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Η τοποθεσία της λίστας φίλτρων δεν είναι έγκυρη URL ούτε και όνομα αρχείου."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Σε εξέλιξη..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Απέτυχε, απόκλιση στον έλεγχο checksum"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Απέτυχε, σφάλμα κατά τη λήψη"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Απέτυχε, μη έγκυρη λίστα φίλτρων"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Απέτυχε, μη έγκυρη διεύθυνση"
+  }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
+  "settings_addsubscription_label": {
+    "message": "Προσθήκη συνδρομής"
+  }, 
+  "settings_enabled_column": {
+    "message": "Ενεργοποιημένο"
+  }, 
+  "settings_remove_label": {
+    "message": "Διαγραφή"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Προσθήκη συνδρομής"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Προσθήκη άλλης συνδρομής"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Παρακαλώ επιλέξτε μια συνδρομή σε φίλτρα από την λίστα:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Τίτλος συνδρομής:"
+  }
+}

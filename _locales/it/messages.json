@@ -3,14 +3,6 @@
     "description": "This is the label for the 'Add' buttons.", 
     "message": "Aggiungi"
   }, 
-  "add_a_filter_list": {
-    "message": "Sottoscrivi una <a href='$url$'>lista di filtri</a> in formato Firefox Adblock Plus:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "Aggiungi dominio"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "Aggiungi filtro(i)?"
-  }, 
-  "add_url_button": {
-    "message": "Aggiungi URL"
   }, 
   "add_your_own_filters": {
     "message": "Aggiungi filtri personalizzati"
@@ -42,10 +31,6 @@
   }, 
   "clickhide_instructions": {
     "message": "Dopo la chiusura di questo pop-up, cliccate (o clic destro) su un elemento sulla pagina."
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "cancella"
   }, 
   "description": {
     "message": "Blocca la pubblicità usando il motore di Firefox Adblock Plus. Dite addio alla pubblicità e navigate in pace!"
@@ -69,18 +54,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "Abilitato per questo sito"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$ di  $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -106,9 +79,26 @@
     "description": "This is a tab heading.", 
     "message": "Generale"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "Il mio hovercraft è pieno di anguille."
+  "global_remove_subscription_warning": {
+    "message": "Eliminare questa sottoscrizione?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Attenzione: per poter aggiungere una sottoscrizione è necessario che i campi 'Titolo della sottoscrizione:' ed 'Indirizzo della lista dei filtri:' non siano lasciati vuoti e corrispondano a nomi di file validi. Inserire tali dati e ripetere la procedura"
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Download in corso…"
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Sincronizzazione non riuscita, checksum non corrispondente"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Sincronizzazione non riuscita, errore durante il download"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Sincronizzazione non riuscita, lista dei filtri non valida"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Sincronizzazione non riuscita, indirizzo web non valido"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -131,16 +121,11 @@
       }
     }
   }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
   "new_filters_added": {
     "message": "Nuovi filtri aggiunti; vedi <a id='options_url' target='_blank'>Opzioni</a> per gestirli."
-  }, 
-  "not_a_filter_list": {
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
-    "message": "Non è un elenco di filtri"
-  }, 
-  "not_found_on_server": {
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
-    "message": "Non trovato sul server"
   }, 
   "options": {
     "message": "Opzioni di Adblock Plus"
@@ -152,11 +137,32 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Rimuovi selezionato"
   }, 
+  "settings_addsubscription_label": {
+    "message": "Aggiungi sottoscrizione"
+  }, 
+  "settings_enabled_column": {
+    "message": "Attivato"
+  }, 
+  "settings_remove_label": {
+    "message": "Elimina"
+  }, 
   "show_block_element_menu": {
     "message": "Mostra 'Blocca Elemento' nel menu contestuale"
   }, 
   "show_icon": {
     "message": "Mosta l'icona nella barra degli indirizzi"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Aggiungi sottoscrizione"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Altre sottoscrizioni"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Selezionare una sottoscrizione di filtri dalla seguente lista:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Titolo della sottoscrizione:"
   }, 
   "update_now": {
     "message": "Aggiorna adesso"

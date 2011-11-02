@@ -3,14 +3,6 @@
     "description": "This is the label for the 'Add' buttons.", 
     "message": "Thêm"
   }, 
-  "add_a_filter_list": {
-    "message": "Đăng ký cập nhật <a href='$url$'>danh sách bộ lọc</a> từ Adblock Plus của Firefox:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "Thêm tên miền"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "Bạn có muốn thêm bộ lọc này không?"
-  }, 
-  "add_url_button": {
-    "message": "Thêm URL"
   }, 
   "add_your_own_filters": {
     "message": "Thêm bộ lọc của bạn"
@@ -42,10 +31,6 @@
   }, 
   "clickhide_instructions": {
     "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "xóa"
   }, 
   "description": {
     "message": "Chặn quảng cáo bằng cách dùng bộ lọc Adblock Plus của Firefox. Vĩnh biệt quảng cáo!"
@@ -69,18 +54,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "Hoạt động trên trang này"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$ của $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -106,9 +79,26 @@
     "description": "This is a tab heading.", 
     "message": "Tổng quan"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "Thuyền của tôi toàn là lươn."
+  "global_remove_subscription_warning": {
+    "message": "Bạn có thật sự muốn xóa bộ trọn gói này không?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Địa chỉ để tải bộ lọc không phải là một URL hay tên tập tin hợp lệ."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Đang tải..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Thất bại, mã băm không phù hợp"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Thất bại, tải xuống thất bại"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Thất bại, không phải là danh sách bộ lọc hợp lệ"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Thất bại, không phải là địa chỉ hợp lệ"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -131,16 +121,11 @@
       }
     }
   }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
   "new_filters_added": {
     "message": "Các bộ lọc mới đã được thêm; hãy mở <a id='options_url' target='_blank'>Cấu hình</a> để quản lý chúng."
-  }, 
-  "not_a_filter_list": {
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
-    "message": "Không phải là một danh sách bộ lọc"
-  }, 
-  "not_found_on_server": {
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
-    "message": "Không tìm thấy trên máy chủ"
   }, 
   "options": {
     "message": "Cấu hình Adblock Plus"
@@ -152,11 +137,32 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Xóa cái vừa chọn"
   }, 
+  "settings_addsubscription_label": {
+    "message": "Thêm bộ lọc trọn gói"
+  }, 
+  "settings_enabled_column": {
+    "message": "Hiệu lực"
+  }, 
+  "settings_remove_label": {
+    "message": "Xóa"
+  }, 
   "show_block_element_menu": {
     "message": "Hiển thị lệnh 'Block Element' ở trình đơn khi ấn chuột phải"
   }, 
   "show_icon": {
     "message": "Hiển thị biểu tượng ở thanh địa chỉ"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Thêm bộ trọn gói"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Thêm bộ lọc trọn gói khác"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Vui lòng chọn một bộ lọc trọn gói từ danh sách:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Tiêu đề của bộ trọn gói:"
   }, 
   "update_now": {
     "message": "cập nhật ngay"
