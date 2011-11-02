@@ -1,47 +1,47 @@
 {
   "global_remove_subscription_warning": {
-    "message": "Do you really want to remove this subscription?"
+    "message": "Naozaj si želáte odstrániť toto povolenie?"
   }, 
   "global_subscription_invalid_location": {
-    "message": "Filter list location is neither a valid URL nor a valid file name."
+    "message": "Umiestnenie zoznamu filtrov nemá platnú URL alebo platný názov súboru."
   }, 
   "global_subscription_status_lastdownload_inprogress": {
-    "message": "Downloading..."
+    "message": "Preberanie..."
   }, 
   "global_synchronize_checksum_mismatch": {
-    "message": "Failed: checksum mismatch"
+    "message": "Zlyhalo, chybné prispôsobenie kontrolného súčtu"
   }, 
   "global_synchronize_connection_error": {
-    "message": "Failed: download failure"
+    "message": "Zlyhanie, sťahovanie neúspešné"
   }, 
   "global_synchronize_invalid_data": {
-    "message": "Failed: not a valid filters list"
+    "message": "Zlyhanie, neplatný zoznam filtrov"
   }, 
   "global_synchronize_invalid_url": {
-    "message": "Failed: not a valid address"
+    "message": "Zlyhanie, neplatná adresa"
   }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
   "settings_addsubscription_label": {
-    "message": "Add filter subscription"
+    "message": "Pridať povolenie filtra"
   }, 
   "settings_enabled_column": {
-    "message": "Enabled"
+    "message": "Zapnuté"
   }, 
   "settings_remove_label": {
-    "message": "Delete"
+    "message": "Odstrániť"
   }, 
   "subscriptionSelection_addSubscription_label": {
-    "message": "Add subscription"
+    "message": "Pridať odber"
   }, 
   "subscriptionSelection_other_label": {
-    "message": "Add a different subscription"
+    "message": "Pridať iné odoberania"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Please choose a filter subscription from the list:"
+    "message": "Prosím, zvoľte odber zo zoznamu:"
   }, 
   "subscriptionSelection_title_label": {
-    "message": "Subscription title:"
+    "message": "Názov povolenia:"
   }
 }

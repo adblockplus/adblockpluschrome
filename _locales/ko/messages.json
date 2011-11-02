@@ -3,14 +3,6 @@
     "description": "This is the label for the 'Add' buttons.", 
     "message": "추가"
   }, 
-  "add_a_filter_list": {
-    "message": "애드블록 플러스의 구독 필터 추가 : <a href='$url$'>전체 구독 필터 목록</a>", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "도메인 추가"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "새 필터를 추가하시겠습니까?"
-  }, 
-  "add_url_button": {
-    "message": "URL 추가"
   }, 
   "add_your_own_filters": {
     "message": "사용자 필터"
@@ -42,10 +31,6 @@
   }, 
   "clickhide_instructions": {
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "삭제"
   }, 
   "description": {
     "message": "침입형 광고, 이제 안녕! Adblock Plus 확장 프로그램을 이제 구글 크롬에서 이용하십시오."
@@ -69,18 +54,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "이 사이트에 필터 적용"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$ - 필터 유지자 : $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -106,9 +79,26 @@
     "description": "This is a tab heading.", 
     "message": "일반"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "메이비는 최고의 팔색조 가수이다."
+  "global_remove_subscription_warning": {
+    "message": "이 구독 필터를 제거하시겠습니까?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "구독 필터의 위치에 입력하는 URL 또는 파일명이 올바르지 않습니다."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "다운로드 중..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "실패함 : 검사합 불일치"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "실패함 : 다운로드 실패"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "실패함 : 올바르지 않은 필터"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "실패함 : 올바르지 않은 주소"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -132,18 +122,10 @@
     }
   }, 
   "name": {
-    "message": "Adblock Plus for Google Chrome™ (베타)"
+    "message": "Adblock Plus (Beta)"
   }, 
   "new_filters_added": {
     "message": "새 필터가 추가되었습니다. 필터 관리 : <a id='options_url' target='_blank'>옵션</a>"
-  }, 
-  "not_a_filter_list": {
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
-    "message": "올바른 형식의 구독 필터가 아닙니다."
-  }, 
-  "not_found_on_server": {
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
-    "message": "서버에 구독 필터가 존재하지 않습니다."
   }, 
   "options": {
     "message": "Adblock Plus - 애드블록 플러스 옵션"
@@ -155,11 +137,32 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "선택 항목 제거"
   }, 
+  "settings_addsubscription_label": {
+    "message": "구독 필터 추가"
+  }, 
+  "settings_enabled_column": {
+    "message": "사용"
+  }, 
+  "settings_remove_label": {
+    "message": "삭제"
+  }, 
   "show_block_element_menu": {
     "message": "문맥 메뉴에 '요소 숨김' 항목 표시"
   }, 
   "show_icon": {
     "message": "주소 표시줄에 아이콘 표시"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "추가"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "다른 구독 필터 추가 (F)"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "구독할 필터를 선택하거나 이름/위치를 입력하십시오."
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "이름 (T)"
   }, 
   "update_now": {
     "message": "지금 업데이트"

@@ -3,14 +3,6 @@
     "description": "This is the label for the 'Add' buttons.", 
     "message": "Lisää"
   }, 
-  "add_a_filter_list": {
-    "message": "Tilaa Firefox Adblock Plus <a href='$url$'>suodatinlistoja</a>:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "Lisää sivu"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "Lisää suodatin?"
-  }, 
-  "add_url_button": {
-    "message": "Lisää URL"
   }, 
   "add_your_own_filters": {
     "message": "Lisää omia suodattimia"
@@ -38,10 +27,6 @@
   }, 
   "clickhide_instructions": {
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "Poista"
   }, 
   "description": {
     "message": "Estä mainokset käyttäen Firefox Adblock Plus san suodatinmenetelmää. Hyvästele mainokset ja jatka surffailua rauhassa!"
@@ -65,18 +50,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "Käytössä tällä sivulla"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$ by $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -102,9 +75,26 @@
     "description": "This is a tab heading.", 
     "message": "Yleiset"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "Ilmatyynyalukseni on täynnä ankeriaita."
+  "global_remove_subscription_warning": {
+    "message": "Haluatko varmasti poistaa tämän tilauksen?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Suodatinlistan sijainti on joko kelvoton osoite tai tiedoston nimi."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Lataa..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Epäonnistui, tarkistussumma ei täsmää"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Epäonnistui, latausvirhe"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Epäonnistui, kelvoton suodatinlista"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Epäonnistui, kelvoton osoite"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -127,16 +117,11 @@
       }
     }
   }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
   "new_filters_added": {
     "message": "Uusi suodatin lisätty; mene <a id='options_url' target='_blank'>asetuksiin</a> editoidaksesi niitä."
-  }, 
-  "not_a_filter_list": {
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
-    "message": "Ei suodatinlista"
-  }, 
-  "not_found_on_server": {
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
-    "message": "Palvelinta ei löydetty"
   }, 
   "options": {
     "message": "Adblock Plus asetukset"
@@ -148,8 +133,29 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Poista valitut"
   }, 
+  "settings_addsubscription_label": {
+    "message": "Lisää suodatintilaus"
+  }, 
+  "settings_enabled_column": {
+    "message": "Käytössä"
+  }, 
+  "settings_remove_label": {
+    "message": "Poista"
+  }, 
   "show_icon": {
     "message": "Näytä kuva osoiterivillä"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Lisää suodatintilaus"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Lisää jokin muu tilaus"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Valitse suodatintilaus listasta:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Tilauksen nimi:"
   }, 
   "update_now": {
     "message": "Päivitä nyt"

@@ -3,14 +3,6 @@
     "description": "Esse é o rótulo para os botões de 'Adicionar'.", 
     "message": "Adicionar"
   }, 
-  "add_a_filter_list": {
-    "message": "Inscrever-se para uma <a href='$url$'>lista de filtro</a> do Firefox Adblock Plus:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "Adicionar domínio"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "Adicionar filtro(s)?"
-  }, 
-  "add_url_button": {
-    "message": "Adicionar URL"
   }, 
   "add_your_own_filters": {
     "message": "Adicione seus próprios filtros"
@@ -42,10 +31,6 @@
   }, 
   "clickhide_instructions": {
     "message": "Após o encerramento desta janela, clique (ou dê um clique com o botão direito) em um elemento da página."
-  }, 
-  "delete": {
-    "description": "Palavra para expressar 'deletar'.", 
-    "message": "deletar"
   }, 
   "description": {
     "message": "Bloqueador de propagandas usando o mecanismo de filtragem do Adblock Plus para o Firefox. Dê um beijo de despedida nelas e navegue em paz!"
@@ -69,18 +54,6 @@
   "enabled_for_site": {
     "description": "Rótulo para a caixa de verificação em formato de balão que surge ao clicar no ícone do Adblock Plus", 
     "message": "Habilitado para esse site"
-  }, 
-  "filter_list_desc": {
-    "description": "ex: FooList por Mr. Foo", 
-    "message": "$title$ por $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "Essa é uma aba do menu.", 
@@ -106,9 +79,26 @@
     "description": "Essa é uma aba do menu.", 
     "message": "Geral"
   }, 
-  "hovercraft": {
-    "description": "Esse é um exemplo de string que pode ser interpretável. Foi citada apenas como uma brincadeira.", 
-    "message": "Meu hovercraft está cheio de enguias."
+  "global_remove_subscription_warning": {
+    "message": "Você realmente deseja remover esta inscrição?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "O local da lista de filtros não é nem uma URL válida nem um nome válido de arquivo."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Fazendo download..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Falhou, checksum deu errado"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Falhou, falha no download"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Falhou, não é uma lista de filtros válida"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Falhou, não é um endereço válido"
   }, 
   "last_updated_at": {
     "description": "ex: Última atualização às 3:00pm, em 1 de Abr, 2011", 
@@ -131,16 +121,11 @@
       }
     }
   }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
   "new_filters_added": {
     "message": "Novos filtros adicionados; veja em <a id='options_url' target='_blank'>Opções</a> para gerenciá-los."
-  }, 
-  "not_a_filter_list": {
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
-    "message": "Não é uma lista de filtro"
-  }, 
-  "not_found_on_server": {
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
-    "message": "Não encontrado no servidor"
   }, 
   "options": {
     "message": "Opções do Adblock Plus"
@@ -152,11 +137,32 @@
     "description": "Esse é o rótulo para os botões de 'Remover selecionados'.", 
     "message": "Remover selecionados"
   }, 
+  "settings_addsubscription_label": {
+    "message": "Adicionar inscrição de filtros"
+  }, 
+  "settings_enabled_column": {
+    "message": "Ativado"
+  }, 
+  "settings_remove_label": {
+    "message": "Excluir"
+  }, 
   "show_block_element_menu": {
     "message": "Mostrar 'Bloquear Elemento' no menu ao clicar com o botão direito"
   }, 
   "show_icon": {
     "message": "Mostrar ícone na barra de endereços"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Adicionar inscrição"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Adicionar outra inscrição"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Por favor, escolha uma inscrição de filtros da lista:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Título da inscrição:"
   }, 
   "update_now": {
     "message": "Atualizar agora"

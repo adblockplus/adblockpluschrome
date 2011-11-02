@@ -3,14 +3,6 @@
     "description": "This is the label for the 'Add' buttons.", 
     "message": "הוספה"
   }, 
-  "add_a_filter_list": {
-    "message": "הרשמה ל<a href='$url$'>רשימת המסננים</a> של Adblock Plus ל־Firefox:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "הוספת שם מתחם"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "האם להוסיף מסנן/ים?"
-  }, 
-  "add_url_button": {
-    "message": "הוספת כתובת"
   }, 
   "add_your_own_filters": {
     "message": "הוספת מסננים משלך"
@@ -38,10 +27,6 @@
   }, 
   "clickhide_instructions": {
     "message": "לאחר סגירת חלונית זו, יש ללחוץ (לא משנה באיזה לחצן) על רכיב בעמוד זה."
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "מחיקה"
   }, 
   "description": {
     "message": "תוסף שחוסם פרסומות באמצעות המנגנון של המסנן Adblock Plus ל־Firefox. נשקו את הפרסומות לשלום!"
@@ -65,18 +50,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "פעיל עבור אתר זה"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$ מבית $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -102,9 +75,26 @@
     "description": "This is a tab heading.", 
     "message": "כללי"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "הרחפת שלי מלאה בצלופחים."
+  "global_remove_subscription_warning": {
+    "message": "האם להסיר את ההרשמה הזאת?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "המיקום שגוי או ששם הקובץ שגוי."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "מוריד..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "כשל, ביקורת הסיכום לתקינות לא התאימה בצורה טובה"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "כשל, ההורדה נכשלה"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "כשל, רשימת המסננים לא חוקית"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "כשל, הכתובת שגויה"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -127,16 +117,11 @@
       }
     }
   }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
   "new_filters_added": {
     "message": "נוספו מסננים חדשים; ניתן לנהל אותם דרך ה<a id='options_url' target='_blank'>אפשרויות</a>."
-  }, 
-  "not_a_filter_list": {
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
-    "message": "אינה רשימת מסננים"
-  }, 
-  "not_found_on_server": {
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
-    "message": "לא נמצא בשרת"
   }, 
   "options": {
     "message": "אפשרויות Adblock Plus"
@@ -148,8 +133,29 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "הסרת הבחירה"
   }, 
+  "settings_addsubscription_label": {
+    "message": "הוספת הרשמה למסננים"
+  }, 
+  "settings_enabled_column": {
+    "message": "מאופשר"
+  }, 
+  "settings_remove_label": {
+    "message": "מחיקה"
+  }, 
   "show_icon": {
     "message": "הצגת סמל בסרגל הכתובות"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "הוספת הרשמה"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "הוספת הרשמה אחרת"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "יש לבחור הרשמת מסנן מהרשימה:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "כותרת ההרשמה:"
   }, 
   "update_now": {
     "message": "עדכון כעת"

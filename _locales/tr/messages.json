@@ -1,47 +1,47 @@
 {
   "global_remove_subscription_warning": {
-    "message": "Do you really want to remove this subscription?"
+    "message": "Gerçekten abonelikten çıkmak istiyor musunuz?"
   }, 
   "global_subscription_invalid_location": {
-    "message": "Filter list location is neither a valid URL nor a valid file name."
+    "message": "Dosya listesi konumu düzgün bir URL ya da düzgün bir ada sahip değil!"
   }, 
   "global_subscription_status_lastdownload_inprogress": {
-    "message": "Downloading..."
+    "message": "İndiriliyor..."
   }, 
   "global_synchronize_checksum_mismatch": {
-    "message": "Failed: checksum mismatch"
+    "message": "Başarısız, checksum eşleşmedi"
   }, 
   "global_synchronize_connection_error": {
-    "message": "Failed: download failure"
+    "message": "Olmadı, indirmede sorun var."
   }, 
   "global_synchronize_invalid_data": {
-    "message": "Failed: not a valid filters list"
+    "message": "Olmadı, bu düzgün bir süzgeç listesi değil!"
   }, 
   "global_synchronize_invalid_url": {
-    "message": "Failed: not a valid address"
+    "message": "Olmadı, bu geçerli bir adres değil!"
   }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
   "settings_addsubscription_label": {
-    "message": "Add filter subscription"
+    "message": "Süzgeç aboneliği ekle"
   }, 
   "settings_enabled_column": {
-    "message": "Enabled"
+    "message": "Etkinlik"
   }, 
   "settings_remove_label": {
-    "message": "Delete"
+    "message": "Sil"
   }, 
   "subscriptionSelection_addSubscription_label": {
-    "message": "Add subscription"
+    "message": "Abone ol"
   }, 
   "subscriptionSelection_other_label": {
-    "message": "Add a different subscription"
+    "message": "Başka abonelik ekle"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Please choose a filter subscription from the list:"
+    "message": "Lütfen listeden bir süzgeç aboneliği seçin:"
   }, 
   "subscriptionSelection_title_label": {
-    "message": "Subscription title:"
+    "message": "Aboneliğin adı:"
   }
 }

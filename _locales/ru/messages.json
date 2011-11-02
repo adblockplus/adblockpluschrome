@@ -3,14 +3,6 @@
     "description": "This is the label for the 'Add' buttons.", 
     "message": "Добавить"
   }, 
-  "add_a_filter_list": {
-    "message": "Подписка на <a href='$url$'>список фильтров</a> Firefox Adblock Plus:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "Добавить домен"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "Добавить фильтр(ы)?"
-  }, 
-  "add_url_button": {
-    "message": "Добавить URL"
   }, 
   "add_your_own_filters": {
     "message": "Добавить свои фильтры"
@@ -38,10 +27,6 @@
   }, 
   "clickhide_instructions": {
     "message": "После закрытия этого всплывающего окна щёлкните левой или правой кнопкой мыши элемент на странице."
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "удалить"
   }, 
   "description": {
     "message": "Реклама? Это было раньше! Популярное расширение Adblock Plus теперь есть и для Google Chrome™."
@@ -65,18 +50,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "Включить для этого сайта"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$. $author$.", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -102,9 +75,26 @@
     "description": "This is a tab heading.", 
     "message": "Общие"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "Мое судно на воздушной подушке заполнено угрями."
+  "global_remove_subscription_warning": {
+    "message": "Вы уверены, что хотите удалить эту подписку?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Не удалось распознать введенный адрес ни как адрес в интернете, ни как путь файлу."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "сейчас..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Ошибка: проверочная сумма не совпадает, возможно ошибка скачивания"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Ошибка: невозможно скачать"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Ошибка: не список фильтров"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Ошибка: неверный адрес"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -128,7 +118,7 @@
     }
   }, 
   "name": {
-    "message": "Adblock Plus для Google Chrome™ (бета)"
+    "message": "Adblock Plus (Beta)"
   }, 
   "new_filters_added": {
     "message": "Новый фильтр добавлен; перейдите в <a id='options_url' target='_blank'>Настройки</a> для редактирования."
@@ -143,8 +133,29 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Удалить"
   }, 
+  "settings_addsubscription_label": {
+    "message": "Добавить подписку"
+  }, 
+  "settings_enabled_column": {
+    "message": "Включено"
+  }, 
+  "settings_remove_label": {
+    "message": "Удалить"
+  }, 
   "show_icon": {
     "message": "Показать иконку на адресной строке"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Добавить подписку"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Добавить другую подписку"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Пожалуйста, выберите подписку из списка:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Название подписки:"
   }, 
   "update_now": {
     "message": "Обновить сейчас"

@@ -3,14 +3,6 @@
     "description": "This is the label for the 'Add' buttons.", 
     "message": "Dodaj"
   }, 
-  "add_a_filter_list": {
-    "message": "Subskrybuj <a href='$url$'>inne filtry</a> Firefox Adblock Plus:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "Dodaj domene"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "Dodać taki filtr?"
-  }, 
-  "add_url_button": {
-    "message": "Dodaj URL"
   }, 
   "add_your_own_filters": {
     "message": "Dodaj własne filtry"
@@ -42,10 +31,6 @@
   }, 
   "clickhide_instructions": {
     "message": "Po zamknięciu tego okna, kliknij lewym (lub prawym) przyciskiem myszy w niechciany element na stronie."
-  }, 
-  "delete": {
-    "description": "Word for 'delete'.", 
-    "message": "Usuń"
   }, 
   "description": {
     "message": "Blokuj reklamy korzystając z filtrów Adblock Plus. Pożegnaj się z reklamami i serwuj w spokoju!"
@@ -69,18 +54,6 @@
   "enabled_for_site": {
     "description": "Popup balloon checkbox label", 
     "message": "Włącz dla tej strony"
-  }, 
-  "filter_list_desc": {
-    "description": "e.g. FooList by Mr. Foo", 
-    "message": "$title$ by $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "This is a tab heading.", 
@@ -106,9 +79,26 @@
     "description": "This is a tab heading.", 
     "message": "Ogólne"
   }, 
-  "hovercraft": {
-    "description": "This is a sample translatable string. It happens to have comedic value.", 
-    "message": "My hovercraft is full of eels."
+  "global_remove_subscription_warning": {
+    "message": "Czy chcesz usunąć ten zestaw?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Lokalizacja zestawu filtrów ma niewłaściwą nazwę pliku, albo adres URL"
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "Pobieranie…"
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Nie powiodło się – niepoprawna suma kontrolna"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Nie powiodło się – błąd pobierania"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Nie powiodło się – nieprawidłowy zestaw filtrów"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Nie powiodło się – nieprawidłowy adres"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -131,16 +121,11 @@
       }
     }
   }, 
+  "name": {
+    "message": "Adblock Plus (Beta)"
+  }, 
   "new_filters_added": {
     "message": "Dodano nowe filtry; Zajrzyj do <a id='options_url' target='_blank'>Opcji</a>."
-  }, 
-  "not_a_filter_list": {
-    "description": "In options.html, error displayed when filter list fetcher receives something not a filter list", 
-    "message": "Brak listy filtrów"
-  }, 
-  "not_found_on_server": {
-    "description": "In options.html, error displayed when filter list fetcher can't find filter list on server", 
-    "message": "Nie znaleziono serwera"
   }, 
   "options": {
     "message": "Adblock Plus Opcje"
@@ -152,8 +137,29 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Usuń zaznaczone"
   }, 
+  "settings_addsubscription_label": {
+    "message": "Dodaj zestaw filtrów"
+  }, 
+  "settings_enabled_column": {
+    "message": "Aktywny"
+  }, 
+  "settings_remove_label": {
+    "message": "Usuń"
+  }, 
   "show_icon": {
     "message": "Pokazuj ikonę na pasku adresu"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Subskrybuj zestaw"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Wybierz inny zestaw"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Wybierz z listy zestaw filtrów:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Nazwa zestawu:"
   }, 
   "update_now": {
     "message": "Zaktualizuj"

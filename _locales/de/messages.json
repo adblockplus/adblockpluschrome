@@ -3,14 +3,6 @@
     "description": "Name für die 'Hinzufügen'-Buttons.", 
     "message": "Hinzufügen"
   }, 
-  "add_a_filter_list": {
-    "message": "Fügen Sie eine Firefox Adblock Plus <a href='$url$'>Filter Liste</a> hinzu:", 
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  }, 
   "add_domain_button": {
     "message": "Domain hinzufügen"
   }, 
@@ -19,9 +11,6 @@
   }, 
   "add_filters_msg": {
     "message": "Filter hinzufügen?"
-  }, 
-  "add_url_button": {
-    "message": "URL hinzufügen"
   }, 
   "add_your_own_filters": {
     "message": "Eigene Filter hinzufügen"
@@ -42,10 +31,6 @@
   }, 
   "clickhide_instructions": {
     "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
-  }, 
-  "delete": {
-    "description": "Wort für 'löschen'.", 
-    "message": "löschen"
   }, 
   "description": {
     "message": "Werbung war gestern! Die bewährte Adblock Plus Erweiterung ist jetzt auch für Google Chrome™ verfügbar."
@@ -69,18 +54,6 @@
   "enabled_for_site": {
     "description": "Adblock Plus-Icon Kontextmenü", 
     "message": "Für diese Seite aktivieren"
-  }, 
-  "filter_list_desc": {
-    "description": "z.B. FooList von Mr. Foo", 
-    "message": "$title$ von $author$", 
-    "placeholders": {
-      "author": {
-        "content": "$2"
-      }, 
-      "title": {
-        "content": "$1"
-      }
-    }
   }, 
   "filter_lists": {
     "description": "Das ist ein Reiter-Name.", 
@@ -106,9 +79,26 @@
     "description": "Das ist ein Reiter-Name.", 
     "message": "Allgemein"
   }, 
-  "hovercraft": {
-    "description": "Das ist ein einfach übersetzbarer Text. Er ist nur zum Spaß da.", 
-    "message": "Mein Luftkissenfahrzeug ist voller Aale."
+  "global_remove_subscription_warning": {
+    "message": "Sind Sie sicher, dass Sie dieses Abonnement entfernen möchten?"
+  }, 
+  "global_subscription_invalid_location": {
+    "message": "Die eingegebene Adresse ist weder eine gültige Web-Adresse, noch ein gültiger Dateiname."
+  }, 
+  "global_subscription_status_lastdownload_inprogress": {
+    "message": "jetzt..."
+  }, 
+  "global_synchronize_checksum_mismatch": {
+    "message": "Fehler, Prüfsumme ist falsch, möglicherweise ein Übertragungsfehler"
+  }, 
+  "global_synchronize_connection_error": {
+    "message": "Fehler, Download gescheitert"
+  }, 
+  "global_synchronize_invalid_data": {
+    "message": "Fehler, keine gültige Filterliste"
+  }, 
+  "global_synchronize_invalid_url": {
+    "message": "Fehler, ungültige Adresse"
   }, 
   "last_updated_at": {
     "description": "z.B. Zuletzt aktualisiert: 1. Apr 2011 um 12:51", 
@@ -132,18 +122,10 @@
     }
   }, 
   "name": {
-    "message": "Adblock Plus für Google Chrome™ (Beta)"
+    "message": "Adblock Plus (Beta)"
   }, 
   "new_filters_added": {
     "message": "Neue Filter hinzugefügt; klicken Sie auf <a id='options_url' target='_blank'>Optionen</a> um sie zu verwalten."
-  }, 
-  "not_a_filter_list": {
-    "description": "In der Datei options.html wird ein Fehler angezeigt, wenn man eine ungültige Filter Liste angibt.", 
-    "message": "Ungültige Filter Liste"
-  }, 
-  "not_found_on_server": {
-    "description": "In der Datei options.html wird ein Fehler angezeigt, wenn man eine FIlter Liste nicht auf dem Server gefunden wird.", 
-    "message": "Filter Liste nicht auf Server gefunden"
   }, 
   "options": {
     "message": "Adblock Plus Optionen"
@@ -155,11 +137,32 @@
     "description": "Name für die 'Ausgewählte entfernen'-Buttons.", 
     "message": "Ausgewählte entfernen"
   }, 
+  "settings_addsubscription_label": {
+    "message": "Filterabonnement hinzufügen"
+  }, 
+  "settings_enabled_column": {
+    "message": "Aktiv"
+  }, 
+  "settings_remove_label": {
+    "message": "Löschen"
+  }, 
   "show_block_element_menu": {
     "message": "Zeige Rechtsklickmenü-Eintrag 'Element blocken'"
   }, 
   "show_icon": {
     "message": "Zeige Icon in der Adressleiste"
+  }, 
+  "subscriptionSelection_addSubscription_label": {
+    "message": "Filterabonnement hinzufügen"
+  }, 
+  "subscriptionSelection_other_label": {
+    "message": "Anderes Abonnement hinzufügen"
+  }, 
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Bitte wählen Sie ein Filterabonnement aus der Liste aus:"
+  }, 
+  "subscriptionSelection_title_label": {
+    "message": "Bezeichnung des Abonnements:"
   }, 
   "update_now": {
     "message": "Jetzt updaten"

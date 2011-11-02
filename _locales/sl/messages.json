@@ -1,47 +1,47 @@
 {
   "global_remove_subscription_warning": {
-    "message": "Do you really want to remove this subscription?"
+    "message": "Želite res odpovedati naročnino?"
   }, 
   "global_subscription_invalid_location": {
-    "message": "Filter list location is neither a valid URL nor a valid file name."
+    "message": "Mesto seznama filtrov ni niti veljaven URL niti veljavno ime datoteke."
   }, 
   "global_subscription_status_lastdownload_inprogress": {
-    "message": "Downloading..."
+    "message": "Prenos s strežnika ..."
   }, 
   "global_synchronize_checksum_mismatch": {
-    "message": "Failed: checksum mismatch"
+    "message": "Neuspešno, kontrolna vsota se ne ujema"
   }, 
   "global_synchronize_connection_error": {
-    "message": "Failed: download failure"
+    "message": "Neuspešno, napaka prenosa"
   }, 
   "global_synchronize_invalid_data": {
-    "message": "Failed: not a valid filters list"
+    "message": "Neuspešno, ni veljaven seznam filtrov"
   }, 
   "global_synchronize_invalid_url": {
-    "message": "Failed: not a valid address"
+    "message": "Neuspešno, ni veljaven naslov"
   }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
   "settings_addsubscription_label": {
-    "message": "Add filter subscription"
+    "message": "Dodaj naročnino filtra"
   }, 
   "settings_enabled_column": {
-    "message": "Enabled"
+    "message": "Omogočeno"
   }, 
   "settings_remove_label": {
-    "message": "Delete"
+    "message": "Izbriši"
   }, 
   "subscriptionSelection_addSubscription_label": {
-    "message": "Add subscription"
+    "message": "Dodaj naročnino"
   }, 
   "subscriptionSelection_other_label": {
-    "message": "Add a different subscription"
+    "message": "Dodaj novo naročnino"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Please choose a filter subscription from the list:"
+    "message": "Izberite naročnino na filter s seznama:"
   }, 
   "subscriptionSelection_title_label": {
-    "message": "Subscription title:"
+    "message": "Naslov naročnine:"
   }
 }
