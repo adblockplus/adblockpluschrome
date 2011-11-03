@@ -230,12 +230,21 @@ function loadRecommendations()
   request.send(null);
 }
 
-function startSubscriptionSelection()
+function startSubscriptionSelection(title, url)
 {
+  $('#tabs').tabs('select', 0);
   $("#addSubscriptionContainer").show();
   $("#addSubscriptionButton").hide();
   $("#subscriptionSelector").focus();
+  if (typeof url != "undefined")
+  {
+    var list = document.getElementById("subscriptionSelector");
+    list.selectedIndex = list.length - 1;
+    document.getElementById("customSubscriptionTitle").value = title;
+    document.getElementById("customSubscriptionLocation").value = url;
+  }
   updateSubscriptionSelection();
+  document.getElementById("addSubscriptionContainer").scrollIntoView(true);
 }
 
 function updateSubscriptionSelection()
