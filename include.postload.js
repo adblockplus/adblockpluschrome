@@ -476,6 +476,63 @@ if (document.documentElement instanceof HTMLElement)
   document.addEventListener('contextmenu', function(e) {
     lastRightClickEvent = e;
   }, false);
+
+  document.addEventListener("click", function(event)
+  {
+    // Ignore right-clicks
+    if (event.button == 2)
+      return;
+
+    // Search the link associated with the click
+    var link = event.target;
+    while (link && !(link instanceof HTMLAnchorElement))
+      link = link.parentNode;
+
+    if (!link || link.protocol != "abp:")
+      return;
+
+    // This is our link - make sure the browser doesn't handle it
+    event.preventDefault();
+    event.stopPropagation();
+
+    var linkTarget = link.href;
+    if (!/^abp:\/*subscribe\/*\?(.*)/i.test(linkTarget))  /**/
+      return;
+
+    // Decode URL parameters
+    var params = RegExp.$1.split("&");
+    var title = null;
+    var url = null;
+    for (var i = 0; i < params.length; i++)
+    {
+      var parts = params[i].split("=", 2);
+      if (parts.length != 2 || !/\S/.test(parts[1]))
+        continue;
+      switch (parts[0])
+      {
+        case "title":
+          title = decodeURIComponent(parts[1]);
+          break;
+        case "location":
+          url = decodeURIComponent(parts[1]);
+          break;
+      }
+    }
+    if (!url)
+      return;
+
+    // Default title to the URL
+    if (!title)
+      title = url;
+
+    // Trim spaces in title and URL
+    title = title.replace(/^\s+/, "").replace(/\s+$/, "");
+    url = url.replace(/^\s+/, "").replace(/\s+$/, "");
+    if (!/^(https?|ftp):/.test(url))
+      return;
+
+    chrome.extension.sendRequest({reqtype: "add-subscription", title: title, url: url});
+  }, true);
   
   chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
   {

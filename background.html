@@ -500,6 +500,55 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
         FilterStorage.saveToDisk();
       }
       break;
+    case "add-subscription":
+      function doAddSubscription(selectTab)
+      {
+        var views = chrome.extension.getViews({type: "tab"});
+        var view = null;
+        for (var i = 0; i < views.length; i++)
+          if ("startSubscriptionSelection" in views[i])
+            view = views[i];
+
+        if (view)
+        {
+          view.startSubscriptionSelection(request.title, request.url);
+          if (selectTab)
+          {
+            chrome.windows.getAll({populate: true}, function(windows)
+            {
+              var url = chrome.extension.getURL("options.html");
+              for (var i = 0; i < windows.length; i++)
+                for (var j = 0; j < windows[i].tabs.length; j++)
+                  if (windows[i].tabs[j].url == url)
+                    return chrome.tabs.update(windows[i].tabs[j].id, {selected: true});
+            });
+          }
+        }
+        return view;
+      }
+
+      if (!doAddSubscription(true))
+      {
+        chrome.tabs.create({url: chrome.extension.getURL("options.html")}, function(tab)
+        {
+          if (tab.status == "complete")
+            doAddSubscription()
+          else
+          {
+            var id = tab.id;
+            var listener = function(tabId, changeInfo, tab)
+            {
+              if (tabId == id && changeInfo.status == "complete")
+              {
+                chrome.tabs.onUpdated.removeListener(listener);
+                doAddSubscription();
+              }
+            };
+            chrome.tabs.onUpdated.addListener(listener);
+          }
+        });
+      }
+      break;
     default:
       sendResponse({});
       break;
