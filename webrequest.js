@@ -23,7 +23,8 @@ function onBeforeRequest(details)
   var documentUrl = getFrameUrl(details.tabId, details.frameId);
   var topUrl = getTabUrl(details.tabId);
   if (type == "SUBDOCUMENT")
-    documentUrl = topUrl;
+    documentUrl = getFrameUrl(details.tabId, details.parentFrameId) || topUrl;
+  console.log(type + " " + details.url + "  " + documentUrl)
 
   var filter = checkRequest(type, details.url, documentUrl, topUrl);
   if (filter instanceof BlockingFilter)
