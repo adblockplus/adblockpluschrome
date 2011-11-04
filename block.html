@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Block element</title>
+<link type="text/css" href="jquery-ui/css/smoothness/jquery-ui-1.8.9.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="jquery-ui/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.9.custom.min.js"></script>
+<script type="text/javascript" src="i18n.js" charset="utf-8"></script>
+<style type="text/css">
+  body
+  {
+    background: #ffffff;
+    margin: 0px;
+    padding: 5px;
+    display: inline-block;
+  }
+  #title,
+  #filters
+  {
+    margin-bottom: 3px;
+  }
+  #title > *
+  {
+    vertical-align: middle;
+  }
+  #title > img
+  {
+    margin-right: 5px;
+  }
+  #filters
+  {
+    width: 400px;
+    height: 100px;
+    resize: none;
+  }
+  #buttons
+  {
+    text-align: right;
+  }
+  button
+  {
+    padding: 3px !important;
+  }
+</style>
+
+<script type="text/javascript">
+var tabId = null;
+
+function init()
+{
+  if (/^\?filters=([^=]*)/.test(location.search))
+    document.getElementById("filters").value = decodeURIComponent(RegExp.$1);
+
+  window.parent.postMessage({
+    type: "size",
+    width: Math.max(document.body.offsetWidth || document.body.scrollWidth),
+    height: Math.max(document.body.offsetHeight || document.body.scrollHeight)
+  }, "*");
+
+  document.getElementById("filters").focus();
+}
+
+function onKeyDown(event)
+{
+  if (event.keyCode == 27)
+  {
+    event.preventDefault();
+    closeDialog();
+  }
+  else if (event.keyCode == 13 && !event.shiftKey && !event.ctrlKey)
+  {
+    event.preventDefault();
+    addFilters();
+  }
+}
+
+function addFilters()
+{
+  // Tell the background page to add the filters
+  var filters = document.getElementById("filters").value.split(/[\r\n]+/)
+                        .map(function(f) {return f.replace(/^\s+/, "").replace(/\s+$/, "");})
+                        .filter(function(f) {return f != "";});
+  chrome.extension.sendRequest({reqtype: "add-filters", filters: filters});
+  closeDialog(true);
+}
+
+function closeDialog(success)
+{
+  window.parent.postMessage({
+    type: "close",
+    remove: (typeof success == "boolean" ? success : false)
+  }, "*");
+}
+
+var dragCoords = null;
+function onDragStart(event)
+{
+  dragCoords = [event.screenX, event.screenY];
+}
+
+function onDrag(event)
+{
+  if (!dragCoords)
+    return;
+
+  if (!event.screenX && !event.screenY)
+    return;
+
+  var diff = [event.screenX - dragCoords[0], event.screenY - dragCoords[1]];
+  if (diff[0] || diff[1])
+  {
+    window.parent.postMessage({
+      type: "move",
+      x: diff[0],
+      y: diff[1]
+    }, "*");
+    dragCoords = [event.screenX, event.screenY];
+  }
+}
+
+function onDragEnd(event)
+{
+  onDrag(event);
+  dragCoords = null;
+}
+
+// Apply jQuery UI styles
+$(function() {
+  $('button').button();
+});
+</script>
+
+</head>
+<body onload="loadI18nStrings();init();" onkeydown="onKeyDown(event);"
+      draggable="true" ondragstart="onDragStart(event);" ondrag="onDrag(event);" ondragend="onDragEnd(event);">
+
+<div id="title">
+  <img src="icons/abp-32.png" />
+  <span class="i18n_add_filters_msg"></span>
+</div>
+
+<textarea id="filters"></textarea>
+
+<div id="buttons">
+  <button id="addButton" class="i18n_add" onclick="addFilters();"></button>
+  <button id="cancelButton" class="i18n_cancel" onclick="closeDialog();"></button>
+</div>
+
+</body>
+</html>

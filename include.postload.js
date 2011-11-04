@@ -111,116 +111,75 @@ function addElementOverlay(elt) {
   return overlay;
 }
 
-// Allow dragging of the clickhide dialog box. This is nice to have for blocking elements
-// inside small iframes that are too narrow to completely contain the clickhide dialog box.
-// This way the user can drag the box over to click one of its buttons.
-// Not a perfect solution but better than nothing.
-var draggedElement = null;
-var dragMouseOffset = null;
-var docUserSelect; // Saves value of document-wide -webkit-user-select
-
-function dragEnd(e) {
-  if(draggedElement) {
-    document.removeEventListener("mouseup", dragEnd, false);
-    document.removeEventListener("mousemove", dragMove, false);
-    document.documentElement.style.setProperty('-webkit-user-select', docUserSelect);
-    draggedElement = null;
-  }
-}
-
-function dragStart(e) {
-  draggedElement = e.target;
-  var pos = getAbsolutePosition(e.target);
-  dragMouseOffset = [e.pageX - pos[0], e.pageY - pos[1]];
-  document.addEventListener("mouseup", dragEnd, false);
-  document.addEventListener("mousemove", dragMove, false);
-  // Make document un-highlightable during drag. Otherwise, if user drags too fast and 
-  // the mouse pointer leaves the bounds of the dialog box, text selection on the page 
-  // will be triggered, and that is ugly
-  docUserSelect = document.documentElement.style.getPropertyCSSValue('-webkit-user-select');
-  document.documentElement.style.setProperty('-webkit-user-select', 'none');
-}
-
-function dragMove(e) {
-  if(draggedElement) {
-    draggedElement.style.left = (e.pageX - dragMouseOffset[0]) + "px";
-    draggedElement.style.top = (e.pageY - dragMouseOffset[1]) + "px";
-  }
-}
-
 // Show dialog asking user whether she wants to add the proposed filters derived
 // from selected page element
-function clickHide_showDialog(left, top, filters) {
-  function escapeHTML(str)
-  {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
+function clickHide_showDialog(left, top, filters)
+{
+  clickHideFiltersDialog = document.createElement("iframe");
+  clickHideFiltersDialog.src = chrome.extension.getURL("block.html") + "?filters=" + encodeURIComponent(filters.join("\n"));
+  clickHideFiltersDialog.setAttribute("style", "position: fixed !important; visibility: hidden; display: block !important; border: 0px !important;");
+  clickHideFiltersDialog.style.WebkitBoxShadow = "5px 5px 20px rgba(0,0,0,0.5)";
+  clickHideFiltersDialog.style.zIndex = 99999;
 
-  // Limit the length the filters string shown so it doesn't clip
-  var filtersString = "";
-  for(var i = 0; i < filters.length; i++) {
-    if(filters[i].length > 80)
-      filtersString += escapeHTML(filters[i].substring(0, 80)) + "&hellip;";
-    else
-      filtersString += escapeHTML(filters[i]);
-    filtersString += "<br/>";
-  }
-      
-  clickHideFiltersDialog = document.createElement('div');
-  clickHideFiltersDialog.setAttribute('style', 'visibility:hidden; -webkit-user-select:none; font-family: Helvetica,Arial,sans-serif !important; font-size: 10pt; color: #505050 !important; position: fixed; -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.5); background: #ffffff; z-index: 99999; padding: 10px; border-radius: 5px');
-  clickHideFiltersDialog.innerHTML = '<table style="margin:0px;border:0px;"><tr><td style="padding:0; background: #ffffff; padding-right: 5px; border: 0px; vertical-align: middle;"><img src="' + chrome.extension.getURL('icons/abp-32.png') + '"/></td><td style="padding:0; background: #ffffff; text-align: left; vertical-align: middle; border: 0px;">' + chrome.i18n.getMessage('add_filters_msg') + '</td></tr></table><div style="border:1px solid #c0c0c0; padding:3px; min-width: 200px; font-size:8pt !important; line-height: 10pt !important; font-color: #909090 !important; background: #ffffff !important">' + filtersString + '</div>';
-
-  buttonsDiv = document.createElement('div');
-  buttonsDiv.setAttribute('style', 'text-align: right');
-  function makeButton(id) {
-    var b = document.createElement('button');
-    b.setAttribute("id", id);
-    // Use the jQuery UI style for the button explicitly
-    b.setAttribute("style", "padding: 3px; margin-left: 5px; font-size: 8pt; border: 1px solid #d3d3d3; background: #e6e6e6 url(" + chrome.extension.getURL("jquery-ui/css/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png") + ") 50% 50% repeat-x; color: #555555; -webkit-border-radius: 4px; font-family: Helvetica, Arial, sans-serif;");
-    return b;
-  }
-  var addButton = makeButton("addButton");
-  addButton.innerText = chrome.i18n.getMessage('add');
-  addButton.onclick = function()
-  {
-    // Save the filters that the user created
-    chrome.extension.sendRequest({reqtype: "add-filters", filters: filters});
-    // Explicitly get rid of currentElement in case removeAdsAgain() doesn't catch it
-    if (currentElement.parentNode)
-    {
-      currentElement.parentNode.removeChild(currentElement);
-      // currentElement may actually be our overlay if right-click element selection was used
-      if (currentElement.prisoner && currentElement.prisoner.parentNode)
-        currentElement.prisoner.parentNode.removeChild(currentElement.prisoner);
-    }
-    clickHide_deactivate();
-  };
-  var cancelButton = makeButton("cancelButton");
-  cancelButton.innerText = chrome.i18n.getMessage("cancel");
-  cancelButton.onclick = function()
-  {
-    clickHide_deactivate();
-  }
-  buttonsDiv.appendChild(addButton);
-  buttonsDiv.appendChild(cancelButton);
-  
-  // Make dialog partly transparent when mouse isn't over it so user has a better
-  // view of what's going to be blocked
-  clickHideFiltersDialog.onmouseout = function() {
-    clickHideFiltersDialog.style.setProperty("opacity", "0.7");
-  }
-  clickHideFiltersDialog.onmouseover = function() {
-    clickHideFiltersDialog.style.setProperty("opacity", "1.0");
-  } 
-  
-  clickHideFiltersDialog.appendChild(buttonsDiv);
-  document.body.appendChild(clickHideFiltersDialog);
   // Position in upper-left all the time
   clickHideFiltersDialog.style.left = "50px";
   clickHideFiltersDialog.style.top = "50px";
-  clickHideFiltersDialog.style.visibility = "visible";
+
+  // Listen for messages from this dialog
+  window.addEventListener("message", clickHide_dialogMessage, true);
+
+  // Make dialog partly transparent when mouse isn't over it so user has a better
+  // view of what's going to be blocked
+  clickHideFiltersDialog.onmouseout = function()
+  {
+    if (clickHideFiltersDialog)
+      clickHideFiltersDialog.style.setProperty("opacity", "0.7");
+  }
+  clickHideFiltersDialog.onmouseover = function()
+  {
+    if (clickHideFiltersDialog)
+      clickHideFiltersDialog.style.setProperty("opacity", "1.0");
+  } 
   
-  clickHideFiltersDialog.addEventListener('mousedown', dragStart, false);
+  document.body.appendChild(clickHideFiltersDialog);
+}
+
+/**
+ * Processes messages received from "add filters" dialog.
+ */
+function clickHide_dialogMessage(event)
+{
+  var origin = chrome.extension.getURL("block.html").replace(/^([^:\/]+:\/+[^:\/]+).*/, "$1");
+  if (event.origin == origin)
+  {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (event.data.type == "size")
+    {
+      clickHideFiltersDialog.style.width = (event.data.width + 5) + "px";
+      clickHideFiltersDialog.style.height = (event.data.height + 5) + "px";
+      clickHideFiltersDialog.style.visibility = "visible";
+    }
+    else if (event.data.type == "move")
+    {
+      clickHideFiltersDialog.style.left = (parseInt(clickHideFiltersDialog.style.left) + event.data.x) + "px";
+      clickHideFiltersDialog.style.top = (parseInt(clickHideFiltersDialog.style.top) + event.data.y) + "px";
+    }
+    else if (event.data.type == "close")
+    {
+      // Explicitly get rid of currentElement in case removeAdsAgain() doesn't catch it
+      if (event.data.remove && currentElement && currentElement.parentNode)
+      {
+        currentElement.parentNode.removeChild(currentElement);
+        // currentElement may actually be our overlay if right-click element selection was used
+        if (currentElement.prisoner && currentElement.prisoner.parentNode)
+          currentElement.prisoner.parentNode.removeChild(currentElement.prisoner);
+      }
+
+      clickHide_deactivate();
+    }
+  }
 }
 
 // Turn on the choose element to create filter thing
@@ -259,11 +218,13 @@ function clickHide_rulesPending() {
 }
 
 // Turn off click-to-hide
-function clickHide_deactivate() {
-  if(clickHideFiltersDialog) {
-    clickHideFiltersDialog.setAttribute('style', 'visibility: hidden');
+function clickHide_deactivate()
+{
+  if (clickHideFiltersDialog)
+  {
     document.body.removeChild(clickHideFiltersDialog);
     clickHideFiltersDialog = null;
+    window.removeEventListener("message", clickHide_dialogMessage, true);
   }
 
   if(currentElement) {
