@@ -79,6 +79,11 @@ function FilterStoragePatch()
     {
       if (e)
         reportError("File system error " + e.code);
+      if (!(Prefs.patternsfile in files) || !files[Prefs.patternsfile].data)
+      {
+        // Data got lost, make sure to add default file subscription
+        delete localStorage["currentVersion"];
+      }
       origLoadFromDisk(silent);
     }
 
