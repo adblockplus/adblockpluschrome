@@ -100,7 +100,7 @@
   "global_synchronize_invalid_url": {
     "message": "Failed, not a valid address"
   }, 
-  "hide_placeholers": {
+  "hide_placeholders": {
     "message": "Hide placeholders of blocked elements"
   }, 
   "last_updated_at": {
