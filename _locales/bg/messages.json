@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Добави абонамент"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Местоположение на списъка с филтрите:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Добави друг абонамент"
   }, 

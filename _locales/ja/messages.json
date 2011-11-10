@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "購読フィルタを追加"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "購読フィルタの場所:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "他の購読フィルタを追加"
   }, 

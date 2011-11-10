@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "เพิ่มนามข้างท้ายตัวกรอง"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "ที่อยู่รายชื่อตัวกรอง:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "เพิ่มนามข้างท้าย"
   }, 

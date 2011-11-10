@@ -155,6 +155,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "添加订阅"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "过滤规则列表位置:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "添加其他订阅"
   }, 

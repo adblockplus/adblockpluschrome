@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Προσθήκη συνδρομής"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Τοποθεσία λίστας φίλτρων:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Προσθήκη άλλης συνδρομής"
   }, 

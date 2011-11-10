@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Abonneren"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Filterlijstlocatie:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Een ander abonnement toevoegen"
   }, 

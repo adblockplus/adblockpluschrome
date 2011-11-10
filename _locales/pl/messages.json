@@ -152,6 +152,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Subskrybuj zestaw"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Lokalizacja zestawu:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Wybierz inny zestaw"
   }, 

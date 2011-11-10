@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Adaugă abonament"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Locaţia listei de filtre:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Adaugă alt abonament"
   }, 

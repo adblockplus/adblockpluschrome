@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Додати підписку"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Адреса списку фільтрів:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Додати іншу підписку"
   }, 

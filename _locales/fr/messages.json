@@ -154,6 +154,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Ajouter l'abonnement"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Emplacement de la liste :"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Ajouter un autre abonnement"
   }, 

@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Pridať odber"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Umiestnenie zoznamu filtrov:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Pridať iné odoberania"
   }, 

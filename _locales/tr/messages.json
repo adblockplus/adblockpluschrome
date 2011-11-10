@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Abone ol"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Süzgeç listesi konumu:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Başka abonelik ekle"
   }, 

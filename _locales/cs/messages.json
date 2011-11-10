@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Přidat cizí sadu filtrů"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Umístění sady filtrů:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Přidat další sadu cizích filtrů"
   }, 

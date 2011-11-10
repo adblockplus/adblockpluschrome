@@ -123,6 +123,6 @@ if __name__ == '__main__':
     'subscriptionSelection.dtd addSubscription.label',
     'subscriptionSelection.dtd other.label',
     'subscriptionSelection.dtd title.label',
-    'subscriptionSelection.dtd locations.label',
+    'subscriptionSelection.dtd location.label',
   ]
   updateLocales(sourceDir, targetDir, localeMap, removed, imported)

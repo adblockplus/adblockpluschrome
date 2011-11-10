@@ -148,6 +148,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Lisää suodatintilaus"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Listan sijainti:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Lisää jokin muu tilaus"
   }, 
