@@ -96,6 +96,9 @@
   "global_synchronize_invalid_url": {
     "message": "Ошибка: неверный адрес"
   }, 
+  "hide_placeholders": {
+    "message": "Прятать метки заблокированных элементов"
+  },
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
     "message": "Последнее обновление: $date$ в $time$", 
