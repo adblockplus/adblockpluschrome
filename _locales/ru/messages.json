@@ -148,6 +148,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Добавить подписку"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Адрес списка фильтров:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Добавить другую подписку"
   }, 

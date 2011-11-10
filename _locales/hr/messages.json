@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Dodati pretplatu"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Mjesto popisa filtera:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Dodajte drugu pretplatu"
   }, 

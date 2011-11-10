@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Afegeix subscripció"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Filtra la localització de la llista:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Afegir una altra subscripció"
   }, 

@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Lisa tellimus"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Filtrite nimekirja asukoht:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Lisa muu tellimus"
   }, 

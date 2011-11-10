@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Dodaj naročnino"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Mesto seznama filtriranja:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Dodaj novo naročnino"
   }, 

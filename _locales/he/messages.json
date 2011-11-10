@@ -148,6 +148,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "הוספת הרשמה"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "מיקום רשימת המסננים:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "הוספת הרשמה אחרת"
   }, 

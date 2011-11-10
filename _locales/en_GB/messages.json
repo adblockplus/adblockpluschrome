@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Add subscription"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Filter list location:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Add a different subscription"
   }, 

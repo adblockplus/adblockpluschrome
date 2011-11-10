@@ -35,6 +35,9 @@
   "subscriptionSelection_addSubscription_label": {
     "message": "Tilføj abonnement"
   }, 
+  "subscriptionSelection_location_label": {
+    "message": "Filterliste placering:"
+  }, 
   "subscriptionSelection_other_label": {
     "message": "Tilføj endnu et abonnement"
   }, 
