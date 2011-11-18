@@ -90,6 +90,7 @@ var BEFORELOAD_MALFUNCTION_DOMAINS = {
   "www.allwear.com": true,
   "scootermag.ru": true,
   "www.scootermag.ru": true,
+  "www.panmacmillan.com": true
 };
 var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
 
