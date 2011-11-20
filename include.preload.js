@@ -300,6 +300,7 @@ if (document.documentElement instanceof HTMLElement)
     {
       // Add a style element for elemhide selectors.
       elemhideElt = document.createElement("style");
+      elemhideElt.setAttribute("type", "text/css");
       elemhideElt.innerText = generateElemhideCSSString(response.selectors);
       document.documentElement.appendChild(elemhideElt);
     }
