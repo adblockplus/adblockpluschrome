@@ -98,21 +98,32 @@ var SELECTOR_GROUP_SIZE = 20;
 
 var savedBeforeloadEvents = new Array();
 
-// Makes a string containing CSS rules for elemhide filters
-function generateElemhideCSSString(selectors)
+// Sets the currently used CSS rules for elemhide filters
+function setElemhideCSSRules(selectors)
 {
-  if (!selectors)
-    return "";
+  if (elemhideElt && elemhideElt.parentNode)
+    elemhideElt.parentNode.removeChild(elemhideElt);
 
-  // WebKit apparently chokes when the selector list in a CSS rule is huge.
-  // So we split the elemhide selectors into groups.
-  var result = [];
-  for (var i = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE)
+  if (!selectors)
+    return;
+
+  elemhideElt = document.createElement("link");
+  elemhideElt.setAttribute("rel", "stylesheet");
+  elemhideElt.setAttribute("type", "text/css");
+  elemhideElt.setAttribute("href", "data:text/css,");
+  document.documentElement.appendChild(elemhideElt);
+
+  var elt = elemhideElt;  // Use a local variable to avoid racing conditions
+  window.setTimeout(function()
   {
-    selector = selectors.slice(i, i + SELECTOR_GROUP_SIZE).join(", ");
-    result.push(selector + " { display: none !important; }");
-  }
-  return result.join(" ");
+    // WebKit apparently chokes when the selector list in a CSS rule is huge.
+    // So we split the elemhide selectors into groups.
+    for (var i = 0, j = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE, j++)
+    {
+      var selector = selectors.slice(i, i + SELECTOR_GROUP_SIZE).join(", ");
+      elt.sheet.insertRule(selector + " { display: none !important; }", j);
+    }
+  }, 0);
 }
 
 // Hides a single element
@@ -296,13 +307,6 @@ if (document.documentElement instanceof HTMLElement)
 
   chrome.extension.sendRequest({reqtype: "get-settings", selectors: true, host: window.location.hostname}, function(response)
   {
-    if (response.selectors)
-    {
-      // Add a style element for elemhide selectors.
-      elemhideElt = document.createElement("style");
-      elemhideElt.setAttribute("type", "text/css");
-      elemhideElt.innerText = generateElemhideCSSString(response.selectors);
-      document.documentElement.appendChild(elemhideElt);
-    }
+    setElemhideCSSRules(response.selectors);
   });
 }
