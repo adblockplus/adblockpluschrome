@@ -364,14 +364,14 @@ function removeAdsAgain()
   chrome.extension.sendRequest({reqtype: "get-settings", matcher: true, selectors: true, host: window.location.hostname}, function(response)
   {
     // Retrieve new set of selectors and build selector strings
-    if (elemhideElt)
-      elemhideElt.innerText = (response.selectors ? generateElemhideCSSString(response.selectors) : "");
+    setElemhideCSSRules(response.selectors);
     defaultMatcher.clear();
     if (response.matcherData)
       defaultMatcher.fromCache(JSON.parse(response.matcherData));
     nukeElements();
   });
 }
+window.setInterval(removeAdsAgain, 4000)
 
 // Block ads in nodes inserted by scripts
 function handleNodeInserted(e)
