@@ -371,7 +371,6 @@ function removeAdsAgain()
     nukeElements();
   });
 }
-window.setInterval(removeAdsAgain, 4000)
 
 // Block ads in nodes inserted by scripts
 function handleNodeInserted(e)
