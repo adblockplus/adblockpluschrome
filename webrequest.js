@@ -11,7 +11,7 @@ function onBeforeRequest(details)
   if (type == "main_frame" || type == "sub_frame")
     recordFrame(details.tabId, details.frameId, details.url, type == "main_frame");
 
-  if (type == "main_frame")
+  if (type == "main_frame" || /^chrome\b/.test(details.url))
     return;
 
   // Type names match Mozilla's with main_frame and sub_frame being the only exceptions.
