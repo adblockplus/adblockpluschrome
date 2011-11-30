@@ -210,9 +210,16 @@ function extractDomainFromURL(url)
   var x = url.substr(url.indexOf("://") + 3);
   x = x.substr(0, x.indexOf("/"));
   x = x.substr(x.indexOf("@") + 1);
-  colPos = x.indexOf(":");
-  if(colPos >= 0)
-    x = x.substr(0, colPos);
+  if (x.indexOf("[") == 0 && x.indexOf("]") > 0)
+  {
+    x = x.substring(1,x.indexOf("]"));
+  }
+  else
+  {
+    colPos = x.indexOf(":");
+    if (colPos >= 0)
+      x = x.substr(0, colPos);
+  }
   return x;
 }
 
