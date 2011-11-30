@@ -95,11 +95,8 @@ function isThirdParty(requestHost, documentHost)
   requestHost = requestHost.replace(/\.+$/, "");
   documentHost = documentHost.replace(/\.+$/, "");
 
-  // Extract domain name - leave IP addresses unchanged, otherwise leave only
-  // the last two parts of the host name
-  var documentDomain = documentHost;
-  if (!/^\d+(\.\d+)*$/.test(documentDomain) && /([^\.]+\.[^\.]+)$/.test(documentDomain))
-    documentDomain = RegExp.$1;
+  // Extract domain name - leave IP addresses unchanged, otherwise leave only base domain
+  var documentDomain = getBaseDomain(documentHost);
   if (requestHost.length > documentDomain.length)
     return (requestHost.substr(requestHost.length - documentDomain.length - 1) != "." + documentDomain);
   else
