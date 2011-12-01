@@ -1,5 +1,5 @@
-chrome.experimental.webRequest.onBeforeRequest.addListener(onBeforeRequest, {}, ["blocking"]);
-chrome.experimental.webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, {}, ["requestHeaders", "blocking"]);
+webRequest.onBeforeRequest.addListener(onBeforeRequest, {}, ["blocking"]);
+webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, {}, ["requestHeaders", "blocking"]);
 chrome.tabs.onRemoved.addListener(forgetTab);
 
 var frames = {};
