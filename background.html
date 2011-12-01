@@ -582,11 +582,13 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
 
 // Only load webrequest.js if we have the necessary permissions
 var hasExperimentalPermissions = false;
+var webRequest = null;
 try
 {
   var dummy = function(){};
-  chrome.experimental.webRequest.onBeforeRequest.addListener(dummy);
-  chrome.experimental.webRequest.onBeforeRequest.removeListener(dummy);
+  webRequest = "webRequest" in chrome ? chrome.webRequest : chrome.experimental.webRequest;
+  webRequest.onBeforeRequest.addListener(dummy);
+  webRequest.onBeforeRequest.removeListener(dummy);
   hasExperimentalPermissions = true;
 
   // Some types cannot be distinguished
