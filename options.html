@@ -597,26 +597,6 @@ function addSubscriptionEntry(subscription)
   document.getElementById("filterLists").appendChild(element);
 }
 
-// Adds and saves the user-entered filter list URL
-function addUserURLFromBox() {
-    var key = "user_" + (new Date()).getTime();
-    var url = document.getElementById("newURL").value;
-    
-    // Extract URL from ABP subscription link
-    var matches;
-    if(matches = url.match(/^abp:\/*?subscribe.*[\?&]location=(.+?)(&|$)/i))
-        url = decodeURIComponent(matches[1]);
-
-    if(!url.match(/^http/i) && !url.match(/^file/))
-        return;
-    addUserURLEntry(key, url);
-    document.getElementById("newURL").value = "";
-    filterFiles[key] = url;
-    // Trigger download
-    updateFilterList(key);
-    saveOptions();
-}
-
 // Set page title to i18n version of "Adblock Plus Options"
 document.title = chrome.i18n.getMessage("options");
 
