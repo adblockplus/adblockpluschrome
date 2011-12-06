@@ -167,6 +167,8 @@ function showUserFilters()
   populateList("excludedDomainsBox", exceptions);
 }
 
+var delayedSubscriptionSelection = null;
+
 function loadRecommendations()
 {
   var request = new XMLHttpRequest();
@@ -226,19 +228,28 @@ function loadRecommendations()
     list.appendChild(option);
 
     list.selectedIndex = selectedIndex;
+
+    if (delayedSubscriptionSelection)
+      startSubscriptionSelection.apply(null, delayedSubscriptionSelection);
   };
   request.send(null);
 }
 
 function startSubscriptionSelection(title, url)
 {
+  var list = document.getElementById("subscriptionSelector");
+  if (list.length == 0)
+  {
+    delayedSubscriptionSelection = [title, url];
+    return;
+  }
+
   $('#tabs').tabs('select', 0);
   $("#addSubscriptionContainer").show();
   $("#addSubscriptionButton").hide();
   $("#subscriptionSelector").focus();
   if (typeof url != "undefined")
   {
-    var list = document.getElementById("subscriptionSelector");
     list.selectedIndex = list.length - 1;
     document.getElementById("customSubscriptionTitle").value = title;
     document.getElementById("customSubscriptionLocation").value = url;
