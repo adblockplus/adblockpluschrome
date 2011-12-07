@@ -87,7 +87,7 @@ p {
 <script type="text/javascript" charset="utf-8">
 
 var backgroundPage = chrome.extension.getBackgroundPage();
-var imports = ["FilterStorage", "Subscription", "SpecialSubscription",
+var imports = ["FilterStorage", "FilterNotifier", "Subscription", "SpecialSubscription",
                "DownloadableSubscription", "Filter", "WhitelistFilter",
                "Synchronizer", "Utils", "hasExperimentalPermissions"];
 for (var i = 0; i < imports.length; i++)
@@ -96,7 +96,7 @@ for (var i = 0; i < imports.length; i++)
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions()
 {
-  FilterStorage.addObserver(onFilterChange);
+  FilterNotifier.addListener(onFilterChange);
 
   // Popuplate option checkboxes
   initCheckbox("shouldShowIcon");
@@ -130,7 +130,7 @@ function loadOptions()
 // Cleans up when the options window is closed
 function unloadOptions()
 {
-  FilterStorage.removeObserver(onFilterChange);
+  FilterNotifier.removeListener(onFilterChange);
 }
 
 function initCheckbox(id)
@@ -332,6 +332,17 @@ function updateSubscriptionInfo(element)
 {
   var subscription = element._subscription;
 
+  var title = element.getElementsByClassName("subscriptionTitle")[0];
+  title.textContent = subscription.title;
+  title.setAttribute("title", subscription.url);
+  if (subscription.homepage)
+    title.href = subscription.homepage;
+  else
+    title.href = subscription.url;
+
+  var enabled = element.getElementsByClassName("subscriptionEnabled")[0];
+  enabled.checked = !subscription.disabled;
+
   var lastUpdate = element.getElementsByClassName("subscriptionUpdate")[0];
   lastUpdate.classList.remove("error");
   if (Synchronizer.isExecuting(subscription.url))
@@ -349,56 +360,39 @@ function updateSubscriptionInfo(element)
   }
 }
 
-function onFilterChange(action, items)
+function onFilterChange(action, item, param1, param2)
 {
   switch (action)
   {
-    case "subscriptions updateinfo":
-    case "subscriptions update":
-      for (var i = 0; i < items.length; i++)
-      {
-        var element = findSubscriptionElement(items[i]);
-        if (element)
-          updateSubscriptionInfo(element);
-      }
+    case "subscription.title":
+    case "subscription.disabled":
+    case "subscription.homepage":
+    case "subscription.lastDownload":
+    case "subscription.downloadStatus":
+      var element = findSubscriptionElement(item);
+      if (element)
+        updateSubscriptionInfo(element);
       break;
-    case "subscriptions add":
-      for (var i = 0; i < items.length; i++)
-      {
-        var subscription = items[i];
-        if (subscription instanceof SpecialSubscription || findSubscriptionElement(subscription))
-          continue;
-
-        addSubscriptionEntry(subscription);
-      }
+    case "subscription.added":
+      if (!(item instanceof SpecialSubscription) && !findSubscriptionElement(item))
+        addSubscriptionEntry(item);
       break;
-    case "subscriptions remove":
-      for (var i = 0; i < items.length; i++)
-      {
-        var element = findSubscriptionElement(items[i]);
-        if (element)
-          element.parentNode.removeChild(element);
-      }
+    case "subscription.removed":
+      var element = findSubscriptionElement(item);
+      if (element)
+        element.parentNode.removeChild(element);
       break;
-    case "filters add":
-      for (var i = 0; i < items.length; i++)
-      {
-        var filter = items[i];
-        if (filter instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(filter.text))
-          appendToListBox("excludedDomainsBox", RegExp.$1);
-        else
-          appendToListBox("userFiltersBox", filter.text);
-      }
+    case "filter.added":
+      if (item instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(item.text))
+        appendToListBox("excludedDomainsBox", RegExp.$1);
+      else
+        appendToListBox("userFiltersBox", item.text);
       break;
-    case "filters remove":
-      for (var i = 0; i < items.length; i++)
-      {
-        var filter = items[i];
-        if (filter instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(filter.text))
-          removeFromListBox("excludedDomainsBox", RegExp.$1);
-        else
-          removeFromListBox("userFiltersBox", filter.text);
-      }
+    case "filter.removed":
+      if (item instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(item.text))
+        removeFromListBox("excludedDomainsBox", RegExp.$1);
+      else
+        removeFromListBox("userFiltersBox", item.text);
       break;
   }
 }
@@ -586,22 +580,14 @@ function addSubscriptionEntry(subscription)
   }, false);
 
   var enabled = element.getElementsByClassName("subscriptionEnabled")[0];
-  enabled.checked = !subscription.disabled;
   enabled.addEventListener("click", function()
   {
     if (subscription.disabled == !enabled.checked)
       return;
 
     subscription.disabled = !enabled.checked;
-    FilterStorage.triggerObservers(subscription.disabled ? "subscriptions disable" : "subscriptions enable", [subscription]);
     window.setTimeout(FilterStorage.saveToDisk, 0);
   }, false);
-
-  var title = element.getElementsByClassName("subscriptionTitle")[0];
-  title.textContent = subscription.title;
-  title.setAttribute("title", subscription.url);
-  if (subscription.homepage)
-    title.href = subscription.homepage;
 
   updateSubscriptionInfo(element);
 

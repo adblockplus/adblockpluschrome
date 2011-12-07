@@ -26,21 +26,20 @@
 // This file has been generated automatically from Adblock Plus source code
 //
 
-(function (_patchFunc5) {
-  var subscriptionFilter = null;
-  const cacheVersion = 1;
+(function (_patchFunc2) {
+  const cacheVersion = 2;
   var batchMode = false;
   var isDirty = false;
   var FilterListener = {
     startup: function () {
-      FilterStorage.addObserver(function (action, items) {
-        if (/^filters (.*)/.test(action))
-          onFilterChange(RegExp["$1"], items);
+      FilterNotifier.addListener(function (action, item, newValue, oldValue) {
+        if (/^filter\.(.*)/.test(action))
+          onFilterChange(RegExp["$1"], item, newValue, oldValue);
          else
-          if (/^subscriptions (.*)/.test(action))
-            onSubscriptionChange(RegExp["$1"], items);
+          if (/^subscription\.(.*)/.test(action))
+            onSubscriptionChange(RegExp["$1"], item, newValue, oldValue);
            else
-            onGenericChange(action, items);
+            onGenericChange(action, item);
       }
       );
       ElemHide.init();
@@ -66,7 +65,7 @@
                 obj[prop] = origValue;
                 if (!loadDone) {
                   loadDone = true;
-                  FilterStorage.loadFromDisk(true);
+                  FilterStorage.loadFromDisk(null, true);
                 }
                 return obj[prop];
               }
@@ -125,12 +124,27 @@
     ,
     QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
   };
+  var flushScheduled = false;
   function flushElemHide() {
+    if (flushScheduled)
+      return ;
+    Utils.runAsync(flushElemHideInternal);
+    flushScheduled = true;
+  }
+  function flushElemHideInternal() {
+    flushScheduled = false;
     if (!batchMode && ElemHide.isDirty)
       ElemHide.apply();
   }
   function addFilter(filter) {
-    if (!(filter instanceof ActiveFilter) || filter.disabled || (subscriptionFilter && filter.subscriptions.some(subscriptionFilter)))
+    if (!(filter instanceof ActiveFilter) || filter.disabled)
+      return ;
+    var hasEnabled = false;
+    for (var i = 0;
+    i < filter.subscriptions.length; i++)
+      if (!filter.subscriptions[i].disabled)
+        hasEnabled = true;
+    if (!hasEnabled)
       return ;
     if (filter instanceof RegExpFilter)
       defaultMatcher.add(filter);
@@ -139,85 +153,66 @@
         ElemHide.add(filter);
   }
   function removeFilter(filter) {
-    if (!(filter instanceof ActiveFilter) || (subscriptionFilter && filter.subscriptions.some(subscriptionFilter)))
+    if (!(filter instanceof ActiveFilter))
       return ;
+    if (!filter.disabled) {
+      var hasEnabled = false;
+      for (var i = 0;
+      i < filter.subscriptions.length; i++)
+        if (!filter.subscriptions[i].disabled)
+          hasEnabled = true;
+      if (hasEnabled)
+        return ;
+    }
     if (filter instanceof RegExpFilter)
       defaultMatcher.remove(filter);
      else
       if (filter instanceof ElemHideFilter)
         ElemHide.remove(filter);
   }
-  function onSubscriptionChange(action, subscriptions) {
+  function onSubscriptionChange(action, subscription, newValue, oldValue) {
     isDirty = true;
-    if (action != "remove") {
-      subscriptions = subscriptions.filter(function (subscription) {
-        return subscription.url in FilterStorage.knownSubscriptions;
-      }
-      );
-    }
-    if (!subscriptions.length)
+    if (action != "added" && action != "removed" && action != "disabled" && action != "updated")
       return ;
-    if (action == "add" || action == "enable" || action == "remove" || action == "disable" || action == "update") {
-      var subscriptionMap = {
-        __proto__: null
-      };
-      for (var _loopIndex1 = 0;
-      _loopIndex1 < subscriptions.length; ++ _loopIndex1) {
-        var subscription = subscriptions[_loopIndex1];
-        subscriptionMap[subscription.url] = true;
-      }
-      subscriptionFilter = (function (subscription) {
-        return !(subscription.url in subscriptionMap) && !subscription.disabled;
-      }
-      );
+    if (action != "removed" && !(subscription.url in FilterStorage.knownSubscriptions)) {
+      return ;
+    }
+    if ((action == "added" || action == "removed" || action == "updated") && subscription.disabled) {
+      return ;
+    }
+    if (action == "added" || action == "removed" || action == "disabled") {
+      var method = (action == "added" || (action == "disabled" && newValue == false) ? addFilter : removeFilter);
+      if (subscription.filters)
+        subscription.filters.forEach(method);
     }
      else
-      subscriptionFilter = null;
-    if (action == "add" || action == "enable" || action == "remove" || action == "disable") {
-      var method = (action == "add" || action == "enable" ? addFilter : removeFilter);
-      for (var _loopIndex2 = 0;
-      _loopIndex2 < subscriptions.length; ++ _loopIndex2) {
-        var subscription = subscriptions[_loopIndex2];
-        if (subscription.filters && (action == "disable" || !subscription.disabled))
-          subscription.filters.forEach(method);
-      }
-    }
-     else
-      if (action == "update") {
-        for (var _loopIndex3 = 0;
-        _loopIndex3 < subscriptions.length; ++ _loopIndex3) {
-          var subscription = subscriptions[_loopIndex3];
-          if (!subscription.disabled) {
-            subscription.oldFilters.forEach(removeFilter);
-            subscription.filters.forEach(addFilter);
-          }
-        }
+      if (action == "updated") {
+        subscription.oldFilters.forEach(removeFilter);
+        subscription.filters.forEach(addFilter);
       }
     flushElemHide();
   }
-  function onFilterChange(action, filters) {
+  function onFilterChange(action, filter, newValue, oldValue) {
     isDirty = true;
-    if (action == "add" || action == "enable" || action == "remove" || action == "disable") {
-      subscriptionFilter = null;
-      var method = (action == "add" || action == "enable" ? addFilter : removeFilter);
-      filters = filters.filter(function (filter) {
-        return ((action != "remove") == filter.subscriptions.some(function (subscription) {
-          return !subscription.disabled;
-        }));
-      }
-      );
-      filters.forEach(method);
-      flushElemHide();
+    if (action != "added" && action != "removed" && action != "disabled")
+      return ;
+    if ((action == "added" || action == "removed") && filter.disabled) {
+      return ;
     }
+    if (action == "added" || (action == "disabled" && newValue == false))
+      addFilter(filter);
+     else
+      removeFilter(filter);
+    flushElemHide();
   }
   function onGenericChange(action) {
     if (action == "load") {
       isDirty = false;
       defaultMatcher.clear();
       ElemHide.clear();
-      for (var _loopIndex4 = 0;
-      _loopIndex4 < FilterStorage.subscriptions.length; ++ _loopIndex4) {
-        var subscription = FilterStorage.subscriptions[_loopIndex4];
+      for (var _loopIndex1 = 0;
+      _loopIndex1 < FilterStorage.subscriptions.length; ++ _loopIndex1) {
+        var subscription = FilterStorage.subscriptions[_loopIndex1];
         if (!subscription.disabled)
           subscription.filters.forEach(addFilter);
       }
@@ -259,8 +254,8 @@
         }
       }
   }
-  if (typeof _patchFunc5 != "undefined")
-    eval("(" + _patchFunc5.toString() + ")()");
+  if (typeof _patchFunc2 != "undefined")
+    eval("(" + _patchFunc2.toString() + ")()");
   window.FilterListener = FilterListener;
 }
 )(window.FilterListenerPatch);

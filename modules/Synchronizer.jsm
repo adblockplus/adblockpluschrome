@@ -282,14 +282,12 @@
         }
         if (newFilters)
           FilterStorage.updateSubscriptionFilters(subscription, newFilters);
-         else
-          FilterStorage.triggerObservers("subscriptions updateinfo", [subscription]);
         delete subscription.oldSubscription;
         FilterStorage.saveToDisk();
       }
       , false);
       executing[url] = true;
-      FilterStorage.triggerObservers("subscriptions updateinfo", [subscription]);
+      FilterNotifier.triggerListeners("subscription.downloadStatus", subscription);
       try {
         request.send(null);
       }
@@ -307,7 +305,7 @@
     for (var _loopIndex3 = 0;
     _loopIndex3 < FilterStorage.subscriptions.length; ++ _loopIndex3) {
       var subscription = FilterStorage.subscriptions[_loopIndex3];
-      if (!(subscription instanceof DownloadableSubscription) || !subscription.autoDownload)
+      if (!(subscription instanceof DownloadableSubscription))
         continue;
       if (subscription.lastCheck && time - subscription.lastCheck > MAX_ABSENSE_INTERVAL) {
         subscription.softExpiration += time - subscription.lastCheck;
@@ -396,12 +394,22 @@
         request.overrideMimeType("text/plain");
         request.channel.loadFlags = request.channel.loadFlags | request.channel.INHIBIT_CACHING | request.channel.VALIDATE_ALWAYS;
         request.addEventListener("load", function (ev) {
+          if (!(subscription.url in FilterStorage.knownSubscriptions))
+            return ;
           if (/^301\s+(\S+)/.test(request.responseText))
             subscription.nextURL = RegExp["$1"];
            else
             if (/^410\b/.test(request.responseText)) {
-              subscription.autoDownload = false;
-              FilterStorage.triggerObservers("subscriptions updateinfo", [subscription]);
+              var data = "[Adblock]\n" + subscription.filters.map(function (f) {
+                return f.text;
+              }).join("\n");
+              var url = "data:text/plain," + encodeURIComponent(data);
+              var newSubscription = Subscription.fromURL(url);
+              newSubscription.title = subscription.title;
+              newSubscription.disabled = subscription.disabled;
+              FilterStorage.removeSubscription(subscription);
+              FilterStorage.addSubscription(newSubscription);
+              Synchronizer.execute(newSubscription);
             }
           FilterStorage.saveToDisk();
         }
@@ -409,7 +417,6 @@
         request.send(null);
       }
     }
-    FilterStorage.triggerObservers("subscriptions updateinfo", [subscription]);
     FilterStorage.saveToDisk();
   }
   if (typeof _patchFunc5 != "undefined")

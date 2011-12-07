@@ -221,6 +221,9 @@
   function CombinedMatcher() {
     this.blacklist = new Matcher();
     this.whitelist = new Matcher();
+    this.keys = {
+      
+    };
     this.resultCache = {
       
     };
@@ -229,11 +232,15 @@
   CombinedMatcher.prototype = {
     blacklist: null,
     whitelist: null,
+    keys: null,
     resultCache: null,
     cacheEntries: 0,
     clear: function () {
       this.blacklist.clear();
       this.whitelist.clear();
+      this.keys = {
+        
+      };
       this.resultCache = {
         
       };
@@ -241,8 +248,15 @@
     }
     ,
     add: function (filter) {
-      if (filter instanceof WhitelistFilter)
-        this.whitelist.add(filter);
+      if (filter instanceof WhitelistFilter) {
+        if (filter.siteKeys) {
+          for (var i = 0;
+          i < filter.siteKeys.length; i++)
+            this.keys[filter.siteKeys[i]] = filter.text;
+        }
+         else
+          this.whitelist.add(filter);
+      }
        else
         this.blacklist.add(filter);
       if (this.cacheEntries > 0) {
@@ -254,8 +268,15 @@
     }
     ,
     remove: function (filter) {
-      if (filter instanceof WhitelistFilter)
-        this.whitelist.remove(filter);
+      if (filter instanceof WhitelistFilter) {
+        if (filter.siteKeys) {
+          for (var i = 0;
+          i < filter.siteKeys.length; i++)
+            delete this.keys[filter.siteKeys[i]];
+        }
+         else
+          this.whitelist.remove(filter);
+      }
        else
         this.blacklist.remove(filter);
       if (this.cacheEntries > 0) {
@@ -334,6 +355,19 @@
       return result;
     }
     ,
+    matchesByKey: function (location, key, docDomain) {
+      key = key.toUpperCase();
+      if (key in this.keys) {
+        var filter = Filter.knownFilters[this.keys[key]];
+        if (filter && filter.matches(location, "DOCUMENT", docDomain, false))
+          return filter;
+         else
+          return null;
+      }
+       else
+        return null;
+    }
+    ,
     toCache: function (cache) {
       cache.matcher = {
         whitelist: {
@@ -341,7 +375,8 @@
         },
         blacklist: {
           
-        }
+        },
+        keys: this.keys
       };
       this.whitelist.toCache(cache.matcher.whitelist);
       this.blacklist.toCache(cache.matcher.blacklist);
@@ -350,6 +385,7 @@
     fromCache: function (cache) {
       this.whitelist.fromCache(cache.matcher.whitelist);
       this.blacklist.fromCache(cache.matcher.blacklist);
+      this.keys = cache.matcher.keys;
     }
     
   };

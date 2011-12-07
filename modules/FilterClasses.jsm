@@ -26,7 +26,7 @@
 // This file has been generated automatically from Adblock Plus source code
 //
 
-(function (_patchFunc5) {
+(function (_patchFunc3) {
   function _extend0(baseClass, props) {
     var dummyConstructor = function () {};
     dummyConstructor.prototype = baseClass.prototype;
@@ -79,11 +79,11 @@
     var ret = Filter.fromText(obj.text);
     if (ret instanceof ActiveFilter) {
       if ("disabled" in obj)
-        ret.disabled = (obj.disabled == "true");
+        ret._disabled = (obj.disabled == "true");
       if ("hitCount" in obj)
-        ret.hitCount = parseInt(obj.hitCount) || 0;
+        ret._hitCount = parseInt(obj.hitCount) || 0;
       if ("lastHit" in obj)
-        ret.lastHit = parseInt(obj.lastHit) || 0;
+        ret._lastHit = parseInt(obj.lastHit) || 0;
     }
     return ret;
   }
@@ -125,97 +125,129 @@
     Filter.call(this, text);
     if (domains) {
       this.domainSource = domains;
-      this.__defineGetter__("includeDomains", this._getIncludeDomains);
-      this.__defineGetter__("excludeDomains", this._getExcludeDomains);
+      this.__defineGetter__("domains", this._getDomains);
     }
   }
   ActiveFilter.prototype = _extend0(Filter, {
-    disabled: false,
-    hitCount: 0,
-    lastHit: 0,
-    domainSource: null,
-    domainSeparator: null,
-    includeDomains: null,
-    excludeDomains: null,
-    _getIncludeDomains: function () {
-      this._generateDomains();
-      return this.includeDomains;
+    _disabled: false,
+    _hitCount: 0,
+    _lastHit: 0,
+    get disabled() {
+      return this._disabled;
+    },
+    set disabled(value) {
+      if (value != this._disabled) {
+        var oldValue = this._disabled;
+        this._disabled = value;
+        FilterNotifier.triggerListeners("filter.disabled", this, value, oldValue);
+      }
+      return this._disabled;
     }
     ,
-    _getExcludeDomains: function () {
+    get hitCount() {
+      return this._hitCount;
+    },
+    set hitCount(value) {
+      if (value != this._hitCount) {
+        var oldValue = this._hitCount;
+        this._hitCount = value;
+        FilterNotifier.triggerListeners("filter.hitCount", this, value, oldValue);
+      }
+      return this._hitCount;
+    }
+    ,
+    get lastHit() {
+      return this._lastHit;
+    },
+    set lastHit(value) {
+      if (value != this._lastHit) {
+        var oldValue = this._lastHit;
+        this._lastHit = value;
+        FilterNotifier.triggerListeners("filter.lastHit", this, value, oldValue);
+      }
+      return this._lastHit;
+    }
+    ,
+    domainSource: null,
+    domainSeparator: null,
+    domains: null,
+    _getDomains: function () {
       this._generateDomains();
-      return this.excludeDomains;
+      return this.domains;
     }
     ,
     _generateDomains: function () {
       var domains = this.domainSource.split(this.domainSeparator);
       delete this.domainSource;
-      delete this.includeDomains;
-      delete this.excludeDomains;
+      delete this.domains;
       if (domains.length == 1 && domains[0][0] != "~") {
-        this.includeDomains = {
-          
+        this.domains = {
+          "": false
         };
-        this.includeDomains[domains[0]] = true;
+        this.domains[domains[0]] = true;
       }
        else {
-        for (var _loopIndex1 = 0;
-        _loopIndex1 < domains.length; ++ _loopIndex1) {
-          var domain = domains[_loopIndex1];
+        var hasIncludes = false;
+        for (var i = 0;
+        i < domains.length; i++) {
+          var domain = domains[i];
           if (domain == "")
             continue;
-          var hash = "includeDomains";
+          var include;
           if (domain[0] == "~") {
-            hash = "excludeDomains";
+            include = false;
             domain = domain.substr(1);
           }
-          if (!this[hash])
-            this[hash] = {
+           else {
+            include = true;
+            hasIncludes = true;
+          }
+          if (!this.domains)
+            this.domains = {
               
             };
-          this[hash][domain] = true;
+          this.domains[domain] = include;
         }
+        this.domains[""] = !hasIncludes;
       }
     }
     ,
     isActiveOnDomain: function (docDomain) {
-      if (!docDomain)
-        return (!this.includeDomains);
-      if (!this.includeDomains && !this.excludeDomains)
+      if (!this.domains)
         return true;
+      if (!docDomain)
+        return this.domains[""];
       docDomain = docDomain.replace(/\.+$/, "").toUpperCase();
       while (true) {
-        if (this.includeDomains && docDomain in this.includeDomains)
-          return true;
-        if (this.excludeDomains && docDomain in this.excludeDomains)
-          return false;
+        if (docDomain in this.domains)
+          return this.domains[docDomain];
         var nextDot = docDomain.indexOf(".");
         if (nextDot < 0)
           break;
         docDomain = docDomain.substr(nextDot + 1);
       }
-      return (this.includeDomains == null);
+      return this.domains[""];
     }
     ,
     isActiveOnlyOnDomain: function (docDomain) {
-      if (!docDomain || !this.includeDomains)
+      if (!docDomain || !this.domains || this.domains[""])
         return false;
       docDomain = docDomain.replace(/\.+$/, "").toUpperCase();
-      for (var domain in this.includeDomains)
-        if (domain != docDomain && (domain.length <= docDomain.length || domain.indexOf("." + docDomain) != domain.length - docDomain.length - 1))
+      for (var domain in this.domains)
+        if (this.domains[domain] && domain != docDomain && (domain.length <= docDomain.length || domain.indexOf("." + docDomain) != domain.length - docDomain.length - 1))
           return false;
       return true;
     }
     ,
     serialize: function (buffer) {
-      if (this.disabled || this.hitCount || this.lastHit) {
+      if (this._disabled || this._hitCount || this._lastHit) {
         Filter.prototype.serialize.call(this, buffer);
-        if (this.disabled)
+        if (this._disabled)
           buffer.push("disabled=true");
-        if (this.hitCount)
-          buffer.push("hitCount=" + this.hitCount);
-        if (this.lastHit)
-          buffer.push("lastHit=" + this.lastHit);
+        if (this._hitCount)
+          buffer.push("hitCount=" + this._hitCount);
+        if (this._lastHit)
+          buffer.push("lastHit=" + this._lastHit);
       }
     }
     
@@ -266,28 +298,31 @@
     
   });
   RegExpFilter.fromText = (function (text) {
-    var constructor = BlockingFilter;
+    var blocking = true;
     var origText = text;
     if (text.indexOf("@@") == 0) {
-      constructor = WhitelistFilter;
+      blocking = false;
       text = text.substr(2);
     }
     var contentType = null;
     var matchCase = null;
     var domains = null;
+    var siteKeys = null;
     var thirdParty = null;
     var collapse = null;
     var options;
     if (Filter.optionsRegExp.test(text)) {
       options = RegExp["$1"].toUpperCase().split(",");
       text = RegExp.leftContext;
-      for (var _loopIndex2 = 0;
-      _loopIndex2 < options.length; ++ _loopIndex2) {
-        var option = options[_loopIndex2];
-        var value;
-        var _tempVar3 = option.split("=", 2);
-        option = _tempVar3[0];
-        value = _tempVar3[1];
+      for (var _loopIndex1 = 0;
+      _loopIndex1 < options.length; ++ _loopIndex1) {
+        var option = options[_loopIndex1];
+        var value = null;
+        var separatorIndex = option.indexOf("=");
+        if (separatorIndex >= 0) {
+          value = option.substr(separatorIndex + 1);
+          option = option.substr(0, separatorIndex);
+        }
         option = option.replace(/-/, "_");
         if (option in RegExpFilter.typeMap) {
           if (contentType == null)
@@ -318,15 +353,23 @@
                      else
                       if (option == "~COLLAPSE")
                         collapse = false;
+                       else
+                        if (option == "SITEKEY" && typeof value != "undefined")
+                          siteKeys = value.split(/\|/);
       }
     }
-    if (constructor == WhitelistFilter && (contentType == null || (contentType & RegExpFilter.typeMap.DOCUMENT)) && (!options || options.indexOf("DOCUMENT") < 0) && !/^\|?[\w\-]+:/.test(text)) {
+    if (!blocking && (contentType == null || (contentType & RegExpFilter.typeMap.DOCUMENT)) && (!options || options.indexOf("DOCUMENT") < 0) && !/^\|?[\w\-]+:/.test(text)) {
       if (contentType == null)
         contentType = RegExpFilter.prototype.contentType;
       contentType &= ~RegExpFilter.typeMap.DOCUMENT;
     }
+    if (!blocking && siteKeys)
+      contentType = RegExpFilter.typeMap.DOCUMENT;
     try {
-      return new constructor(origText, text, contentType, matchCase, domains, thirdParty, collapse);
+      if (blocking)
+        return new BlockingFilter(origText, text, contentType, matchCase, domains, thirdParty, collapse);
+       else
+        return new WhitelistFilter(origText, text, contentType, matchCase, domains, thirdParty, siteKeys);
     }
     catch (e){
       return new InvalidFilter(text, e);
@@ -341,11 +384,11 @@
     OBJECT: 16,
     SUBDOCUMENT: 32,
     DOCUMENT: 64,
-    XBL: 512,
-    PING: 1024,
+    XBL: 1,
+    PING: 1,
     XMLHTTPREQUEST: 2048,
     OBJECT_SUBREQUEST: 4096,
-    DTD: 8192,
+    DTD: 1,
     MEDIA: 16384,
     FONT: 32768,
     BACKGROUND: 4,
@@ -361,11 +404,13 @@
   BlockingFilter.prototype = _extend0(RegExpFilter, {
     collapse: null
   });
-  function WhitelistFilter(text, regexpSource, contentType, matchCase, domains, thirdParty) {
+  function WhitelistFilter(text, regexpSource, contentType, matchCase, domains, thirdParty, siteKeys) {
     RegExpFilter.call(this, text, regexpSource, contentType, matchCase, domains, thirdParty);
+    if (siteKeys != null)
+      this.siteKeys = siteKeys;
   }
   WhitelistFilter.prototype = _extend0(RegExpFilter, {
-    
+    siteKeys: null
   });
   function ElemHideFilter(text, domains, selector) {
     ActiveFilter.call(this, text, domains ? domains.toUpperCase() : null);
@@ -386,9 +431,9 @@
       var additional = "";
       if (attrRules) {
         attrRules = attrRules.match(/\([\w\-]+(?:[$^*]?=[^\(\)"]*)?\)/g);
-        for (var _loopIndex4 = 0;
-        _loopIndex4 < attrRules.length; ++ _loopIndex4) {
-          var rule = attrRules[_loopIndex4];
+        for (var _loopIndex2 = 0;
+        _loopIndex2 < attrRules.length; ++ _loopIndex2) {
+          var rule = attrRules[_loopIndex2];
           rule = rule.substr(1, rule.length - 2);
           var separatorPos = rule.indexOf("=");
           if (separatorPos > 0) {
@@ -414,8 +459,8 @@
     return new ElemHideFilter(text, domain, selector);
   }
   );
-  if (typeof _patchFunc5 != "undefined")
-    eval("(" + _patchFunc5.toString() + ")()");
+  if (typeof _patchFunc3 != "undefined")
+    eval("(" + _patchFunc3.toString() + ")()");
   window.Filter = Filter;
   window.InvalidFilter = InvalidFilter;
   window.CommentFilter = CommentFilter;
