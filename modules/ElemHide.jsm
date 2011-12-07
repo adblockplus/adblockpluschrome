@@ -52,10 +52,10 @@
     ,
     clear: function () {
       filterByKey = {
-        
+        __proto__: null
       };
       ElemHide.keyByFilter = {
-        
+        __proto__: null
       };
       ElemHide.isDirty = false;
       ElemHide.unapply();
@@ -108,7 +108,7 @@
               list = domains[domain];
              else {
               list = {
-                
+                __proto__: null
               };
               domains[domain] = list;
             }

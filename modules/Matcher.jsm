@@ -35,10 +35,10 @@
     keywordByFilter: null,
     clear: function () {
       this.filterByKeyword = {
-        
+        __proto__: null
       };
       this.keywordByFilter = {
-        
+        __proto__: null
       };
     }
     ,
@@ -222,10 +222,10 @@
     this.blacklist = new Matcher();
     this.whitelist = new Matcher();
     this.keys = {
-      
+      __proto__: null
     };
     this.resultCache = {
-      
+      __proto__: null
     };
   }
   CombinedMatcher.maxCacheEntries = 1000;
@@ -239,10 +239,10 @@
       this.blacklist.clear();
       this.whitelist.clear();
       this.keys = {
-        
+        __proto__: null
       };
       this.resultCache = {
-        
+        __proto__: null
       };
       this.cacheEntries = 0;
     }
@@ -261,7 +261,7 @@
         this.blacklist.add(filter);
       if (this.cacheEntries > 0) {
         this.resultCache = {
-          
+          __proto__: null
         };
         this.cacheEntries = 0;
       }
@@ -281,7 +281,7 @@
         this.blacklist.remove(filter);
       if (this.cacheEntries > 0) {
         this.resultCache = {
-          
+          __proto__: null
         };
         this.cacheEntries = 0;
       }
@@ -346,7 +346,7 @@
       var result = this.matchesAnyInternal(location, contentType, docDomain, thirdParty);
       if (this.cacheEntries >= CombinedMatcher.maxCacheEntries) {
         this.resultCache = {
-          
+          __proto__: null
         };
         this.cacheEntries = 0;
       }

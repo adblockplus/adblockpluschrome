@@ -26,15 +26,7 @@
 // This file has been generated automatically from Adblock Plus source code
 //
 
-(function (_patchFunc3) {
-  function _extend1(baseClass, props) {
-    var dummyConstructor = function () {};
-    dummyConstructor.prototype = baseClass.prototype;
-    var result = new dummyConstructor();
-    for (var k in props)
-      result[k] = props[k];
-    return result;
-  }
+(function (_patchFunc2) {
   function Subscription(url, title) {
     this.url = url;
     this.filters = [];
@@ -94,7 +86,7 @@
     
   };
   Subscription.knownSubscriptions = {
-    
+    __proto__: null
   };
   Subscription.fromURL = (function (url) {
     if (url in Subscription.knownSubscriptions)
@@ -166,13 +158,14 @@
   function SpecialSubscription(url, title) {
     Subscription.call(this, url, title);
   }
-  SpecialSubscription.prototype = _extend1(Subscription, {
+  SpecialSubscription.prototype = {
+    __proto__: Subscription.prototype,
     defaults: null,
     isDefaultFor: function (filter) {
       if (this.defaults && this.defaults.length) {
-        for (var _loopIndex2 = 0;
-        _loopIndex2 < this.defaults.length; ++ _loopIndex2) {
-          var type = this.defaults[_loopIndex2];
+        for (var _loopIndex1 = 0;
+        _loopIndex1 < this.defaults.length; ++ _loopIndex1) {
+          var type = this.defaults[_loopIndex1];
           if (filter instanceof SpecialSubscription.defaultsMap[type])
             return true;
           if (!(filter instanceof ActiveFilter) && type == "blacklist")
@@ -192,8 +185,9 @@
         buffer.push("lastDownload=" + this._lastDownload);
     }
     
-  });
+  };
   SpecialSubscription.defaultsMap = {
+    __proto__: null,
     "whitelist": WhitelistFilter,
     "blocking": BlockingFilter,
     "elemhide": ElemHideFilter
@@ -223,7 +217,8 @@
   function RegularSubscription(url, title) {
     Subscription.call(this, url, title || url);
   }
-  RegularSubscription.prototype = _extend1(Subscription, {
+  RegularSubscription.prototype = {
+    __proto__: Subscription.prototype,
     _homepage: null,
     _lastDownload: 0,
     get homepage() {
@@ -258,20 +253,22 @@
         buffer.push("lastDownload=" + this._lastDownload);
     }
     
-  });
+  };
   function ExternalSubscription(url, title) {
     RegularSubscription.call(this, url, title);
   }
-  ExternalSubscription.prototype = _extend1(RegularSubscription, {
+  ExternalSubscription.prototype = {
+    __proto__: RegularSubscription.prototype,
     serialize: function (buffer) {
       throw "Unexpected call, external subscriptions should not be serialized";
     }
     
-  });
+  };
   function DownloadableSubscription(url, title) {
     RegularSubscription.call(this, url, title);
   }
-  DownloadableSubscription.prototype = _extend1(RegularSubscription, {
+  DownloadableSubscription.prototype = {
+    __proto__: RegularSubscription.prototype,
     _downloadStatus: null,
     nextURL: null,
     get downloadStatus() {
@@ -319,9 +316,9 @@
         buffer.push("alternativeLocations=" + this.alternativeLocations);
     }
     
-  });
-  if (typeof _patchFunc3 != "undefined")
-    eval("(" + _patchFunc3.toString() + ")()");
+  };
+  if (typeof _patchFunc2 != "undefined")
+    eval("(" + _patchFunc2.toString() + ")()");
   window.Subscription = Subscription;
   window.SpecialSubscription = SpecialSubscription;
   window.RegularSubscription = RegularSubscription;
