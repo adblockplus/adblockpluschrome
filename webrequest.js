@@ -1,5 +1,5 @@
-webRequest.onBeforeRequest.addListener(onBeforeRequest, {}, ["blocking"]);
-webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, {}, ["requestHeaders", "blocking"]);
+webRequest.onBeforeRequest.addListener(onBeforeRequest, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
+webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, {urls: ["http://*/*", "https://*/*"]}, ["requestHeaders", "blocking"]);
 chrome.tabs.onRemoved.addListener(forgetTab);
 
 var frames = {};
@@ -11,7 +11,7 @@ function onBeforeRequest(details)
   if (type == "main_frame" || type == "sub_frame")
     recordFrame(details.tabId, details.frameId, details.url, type == "main_frame");
 
-  if (type == "main_frame" || /^chrome\b/.test(details.url))
+  if (type == "main_frame")
     return;
 
   // Type names match Mozilla's with main_frame and sub_frame being the only exceptions.
