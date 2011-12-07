@@ -727,14 +727,14 @@ $(function() {
           <div style="font-size: 90%; text-align: right"><a onclick="toggleFiltersInRawFormat()" href="#"><span class="i18n_edit_filters_raw"></span></a></div>
         </td>
       </tr>
-      <tr>
+      <tr id="rawFilters">
         <td>
-          <div id="rawFilters" style="width: 500px">
+          <div style="width: 500px">
             <textarea id="rawFiltersText" style="width: 100%; height: 300px"></textarea>
           </div>
         </td>
         <td>
-          <div class="rawFilters"><button onclick="importRawFiltersText()"><span class="i18n_apply_changes"></span></button></div>
+          <div><button onclick="importRawFiltersText()"><span class="i18n_apply_changes"></span></button></div>
         </td>
       </tr>
     </table>
