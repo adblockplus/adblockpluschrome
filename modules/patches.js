@@ -250,6 +250,9 @@ var Utils =
   {
     newURI: function(uri)
     {
+      if (!uri.length || uri[0] == "~")
+        throw new Error("Invalid URI");
+
       /^([^:\/]*)/.test(uri);
       var scheme = RegExp.$1.toLowerCase();
 
