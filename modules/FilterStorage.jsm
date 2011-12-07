@@ -26,10 +26,12 @@
 // This file has been generated automatically from Adblock Plus source code
 //
 
-(function (_patchFunc12) {
-  const formatVersion = 3;
-  var observers = [];
+(function (_patchFunc11) {
+  const formatVersion = 4;
   var FilterStorage = {
+    get formatVersion() {
+      return formatVersion;
+    },
     get sourceFile() {
       var file = null;
       if (Prefs.patternsfile) {
@@ -63,24 +65,19 @@
     knownSubscriptions: {
       __proto__: null
     },
-    addObserver: function (observer) {
-      if (observers.indexOf(observer) >= 0)
-        return ;
-      observers.push(observer);
-    }
-    ,
-    removeObserver: function (observer) {
-      var index = observers.indexOf(observer);
-      if (index >= 0)
-        observers.splice(index, 1);
-    }
-    ,
-    triggerObservers: function (action, items, additionalData) {
+    getGroupForFilter: function (filter) {
+      var generalSubscription = null;
       for (var _loopIndex0 = 0;
-      _loopIndex0 < observers.length; ++ _loopIndex0) {
-        var observer = observers[_loopIndex0];
-        observer(action, items, additionalData);
+      _loopIndex0 < FilterStorage.subscriptions.length; ++ _loopIndex0) {
+        var subscription = FilterStorage.subscriptions[_loopIndex0];
+        if (subscription instanceof SpecialSubscription) {
+          if (subscription.isDefaultFor(filter))
+            return subscription;
+          if (!generalSubscription && (!subscription.defaults || !subscription.defaults.length))
+            generalSubscription = subscription;
+        }
       }
+      return generalSubscription;
     }
     ,
     addSubscription: function (subscription, silent) {
@@ -90,7 +87,7 @@
       FilterStorage.knownSubscriptions[subscription.url] = subscription;
       addSubscriptionFilters(subscription);
       if (!silent)
-        FilterStorage.triggerObservers("subscriptions add", [subscription]);
+        FilterNotifier.triggerListeners("subscription.added", subscription);
     }
     ,
     removeSubscription: function (subscription, silent) {
@@ -101,10 +98,26 @@
           FilterStorage.subscriptions.splice(i--, 1);
           delete FilterStorage.knownSubscriptions[subscription.url];
           if (!silent)
-            FilterStorage.triggerObservers("subscriptions remove", [subscription]);
+            FilterNotifier.triggerListeners("subscription.removed", subscription);
           return ;
         }
       }
+    }
+    ,
+    moveSubscription: function (subscription, insertBefore) {
+      var currentPos = FilterStorage.subscriptions.indexOf(subscription);
+      if (currentPos < 0)
+        return ;
+      var newPos = insertBefore ? FilterStorage.subscriptions.indexOf(insertBefore) : -1;
+      if (newPos < 0)
+        newPos = FilterStorage.subscriptions.length;
+      if (currentPos < newPos)
+        newPos--;
+      if (currentPos == newPos)
+        return ;
+      FilterStorage.subscriptions.splice(currentPos, 1);
+      FilterStorage.subscriptions.splice(newPos, 0, subscription);
+      FilterNotifier.triggerListeners("subscription.moved", subscription);
     }
     ,
     updateSubscriptionFilters: function (subscription, filters) {
@@ -112,64 +125,78 @@
       subscription.oldFilters = subscription.filters;
       subscription.filters = filters;
       addSubscriptionFilters(subscription);
-      FilterStorage.triggerObservers("subscriptions update", [subscription]);
+      FilterNotifier.triggerListeners("subscription.updated", subscription);
       delete subscription.oldFilters;
-      if (subscription instanceof SpecialSubscription && !subscription.filters.length && subscription.disabled) {
+      if (subscription instanceof SpecialSubscription && !subscription.filters.length && subscription.disabled)
         subscription.disabled = false;
-        FilterStorage.triggerObservers("subscriptions enable", [subscription]);
-      }
     }
     ,
-    addFilter: function (filter, insertBefore, silent) {
-      var subscription = null;
+    addFilter: function (filter, subscription, position, silent) {
       if (!subscription) {
-        for (var _loopIndex1 = 0;
-        _loopIndex1 < FilterStorage.subscriptions.length; ++ _loopIndex1) {
-          var s = FilterStorage.subscriptions[_loopIndex1];
-          if (s instanceof SpecialSubscription && s.isFilterAllowed(filter)) {
-            if (s.filters.indexOf(filter) >= 0)
-              return ;
-            if (!subscription || s.priority > subscription.priority)
-              subscription = s;
-          }
-        }
+        if (filter.subscriptions.some(function (s) {
+          return s instanceof SpecialSubscription;
+        }))
+          return ;
+        subscription = FilterStorage.getGroupForFilter(filter);
       }
-      if (!subscription)
+      if (!subscription) {
+        subscription = SpecialSubscription.createForFilter(filter);
+        this.addSubscription(subscription);
         return ;
-      var insertIndex = -1;
-      if (insertBefore)
-        insertIndex = subscription.filters.indexOf(insertBefore);
-      filter.subscriptions.push(subscription);
-      if (insertIndex >= 0)
-        subscription.filters.splice(insertIndex, 0, filter);
-       else
-        subscription.filters.push(filter);
+      }
+      if (typeof position == "undefined")
+        position = subscription.filters.length;
+      if (filter.subscriptions.indexOf(subscription) < 0)
+        filter.subscriptions.push(subscription);
+      subscription.filters.splice(position, 0, filter);
       if (!silent)
-        FilterStorage.triggerObservers("filters add", [filter], insertBefore);
+        FilterNotifier.triggerListeners("filter.added", filter, subscription, position);
     }
     ,
-    removeFilter: function (filter, silent) {
+    removeFilter: function (filter, subscription, position) {
+      var subscriptions = (subscription ? [subscription] : filter.subscriptions.slice());
       for (var i = 0;
-      i < filter.subscriptions.length; i++) {
-        var subscription = filter.subscriptions[i];
+      i < subscriptions.length; i++) {
+        var subscription = subscriptions[i];
         if (subscription instanceof SpecialSubscription) {
-          for (var j = 0;
-          j < subscription.filters.length; j++) {
-            if (subscription.filters[j].text == filter.text) {
-              filter.subscriptions.splice(i, 1);
-              subscription.filters.splice(j, 1);
-              if (!silent)
-                FilterStorage.triggerObservers("filters remove", [filter]);
-              if (!subscription.filters.length && subscription.disabled) {
-                subscription.disabled = false;
-                if (!silent)
-                  FilterStorage.triggerObservers("subscriptions enable", [subscription]);
+          var positions = [];
+          if (typeof position == "undefined") {
+            var index = -1;
+            do {
+              index = subscription.filters.indexOf(filter, index + 1);
+              if (index >= 0)
+                positions.push(index);
+            }
+            while (index >= 0);
+          }
+           else
+            positions.push(position);
+          for (var j = positions.length - 1;
+          j >= 0; j--) {
+            var position = positions[j];
+            if (subscription.filters[position] == filter) {
+              subscription.filters.splice(position, 1);
+              if (subscription.filters.indexOf(filter) < 0) {
+                var index = filter.subscriptions.indexOf(subscription);
+                if (index >= 0)
+                  filter.subscriptions.splice(index, 1);
               }
-              return ;
+              FilterNotifier.triggerListeners("filter.removed", filter, subscription, position);
             }
           }
         }
       }
+    }
+    ,
+    moveFilter: function (filter, subscription, oldPosition, newPosition) {
+      if (!(subscription instanceof SpecialSubscription) || subscription.filters[oldPosition] != filter)
+        return ;
+      newPosition = Math.min(Math.max(newPosition, 0), subscription.filters.length - 1);
+      if (oldPosition == newPosition)
+        return ;
+      subscription.filters.splice(oldPosition, 1);
+      subscription.filters.splice(newPosition, 0, filter);
+      FilterNotifier.triggerListeners("filter.moved", filter, subscription, oldPosition, newPosition);
     }
     ,
     increaseHitCount: function (filter) {
@@ -177,34 +204,44 @@
         return ;
       filter.hitCount++;
       filter.lastHit = Date.now();
-      FilterStorage.triggerObservers("filters hit", [filter]);
     }
     ,
     resetHitCounts: function (filters) {
       if (!filters) {
         filters = [];
-        for (var _loopIndex3 = 0;
-        _loopIndex3 < Filter.knownFilters.length; ++ _loopIndex3) {
-          var filter = Filter.knownFilters[_loopIndex3];
+        for (var _loopIndex2 = 0;
+        _loopIndex2 < Filter.knownFilters.length; ++ _loopIndex2) {
+          var filter = Filter.knownFilters[_loopIndex2];
           filters.push(filter);
         }
       }
-      for (var _loopIndex2 = 0;
-      _loopIndex2 < filters.length; ++ _loopIndex2) {
-        var filter = filters[_loopIndex2];
+      for (var _loopIndex1 = 0;
+      _loopIndex1 < filters.length; ++ _loopIndex1) {
+        var filter = filters[_loopIndex1];
         filter.hitCount = 0;
         filter.lastHit = 0;
       }
-      FilterStorage.triggerObservers("filters hit", filters);
     }
     ,
-    loadFromDisk: function (silent) {
-      var realSourceFile = FilterStorage.sourceFile;
-      if (!realSourceFile || !realSourceFile.exists()) {
-        var patternsURL = Utils.ioService.newURI("chrome://adblockplus-defaults/content/patterns.ini", null, null);
-        patternsURL = Utils.chromeRegistry.convertChromeURL(patternsURL);
-        if (patternsURL instanceof Ci.nsIFileURL)
-          realSourceFile = patternsURL.file;
+    loadFromDisk: function (sourceFile, silent) {
+      if (!silent) {
+        Filter.knownFilters = {
+          
+        };
+        Subscription.knownSubscriptions = {
+          
+        };
+      }
+      var explicitFile = true;
+      if (!sourceFile) {
+        sourceFile = FilterStorage.sourceFile;
+        explicitFile = false;
+        if (!sourceFile || !sourceFile.exists()) {
+          var patternsURL = Utils.ioService.newURI("chrome://adblockplus-defaults/content/patterns.ini", null, null);
+          patternsURL = Utils.chromeRegistry.convertChromeURL(patternsURL);
+          if (patternsURL instanceof Ci.nsIFileURL)
+            sourceFile = patternsURL.file;
+        }
       }
       var userFilters = null;
       var backup = 0;
@@ -214,9 +251,9 @@
           
         };
         try {
-          if (realSourceFile && realSourceFile.exists()) {
+          if (sourceFile && sourceFile.exists()) {
             var fileStream = Cc["@mozilla.org/network/file-input-stream;1"].createInstance(Ci.nsIFileInputStream);
-            fileStream.init(realSourceFile, 1, 292, 0);
+            fileStream.init(sourceFile, 1, 292, 0);
             var stream = Cc["@mozilla.org/intl/converter-input-stream;1"].createInstance(Ci.nsIConverterInputStream);
             stream.init(fileStream, "UTF-8", 16384, 0);
             stream = stream.QueryInterface(Ci.nsIUnicharLineInputStream);
@@ -229,55 +266,62 @@
           break;
         }
         catch (e){
-          Cu.reportError("Adblock Plus: Failed to read filters from file " + realSourceFile.path);
+          Cu.reportError("Adblock Plus: Failed to read filters from file " + sourceFile.path);
           Cu.reportError(e);
         }
-        realSourceFile = FilterStorage.sourceFile;
-        if (realSourceFile) {
-          var part1 = realSourceFile.leafName;
-          var part2 = "";
-          if (/^(.*)(\.\w+)$/.test(part1)) {
-            part1 = RegExp["$1"];
-            part2 = RegExp["$2"];
-          }
-          realSourceFile = realSourceFile.clone();
-          realSourceFile.leafName = part1 + "-backup" + (++ backup) + part2;
+        if (explicitFile)
+          break;
+        sourceFile = FilterStorage.sourceFile;
+        if (!sourceFile)
+          break;
+        var part1 = sourceFile.leafName;
+        var part2 = "";
+        if (/^(.*)(\.\w+)$/.test(part1)) {
+          part1 = RegExp["$1"];
+          part2 = RegExp["$2"];
         }
+        sourceFile = sourceFile.clone();
+        sourceFile.leafName = part1 + "-backup" + (++ backup) + part2;
       }
-      for (var _loopIndex4 = 0;
-      _loopIndex4 < ["~il~", "~wl~", "~fl~", "~eh~"].length; ++ _loopIndex4) {
-        var specialSubscription = ["~il~", "~wl~", "~fl~", "~eh~"][_loopIndex4];
-        if (!(specialSubscription in FilterStorage.knownSubscriptions)) {
+      for (var _loopIndex3 = 0;
+      _loopIndex3 < ["~il~", "~wl~", "~fl~", "~eh~"].length; ++ _loopIndex3) {
+        var specialSubscription = ["~il~", "~wl~", "~fl~", "~eh~"][_loopIndex3];
+        if (specialSubscription in FilterStorage.knownSubscriptions) {
           var subscription = Subscription.fromURL(specialSubscription);
-          if (subscription)
-            FilterStorage.addSubscription(subscription, true);
+          if (subscription.filters.length == 0)
+            FilterStorage.removeSubscription(subscription, true);
         }
       }
       if (userFilters) {
-        for (var _loopIndex5 = 0;
-        _loopIndex5 < userFilters.length; ++ _loopIndex5) {
-          var filter = userFilters[_loopIndex5];
+        for (var _loopIndex4 = 0;
+        _loopIndex4 < userFilters.length; ++ _loopIndex4) {
+          var filter = userFilters[_loopIndex4];
           filter = Filter.fromText(filter);
           if (filter)
-            FilterStorage.addFilter(filter, null, true);
+            FilterStorage.addFilter(filter, null, undefined, true);
         }
       }
       if (!silent)
-        FilterStorage.triggerObservers("load");
+        FilterNotifier.triggerListeners("load");
     }
     ,
-    saveToDisk: function () {
-      if (!FilterStorage.sourceFile)
+    saveToDisk: function (targetFile) {
+      var explicitFile = true;
+      if (!targetFile) {
+        targetFile = FilterStorage.sourceFile;
+        explicitFile = false;
+      }
+      if (!targetFile)
         return ;
       try {
-        FilterStorage.sourceFile.normalize();
+        targetFile.normalize();
       }
       catch (e){}
       try {
-        FilterStorage.sourceFile.parent.create(Ci.nsIFile.DIRECTORY_TYPE, 493);
+        targetFile.parent.create(Ci.nsIFile.DIRECTORY_TYPE, 493);
       }
       catch (e){}
-      var tempFile = FilterStorage.sourceFile.clone();
+      var tempFile = targetFile.clone();
       tempFile.leafName += "-temp";
       var fileStream, stream;
       try {
@@ -300,14 +344,14 @@
       var saved = {
         __proto__: null
       };
-      for (var _loopIndex6 = 0;
-      _loopIndex6 < FilterStorage.subscriptions.length; ++ _loopIndex6) {
-        var subscription = FilterStorage.subscriptions[_loopIndex6];
+      for (var _loopIndex5 = 0;
+      _loopIndex5 < FilterStorage.subscriptions.length; ++ _loopIndex5) {
+        var subscription = FilterStorage.subscriptions[_loopIndex5];
         if (subscription instanceof ExternalSubscription)
           continue;
-        for (var _loopIndex8 = 0;
-        _loopIndex8 < subscription.filters.length; ++ _loopIndex8) {
-          var filter = subscription.filters[_loopIndex8];
+        for (var _loopIndex7 = 0;
+        _loopIndex7 < subscription.filters.length; ++ _loopIndex7) {
+          var filter = subscription.filters[_loopIndex7];
           if (!(filter.text in saved)) {
             filter.serialize(buf);
             saved[filter.text] = filter;
@@ -316,9 +360,9 @@
           }
         }
       }
-      for (var _loopIndex7 = 0;
-      _loopIndex7 < FilterStorage.subscriptions.length; ++ _loopIndex7) {
-        var subscription = FilterStorage.subscriptions[_loopIndex7];
+      for (var _loopIndex6 = 0;
+      _loopIndex6 < FilterStorage.subscriptions.length; ++ _loopIndex6) {
+        var subscription = FilterStorage.subscriptions[_loopIndex6];
         if (subscription instanceof ExternalSubscription)
           continue;
         buf.push("");
@@ -339,8 +383,8 @@
         Cu.reportError(e);
         return ;
       }
-      if (FilterStorage.sourceFile.exists()) {
-        var part1 = FilterStorage.sourceFile.leafName;
+      if (!explicitFile && targetFile.exists()) {
+        var part1 = targetFile.leafName;
         var part2 = "";
         if (/^(.*)(\.\w+)$/.test(part1)) {
           part1 = RegExp["$1"];
@@ -348,13 +392,13 @@
         }
         var doBackup = (Prefs.patternsbackups > 0);
         if (doBackup) {
-          var lastBackup = FilterStorage.sourceFile.clone();
+          var lastBackup = targetFile.clone();
           lastBackup.leafName = part1 + "-backup1" + part2;
           if (lastBackup.exists() && (Date.now() - lastBackup.lastModifiedTime) / 3600000 < Prefs.patternsbackupinterval)
             doBackup = false;
         }
         if (doBackup) {
-          var backupFile = FilterStorage.sourceFile.clone();
+          var backupFile = targetFile.clone();
           backupFile.leafName = part1 + "-backup" + Prefs.patternsbackups + part2;
           try {
             backupFile.remove(false);
@@ -370,26 +414,51 @@
           }
         }
       }
-      tempFile.moveTo(FilterStorage.sourceFile.parent, FilterStorage.sourceFile.leafName);
-      FilterStorage.triggerObservers("save");
+       else
+        if (targetFile.exists())
+          targetFile.remove(false);
+      tempFile.moveTo(targetFile.parent, targetFile.leafName);
+      if (!explicitFile)
+        FilterNotifier.triggerListeners("save");
+    }
+    ,
+    getBackupFiles: function () {
+      var result = [];
+      var part1 = FilterStorage.sourceFile.leafName;
+      var part2 = "";
+      if (/^(.*)(\.\w+)$/.test(part1)) {
+        part1 = RegExp["$1"];
+        part2 = RegExp["$2"];
+      }
+      for (var i = 1;
+      ;
+      i++) {
+        var file = FilterStorage.sourceFile.clone();
+        file.leafName = part1 + "-backup" + i + part2;
+        if (file.exists())
+          result.push(file);
+         else
+          break;
+      }
+      return result;
     }
     
   };
   function addSubscriptionFilters(subscription) {
     if (!(subscription.url in FilterStorage.knownSubscriptions))
       return ;
-    for (var _loopIndex9 = 0;
-    _loopIndex9 < subscription.filters.length; ++ _loopIndex9) {
-      var filter = subscription.filters[_loopIndex9];
+    for (var _loopIndex8 = 0;
+    _loopIndex8 < subscription.filters.length; ++ _loopIndex8) {
+      var filter = subscription.filters[_loopIndex8];
       filter.subscriptions.push(subscription);
     }
   }
   function removeSubscriptionFilters(subscription) {
     if (!(subscription.url in FilterStorage.knownSubscriptions))
       return ;
-    for (var _loopIndex10 = 0;
-    _loopIndex10 < subscription.filters.length; ++ _loopIndex10) {
-      var filter = subscription.filters[_loopIndex10];
+    for (var _loopIndex9 = 0;
+    _loopIndex9 < subscription.filters.length; ++ _loopIndex9) {
+      var filter = subscription.filters[_loopIndex9];
       var i = filter.subscriptions.indexOf(subscription);
       if (i >= 0)
         filter.subscriptions.splice(i, 1);
@@ -436,9 +505,9 @@
               case "subscription patterns": {
                 if (FilterStorage.subscriptions.length) {
                   var subscription = FilterStorage.subscriptions[FilterStorage.subscriptions.length - 1];
-                  for (var _loopIndex11 = 0;
-                  _loopIndex11 < curObj.length; ++ _loopIndex11) {
-                    var text = curObj[_loopIndex11];
+                  for (var _loopIndex10 = 0;
+                  _loopIndex10 < curObj.length; ++ _loopIndex10) {
+                    var text = curObj[_loopIndex10];
                     var filter = Filter.fromText(text);
                     if (filter) {
                       subscription.filters.push(filter);
@@ -486,8 +555,8 @@
     }
     return userFilters;
   }
-  if (typeof _patchFunc12 != "undefined")
-    eval("(" + _patchFunc12.toString() + ")()");
+  if (typeof _patchFunc11 != "undefined")
+    eval("(" + _patchFunc11.toString() + ")()");
   window.FilterStorage = FilterStorage;
 }
 )(window.FilterStoragePatch);

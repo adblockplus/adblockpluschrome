@@ -175,7 +175,7 @@
         }
       }
       finally {
-        FilterStorage.triggerObservers("elemhideupdate");
+        FilterNotifier.triggerListeners("elemhideupdate");
       }
     }
     ,

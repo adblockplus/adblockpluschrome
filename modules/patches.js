@@ -45,7 +45,7 @@ function ElemHidePatch()
     for (var key in filterByKey)
     {
       var filter = Filter.knownFilters[filterByKey[key]];
-      if (specificOnly && !filter.includeDomains)
+      if (specificOnly && (!filter.domains || filter.domains[""]))
         continue;
 
       if (filter.isActiveOnDomain(domain))
@@ -273,7 +273,7 @@ var Utils =
       callback.apply(thisPtr, params);
     }, 0);
   },
-  addonVersion: "1.3.10", // Hardcoded for now
+  addonVersion: "2.0", // Hardcoded for now
   get appLocale()
   {
     var locale = chrome.i18n.getMessage("@@ui_locale").replace(/_/g, "-");

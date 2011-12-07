@@ -82,10 +82,7 @@ function toggleEnabled()
     {
       FilterStorage.removeFilter(filter);
       if (filter.subscriptions.length)
-      {
         filter.disabled = true;
-        FilterStorage.triggerObservers("filters disable", [filter]);
-      }
       filter = isWhitelisted(tab.url);
     }
   }
@@ -94,10 +91,7 @@ function toggleEnabled()
     var host = extractDomainFromURL(tab.url).replace(/^www\./, "");
     var filter = Filter.fromText("@@||" + host + "^$document");
     if (filter.subscriptions.length && filter.disabled)
-    {
       filter.disabled = false;
-      FilterStorage.triggerObservers("filters enable", [filter]);
-    }
     else
     {
       filter.disabled = false;
