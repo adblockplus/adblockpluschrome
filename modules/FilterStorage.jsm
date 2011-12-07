@@ -226,10 +226,10 @@
     loadFromDisk: function (sourceFile, silent) {
       if (!silent) {
         Filter.knownFilters = {
-          
+          __proto__: null
         };
         Subscription.knownSubscriptions = {
-          
+          __proto__: null
         };
       }
       var explicitFile = true;
@@ -248,7 +248,7 @@
       while (true) {
         FilterStorage.subscriptions = [];
         FilterStorage.knownSubscriptions = {
-          
+          __proto__: null
         };
         try {
           if (sourceFile && sourceFile.exists()) {

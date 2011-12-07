@@ -26,15 +26,7 @@
 // This file has been generated automatically from Adblock Plus source code
 //
 
-(function (_patchFunc3) {
-  function _extend0(baseClass, props) {
-    var dummyConstructor = function () {};
-    dummyConstructor.prototype = baseClass.prototype;
-    var result = new dummyConstructor();
-    for (var k in props)
-      result[k] = props[k];
-    return result;
-  }
+(function (_patchFunc2) {
   function Filter(text) {
     this.text = text;
     this.subscriptions = [];
@@ -53,7 +45,7 @@
     
   };
   Filter.knownFilters = {
-    
+    __proto__: null
   };
   Filter.elemhideRegExp = /^([^\/\*\|\@"!]*?)#(?:([\w\-]+|\*)((?:\([\w\-]+(?:[$^*]?=[^\(\)"]*)?\))*)|#([^{}]+))$/;
   Filter.regexpRegExp = /^(@@)?\/.*\/(?:\$~?[\w\-]+(?:=[^,\s]+)?(?:,~?[\w\-]+(?:=[^,\s]+)?)*)?$/;
@@ -111,16 +103,18 @@
     Filter.call(this, text);
     this.reason = reason;
   }
-  InvalidFilter.prototype = _extend0(Filter, {
+  InvalidFilter.prototype = {
+    __proto__: Filter.prototype,
     reason: null,
     serialize: function (buffer) {}
-  });
+  };
   function CommentFilter(text) {
     Filter.call(this, text);
   }
-  CommentFilter.prototype = _extend0(Filter, {
+  CommentFilter.prototype = {
+    __proto__: Filter.prototype,
     serialize: function (buffer) {}
-  });
+  };
   function ActiveFilter(text, domains) {
     Filter.call(this, text);
     if (domains) {
@@ -128,7 +122,8 @@
       this.__defineGetter__("domains", this._getDomains);
     }
   }
-  ActiveFilter.prototype = _extend0(Filter, {
+  ActiveFilter.prototype = {
+    __proto__: Filter.prototype,
     _disabled: false,
     _hitCount: 0,
     _lastHit: 0,
@@ -182,6 +177,7 @@
       delete this.domains;
       if (domains.length == 1 && domains[0][0] != "~") {
         this.domains = {
+          __proto__: null,
           "": false
         };
         this.domains[domains[0]] = true;
@@ -204,7 +200,7 @@
           }
           if (!this.domains)
             this.domains = {
-              
+              __proto__: null
             };
           this.domains[domain] = include;
         }
@@ -251,7 +247,7 @@
       }
     }
     
-  });
+  };
   function RegExpFilter(text, regexpSource, contentType, matchCase, domains, thirdParty) {
     ActiveFilter.call(this, text, domains);
     if (contentType != null)
@@ -268,7 +264,8 @@
       this.__defineGetter__("regexp", this._generateRegExp);
     }
   }
-  RegExpFilter.prototype = _extend0(ActiveFilter, {
+  RegExpFilter.prototype = {
+    __proto__: ActiveFilter.prototype,
     domainSeparator: "|",
     regexpSource: null,
     regexp: null,
@@ -296,7 +293,7 @@
       return false;
     }
     
-  });
+  };
   RegExpFilter.fromText = (function (text) {
     var blocking = true;
     var origText = text;
@@ -314,9 +311,9 @@
     if (Filter.optionsRegExp.test(text)) {
       options = RegExp["$1"].toUpperCase().split(",");
       text = RegExp.leftContext;
-      for (var _loopIndex1 = 0;
-      _loopIndex1 < options.length; ++ _loopIndex1) {
-        var option = options[_loopIndex1];
+      for (var _loopIndex0 = 0;
+      _loopIndex0 < options.length; ++ _loopIndex0) {
+        var option = options[_loopIndex0];
         var value = null;
         var separatorIndex = option.indexOf("=");
         if (separatorIndex >= 0) {
@@ -401,28 +398,31 @@
     RegExpFilter.call(this, text, regexpSource, contentType, matchCase, domains, thirdParty);
     this.collapse = collapse;
   }
-  BlockingFilter.prototype = _extend0(RegExpFilter, {
+  BlockingFilter.prototype = {
+    __proto__: RegExpFilter.prototype,
     collapse: null
-  });
+  };
   function WhitelistFilter(text, regexpSource, contentType, matchCase, domains, thirdParty, siteKeys) {
     RegExpFilter.call(this, text, regexpSource, contentType, matchCase, domains, thirdParty);
     if (siteKeys != null)
       this.siteKeys = siteKeys;
   }
-  WhitelistFilter.prototype = _extend0(RegExpFilter, {
+  WhitelistFilter.prototype = {
+    __proto__: RegExpFilter.prototype,
     siteKeys: null
-  });
+  };
   function ElemHideFilter(text, domains, selector) {
     ActiveFilter.call(this, text, domains ? domains.toUpperCase() : null);
     if (domains)
       this.selectorDomain = domains.replace(/,~[^,]+/g, "").replace(/^~[^,]+,?/, "").toLowerCase();
     this.selector = selector;
   }
-  ElemHideFilter.prototype = _extend0(ActiveFilter, {
+  ElemHideFilter.prototype = {
+    __proto__: ActiveFilter.prototype,
     domainSeparator: ",",
     selectorDomain: null,
     selector: null
-  });
+  };
   ElemHideFilter.fromText = (function (text, domain, tagName, attrRules, selector) {
     if (!selector) {
       if (tagName == "*")
@@ -431,9 +431,9 @@
       var additional = "";
       if (attrRules) {
         attrRules = attrRules.match(/\([\w\-]+(?:[$^*]?=[^\(\)"]*)?\)/g);
-        for (var _loopIndex2 = 0;
-        _loopIndex2 < attrRules.length; ++ _loopIndex2) {
-          var rule = attrRules[_loopIndex2];
+        for (var _loopIndex1 = 0;
+        _loopIndex1 < attrRules.length; ++ _loopIndex1) {
+          var rule = attrRules[_loopIndex1];
           rule = rule.substr(1, rule.length - 2);
           var separatorPos = rule.indexOf("=");
           if (separatorPos > 0) {
@@ -459,8 +459,8 @@
     return new ElemHideFilter(text, domain, selector);
   }
   );
-  if (typeof _patchFunc3 != "undefined")
-    eval("(" + _patchFunc3.toString() + ")()");
+  if (typeof _patchFunc2 != "undefined")
+    eval("(" + _patchFunc2.toString() + ")()");
   window.Filter = Filter;
   window.InvalidFilter = InvalidFilter;
   window.CommentFilter = CommentFilter;
