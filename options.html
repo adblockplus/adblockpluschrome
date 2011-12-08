@@ -185,7 +185,7 @@ function loadRecommendations()
     {
       var element = elements[i];
       var option = document.createElement("option");
-      option.text = element.getAttribute("title");
+      option.text = element.getAttribute("title") + " (" + element.getAttribute("specialization") + ")";
       option._data = {
         title: element.getAttribute("title"),
         url: element.getAttribute("url"),
