@@ -114,8 +114,15 @@ function setElemhideCSSRules(selectors)
   document.documentElement.appendChild(elemhideElt);
 
   var elt = elemhideElt;  // Use a local variable to avoid racing conditions
-  window.setTimeout(function()
+  function setRules()
   {
+    if (!elt.sheet)
+    {
+      // Stylesheet didn't initialize yet, wait a little longer
+      window.setTimeout(setRules, 0);
+      return;
+    }
+
     // WebKit apparently chokes when the selector list in a CSS rule is huge.
     // So we split the elemhide selectors into groups.
     for (var i = 0, j = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE, j++)
@@ -123,7 +130,8 @@ function setElemhideCSSRules(selectors)
       var selector = selectors.slice(i, i + SELECTOR_GROUP_SIZE).join(", ");
       elt.sheet.insertRule(selector + " { display: none !important; }", j);
     }
-  }, 0);
+  }
+  setRules();
 }
 
 // Hides a single element
