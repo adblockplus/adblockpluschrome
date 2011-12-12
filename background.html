@@ -588,7 +588,7 @@ try
 {
   var dummy = function(){};
   webRequest = "webRequest" in chrome ? chrome.webRequest : chrome.experimental.webRequest;
-  webRequest.onBeforeRequest.addListener(dummy);
+  webRequest.onBeforeRequest.addListener(dummy, {urls: []});
   webRequest.onBeforeRequest.removeListener(dummy);
   hasExperimentalPermissions = true;
 
