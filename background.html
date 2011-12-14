@@ -33,7 +33,8 @@ FilterNotifier.addListener(function(action)
   }
 });
 
-// Special-case domains for which we cannot use style-based hiding rules
+// Special-case domains for which we cannot use style-based hiding rules.
+// See http://crbug.com/68705.
 var noStyleRulesHosts = ["mail.google.com", "mail.yahoo.com", "www.google.com"];
 
 // Extracts a domain name from a URL
