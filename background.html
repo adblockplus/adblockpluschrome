@@ -33,10 +33,8 @@ FilterNotifier.addListener(function(action)
   }
 });
 
-// Special-case domains for which we should only inject their specific
-// selectors, due to Chrome selector handling bugginess
-// TODO: Put this in the AdThwart filter list, like !NI
-var onlyInjectDomainSpecificSelectors = ["mail.google.com", "mail.yahoo.com"];
+// Special-case domains for which we cannot use style-based hiding rules
+var noStyleRulesHosts = ["mail.google.com", "mail.yahoo.com", "www.google.com"];
 
 // Extracts a domain name from a URL
 function extractDomainFromURL(url)
@@ -478,18 +476,25 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
         matcherData = getMatcherData();
       if (enabled && request.selectors)
       {
-        var onlySpecific = false;
+        var noStyleRules = false;
         var host = request.host;
-        for (var i = 0; i < onlyInjectDomainSpecificSelectors.length; i++)
+        for (var i = 0; i < noStyleRulesHosts.length; i++)
         {
-          var specificDomain = onlyInjectDomainSpecificSelectors[i];
-          if (host == specificDomain || (host.length > specificDomain.length &&
-                                         host.substr(host.length - specificDomain.length - 1) == "." + specificDomain))
+          var noStyleHost = noStyleRulesHosts[i];
+          if (host == noStyleHost || (host.length > noStyleHost.length &&
+                                      host.substr(host.length - noStyleHost.length - 1) == "." + noStyleHost))
           {
-            onlySpecific = true;
+            noStyleRules = true;
           }
         }
-        selectors = ElemHide.getSelectorsForDomain(host, onlySpecific);
+        selectors = ElemHide.getSelectorsForDomain(host, false);
+        if (noStyleRules)
+        {
+          selectors = selectors.filter(function(s)
+          {
+            return !/\[style[\^\$]?=/.test(s);
+          });
+        }
       }
       sendResponse({enabled: enabled, matcherData: matcherData, selectors: selectors});
       break;
