@@ -1,5 +1,12 @@
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
 webRequest.onBeforeRequest.addListener(onBeforeRequest, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
 webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, {urls: ["http://*/*", "https://*/*"]}, ["requestHeaders", "blocking"]);
+webRequest.onErrorOccurred.addListener(onErrorOccurred, {urls: ["http://*/*", "https://*/*"]});
 chrome.tabs.onRemoved.addListener(forgetTab);
 
 var frames = {};
@@ -115,4 +122,9 @@ function checkRequest(type, url, documentUrl, topUrl)
   var documentHost = extractDomainFromURL(documentUrl);
   var thirdParty = isThirdParty(requestHost, documentHost);
   return defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
+}
+
+function onErrorOccurred(details)
+{
+  console.log(details);
 }
