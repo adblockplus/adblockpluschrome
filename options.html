@@ -352,9 +352,9 @@ function updateSubscriptionInfo(element)
     lastUpdate.textContent = chrome.i18n.getMessage("global_" + subscription.downloadStatus);
     lastUpdate.classList.add("error");
   }
-  else if (subscription.lastSuccess > 0)
+  else if (subscription.lastDownload > 0)
   {
-    var timeDate = i18n_timeDateStrings(subscription.lastSuccess * 1000);
+    var timeDate = i18n_timeDateStrings(subscription.lastDownload * 1000);
     var messageID = (timeDate[1] ? "last_updated_at" : "last_updated_at_today");
     lastUpdate.textContent = chrome.i18n.getMessage(messageID, timeDate);
   }
