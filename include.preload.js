@@ -79,6 +79,8 @@ var SELECTOR_GROUP_SIZE = 20;
 
 var savedBeforeloadEvents = new Array();
 
+var elemhideElt = null;
+
 // Sets the currently used CSS rules for elemhide filters
 function setElemhideCSSRules(selectors)
 {
@@ -266,16 +268,12 @@ function beforeloadHandler(/**Event*/ e)
   }
 }
 
-if (isExperimental != true && !workaroundBeforeloadMalfunction)
+function sendRequests()
 {
-  document.addEventListener("beforeload", saveBeforeloadEvent, true);
-}
+  // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
+  if (!(document.documentElement instanceof HTMLElement))
+    return;
 
-var elemhideElt = null;
-
-// Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
-if (document.documentElement instanceof HTMLElement)
-{
   // Blocking from content script is unnecessary in experimental builds, it is
   // done though webRequest API.
   if (isExperimental != true)
@@ -306,3 +304,14 @@ if (document.documentElement instanceof HTMLElement)
     setElemhideCSSRules(response.selectors);
   });
 }
+
+if (isExperimental != true && !workaroundBeforeloadMalfunction)
+{
+  document.addEventListener("beforeload", saveBeforeloadEvent, true);
+}
+
+// In Chrome 18 the document might not be initialized yet
+if (document.documentElement)
+  sendRequests();
+else
+  window.setTimeout(sendRequests, 0);
