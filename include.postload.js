@@ -550,14 +550,6 @@ if (document.documentElement instanceof HTMLElement)
       enabled = response.enabled;
       if(enabled)
       {
-        if (workaroundBeforeloadMalfunction)
-        {
-          // Too bad, we cannot block properly - resort to crawling the document
-          // for ads.
-          nukeElements();
-          document.addEventListener("DOMNodeInserted", handleNodeInserted, false);
-        }
-
         // Nuke background if it's an ad
         var bodyBackground = getComputedStyle(document.body).backgroundImage;
         if (bodyBackground && /^url\((.*)\)$/.test(bodyBackground) && shouldBlock(RegExp.$1, "IMAGE"))

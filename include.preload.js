@@ -15,66 +15,6 @@ var TagToType = {
   "IFRAME": "SUBDOCUMENT"
 };
 
-// Merely listening to the beforeload event messes up various websites (see
-// http://code.google.com/p/chromium/issues/detail?id=56204#c10 and
-// https://bugs.webkit.org/show_bug.cgi?id=45586). So for these cases we avoid
-// listening to beforeload and instead depend on handleNodeInserted() in
-// blocker.js to get rid of ads by element src URL.
-// Unfortunately we can't do this with filter rules because we would need to query the backend to
-// check our domain, which cannot respond in time due to the lack of synchronous message passing.
-
-var BEFORELOAD_MALFUNCTION_DOMAINS = {
-  "t.sina.com.cn": true,
-  "prazsketramvaje.cz": true,
-  "xnachat.com": true,
-  "www.tuenti.com": true,
-  "www.nwjv.de": true,
-  "www.redfin.com": true,
-  "www.nubert.de": true,
-  "shop.ww.kz": true,
-  "www.shop.ww.kz": true,
-  "www.meinvz.net": true,
-  "www.studivz.net": true,
-  "www.schuelervz.net": true,
-  "www.wien.gv.at": true,
-  "rezitests.ro": true,
-  "www.rezitests.ro": true,
-  "www.lojagloboesporte.com": true,
-  "www.netshoes.com.br": true,
-  "victorinox.com": true,
-  "www.victorinox.com": true,
-  "www.edmontonjournal.com": true,
-  "www.timescolonist.com": true,
-  "www.theprovince.com": true,
-  "www.vancouversun.com": true,
-  "www.calgaryherald.com": true,
-  "www.leaderpost.com": true,
-  "www.thestarphoenix.com": true,
-  "www.windsorstar.com": true,
-  "www.ottawacitizen.com": true,
-  "www.montrealgazette.com": true,
-  "shop.advanceautoparts.com": true,
-  "www.clove.co.uk": true,
-  "www.e-shop.gr": true,
-  "www.ebuyer.com": true,
-  "www.satchef.de": true,
-  "www.brueckenkopf-online.com": true,
-  "bestrepack.net": true,
-  "www.bestrepack.net": true,
-  "notebookhp.ru": true,
-  "www.notebookhp.ru": true,
-  "mp3dostavka.ru": true,
-  "www.mp3dostavka.ru": true,
-  "avikomp.ru": true,
-  "www.avikomp.ru": true,
-  "www.mtonline.ru": true,
-  "www.allwear.com": true,
-  "scootermag.ru": true,
-  "www.scootermag.ru": true,
-  "www.panmacmillan.com": true
-};
-var workaroundBeforeloadMalfunction = document.domain in BEFORELOAD_MALFUNCTION_DOMAINS;
-
 var SELECTOR_GROUP_SIZE = 20;
 
 var savedBeforeloadEvents = new Array();
@@ -286,14 +226,11 @@ function sendRequests()
       {
         defaultMatcher.fromCache(JSON.parse(response.matcherData));
 
-        if (!workaroundBeforeloadMalfunction)
-        {
-          document.addEventListener("beforeload", beforeloadHandler, true);
+        document.addEventListener("beforeload", beforeloadHandler, true);
 
-          // Replay the events that were saved while we were waiting to learn whether we are enabled
-          for(var i = 0; i < savedBeforeloadEvents.length; i++)
-            beforeloadHandler(savedBeforeloadEvents[i]);
-        }
+        // Replay the events that were saved while we were waiting to learn whether we are enabled
+        for(var i = 0; i < savedBeforeloadEvents.length; i++)
+          beforeloadHandler(savedBeforeloadEvents[i]);
       }
       delete savedBeforeloadEvents;
     });
@@ -305,10 +242,8 @@ function sendRequests()
   });
 }
 
-if (isExperimental != true && !workaroundBeforeloadMalfunction)
-{
+if (isExperimental != true)
   document.addEventListener("beforeload", saveBeforeloadEvent, true);
-}
 
 // In Chrome 18 the document might not be initialized yet
 if (document.documentElement)
