@@ -18,6 +18,8 @@
 FilterListener.startup();
 Synchronizer.startup();
 
+window.addEventListener("unload", FilterListener.shutdown);
+
 FilterNotifier.addListener(function(action)
 {
   if (action == "load")
@@ -205,8 +207,6 @@ function getMatcherData()
  */
 function importOldData()
 {
-  var hadChanges = false;
-
   function addSubscription(url, title)
   {
     try
@@ -218,7 +218,6 @@ function importOldData()
           subscription.title = title;
         FilterStorage.addSubscription(subscription);
         Synchronizer.execute(subscription);
-        hadChanges = true;
       }
     }
     catch (e)
@@ -327,7 +326,6 @@ function importOldData()
 
         var filter = Filter.fromText(filterText);
         FilterStorage.addFilter(filter);
-        hadChanges = true;
       }
       delete localStorage["userFilters"];
     }
@@ -348,7 +346,6 @@ function importOldData()
         var filterText = "@@||" + domain + "^$document";
         var filter = Filter.fromText(filterText);
         FilterStorage.addFilter(filter);
-        hadChanges = true;
       }
       delete localStorage["excludedDomains"];
     }
@@ -369,9 +366,6 @@ function importOldData()
   {
     reportError(e);
   }
-
-  if (hadChanges)
-    FilterStorage.saveToDisk();
 }
 
 /**
@@ -443,8 +437,6 @@ function executeFirstRunActions()
     if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
       Synchronizer.execute(subscription);
     FilterStorage.addSubscription(subscription);
-
-    FilterStorage.saveToDisk();
   };
   request.send(null);
 }
@@ -513,7 +505,6 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
       {
         for (var i = 0; i < request.filters.length; i++)
           FilterStorage.addFilter(Filter.fromText(request.filters[i]));
-        FilterStorage.saveToDisk();
       }
       break;
     case "add-subscription":

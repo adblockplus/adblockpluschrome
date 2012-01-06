@@ -96,13 +96,13 @@
       if ("lastSuccess" in obj)
         result.lastSuccess = parseInt(obj.lastSuccess) || 0;
       if ("lastCheck" in obj)
-        result.lastCheck = parseInt(obj.lastCheck) || 0;
+        result._lastCheck = parseInt(obj.lastCheck) || 0;
       if ("expires" in obj)
         result.expires = parseInt(obj.expires) || 0;
       if ("softExpiration" in obj)
         result.softExpiration = parseInt(obj.softExpiration) || 0;
       if ("errors" in obj)
-        result.errors = parseInt(obj.errors) || 0;
+        result._errors = parseInt(obj.errors) || 0;
       if ("requiredVersion" in obj) {
         result.requiredVersion = obj.requiredVersion;
         if (Utils.versionComparator.compare(result.requiredVersion, Utils.addonVersion) > 0)
@@ -252,25 +252,47 @@
   DownloadableSubscription.prototype = {
     __proto__: RegularSubscription.prototype,
     _downloadStatus: null,
+    _lastCheck: 0,
+    _errors: 0,
     nextURL: null,
     get downloadStatus() {
       return this._downloadStatus;
     },
     set downloadStatus(value) {
-      if (value != this._downloadStatus) {
-        var oldValue = this._downloadStatus;
-        this._downloadStatus = value;
-        FilterNotifier.triggerListeners("subscription.downloadStatus", this, value, oldValue);
-      }
+      var oldValue = this._downloadStatus;
+      this._downloadStatus = value;
+      FilterNotifier.triggerListeners("subscription.downloadStatus", this, value, oldValue);
       return this._downloadStatus;
     }
     ,
     lastModified: null,
     lastSuccess: 0,
-    lastCheck: 0,
+    get lastCheck() {
+      return this._lastCheck;
+    },
+    set lastCheck(value) {
+      if (value != this._lastCheck) {
+        var oldValue = this._lastCheck;
+        this._lastCheck = value;
+        FilterNotifier.triggerListeners("subscription.lastCheck", this, value, oldValue);
+      }
+      return this._lastCheck;
+    }
+    ,
     expires: 0,
     softExpiration: 0,
-    errors: 0,
+    get errors() {
+      return this._errors;
+    },
+    set errors(value) {
+      if (value != this._errors) {
+        var oldValue = this._errors;
+        this._errors = value;
+        FilterNotifier.triggerListeners("subscription.errors", this, value, oldValue);
+      }
+      return this._errors;
+    }
+    ,
     requiredVersion: null,
     upgradeRequired: false,
     alternativeLocations: null,

@@ -257,7 +257,7 @@ var Utils =
       callback.apply(thisPtr, params);
     }, 0);
   },
-  addonVersion: "2.0", // Hardcoded for now
+  addonVersion: "2.0.3", // Hardcoded for now
   get appLocale()
   {
     var locale = chrome.i18n.getMessage("@@ui_locale").replace(/_/g, "-");
