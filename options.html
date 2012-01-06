@@ -110,7 +110,21 @@ function loadOptions()
   else
     document.getElementById("hidePlaceholdersContainer").style.display = "none";
 
+  // Load recommended subscriptions
+  loadRecommendations();
+
+  // Show user's filters
+  reloadFilters();
+}
+
+// Reloads the displayed subscriptions and filters
+function reloadFilters()
+{
   // Load user filter URLs
+  var container = document.getElementById("filterLists");
+  while (container.lastChild)
+    container.removeChild(container.lastChild);
+
   for (var i = 0; i < FilterStorage.subscriptions.length; i++)
   {
     var subscription = FilterStorage.subscriptions[i];
@@ -122,9 +136,6 @@ function loadOptions()
 
   // User-entered filters
   showUserFilters();
-
-  // Load recommended subscriptions
-  loadRecommendations();
 }
 
 // Cleans up when the options window is closed
@@ -362,6 +373,9 @@ function onFilterChange(action, item, param1, param2)
 {
   switch (action)
   {
+    case "load":
+      reloadFilters();
+      break;
     case "subscription.title":
     case "subscription.disabled":
     case "subscription.homepage":
