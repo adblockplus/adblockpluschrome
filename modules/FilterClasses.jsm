@@ -238,7 +238,7 @@
       this.matchCase = matchCase;
     if (thirdParty != null)
       this.thirdParty = thirdParty;
-    if (regexpSource[0] == "/" && regexpSource[regexpSource.length - 1] == "/") {
+    if (regexpSource.length >= 2 && regexpSource[0] == "/" && regexpSource[regexpSource.length - 1] == "/") {
       this.regexp = new RegExp(regexpSource.substr(1, regexpSource.length - 2), this.matchCase ? "" : "i");
     }
      else {

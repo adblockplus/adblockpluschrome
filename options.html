@@ -315,8 +315,6 @@ function doAddSubscription(url, title, homepage)
 
   if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
     Synchronizer.execute(subscription);
-
-  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 function findSubscriptionElement(subscription)
@@ -444,7 +442,6 @@ function addWhitelistDomain()
 
   var filterText = "@@||" + domain + "^$document";
   FilterStorage.addFilter(Filter.fromText(filterText));
-  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 // Adds filter text that user typed to the selection box
@@ -456,7 +453,6 @@ function addTypedFilter()
     return;
 
   FilterStorage.addFilter(Filter.fromText(filterText));
-  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 // Removes currently selected whitelisted domains
@@ -472,7 +468,6 @@ function removeSelectedExcludedDomain()
 
   for (var i = 0; i < remove.length; i++)
     FilterStorage.removeFilter(Filter.fromText("@@||" + remove[i] + "^$document"));
-  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 // Removes all currently selected filters
@@ -488,7 +483,6 @@ function removeSelectedFilters()
 
   for (var i = 0; i < remove.length; i++)
     FilterStorage.removeFilter(Filter.fromText(remove[i]));
-  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 // Shows raw filters box and fills it with the current user filters
@@ -544,8 +538,6 @@ function importRawFiltersText()
   }
   for (var i = 0; i < remove.length; i++)
     FilterStorage.removeFilter(remove[i]);
-
-  window.setTimeout(FilterStorage.saveToDisk, 0);
 }
 
 // Called when user explicitly requests filter list updates
@@ -576,7 +568,6 @@ function addSubscriptionEntry(subscription)
       return;
 
     FilterStorage.removeSubscription(subscription);
-    window.setTimeout(FilterStorage.saveToDisk, 0);
   }, false);
 
   var enabled = element.getElementsByClassName("subscriptionEnabled")[0];
@@ -586,7 +577,6 @@ function addSubscriptionEntry(subscription)
       return;
 
     subscription.disabled = !enabled.checked;
-    window.setTimeout(FilterStorage.saveToDisk, 0);
   }, false);
 
   updateSubscriptionInfo(element);

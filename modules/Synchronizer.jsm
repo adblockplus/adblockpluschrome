@@ -265,7 +265,6 @@
         if (newFilters)
           FilterStorage.updateSubscriptionFilters(subscription, newFilters);
         delete subscription.oldSubscription;
-        FilterStorage.saveToDisk();
       }
       , false);
       executing[url] = true;
@@ -282,7 +281,8 @@
     
   };
   function checkSubscriptions() {
-    var hadDownloads = false;
+    if (!Prefs.subscriptions_autoupdate)
+      return ;
     var time = Math.round(Date.now() / MILLISECONDS_IN_SECOND);
     for (var _loopIndex3 = 0;
     _loopIndex3 < FilterStorage.subscriptions.length; ++ _loopIndex3) {
@@ -299,13 +299,8 @@
         subscription.softExpiration = time + MAX_EXPIRATION_INTERVAL;
       if (subscription.softExpiration > time && subscription.expires > time)
         continue;
-      if (time - subscription.lastDownload >= MIN_EXPIRATION_INTERVAL) {
-        hadDownloads = true;
+      if (time - subscription.lastDownload >= MIN_EXPIRATION_INTERVAL)
         Synchronizer.execute(subscription, false);
-      }
-    }
-    if (!hadDownloads) {
-      FilterStorage.saveToDisk();
     }
   }
   function readFilters(subscription, text, errorCallback) {
@@ -393,13 +388,11 @@
               FilterStorage.addSubscription(newSubscription);
               Synchronizer.execute(newSubscription);
             }
-          FilterStorage.saveToDisk();
         }
         , false);
         request.send(null);
       }
     }
-    FilterStorage.saveToDisk();
   }
   if (typeof _patchFunc5 != "undefined")
     eval("(" + _patchFunc5.toString() + ")()");

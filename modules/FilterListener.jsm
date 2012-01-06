@@ -11,7 +11,7 @@
 (function (_patchFunc2) {
   const cacheVersion = 2;
   var batchMode = false;
-  var isDirty = false;
+  var isDirty = 0;
   var FilterListener = {
     startup: function () {
       FilterNotifier.addListener(function (action, item, newValue, oldValue) {
@@ -81,7 +81,7 @@
     }
     ,
     shutdown: function () {
-      if (isDirty)
+      if (isDirty > 0)
         FilterStorage.saveToDisk();
     }
     ,
@@ -93,30 +93,46 @@
       batchMode = value;
       flushElemHide();
     }
+    ,
+    setDirty: function (factor) {
+      if (factor == 0 && isDirty > 0)
+        isDirty = 1;
+       else
+        isDirty += factor;
+      if (isDirty >= 1 && !filtersFlushScheduled) {
+        Utils.runAsync(flushFiltersInternal);
+        filtersFlushScheduled = true;
+      }
+    }
     
   };
   var FilterListenerPrivate = {
     observe: function (subject, topic, data) {
       if (topic == "browser:purge-session-history" && Prefs.clearStatsOnHistoryPurge) {
         FilterStorage.resetHitCounts();
-        FilterStorage.saveToDisk();
+        FilterListener.setDirty(0);
         Prefs.recentReports = "[]";
       }
     }
     ,
     QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
   };
-  var flushScheduled = false;
+  var elemhideFlushScheduled = false;
   function flushElemHide() {
-    if (flushScheduled)
+    if (elemhideFlushScheduled)
       return ;
     Utils.runAsync(flushElemHideInternal);
-    flushScheduled = true;
+    elemhideFlushScheduled = true;
   }
   function flushElemHideInternal() {
-    flushScheduled = false;
+    elemhideFlushScheduled = false;
     if (!batchMode && ElemHide.isDirty)
       ElemHide.apply();
+  }
+  var filtersFlushScheduled = false;
+  function flushFiltersInternal() {
+    filtersFlushScheduled = false;
+    FilterStorage.saveToDisk();
   }
   function addFilter(filter) {
     if (!(filter instanceof ActiveFilter) || filter.disabled)
@@ -153,7 +169,10 @@
         ElemHide.remove(filter);
   }
   function onSubscriptionChange(action, subscription, newValue, oldValue) {
-    isDirty = true;
+    if (action == "homepage" || action == "downloadStatus" || action == "lastDownload")
+      FilterListener.setDirty(0.2);
+     else
+      FilterListener.setDirty(1);
     if (action != "added" && action != "removed" && action != "disabled" && action != "updated")
       return ;
     if (action != "removed" && !(subscription.url in FilterStorage.knownSubscriptions)) {
@@ -175,7 +194,13 @@
     flushElemHide();
   }
   function onFilterChange(action, filter, newValue, oldValue) {
-    isDirty = true;
+    if (action == "hitCount" || action == "lastHit")
+      FilterListener.setDirty(0.0001);
+     else
+      if (action == "disabled" || action == "moved")
+        FilterListener.setDirty(0.2);
+       else
+        FilterListener.setDirty(1);
     if (action != "added" && action != "removed" && action != "disabled")
       return ;
     if ((action == "added" || action == "removed") && filter.disabled) {
@@ -189,7 +214,7 @@
   }
   function onGenericChange(action) {
     if (action == "load") {
-      isDirty = false;
+      isDirty = 0;
       defaultMatcher.clear();
       ElemHide.clear();
       for (var _loopIndex1 = 0;
@@ -202,7 +227,7 @@
     }
      else
       if (action == "save") {
-        isDirty = false;
+        isDirty = 0;
         var cache = {
           version: cacheVersion,
           patternsTimestamp: FilterStorage.sourceFile.clone().lastModifiedTime
