@@ -5,8 +5,6 @@
  */
 
 var enabled = false; // Enabled for this particular domain.
-var nukeElementsTimeoutID = 0;
-var nukeElementsLastTime = 0;
 
 // Click-to-hide stuff
 var clickHide_activated = false;
@@ -26,7 +24,7 @@ function highlightElements(selectorString) {
   if(highlightedElementsSelector)
     unhighlightElements();
   
-  highlightedElements = document.querySelectorAll(selectorString);
+  var highlightedElements = document.querySelectorAll(selectorString);
   highlightedElementsSelector = selectorString;
   highlightedElementsBoxShadows = new Array();
   highlightedElementsBGColors = new Array();
@@ -44,7 +42,7 @@ function highlightElements(selectorString) {
 function unhighlightElements() {
   if(highlightedElementsSelector == null)
     return;
-  highlightedElements = document.querySelectorAll(highlightedElementsSelector);
+  var highlightedElements = document.querySelectorAll(highlightedElementsSelector);
   for(var i = 0; i < highlightedElements.length; i++) {
     highlightedElements[i].style.setProperty("-webkit-box-shadow", highlightedElementsBoxShadows[i]);
     highlightedElements[i].style.backgroundColor = highlightedElementsBGColors[i];
@@ -98,7 +96,11 @@ function clickHide_showDialog(left, top, filters)
 {
   // If we are already selecting, abort now
   if (clickHide_activated || clickHideFiltersDialog)
+  {
+    var savedElement = (currentElement.prisoner ? currentElement.prisoner : currentElement);
     clickHide_deactivate();
+    currentElement = savedElement;
+  }
 
   clickHideFiltersDialog = document.createElement("iframe");
   clickHideFiltersDialog.src = chrome.extension.getURL("block.html") + "?filters=" + encodeURIComponent(filters.join("\n"));
@@ -153,14 +155,9 @@ function clickHide_dialogMessage(event)
     }
     else if (event.data.type == "close")
     {
-      // Explicitly get rid of currentElement in case removeAdsAgain() doesn't catch it
+      // Explicitly get rid of currentElement
       if (event.data.remove && currentElement && currentElement.parentNode)
-      {
         currentElement.parentNode.removeChild(currentElement);
-        // currentElement may actually be our overlay if right-click element selection was used
-        if (currentElement.prisoner && currentElement.prisoner.parentNode)
-          currentElement.prisoner.parentNode.removeChild(currentElement.prisoner);
-      }
 
       clickHide_deactivate();
     }
@@ -215,7 +212,8 @@ function clickHide_deactivate()
     currentElement = null;
     clickHideFilters = null;
   }
-  
+  unhighlightElements();
+
   clickHide_activated = false;
   if(!document)
     return; // This can happen inside a nuked iframe...I think
@@ -331,36 +329,6 @@ function clickHide_mouseClick(e) {
   // Now, actually highlight the element the user clicked on in red
   currentElement.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #fd1708");
   currentElement.style.backgroundColor = "#f6a1b5";
-
-  // Half-deactivate click-hide so the user has a chance to click the page action icon.
-  // currentElement is still set to the putative element to be blocked.
-  clickHide_rulesPending();
-}
-
-// Called when a new filter is added.
-// It would be a click-to-hide filter, so it's only an elemhide filter.
-// Since this rarely happens, we can afford to do a full run of ad removal.
-function removeAdsAgain()
-{
-  chrome.extension.sendRequest({reqtype: "get-settings", matcher: true, selectors: true, host: window.location.hostname}, function(response)
-  {
-    // Retrieve new set of selectors and build selector strings
-    setElemhideCSSRules(response.selectors);
-    defaultMatcher.clear();
-    if (response.matcherData)
-      defaultMatcher.fromCache(JSON.parse(response.matcherData));
-    nukeElements();
-  });
-}
-
-// Block ads in nodes inserted by scripts
-function handleNodeInserted(e)
-{
-  // Remove ads relatively infrequently. If no timeout set, set one.
-  if(enabled && nukeElementsTimeoutID == 0)
-  {
-    nukeElementsTimeoutID = setTimeout(nukeElements, (Date.now() - nukeElementsLastTime > 1000) ? 1 : 1000);
-  }
 }
 
 // Extracts source URL from an IMG, OBJECT, EMBED, or IFRAME
@@ -383,25 +351,6 @@ function getElementURL(elt) {
     url = elt.getAttribute("src") || elt.getAttribute("href"); 
   }
   return url;
-}
-
-// Hides/removes image and Flash elements according to the external resources they load.
-// (e.g. src attribute)
-function nukeElements()
-{
-  var elts = document.querySelectorAll("img,object,iframe,embed,link");
-  for (var i = 0; i < elts.length; i++)
-  {
-    // The URL is normalized in the background script so we don't need to do it here
-    var url = getElementURL(elts[i]);
-    // If the URL of the element is the same as the document URI, the user is trying to directly
-    // view the ad for some reason and so we won't block it.
-    if (url && url != document.baseURI && shouldBlock(url, TagToType[elts[i].localName.toUpperCase()]))
-      nukeSingleElement(elts[i]);
-  }
-  
-  nukeElementsTimeoutID = 0;
-  nukeElementsLastTime = Date.now();
 }
 
 // Content scripts are apparently invoked on non-HTML documents, so we have to
@@ -531,11 +480,6 @@ if (document.documentElement instanceof HTMLElement)
         }
         else
           console.log("clickhide-new-filter: URLs don't match. Couldn't find that element.", request.filter, url, lastRightClickEvent.target.src);
-        break;
-      case "remove-ads-again":
-        // Called when a new filter is added
-        if (isExperimental != true)
-          removeAdsAgain();
         break;
       default:
         sendResponse({});
