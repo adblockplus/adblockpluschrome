@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # coding: utf-8
  
 # This Source Code is subject to the terms of the Mozilla Public License
@@ -35,15 +36,15 @@ def getPublicSuffixList():
   resource = urlopen(url)
   
   for line in resource:
-  line = line.rstrip()
-  if line.startswith("//") or "." not in line:
-    continue
-  if line.startswith('*.'):
-    suffixes[line[2:]] = 2
-  elif line.startswith('!'):
-    suffixes[line[1:]] = 0
-  else:
-    suffixes[line] = 1
+    line = line.rstrip()
+    if line.startswith("//") or "." not in line:
+      continue
+    if line.startswith('*.'):
+      suffixes[line[2:]] = 2
+    elif line.startswith('!'):
+      suffixes[line[1:]] = 0
+    else:
+      suffixes[line] = 1
  
   return suffixes
 
