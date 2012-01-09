@@ -238,7 +238,7 @@ function loadRecommendations()
     }
 
     var option = document.createElement("option");
-    option.text = chrome.i18n.getMessage("subscriptionSelection_other_label") + "\u2026";
+    option.text = chrome.i18n.getMessage("filters_addSubscriptionOther_label") + "\u2026";
     option._data = null;
     list.appendChild(option);
 
@@ -359,10 +359,20 @@ function updateSubscriptionInfo(element)
   var lastUpdate = element.getElementsByClassName("subscriptionUpdate")[0];
   lastUpdate.classList.remove("error");
   if (Synchronizer.isExecuting(subscription.url))
-    lastUpdate.textContent = chrome.i18n.getMessage("global_subscription_status_lastdownload_inprogress");
+    lastUpdate.textContent = chrome.i18n.getMessage("filters_subscription_lastDownload_inProgress");
   else if (subscription.downloadStatus && subscription.downloadStatus != "synchronize_ok")
   {
-    lastUpdate.textContent = chrome.i18n.getMessage("global_" + subscription.downloadStatus);
+    var map =
+    {
+      "synchronize_invalid_url": "filters_subscription_lastDownload_invalidURL",
+      "synchronize_connection_error": "filters_subscription_lastDownload_connectionError",
+      "synchronize_invalid_data": "filters_subscription_lastDownload_invalidData",
+      "synchronize_checksum_mismatch": "filters_subscription_lastDownload_checksumMismatch"
+    };
+    if (subscription.downloadStatus in map)
+      lastUpdate.textContent = chrome.i18n.getMessage(map[subscription.downloadStatus]);
+    else
+      lastUpdate.textContent = subscription.downloadStatus;
     lastUpdate.classList.add("error");
   }
   else if (subscription.lastDownload > 0)
@@ -647,9 +657,9 @@ $(function() {
 
       <!-- Subscription entry template -->
       <div id="subscriptionTemplate" class="subscription">
-        <button class="i18n_settings_remove_label subscriptionRemoveButton"></button>
+        <button class="i18n_filters_subscription_delete_label subscriptionRemoveButton"></button>
         <span class="subscriptionEnabledContainer">
-          <input class="subscriptionEnabled" type="checkbox" /> <span class="i18n_settings_enabled_column"></span>
+          <input class="subscriptionEnabled" type="checkbox" /> <span class="i18n_filters_subscription_enabled_label"></span>
         </span>
         <a class="subscriptionTitle"></a>
         <span class="subscriptionUpdate"></span>
@@ -663,12 +673,12 @@ $(function() {
       <div id="userFilterLists" style="margin-bottom: 8px"></div>
 
       <p id="addSubscriptionButton">
-        <button class="addButton" onclick="startSubscriptionSelection();"><span class="i18n_settings_addsubscription_label"></span></button>
+        <button class="addButton" onclick="startSubscriptionSelection();"><span class="i18n_filters_addSubscription_label"></span></button>
       </p>
       <div id="addSubscriptionContainer">
         <span class="i18n_subscriptionSelection_subscriptionSelector_label"></span><br />
         <select id="subscriptionSelector" onchange="updateSubscriptionSelection();" style="width:500px"></select>
-        <button class="addButton" onclick="addSubscription()"><span class="i18n_subscriptionSelection_addSubscription_label"></span></button>
+        <button class="addButton" onclick="addSubscription()"><span class="i18n_filters_addSubscriptionAdd_label"></span></button>
       </div>
       <div id="customSubscriptionContainer">
         <p>
@@ -764,7 +774,7 @@ $(function() {
         <input type="checkbox" id="specialCaseYouTube" /><span class="i18n_block_youtube"></span>
       </div>
       <div id="hidePlaceholdersContainer">
-        <input type="checkbox" id="hidePlaceholders" /><span class="i18n_hide_placeholders"></span>
+        <input type="checkbox" id="hidePlaceholders" /><span class="i18n_overlay_hideplaceholders_label"></span>
       </div>
     </p>
 

@@ -67,6 +67,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "Hinzufügen"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Anderes Abonnement hinzufügen"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Filterabonnement hinzufügen"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Löschen"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Aktiv"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Fehler, Prüfsumme ist falsch, möglicherweise ein Übertragungsfehler"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Fehler, Download fehlgeschlagen"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Wird heruntergeladen..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Fehler, keine gültige Filterliste"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Fehler, ungültige Adresse"
+  }, 
   "found_a_bug": {
     "message": "Sie haben einen Bug gefunden oder wollen Adblock Plus in eine andere Sprache übersetzen? Bitte schreiben Sie <a href='$url$'>hier</a> ihre Anfrage.", 
     "placeholders": {
@@ -85,24 +115,6 @@
   "global_subscription_invalid_location": {
     "message": "Die eingegebene Adresse ist weder eine gültige Web-Adresse, noch ein gültiger Dateiname."
   }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Wird heruntergeladen..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Fehler, Prüfsumme ist falsch, möglicherweise ein Übertragungsfehler"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Fehler, Download fehlgeschlagen"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Fehler, keine gültige Filterliste"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Fehler, ungültige Adresse"
-  }, 
-  "hide_placeholders": {
-    "message": "Platzhalter blockierter Elemente verstecken"
-  },
   "last_updated_at": {
     "description": "z.B. Zuletzt aktualisiert: 1. Apr 2011 um 12:51", 
     "message": "Zuletzt aktualisiert: $date$ um $time$", 
@@ -136,18 +148,12 @@
   "out_of_date_lists": {
     "message": "Abgelaufene Filter werden regelmäßig aktualisiert."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "Platzhalter blockierter Elemente verstecken"
+  }, 
   "remove_button": {
     "description": "Name für die 'Ausgewählte entfernen'-Buttons.", 
     "message": "Ausgewählte entfernen"
-  }, 
-  "settings_addsubscription_label": {
-    "message": "Filterabonnement hinzufügen"
-  }, 
-  "settings_enabled_column": {
-    "message": "Aktiv"
-  }, 
-  "settings_remove_label": {
-    "message": "Löschen"
   }, 
   "show_block_element_menu": {
     "message": "Zeige Rechtsklickmenü-Eintrag 'Element blocken'"
@@ -155,14 +161,8 @@
   "show_icon": {
     "message": "Zeige Icon in der Adressleiste"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Filterabonnement hinzufügen"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Adresse der Filterliste:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Anderes Abonnement hinzufügen"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Bitte wählen Sie ein Filterabonnement aus der Liste aus:"

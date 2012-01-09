@@ -1,45 +1,48 @@
 {
+  "filters_addSubscriptionAdd_label": {
+    "message": "Добави"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Добави друг абонамент"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Добави абонамент за филтър"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Изтрий"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Включен"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Грешка, несъвпадение на контролната сума"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Грешка, неуспешно изтегляне"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Изтегляне..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Грешка, невалиден списък с филтри"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Грешка, невалиден адрес"
+  }, 
   "global_remove_subscription_warning": {
     "message": "Наистина ли искате да премахнете този абонамент?"
   }, 
   "global_subscription_invalid_location": {
     "message": "Местоположението на списъка с филтри или не е валиден URL или не е валидно името на файла."
   }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Изтегляне..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Грешка, несъвпадение на контролната сума"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Грешка, неуспешно изтегляне"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Грешка, невалиден списък с филтри"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Грешка, невалиден адрес"
-  }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Добави абонамент за филтър"
-  }, 
-  "settings_enabled_column": {
-    "message": "Включен"
-  }, 
-  "settings_remove_label": {
-    "message": "Изтрий"
-  }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Добави абонамент"
+  "overlay_hideplaceholders_label": {
+    "message": "Скрий контейнери на блокираните елементи"
   }, 
   "subscriptionSelection_location_label": {
     "message": "Местоположение на списъка с филтрите:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Добави друг абонамент"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Моля изберете абонамент за филтър от списъка:"

@@ -1,53 +1,53 @@
 {
   "filters_addSubscriptionAdd_label": {
-    "message": "Add"
+    "message": "Pridėti"
   }, 
   "filters_addSubscriptionOther_label": {
-    "message": "Add a different subscription"
+    "message": "Pridėti kitą prenumeratą"
   }, 
   "filters_addSubscription_label": {
-    "message": "Add filter subscription"
+    "message": "Pridėti filtro prenumeratą"
   }, 
   "filters_subscription_delete_label": {
-    "message": "Delete"
+    "message": "Ištrinti"
   }, 
   "filters_subscription_enabled_label": {
-    "message": "Enabled"
+    "message": "Įjungta"
   }, 
   "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Failed: checksum mismatch"
+    "message": "Nepavyko, bloga kontrolinė suma"
   }, 
   "filters_subscription_lastDownload_connectionError": {
-    "message": "Failed: download failure"
+    "message": "Nepavyko, atsiuntimo klaida"
   }, 
   "filters_subscription_lastDownload_inProgress": {
-    "message": "Downloading..."
+    "message": "Atsiunčiama..."
   }, 
   "filters_subscription_lastDownload_invalidData": {
-    "message": "Failed: not a valid filters list"
+    "message": "Nepavyko, netinkamas filtrų sąrašas"
   }, 
   "filters_subscription_lastDownload_invalidURL": {
-    "message": "Failed: not a valid address"
+    "message": "Nepavyko, netinkamas adresas"
   }, 
   "global_remove_subscription_warning": {
-    "message": "Do you really want to remove this subscription?"
+    "message": "Ar tikrai norite atsisakyti šios prenumeratos?"
   }, 
   "global_subscription_invalid_location": {
-    "message": "Filter list location is neither a valid URL nor a valid file name."
+    "message": "Filtrų sąrašo adresas nėra taisyklingas URL ar failo vardas."
   }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
   "overlay_hideplaceholders_label": {
-    "message": "Hide placeholders of blocked elements"
+    "message": "Slėpti užblokuotų elementų vietos laikiklius"
   }, 
   "subscriptionSelection_location_label": {
-    "message": "Filter list location:"
+    "message": "Filtrų sąrašo vieta:"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Please choose a filter subscription from the list:"
+    "message": "Pasirinkite filtro prenumeratą iš šio sąrašo:"
   }, 
   "subscriptionSelection_title_label": {
-    "message": "Subscription title:"
+    "message": "Prenumeratos pavadinimas:"
   }
 }

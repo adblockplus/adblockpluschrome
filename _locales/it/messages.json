@@ -67,6 +67,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "Aggiungi"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Altre sottoscrizioni"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Aggiungi sottoscrizione"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Elimina"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Attiva"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Sincronizzazione non riuscita, checksum non corrispondente"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Sincronizzazione non riuscita, errore durante il download"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "download in corso…"
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Sincronizzazione non riuscita, lista dei filtri non valida"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Sincronizzazione non riuscita, indirizzo web non valido"
+  }, 
   "found_a_bug": {
     "message": "Hai trovato un bug? Vuoi tradurre Adblock Plus nella tua lingua? Per favore <a href='$url$'>compila questa rischiesta</a>.", 
     "placeholders": {
@@ -80,25 +110,10 @@
     "message": "Generale"
   }, 
   "global_remove_subscription_warning": {
-    "message": "Eliminare questa sottoscrizione?"
+    "message": "Eliminare sottoscrizione / gruppo di filtri?"
   }, 
   "global_subscription_invalid_location": {
     "message": "Attenzione: per poter aggiungere una sottoscrizione è necessario che i campi 'Titolo della sottoscrizione:' ed 'Indirizzo della lista dei filtri:' non siano lasciati vuoti e corrispondano a nomi di file validi. Inserire tali dati e ripetere la procedura"
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Download in corso…"
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Sincronizzazione non riuscita, checksum non corrispondente"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Sincronizzazione non riuscita, errore durante il download"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Sincronizzazione non riuscita, lista dei filtri non valida"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Sincronizzazione non riuscita, indirizzo web non valido"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -133,18 +148,12 @@
   "out_of_date_lists": {
     "message": "Le liste scadute verranno aggiornate automaticamente."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "Nascondi gli elementi bloccati"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Rimuovi selezionato"
-  }, 
-  "settings_addsubscription_label": {
-    "message": "Aggiungi sottoscrizione"
-  }, 
-  "settings_enabled_column": {
-    "message": "Attivato"
-  }, 
-  "settings_remove_label": {
-    "message": "Elimina"
   }, 
   "show_block_element_menu": {
     "message": "Mostra 'Blocca Elemento' nel menu contestuale"
@@ -152,14 +161,8 @@
   "show_icon": {
     "message": "Mosta l'icona nella barra degli indirizzi"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Aggiungi sottoscrizione"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Indirizzo della lista dei filtri:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Altre sottoscrizioni"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Selezionare una sottoscrizione di filtri dalla seguente lista:"

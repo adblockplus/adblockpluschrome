@@ -1,45 +1,48 @@
 {
+  "filters_addSubscriptionAdd_label": {
+    "message": "Tilføj"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Tilføj endnu et abonnement"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Tilføj filterabonnement"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Slet"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Aktiveret"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Fejlede, checksum matcher ikke"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Fejlede, hentningsfejl"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Henter..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Fejlede, ikke en gyldig liste over filtre"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Fejlede, ikke en gyldig adresse"
+  }, 
   "global_remove_subscription_warning": {
     "message": "Vil du virkelig fjerne dette abonnement?"
   }, 
   "global_subscription_invalid_location": {
-    "message": "Filterliste-placering er hverken en gyldig URL eller et gyldigt filnavn."
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Henter..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Fejlede, checksum matcher ikke"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Fejlede, hentningsfejl"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Fejlede, ikke en gyldig liste over filtre"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Fejlede, ikke en gyldig adresse"
+    "message": "Filterlistens placering er hverken en gyldig URL eller et gyldigt filnavn."
   }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Tilføj filterabonnement"
-  }, 
-  "settings_enabled_column": {
-    "message": "Slået til"
-  }, 
-  "settings_remove_label": {
-    "message": "Slet"
-  }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Tilføj abonnement"
+  "overlay_hideplaceholders_label": {
+    "message": "Skjul blokerede emners pladsholder"
   }, 
   "subscriptionSelection_location_label": {
-    "message": "Filterliste placering:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Tilføj endnu et abonnement"
+    "message": "Filterlistens placering:"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vælg et filterabonnement fra listen:"

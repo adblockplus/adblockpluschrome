@@ -63,6 +63,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "Hozzáadás"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Külső szűrő hozzáadása"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Külső szűrő hozzáadása"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Törlés"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Engedélyezve"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Sikertelen, érvénytelen ellenőrző összeg"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Sikertelen, letöltési hiba"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Letöltés..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Sikertelen, érvénytelen szűrőlista"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Sikertelen, érvénytelen cím"
+  }, 
   "found_a_bug": {
     "message": "Találtál egy hibát az Adblock Plus-ban? Kérlek <a href='$url$'>jelentsd itt</a>.", 
     "placeholders": {
@@ -80,21 +110,6 @@
   }, 
   "global_subscription_invalid_location": {
     "message": "A megadott külső szűrőt tartalmazó cím helytelen, vagy hibás fájlnevet tartalmaz."
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Letöltés..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Sikertelen, érvénytelen ellenőrző összeg"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Sikertelen, letöltési hiba"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Sikertelen, érvénytelen szűrőlista"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Sikertelen, érvénytelen cím"
   }, 
   "last_updated_at": {
     "description": "Last updated at time on date.", 
@@ -129,30 +144,18 @@
   "out_of_date_lists": {
     "message": "Az elavult listák időközönként frissülnek."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "Letiltott elemek helyőrzőinek elrejtése"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Kijelölt eltávolítása"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Külső szűrő hozzáadása"
-  }, 
-  "settings_enabled_column": {
-    "message": "Engedélyezve"
-  }, 
-  "settings_remove_label": {
-    "message": "Törlés"
-  }, 
   "show_icon": {
     "message": "Mutasd az ikont a címsorban"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Szűrő hozzáadása"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Szűrőlista címe:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Külső szűrő hozzáadása"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Kérem válassza ki a szűrőt a listából:"

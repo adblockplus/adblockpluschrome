@@ -1,45 +1,48 @@
 {
+  "filters_addSubscriptionAdd_label": {
+    "message": "Προσθήκη"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Προσθήκη άλλης συνδρομής"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Προσθήκη συνδρομής"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Διαγραφή"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Ενεργοποιημένη"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Απέτυχε, απόκλιση στον έλεγχο checksum"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Απέτυχε, σφάλμα κατά τη λήψη"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Σε εξέλιξη..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Απέτυχε, μη έγκυρη λίστα φίλτρων"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Απέτυχε, μη έγκυρη διεύθυνση"
+  }, 
   "global_remove_subscription_warning": {
     "message": "Θέλετε να απομακρύνετε αυτή τη συνδρομή;"
   }, 
   "global_subscription_invalid_location": {
     "message": "Η τοποθεσία της λίστας φίλτρων δεν είναι έγκυρη URL ούτε και όνομα αρχείου."
   }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Σε εξέλιξη..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Απέτυχε, απόκλιση στον έλεγχο checksum"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Απέτυχε, σφάλμα κατά τη λήψη"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Απέτυχε, μη έγκυρη λίστα φίλτρων"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Απέτυχε, μη έγκυρη διεύθυνση"
-  }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Προσθήκη συνδρομής"
-  }, 
-  "settings_enabled_column": {
-    "message": "Ενεργοποιημένο"
-  }, 
-  "settings_remove_label": {
-    "message": "Διαγραφή"
-  }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Προσθήκη συνδρομής"
+  "overlay_hideplaceholders_label": {
+    "message": "Απόκρυψη πλαισίων των φιλτραρισμένων στοιχείων"
   }, 
   "subscriptionSelection_location_label": {
     "message": "Τοποθεσία λίστας φίλτρων:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Προσθήκη άλλης συνδρομής"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Παρακαλώ επιλέξτε μια συνδρομή σε φίλτρα από την λίστα:"

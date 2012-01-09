@@ -1,45 +1,48 @@
 {
+  "filters_addSubscriptionAdd_label": {
+    "message": "Ekle"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Başka abonelik ekle"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Süzgeç aboneliği ekle"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Sil"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Devrede"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Başarısız, checksum eşleşmedi"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Olmadı. İndirmede sorun var."
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "İndiriliyor..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Olmadı. Bu düzgün bir süzgeç listesi değil."
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Olmadı. Bu geçerli bir adres değil."
+  }, 
   "global_remove_subscription_warning": {
     "message": "Gerçekten abonelikten çıkmak istiyor musunuz?"
   }, 
   "global_subscription_invalid_location": {
-    "message": "Dosya listesi konumu düzgün bir URL ya da düzgün bir ada sahip değil!"
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "İndiriliyor..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Başarısız, checksum eşleşmedi"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Olmadı, indirmede sorun var."
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Olmadı, bu düzgün bir süzgeç listesi değil!"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Olmadı, bu geçerli bir adres değil!"
+    "message": "Dosya listesi konumu ne düzgün bir URL ne de düzgün bir ada sahip."
   }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Süzgeç aboneliği ekle"
-  }, 
-  "settings_enabled_column": {
-    "message": "Etkinlik"
-  }, 
-  "settings_remove_label": {
-    "message": "Sil"
-  }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Abone ol"
+  "overlay_hideplaceholders_label": {
+    "message": "Engellenen öğelerin yer işaretlerini gizle"
   }, 
   "subscriptionSelection_location_label": {
     "message": "Süzgeç listesi konumu:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Başka abonelik ekle"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lütfen listeden bir süzgeç aboneliği seçin:"

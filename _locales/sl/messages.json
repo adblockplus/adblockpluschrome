@@ -1,45 +1,36 @@
 {
+  "filters_addSubscriptionOther_label": {
+    "message": "Dodaj novo naročnino"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Dodaj naročnino filtra"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Neuspešno, kontrolna vsota se ne ujema"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Neuspešno, napaka prenosa"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Prenos s strežnika ..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Neuspešno, ni veljaven seznam filtrov"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Neuspešno, ni veljaven naslov"
+  }, 
   "global_remove_subscription_warning": {
     "message": "Želite res odpovedati naročnino?"
   }, 
   "global_subscription_invalid_location": {
     "message": "Mesto seznama filtrov ni niti veljaven URL niti veljavno ime datoteke."
   }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Prenos s strežnika ..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Neuspešno, kontrolna vsota se ne ujema"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Neuspešno, napaka prenosa"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Neuspešno, ni veljaven seznam filtrov"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Neuspešno, ni veljaven naslov"
-  }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Dodaj naročnino filtra"
-  }, 
-  "settings_enabled_column": {
-    "message": "Omogočeno"
-  }, 
-  "settings_remove_label": {
-    "message": "Izbriši"
-  }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Dodaj naročnino"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Mesto seznama filtriranja:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Dodaj novo naročnino"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Izberite naročnino na filter s seznama:"

@@ -67,6 +67,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "추가"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "다른 구독 필터 추가 (F)"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "구독 필터 추가"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "삭제"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "사용"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "실패함 : 검사합 불일치"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "실패함 : 다운로드 실패"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "다운로드 중..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "실패함 : 올바르지 않은 필터"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "실패함 : 올바르지 않은 주소"
+  }, 
   "found_a_bug": {
     "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? <a href='$url$'>연락하기</a>", 
     "placeholders": {
@@ -84,21 +114,6 @@
   }, 
   "global_subscription_invalid_location": {
     "message": "구독 필터의 위치에 입력하는 URL 또는 파일명이 올바르지 않습니다."
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "다운로드 중..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "실패함 : 검사합 불일치"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "실패함 : 다운로드 실패"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "실패함 : 올바르지 않은 필터"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "실패함 : 올바르지 않은 주소"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -133,18 +148,12 @@
   "out_of_date_lists": {
     "message": "구독 필터는 주기적으로 자동 업데이트됩니다."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "차단된 요소의 공백 숨기기"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "선택 항목 제거"
-  }, 
-  "settings_addsubscription_label": {
-    "message": "구독 필터 추가"
-  }, 
-  "settings_enabled_column": {
-    "message": "사용"
-  }, 
-  "settings_remove_label": {
-    "message": "삭제"
   }, 
   "show_block_element_menu": {
     "message": "문맥 메뉴에 '요소 숨김' 항목 표시"
@@ -152,14 +161,8 @@
   "show_icon": {
     "message": "주소 표시줄에 아이콘 표시"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "추가"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "위치 (L)"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "다른 구독 필터 추가 (F)"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "구독할 필터를 선택하거나 이름/위치를 입력하십시오."

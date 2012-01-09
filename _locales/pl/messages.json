@@ -67,6 +67,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "Dodaj"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Wybierz inny zestaw"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Dodaj zestaw filtrów"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Usuń"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Aktywny"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Nie powiodło się – niepoprawna suma kontrolna"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Nie powiodło się – błąd pobierania"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Pobieranie…"
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Nie powiodło się – nieprawidłowy zestaw filtrów"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Nie powiodło się – nieprawidłowy adres"
+  }, 
   "found_a_bug": {
     "message": "Znalazłeś błąd? Zgłoś proszę <a href='$url$'>problem tutaj</a>.", 
     "placeholders": {
@@ -84,21 +114,6 @@
   }, 
   "global_subscription_invalid_location": {
     "message": "Lokalizacja zestawu filtrów ma niewłaściwą nazwę pliku, albo adres URL"
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Pobieranie…"
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Nie powiodło się – niepoprawna suma kontrolna"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Nie powiodło się – błąd pobierania"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Nie powiodło się – nieprawidłowy zestaw filtrów"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Nie powiodło się – nieprawidłowy adres"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -133,30 +148,18 @@
   "out_of_date_lists": {
     "message": "Po pewnym czasie filtry aktualizowane są automatycznie."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "Ukryj zamienniki blokowanych elementów"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Usuń zaznaczone"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Dodaj zestaw filtrów"
-  }, 
-  "settings_enabled_column": {
-    "message": "Aktywny"
-  }, 
-  "settings_remove_label": {
-    "message": "Usuń"
-  }, 
   "show_icon": {
     "message": "Pokazuj ikonę na pasku adresu"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Subskrybuj zestaw"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Lokalizacja zestawu:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Wybierz inny zestaw"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Wybierz z listy zestaw filtrów:"

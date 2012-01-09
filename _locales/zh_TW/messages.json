@@ -67,6 +67,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "加入"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "新增其他條件集"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "新增過濾條件集"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "刪除"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "啟用"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "失敗，驗證碼不符"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "失敗，檔案下載失敗"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "下載中..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "失敗，無效的過濾條件列表"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "失敗，無效的位址"
+  }, 
   "found_a_bug": {
     "message": "發現錯誤？要翻譯 Adblock Plus？ 請至 <a href='$url$'>此處詢問</a>。", 
     "placeholders": {
@@ -80,25 +110,10 @@
     "message": "一般"
   }, 
   "global_remove_subscription_warning": {
-    "message": "您確定要移除此訂閱項目嗎？"
+    "message": "您確定要移除此條件集嗎？"
   }, 
   "global_subscription_invalid_location": {
-    "message": "過濾條件集網址或檔名無效。"
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "下載中..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "失敗，檢查碼不符"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "失敗，檔案下載失敗"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "失敗，無效的過濾條件集"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "失敗，無效的位址"
+    "message": "條件集網址或檔名無效。"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -133,18 +148,12 @@
   "out_of_date_lists": {
     "message": "過濾清單會定期自動更新。"
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "隱藏已阻擋元素所佔用的空間"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "刪除已選擇"
-  }, 
-  "settings_addsubscription_label": {
-    "message": "訂閱過濾條件集"
-  }, 
-  "settings_enabled_column": {
-    "message": "已啟用"
-  }, 
-  "settings_remove_label": {
-    "message": "刪除"
   }, 
   "show_block_element_menu": {
     "message": "右鍵選單顯示「阻擋網頁元素」"
@@ -152,17 +161,11 @@
   "show_icon": {
     "message": "網址列顯示 Adblock Plus 圖示"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "新增過濾條件集"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "過濾條件集位址:"
   }, 
-  "subscriptionSelection_other_label": {
-    "message": "新增其他訂閱來源"
-  }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "請從清單中選擇過濾條件集:"
+    "message": "請從列表中選擇過濾條件集:"
   }, 
   "subscriptionSelection_title_label": {
     "message": "訂閱項目名稱:"

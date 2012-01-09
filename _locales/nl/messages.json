@@ -1,45 +1,48 @@
 {
+  "filters_addSubscriptionAdd_label": {
+    "message": "Toevoegen"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Een ander abonnement toevoegen"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Filterabonnement toevoegen"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Verwijderen"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Ingeschakeld"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Mislukt, afwijkend controlecijfer"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Mislukt, downloadprobleem"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Downloaden…"
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Mislukt, geen geldige filterlijst"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Mislukt, geen geldig adres"
+  }, 
   "global_remove_subscription_warning": {
     "message": "Weet u zeker dat u dit abonnement wilt verwijderen?"
   }, 
   "global_subscription_invalid_location": {
     "message": "Deze filterlijstlocatie is geen geldige URL en ook geen geldige bestandsnaam."
   }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Downloaden…"
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Mislukt, afwijkend controlecijfer"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Mislukt, downloadprobleem"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Mislukt, geen geldige filterlijst"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Mislukt, geen geldig adres"
-  }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Filterabonnement toevoegen"
-  }, 
-  "settings_enabled_column": {
-    "message": "Ingeschakeld"
-  }, 
-  "settings_remove_label": {
-    "message": "Verwijderen"
-  }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Abonneren"
+  "overlay_hideplaceholders_label": {
+    "message": "Plaatshouders of geblokkeerde elementen verbergen"
   }, 
   "subscriptionSelection_location_label": {
     "message": "Filterlijstlocatie:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Een ander abonnement toevoegen"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Kies a.u.b. een filterabonnement uit de lijst:"
