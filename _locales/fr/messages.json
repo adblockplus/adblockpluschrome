@@ -66,6 +66,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "Ajouter"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Ajouter un autre abonnement"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "S'abonner à la liste de filtres"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Supprimer"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Activé"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Échec, le checksum ne correspond pas !"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Échec, erreur lors du téléchargement !"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Téléchargement en cours…"
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Échec, ceci n'est pas une liste de filtres valide !"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Échec, ceci n'est pas une adresse valide !"
+  }, 
   "found_a_bug": {
     "message": "Avez-vous trouvé un bug ou une mauvaise traduction dans Adblock Plus&nbsp;? S'il-vous-plaît, <a href='$url$'>enregistrez-le ici</a>.", 
     "placeholders": {
@@ -83,21 +113,6 @@
   }, 
   "global_subscription_invalid_location": {
     "message": "L'adresse indiquant l'emplacement de la liste de filtres n'est ni une URL valide, ni un nom de fichier valide."
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Téléchargement en cours…"
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Échec, le checksum ne correspond pas !"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Échec, erreur lors du téléchargement !"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Échec, ceci n'est pas une liste de filtres valide !"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Échec, ceci n'est pas une adresse valide !"
   }, 
   "last_updated_at": {
     "description": "Last updated at time on date.", 
@@ -132,17 +147,11 @@
   "out_of_date_lists": {
     "message": "Les listes périmées seront actualisées automatiquement."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "Masquer les conteneurs des éléments bloqués"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
-    "message": "Supprimer"
-  }, 
-  "settings_addsubscription_label": {
-    "message": "S&apos;abonner à la liste de filtres"
-  }, 
-  "settings_enabled_column": {
-    "message": "Activé"
-  }, 
-  "settings_remove_label": {
     "message": "Supprimer"
   }, 
   "show_block_element_menu": {
@@ -151,14 +160,8 @@
   "show_icon": {
     "message": "Afficher l'icone dans la barre d'adresse"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Ajouter l'abonnement"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Emplacement de la liste :"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Ajouter un autre abonnement"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Veuillez choisir un abonnement dans la liste suivante :"

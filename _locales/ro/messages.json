@@ -1,45 +1,48 @@
 {
+  "filters_addSubscriptionAdd_label": {
+    "message": "Adaugă"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Adaugă alt abonament"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Adaugă abonament filtru"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Șterge"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Activat"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Eşuat, suma de control nu se potriveşte."
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Eşuat, descărcare nereuşită"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Descărcare..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Eşuat, lista nu este validă"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Eşuat, adresa nu este validă"
+  }, 
   "global_remove_subscription_warning": {
     "message": "Sigur doriţi să îndepărtaţi această subscriere?"
   }, 
   "global_subscription_invalid_location": {
     "message": "Locaţia pentru filtre nu este validă"
   }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Decărcare..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Eşuat, suma de control nu se potriveşte."
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Eşuat, descărcare nereuşită"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Eşuat, lista nu este validă"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Eşuat, adresa nu este validă"
-  }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Adaugă abonament filtre"
-  }, 
-  "settings_enabled_column": {
-    "message": "Stare"
-  }, 
-  "settings_remove_label": {
-    "message": "Şterge"
-  }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Adaugă abonament"
+  "overlay_hideplaceholders_label": {
+    "message": "Ascunde indicatoarele elementelor blocate"
   }, 
   "subscriptionSelection_location_label": {
     "message": "Locaţia listei de filtre:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Adaugă alt abonament"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Alegeţi un abonamente filtre din listă:"

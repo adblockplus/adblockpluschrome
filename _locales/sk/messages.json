@@ -1,45 +1,48 @@
 {
+  "filters_addSubscriptionAdd_label": {
+    "message": "Pridať"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Pridať iné odoberania"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Pridať povolenie filtra"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Zmazať"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Zapnuté"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Zlyhalo, chybné prispôsobenie kontrolného súčtu"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Zlyhanie, sťahovanie neúspešné"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Preberanie..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Zlyhanie, neplatný zoznam filtrov"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Zlyhanie, neplatná adresa"
+  }, 
   "global_remove_subscription_warning": {
     "message": "Naozaj si želáte odstrániť toto povolenie?"
   }, 
   "global_subscription_invalid_location": {
     "message": "Umiestnenie zoznamu filtrov nemá platnú URL alebo platný názov súboru."
   }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Preberanie..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Zlyhalo, chybné prispôsobenie kontrolného súčtu"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Zlyhanie, sťahovanie neúspešné"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Zlyhanie, neplatný zoznam filtrov"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Zlyhanie, neplatná adresa"
-  }, 
   "name": {
     "message": "Adblock Plus (Beta)"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Pridať povolenie filtra"
-  }, 
-  "settings_enabled_column": {
-    "message": "Zapnuté"
-  }, 
-  "settings_remove_label": {
-    "message": "Odstrániť"
-  }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Pridať odber"
+  "overlay_hideplaceholders_label": {
+    "message": "Skryť symboly blokovaných prvkov"
   }, 
   "subscriptionSelection_location_label": {
     "message": "Umiestnenie zoznamu filtrov:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Pridať iné odoberania"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Prosím, zvoľte odber zo zoznamu:"

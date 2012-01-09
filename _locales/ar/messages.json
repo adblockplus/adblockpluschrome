@@ -63,6 +63,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "اضافة"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "إضافة اشتراك آخر"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "إضافة اشتراك إلى فلتر"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "ازالة"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "مفعّل"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "فشل ، عدم تطابق المجموع الاختباري"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "فشل الأمر بسبب فشل التحميل"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "جاري التحميل"
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "فشل الأمر، ليست قائمة فلاتر صحيحة"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "فشل الأمر، ليس عنوان صحيح"
+  }, 
   "found_a_bug": {
     "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.", 
     "placeholders": {
@@ -79,22 +109,7 @@
     "message": "هل أنت حقاً راغب بإزالة هذا الاشتراك؟"
   }, 
   "global_subscription_invalid_location": {
-    "message": "موقع قائمة الفلتر ليس صحيح كعنوان ويب و لا كاسم ملف"
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "جاري التحميل"
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "فشل، عدم تطابق checksum"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "فشل الأمر بسبب فشل التحميل"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "فشل الأمر، ليست قائمة فلاتر صحيحة"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "فشل الأمر، ليس عنوان صحيح"
+    "message": "موقع قائمة الفلتر ليس صحيح كعنوان ويب و لا كأسم ملف"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -118,7 +133,7 @@
     }
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "آدبلوك بلس (Beta)"
   }, 
   "new_filters_added": {
     "message": "تم إضافة فلتر جديد; انظر <a id='options_url' target='_blank'>الخصائص</a> للتحكم بها."
@@ -129,30 +144,18 @@
   "out_of_date_lists": {
     "message": "القوائم القديمة تحدث دورياً."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "اخفاء ماسك المكان للعناصر الموقوفة"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "حذف المختارة"
   }, 
-  "settings_addsubscription_label": {
-    "message": "إضافة اشتراك إلى فلتر"
-  }, 
-  "settings_enabled_column": {
-    "message": "مشغل"
-  }, 
-  "settings_remove_label": {
-    "message": "حذف"
-  }, 
   "show_icon": {
     "message": "أظهر الأيقونة في شريط العنوان"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "إضافة اشتراك"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "موقع قائمة الفلاتر"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "إضافة اشتراك آخر"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "الرجاء اختيار اشتراك فلتر من القائمة:"

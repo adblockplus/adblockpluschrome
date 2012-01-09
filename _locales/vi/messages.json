@@ -67,6 +67,27 @@
       }
     }
   }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Thêm bộ lọc trọn gói khác"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Thêm bộ lọc trọn gói"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Thất bại, mã băm không phù hợp"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Thất bại, tải xuống thất bại"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Đang tải..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Thất bại, không phải là danh sách bộ lọc hợp lệ"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Thất bại, không phải là địa chỉ hợp lệ"
+  }, 
   "found_a_bug": {
     "message": "Bạn phát hiện thấy lỗi? Bạn muuốn dịch Adblock Plus sang ngôn ngữ của bạn? Hãy <a href='$url$'>gửi yêu cầu tại đây</a>.", 
     "placeholders": {
@@ -84,21 +105,6 @@
   }, 
   "global_subscription_invalid_location": {
     "message": "Địa chỉ để tải bộ lọc không phải là một URL hay tên tập tin hợp lệ."
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Đang tải..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Thất bại, mã băm không phù hợp"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Thất bại, tải xuống thất bại"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Thất bại, không phải là danh sách bộ lọc hợp lệ"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Thất bại, không phải là địa chỉ hợp lệ"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -137,29 +143,14 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Xóa cái vừa chọn"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Thêm bộ lọc trọn gói"
-  }, 
-  "settings_enabled_column": {
-    "message": "Hiệu lực"
-  }, 
-  "settings_remove_label": {
-    "message": "Xóa"
-  }, 
   "show_block_element_menu": {
     "message": "Hiển thị lệnh 'Block Element' ở trình đơn khi ấn chuột phải"
   }, 
   "show_icon": {
     "message": "Hiển thị biểu tượng ở thanh địa chỉ"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Thêm bộ trọn gói"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Địa chỉ của danh sách bộ lọc:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Thêm bộ lọc trọn gói khác"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vui lòng chọn một bộ lọc trọn gói từ danh sách:"

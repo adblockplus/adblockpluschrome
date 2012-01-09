@@ -67,6 +67,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "Añadir"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Añadir otra suscripción"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Añadir suscripción de filtros"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Eliminar"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Activada"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Error, el checksum no coincide"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Error: error de descarga"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Descargando…"
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Error: lista de filtros no válida"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Error: no es una dirección válida"
+  }, 
   "found_a_bug": {
     "message": "¿Encontraste un bug en Adblock Plus o tienes una mejor traducción? Por favor <a href='$url$'>repórtalo aquí</a>.", 
     "placeholders": {
@@ -84,21 +114,6 @@
   }, 
   "global_subscription_invalid_location": {
     "message": "La dirección de la lista de filtros no es una URL ni una ruta de archivo válida."
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Descargando..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Error, el checksum no coincide"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Error: error de descarga"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Error: lista de filtros no válida"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Error: no es una dirección válida"
   }, 
   "last_updated_at": {
     "description": "Last updated at time on date.", 
@@ -133,17 +148,11 @@
   "out_of_date_lists": {
     "message": "Las listas obsoletas se actualizarán periódicamente."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "Ocultar posicionadores de elementos bloqueados"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
-    "message": "Eliminar"
-  }, 
-  "settings_addsubscription_label": {
-    "message": "Añadir suscripción de filtros"
-  }, 
-  "settings_enabled_column": {
-    "message": "Activado"
-  }, 
-  "settings_remove_label": {
     "message": "Eliminar"
   }, 
   "show_block_element_menu": {
@@ -152,14 +161,8 @@
   "show_icon": {
     "message": "Mostrar ícono en la barra de direcciones"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Añadir suscripción"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Ubicación de la lista de filtros:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Añadir otra suscripción"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor elija una suscripción de filtros de la lista:"

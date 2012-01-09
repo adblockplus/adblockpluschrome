@@ -67,6 +67,27 @@
       }
     }
   }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Pievienot citu abonementu"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Pievienot filtra abonēšanu"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Neizdevās, kontrolsummas neatbilstība"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Neizdevās, lejupielāde neizdevās"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Lejupielādē..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Neizdevās, nav derīgs filtru saraksts"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Neizdevās, nav derīga adrese"
+  }, 
   "found_a_bug": {
     "message": "Atradi defektu? Vēlies iztulkot Adblock Plus savā valodā? Lūdzu <a href='$url$'>iesniedz pieprasījumu šeit</a>.", 
     "placeholders": {
@@ -84,21 +105,6 @@
   }, 
   "global_subscription_invalid_location": {
     "message": "Filtru saraksta atrašanās vieta nav ne derīgs URL ne arī derīgs faila nosaukums."
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Lejupielādē..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Neizdevās, kontrolsummas neatbilstība"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Neizdevās, lejupielāde neizdevās"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Neizdevās, nav derīgs filtru saraksts"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Neizdevās, nav derīga adrese"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -137,32 +143,17 @@
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Noņemt izvēlēto"
   }, 
-  "settings_addsubscription_label": {
-    "message": "Pievienot filtru abonementu"
-  }, 
-  "settings_enabled_column": {
-    "message": "Iespējots"
-  }, 
-  "settings_remove_label": {
-    "message": "Dzēst"
-  }, 
   "show_block_element_menu": {
     "message": "Rādīt 'Bloķēt elementu''labā klikšķa izvēlnē"
   }, 
   "show_icon": {
     "message": "Rādīt ikonu adreses joslā"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Pievienot abonementu"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Filtru saraksta atrašanās vieta:"
   }, 
-  "subscriptionSelection_other_label": {
-    "message": "Pievienot citu abonementu"
-  }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Lūdzu izvēlieties filtru abonementu no saraksta:"
+    "message": "Lūdzu, izvēlieties filtru abonementu no saraksta:"
   }, 
   "subscriptionSelection_title_label": {
     "message": "Abonementa nosaukums:"

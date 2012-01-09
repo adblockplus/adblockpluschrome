@@ -67,6 +67,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "Add"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Add a different subscription"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Add filter subscription"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Delete"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Enabled"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Failed, checksum mismatch"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Failed, download failure"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Downloading…"
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Failed, not a valid filters list"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Failed, not a valid address"
+  }, 
   "found_a_bug": {
     "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a href='$url$'>file a request here</a>.", 
     "placeholders": {
@@ -84,24 +114,6 @@
   }, 
   "global_subscription_invalid_location": {
     "message": "Filter list location is neither a valid URL nor a valid file name."
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Downloading..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Failed, checksum mismatch"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Failed, download failure"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Failed, not a valid filters list"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Failed, not a valid address"
-  }, 
-  "hide_placeholders": {
-    "message": "Hide placeholders of blocked elements"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -136,18 +148,12 @@
   "out_of_date_lists": {
     "message": "Out-of-date lists are updated periodically."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "Hide placeholders of blocked elements"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Remove selected"
-  }, 
-  "settings_addsubscription_label": {
-    "message": "Add filter subscription"
-  }, 
-  "settings_enabled_column": {
-    "message": "Enabled"
-  }, 
-  "settings_remove_label": {
-    "message": "Delete"
   }, 
   "show_block_element_menu": {
     "message": "Show 'Block Element' right-click menu item"
@@ -155,14 +161,8 @@
   "show_icon": {
     "message": "Show icon in address bar"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Add subscription"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Filter list location:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Add a different subscription"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Please choose a filter subscription from the list:"

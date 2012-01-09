@@ -67,6 +67,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "Lägg till"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "Lägg till en ny prenumeration"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "Lägg till filterprenumeration"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "Ta bort"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "Aktiverat"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Fel kontrollsumma"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Fel vid hämtning"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Hämtar…"
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Fel vid validering av filter"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Ogiltig adress"
+  }, 
   "found_a_bug": {
     "message": "Hittat ett fel eller vill du översätta Adblock Plus till ett annat språk? Vänligen, <a href='$url$'>meddela här</a>.", 
     "placeholders": {
@@ -84,21 +114,6 @@
   }, 
   "global_subscription_invalid_location": {
     "message": "Platsen du angivit är antingen ogiltig eller så har du angivit ett felaktigt filnamn."
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "Laddar ner…"
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "Fel kontrollsumma"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "Fel vid nerladdning"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "Fel vid validering av filter"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "Ogiltig adress"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -133,18 +148,12 @@
   "out_of_date_lists": {
     "message": "Inaktuella listor uppdateras periodiskt."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "Dölj platshållare för blockerade element"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "Ta bort markerad"
-  }, 
-  "settings_addsubscription_label": {
-    "message": "Lägg till filterprenumeration"
-  }, 
-  "settings_enabled_column": {
-    "message": "På"
-  }, 
-  "settings_remove_label": {
-    "message": "Ta bort"
   }, 
   "show_block_element_menu": {
     "message": "Visa 'Blockera objekt' i högerklicksmeny"
@@ -152,14 +161,8 @@
   "show_icon": {
     "message": "Visa ikon i adressfältet"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "Lägg till filterprenumeration"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "Plats för filter:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "Lägg till en ny prenumeration"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Var vänlig välj en filterprenumeration från listan:"

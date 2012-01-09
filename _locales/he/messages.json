@@ -63,6 +63,36 @@
       }
     }
   }, 
+  "filters_addSubscriptionAdd_label": {
+    "message": "הוספה"
+  }, 
+  "filters_addSubscriptionOther_label": {
+    "message": "הוספת הרשמה אחרת"
+  }, 
+  "filters_addSubscription_label": {
+    "message": "הוספת הרשמת מסננים"
+  }, 
+  "filters_subscription_delete_label": {
+    "message": "מחיקה"
+  }, 
+  "filters_subscription_enabled_label": {
+    "message": "מאפשר"
+  }, 
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "כשל, ביקורת הסיכום לתקינות לא התאימה בצורה טובה"
+  }, 
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "כשל, ההורדה נכשלה"
+  }, 
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "מוריד..."
+  }, 
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "כשל, רשימת המסננים לא חוקית"
+  }, 
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "כשל, הכתובת שגויה"
+  }, 
   "found_a_bug": {
     "message": "מצאת באג? ברצונך ליצור תרגום של Adblock Plus לשפתך? נא <a href='$url$'>לציין את בקשתך כאן</a>.", 
     "placeholders": {
@@ -79,22 +109,7 @@
     "message": "האם להסיר את ההרשמה הזאת?"
   }, 
   "global_subscription_invalid_location": {
-    "message": "המיקום שגוי או ששם הקובץ שגוי."
-  }, 
-  "global_subscription_status_lastdownload_inprogress": {
-    "message": "מוריד..."
-  }, 
-  "global_synchronize_checksum_mismatch": {
-    "message": "כשל, ביקורת הסיכום לתקינות לא התאימה בצורה טובה"
-  }, 
-  "global_synchronize_connection_error": {
-    "message": "כשל, ההורדה נכשלה"
-  }, 
-  "global_synchronize_invalid_data": {
-    "message": "כשל, רשימת המסננים לא חוקית"
-  }, 
-  "global_synchronize_invalid_url": {
-    "message": "כשל, הכתובת שגויה"
+    "message": "מיקום רשימת הסינון איננו כתובת אתר חוקית ולא שם קובץ חוקי."
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -129,30 +144,18 @@
   "out_of_date_lists": {
     "message": "רשימות שאינן עדכניות מתעדכנות באופן תדיר."
   }, 
+  "overlay_hideplaceholders_label": {
+    "message": "הסתרת מצייני מקום של אלמנט חסום"
+  }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 
     "message": "הסרת הבחירה"
   }, 
-  "settings_addsubscription_label": {
-    "message": "הוספת הרשמה למסננים"
-  }, 
-  "settings_enabled_column": {
-    "message": "מאופשר"
-  }, 
-  "settings_remove_label": {
-    "message": "מחיקה"
-  }, 
   "show_icon": {
     "message": "הצגת סמל בסרגל הכתובות"
   }, 
-  "subscriptionSelection_addSubscription_label": {
-    "message": "הוספת הרשמה"
-  }, 
   "subscriptionSelection_location_label": {
     "message": "מיקום רשימת המסננים:"
-  }, 
-  "subscriptionSelection_other_label": {
-    "message": "הוספת הרשמה אחרת"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "יש לבחור הרשמת מסנן מהרשימה:"
