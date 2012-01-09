@@ -96,6 +96,10 @@ function addElementOverlay(elt) {
 // from selected page element
 function clickHide_showDialog(left, top, filters)
 {
+  // If we are already selecting, abort now
+  if (clickHide_activated || clickHideFiltersDialog)
+    clickHide_deactivate();
+
   clickHideFiltersDialog = document.createElement("iframe");
   clickHideFiltersDialog.src = chrome.extension.getURL("block.html") + "?filters=" + encodeURIComponent(filters.join("\n"));
   clickHideFiltersDialog.setAttribute("style", "position: fixed !important; visibility: hidden; display: block !important; border: 0px !important;");
@@ -168,14 +172,10 @@ function clickHide_activate() {
   if(document == null)
     return;
   
-  // If we already had a selected element, restore its appearance
-  if(currentElement) {
-    currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
-    currentElement.style.backgroundColor = currentElement_backgroundColor;
-    currentElement = null;
-    clickHideFilters = null;
-  }
-  
+  // If we are already selecting, abort now
+  if (clickHide_activated || clickHideFiltersDialog)
+    clickHide_deactivate();
+
   // Add overlays for elements with URLs so user can easily click them
   var elts = document.querySelectorAll('object,embed,img,iframe');
   for(var i=0; i<elts.length; i++)
