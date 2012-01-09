@@ -463,6 +463,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
   {
     case "get-settings":
       var matcherData = null;
+      var hostDomain = null;
       var selectors = null;
       var enabled = sender.tab ? !isWhitelisted(sender.tab.url) : true;
       if (enabled && request.matcher)
@@ -489,7 +490,9 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
           });
         }
       }
-      sendResponse({enabled: enabled, matcherData: matcherData, selectors: selectors});
+      if (enabled)
+        hostDomain = getBaseDomain(request.host);
+      sendResponse({enabled: enabled, hostDomain: hostDomain, matcherData: matcherData, selectors: selectors});
       break;
     case "get-domain-enabled-state":
       // Returns whether this domain is in the exclusion list.

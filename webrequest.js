@@ -94,8 +94,11 @@ function forgetTab(tabId)
   delete tabs[tabId];
 }
 
-// Primitive third-party check, needs to be replaced by something more elaborate
-// later. This is a copy of the function in include.preload.js.
+/**
+ * Checks whether a request is third party for the given document, uses
+ * information from the public suffix list to determine the effective domain
+ * name for the document.
+ */
 function isThirdParty(requestHost, documentHost)
 {
   // Remove trailing dots
