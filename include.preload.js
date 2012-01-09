@@ -15,6 +15,8 @@ var TagToType = {
   "IFRAME": "SUBDOCUMENT"
 };
 
+var hostDomain = null;
+
 var SELECTOR_GROUP_SIZE = 20;
 
 var savedBeforeloadEvents = new Array();
@@ -154,23 +156,22 @@ function extractDomainFromURL(url)
   return x;
 }
 
-// Primitive third-party check, needs to be replaced by something more elaborate
-// later.
-function isThirdParty(requestHost, documentHost)
+/**
+ * Checks whether a request is third party for the current document, uses
+ * our effective document domain as received by the background process.
+ */
+function isThirdParty(requestHost)
 {
+  if (!hostDomain)
+    return true;
+
   // Remove trailing dots
   requestHost = requestHost.replace(/\.+$/, "");
-  documentHost = documentHost.replace(/\.+$/, "");
 
-  // Extract domain name - leave IP addresses unchanged, otherwise leave only
-  // the last two parts of the host name
-  var documentDomain = documentHost;
-  if (!/^\d+(\.\d+)*$/.test(documentDomain) && /([^\.]+\.[^\.]+)$/.test(documentDomain))
-    documentDomain = RegExp.$1;
-  if (requestHost.length > documentDomain.length)
-    return (requestHost.substr(requestHost.length - documentDomain.length - 1) != "." + documentDomain);
+  if (requestHost.length > hostDomain.length)
+    return (requestHost.substr(requestHost.length - hostDomain.length - 1) != "." + hostDomain);
   else
-    return (requestHost != documentDomain);
+    return (requestHost != hostDomain);
 }
 
 // This beforeload handler is used before we hear back from the background process about
@@ -188,9 +189,8 @@ function shouldBlock(/**String*/ url, /**String*/ type)
 {
   var url = relativeToAbsoluteUrl(url);
   var requestHost = extractDomainFromURL(url);
-  var documentHost = window.location.hostname;
-  var thirdParty = isThirdParty(requestHost, documentHost);
-  var match = defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
+  var thirdParty = isThirdParty(requestHost);
+  var match = defaultMatcher.matchesAny(url, type, window.location.hostname, thirdParty);
   return (match && match instanceof BlockingFilter);
 }
 
@@ -218,12 +218,13 @@ function sendRequests()
   // done though webRequest API.
   if (isExperimental != true)
   {
-    chrome.extension.sendRequest({reqtype: "get-settings", matcher: true}, function(response)
+    chrome.extension.sendRequest({reqtype: "get-settings", matcher: true, host: window.location.hostname}, function(response)
     {
       document.removeEventListener("beforeload", saveBeforeloadEvent, true);
 
       if (response.enabled)
       {
+        hostDomain = response.hostDomain;
         defaultMatcher.fromCache(JSON.parse(response.matcherData));
 
         document.addEventListener("beforeload", beforeloadHandler, true);
