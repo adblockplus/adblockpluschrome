@@ -35,7 +35,7 @@ function setElemhideCSSRules(selectors)
   elemhideElt = document.createElement("link");
   elemhideElt.setAttribute("rel", "stylesheet");
   elemhideElt.setAttribute("type", "text/css");
-  elemhideElt.setAttribute("href", "data:text/css,");
+  elemhideElt.setAttribute("href", "data:text/css,/*http://*/");
   document.documentElement.appendChild(elemhideElt);
 
   var elt = elemhideElt;  // Use a local variable to avoid racing conditions
@@ -118,7 +118,7 @@ function normalizeURL(url)
 
 // Converts relative to absolute URL
 // e.g.: foo.swf on http://example.com/whatever/bar.html
-//  -> http://example.com/whatever/foo.swf 
+//  -> http://example.com/whatever/foo.swf
 function relativeToAbsoluteUrl(url) {
   // If URL is already absolute, don't mess with it
   if(!url || url.match(/^http/i))
