@@ -35,7 +35,7 @@ function setElemhideCSSRules(selectors)
   elemhideElt = document.createElement("link");
   elemhideElt.setAttribute("rel", "stylesheet");
   elemhideElt.setAttribute("type", "text/css");
-  elemhideElt.setAttribute("href", "data:text/css,/*http://*/");
+  elemhideElt.setAttribute("href", "javascript://");
   document.documentElement.appendChild(elemhideElt);
 
   var elt = elemhideElt;  // Use a local variable to avoid racing conditions
