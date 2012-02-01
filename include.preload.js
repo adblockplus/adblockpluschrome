@@ -32,10 +32,8 @@ function setElemhideCSSRules(selectors)
   if (!selectors)
     return;
 
-  elemhideElt = document.createElement("link");
-  elemhideElt.setAttribute("rel", "stylesheet");
+  elemhideElt = document.createElement("style");
   elemhideElt.setAttribute("type", "text/css");
-  elemhideElt.setAttribute("href", "about:");
   document.documentElement.appendChild(elemhideElt);
 
   var elt = elemhideElt;  // Use a local variable to avoid racing conditions
