@@ -22,9 +22,6 @@
     "description": "Label for 'Block Element' context menu item", 
     "message": "Block Element"
   }, 
-  "block_youtube": {
-    "message": "Block ads inside YouTube videos"
-  }, 
   "cancel": {
     "description": "Cancel button label", 
     "message": "Cancel"

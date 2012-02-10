@@ -22,9 +22,6 @@
     "description": "Label for 'Block Element' context menu item", 
     "message": "Khóa đối tượng này"
   }, 
-  "block_youtube": {
-    "message": "Chặn quảng cáo trong các đọan phim trên YouTube"
-  }, 
   "cancel": {
     "description": "Cancel button label", 
     "message": "Hủy bỏ"

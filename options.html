@@ -93,7 +93,7 @@ p {
 var backgroundPage = chrome.extension.getBackgroundPage();
 var imports = ["FilterStorage", "FilterNotifier", "Subscription", "SpecialSubscription",
                "DownloadableSubscription", "Filter", "WhitelistFilter",
-               "Synchronizer", "Utils", "hasExperimentalPermissions"];
+               "Synchronizer", "Utils"];
 for (var i = 0; i < imports.length; i++)
   window[imports[i]] = backgroundPage[imports[i]];
 
@@ -106,13 +106,7 @@ function loadOptions()
   initCheckbox("shouldShowIcon");
   initCheckbox("shouldShowBlockElementMenu");
   initCheckbox("disableInlineTextAds");
-  initCheckbox("specialCaseYouTube");
   initCheckbox("hidePlaceholders");
-
-  if (hasExperimentalPermissions)
-    document.getElementById("specialCaseYouTubeContainer").style.display = "none";
-  else
-    document.getElementById("hidePlaceholdersContainer").style.display = "none";
 
   // Load recommended subscriptions
   loadRecommendations();
@@ -769,9 +763,6 @@ $(function() {
       </div>
       <div id="disableInlineTextAdsContainer">
         <input type="checkbox" id="disableInlineTextAds" /><span class="i18n_disable_inline"></span>
-      </div>
-      <div id="specialCaseYouTubeContainer">
-        <input type="checkbox" id="specialCaseYouTube" /><span class="i18n_block_youtube"></span>
       </div>
       <div id="hidePlaceholdersContainer">
         <input type="checkbox" id="hidePlaceholders" /><span class="i18n_overlay_hideplaceholders_label"></span>

@@ -22,9 +22,6 @@
     "description": "Label for 'Block Element' context menu item", 
     "message": "Blockera objekt"
   }, 
-  "block_youtube": {
-    "message": "Blockera annonser i YouTube-videos"
-  }, 
   "cancel": {
     "description": "Cancel button label", 
     "message": "Avbryt"

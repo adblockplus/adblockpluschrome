@@ -18,9 +18,6 @@
   "apply_changes": {
     "message": "تطبيق التغييرات"
   }, 
-  "block_youtube": {
-    "message": "منع الإعلانات داخل YouTube videos"
-  }, 
   "cancel": {
     "description": "Cancel button label", 
     "message": "إلغاء"

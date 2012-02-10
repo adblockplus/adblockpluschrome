@@ -22,9 +22,6 @@
     "description": "Label for 'Block Element' context menu item", 
     "message": "屏蔽此元素"
   }, 
-  "block_youtube": {
-    "message": "屏蔽YouTube视频中的广告"
-  }, 
   "cancel": {
     "description": "Cancel button label", 
     "message": "取消"

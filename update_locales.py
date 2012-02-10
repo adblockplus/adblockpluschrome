@@ -122,6 +122,7 @@ if __name__ == '__main__':
     'subscriptionSelection_addSubscription_label',
     'subscriptionSelection_other_label',
     'hide_placeholders',
+    'block_youtube',
   ]
   imported = [
     'global.properties subscription_invalid_location',

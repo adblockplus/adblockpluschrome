@@ -22,9 +22,6 @@
     "description": "Label for 'Block Element' context menu item", 
     "message": "Bloķēt elementu"
   }, 
-  "block_youtube": {
-    "message": "Bloķēt reklāmas YouTube videoklipos"
-  }, 
   "cancel": {
     "description": "Cancel button label", 
     "message": "Atcelt"
