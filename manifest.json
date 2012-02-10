@@ -1,7 +1,7 @@
 {
   "name": "__MSG_name__",
   "version": "1.2",
-  "minimum_chrome_version": "16.0",
+  "minimum_chrome_version": "17.0",
   "description": "__MSG_description__",
   "default_locale": "en",
   "update_url": "https://adblockplus.org/devbuilds/adblockpluschrome/updates.xml",
@@ -17,20 +17,14 @@
     "128": "icons/abp-128.png"
   },
   "permissions": [
-    "tabs", "http://*/*", "https://*/*", "contextMenus", "webRequest", "webRequestBlocking", "unlimitedStorage", "experimental"
+    "tabs", "http://*/*", "https://*/*", "contextMenus", "webRequest", "webRequestBlocking", "unlimitedStorage"
   ],
   "background_page": "background.html",
   "options_page": "options.html",
   "content_scripts": [
     {
-      "matches": ["http://*.youtube.com/*", "https://*.youtube.com/*", "http://*.youtube-nocookie.com/*", "https://*.youtube-nocookie.com/*"],
-      "js": ["include.experimental.js", "include.youtube.js"],
-      "run_at": "document_start",
-      "all_frames": true
-    },
-    {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["modules/patches.js", "modules/FilterClasses.jsm", "modules/Matcher.jsm", "include.experimental.js", "include.preload.js"],
+      "js": ["include.preload.js"],
       "run_at": "document_start",
       "all_frames": true
     },

@@ -22,9 +22,6 @@
     "description": "Label for 'Block Element' context menu item", 
     "message": "요소 숨김"
   }, 
-  "block_youtube": {
-    "message": "유튜브 동영상 내부의 광고 차단"
-  }, 
   "cancel": {
     "description": "Cancel button label", 
     "message": "취소"

@@ -13,8 +13,13 @@
 <script type="text/javascript" src="lib/punycode.js"></script>
 <script type="text/javascript" src="lib/publicSuffixList.js"></script>
 <script type="text/javascript" src="lib/basedomain.js"></script>
+<script type="text/javascript" src="webrequest.js"></script>
 
 <script type="text/javascript">
+// Some types cannot be distinguished
+RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
+RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OTHER;
+
 FilterListener.startup();
 Synchronizer.startup();
 
@@ -125,11 +130,12 @@ function setDefaultOptions()
   defaultOptionValue("shouldShowIcon", "true");
   defaultOptionValue("shouldShowBlockElementMenu", "true");
   defaultOptionValue("disableInlineTextAds", "true");
-  defaultOptionValue("specialCaseYouTube", "true");
 
   // If user had older version installed, get rid of old option
-  if("experimental" in localStorage)
-    delete localStorage["experimental"];
+  if ("specialCaseYouTube" in localStorage)
+    delete localStorage.specialCaseYouTube;
+  if ("experimental" in localStorage)
+    delete localStorage.experimental;
 }
 
 // Upgrade options before we do anything else.
@@ -580,34 +586,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
   if(changeInfo.status == "loading")
     refreshIconAndContextMenu(tab);
 });
-
-// Only load webrequest.js if we have the necessary permissions
-var hasExperimentalPermissions = false;
-var webRequest = null;
-try
-{
-  var dummy = function(){};
-  webRequest = "webRequest" in chrome ? chrome.webRequest : chrome.experimental.webRequest;
-  webRequest.onBeforeRequest.addListener(dummy, {urls: []});
-  webRequest.onBeforeRequest.removeListener(dummy);
-  hasExperimentalPermissions = true;
-
-  // Some types cannot be distinguished
-  RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
-  RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OTHER;
-}
-catch (e) {}
-
-if (hasExperimentalPermissions)
-{
-  window.addEventListener("load", function()
-  {
-    var script = document.createElement("script");
-    script.setAttribute("src", "webrequest.js");
-    document.body.appendChild(script);
-  }, false);
-}
-
 </script>
 
 </head>

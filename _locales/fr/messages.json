@@ -21,9 +21,6 @@
   "block_element": {
     "message": "Supprimer l'élément"
   }, 
-  "block_youtube": {
-    "message": "Retirer les publicités dans les vidéos YouTube"
-  }, 
   "cancel": {
     "description": "Cancel button label", 
     "message": "Annuler"

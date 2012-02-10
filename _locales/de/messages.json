@@ -22,9 +22,6 @@
     "description": "Name für Kontextmenü-Eintrag 'Element blocken'", 
     "message": "Element blocken"
   }, 
-  "block_youtube": {
-    "message": "Blocke Werbung in YouTube Videos"
-  }, 
   "cancel": {
     "description": "Name für den 'Abbrechen'-Button", 
     "message": "Abbrechen"

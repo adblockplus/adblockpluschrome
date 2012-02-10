@@ -31,26 +31,15 @@ def removeUpdateURL(zip, dir, fileName, fileData):
     return json.dumps(data, sort_keys=True, indent=2)
   return fileData
 
-def useExperimentalUpdateURL(zip, dir, fileName, fileData):
+def setExperimentalSettings(zip, dir, fileName, fileData):
   if fileName == 'manifest.json':
     data = json.loads(fileData)
     if 'update_url' in data:
       index = data['update_url'].rfind('/')
       if index >= 0:
         data['update_url'] = data['update_url'][0:index] + '-experimental' + data['update_url'][index:]
+    data['permissions'] += ['experimental']
     data['name'] += ' experimental build'
-    return json.dumps(data, sort_keys=True, indent=2)
-  return fileData
-
-def removeExperimentalPermissions(zip, dir, fileName, fileData):
-  if fileName == 'manifest.json':
-    data = json.loads(fileData)
-    data['permissions'] = filter(lambda p: p != 'experimental', data['permissions'])
-    if 'content_scripts' in data:
-      for script in data['content_scripts']:
-        if 'js' in script:
-          script['js'] = filter(lambda s: s != 'include.experimental.js', script['js'])
-
     return json.dumps(data, sort_keys=True, indent=2)
   return fileData
 
@@ -179,9 +168,7 @@ if __name__ == '__main__':
   else:
     filters.append(lambda zip, dir, fileName, fileData: addBuildNumber(buildNum, zip, dir, fileName, fileData))
     if allowExperimental:
-      filters.append(useExperimentalUpdateURL)
-  if not allowExperimental:
-    filters.append(removeExperimentalPermissions)
+      filters.append(setExperimentalSettings)
   filters.append(mergeContentScripts)
 
   zipdata = packDirectory(inputdir, filters)

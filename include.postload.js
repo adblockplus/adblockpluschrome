@@ -4,8 +4,6 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-var enabled = false; // Enabled for this particular domain.
-
 // Click-to-hide stuff
 var clickHide_activated = false;
 var currentElement = null;
@@ -353,6 +351,69 @@ function getElementURL(elt) {
   return url;
 }
 
+// Converts relative to absolute URL
+// e.g.: foo.swf on http://example.com/whatever/bar.html
+//  -> http://example.com/whatever/foo.swf
+function relativeToAbsoluteUrl(url)
+{
+  // If URL is already absolute, don't mess with it
+  if (!url || /^[\w\-]+:/i.test(url))
+    return url;
+
+  // Leading / means absolute path
+  if(url[0] == '/')
+    return document.location.protocol + "//" + document.location.host + url;
+
+  // Remove filename and add relative URL to it
+  var base = document.baseURI.match(/.+\//);
+  if(!base)
+    return document.baseURI + "/" + url;
+  return base[0] + url;
+}
+
+// This function Copyright (c) 2008 Jeni Tennison, from jquery.uri.js
+// and licensed under the MIT license. See jquery-*.min.js for details.
+function removeDotSegments(u) {
+  var r = '', m = [];
+  if (/\./.test(u)) {
+    while (u !== undefined && u !== '') {
+      if (u === '.' || u === '..') {
+        u = '';
+      } else if (/^\.\.\//.test(u)) { // starts with ../
+        u = u.substring(3);
+      } else if (/^\.\//.test(u)) { // starts with ./
+        u = u.substring(2);
+      } else if (/^\/\.(\/|$)/.test(u)) { // starts with /./ or consists of /.
+        u = '/' + u.substring(3);
+      } else if (/^\/\.\.(\/|$)/.test(u)) { // starts with /../ or consists of /..
+        u = '/' + u.substring(4);
+        r = r.replace(/\/?[^\/]+$/, '');
+      } else {
+        m = u.match(/^(\/?[^\/]*)(\/.*)?$/);
+        u = m[2];
+        r = r + m[1];
+      }
+    }
+    return r;
+  } else {
+    return u;
+  }
+}
+
+// Does some degree of URL normalization
+function normalizeURL(url)
+{
+  var components = url.match(/(.+:\/\/.+?)\/(.*)/);
+  if(!components)
+    return url;
+  var newPath = removeDotSegments(components[2]);
+  if(newPath.length == 0)
+    return components[1];
+  if(newPath[0] != '/')
+    newPath = '/' + newPath;
+  return components[1] + newPath;
+}
+
 // Content scripts are apparently invoked on non-HTML documents, so we have to
 // check for that before doing stuff. |document instanceof HTMLDocument| check
 // will fail on some sites like planet.mozilla.org because WebKit creates
@@ -445,7 +506,7 @@ if (document.documentElement instanceof HTMLElement)
         // We hope the URL we are given is the same as the one in the element referenced
         // by lastRightClickEvent.target. If not, we just discard
         var target = lastRightClickEvent.target;
-        var url = relativeToAbsoluteUrl(target.src);
+        var url = target.src;
         // If we don't have the element with a src URL same as the filter, look for it.
         // Chrome's context menu API is terrible. Why can't it give us the friggin' element
         // to start with?
@@ -455,7 +516,7 @@ if (document.documentElement instanceof HTMLElement)
           // work on those, so we're OK for now.
           var elts = document.querySelectorAll('[src]');
           for(var i=0; i<elts.length; i++) {
-            url = relativeToAbsoluteUrl(elts[i].src);
+            url = elts[i].src;
             if(request.filter === url) {
               // This is hopefully our element. In case of multiple elements
               // with the same src, only one will be highlighted.
@@ -486,19 +547,4 @@ if (document.documentElement instanceof HTMLElement)
         break;
     }
   });
-
-  if (isExperimental != true)
-  {
-    chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response)
-    {
-      enabled = response.enabled;
-      if(enabled)
-      {
-        // Nuke background if it's an ad
-        var bodyBackground = getComputedStyle(document.body).backgroundImage;
-        if (bodyBackground && /^url\((.*)\)$/.test(bodyBackground) && shouldBlock(RegExp.$1, "IMAGE"))
-          document.body.style.setProperty("background-image", "none", "important");
-      }
-    });
-  }
 }

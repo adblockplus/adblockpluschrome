@@ -22,9 +22,6 @@
     "description": "Legenda para o item 'Bloquear Elemento' no menu de contexto", 
     "message": "Bloquear Elemento"
   }, 
-  "block_youtube": {
-    "message": "Bloquear propagandas dentro de vídeos do YouTube"
-  }, 
   "cancel": {
     "description": "Rótulo para o botão de Cancelar", 
     "message": "Cancelar"
