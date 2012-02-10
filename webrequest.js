@@ -6,7 +6,6 @@
 
 chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
 chrome.webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, {urls: ["http://*/*", "https://*/*"]}, ["requestHeaders", "blocking"]);
-chrome.webRequest.onErrorOccurred.addListener(onErrorOccurred, {urls: ["http://*/*", "https://*/*"]});
 chrome.tabs.onRemoved.addListener(forgetTab);
 
 var frames = {};
@@ -125,9 +124,4 @@ function checkRequest(type, url, documentUrl, topUrl)
   var documentHost = extractDomainFromURL(documentUrl);
   var thirdParty = isThirdParty(requestHost, documentHost);
   return defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
-}
-
-function onErrorOccurred(details)
-{
-  console.log(details);
 }
