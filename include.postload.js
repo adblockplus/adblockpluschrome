@@ -204,6 +204,7 @@ function clickHide_deactivate()
   }
 
   if(currentElement) {
+    currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, false);
     unhighlightElements();
     currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
     currentElement.style.backgroundColor = currentElement_backgroundColor;
