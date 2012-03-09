@@ -28,7 +28,7 @@
         try {
           file = Utils.resolveFilePath(Prefs.defaultBranch.getCharPref("data_directory"));
           if (file)
-            FilterStorage.sourceFile.append("patterns.ini");
+            file.append("patterns.ini");
         }
         catch (e){}
       }
@@ -242,7 +242,7 @@
             userFilters = parseIniFile(stream);
             stream.close();
             if (!FilterStorage.subscriptions.length) {
-              throw "No data in the file";
+              throw new Error("No data in the file");
             }
           }
           break;
