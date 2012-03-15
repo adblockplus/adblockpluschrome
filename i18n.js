@@ -43,10 +43,8 @@ function i18n_timeDateStrings(when) {
   var timeString = d.toLocaleTimeString();
 
   var now = new Date();
-  if(d.toDateString() == now.toDateString())
-    dateString = null;
+  if (d.toDateString() == now.toDateString())
+    return [timeString];
   else
-    dateString = d.toLocaleDateString();
-  
-  return [timeString, dateString];
+    return [timeString, d.toLocaleDateString()];
 }
