@@ -109,7 +109,7 @@ function toggleEnabled()
 function activateClickHide()
 {
   clickHideActiveStuff();
-  chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-activate"});
+  chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-activate", tabId: tab.id});
 
   // Close the popup after a few seconds, so user doesn't have to
   activateClickHide.timeout = window.setTimeout(window.close, 5000);

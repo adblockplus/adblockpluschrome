@@ -51,14 +51,29 @@ var tabId = null;
 
 function init()
 {
-  if (/^\?filters=([^=]*)/.test(location.search))
-    document.getElementById("filters").value = decodeURIComponent(RegExp.$1);
+  if (!/^\?tab=(\d+)/.test(location.search))
+  {
+    window.location.href.replace("about:blank");
+    return;
+  }
 
-  window.parent.postMessage({
-    type: "size",
-    width: Math.max(document.body.offsetWidth || document.body.scrollWidth),
-    height: Math.max(document.body.offsetHeight || document.body.scrollHeight)
-  }, "*");
+  tabId = parseInt(RegExp.$1, 10);
+  chrome.extension.sendRequest(
+    {
+      reqtype: "forward",
+      tab: tabId,
+      request:
+      {
+        reqtype: "clickhide-init",
+        width: Math.max(document.body.offsetWidth || document.body.scrollWidth),
+        height: Math.max(document.body.offsetHeight || document.body.scrollHeight)
+      }
+    },
+    function(response)
+    {
+      document.getElementById("filters").value = response.filters.join("\n");
+    }
+  );
 
   document.getElementById("filters").focus();
 }
@@ -89,10 +104,17 @@ function addFilters()
 
 function closeDialog(success)
 {
-  window.parent.postMessage({
-    type: "close",
-    remove: (typeof success == "boolean" ? success : false)
-  }, "*");
+  chrome.extension.sendRequest(
+    {
+      reqtype: "forward",
+      tab: tabId,
+      request:
+      {
+        reqtype: "clickhide-close",
+        remove: (typeof success == "boolean" ? success : false)
+      }
+    }
+  );
 }
 
 var dragCoords = null;
@@ -112,11 +134,18 @@ function onDrag(event)
   var diff = [event.screenX - dragCoords[0], event.screenY - dragCoords[1]];
   if (diff[0] || diff[1])
   {
-    window.parent.postMessage({
-      type: "move",
-      x: diff[0],
-      y: diff[1]
-    }, "*");
+    chrome.extension.sendRequest(
+      {
+        reqtype: "forward",
+        tab: tabId,
+        request:
+        {
+          reqtype: "clickhide-move",
+          x: diff[0],
+          y: diff[1]
+        }
+      }
+    );
     dragCoords = [event.screenX, event.screenY];
   }
 }

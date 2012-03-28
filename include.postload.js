@@ -6,6 +6,8 @@
 
 // Click-to-hide stuff
 var clickHide_activated = false;
+var clickHide_tabId = null;
+var clickHide_filters = null;
 var currentElement = null;
 var currentElement_boxShadow = null;
 var currentElement_backgroundColor;
@@ -100,8 +102,10 @@ function clickHide_showDialog(left, top, filters)
     currentElement = savedElement;
   }
 
+  clickHide_filters = filters;
+
   clickHideFiltersDialog = document.createElement("iframe");
-  clickHideFiltersDialog.src = chrome.extension.getURL("block.html") + "?filters=" + encodeURIComponent(filters.join("\n"));
+  clickHideFiltersDialog.src = chrome.extension.getURL("block.html") + "?tab=" + encodeURIComponent(clickHide_tabId);
   clickHideFiltersDialog.setAttribute("style", "position: fixed !important; visibility: hidden; display: block !important; border: 0px !important;");
   clickHideFiltersDialog.style.WebkitBoxShadow = "5px 5px 20px rgba(0,0,0,0.5)";
   clickHideFiltersDialog.style.zIndex = 99999;
@@ -109,9 +113,6 @@ function clickHide_showDialog(left, top, filters)
   // Position in upper-left all the time
   clickHideFiltersDialog.style.left = "50px";
   clickHideFiltersDialog.style.top = "50px";
-
-  // Listen for messages from this dialog
-  window.addEventListener("message", clickHide_dialogMessage, true);
 
   // Make dialog partly transparent when mouse isn't over it so user has a better
   // view of what's going to be blocked
@@ -127,39 +128,6 @@ function clickHide_showDialog(left, top, filters)
   } 
   
   document.body.appendChild(clickHideFiltersDialog);
-}
-
-/**
- * Processes messages received from "add filters" dialog.
- */
-function clickHide_dialogMessage(event)
-{
-  var origin = chrome.extension.getURL("block.html").replace(/^([^:\/]+:\/+[^:\/]+).*/, "$1");
-  if (event.origin == origin)
-  {
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (event.data.type == "size")
-    {
-      clickHideFiltersDialog.style.width = (event.data.width + 5) + "px";
-      clickHideFiltersDialog.style.height = (event.data.height + 5) + "px";
-      clickHideFiltersDialog.style.visibility = "visible";
-    }
-    else if (event.data.type == "move")
-    {
-      clickHideFiltersDialog.style.left = (parseInt(clickHideFiltersDialog.style.left) + event.data.x) + "px";
-      clickHideFiltersDialog.style.top = (parseInt(clickHideFiltersDialog.style.top) + event.data.y) + "px";
-    }
-    else if (event.data.type == "close")
-    {
-      // Explicitly get rid of currentElement
-      if (event.data.remove && currentElement && currentElement.parentNode)
-        currentElement.parentNode.removeChild(currentElement);
-
-      clickHide_deactivate();
-    }
-  }
 }
 
 // Turn on the choose element to create filter thing
@@ -200,7 +168,6 @@ function clickHide_deactivate()
   {
     document.body.removeChild(clickHideFiltersDialog);
     clickHideFiltersDialog = null;
-    window.removeEventListener("message", clickHide_dialogMessage, true);
   }
 
   if(currentElement) {
@@ -214,6 +181,7 @@ function clickHide_deactivate()
   unhighlightElements();
 
   clickHide_activated = false;
+  clickHide_filters = null;
   if(!document)
     return; // This can happen inside a nuked iframe...I think
   document.removeEventListener("mouseover", clickHide_mouseOver, false);
@@ -494,6 +462,7 @@ if (document.documentElement instanceof HTMLElement)
         sendResponse({active: clickHide_activated});
         break;
       case "clickhide-activate":
+        clickHide_tabId = request.tabId;
         clickHide_activate();
         break;
       case "clickhide-deactivate":
@@ -504,6 +473,9 @@ if (document.documentElement instanceof HTMLElement)
         // user right-clicked in
         if(!lastRightClickEvent)
           return;
+
+        clickHide_tabId = request.tabId;
+
         // We hope the URL we are given is the same as the one in the element referenced
         // by lastRightClickEvent.target. If not, we just discard
         var target = lastRightClickEvent.target;
@@ -542,6 +514,33 @@ if (document.documentElement instanceof HTMLElement)
         }
         else
           console.log("clickhide-new-filter: URLs don't match. Couldn't find that element.", request.filter, url, lastRightClickEvent.target.src);
+        break;
+      case "clickhide-init":
+        if (clickHideFiltersDialog)
+        {
+          sendResponse({filters: clickHide_filters});
+
+          clickHideFiltersDialog.style.width = (request.width + 5) + "px";
+          clickHideFiltersDialog.style.height = (request.height + 5) + "px";
+          clickHideFiltersDialog.style.visibility = "visible";
+        }
+        break;
+      case "clickhide-move":
+        if (clickHideFiltersDialog)
+        {
+          clickHideFiltersDialog.style.left = (parseInt(clickHideFiltersDialog.style.left, 10) + request.x) + "px";
+          clickHideFiltersDialog.style.top = (parseInt(clickHideFiltersDialog.style.top, 10) + request.y) + "px";
+        }
+        break;
+      case "clickhide-close":
+        if (clickHideFiltersDialog)
+        {
+          // Explicitly get rid of currentElement
+          if (request.remove && currentElement && currentElement.parentNode)
+            currentElement.parentNode.removeChild(currentElement);
+
+          clickHide_deactivate();
+        }
         break;
       default:
         sendResponse({});
