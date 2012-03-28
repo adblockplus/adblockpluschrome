@@ -462,7 +462,7 @@ function showContextMenu()
       chrome.contextMenus.create({'title': chrome.i18n.getMessage('block_element'), 'contexts': ['image', 'video', 'audio'], 'onclick': function(info, tab)
       {
         if(info.srcUrl)
-            chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl});
+            chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl, tabId: tab.id});
       }});
     }
   });
@@ -569,6 +569,9 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
           }
         });
       }
+      break;
+    case "forward":
+      chrome.tabs.sendRequest(request.tab, request.request, sendResponse);
       break;
     default:
       sendResponse({});
