@@ -47,21 +47,11 @@
 </style>
 
 <script type="text/javascript">
-var tabId = null;
-
 function init()
 {
-  if (!/^\?tab=(\d+)/.test(location.search))
-  {
-    window.location.href.replace("about:blank");
-    return;
-  }
-
-  tabId = parseInt(RegExp.$1, 10);
   chrome.extension.sendRequest(
     {
       reqtype: "forward",
-      tab: tabId,
       request:
       {
         reqtype: "clickhide-init",
@@ -107,7 +97,6 @@ function closeDialog(success)
   chrome.extension.sendRequest(
     {
       reqtype: "forward",
-      tab: tabId,
       request:
       {
         reqtype: "clickhide-close",
@@ -137,7 +126,6 @@ function onDrag(event)
     chrome.extension.sendRequest(
       {
         reqtype: "forward",
-        tab: tabId,
         request:
         {
           reqtype: "clickhide-move",

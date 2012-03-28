@@ -6,7 +6,6 @@
 
 // Click-to-hide stuff
 var clickHide_activated = false;
-var clickHide_tabId = null;
 var clickHide_filters = null;
 var currentElement = null;
 var currentElement_boxShadow = null;
@@ -105,7 +104,7 @@ function clickHide_showDialog(left, top, filters)
   clickHide_filters = filters;
 
   clickHideFiltersDialog = document.createElement("iframe");
-  clickHideFiltersDialog.src = chrome.extension.getURL("block.html") + "?tab=" + encodeURIComponent(clickHide_tabId);
+  clickHideFiltersDialog.src = chrome.extension.getURL("block.html");
   clickHideFiltersDialog.setAttribute("style", "position: fixed !important; visibility: hidden; display: block !important; border: 0px !important;");
   clickHideFiltersDialog.style.WebkitBoxShadow = "5px 5px 20px rgba(0,0,0,0.5)";
   clickHideFiltersDialog.style.zIndex = 99999;
@@ -462,7 +461,6 @@ if (document.documentElement instanceof HTMLElement)
         sendResponse({active: clickHide_activated});
         break;
       case "clickhide-activate":
-        clickHide_tabId = request.tabId;
         clickHide_activate();
         break;
       case "clickhide-deactivate":
@@ -473,9 +471,6 @@ if (document.documentElement instanceof HTMLElement)
         // user right-clicked in
         if(!lastRightClickEvent)
           return;
-
-        clickHide_tabId = request.tabId;
-
         // We hope the URL we are given is the same as the one in the element referenced
         // by lastRightClickEvent.target. If not, we just discard
         var target = lastRightClickEvent.target;
