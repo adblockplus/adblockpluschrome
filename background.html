@@ -16,6 +16,11 @@
 <script type="text/javascript" src="webrequest.js"></script>
 
 <script type="text/javascript">
+
+// Don't allow this page to be opened in frames, to avoid web pages messing with us
+if (window.top != window || window.opener)
+  window.location.replace("about:blank");
+
 // Some types cannot be distinguished
 RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
 RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OTHER;
