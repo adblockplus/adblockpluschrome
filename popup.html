@@ -36,6 +36,10 @@ a:hover { color: #eeeeff }
 <script type="text/javascript" src="i18n.js"></script>
 <script type="text/javascript" charset="utf-8">
 
+// Don't allow this page to be opened in frames, to avoid web pages messing with us
+if (window.top != window || window.opener)
+  window.location.replace("about:blank");
+
 var backgroundPage = chrome.extension.getBackgroundPage();
 var imports = ["FilterStorage", "Filter", "isWhitelisted", "extractDomainFromURL", "refreshIconAndContextMenu"];
 for (var i = 0; i < imports.length; i++)

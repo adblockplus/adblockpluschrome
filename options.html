@@ -90,6 +90,10 @@ p {
 </style>
 <script type="text/javascript" charset="utf-8">
 
+// Don't allow this page to be opened in frames, to avoid web pages messing with us
+if (window.top != window || window.opener)
+  window.location.replace("about:blank");
+
 var backgroundPage = chrome.extension.getBackgroundPage();
 var imports = ["FilterStorage", "FilterNotifier", "Subscription", "SpecialSubscription",
                "DownloadableSubscription", "Filter", "WhitelistFilter",
