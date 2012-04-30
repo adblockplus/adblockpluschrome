@@ -78,12 +78,12 @@ function removeTextAdFromElement(elt) {
 chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(response) {
   if(response.enabled && response.disableInlineTextAds) {
     // Listen for inserted nodes and process them as they come in
-    document.addEventListener('DOMNodeInserted', function(event) {
-      // Delay our handler to work around Chrome issue 81530
-      window.setTimeout(function() {
-        removeTextAdFromElement(event.target);
-      }, 0);
-    }, true);
+    var observer = new WebKitMutationObserver(function(mutations)
+    {
+      for (var i = 0; i < mutations.length; i++)
+        for (var j = 0; j < mutations[i].addedNodes.length; j++)
+          removeTextAdFromElement(mutations[i].addedNodes[j]);
+    });
 
     // However, our event handler above may not have been inserted in time, so we also scan the document.
     // We use setTimeout here because there is no way to ensure that we are running after the ad scripts have run.
