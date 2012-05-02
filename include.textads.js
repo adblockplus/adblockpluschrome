@@ -84,6 +84,7 @@ chrome.extension.sendRequest({reqtype: "get-domain-enabled-state"}, function(res
         for (var j = 0; j < mutations[i].addedNodes.length; j++)
           removeTextAdFromElement(mutations[i].addedNodes[j]);
     });
+    observer.observe(document.documentElement, {subtree: true, childList: true});
 
     // However, our event handler above may not have been inserted in time, so we also scan the document.
     // We use setTimeout here because there is no way to ensure that we are running after the ad scripts have run.
