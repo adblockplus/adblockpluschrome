@@ -289,15 +289,21 @@ var Utils =
   {
     compare: function(v1, v2)
     {
+      function compareParts(p1, p2)
+      {
+        if (p1 < p2)
+          return -1;
+        if (p1 < p2)
+          return 1;
+        return 0;
+      }
+
       var parts1 = v1.split(".");
       var parts2 = v2.split(".");
-      for (var i = 0; i < Math.max(parts1.length, parts2.length); i++)
-      {
-        // TODO: Handle non-integer version parts properly
-        var part1 = parseInt(i < parts1.length ? parts1[i] : "0");
-        var part2 = parseInt(i < parts2.length ? parts2[i] : "0");
-        if (part1 != part2)
-          return part1 - part2;
+      for (var i = 0; i < Math.max(parts1.length, parts2.length); i++) {
+        var result = compareParts(parts1[i], parts2[i]);
+        if (result !== 0)
+          return result;
       }
       return 0;
     }
