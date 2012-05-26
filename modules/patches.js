@@ -330,6 +330,8 @@ var Utils =
         return result;
       }
 
+      // TODO: Support + and *
+
       var parts1 = v1.split(".");
       var parts2 = v2.split(".");
       for (var i = 0; i < Math.max(parts1.length, parts2.length); i++)
