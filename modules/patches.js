@@ -289,20 +289,53 @@ var Utils =
   {
     compare: function(v1, v2)
     {
+      function parsePartInt(s)
+      {
+        var i = parseInt(s);
+        return isNaN(i) ? 0 : i;
+      }
+
+      function parsePart(s)
+      {
+        if (!s)
+          return parsePart("0");
+
+        var matches = s.match(/(\d*)(\D*)(\d*)(.*)/);
+        return {
+          numA: parsePartInt(matches[1]),
+          strB: matches[2],
+          numC: parsePartInt(matches[3]),
+          extraD: matches[4]
+        };
+      }
+
+      function comparePartElement(s1, s2)
+      {
+        if (s1 === "" && s2 !== "")
+          return 1;
+        if (s1 !== "" && s2 === "")
+          return -1;
+        return s1 === s2 ? 0 : (s1 > s2 ? 1 : -1);
+      }
+
       function compareParts(p1, p2)
       {
-        if (p1 < p2)
-          return -1;
-        if (p1 < p2)
-          return 1;
-        return 0;
+        var result = 0;
+        var elements = ["numA", "strB", "numC", "extraD"];
+        elements.some(function(element)
+        {
+          result = comparePartElement(p1[element], p2[element]);
+          return result;
+        });
+        return result;
       }
 
       var parts1 = v1.split(".");
       var parts2 = v2.split(".");
-      for (var i = 0; i < Math.max(parts1.length, parts2.length); i++) {
-        var result = compareParts(parts1[i], parts2[i]);
-        if (result !== 0)
+      for (var i = 0; i < Math.max(parts1.length, parts2.length); i++)
+      {
+        var result = compareParts(parsePart(parts1[i]), parsePart(parts2[i]));
+        if (result)
           return result;
       }
       return 0;
