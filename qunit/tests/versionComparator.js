@@ -25,28 +25,30 @@
     });
   });
 
-  test("Examples", 10, function() {
+  test("Examples", 30, function() {
     var examples = [
       "1.0pre1",
       "1.0pre2",
-      // TODO: Each of these should be checked for equality and >/<.
-      //    ["1.0", "1.0.0", "1.0.0.0"],
-      //    ["1.1pre", "1.1pre0", "1.0+"],
+      ["1.0", "1.0.0", "1.0.0.0"],
+      ["1.1pre", "1.1pre0", "1.0+"],
       "1.1pre1a",
       "1.1pre1",
       "1.1pre10a",
       "1.1pre10"
     ];
 
-    // TODO: Check each version against each other, not just neighbours.
+    // TODO: Compare all values in arrays for equality
 
-    for (var i = 0; i < examples.length - 1; i++) {
-      var v1 = examples[i];
-      var v2 = examples[i + 1];
+    allPairs(examples).forEach(function(pair) {
+      var v1 = pair[0];
+      var v2 = pair[1];
+      // TODO: Compare against each element of the array
+      if (v1 instanceof Array || v2 instanceof Array)
+        return;
       equal(compare(v1, v2), -1,
             "'" + v1 + "' should be smaller than '" + v2 + "'");
       equal(compare(v2, v1), 1,
             "'" + v2 + "' should be larger than '" + v1 + "'");
-    }
+    });
   });
 })();
