@@ -21,7 +21,7 @@
     });
   }
 
-  function versionLarger(v1, v2)
+  function versionSmaller(v1, v2)
   {
     equal(compare(v1, v2), -1,
           "'" + v1 + "' should be smaller than '" + v2 + "'");
@@ -46,6 +46,13 @@
   {
     versionsEqual(["2pre", "1+"]);
     versionsEqual(["1.1pre", "1.0+"]);
+  });
+
+  test("*", 6, function()
+  {
+    versionSmaller("1", "*");
+    versionSmaller("1.1", "1.*");
+    versionSmaller("1.*", "2");
   });
 
   test("Examples", 126, function()
@@ -73,7 +80,7 @@
       var v2 = [].concat(pair[1]);
       for (var i = 0; i < v1.length; i++)
         for (var j = 0; j < v2.length; j++)
-          versionLarger(v1[i], v2[j]);
+          versionSmaller(v1[i], v2[j]);
     });
   });
 })();

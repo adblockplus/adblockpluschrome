@@ -289,24 +289,28 @@ var Utils =
   {
     compare: function(v1, v2)
     {
-      function parsePartInt(s)
-      {
-        var i = parseInt(s);
-        return isNaN(i) ? 0 : i;
-      }
-
       function parsePart(s)
       {
         if (!s)
           return parsePart("0");
 
-        var matches = s.match(/(\d*)(\D*)(\d*)(.*)/);
         var part = {
-          numA: parsePartInt(matches[1]),
-          strB: matches[2],
-          numC: parsePartInt(matches[3]),
-          extraD: matches[4]
+          numA: 0,
+          strB: "",
+          numC: 0,
+          extraD: ""          
         };
+
+        if (s === "*") {
+          part.numA = Number.MAX_VALUE;
+          return part;
+        }
+
+        var matches = s.match(/(\d*)(\D*)(\d*)(.*)/);
+        part.numA = parseInt(matches[1]) || part.numA;
+        part.strB = matches[2] || part.strB;
+        part.numC = parseInt(matches[3]) || part.numC;
+        part.extraD = matches[4] || part.extraD;
 
         if (part.strB.indexOf("+") === 0)
         {
@@ -337,8 +341,6 @@ var Utils =
         });
         return result;
       }
-
-      // TODO: Support *
 
       var parts1 = v1.split(".");
       var parts2 = v2.split(".");
