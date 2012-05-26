@@ -37,7 +37,8 @@
 
   module("versionComparator");
 
-  test("Optional zero", 6, function() {
+  test("Optional zero", 6, function()
+  {
     versionsEqual(["1", "1.0", "1.0.0", "1.0.0.0"]);
   });
 
