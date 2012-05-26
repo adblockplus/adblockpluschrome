@@ -42,13 +42,19 @@
     versionsEqual(["1", "1.0", "1.0.0", "1.0.0.0"]);
   });
 
-  test("Examples", 106, function()
+  test("+", 2, function()
+  {
+    versionsEqual(["2pre", "1+"]);
+    versionsEqual(["1.1pre", "1.0+"]);
+  });
+
+  test("Examples", 126, function()
   {
     var examples = [
       "1.0pre1",
       "1.0pre2",
       ["1.0", "1.0.0", "1.0.0.0"],
-      ["1.1pre", "1.1pre0"/*, "1.0+"*/], // TODO: Support +
+      ["1.1pre", "1.1pre0", "1.0+"],
       "1.1pre1a",
       "1.1pre1",
       "1.1pre10a",
