@@ -301,12 +301,20 @@ var Utils =
           return parsePart("0");
 
         var matches = s.match(/(\d*)(\D*)(\d*)(.*)/);
-        return {
+        var part = {
           numA: parsePartInt(matches[1]),
           strB: matches[2],
           numC: parsePartInt(matches[3]),
           extraD: matches[4]
         };
+
+        if (part.strB.indexOf("+") === 0)
+        {
+          part.numA++;
+          part.strB = "pre";
+        }
+
+        return part;
       }
 
       function comparePartElement(s1, s2)
@@ -330,7 +338,7 @@ var Utils =
         return result;
       }
 
-      // TODO: Support + and *
+      // TODO: Support *
 
       var parts1 = v1.split(".");
       var parts2 = v2.split(".");
