@@ -312,7 +312,7 @@ var Utils =
         part.numC = parseInt(matches[3]) || part.numC;
         part.extraD = matches[4] || part.extraD;
 
-        if (part.strB.indexOf("+") === 0)
+        if (part.strB == "+")
         {
           part.numA++;
           part.strB = "pre";
