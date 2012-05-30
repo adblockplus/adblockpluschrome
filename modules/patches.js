@@ -301,7 +301,8 @@ var Utils =
           extraD: ""          
         };
 
-        if (s === "*") {
+        if (s === "*")
+        {
           part.numA = Number.MAX_VALUE;
           return part;
         }
