@@ -56,7 +56,7 @@
     versionSmaller("1.*", "2");
   });
 
-  test("Examples", 176, function()
+  test("Examples", 296, function()
   {
     var examples = [
       "1.0+a",
@@ -68,7 +68,8 @@
       "1.1pre1a",
       "1.1pre1",
       "1.1pre10a",
-      "1.1pre10"
+      ["1.1pre10", "1.1pre010"],
+      ["1.10", "1.010", "1.00010"],
     ];
 
     examples.forEach(function(example)

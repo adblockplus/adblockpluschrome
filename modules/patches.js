@@ -308,9 +308,9 @@ var Utils =
         }
 
         var matches = s.match(/(\d*)(\D*)(\d*)(.*)/);
-        part.numA = parseInt(matches[1]) || part.numA;
+        part.numA = parseInt(matches[1], 10) || part.numA;
         part.strB = matches[2] || part.strB;
-        part.numC = parseInt(matches[3]) || part.numC;
+        part.numC = parseInt(matches[3], 10) || part.numC;
         part.extraD = matches[4] || part.extraD;
 
         if (part.strB == "+")
