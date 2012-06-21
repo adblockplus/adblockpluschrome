@@ -93,25 +93,6 @@ function forgetTab(tabId)
   delete tabs[tabId];
 }
 
-/**
- * Checks whether a request is third party for the given document, uses
- * information from the public suffix list to determine the effective domain
- * name for the document.
- */
-function isThirdParty(requestHost, documentHost)
-{
-  // Remove trailing dots
-  requestHost = requestHost.replace(/\.+$/, "");
-  documentHost = documentHost.replace(/\.+$/, "");
-
-  // Extract domain name - leave IP addresses unchanged, otherwise leave only base domain
-  var documentDomain = getBaseDomain(documentHost);
-  if (requestHost.length > documentDomain.length)
-    return (requestHost.substr(requestHost.length - documentDomain.length - 1) != "." + documentDomain);
-  else
-    return (requestHost != documentDomain);
-}
-
 function checkRequest(type, url, documentUrl, topUrl)
 {
   if (topUrl && isWhitelisted(topUrl))
@@ -120,8 +101,8 @@ function checkRequest(type, url, documentUrl, topUrl)
   if (!documentUrl)
     documentUrl = topUrl;
 
-  var requestHost = extractDomainFromURL(url);
-  var documentHost = extractDomainFromURL(documentUrl);
+  var requestHost = extractHostFromURL(url);
+  var documentHost = extractHostFromURL(documentUrl);
   var thirdParty = isThirdParty(requestHost, documentHost);
   return defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
 }

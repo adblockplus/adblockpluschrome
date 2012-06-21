@@ -37,7 +37,7 @@ a:hover { color: #eeeeff }
 <script type="text/javascript" charset="utf-8">
 
 var backgroundPage = chrome.extension.getBackgroundPage();
-var imports = ["FilterStorage", "Filter", "isWhitelisted", "extractDomainFromURL", "refreshIconAndContextMenu"];
+var imports = ["FilterStorage", "Filter", "isWhitelisted", "extractHostFromURL", "refreshIconAndContextMenu"];
 for (var i = 0; i < imports.length; i++)
   window[imports[i]] = backgroundPage[imports[i]];
 
@@ -88,7 +88,7 @@ function toggleEnabled()
   }
   else
   {
-    var host = extractDomainFromURL(tab.url).replace(/^www\./, "");
+    var host = extractHostFromURL(tab.url).replace(/^www\./, "");
     var filter = Filter.fromText("@@||" + host + "^$document");
     if (filter.subscriptions.length && filter.disabled)
       filter.disabled = false;
