@@ -32,10 +32,6 @@ FilterNotifier.addListener(function(action)
       executeFirstRunActions();
     localStorage["currentVersion"] = require("info").addonVersion;
   }
-  else if (/^(filter|subscription)\./.test(action))
-  {
-    cachedMatcherData = null;
-  }
 });
 
 // Special-case domains for which we cannot use style-based hiding rules.
@@ -107,28 +103,6 @@ function refreshIconAndContextMenu(tab)
     else
       showContextMenu();
   }
-}
-
-/**
- * Cached JSON-ified version of the matcher data, to be sent to content
- * processes. Always use getMatcherData() to retrieve it.
- * @type String
- */
-var cachedMatcherData = null;
-
-/**
- * This will initialize cachedMatcherData variable if necessary and return its
- * value.
- */
-function getMatcherData()
-{
-  if (!cachedMatcherData)
-  {
-    var cache = {};
-    defaultMatcher.toCache(cache);
-    cachedMatcherData = JSON.stringify(cache);
-  }
-  return cachedMatcherData;
 }
 
 /**
@@ -392,12 +366,9 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
   switch (request.reqtype)
   {
     case "get-settings":
-      var matcherData = null;
       var hostDomain = null;
       var selectors = null;
       var enabled = sender.tab ? !isWhitelisted(sender.tab.url) : true;
-      if (enabled && request.matcher)
-        matcherData = getMatcherData();
       if (enabled && request.selectors)
       {
         var noStyleRules = false;
@@ -422,7 +393,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
       }
       if (enabled)
         hostDomain = getBaseDomain(request.host);
-      sendResponse({enabled: enabled, hostDomain: hostDomain, matcherData: matcherData, selectors: selectors});
+      sendResponse({enabled: enabled, hostDomain: hostDomain, selectors: selectors});
       break;
     case "get-domain-enabled-state":
       // Returns whether this domain is in the exclusion list.
