@@ -1,15 +1,8 @@
 <html>
 <head>
 
-<script type="text/javascript" src="modules/patches.js"></script>
-<script type="text/javascript" src="modules/FilterNotifier.jsm"></script>
-<script type="text/javascript" src="modules/FilterClasses.jsm"></script>
-<script type="text/javascript" src="modules/SubscriptionClasses.jsm"></script>
-<script type="text/javascript" src="modules/FilterStorage.jsm"></script>
-<script type="text/javascript" src="modules/ElemHide.jsm"></script>
-<script type="text/javascript" src="modules/FilterListener.jsm"></script>
-<script type="text/javascript" src="modules/Matcher.jsm"></script>
-<script type="text/javascript" src="modules/Synchronizer.jsm"></script>
+<script type="text/javascript" src="lib/adblockplus_compat.js"></script>
+<script type="text/javascript" src="lib/adblockplus.js"></script>
 <script type="text/javascript" src="lib/punycode.js"></script>
 <script type="text/javascript" src="lib/publicSuffixList.js"></script>
 <script type="text/javascript" src="lib/basedomain.js"></script>
@@ -17,14 +10,18 @@
 
 <script type="text/javascript">
 
+importAll("filterClasses", this);
+importAll("subscriptionClasses", this);
+importAll("filterStorage", this);
+importAll("elemHide", this);
+importAll("filterListener", this);
+importAll("filterNotifier", this);
+importAll("matcher", this);
+importAll("synchronizer", this);
+
 // Some types cannot be distinguished
 RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
 RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OTHER;
-
-FilterListener.startup();
-Synchronizer.startup();
-
-window.addEventListener("unload", FilterListener.shutdown);
 
 FilterNotifier.addListener(function(action)
 {
@@ -33,7 +30,7 @@ FilterNotifier.addListener(function(action)
     importOldData();
     if (!localStorage["currentVersion"])
       executeFirstRunActions();
-    localStorage["currentVersion"] = Utils.addonVersion;
+    localStorage["currentVersion"] = require("info").addonVersion;
   }
   else if (/^(filter|subscription)\./.test(action))
   {
@@ -327,7 +324,7 @@ function executeFirstRunActions()
       if (!selectedItem)
         selectedItem = subscription;
 
-      var prefix = Utils.checkLocalePrefixMatch(subscription.getAttribute("prefixes"));
+      var prefix = require("utils").Utils.checkLocalePrefixMatch(subscription.getAttribute("prefixes"));
       if (prefix)
       {
         if (!selectedPrefix || selectedPrefix.length < prefix.length)
