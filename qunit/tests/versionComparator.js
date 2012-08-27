@@ -1,6 +1,6 @@
 (function()
 {
-  var compare = Utils.versionComparator.compare;
+  var compare = Services.vc.compare;
 
   function allPairs(array)
   {

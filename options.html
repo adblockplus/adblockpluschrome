@@ -93,7 +93,7 @@ p {
 var backgroundPage = chrome.extension.getBackgroundPage();
 var imports = ["FilterStorage", "FilterNotifier", "Subscription", "SpecialSubscription",
                "DownloadableSubscription", "Filter", "WhitelistFilter",
-               "Synchronizer", "Utils"];
+               "Synchronizer", "require"];
 for (var i = 0; i < imports.length; i++)
   window[imports[i]] = backgroundPage[imports[i]];
 
@@ -201,7 +201,7 @@ function loadRecommendations()
         homepage: element.getAttribute("homepage")
       };
 
-      var prefix = Utils.checkLocalePrefixMatch(element.getAttribute("prefixes"));
+      var prefix = require("utils").Utils.checkLocalePrefixMatch(element.getAttribute("prefixes"));
       if (prefix)
       {
         option.style.fontWeight = "bold";
