@@ -1,15 +1,3 @@
-<html>
-<head>
-
-<script type="text/javascript" src="lib/adblockplus_compat.js"></script>
-<script type="text/javascript" src="lib/adblockplus.js"></script>
-<script type="text/javascript" src="lib/punycode.js"></script>
-<script type="text/javascript" src="lib/publicSuffixList.js"></script>
-<script type="text/javascript" src="lib/basedomain.js"></script>
-<script type="text/javascript" src="webrequest.js"></script>
-
-<script type="text/javascript">
-
 importAll("filterClasses", this);
 importAll("subscriptionClasses", this);
 importAll("filterStorage", this);
@@ -484,7 +472,3 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
   if(changeInfo.status == "loading")
     refreshIconAndContextMenu(tab);
 });
-</script>
-
-</head>
-</html>

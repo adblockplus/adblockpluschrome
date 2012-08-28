@@ -33,123 +33,22 @@ a:hover { color: #eeeeff }
 }
 </style>
 
+<script type="text/javascript" src="jquery-ui/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="i18n.js"></script>
-<script type="text/javascript" charset="utf-8">
-
-var backgroundPage = chrome.extension.getBackgroundPage();
-var imports = ["FilterStorage", "Filter", "isWhitelisted", "extractHostFromURL", "refreshIconAndContextMenu"];
-for (var i = 0; i < imports.length; i++)
-  window[imports[i]] = backgroundPage[imports[i]];
-
-var tab = null;
-
-function init()
-{
-  // Fill in i18n strings
-  loadI18nStrings();
-    
-  // Ask content script whether clickhide is active. If so, show cancel button.
-  // If that isn't the case, ask background.html whether it has cached filters. If so,
-  // ask the user whether she wants those filters.
-  // Otherwise, we are in default state.
-  chrome.windows.getCurrent(function(w)
-  {
-    chrome.tabs.getSelected(w.id, function(t)
-    {
-      tab = t;
-      document.getElementById("enabled").checked = !isWhitelisted(tab.url);
-      document.getElementById("enabledCheckboxAndLabel").style.display = "block";
-
-      chrome.tabs.sendRequest(tab.id, {reqtype: "get-clickhide-state"}, function(response)
-      {
-        if(response.active)
-          clickHideActiveStuff();
-        else
-          clickHideInactiveStuff();
-      });
-    });
-  });
-}
-
-function toggleEnabled()
-{
-  var checked = document.getElementById("enabled").checked;
-  if (checked)
-  {
-    // Remove any exception rules applying to this URL
-    var filter = isWhitelisted(tab.url);
-    while (filter)
-    {
-      FilterStorage.removeFilter(filter);
-      if (filter.subscriptions.length)
-        filter.disabled = true;
-      filter = isWhitelisted(tab.url);
-    }
-  }
-  else
-  {
-    var host = extractHostFromURL(tab.url).replace(/^www\./, "");
-    var filter = Filter.fromText("@@||" + host + "^$document");
-    if (filter.subscriptions.length && filter.disabled)
-      filter.disabled = false;
-    else
-    {
-      filter.disabled = false;
-      FilterStorage.addFilter(filter);
-    }
-  }
-
-  refreshIconAndContextMenu(tab);
-}
-
-function activateClickHide()
-{
-  clickHideActiveStuff();
-  chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-activate"});
-
-  // Close the popup after a few seconds, so user doesn't have to
-  activateClickHide.timeout = window.setTimeout(window.close, 5000);
-}
-
-function cancelClickHide()
-{
-  if (activateClickHide.timeout)
-  {
-    window.clearTimeout(activateClickHide.timeout);
-    activateClickHide.timeout = null;
-  }
-  clickHideInactiveStuff();
-  chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-deactivate"});
-}
-
-function clickHideActiveStuff()
-{
-  document.getElementById("enabledCheckboxAndLabel").style.display = "none";
-  document.getElementById("clickHideInactiveStuff").style.display = "none";
-  document.getElementById("clickHideActiveStuff").style.display = "inherit";
-}
-
-function clickHideInactiveStuff()
-{
-  document.getElementById("enabledCheckboxAndLabel").style.display = "block";
-  document.getElementById("clickHideActiveStuff").style.display = "none";
-  document.getElementById("clickHideInactiveStuff").style.display = "inherit";
-}
-
-</script>
+<script type="text/javascript" src="popup.js"></script>
 </head>
-<body id="main" onload="init()">
-<div id="enabledCheckboxAndLabel" style="display:none"><input id="enabled" type="checkbox" checked onClick="toggleEnabled()"><label for="enabled"><span class="i18n_enabled_for_site"></span></label></div>
+<body id="main">
+<div id="enabledCheckboxAndLabel" style="display:none"><input id="enabled" type="checkbox" checked><label for="enabled"><span class="i18n_enabled_for_site"></span></label></div>
 <div id="mustReloadMsg" style="display:none"><span class="i18n_new_filters_added"></span></div>
 <div id="clickHideInactiveStuff" style="display: none">
 <div class="spacer"></div>
-<button id="clickHideButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="activateClickHide()"><span class="i18n_easy_create_filter"></span></button>
+<button id="clickHideButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="i18n_easy_create_filter"></span></button>
 </div>
 
 <div id="clickHideActiveStuff" style="display: none">
 <div id="clickHideMsg"><span class="i18n_clickhide_instructions"></span></div>
 <div class="spacer"></div>
-<button id="cancelButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onClick="cancelClickHide()"><span class="i18n_cancel"></span></button>
+<button id="cancelButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="i18n_cancel"></span></button>
 </div>
 
 </div>
