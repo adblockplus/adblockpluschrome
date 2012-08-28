@@ -1,4 +1,5 @@
 {
+  "manifest_version": 2,
   "name": "__MSG_name__",
   "version": "1.2",
   "minimum_chrome_version": "20.0",
@@ -6,9 +7,9 @@
   "default_locale": "en",
   "update_url": "https://adblockplus.org/devbuilds/adblockpluschrome/updates.xml",
   "page_action": {
-    "default icon": "icons/abp-19.png",
-    "default title": "Adblock Plus",
-    "popup": "popup.html"
+    "default_icon": "icons/abp-19.png",
+    "default_title": "Adblock Plus",
+    "default_popup": "popup.html"
   },
   "icons": {
     "16": "icons/abp-16.png",
@@ -19,7 +20,13 @@
   "permissions": [
     "tabs", "http://*/*", "https://*/*", "contextMenus", "webRequest", "webRequestBlocking", "unlimitedStorage"
   ],
-  "background_page": "background.html",
+  "background": {
+    "scripts": [
+      "lib/adblockplus_compat.js", "lib/adblockplus.js", "lib/punycode.js",
+      "lib/publicSuffixList.js", "lib/basedomain.js", "webrequest.js",
+      "background.js"
+    ]
+  },
   "options_page": "options.html",
   "content_scripts": [
     {
