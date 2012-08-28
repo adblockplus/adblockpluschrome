@@ -10,6 +10,9 @@ function loadOptions()
 {
   loadI18nStrings();
 
+  // Set page title to i18n version of "Adblock Plus Options"
+  document.title = chrome.i18n.getMessage("options");
+
   // Add event listeners
   window.addEventListener("unload", unloadOptions, false);
   $("#updateFilterLists").click(updateFilterLists);
@@ -23,6 +26,13 @@ function loadOptions()
   $("#rawFiltersButton").click(toggleFiltersInRawFormat);
   $("#importRawFilters").click(importRawFiltersText);
   FilterNotifier.addListener(onFilterChange);
+
+  // Display jQuery UI elements
+  $("#tabs").tabs();
+  $("button").button();
+  $(".refreshButton").button("option", "icons", {primary: "ui-icon-refresh"});
+  $(".addButton").button("option", "icons", {primary: "ui-icon-plus"});
+  $(".removeButton").button("option", "icons", {primary: "ui-icon-minus"});
 
   // Popuplate option checkboxes
   initCheckbox("shouldShowIcon");
@@ -534,15 +544,3 @@ function addSubscriptionEntry(subscription)
 
   document.getElementById("filterLists").appendChild(element);
 }
-
-// Set page title to i18n version of "Adblock Plus Options"
-document.title = chrome.i18n.getMessage("options");
-
-// Display jQuery UI elements
-$(function() { 
-    $('#tabs').tabs(); 
-    $('button').button(); 
-    $('.refreshButton').button('option', 'icons', {primary: 'ui-icon-refresh'});
-    $('.addButton').button('option', 'icons', {primary: 'ui-icon-plus'});
-    $('.removeButton').button('option', 'icons', {primary: 'ui-icon-minus'});
-});
