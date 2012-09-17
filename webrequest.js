@@ -9,7 +9,6 @@ chrome.webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, {urls: ["
 chrome.tabs.onRemoved.addListener(forgetTab);
 
 var frames = {};
-var tabs = {};
 
 function onBeforeRequest(details)
 {
@@ -67,9 +66,6 @@ function recordFrame(tabId, frameId, parentFrameId, frameUrl, isMain)
   if (!(tabId in frames))
     frames[tabId] = {};
   frames[tabId][frameId] = {url: frameUrl, parent: parentFrameId};
-
-  if (isMain)
-    tabs[tabId] = frameUrl;
 }
 
 function getFrameUrl(tabId, frameId)
@@ -86,42 +82,35 @@ function getFrameParent(tabId, frameId)
   return -1;
 }
 
-function getTabUrl(tabId)
-{
-  if (tabId in tabs)
-    return tabs[tabId];
-  return null;
-}
-
 function forgetTab(tabId)
 {
   delete frames[tabId];
-  delete tabs[tabId];
 }
 
-function checkRequest(type, tabId, url, frame)
+function checkRequest(type, tabId, url, frameId)
 {
-  var documentUrl;
-  var parent = frame;
-  while (parent != -1)
-  {
-    var parentUrl = getFrameUrl(tabId, parent);
-    if (typeof documentUrl == "undefined")
-      documentUrl = parentUrl;
-    if (parentUrl && isWhitelisted(parentUrl))
-      return false;
-    parent = getFrameParent(tabId, parent);
-  }
+  if (isFrameWhitelisted(tabId, frameId))
+    return false;
 
+  var documentUrl = getFrameUrl(tabId, frameId);
   if (!documentUrl)
-  {
-    documentUrl = getTabUrl(tabId);
-    if (documentUrl && isWhitelisted(parentUrl))
-      return false;
-  }
+    return false;
 
   var requestHost = extractHostFromURL(url);
   var documentHost = extractHostFromURL(documentUrl);
   var thirdParty = isThirdParty(requestHost, documentHost);
   return defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
+}
+
+function isFrameWhitelisted(tabId, frameId)
+{
+  var parent = frameId;
+  while (parent != -1)
+  {
+    var parentUrl = getFrameUrl(tabId, parent);
+    if (parentUrl && isWhitelisted(parentUrl))
+      return true;
+    parent = getFrameParent(tabId, parent);
+  }
+  return false;
 }
