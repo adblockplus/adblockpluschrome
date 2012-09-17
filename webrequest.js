@@ -102,13 +102,13 @@ function checkRequest(type, tabId, url, frameId)
   return defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
 }
 
-function isFrameWhitelisted(tabId, frameId)
+function isFrameWhitelisted(tabId, frameId, type)
 {
   var parent = frameId;
   while (parent != -1)
   {
     var parentUrl = getFrameUrl(tabId, parent);
-    if (parentUrl && isWhitelisted(parentUrl))
+    if (parentUrl && isWhitelisted(parentUrl, type))
       return true;
     parent = getFrameParent(tabId, parent);
   }

@@ -54,14 +54,14 @@ setDefaultOptions();
  * @param url {String}
  * @return {Filter} filter that matched the URL or null if not whitelisted
  */
-function isWhitelisted(url)
+function isWhitelisted(url, type)
 {
   // Ignore fragment identifier
   var index = url.indexOf("#");
   if (index >= 0)
     url = url.substring(0, index);
 
-  var result = defaultMatcher.matchesAny(url, "DOCUMENT", extractHostFromURL(url), false);
+  var result = defaultMatcher.matchesAny(url, type || "DOCUMENT", extractHostFromURL(url), false);
   return (result instanceof WhitelistFilter ? result : null);
 }
 
@@ -377,7 +377,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
         }
       }
 
-      var enabled = !isFrameWhitelisted(tabId, frameId);
+      var enabled = !isFrameWhitelisted(tabId, frameId, "DOCUMENT") && !isFrameWhitelisted(tabId, frameId, "ELEMHIDE");
       if (enabled && request.selectors)
       {
         var noStyleRules = false;
