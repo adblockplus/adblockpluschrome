@@ -50,7 +50,7 @@ function sendRequests()
   if (!(document.documentElement instanceof HTMLElement))
     return;
 
-  chrome.extension.sendRequest({reqtype: "get-settings", selectors: true, host: window.location.hostname}, function(response)
+  chrome.extension.sendRequest({reqtype: "get-settings", selectors: true, frameUrl: window.location.href}, function(response)
   {
     setElemhideCSSRules(response.selectors);
   });

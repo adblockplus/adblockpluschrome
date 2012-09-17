@@ -356,11 +356,33 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
     case "get-settings":
       var hostDomain = null;
       var selectors = null;
-      var enabled = sender.tab ? !isWhitelisted(sender.tab.url) : true;
+
+      // HACK: We don't know which frame sent us the message, try to find it
+      // in webRequest's frame data.
+      var tabId = -1;
+      var frameId = -1;
+      if (sender.tab)
+      {
+        var tabId = sender.tab.id;
+        if (tabId in frames)
+        {
+          for (var f in frames[tabId])
+          {
+            if (getFrameUrl(tabId, f) == request.frameUrl)
+            {
+              frameId = f;
+              break;
+            }
+          }
+        }
+      }
+
+      var enabled = !isFrameWhitelisted(tabId, frameId);
       if (enabled && request.selectors)
       {
         var noStyleRules = false;
-        var host = request.host;
+        var host = extractHostFromURL(request.frameUrl);
+        hostDomain = getBaseDomain(host);
         for (var i = 0; i < noStyleRulesHosts.length; i++)
         {
           var noStyleHost = noStyleRulesHosts[i];
@@ -379,8 +401,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
           });
         }
       }
-      if (enabled)
-        hostDomain = getBaseDomain(request.host);
+
       sendResponse({enabled: enabled, hostDomain: hostDomain, selectors: selectors});
       break;
     case "get-domain-enabled-state":
