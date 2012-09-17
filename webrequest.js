@@ -13,12 +13,15 @@ var tabs = {};
 
 function onBeforeRequest(details)
 {
+  if (details.tabId == -1)
+    return {};
+
   var type = details.type;
   if (type == "main_frame" || type == "sub_frame")
-    recordFrame(details.tabId, details.frameId, details.url, type == "main_frame");
+    recordFrame(details.tabId, details.frameId, details.parentFrameId, details.url, type == "main_frame");
 
   if (type == "main_frame")
-    return;
+    return {};
 
   // Type names match Mozilla's with main_frame and sub_frame being the only exceptions.
   if (type == "sub_frame")
@@ -26,12 +29,8 @@ function onBeforeRequest(details)
   else
     type = type.toUpperCase();
 
-  var documentUrl = getFrameUrl(details.tabId, details.frameId);
-  var topUrl = getTabUrl(details.tabId);
-  if (type == "SUBDOCUMENT")
-    documentUrl = getFrameUrl(details.tabId, details.parentFrameId) || topUrl;
-
-  var filter = checkRequest(type, details.url, documentUrl, topUrl);
+  var frame = (type != "SUBDOCUMENT" ? details.frameId : details.parentFrameId);
+  var filter = checkRequest(type, details.tabId, details.url, frame);
   if (filter instanceof BlockingFilter)
   {
     var collapse = filter.collapse;
@@ -63,11 +62,11 @@ function onBeforeSendHeaders(details)
   return null;
 }
 
-function recordFrame(tabId, frameId, frameUrl, isMain)
+function recordFrame(tabId, frameId, parentFrameId, frameUrl, isMain)
 {
   if (!(tabId in frames))
     frames[tabId] = {};
-  frames[tabId][frameId] = frameUrl;
+  frames[tabId][frameId] = {url: frameUrl, parent: parentFrameId};
 
   if (isMain)
     tabs[tabId] = frameUrl;
@@ -76,8 +75,15 @@ function recordFrame(tabId, frameId, frameUrl, isMain)
 function getFrameUrl(tabId, frameId)
 {
   if (tabId in frames && frameId in frames[tabId])
-    return frames[tabId][frameId];
+    return frames[tabId][frameId].url;
   return null;
+}
+
+function getFrameParent(tabId, frameId)
+{
+  if (tabId in frames && frameId in frames[tabId])
+    return frames[tabId][frameId].parent;
+  return -1;
 }
 
 function getTabUrl(tabId)
@@ -93,13 +99,26 @@ function forgetTab(tabId)
   delete tabs[tabId];
 }
 
-function checkRequest(type, url, documentUrl, topUrl)
+function checkRequest(type, tabId, url, frame)
 {
-  if (topUrl && isWhitelisted(topUrl))
-    return false;
+  var documentUrl;
+  var parent = frame;
+  while (parent != -1)
+  {
+    var parentUrl = getFrameUrl(tabId, parent);
+    if (typeof documentUrl == "undefined")
+      documentUrl = parentUrl;
+    if (parentUrl && isWhitelisted(parentUrl))
+      return false;
+    parent = getFrameParent(tabId, parent);
+  }
 
   if (!documentUrl)
-    documentUrl = topUrl;
+  {
+    documentUrl = getTabUrl(tabId);
+    if (documentUrl && isWhitelisted(parentUrl))
+      return false;
+  }
 
   var requestHost = extractHostFromURL(url);
   var documentHost = extractHostFromURL(documentUrl);
