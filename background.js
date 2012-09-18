@@ -51,7 +51,8 @@ setDefaultOptions();
 
 /**
  * Checks whether a page is whitelisted.
- * @param url {String}
+ * @param {String} url
+ * @param {String} [type] content type to be checked, default is "DOCUMENT"
  * @return {Filter} filter that matched the URL or null if not whitelisted
  */
 function isWhitelisted(url, type)
@@ -363,7 +364,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
       var frameId = -1;
       if (sender.tab)
       {
-        var tabId = sender.tab.id;
+        tabId = sender.tab.id;
         if (tabId in frames)
         {
           for (var f in frames[tabId])
