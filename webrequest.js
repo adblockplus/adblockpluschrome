@@ -17,7 +17,7 @@ function onBeforeRequest(details)
 
   var type = details.type;
   if (type == "main_frame" || type == "sub_frame")
-    recordFrame(details.tabId, details.frameId, details.parentFrameId, details.url, type == "main_frame");
+    recordFrame(details.tabId, details.frameId, details.parentFrameId, details.url);
 
   if (type == "main_frame")
     return {};
@@ -61,7 +61,7 @@ function onBeforeSendHeaders(details)
   return null;
 }
 
-function recordFrame(tabId, frameId, parentFrameId, frameUrl, isMain)
+function recordFrame(tabId, frameId, parentFrameId, frameUrl)
 {
   if (!(tabId in frames))
     frames[tabId] = {};
