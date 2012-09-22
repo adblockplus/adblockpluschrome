@@ -5,7 +5,6 @@
  */
 
 chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
-chrome.webRequest.onBeforeSendHeaders.addListener(onBeforeSendHeaders, {urls: ["http://*/*", "https://*/*"]}, ["requestHeaders", "blocking"]);
 chrome.tabs.onRemoved.addListener(forgetTab);
 
 var frames = {};
@@ -44,21 +43,6 @@ function onBeforeRequest(details)
   }
   else
     return {};
-}
-
-function onBeforeSendHeaders(details)
-{
-  var match = defaultMatcher.matchesAny(details.url, "DONOTTRACK", null, false);
-  if (match && match instanceof BlockingFilter)
-  {
-    var headers = details.requestHeaders || [];
-    if (!headers.some(function(header) { header.name == "DNT";}))
-    {
-      headers.push({name: "DNT", value: "1"});
-      return {requestHeaders: headers};
-    }
-  }
-  return null;
 }
 
 function recordFrame(tabId, frameId, parentFrameId, frameUrl)
