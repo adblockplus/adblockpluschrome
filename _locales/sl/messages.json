@@ -1,4 +1,7 @@
 {
+  "filters_addSubscriptionAdd_label": {
+    "message": "Dodaj"
+  }, 
   "filters_addSubscriptionOther_label": {
     "message": "Dodaj novo naročnino"
   }, 
@@ -28,6 +31,9 @@
   }, 
   "name": {
     "message": "Adblock Plus (Beta)"
+  }, 
+  "overlay_hideplaceholders_label": {
+    "message": "Skrij ograde blokoranih elementov"
   }, 
   "subscriptionSelection_location_label": {
     "message": "Mesto seznama filtriranja:"

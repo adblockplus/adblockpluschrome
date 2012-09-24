@@ -60,6 +60,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "السماح لبعض الإعلانات الغير متطفّلة"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "اضافة"
   }, 
@@ -68,6 +71,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "إضافة اشتراك إلى فلتر"
+  }, 
+  "filters_readMore_label": {
+    "message": "قراءة المزيد"
   }, 
   "filters_subscription_delete_label": {
     "message": "ازالة"
@@ -89,6 +95,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "فشل الأمر، ليس عنوان صحيح"
+  }, 
+  "filters_viewList_label": {
+    "message": "اظهار القائمة"
   }, 
   "found_a_bug": {
     "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.", 

@@ -64,14 +64,20 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "允许一些非侵入式广告"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "添加"
   }, 
   "filters_addSubscriptionOther_label": {
-    "message": "添加其他订阅"
+    "message": "添加其他过滤规则订阅组"
   }, 
   "filters_addSubscription_label": {
-    "message": "添加过滤规则订阅"
+    "message": "添加过滤规则订阅组"
+  }, 
+  "filters_readMore_label": {
+    "message": "深入了解"
   }, 
   "filters_subscription_delete_label": {
     "message": "删除"
@@ -86,13 +92,16 @@
     "message": "失败，下载失败"
   }, 
   "filters_subscription_lastDownload_inProgress": {
-    "message": "下载中……"
+    "message": "正在下载……"
   }, 
   "filters_subscription_lastDownload_invalidData": {
     "message": "失败，不是有效的过滤规则列表"
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "失败，不是有效地址"
+  }, 
+  "filters_viewList_label": {
+    "message": "查看列表"
   }, 
   "found_a_bug": {
     "message": "发现错误？需要帮助？请前往<a href='$url$'>此处</a>", 
@@ -107,10 +116,10 @@
     "message": "常规"
   }, 
   "global_remove_subscription_warning": {
-    "message": "你真的希望移除该订阅么？"
+    "message": "您确定要移除该过滤规则订阅组吗？"
   }, 
   "global_subscription_invalid_location": {
-    "message": "过滤规则列表的位置不是有效的URL或有效的文件名"
+    "message": "过滤规则列表的位置不是有效的 URL 或有效的文件名。"
   }, 
   "last_updated_at": {
     "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
@@ -162,10 +171,10 @@
     "message": "过滤规则列表位置:"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "从列表中选择过滤规则订阅："
+    "message": "从列表中选择过滤规则订阅组:"
   }, 
   "subscriptionSelection_title_label": {
-    "message": "订阅的标题:"
+    "message": "订阅组的标题:"
   }, 
   "update_now": {
     "message": "立即更新"

@@ -60,6 +60,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "Salli osa ei-häiritsevästä mainonnasta"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Lisää"
   }, 
@@ -68,6 +71,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Lisää suodatintilaus"
+  }, 
+  "filters_readMore_label": {
+    "message": "Lue lisää"
   }, 
   "filters_subscription_delete_label": {
     "message": "Poista"
@@ -89,6 +95,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Epäonnistui, kelvoton osoite"
+  }, 
+  "filters_viewList_label": {
+    "message": "Näytä lista"
   }, 
   "found_a_bug": {
     "message": "Löysitkö vian? Haluatko kääntää Adblock Plusin omalle kielellesi? Ole hyvä ja <a href='$url$'>kirjoita hakemus täällä</a>.", 

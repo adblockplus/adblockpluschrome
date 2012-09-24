@@ -64,6 +64,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "Allow some non-intrusive advertising"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Add"
   }, 
@@ -72,6 +75,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Add filter subscription"
+  }, 
+  "filters_readMore_label": {
+    "message": "Read more"
   }, 
   "filters_subscription_delete_label": {
     "message": "Delete"
@@ -93,6 +99,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Failed, not a valid address"
+  }, 
+  "filters_viewList_label": {
+    "message": "View list"
   }, 
   "found_a_bug": {
     "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a href='$url$'>file a request here</a>.", 

@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "Allow some non-intrusive advertising"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Add"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Add filter subscription"
+  }, 
+  "filters_readMore_label": {
+    "message": "Read more"
   }, 
   "filters_subscription_delete_label": {
     "message": "Delete"
@@ -28,6 +34,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Failed: not a valid address"
+  }, 
+  "filters_viewList_label": {
+    "message": "View list"
   }, 
   "global_remove_subscription_warning": {
     "message": "Do you really want to remove this subscription?"

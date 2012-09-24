@@ -64,6 +64,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "Permetti alcune pubblicità non inopportune"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Aggiungi"
   }, 
@@ -72,6 +75,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Aggiungi sottoscrizione"
+  }, 
+  "filters_readMore_label": {
+    "message": "Ulteriori informazioni…"
   }, 
   "filters_subscription_delete_label": {
     "message": "Elimina"
@@ -93,6 +99,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Sincronizzazione non riuscita, indirizzo web non valido"
+  }, 
+  "filters_viewList_label": {
+    "message": "Visualizza la lista…"
   }, 
   "found_a_bug": {
     "message": "Hai trovato un bug? Vuoi tradurre Adblock Plus nella tua lingua? Per favore <a href='$url$'>compila questa rischiesta</a>.", 

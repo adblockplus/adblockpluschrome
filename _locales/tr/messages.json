@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "Rahatsız etmeyen bazı reklamlara izin ver"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Ekle"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Süzgeç aboneliği ekle"
+  }, 
+  "filters_readMore_label": {
+    "message": "Daha fazla bilgi al"
   }, 
   "filters_subscription_delete_label": {
     "message": "Sil"
@@ -28,6 +34,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Olmadı. Bu geçerli bir adres değil."
+  }, 
+  "filters_viewList_label": {
+    "message": "Listeye bak"
   }, 
   "global_remove_subscription_warning": {
     "message": "Gerçekten abonelikten çıkmak istiyor musunuz?"

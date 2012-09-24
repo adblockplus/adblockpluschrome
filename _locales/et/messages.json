@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "Luba mõned mittepealetükkivad reklaamid"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Lisa"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Lisa filtrite tellimus"
+  }, 
+  "filters_readMore_label": {
+    "message": "Loe lisaks"
   }, 
   "filters_subscription_delete_label": {
     "message": "Kustuta"
@@ -28,6 +34,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Nurjus, vale aadress"
+  }, 
+  "filters_viewList_label": {
+    "message": "Vaata loetelu"
   }, 
   "global_remove_subscription_warning": {
     "message": "Kas oled kindel, et soovid selle tellimuse eemaldata?"

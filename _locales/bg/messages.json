@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "Оставете някои не натрапчиви реклами"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Добави"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Добави абонамент за филтър"
+  }, 
+  "filters_readMore_label": {
+    "message": "Прочети повече"
   }, 
   "filters_subscription_delete_label": {
     "message": "Изтрий"
@@ -28,6 +34,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Грешка, невалиден адрес"
+  }, 
+  "filters_viewList_label": {
+    "message": "Виж лист"
   }, 
   "global_remove_subscription_warning": {
     "message": "Наистина ли искате да премахнете този абонамент?"

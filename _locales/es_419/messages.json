@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "Permitir publicidad no hostigadora"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Agregar"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Agregar suscripción de filtros"
+  }, 
+  "filters_readMore_label": {
+    "message": "Leer más"
   }, 
   "filters_subscription_delete_label": {
     "message": "Eliminar"
@@ -28,6 +34,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Falló, no es una dirección válida"
+  }, 
+  "filters_viewList_label": {
+    "message": "Ver lista"
   }, 
   "global_remove_subscription_warning": {
     "message": "¿Estás seguro de querer quitar esta suscripción?"

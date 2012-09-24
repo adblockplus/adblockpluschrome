@@ -64,6 +64,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "Permitir cierta publicidad no intrusiva"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Añadir"
   }, 
@@ -72,6 +75,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Añadir suscripción de filtros"
+  }, 
+  "filters_readMore_label": {
+    "message": "Leer más"
   }, 
   "filters_subscription_delete_label": {
     "message": "Eliminar"
@@ -93,6 +99,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Error: no es una dirección válida"
+  }, 
+  "filters_viewList_label": {
+    "message": "Ver lista"
   }, 
   "found_a_bug": {
     "message": "¿Encontraste un bug en Adblock Plus o tienes una mejor traducción? Por favor <a href='$url$'>repórtalo aquí</a>.", 

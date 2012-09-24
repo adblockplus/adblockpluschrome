@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "Enkele niet-opdringerige advertenties toestaan"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Toevoegen"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Filterabonnement toevoegen"
+  }, 
+  "filters_readMore_label": {
+    "message": "Lees meer"
   }, 
   "filters_subscription_delete_label": {
     "message": "Verwijderen"
@@ -29,6 +35,9 @@
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Mislukt, geen geldig adres"
   }, 
+  "filters_viewList_label": {
+    "message": "Lijst bekijken"
+  }, 
   "global_remove_subscription_warning": {
     "message": "Weet u zeker dat u dit abonnement wilt verwijderen?"
   }, 
@@ -39,7 +48,7 @@
     "message": "Adblock Plus (Beta)"
   }, 
   "overlay_hideplaceholders_label": {
-    "message": "Plaatshouders of geblokkeerde elementen verbergen"
+    "message": "Plaatshouders van geblokkeerde elementen verbergen"
   }, 
   "subscriptionSelection_location_label": {
     "message": "Filterlijstlocatie:"

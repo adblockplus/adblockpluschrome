@@ -5,7 +5,9 @@ importAll("elemHide", this);
 importAll("filterListener", this);
 importAll("filterNotifier", this);
 importAll("matcher", this);
+importAll("prefs", this);
 importAll("synchronizer", this);
+importAll("utils", this);
 
 // Some types cannot be distinguished
 RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;

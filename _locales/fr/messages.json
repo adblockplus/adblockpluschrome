@@ -63,6 +63,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "Autoriser certaines publicité non-intrusives"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Ajouter"
   }, 
@@ -72,6 +75,9 @@
   "filters_addSubscription_label": {
     "message": "S'abonner à la liste de filtres"
   }, 
+  "filters_readMore_label": {
+    "message": "Apprendre davantage"
+  }, 
   "filters_subscription_delete_label": {
     "message": "Supprimer"
   }, 
@@ -79,19 +85,22 @@
     "message": "Activé"
   }, 
   "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Échec, le checksum ne correspond pas !"
+    "message": "Échec, le checksum ne correspond pas!"
   }, 
   "filters_subscription_lastDownload_connectionError": {
-    "message": "Échec, erreur lors du téléchargement !"
+    "message": "Échec, erreur lors du téléchargement!"
   }, 
   "filters_subscription_lastDownload_inProgress": {
-    "message": "Téléchargement en cours…"
+    "message": "Téléchargement en cours..."
   }, 
   "filters_subscription_lastDownload_invalidData": {
-    "message": "Échec, ceci n'est pas une liste de filtres valide !"
+    "message": "Échec, ceci n'est pas une liste de filtres valide!"
   }, 
   "filters_subscription_lastDownload_invalidURL": {
-    "message": "Échec, ceci n'est pas une adresse valide !"
+    "message": "Échec, ceci n'est pas une adresse valide!"
+  }, 
+  "filters_viewList_label": {
+    "message": "Afficher la liste"
   }, 
   "found_a_bug": {
     "message": "Avez-vous trouvé un bug ou une mauvaise traduction dans Adblock Plus&nbsp;? S'il-vous-plaît, <a href='$url$'>enregistrez-le ici</a>.", 
@@ -106,7 +115,7 @@
     "message": "Général"
   }, 
   "global_remove_subscription_warning": {
-    "message": "Souhaitez-vous vraiment vous désabonner ?"
+    "message": "Voulez-vous vraiment supprimer cet abonnement?"
   }, 
   "global_subscription_invalid_location": {
     "message": "L'adresse indiquant l'emplacement de la liste de filtres n'est ni une URL valide, ni un nom de fichier valide."

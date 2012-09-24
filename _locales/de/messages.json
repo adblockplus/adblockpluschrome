@@ -64,6 +64,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "Einige nicht aufdringliche Werbung zulassen"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Hinzufügen"
   }, 
@@ -72,6 +75,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Filterabonnement hinzufügen"
+  }, 
+  "filters_readMore_label": {
+    "message": "Mehr Information"
   }, 
   "filters_subscription_delete_label": {
     "message": "Löschen"
@@ -93,6 +99,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Fehler, ungültige Adresse"
+  }, 
+  "filters_viewList_label": {
+    "message": "Liste öffnen"
   }, 
   "found_a_bug": {
     "message": "Sie haben einen Bug gefunden oder wollen Adblock Plus in eine andere Sprache übersetzen? Bitte schreiben Sie <a href='$url$'>hier</a> ihre Anfrage.", 

@@ -60,6 +60,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "אפשור קצת פרסום לא פולשני"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "הוספה"
   }, 
@@ -68,6 +71,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "הוספת הרשמת מסננים"
+  }, 
+  "filters_readMore_label": {
+    "message": "לקרוא עוד"
   }, 
   "filters_subscription_delete_label": {
     "message": "מחיקה"
@@ -89,6 +95,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "כשל, הכתובת שגויה"
+  }, 
+  "filters_viewList_label": {
+    "message": "הצגת רשימה"
   }, 
   "found_a_bug": {
     "message": "מצאת באג? ברצונך ליצור תרגום של Adblock Plus לשפתך? נא <a href='$url$'>לציין את בקשתך כאן</a>.", 

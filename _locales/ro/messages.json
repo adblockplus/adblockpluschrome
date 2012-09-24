@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "Permite publicitatea discretă"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Adaugă"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Adaugă abonament filtru"
+  }, 
+  "filters_readMore_label": {
+    "message": "Citește mai mult"
   }, 
   "filters_subscription_delete_label": {
     "message": "Șterge"
@@ -29,6 +35,9 @@
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Eşuat, adresa nu este validă"
   }, 
+  "filters_viewList_label": {
+    "message": "Afişare listă"
+  }, 
   "global_remove_subscription_warning": {
     "message": "Sigur doriţi să îndepărtaţi această subscriere?"
   }, 
@@ -45,7 +54,7 @@
     "message": "Locaţia listei de filtre:"
   }, 
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Alegeţi un abonamente filtre din listă:"
+    "message": "Alegeți un abonamente filtre din listă:"
   }, 
   "subscriptionSelection_title_label": {
     "message": "Titlul abonamentului:"
