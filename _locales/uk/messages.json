@@ -8,6 +8,9 @@
   "filters_addSubscription_label": {
     "message": "Додати підписку"
   }, 
+  "filters_readMore_label": {
+    "message": "Детальніше"
+  }, 
   "filters_subscription_delete_label": {
     "message": "Видалити"
   }, 

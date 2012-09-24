@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "Дозволи ненаметљиве рекламе"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Додај"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Додај претплату на филтер"
+  }, 
+  "filters_readMore_label": {
+    "message": "Сазнај више"
   }, 
   "filters_subscription_delete_label": {
     "message": "Избриши"
@@ -28,6 +34,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Неуспело, неисправна адреса"
+  }, 
+  "filters_viewList_label": {
+    "message": "Погледај списак"
   }, 
   "global_remove_subscription_warning": {
     "message": "Желите ли да уклоните ову претплату?"

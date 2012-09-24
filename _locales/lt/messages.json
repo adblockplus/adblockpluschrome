@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "Leisti neįkyrias reklamas"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Pridėti"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Pridėti filtro prenumeratą"
+  }, 
+  "filters_readMore_label": {
+    "message": "Plačiau"
   }, 
   "filters_subscription_delete_label": {
     "message": "Ištrinti"
@@ -28,6 +34,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Nepavyko, netinkamas adresas"
+  }, 
+  "filters_viewList_label": {
+    "message": "Peržiūrėti sąrašą"
   }, 
   "global_remove_subscription_warning": {
     "message": "Ar tikrai norite atsisakyti šios prenumeratos?"

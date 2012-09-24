@@ -64,6 +64,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "비침입형 광고 허용"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "추가"
   }, 
@@ -72,6 +75,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "구독 필터 추가"
+  }, 
+  "filters_readMore_label": {
+    "message": "자세히 보기"
   }, 
   "filters_subscription_delete_label": {
     "message": "삭제"
@@ -93,6 +99,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "실패함 : 올바르지 않은 주소"
+  }, 
+  "filters_viewList_label": {
+    "message": "필터 목록 보기"
   }, 
   "found_a_bug": {
     "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? <a href='$url$'>연락하기</a>", 
@@ -146,7 +155,7 @@
     "message": "구독 필터는 주기적으로 자동 업데이트됩니다."
   }, 
   "overlay_hideplaceholders_label": {
-    "message": "차단된 요소의 공백 숨기기"
+    "message": "차단된 요소의 영역 숨기기"
   }, 
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.", 

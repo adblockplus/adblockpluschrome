@@ -1,7 +1,7 @@
 var backgroundPage = chrome.extension.getBackgroundPage();
 var imports = ["FilterStorage", "FilterNotifier", "Subscription", "SpecialSubscription",
                "DownloadableSubscription", "Filter", "WhitelistFilter",
-               "Synchronizer", "require"];
+               "Synchronizer", "Prefs", "Utils", "require"];
 for (var i = 0; i < imports.length; i++)
   window[imports[i]] = backgroundPage[imports[i]];
 
@@ -13,12 +13,17 @@ function loadOptions()
   // Set page title to i18n version of "Adblock Plus Options"
   document.title = chrome.i18n.getMessage("options");
 
+  // Set links
+  $("#acceptableAdsLink").attr("href", Prefs.subscriptions_exceptionsurl);
+  $("#acceptableAdsDocs").attr("href", Prefs.documentation_link.replace(/%LINK%/g, "acceptable_ads").replace(/%LANG%/g, Utils.appLocale));
+
   // Add event listeners
   window.addEventListener("unload", unloadOptions, false);
   $("#updateFilterLists").click(updateFilterLists);
   $("#startSubscriptionSelection").click(startSubscriptionSelection);
   $("#subscriptionSelector").change(updateSubscriptionSelection);
   $("#addSubscription").click(addSubscription);
+  $("#acceptableAds").click(allowAcceptableAds);
   $("#whitelistForm").submit(addWhitelistDomain);
   $("#removeWhitelist").click(removeSelectedExcludedDomain);
   $("#customFilterForm").submit(addTypedFilter);
@@ -56,14 +61,23 @@ function reloadFilters()
   while (container.lastChild)
     container.removeChild(container.lastChild);
 
+  var hasAcceptable = false;
   for (var i = 0; i < FilterStorage.subscriptions.length; i++)
   {
     var subscription = FilterStorage.subscriptions[i];
     if (subscription instanceof SpecialSubscription)
       continue;
 
+    if (subscription.url == Prefs.subscriptions_exceptionsurl)
+    {
+      hasAcceptable = true;
+      continue;
+    }
+
     addSubscriptionEntry(subscription);
   }
+
+  $("#acceptableAds").prop("checked", hasAcceptable);
 
   // User-entered filters
   showUserFilters();
@@ -259,6 +273,24 @@ function doAddSubscription(url, title, homepage)
     Synchronizer.execute(subscription);
 }
 
+function allowAcceptableAds(event)
+{
+  var subscription = Subscription.fromURL(Prefs.subscriptions_exceptionsurl);
+  if (!subscription)
+    return;
+
+  subscription.disabled = false;
+  subscription.title = "Allow non-intrusive advertising";
+  if ($("#acceptableAds").prop("checked"))
+  {
+    FilterStorage.addSubscription(subscription);
+    if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
+      Synchronizer.execute(subscription);
+  }
+  else
+    FilterStorage.removeSubscription(subscription);
+}
+
 function findSubscriptionElement(subscription)
 {
   var children = document.getElementById("filterLists").childNodes;
@@ -328,12 +360,22 @@ function onFilterChange(action, item, param1, param2)
       break;
     case "subscription.added":
       if (!(item instanceof SpecialSubscription) && !findSubscriptionElement(item))
-        addSubscriptionEntry(item);
+      {
+        if (item.url == Prefs.subscriptions_exceptionsurl)
+          $("#acceptableAds").prop("checked", true);
+        else
+          addSubscriptionEntry(item);
+      }
       break;
     case "subscription.removed":
-      var element = findSubscriptionElement(item);
-      if (element)
-        element.parentNode.removeChild(element);
+      if (item.url == Prefs.subscriptions_exceptionsurl)
+        $("#acceptableAds").prop("checked", false);
+      else
+      {
+        var element = findSubscriptionElement(item);
+        if (element)
+          element.parentNode.removeChild(element);
+      }
       break;
     case "filter.added":
       if (item instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(item.text))

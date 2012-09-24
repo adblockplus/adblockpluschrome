@@ -60,6 +60,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "Néhány nem tolakodó hirdetés engedélyezése"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Hozzáadás"
   }, 
@@ -68,6 +71,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Külső szűrő hozzáadása"
+  }, 
+  "filters_readMore_label": {
+    "message": "Mi ez?"
   }, 
   "filters_subscription_delete_label": {
     "message": "Törlés"
@@ -89,6 +95,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Sikertelen, érvénytelen cím"
+  }, 
+  "filters_viewList_label": {
+    "message": "Lista megtekintése"
   }, 
   "found_a_bug": {
     "message": "Találtál egy hibát az Adblock Plus-ban? Kérlek <a href='$url$'>jelentsd itt</a>.", 

@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "控えめな広告を許可"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "追加"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "フィルタ購読を追加"
+  }, 
+  "filters_readMore_label": {
+    "message": "更に詳しい説明"
   }, 
   "filters_subscription_delete_label": {
     "message": "削除"
@@ -29,6 +35,9 @@
   "filters_subscription_lastDownload_invalidURL": {
     "message": "更新失敗:アドレス無効"
   }, 
+  "filters_viewList_label": {
+    "message": "設定内容を参照"
+  }, 
   "global_remove_subscription_warning": {
     "message": "本当にこのフィルタ購読を削除しますか？"
   }, 
@@ -39,7 +48,7 @@
     "message": "Adblock Plus (Beta)"
   }, 
   "overlay_hideplaceholders_label": {
-    "message": "ブロックした要素の「代わり」を非表示"
+    "message": "ブロックした要素の「代わり」を表示しない"
   }, 
   "subscriptionSelection_location_label": {
     "message": "フィルタ購読の場所:"

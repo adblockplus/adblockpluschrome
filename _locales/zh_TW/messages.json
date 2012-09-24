@@ -64,6 +64,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "允許部分的非侵入式廣告"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "加入"
   }, 
@@ -72,6 +75,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "新增過濾條件集"
+  }, 
+  "filters_readMore_label": {
+    "message": "詳細內容"
   }, 
   "filters_subscription_delete_label": {
     "message": "刪除"
@@ -93,6 +99,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "失敗，無效的位址"
+  }, 
+  "filters_viewList_label": {
+    "message": "檢視條件列表"
   }, 
   "found_a_bug": {
     "message": "發現錯誤？要翻譯 Adblock Plus？ 請至 <a href='$url$'>此處詢問</a>。", 

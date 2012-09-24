@@ -39,6 +39,18 @@ button
   display: none;
 }
 
+#acceptableAdsContainer
+{
+  margin-top: 10px;
+}
+
+#acceptableAdsLink,
+#acceptableAdsDocs
+{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 .subscription
 {
   margin: 3px 0px;
@@ -160,6 +172,13 @@ button
           <span class="i18n_subscriptionSelection_location_label"></span><br />
           <input type="text" id="customSubscriptionLocation" style="width:500px" />
         </p>
+      </div>
+
+      <div id="acceptableAdsContainer">
+        <input type="checkbox" id="acceptableAds" />
+        <span class="i18n_filters_acceptableAds2_label"></span>
+        <a id="acceptableAdsLink" href="#" class="i18n_filters_viewList_label"></a>
+        <a id="acceptableAdsDocs" href="#" class="i18n_filters_readMore_label"></a>
       </div>
     </p>
   </div>

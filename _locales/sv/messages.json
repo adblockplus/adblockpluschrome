@@ -64,6 +64,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "Tillåt viss icke-störande reklam"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Lägg till"
   }, 
@@ -72,6 +75,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Lägg till filterprenumeration"
+  }, 
+  "filters_readMore_label": {
+    "message": "Läs mer"
   }, 
   "filters_subscription_delete_label": {
     "message": "Ta bort"
@@ -93,6 +99,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Ogiltig adress"
+  }, 
+  "filters_viewList_label": {
+    "message": "Visa lista"
   }, 
   "found_a_bug": {
     "message": "Hittat ett fel eller vill du översätta Adblock Plus till ett annat språk? Vänligen, <a href='$url$'>meddela här</a>.", 

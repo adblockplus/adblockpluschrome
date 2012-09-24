@@ -64,6 +64,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "Zezwalaj na nie natrętne reklamy"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Dodaj"
   }, 
@@ -72,6 +75,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Dodaj zestaw filtrów"
+  }, 
+  "filters_readMore_label": {
+    "message": "Dowiedz się więcej"
   }, 
   "filters_subscription_delete_label": {
     "message": "Usuń"
@@ -93,6 +99,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Nie powiodło się – nieprawidłowy adres"
+  }, 
+  "filters_viewList_label": {
+    "message": "Zobacz listę"
   }, 
   "found_a_bug": {
     "message": "Znalazłeś błąd? Zgłoś proszę <a href='$url$'>problem tutaj</a>.", 

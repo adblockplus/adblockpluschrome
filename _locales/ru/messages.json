@@ -60,6 +60,9 @@
       }
     }
   }, 
+  "filters_acceptableAds2_label": {
+    "message": "Разрешить некоторую ненавязчивую рекламу"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Добавить"
   }, 
@@ -68,6 +71,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Добавить подписку"
+  }, 
+  "filters_readMore_label": {
+    "message": "Дополнительная информация"
   }, 
   "filters_subscription_delete_label": {
     "message": "Удалить"
@@ -89,6 +95,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Ошибка: неверный адрес"
+  }, 
+  "filters_viewList_label": {
+    "message": "Открыть список"
   }, 
   "found_a_bug": {
     "message": "Нашли ошибку в Adblock Plus? Пожалуйста, <a href='$url$'>сообщите об этом здесь</a>.", 

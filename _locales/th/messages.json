@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "อนุญาตให้มีโฆษณาบางอย่างที่ไม่ต้องการรบกวน"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "เพิ่ม"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "เพิ่มนามข้างท้ายตัวกรอง"
+  }, 
+  "filters_readMore_label": {
+    "message": "อ่านเพิ่มเติม"
   }, 
   "filters_subscription_delete_label": {
     "message": "ลบ"
@@ -28,6 +34,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "ล้มเหลว ไม่มีที่อยู่ที่ถูกต้อง"
+  }, 
+  "filters_viewList_label": {
+    "message": "มุมมองรายการ"
   }, 
   "global_remove_subscription_warning": {
     "message": "คุณแน่ใจหรือว่าต้องการลบนามข้างท้ายนี้"

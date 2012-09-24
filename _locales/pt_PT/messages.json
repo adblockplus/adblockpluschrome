@@ -1,4 +1,7 @@
 {
+  "filters_acceptableAds2_label": {
+    "message": "Permitir alguma publicidade não intrusiva"
+  }, 
   "filters_addSubscriptionAdd_label": {
     "message": "Adicionar"
   }, 
@@ -7,6 +10,9 @@
   }, 
   "filters_addSubscription_label": {
     "message": "Adicionar subscrição de filtros"
+  }, 
+  "filters_readMore_label": {
+    "message": "Ler mais"
   }, 
   "filters_subscription_delete_label": {
     "message": "Apagar"
@@ -28,6 +34,9 @@
   }, 
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Falhou, endereço inválido"
+  }, 
+  "filters_viewList_label": {
+    "message": "Ver lista"
   }, 
   "global_remove_subscription_warning": {
     "message": "Deseja, realmente, remover esta subscrição?"
