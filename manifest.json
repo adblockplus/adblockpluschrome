@@ -23,8 +23,8 @@
   "background": {
     "scripts": [
       "lib/adblockplus_compat.js", "lib/adblockplus.js", "lib/punycode.js",
-      "lib/publicSuffixList.js", "lib/basedomain.js", "webrequest.js",
-      "background.js"
+      "lib/publicSuffixList.js", "lib/basedomain.js", "lib/sha1.js",
+      "lib/jsbn.js", "lib/rsa.js", "webrequest.js", "background.js"
     ]
   },
   "options_page": "options.html",
