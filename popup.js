@@ -7,9 +7,6 @@ var tab = null;
 
 function init()
 {
-  // Fill in i18n strings
-  loadI18nStrings();
-
   // Attach event listeners
   $("#enabled").click(toggleEnabled);
   $("#clickHideButton").click(activateClickHide);
