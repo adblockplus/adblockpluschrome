@@ -1,7 +1,5 @@
 function init()
 {
-  loadI18nStrings();
-
   // Attach event listeners
   window.addEventListener("keydown", onKeyDown, false);
   window.addEventListener("dragstart", onDragStart, false);

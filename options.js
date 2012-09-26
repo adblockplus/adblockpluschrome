@@ -8,8 +8,6 @@ for (var i = 0; i < imports.length; i++)
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions()
 {
-  loadI18nStrings();
-
   // Set page title to i18n version of "Adblock Plus Options"
   document.title = chrome.i18n.getMessage("options");
 

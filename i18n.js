@@ -48,3 +48,6 @@ function i18n_timeDateStrings(when) {
   else
     return [timeString, d.toLocaleDateString()];
 }
+
+// Fill in the strings as soon as possible
+window.addEventListener("DOMContentLoaded", loadI18nStrings, true);
