@@ -13,13 +13,17 @@ importAll("utils", this);
 RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
 RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OTHER;
 
+var isFirstRun = false;
 FilterNotifier.addListener(function(action)
 {
   if (action == "load")
   {
     importOldData();
     if (!localStorage["currentVersion"])
+    {
+      isFirstRun = true;
       executeFirstRunActions();
+    }
     localStorage["currentVersion"] = require("info").addonVersion;
   }
 });
@@ -49,7 +53,7 @@ function setDefaultOptions()
 }
 
 // Upgrade options before we do anything else.
-setDefaultOptions(); 
+setDefaultOptions();
 
 /**
  * Checks whether a page is whitelisted.
@@ -352,6 +356,71 @@ function showContextMenu()
   });
 }
 
+/**
+ * Opens Options window or focuses an existing one.
+ * @param {Function} callback  function to be called with the window object of
+ *                             the Options window
+ */
+function openOptions(callback)
+{
+  function findOptions(selectTab)
+  {
+    var views = chrome.extension.getViews({type: "tab"});
+    for (var i = 0; i < views.length; i++)
+      if ("startSubscriptionSelection" in views[i])
+        return views[i];
+
+    return null;
+  }
+
+  function selectOptionsTab()
+  {
+    chrome.windows.getAll({populate: true}, function(windows)
+    {
+      var url = chrome.extension.getURL("options.html");
+      for (var i = 0; i < windows.length; i++)
+        for (var j = 0; j < windows[i].tabs.length; j++)
+          if (windows[i].tabs[j].url == url)
+            chrome.tabs.update(windows[i].tabs[j].id, {selected: true});
+    });
+  }
+
+  var view = findOptions();
+  if (view)
+  {
+    selectOptionsTab();
+    callback(view);
+  }
+  else
+  {
+    var onLoad = function()
+    {
+      var view = findOptions();
+      if (view)
+        callback(view);
+    };
+
+    chrome.tabs.create({url: chrome.extension.getURL("options.html")}, function(tab)
+    {
+      if (tab.status == "complete")
+        onLoad();
+      else
+      {
+        var id = tab.id;
+        var listener = function(tabId, changeInfo, tab)
+        {
+          if (tabId == id && changeInfo.status == "complete")
+          {
+            chrome.tabs.onUpdated.removeListener(listener);
+            onLoad();
+          }
+        };
+        chrome.tabs.onUpdated.addListener(listener);
+      }
+    });
+  }
+}
+
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
 {
   switch (request.reqtype)
@@ -424,53 +493,10 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
       }
       break;
     case "add-subscription":
-      function doAddSubscription(selectTab)
+      openOptions(function(view)
       {
-        var views = chrome.extension.getViews({type: "tab"});
-        var view = null;
-        for (var i = 0; i < views.length; i++)
-          if ("startSubscriptionSelection" in views[i])
-            view = views[i];
-
-        if (view)
-        {
-          view.startSubscriptionSelection(request.title, request.url);
-          if (selectTab)
-          {
-            chrome.windows.getAll({populate: true}, function(windows)
-            {
-              var url = chrome.extension.getURL("options.html");
-              for (var i = 0; i < windows.length; i++)
-                for (var j = 0; j < windows[i].tabs.length; j++)
-                  if (windows[i].tabs[j].url == url)
-                    return chrome.tabs.update(windows[i].tabs[j].id, {selected: true});
-            });
-          }
-        }
-        return view;
-      }
-
-      if (!doAddSubscription(true))
-      {
-        chrome.tabs.create({url: chrome.extension.getURL("options.html")}, function(tab)
-        {
-          if (tab.status == "complete")
-            doAddSubscription()
-          else
-          {
-            var id = tab.id;
-            var listener = function(tabId, changeInfo, tab)
-            {
-              if (tabId == id && changeInfo.status == "complete")
-              {
-                chrome.tabs.onUpdated.removeListener(listener);
-                doAddSubscription();
-              }
-            };
-            chrome.tabs.onUpdated.addListener(listener);
-          }
-        });
-      }
+        view.startSubscriptionSelection(request.title, request.url);
+      });
       break;
     case "forward":
       chrome.tabs.sendRequest(sender.tab.id, request.request, sendResponse);
