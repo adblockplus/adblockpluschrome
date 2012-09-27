@@ -103,6 +103,30 @@
   "filters_viewList_label": {
     "message": "View list"
   }, 
+  "firstRun_acceptableAdsExplanation": {
+    "description": "This is the explanation of the acceptable ads feature", 
+    "message": "<strong>Adblock Plus automatically blocks annoying ads.</strong> Adblock Plus has also been configured to <a>allow some advertising</a> that is considered non-annoying. These ads have to follow <a>strict guidelines</a>, e.g. they cannot be animated and there has to be clear separation between content and ads. By allowing some carefully selected ads you support websites that rely on advertising but choose to do it in a non-intrusve way. You can <a>disable</a> this feature at any time."
+  }, 
+  "firstRun_feature_acceptableAds": {
+    "description": "One of the bullet points in the features list", 
+    "message": "Support websites with acceptable ads (read below for more information)"
+  }, 
+  "firstRun_feature_betterSurfing": {
+    "description": "One of the bullet points in the features list", 
+    "message": "Surf the web without annoying ads"
+  }, 
+  "firstRun_feature_improvements": {
+    "description": "One of the bullet points in the features list", 
+    "message": "Many other improvements (<a>view changelog</a>)"
+  }, 
+  "firstRun_title_install": {
+    "description": "This is the page heading on first installation", 
+    "message": "Adblock Plus has been installed."
+  }, 
+  "firstRun_title_update": {
+    "description": "This is the page heading on update", 
+    "message": "Adblock Plus has been updated."
+  }, 
   "found_a_bug": {
     "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a href='$url$'>file a request here</a>.", 
     "placeholders": {

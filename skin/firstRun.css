@@ -1,0 +1,61 @@
+body
+{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  background: repeating-linear-gradient(0deg, #F8F6F5, #F6F4F2 50%, #FCFBF9);
+  background: -webkit-repeating-linear-gradient(0deg, #F5F4F3, #FAF9F8 50%, #F5F4F3);
+  background-size: 5px 5px;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1.5;
+}
+
+h1
+{
+  margin-top: 30px;
+  padding-top: 148px;
+  font-size: 250%;
+  font-weight: normal;
+  background-image: url(/icons/abp-128.png);
+  background-position: 50% 0%;
+  background-repeat: no-repeat;
+}
+
+#features > li
+{
+  margin-left: 50px;
+  list-style-image: url(/skin/checkmark.png);
+}
+
+#features
+{
+  margin: 40px 0px;
+}
+
+#share-text
+{
+  margin: 40px 0px 0px 200px;
+  fill: #FF0000;
+  font-family: Comic Sans MS;
+  font-weight: bold;
+}
+
+.share-image
+{
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  position: relative;
+  left: 350px;
+  top: -40px;
+}
+
+#share-facebook
+{
+  background-image: url(/skin/facebook.png);
+}
+
+#share-twitter
+{
+  background-image: url(/skin/twitter.png);
+}
