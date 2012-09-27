@@ -119,6 +119,14 @@
     "description": "One of the bullet points in the features list", 
     "message": "Many other improvements (<a>view changelog</a>)"
   }, 
+  "firstRun_share1": {
+    "description": "First line of text appearing above Facebook/Twitter buttons", 
+    "message": "Do you like blocking ads?"
+  }, 
+  "firstRun_share2": {
+    "description": "Second line of text appearing above Facebook/Twitter buttons", 
+    "message": "Please spread the word!"
+  }, 
   "firstRun_title_install": {
     "description": "This is the page heading on first installation", 
     "message": "Adblock Plus has been installed."
