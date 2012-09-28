@@ -32,9 +32,25 @@ h1
   margin: 40px 0px;
 }
 
-#share-text
+#share1,
+#share2
 {
-  margin: 20px 0px 0px 200px;
+  display: none;
+}
+
+:root[share-variant="1"] #share1
+{
+  display: block;
+}
+
+:root[share-variant="2"] #share2
+{
+  display: block;
+}
+
+#share-text1
+{
+  margin-left: 200px;
   fill: #FF0000;
   font-family: Comic Sans MS;
   font-weight: bold;
@@ -45,17 +61,64 @@ h1
   display: inline-block;
   width: 64px;
   height: 64px;
+}
+
+#share-images1 > .share-image
+{
   position: relative;
   left: 350px;
   top: -40px;
 }
 
-#share-facebook
+#share2
+{
+  text-align: center;
+  font-size: 120%;
+  margin-top: 40px;
+}
+
+#share-images2
+{
+  display: inline-block;
+  box-shadow: 0 0 4px 3px #EEEEEE;
+  border-radius: 5px;
+  background: #FFFFFF;
+  padding: 10px 40px;
+  margin-bottom: 30px;
+}
+
+#share-images2 > *
+{
+  vertical-align: middle;
+}
+
+#share-donate
+{
+  display: inline-block;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 12px;
+  text-decoration: none;
+  color: #003366;
+  border: 1px solid #FF9933;
+  border-radius: 10px;
+  padding: 2px 10px;
+  background-image: linear-gradient(0deg, #FFFDF8, #FEDE9E 60%, #FFAF34 65%, #FFEFD3);
+  background-image: -webkit-gradient(linear, center top, center bottom,
+          from(#FFFDF8), color-stop(60%, #FEDE9E), color-stop(65%, #FFAF34), to(#FFEFD3));
+}
+
+#share2-connection
+{
+  margin: 0px 20px;
+}
+
+.share-facebook
 {
   background-image: url(/skin/facebook.png);
 }
 
-#share-twitter
+.share-twitter
 {
   background-image: url(/skin/twitter.png);
 }

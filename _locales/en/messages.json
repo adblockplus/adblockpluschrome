@@ -127,6 +127,18 @@
     "description": "Second line of text appearing above Facebook/Twitter buttons", 
     "message": "Please spread the word!"
   }, 
+  "firstRun_share3": {
+    "description": "Alternative text to appear above Facebook/Twitter buttons", 
+    "message": "Adblock Plus is free and open source. Please support us:"
+  }, 
+  "firstRun_share3_donate": {
+    "description": "'Donate' button text", 
+    "message": "Donate"
+  }, 
+  "firstRun_share3_or": {
+    "description": "'or' as in 'donate or spread the word'", 
+    "message": "or"
+  }, 
   "firstRun_title_install": {
     "description": "This is the page heading on first installation", 
     "message": "Adblock Plus has been installed."
