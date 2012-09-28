@@ -5,6 +5,10 @@ var Utils = require("utils").Utils;
 
 function init()
 {
+  // Choose a share text variant randomly
+  var variant = Math.floor(Math.random() * 2) + 1;
+  document.documentElement.setAttribute("share-variant", variant);
+
   // Set up page title
   var titleId = (backgroundPage.isFirstRun ? "firstRun_title_install" : "firstRun_title_update");
   var pageTitle = chrome.i18n.getMessage(titleId);
@@ -15,6 +19,17 @@ function init()
   setLinks("improvementsFeature", "https://adblockplus.org/releases/adblock-plus-" + versionID + "-for-google-chrome-released");
   setLinks("acceptableAdsExplanation", getDocLink("acceptable_ads"),
            getDocLink("acceptable_ads", "criteria"), backgroundPage.openOptions);
+
+  var facebookLinks = document.getElementsByClassName("share-facebook");
+  for (var i = 0; i < facebookLinks.length; i++)
+    facebookLinks[i].href = getDocLink("facebook") + "&variant=" + variant;
+
+  var twitterLinks = document.getElementsByClassName("share-twitter");
+  for (var i = 0; i < twitterLinks.length; i++)
+    twitterLinks[i].href = getDocLink("twitter") + "&variant=" + variant;
+
+  var donateLink = document.getElementById("share-donate");
+  donateLink.href = getDocLink("donate") + "&variant=" + variant;
 }
 window.addEventListener("load", init, false);
 
