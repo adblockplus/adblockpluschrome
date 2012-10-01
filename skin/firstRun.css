@@ -122,3 +122,28 @@ h1
 {
   background-image: url(/skin/twitter.png);
 }
+
+/* Adjust font size on smaller screens */
+@media (max-height: 800px)
+{
+  body
+  {
+    font-size: 19px;
+  }
+}
+
+@media (max-height: 750px)
+{
+  body
+  {
+    font-size: 17px;
+  }
+}
+
+@media (max-height: 700px)
+{
+  body
+  {
+    font-size: 16px;
+  }
+}
