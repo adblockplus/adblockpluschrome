@@ -6,8 +6,6 @@
 
 var SELECTOR_GROUP_SIZE = 20;
 
-var savedBeforeloadEvents = new Array();
-
 var elemhideElt = null;
 
 // Sets the currently used CSS rules for elemhide filters
