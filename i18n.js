@@ -7,9 +7,11 @@
 // Loads and inserts i18n strings into matching elements. Any inner HTML already in the
 // element is parsed as JSON and used as parameters to substitute into placeholders in the
 // i18n message.
-function loadI18nStrings() {
+function loadI18nStrings()
+{
   var nodes = document.querySelectorAll("[class^='i18n_']");
-  for(var i = 0; i < nodes.length; i++) {
+  for(var i = 0; i < nodes.length; i++)
+  {
     var arguments = JSON.parse("[" + nodes[i].textContent + "]");
     var className = nodes[i].className;
     if (className instanceof SVGAnimatedString)
@@ -23,26 +25,9 @@ function loadI18nStrings() {
   }
 }
 
-function i18n_time(h, m) {
-  var locale = chrome.i18n.getMessage("@@ui_locale");
-  if(m < 10)
-    m = "0" + m;
-  if(locale == "fr") {
-    return h + "h" + m;
-  } else {
-    var ampm = "a.m.";
-    if(h >= 12) {
-      h -= 12;
-      ampm = "p.m.";
-    }
-    if(h == 0)
-      h = 12;
-    return(h + ":" + m + " " + ampm);
-  }
-}
-
 // Provides a more readable string of the current date and time
-function i18n_timeDateStrings(when) {
+function i18n_timeDateStrings(when)
+{
   var d = new Date(when);
   var timeString = d.toLocaleTimeString();
 
