@@ -105,47 +105,51 @@
   }, 
   "firstRun_acceptableAdsExplanation": {
     "description": "This is the explanation of the acceptable ads feature", 
-    "message": "<strong>Adblock Plus automatically blocks annoying ads.</strong> Adblock Plus has also been configured to <a>allow some advertising</a> that is considered non-annoying. These ads have to follow <a>strict guidelines</a>, e.g. they cannot be animated and there has to be clear separation between content and ads. By allowing some carefully selected ads you support websites that rely on advertising but choose to do it in a non-intrusve way. You can <a>disable</a> this feature at any time."
+    "message": "<strong>Adblock Plus will always block annoying ads.</strong> Still, we want to encourage websites using plain and unobtrusive advertising. That's why we have established <a>strict guidelines</a> to identify acceptable ads, and allow these out of the box. You can always <a>disable</a> this if you want to block all ads."
+  }, 
+  "firstRun_changelog": {
+    "description": "Page subtitle, links to the changelog", 
+    "message": "See what's new"
   }, 
   "firstRun_feature_acceptableAds": {
     "description": "One of the bullet points in the features list", 
-    "message": "Support websites with acceptable ads (read below for more information)"
+    "message": "Support websites with acceptable ads (more below)"
   }, 
   "firstRun_feature_betterSurfing": {
     "description": "One of the bullet points in the features list", 
-    "message": "Surf the web without annoying ads"
+    "message": "Enjoy the web without annoying ads"
   }, 
-  "firstRun_feature_improvements": {
+  "firstRun_feature_videoAds": {
     "description": "One of the bullet points in the features list", 
-    "message": "Many other improvements (<a>view changelog</a>)"
+    "message": "Watch videos without commercial interruptions"
+  }, 
+  "firstRun_features_heading": {
+    "description": "Text above the features list", 
+    "message": "With Adblock Plus you can:"
   }, 
   "firstRun_share1": {
-    "description": "First line of text appearing above Facebook/Twitter buttons", 
-    "message": "Do you like blocking ads?"
+    "description": "Text appearing above Facebook/Twitter buttons", 
+    "message": "Do you think Adblock Plus is worth sharing? Please do!"
   }, 
   "firstRun_share2": {
-    "description": "Second line of text appearing above Facebook/Twitter buttons", 
-    "message": "Please spread the word!"
-  }, 
-  "firstRun_share3": {
     "description": "Alternative text to appear above Facebook/Twitter buttons", 
     "message": "Adblock Plus is free and open source. Please support us:"
   }, 
-  "firstRun_share3_donate": {
+  "firstRun_share2_donate": {
     "description": "'Donate' button text", 
     "message": "Donate"
   }, 
-  "firstRun_share3_or": {
+  "firstRun_share2_or": {
     "description": "'or' as in 'donate or spread the word'", 
     "message": "or"
   }, 
   "firstRun_title_install": {
     "description": "This is the page heading on first installation", 
-    "message": "Adblock Plus has been installed."
+    "message": "Adblock Plus has been installed"
   }, 
   "firstRun_title_update": {
     "description": "This is the page heading on update", 
-    "message": "Adblock Plus has been updated."
+    "message": "Adblock Plus has been updated"
   }, 
   "found_a_bug": {
     "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a href='$url$'>file a request here</a>.", 
