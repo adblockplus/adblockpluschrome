@@ -12,13 +12,17 @@ function init()
   // Set up page title
   var titleId = (backgroundPage.isFirstRun ? "firstRun_title_install" : "firstRun_title_update");
   var pageTitle = chrome.i18n.getMessage(titleId);
-  document.title = document.getElementById("title").textContent = pageTitle;
+  document.title = document.getElementById("title-main").textContent = pageTitle;
+
+  // Only show changelog link on the update page
+  if (backgroundPage.isFirstRun)
+    document.getElementById("title-changelog").style.display = "none";
 
   // Set up URLs
-  var versionID = chrome.app.getDetails().version.split(".").slice(0, 2).join("");
-  setLinks("improvementsFeature", "https://adblockplus.org/releases/adblock-plus-" + versionID + "-for-google-chrome-released");
-  setLinks("acceptableAdsExplanation", getDocLink("acceptable_ads"),
-           getDocLink("acceptable_ads", "criteria"), backgroundPage.openOptions);
+  var versionId = chrome.app.getDetails().version.split(".").slice(0, 2).join("");
+  setLinks("title-changelog", "https://adblockplus.org/releases/adblock-plus-" + versionId + "-for-google-chrome-released");
+  setLinks("acceptableAdsExplanation", getDocLink("acceptable_ads", "criteria"),
+      backgroundPage.openOptions);
 
   var facebookLinks = document.getElementsByClassName("share-facebook");
   for (var i = 0; i < facebookLinks.length; i++)

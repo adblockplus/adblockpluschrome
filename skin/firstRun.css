@@ -10,15 +10,34 @@ body
   line-height: 1.5;
 }
 
-h1
+#title
 {
   margin-top: 30px;
-  padding-top: 148px;
+  padding-left: 148px;
+  line-height: 1;
   font-size: 250%;
   font-weight: normal;
   background-image: url(/icons/abp-128.png);
-  background-position: 50% 0%;
+  background-position: 0% 50%;
   background-repeat: no-repeat;
+  min-height: 128px;
+  vertical-align: middle;
+  display: -webkit-box;
+  display: box;
+  box-orient: vertical;
+  box-pack: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+}
+
+#title-changelog
+{
+  font-size: 50%;
+}
+
+#features
+{
+  margin: 10px 0px 40px 0px;
 }
 
 #features > li
@@ -27,33 +46,19 @@ h1
   list-style-image: url(/skin/checkmark.png);
 }
 
-#features
-{
-  margin: 40px 0px;
-}
-
 #share1,
 #share2
 {
   display: none;
+  text-align: center;
+  font-size: 120%;
+  margin-top: 40px;
 }
 
-:root[share-variant="1"] #share1
-{
-  display: block;
-}
-
+:root[share-variant="1"] #share1,
 :root[share-variant="2"] #share2
 {
   display: block;
-}
-
-#share-text1
-{
-  margin-left: 200px;
-  fill: #FF0000;
-  font-family: Comic Sans MS;
-  font-weight: bold;
 }
 
 .share-image
@@ -61,20 +66,6 @@ h1
   display: inline-block;
   width: 64px;
   height: 64px;
-}
-
-#share-images1 > .share-image
-{
-  position: relative;
-  left: 350px;
-  top: -40px;
-}
-
-#share2
-{
-  text-align: center;
-  font-size: 120%;
-  margin-top: 40px;
 }
 
 #share-images2
