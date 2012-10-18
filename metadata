@@ -1,2 +1,21 @@
 [general]
-basename=adblockpluschrome
+basename = adblockpluschrome
+
+[locale_sync]
+global.properties = subscription_invalid_location
+  remove_subscription_warning
+overlay.dtd = hideplaceholders.label
+filters.dtd = subscription.lastDownload.inProgress
+  subscription.lastDownload.invalidURL
+  subscription.lastDownload.connectionError
+  subscription.lastDownload.invalidData
+  subscription.lastDownload.checksumMismatch
+  subscription.enabled.label
+  subscription.delete.label
+  addSubscription.label
+  addSubscriptionAdd.label
+  addSubscriptionOther.label
+  acceptableAds2.label
+  viewList.label
+  readMore.label
+remove = hovercraft
