@@ -45,7 +45,7 @@
     "message": "Filter list location is neither a valid URL nor a valid file name."
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "overlay_hideplaceholders_label": {
     "message": "Hide placeholders of blocked elements"

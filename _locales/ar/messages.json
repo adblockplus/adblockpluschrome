@@ -139,7 +139,7 @@
     }
   }, 
   "name": {
-    "message": "آدبلوك بلس (Beta)"
+    "message": "آدبلوك بلس"
   }, 
   "new_filters_added": {
     "message": "تم إضافة فلتر جديد; انظر <a id='options_url' target='_blank'>الخصائص</a> للتحكم بها."

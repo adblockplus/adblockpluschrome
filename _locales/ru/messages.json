@@ -139,7 +139,7 @@
     }
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "new_filters_added": {
     "message": "Новый фильтр добавлен; перейдите в <a id='options_url' target='_blank'>Настройки</a> для редактирования."

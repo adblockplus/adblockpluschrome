@@ -45,7 +45,7 @@
     "message": "Filtrų sąrašo adresas nėra taisyklingas URL ar failo vardas."
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "overlay_hideplaceholders_label": {
     "message": "Slėpti užblokuotų elementų vietos laikiklius"

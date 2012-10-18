@@ -45,7 +45,7 @@
     "message": "La ubicación de lista de filtros no es válida, o no es válido el nombre de archivo."
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "overlay_hideplaceholders_label": {
     "message": "Colapsar elementos bloqueados"
