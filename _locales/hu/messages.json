@@ -139,7 +139,7 @@
     }
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "new_filters_added": {
     "message": "Új szűrők hozzáadva; lásd <a id='options_url' target='_blank'>Options</a> a szerkesztéshez."

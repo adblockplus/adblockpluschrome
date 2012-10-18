@@ -45,7 +45,7 @@
     "message": "Deze filterlijstlocatie is geen geldige URL en ook geen geldige bestandsnaam."
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "overlay_hideplaceholders_label": {
     "message": "Plaatshouders van geblokkeerde elementen verbergen"

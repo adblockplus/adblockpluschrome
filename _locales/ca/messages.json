@@ -27,7 +27,7 @@
     "message": "La llista de filtres no és una URL vàlida ni un nom de fitxer vàlid."
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "overlay_hideplaceholders_label": {
     "message": "Amaga les localitzacions dels elements bloquejats"

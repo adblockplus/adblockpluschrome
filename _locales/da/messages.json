@@ -45,7 +45,7 @@
     "message": "Filterlistens placering er hverken en gyldig URL eller et gyldigt filnavn."
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "overlay_hideplaceholders_label": {
     "message": "Skjul blokerede emners pladsholder"

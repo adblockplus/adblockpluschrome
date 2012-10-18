@@ -45,7 +45,7 @@
     "message": "ตำแหน่งรายชื่อตัวกรองไม่ใช่ทั้งยูอาร์แอลที่ถูกต้องและชื่อไฟล์ที่ถูกต้อง"
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "overlay_hideplaceholders_label": {
     "message": "ซ่อนตำแหน่งตัวยึดตำแหน่งขององค์ประกอบที่ถูกบล็อคไว้"

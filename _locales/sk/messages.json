@@ -45,7 +45,7 @@
     "message": "Umiestnenie zoznamu filtrov nemá platnú URL alebo platný názov súboru."
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "overlay_hideplaceholders_label": {
     "message": "Skryť symboly blokovaných prvkov"

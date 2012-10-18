@@ -45,7 +45,7 @@
     "message": "Местоположението на списъка с филтри или не е валиден URL или не е валидно името на файла."
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "overlay_hideplaceholders_label": {
     "message": "Скрий контейнери на блокираните елементи"

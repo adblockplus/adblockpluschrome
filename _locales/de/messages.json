@@ -143,7 +143,7 @@
     }
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "new_filters_added": {
     "message": "Neue Filter hinzugefügt; klicken Sie auf <a id='options_url' target='_blank'>Optionen</a> um sie zu verwalten."

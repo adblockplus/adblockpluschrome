@@ -39,7 +39,7 @@
     "message": "Не вдалося розпізнати введену адресу ні як інтернет адресу, ні як шлях до файлу."
   }, 
   "name": {
-    "message": "Adblock Plus (Beta)"
+    "message": "Adblock Plus"
   }, 
   "overlay_hideplaceholders_label": {
     "message": "Приховувати замінники заблокованих елементів"
