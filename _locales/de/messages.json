@@ -1,186 +1,186 @@
 {
   "add": {
-    "description": "Name für die 'Hinzufügen'-Buttons.", 
+    "description": "Name für die 'Hinzufügen'-Buttons.",
     "message": "Hinzufügen"
-  }, 
+  },
   "add_domain_button": {
     "message": "Domain hinzufügen"
-  }, 
+  },
   "add_filter_button": {
     "message": "Filter hinzufügen"
-  }, 
+  },
   "add_filters_msg": {
     "message": "Filter hinzufügen?"
-  }, 
+  },
   "add_your_own_filters": {
     "message": "Eigene Filter hinzufügen"
-  }, 
+  },
   "apply_changes": {
     "message": "Änderungen übernehmen"
-  }, 
+  },
   "block_element": {
-    "description": "Name für Kontextmenü-Eintrag 'Element blocken'", 
+    "description": "Name für Kontextmenü-Eintrag 'Element blocken'",
     "message": "Element blocken"
-  }, 
+  },
   "cancel": {
-    "description": "Name für den 'Abbrechen'-Button", 
+    "description": "Name für den 'Abbrechen'-Button",
     "message": "Abbrechen"
-  }, 
+  },
   "clickhide_instructions": {
     "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
-  }, 
+  },
   "description": {
     "message": "Werbung war gestern! Die bewährte Adblock Plus Erweiterung ist jetzt auch für Google Chrome™ verfügbar."
-  }, 
+  },
   "disable_inline": {
     "message": "Blocke Inline Text Werbung"
-  }, 
+  },
   "disabled_for_these_domains": {
     "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain via Adblock Plus-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in die Textzeile und drücken auf \"Domain hinzufügen\"."
-  }, 
+  },
   "easy_create_filter": {
-    "description": "Adblock Plus-Icon Kontextmenü", 
+    "description": "Adblock Plus-Icon Kontextmenü",
     "message": "Einfach Filter erstellen"
-  }, 
+  },
   "edit_filters_raw": {
     "message": "Filter als reinen Text editieren"
-  }, 
+  },
   "enable_only_the": {
     "message": "Falls Sie einen langsamen Computer haben, wählen Sie bitte nur Filter aus, die Sie wirklich brauchen."
-  }, 
+  },
   "enabled_for_site": {
-    "description": "Adblock Plus-Icon Kontextmenü", 
+    "description": "Adblock Plus-Icon Kontextmenü",
     "message": "Für diese Seite aktivieren"
-  }, 
+  },
   "filter_lists": {
-    "description": "Das ist ein Reiter-Name.", 
+    "description": "Das ist ein Reiter-Name.",
     "message": "Filter Liste"
-  }, 
+  },
   "filter_must_follow_syntax": {
-    "message": "Ihr Filter muss nach der <a href='$url$'>Adblock Plus Filter Syntax</a> geschrieben werden. Manche Filter Arten, wie object-subrequest (Anfragen, die von Plugins gestartet werden), werden nicht unterstützt.", 
+    "message": "Ihr Filter muss nach der <a href='$url$'>Adblock Plus Filter Syntax</a> geschrieben werden. Manche Filter Arten, wie object-subrequest (Anfragen, die von Plugins gestartet werden), werden nicht unterstützt.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "filters_acceptableAds2_label": {
     "message": "Einige nicht aufdringliche Werbung zulassen"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "Hinzufügen"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "Anderes Abonnement hinzufügen"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "Filterabonnement hinzufügen"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "Mehr Information"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "Löschen"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "Aktiv"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Fehler, Prüfsumme ist falsch, möglicherweise ein Übertragungsfehler"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Fehler, Download fehlgeschlagen"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Wird heruntergeladen..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Fehler, keine gültige Filterliste"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Fehler, ungültige Adresse"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "Liste öffnen"
-  }, 
+  },
   "found_a_bug": {
-    "message": "Sie haben einen Bug gefunden oder wollen Adblock Plus in eine andere Sprache übersetzen? Bitte schreiben Sie <a href='$url$'>hier</a> ihre Anfrage.", 
+    "message": "Sie haben einen Bug gefunden oder wollen Adblock Plus in eine andere Sprache übersetzen? Bitte schreiben Sie <a href='$url$'>hier</a> ihre Anfrage.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "general": {
-    "description": "Das ist ein Reiter-Name.", 
+    "description": "Das ist ein Reiter-Name.",
     "message": "Allgemein"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "Sind Sie sicher, dass Sie dieses Abonnement entfernen möchten?"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "Die eingegebene Adresse ist weder eine gültige Web-Adresse, noch ein gültiger Dateiname."
-  }, 
+  },
   "last_updated_at": {
-    "description": "z.B. Zuletzt aktualisiert: 1. Apr 2011 um 12:51", 
-    "message": "Zuletzt aktualisiert: $date$ um $time$", 
+    "description": "z.B. Zuletzt aktualisiert: 1. Apr 2011 um 12:51",
+    "message": "Zuletzt aktualisiert: $date$ um $time$",
     "placeholders": {
       "date": {
         "content": "$2"
-      }, 
+      },
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today", 
-    "message": "Zuletzt aktualisiert: heute um $time$", 
+    "description": "e.g. Last updated at 3:00pm today",
+    "message": "Zuletzt aktualisiert: heute um $time$",
     "placeholders": {
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "new_filters_added": {
     "message": "Neue Filter hinzugefügt; klicken Sie auf <a id='options_url' target='_blank'>Optionen</a> um sie zu verwalten."
-  }, 
+  },
   "options": {
     "message": "Adblock Plus Optionen"
-  }, 
+  },
   "out_of_date_lists": {
     "message": "Abgelaufene Filter werden regelmäßig aktualisiert."
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "Platzhalter blockierter Elemente verstecken"
-  }, 
+  },
   "remove_button": {
-    "description": "Name für die 'Ausgewählte entfernen'-Buttons.", 
+    "description": "Name für die 'Ausgewählte entfernen'-Buttons.",
     "message": "Ausgewählte entfernen"
-  }, 
+  },
   "show_block_element_menu": {
     "message": "Zeige Rechtsklickmenü-Eintrag 'Element blocken'"
-  }, 
+  },
   "show_icon": {
     "message": "Zeige Icon in der Adressleiste"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "Adresse der Filterliste:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Bitte wählen Sie ein Filterabonnement aus der Liste aus:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "Bezeichnung des Abonnements:"
-  }, 
+  },
   "update_now": {
     "message": "Jetzt updaten"
-  }, 
+  },
   "whitelisted_domains": {
-    "description": "Das ist ein Reiter-Name.", 
+    "description": "Das ist ein Reiter-Name.",
     "message": "Ausnahmen"
   }
 }

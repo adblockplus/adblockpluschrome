@@ -1,61 +1,61 @@
 {
   "filters_acceptableAds2_label": {
     "message": "Permitir publicidad no hostigadora"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "Agregar"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "Agregar un filtro de suscripción"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "Agregar suscripción de filtros"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "Leer más"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "Eliminar"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "Habilitado"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Falló, el archivo checksum no coincide"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Falló, error en la descarga"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Descargando..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Falló, no es una lista de filtros válida"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Falló, no es una dirección válida"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "Ver lista"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "¿Estás seguro de querer quitar esta suscripción?"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "La ubicación de lista de filtros no es válida, o no es válido el nombre de archivo."
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "Colapsar elementos bloqueados"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "Ubicación de la lista de filtros:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor, seleccioná una suscripción de la lista:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "Título de suscripción:"
   }

@@ -1,61 +1,61 @@
 {
   "filters_acceptableAds2_label": {
     "message": "Dopusti neke nenametljive reklame"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "Dodaj"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "Dodaj drugu pretplatu"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "Dodaj pretplatu filtera"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "Pročitaj više"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "Obriši"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "Omogućen"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Neuspješno, neusklađenost checksum-a."
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Neuspješno, greška preuzimanja"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Preuzimanje..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Neuspješno, neispravan popis filtera"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Neuspješno, neispravna adresa"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "Pogledaj popis"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "Želite li stvarno ukloniti ovu pretplatu?"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "Lokacija popisa filtera nije niti valjana web adresa niti naziv datoteke."
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "Sakrij rezervirana mjesta blokiranih elemenata"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "Lokacija popisa filtera:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Molimo odaberite pretplatu na filter sa popisa:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "Naslov pretplate:"
   }

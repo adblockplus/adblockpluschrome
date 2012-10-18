@@ -1,165 +1,165 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.", 
+    "description": "This is the label for the 'Add' buttons.",
     "message": "Pievienot"
-  }, 
+  },
   "add_domain_button": {
     "message": "Pievienot domēnu"
-  }, 
+  },
   "add_filter_button": {
     "message": "Pievienot filtru"
-  }, 
+  },
   "add_filters_msg": {
     "message": "Pievienot filtru(s)?"
-  }, 
+  },
   "add_your_own_filters": {
     "message": "Pievieno savus filtrus"
-  }, 
+  },
   "apply_changes": {
     "message": "Pielietot izmaiņas"
-  }, 
+  },
   "block_element": {
-    "description": "Label for 'Block Element' context menu item", 
+    "description": "Label for 'Block Element' context menu item",
     "message": "Bloķēt elementu"
-  }, 
+  },
   "cancel": {
-    "description": "Cancel button label", 
+    "description": "Cancel button label",
     "message": "Atcelt"
-  }, 
+  },
   "clickhide_instructions": {
     "message": "Pēc šī aizvēršanas, noklikšķiniet (vai noklikšķiniet ar labo pogu) uz elementa šajā lapā."
-  }, 
+  },
   "description": {
     "message": "Reklāmas bija vakardiena! Veiksmīgais papildinājums Adblock Plus tagad ir pieejams Google Chrome™."
-  }, 
+  },
   "disable_inline": {
     "message": "Atspējot iekš-rindu teksta reklāmas"
-  }, 
+  },
   "disabled_for_these_domains": {
     "message": "Adblock Plus Jūsu izvēlētajos domēnos ir atslēgts. Jūs varat pievienot domēnu izmantojot Adblock Plus, kas atrodas adreses joslā, vai ievadot domēnu (nevis URL) kastē un noklikšķinot uz pogas \"Pievienot domēnu\"."
-  }, 
+  },
   "easy_create_filter": {
-    "description": "Button label in popup balloon", 
+    "description": "Button label in popup balloon",
     "message": "Viegli izveidot filtru"
-  }, 
+  },
   "edit_filters_raw": {
     "message": "Labot filtrus kā jēlu tekstu"
-  }, 
+  },
   "enable_only_the": {
     "message": "Iespējo tikai vajadzīgos filtru sarakstus. Pārāk daudzi var padarīt Chrome nereaģējošu."
-  }, 
+  },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label", 
+    "description": "Popup balloon checkbox label",
     "message": "Iespējots šajā vietnē"
-  }, 
+  },
   "filter_lists": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "Filtru saraksts"
-  }, 
+  },
   "filter_must_follow_syntax": {
-    "message": "Jūsu filtram ir jāatbilst <a href='$url$'>Adblock Plus filtru sintaksei</a>. Atsevišķi filtru tipi, kā objekta apakš-pieprasījums, nav atbalstīti.", 
+    "message": "Jūsu filtram ir jāatbilst <a href='$url$'>Adblock Plus filtru sintaksei</a>. Atsevišķi filtru tipi, kā objekta apakš-pieprasījums, nav atbalstīti.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "Pievienot citu abonementu"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "Pievienot filtra abonēšanu"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Neizdevās, kontrolsummas neatbilstība"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Neizdevās, lejupielāde neizdevās"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Lejupielādē..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Neizdevās, nav derīgs filtru saraksts"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Neizdevās, nav derīga adrese"
-  }, 
+  },
   "found_a_bug": {
-    "message": "Atradi defektu? Vēlies iztulkot Adblock Plus savā valodā? Lūdzu <a href='$url$'>iesniedz pieprasījumu šeit</a>.", 
+    "message": "Atradi defektu? Vēlies iztulkot Adblock Plus savā valodā? Lūdzu <a href='$url$'>iesniedz pieprasījumu šeit</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "general": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "Vispārīgi"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "Vai Jūs tiešām vēlaties noņemt šo abonementu?"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "Filtru saraksta atrašanās vieta nav ne derīgs URL ne arī derīgs faila nosaukums."
-  }, 
+  },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
-    "message": "Pēdējo reiz atjaunināts $time$ $date$", 
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+    "message": "Pēdējo reiz atjaunināts $time$ $date$",
     "placeholders": {
       "date": {
         "content": "$2"
-      }, 
+      },
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today", 
-    "message": "Pēdējo reiz atjaunināts šodien plkst. $time$", 
+    "description": "e.g. Last updated at 3:00pm today",
+    "message": "Pēdējo reiz atjaunināts šodien plkst. $time$",
     "placeholders": {
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "new_filters_added": {
     "message": "Jauni filtri pievienoti; lai tos pārvaldītu, skatiet <a id='options_url' target='_blank'>Opcijas</a>."
-  }, 
+  },
   "options": {
     "message": "Adblock Plus Opcijas"
-  }, 
+  },
   "out_of_date_lists": {
     "message": "Novecojušie saraksti tiek periodiski atjaunināti."
-  }, 
+  },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.", 
+    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Noņemt izvēlēto"
-  }, 
+  },
   "show_block_element_menu": {
     "message": "Rādīt 'Bloķēt elementu''labā klikšķa izvēlnē"
-  }, 
+  },
   "show_icon": {
     "message": "Rādīt ikonu adreses joslā"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "Filtru saraksta atrašanās vieta:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lūdzu, izvēlieties filtru abonementu no saraksta:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "Abonementa nosaukums:"
-  }, 
+  },
   "update_now": {
     "message": "Atjaunināt tagad"
-  }, 
+  },
   "whitelisted_domains": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "Domēni baltajā sarakstā"
   }
 }

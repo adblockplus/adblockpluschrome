@@ -1,43 +1,43 @@
 {
   "filters_addSubscriptionOther_label": {
     "message": "Afegir una altra subscripció"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "Afegir subscripció al filtre"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Error, el checksum no concorda"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Fallada, error en la descàrrega"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Descarregant..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Fallada, no és una llista vàlida de filtres"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Fallada, no és una adreça vàlida"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "Realment desitges eliminar aquesta subscripció?"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "La llista de filtres no és una URL vàlida ni un nom de fitxer vàlid."
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "Amaga les localitzacions dels elements bloquejats"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "Filtra la localització de la llista:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Si us plau tria una subscripció de filtre a la llista:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "Títol de la subscripció:"
   }

@@ -1,186 +1,186 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.", 
+    "description": "This is the label for the 'Add' buttons.",
     "message": "新增"
-  }, 
+  },
   "add_domain_button": {
     "message": "新增域名"
-  }, 
+  },
   "add_filter_button": {
     "message": "新增過濾規則"
-  }, 
+  },
   "add_filters_msg": {
     "message": "新增過濾規則？"
-  }, 
+  },
   "add_your_own_filters": {
     "message": "黑名單"
-  }, 
+  },
   "apply_changes": {
     "message": "套用"
-  }, 
+  },
   "block_element": {
-    "description": "Label for 'Block Element' context menu item", 
+    "description": "Label for 'Block Element' context menu item",
     "message": "阻擋網頁元素"
-  }, 
+  },
   "cancel": {
-    "description": "Cancel button label", 
+    "description": "Cancel button label",
     "message": "取消"
-  }, 
+  },
   "clickhide_instructions": {
     "message": "此彈出訊息關閉後，請點選網頁上的元素。"
-  }, 
+  },
   "description": {
     "message": "使用 Firefox Adblock Plus 的廣告過濾引擎。告別廣告，開心瀏覽!"
-  }, 
+  },
   "disable_inline": {
     "message": "阻擋文字廣告"
-  }, 
+  },
   "disabled_for_these_domains": {
     "message": "Adblock Plus 將不在以下域名啟用。您可以透過 Adblock Plus 於網址列的圖示新增域名，或者 在以下欄位輸入域名（非網址），然後點擊「新增域名」。"
-  }, 
+  },
   "easy_create_filter": {
-    "description": "Button label in popup balloon", 
+    "description": "Button label in popup balloon",
     "message": "簡單建立過濾規則"
-  }, 
+  },
   "edit_filters_raw": {
     "message": "以純文本編輯"
-  }, 
+  },
   "enable_only_the": {
     "message": "請只啟用您需要的過濾清單。啟用過多會使瀏覽器無回應。"
-  }, 
+  },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label", 
+    "description": "Popup balloon checkbox label",
     "message": "該網站啟用過濾"
-  }, 
+  },
   "filter_lists": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "過濾清單"
-  }, 
+  },
   "filter_must_follow_syntax": {
-    "message": "您的過濾規則必須遵循 <a href='$url$'>Adblock Plus 的語法</a>。特定的過濾類型，像是 object-subrequest 不支援。", 
+    "message": "您的過濾規則必須遵循 <a href='$url$'>Adblock Plus 的語法</a>。特定的過濾類型，像是 object-subrequest 不支援。",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "filters_acceptableAds2_label": {
     "message": "允許部分的非侵入式廣告"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "加入"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "新增其他條件集"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "新增過濾條件集"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "詳細內容"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "刪除"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "啟用"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "失敗，驗證碼不符"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "失敗，檔案下載失敗"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "下載中..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "失敗，無效的過濾條件列表"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "失敗，無效的位址"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "檢視條件列表"
-  }, 
+  },
   "found_a_bug": {
-    "message": "發現錯誤？要翻譯 Adblock Plus？ 請至 <a href='$url$'>此處詢問</a>。", 
+    "message": "發現錯誤？要翻譯 Adblock Plus？ 請至 <a href='$url$'>此處詢問</a>。",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "general": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "一般"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "您確定要移除此條件集嗎？"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "條件集網址或檔名無效。"
-  }, 
+  },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
-    "message": "最近更新於 $time$ $date$", 
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+    "message": "最近更新於 $time$ $date$",
     "placeholders": {
       "date": {
         "content": "$2"
-      }, 
+      },
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today", 
-    "message": "最近更新於 $time$ 今日", 
+    "description": "e.g. Last updated at 3:00pm today",
+    "message": "最近更新於 $time$ 今日",
     "placeholders": {
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "new_filters_added": {
     "message": "您已新增過濾規則。 請至 <a id='options_url' target='_blank'>Adblock Plus 選項</a> 管理過濾規則。"
-  }, 
+  },
   "options": {
     "message": "Adblock Plus 選項"
-  }, 
+  },
   "out_of_date_lists": {
     "message": "過濾清單會定期自動更新。"
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "隱藏已阻擋元素所佔用的空間"
-  }, 
+  },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.", 
+    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "刪除已選擇"
-  }, 
+  },
   "show_block_element_menu": {
     "message": "右鍵選單顯示「阻擋網頁元素」"
-  }, 
+  },
   "show_icon": {
     "message": "網址列顯示 Adblock Plus 圖示"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "過濾條件集位址:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "請從列表中選擇過濾條件集:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "訂閱項目名稱:"
-  }, 
+  },
   "update_now": {
     "message": "立即更新"
-  }, 
+  },
   "whitelisted_domains": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "白名單"
   }
 }

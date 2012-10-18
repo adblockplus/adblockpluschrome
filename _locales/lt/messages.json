@@ -1,61 +1,61 @@
 {
   "filters_acceptableAds2_label": {
     "message": "Leisti neįkyrias reklamas"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "Pridėti"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "Pridėti kitą prenumeratą"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "Pridėti filtro prenumeratą"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "Plačiau"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "Ištrinti"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "Įjungta"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Nepavyko, bloga kontrolinė suma"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Nepavyko, atsiuntimo klaida"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Atsiunčiama..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Nepavyko, netinkamas filtrų sąrašas"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Nepavyko, netinkamas adresas"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "Peržiūrėti sąrašą"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "Ar tikrai norite atsisakyti šios prenumeratos?"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "Filtrų sąrašo adresas nėra taisyklingas URL ar failo vardas."
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "Slėpti užblokuotų elementų vietos laikiklius"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "Filtrų sąrašo vieta:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Pasirinkite filtro prenumeratą iš šio sąrašo:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "Prenumeratos pavadinimas:"
   }
