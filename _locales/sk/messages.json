@@ -1,61 +1,61 @@
 {
   "filters_acceptableAds2_label": {
     "message": "Povoliť niektorá nevtieravé reklamy"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "Pridať"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "Pridať iné odoberania"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "Pridať povolenie filtra"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "Zobraziť viac"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "Zmazať"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "Zapnuté"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Zlyhalo, chybné prispôsobenie kontrolného súčtu"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Zlyhanie, sťahovanie neúspešné"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Preberanie..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Zlyhanie, neplatný zoznam filtrov"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Zlyhanie, neplatná adresa"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "Zobraziť zoznam"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "Naozaj si želáte odstrániť toto povolenie?"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "Umiestnenie zoznamu filtrov nemá platnú URL alebo platný názov súboru."
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "Skryť symboly blokovaných prvkov"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "Umiestnenie zoznamu filtrov:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Prosím, zvoľte odber zo zoznamu:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "Názov povolenia:"
   }

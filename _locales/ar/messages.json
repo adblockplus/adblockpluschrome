@@ -1,179 +1,179 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.", 
+    "description": "This is the label for the 'Add' buttons.",
     "message": "أضف"
-  }, 
+  },
   "add_domain_button": {
     "message": "أضف نطاق"
-  }, 
+  },
   "add_filter_button": {
     "message": "أضف فلتر"
-  }, 
+  },
   "add_filters_msg": {
     "message": "إضافة الفلاتر؟"
-  }, 
+  },
   "add_your_own_filters": {
     "message": "أضف الفلاتر الخاصة بك"
-  }, 
+  },
   "apply_changes": {
     "message": "تطبيق التغييرات"
-  }, 
+  },
   "cancel": {
-    "description": "Cancel button label", 
+    "description": "Cancel button label",
     "message": "إلغاء"
-  }, 
+  },
   "clickhide_instructions": {
     "message": "بعد إغلاق هذه النافذة. إضغط (او إضغط بالزر اليمين) على أحد العناصر في الصفحة"
-  }, 
+  },
   "description": {
     "message": "منع الإعلانات بإستخدام محرك الفلاتر الخاص بـ Firefox Adblock Plus. قبل الإعلانات وداعأ ومتصفحك في سلام!"
-  }, 
+  },
   "disable_inline": {
     "message": "تعطيل الإعلانات المضمنة في النص"
-  }, 
+  },
   "disabled_for_these_domains": {
     "message": "Adblock Plus معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال الضغط على أيقونة Adblock Plus في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"Add domain\"."
-  }, 
+  },
   "easy_create_filter": {
-    "description": "Button label in popup balloon", 
+    "description": "Button label in popup balloon",
     "message": "إنشاء فلتر بسهوله"
-  }, 
+  },
   "edit_filters_raw": {
     "message": "تعديل الفلاتر كـ raw text"
-  }, 
+  },
   "enable_only_the": {
     "message": "فعل قائمة الفلاتر اللي تحتاجها فقط. تفعبل الكثير منها من الممكن أن يجعل Chrome لا يستجيب"
-  }, 
+  },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label", 
+    "description": "Popup balloon checkbox label",
     "message": "فعل لهذا الموقع"
-  }, 
+  },
   "filter_lists": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "قائمة الفلاتر"
-  }, 
+  },
   "filter_must_follow_syntax": {
-    "message": "الفلتر الخاص بك يجب أن يتبع <a href='$url$'>Adblock Plus تركيب الفلتر</a>. أنواع معينة من الفلاتر, مثل object-subrequest, غير مدعومه.", 
+    "message": "الفلتر الخاص بك يجب أن يتبع <a href='$url$'>Adblock Plus تركيب الفلتر</a>. أنواع معينة من الفلاتر, مثل object-subrequest, غير مدعومه.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "filters_acceptableAds2_label": {
     "message": "السماح لبعض الإعلانات الغير متطفّلة"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "اضافة"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "إضافة اشتراك آخر"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "إضافة اشتراك إلى فلتر"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "قراءة المزيد"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "ازالة"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "مفعّل"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "فشل ، عدم تطابق المجموع الاختباري"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "فشل الأمر بسبب فشل التحميل"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "جاري التحميل"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "فشل الأمر، ليست قائمة فلاتر صحيحة"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "فشل الأمر، ليس عنوان صحيح"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "اظهار القائمة"
-  }, 
+  },
   "found_a_bug": {
-    "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.", 
+    "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "general": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "عـام"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "هل أنت حقاً راغب بإزالة هذا الاشتراك؟"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "موقع قائمة الفلتر ليس صحيح كعنوان ويب و لا كأسم ملف"
-  }, 
+  },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
-    "message": "أخر تحديث في $time$ on $date$", 
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+    "message": "أخر تحديث في $time$ on $date$",
     "placeholders": {
       "date": {
         "content": "$2"
-      }, 
+      },
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today", 
-    "message": "أخر تحديث في $time$ اليوم", 
+    "description": "e.g. Last updated at 3:00pm today",
+    "message": "أخر تحديث في $time$ اليوم",
     "placeholders": {
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "name": {
     "message": "آدبلوك بلس"
-  }, 
+  },
   "new_filters_added": {
     "message": "تم إضافة فلتر جديد; انظر <a id='options_url' target='_blank'>الخصائص</a> للتحكم بها."
-  }, 
+  },
   "options": {
     "message": "Adblock Plus خصائص"
-  }, 
+  },
   "out_of_date_lists": {
     "message": "القوائم القديمة تحدث دورياً."
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "اخفاء ماسك المكان للعناصر الموقوفة"
-  }, 
+  },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.", 
+    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "حذف المختارة"
-  }, 
+  },
   "show_icon": {
     "message": "أظهر الأيقونة في شريط العنوان"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "موقع قائمة الفلاتر"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "الرجاء اختيار اشتراك فلتر من القائمة:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "عنوان الاشتراك"
-  }, 
+  },
   "update_now": {
     "message": "التحديث الان"
-  }, 
+  },
   "whitelisted_domains": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "نطاقات القائمة البيضاء"
   }
 }

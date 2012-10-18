@@ -1,186 +1,186 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.", 
+    "description": "This is the label for the 'Add' buttons.",
     "message": "추가"
-  }, 
+  },
   "add_domain_button": {
     "message": "도메인 추가"
-  }, 
+  },
   "add_filter_button": {
     "message": "필터 추가"
-  }, 
+  },
   "add_filters_msg": {
     "message": "새 필터를 추가하시겠습니까?"
-  }, 
+  },
   "add_your_own_filters": {
     "message": "사용자 필터"
-  }, 
+  },
   "apply_changes": {
     "message": "적용"
-  }, 
+  },
   "block_element": {
-    "description": "Label for 'Block Element' context menu item", 
+    "description": "Label for 'Block Element' context menu item",
     "message": "요소 숨김"
-  }, 
+  },
   "cancel": {
-    "description": "Cancel button label", 
+    "description": "Cancel button label",
     "message": "취소"
-  }, 
+  },
   "clickhide_instructions": {
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
-  }, 
+  },
   "description": {
     "message": "침입형 광고, 이제 안녕! Adblock Plus 확장 프로그램을 이제 구글 크롬에서 이용하십시오."
-  }, 
+  },
   "disable_inline": {
     "message": "인라인 텍스트 광고를 보지 않음"
-  }, 
+  },
   "disabled_for_these_domains": {
     "message": "다음 도메인에서는 광고를 차단하지 않습니다. 주소 표시줄의 애드블록 플러스 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
-  }, 
+  },
   "easy_create_filter": {
-    "description": "Button label in popup balloon", 
+    "description": "Button label in popup balloon",
     "message": "광고 영역 숨기기"
-  }, 
+  },
   "edit_filters_raw": {
     "message": "필터 편집"
-  }, 
+  },
   "enable_only_the": {
     "message": "필요한 구독 필터만 추가하십시오. 구독 필터를 필요 이상으로 많이 추가하면 페이지의 로딩 속도가 느려질 수 있습니다."
-  }, 
+  },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label", 
+    "description": "Popup balloon checkbox label",
     "message": "이 사이트에 필터 적용"
-  }, 
+  },
   "filter_lists": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "구독 필터"
-  }, 
+  },
   "filter_must_follow_syntax": {
-    "message": "사용자 필터는 <a href='$url$'>애드블록 플러스의 필터 작성 방법</a>을 따라야 합니다. 필터의 특정 구문은 지원하지 않습니다.", 
+    "message": "사용자 필터는 <a href='$url$'>애드블록 플러스의 필터 작성 방법</a>을 따라야 합니다. 필터의 특정 구문은 지원하지 않습니다.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "filters_acceptableAds2_label": {
     "message": "비침입형 광고 허용"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "추가"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "다른 구독 필터 추가 (F)"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "구독 필터 추가"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "자세히 보기"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "삭제"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "사용"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "실패함 : 검사합 불일치"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "실패함 : 다운로드 실패"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "다운로드 중..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "실패함 : 올바르지 않은 필터"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "실패함 : 올바르지 않은 주소"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "필터 목록 보기"
-  }, 
+  },
   "found_a_bug": {
-    "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? <a href='$url$'>연락하기</a>", 
+    "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? <a href='$url$'>연락하기</a>",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "general": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "일반"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "이 구독 필터를 제거하시겠습니까?"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "구독 필터의 위치에 입력하는 URL 또는 파일명이 올바르지 않습니다."
-  }, 
+  },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
-    "message": "$date$ $time$에 마지막으로 업데이트됨", 
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+    "message": "$date$ $time$에 마지막으로 업데이트됨",
     "placeholders": {
       "date": {
         "content": "$2"
-      }, 
+      },
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today", 
-    "message": "오늘 $time$에 마지막으로 업데이트됨", 
+    "description": "e.g. Last updated at 3:00pm today",
+    "message": "오늘 $time$에 마지막으로 업데이트됨",
     "placeholders": {
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "new_filters_added": {
     "message": "새 필터가 추가되었습니다. 필터 관리 : <a id='options_url' target='_blank'>옵션</a>"
-  }, 
+  },
   "options": {
     "message": "Adblock Plus - 애드블록 플러스 옵션"
-  }, 
+  },
   "out_of_date_lists": {
     "message": "구독 필터는 주기적으로 자동 업데이트됩니다."
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "차단된 요소의 영역 숨기기"
-  }, 
+  },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.", 
+    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "선택 항목 제거"
-  }, 
+  },
   "show_block_element_menu": {
     "message": "문맥 메뉴에 '요소 숨김' 항목 표시"
-  }, 
+  },
   "show_icon": {
     "message": "주소 표시줄에 아이콘 표시"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "위치 (L)"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "구독할 필터를 선택하거나 이름/위치를 입력하십시오."
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "이름 (T)"
-  }, 
+  },
   "update_now": {
     "message": "지금 업데이트"
-  }, 
+  },
   "whitelisted_domains": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "허용 도메인"
   }
 }

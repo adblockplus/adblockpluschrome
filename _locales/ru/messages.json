@@ -1,179 +1,179 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.", 
+    "description": "This is the label for the 'Add' buttons.",
     "message": "Добавить"
-  }, 
+  },
   "add_domain_button": {
     "message": "Добавить домен"
-  }, 
+  },
   "add_filter_button": {
     "message": "Добавить фильтр"
-  }, 
+  },
   "add_filters_msg": {
     "message": "Добавить фильтр(ы)?"
-  }, 
+  },
   "add_your_own_filters": {
     "message": "Добавить свои фильтры"
-  }, 
+  },
   "apply_changes": {
     "message": "Применить изменения"
-  }, 
+  },
   "cancel": {
-    "description": "Cancel button label", 
+    "description": "Cancel button label",
     "message": "Отменить"
-  }, 
+  },
   "clickhide_instructions": {
     "message": "После закрытия этого всплывающего окна щёлкните левой или правой кнопкой мыши элемент на странице."
-  }, 
+  },
   "description": {
     "message": "Реклама? Это было раньше! Популярное расширение Adblock Plus теперь есть и для Google Chrome™."
-  }, 
+  },
   "disable_inline": {
     "message": "Скрыть элемент текстовой рекламы на странице"
-  }, 
+  },
   "disabled_for_these_domains": {
     "message": "Adblock Plus выключен для этих доменов. Дополнительные домены можно добавить, щёлкнув иконку Adblock Plus на адресной строке или напечатав название домена (не ссылку) в данной области и нажав на кнопку \"Добавить домен\""
-  }, 
+  },
   "easy_create_filter": {
-    "description": "Button label in popup balloon", 
+    "description": "Button label in popup balloon",
     "message": "Быстро создать фильтр"
-  }, 
+  },
   "edit_filters_raw": {
     "message": "Редактировать фильтры в текстовом режиме"
-  }, 
+  },
   "enable_only_the": {
     "message": "Включите только фильтры, которые вам нужны. С большим количеством фильтров Chrome может тормозить."
-  }, 
+  },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label", 
+    "description": "Popup balloon checkbox label",
     "message": "Включить для этого сайта"
-  }, 
+  },
   "filter_lists": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "Список фильтров"
-  }, 
+  },
   "filter_must_follow_syntax": {
-    "message": "Ваш фильтр должен соответствовать <a href='$url$'>синтаксису Adblock Plus</a>. Фильтры некоторых типов, например, с подзапросом объекта, не поддерживаются.", 
+    "message": "Ваш фильтр должен соответствовать <a href='$url$'>синтаксису Adblock Plus</a>. Фильтры некоторых типов, например, с подзапросом объекта, не поддерживаются.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "filters_acceptableAds2_label": {
     "message": "Разрешить некоторую ненавязчивую рекламу"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "Добавить"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "Добавить другую подписку"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "Добавить подписку"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "Дополнительная информация"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "Удалить"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "Включена"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Ошибка: проверочная сумма не совпадает, возможно произошла ошибка загрузки"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Ошибка: невозможно загрузить"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "сейчас..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Ошибка: неверный формат списка фильтров"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Ошибка: неверный адрес"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "Открыть список"
-  }, 
+  },
   "found_a_bug": {
-    "message": "Нашли ошибку в Adblock Plus? Пожалуйста, <a href='$url$'>сообщите об этом здесь</a>.", 
+    "message": "Нашли ошибку в Adblock Plus? Пожалуйста, <a href='$url$'>сообщите об этом здесь</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "general": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "Общие"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "Вы уверены, что хотите удалить эту подписку?"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "Не удалось распознать введенный адрес ни как адрес в интернете, ни как путь файлу."
-  }, 
+  },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
-    "message": "Последнее обновление: $date$ в $time$", 
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+    "message": "Последнее обновление: $date$ в $time$",
     "placeholders": {
       "date": {
         "content": "$2"
-      }, 
+      },
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today", 
-    "message": "Последнее обновление: сегодня в $time$", 
+    "description": "e.g. Last updated at 3:00pm today",
+    "message": "Последнее обновление: сегодня в $time$",
     "placeholders": {
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "new_filters_added": {
     "message": "Новый фильтр добавлен; перейдите в <a id='options_url' target='_blank'>Настройки</a> для редактирования."
-  }, 
+  },
   "options": {
     "message": "Настройки Adblock Plus"
-  }, 
+  },
   "out_of_date_lists": {
     "message": "Устаревшие списки периодически обновляются."
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "Прятать метки на месте заблокированных элементов"
-  }, 
+  },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.", 
+    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Удалить"
-  }, 
+  },
   "show_icon": {
     "message": "Показать иконку на адресной строке"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "Адрес списка фильтров:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Пожалуйста, выберите подписку из списка:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "Название подписки:"
-  }, 
+  },
   "update_now": {
     "message": "Обновить сейчас"
-  }, 
+  },
   "whitelisted_domains": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "Белый список доменов"
   }
 }

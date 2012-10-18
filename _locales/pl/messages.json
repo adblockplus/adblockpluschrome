@@ -1,183 +1,183 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.", 
+    "description": "This is the label for the 'Add' buttons.",
     "message": "Dodaj"
-  }, 
+  },
   "add_domain_button": {
     "message": "Dodaj domene"
-  }, 
+  },
   "add_filter_button": {
     "message": "Dodaj filtr"
-  }, 
+  },
   "add_filters_msg": {
     "message": "Dodać taki filtr?"
-  }, 
+  },
   "add_your_own_filters": {
     "message": "Dodaj własne filtry"
-  }, 
+  },
   "apply_changes": {
     "message": "Zakceptuj zmiany"
-  }, 
+  },
   "block_element": {
-    "description": "Label for 'Block Element' context menu item", 
+    "description": "Label for 'Block Element' context menu item",
     "message": "Blokuj Element"
-  }, 
+  },
   "cancel": {
-    "description": "Cancel button label", 
+    "description": "Cancel button label",
     "message": "Anuluj"
-  }, 
+  },
   "clickhide_instructions": {
     "message": "Po zamknięciu tego okna, kliknij lewym (lub prawym) przyciskiem myszy w niechciany element na stronie."
-  }, 
+  },
   "description": {
     "message": "Blokuj reklamy korzystając z filtrów Adblock Plus. Pożegnaj się z reklamami i serwuj w spokoju!"
-  }, 
+  },
   "disable_inline": {
     "message": "Wyłącz reklamy tekstowe"
-  }, 
+  },
   "disabled_for_these_domains": {
     "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
-  }, 
+  },
   "easy_create_filter": {
-    "description": "Button label in popup balloon", 
+    "description": "Button label in popup balloon",
     "message": "Kreator filtrów"
-  }, 
+  },
   "edit_filters_raw": {
     "message": "Edytuj filtry jako zwykły tekst"
-  }, 
+  },
   "enable_only_the": {
     "message": "Włącz tylko te filtry których potrzebujesz. Za duża ilość może spowolnić działanie przeglądarki."
-  }, 
+  },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label", 
+    "description": "Popup balloon checkbox label",
     "message": "Włącz dla tej strony"
-  }, 
+  },
   "filter_lists": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "Listy filtrów"
-  }, 
+  },
   "filter_must_follow_syntax": {
-    "message": "Twój filtr musi być zgodny <a href='$url$'>ze składnią filtru Adblock Plus</a>. Niektóre typy filtrów, jak obiect-subrequest, nie są obsługiwane.", 
+    "message": "Twój filtr musi być zgodny <a href='$url$'>ze składnią filtru Adblock Plus</a>. Niektóre typy filtrów, jak obiect-subrequest, nie są obsługiwane.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "filters_acceptableAds2_label": {
     "message": "Zezwalaj na nie natrętne reklamy"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "Dodaj"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "Wybierz inny zestaw"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "Dodaj zestaw filtrów"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "Dowiedz się więcej"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "Usuń"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "Aktywny"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Nie powiodło się – niepoprawna suma kontrolna"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Nie powiodło się – błąd pobierania"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Pobieranie…"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Nie powiodło się – nieprawidłowy zestaw filtrów"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Nie powiodło się – nieprawidłowy adres"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "Zobacz listę"
-  }, 
+  },
   "found_a_bug": {
-    "message": "Znalazłeś błąd? Zgłoś proszę <a href='$url$'>problem tutaj</a>.", 
+    "message": "Znalazłeś błąd? Zgłoś proszę <a href='$url$'>problem tutaj</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "general": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "Ogólne"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "Czy chcesz usunąć ten zestaw?"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "Lokalizacja zestawu filtrów ma niewłaściwą nazwę pliku, albo adres URL"
-  }, 
+  },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011", 
-    "message": "Ostatnia aktualizacja: $date$ o $time$", 
+    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
+    "message": "Ostatnia aktualizacja: $date$ o $time$",
     "placeholders": {
       "date": {
         "content": "$2"
-      }, 
+      },
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today", 
-    "message": "Ostatnia aktualizacja: dzisiaj o $time$", 
+    "description": "e.g. Last updated at 3:00pm today",
+    "message": "Ostatnia aktualizacja: dzisiaj o $time$",
     "placeholders": {
       "time": {
         "content": "$1"
       }
     }
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "new_filters_added": {
     "message": "Dodano nowe filtry; Zajrzyj do <a id='options_url' target='_blank'>Opcji</a>."
-  }, 
+  },
   "options": {
     "message": "Adblock Plus Opcje"
-  }, 
+  },
   "out_of_date_lists": {
     "message": "Po pewnym czasie filtry aktualizowane są automatycznie."
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "Ukryj zamienniki blokowanych elementów"
-  }, 
+  },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.", 
+    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Usuń zaznaczone"
-  }, 
+  },
   "show_icon": {
     "message": "Pokazuj ikonę na pasku adresu"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "Lokalizacja zestawu:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Wybierz z listy zestaw filtrów:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "Nazwa zestawu:"
-  }, 
+  },
   "update_now": {
     "message": "Zaktualizuj"
-  }, 
+  },
   "whitelisted_domains": {
-    "description": "This is a tab heading.", 
+    "description": "This is a tab heading.",
     "message": "Wykluczone strony"
   }
 }

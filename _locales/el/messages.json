@@ -1,61 +1,61 @@
 {
   "filters_acceptableAds2_label": {
     "message": "Να επιτρέπονται μερικές μη-παρεμβατικές διαφημίσεις"
-  }, 
+  },
   "filters_addSubscriptionAdd_label": {
     "message": "Προσθήκη"
-  }, 
+  },
   "filters_addSubscriptionOther_label": {
     "message": "Προσθήκη άλλης συνδρομής"
-  }, 
+  },
   "filters_addSubscription_label": {
     "message": "Προσθήκη συνδρομής"
-  }, 
+  },
   "filters_readMore_label": {
     "message": "Διαβάστε περισσότερα"
-  }, 
+  },
   "filters_subscription_delete_label": {
     "message": "Διαγραφή"
-  }, 
+  },
   "filters_subscription_enabled_label": {
     "message": "Ενεργοποιημένη"
-  }, 
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Απέτυχε, απόκλιση στον έλεγχο checksum"
-  }, 
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Απέτυχε, σφάλμα κατά τη λήψη"
-  }, 
+  },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Σε εξέλιξη..."
-  }, 
+  },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Απέτυχε, μη έγκυρη λίστα φίλτρων"
-  }, 
+  },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Απέτυχε, μη έγκυρη διεύθυνση"
-  }, 
+  },
   "filters_viewList_label": {
     "message": "Δείτε την λίστα"
-  }, 
+  },
   "global_remove_subscription_warning": {
     "message": "Θέλετε να απομακρύνετε αυτή τη συνδρομή;"
-  }, 
+  },
   "global_subscription_invalid_location": {
     "message": "Η τοποθεσία της λίστας φίλτρων δεν είναι έγκυρη URL ούτε και όνομα αρχείου."
-  }, 
+  },
   "name": {
     "message": "Adblock Plus"
-  }, 
+  },
   "overlay_hideplaceholders_label": {
     "message": "Απόκρυψη πλαισίων των φιλτραρισμένων στοιχείων"
-  }, 
+  },
   "subscriptionSelection_location_label": {
     "message": "Τοποθεσία λίστας φίλτρων:"
-  }, 
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Παρακαλώ επιλέξτε μια συνδρομή σε φίλτρα από την λίστα:"
-  }, 
+  },
   "subscriptionSelection_title_label": {
     "message": "Τίτλος συνδρομής:"
   }
