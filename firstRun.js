@@ -11,7 +11,7 @@ function init()
 
   // Set up page title
   var titleId = (backgroundPage.isFirstRun ? "firstRun_title_install" : "firstRun_title_update");
-  var pageTitle = chrome.i18n.getMessage(titleId);
+  var pageTitle = i18n.getMessage(titleId);
   document.title = document.getElementById("title-main").textContent = pageTitle;
 
   // Only show changelog link on the update page

@@ -4,6 +4,8 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
+var i18n = chrome.i18n;
+
 // Loads and inserts i18n strings into matching elements. Any inner HTML already in the
 // element is parsed as JSON and used as parameters to substitute into placeholders in the
 // i18n message.
@@ -19,9 +21,9 @@ function loadI18nStrings()
     var stringName = className.split(/\s/)[0].substring(5);
     var prop = "innerHTML" in nodes[i] ? "innerHTML" : "textContent";
     if(arguments.length > 0)
-      nodes[i][prop] = chrome.i18n.getMessage(stringName, arguments);
+      nodes[i][prop] = i18n.getMessage(stringName, arguments);
     else
-      nodes[i][prop] = chrome.i18n.getMessage(stringName);
+      nodes[i][prop] = i18n.getMessage(stringName);
   }
 }
 
