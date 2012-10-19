@@ -9,7 +9,7 @@ for (var i = 0; i < imports.length; i++)
 function loadOptions()
 {
   // Set page title to i18n version of "Adblock Plus Options"
-  document.title = chrome.i18n.getMessage("options");
+  document.title = i18n.getMessage("options");
 
   // Set links
   $("#acceptableAdsLink").attr("href", Prefs.subscriptions_exceptionsurl);
@@ -177,7 +177,7 @@ function loadRecommendations()
     }
 
     var option = document.createElement("option");
-    option.text = chrome.i18n.getMessage("filters_addSubscriptionOther_label") + "\u2026";
+    option.text = i18n.getMessage("filters_addSubscriptionOther_label") + "\u2026";
     option._data = null;
     list.appendChild(option);
 
@@ -236,7 +236,7 @@ function addSubscription()
     var url = document.getElementById("customSubscriptionLocation").value.replace(/^\s+/, "").replace(/\s+$/, "");
     if (!/^https?:/i.test(url))
     {
-      alert(chrome.i18n.getMessage("global_subscription_invalid_location"));
+      alert(i18n.getMessage("global_subscription_invalid_location"));
       $("#customSubscriptionLocation").focus();
       return;
     }
@@ -316,7 +316,7 @@ function updateSubscriptionInfo(element)
   var lastUpdate = element.getElementsByClassName("subscriptionUpdate")[0];
   lastUpdate.classList.remove("error");
   if (Synchronizer.isExecuting(subscription.url))
-    lastUpdate.textContent = chrome.i18n.getMessage("filters_subscription_lastDownload_inProgress");
+    lastUpdate.textContent = i18n.getMessage("filters_subscription_lastDownload_inProgress");
   else if (subscription.downloadStatus && subscription.downloadStatus != "synchronize_ok")
   {
     var map =
@@ -327,7 +327,7 @@ function updateSubscriptionInfo(element)
       "synchronize_checksum_mismatch": "filters_subscription_lastDownload_checksumMismatch"
     };
     if (subscription.downloadStatus in map)
-      lastUpdate.textContent = chrome.i18n.getMessage(map[subscription.downloadStatus]);
+      lastUpdate.textContent = i18n.getMessage(map[subscription.downloadStatus]);
     else
       lastUpdate.textContent = subscription.downloadStatus;
     lastUpdate.classList.add("error");
@@ -336,7 +336,7 @@ function updateSubscriptionInfo(element)
   {
     var timeDate = i18n_timeDateStrings(subscription.lastDownload * 1000);
     var messageID = (timeDate[1] ? "last_updated_at" : "last_updated_at_today");
-    lastUpdate.textContent = chrome.i18n.getMessage(messageID, timeDate);
+    lastUpdate.textContent = i18n.getMessage(messageID, timeDate);
   }
 }
 
@@ -565,7 +565,7 @@ function addSubscriptionEntry(subscription)
   removeButton.textContent = "\xD7";
   removeButton.addEventListener("click", function()
   {
-    if (!confirm(chrome.i18n.getMessage("global_remove_subscription_warning")))
+    if (!confirm(i18n.getMessage("global_remove_subscription_warning")))
       return;
 
     FilterStorage.removeSubscription(subscription);
