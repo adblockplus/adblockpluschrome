@@ -357,16 +357,23 @@ function onFilterChange(action, item, param1, param2)
         updateSubscriptionInfo(element);
       break;
     case "subscription.added":
-      if (!(item instanceof SpecialSubscription) && !findSubscriptionElement(item))
+      if (item instanceof SpecialSubscription)
       {
-        if (item.url == Prefs.subscriptions_exceptionsurl)
-          $("#acceptableAds").prop("checked", true);
-        else
-          addSubscriptionEntry(item);
+        for (var i = 0; i < item.filters.length; i++)
+          onFilterChange("filter.added", item.filters[i]);
       }
+      else if (item.url == Prefs.subscriptions_exceptionsurl)
+        $("#acceptableAds").prop("checked", true);
+      else if (!findSubscriptionElement(item))
+        addSubscriptionEntry(item);
       break;
     case "subscription.removed":
-      if (item.url == Prefs.subscriptions_exceptionsurl)
+      if (item instanceof SpecialSubscription)
+      {
+        for (var i = 0; i < item.filters.length; i++)
+          onFilterChange("filter.removed", item.filters[i]);
+      }
+      else if (item.url == Prefs.subscriptions_exceptionsurl)
         $("#acceptableAds").prop("checked", false);
       else
       {
