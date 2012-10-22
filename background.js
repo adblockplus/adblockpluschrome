@@ -86,7 +86,7 @@ function refreshIconAndContextMenu(tab)
     return;
 
   var excluded = isWhitelisted(tab.url);
-  iconFilename = excluded ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
+  var iconFilename = excluded ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
   chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
 
   // Only show icon for pages we can influence (http: and https:)
