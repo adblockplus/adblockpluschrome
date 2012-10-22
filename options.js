@@ -150,7 +150,7 @@ function loadRecommendations()
     for (var i = 0; i < elements.length; i++)
     {
       var element = elements[i];
-      var option = document.createElement("option");
+      var option = new Option();
       option.text = element.getAttribute("title") + " (" + element.getAttribute("specialization") + ")";
       option._data = {
         title: element.getAttribute("title"),
@@ -188,7 +188,7 @@ function loadRecommendations()
       list.appendChild(option);
     }
 
-    var option = document.createElement("option");
+    var option = new Option();
     option.text = i18n.getMessage("filters_addSubscriptionOther_label") + "\u2026";
     option._data = null;
     list.appendChild(option);
@@ -419,7 +419,7 @@ function populateList(id, entries)
   entries.sort();
   for (var i = 0; i < entries.length; i++)
   {
-    var option = document.createElement("option");
+    var option = new Option();
     option.text = entries[i];
     option.value = entries[i];
     list.appendChild(option);
@@ -429,7 +429,7 @@ function populateList(id, entries)
 // Add a filter string to the list box.
 function appendToListBox(boxId, text)
 {
-  var elt = document.createElement("option");
+  var elt = new Option();  /* Note: document.createElement("option") is unreliable in Opera */
   elt.text = text;
   elt.value = text;
   document.getElementById(boxId).appendChild(elt);
@@ -438,9 +438,6 @@ function appendToListBox(boxId, text)
 // Remove a filter string from a list box.
 function removeFromListBox(boxId, text)
 {
-  var elt = document.createElement("option");
-  elt.text = text;
-  elt.value = text;
   var list = document.getElementById(boxId);
   for (var i = 0; i < list.length; i++)
     if (list.options[i].value == text)
