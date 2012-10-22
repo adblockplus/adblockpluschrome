@@ -1,6 +1,5 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.",
     "message": "Добавить"
   },
   "add_domain_button": {
@@ -19,7 +18,6 @@
     "message": "Применить изменения"
   },
   "cancel": {
-    "description": "Cancel button label",
     "message": "Отменить"
   },
   "clickhide_instructions": {
@@ -35,7 +33,6 @@
     "message": "Adblock Plus выключен для этих доменов. Дополнительные домены можно добавить, щёлкнув иконку Adblock Plus на адресной строке или напечатав название домена (не ссылку) в данной области и нажав на кнопку \"Добавить домен\""
   },
   "easy_create_filter": {
-    "description": "Button label in popup balloon",
     "message": "Быстро создать фильтр"
   },
   "edit_filters_raw": {
@@ -45,11 +42,9 @@
     "message": "Включите только фильтры, которые вам нужны. С большим количеством фильтров Chrome может тормозить."
   },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label",
     "message": "Включить для этого сайта"
   },
   "filter_lists": {
-    "description": "This is a tab heading.",
     "message": "Список фильтров"
   },
   "filter_must_follow_syntax": {
@@ -108,7 +103,6 @@
     }
   },
   "general": {
-    "description": "This is a tab heading.",
     "message": "Общие"
   },
   "global_remove_subscription_warning": {
@@ -118,7 +112,6 @@
     "message": "Не удалось распознать введенный адрес ни как адрес в интернете, ни как путь файлу."
   },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
     "message": "Последнее обновление: $date$ в $time$",
     "placeholders": {
       "date": {
@@ -130,7 +123,6 @@
     }
   },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
     "message": "Последнее обновление: сегодня в $time$",
     "placeholders": {
       "time": {
@@ -154,7 +146,6 @@
     "message": "Прятать метки на месте заблокированных элементов"
   },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Удалить"
   },
   "show_icon": {
@@ -173,7 +164,6 @@
     "message": "Обновить сейчас"
   },
   "whitelisted_domains": {
-    "description": "This is a tab heading.",
     "message": "Белый список доменов"
   }
 }

@@ -1,6 +1,5 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.",
     "message": "Thêm"
   },
   "add_domain_button": {
@@ -19,11 +18,9 @@
     "message": "Lưu các thay đổi"
   },
   "block_element": {
-    "description": "Label for 'Block Element' context menu item",
     "message": "Khóa đối tượng này"
   },
   "cancel": {
-    "description": "Cancel button label",
     "message": "Hủy bỏ"
   },
   "clickhide_instructions": {
@@ -39,7 +36,6 @@
     "message": "Adblock Plus không hoạt động ở các tên miền dưới đây. Bạn có thể thêm một tên miền nhờ biểu tượng Adblock Plus nằm trên thanh địa chỉ, hoặc gõ tên miền (không phải là URL) trong khung bên dưới và ấn nút \"Thêm tên miền\"."
   },
   "easy_create_filter": {
-    "description": "Button label in popup balloon",
     "message": "Tạo bộ lọc một cách dễ dàng"
   },
   "edit_filters_raw": {
@@ -49,11 +45,9 @@
     "message": "Chỉ sử dụng danh sách các bộ lọc mà bạn cần. Dùng quá nhiều bộ lọc sẽ khiến Chrome bị treo."
   },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label",
     "message": "Hoạt động trên trang này"
   },
   "filter_lists": {
-    "description": "This is a tab heading.",
     "message": "Danh sách các bộ lọc"
   },
   "filter_must_follow_syntax": {
@@ -94,7 +88,6 @@
     }
   },
   "general": {
-    "description": "This is a tab heading.",
     "message": "Tổng quan"
   },
   "global_remove_subscription_warning": {
@@ -104,21 +97,11 @@
     "message": "Địa chỉ để tải bộ lọc không phải là một URL hay tên tập tin hợp lệ."
   },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
     "message": "cập nhật lần cuối cùng lúc $time$ vào ngày $date$",
     "placeholders": {
       "date": {
         "content": "$2"
       },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
-    "message": "Last updated at $time$ today",
-    "placeholders": {
       "time": {
         "content": "$1"
       }
@@ -137,7 +120,6 @@
     "message": "Các danh sách cũ đã được cập nhật định kỳ."
   },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Xóa cái vừa chọn"
   },
   "show_block_element_menu": {
@@ -159,7 +141,6 @@
     "message": "cập nhật ngay"
   },
   "whitelisted_domains": {
-    "description": "This is a tab heading.",
     "message": "Danh Sách Trắng"
   }
 }
