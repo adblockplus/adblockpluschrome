@@ -1,20 +1,26 @@
-importAll("filterClasses", this);
-importAll("subscriptionClasses", this);
-importAll("filterStorage", this);
-importAll("elemHide", this);
-importAll("filterListener", this);
-importAll("filterNotifier", this);
-importAll("matcher", this);
-importAll("prefs", this);
-importAll("synchronizer", this);
-importAll("utils", this);
+with(require("filterClasses"))
+{
+  this.Filter = Filter;
+  this.RegExpFilter = RegExpFilter;
+  this.BlockingFilter = BlockingFilter;
+  this.WhitelistFilter = WhitelistFilter;
+}
+with(require("subscriptionClasses"))
+{
+  this.Subscription = Subscription;
+  this.DownloadableSubscription = DownloadableSubscription;
+}
+var FilterStorage = require("filterStorage").FilterStorage;
+var ElemHide = require("elemHide").ElemHide;
+var defaultMatcher = require("matcher").defaultMatcher;
+var Synchronizer = require("synchronizer").Synchronizer;
 
 // Some types cannot be distinguished
 RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
 RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OTHER;
 
 var isFirstRun = false;
-FilterNotifier.addListener(function(action)
+require("filterNotifier").FilterNotifier.addListener(function(action)
 {
   if (action == "load")
   {

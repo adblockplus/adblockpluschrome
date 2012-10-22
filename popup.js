@@ -1,7 +1,10 @@
 var backgroundPage = chrome.extension.getBackgroundPage();
-var imports = ["FilterStorage", "Filter", "isWhitelisted", "extractHostFromURL", "refreshIconAndContextMenu"];
+var imports = ["require", "isWhitelisted", "extractHostFromURL", "refreshIconAndContextMenu"];
 for (var i = 0; i < imports.length; i++)
   window[imports[i]] = backgroundPage[imports[i]];
+
+var Filter = require("filterClasses").Filter;
+var FilterStorage = require("filterStorage").FilterStorage;
 
 var tab = null;
 

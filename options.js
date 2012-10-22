@@ -1,9 +1,21 @@
 var backgroundPage = chrome.extension.getBackgroundPage();
-var imports = ["FilterStorage", "FilterNotifier", "Subscription", "SpecialSubscription",
-               "DownloadableSubscription", "Filter", "WhitelistFilter",
-               "Synchronizer", "Prefs", "Utils", "require"];
-for (var i = 0; i < imports.length; i++)
-  window[imports[i]] = backgroundPage[imports[i]];
+var require = backgroundPage.require;
+
+with(require("filterClasses"))
+{
+  this.Filter = Filter;
+  this.WhitelistFilter = WhitelistFilter;
+}
+with(require("subscriptionClasses"))
+{
+  this.Subscription = Subscription;
+  this.SpecialSubscription = SpecialSubscription;
+  this.DownloadableSubscription = DownloadableSubscription;
+}
+var FilterStorage = require("filterStorage").FilterStorage;
+var FilterNotifier = require("filterNotifier").FilterNotifier;
+var Prefs = require("prefs").Prefs;
+var Synchronizer = require("synchronizer").Synchronizer;
 
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions()
@@ -13,7 +25,7 @@ function loadOptions()
 
   // Set links
   $("#acceptableAdsLink").attr("href", Prefs.subscriptions_exceptionsurl);
-  $("#acceptableAdsDocs").attr("href", Prefs.documentation_link.replace(/%LINK%/g, "acceptable_ads").replace(/%LANG%/g, Utils.appLocale));
+  $("#acceptableAdsDocs").attr("href", Prefs.documentation_link.replace(/%LINK%/g, "acceptable_ads").replace(/%LANG%/g, require("utils").Utils.appLocale));
 
   // Add event listeners
   window.addEventListener("unload", unloadOptions, false);
