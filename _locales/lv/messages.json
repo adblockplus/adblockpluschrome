@@ -1,6 +1,5 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.",
     "message": "Pievienot"
   },
   "add_domain_button": {
@@ -19,11 +18,9 @@
     "message": "Pielietot izmaiņas"
   },
   "block_element": {
-    "description": "Label for 'Block Element' context menu item",
     "message": "Bloķēt elementu"
   },
   "cancel": {
-    "description": "Cancel button label",
     "message": "Atcelt"
   },
   "clickhide_instructions": {
@@ -39,7 +36,6 @@
     "message": "Adblock Plus Jūsu izvēlētajos domēnos ir atslēgts. Jūs varat pievienot domēnu izmantojot Adblock Plus, kas atrodas adreses joslā, vai ievadot domēnu (nevis URL) kastē un noklikšķinot uz pogas \"Pievienot domēnu\"."
   },
   "easy_create_filter": {
-    "description": "Button label in popup balloon",
     "message": "Viegli izveidot filtru"
   },
   "edit_filters_raw": {
@@ -49,11 +45,9 @@
     "message": "Iespējo tikai vajadzīgos filtru sarakstus. Pārāk daudzi var padarīt Chrome nereaģējošu."
   },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label",
     "message": "Iespējots šajā vietnē"
   },
   "filter_lists": {
-    "description": "This is a tab heading.",
     "message": "Filtru saraksts"
   },
   "filter_must_follow_syntax": {
@@ -94,7 +88,6 @@
     }
   },
   "general": {
-    "description": "This is a tab heading.",
     "message": "Vispārīgi"
   },
   "global_remove_subscription_warning": {
@@ -104,7 +97,6 @@
     "message": "Filtru saraksta atrašanās vieta nav ne derīgs URL ne arī derīgs faila nosaukums."
   },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
     "message": "Pēdējo reiz atjaunināts $time$ $date$",
     "placeholders": {
       "date": {
@@ -116,7 +108,6 @@
     }
   },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
     "message": "Pēdējo reiz atjaunināts šodien plkst. $time$",
     "placeholders": {
       "time": {
@@ -137,7 +128,6 @@
     "message": "Novecojušie saraksti tiek periodiski atjaunināti."
   },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Noņemt izvēlēto"
   },
   "show_block_element_menu": {
@@ -159,7 +149,6 @@
     "message": "Atjaunināt tagad"
   },
   "whitelisted_domains": {
-    "description": "This is a tab heading.",
     "message": "Domēni baltajā sarakstā"
   }
 }

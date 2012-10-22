@@ -1,6 +1,5 @@
 {
   "add": {
-    "description": "This is the label for the generic 'Add' buttons.",
     "message": "Ajouter"
   },
   "add_domain_button": {
@@ -22,7 +21,6 @@
     "message": "Supprimer l'élément"
   },
   "cancel": {
-    "description": "Cancel button label",
     "message": "Annuler"
   },
   "clickhide_instructions": {
@@ -38,7 +36,6 @@
     "message": "Adblock Plus est inactivé pour les domaines ci-dessous. Vous pouvez ajouter un domaine soit par l'icon Adblock Plus dans la barre d'adresse ou en tapant le domaine (pas l'URL) dans la zone et cliquant sur le bouton \"Ajouter\"."
   },
   "easy_create_filter": {
-    "description": "Button label in popup balloon",
     "message": "Création facile de filtre"
   },
   "edit_filters_raw": {
@@ -48,11 +45,9 @@
     "message": "Choisissez seulement les listes dont vous avez besoin. Trop de script tuent le script&nbsp;!"
   },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label",
     "message": "Activé pour ce site"
   },
   "filter_lists": {
-    "description": "This is a tab heading.",
     "message": "Liste de filtres"
   },
   "filter_must_follow_syntax": {
@@ -111,7 +106,6 @@
     }
   },
   "general": {
-    "description": "This is a tab heading.",
     "message": "Général"
   },
   "global_remove_subscription_warning": {
@@ -121,7 +115,6 @@
     "message": "L'adresse indiquant l'emplacement de la liste de filtres n'est ni une URL valide, ni un nom de fichier valide."
   },
   "last_updated_at": {
-    "description": "Last updated at time on date.",
     "message": "Dernière actualisation le $date$ à $time$",
     "placeholders": {
       "date": {
@@ -133,7 +126,6 @@
     }
   },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
     "message": "Dernière actualisation aujourd'hui à $time$",
     "placeholders": {
       "time": {
@@ -157,7 +149,6 @@
     "message": "Masquer les conteneurs des éléments bloqués"
   },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Supprimer"
   },
   "show_block_element_menu": {
@@ -179,7 +170,6 @@
     "message": "Actualiser maintenant"
   },
   "whitelisted_domains": {
-    "description": "This is a tab heading.",
     "message": "Domaines autorisés"
   }
 }

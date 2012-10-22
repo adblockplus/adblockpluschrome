@@ -1,6 +1,5 @@
 {
   "add": {
-    "description": "Esse é o rótulo para os botões de 'Adicionar'.",
     "message": "Adicionar"
   },
   "add_domain_button": {
@@ -19,11 +18,9 @@
     "message": "Aplicar mudanças"
   },
   "block_element": {
-    "description": "Legenda para o item 'Bloquear Elemento' no menu de contexto",
     "message": "Bloquear Elemento"
   },
   "cancel": {
-    "description": "Rótulo para o botão de Cancelar",
     "message": "Cancelar"
   },
   "clickhide_instructions": {
@@ -39,7 +36,6 @@
     "message": "O Adblock Plus está desabilitado para os domínios abaixo. Você pode adicionar um domínio, tanto pelo ícone do Adblock Plus na barra de endereços, quanto digitando o domínio (não a URL) dentro da caixa e clicando no botão \"Adicionar domínio\"."
   },
   "easy_create_filter": {
-    "description": "Rótulo para o botão dentro do balão que surge ao clicar no ícone do Adblock Plus",
     "message": "Crie fácil um filtro"
   },
   "edit_filters_raw": {
@@ -49,11 +45,9 @@
     "message": "Habilitar somente as listas de filtros que você precisa. Muitos filtros simultâneos podem causar o travamento do seu Chrome."
   },
   "enabled_for_site": {
-    "description": "Rótulo para a caixa de verificação em formato de balão que surge ao clicar no ícone do Adblock Plus",
     "message": "Habilitado para esse site"
   },
   "filter_lists": {
-    "description": "Essa é uma aba do menu.",
     "message": "Lista de Filtros"
   },
   "filter_must_follow_syntax": {
@@ -112,7 +106,6 @@
     }
   },
   "general": {
-    "description": "Essa é uma aba do menu.",
     "message": "Geral"
   },
   "global_remove_subscription_warning": {
@@ -122,7 +115,6 @@
     "message": "O local da lista de filtros não é nem uma URL válida nem um nome válido de arquivo."
   },
   "last_updated_at": {
-    "description": "ex: Última atualização às 3:00pm, em 1 de Abr, 2011",
     "message": "Última atualização às $time$ em $date$",
     "placeholders": {
       "date": {
@@ -134,7 +126,6 @@
     }
   },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
     "message": "Última atualização às $time$ hoje",
     "placeholders": {
       "time": {
@@ -158,7 +149,6 @@
     "message": "Comprimir espaço de elementos bloqueados"
   },
   "remove_button": {
-    "description": "Esse é o rótulo para os botões de 'Remover selecionados'.",
     "message": "Remover selecionados"
   },
   "show_block_element_menu": {
@@ -180,7 +170,6 @@
     "message": "Atualizar agora"
   },
   "whitelisted_domains": {
-    "description": "Essa é uma aba do menu.",
     "message": "Domínios permitidos"
   }
 }

@@ -1,4 +1,63 @@
 {
+  "add": {
+    "message": "追加"
+  },
+  "add_domain_button": {
+    "message": "ドメインを追加"
+  },
+  "add_filter_button": {
+    "message": "フィルタを追加"
+  },
+  "add_filters_msg": {
+    "message": "フィルタを追加しますか?"
+  },
+  "add_your_own_filters": {
+    "message": "自作フィルタを追加"
+  },
+  "apply_changes": {
+    "message": "変更を適用"
+  },
+  "block_element": {
+    "message": "ブロック要素"
+  },
+  "cancel": {
+    "message": "キャンセル"
+  },
+  "clickhide_instructions": {
+    "message": "このポップアップを閉じた後に、ページ上の要素をクリック(または右クリック)してください。"
+  },
+  "description": {
+    "message": "広告があったのは過去の話です！ 大ヒットしたアドオン Adblock Plus が Google Chrome™ で利用できます。"
+  },
+  "disable_inline": {
+    "message": "インラインのテキスト広告を無効にする"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plusを以下に記載されたドメインで無効にします。アドレスバーのAdblock Plusアイコンから設定するか、下の欄にドメイン(URLではなく)を入力して、\"ドメインを追加\"のボタンをクリックすることによってドメインを追加することができます。"
+  },
+  "easy_create_filter": {
+    "message": "簡単にフィルタを作成する"
+  },
+  "edit_filters_raw": {
+    "message": "直接テキストフィルタを編集する"
+  },
+  "enable_only_the": {
+    "message": "あなたが必要とするフィルタリストのみを有効にしてください。フィルタリストが多すぎるとChromeの動作が遅くなることがあります。"
+  },
+  "enabled_for_site": {
+    "message": "このサイトで有効"
+  },
+  "filter_lists": {
+    "message": "フィルタリスト"
+  },
+  "filter_must_follow_syntax": {
+    "message": "自作フィルタは、 <a href='$url$'>Adblock Plus フィルタ構文</a>に従う必要があります。object-subrequest のような特定のフィルタタイプはサポートされていません。",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
   "filters_acceptableAds2_label": {
     "message": "控えめな広告を許可"
   },
@@ -38,25 +97,115 @@
   "filters_viewList_label": {
     "message": "設定内容を参照"
   },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plusは、常に迷惑な広告をブロックします。</strong> ただ、我々は、 Web サイトが控えめな広告を使用することを奨励したいと思います。そこで、 <a>厳格なガイドライン</a> に基づいて控えめな広告の表示を許可することにしました。あなたがすべての広告をブロックしたい場合は、いつでもこれを <a>無効</a> にすることができます。"
+  },
+  "firstRun_changelog": {
+    "message": "新着情報を見る"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "許容可能な広告でWebサイトをサポート（以下詳細）"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "迷惑な広告なしで web を楽しむ"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "ＣＭ中断なしにビデオを見る"
+  },
+  "firstRun_features_heading": {
+    "message": "Adblock Plus でできること:"
+  },
+  "firstRun_share1": {
+    "message": "Adblock Plus が共有する価値があると思う方は、ぜひ共有してください。"
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus はフリーでオープンソースです。私たちをサポートしてください："
+  },
+  "firstRun_share2_donate": {
+    "message": "寄付"
+  },
+  "firstRun_share2_or": {
+    "message": "または"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus をインストールしました。"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus が更新されました"
+  },
+  "found_a_bug": {
+    "message": "バグが見つかりましたか? あなたの言語に翻訳したいですか? その場合は <a href='$url$'>こちら</a>へお願いします。",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "general": {
+    "message": "一般"
+  },
   "global_remove_subscription_warning": {
     "message": "本当にこのフィルタ購読を削除しますか？"
   },
   "global_subscription_invalid_location": {
     "message": "フィルタ購読の URL が無効、もしくは不正なファイル名です。"
   },
+  "last_updated_at": {
+    "message": "最終更新日 $date$ $time$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "最終更新日  今日 $time$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
   "name": {
     "message": "Adblock Plus"
+  },
+  "new_filters_added": {
+    "message": "新しいフィルタを追加; 管理するためには、 <a id='options_url' target='_blank'>Options</a> を参照してください。"
+  },
+  "options": {
+    "message": "Adblock Plus オプション"
+  },
+  "out_of_date_lists": {
+    "message": "古いリストは定期的に更新されます。"
   },
   "overlay_hideplaceholders_label": {
     "message": "ブロックした要素の「代わり」を表示しない"
   },
+  "remove_button": {
+    "message": "削除"
+  },
+  "show_block_element_menu": {
+    "message": "「ブロック要素」を右クリックメニューに表示"
+  },
+  "show_icon": {
+    "message": "アドレスバーにアイコンを表示"
+  },
   "subscriptionSelection_location_label": {
-    "message": "フィルタ購読の場所:"
+    "message": "フィルタリストの場所："
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "リストからフィルタ購読を選択してください:"
+    "message": "購読するフィルタをリストから選択してください:"
   },
   "subscriptionSelection_title_label": {
-    "message": "フィルタ購読の名称:"
+    "message": "フィルタ名称:"
+  },
+  "update_now": {
+    "message": "今すぐ更新"
+  },
+  "whitelisted_domains": {
+    "message": "ホワイトリストに追加されたドメイン"
   }
 }

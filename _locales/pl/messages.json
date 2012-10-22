@@ -1,63 +1,57 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.",
     "message": "Dodaj"
   },
   "add_domain_button": {
-    "message": "Dodaj domene"
+    "message": "Dodaj domenę"
   },
   "add_filter_button": {
     "message": "Dodaj filtr"
   },
   "add_filters_msg": {
-    "message": "Dodać taki filtr?"
+    "message": "Dodać filtry?"
   },
   "add_your_own_filters": {
     "message": "Dodaj własne filtry"
   },
   "apply_changes": {
-    "message": "Zakceptuj zmiany"
+    "message": "Zastosuj zmiany"
   },
   "block_element": {
-    "description": "Label for 'Block Element' context menu item",
-    "message": "Blokuj Element"
+    "message": "Blokuj element"
   },
   "cancel": {
-    "description": "Cancel button label",
     "message": "Anuluj"
   },
   "clickhide_instructions": {
-    "message": "Po zamknięciu tego okna, kliknij lewym (lub prawym) przyciskiem myszy w niechciany element na stronie."
+    "message": "Po zamknięciu tego okna kliknij na stronie lewym lub prawym przyciskiem myszy niechciany element."
   },
   "description": {
-    "message": "Blokuj reklamy korzystając z filtrów Adblock Plus. Pożegnaj się z reklamami i serwuj w spokoju!"
+    "message": "Uwolnij się od reklam! Rozszerzenie Adblock Plus jest teraz dostępne dla Google Chrome™."
   },
   "disable_inline": {
     "message": "Wyłącz reklamy tekstowe"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
+    "message": "Adblock Plus jest wyłączony dla niżej wymienionych domen. Możesz dodać domenę, używając ikony Adblock Plusa znajdującej się w pasku adresu lub wpisując domenę – nie adres URL – w polu i naciskając przycisk „Dodaj domenę”."
   },
   "easy_create_filter": {
-    "description": "Button label in popup balloon",
     "message": "Kreator filtrów"
   },
   "edit_filters_raw": {
     "message": "Edytuj filtry jako zwykły tekst"
   },
   "enable_only_the": {
-    "message": "Włącz tylko te filtry których potrzebujesz. Za duża ilość może spowolnić działanie przeglądarki."
+    "message": "Włącz tylko filtry, których potrzebujesz. Zbyt duża liczna filtrów może spowolnić działanie przeglądarki."
   },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label",
     "message": "Włącz dla tej strony"
   },
   "filter_lists": {
-    "description": "This is a tab heading.",
     "message": "Listy filtrów"
   },
   "filter_must_follow_syntax": {
-    "message": "Twój filtr musi być zgodny <a href='$url$'>ze składnią filtru Adblock Plus</a>. Niektóre typy filtrów, jak obiect-subrequest, nie są obsługiwane.",
+    "message": "Twój filtr musi być zgodny <a href='$url$'>ze składnią filtrów Adblock Plus</a>. Niektóre typy filtrów, jak obiect-subrequest nie są obsługiwane.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -103,8 +97,44 @@
   "filters_viewList_label": {
     "message": "Zobacz listę"
   },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus będzie zawsze blokował irytujące reklamy</strong>, niemniej umożliwiliśmy witrynom wyświetlającym proste i dyskretne reklamy na ich wyświetlanie. Dlatego określiliśmy <a>ścisłe wytyczne</a> umożliwiające precyzyjną identyfikację akceptowanych reklam i ich wyświetlanie. Jeśli chcesz blokować wszystkie reklamy, możesz w każdej chwil tę możliwość <a>wyłączyć</a>."
+  },
+  "firstRun_changelog": {
+    "message": "Zobacz, co jest nowego"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "Witryny, których reklamy są akceptowane (więcej poniżej)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "Korzystaj z internetu bez irytujących reklam"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "Oglądaj widea bez przerw reklamowych"
+  },
+  "firstRun_features_heading": {
+    "message": "Korzystając z Adblock Plusa możesz:"
+  },
+  "firstRun_share1": {
+    "message": "Jeśli uważasz, że Adblock Plus jest godny polecenia – poleć go."
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus jest darmowy i o otwartym kodzie źródłowym. Wspomóż nas:"
+  },
+  "firstRun_share2_donate": {
+    "message": "Wspomóż"
+  },
+  "firstRun_share2_or": {
+    "message": "lub"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus został zainstalowany"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus został zaktualizowany"
+  },
   "found_a_bug": {
-    "message": "Znalazłeś błąd? Zgłoś proszę <a href='$url$'>problem tutaj</a>.",
+    "message": "Uważasz, że wystąpił błąd? Zgłoś <a href='$url$'>problem tutaj</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -112,7 +142,6 @@
     }
   },
   "general": {
-    "description": "This is a tab heading.",
     "message": "Ogólne"
   },
   "global_remove_subscription_warning": {
@@ -122,7 +151,6 @@
     "message": "Lokalizacja zestawu filtrów ma niewłaściwą nazwę pliku, albo adres URL"
   },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
     "message": "Ostatnia aktualizacja: $date$ o $time$",
     "placeholders": {
       "date": {
@@ -134,7 +162,6 @@
     }
   },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
     "message": "Ostatnia aktualizacja: dzisiaj o $time$",
     "placeholders": {
       "time": {
@@ -146,23 +173,25 @@
     "message": "Adblock Plus"
   },
   "new_filters_added": {
-    "message": "Dodano nowe filtry; Zajrzyj do <a id='options_url' target='_blank'>Opcji</a>."
+    "message": "Dodano nowe filtry. By nimi zarządzać zajrzyj do <a id='options_url' target='_blank'>ustawień</a>."
   },
   "options": {
-    "message": "Adblock Plus Opcje"
+    "message": "Adblock Plus – ustawienia"
   },
   "out_of_date_lists": {
-    "message": "Po pewnym czasie filtry aktualizowane są automatycznie."
+    "message": "Nieaktualne zestawy filtrów są uaktualniane okresowo."
   },
   "overlay_hideplaceholders_label": {
     "message": "Ukryj zamienniki blokowanych elementów"
   },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Usuń zaznaczone"
   },
+  "show_block_element_menu": {
+    "message": "Wyświetlaj menu kontekstowe „Blokuj element”"
+  },
   "show_icon": {
-    "message": "Pokazuj ikonę na pasku adresu"
+    "message": "Pokazuj ikonę w pasku adresu"
   },
   "subscriptionSelection_location_label": {
     "message": "Lokalizacja zestawu:"
@@ -174,10 +203,9 @@
     "message": "Nazwa zestawu:"
   },
   "update_now": {
-    "message": "Zaktualizuj"
+    "message": "Aktualizuj teraz"
   },
   "whitelisted_domains": {
-    "description": "This is a tab heading.",
     "message": "Wykluczone strony"
   }
 }

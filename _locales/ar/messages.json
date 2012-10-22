@@ -1,6 +1,5 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.",
     "message": "أضف"
   },
   "add_domain_button": {
@@ -19,7 +18,6 @@
     "message": "تطبيق التغييرات"
   },
   "cancel": {
-    "description": "Cancel button label",
     "message": "إلغاء"
   },
   "clickhide_instructions": {
@@ -35,7 +33,6 @@
     "message": "Adblock Plus معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال الضغط على أيقونة Adblock Plus في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"Add domain\"."
   },
   "easy_create_filter": {
-    "description": "Button label in popup balloon",
     "message": "إنشاء فلتر بسهوله"
   },
   "edit_filters_raw": {
@@ -45,11 +42,9 @@
     "message": "فعل قائمة الفلاتر اللي تحتاجها فقط. تفعبل الكثير منها من الممكن أن يجعل Chrome لا يستجيب"
   },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label",
     "message": "فعل لهذا الموقع"
   },
   "filter_lists": {
-    "description": "This is a tab heading.",
     "message": "قائمة الفلاتر"
   },
   "filter_must_follow_syntax": {
@@ -108,7 +103,6 @@
     }
   },
   "general": {
-    "description": "This is a tab heading.",
     "message": "عـام"
   },
   "global_remove_subscription_warning": {
@@ -118,7 +112,6 @@
     "message": "موقع قائمة الفلتر ليس صحيح كعنوان ويب و لا كأسم ملف"
   },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
     "message": "أخر تحديث في $time$ on $date$",
     "placeholders": {
       "date": {
@@ -130,7 +123,6 @@
     }
   },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
     "message": "أخر تحديث في $time$ اليوم",
     "placeholders": {
       "time": {
@@ -154,7 +146,6 @@
     "message": "اخفاء ماسك المكان للعناصر الموقوفة"
   },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "حذف المختارة"
   },
   "show_icon": {
@@ -173,7 +164,6 @@
     "message": "التحديث الان"
   },
   "whitelisted_domains": {
-    "description": "This is a tab heading.",
     "message": "نطاقات القائمة البيضاء"
   }
 }

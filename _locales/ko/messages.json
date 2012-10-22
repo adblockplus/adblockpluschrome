@@ -1,6 +1,5 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.",
     "message": "추가"
   },
   "add_domain_button": {
@@ -19,11 +18,9 @@
     "message": "적용"
   },
   "block_element": {
-    "description": "Label for 'Block Element' context menu item",
     "message": "요소 숨김"
   },
   "cancel": {
-    "description": "Cancel button label",
     "message": "취소"
   },
   "clickhide_instructions": {
@@ -39,7 +36,6 @@
     "message": "다음 도메인에서는 광고를 차단하지 않습니다. 주소 표시줄의 애드블록 플러스 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
   },
   "easy_create_filter": {
-    "description": "Button label in popup balloon",
     "message": "광고 영역 숨기기"
   },
   "edit_filters_raw": {
@@ -49,11 +45,9 @@
     "message": "필요한 구독 필터만 추가하십시오. 구독 필터를 필요 이상으로 많이 추가하면 페이지의 로딩 속도가 느려질 수 있습니다."
   },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label",
     "message": "이 사이트에 필터 적용"
   },
   "filter_lists": {
-    "description": "This is a tab heading.",
     "message": "구독 필터"
   },
   "filter_must_follow_syntax": {
@@ -112,7 +106,6 @@
     }
   },
   "general": {
-    "description": "This is a tab heading.",
     "message": "일반"
   },
   "global_remove_subscription_warning": {
@@ -122,7 +115,6 @@
     "message": "구독 필터의 위치에 입력하는 URL 또는 파일명이 올바르지 않습니다."
   },
   "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
     "message": "$date$ $time$에 마지막으로 업데이트됨",
     "placeholders": {
       "date": {
@@ -134,7 +126,6 @@
     }
   },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
     "message": "오늘 $time$에 마지막으로 업데이트됨",
     "placeholders": {
       "time": {
@@ -158,7 +149,6 @@
     "message": "차단된 요소의 영역 숨기기"
   },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "선택 항목 제거"
   },
   "show_block_element_menu": {
@@ -180,7 +170,6 @@
     "message": "지금 업데이트"
   },
   "whitelisted_domains": {
-    "description": "This is a tab heading.",
     "message": "허용 도메인"
   }
 }

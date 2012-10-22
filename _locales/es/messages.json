@@ -1,6 +1,5 @@
 {
   "add": {
-    "description": "This is the label for the 'Add' buttons.",
     "message": "Añadir"
   },
   "add_domain_button": {
@@ -13,51 +12,46 @@
     "message": "¿Añadir filtro(s)?"
   },
   "add_your_own_filters": {
-    "message": "Añade tus propios filtros"
+    "message": "Añada sus filtros"
   },
   "apply_changes": {
     "message": "Aplicar cambios"
   },
   "block_element": {
-    "description": "Label for 'Block Element' context menu item",
-    "message": "Bloquear Elemento"
+    "message": "Bloquear elemento"
   },
   "cancel": {
-    "description": "Cancel button label",
     "message": "Cancelar"
   },
   "clickhide_instructions": {
-    "message": "Después de cerrar este menú desplegable, da clic (o clic derecho) en un elemento de la página."
+    "message": "Tras cerrar este menú desplegable, pulse (o con botón derecho) en un elemento de la página."
   },
   "description": {
-    "message": "Bloquea anuncios publicitarios usando el motor de filtros de Firefox Adblock Plus. ¡Dales un beso de despedida a los anuncios y navega con tranquilidad!"
+    "message": "La publicidad es cosa del pasado. La exitosa extensión Adblock Plus está ya disponible en Google Chrome™."
   },
   "disable_inline": {
-    "message": "Desactivar la publicidad en las líneas de texto"
+    "message": "Desactivar anuncios de texto en línea"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus está desactivado para los dominios mostrados a continuación. Puedes añadir un dominio usando el ícono de Adblock Plus en la barra de direcciones o escribiendo el dominio (no la URL) en el cuadro de texto y dando clic en el botón \"Añadir dominio\"."
+    "message": "Adblock Plus está desactivado para los dominios mostrados a continuación. Puede añadir un dominio con el ícono de Adblock Plus en la barra de direcciones o escribiendo el dominio (no la URL) en el recuadro y pulsando el botón \"Añadir dominio\"."
   },
   "easy_create_filter": {
-    "description": "Button label in popup balloon",
     "message": "Crear un filtro fácilmente"
   },
   "edit_filters_raw": {
-    "message": "Modificar los filtros como texto"
+    "message": "Editar los filtros como texto"
   },
   "enable_only_the": {
-    "message": "Activa únicamente las listas que necesitas. Activar demasiadas listas puede hacer que Chrome deje de responder."
+    "message": "Active sólo las listas de filtros que necesite. Si activa demasiadas puede provocar que Chrome se bloquee."
   },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label",
     "message": "Activado para este sitio"
   },
   "filter_lists": {
-    "description": "This is a tab heading.",
-    "message": "Lista de filtros"
+    "message": "Listas de filtros"
   },
   "filter_must_follow_syntax": {
-    "message": "Tu filtro debe seguir la <a href='$url$'>sintaxis para filtros de Adblock Plus</a>. Algunos tipos de filtros, como object-subrequest, no están soportados.",
+    "message": "Tu filtro debe cumplir la <a href='$url$'>sintaxis para filtros de Adblock Plus</a>. Algunos tipos de filtros, como object-subrequest, no están soportados.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -103,8 +97,44 @@
   "filters_viewList_label": {
     "message": "Ver lista"
   },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus bloqueará siempre los anuncios molestos</strong>, pero queremos fomentar las páginas web que usan publicidad sencilla y discreta. Por eso hemos establecido <a>unas directrices estrictas</a> para identificar la publicidad aceptable y permitir que se muestre. Siempre podrá <a>deshabilitar</a> esta funcionalidad si quiere bloquear toda clase de publicidad."
+  },
+  "firstRun_changelog": {
+    "message": "Ver novedades"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "Apoyar las páginas web con publicidad aceptable (más a continuación)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "Disfrute de una web sin anuncios molestos"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "Vea vídeos sin interrupciones comerciales"
+  },
+  "firstRun_features_heading": {
+    "message": "Con Adblock Plus podrá:"
+  },
+  "firstRun_share1": {
+    "message": "¿Cree que vale la pena compartir Adblock Plus? Por favor, hágalo."
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus es gratuito y de código abierto. Por favor, ayúdenos:"
+  },
+  "firstRun_share2_donate": {
+    "message": "Donar"
+  },
+  "firstRun_share2_or": {
+    "message": "o"
+  },
+  "firstRun_title_install": {
+    "message": "Se ha instalado Adblock Plus"
+  },
+  "firstRun_title_update": {
+    "message": "Se ha actualizado Adblock Plus"
+  },
   "found_a_bug": {
-    "message": "¿Encontraste un bug en Adblock Plus o tienes una mejor traducción? Por favor <a href='$url$'>repórtalo aquí</a>.",
+    "message": "¿Encontró un error en Adblock Plus? ¿Quiere traducirlo a su idioma? Por favor <a href='$url$'>rellene aquí una petición</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -112,7 +142,6 @@
     }
   },
   "general": {
-    "description": "This is a tab heading.",
     "message": "General"
   },
   "global_remove_subscription_warning": {
@@ -122,8 +151,7 @@
     "message": "La dirección de la lista de filtros no es una URL ni una ruta de archivo válida."
   },
   "last_updated_at": {
-    "description": "Last updated at time on date.",
-    "message": "Última actualización a las $time$ de $date$",
+    "message": "Última actualización a las $time$ del $date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -134,7 +162,6 @@
     }
   },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
     "message": "Última actualización a las $time$ de hoy",
     "placeholders": {
       "time": {
@@ -146,7 +173,7 @@
     "message": "Adblock Plus"
   },
   "new_filters_added": {
-    "message": "Nuevos filtros añadidos; revisa las <a id='options_url' target='_blank'>Opciones</a> para administrarlos."
+    "message": "Nuevos filtros añadidos, puede administrarlos en <a id='options_url' target='_blank'>Opciones</a>."
   },
   "options": {
     "message": "Opciones de Adblock Plus"
@@ -158,14 +185,13 @@
     "message": "Ocultar posicionadores de elementos bloqueados"
   },
   "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Eliminar"
   },
   "show_block_element_menu": {
-    "message": "Mostrar la opción \"Bloquear Elemento\" en el menú contextual"
+    "message": "Mostrar la opción \"Bloquear elemento\" en el menú contextual"
   },
   "show_icon": {
-    "message": "Mostrar ícono en la barra de direcciones"
+    "message": "Mostrar icono en la barra de direcciones"
   },
   "subscriptionSelection_location_label": {
     "message": "Ubicación de la lista de filtros:"
@@ -180,7 +206,6 @@
     "message": "Actualizar ahora"
   },
   "whitelisted_domains": {
-    "description": "This is a tab heading.",
     "message": "Dominios autorizados"
   }
 }

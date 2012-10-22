@@ -1,6 +1,5 @@
 {
   "add": {
-    "description": "Name für die 'Hinzufügen'-Buttons.",
     "message": "Hinzufügen"
   },
   "add_domain_button": {
@@ -19,11 +18,9 @@
     "message": "Änderungen übernehmen"
   },
   "block_element": {
-    "description": "Name für Kontextmenü-Eintrag 'Element blocken'",
     "message": "Element blocken"
   },
   "cancel": {
-    "description": "Name für den 'Abbrechen'-Button",
     "message": "Abbrechen"
   },
   "clickhide_instructions": {
@@ -39,7 +36,6 @@
     "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain via Adblock Plus-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in die Textzeile und drücken auf \"Domain hinzufügen\"."
   },
   "easy_create_filter": {
-    "description": "Adblock Plus-Icon Kontextmenü",
     "message": "Einfach Filter erstellen"
   },
   "edit_filters_raw": {
@@ -49,11 +45,9 @@
     "message": "Falls Sie einen langsamen Computer haben, wählen Sie bitte nur Filter aus, die Sie wirklich brauchen."
   },
   "enabled_for_site": {
-    "description": "Adblock Plus-Icon Kontextmenü",
     "message": "Für diese Seite aktivieren"
   },
   "filter_lists": {
-    "description": "Das ist ein Reiter-Name.",
     "message": "Filter Liste"
   },
   "filter_must_follow_syntax": {
@@ -112,7 +106,6 @@
     }
   },
   "general": {
-    "description": "Das ist ein Reiter-Name.",
     "message": "Allgemein"
   },
   "global_remove_subscription_warning": {
@@ -122,7 +115,6 @@
     "message": "Die eingegebene Adresse ist weder eine gültige Web-Adresse, noch ein gültiger Dateiname."
   },
   "last_updated_at": {
-    "description": "z.B. Zuletzt aktualisiert: 1. Apr 2011 um 12:51",
     "message": "Zuletzt aktualisiert: $date$ um $time$",
     "placeholders": {
       "date": {
@@ -134,7 +126,6 @@
     }
   },
   "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
     "message": "Zuletzt aktualisiert: heute um $time$",
     "placeholders": {
       "time": {
@@ -158,7 +149,6 @@
     "message": "Platzhalter blockierter Elemente verstecken"
   },
   "remove_button": {
-    "description": "Name für die 'Ausgewählte entfernen'-Buttons.",
     "message": "Ausgewählte entfernen"
   },
   "show_block_element_menu": {
@@ -180,7 +170,6 @@
     "message": "Jetzt updaten"
   },
   "whitelisted_domains": {
-    "description": "Das ist ein Reiter-Name.",
     "message": "Ausnahmen"
   }
 }
