@@ -194,13 +194,13 @@
     "message": "アドレスバーにアイコンを表示"
   },
   "subscriptionSelection_location_label": {
-    "message": "フィルタリストの場所："
+    "message": "フィルタ購読の場所:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "購読するフィルタをリストから選択してください:"
+    "message": "リストからフィルタ購読を選択してください:"
   },
   "subscriptionSelection_title_label": {
-    "message": "フィルタ名称:"
+    "message": "フィルタ購読の名称:"
   },
   "update_now": {
     "message": "今すぐ更新"

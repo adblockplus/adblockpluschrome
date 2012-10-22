@@ -18,4 +18,7 @@ filters.dtd = subscription.lastDownload.inProgress
   acceptableAds2.label
   viewList.label
   readMore.label
+subscriptionSelection.dtd = location.label
+  title.label
+  subscriptionSelector.label
 remove = hovercraft
