@@ -114,6 +114,63 @@ body
   background-image: url(/skin/twitter.png);
 }
 
+#glass-pane
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+
+  display: box;
+  box-orient: horizontal;
+  box-pack: center;
+  box-align: center;
+}
+
+#share-popup
+{
+  border: none;
+}
+
+#glass-pane, #share-popup
+{
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition-property: opacity, visibility;
+  transition-property: opacity, visibility;
+}
+
+#glass-pane
+{
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+#share-popup
+{
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+
+#glass-pane.visible, #share-popup.visible
+{
+  visibility: visible;
+  opacity: 1;
+}
+
+#share-popup.visible
+{
+  -webkit-transition-duration: 0.15s;
+  transition-duration: 0.15s;
+}
+
 /* Adjust font size on smaller screens */
 @media (max-height: 800px)
 {
