@@ -13,7 +13,9 @@ with(require("subscriptionClasses"))
 var FilterStorage = require("filterStorage").FilterStorage;
 var ElemHide = require("elemHide").ElemHide;
 var defaultMatcher = require("matcher").defaultMatcher;
+var Prefs = require("prefs").Prefs;
 var Synchronizer = require("synchronizer").Synchronizer;
+var Utils = require("utils").Utils;
 
 // Some types cannot be distinguished
 RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
@@ -25,12 +27,15 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
   if (action == "load")
   {
     importOldData();
-    if (!localStorage["currentVersion"])
+
+    var addonVersion = require("info").addonVersion;
+    var prevVersion = localStorage["currentVersion"];
+    if (prevVersion != addonVersion)
     {
-      isFirstRun = true;
-      executeFirstRunActions();
+      isFirstRun = !prevVersion;
+      localStorage["currentVersion"] = addonVersion;
+      addSubscription(prevVersion);
     }
-    localStorage["currentVersion"] = require("info").addonVersion;
   }
 });
 
@@ -274,76 +279,88 @@ function importOldData()
 }
 
 /**
- * This function is called first time the extension runs after installation.
- * It will add the default filter subscription.
+ * This function is called on an extension update. It will add the default
+ * filter subscription if necessary.
  */
-function executeFirstRunActions()
+function addSubscription(prevVersion)
 {
-  // Don't do anything if the user has a subscription already
-  var hasSubscriptions = FilterStorage.subscriptions.some(function(subscription) {return subscription instanceof DownloadableSubscription});
-  if (hasSubscriptions)
-    return;
-
-  // Load subscriptions data
-  var request = new XMLHttpRequest();
-  request.open("GET", "subscriptions.xml");
-  request.onload = function()
+  // Add "acceptable ads" subscription for new users and users updating from old ABP versions
+  var addAcceptable = (!prevVersion || Services.vc.compare(prevVersion, "2.1") < 0);
+  if (addAcceptable)
   {
-    var subscriptions = request.responseXML.documentElement.getElementsByTagName("subscription");
-    var selectedItem = null;
-    var selectedPrefix = null;
-    var matchCount = 0;
-    for (var i = 0; i < subscriptions.length; i++)
+    addAcceptable = !FilterStorage.subscriptions.some(function(subscription)
     {
-      var subscription = subscriptions[i];
-      if (!selectedItem)
-        selectedItem = subscription;
+      return subscription.url == Prefs.subscriptions_exceptionsurl;
+    });
+  }
 
-      var prefix = require("utils").Utils.checkLocalePrefixMatch(subscription.getAttribute("prefixes"));
-      if (prefix)
-      {
-        if (!selectedPrefix || selectedPrefix.length < prefix.length)
-        {
-          selectedItem = subscription;
-          selectedPrefix = prefix;
-          matchCount = 1;
-        }
-        else if (selectedPrefix && selectedPrefix.length == prefix.length)
-        {
-          matchCount++;
+  // Don't add subscription if the user has a subscription already
+  var addSubscription = !FilterStorage.subscriptions.some(function(subscription)
+  {
+    return subscription instanceof DownloadableSubscription &&
+           subscription.url != Prefs.subscriptions_exceptionsurl;
+  });
 
-          // If multiple items have a matching prefix of the same length:
-          // Select one of the items randomly, probability should be the same
-          // for all items. So we replace the previous match here with
-          // probability 1/N (N being the number of matches).
-          if (Math.random() * matchCount < 1)
-          {
-            selectedItem = subscription;
-            selectedPrefix = prefix;
-          }
-        }
-      }
-    }
+  // If this isn't the first run, only add subscription if the user has no custom filters
+  if (addSubscription && prevVersion)
+  {
+    addSubscription = !FilterStorage.subscriptions.some(function(subscription)
+    {
+      return subscription.url != Prefs.subscriptions_exceptionsurl &&
+             subscription.filters.length;
+    });
+  }
 
-    var subscription = (selectedItem ? Subscription.fromURL(selectedItem.getAttribute("url")) : null);
+  // Add "acceptable ads" subscription
+  if (addAcceptable)
+  {
+    var subscription = Subscription.fromURL(Prefs.subscriptions_exceptionsurl);
     if (subscription)
     {
-      subscription.disabled = false;
-      subscription.title = selectedItem.getAttribute("title");
-      subscription.homepage = selectedItem.getAttribute("homepage");
+      subscription.title = "Allow non-intrusive advertising";
+      FilterStorage.addSubscription(subscription);
       if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
         Synchronizer.execute(subscription);
-      FilterStorage.addSubscription(subscription);
     }
+    else
+      addAcceptable = false;
+  }
 
-    subscription = Subscription.fromURL("https://easylist-downloads.adblockplus.org/chrome_supplement.txt");
-    subscription.disabled = false;
-    subscription.title = "Recommended filters for Google Chrome"
-    if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
-      Synchronizer.execute(subscription);
-    FilterStorage.addSubscription(subscription);
-  };
-  request.send(null);
+  if (!addSubscription && !addAcceptable)
+    return;
+
+  function notifyUser()
+  {
+    chrome.tabs.create({
+      url: chrome.extension.getURL("firstRun.html")
+    });
+  }
+
+  if (addSubscription)
+  {
+    // Load subscriptions data
+    var request = new XMLHttpRequest();
+    request.open("GET", "subscriptions.xml");
+    request.addEventListener("load", function()
+    {
+      var node = Utils.chooseFilterSubscription(request.responseXML.getElementsByTagName("subscription"));
+      var subscription = (node ? Subscription.fromURL(node.getAttribute("url")) : null);
+      if (subscription)
+      {
+        FilterStorage.addSubscription(subscription);
+        subscription.disabled = false;
+        subscription.title = node.getAttribute("title");
+        subscription.homepage = node.getAttribute("homepage");
+        if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
+          Synchronizer.execute(subscription);
+
+          notifyUser();
+      }
+    }, false);
+    request.send(null);
+  }
+  else
+    notifyUser();
 }
 
 // Set up context menu for user selection of elements to block
