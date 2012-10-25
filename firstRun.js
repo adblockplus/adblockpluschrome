@@ -3,6 +3,57 @@ var require = backgroundPage.require;
 var Prefs = require("prefs").Prefs;
 var Utils = require("utils").Utils;
 
+function openSharePopup(url)
+{
+  var iframe = document.getElementById("share-popup");
+  var glassPane = document.getElementById("glass-pane");
+
+  var popupMessageListener = function(event)
+  {
+    if (event.origin !== url)
+      return;
+
+    iframe.width = event.data.width;
+    iframe.height = event.data.height;
+    window.removeEventListener("message", popupMessageListener);
+  };
+  window.addEventListener("message", popupMessageListener, false);
+
+  var popupLoadListener = function()
+  {
+    iframe.className = "visible";
+
+    var popupCloseListener = function()
+    {
+      iframe.className = glassPane.className = "";
+      document.removeEventListener("click", popupCloseListener);
+    };
+    document.addEventListener("click", popupCloseListener, false);
+    iframe.removeEventListener("load", popupLoadListener);
+  };
+  iframe.addEventListener("load", popupLoadListener, false);
+
+  iframe.src = url;
+  glassPane.className = "visible";
+}
+
+function initSocialLinks(variant)
+{
+  var networks = ["twitter", "facebook"];
+  networks.forEach(function(network)
+  {
+    var links = document.getElementsByClassName("share-" + network);
+    for (var i = 0; i < links.length; i++)
+    {
+      links[i].addEventListener("click", function(e)
+      {
+        e.preventDefault();
+        openSharePopup(getDocLink("share-" + network) + "&variant=" + variant);
+      }, false);
+    }
+  });
+}
+
 function init()
 {
   // Choose a share text variant randomly
@@ -24,13 +75,7 @@ function init()
   setLinks("acceptableAdsExplanation", getDocLink("acceptable_ads", "criteria"),
       backgroundPage.openOptions);
 
-  var facebookLinks = document.getElementsByClassName("share-facebook");
-  for (var i = 0; i < facebookLinks.length; i++)
-    facebookLinks[i].href = getDocLink("facebook") + "&variant=" + variant;
-
-  var twitterLinks = document.getElementsByClassName("share-twitter");
-  for (var i = 0; i < twitterLinks.length; i++)
-    twitterLinks[i].href = getDocLink("twitter") + "&variant=" + variant;
+  initSocialLinks(variant);
 
   var donateLink = document.getElementById("share-donate");
   donateLink.href = getDocLink("donate") + "&variant=" + variant;
