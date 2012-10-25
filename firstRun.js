@@ -7,6 +7,7 @@ function openSharePopup(url)
 {
   var iframe = document.getElementById("share-popup");
   var glassPane = document.getElementById("glass-pane");
+  var popupMessageReceived = false;
 
   var popupMessageListener = function(event)
   {
@@ -15,20 +16,30 @@ function openSharePopup(url)
 
     iframe.width = event.data.width;
     iframe.height = event.data.height;
+    popupMessageReceived = true;
     window.removeEventListener("message", popupMessageListener);
   };
   window.addEventListener("message", popupMessageListener, false);
 
   var popupLoadListener = function()
   {
-    iframe.className = "visible";
-
-    var popupCloseListener = function()
+    if (popupMessageReceived)
     {
-      iframe.className = glassPane.className = "";
-      document.removeEventListener("click", popupCloseListener);
-    };
-    document.addEventListener("click", popupCloseListener, false);
+      iframe.className = "visible";
+
+      var popupCloseListener = function()
+      {
+        iframe.className = glassPane.className = "";
+        document.removeEventListener("click", popupCloseListener);
+      };
+      document.addEventListener("click", popupCloseListener, false);
+    }
+    else
+    {
+      glassPane.className = "";
+      window.removeEventListener("message", popupMessageListener);
+    }
+
     iframe.removeEventListener("load", popupLoadListener);
   };
   iframe.addEventListener("load", popupLoadListener, false);
