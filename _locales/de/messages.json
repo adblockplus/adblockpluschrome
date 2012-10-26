@@ -18,7 +18,7 @@
     "message": "Änderungen übernehmen"
   },
   "block_element": {
-    "message": "Element blocken"
+    "message": "Element blockieren"
   },
   "cancel": {
     "message": "Abbrechen"
@@ -27,19 +27,19 @@
     "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
   },
   "description": {
-    "message": "Werbung war gestern! Die bewährte Adblock Plus Erweiterung ist jetzt auch für Google Chrome™ verfügbar."
+    "message": "Werbung war gestern! Die beliebte Adblock Plus Erweiterung ist jetzt auch für Google Chrome™ verfügbar."
   },
   "disable_inline": {
-    "message": "Blocke Inline Text Werbung"
+    "message": "Blockiere Inline Text Werbung"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain via Adblock Plus-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in die Textzeile und drücken auf \"Domain hinzufügen\"."
+    "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain über das Adblock Plus-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in das Textfeld und drücken auf \"Domain hinzufügen\"."
   },
   "easy_create_filter": {
     "message": "Einfach Filter erstellen"
   },
   "edit_filters_raw": {
-    "message": "Filter als reinen Text editieren"
+    "message": "Liste als Text bearbeiten"
   },
   "enable_only_the": {
     "message": "Falls Sie einen langsamen Computer haben, wählen Sie bitte nur Filter aus, die Sie wirklich brauchen."
@@ -48,10 +48,10 @@
     "message": "Für diese Seite aktivieren"
   },
   "filter_lists": {
-    "message": "Filter Liste"
+    "message": "Filterlisten"
   },
   "filter_must_follow_syntax": {
-    "message": "Ihr Filter muss nach der <a href='$url$'>Adblock Plus Filter Syntax</a> geschrieben werden. Manche Filter Arten, wie object-subrequest (Anfragen, die von Plugins gestartet werden), werden nicht unterstützt.",
+    "message": "Ihr Filter muss nach der <a href='$url$'>Adblock Plus Filterschreibweise</a> geschrieben werden. Manche Filter-Attribute wie object-subrequest (Anfragen, die von Plugins gestartet werden) werden nicht unterstützt.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -97,8 +97,44 @@
   "filters_viewList_label": {
     "message": "Liste öffnen"
   },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus wird nervige Werbung immer blockieren.</strong> Wir wollen dennoch Webseiten unterstützen, die auf einfache und unaufdringliche Werbung setzen. Deshalb haben wir <a>strikte Richtlinien</a> für akzeptable Werbung festgelegt, die von uns standardmäßig erlaubt wird. Sie können dies jederzeit <a>abschalten</a>, wenn Sie trotzdem jede Werbung blockieren wollen."
+  },
+  "firstRun_changelog": {
+    "message": "Was ist neu?"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "Webseiten mit akzeptabler Werbung unterstützen (mehr dazu unten)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "Das Web ohne nervige Werbung genießen"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "Videos ohne Werbeunterbrechungen schauen"
+  },
+  "firstRun_features_heading": {
+    "message": "Mit Adblock Plus können Sie:"
+  },
+  "firstRun_share1": {
+    "message": "Ist Adblock Plus gut genug, um es mit anderen zu teilen? Nur zu!"
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus ist kostenlose Open-Source-Software. Bitte unterstützen Sie uns:"
+  },
+  "firstRun_share2_donate": {
+    "message": "Spenden"
+  },
+  "firstRun_share2_or": {
+    "message": "oder"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus wurde installiert"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus wurde aktualisiert"
+  },
   "found_a_bug": {
-    "message": "Sie haben einen Bug gefunden oder wollen Adblock Plus in eine andere Sprache übersetzen? Bitte schreiben Sie <a href='$url$'>hier</a> ihre Anfrage.",
+    "message": "Sie haben einen Fehler gefunden oder wollen Adblock Plus in eine andere Sprache übersetzen? Bitte schreiben Sie uns <a href='$url$'>hier</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -143,7 +179,7 @@
     "message": "Adblock Plus Optionen"
   },
   "out_of_date_lists": {
-    "message": "Abgelaufene Filter werden regelmäßig aktualisiert."
+    "message": "Abgelaufene Filterlisten werden regelmäßig aktualisiert."
   },
   "overlay_hideplaceholders_label": {
     "message": "Platzhalter blockierter Elemente verstecken"
@@ -152,7 +188,7 @@
     "message": "Ausgewählte entfernen"
   },
   "show_block_element_menu": {
-    "message": "Zeige Rechtsklickmenü-Eintrag 'Element blocken'"
+    "message": "Zeige Rechtsklickmenü-Eintrag 'Element blockieren'"
   },
   "show_icon": {
     "message": "Zeige Icon in der Adressleiste"
@@ -167,7 +203,7 @@
     "message": "Bezeichnung des Abonnements:"
   },
   "update_now": {
-    "message": "Jetzt updaten"
+    "message": "Jetzt aktualisieren"
   },
   "whitelisted_domains": {
     "message": "Ausnahmen"

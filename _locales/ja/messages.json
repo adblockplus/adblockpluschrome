@@ -104,7 +104,7 @@
     "message": "新着情報を見る"
   },
   "firstRun_feature_acceptableAds": {
-    "message": "許容可能な広告でWebサイトをサポート（以下詳細）"
+    "message": "控えめな広告を受け入れることでWebサイトをサポート（以下詳細）"
   },
   "firstRun_feature_betterSurfing": {
     "message": "迷惑な広告なしで web を楽しむ"
@@ -179,7 +179,7 @@
     "message": "Adblock Plus オプション"
   },
   "out_of_date_lists": {
-    "message": "古いリストは定期的に更新されます。"
+    "message": "リストは定期的に更新されます。"
   },
   "overlay_hideplaceholders_label": {
     "message": "ブロックした要素の「代わり」を表示しない"
