@@ -284,6 +284,11 @@ function importOldData()
  */
 function addSubscription(prevVersion)
 {
+  // Make sure to remove "Recommended filters", no longer necessary
+  var toRemove = "https://easylist-downloads.adblockplus.org/chrome_supplement.txt";
+  if (toRemove in FilterStorage.knownSubscriptions)
+    FilterStorage.removeSubscription(FilterStorage.knownSubscriptions[toRemove]);
+
   // Add "acceptable ads" subscription for new users and users updating from old ABP versions
   var addAcceptable = (!prevVersion || Services.vc.compare(prevVersion, "2.1") < 0);
   if (addAcceptable)
