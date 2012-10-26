@@ -48,6 +48,29 @@ function sendRequests()
   if (!(document.documentElement instanceof HTMLElement))
     return;
 
+  chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
+  {
+    switch (request.reqtype)
+    {
+      case "hide-element":
+        if (request.documentUrl != document.URL)
+          return;
+
+        // We have little way of knowing which element was blocked - see
+        // http://code.google.com/p/chromium/issues/detail?id=97392. Have to
+        // look through all of them and try to find the right one.
+        var remove = [];
+        var elements = (request.type == "IMAGE" ? document.images : document.getElementsByTagName("iframe"));
+        for (var i = 0, l = elements.length; i < l; i++)
+          if (elements[i].src == request.url)
+            remove.push(elements[i]);
+
+        for (var i = 0, l = remove.length; i < l; i++)
+          if (remove[i].parentNode)
+            remove[i].parentNode.removeChild(remove[i]);
+    }
+  });
+
   chrome.extension.sendRequest({reqtype: "get-settings", selectors: true, frameUrl: window.location.href}, function(response)
   {
     setElemhideCSSRules(response.selectors);

@@ -31,17 +31,7 @@ function onBeforeRequest(details)
   var frame = (type != "SUBDOCUMENT" ? details.frameId : details.parentFrameId);
   var filter = checkRequest(type, details.tabId, details.url, frame);
   if (filter instanceof BlockingFilter)
-  {
-    var collapse = filter.collapse;
-    if (collapse == null)
-      collapse = (localStorage["hidePlaceholders"] != "false");
-    if (collapse && type == "SUBDOCUMENT")
-      return {redirectUrl: "about:blank"};
-    else if (collapse && type == "IMAGE")
-      return {redirectUrl: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="};
-    else
-      return {cancel: true};
-  }
+    return {cancel: true};
   else
     return {};
 }
@@ -141,7 +131,25 @@ function checkRequest(type, tabId, url, frameId)
   var requestHost = extractHostFromURL(url);
   var documentHost = extractHostFromURL(documentUrl);
   var thirdParty = isThirdParty(requestHost, documentHost);
-  return defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
+  var filter = defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
+
+  if (filter instanceof BlockingFilter)
+  {
+    var collapse = filter.collapse;
+    if (collapse == null)
+      collapse = (localStorage["hidePlaceholders"] != "false");
+    if (collapse && (type == "SUBDOCUMENT" || type == "IMAGE"))
+    {
+      chrome.tabs.sendMessage(tabId, {
+        reqtype: "hide-element",
+        type: type,
+        url: url,
+        documentUrl: documentUrl
+      });
+    }
+  }
+
+  return filter;
 }
 
 function isFrameWhitelisted(tabId, frameId, type)
