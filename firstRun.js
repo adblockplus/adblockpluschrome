@@ -2,6 +2,7 @@ var backgroundPage = chrome.extension.getBackgroundPage();
 var require = backgroundPage.require;
 var Prefs = require("prefs").Prefs;
 var Utils = require("utils").Utils;
+var Filter = require("filterClasses").Filter;
 
 function openSharePopup(url)
 {
@@ -11,7 +12,8 @@ function openSharePopup(url)
 
   var popupMessageListener = function(event)
   {
-    if (event.origin !== url)
+    var originFilter = Filter.fromText("||adblockplus.org^");
+    if (!originFilter.matches(event.origin, "OTHER", null, null))
       return;
 
     iframe.width = event.data.width;
