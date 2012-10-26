@@ -15,34 +15,34 @@
     "message": "Ajouter vos propres filtres"
   },
   "apply_changes": {
-    "message": "Appliquer"
+    "message": "Appliquer les modifications"
   },
   "block_element": {
-    "message": "Supprimer l'élément"
+    "message": "Bloquer l'élément"
   },
   "cancel": {
     "message": "Annuler"
   },
   "clickhide_instructions": {
-    "message": "Après avoir clôturé ce popup, cliquez (ou droit-cliquez) un élément sur la page."
+    "message": "Après avoir fermé ce popup, cliquez (ou clic-droit) un élément sur la page."
   },
   "description": {
-    "message": "Suppression des publicités utilisant le moteur de Firefox Adblock Plus. Dites adieu publicités et naviguez en paix!"
+    "message": "Dites adieu aux publicités ! L'extension réussie Adblock Plus est maintenant disponible pour Google Chrome™."
   },
   "disable_inline": {
-    "message": "Retirer les publicités integrées des textes"
+    "message": "Retirer les publicités intégrées aux textes"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus est inactivé pour les domaines ci-dessous. Vous pouvez ajouter un domaine soit par l'icon Adblock Plus dans la barre d'adresse ou en tapant le domaine (pas l'URL) dans la zone et cliquant sur le bouton \"Ajouter\"."
+    "message": "Adblock Plus est désactivé pour les domaines ci-dessous. Vous pouvez ajouter un domaine soit par l'icon Adblock Plus dans la barre d'adresse ou en tapant le domaine (pas l'URL) sans la boite et cliquer sur le bouton \"ajouter le domaine\"."
   },
   "easy_create_filter": {
     "message": "Création facile de filtre"
   },
   "edit_filters_raw": {
-    "message": "Modifier les filtres comme text brut"
+    "message": "Editer les filtres en texte brut"
   },
   "enable_only_the": {
-    "message": "Choisissez seulement les listes dont vous avez besoin. Trop de script tuent le script&nbsp;!"
+    "message": "Choisissez seulement les listes de filtres dont vous avez besoin. Trop de listes rendent Chrome inopérant."
   },
   "enabled_for_site": {
     "message": "Activé pour ce site"
@@ -51,7 +51,7 @@
     "message": "Liste de filtres"
   },
   "filter_must_follow_syntax": {
-    "message": "Il faut que votre filtre suive <a href='$url$'>le syntaxe Adblock Plus</a>. Certains types de filtre, comme object-subrequest, ne sont pas supportés.",
+    "message": "Il faut que votre filtre suive  <a href='$urlAdblock Plus filter syntax</a>. Certains types de filtre, comme object-subrequest, ne sont pas supportés.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -97,8 +97,44 @@
   "filters_viewList_label": {
     "message": "Afficher la liste"
   },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus bloquera toujours les publicités invasives.</strong> Malgré tout, nous voulons encourager les sites Web utilisant des publicités simples et non-intrusives. C'est pourquoi nous avons établi <a>des règles d'utilisation rigoureuses</a> pour identifier les publicités acceptables et leurs permettre d'exister. Vous pouvez toujours <a>désactiver</a> cette fonctionnalité si vous souhaitez bloquer toutes les publicités."
+  },
+  "firstRun_changelog": {
+    "message": "Voir les nouveautés"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "Soutenir les sites Web avec des annonces acceptables (plus d'informations ci-dessous)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "Profitez du web sans publicité ennuyeuse"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "Visionnez les vidéos sans intrusion/interruption commerciale"
+  },
+  "firstRun_features_heading": {
+    "message": "Avec Adblock Plus, vous pouvez :"
+  },
+  "firstRun_share1": {
+    "message": "Pensez-vous que Adblock Plus mérite d'être partagé ? si oui, alors faites le !"
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus est gratuit en open source. Soutenez nous s'il vous plaît :"
+  },
+  "firstRun_share2_donate": {
+    "message": "Faire un don"
+  },
+  "firstRun_share2_or": {
+    "message": "ou"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus a été installé"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus a été mis à jour"
+  },
   "found_a_bug": {
-    "message": "Avez-vous trouvé un bug ou une mauvaise traduction dans Adblock Plus&nbsp;? S'il-vous-plaît, <a href='$url$'>enregistrez-le ici</a>.",
+    "message": "Vous avez trouvé un bug ? Vous voulez traduire Adblock Plus dans votre propre langue ? S'il-vous-plaît <a href='$urlfile a request here</a>.>enregistrez-le ici%-#-#0#-#-%.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -137,25 +173,25 @@
     "message": "Adblock Plus"
   },
   "new_filters_added": {
-    "message": "Nouveaux filtres ajoutés. Regardez <a id='options_url' target='_blank'>Paramètres</a> pour les contrôler."
+    "message": "Nouveaux filtres ajoutés; Regardez  <a id='options_url' target='_blank'>Options</a> pour les gérer."
   },
   "options": {
-    "message": "Paramètres Adblock Plus"
+    "message": "Adblock Plus : les options"
   },
   "out_of_date_lists": {
-    "message": "Les listes périmées seront actualisées automatiquement."
+    "message": "Les listes périmées seront actualisées périodiquement."
   },
   "overlay_hideplaceholders_label": {
     "message": "Masquer les conteneurs des éléments bloqués"
   },
   "remove_button": {
-    "message": "Supprimer"
+    "message": "Supprimer ce  que vous avez sélectionné"
   },
   "show_block_element_menu": {
-    "message": "Afficher 'Supprimer l'élément' dans le menu clic-droit"
+    "message": "Afficher 'bloquer l'élément' dans le menu clic-droit"
   },
   "show_icon": {
-    "message": "Afficher l'icone dans la barre d'adresse"
+    "message": "Afficher l’icône dans la barre d'adresse"
   },
   "subscriptionSelection_location_label": {
     "message": "Emplacement de la liste :"

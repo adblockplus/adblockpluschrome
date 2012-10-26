@@ -1,4 +1,63 @@
 {
+  "add": {
+    "message": "Voeg toe"
+  },
+  "add_domain_button": {
+    "message": "Voeg domein toe"
+  },
+  "add_filter_button": {
+    "message": "Voeg filter toe"
+  },
+  "add_filters_msg": {
+    "message": "Filter(s) toevoegen?"
+  },
+  "add_your_own_filters": {
+    "message": "Eigen filters toevoegen"
+  },
+  "apply_changes": {
+    "message": "Wijzigen"
+  },
+  "block_element": {
+    "message": "Element blokkeren"
+  },
+  "cancel": {
+    "message": "Annuleren"
+  },
+  "clickhide_instructions": {
+    "message": "Na het sluiten van deze popup, klik (of klik met de rechtermuisknop) op het pagina element."
+  },
+  "description": {
+    "message": "Online ads zijn verleden tijd! De succesvolle extensie Adblock Plus is nu beschikbaar voor Google Chrome™."
+  },
+  "disable_inline": {
+    "message": "Inline tekstadvertenties uitschakelen"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus is uitgeschakeld voor de hieronder vermelde domeinen. U kunt een domein toevoegen via het Adblock Plus logo in de adresbalk, of door het domein (geen URL) in het vak te typen en te klikken op \"Domein toevoegen\"."
+  },
+  "easy_create_filter": {
+    "message": "Eenvoudig filter instellen"
+  },
+  "edit_filters_raw": {
+    "message": "Bewerk filters als tekst"
+  },
+  "enable_only_the": {
+    "message": "Schakel alleen de filters in die u gebruikt. Teveel filters kunnen ervoor zorgen dat Chrome ermee stopt."
+  },
+  "enabled_for_site": {
+    "message": "Ingeschakeld voor deze site"
+  },
+  "filter_lists": {
+    "message": "Filterlijsten"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Het filter moet de <a href='$urlAdblock Plus filter syntax</a> volgen. Sommige filtertypes zoals object-subrequest, worden niet ondersteund.>Adblock Plus filter syntax%-#-#0#-#-%. Sommige filtertypes zoals object-subrequest, worden niet ondersteund.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
   "filters_acceptableAds2_label": {
     "message": "Enkele niet-opdringerige advertenties toestaan"
   },
@@ -38,17 +97,101 @@
   "filters_viewList_label": {
     "message": "Lijst bekijken"
   },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus zal altijd irritante advertenties blokkeren.</strong> Toch willen we websites met simpele en onopvallende advertenties tegemoet komen. Daarom hebben wij <a>strikte richtlijnen</a> om Acceptabele Advertenties te identificeren en standaard toe te laten. Wanneer je alle advertenties wil blokkeren kan je deze functie altijd <a>uitschakelen</a>."
+  },
+  "firstRun_changelog": {
+    "message": "Bekijk wat nieuw is"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "Ondersteun websites met acceptabele advertenties (meer hieronder)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "Beleef het web zonder irritante advertenties"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "Bekijk videos zonder commerciële onderbrekingen"
+  },
+  "firstRun_features_heading": {
+    "message": "Met Adblock Plus kan je:"
+  },
+  "firstRun_share1": {
+    "message": "Vind je Adblock Plus het delen waard? Graag!"
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus is gratis en open source. Steun ons alsjeblieft:"
+  },
+  "firstRun_share2_donate": {
+    "message": "Doneren"
+  },
+  "firstRun_share2_or": {
+    "message": "of"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus is geïnstalleerd"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus is bijgewerkt"
+  },
+  "found_a_bug": {
+    "message": "Heb je een bug gevonden? Wil je helpen Adblock Plus te vertalen naar je eigen taal? Dien <a href='$urlhier een verzoek in</a>.>hier een verzoek in%-#-#0#-#-%.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "general": {
+    "message": "Algemeen"
+  },
   "global_remove_subscription_warning": {
     "message": "Weet u zeker dat u dit abonnement wilt verwijderen?"
   },
   "global_subscription_invalid_location": {
     "message": "Deze filterlijstlocatie is geen geldige URL en ook geen geldige bestandsnaam."
   },
+  "last_updated_at": {
+    "message": "Laatst bijgewerkt op $time$ op $date$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Laatst bijgewerkt op $time$ vandaag",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
   "name": {
     "message": "Adblock Plus"
   },
+  "new_filters_added": {
+    "message": "Nieuwe filters toegevoegd; Zie <a id='options_url' target='_blank'> Opties</a> om ze te beheren."
+  },
+  "options": {
+    "message": "Adblock Plus opties"
+  },
+  "out_of_date_lists": {
+    "message": "Verouderde lijsten worden regelmatig bijgewerkt."
+  },
   "overlay_hideplaceholders_label": {
     "message": "Plaatshouders van geblokkeerde elementen verbergen"
+  },
+  "remove_button": {
+    "message": "Verwijder geselecteerde"
+  },
+  "show_block_element_menu": {
+    "message": "Toon 'Blokkeer Element' in het rechtermuisklik menu"
+  },
+  "show_icon": {
+    "message": "Pictogram in de adresbalk weergeven"
   },
   "subscriptionSelection_location_label": {
     "message": "Filterlijstlocatie:"
@@ -58,5 +201,11 @@
   },
   "subscriptionSelection_title_label": {
     "message": "Abonnementstitel:"
+  },
+  "update_now": {
+    "message": "Nu bijwerken"
+  },
+  "whitelisted_domains": {
+    "message": "Vertrouwde domeinen"
   }
 }

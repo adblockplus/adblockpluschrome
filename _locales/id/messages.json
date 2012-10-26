@@ -145,15 +145,6 @@
   "show_icon": {
     "message": "Perlihatkan ikon pada bilah alamat"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Filter daftar lokasi:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Silakan pilih filter berlangganan dari daftar:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Judul berlangganan:"
-  },
   "update_now": {
     "message": "Perbarui sekarang"
   },
