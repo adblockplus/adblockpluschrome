@@ -53,6 +53,37 @@ function setElemhideCSSRules(selectors)
   setRules();
 }
 
+function removeElements(tagName, urls)
+{
+  var remove = [];
+  var elements = document.getElementsByTagName(tagName);
+  for (var i = 0, l = elements.length; i < l; i++)
+    if (elements[i].src in urls)
+      remove.push(elements[i]);
+
+  for (var i = 0, l = remove.length; i < l; i++)
+    if (remove[i].parentNode)
+      remove[i].parentNode.removeChild(remove[i]);
+
+  return remove.length > 0;
+}
+
+var removeMap =
+{
+  IMAGE: {
+    tag: "img",
+    remove: {},
+    loadHandler: false
+  },
+  SUBDOCUMENT: {
+    tag: "iframe",
+    remove: {},
+    loadHandler: false
+  }
+};
+removeMap.IMAGE.handler = removeElements.bind(null, removeMap.IMAGE.tag, removeMap.IMAGE.remove);
+removeMap.SUBDOCUMENT.handler = removeElements.bind(null, removeMap.SUBDOCUMENT.tag, removeMap.SUBDOCUMENT.remove);
+
 function sendRequests()
 {
   // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
@@ -69,16 +100,17 @@ function sendRequests()
 
         // We have little way of knowing which element was blocked - see
         // http://code.google.com/p/chromium/issues/detail?id=97392. Have to
-        // look through all of them and try to find the right one.
-        var remove = [];
-        var elements = (request.type == "IMAGE" ? document.images : document.getElementsByTagName("iframe"));
-        for (var i = 0, l = elements.length; i < l; i++)
-          if (elements[i].src == request.url)
-            remove.push(elements[i]);
-
-        for (var i = 0, l = remove.length; i < l; i++)
-          if (remove[i].parentNode)
-            remove[i].parentNode.removeChild(remove[i]);
+        // look through all of them and try to find the right one. And if we
+        // don't find it then maybe it just wasn't added yet.
+        var info = removeMap[request.type];
+        info.remove[request.url] = true;
+        if (info.handler())
+          delete info.remove[request.url];
+        else if (!info.onLoadHandler)
+        {
+          window.addEventListener("DOMContentLoaded", info.handler, false);
+          info.onLoadHandler = true;
+        }
     }
   });
 
