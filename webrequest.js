@@ -140,18 +140,22 @@ function recordFrame(tabId, frameId, parentFrameId, frameUrl)
   frames[tabId][frameId] = {url: frameUrl, parent: parentFrameId};
 }
 
-function getFrameUrl(tabId, frameId)
+function getFrameData(tabId, frameId)
 {
   if (tabId in frames && frameId in frames[tabId])
-    return frames[tabId][frameId].url;
+    return frames[tabId][frameId];
+  else if (frameId > 0 && tabId in frames && 0 in frames[tabId])
+  {
+    // We don't know anything about javascript: or data: frames, use top frame
+    return frames[tabId][0];
+  }
   return null;
 }
 
-function getFrameParent(tabId, frameId)
+function getFrameUrl(tabId, frameId)
 {
-  if (tabId in frames && frameId in frames[tabId])
-    return frames[tabId][frameId].parent;
-  return -1;
+  var frameData = getFrameData(tabId, frameId);
+  return (frameData ? frameData.url : null);
 }
 
 function forgetTab(tabId)
@@ -197,12 +201,13 @@ function isFrameWhitelisted(tabId, frameId, type)
   var parent = frameId;
   while (parent != -1)
   {
-    var parentUrl = getFrameUrl(tabId, parent);
-    if (parentUrl && isWhitelisted(parentUrl, type))
+    var parentData = getFrameData(tabId, parent);
+    if (!parentData)
+      break;
+
+    if (isWhitelisted(parentData.url, type) || "keyException" in parentData)
       return true;
-    if (parentUrl && "keyException" in frames[tabId][frameId])
-      return true;
-    parent = getFrameParent(tabId, parent);
+    parent = parentData.parent;
   }
   return false;
 }
