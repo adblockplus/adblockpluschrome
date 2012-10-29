@@ -19,6 +19,35 @@ chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, {urls: ["http://*
 chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {urls: ["http://*/*", "https://*/*"]}, ["responseHeaders"]);
 chrome.tabs.onRemoved.addListener(forgetTab);
 
+var onFilterChangeTimeout = null;
+function onFilterChange()
+{
+  onFilterChangeTimeout = null;
+  chrome.webRequest.handlerBehaviorChanged();
+}
+
+var importantNotifications = {
+  'filter.added': true,
+  'filter.removed': true,
+  'filter.disabled': true,
+  'subscription.added': true,
+  'subscription.removed': true,
+  'subscription.disabled': true,
+  'subscription.updated': true,
+  'load': true
+};
+
+require("filterNotifier").FilterNotifier.addListener(function(action)
+{
+  if (action in importantNotifications)
+  {
+    // Execute delayed to prevent multiple executions in a quick succession
+    if (onFilterChangeTimeout != null)
+      window.clearTimeout(onFilterChangeTimeout);
+    onFilterChangeTimeout = window.setTimeout(onFilterChange, 2000);
+  }
+});
+
 var frames = {};
 
 function onBeforeRequest(details)
