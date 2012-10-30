@@ -99,11 +99,16 @@ function init()
   if (backgroundPage.isFirstRun)
     document.getElementById("title-changelog").style.display = "none";
 
+  // Show warning if data corruption was detected
+  if (backgroundPage.seenDataCorruption)
+    document.getElementById("dataCorruptionWarning").removeAttribute("hidden");
+
   // Set up URLs
   var versionId = chrome.app.getDetails().version.split(".").slice(0, 2).join("");
   setLinks("title-changelog", "https://adblockplus.org/releases/adblock-plus-" + versionId + "-for-google-chrome-released");
   setLinks("acceptableAdsExplanation", getDocLink("acceptable_ads", "criteria"),
       backgroundPage.openOptions);
+  setLinks("dataCorruptionWarning", getDocLink("knownIssuesChrome_filterstorage"));
 
   initSocialLinks(variant);
 
