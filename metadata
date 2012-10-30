@@ -1,5 +1,5 @@
 [general]
-baseName = adblockpluschrome
+basename = adblockpluschrome
 
 [locale_sync]
 global.properties = subscription_invalid_location
