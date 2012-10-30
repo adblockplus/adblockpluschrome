@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "请点击（或右击）要屏蔽的元素"
   },
-  "description": {
-    "message": "使用Firefox AdBlock Plus过滤广告。使您告别广告，舒心浏览网页！"
-  },
   "disable_inline": {
     "message": "屏蔽广告链接"
   },

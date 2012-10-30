@@ -23,9 +23,6 @@
   "clickhide_instructions": {
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
   },
-  "description": {
-    "message": "Estä mainokset käyttäen Firefox Adblock Plus san suodatinmenetelmää. Hyvästele mainokset ja jatka surffailua rauhassa!"
-  },
   "disable_inline": {
     "message": "Estä tekstimainokset"
   },

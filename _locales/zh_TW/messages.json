@@ -3,16 +3,16 @@
     "message": "新增"
   },
   "add_domain_button": {
-    "message": "新增域名"
+    "message": "新增網域"
   },
   "add_filter_button": {
-    "message": "新增過濾規則"
+    "message": "新增過濾條件"
   },
   "add_filters_msg": {
-    "message": "新增過濾規則？"
+    "message": "新增過濾條件？"
   },
   "add_your_own_filters": {
-    "message": "黑名單"
+    "message": "新增自己的過濾條件"
   },
   "apply_changes": {
     "message": "套用"
@@ -26,32 +26,29 @@
   "clickhide_instructions": {
     "message": "此彈出訊息關閉後，請點選網頁上的元素。"
   },
-  "description": {
-    "message": "使用 Firefox Adblock Plus 的廣告過濾引擎。告別廣告，開心瀏覽!"
-  },
   "disable_inline": {
     "message": "阻擋文字廣告"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus 將不在以下域名啟用。您可以透過 Adblock Plus 於網址列的圖示新增域名，或者 在以下欄位輸入域名（非網址），然後點擊「新增域名」。"
+    "message": "Adblock Plus 將在以下網域停用。您可以利用網址列上的 Adblock Plus 圖示新增，或在下方輸入網域 (而非網址) 並點擊「新增網域」按鈕。"
   },
   "easy_create_filter": {
-    "message": "簡單建立過濾規則"
+    "message": "輕鬆地建立過濾條件"
   },
   "edit_filters_raw": {
-    "message": "以純文本編輯"
+    "message": "以純文字編輯"
   },
   "enable_only_the": {
-    "message": "請只啟用您需要的過濾清單。啟用過多會使瀏覽器無回應。"
+    "message": "請務必只啟用您需要的過濾列表。啟用太多會造成瀏覽器反應遲鈍。"
   },
   "enabled_for_site": {
-    "message": "該網站啟用過濾"
+    "message": "在此網站啟用"
   },
   "filter_lists": {
-    "message": "過濾清單"
+    "message": "過濾列表"
   },
   "filter_must_follow_syntax": {
-    "message": "您的過濾規則必須遵循 <a href='$url$'>Adblock Plus 的語法</a>。特定的過濾類型，像是 object-subrequest 不支援。",
+    "message": "您的過濾條件必須遵守 <a href='$url$'>Adblock Plus 的語法</a>。不支援如 object-subreuqest 等特定過濾類型。",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -97,8 +94,44 @@
   "filters_viewList_label": {
     "message": "檢視條件列表"
   },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus 將過濾煩人的廣告。</strong> 一如往常，我們仍鼓勵網站改採簡樸且不過於搶眼的廣告。這也是我們建立 <a>嚴格的規範</a> 來辨識並允許非侵入式廣告的原因。若您想過濾所有廣告，可以選擇 <a>停用此功能</a> 。"
+  },
+  "firstRun_changelog": {
+    "message": "檢視更新日誌"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "支援採用非侵入式廣告的網站 (詳情如下)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "享受沒有煩人廣告的網站"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "觀賞影片再也不被廣告打斷"
+  },
+  "firstRun_features_heading": {
+    "message": "有了 Adblock Plus 您就可以："
+  },
+  "firstRun_share1": {
+    "message": "您認為 Adblock Plus 值得分享嗎？那就這麼做吧！"
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus 免費且開放原始碼。請支持我們："
+  },
+  "firstRun_share2_donate": {
+    "message": "贊助"
+  },
+  "firstRun_share2_or": {
+    "message": "或"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus 已安裝完成"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus 已更新完成"
+  },
   "found_a_bug": {
-    "message": "發現錯誤？要翻譯 Adblock Plus？ 請至 <a href='$url$'>此處詢問</a>。",
+    "message": "發現 bug？想要翻譯 Adblock Plus？請至 <a href='$url$'>此處詢問</a>。",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -106,7 +139,7 @@
     }
   },
   "general": {
-    "message": "一般"
+    "message": "一般設定"
   },
   "global_remove_subscription_warning": {
     "message": "您確定要移除此條件集嗎？"
@@ -115,7 +148,7 @@
     "message": "條件集網址或檔名無效。"
   },
   "last_updated_at": {
-    "message": "最近更新於 $time$ $date$",
+    "message": "最近更新於 $date$ $time$ ",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -126,7 +159,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "最近更新於 $time$ 今日",
+    "message": "最近更新於今日 $time$ ",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -137,25 +170,25 @@
     "message": "Adblock Plus"
   },
   "new_filters_added": {
-    "message": "您已新增過濾規則。 請至 <a id='options_url' target='_blank'>Adblock Plus 選項</a> 管理過濾規則。"
+    "message": "已新增過濾條件。若要管理請至 <a id='options_url' target='_blank'>Adblock Plus 選項</a> 。"
   },
   "options": {
     "message": "Adblock Plus 選項"
   },
   "out_of_date_lists": {
-    "message": "過濾清單會定期自動更新。"
+    "message": "過濾列表會定期自動更新。"
   },
   "overlay_hideplaceholders_label": {
     "message": "隱藏已阻擋元素所佔用的空間"
   },
   "remove_button": {
-    "message": "刪除已選擇"
+    "message": "刪除已選擇項目"
   },
   "show_block_element_menu": {
-    "message": "右鍵選單顯示「阻擋網頁元素」"
+    "message": "在右鍵選單顯示「阻擋網頁元素」"
   },
   "show_icon": {
-    "message": "網址列顯示 Adblock Plus 圖示"
+    "message": "在網址列顯示 Adblock Plus 圖示"
   },
   "subscriptionSelection_location_label": {
     "message": "過濾條件集位址:"

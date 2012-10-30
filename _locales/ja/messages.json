@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "このポップアップを閉じた後に、ページ上の要素をクリック(または右クリック)してください。"
   },
-  "description": {
-    "message": "広告があったのは過去の話です！ 大ヒットしたアドオン Adblock Plus が Google Chrome™ で利用できます。"
-  },
   "disable_inline": {
     "message": "インラインのテキスト広告を無効にする"
   },

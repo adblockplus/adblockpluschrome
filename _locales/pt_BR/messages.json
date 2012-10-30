@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "Após o encerramento desta janela, clique (ou dê um clique com o botão direito) em um elemento da página."
   },
-  "description": {
-    "message": "Bloqueador de propagandas usando o mecanismo de filtragem do Adblock Plus para o Firefox. Dê um beijo de despedida nelas e navegue em paz!"
-  },
   "disable_inline": {
     "message": "Desativar propagandas de texto em linha"
   },
