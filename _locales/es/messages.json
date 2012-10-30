@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "Tras cerrar este menú desplegable, pulse (o con botón derecho) en un elemento de la página."
   },
-  "description": {
-    "message": "La publicidad es cosa del pasado. La exitosa extensión Adblock Plus está ya disponible en Google Chrome™."
-  },
   "disable_inline": {
     "message": "Desactivar anuncios de texto en línea"
   },

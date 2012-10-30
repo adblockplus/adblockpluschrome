@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
   },
-  "description": {
-    "message": "Chặn quảng cáo bằng cách dùng bộ lọc Adblock Plus của Firefox. Vĩnh biệt quảng cáo!"
-  },
   "disable_inline": {
     "message": "Chặn trực tiếp các quảng cáo chữ"
   },

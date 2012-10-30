@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "När denna popup stängs, klicka (eller högerklicka) ett objekt på sidan."
   },
-  "description": {
-    "message": "Blockerar reklam med hjälp av Firefox Adblock Plus filtreringsmotor. Säg adjö till reklamen och surfa i fred!"
-  },
   "disable_inline": {
     "message": "Inaktivera infogade textannonser"
   },

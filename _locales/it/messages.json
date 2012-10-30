@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "Dopo la chiusura di questo pop-up, cliccate (o clic destro) su un elemento sulla pagina."
   },
-  "description": {
-    "message": "Blocca la pubblicità usando il motore di Firefox Adblock Plus. Dite addio alla pubblicità e navigate in pace!"
-  },
   "disable_inline": {
     "message": "Disabilita la pubblicità integrata nel testo"
   },

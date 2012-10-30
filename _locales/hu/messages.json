@@ -23,9 +23,6 @@
   "clickhide_instructions": {
     "message": "Miután bezártad ezt a buborékot, kattints egy elemre az oldalon.."
   },
-  "description": {
-    "message": "Blokkolja a reklámokat a Firefox Adblock Plus szűrő segítségével. Mondj búcsút a reklámoknak és böngéssz békében!"
-  },
   "disable_inline": {
     "message": "Szöveges reklámok tiltása"
   },

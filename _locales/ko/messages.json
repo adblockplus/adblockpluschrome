@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
   },
-  "description": {
-    "message": "침입형 광고, 이제 안녕! Adblock Plus 확장 프로그램을 이제 구글 크롬에서 이용하십시오."
-  },
   "disable_inline": {
     "message": "인라인 텍스트 광고를 보지 않음"
   },

@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
   },
-  "description": {
-    "message": "Werbung war gestern! Die beliebte Adblock Plus Erweiterung ist jetzt auch für Google Chrome™ verfügbar."
-  },
   "disable_inline": {
     "message": "Blockiere Inline Text Werbung"
   },

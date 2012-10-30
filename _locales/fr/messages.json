@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "Après avoir fermé ce popup, cliquez (ou clic-droit) un élément sur la page."
   },
-  "description": {
-    "message": "Dites adieu aux publicités ! L'extension réussie Adblock Plus est maintenant disponible pour Google Chrome™."
-  },
   "disable_inline": {
     "message": "Retirer les publicités intégrées aux textes"
   },
