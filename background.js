@@ -39,6 +39,7 @@ RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
 RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OTHER;
 
 var isFirstRun = false;
+var seenDataCorruption = false;
 require("filterNotifier").FilterNotifier.addListener(function(action)
 {
   if (action == "load")
