@@ -467,6 +467,24 @@ function openOptions(callback)
   }
 }
 
+/**
+ * This function is a hack - we only know the tabId and document URL for a
+ * message but we need to know the frame ID. Try to find it in webRequest's
+ * frame data.
+ */
+function getFrameId(tabId, url)
+{
+  if (tabId in frames)
+  {
+    for (var f in frames[tabId])
+    {
+      if (getFrameUrl(tabId, f) == url)
+        return f;
+    }
+  }
+  return -1;
+}
+
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
 {
   switch (request.reqtype)
@@ -475,24 +493,12 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
       var hostDomain = null;
       var selectors = null;
 
-      // HACK: We don't know which frame sent us the message, try to find it
-      // in webRequest's frame data.
       var tabId = -1;
       var frameId = -1;
       if (sender.tab)
       {
         tabId = sender.tab.id;
-        if (tabId in frames)
-        {
-          for (var f in frames[tabId])
-          {
-            if (getFrameUrl(tabId, f) == request.frameUrl)
-            {
-              frameId = f;
-              break;
-            }
-          }
-        }
+        frameId = getFrameId(tabId, request.frameUrl);
       }
 
       var enabled = !isFrameWhitelisted(tabId, frameId, "DOCUMENT") && !isFrameWhitelisted(tabId, frameId, "ELEMHIDE");
@@ -521,6 +527,36 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
       }
 
       sendResponse({enabled: enabled, hostDomain: hostDomain, selectors: selectors});
+      break;
+    case "should-collapse":
+      var tabId = -1;
+      var frameId = -1;
+      if (sender.tab)
+      {
+        tabId = sender.tab.id;
+        frameId = getFrameId(tabId, request.documentUrl);
+      }
+
+      var enabled = !isFrameWhitelisted(tabId, frameId, "DOCUMENT");
+      if (!enabled)
+      {
+        sendResponse(false);
+        break;
+      }
+
+      var requestHost = extractHostFromURL(request.url);
+      var documentHost = extractHostFromURL(request.documentUrl);
+      var thirdParty = isThirdParty(requestHost, documentHost);
+      var filter = defaultMatcher.matchesAny(request.url, request.type, documentHost, thirdParty);
+      if (filter instanceof BlockingFilter)
+      {
+        var collapse = filter.collapse;
+        if (collapse == null)
+          collapse = (localStorage.hidePlaceholders != "false");
+        sendResponse(collapse);
+      }
+      else
+        sendResponse(false);
       break;
     case "get-domain-enabled-state":
       // Returns whether this domain is in the exclusion list.
