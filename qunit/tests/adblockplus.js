@@ -15,7 +15,6 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 //
 // This file has been generated automatically from Adblock Plus for Firefox
 // source code. DO NOT MODIFY, change the original source code instead.
