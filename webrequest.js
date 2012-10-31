@@ -175,25 +175,7 @@ function checkRequest(type, tabId, url, frameId)
   var requestHost = extractHostFromURL(url);
   var documentHost = extractHostFromURL(documentUrl);
   var thirdParty = isThirdParty(requestHost, documentHost);
-  var filter = defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
-
-  if (filter instanceof BlockingFilter)
-  {
-    var collapse = filter.collapse;
-    if (collapse == null)
-      collapse = (localStorage["hidePlaceholders"] != "false");
-    if (collapse && (type == "SUBDOCUMENT" || type == "IMAGE"))
-    {
-      chrome.tabs.sendMessage(tabId, {
-        reqtype: "hide-element",
-        type: type,
-        url: url,
-        documentUrl: documentUrl
-      });
-    }
-  }
-
-  return filter;
+  return defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
 }
 
 function isFrameWhitelisted(tabId, frameId, type)

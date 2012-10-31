@@ -53,36 +53,25 @@ function setElemhideCSSRules(selectors)
   setRules();
 }
 
-function removeElements(tagName, urls)
+function checkCollapse(event)
 {
-  var remove = [];
-  var elements = document.getElementsByTagName(tagName);
-  for (var i = 0, l = elements.length; i < l; i++)
-    if (elements[i].src in urls)
-      remove.push(elements[i]);
+  var target = event.target;
+  if ((event.type == "error" && target instanceof HTMLImageElement) ||
+      (event.type == "load" && target instanceof HTMLIFrameElement))
+  {
+    // This element failed loading, did we block it?
+    var url = target.src;
+    if (!url)
+      return;
 
-  for (var i = 0, l = remove.length; i < l; i++)
-    if (remove[i].parentNode)
-      remove[i].parentNode.removeChild(remove[i]);
-
-  return remove.length > 0;
-}
-
-var removeMap =
-{
-  IMAGE: {
-    tag: "img",
-    remove: {},
-    loadHandler: false
-  },
-  SUBDOCUMENT: {
-    tag: "iframe",
-    remove: {},
-    loadHandler: false
+    var type = (target instanceof HTMLImageElement ? "IMAGE": "SUBDOCUMENT");
+    chrome.extension.sendRequest({reqtype: "should-collapse", url: url, documentUrl: document.URL, type: type}, function(response)
+    {
+      if (response && target.parentNode)
+        target.parentNode.removeChild(target);
+    });
   }
-};
-removeMap.IMAGE.handler = removeElements.bind(null, removeMap.IMAGE.tag, removeMap.IMAGE.remove);
-removeMap.SUBDOCUMENT.handler = removeElements.bind(null, removeMap.SUBDOCUMENT.tag, removeMap.SUBDOCUMENT.remove);
+}
 
 function sendRequests()
 {
@@ -90,35 +79,14 @@ function sendRequests()
   if (!(document.documentElement instanceof HTMLElement))
     return;
 
-  chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
-  {
-    switch (request.reqtype)
-    {
-      case "hide-element":
-        if (request.documentUrl != document.URL)
-          return;
-
-        // We have little way of knowing which element was blocked - see
-        // http://code.google.com/p/chromium/issues/detail?id=97392. Have to
-        // look through all of them and try to find the right one. And if we
-        // don't find it then maybe it just wasn't added yet.
-        var info = removeMap[request.type];
-        info.remove[request.url] = true;
-        if (info.handler())
-          delete info.remove[request.url];
-        else if (!info.onLoadHandler)
-        {
-          window.addEventListener("DOMContentLoaded", info.handler, false);
-          info.onLoadHandler = true;
-        }
-    }
-  });
-
   chrome.extension.sendRequest({reqtype: "get-settings", selectors: true, frameUrl: window.location.href}, function(response)
   {
     setElemhideCSSRules(response.selectors);
   });
 }
+
+document.addEventListener("error", checkCollapse, true);
+document.addEventListener("load", checkCollapse, true);
 
 // In Chrome 18 the document might not be initialized yet
 if (document.documentElement)
