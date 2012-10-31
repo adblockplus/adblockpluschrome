@@ -537,8 +537,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
         frameId = getFrameId(tabId, request.documentUrl);
       }
 
-      var enabled = !isFrameWhitelisted(tabId, frameId, "DOCUMENT");
-      if (!enabled)
+      if (isFrameWhitelisted(tabId, frameId, "DOCUMENT"))
       {
         sendResponse(false);
         break;
