@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Setelah menutup popup ini, klik (atau klik kanan) elemen pada halaman."
   },
+  "description": {
+    "message": "Blok semua iklan yang mengganggu di web: iklan video di YouTube, Facebook iklan, banner, dan banyak lagi."
+  },
   "disable_inline": {
     "message": "Menonaktifkan iklan teks inline"
   },
@@ -48,7 +51,7 @@
     "message": "Menyaring daftar"
   },
   "filter_must_follow_syntax": {
-    "message": "Filter Anda harus mengikuti < href ='$ urlAdblock Ditambah menyaring sintaks</a>. Jenis filter tertentu, seperti objek-subrequest, yang tidak didukung. mengatakan Adblock Plus filter sintaks %-#-#0 #-#-%. Jenis filter tertentu, seperti objek-subrequest, yang tidak didukung.",
+    "message": "Filter Anda harus mengikuti <a href='$url$'>Adblock Ditambah menyaring sintaks</a>. Jenis filter tertentu, seperti objek-subrequest, yang tidak didukung.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -60,6 +63,9 @@
   },
   "firstRun_changelog": {
     "message": "Melihat apa yang baru"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "Apakah Halaman ini tetap muncul? <a>Klik di sini!</a>"
   },
   "firstRun_feature_acceptableAds": {
     "message": "Mendukung situs web dengan iklan dapat diterima (lebih di bawah ini)"
@@ -92,7 +98,7 @@
     "message": "Adblock Plus telah diperbarui"
   },
   "found_a_bug": {
-    "message": "Menemukan bug? Ingin menerjemahkan Adblock Plus ke dalam bahasa Anda? Silakan < href ='$ urlfile permintaan di sini</a>. mengatakan mengajukan permintaan di sini %-#-#0 #-#-%.",
+    "message": "Menemukan bug? Ingin menerjemahkan Adblock Plus ke dalam bahasa Anda? Silakan <a href='$url$'>permintaan di sini</a>.",
     "placeholders": {
       "url": {
         "content": "$1"

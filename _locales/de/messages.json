@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
   },
+  "description": {
+    "message": "Beseitigt nervige Werbung im Web vollständig: Video-Werbung auf YouTube, Facebook-Werbung, Werbebanner und vieles mehr."
+  },
   "disable_inline": {
     "message": "Blockiere Inline Text Werbung"
   },
@@ -99,6 +102,9 @@
   },
   "firstRun_changelog": {
     "message": "Was ist neu?"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "Wird diese Seite immer wieder angezeigt? <a>Bitte hier klicken!</a>"
   },
   "firstRun_feature_acceptableAds": {
     "message": "Webseiten mit akzeptabler Werbung unterstützen (mehr dazu unten)"

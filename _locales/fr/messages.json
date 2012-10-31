@@ -48,7 +48,7 @@
     "message": "Liste de filtres"
   },
   "filter_must_follow_syntax": {
-    "message": "Il faut que votre filtre suive  <a href='$urlAdblock Plus filter syntax</a>. Certains types de filtre, comme object-subrequest, ne sont pas supportés.",
+    "message": "Il faut que votre filtre suive <a href='$url$'>le syntaxe Adblock Plus</a>. Certains types de filtre, comme object-subrequest, ne sont pas supportés.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -131,7 +131,7 @@
     "message": "Adblock Plus a été mis à jour"
   },
   "found_a_bug": {
-    "message": "Vous avez trouvé un bug ? Vous voulez traduire Adblock Plus dans votre propre langue ? S'il-vous-plaît <a href='$urlfile a request here</a>.>enregistrez-le ici%-#-#0#-#-%.",
+    "message": "Vous avez trouvé un bug ? Vous voulez traduire Adblock Plus dans votre propre langue ? S'il-vous-plaît <a href='$url$'>enregistrez-le ici</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
