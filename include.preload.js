@@ -53,18 +53,26 @@ function setElemhideCSSRules(selectors)
   setRules();
 }
 
+var typeMap = {
+  "img": "IMAGE",
+  "input": "IMAGE",
+  "audio": "MEDIA",
+  "video": "MEDIA",
+  "iframe": "SUBDOCUMENT"
+};
+
 function checkCollapse(event)
 {
   var target = event.target;
-  if ((event.type == "error" && target instanceof HTMLImageElement) ||
-      (event.type == "load" && target instanceof HTMLIFrameElement))
+  var tag = target.localName;
+  if (tag in typeMap && event.type == (tag == "iframe" ? "load" : "error"))
   {
     // This element failed loading, did we block it?
     var url = target.src;
     if (!url)
       return;
 
-    var type = (target instanceof HTMLImageElement ? "IMAGE": "SUBDOCUMENT");
+    var type = typeMap[tag];
     chrome.extension.sendRequest({reqtype: "should-collapse", url: url, documentUrl: document.URL, type: type}, function(response)
     {
       if (response && target.parentNode)
@@ -73,11 +81,14 @@ function checkCollapse(event)
   }
 }
 
-function sendRequests()
+function init()
 {
   // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
   if (!(document.documentElement instanceof HTMLElement))
     return;
+
+  document.addEventListener("error", checkCollapse, true);
+  document.addEventListener("load", checkCollapse, true);
 
   chrome.extension.sendRequest({reqtype: "get-settings", selectors: true, frameUrl: window.location.href}, function(response)
   {
@@ -85,11 +96,8 @@ function sendRequests()
   });
 }
 
-document.addEventListener("error", checkCollapse, true);
-document.addEventListener("load", checkCollapse, true);
-
 // In Chrome 18 the document might not be initialized yet
 if (document.documentElement)
-  sendRequests();
+  init();
 else
-  window.setTimeout(sendRequests, 0);
+  window.setTimeout(init, 0);
