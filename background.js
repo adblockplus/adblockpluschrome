@@ -562,7 +562,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
       // The page action popup asks us this.
       if(sender.tab)
       {
-        sendResponse({enabled: !isWhitelisted(sender.tab.url), specialCaseYouTube: localStorage["specialCaseYouTube"] == "true", disableInlineTextAds: localStorage["disableInlineTextAds"] == "true"});
+        sendResponse({enabled: !isWhitelisted(sender.tab.url), disableInlineTextAds: localStorage["disableInlineTextAds"] == "true"});
         return;
       }
       break;
