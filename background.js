@@ -61,6 +61,16 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
 // See http://crbug.com/68705.
 var noStyleRulesHosts = ["mail.google.com", "mail.yahoo.com", "www.google.com"];
 
+function removeDeprecatedOptions()
+{
+  var deprecatedOptions = ["specialCaseYouTube", "experimental", "disableInlineTextAds"];
+  deprecatedOptions.forEach(function(option)
+  {
+    if (option in localStorage)
+      delete localStorage[option];
+  });
+}
+
 // Sets options to defaults, upgrading old options from previous versions as necessary
 function setDefaultOptions()
 {
@@ -72,13 +82,8 @@ function setDefaultOptions()
 
   defaultOptionValue("shouldShowIcon", "true");
   defaultOptionValue("shouldShowBlockElementMenu", "true");
-  defaultOptionValue("disableInlineTextAds", "false");
 
-  // If user had older version installed, get rid of old option
-  if ("specialCaseYouTube" in localStorage)
-    delete localStorage.specialCaseYouTube;
-  if ("experimental" in localStorage)
-    delete localStorage.experimental;
+  removeDeprecatedOptions();
 }
 
 // Upgrade options before we do anything else.
@@ -562,7 +567,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
       // The page action popup asks us this.
       if(sender.tab)
       {
-        sendResponse({enabled: !isWhitelisted(sender.tab.url), disableInlineTextAds: localStorage["disableInlineTextAds"] == "true"});
+        sendResponse({enabled: !isWhitelisted(sender.tab.url)});
         return;
       }
       break;

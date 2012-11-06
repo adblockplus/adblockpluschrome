@@ -69,7 +69,6 @@ function loadOptions()
   // Popuplate option checkboxes
   initCheckbox("shouldShowIcon");
   initCheckbox("shouldShowBlockElementMenu");
-  initCheckbox("disableInlineTextAds");
   initCheckbox("hidePlaceholders");
 
   // Load recommended subscriptions
