@@ -1,4 +1,25 @@
 {
+  "add": {
+    "message": "Lisa"
+  },
+  "add_domain_button": {
+    "message": "Lisa domeen"
+  },
+  "add_filter_button": {
+    "message": "Lisa filter"
+  },
+  "add_your_own_filters": {
+    "message": "Lisa oma filtreid"
+  },
+  "apply_changes": {
+    "message": "Rakenda muudatused"
+  },
+  "cancel": {
+    "message": "Loobu"
+  },
+  "filter_lists": {
+    "message": "Flitrite nimekirjad"
+  },
   "filters_acceptableAds2_label": {
     "message": "Luba mõned mittepealetükkivad reklaamid"
   },
@@ -38,6 +59,27 @@
   "filters_viewList_label": {
     "message": "Vaata loetelu"
   },
+  "firstRun_feature_betterSurfing": {
+    "message": "Naudi veebi ilma tüütute kuulutuste"
+  },
+  "firstRun_features_heading": {
+    "message": "AdBlock Plusiga saate teha järgmist:"
+  },
+  "firstRun_share2_donate": {
+    "message": "Anneta"
+  },
+  "firstRun_share2_or": {
+    "message": "või"
+  },
+  "firstRun_title_install": {
+    "message": "AdBlock Plus on paigaldatud"
+  },
+  "firstRun_title_update": {
+    "message": "AdBlock Plus on uuendatud"
+  },
+  "general": {
+    "message": "Üldine"
+  },
   "global_remove_subscription_warning": {
     "message": "Kas oled kindel, et soovid selle tellimuse eemaldata?"
   },
@@ -46,6 +88,9 @@
   },
   "name": {
     "message": "Adblock Plus"
+  },
+  "options": {
+    "message": "AdBlock Plus Valikud"
   },
   "overlay_hideplaceholders_label": {
     "message": "Peida blokeeritud elementide kohatäitjad"
@@ -58,5 +103,8 @@
   },
   "subscriptionSelection_title_label": {
     "message": "Tellimuse pealkiri:"
+  },
+  "update_now": {
+    "message": "Värskenda kohe"
   }
 }

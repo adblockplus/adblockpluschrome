@@ -18,28 +18,31 @@
     "message": "変更を適用"
   },
   "block_element": {
-    "message": "ブロック要素"
+    "message": "要素をブロック"
   },
   "cancel": {
     "message": "キャンセル"
   },
   "clickhide_instructions": {
-    "message": "このポップアップを閉じた後に、ページ上の要素をクリック(または右クリック)してください。"
+    "message": "このポップアップが閉じた後に、ページ上の要素をクリック(または右クリック)してください。"
+  },
+  "description": {
+    "message": "Web 上の迷惑な広告を全てブロックします：YouTube のビデオ広告、Facebook 広告、バナー広告などなど。"
   },
   "disable_inline": {
-    "message": "インラインのテキスト広告を無効にする"
+    "message": "インラインテキスト広告を無効にする"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plusを以下に記載されたドメインで無効にします。アドレスバーのAdblock Plusアイコンから設定するか、下の欄にドメイン(URLではなく)を入力して、\"ドメインを追加\"のボタンをクリックすることによってドメインを追加することができます。"
+    "message": "Adblock Plus を以下のドメインで無効にします。アドレスバーの Adblock Plus アイコン、または下の欄にドメイン（URL ではない）を入力し「ドメインを追加」ボタンで追加できます。"
   },
   "easy_create_filter": {
     "message": "簡単にフィルタを作成する"
   },
   "edit_filters_raw": {
-    "message": "直接テキストフィルタを編集する"
+    "message": "フィルタを編集する"
   },
   "enable_only_the": {
-    "message": "あなたが必要とするフィルタリストのみを有効にしてください。フィルタリストが多すぎるとChromeの動作が遅くなることがあります。"
+    "message": "あなたが必要とするフィルタリストのみを有効にしてください。フィルタリストが多すぎると Chrome の動作が遅くなることがあります。"
   },
   "enabled_for_site": {
     "message": "このサイトで有効"
@@ -48,7 +51,7 @@
     "message": "フィルタリスト"
   },
   "filter_must_follow_syntax": {
-    "message": "自作フィルタは、 <a href='$url$'>Adblock Plus フィルタ構文</a>に従う必要があります。object-subrequest のような特定のフィルタタイプはサポートされていません。",
+    "message": "自作フィルタは <a href='$url$'>Adblock Plus フィルタ構文</a> に準拠すること。フィルタオプションによってはサポートされていないものもあります（例：object-subrequest）。",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -95,10 +98,13 @@
     "message": "設定内容を参照"
   },
   "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plusは、常に迷惑な広告をブロックします。</strong> ただ、我々は、 Web サイトが控えめな広告を使用することを奨励したいと思います。そこで、 <a>厳格なガイドライン</a> に基づいて控えめな広告の表示を許可することにしました。あなたがすべての広告をブロックしたい場合は、いつでもこれを <a>無効</a> にすることができます。"
+    "message": "<strong>Adblock Plus は常に迷惑な広告をブロックします。</strong>ただ、地味で控えめな広告を使用する Web サイトについては応援したい。そこで、我々は控えめな広告を判定するための <a>厳格なガイドライン</a> を策定し、これに該当するものはブロック対象から除外することにしました。もし、全ての広告をブロックしたい場合は、いつでも控えめな広告に対する許可を <a>無効</a> にすることができます。"
   },
   "firstRun_changelog": {
-    "message": "新着情報を見る"
+    "message": "更新内容を確認する"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "このページが何度も再表示される場合は <a>ここを参照！</a>"
   },
   "firstRun_feature_acceptableAds": {
     "message": "控えめな広告を受け入れることでWebサイトをサポート（以下詳細）"
@@ -110,10 +116,10 @@
     "message": "ＣＭ中断なしにビデオを見る"
   },
   "firstRun_features_heading": {
-    "message": "Adblock Plus でできること:"
+    "message": "Adblock Plus で出来ること:"
   },
   "firstRun_share1": {
-    "message": "Adblock Plus が共有する価値があると思う方は、ぜひ共有してください。"
+    "message": "Adblock Plus を共有する価値があると思う方は、ぜひ共有してください。"
   },
   "firstRun_share2": {
     "message": "Adblock Plus はフリーでオープンソースです。私たちをサポートしてください："
@@ -125,7 +131,7 @@
     "message": "または"
   },
   "firstRun_title_install": {
-    "message": "Adblock Plus をインストールしました。"
+    "message": "Adblock Plus がインストールされました。"
   },
   "firstRun_title_update": {
     "message": "Adblock Plus が更新されました"
@@ -170,7 +176,7 @@
     "message": "Adblock Plus"
   },
   "new_filters_added": {
-    "message": "新しいフィルタを追加; 管理するためには、 <a id='options_url' target='_blank'>Options</a> を参照してください。"
+    "message": "新しいフィルタが追加されました; 管理方法については <a id='options_url' target='_blank'>オプション</a> を参照。"
   },
   "options": {
     "message": "Adblock Plus オプション"
@@ -182,10 +188,10 @@
     "message": "ブロックした要素の「代わり」を表示しない"
   },
   "remove_button": {
-    "message": "削除"
+    "message": "選択項目の削除"
   },
   "show_block_element_menu": {
-    "message": "「ブロック要素」を右クリックメニューに表示"
+    "message": "右クリックメニューに「要素をブロック」を表示"
   },
   "show_icon": {
     "message": "アドレスバーにアイコンを表示"
@@ -203,6 +209,6 @@
     "message": "今すぐ更新"
   },
   "whitelisted_domains": {
-    "message": "ホワイトリストに追加されたドメイン"
+    "message": "ホワイトリスト設定されたドメイン"
   }
 }

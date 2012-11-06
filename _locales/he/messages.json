@@ -26,11 +26,14 @@
   "clickhide_instructions": {
     "message": "אחרי שתסגור חלון זה לחץ על אלמנט בעמוד זה"
   },
+  "description": {
+    "message": "חוסם את כל הפרסומות המעצבנות באינטרנט: כולל YouTube, Facebook,אתרים אחרים + אתרים מישראל."
+  },
   "disable_inline": {
     "message": "ביטול פרסומות טקסט"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus חסם את הקישורים ששמת. אתה יכול להוסיף עוד קישורים לחץ על האיקון של Adblock Plus ואז על הכפתור \"הוסף קישור\"."
+    "message": "Adblock Plus\nחסם את הקישורים ששמת. אתה יכול להוסיף עוד קישורים לחץ על האיקון של Adblock Plus ואז על הכפתור \"הוסף קישור\". (כתוב דומין ולא שם מתחם)"
   },
   "easy_create_filter": {
     "message": "קל ליצור מסנן"
@@ -100,6 +103,9 @@
   "firstRun_changelog": {
     "message": "ראה מה חדש"
   },
+  "firstRun_dataCorruptionWarning": {
+    "message": "הדף הזה מופיעה הרבה ? <a>לחץ כאן!</a>"
+  },
   "firstRun_feature_acceptableAds": {
     "message": "תמוך באתרים שמשתמשים בפרסומות לא מציקות (ראה פרטים)"
   },
@@ -148,7 +154,7 @@
     "message": "מיקום רשימת הסינון איננו כתובת אתר חוקית ולא שם קובץ חוקי."
   },
   "last_updated_at": {
-    "message": "עודכן לאחרונה בשעה $time$ ב־$date$",
+    "message": "עדכון אחרון $בשעה$ $בתאריך$\n",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -159,7 +165,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "עודכן לאחרונה $time$ ב־היום",
+    "message": "עודכן לאחרונה $בשעה$ ב־היום",
     "placeholders": {
       "time": {
         "content": "$1"

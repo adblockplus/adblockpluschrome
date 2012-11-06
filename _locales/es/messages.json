@@ -26,11 +26,14 @@
   "clickhide_instructions": {
     "message": "Tras cerrar este menú desplegable, pulse (o con botón derecho) en un elemento de la página."
   },
+  "description": {
+    "message": "Bloquea toda la publicidad molesta de la red: anuncios en vídeos de YouTube, publicidad en Facebook, banners y muchos otros más."
+  },
   "disable_inline": {
     "message": "Desactivar anuncios de texto en línea"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus está desactivado para los dominios mostrados a continuación. Puede añadir un dominio con el ícono de Adblock Plus en la barra de direcciones o escribiendo el dominio (no la URL) en el recuadro y pulsando el botón \"Añadir dominio\"."
+    "message": "Adblock Plus está desactivado para los dominios mostrados a continuación. Puede añadir un dominio con el icono de Adblock Plus en la barra de direcciones o escribiendo el dominio (no la URL) en el recuadro y pulsando el botón \"Añadir dominio\"."
   },
   "easy_create_filter": {
     "message": "Crear un filtro fácilmente"
@@ -48,7 +51,7 @@
     "message": "Listas de filtros"
   },
   "filter_must_follow_syntax": {
-    "message": "Tu filtro debe cumplir la <a href='$url$'>sintaxis para filtros de Adblock Plus</a>. Algunos tipos de filtros, como object-subrequest, no están soportados.",
+    "message": "Su filtro debe respetar la <a href='$url$'>sintaxis para filtros de Adblock Plus</a>. No están soportados algunos tipos de filtros, como object-subrequest.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -95,10 +98,13 @@
     "message": "Ver lista"
   },
   "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus bloqueará siempre los anuncios molestos</strong>, pero queremos fomentar las páginas web que usan publicidad sencilla y discreta. Por eso hemos establecido <a>unas directrices estrictas</a> para identificar la publicidad aceptable y permitir que se muestre. Siempre podrá <a>deshabilitar</a> esta funcionalidad si quiere bloquear toda clase de publicidad."
+    "message": "<strong>Adblock Plus bloqueará siempre los anuncios molestos</strong>, pero queremos fomentar las páginas web que usan publicidad sencilla y discreta. Por eso hemos establecido <a>unas directrices estrictas</a> para identificar la publicidad aceptable y permitir que se muestre. Siempre podrá <a>desactivar</a> esa funcionalidad si quiere bloquear todo tipo de publicidad."
   },
   "firstRun_changelog": {
     "message": "Ver novedades"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "¿Sigue mostrándose esta página? <a>Pulse aquí</a>."
   },
   "firstRun_feature_acceptableAds": {
     "message": "Apoyar las páginas web con publicidad aceptable (más a continuación)"
