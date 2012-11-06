@@ -92,17 +92,18 @@ setDefaultOptions();
 /**
  * Checks whether a page is whitelisted.
  * @param {String} url
+ * @param {String} [parentUrl] URL of the parent frame
  * @param {String} [type] content type to be checked, default is "DOCUMENT"
  * @return {Filter} filter that matched the URL or null if not whitelisted
  */
-function isWhitelisted(url, type)
+function isWhitelisted(url, parentUrl, type)
 {
   // Ignore fragment identifier
   var index = url.indexOf("#");
   if (index >= 0)
     url = url.substring(0, index);
 
-  var result = defaultMatcher.matchesAny(url, type || "DOCUMENT", extractHostFromURL(url), false);
+  var result = defaultMatcher.matchesAny(url, type || "DOCUMENT", extractHostFromURL(parentUrl || url), false);
   return (result instanceof WhitelistFilter ? result : null);
 }
 

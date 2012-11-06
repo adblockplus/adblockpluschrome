@@ -181,15 +181,19 @@ function checkRequest(type, tabId, url, frameId)
 function isFrameWhitelisted(tabId, frameId, type)
 {
   var parent = frameId;
-  while (parent != -1)
+  var parentData = getFrameData(tabId, parent);
+  while (parentData)
   {
-    var parentData = getFrameData(tabId, parent);
-    if (!parentData)
-      break;
+    var frame = parent;
+    var frameData = parentData;
 
-    if (isWhitelisted(parentData.url, type) || "keyException" in parentData)
+    parent = frameData.parent;
+    parentData = getFrameData(tabId, parent);
+
+    var frameUrl = frameData.url;
+    var parentUrl = (parentData ? parentData.url : frameUrl);
+    if ("keyException" in frameData || isWhitelisted(frameUrl, parentUrl, type))
       return true;
-    parent = parentData.parent;
   }
   return false;
 }
