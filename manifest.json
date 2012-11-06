@@ -36,7 +36,7 @@
     },
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["include.postload.js", "include.textads.js"],
+      "js": ["include.postload.js"],
       "run_at": "document_end",
       "all_frames": true
     }
