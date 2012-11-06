@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Na het sluiten van deze popup, klik (of klik met de rechtermuisknop) op het pagina element."
   },
+  "description": {
+    "message": "Blokkeert alle irritante advertenties op het web: video-reclame op YouTube, Facebook ads, banners en veel meer."
+  },
   "disable_inline": {
     "message": "Inline tekstadvertenties uitschakelen"
   },
@@ -99,6 +102,9 @@
   },
   "firstRun_changelog": {
     "message": "Bekijk wat nieuw is"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "Blijft deze pagina terugkomen? <a>Klik hier!</a>"
   },
   "firstRun_feature_acceptableAds": {
     "message": "Ondersteun websites met acceptabele advertenties (meer hieronder)"

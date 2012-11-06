@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Po zamknięciu tego okna kliknij na stronie lewym lub prawym przyciskiem myszy niechciany element."
   },
+  "description": {
+    "message": "Blokuje wszystkie denerwujące reklamy w internecie, reklamy wideo na YouTube, reklamy na Facebooku, banery i wiele więcej…"
+  },
   "disable_inline": {
     "message": "Wyłącz reklamy tekstowe"
   },
@@ -99,6 +102,9 @@
   },
   "firstRun_changelog": {
     "message": "Zobacz, co jest nowego"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "Czy ta strona ma być wyświetlana? <a>Kliknij tutaj!</a>"
   },
   "firstRun_feature_acceptableAds": {
     "message": "Witryny, których reklamy są akceptowane (więcej poniżej)"
