@@ -154,7 +154,7 @@
     "message": "מיקום רשימת הסינון איננו כתובת אתר חוקית ולא שם קובץ חוקי."
   },
   "last_updated_at": {
-    "message": "עדכון אחרון $בשעה$ $בתאריך$\n",
+    "message": "עודכן לאחרונה בשעה $time$ ב־$date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -165,7 +165,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "עודכן לאחרונה $בשעה$ ב־היום",
+    "message": "עודכן לאחרונה $time$ ב־היום",
     "placeholders": {
       "time": {
         "content": "$1"
