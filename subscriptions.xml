@@ -23,7 +23,7 @@
                 url="https://easylist-downloads.adblockplus.org/easylist.txt"
                 homepage="https://easylist.adblockplus.org/"
                 prefixes="en"
-                author="MonztA, Ares2, Famlam, Khrin"/>
+                author="MonztA, Famlam, Khrin"/>
   <subscription title="ABPindo+EasyList"
                 specialization="Bahasa Indonesia"
                 url="https://easylist-downloads.adblockplus.org/abpindo+easylist.txt"
@@ -53,7 +53,7 @@
                 url="https://easylist-downloads.adblockplus.org/easylistgermany+easylist.txt"
                 homepage="https://easylist.adblockplus.org/"
                 prefixes="de"
-                author="MonztA, Ares2, Famlam"/>
+                author="MonztA, Famlam"/>
   <subscription title="EasyList Italy+EasyList"
                 specialization="italiano"
                 url="https://easylist-downloads.adblockplus.org/easylistitaly+easylist.txt"
