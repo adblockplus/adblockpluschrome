@@ -1,6 +1,5 @@
-syntax: glob
-
-*.zip
-*.crx
-*.pyc
-*.sh
+^devenv$
+\.zip$
+\.crx$
+\.pyc$
+\.sh$
