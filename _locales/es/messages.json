@@ -92,7 +92,7 @@
     "message": "Error: lista de filtros no válida"
   },
   "filters_subscription_lastDownload_invalidURL": {
-    "message": "Error: no es una dirección válida"
+    "message": "Error: dirección no válida"
   },
   "filters_viewList_label": {
     "message": "Ver lista"

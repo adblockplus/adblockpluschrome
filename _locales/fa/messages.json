@@ -1,0 +1,157 @@
+{
+  "add": {
+    "message": "اضافه کردن"
+  },
+  "add_domain_button": {
+    "message": "اضافه کردن سایت"
+  },
+  "add_filter_button": {
+    "message": "اضافه کردن فیلتر"
+  },
+  "add_filters_msg": {
+    "message": "اضافه کردن فیلتر (ها) ؟"
+  },
+  "add_your_own_filters": {
+    "message": "اضافه کردن فیلتر خودتون"
+  },
+  "apply_changes": {
+    "message": "ثبت تغببرات"
+  },
+  "block_element": {
+    "message": "مسدودسازی این عنصر"
+  },
+  "cancel": {
+    "message": "بیخیال"
+  },
+  "clickhide_instructions": {
+    "message": "پس از بسته شدن این پنجره، روی بخشی از صفحه کلیک (یا راست کلیک) کن."
+  },
+  "description": {
+    "message": "جلوگیری از همه تبلیغات مزاحم در: ویدوهای YouTube، تبلیغات Facebook، تبلیغات و خیلی چیزای دیگه."
+  },
+  "disable_inline": {
+    "message": "غیرفعال کردن تبلیغات متنی"
+  },
+  "disabled_for_these_domains": {
+    "message": "این افزونه در سایت های زیر غیرفعاله. برای اضافه کردن یک سایت می توانید روی آیکون Adblock Plus در نوارآدرس کلیک کنید یا دامنه اون سایت (نه آدرس دقیق) را در این جعبه بنویسید و دکمه «اضافه کردن سایت» را بزنید."
+  },
+  "easy_create_filter": {
+    "message": "مسدود کردن یک عنصر"
+  },
+  "edit_filters_raw": {
+    "message": "ویرایش لیست فیلترها بصورت متنی"
+  },
+  "enable_only_the": {
+    "message": "فقط لیست هایی که لازم می دانید را فعال کنید. اگه الکی لیست های زیادی رو فعال کنی باعث میشه مرورگر کند بشه یا حتی هنگ کنه."
+  },
+  "enabled_for_site": {
+    "message": "برای این سایت فعال باشد"
+  },
+  "filter_lists": {
+    "message": "فیلتر کردن لیست"
+  },
+  "filter_must_follow_syntax": {
+    "message": "فیلتر شما باید طبق  <a href='$url$'>قوانین نحوی Adblock Plus </a> باشه. تعیین نوع فیلتر، مثل «آدرس های دارای متدهای اضافه» پشتیبانی نمی شوند.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>همیشه تبلیغات آزاردهنده رو مسدود میکنه Adblock Plus</strong>با این حال ما می خواهیم وبسایت ها رو تشویق کنیم به استفاده از تبلیغات ساده و بدون تحرک.\nاین بود که باعث تاسیس <a>راهبردهای سخت گیرانه</a> برای شناسایی تبلیغات مطلوب شد، و اجازه دادن به آنها بدون مسدودسازی. هروقت خواستید می توانید این افزونه را <a>غیرفعال</a> کنید اگه باهاش حال نکردید."
+  },
+  "firstRun_changelog": {
+    "message": "خبر جدید چیه"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "آیا این صفحه در حال رویت نگه داشته شده؟ <a>اینجا کلیک کن!</a>"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "حمایت از وبسایت های دارای تبلیغات مناسب (توضیحات بیشتر در پایین)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "لذت از وبگردی بدون تبلیغات آزاردهنده"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "تماشای ویدوها وقفه های تبلیغاتی"
+  },
+  "firstRun_features_heading": {
+    "message": "افزونه Adblock Plus به شما اجازه میده:"
+  },
+  "firstRun_share1": {
+    "message": "فکر می کنی Adblock Plus ارزش اشتراک گذاشتن رو داره؟ پس انجام بده!"
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus هم رایگانه و هم منبع باز. خواهشا از ما حمایت کنید:"
+  },
+  "firstRun_share2_donate": {
+    "message": "کمک مالی"
+  },
+  "firstRun_share2_or": {
+    "message": "یا"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus با موفقیت نصب شد"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus با موفقیت ارتقاء یافت"
+  },
+  "found_a_bug": {
+    "message": "باگ پیدا کردی؟ می خوای Adblock Plus رو به زبون خودتون ترجمه کنی؟ <a href='$url$'>فایل درخواست اینجاست</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "general": {
+    "message": "صفحه اصلی"
+  },
+  "last_updated_at": {
+    "message": "آخرین ارتقاء در زمان $time$ و تاریخ $date$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "آخرین ارتقاء در ساعت $time$ امروز",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "name": {
+    "message": "Adblock Plus\nor\nتبلیغ کش\nor\nتبلیغ زدا"
+  },
+  "new_filters_added": {
+    "message": "فیلترهای جدید اضافه شد؛ برای مدیریت <a id='options_url' target='_blank'>تنظیمات</a> رو ببین."
+  },
+  "options": {
+    "message": "تنظیمات Adblock Plus"
+  },
+  "out_of_date_lists": {
+    "message": "لیست های تاریخ گذشته مرتباً آپدیت شدند."
+  },
+  "remove_button": {
+    "message": "حذف انتخاب شده"
+  },
+  "show_block_element_menu": {
+    "message": "نمایش گزینه «مسدودسازی عنصر» در منو کلیک راست"
+  },
+  "show_icon": {
+    "message": "نمایش آیکون در نوارآدرس"
+  },
+  "update_now": {
+    "message": "آپدیت کن"
+  },
+  "whitelisted_domains": {
+    "message": "لیست سفید سایت ها (که تبلیغات مسدود نشه)"
+  }
+}

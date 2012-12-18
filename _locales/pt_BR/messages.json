@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Após o encerramento desta janela, clique (ou dê um clique com o botão direito) em um elemento da página."
   },
+  "description": {
+    "message": "Bloqueia todos anúncios irritantes na internet: anúncios em vídeo no YouTube, anúncios no Facebook, banners e muito mais."
+  },
   "disable_inline": {
     "message": "Desativar propagandas de texto em linha"
   },
@@ -93,6 +96,45 @@
   },
   "filters_viewList_label": {
     "message": "Ver lista"
+  },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus sempre bloqueará anúncios incômodos.</strong> No entanto, queremos encorajar o uso de publicidade plana e não intrusiva. É por isso que estabelecemos <a>normas estritas</a> para identificar anúncios aceitáveis e permitir sua execução sem problemas.\nVocê sempre pode <a>desativar</a> esta opção se quiser bloquear todos os anúncios."
+  },
+  "firstRun_changelog": {
+    "message": "Veja o que há de novo"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "Esta página continua aparecendo?<a>Clique aqui!</a>"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "Apoie páginas da internet com anúncios aceitáveis (mais abaixo)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "Curta a internet sem anúncios irritantes"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "Assista vídeos sem interrupçôes de comerciais"
+  },
+  "firstRun_features_heading": {
+    "message": "Com Adblock Plus você pode:"
+  },
+  "firstRun_share1": {
+    "message": "Você acredita que vale a pena compartilhar o Adblock Plus? Por favor, compartilhe!"
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus é gratuito e de código aberto. Por gentileza, apoie-nos:"
+  },
+  "firstRun_share2_donate": {
+    "message": "Fazer doação"
+  },
+  "firstRun_share2_or": {
+    "message": "ou"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus foi instalado"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus foi atualizado"
   },
   "found_a_bug": {
     "message": "Encontrou um bug? Por favor <a href='$url$'>nos informe a falha por aqui</a>.",
