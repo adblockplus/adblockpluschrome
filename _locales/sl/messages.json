@@ -8,6 +8,15 @@
   "filters_addSubscription_label": {
     "message": "Dodaj naročnino filtra"
   },
+  "filters_readMore_label": {
+    "message": "Preberi več"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Izbriši"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Omogočeno"
+  },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Neuspešno, kontrolna vsota se ne ujema"
   },
@@ -23,14 +32,14 @@
   "filters_subscription_lastDownload_invalidURL": {
     "message": "Neuspešno, ni veljaven naslov"
   },
+  "filters_viewList_label": {
+    "message": "Pokaži seznam"
+  },
   "global_remove_subscription_warning": {
     "message": "Želite res odpovedati naročnino?"
   },
   "global_subscription_invalid_location": {
     "message": "Mesto seznama filtrov ni niti veljaven URL niti veljavno ime datoteke."
-  },
-  "name": {
-    "message": "Adblock Plus"
   },
   "overlay_hideplaceholders_label": {
     "message": "Skrij ograde blokoranih elementov"

@@ -1,4 +1,28 @@
 {
+  "add": {
+    "message": "Add"
+  },
+  "add_domain_button": {
+    "message": "Add domain"
+  },
+  "add_filter_button": {
+    "message": "Add filter"
+  },
+  "add_your_own_filters": {
+    "message": "Add your own filters"
+  },
+  "apply_changes": {
+    "message": "Apply changes"
+  },
+  "block_element": {
+    "message": "Block Element"
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "filter_lists": {
+    "message": "Filter lists"
+  },
   "filters_acceptableAds2_label": {
     "message": "Allow some non-intrusive advertising"
   },
@@ -52,9 +76,6 @@
   },
   "subscriptionSelection_location_label": {
     "message": "Filter list location:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Please choose a filter subscription from the list:"
   },
   "subscriptionSelection_title_label": {
     "message": "Subscription title:"

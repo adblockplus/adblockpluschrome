@@ -27,7 +27,7 @@
     "message": "請在此訊息關閉後點選網頁上的元素。"
   },
   "description": {
-    "message": "過濾網路上所有煩人的廣告：YouTube，Facebook 等，任何你想得到的，都解決了。"
+    "message": "過濾網路上所有煩人的廣告：YouTube，Facebook 等，任何您想得到的，都解決了。"
   },
   "disable_inline": {
     "message": "阻擋文字廣告"
@@ -59,7 +59,7 @@
     }
   },
   "filters_acceptableAds2_label": {
-    "message": "允許部分的非侵入式廣告"
+    "message": "允許部分非侵入式廣告"
   },
   "filters_addSubscriptionAdd_label": {
     "message": "加入"
@@ -151,7 +151,7 @@
     "message": "您確定要移除此條件集嗎？"
   },
   "global_subscription_invalid_location": {
-    "message": "條件集網址或檔名無效。"
+    "message": "條件集網址或檔案名稱無效。"
   },
   "last_updated_at": {
     "message": "最後更新於 $date$ $time$",
@@ -197,13 +197,13 @@
     "message": "在網址列顯示 Adblock Plus 圖示"
   },
   "subscriptionSelection_location_label": {
-    "message": "過濾條件集位址:"
+    "message": "過濾條件集位址："
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "請從列表中選擇過濾條件集:"
   },
   "subscriptionSelection_title_label": {
-    "message": "訂閱項目名稱:"
+    "message": "過濾條件集名稱："
   },
   "update_now": {
     "message": "立即更新"

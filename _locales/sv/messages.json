@@ -94,6 +94,24 @@
   "filters_viewList_label": {
     "message": "Visa lista"
   },
+  "firstRun_changelog": {
+    "message": "Se vad som är nytt"
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus är gratis och öppen källkod. Stöd oss gärna:"
+  },
+  "firstRun_share2_donate": {
+    "message": "Donera"
+  },
+  "firstRun_share2_or": {
+    "message": "eller"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus har installerats"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus har uppdaterats"
+  },
   "found_a_bug": {
     "message": "Hittat ett fel eller vill du översätta Adblock Plus till ett annat språk? Vänligen, <a href='$url$'>meddela här</a>.",
     "placeholders": {

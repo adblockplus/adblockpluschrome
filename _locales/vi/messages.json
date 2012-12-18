@@ -104,9 +104,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "new_filters_added": {
     "message": "Các bộ lọc mới đã được thêm; hãy mở <a id='options_url' target='_blank'>Cấu hình</a> để quản lý chúng."
   },

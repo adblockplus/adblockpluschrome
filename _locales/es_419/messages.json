@@ -1,4 +1,63 @@
 {
+  "add": {
+    "message": "Agregar"
+  },
+  "add_domain_button": {
+    "message": "Agregar dominio"
+  },
+  "add_filter_button": {
+    "message": "Agregar filtro"
+  },
+  "add_filters_msg": {
+    "message": "¿Agregar filtro/s?"
+  },
+  "add_your_own_filters": {
+    "message": "Agregá tus propios filtros"
+  },
+  "apply_changes": {
+    "message": "Aplicar cambios"
+  },
+  "block_element": {
+    "message": "Bloquear elemento"
+  },
+  "cancel": {
+    "message": "Cancelar"
+  },
+  "clickhide_instructions": {
+    "message": "Después de cerrar esta ventana emergente, haga clic en un elemento de la página."
+  },
+  "description": {
+    "message": "Bloquea todos las molestas publicidades en la web: en videos de YouTube, en Facebook, báners y mucho más."
+  },
+  "disable_inline": {
+    "message": "Deshabilitar publicidades en texto"
+  },
+  "disabled_for_these_domains": {
+    "message": "AdBlock Plus está deshabilitado para los dominios que aparecen a continuación. Podés agregar un dominio, ya sea a través del ícono de Adblock Plus en la barra de direcciones o ingresando el dominio (no la dirección web entera) en el cuadro y haciendo clic en el botón \"Agregar dominio\"."
+  },
+  "easy_create_filter": {
+    "message": "Crear filtro fácil"
+  },
+  "edit_filters_raw": {
+    "message": "Editar filtros como texto sin formato"
+  },
+  "enable_only_the": {
+    "message": "Permitir sólo las listas de filtros que se necesitan. Demasiados pueden hacer que Chrome se cuelgue."
+  },
+  "enabled_for_site": {
+    "message": "Habilitado para este sitio"
+  },
+  "filter_lists": {
+    "message": "Listas de filtros"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Tu filtro debe seguir la <a href='$url$'> Sintaxis de filtro Adblock Plus</a>. Ciertos tipos de filtro, como objeto-subpetición, no son compatibles.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
   "filters_acceptableAds2_label": {
     "message": "Permitir publicidad no hostigadora"
   },
@@ -21,7 +80,7 @@
     "message": "Habilitado"
   },
   "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Falló, el archivo checksum no coincide"
+    "message": "Falló, el archivo de suma de comprobación no coincide"
   },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Falló, error en la descarga"
@@ -38,17 +97,104 @@
   "filters_viewList_label": {
     "message": "Ver lista"
   },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus siempre bloqueará publicidades molestas.</strong> Aún así, queremos alentar a que los propietarios de sitios web a que utilicen publicidad no hostigadora y estática en los mismos. Por eso hemos establecido <a>guías estrictas</a> para identificar publicidades aceptables y permitir estas de modo predeterminado. Siempre vas a poder <a>deshabilitar</a> esto si querés bloquear todas las publicidades."
+  },
+  "firstRun_changelog": {
+    "message": "Ver novedades"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "¿Esta página se la pasa apareciendo? <a>¡Hacé clic acá!</a>"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "Apoyá a sitios web con publicidades aceptables (más abajo)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "Disfrutá la web sin publicidades molestas"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "Mirá videos sin cortes comerciales"
+  },
+  "firstRun_features_heading": {
+    "message": "Con Adblock Plus podés:"
+  },
+  "firstRun_share1": {
+    "message": "¿Pensás que vale la pena compartir Adblock Plus? ¡Por favor, hacelo!"
+  },
+  "firstRun_share2": {
+    "message": "AdBlock Plus es software libre y de código abierto. Por favor, apoyanos:"
+  },
+  "firstRun_share2_donate": {
+    "message": "Doná"
+  },
+  "firstRun_share2_or": {
+    "message": "o"
+  },
+  "firstRun_title_install": {
+    "message": "Se instaló Adblock Plus"
+  },
+  "firstRun_title_update": {
+    "message": "Se actualizó Adblock Plus"
+  },
+  "found_a_bug": {
+    "message": "¡Encontraste un error? ¿Querés localizar Adblock Plus a tu idioma? Por favor, <a href='$url$'>realizá una petición acá</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "general": {
+    "message": "General"
+  },
   "global_remove_subscription_warning": {
     "message": "¿Estás seguro de querer quitar esta suscripción?"
   },
   "global_subscription_invalid_location": {
     "message": "La ubicación de lista de filtros no es válida, o no es válido el nombre de archivo."
   },
+  "last_updated_at": {
+    "message": "Última actualización a las $time$ del $date$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Última actualización, hoy a las $time$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
   "name": {
     "message": "Adblock Plus"
   },
+  "new_filters_added": {
+    "message": "Se agregaron nuevos filtros; andá a <a id='options_url' target='_blank'>Opciones</a> para administrarlos."
+  },
+  "options": {
+    "message": "Opciones de Adblock Plus"
+  },
+  "out_of_date_lists": {
+    "message": "Las listas desactualizadas se actualizan periódicamente."
+  },
   "overlay_hideplaceholders_label": {
     "message": "Colapsar elementos bloqueados"
+  },
+  "remove_button": {
+    "message": "Quitar lo seleccionado"
+  },
+  "show_block_element_menu": {
+    "message": "Mostrar \"Bloquear elemento\" en el menú contextual"
+  },
+  "show_icon": {
+    "message": "Mostrar ícono en la barra de direcciones"
   },
   "subscriptionSelection_location_label": {
     "message": "Ubicación de la lista de filtros:"
@@ -58,5 +204,11 @@
   },
   "subscriptionSelection_title_label": {
     "message": "Título de suscripción:"
+  },
+  "update_now": {
+    "message": "Actualizar ahora"
+  },
+  "whitelisted_domains": {
+    "message": "Dominios seguros"
   }
 }

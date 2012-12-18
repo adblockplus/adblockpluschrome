@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "请点击（或右击）要屏蔽的元素"
   },
+  "description": {
+    "message": "阻挡网上所有烦人的广告：视频广告、横幅广告等等。"
+  },
   "disable_inline": {
     "message": "屏蔽广告链接"
   },
@@ -93,6 +96,45 @@
   },
   "filters_viewList_label": {
     "message": "查看列表"
+  },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus 将始终阻挡烦人的广告。</strong> 不过，我们想鼓励网站使用普通且不太显眼的广告。这就是为什么我们设立了<a>严格的方针</a>来确定可以接受的广告，并允许它们显示出来。如果您想阻挡所有广告，您也可以总是<a>禁用</a>这个功能。"
+  },
+  "firstRun_changelog": {
+    "message": "看看有什么新东西"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "总是显示此页？<a>点击这里！</a>"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "支持网站放置可以接受的广告（详见下文）"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "享受没有烦人广告的网络"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "在没有商业广告打断的情况下观看视频"
+  },
+  "firstRun_features_heading": {
+    "message": "用了 Adblock Plus，您可以："
+  },
+  "firstRun_share1": {
+    "message": "您认为 Adblock Plus 值得分享吗？那就来吧！"
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus 是自由和开源的。请支持我们："
+  },
+  "firstRun_share2_donate": {
+    "message": "捐赠"
+  },
+  "firstRun_share2_or": {
+    "message": "或"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus 已安装"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus 已更新"
   },
   "found_a_bug": {
     "message": "发现错误？需要帮助？请前往<a href='$url$'>此处</a>",
