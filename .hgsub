@@ -1,4 +1,3 @@
 buildtools = ../buildtools
-jshydra = ../jshydra
 adblockplus = ../adblockplus
 adblockplustests = ../adblockplustests
