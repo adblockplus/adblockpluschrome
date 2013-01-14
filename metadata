@@ -30,6 +30,9 @@ document_end = include.postload.js
 [compat]
 chrome = 18.0
 
+[mapping]
+subscriptions.xml = adblockplus/chrome/content/ui/subscriptions.xml
+
 [convert_js]
 lib/adblockplus.js = adblockplus/lib/filterNotifier.js
   adblockplus/lib/filterClasses.js
