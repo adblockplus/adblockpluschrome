@@ -58,45 +58,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "Permet alguna publicitat no instrusiva"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Afegeix"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Afegir una altra subscripció"
-  },
-  "filters_addSubscription_label": {
-    "message": "Afegir subscripció al filtre"
-  },
-  "filters_readMore_label": {
-    "message": "Llegeix-ne més"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Suprimeix"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Activat"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Error, el checksum no concorda"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Fallada, error en la descàrrega"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Descarregant..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Fallada, no és una llista vàlida de filtres"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Fallada, no és una adreça vàlida"
-  },
-  "filters_viewList_label": {
-    "message": "Mira la llista"
-  },
   "firstRun_acceptableAdsExplanation": {
     "message": "<strong>L'AdBlock Plus sempre blocarà els anuncis estressants.</strong>Tanmateix, volem animar les pàgines web a utilitzar anuncis no intrusius. Aquesta és la raó per la qual hem establert <a>uns patrons estrictes</a> per identificar els anuncis acceptables, i permetre'ls al web . Sempre pots <a>desactivar</a> això si vols blocar tots els anuncis."
   },
@@ -147,12 +108,6 @@
   "general": {
     "message": "General"
   },
-  "global_remove_subscription_warning": {
-    "message": "Realment desitges eliminar aquesta subscripció?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "La llista de filtres no és una URL vàlida ni un nom de fitxer vàlid."
-  },
   "last_updated_at": {
     "message": "Última actualització a les $time$ a $date$",
     "placeholders": {
@@ -172,9 +127,6 @@
       }
     }
   },
-  "name": {
-    "message": "AdBlock Plus"
-  },
   "new_filters_added": {
     "message": "S'han afegit nous filtres; mira les<a id='options_url' target='_blank'>opcions</a> per gestionar-los."
   },
@@ -183,9 +135,6 @@
   },
   "out_of_date_lists": {
     "message": "Les llistes obsoletes són actualitzades periòdicament."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Amaga les localitzacions dels elements bloquejats"
   },
   "remove_button": {
     "message": "Suprimeix els seleccionats"
@@ -196,14 +145,8 @@
   "show_icon": {
     "message": "Mostra la icona a la barra d'adreces"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Filtra la localització de la llista:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Si us plau tria una subscripció de filtre a la llista:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Títol de la subscripció:"
   },
   "update_now": {
     "message": "Actualitza ara"

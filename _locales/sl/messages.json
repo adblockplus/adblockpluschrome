@@ -1,56 +1,5 @@
 {
-  "filters_addSubscriptionAdd_label": {
-    "message": "Dodaj"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Dodaj novo naročnino"
-  },
-  "filters_addSubscription_label": {
-    "message": "Dodaj naročnino filtra"
-  },
-  "filters_readMore_label": {
-    "message": "Preberi več"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Izbriši"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Omogočeno"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Neuspešno, kontrolna vsota se ne ujema"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Neuspešno, napaka prenosa"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Prenos s strežnika ..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Neuspešno, ni veljaven seznam filtrov"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Neuspešno, ni veljaven naslov"
-  },
-  "filters_viewList_label": {
-    "message": "Pokaži seznam"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Želite res odpovedati naročnino?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Mesto seznama filtrov ni niti veljaven URL niti veljavno ime datoteke."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Skrij ograde blokoranih elementov"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Mesto seznama filtriranja:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Izberite naročnino na filter s seznama:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Naslov naročnine:"
   }
 }

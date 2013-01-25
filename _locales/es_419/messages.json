@@ -58,45 +58,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "Permitir publicidad no hostigadora"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Agregar"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Agregar un filtro de suscripción"
-  },
-  "filters_addSubscription_label": {
-    "message": "Agregar suscripción de filtros"
-  },
-  "filters_readMore_label": {
-    "message": "Leer más"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Eliminar"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Habilitado"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Falló, el archivo de suma de comprobación no coincide"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Falló, error en la descarga"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Descargando..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Falló, no es una lista de filtros válida"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Falló, no es una dirección válida"
-  },
-  "filters_viewList_label": {
-    "message": "Ver lista"
-  },
   "firstRun_acceptableAdsExplanation": {
     "message": "<strong>Adblock Plus siempre bloqueará publicidades molestas.</strong> Aún así, queremos alentar a que los propietarios de sitios web a que utilicen publicidad no hostigadora y estática en los mismos. Por eso hemos establecido <a>guías estrictas</a> para identificar publicidades aceptables y permitir estas de modo predeterminado. Siempre vas a poder <a>deshabilitar</a> esto si querés bloquear todas las publicidades."
   },
@@ -147,12 +108,6 @@
   "general": {
     "message": "General"
   },
-  "global_remove_subscription_warning": {
-    "message": "¿Estás seguro de querer quitar esta suscripción?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "La ubicación de lista de filtros no es válida, o no es válido el nombre de archivo."
-  },
   "last_updated_at": {
     "message": "Última actualización a las $time$ del $date$",
     "placeholders": {
@@ -172,9 +127,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "new_filters_added": {
     "message": "Se agregaron nuevos filtros; andá a <a id='options_url' target='_blank'>Opciones</a> para administrarlos."
   },
@@ -183,9 +135,6 @@
   },
   "out_of_date_lists": {
     "message": "Las listas desactualizadas se actualizan periódicamente."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Colapsar elementos bloqueados"
   },
   "remove_button": {
     "message": "Quitar lo seleccionado"
@@ -196,14 +145,8 @@
   "show_icon": {
     "message": "Mostrar ícono en la barra de direcciones"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Ubicación de la lista de filtros:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor, seleccioná una suscripción de la lista:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Título de suscripción:"
   },
   "update_now": {
     "message": "Actualizar ahora"

@@ -1,53 +1,5 @@
 {
-  "filters_addSubscriptionAdd_label": {
-    "message": "Додати"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Додати іншу підписку"
-  },
-  "filters_addSubscription_label": {
-    "message": "Додати підписку"
-  },
-  "filters_readMore_label": {
-    "message": "Детальніше"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Видалити"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Увімкнено"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Помилка, не збіглась контрольна сума"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Помилка, неможливо викачати"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Завантажується…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Помилка, не список фільтрів"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Помилка, невірна адреса"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Ви впевнені, що хочете вилучити цю підписку?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Не вдалося розпізнати введену адресу ні як інтернет адресу, ні як шлях до файлу."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Приховувати замінники заблокованих елементів"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Адреса списку фільтрів:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Будь ласка виберіть фільтрову підписку з переліку:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Назва підписки:"
   }
 }

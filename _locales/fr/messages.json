@@ -58,45 +58,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "Autoriser certaines publicité non-intrusives"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Ajouter"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Ajouter un autre abonnement"
-  },
-  "filters_addSubscription_label": {
-    "message": "S'abonner à la liste de filtres"
-  },
-  "filters_readMore_label": {
-    "message": "En apprendre davantage"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Supprimer"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Activé"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Échec, le checksum ne correspond pas !"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Échec, erreur lors du téléchargement !"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Téléchargement en cours…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Échec, ceci n'est pas une liste de filtres valide !"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Échec, ceci n'est pas une adresse valide !"
-  },
-  "filters_viewList_label": {
-    "message": "Afficher la liste"
-  },
   "firstRun_acceptableAdsExplanation": {
     "message": "<strong>Adblock Plus bloquera toujours les publicités invasives.</strong> Malgré tout, nous voulons encourager les sites Web utilisant des publicités simples et non-intrusives. C'est pourquoi nous avons établi <a>des règles d'utilisation rigoureuses</a> pour identifier les publicités acceptables et leurs permettre d'exister. Vous pouvez toujours <a>désactiver</a> cette fonctionnalité si vous souhaitez bloquer toutes les publicités."
   },
@@ -147,12 +108,6 @@
   "general": {
     "message": "Général"
   },
-  "global_remove_subscription_warning": {
-    "message": "Souhaitez-vous vraiment supprimer cet abonnement?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "L'adresse indiquant l'emplacement de la liste de filtres n'est ni une URL valide, ni un nom de fichier valide."
-  },
   "last_updated_at": {
     "message": "Dernière actualisation le $date$ à $time$",
     "placeholders": {
@@ -172,9 +127,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "new_filters_added": {
     "message": "Nouveaux filtres ajoutés ; Allez dans les <a id='options_url' target='_blank'>Options</a> pour les gérer."
   },
@@ -183,9 +135,6 @@
   },
   "out_of_date_lists": {
     "message": "Les listes périmées seront actualisées périodiquement."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Masquer les conteneurs des éléments bloqués"
   },
   "remove_button": {
     "message": "Supprimer la sélection"
@@ -196,14 +145,8 @@
   "show_icon": {
     "message": "Afficher l’icône dans la barre d'adresse"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Emplacement de la liste :"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Veuillez choisir un abonnement dans la liste suivante :"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Nom de l'abonnement :"
   },
   "update_now": {
     "message": "Actualiser maintenant"

@@ -52,45 +52,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "السماح لبعض الإعلانات الغير متطفّلة"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "اضافة"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "إضافة اشتراك آخر"
-  },
-  "filters_addSubscription_label": {
-    "message": "إضافة اشتراك إلى فلتر"
-  },
-  "filters_readMore_label": {
-    "message": "قراءة المزيد"
-  },
-  "filters_subscription_delete_label": {
-    "message": "ازالة"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "مفعّل"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "فشل ، عدم تطابق المجموع الاختباري"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "فشل الأمر بسبب فشل التحميل"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "جاري التحميل"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "فشل الأمر، ليست قائمة فلاتر صحيحة"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "فشل الأمر، ليس عنوان صحيح"
-  },
-  "filters_viewList_label": {
-    "message": "اظهار القائمة"
-  },
   "found_a_bug": {
     "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.",
     "placeholders": {
@@ -101,12 +62,6 @@
   },
   "general": {
     "message": "عـام"
-  },
-  "global_remove_subscription_warning": {
-    "message": "هل أنت حقاً راغب بإزالة هذا الاشتراك؟"
-  },
-  "global_subscription_invalid_location": {
-    "message": "موقع قائمة الفلتر ليس صحيح كعنوان ويب و لا كأسم ملف"
   },
   "last_updated_at": {
     "message": "أخر تحديث في $time$ on $date$",
@@ -127,9 +82,6 @@
       }
     }
   },
-  "name": {
-    "message": "آدبلوك بلس"
-  },
   "new_filters_added": {
     "message": "تم إضافة فلتر جديد; انظر <a id='options_url' target='_blank'>الخصائص</a> للتحكم بها."
   },
@@ -139,23 +91,14 @@
   "out_of_date_lists": {
     "message": "القوائم القديمة تحدث دورياً."
   },
-  "overlay_hideplaceholders_label": {
-    "message": "اخفاء ماسك المكان للعناصر الموقوفة"
-  },
   "remove_button": {
     "message": "حذف المختارة"
   },
   "show_icon": {
     "message": "أظهر الأيقونة في شريط العنوان"
   },
-  "subscriptionSelection_location_label": {
-    "message": "موقع قائمة الفلاتر"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "الرجاء اختيار اشتراك فلتر من القائمة:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "عنوان الاشتراك"
   },
   "update_now": {
     "message": "التحديث الان"

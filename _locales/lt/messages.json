@@ -58,45 +58,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "Leisti neįkyrias reklamas"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Pridėti"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Pridėti kitą prenumeratą"
-  },
-  "filters_addSubscription_label": {
-    "message": "Pridėti filtro prenumeratą"
-  },
-  "filters_readMore_label": {
-    "message": "Plačiau"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Ištrinti"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Įjungta"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Nepavyko, bloga kontrolinė suma"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Nepavyko, atsiuntimo klaida"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Atsiunčiama..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Nepavyko, netinkamas filtrų sąrašas"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Nepavyko, netinkamas adresas"
-  },
-  "filters_viewList_label": {
-    "message": "Peržiūrėti sąrašą"
-  },
   "firstRun_acceptableAdsExplanation": {
     "message": "<strong>Adblock Plus visada blokuos erzinančias reklamas.</strong> Nepaisant to mes skatiname tinklapius naudoti paprastą nekrentančią į akis reklamą. Todėl mes sukūrėme <a>griežtas gaires</a> kurios padės atpažinti priimtinas reklamas ir leis jas be jokių konfigūravimų. Jūs visada galite <a>išjungti</a> tai jei norite blokuoti visas reklamas."
   },
@@ -147,12 +108,6 @@
   "general": {
     "message": "Bendra"
   },
-  "global_remove_subscription_warning": {
-    "message": "Ar tikrai norite atsisakyti šios prenumeratos?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Filtrų sąrašo adresas nėra taisyklingas URL ar failo vardas."
-  },
   "last_updated_at": {
     "message": "Paskutinį kartą atnaujinta $date $time",
     "placeholders": {
@@ -172,9 +127,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "new_filters_added": {
     "message": "Pridėti nauji filtrai; juos tvarkyti galite <a id='options_url' target='_blank'>parinktyse</a>."
   },
@@ -183,9 +135,6 @@
   },
   "out_of_date_lists": {
     "message": "Pasenę sąrašai periodiškai atnaujinami."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Slėpti užblokuotų elementų vietos laikiklius"
   },
   "remove_button": {
     "message": "Pašalinti pasirinktą"
@@ -196,14 +145,8 @@
   "show_icon": {
     "message": "Adreso juostoje rodyti piktogramą"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Filtrų sąrašo vieta:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Pasirinkite filtro prenumeratą iš šio sąrašo:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Prenumeratos pavadinimas:"
   },
   "update_now": {
     "message": "Atnaujinti"

@@ -58,45 +58,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "Enkele niet-opdringerige advertenties toestaan"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Toevoegen"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Een ander abonnement toevoegen"
-  },
-  "filters_addSubscription_label": {
-    "message": "Filterabonnement toevoegen"
-  },
-  "filters_readMore_label": {
-    "message": "Lees meer"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Verwijderen"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Ingeschakeld"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Mislukt, afwijkend controlecijfer"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Mislukt, downloadprobleem"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Downloaden…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Mislukt, geen geldige filterlijst"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Mislukt, geen geldig adres"
-  },
-  "filters_viewList_label": {
-    "message": "Lijst bekijken"
-  },
   "firstRun_acceptableAdsExplanation": {
     "message": "<strong>Adblock Plus zal altijd irritante advertenties blokkeren.</strong> Toch willen we websites met simpele en onopvallende advertenties tegemoet komen. Daarom hebben wij <a>strikte richtlijnen</a> om Acceptabele Advertenties te identificeren en standaard toe te laten. Wanneer je alle advertenties wil blokkeren kan je deze functie altijd <a>uitschakelen</a>."
   },
@@ -147,12 +108,6 @@
   "general": {
     "message": "Algemeen"
   },
-  "global_remove_subscription_warning": {
-    "message": "Weet u zeker dat u dit abonnement wilt verwijderen?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Deze filterlijstlocatie is geen geldige URL en ook geen geldige bestandsnaam."
-  },
   "last_updated_at": {
     "message": "Laatst bijgewerkt op $time$ op $date$",
     "placeholders": {
@@ -172,9 +127,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "new_filters_added": {
     "message": "Nieuwe filters toegevoegd; Zie <a id='options_url' target='_blank'> Opties</a> om ze te beheren."
   },
@@ -183,9 +135,6 @@
   },
   "out_of_date_lists": {
     "message": "Verouderde lijsten worden regelmatig bijgewerkt."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Plaatshouders van geblokkeerde elementen verbergen"
   },
   "remove_button": {
     "message": "Verwijder geselecteerde"
@@ -196,14 +145,8 @@
   "show_icon": {
     "message": "Pictogram in de adresbalk weergeven"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Filterlijstlocatie:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Kies a.u.b. een filterabonnement uit de lijst:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Abonnementstitel:"
   },
   "update_now": {
     "message": "Nu bijwerken"

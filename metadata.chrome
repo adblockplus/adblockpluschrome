@@ -53,11 +53,11 @@ qunit/tests/adblockplus.js = adblockplustests/chrome/content/tests/domainRestric
   adblockplustests/chrome/content/tests/subscriptionClasses.js
   --arg source_repo=https://hg.adblockplus.org/adblockplustests/
 
-[locale_sync]
-global.properties = subscription_invalid_location
+[import_locales]
+adblockplus/chrome/locale/*/global.properties = subscription_invalid_location
   remove_subscription_warning
-overlay.dtd = hideplaceholders.label
-filters.dtd = subscription.lastDownload.inProgress
+adblockplus/chrome/locale/*/overlay.dtd = hideplaceholders.label
+adblockplus/chrome/locale/*/filters.dtd = subscription.lastDownload.inProgress
   subscription.lastDownload.invalidURL
   subscription.lastDownload.connectionError
   subscription.lastDownload.invalidData
@@ -70,6 +70,6 @@ filters.dtd = subscription.lastDownload.inProgress
   acceptableAds2.label
   viewList.label
   readMore.label
-subscriptionSelection.dtd = location.label
+adblockplus/chrome/locale/*/subscriptionSelection.dtd = location.label
   title.label
-remove = hovercraft
+adblockplus/chrome/locale/*/meta.properties = =name

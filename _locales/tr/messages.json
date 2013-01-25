@@ -58,45 +58,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "Rahatsız etmeyen bazı reklamlara izin ver"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Ekle"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Başka abonelik ekle"
-  },
-  "filters_addSubscription_label": {
-    "message": "Süzgeç aboneliği ekle"
-  },
-  "filters_readMore_label": {
-    "message": "Daha fazla bilgi al"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Sil"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Devrede"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Başarısız, checksum eşleşmedi"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Olmadı. İndirmede sorun var."
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "İndiriliyor..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Olmadı. Bu düzgün bir süzgeç listesi değil."
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Olmadı. Bu geçerli bir adres değil."
-  },
-  "filters_viewList_label": {
-    "message": "Listeye bak"
-  },
   "firstRun_acceptableAdsExplanation": {
     "message": "<strong>Adblock Plus tüm rahatsız edici reklamları engeller.</strong> Ayrıca siteleri rahatsız etmeyen reklamlar koymaya teşvik ediyoruz. <a>katı kurallar</a> koyarak reklamları engellememizin sebebi bu,ve eğer siteler rahatsız etmeyen reklamlar koyarsalar onları destek amaçlı o reklamları engellemeyiz . Tabi ki <a>bu özelliği kapatarak</a> tüm reklamları engelleyebilirsiniz."
   },
@@ -147,12 +108,6 @@
   "general": {
     "message": "Genel"
   },
-  "global_remove_subscription_warning": {
-    "message": "Gerçekten abonelikten çıkmak istiyor musunuz?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Dosya listesi konumu ne düzgün bir URL ne de düzgün bir ada sahip."
-  },
   "last_updated_at": {
     "message": "En son $date$ $time$'de güncellendi",
     "placeholders": {
@@ -172,9 +127,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "new_filters_added": {
     "message": "Yeni filtreler eklendi; Onları düzenlemek için<a id='options_url' target='_blank'>Seçeneklere</a> bakın."
   },
@@ -183,9 +135,6 @@
   },
   "out_of_date_lists": {
     "message": "Zamanı geçmiş listeler düzenli olarak güncellenmektedir."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Engellenen öğelerin yer işaretlerini gizle"
   },
   "remove_button": {
     "message": "Seçili olanı kaldır"
@@ -196,14 +145,8 @@
   "show_icon": {
     "message": "İkonu adres çubuğunda göster."
   },
-  "subscriptionSelection_location_label": {
-    "message": "Süzgeç listesi konumu:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lütfen listeden bir süzgeç aboneliği seçin:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Aboneliğin adı:"
   },
   "update_now": {
     "message": "Şimdi güncelleştir"

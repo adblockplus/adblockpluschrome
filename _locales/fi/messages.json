@@ -52,45 +52,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "Salli osa ei-häiritsevästä mainonnasta"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Lisää"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Lisää jokin muu tilaus"
-  },
-  "filters_addSubscription_label": {
-    "message": "Lisää suodatintilaus"
-  },
-  "filters_readMore_label": {
-    "message": "Lue lisää"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Poista"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Käytössä"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Epäonnistui, tarkistussumma ei täsmää"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Epäonnistui, latausvirhe"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Lataa..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Epäonnistui, kelvoton suodatinlista"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Epäonnistui, kelvoton osoite"
-  },
-  "filters_viewList_label": {
-    "message": "Näytä lista"
-  },
   "found_a_bug": {
     "message": "Löysitkö vian? Haluatko kääntää Adblock Plusin omalle kielellesi? Ole hyvä ja <a href='$url$'>kirjoita hakemus täällä</a>.",
     "placeholders": {
@@ -101,12 +62,6 @@
   },
   "general": {
     "message": "Yleiset"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Haluatko varmasti poistaa tämän tilauksen?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Suodatinlistan sijainti on joko kelvoton osoite tai tiedoston nimi."
   },
   "last_updated_at": {
     "message": "Viimeksi päivitetty $time$ $date$",
@@ -136,23 +91,14 @@
   "out_of_date_lists": {
     "message": "Vanhentuneet listat päivitetään säännöllisesti."
   },
-  "overlay_hideplaceholders_label": {
-    "message": "Piilota elementit, jotka sisältävät estettyjä elementtejä"
-  },
   "remove_button": {
     "message": "Poista valitut"
   },
   "show_icon": {
     "message": "Näytä kuva osoiterivillä"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Listan sijainti:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Valitse suodatintilaus listasta:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Tilauksen nimi:"
   },
   "update_now": {
     "message": "Päivitä nyt"
