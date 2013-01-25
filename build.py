@@ -4,4 +4,4 @@
 import os, sys, subprocess
 
 import buildtools.build
-buildtools.build.processArgs('.', sys.argv, type='chrome')
+buildtools.build.processArgs('.', sys.argv)
