@@ -58,45 +58,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "אפשור קצת פרסום לא פולשני"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "הוספה"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "הוספת הרשמה אחרת"
-  },
-  "filters_addSubscription_label": {
-    "message": "הוספת הרשמת מסנן"
-  },
-  "filters_readMore_label": {
-    "message": "לקרוא עוד"
-  },
-  "filters_subscription_delete_label": {
-    "message": "מחיקה"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "מאפשר"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "נכשל, ביקורת הסיכום לתקינות לא התאימה בצורה טובה"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "נכשל, ההורדה נכשלה"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "מוריד..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "נכשל, רשימת המסננים לא חוקית"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "נכשל, הכתובת שגויה"
-  },
-  "filters_viewList_label": {
-    "message": "הצגת רשימה"
-  },
   "firstRun_acceptableAdsExplanation": {
     "message": "<strong> Adblock Plus תמיד יחסום מודעות מעצבנות. </ strong> ובכל זאת, אנחנו רוצים לעודד אתרים המשתמשים בפרסום רגיל, לא פולשני, ולא מעצבן. זו הסיבה שבנינו הנחיות קפדניות <a> </ a> כדי לזהות מודעות מקובלות, ולאפשר את הפרסומות שעומדות בתנאים. אתה תמיד יכול לבטל את אפשר פרסום לא פולשני <a> </ a> אם אתה רוצה לחסום את כל המודעות."
   },
@@ -147,12 +108,6 @@
   "general": {
     "message": "כללי"
   },
-  "global_remove_subscription_warning": {
-    "message": "האם להסיר את ההרשמה הזאת?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "מיקום רשימת הסינון איננו כתובת אתר חוקית ולא שם קובץ חוקי."
-  },
   "last_updated_at": {
     "message": "עודכן לאחרונה בשעה $time$ בתאריך $date$",
     "placeholders": {
@@ -172,9 +127,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "new_filters_added": {
     "message": "נוספו מסננים חדשים: ניתן לנהל אותם דרך <a id='options_url' target='_blank'>אפשרויות</a>."
   },
@@ -183,9 +135,6 @@
   },
   "out_of_date_lists": {
     "message": "הרשימות מתעדכנות באופן אוטומטי."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "הסתרת מצייני מקום של אלמנטים חסומים"
   },
   "remove_button": {
     "message": "מחיקת המסומנים"
@@ -196,14 +145,8 @@
   "show_icon": {
     "message": "הראה סמל בשורת כתובות "
   },
-  "subscriptionSelection_location_label": {
-    "message": "מיקום רשימת המסננים:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "יש לבחור הרשמת מסנן מהרשימה:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "כותרת ההרשמה:"
   },
   "update_now": {
     "message": "עדכן עכשיו"

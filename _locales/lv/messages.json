@@ -55,27 +55,6 @@
       }
     }
   },
-  "filters_addSubscriptionOther_label": {
-    "message": "Pievienot citu abonementu"
-  },
-  "filters_addSubscription_label": {
-    "message": "Pievienot filtra abonēšanu"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Neizdevās, kontrolsummas neatbilstība"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Neizdevās, lejupielāde neizdevās"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Lejupielādē..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Neizdevās, nav derīgs filtru saraksts"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Neizdevās, nav derīga adrese"
-  },
   "found_a_bug": {
     "message": "Atradi defektu? Vēlies iztulkot Adblock Plus savā valodā? Lūdzu <a href='$url$'>iesniedz pieprasījumu šeit</a>.",
     "placeholders": {
@@ -86,12 +65,6 @@
   },
   "general": {
     "message": "Vispārīgi"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Vai Jūs tiešām vēlaties noņemt šo abonementu?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Filtru saraksta atrašanās vieta nav ne derīgs URL ne arī derīgs faila nosaukums."
   },
   "last_updated_at": {
     "message": "Pēdējo reiz atjaunināts $time$ $date$",
@@ -130,14 +103,8 @@
   "show_icon": {
     "message": "Rādīt ikonu adreses joslā"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Filtru saraksta atrašanās vieta:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lūdzu, izvēlieties filtru abonementu no saraksta:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Abonementa nosaukums:"
   },
   "update_now": {
     "message": "Atjaunināt tagad"

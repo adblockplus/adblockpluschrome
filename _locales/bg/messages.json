@@ -1,59 +1,5 @@
 {
-  "filters_acceptableAds2_label": {
-    "message": "Оставете някои не натрапчиви реклами"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Добави"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Добави друг абонамент"
-  },
-  "filters_addSubscription_label": {
-    "message": "Добави абонамент за филтър"
-  },
-  "filters_readMore_label": {
-    "message": "Прочети повече"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Изтрий"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Включен"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Грешка, несъвпадение на контролната сума"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Грешка, неуспешно изтегляне"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Изтегляне..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Грешка, невалиден списък с филтри"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Грешка, невалиден адрес"
-  },
-  "filters_viewList_label": {
-    "message": "Виж лист"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Наистина ли искате да премахнете този абонамент?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Местоположението на списъка с филтри или не е валиден URL или не е валидно името на файла."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Скрий контейнери на блокираните елементи"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Местоположение на списъка с филтрите:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Моля изберете абонамент за филтър от списъка:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Заглавие на абонамента:"
   }
 }

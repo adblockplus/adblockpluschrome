@@ -55,27 +55,6 @@
       }
     }
   },
-  "filters_addSubscriptionOther_label": {
-    "message": "Thêm bộ lọc trọn gói khác"
-  },
-  "filters_addSubscription_label": {
-    "message": "Thêm bộ lọc trọn gói"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Thất bại, mã băm không phù hợp"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Thất bại, tải xuống thất bại"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Đang tải..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Thất bại, không phải là danh sách bộ lọc hợp lệ"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Thất bại, không phải là địa chỉ hợp lệ"
-  },
   "found_a_bug": {
     "message": "Bạn phát hiện thấy lỗi? Bạn muuốn dịch Adblock Plus sang ngôn ngữ của bạn? Hãy <a href='$url$'>gửi yêu cầu tại đây</a>.",
     "placeholders": {
@@ -86,12 +65,6 @@
   },
   "general": {
     "message": "Tổng quan"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Bạn có thật sự muốn xóa bộ trọn gói này không?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Địa chỉ để tải bộ lọc không phải là một URL hay tên tập tin hợp lệ."
   },
   "last_updated_at": {
     "message": "cập nhật lần cuối cùng lúc $time$ vào ngày $date$",
@@ -122,14 +95,8 @@
   "show_icon": {
     "message": "Hiển thị biểu tượng ở thanh địa chỉ"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Địa chỉ của danh sách bộ lọc:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vui lòng chọn một bộ lọc trọn gói từ danh sách:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Tiêu đề của bộ trọn gói:"
   },
   "update_now": {
     "message": "cập nhật ngay"

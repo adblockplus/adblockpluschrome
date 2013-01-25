@@ -58,45 +58,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "Dopusti neke nenametljive reklame"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Dodaj"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Dodaj drugu pretplatu"
-  },
-  "filters_addSubscription_label": {
-    "message": "Dodaj pretplatu filtera"
-  },
-  "filters_readMore_label": {
-    "message": "Pročitaj više"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Obriši"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Omogućen"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Neuspješno, neusklađenost checksum-a."
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Neuspješno, greška preuzimanja"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Preuzimanje..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Neuspješno, neispravan popis filtera"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Neuspješno, neispravna adresa"
-  },
-  "filters_viewList_label": {
-    "message": "Pogledaj popis"
-  },
   "firstRun_acceptableAdsExplanation": {
     "message": "<strong>Adblock Plus će uvijek blokirati nametljive reklame.</strong> Ipak, mi želimo ohrabriti web stranice da koriste jednostavne i nenametljive reklame. Zato smo osmislili <a>stroge smjernice</a> za prepoznavanje prihvatljivih reklama i omogućili ih izvan zadanih okvira. Uvijek možete to <a>onemogućiti</a> ako želite blokirati sve reklame."
   },
@@ -147,12 +108,6 @@
   "general": {
     "message": "Općenito"
   },
-  "global_remove_subscription_warning": {
-    "message": "Želite li stvarno ukloniti ovu pretplatu?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Lokacija popisa filtera nije niti valjana web adresa niti naziv datoteke."
-  },
   "last_updated_at": {
     "message": "Posljednji put je ažurirano $date$ u $time$",
     "placeholders": {
@@ -172,9 +127,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "new_filters_added": {
     "message": "Novi filter je dodan; pogledajte <a id='options_url' target='_blank'>Mogućnosti</a> za upravljanje sa njima."
   },
@@ -183,9 +135,6 @@
   },
   "out_of_date_lists": {
     "message": "Zastarjeli popis se ažurira povremeno."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Sakrij rezervirana mjesta blokiranih elemenata"
   },
   "remove_button": {
     "message": "Ukloni odabrano"
@@ -196,14 +145,8 @@
   "show_icon": {
     "message": "Prikaži ikonu u adresnoj traci"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Lokacija popisa filtera:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Molimo odaberite pretplatu na filter sa popisa:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Naslov pretplate:"
   },
   "update_now": {
     "message": "Ažuriraj odmah"

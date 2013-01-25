@@ -20,45 +20,6 @@
   "filter_lists": {
     "message": "Flitrite nimekirjad"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Luba mõned mittepealetükkivad reklaamid"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Lisa"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Lisa muu tellimus"
-  },
-  "filters_addSubscription_label": {
-    "message": "Lisa filtrite tellimus"
-  },
-  "filters_readMore_label": {
-    "message": "Loe lisaks"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Kustuta"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Lubatud"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Nurjus, kontrollsumma ei klapi"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Nurjus, allalaadimise viga"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Laen alla..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Nurjus, vale filtrite nimekiri"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Nurjus, vale aadress"
-  },
-  "filters_viewList_label": {
-    "message": "Vaata loetelu"
-  },
   "firstRun_feature_betterSurfing": {
     "message": "Naudi veebi ilma tüütute kuulutuste"
   },
@@ -80,29 +41,11 @@
   "general": {
     "message": "Üldine"
   },
-  "global_remove_subscription_warning": {
-    "message": "Kas oled kindel, et soovid selle tellimuse eemaldata?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Filtrite nimekirja asukoht on kas vigane URL või failinimi."
-  },
-  "name": {
-    "message": "AdBlock Plus"
-  },
   "options": {
     "message": "AdBlock Plus Valikud"
   },
-  "overlay_hideplaceholders_label": {
-    "message": "Peida blokeeritud elementide kohatäitjad"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Filtrite nimekirja asukoht:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vali nimekirjast sobiv filtrite tellimus:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Tellimuse pealkiri:"
   },
   "update_now": {
     "message": "Värskenda kohe"

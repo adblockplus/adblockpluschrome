@@ -58,45 +58,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "Zezwalaj na nie natrętne reklamy"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Dodaj"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Wybierz inny zestaw"
-  },
-  "filters_addSubscription_label": {
-    "message": "Dodaj zestaw filtrów"
-  },
-  "filters_readMore_label": {
-    "message": "Dowiedz się więcej"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Usuń"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Aktywny"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Nie powiodło się – niepoprawna suma kontrolna"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Nie powiodło się – błąd pobierania"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Pobieranie…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Nie powiodło się – nieprawidłowy zestaw filtrów"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Nie powiodło się – nieprawidłowy adres"
-  },
-  "filters_viewList_label": {
-    "message": "Zobacz listę"
-  },
   "firstRun_acceptableAdsExplanation": {
     "message": "<strong>Adblock Plus będzie zawsze blokował irytujące reklamy</strong>, niemniej umożliwiliśmy witrynom wyświetlającym proste i dyskretne reklamy na ich wyświetlanie. Dlatego określiliśmy <a>ścisłe wytyczne</a> umożliwiające precyzyjną identyfikację akceptowanych reklam i ich wyświetlanie. Jeśli chcesz blokować wszystkie reklamy, możesz w każdej chwil tę możliwość <a>wyłączyć</a>."
   },
@@ -147,12 +108,6 @@
   "general": {
     "message": "Ogólne"
   },
-  "global_remove_subscription_warning": {
-    "message": "Czy chcesz usunąć ten zestaw?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Lokalizacja zestawu filtrów ma niewłaściwą nazwę pliku, albo adres URL"
-  },
   "last_updated_at": {
     "message": "Ostatnia aktualizacja: $date$ o $time$",
     "placeholders": {
@@ -172,9 +127,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "new_filters_added": {
     "message": "Dodano nowe filtry. By nimi zarządzać zajrzyj do <a id='options_url' target='_blank'>ustawień</a>."
   },
@@ -183,9 +135,6 @@
   },
   "out_of_date_lists": {
     "message": "Nieaktualne zestawy filtrów są uaktualniane okresowo."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Ukrywaj zamienniki blokowanych elementów"
   },
   "remove_button": {
     "message": "Usuń zaznaczone"
@@ -196,14 +145,8 @@
   "show_icon": {
     "message": "Pokazuj ikonę w pasku adresu"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Lokalizacja zestawu:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Wybierz z listy zestaw filtrów:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Nazwa zestawu:"
   },
   "update_now": {
     "message": "Aktualizuj teraz"

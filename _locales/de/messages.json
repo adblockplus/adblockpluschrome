@@ -58,45 +58,6 @@
       }
     }
   },
-  "filters_acceptableAds2_label": {
-    "message": "Einige nicht aufdringliche Werbung zulassen"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Hinzufügen"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Anderes Abonnement hinzufügen"
-  },
-  "filters_addSubscription_label": {
-    "message": "Filterabonnement hinzufügen"
-  },
-  "filters_readMore_label": {
-    "message": "Mehr Information"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Löschen"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Aktiv"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Fehler, Prüfsumme ist falsch, möglicherweise ein Übertragungsfehler"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Fehler, Download fehlgeschlagen"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Wird heruntergeladen..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Fehler, keine gültige Filterliste"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Fehler, ungültige Adresse"
-  },
-  "filters_viewList_label": {
-    "message": "Liste öffnen"
-  },
   "firstRun_acceptableAdsExplanation": {
     "message": "<strong>Adblock Plus wird nervige Werbung immer blockieren.</strong> Wir wollen dennoch Webseiten unterstützen, die auf einfache und unaufdringliche Werbung setzen. Deshalb haben wir <a>strikte Richtlinien</a> für akzeptable Werbung festgelegt, die von uns standardmäßig erlaubt wird. Sie können dies jederzeit <a>abschalten</a>, wenn Sie trotzdem jede Werbung blockieren wollen."
   },
@@ -147,12 +108,6 @@
   "general": {
     "message": "Allgemein"
   },
-  "global_remove_subscription_warning": {
-    "message": "Sind Sie sicher, dass Sie dieses Abonnement entfernen möchten?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Die eingegebene Adresse ist weder eine gültige Web-Adresse, noch ein gültiger Dateiname."
-  },
   "last_updated_at": {
     "message": "Zuletzt aktualisiert: $date$ um $time$",
     "placeholders": {
@@ -172,9 +127,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "new_filters_added": {
     "message": "Neue Filter hinzugefügt; klicken Sie auf <a id='options_url' target='_blank'>Optionen</a> um sie zu verwalten."
   },
@@ -183,9 +135,6 @@
   },
   "out_of_date_lists": {
     "message": "Abgelaufene Filterlisten werden regelmäßig aktualisiert."
-  },
-  "overlay_hideplaceholders_label": {
-    "message": "Platzhalter blockierter Elemente verstecken"
   },
   "remove_button": {
     "message": "Ausgewählte entfernen"
@@ -196,14 +145,8 @@
   "show_icon": {
     "message": "Zeige Icon in der Adressleiste"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Adresse der Filterliste:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Bitte wählen Sie ein Filterabonnement aus der Liste aus:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Bezeichnung des Abonnements:"
   },
   "update_now": {
     "message": "Jetzt aktualisieren"
