@@ -30,7 +30,11 @@ function setElemhideCSSRules(selectors)
 
   elemhideElt = document.createElement("style");
   elemhideElt.setAttribute("type", "text/css");
-  document.documentElement.appendChild(elemhideElt);
+
+  // Try to insert the style into the <head> tag, inserting directly under the
+  // document root breaks dev tools functionality:
+  // http://code.google.com/p/chromium/issues/detail?id=178109
+  (document.head || document.documentElement).appendChild(elemhideElt);
 
   var elt = elemhideElt;  // Use a local variable to avoid racing conditions
   function setRules()
