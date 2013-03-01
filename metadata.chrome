@@ -10,6 +10,7 @@ backgroundScripts = lib/adblockplus_compat.js
   lib/jsbn.js
   lib/rsa.js
   webrequest.js
+  popupBlocker.js
   background.js
 permissions = tabs
   http://*/*
