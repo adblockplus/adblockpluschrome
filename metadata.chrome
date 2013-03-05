@@ -18,6 +18,7 @@ permissions = tabs
   contextMenus
   webRequest
   webRequestBlocking
+  webNavigation
   unlimitedStorage
 options = options.html
 pageAction = icons/abp-19.png popup.html

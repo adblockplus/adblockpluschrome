@@ -17,26 +17,20 @@
 
 var tabsLoading = {};
 
-chrome.tabs.onCreated.addListener(function(tab)
+chrome.webNavigation.onCreatedNavigationTarget.addListener(function(details)
 {
-  if (!("openerTabId" in tab))
-  {
-    // This isn't a pop-up
-    return;
-  }
-
-  if (isFrameWhitelisted(tab.openerTabId, 0))
+  if (isFrameWhitelisted(details.sourceTabId, details.sourceFrameId))
     return;
 
-  var openerUrl = getFrameUrl(tab.openerTabId, 0);
+  var openerUrl = getFrameUrl(details.sourceTabId, details.sourceFrameId);
   if (!openerUrl)
   {
     // We don't know the opener tab
     return;
   }
-  tabsLoading[tab.id] = openerUrl;
+  tabsLoading[details.tabId] = openerUrl;
 
-  checkPotentialPopup(tab, openerUrl);
+  checkPotentialPopup(details.tabId, details.url, openerUrl);
 });
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
@@ -48,19 +42,19 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
   }
 
   if ("url" in changeInfo)
-    checkPotentialPopup(tab, tabsLoading[tabId]);
+    checkPotentialPopup(tabId, tab.url, tabsLoading[tabId]);
 
   if ("status" in changeInfo && changeInfo.status == "complete")
     delete tabsLoading[tabId];
 });
 
 
-function checkPotentialPopup(tab)
+function checkPotentialPopup(tabId, url, opener)
 {
-  var requestHost = extractHostFromURL(tab.url);
-  var documentHost = extractHostFromURL(tabsLoading[tab.id]);
+  var requestHost = extractHostFromURL(url);
+  var documentHost = extractHostFromURL(opener);
   var thirdParty = isThirdParty(requestHost, documentHost);
-  var filter = defaultMatcher.matchesAny(tab.url || "about:blank", "POPUP", documentHost, thirdParty);
+  var filter = defaultMatcher.matchesAny(url || "about:blank", "POPUP", documentHost, thirdParty);
   if (filter instanceof BlockingFilter)
-    chrome.tabs.remove(tab.id);
+    chrome.tabs.remove(tabId);
 }
