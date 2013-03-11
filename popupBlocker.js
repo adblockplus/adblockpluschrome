@@ -44,7 +44,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
   if ("url" in changeInfo)
     checkPotentialPopup(tabId, tab.url, tabsLoading[tabId]);
 
-  if ("status" in changeInfo && changeInfo.status == "complete")
+  if ("status" in changeInfo && changeInfo.status == "complete" && tab.url != "about:blank")
     delete tabsLoading[tabId];
 });
 
