@@ -62,6 +62,7 @@ var typeMap = {
   "input": "IMAGE",
   "audio": "MEDIA",
   "video": "MEDIA",
+  "frame": "SUBDOCUMENT",
   "iframe": "SUBDOCUMENT"
 };
 
@@ -69,7 +70,8 @@ function checkCollapse(event)
 {
   var target = event.target;
   var tag = target.localName;
-  if (tag in typeMap && event.type == (tag == "iframe" ? "load" : "error"))
+  var expectedEvent = (tag == "iframe" || tag == "frame" ? "load" : "error");
+  if (tag in typeMap && event.type == expectedEvent)
   {
     // This element failed loading, did we block it?
     var url = target.src;
@@ -80,7 +82,13 @@ function checkCollapse(event)
     chrome.extension.sendRequest({reqtype: "should-collapse", url: url, documentUrl: document.URL, type: type}, function(response)
     {
       if (response && target.parentNode)
-        target.parentNode.removeChild(target);
+      {
+        // <frame> cannot be removed, doing that will mess up the frameset
+        if (tag == "frame")
+          target.style.setProperty("visibility", "hidden", "!important");
+        else
+          target.parentNode.removeChild(target);
+      }
     });
   }
 }
