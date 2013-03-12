@@ -1,6 +1,6 @@
 {
   "add": {
-    "message": "Afegeix-ne"
+    "message": "Afegeix"
   },
   "add_domain_button": {
     "message": "Afegeix un domini"
@@ -9,10 +9,10 @@
     "message": "Afegeix un filtre"
   },
   "add_filters_msg": {
-    "message": "Afegeixes filtre(s)?"
+    "message": "Voleu afegir els filtres?"
   },
   "add_your_own_filters": {
-    "message": "Afegeix els teus pròpis filtres"
+    "message": "Afegiu els vostres filtres"
   },
   "apply_changes": {
     "message": "Aplica els canvis"
@@ -24,16 +24,13 @@
     "message": "Cancel·la"
   },
   "clickhide_instructions": {
-    "message": "Després de tancar aquest Pop-up, clica (o fes clic amb el botó dret) a un element a la pàgina."
-  },
-  "description": {
-    "message": "Bloca tots els anuncis estressants de la web : Els anuncis de Vídeo del YouTube, els de Facebook, els bànners i molts més."
+    "message": "Després de tancar aquesta finestra, cliqueu sobre un element de la pàgina."
   },
   "disable_inline": {
     "message": "Desactiva els anuncis de text en línia"
   },
   "disabled_for_these_domains": {
-    "message": "L'AdBlock Plus està desactivat per els dominis de la llista de sota. També pots afegir un domini clicant la icona d'AdBlock Plus de la barra d'adreces o bé escribint el domini (no la URL) al quadre de text i clicant el botó \"Afegeix un domini\"."
+    "message": "L'AdBlock Plus està desactivat als dominis de la llista de sota. Podeu afegir un domini clicant la icona d'AdBlock Plus de la barra d'adreces o bé escrivint el domini (no la URL) al quadre de text i clicant \"Afegeix un domini\"."
   },
   "easy_create_filter": {
     "message": "Crea un filtre fàcilment"
@@ -42,7 +39,7 @@
     "message": "Edita els filtres com a text simple"
   },
   "enable_only_the": {
-    "message": "Activa només les llistes de filtres que necessitis. Masses poden fer que Chrome no les processi bé. "
+    "message": "Activeu només les llistes de filtres que necessiteu. Masses poden alentir el Chromium."
   },
   "enabled_for_site": {
     "message": "Activat per aquest lloc"
@@ -51,7 +48,7 @@
     "message": "Llistes de filtres"
   },
   "filter_must_follow_syntax": {
-    "message": "El teu filtre ha de seguir la <a href='$url> Sintaxi de filtres d'Adblock Plus </a>. Certs tipus de filtres, com object-subrequest, no són compatibles.",
+    "message": "El vostre filtre ha de seguir la <a href='$url$'>sintaxi de filtres de l'Adblock Plus</a>. Certs tipus de filtres, com ara els \"object-subrequest\", no són compatibles.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -59,7 +56,7 @@
     }
   },
   "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>L'AdBlock Plus sempre blocarà els anuncis estressants.</strong>Tanmateix, volem animar les pàgines web a utilitzar anuncis no intrusius. Aquesta és la raó per la qual hem establert <a>uns patrons estrictes</a> per identificar els anuncis acceptables, i permetre'ls al web . Sempre pots <a>desactivar</a> això si vols blocar tots els anuncis."
+    "message": "<strong>L'AdBlock Plus sempre blocarà els anuncis estressants.</strong> Tanmateix, volem animar les pàgines web a utilitzar anuncis no intrusius. Aquesta és la raó per la qual hem establert <a>uns patrons estrictes</a> per a identificar els anuncis acceptables, i permetre'ls al web. Sempre ho pots <a>desactivar</a> si vols blocar tots els anuncis."
   },
   "firstRun_changelog": {
     "message": "Mira les novetats"
@@ -68,25 +65,25 @@
     "message": "Es segueix mostrant aquesta pàgina? <a>Clica aquí!</a>"
   },
   "firstRun_feature_acceptableAds": {
-    "message": "Dóna suport als llocs web amb anuncis acceptables (més a continuació)"
+    "message": "Donar suport als llocs web amb anuncis acceptables (més a continuació)"
   },
   "firstRun_feature_betterSurfing": {
-    "message": "Disfruta del web sense anuncis estressants"
+    "message": "Disfrutar de la xarxa sense anuncis estressants"
   },
   "firstRun_feature_videoAds": {
-    "message": "Mira vídeos sense interrupcions publicitàries"
+    "message": "Mirar vídeos sense interrupcions publicitàries"
   },
   "firstRun_features_heading": {
-    "message": "Amb AdBlock Plus tu pots :"
+    "message": "Amb l'AdBlock Plus podreu:"
   },
   "firstRun_share1": {
-    "message": "Creus que val la pena compartir l'AdBlock Plus ? Siusplau fes-ho !"
+    "message": "Creieu que val la pena compartir l'AdBlock Plus? Si us plau, feu-ho!"
   },
   "firstRun_share2": {
-    "message": "L'AdBlock Plus és gratuït i de codi obert. Siusplau, dónan's suport :"
+    "message": "L'AdBlock Plus és gratuït i de codi obert. Si us plau, doneu-nos suport:"
   },
   "firstRun_share2_donate": {
-    "message": "Dóna"
+    "message": "Fes una donació"
   },
   "firstRun_share2_or": {
     "message": "o bé"
@@ -98,7 +95,7 @@
     "message": "S'ha actualitzat l'AdBlock Plus"
   },
   "found_a_bug": {
-    "message": "Has trobat un bug? Vols traduïr l'AdBlock Plus al teu idioma?  Siusplau,<a href='$url>ompli la seva petició aquí</a>.",
+    "message": "Heu trobat un error? Voleu traduïr l'AdBlock Plus al vostre idioma? Si us plau, <a href='$url$'>demaneu-ho aquí</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -128,10 +125,10 @@
     }
   },
   "new_filters_added": {
-    "message": "S'han afegit nous filtres; mira les<a id='options_url' target='_blank'>opcions</a> per gestionar-los."
+    "message": "S'han afegit nous filtres; mireu les <a id='options_url' target='_blank'>opcions</a> per a gestionar-los."
   },
   "options": {
-    "message": "Opcions d'Adblock Plus"
+    "message": "Opcions de l'Adblock Plus"
   },
   "out_of_date_lists": {
     "message": "Les llistes obsoletes són actualitzades periòdicament."
@@ -140,7 +137,7 @@
     "message": "Suprimeix els seleccionats"
   },
   "show_block_element_menu": {
-    "message": "Mostra la opció \"Blocar l'element\" com a ítem d'un menú contextual"
+    "message": "Mostra la opció \"Bloca l'element\" com a ítem d'un menú contextual"
   },
   "show_icon": {
     "message": "Mostra la icona a la barra d'adreces"

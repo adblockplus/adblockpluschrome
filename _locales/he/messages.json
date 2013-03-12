@@ -15,7 +15,7 @@
     "message": "הוסף מסננים משלך"
   },
   "apply_changes": {
-    "message": "החלת השינויים"
+    "message": "אשר שינוים"
   },
   "block_element": {
     "message": "חסימת אלמנט"
@@ -137,7 +137,7 @@
     "message": "הרשימות מתעדכנות באופן אוטומטי."
   },
   "remove_button": {
-    "message": "מחיקת המסומנים"
+    "message": "מחיקת המסומן"
   },
   "show_block_element_menu": {
     "message": "הראה את חוסם האלמנטים כשאתה לוחץ לחיצה ימנית בעכבר"
