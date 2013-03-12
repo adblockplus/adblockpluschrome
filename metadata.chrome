@@ -1,6 +1,6 @@
 [general]
 basename = adblockpluschrome
-version = 1.3.4
+version = 1.4
 backgroundScripts = lib/adblockplus_compat.js
   lib/adblockplus.js
   lib/punycode.js
