@@ -3,7 +3,7 @@
     "message": "Dodaj"
   },
   "add_domain_button": {
-    "message": "Dodaj domenę"
+    "message": "Dodaj domene"
   },
   "add_filter_button": {
     "message": "Dodaj filtr"
@@ -18,7 +18,7 @@
     "message": "Zastosuj zmiany"
   },
   "block_element": {
-    "message": "Blokuj element"
+    "message": "Blokuj Element"
   },
   "cancel": {
     "message": "Anuluj"

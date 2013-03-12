@@ -27,7 +27,7 @@
     "message": "このポップアップが閉じた後に、ページ上の要素をクリック(または右クリック)してください。"
   },
   "description": {
-    "message": "Web 上の迷惑な広告を全てブロックします：YouTube のビデオ広告、Facebook 広告、バナー広告などなど。"
+    "message": "無料の Chrome 用広告ブロックツール: 迷惑な YouTube のビデオ広告、Facebook 広告、バナー広告等をブロックします"
   },
   "disable_inline": {
     "message": "インラインテキスト広告を無効にする"
@@ -74,7 +74,7 @@
     "message": "迷惑な広告なしで web を楽しむ"
   },
   "firstRun_feature_videoAds": {
-    "message": "ＣＭ中断なしにビデオを見る"
+    "message": "ＣＭの中断なしにビデオを見る"
   },
   "firstRun_features_heading": {
     "message": "Adblock Plus で出来ること:"
@@ -146,7 +146,7 @@
     "message": "アドレスバーにアイコンを表示"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "リストからフィルタ購読を選択してください:"
+    "message": "購読したいフィルタをリストから選択してください:"
   },
   "update_now": {
     "message": "今すぐ更新"

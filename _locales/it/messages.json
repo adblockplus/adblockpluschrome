@@ -55,6 +55,45 @@
       }
     }
   },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus bloccherà sempre gli annunci fastidiosi.</strong> Inoltre, vogliamo incoraggiare i siti web ad utilizzare pubblicità semplici e non invasive. Ciò è il motivo per il quale abbiamo stabilito delle <a>linee guida rigorose</a> per identificare gli annunci accettabili, e permettere ad essi di essere visualizzati. È possibile comunque <a>disabilitare</a> questa opzione se si vuole rimuovere tutti gli annunci."
+  },
+  "firstRun_changelog": {
+    "message": "Scopri le novità"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "Questa pagina continua a mostrarli? <a>Clicca qua!</a>"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "Supporta i siti web con annunci accettabili. (Maggiori info in basso)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "Naviga sul web senza fastidiosi annunci"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "Guarda i video senza interruzioni commerciali"
+  },
+  "firstRun_features_heading": {
+    "message": "Con Adblock Plus è possibile:"
+  },
+  "firstRun_share1": {
+    "message": "Pensi che Adblock valga la pena di essere condiviso? Fallo!"
+  },
+  "firstRun_share2": {
+    "message": "Adblock è gratuito e open source. Per favore supportaci:"
+  },
+  "firstRun_share2_donate": {
+    "message": "Dona"
+  },
+  "firstRun_share2_or": {
+    "message": "o"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus stato installato"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus è stato aggiornato"
+  },
   "found_a_bug": {
     "message": "Hai trovato un bug? Vuoi tradurre Adblock Plus nella tua lingua? Per favore <a href='$url$'>compila questa rischiesta</a>.",
     "placeholders": {

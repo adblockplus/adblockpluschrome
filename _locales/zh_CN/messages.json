@@ -27,7 +27,7 @@
     "message": "请点击（或右击）要屏蔽的元素"
   },
   "description": {
-    "message": "阻挡网上所有烦人的广告：视频广告、横幅广告等等。"
+    "message": "Chrome的免费广告过滤工具: 阻挡Youtube上烦人的视频广告，Facebook上的广告，大横幅广告，还有更多 "
   },
   "disable_inline": {
     "message": "屏蔽广告链接"
@@ -83,7 +83,7 @@
     "message": "您认为 Adblock Plus 值得分享吗？那就来吧！"
   },
   "firstRun_share2": {
-    "message": "Adblock Plus 是自由和开源的。请支持我们："
+    "message": "Adblock Plus 是自由开源的。请通过以下方式支持我们："
   },
   "firstRun_share2_donate": {
     "message": "捐赠"
@@ -98,7 +98,7 @@
     "message": "Adblock Plus 已更新"
   },
   "found_a_bug": {
-    "message": "发现错误？需要帮助？请前往<a href='$url$'>此处</a>",
+    "message": "发现错误？想要帮忙翻译Adblock Plus？请前往<a href='$url$'>此处</a>",
     "placeholders": {
       "url": {
         "content": "$1"

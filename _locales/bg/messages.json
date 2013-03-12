@@ -1,5 +1,154 @@
 {
+  "add": {
+    "message": "Добави"
+  },
+  "add_domain_button": {
+    "message": "Добави домейн"
+  },
+  "add_filter_button": {
+    "message": "Добави Филтър"
+  },
+  "add_filters_msg": {
+    "message": "Добави филтър(филтри)?"
+  },
+  "add_your_own_filters": {
+    "message": "Добави собствени филтри"
+  },
+  "apply_changes": {
+    "message": "Приложи промените"
+  },
+  "block_element": {
+    "message": "Блокирай елемент"
+  },
+  "cancel": {
+    "message": "Отказ"
+  },
+  "clickhide_instructions": {
+    "message": "След като затворите този изскачащ прозорец, кликнете (или щракнете с десния бутон)върху елемента на страницата."
+  },
+  "disable_inline": {
+    "message": "Изключи вградените текстови реклами"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus е изключен за домейните, посочени по-долу. Можете да добавите домейн или чрез Adblock Plus иконата в адресната лента или чрез въвеждане на домейна (URL) в полето и кликнете върху бутона \"Добавяне на домейн\"."
+  },
+  "easy_create_filter": {
+    "message": "Лесно създаване на филтър"
+  },
+  "edit_filters_raw": {
+    "message": "Редактиране на филтри като суров текст"
+  },
+  "enable_only_the": {
+    "message": "Позволи само филтрите, от които имате нужда. Прекалено много списъци могат да направят Google chrome нестабилен."
+  },
+  "enabled_for_site": {
+    "message": "Активен за този сайт"
+  },
+  "filter_lists": {
+    "message": "Списъците на филтъра"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Филтъра трябва да има следния <a href='$url$'>Adblock Plus филтър синтаксис</a>. Някои видове на филтри, като обект-subrequest, не се поддържат.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "firstRun_acceptableAdsExplanation": {
+    "message": "<strong>Adblock Plus винаги ще блокира досадните реклами.</strong> Все пак ние искаме да окуражим уеб сайтовете, използвайки обикновени и дискретни реклами. Ето защо ние разработихме <a>строги указания</a> да се определят приемливите реклами. Винаги можете да <a>забраните</a> това ако искате да блокирате всички реклами."
+  },
+  "firstRun_changelog": {
+    "message": "Вижте какво е новото"
+  },
+  "firstRun_dataCorruptionWarning": {
+    "message": "Дали тази страница да се показва? <a>Щракнете тук!</a>"
+  },
+  "firstRun_feature_acceptableAds": {
+    "message": "Поддръжка на уеб сайтове с приемливи реклами (по-долу)"
+  },
+  "firstRun_feature_betterSurfing": {
+    "message": "Наслаждавайте се на интернет без досадни реклами"
+  },
+  "firstRun_feature_videoAds": {
+    "message": "Гледайте видео без търговски прекъсвания"
+  },
+  "firstRun_features_heading": {
+    "message": "С Adblock Plus можете да:"
+  },
+  "firstRun_share1": {
+    "message": "Мислите ли, че Ablock Plus е за споделяне? Моля, направете го!"
+  },
+  "firstRun_share2": {
+    "message": "Adblock Plus е свободен и с отворен код. Моля, да ни подкрепите:"
+  },
+  "firstRun_share2_donate": {
+    "message": "Дари"
+  },
+  "firstRun_share2_or": {
+    "message": "или"
+  },
+  "firstRun_title_install": {
+    "message": "Adblock Plus е инсталиран"
+  },
+  "firstRun_title_update": {
+    "message": "Adblock Plus е актуализиран"
+  },
+  "found_a_bug": {
+    "message": "Попаднали сте на грешка? Искате ли да преведете Adblock Plus на вашия език? Моля, <a href='$url$'> Съобщете тук</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "general": {
+    "message": "Общи"
+  },
+  "last_updated_at": {
+    "message": "Последна актуализация на $date$ в $time$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Последна актуализация в $time$ днес",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "new_filters_added": {
+    "message": "Добавени са нови филтри; Вижте в <a id='options_url' target='_blank'>Опции</a>, за да ги управлявате."
+  },
+  "options": {
+    "message": "Adblock Plus опции"
+  },
+  "out_of_date_lists": {
+    "message": "Остарелите списъци се актуализират периодично."
+  },
+  "remove_button": {
+    "message": "Премахване на избраните"
+  },
+  "show_block_element_menu": {
+    "message": "Покажи \"Блокирай елемент\" с десния бутон върху елемент от менюто"
+  },
+  "show_icon": {
+    "message": "Показвай иконата в адресната лента"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Моля изберете абонамент за филтър от списъка:"
+    "message": "Моля, изберете филтър за абонамент от списъка:"
+  },
+  "update_now": {
+    "message": "Актуализирай сега"
+  },
+  "whitelisted_domains": {
+    "message": "Белия списък с домейни"
   }
 }
