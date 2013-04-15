@@ -340,12 +340,18 @@ function relativeToAbsoluteUrl(url)
     return url;
 
   // Leading / means absolute path
-  if(url[0] == '/')
-    return document.location.protocol + "//" + document.location.host + url;
+  // Leading // means network path
+  if (url[0] == '/')
+  {
+    if (url[1] == '/')
+      return document.location.protocol + url;
+    else
+      return document.location.protocol + "//" + document.location.host + url;
+  }
 
   // Remove filename and add relative URL to it
   var base = document.baseURI.match(/.+\//);
-  if(!base)
+  if (!base)
     return document.baseURI + "/" + url;
   return base[0] + url;
 }
