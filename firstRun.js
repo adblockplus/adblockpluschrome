@@ -106,7 +106,7 @@ function init()
   // Set up URLs
   var versionId = chrome.app.getDetails().version.split(".").slice(0, 2).join("");
   setLinks("title-changelog", "https://adblockplus.org/releases/adblock-plus-" + versionId + "-for-google-chrome-released");
-  setLinks("acceptableAdsExplanation", getDocLink("acceptable_ads", "criteria"),
+  setLinks("acceptableAdsExplanation", getDocLink("acceptable_ads_criteria"),
       backgroundPage.openOptions);
   setLinks("dataCorruptionWarning", getDocLink("knownIssuesChrome_filterstorage"));
 
@@ -139,9 +139,9 @@ function setLinks(id)
   }
 }
 
-function getDocLink(page, anchor)
+function getDocLink(page)
 {
   return Prefs.documentation_link
               .replace(/%LINK%/g, page)
-              .replace(/%LANG%/g, Utils.appLocale) + (anchor ? "#" + anchor : "");
+              .replace(/%LANG%/g, Utils.appLocale);
 }
