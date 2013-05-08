@@ -1,7 +1,7 @@
 [general]
 basename = adblockpluschrome
 version = 1.4
-backgroundScripts = lib/adblockplus_compat.js
+backgroundScripts = lib/compat.js
   lib/adblockplus.js
   lib/punycode.js
   lib/publicSuffixList.js
@@ -36,7 +36,12 @@ chrome = 18.0
 subscriptions.xml = adblockplus/chrome/content/ui/subscriptions.xml
 
 [convert_js]
-lib/adblockplus.js = adblockplus/lib/filterNotifier.js
+lib/adblockplus.js = lib/info.js
+  lib/io.js
+  lib/prefs.js
+  lib/utils.js
+  lib/elemHideHitRegistration.js
+  adblockplus/lib/filterNotifier.js
   adblockplus/lib/filterClasses.js
   adblockplus/lib/subscriptionClasses.js
   adblockplus/lib/filterStorage.js
