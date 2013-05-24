@@ -15,39 +15,41 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var tabsLoading = {};
-
-chrome.webNavigation.onCreatedNavigationTarget.addListener(function(details)
+if ("webNavigation" in chrome)
 {
-  if (isFrameWhitelisted(details.sourceTabId, details.sourceFrameId))
-    return;
+  var tabsLoading = {};
 
-  var openerUrl = getFrameUrl(details.sourceTabId, details.sourceFrameId);
-  if (!openerUrl)
+  chrome.webNavigation.onCreatedNavigationTarget.addListener(function(details)
   {
-    // We don't know the opener tab
-    return;
-  }
-  tabsLoading[details.tabId] = openerUrl;
+    if (isFrameWhitelisted(details.sourceTabId, details.sourceFrameId))
+      return;
 
-  checkPotentialPopup(details.tabId, details.url, openerUrl);
-});
+    var openerUrl = getFrameUrl(details.sourceTabId, details.sourceFrameId);
+    if (!openerUrl)
+    {
+      // We don't know the opener tab
+      return;
+    }
+    tabsLoading[details.tabId] = openerUrl;
 
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
-{
-  if (!(tabId in tabsLoading))
+    checkPotentialPopup(details.tabId, details.url, openerUrl);
+  });
+
+  chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
   {
-    // Not a pop-up we've previously seen
-    return;
-  }
+    if (!(tabId in tabsLoading))
+    {
+      // Not a pop-up we've previously seen
+      return;
+    }
 
-  if ("url" in changeInfo)
-    checkPotentialPopup(tabId, tab.url, tabsLoading[tabId]);
+    if ("url" in changeInfo)
+      checkPotentialPopup(tabId, tab.url, tabsLoading[tabId]);
 
-  if ("status" in changeInfo && changeInfo.status == "complete" && tab.url != "about:blank")
-    delete tabsLoading[tabId];
-});
-
+    if ("status" in changeInfo && changeInfo.status == "complete" && tab.url != "about:blank")
+      delete tabsLoading[tabId];
+  });
+}
 
 function checkPotentialPopup(tabId, url, opener)
 {
