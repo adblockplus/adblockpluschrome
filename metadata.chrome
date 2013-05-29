@@ -35,6 +35,18 @@ chrome = 18.0
 
 [mapping]
 subscriptions.xml = adblockplus/chrome/content/ui/subscriptions.xml
+firstRun.html = adblockplus/chrome/content/ui/firstRun.html
+firstRun.js = adblockplus/chrome/content/ui/firstRun.js
+skin/firstRun.css = adblockplus/chrome/skin/firstRun.css
+skin/abp-icon-big.png = adblockplus/chrome/skin/abp-icon-big.png
+skin/ajax-loader.gif = adblockplus/chrome/skin/ajax-loader.gif
+skin/background.png = adblockplus/chrome/skin/background.png
+skin/features/malware.png = adblockplus/chrome/skin/features/malware.png
+skin/features/social.png = adblockplus/chrome/skin/features/social.png
+skin/features/tracking.png = adblockplus/chrome/skin/features/tracking.png
+skin/social/facebook.png = adblockplus/chrome/skin/social/facebook.png
+skin/social/gplus.png = adblockplus/chrome/skin/social/gplus.png
+skin/social/twitter.png = adblockplus/chrome/skin/social/twitter.png
 
 [convert_js]
 lib/io.js = lib/filesystem/io.js
@@ -82,3 +94,4 @@ adblockplus/chrome/locale/*/filters.dtd = subscription.lastDownload.inProgress
 adblockplus/chrome/locale/*/subscriptionSelection.dtd = location.label
   title.label
 adblockplus/chrome/locale/*/meta.properties = =name
+adblockplus/chrome/locale/*/firstRun.properties = =*
