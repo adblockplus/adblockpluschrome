@@ -10,7 +10,10 @@ var FilterNotifier = require("filterNotifier").FilterNotifier;
 var subscriptionClasses = require("subscriptionClasses");
 var Subscription = subscriptionClasses.Subscription;
 var DownloadableSubscription = subscriptionClasses.DownloadableSubscription;
-var Filter = require("filterClasses").Filter;
+var filterClasses = require("filterClasses");
+var Filter = filterClasses.Filter;
+var BlockingFilter = filterClasses.BlockingFilter;
+var defaultMatcher = require("matcher").defaultMatcher;
 
 /**
  * Shortcut for document.getElementById(id)
