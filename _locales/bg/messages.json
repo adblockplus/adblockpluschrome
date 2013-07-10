@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "След като затворите този изскачащ прозорец, кликнете (или щракнете с десния бутон)върху елемента на страницата."
   },
+  "description": {
+    "message": "Безплатен Аdblock инструмент за Chrome: Блокира всички видео реклами в Youtube, Faacebook реклами, банери и много други."
+  },
   "disable_inline": {
     "message": "Изключи вградените текстови реклами"
   },
@@ -48,51 +51,12 @@
     "message": "Списъците на филтъра"
   },
   "filter_must_follow_syntax": {
-    "message": "Филтъра трябва да има следния <a href='$url$'>Adblock Plus филтър синтаксис</a>. Някои видове на филтри, като обект-subrequest, не се поддържат.",
+    "message": "Вашия филтър трябва да следва <a href='$url$'> Adblock Плюс филтърен синтаксис</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus винаги ще блокира досадните реклами.</strong> Все пак ние искаме да окуражим уеб сайтовете, използвайки обикновени и дискретни реклами. Ето защо ние разработихме <a>строги указания</a> да се определят приемливите реклами. Винаги можете да <a>забраните</a> това ако искате да блокирате всички реклами."
-  },
-  "firstRun_changelog": {
-    "message": "Вижте какво е новото"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Дали тази страница да се показва? <a>Щракнете тук!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Поддръжка на уеб сайтове с приемливи реклами (по-долу)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Наслаждавайте се на интернет без досадни реклами"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Гледайте видео без търговски прекъсвания"
-  },
-  "firstRun_features_heading": {
-    "message": "С Adblock Plus можете да:"
-  },
-  "firstRun_share1": {
-    "message": "Мислите ли, че Ablock Plus е за споделяне? Моля, направете го!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus е свободен и с отворен код. Моля, да ни подкрепите:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Дари"
-  },
-  "firstRun_share2_or": {
-    "message": "или"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus е инсталиран"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus е актуализиран"
   },
   "found_a_bug": {
     "message": "Попаднали сте на грешка? Искате ли да преведете Adblock Plus на вашия език? Моля, <a href='$url$'> Съобщете тук</a>.",

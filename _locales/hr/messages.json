@@ -24,10 +24,10 @@
     "message": "Poništi"
   },
   "clickhide_instructions": {
-    "message": "Nakon zatvaranja ovog skočnog prozora, kliknite (ili lijevi klik) na element na ovoj stranici."
+    "message": "Nakon zatvaranja ovog skočnog prozora, kliknite (ili desni klik miša) na element na ovoj stranici."
   },
   "description": {
-    "message": "Blokira sve nametljive reklame na web stranicama: video reklame na YouTube-u, Facebook reklame, natpise i još mnogo toga."
+    "message": "Besplatan alat za blokiranje reklama na Chromeu: blokira nametljive video reklame na YouTubeu, Facebooku, banere i još mnogo toga."
   },
   "disable_inline": {
     "message": "Onemogući tekstualne reklame iste linije"
@@ -42,7 +42,7 @@
     "message": "Uredi filtere kao raw tekst"
   },
   "enable_only_the": {
-    "message": "Omogućite samo popis filtera koji vam je potreban. Previše omogućenih popisa mogu učiniti Chrome neupotrebljivim."
+    "message": "Omogućite samo popis filtera koji vam je potreban. Zbog previše omogućenih popisa Chrome može prestati raditi."
   },
   "enabled_for_site": {
     "message": "Omogući za ovu stranicu"
@@ -51,54 +51,15 @@
     "message": "Popisi filtera"
   },
   "filter_must_follow_syntax": {
-    "message": "Vaš filter mora slijediti <a href='$url$'>Adblock Plus sintaksu filtera</a>. Određene vrste filtera, poput podzahtjeva-objekta, nisu podržani.",
+    "message": "Vaši filtri moraju slijediti <a href='$url$'>Adblock Plus filter sintaksa</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
   },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus će uvijek blokirati nametljive reklame.</strong> Ipak, mi želimo ohrabriti web stranice da koriste jednostavne i nenametljive reklame. Zato smo osmislili <a>stroge smjernice</a> za prepoznavanje prihvatljivih reklama i omogućili ih izvan zadanih okvira. Uvijek možete to <a>onemogućiti</a> ako želite blokirati sve reklame."
-  },
-  "firstRun_changelog": {
-    "message": "Pogledajte što je novo"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Je li se ova stranica stalno nastavlja prikazivati? <a>Kliknite ovdje!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Podržati web stranice sa prihvatljivim reklamama (više o tome ispod)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Uživati u surfanju bez ometanja rekalama"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Gledati video snimke bez ometanja komercijalnih reklama"
-  },
-  "firstRun_features_heading": {
-    "message": "Sa Adblock Plus-om možete:"
-  },
-  "firstRun_share1": {
-    "message": "Mislite li da Adblock Plus vrijedi dijeljenja? Podijelite nas sa prijateljima!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus je slobodan softver otvorenog kôda. Molimo, podržite nas:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Donirajte"
-  },
-  "firstRun_share2_or": {
-    "message": "ili"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus je instaliran"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus je ažuriran"
-  },
   "found_a_bug": {
-    "message": "Pronašli ste grešku? Želite prevesti Adblock Plus na vaš jezik? <a href='$url$'>Podnesite zahtjev ovdje</a>.",
+    "message": "Pronašli ste grešku? Želite prevesti Adblock Plus na svoj jezik? <a href='$url$'>Podnesite zahtjev ovdje</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -134,7 +95,7 @@
     "message": "Adblock Plus mogućnosti"
   },
   "out_of_date_lists": {
-    "message": "Zastarjeli popis se ažurira povremeno."
+    "message": "Zastarjeli popisi redovito se ažuriraju."
   },
   "remove_button": {
     "message": "Ukloni odabrano"

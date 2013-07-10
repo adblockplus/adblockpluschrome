@@ -27,7 +27,7 @@
     "message": "請在此訊息關閉後點選網頁上的元素。"
   },
   "description": {
-    "message": "過濾網路上所有煩人的廣告：YouTube，Facebook 等，任何您想得到的，都解決了。"
+    "message": "專為 Chrome 設計的 adblock：過濾網路上所有煩人的廣告，YouTube，Facebook 等等，任何您想得到的，都解決了。 "
   },
   "disable_inline": {
     "message": "阻擋文字廣告"
@@ -51,51 +51,12 @@
     "message": "過濾列表"
   },
   "filter_must_follow_syntax": {
-    "message": "您的過濾條件必須遵循 <a href='$url$'>Adblock Plus 的語法</a>。不支援 object-subreuqest 等特定過濾類型。",
+    "message": "您的過濾條件必須遵守 <a href='$url$'>Adblock Plus 的語法</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus 會過濾煩人的廣告。</strong> 一如往常，我們鼓勵網站改採簡樸且不過於搶眼的廣告。這也是我們建立 <a>嚴格的規範</a> 來辨識並允許非侵入式廣告的原因。若您想過濾所有廣告，隨時可以 <a>停用此功能</a>。"
-  },
-  "firstRun_changelog": {
-    "message": "檢視更新日誌"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "這個網頁一直跳出來嗎？ <a>請看這裡！</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "支援採用非侵入式廣告的網站 (詳情如下)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "享受沒有煩人廣告的網站"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "觀賞影片再也不被廣告打斷"
-  },
-  "firstRun_features_heading": {
-    "message": "有了 Adblock Plus 您就可以："
-  },
-  "firstRun_share1": {
-    "message": "您認為 Adblock Plus 值得分享嗎？那就按下去吧！"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus 免費且開放原始碼。請支持我們："
-  },
-  "firstRun_share2_donate": {
-    "message": "贊助"
-  },
-  "firstRun_share2_or": {
-    "message": "或"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus 已安裝完成"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus 已更新完成"
   },
   "found_a_bug": {
     "message": "發現 bug？想要翻譯 Adblock Plus？請至 <a href='$url$'>此處詢問</a>。",

@@ -42,7 +42,7 @@
     "message": "フィルタを編集する"
   },
   "enable_only_the": {
-    "message": "あなたが必要とするフィルタリストのみを有効にしてください。フィルタリストが多すぎると Chrome の動作が遅くなることがあります。"
+    "message": "必要とするフィルタリストのみを有効にしてください。フィルタリストが多すぎると Chrome の動作が遅くなることがあります。"
   },
   "enabled_for_site": {
     "message": "このサイトで有効"
@@ -51,51 +51,12 @@
     "message": "フィルタリスト"
   },
   "filter_must_follow_syntax": {
-    "message": "自作フィルタは <a href='$url$'>Adblock Plus フィルタ構文</a> に準拠すること。フィルタオプションによってはサポートされていないものもあります（例：object-subrequest）。",
+    "message": "フィルタの記述は <a href='$url$'>Adblock Plus フィルタ書式</a> に従う必要があります。",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus は常に迷惑な広告をブロックします。</strong>ただ、地味で控えめな広告を使用する Web サイトについては応援したい。そこで、我々は控えめな広告を判定するための <a>厳格なガイドライン</a> を策定し、これに該当するものはブロック対象から除外することにしました。もし、全ての広告をブロックしたい場合は、いつでも控えめな広告に対する許可を <a>無効</a> にすることができます。"
-  },
-  "firstRun_changelog": {
-    "message": "更新内容を確認する"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "このページが何度も再表示される場合は <a>ここを参照！</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "控えめな広告を受け入れることでWebサイトをサポート（以下詳細）"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "迷惑な広告なしで web を楽しむ"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "ＣＭの中断なしにビデオを見る"
-  },
-  "firstRun_features_heading": {
-    "message": "Adblock Plus で出来ること:"
-  },
-  "firstRun_share1": {
-    "message": "Adblock Plus を共有する価値があると思う方は、ぜひ共有してください。"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus はフリーでオープンソースです。私たちをサポートしてください："
-  },
-  "firstRun_share2_donate": {
-    "message": "寄付"
-  },
-  "firstRun_share2_or": {
-    "message": "または"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus がインストールされました。"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus が更新されました"
   },
   "found_a_bug": {
     "message": "バグが見つかりましたか? あなたの言語に翻訳したいですか? その場合は <a href='$url$'>こちら</a>へお願いします。",

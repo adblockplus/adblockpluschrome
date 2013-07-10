@@ -15,7 +15,7 @@
     "message": "Eigen filters toevoegen"
   },
   "apply_changes": {
-    "message": "Wijzigen"
+    "message": "Bevestigen"
   },
   "block_element": {
     "message": "Element blokkeren"
@@ -27,7 +27,7 @@
     "message": "Na het sluiten van deze popup, klik (of klik met de rechtermuisknop) op het pagina element."
   },
   "description": {
-    "message": "De gratis adblocker voor Chrome: Blokkeert video-reclames op YouTube, Facebook advertenties, banners en meer."
+    "message": "De gratis adblocker voor Chrome: Blokkeert vervelende video-reclames op YouTube, Facebook advertenties, banners en nog veel meer."
   },
   "disable_inline": {
     "message": "Inline tekstadvertenties uitschakelen"
@@ -42,7 +42,7 @@
     "message": "Bewerk filters als tekst"
   },
   "enable_only_the": {
-    "message": "Schakel alleen de filters in die u gebruikt. Teveel filters kunnen ervoor zorgen dat Chrome ermee stopt."
+    "message": "Schakel alleen de filters in die u gebruikt. Teveel filters kunnen ervoor zorgen dat Chrome niet meer reageert."
   },
   "enabled_for_site": {
     "message": "Ingeschakeld voor deze site"
@@ -51,51 +51,12 @@
     "message": "Filterlijsten"
   },
   "filter_must_follow_syntax": {
-    "message": "Het filter moet de <a href='$url$'>Adblock Plus filter syntax</a> volgen. Sommige filtertypes zoals object-subrequest, worden niet ondersteund.",
+    "message": "Je filter moet de <a href='$url$'>Adblock Plus filter syntax</a> volgen.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus zal altijd irritante advertenties blokkeren.</strong> Toch willen we websites met simpele en onopvallende advertenties tegemoet komen. Daarom hebben wij <a>strikte richtlijnen</a> om Acceptabele Advertenties te identificeren en standaard toe te laten. Wanneer je alle advertenties wil blokkeren kan je deze functie altijd <a>uitschakelen</a>."
-  },
-  "firstRun_changelog": {
-    "message": "Bekijk wat nieuw is"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Blijft deze pagina terugkomen? <a>Klik hier!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Ondersteun websites met acceptabele advertenties (meer hieronder)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Beleef het web zonder irritante advertenties"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Bekijk videos zonder commerciële onderbrekingen"
-  },
-  "firstRun_features_heading": {
-    "message": "Met Adblock Plus kan je:"
-  },
-  "firstRun_share1": {
-    "message": "Vind je Adblock Plus het delen waard? Graag!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus is gratis en open source. Steun ons alsjeblieft:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Doneren"
-  },
-  "firstRun_share2_or": {
-    "message": "of"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus is geïnstalleerd"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus is bijgewerkt"
   },
   "found_a_bug": {
     "message": "Heb je een bug gevonden? Wil je helpen Adblock Plus te vertalen naar je eigen taal? Dien <a href='$url$'>hier een verzoek in</a>.",

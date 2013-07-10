@@ -51,51 +51,12 @@
     "message": "Liste de filtre"
   },
   "filter_must_follow_syntax": {
-    "message": "Filtrul tău trebuie să respecte <a href='$url$'> sintaxa Adblock Plus pentru filtre</a>. Anumite tipuri de filtre, de ex. object-subrequest, nu sunt acceptate.",
+    "message": "Filtrul tău trebuie să respecte <a href='$url$'> sintaxa Adblock Plus pentru filtre</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus va bloca mereu reclamele deranjante.</strong> Dar, dorim să încurajăm site-urile să folosească publicitate simplă şi discretă. De aceea am stabilit <a>reguli stricte</a> pentru a identifica reclame acceptabile, şi vom permite acestora să fie afişate. Puteţi oricând să <a>dezactivaţi</a> acest lucru dacă doriţi să blocaţi toate reclamele."
-  },
-  "firstRun_changelog": {
-    "message": "Vedeţi ce este nou"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Această pagină continuă să apară chiar daca aţi terminat instalarea? <a>Faceţi clic aici!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Susține site-uri cu anunţuri acceptabile (mai multe dedesubt)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Bucuraţi-vă de web fără reclame enervante"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Vizionați clipuri fără întreruperi comerciale"
-  },
-  "firstRun_features_heading": {
-    "message": "Cu Adblock Plus puteţi:"
-  },
-  "firstRun_share1": {
-    "message": "Credeți că Adblock Plus merită impartășit cu restul lumii? Dacă da, vă rugăm să o faceţi!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus este gratuit şi open source. Vă rugăm să ne sprijiniți:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Donați"
-  },
-  "firstRun_share2_or": {
-    "message": "sau"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus a fost instalat"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus a fost actualizat"
   },
   "found_a_bug": {
     "message": "Ai gasit o eroare? Dorești să traduci Adblock Plus în limba ta?  <a href='$url$'>scrie o cerere aici</a>.",

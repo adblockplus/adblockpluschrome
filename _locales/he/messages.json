@@ -3,7 +3,7 @@
     "message": "הוספה"
   },
   "add_domain_button": {
-    "message": "הוסף דומין"
+    "message": "הוספת שם מתחם"
   },
   "add_filter_button": {
     "message": "הוספת מסנן"
@@ -12,10 +12,10 @@
     "message": "הוספת מסנן(ים)?"
   },
   "add_your_own_filters": {
-    "message": "הוסף מסננים משלך"
+    "message": "הוספת מסננים משלך"
   },
   "apply_changes": {
-    "message": "אשר שינוים"
+    "message": "החלת השינויים"
   },
   "block_element": {
     "message": "חסימת אלמנט"
@@ -24,81 +24,42 @@
     "message": "ביטול"
   },
   "clickhide_instructions": {
-    "message": "אחרי שתסגור חלון זה לחץ על אלמנט בעמוד זה"
+    "message": "לאחר סגירת חלונית זו, יש ללחוץ (לא משנה באיזה לחצן) על רכיב בעמוד זה."
   },
   "description": {
-    "message": "חסימת כל המודעות המעצבנות ברשת: מודעות וידאו ב-YouTube, מודעות Facebook, באנרים ועוד."
+    "message": "כלי חסימת הפרסומות החינמי עבור Chrome: חסימת מודעות וידאו מטרידות ב-YouTube, מודעות Facebook, באנרים ועוד רבות."
   },
   "disable_inline": {
-    "message": "ביטול פרסומות טקסט"
+    "message": "ניטרול מודעות טקסט"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus מושבת לדומין שרשמת.\nאתה יכול להוסיף עוד דומינים על ידי לחיצה על האיקון בשורת כתובות ולרשום את הדומין שאתה רוצה לנטרל בו את Adblock Plus וללחוץ על הוסף דומין.\n"
+    "message": "Adblock Plus מנוטרל עבור שמות המתחם המופיעים להלן. ניתן להוסיף שם מתחם או דרך הסמל של Adblock Plus שבשורת הכתובות או על ידי הקלדת שם המתחם (לא הכתובת) בתיבה וללחוץ על הלחצן \"הוספת שם מתחם\"."
   },
   "easy_create_filter": {
-    "message": "קל ליצור מסנן"
+    "message": "יצירת מסנן בקלות"
   },
   "edit_filters_raw": {
-    "message": "ערוך פילטרים"
+    "message": "עריכת מסננים כטקסט גולמי"
   },
   "enable_only_the": {
-    "message": "השתמש רק ברשימות שאתה צריך. יותר מדי רשימות יכולת להאט את הדפדפן."
+    "message": "מומלץ להפעיל רק את רשימות המסננים בהן יש צורך. יותר מדי רשימות עלולות לפגוע בביצועי הדפדפן."
   },
   "enabled_for_site": {
-    "message": "פעיל באתר זה"
+    "message": "פעיל עבור אתר זה"
   },
   "filter_lists": {
     "message": "רשימות המסננים"
   },
   "filter_must_follow_syntax": {
-    "message": "על המסנן שלך לציית ל<a href='$url$'>כללי התחביר של מסנני Adblock Plus</a>.",
+    "message": "המסנן שלכם חייב לציית ל<a href='$url$'>תחביר מסנן Adblock Plus</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
   },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong> Adblock Plus תמיד יחסום מודעות מעצבנות. </ strong> ובכל זאת, אנחנו רוצים לעודד אתרים המשתמשים בפרסום רגיל, לא פולשני, ולא מעצבן. זו הסיבה שבנינו הנחיות קפדניות <a> </ a> כדי לזהות מודעות מקובלות, ולאפשר את הפרסומות שעומדות בתנאים. אתה תמיד יכול לבטל את אפשר פרסום לא פולשני <a> </ a> אם אתה רוצה לחסום את כל המודעות."
-  },
-  "firstRun_changelog": {
-    "message": "ראו מה חדש"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "רואה את ההודעה הזאת הרבה ? <a>לחץ כאן!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "תמוך באתרים שמשתמשים בפרסומות לא מציקות (ראה פרטים)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "תהנה מגלישה ללא פרסומות מעצבנות"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "צפה בסרטונים ללא פרסומות מציקות"
-  },
-  "firstRun_features_heading": {
-    "message": "עם Adblock Plus אתה יכול:"
-  },
-  "firstRun_share1": {
-    "message": "נהנה מ Adblock Plus ? שתף אותנו עם חברים שלך ברשת!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus היא תוכנה חינמית בקוד פתוח. בבקשה תמוך בנו:"
-  },
-  "firstRun_share2_donate": {
-    "message": "תרום"
-  },
-  "firstRun_share2_or": {
-    "message": "או"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus הותקן בהצלחה"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus עודכן בהצלחה"
-  },
   "found_a_bug": {
-    "message": "מצאת באג? ברצונך ליצור תרגום של Adblock Plus לשפתך? נא <a href='$url$'>רשום את בקשתך כאן</a>.",
+    "message": "מצאת באג? ברצונך ליצור תרגום של Adblock Plus לשפתך? נא <a href='$url$'>לציין את בקשתך כאן</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -109,7 +70,7 @@
     "message": "כללי"
   },
   "last_updated_at": {
-    "message": "עודכן לאחרונה בשעה $time$ בתאריך $date$",
+    "message": "עודכנה לאחרונה בשעה $time$ ב־$date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -120,7 +81,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "עודכן לאחרונה בשעה $time$ היום",
+    "message": "עודכנה לאחרונה בשעה $time$ ב־היום",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -128,28 +89,28 @@
     }
   },
   "new_filters_added": {
-    "message": "נוספו מסננים חדשים: ניתן לנהל אותם דרך <a id='options_url' target='_blank'>אפשרויות</a>."
+    "message": "נוספו מסננים חדשים; ניתן לנהל אותם דרך ה<a id='options_url' target='_blank'>אפשרויות</a>."
   },
   "options": {
     "message": "אפשרויות Adblock Plus"
   },
   "out_of_date_lists": {
-    "message": "הרשימות מתעדכנות באופן אוטומטי."
+    "message": "רשימות שאינן עדכניות מתעדכנות באופן תדיר."
   },
   "remove_button": {
-    "message": "מחיקת המסומן"
+    "message": "הסרת הבחירה"
   },
   "show_block_element_menu": {
-    "message": "הראה את חוסם האלמנטים כשאתה לוחץ לחיצה ימנית בעכבר"
+    "message": "הצגת הפריט 'חסימת אלמנט' בתפריט הלחצן הימני"
   },
   "show_icon": {
-    "message": "הראה סמל בשורת כתובות "
+    "message": "הצגת סמל בסרגל הכתובות"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "יש לבחור הרשמת מסנן מהרשימה:"
   },
   "update_now": {
-    "message": "עדכן עכשיו"
+    "message": "עדכון כעת"
   },
   "whitelisted_domains": {
     "message": "שמות מתחם מורשים"

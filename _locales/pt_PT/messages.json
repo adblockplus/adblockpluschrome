@@ -27,7 +27,7 @@
     "message": "Após fechar este popup, clique (ou clique com o botão direito) num elemento na página."
   },
   "description": {
-    "message": "Bloqueia todos os anúncios irritantes na Internet: anúncios de vídeo no YouTube, anúncios no Facebook, banners e muito mais."
+    "message": "A ferramenta gratuita, Adblock para o Chrome: Bloqueia anúncios irritantes no YouTube, Facebook, e outros sites."
   },
   "disable_inline": {
     "message": "Desativar anúncios de texto embutido"
@@ -51,51 +51,12 @@
     "message": "Lista de filtros"
   },
   "filter_must_follow_syntax": {
-    "message": "O filtro deve seguir a <a href='$url$'>sintaxe de filtros do Adblock Plus</a>. Alguns tipos de filtros - como  \"object-subrequest\" - não são suportados.",
+    "message": "O filtro deve seguir os  <a href='$url$'>parâmentros dos filtros do Adblock Plus</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>O Adblock Plus irá sempre bloquear anúncios irritantes.</strong>. No entanto, queremos incentivar os sites a usar publicidade simples e não intrusiva. Por isso, estabelecemos <a>normas rigorosas</a> para identificar e permitir anúncios aceitáveis. Pode sempre <a>desativar</a> esta opção caso queira bloquear todos os anúncios."
-  },
-  "firstRun_changelog": {
-    "message": "Veja o que há de novo"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Esta página continua a aparecer? <a>Clique aqui!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Apoie websites com anúncios aceitáveis (ver mais abaixo)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Aproveite a Internet sem anúncios irritantes"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Veja vídeos sem interrupções comerciais"
-  },
-  "firstRun_features_heading": {
-    "message": "Com o Adblock Plus, você pode:"
-  },
-  "firstRun_share1": {
-    "message": "Acha que vale a pena partilhar o Adblock Plus? Por favor faça-o!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus é gratuito e de código aberto. Por favor, apoiem-nos:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Doar"
-  },
-  "firstRun_share2_or": {
-    "message": "ou"
-  },
-  "firstRun_title_install": {
-    "message": "O Adblock Plus foi instalado"
-  },
-  "firstRun_title_update": {
-    "message": "O Adblock Plus foi atualizado"
   },
   "found_a_bug": {
     "message": "Encontrou um bug? Quer traduzir o Adblock Plus na sua língua? Por favor, <a href='$url$'>submeta um pedido aqui</a>.",

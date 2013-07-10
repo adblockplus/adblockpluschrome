@@ -27,7 +27,7 @@
     "message": "Užvėrus šį iššokantį langą, paspauskite (arba dešiniu mygtuku) ant elemento esančio puslapyje."
   },
   "description": {
-    "message": "Blokuoja visas erzinančias reklamas internete: video reklamas YouTube, Facebook reklamas, banerius ir dar daug daugiau."
+    "message": "Nemokamas reklamų blokavimo įrankis skirtas Chrome: blokuoja erzinančias reklamas YouTube tinklapyje,  Facebook reklamas, banerius ir dar daugiau."
   },
   "disable_inline": {
     "message": "Išjungti vietines teksto reklamas"
@@ -51,51 +51,12 @@
     "message": "Filtrų sąrašai"
   },
   "filter_must_follow_syntax": {
-    "message": "Jūsų filtras turi atitikti <a href='$url$'>Adblock Plus filtrų sintaksę</a>. Kai kurie filtrų tipai, tokie kaip object-subrequest nepalaikomi.",
+    "message": "Jūsų filtras turi atitikti <a href='$url$'>Adblock Plus filtrų sintaksę</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus visada blokuos erzinančias reklamas.</strong> Nepaisant to mes skatiname tinklapius naudoti paprastą nekrentančią į akis reklamą. Todėl mes sukūrėme <a>griežtas gaires</a> kurios padės atpažinti priimtinas reklamas ir leis jas be jokių konfigūravimų. Jūs visada galite <a>išjungti</a> tai jei norite blokuoti visas reklamas."
-  },
-  "firstRun_changelog": {
-    "message": "Kas naujo"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Ar šis puslapis pastoviai rodomas? <a>Paspauskite čia</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Palaikomi tinklapiai su priimtinomis reklamomis (žemiau yra daugiau)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Mėgaukitės internetu be erzinančių reklamų"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Žiūrėkite vaizdo įrašus be komercinių pertraukimų"
-  },
-  "firstRun_features_heading": {
-    "message": "Su Adblock Plus jūs galite:"
-  },
-  "firstRun_share1": {
-    "message": "Manote jog Adblock Plus verta pasidalinti? Taip ir padarykite!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus yra nemokama ir atvirto kodo. Paremkite mus:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Paremti"
-  },
-  "firstRun_share2_or": {
-    "message": "arba"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus įdiegta"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus atnaujintas"
   },
   "found_a_bug": {
     "message": "Radote klaidą? Norite išversti Adblock Plus į savo kalbą? Užpildykite <a>prašymą čia</a>.",

@@ -3,7 +3,7 @@
     "message": "Dodaj"
   },
   "add_domain_button": {
-    "message": "Dodaj domene"
+    "message": "Dodaj domenę"
   },
   "add_filter_button": {
     "message": "Dodaj filtr"
@@ -18,7 +18,7 @@
     "message": "Zastosuj zmiany"
   },
   "block_element": {
-    "message": "Blokuj Element"
+    "message": "Blokuj element"
   },
   "cancel": {
     "message": "Anuluj"
@@ -27,10 +27,10 @@
     "message": "Po zamknięciu tego okna kliknij na stronie lewym lub prawym przyciskiem myszy niechciany element."
   },
   "description": {
-    "message": "Blokuje wszystkie denerwujące reklamy w internecie, reklamy wideo na YouTube, reklamy na Facebooku, banery i wiele więcej…"
+    "message": "Darmowe narzędzie blokujące reklamy dla Chrome. Blokuje denerwujące wideo reklamy w serwisie YouTube, reklamy na portalu społecznościowym Facebook, banery i wiele więcej."
   },
   "disable_inline": {
-    "message": "Wyłącz reklamy tekstowe"
+    "message": "Wyłącz wbudowane reklamy tekstowe"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus jest wyłączony dla niżej wymienionych domen. Możesz dodać domenę, używając ikony Adblock Plusa znajdującej się w pasku adresu lub wpisując domenę – nie adres URL – w polu i naciskając przycisk „Dodaj domenę”."
@@ -42,7 +42,7 @@
     "message": "Edytuj filtry jako zwykły tekst"
   },
   "enable_only_the": {
-    "message": "Włącz tylko filtry, których potrzebujesz. Zbyt duża liczna filtrów może spowolnić działanie przeglądarki."
+    "message": "Włącz tylko filtry, których potrzebujesz. Zbyt duża liczba filtrów może spowolnić działanie przeglądarki."
   },
   "enabled_for_site": {
     "message": "Włącz dla tej strony"
@@ -51,54 +51,15 @@
     "message": "Listy filtrów"
   },
   "filter_must_follow_syntax": {
-    "message": "Twój filtr musi być zgodny <a href='$url$'>ze składnią filtrów Adblock Plus</a>. Niektóre typy filtrów, jak obiect-subrequest nie są obsługiwane.",
+    "message": "Filtr musi przestrzegać <a href='$url$'>składni filtra Adblock Plusa</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
   },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus będzie zawsze blokował irytujące reklamy</strong>, niemniej umożliwiliśmy witrynom wyświetlającym proste i dyskretne reklamy na ich wyświetlanie. Dlatego określiliśmy <a>ścisłe wytyczne</a> umożliwiające precyzyjną identyfikację akceptowanych reklam i ich wyświetlanie. Jeśli chcesz blokować wszystkie reklamy, możesz w każdej chwil tę możliwość <a>wyłączyć</a>."
-  },
-  "firstRun_changelog": {
-    "message": "Zobacz, co jest nowego"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Czy ta strona ma być wyświetlana? <a>Kliknij tutaj!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Witryny, których reklamy są akceptowane (więcej poniżej)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Korzystaj z internetu bez irytujących reklam"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Oglądaj widea bez przerw reklamowych"
-  },
-  "firstRun_features_heading": {
-    "message": "Korzystając z Adblock Plusa możesz:"
-  },
-  "firstRun_share1": {
-    "message": "Jeśli uważasz, że Adblock Plus jest godny polecenia – poleć go."
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus jest darmowy i o otwartym kodzie źródłowym. Wspomóż nas:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Wspomóż"
-  },
-  "firstRun_share2_or": {
-    "message": "lub"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus został zainstalowany"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus został zaktualizowany"
-  },
   "found_a_bug": {
-    "message": "Uważasz, że wystąpił błąd? Zgłoś <a href='$url$'>problem tutaj</a>.",
+    "message": "Znalazłeś błąd? Chcesz przetłumaczyć Adblock Plus na swój język? Zgłoś <a href='$url$'>tutaj</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -140,10 +101,10 @@
     "message": "Usuń zaznaczone"
   },
   "show_block_element_menu": {
-    "message": "Wyświetlaj menu kontekstowe „Blokuj element”"
+    "message": "Wyświetlaj element „Blokuj element” w menu kontekstowym"
   },
   "show_icon": {
-    "message": "Pokazuj ikonę w pasku adresu"
+    "message": "Pokazuj ikonę na pasku adresu"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Wybierz z listy zestaw filtrów:"

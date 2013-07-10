@@ -32,30 +32,6 @@
   "filter_lists": {
     "message": "Seznam filtrov"
   },
-  "firstRun_changelog": {
-    "message": "Poglej, kaj je novega"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Uživajte splet brez nadležnih oglasov"
-  },
-  "firstRun_features_heading": {
-    "message": "Z Adblock Plusom lahko:"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus je brezplačen in odprtokoden. Prosim, podprite nas:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Doniraj"
-  },
-  "firstRun_share2_or": {
-    "message": "ali"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus je bil nameščen"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus je bil posodobljen"
-  },
   "general": {
     "message": "Splošno"
   },

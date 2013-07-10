@@ -51,51 +51,12 @@
     "message": "Filterlisten"
   },
   "filter_must_follow_syntax": {
-    "message": "Ihr Filter muss nach der <a href='$url$'>Adblock Plus Filterschreibweise</a> geschrieben werden. Manche Filter-Attribute wie object-subrequest (Anfragen, die von Plugins gestartet werden) werden nicht unterstützt.",
+    "message": "Ihr Filter muss nach der <a href='$url$'>Adblock Plus Filterschreibweise</a> geschrieben werden.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus wird nervige Werbung immer blockieren.</strong> Wir wollen dennoch Webseiten unterstützen, die auf einfache und unaufdringliche Werbung setzen. Deshalb haben wir <a>strikte Richtlinien</a> für akzeptable Werbung festgelegt, die von uns standardmäßig erlaubt wird. Sie können dies jederzeit <a>abschalten</a>, wenn Sie trotzdem jede Werbung blockieren wollen."
-  },
-  "firstRun_changelog": {
-    "message": "Was ist neu?"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Wird diese Seite immer wieder angezeigt? <a>Bitte hier klicken!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Webseiten mit akzeptabler Werbung unterstützen (mehr dazu unten)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Das Web ohne nervige Werbung genießen"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Videos ohne Werbeunterbrechungen schauen"
-  },
-  "firstRun_features_heading": {
-    "message": "Mit Adblock Plus können Sie:"
-  },
-  "firstRun_share1": {
-    "message": "Ist Adblock Plus gut genug, um es mit anderen zu teilen? Nur zu!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus ist kostenlose Open-Source-Software. Bitte unterstützen Sie uns:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Spenden"
-  },
-  "firstRun_share2_or": {
-    "message": "oder"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus wurde installiert"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus wurde aktualisiert"
   },
   "found_a_bug": {
     "message": "Sie haben einen Fehler gefunden oder wollen Adblock Plus in eine andere Sprache übersetzen? Bitte schreiben Sie uns <a href='$url$'>hier</a>.",
