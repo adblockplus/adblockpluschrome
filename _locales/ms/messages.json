@@ -23,39 +23,6 @@
   "filter_lists": {
     "message": "Senarai penapis"
   },
-  "firstRun_changelog": {
-    "message": "Lihat apa yang baharu"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Adakah laman ini muncul tidak terhenti-henti? <a>Klik di sini!</a>"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Nikmati laman web tanpa iklan yang menyusahkan"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Tonton video tanpa gangguan iklan"
-  },
-  "firstRun_features_heading": {
-    "message": "Dengan Adblock Plus anda dapat:"
-  },
-  "firstRun_share1": {
-    "message": "Pada pendapat anda, adakah Adblock Plus berbaloi untuk dikongsikan? Silalah berbuat demikian!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus percuma dan merupakan sumber terbuka. Sila menyokong kami:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Derma"
-  },
-  "firstRun_share2_or": {
-    "message": "atau"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus telah dipasang"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus telah dikemaskini"
-  },
   "general": {
     "message": "Umum"
   },

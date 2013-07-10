@@ -47,14 +47,6 @@
   "filter_lists": {
     "message": "구독 필터"
   },
-  "filter_must_follow_syntax": {
-    "message": "사용자 필터는 <a href='$url$'>애드블록 플러스의 필터 작성 방법</a>을 따라야 합니다. 필터의 특정 구문은 지원하지 않습니다.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  },
   "found_a_bug": {
     "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? <a href='$url$'>연락하기</a>",
     "placeholders": {

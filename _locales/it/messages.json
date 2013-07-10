@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Dopo la chiusura di questo pop-up, cliccate (o clic destro) su un elemento sulla pagina."
   },
+  "description": {
+    "message": "Lo strumento anti-pubblicità gratuito per Chrome: Blocca pubblicità indesiderate su YouTube, Facebook e molti altri siti."
+  },
   "disable_inline": {
     "message": "Disabilita la pubblicità integrata nel testo"
   },
@@ -48,51 +51,12 @@
     "message": "Liste di filtri"
   },
   "filter_must_follow_syntax": {
-    "message": "I filtri personalizzati devono seguire <a href='$url$'>la sintassi di Adblock Plus</a>. Certi tipi di filtro, come object-subrequest, non sono supportati.",
+    "message": "Il tuo filtro deve rispettare la <a href='$url$'>sintassi filtri di Adblock Plus</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus bloccherà sempre gli annunci fastidiosi.</strong> Inoltre, vogliamo incoraggiare i siti web ad utilizzare pubblicità semplici e non invasive. Ciò è il motivo per il quale abbiamo stabilito delle <a>linee guida rigorose</a> per identificare gli annunci accettabili, e permettere ad essi di essere visualizzati. È possibile comunque <a>disabilitare</a> questa opzione se si vuole rimuovere tutti gli annunci."
-  },
-  "firstRun_changelog": {
-    "message": "Scopri le novità"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Questa pagina continua a mostrarli? <a>Clicca qua!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Supporta i siti web con annunci accettabili. (Maggiori info in basso)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Naviga sul web senza fastidiosi annunci"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Guarda i video senza interruzioni commerciali"
-  },
-  "firstRun_features_heading": {
-    "message": "Con Adblock Plus è possibile:"
-  },
-  "firstRun_share1": {
-    "message": "Pensi che Adblock valga la pena di essere condiviso? Fallo!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock è gratuito e open source. Per favore supportaci:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Dona"
-  },
-  "firstRun_share2_or": {
-    "message": "o"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus stato installato"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus è stato aggiornato"
   },
   "found_a_bug": {
     "message": "Hai trovato un bug? Vuoi tradurre Adblock Plus nella tua lingua? Per favore <a href='$url$'>compila questa rischiesta</a>.",
@@ -106,7 +70,7 @@
     "message": "Generale"
   },
   "last_updated_at": {
-    "message": "Ultimo aggiornamento $time$ il $date$",
+    "message": "Ultimo aggiornamento alle $time$ del $date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -117,7 +81,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "Ultimo aggiornamento $time$ oggi",
+    "message": "Ultimo aggiornamento alle $time$ di oggi",
     "placeholders": {
       "time": {
         "content": "$1"

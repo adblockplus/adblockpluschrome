@@ -27,7 +27,7 @@
     "message": "Miután bezártad ezt a buborékot, kattints egy elemre az oldalon.."
   },
   "description": {
-    "message": "Blokkol minden idegesítő reklámot a weben: a videóreklámokat a YouTube-on, a Facebookon, a bannereket, és még sok minden mást."
+    "message": "Ingyenes reklámszűrő kiegészítő Chrome-hoz: blokkolja az idegesítő videóreklámokat a YouTube-n, a Facebook reklámjait, bannereket és még többet."
   },
   "disable_inline": {
     "message": "Szöveges reklámok tiltása"
@@ -51,51 +51,12 @@
     "message": "Szűrő lista"
   },
   "filter_must_follow_syntax": {
-    "message": "A szűrődnek meg kell felelnie a <a href='$url$'>Adblock Plus szűrő szintakszis</a> oldalon leírtaknak. Bizonyos típusú szűrők, mint az 'object-subrequest', nem támogatottak.",
+    "message": "A szűrőd kövesse az <a href='$url$'>Adblock Plus szintaxisát</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Az Adblock Plus mindig blokkolni fogja a zavaró reklámokat.</strong> Ezen túl szeretnénk bátorítani az oldalakat egyszerű, nem tolakodó reklámok alkalmazására. Ezért hoztunk létre egy <a>szigorú iránymutatást</a> az elfogadható reklámok azonosítására. Bármikor rákattinthat a <a>letiltásra</a>, ha nem szeretne látni semmilyen reklámot sem."
-  },
-  "firstRun_changelog": {
-    "message": "Újdonságok"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Állandóan megjelenik ez az oldal? <a>Kattintson ide!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Támogathatja a \"nem tolakodó\" reklámokat alkalmazó oldalakat (részletek lent)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Élvezheti a webet idegesítő reklámok nélkül"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Átugorhatja a reklámszünetek a videókban"
-  },
-  "firstRun_features_heading": {
-    "message": "Az Adblock Plus-szal Ön:"
-  },
-  "firstRun_share1": {
-    "message": "Ön szerint érdemes terjeszteni az Adblock Plust? Kérem tegye meg!"
-  },
-  "firstRun_share2": {
-    "message": "Az Adblock Plus ingyenes és nyílt forráskódú. Kérem támogasson minket:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Adományozás"
-  },
-  "firstRun_share2_or": {
-    "message": "vagy"
-  },
-  "firstRun_title_install": {
-    "message": "Sikeresen telepítette az Adblock Plus-t"
-  },
-  "firstRun_title_update": {
-    "message": "Az Adblock Plus frissítve"
   },
   "found_a_bug": {
     "message": "Találtál egy hibát az Adblock Plus-ban? Kérlek <a href='$url$'>jelentsd itt</a>.",

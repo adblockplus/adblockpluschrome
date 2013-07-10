@@ -27,7 +27,7 @@
     "message": "Après avoir fermé ce pop-up, cliquez (ou cliquez-droit) sur un élément de la page."
   },
   "description": {
-    "message": "Bloque toutes les publicités intempestives d'Internet : les publicités vidéo sur Youtube, celles sur Facebook, les bannières, et bien plus encore."
+    "message": "Le pare-pub pour Chrome: Bloque les annonces gênantes sur YouTube, les pubs sur Facebook, les bannières et bien plus."
   },
   "disable_inline": {
     "message": "Retirer les publicités intégrées aux textes"
@@ -51,51 +51,12 @@
     "message": "Liste de filtres"
   },
   "filter_must_follow_syntax": {
-    "message": "Il faut que votre filtre suive <a href='$url$'>la syntaxe de filtre d'Adblock Plus</a>. Certains types de filtre, comme object-subrequest (c'est-à-dire les requêtes émises par les plug-ins), ne sont pas supportés.",
+    "message": "Votre filtre doit suivre la <a href='$url$'>syntaxe des filtres Adblock Plus</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus bloquera toujours les publicités invasives.</strong> Malgré tout, nous voulons encourager les sites Web utilisant des publicités simples et non-intrusives. C'est pourquoi nous avons établi <a>des règles d'utilisation rigoureuses</a> pour identifier les publicités acceptables et leurs permettre d'exister. Vous pouvez toujours <a>désactiver</a> cette fonctionnalité si vous souhaitez bloquer toutes les publicités."
-  },
-  "firstRun_changelog": {
-    "message": "Voir les nouveautés"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Est-ce que cette page continue de s'afficher ? <a>Cliquez ici !</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Soutenir les sites Web contenant des publicités acceptables (plus d'informations ci-dessous)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Profitez d'Internet sans publicité intempestive"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Visionnez les vidéos sans intrusion ou interruption commerciale"
-  },
-  "firstRun_features_heading": {
-    "message": "Avec Adblock Plus, vous pouvez :"
-  },
-  "firstRun_share1": {
-    "message": "Pensez-vous que Adblock Plus mérite d'être partagé ? Si oui, alors faites le !"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus est gratuit et en open source. Merci d'y apporter votre soutien :"
-  },
-  "firstRun_share2_donate": {
-    "message": "Faire un don"
-  },
-  "firstRun_share2_or": {
-    "message": "ou"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus a été installé"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus a été mis à jour"
   },
   "found_a_bug": {
     "message": "Vous avez trouvé un bug ? Vous voulez traduire Adblock Plus dans votre propre langue ? N’hésitez pas à <a href='$url$'>déposer une demande ici</a>.",

@@ -44,14 +44,6 @@
   "filter_lists": {
     "message": "Suodatinlistat"
   },
-  "filter_must_follow_syntax": {
-    "message": "Suodattimen täytyy seurata <a href='$url$'>Adblock Plus suodatinkaavaa</a>. Tietyt suodatinyypit, kuten objektien alapyynnöt, eivät ole tuettuja.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  },
   "found_a_bug": {
     "message": "Löysitkö vian? Haluatko kääntää Adblock Plusin omalle kielellesi? Ole hyvä ja <a href='$url$'>kirjoita hakemus täällä</a>.",
     "placeholders": {

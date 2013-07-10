@@ -24,13 +24,16 @@
     "message": "إلغاء"
   },
   "clickhide_instructions": {
-    "message": "بعد إغلاق هذه النافذة، اضغط (أو اضغط بالزر اليمين) على أحد العناصر في الصفحة."
+    "message": "بعد إغلاق هذه النافذة، اضغط (أو اضغط بالزر الأيمن) على أحد العناصر في الصفحة."
+  },
+  "description": {
+    "message": "أداة آدبلوك المجانية لكروم: تحذف إعلانات مقاطع الفيديو المزعجة في اليوتيوب وإعلانات الفيسبوك والشرائط الإعلانية وغيرها."
   },
   "disable_inline": {
-    "message": "تعطيل الإعلانات المضمنة في النص"
+    "message": "تعطيل الإعلانات المضمنة في النص."
   },
   "disabled_for_these_domains": {
-    "message": "آدبلوك بلس معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال الضغط على أيقونة آدبلوك بلس في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"أضف نطاق\"."
+    "message": "Adblock Plus معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال الضغط على أيقونة Adblock Plus في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"Add domain\"."
   },
   "easy_create_filter": {
     "message": "إنشاء فلتر بسهولة"
@@ -48,54 +51,15 @@
     "message": "قائمة الفلاتر"
   },
   "filter_must_follow_syntax": {
-    "message": "الفلتر الخاص بك يجب أن يتبع <a href='$url$'>Adblock Plus filter syntax</a>. أنواع معينة من الفلاتر مثل object-subrequest غير مدعومة.",
+    "message": "فلترك يجب أن يتبع <a href='$url$'> Adblock Plus filter syntax</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
   },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus سيحذف دائما الإعلانات المزعجة</strong> مع ذلك، نريد أن نشجع صفحات الإنترنت على استخدام إعلانات عادية وغير بارزة. لهذا السبب أنشأنا <a>توجيهات متشددة</a> لتحديد الإعلانات المقبولة التي لن تحذف. تستطيع دائما <a>إلغاء هذا</a> إذا كنت تريد حذف جميع الإعلانات."
-  },
-  "firstRun_changelog": {
-    "message": "أنظر ما هو الجديد"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "هل هذه الصفحة تواصل الظهور أكثر من مرة؟ <a>اضغط هنا</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "دعم المواقع التي تحتوي على إعلانات مقبولة (المزيد في الأسفل)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "الاستمتاع بتصفح الشبكة بدون الإعلانات المزعجة"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "مشاهدة مقاطع الفيديو بدون تقطيع إعلاني"
-  },
-  "firstRun_features_heading": {
-    "message": "مع آدبلوك بلس تستطيع:"
-  },
-  "firstRun_share1": {
-    "message": "هل تعتقد أن آدبلوك بلس يستحق المشاركة؟ قم بذلك!"
-  },
-  "firstRun_share2": {
-    "message": "آدبلوك بلس مجاني. الرجاء دعمنا:"
-  },
-  "firstRun_share2_donate": {
-    "message": "تبرع"
-  },
-  "firstRun_share2_or": {
-    "message": "أو"
-  },
-  "firstRun_title_install": {
-    "message": "تم تثبيت آدبلوك بلس"
-  },
-  "firstRun_title_update": {
-    "message": "تم تحديث آدبلوك بلس"
-  },
   "found_a_bug": {
-    "message": "هل وجدت خطأ برمجي؟ تريد ترجمة آدبلوك بلس إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.",
+    "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -117,7 +81,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "أخر تحديث في $time$ اليوم",
+    "message": "أخر تحديث في $time$ من اليوم",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -143,10 +107,10 @@
     "message": "أظهر الأيقونة في شريط العنوان"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "الرجاء اختيار اشتراك فلتر من القائمة:"
+    "message": "الرجاء اختيار اشتراك لفلتر من القائمة:"
   },
   "update_now": {
-    "message": "التحديث الآن"
+    "message": "التحديث الان"
   },
   "whitelisted_domains": {
     "message": "نطاقات القائمة البيضاء"

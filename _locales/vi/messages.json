@@ -47,14 +47,6 @@
   "filter_lists": {
     "message": "Danh sách các bộ lọc"
   },
-  "filter_must_follow_syntax": {
-    "message": "bộ lọc của bạn phải tuân theo <a href='$url$'>cú pháp của bộ lọc Adblock Plus</a>. Các kiểu bộ lọc cụ thể, như yêu cầu đối tượng phụ, không được chấp nhận.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  },
   "found_a_bug": {
     "message": "Bạn phát hiện thấy lỗi? Bạn muuốn dịch Adblock Plus sang ngôn ngữ của bạn? Hãy <a href='$url$'>gửi yêu cầu tại đây</a>.",
     "placeholders": {

@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Po zavření tohoto vyskakovacího okna, klikněte levým (nebo pravým) tlačítkem myši na element na stránce."
   },
+  "description": {
+    "message": "Bezplatný nástroj na blokování reklam pro Chrome: Blokuje otravné video reklamy na YouTube, Facebookové reklamy, bannery a mnohem více."
+  },
   "disable_inline": {
     "message": "Zakázat \"inline text\" reklamy"
   },
@@ -48,51 +51,12 @@
     "message": "Seznam filtrů"
   },
   "filter_must_follow_syntax": {
-    "message": "Váš filtr musí být podle <a href='$url$'>Adblock Plus filtrové syntaxe</a>. Nějaké typy filtrů, jako object-subrequest, nejsou podporovány.",
+    "message": "Váš filtr musí obsahovat <a href='$url$'>Filtrovou syntaxi Adblocku Plus</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus bude vždy blokovat otravné reklamy.</strong> Nicméně, chceme donutit provozovatele stránek,aby používali prostou nevtíravou reklamu. To je důvod proč jsem vytvořili <a>přesné pokyny</a> k identifikaci přijatelných reklam, a povolit je. Můžete to kdykoliv <a>zakázat</a> pokud chcete blokovat všechny reklamy."
-  },
-  "firstRun_changelog": {
-    "message": "Podívejte se co je nového"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Pořád se vám tato stránka zobrazuje? <a>Klikněte zde!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Podpořit stránky s přijatelnými reklamami (více níže)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Užijte si web bez otravných reklam"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Sledujte videa bez komerčních přestávek"
-  },
-  "firstRun_features_heading": {
-    "message": "S Adblock Plus můžete:"
-  },
-  "firstRun_share1": {
-    "message": "Myslíte,že Adblock Plus stojí za sdílení? Prosím zdílejte!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus je zdarma a otevřený software. Prosím podpořte nás:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Darovat"
-  },
-  "firstRun_share2_or": {
-    "message": "nebo"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus byl nainstalován"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus byl aktualizován"
   },
   "found_a_bug": {
     "message": "Našli jste chybu? Chcete přeložit Adblock Plus do vašeho jazyka? Prosím <a href='$url$'>vyplňte žádost zde</a>.",
@@ -128,7 +92,7 @@
     "message": "Nové filtry přidány; navštivte <a id='options_url' target='_blank'>Nastavení</a> k jejich správě."
   },
   "options": {
-    "message": "Adblock Plus Nastavení"
+    "message": "Možnosti Adblock Plus"
   },
   "out_of_date_lists": {
     "message": "Zastaralé seznamy jsou pravidelně aktualizovány."

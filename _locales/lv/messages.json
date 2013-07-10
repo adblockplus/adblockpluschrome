@@ -47,14 +47,6 @@
   "filter_lists": {
     "message": "Filtru saraksts"
   },
-  "filter_must_follow_syntax": {
-    "message": "Jūsu filtram ir jāatbilst <a href='$url$'>Adblock Plus filtru sintaksei</a>. Atsevišķi filtru tipi, kā objekta apakš-pieprasījums, nav atbalstīti.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
-  },
   "found_a_bug": {
     "message": "Atradi defektu? Vēlies iztulkot Adblock Plus savā valodā? Lūdzu <a href='$url$'>iesniedz pieprasījumu šeit</a>.",
     "placeholders": {

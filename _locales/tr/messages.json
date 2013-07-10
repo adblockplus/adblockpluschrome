@@ -9,40 +9,40 @@
     "message": "Filtre Ekle"
   },
   "add_filters_msg": {
-    "message": "Filtreler Ekle?"
+    "message": "Filtre(ler) Ekle?"
   },
   "add_your_own_filters": {
     "message": "Kendi Filtrelerini Ekle"
   },
   "apply_changes": {
-    "message": "Değişiklikleri Onayla"
+    "message": "Değişiklikleri uygula"
   },
   "block_element": {
     "message": "Öğeyi Engelle"
   },
   "cancel": {
-    "message": "İptal"
+    "message": "Vazgeç"
   },
   "clickhide_instructions": {
-    "message": "Bu pencere kapandığında,sayfadaki bir öğeye tıklayın"
+    "message": "Bu pencere kapandığında, engelleyeceğiniz öğeye tıklayın (ya da sağ tıklayın)."
   },
   "description": {
-    "message": "Webdeki tüm sinir bozucu reklamları engeller:Youtube'daki video reklamları,Facebook reklamları,Logolar ve daha fazlası."
+    "message": "Chrome için ücretsiz reklam engelleyici: Facebook, YouTube, vb. sitelerdeki reklamları, banner'ları ve daha fazlasını engeller."
   },
   "disable_inline": {
-    "message": "Satırlardaki yazı reklamlarını devre dışı bırak"
+    "message": "Metin reklamlarını devre dışı bırak"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus aşağıdaki adresleri engelledi.Adresleri hem adres çubuğundaki Adblock ikonundan engelleyebilir veya adresi kutucuğa yazıp \"Adresi ekle\" butonuna tıklayabilirsin."
+    "message": "Adblock Plus aşağıdaki adresleri engelledi. Adresleri hem adres çubuğundaki Adblock ikonundan engelleyebilir veya domain'i (URL'yi değil) kutucuğa yazıp \"Adresi ekle\" butonuna tıklayabilirsin."
   },
   "easy_create_filter": {
     "message": "Kolayca filtre yarat"
   },
   "edit_filters_raw": {
-    "message": "Filtreleri metin olarak düzenleyin"
+    "message": "Filtreleri salt metin olarak düzenle"
   },
   "enable_only_the": {
-    "message": "Sadece kendi filtrelerinizi etkin kılın.Bazıları Chrome'u tepkisiz hale getirebilir."
+    "message": "Yalnızca gereksinim duyduğunuz filtreleri etkinleştirin. Çok fazla filtre Chrome'u yavaşlatabilir."
   },
   "enabled_for_site": {
     "message": "Bu site için etkin"
@@ -51,54 +51,15 @@
     "message": "Süzgeç listesi"
   },
   "filter_must_follow_syntax": {
-    "message": "Fitren <a href='$url$'>Adblock Plus Filtre sözdizimini</a> takip etmeli. Nesne-istek gibi belirli filtre türleri desteklenmez.",
+    "message": "Eklediğiniz filtre <a href='$url$'>Adblock Plus filtre kurallarına</a> uymak zorundadır.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
   },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>Adblock Plus tüm rahatsız edici reklamları engeller.</strong> Ayrıca siteleri rahatsız etmeyen reklamlar koymaya teşvik ediyoruz. <a>katı kurallar</a> koyarak reklamları engellememizin sebebi bu,ve eğer siteler rahatsız etmeyen reklamlar koyarsalar onları destek amaçlı o reklamları engellemeyiz . Tabi ki <a>bu özelliği kapatarak</a> tüm reklamları engelleyebilirsiniz."
-  },
-  "firstRun_changelog": {
-    "message": "Yeniliklere bakın"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Bu sayfa sürekli gösteriliyor mu? <a>Buraya Tıklayın!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Rahatsız etmeyen reklamlarla siteleri destekleyin (dahası aşağıda)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Rahatsız edici reklamlar olmadan internet keyfi sürün"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Ticari kesintiler olmadan video seyredin"
-  },
-  "firstRun_features_heading": {
-    "message": "Adblock ile şunları yapabilirsiniz;"
-  },
-  "firstRun_share1": {
-    "message": "Adblock Plus sizce paylaşılmaya değerse,lütfen paylaşın!"
-  },
-  "firstRun_share2": {
-    "message": "Adblock Plus ücretsiz ve açık kaynaklıdır.Lütfen bizi destekleyin:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Bağış yapın"
-  },
-  "firstRun_share2_or": {
-    "message": "Yada"
-  },
-  "firstRun_title_install": {
-    "message": "Adblock Plus yüklendi"
-  },
-  "firstRun_title_update": {
-    "message": "Adblock Plus güncellendi"
-  },
   "found_a_bug": {
-    "message": "Bir hata mı buldunuz?Adblock plus'u kendi dilinize mi çevirmek istiyorsunuz?Lütfen <a href='$url$'> buradan dosya isteyiniz.",
+    "message": "Hata mı buldunuz? Adblock Plus'ı kendi dilinize mi çevirmek istiyorsunuz? Lütfen <a href='$url$'>buradan dosya isteyiniz</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -109,7 +70,7 @@
     "message": "Genel"
   },
   "last_updated_at": {
-    "message": "En son $date$ $time$'de güncellendi",
+    "message": "Son Güncellenme: $date$ $time$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -120,7 +81,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "En son $time$ bugün güncellendi",
+    "message": "En son bugün güncellendi. Güncelleme saati: $time$",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -140,7 +101,7 @@
     "message": "Seçili olanı kaldır"
   },
   "show_block_element_menu": {
-    "message": "Öğeye sağ tıkladığınızda \"Öğeyi Engelle\" seçeneğini göster"
+    "message": "Sağ tıkladığınızda \"Öğeyi Engelle\" seçeneğini göster"
   },
   "show_icon": {
     "message": "İkonu adres çubuğunda göster."

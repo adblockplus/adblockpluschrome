@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Després de tancar aquesta finestra, cliqueu sobre un element de la pàgina."
   },
+  "description": {
+    "message": "L'eina gratuïta de bloqueig d'anuncis a Chrome: Bloqueja els anuncis dins dels vídeos de YouTube, els anuncis de Facebook, els bàners i molts més."
+  },
   "disable_inline": {
     "message": "Desactiva els anuncis de text en línia"
   },
@@ -42,57 +45,18 @@
     "message": "Activeu només les llistes de filtres que necessiteu. Masses poden alentir el Chromium."
   },
   "enabled_for_site": {
-    "message": "Activat per aquest lloc"
+    "message": "Activat per a aquest lloc"
   },
   "filter_lists": {
     "message": "Llistes de filtres"
   },
   "filter_must_follow_syntax": {
-    "message": "El vostre filtre ha de seguir la <a href='$url$'>sintaxi de filtres de l'Adblock Plus</a>. Certs tipus de filtres, com ara els \"object-subrequest\", no són compatibles.",
+    "message": "El vostre filtre ha de seguir la <a href='$url$'>Sintaxi de filtres d'Adblock Plus</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
       }
     }
-  },
-  "firstRun_acceptableAdsExplanation": {
-    "message": "<strong>L'AdBlock Plus sempre blocarà els anuncis estressants.</strong> Tanmateix, volem animar les pàgines web a utilitzar anuncis no intrusius. Aquesta és la raó per la qual hem establert <a>uns patrons estrictes</a> per a identificar els anuncis acceptables, i permetre'ls al web. Sempre ho pots <a>desactivar</a> si vols blocar tots els anuncis."
-  },
-  "firstRun_changelog": {
-    "message": "Mira les novetats"
-  },
-  "firstRun_dataCorruptionWarning": {
-    "message": "Es segueix mostrant aquesta pàgina? <a>Clica aquí!</a>"
-  },
-  "firstRun_feature_acceptableAds": {
-    "message": "Donar suport als llocs web amb anuncis acceptables (més a continuació)"
-  },
-  "firstRun_feature_betterSurfing": {
-    "message": "Disfrutar de la xarxa sense anuncis estressants"
-  },
-  "firstRun_feature_videoAds": {
-    "message": "Mirar vídeos sense interrupcions publicitàries"
-  },
-  "firstRun_features_heading": {
-    "message": "Amb l'AdBlock Plus podreu:"
-  },
-  "firstRun_share1": {
-    "message": "Creieu que val la pena compartir l'AdBlock Plus? Si us plau, feu-ho!"
-  },
-  "firstRun_share2": {
-    "message": "L'AdBlock Plus és gratuït i de codi obert. Si us plau, doneu-nos suport:"
-  },
-  "firstRun_share2_donate": {
-    "message": "Fes una donació"
-  },
-  "firstRun_share2_or": {
-    "message": "o bé"
-  },
-  "firstRun_title_install": {
-    "message": "S'ha instal·lat l'AdBlock Plus"
-  },
-  "firstRun_title_update": {
-    "message": "S'ha actualitzat l'AdBlock Plus"
   },
   "found_a_bug": {
     "message": "Heu trobat un error? Voleu traduïr l'AdBlock Plus al vostre idioma? Si us plau, <a href='$url$'>demaneu-ho aquí</a>.",
