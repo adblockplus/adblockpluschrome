@@ -33,6 +33,7 @@ var FilterStorage = require("filterStorage").FilterStorage;
 var FilterNotifier = require("filterNotifier").FilterNotifier;
 var Prefs = require("prefs").Prefs;
 var Synchronizer = require("synchronizer").Synchronizer;
+var Utils = require("utils").Utils;
 
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions()
@@ -42,7 +43,9 @@ function loadOptions()
 
   // Set links
   $("#acceptableAdsLink").attr("href", Prefs.subscriptions_exceptionsurl);
-  $("#acceptableAdsDocs").attr("href", Prefs.documentation_link.replace(/%LINK%/g, "acceptable_ads").replace(/%LANG%/g, require("utils").Utils.appLocale));
+  $("#acceptableAdsDocs").attr("href", Utils.getDocLink("acceptable_ads"));
+  setLinks("filter-must-follow-syntax", Utils.getDocLink("filterdoc"));
+  setLinks("found-a-bug", Utils.getDocLink(require("info").application + "_support"));
 
   // Add event listeners
   window.addEventListener("unload", unloadOptions, false);
@@ -174,7 +177,7 @@ function loadRecommendations()
         homepage: element.getAttribute("homepage")
       };
 
-      var prefix = require("utils").Utils.checkLocalePrefixMatch(element.getAttribute("prefixes"));
+      var prefix = Utils.checkLocalePrefixMatch(element.getAttribute("prefixes"));
       if (prefix)
       {
         option.style.fontWeight = "bold";
@@ -615,4 +618,26 @@ function addSubscriptionEntry(subscription)
   updateSubscriptionInfo(element);
 
   document.getElementById("filterLists").appendChild(element);
+}
+
+function setLinks(id)
+{
+  var element = document.getElementById(id);
+  if (!element)
+    return;
+
+  var links = element.getElementsByTagName("a");
+  for (var i = 0; i < links.length; i++)
+  {
+    if (typeof arguments[i + 1] == "string")
+    {
+      links[i].href = arguments[i + 1];
+      links[i].setAttribute("target", "_blank");
+    }
+    else if (typeof arguments[i + 1] == "function")
+    {
+      links[i].href = "javascript:void(0);";
+      links[i].addEventListener("click", arguments[i + 1], false);
+    }
+  }
 }

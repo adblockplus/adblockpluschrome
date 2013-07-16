@@ -57,20 +57,10 @@
     "message": "Filter lists"
   },
   "filter_must_follow_syntax": {
-    "message": "Your filter must follow the <a href='$url$'>Adblock Plus filter syntax</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Your filter must follow the <a>Adblock Plus filter syntax</a>."
   },
   "found_a_bug": {
-    "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a href='$url$'>file a request here</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a>file a request here</a>."
   },
   "general": {
     "description": "This is a tab heading.",
@@ -96,9 +86,6 @@
         "content": "$1"
       }
     }
-  },
-  "new_filters_added": {
-    "message": "New filters added; see <a id='options_url' target='_blank'>Options</a> to manage them."
   },
   "options": {
     "message": "Adblock Plus Options"
