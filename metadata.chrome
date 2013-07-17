@@ -56,6 +56,7 @@ lib/adblockplus.js = lib/info.js
   lib/prefs.js
   lib/utils.js
   lib/elemHideHitRegistration.js
+  adblockplus/lib/downloader.js
   adblockplus/lib/filterNotifier.js
   adblockplus/lib/filterClasses.js
   adblockplus/lib/subscriptionClasses.js
