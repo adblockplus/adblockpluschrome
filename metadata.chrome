@@ -48,6 +48,8 @@ skin/features/tracking.png = adblockplus/chrome/skin/features/tracking.png
 skin/social/facebook.png = adblockplus/chrome/skin/social/facebook.png
 skin/social/gplus.png = adblockplus/chrome/skin/social/gplus.png
 skin/social/twitter.png = adblockplus/chrome/skin/social/twitter.png
+qunit/qunit.js = adblockplustests/chrome/content/qunit.js
+qunit/qunit.css = adblockplustests/chrome/content/qunit.css
 
 [convert_js]
 lib/io.js = lib/filesystem/io.js
