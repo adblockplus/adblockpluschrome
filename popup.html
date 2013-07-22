@@ -31,7 +31,34 @@ body {
 }
 
 a { text-decoration: none }
-a:hover { color: #eeeeff }
+
+#notification
+{
+  min-width: 240px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 2px solid;
+}
+
+#notification.information
+{
+  border-color: #09d;
+}
+
+#notification.critical
+{
+  border-color: #e40;
+}
+
+#notification>h1
+{
+  font-size: 16px;
+}
+
+#notification>*
+{
+  margin: 5px;
+}
 
 #filtersList {
   border: 1px dotted gray;
@@ -54,8 +81,14 @@ a:hover { color: #eeeeff }
 <script type="text/javascript" src="jquery-ui/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="i18n.js"></script>
 <script type="text/javascript" src="popup.js"></script>
+<script type="text/javascript" src="notification.js"></script>
 </head>
 <body id="main">
+<div id="notification" style="display: none">
+<h1 id="title"></h1>
+<p id="message"></p>
+</div>
+
 <div id="enabledCheckboxAndLabel" style="display:none"><input id="enabled" type="checkbox" checked><label for="enabled"><span class="i18n_enabled_for_site"></span></label></div>
 <div id="clickHideInactiveStuff" style="display: none">
 <div class="spacer"></div>
