@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body
+      {
+        background-color: #f8f6f2;
+        font-family: Arial, sans;
+        font-size: 12px;
+      }
+
+      #notification
+      {
+        position: absolute;
+        top: 5px;
+        left: 65px;
+      }
+
+      #notification>h1
+      {
+        font-size: 16px;
+      }
+
+      #notification>*
+      {
+        margin: 5px;
+      }
+    </style>
+    <script src="notification.js"></script>
+  </head>
+  <body>
+    <img src="icons/abp-48.png">
+    <div id="notification">
+      <h1 id="title"></h1>
+      <p id="message"></p>
+    </div>
+  </body>
+</html>

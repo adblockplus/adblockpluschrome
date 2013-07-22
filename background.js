@@ -33,6 +33,7 @@ var defaultMatcher = require("matcher").defaultMatcher;
 var Prefs = require("prefs").Prefs;
 var Synchronizer = require("synchronizer").Synchronizer;
 var Utils = require("utils").Utils;
+var Notification = require("notification").Notification;
 
 // Some types cannot be distinguished
 RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
@@ -107,6 +108,8 @@ function isWhitelisted(url, parentUrl, type)
   return (result instanceof WhitelistFilter ? result : null);
 }
 
+var activeNotification = null;
+
 // Adds or removes page action icon according to options.
 function refreshIconAndContextMenu(tab)
 {
@@ -116,7 +119,11 @@ function refreshIconAndContextMenu(tab)
 
   var excluded = isWhitelisted(tab.url);
   var iconFilename = excluded ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
-  chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
+
+  if (activeNotification)
+    startIconAnimation(tab, iconFilename);
+  else
+    chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
 
   // Only show icon for pages we can influence (http: and https:)
   if(/^https?:/.test(tab.url))
@@ -473,6 +480,122 @@ function openOptions(callback)
   }
 }
 
+var iconAnimationTimer = null;
+var animatedIconTab = null;
+
+function stopIconAnimation()
+{
+  if (!iconAnimationTimer)
+    return;
+
+  clearTimeout(iconAnimationTimer);
+  iconAnimationTimer = null;
+  animatedIconTab = null;
+}
+
+function loadImages(imageFiles, callback)
+{
+  var images = {};
+  var imagesLoaded = 0;
+  imageFiles.forEach(function(imageFile)
+  {
+    var image = new Image();
+    image.src = imageFile;
+    image.addEventListener("load", function()
+    {
+      images[imageFile] = image;
+      if (++imagesLoaded === imageFiles.length)
+        callback(images);
+    });
+  });
+}
+
+function startIconAnimation(tab, iconPath)
+{
+  stopIconAnimation();
+  animatedIconTab = tab;
+
+  var severitySuffix = activeNotification.severity === "critical"
+      ? "critical" : "information";
+  var notificationIconPath = "icons/notification-" + severitySuffix + ".png";
+  var iconFiles = [iconPath, notificationIconPath];
+  loadImages(iconFiles, function(images)
+  {
+    var icon = images[iconPath];
+    var notificationIcon = images[notificationIconPath];
+
+    var canvas = document.createElement("canvas");
+    canvas.width = icon.width;
+    canvas.height = icon.height;
+    var context = canvas.getContext("2d");
+
+    var currentFrame = 0;
+    var frameOpacities = [0, 0.2, 0.4, 0.6, 0.8,
+                          1, 1, 1, 1, 1,
+                          0.8, 0.6, 0.4, 0.2, 0];
+
+    function animationStep()
+    {
+      var opacity = frameOpacities[currentFrame];
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.globalAlpha = 1;
+      context.drawImage(icon, 0, 0);
+      context.globalAlpha = opacity;
+      context.drawImage(notificationIcon, 0, 0);
+      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+      chrome.pageAction.setIcon({tabId: tab.id, imageData: imageData});
+
+      var interval;
+      currentFrame++;
+      if (currentFrame < frameOpacities.length)
+      {
+        var duration = 3000;
+        interval = duration / frameOpacities.length;
+      }
+      else
+      {
+        currentFrame = 0;
+        interval = 10000;
+      }
+      iconAnimationTimer = setTimeout(animationStep, interval);
+    }
+    animationStep();
+  });
+}
+
+function prepareNotificationIconAndPopup()
+{
+  activeNotification.onClicked = function()
+  {
+    var tab = animatedIconTab;
+    stopIconAnimation();
+    activeNotification = null;
+    refreshIconAndContextMenu(tab);
+  };
+
+  chrome.windows.getLastFocused({populate: true}, function(window)
+  {
+    chrome.tabs.query({active: true, windowId: window.id}, function(tabs)
+    {
+      tabs.forEach(refreshIconAndContextMenu);
+    });
+  });
+}
+
+function showNotification(notification)
+{
+  activeNotification = notification;
+
+  if (activeNotification.severity === "critical")
+  {
+    var notification = webkitNotifications.createHTMLNotification("notification.html");
+    notification.show();
+    notification.addEventListener("close", prepareNotificationIconAndPopup);
+  }
+  else
+    prepareNotificationIconAndPopup();
+}
+
 /**
  * This function is a hack - we only know the tabId and document URL for a
  * message but we need to know the frame ID. Try to find it in webRequest's
@@ -609,3 +732,25 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
   if(changeInfo.status == "loading")
     refreshIconAndContextMenu(tab);
 });
+
+// Refresh icon when switching tabs or windows
+chrome.tabs.onActivated.addListener(function(activeInfo)
+{
+  refreshIconAndContextMenu(animatedIconTab);
+  chrome.tabs.get(activeInfo.tabId, refreshIconAndContextMenu);
+});
+chrome.windows.onFocusChanged.addListener(function(windowId)
+{
+  refreshIconAndContextMenu(animatedIconTab);
+  chrome.tabs.query({active: true, windowId: windowId}, function(tabs)
+  {
+    tabs.forEach(refreshIconAndContextMenu);
+  });
+});
+
+setTimeout(function()
+{
+  var notificationToShow = Notification.getNextToShow();
+  if (notificationToShow)
+    showNotification(notificationToShow);
+}, 3 * 60 * 1000);
