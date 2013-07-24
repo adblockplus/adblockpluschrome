@@ -1,5 +1,118 @@
 {
+  "add": {
+    "message": "เพิ่ม"
+  },
+  "add_domain_button": {
+    "message": "เพิ่มโดเมน"
+  },
+  "add_filter_button": {
+    "message": "เพิ่มตัวกรอง"
+  },
+  "add_filters_msg": {
+    "message": "เพิ่มตัวกรองอะไรบ้าง?"
+  },
+  "add_your_own_filters": {
+    "message": "เพิ่มตัวกรองของคุณเอง"
+  },
+  "apply_changes": {
+    "message": "ใช้งานการเปลี่ยนแปลง"
+  },
+  "block_element": {
+    "message": "องค์ประกอบของบล็อก"
+  },
+  "cancel": {
+    "message": "ยกเลิก"
+  },
+  "clickhide_instructions": {
+    "message": "หลังจากปิดนี้ผุดขึ้น คลิก (หรือคลิกขวา) องค์ประกอบบนเพจ"
+  },
+  "description": {
+    "message": "โปรแกรมบล็อกโฆษณาฟรีสำหรับ Chrome: บล็อกโฆษณาที่น่ากวนใจต่างๆทั้ง คลิปโฆษณาของ YouTube,โฆษณาบน Facebook, แบนเนอร์บนเว็บ และอื่นๆอีกมากมาย"
+  },
+  "disable_inline": {
+    "message": "ปิดใช้งานข้อความโฆษณาแบบอินไลน์"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus ถูกปิดใช้งานสำหรับโดเมนที่แสดงด้านล่าง คุณสามารถเพิ่มโดเมนได้ ผ่านคอน Adblock Plus ในแถบอยู่ หรือพิมพ์โดเมน (ไม่ URL) ในกล่อง และคลิกปุ่ม \"เพิ่มโดเมน\""
+  },
+  "easy_create_filter": {
+    "message": "สร้างตัวกรองอย่างง่าย"
+  },
+  "edit_filters_raw": {
+    "message": "แก้ไขตัวกรองเป็นข้อความดิบ"
+  },
+  "enable_only_the": {
+    "message": "เปิดใช้งานเฉพาะรายการตัวกรองคุณต้องการ เกินไปมากจะทำให้โครเมี่ยมไม่ตอบสนองได้"
+  },
+  "enabled_for_site": {
+    "message": "เปิดใช้สำหรับเว็บนี้"
+  },
+  "filter_lists": {
+    "message": "รายชื่อตัวกรอง"
+  },
+  "filter_must_follow_syntax": {
+    "message": "ตัวกรองของคุณต้องทำตาม<a href='$url$'>ไวยากรณ์ตัวกรอง Adblock Plus</a>",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "found_a_bug": {
+    "message": "เจอบักงั้นหรอ?หรือต้องการแปล Adblock Plus เป็นภาษาของคุณเอง? กรุณา <a href='$url$'>ยื่นคำร้องได้ที่นี่</a>",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "general": {
+    "message": "ทั่วไป"
+  },
+  "last_updated_at": {
+    "message": "อัปเดตล่าสุดเมื่อ $date$ เวลา $time$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "อัปเดตล่าสุดเมื่อวันนี้ เวลา $time$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "new_filters_added": {
+    "message": "เพิ่มตัวกรองใหม่แล้ว; ไปที่<a id='options_url' target='_blank'>ตัวเลือก</a>เพื่อดูแลจัดการ"
+  },
+  "options": {
+    "message": "ตัวเลือกของ Adblock Plus"
+  },
+  "out_of_date_lists": {
+    "message": "เลิกรายการปรับปรุงเป็นระยะ ๆ"
+  },
+  "remove_button": {
+    "message": "ลบสิ่งที่เลือก"
+  },
+  "show_block_element_menu": {
+    "message": "แสดงรายการในเมนูคลิกขวา 'องค์ประกอบบล็อก'"
+  },
+  "show_icon": {
+    "message": "แสดงไอคอนในแถบ address bar"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "กรุณาเลือกนามข้างท้ายตัวกรองจากรายชื่อ:"
+  },
+  "update_now": {
+    "message": "อัปเดตเลย"
+  },
+  "whitelisted_domains": {
+    "message": "โดเมนที่ขึ้นบัญชีขาว"
   }
 }

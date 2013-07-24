@@ -8,6 +8,9 @@
   "add_filter_button": {
     "message": "tambah filter / penyaringan"
   },
+  "add_filters_msg": {
+    "message": "Tambahkan penyaring?"
+  },
   "add_your_own_filters": {
     "message": "kamu tambahkan sendiri filternya"
   },
@@ -22,5 +25,94 @@
   },
   "clickhide_instructions": {
     "message": "setelah keluar dari popup , klik (atau klik kanan) pada elemen di halaman web."
+  },
+  "description": {
+    "message": "AdBlock gratis untuk Chrome : Blokir iklan yang mengganggu di video YouTube, Iklan Facebook, Banner dan lainnya."
+  },
+  "disable_inline": {
+    "message": "Nonaktifkan iklan teks"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock menonaktifkan daftar domain di bawah. Anda dapat menambah sebuah domain melalui ikon Adblock Plus pada alamat bar atau dengan mengetikan domain (tidak sebuah URL) di sebuah boks dan klik tombol \"Tambah Domain\""
+  },
+  "easy_create_filter": {
+    "message": "Buat penyaring dengan mudah"
+  },
+  "edit_filters_raw": {
+    "message": "Ubah penyaring sebagai teks mentah"
+  },
+  "enable_only_the": {
+    "message": "Hanya mengaktifkan penyaring yang Anda butuhkan. Terlalu banyak penyaring membuat Chrome tidak merespon."
+  },
+  "enabled_for_site": {
+    "message": "Izinkan untuk situs ini"
+  },
+  "filter_lists": {
+    "message": "Daftar penyaring"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Daftar penyaring Anda harus mengikuti <a href='$url$'>Sintaks Penyaring Adblock Plus</a>",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "found_a_bug": {
+    "message": "Menemukan sebuah celah? Ingin menerjemahkan Adblock ke bahasa Anda? Silahkan  <a href='$url$'>minta sebuah berkas disini</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "general": {
+    "message": "Umum"
+  },
+  "last_updated_at": {
+    "message": "Terakhir diperbaharui pada pukul $time$ tanggal $date$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Hari ini tearkhir diperbaharui pada pukul $time$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "new_filters_added": {
+    "message": "Penyaring baru ditambahkan; lihat <a id='options_url' target='_blank'>Pilihan</a> untuk mengaturnya."
+  },
+  "options": {
+    "message": "Pengaturan Adblock Plus"
+  },
+  "out_of_date_lists": {
+    "message": "Daftar lama diperbaharui secara berkala"
+  },
+  "remove_button": {
+    "message": "Hapus yang dipilih"
+  },
+  "show_block_element_menu": {
+    "message": "Tampilkan \"Elemen Blok\" klik kanan menu item"
+  },
+  "show_icon": {
+    "message": "Tampilkan ikon pada bilah alamat"
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Silahkan pilih sebuah penyaring berlangganan dari daftar:"
+  },
+  "update_now": {
+    "message": "Perbaharui sekarang"
+  },
+  "whitelisted_domains": {
+    "message": "Daftar putih domain"
   }
 }
