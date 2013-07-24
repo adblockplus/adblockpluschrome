@@ -44,7 +44,7 @@ function preparePrefs()
 {
   this._pbackup = {__proto__: null};
   for (var pref in Prefs)
-    if (Prefs.hasOwnProperty(pref))
+    if (Prefs.__lookupSetter__(pref))
       this._pbackup[pref] = Prefs[pref];
   Prefs.enabled = true;
 }
