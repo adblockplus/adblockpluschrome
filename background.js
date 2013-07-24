@@ -586,7 +586,8 @@ function showNotification(notification)
 {
   activeNotification = notification;
 
-  if (activeNotification.severity === "critical")
+  if (activeNotification.severity === "critical"
+      && typeof webkitNotifications !== "undefined")
   {
     var notification = webkitNotifications.createHTMLNotification("notification.html");
     notification.show();
