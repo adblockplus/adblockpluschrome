@@ -10,7 +10,6 @@ permissions = tabs
   webRequest
   webRequestBlocking
   unlimitedStorage
-  notification
 
 [convert_js]
 lib/io.js = lib/localstorage/io.js
