@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
   },
+  "description": {
+    "message": "크롬 무료 광고차단 애드: 유투브, 페이스북, 배너 등등에서 나오는 광고들을 차단시켜 불편함을 줄여줍니다."
+  },
   "disable_inline": {
     "message": "인라인 텍스트 광고를 보지 않음"
   },
@@ -78,7 +81,7 @@
     }
   },
   "new_filters_added": {
-    "message": "새 필터가 추가되었습니다. 필터 관리 : <a id='options_url' target='_blank'>옵션</a>"
+    "message": "새 필터가 추가되었습니다. 필터 관리 : <a id='options_url' target='_blank'>옵션</a> 관리를 참조 하십시오."
   },
   "options": {
     "message": "Adblock Plus - 애드블록 플러스 옵션"
@@ -96,12 +99,12 @@
     "message": "주소 표시줄에 아이콘 표시"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "구독할 필터를 선택하거나 이름/위치를 입력하십시오."
+    "message": "목록에서 구독할 필터를 선택하십시오."
   },
   "update_now": {
     "message": "지금 업데이트"
   },
   "whitelisted_domains": {
-    "message": "허용 도메인"
+    "message": "허용된 도메인"
   }
 }

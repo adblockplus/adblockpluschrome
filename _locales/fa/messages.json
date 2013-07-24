@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "پس از بسته شدن این پنجره، روی بخشی از صفحه کلیک (یا راست کلیک) کن."
   },
+  "description": {
+    "message": "ابزار رایگان adblock برای کروم: بلوک های آزار دهنده تبلیغات ویدئویی در یوتیوب، فیس بوک تبلیغات، آگهی ها و خیلی بیشتر."
+  },
   "disable_inline": {
     "message": "غیرفعال کردن تبلیغات متنی"
   },
@@ -46,6 +49,14 @@
   },
   "filter_lists": {
     "message": "فیلتر کردن لیست"
+  },
+  "filter_must_follow_syntax": {
+    "message": "فیلتر خود را باید <a href='$url$'> ترکیب فیلتر Adblock پلاس</a> را دنبال کنید.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
     "message": "باگ پیدا کردی؟ می خوای Adblock Plus رو به زبون خودتون ترجمه کنی؟ <a href='$url$'>فایل درخواست اینجاست</a>.",
@@ -94,6 +105,9 @@
   },
   "show_icon": {
     "message": "نمایش آیکون در نوارآدرس"
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "لطفا اشتراک فیلتر را از لیست انتخاب کنید:"
   },
   "update_now": {
     "message": "آپدیت کن"
