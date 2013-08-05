@@ -51,20 +51,10 @@
     "message": "רשימות המסננים"
   },
   "filter_must_follow_syntax": {
-    "message": "המסנן שלכם חייב לציית ל<a href='$url$'>תחביר מסנן Adblock Plus</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "המסנן שלכם חייב לציית ל<a>תחביר מסנן Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "מצאת באג? ברצונך ליצור תרגום של Adblock Plus לשפתך? נא <a href='$url$'>לציין את בקשתך כאן</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "מצאת באג? ברצונך ליצור תרגום של Adblock Plus לשפתך? נא <a>לציין את בקשתך כאן</a>."
   },
   "general": {
     "message": "כללי"

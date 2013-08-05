@@ -51,20 +51,10 @@
     "message": "قائمة الفلاتر"
   },
   "filter_must_follow_syntax": {
-    "message": "فلترك يجب أن يتبع <a href='$url$'> Adblock Plus filter syntax</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "فلترك يجب أن يتبع <a> Adblock Plus filter syntax</a>."
   },
   "found_a_bug": {
-    "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a href='$url$'>الطلب هنا</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a>الطلب هنا</a>."
   },
   "general": {
     "message": "عـام"

@@ -51,20 +51,10 @@
     "message": "Λίστες φίλτρων"
   },
   "filter_must_follow_syntax": {
-    "message": "Το φίλτρο σας πρέπει να ακολουθεί τη <a href='$url$'> σύνταξη φίλτρου του Adblock Plus</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Το φίλτρο σας πρέπει να ακολουθεί τη <a> σύνταξη φίλτρου του Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "Βρήκατε σφάλματα; Θέλετε να μεταφράσετε το Adblock Plus στην γλώσσα σας; Παρακαλώ <a href='$url$'> στείλτε ένα αίτημα εδώ</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Βρήκατε σφάλματα; Θέλετε να μεταφράσετε το Adblock Plus στην γλώσσα σας; Παρακαλώ <a> στείλτε ένα αίτημα εδώ</a>."
   },
   "general": {
     "message": "Γενικά"
