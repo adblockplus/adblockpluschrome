@@ -51,20 +51,10 @@
     "message": "Списъците на филтъра"
   },
   "filter_must_follow_syntax": {
-    "message": "Вашия филтър трябва да следва <a href='$url$'> Adblock Плюс филтърен синтаксис</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Вашия филтър трябва да следва <a> Adblock Плюс филтърен синтаксис</a>."
   },
   "found_a_bug": {
-    "message": "Попаднали сте на грешка? Искате ли да преведете Adblock Plus на вашия език? Моля, <a href='$url$'> Съобщете тук</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Попаднали сте на грешка? Искате ли да преведете Adblock Plus на вашия език? Моля, <a> Съобщете тук</a>."
   },
   "general": {
     "message": "Общи"

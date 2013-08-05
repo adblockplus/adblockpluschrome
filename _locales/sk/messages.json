@@ -51,20 +51,10 @@
     "message": "Zoznamy filtrov"
   },
   "filter_must_follow_syntax": {
-    "message": "Váš filter musí spĺňať <a href='$url$'> syntax filtrov Adblocku Plus</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Váš filter musí spĺňať <a> syntax filtrov Adblocku Plus</a>."
   },
   "found_a_bug": {
-    "message": "Nájdené chyba? Chcete preložiť Adblock Plus do vášho jazyka? Prosím <a href='$url$'> zadajte žiadosť tu</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Nájdené chyba? Chcete preložiť Adblock Plus do vášho jazyka? Prosím <a> zadajte žiadosť tu</a>."
   },
   "general": {
     "message": "Všeobecné"

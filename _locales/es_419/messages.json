@@ -51,20 +51,10 @@
     "message": "Listas de filtros"
   },
   "filter_must_follow_syntax": {
-    "message": "El filtro debe seguir el <a href='$url$'> sintaxis del filtro de Adblock Plus</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "El filtro debe seguir el <a> sintaxis del filtro de Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "¡Encontraste un error? ¿Querés localizar Adblock Plus a tu idioma? Por favor, <a href='$url$'>realizá una petición acá</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "¡Encontraste un error? ¿Querés localizar Adblock Plus a tu idioma? Por favor, <a>realizá una petición acá</a>."
   },
   "general": {
     "message": "General"
