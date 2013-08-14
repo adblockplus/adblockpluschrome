@@ -1,0 +1,118 @@
+{
+  "add": {
+    "message": "சேர்"
+  },
+  "add_domain_button": {
+    "message": "களத்தை சேர்"
+  },
+  "add_filter_button": {
+    "message": "வடிகட்டியை சேர்"
+  },
+  "add_filters_msg": {
+    "message": "வடிகட்டியை சேர்க்கவா?"
+  },
+  "add_your_own_filters": {
+    "message": "சொந்த வடிகட்டியை சேர்"
+  },
+  "apply_changes": {
+    "message": "மாற்றங்களை பயன்படுத்து"
+  },
+  "block_element": {
+    "message": "உறுப்பை தடு"
+  },
+  "cancel": {
+    "message": "ரத்து செய்"
+  },
+  "clickhide_instructions": {
+    "message": "இந்த விழிதிரை மூடிய பின், பக்கத்தில் உள்ள உறுப்பின் மேல் சொடுக்கவும். (அல்லது வலது விசையை சொடுக்கவும்.)"
+  },
+  "description": {
+    "message": "குரோமிட்ற்கு ஏற்ற இந்த இலவச விளம்பரம் தடுக்கும் கருவி எரிச்சலூட்டும் யூடியூப், ஃபேஸ்புக் விளம்பரங்கள், பதாகைகள், மற்றும் வீடியோ விளம்பரங்களை தடுக்கும்."
+  },
+  "disable_inline": {
+    "message": "வரி விளம்பரங்களை முடக்கு"
+  },
+  "disabled_for_these_domains": {
+    "message": "கீழே பட்டியலிடப்பட்டுள்ள களங்களுக்கு Adblock Plus முடக்கப்பட்டுள்ளது. களம் ஒன்றை சேர்க்க: முகவரிப் பட்டியில் உள்ள Adblock Plus படவுரு வழியாகவோ அல்லது பெட்டியில் களத்தை (URL அல்ல) தட்டச்சு செய்து   \"களத்தை சேர்\" பொத்தானை சொடுக்குவது மூலமாகவோ நீங்கள் சேர்க்கலாம்."
+  },
+  "easy_create_filter": {
+    "message": "எளிதான வடிகட்டியை உருவாக்கு"
+  },
+  "edit_filters_raw": {
+    "message": "வடிகட்டிகளை வெறும் உரையாக திருத்து"
+  },
+  "enable_only_the": {
+    "message": "தேவையான வடிகட்டி பட்டியல்களை மட்டும் செயல்படுத்தவும். பல பட்டியல்களுக்கு Chrome எளிதாக பதிலளிக்காதது."
+  },
+  "enabled_for_site": {
+    "message": "இந்த தளத்திற்கு செயல்படுத்தப்பட்டுள்ளது"
+  },
+  "filter_lists": {
+    "message": "வடிகட்டி பட்டியல்கள்"
+  },
+  "filter_must_follow_syntax": {
+    "message": "உங்கள் Adblock Plus வடிகட்டி பின்வரும் இலக்கணத்தை பயன்படுத்தவேண்டும்: <a href='$url$'> </a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "found_a_bug": {
+    "message": "ஏதேனும் பிழையா? உங்கள் மொழிக்கு Adblock Plus மொழிபெயர்க்கபட வேண்டுமா? தயவுசெய்து கோரிக்கையை <a href='$url$'> இங்கே பதிக்கவும் </a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
+  "general": {
+    "message": "பொது"
+  },
+  "last_updated_at": {
+    "message": "$date$ $time$ இல் புதுப்பிக்கப்பட்டது",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "இன்று  $time$ க்கு புதுப்பிக்கப்பட்டது",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "new_filters_added": {
+    "message": "புதிய வடிகட்டிகள் சேர்க்கப்பட்டன; அவற்றை நிர்வகிக்க <a id='options_url' target='_blank'> விருப்பங்களை</a> பார்க்கவும்."
+  },
+  "options": {
+    "message": "Adblock Plus விருப்பங்கள்"
+  },
+  "out_of_date_lists": {
+    "message": "பழைய பட்டியல்கள் அவ்வப்போது புதுப்பிக்கப்படும்."
+  },
+  "remove_button": {
+    "message": "தேர்ந்தெடுத்ததை நீக்கு"
+  },
+  "show_block_element_menu": {
+    "message": "'உறுப்பை தடு' வலது-கிளிக் மெனு உருப்படியை காண்பி"
+  },
+  "show_icon": {
+    "message": "முகவரிப் பட்டியில் படவுருவை காண்பி"
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "பட்டியலில் இருந்து ஒரு வடிகட்டி சந்தாவை தேர்ந்தெடுக்கவும்:"
+  },
+  "update_now": {
+    "message": "இப்போது புதுப்பிக்கவும்"
+  },
+  "whitelisted_domains": {
+    "message": "அனுமதிக்கப்பட்ட களங்கள்"
+  }
+}

@@ -1,27 +1,27 @@
 {
   "add": {
-    "message": "tambah"
+    "message": "Tambah"
   },
   "add_domain_button": {
-    "message": "tambah Domain"
+    "message": "Tambah domain"
   },
   "add_filter_button": {
-    "message": "tambah filter / penyaringan"
+    "message": "Tambah penyaring"
   },
   "add_filters_msg": {
     "message": "Tambahkan penyaring?"
   },
   "add_your_own_filters": {
-    "message": "kamu tambahkan sendiri filternya"
+    "message": "Tambahkan penyaring sendiri"
   },
   "apply_changes": {
-    "message": "terapkan perubahan"
+    "message": "Terapkan perubahan"
   },
   "block_element": {
-    "message": "blokir elemen"
+    "message": "Blokir Blemen"
   },
   "cancel": {
-    "message": "batal"
+    "message": "Batal"
   },
   "clickhide_instructions": {
     "message": "setelah keluar dari popup , klik (atau klik kanan) pada elemen di halaman web."
@@ -42,7 +42,7 @@
     "message": "Ubah penyaring sebagai teks mentah"
   },
   "enable_only_the": {
-    "message": "Hanya mengaktifkan penyaring yang Anda butuhkan. Terlalu banyak penyaring membuat Chrome tidak merespon."
+    "message": "Aktifkan hanya penyaring yang Anda butuhkan saja. Terlalu banyak penyaring membuat Chrome menjadi lambat."
   },
   "enabled_for_site": {
     "message": "Izinkan untuk situs ini"
@@ -107,7 +107,7 @@
     "message": "Tampilkan ikon pada bilah alamat"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Silahkan pilih sebuah penyaring berlangganan dari daftar:"
+    "message": "Silakan pilih langganan penyaring dari daftar:"
   },
   "update_now": {
     "message": "Perbaharui sekarang"

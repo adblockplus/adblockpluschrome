@@ -70,7 +70,7 @@
     "message": "Generelt"
   },
   "last_updated_at": {
-    "message": "Senest opdateret kl. $tid$ d. $date$",
+    "message": "Senest opdateret kl. $time$ d. $date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -81,7 +81,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "Senest opdateret kl. $tid$ i dag",
+    "message": "Senest opdateret kl. $time$ i dag",
     "placeholders": {
       "time": {
         "content": "$1"

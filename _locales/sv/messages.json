@@ -9,7 +9,7 @@
     "message": "Lägg till filter"
   },
   "add_filters_msg": {
-    "message": "Lägga till filter?"
+    "message": "Lägg till filter?"
   },
   "add_your_own_filters": {
     "message": "Lägg till dina egna filter"
@@ -27,7 +27,7 @@
     "message": "När denna popup stängs, klicka (eller högerklicka) ett objekt på sidan."
   },
   "description": {
-    "message": "Den gratis annonsblockeraren för Chrome: Blockerar irriterande video-annonser på Youtube, Facebook-annonser, banners och mycket mer."
+    "message": "Den kostnadsfria annonsblockeraren för Chrome: Blockerar irriterande videoreklam på YouTube, Facebook-annonser, webbannonser och mycket mer."
   },
   "disable_inline": {
     "message": "Inaktivera infogade textannonser"
