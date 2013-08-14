@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "క్రొత్త వడపోత (ఫిల్టర్) జోడించబడింది; ఐచ్ఛికాల కొఱకు <a id='options_url' target='_blank'> </a> చూడండి."
-  },
   "options": {
     "message": "యాడ్ బ్లాక్ ప్లస్ ఐచ్ఛికాలు"
   },

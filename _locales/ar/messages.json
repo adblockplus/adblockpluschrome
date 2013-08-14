@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "تم إضافة فلاتر جديدة; انظر <a id='options_url' target='_blank'>الخيارات</a> للتحكم بها."
-  },
   "options": {
     "message": "خيارات آدبلوك بلس"
   },

@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Nové filtry přidány; navštivte <a id='options_url' target='_blank'>Nastavení</a> k jejich správě."
-  },
   "options": {
     "message": "Možnosti Adblock Plus"
   },

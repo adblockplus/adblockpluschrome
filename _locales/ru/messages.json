@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Новые фильтры добавлены; перейдите в <a id='options_url' target='_blank'>Настройки</a> для редактирования."
-  },
   "options": {
     "message": "Настройки Adblock Plus"
   },

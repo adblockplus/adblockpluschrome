@@ -72,9 +72,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Jauni filtri pievienoti; lai tos pārvaldītu, skatiet <a id='options_url' target='_blank'>Opcijas</a>."
-  },
   "options": {
     "message": "Adblock Plus Opcijas"
   },

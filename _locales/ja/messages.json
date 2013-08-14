@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "新しいフィルタが追加されました; 管理方法については <a id='options_url' target='_blank'>オプション</a> を参照。"
-  },
   "options": {
     "message": "Adblock Plus オプション"
   },

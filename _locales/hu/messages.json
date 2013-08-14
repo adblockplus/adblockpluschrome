@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Új szűrők hozzáadva; tekintsd meg a <a id='options_url' target='_blank'>beállításokat</a> a szerkesztéshez."
-  },
   "options": {
     "message": "Adblock Plus beállítások"
   },

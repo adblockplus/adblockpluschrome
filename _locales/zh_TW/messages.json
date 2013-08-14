@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "已新增過濾條件。若要管理請至 <a id='options_url' target='_blank'>Adblock Plus 選項</a> 。"
-  },
   "options": {
     "message": "Adblock Plus 選項"
   },

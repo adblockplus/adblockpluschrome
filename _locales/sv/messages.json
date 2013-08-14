@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Nya filter tillagda; se <a id='options_url' target='_blank'>Alternativ</a> för att hantera dom."
-  },
   "options": {
     "message": "Adblock Plus Alternativ"
   },

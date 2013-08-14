@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "فیلترهای جدید اضافه شد؛ برای مدیریت <a id='options_url' target='_blank'>تنظیمات</a> رو ببین."
-  },
   "options": {
     "message": "تنظیمات Adblock Plus"
   },

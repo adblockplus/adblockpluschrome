@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Novi filter je dodan; pogledajte <a id='options_url' target='_blank'>Mogućnosti</a> za upravljanje sa njima."
-  },
   "options": {
     "message": "Adblock Plus mogućnosti"
   },

@@ -69,9 +69,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Uusi suodatin lisätty; mene <a id='options_url' target='_blank'>asetuksiin</a> editoidaksesi niitä."
-  },
   "options": {
     "message": "Adblock Plus asetukset"
   },

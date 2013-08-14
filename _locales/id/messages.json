@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Penyaring baru ditambahkan; lihat <a id='options_url' target='_blank'>Pilihan</a> untuk mengaturnya."
-  },
   "options": {
     "message": "Pengaturan Adblock Plus"
   },

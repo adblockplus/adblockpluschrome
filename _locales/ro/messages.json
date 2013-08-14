@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Noi filtre adăugate; consultaţi <a id='options_url' target='_blank'> Opţiunile</a> pentru a le administra."
-  },
   "options": {
     "message": "Opţiuni Adblock Plus"
   },
