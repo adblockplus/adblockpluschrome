@@ -51,20 +51,10 @@
     "message": "Danh sách các bộ lọc"
   },
   "filter_must_follow_syntax": {
-    "message": "Bộ lọc của bạn phải tuân theo <a href='$url$'>cú pháp bộ lọc của Adblock Plusx</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Bộ lọc của bạn phải tuân theo <a>cú pháp bộ lọc của Adblock Plusx</a>."
   },
   "found_a_bug": {
-    "message": "Bạn phát hiện thấy lỗi? Bạn muốn dịch Adblock Plus sang ngôn ngữ của bạn? Hãy <a href='$url$'>gửi yêu cầu tại đây</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Bạn phát hiện thấy lỗi? Bạn muốn dịch Adblock Plus sang ngôn ngữ của bạn? Hãy <a>gửi yêu cầu tại đây</a>."
   },
   "general": {
     "message": "Tổng quan"

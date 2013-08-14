@@ -45,12 +45,7 @@
     "message": "Suodatinlistat"
   },
   "found_a_bug": {
-    "message": "Löysitkö vian? Haluatko kääntää Adblock Plusin omalle kielellesi? Ole hyvä ja <a href='$url$'>kirjoita hakemus täällä</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Löysitkö vian? Haluatko kääntää Adblock Plusin omalle kielellesi? Ole hyvä ja <a>kirjoita hakemus täällä</a>."
   },
   "general": {
     "message": "Yleiset"

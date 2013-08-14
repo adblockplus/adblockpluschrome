@@ -51,20 +51,10 @@
     "message": "過濾列表"
   },
   "filter_must_follow_syntax": {
-    "message": "您的過濾條件必須遵守 <a href='$url$'>Adblock Plus 的語法</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "您的過濾條件必須遵守 <a>Adblock Plus 的語法</a>."
   },
   "found_a_bug": {
-    "message": "發現 bug？想要翻譯 Adblock Plus？請至 <a href='$url$'>此處詢問</a>。",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "發現 bug？想要翻譯 Adblock Plus？請至 <a>此處詢問</a>。"
   },
   "general": {
     "message": "一般設定"

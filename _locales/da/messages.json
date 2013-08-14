@@ -51,20 +51,10 @@
     "message": "Filterlister"
   },
   "filter_must_follow_syntax": {
-    "message": "Filteret skal følge <a href='$url$'> Adblock Plus filter syntaks</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Filteret skal følge <a>Adblock Plus filter syntaks</a>."
   },
   "found_a_bug": {
-    "message": "Har du fundet en fejl? Vil du oversætte Adblock Plus til dit sprog? Send <a href='$url$'> venligst din anmodning anmodning her</a>.",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "Har du fundet en fejl? Vil du oversætte Adblock Plus til dit sprog? Send <a>venligst din anmodning anmodning her</a>."
   },
   "general": {
     "message": "Generelt"
