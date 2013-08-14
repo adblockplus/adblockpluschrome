@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "புதிய வடிகட்டிகள் சேர்க்கப்பட்டன; அவற்றை நிர்வகிக்க <a id='options_url' target='_blank'> விருப்பங்களை</a> பார்க்கவும்."
-  },
   "options": {
     "message": "Adblock Plus விருப்பங்கள்"
   },

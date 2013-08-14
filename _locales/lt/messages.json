@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Pridėti nauji filtrai; juos tvarkyti galite <a id='options_url' target='_blank'>parinktyse</a>."
-  },
   "options": {
     "message": "Adblock Plus parinktys"
   },

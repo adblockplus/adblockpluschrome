@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Νέο φίλτρο προστέθηκε; δείτε <a id='options_url' target='_blank'>Επιλογές</a> για να τα διαχειριστείτε. "
-  },
   "options": {
     "message": "Επιλογές Adblock Plus"
   },

@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "เพิ่มตัวกรองใหม่แล้ว; ไปที่<a id='options_url' target='_blank'>ตัวเลือก</a>เพื่อดูแลจัดการ"
-  },
   "options": {
     "message": "ตัวเลือกของ Adblock Plus"
   },

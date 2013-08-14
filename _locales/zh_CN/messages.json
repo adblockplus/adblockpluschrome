@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "您已添加过滤规则。 请至<a id='options_url' target='_blank'>Adblock Plus选项</a> 管理过滤规则。"
-  },
   "options": {
     "message": "设置选项"
   },

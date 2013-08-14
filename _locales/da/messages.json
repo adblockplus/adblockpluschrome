@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Nye filtre tilføjet; Se <a id='options_url' target='_blank'> Indstillinger</a> for at redigere dem."
-  },
   "options": {
     "message": "Adblock Plus indstillinger"
   },

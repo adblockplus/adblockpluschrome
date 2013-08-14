@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Добавени са нови филтри; Вижте в <a id='options_url' target='_blank'>Опции</a>, за да ги управлявате."
-  },
   "options": {
     "message": "Adblock Plus опции"
   },

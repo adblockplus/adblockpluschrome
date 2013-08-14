@@ -78,9 +78,6 @@
       }
     }
   },
-  "new_filters_added": {
-    "message": "Yeni filtreler eklendi; Onları düzenlemek için<a id='options_url' target='_blank'>Seçeneklere</a> bakın."
-  },
   "options": {
     "message": "Adblock Plus seçenekleri"
   },
