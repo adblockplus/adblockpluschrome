@@ -51,10 +51,20 @@
     "message": "过滤清单"
   },
   "filter_must_follow_syntax": {
-    "message": "您的过滤器必须遵循 <a> Adblock Plus 过滤器语法</a>。"
+    "message": "您的过滤器必须遵循 <a href='$url$'> Adblock Plus 过滤器语法</a>。",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "发现错误？想要帮忙翻译Adblock Plus？请前往<a>此处</a>"
+    "message": "发现错误？想要帮忙翻译Adblock Plus？请前往<a href='$url$'>此处</a>",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "常规"

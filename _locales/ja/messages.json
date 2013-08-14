@@ -51,10 +51,20 @@
     "message": "フィルタリスト"
   },
   "filter_must_follow_syntax": {
-    "message": "フィルタの記述は <a>Adblock Plus フィルタ書式</a> に従う必要があります。"
+    "message": "フィルタの記述は <a href='$url$'>Adblock Plus フィルタ書式</a> に従う必要があります。",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "バグが見つかりましたか? あなたの言語に翻訳したいですか? その場合は <a>こちら</a>へお願いします。"
+    "message": "バグが見つかりましたか? あなたの言語に翻訳したいですか? その場合は <a href='$url$'>こちら</a>へお願いします。",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "一般"

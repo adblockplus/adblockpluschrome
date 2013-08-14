@@ -51,10 +51,20 @@
     "message": "فیلتر کردن لیست"
   },
   "filter_must_follow_syntax": {
-    "message": "فیلتر خود را باید <a> ترکیب فیلتر Adblock پلاس</a> را دنبال کنید."
+    "message": "فیلتر خود را باید <a href='$url$'> ترکیب فیلتر Adblock پلاس</a> را دنبال کنید.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "باگ پیدا کردی؟ می خوای Adblock Plus رو به زبون خودتون ترجمه کنی؟ <a>فایل درخواست اینجاست</a>."
+    "message": "باگ پیدا کردی؟ می خوای Adblock Plus رو به زبون خودتون ترجمه کنی؟ <a href='$url$'>فایل درخواست اینجاست</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "صفحه اصلی"

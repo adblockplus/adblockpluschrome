@@ -27,7 +27,12 @@
     "message": "Flitrite nimekirjad"
   },
   "found_a_bug": {
-    "message": "Leidsid vea? Tahad tõlkida Adblock Plus'i enda keelde? Palun saada soovitus <a>siia</a>."
+    "message": "Leidsid vea? Tahad tõlkida Adblock Plus'i enda keelde? Palun saada soovitus <a href='$url$'>siia</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "Üldine"

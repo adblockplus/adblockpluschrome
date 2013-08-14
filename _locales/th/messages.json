@@ -51,10 +51,20 @@
     "message": "รายชื่อตัวกรอง"
   },
   "filter_must_follow_syntax": {
-    "message": "ตัวกรองของคุณต้องทำตาม<a>ไวยากรณ์ตัวกรอง Adblock Plus</a>"
+    "message": "ตัวกรองของคุณต้องทำตาม<a href='$url$'>ไวยากรณ์ตัวกรอง Adblock Plus</a>",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "เจอบักงั้นหรอ?หรือต้องการแปล Adblock Plus เป็นภาษาของคุณเอง? กรุณา <a>ยื่นคำร้องได้ที่นี่</a>"
+    "message": "เจอบักงั้นหรอ?หรือต้องการแปล Adblock Plus เป็นภาษาของคุณเอง? กรุณา <a href='$url$'>ยื่นคำร้องได้ที่นี่</a>",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "ทั่วไป"

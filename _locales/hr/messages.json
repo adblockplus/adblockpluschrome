@@ -51,10 +51,20 @@
     "message": "Popisi filtera"
   },
   "filter_must_follow_syntax": {
-    "message": "Vaši filtri moraju slijediti <a>Adblock Plus filter sintaksa</a>."
+    "message": "Vaši filtri moraju slijediti <a href='$url$'>Adblock Plus filter sintaksa</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "Pronašli ste grešku? Želite prevesti Adblock Plus na svoj jezik? <a>Podnesite zahtjev ovdje</a>."
+    "message": "Pronašli ste grešku? Želite prevesti Adblock Plus na svoj jezik? <a href='$url$'>Podnesite zahtjev ovdje</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "Općenito"

@@ -51,10 +51,20 @@
     "message": "Süzgeç listesi"
   },
   "filter_must_follow_syntax": {
-    "message": "Eklediğiniz filtre <a>Adblock Plus filtre kurallarına</a> uymak zorundadır."
+    "message": "Eklediğiniz filtre <a href='$url$'>Adblock Plus filtre kurallarına</a> uymak zorundadır.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "Hata mı buldunuz? Adblock Plus'ı kendi dilinize mi çevirmek istiyorsunuz? Lütfen <a>buradan dosya isteyiniz</a>."
+    "message": "Hata mı buldunuz? Adblock Plus'ı kendi dilinize mi çevirmek istiyorsunuz? Lütfen <a href='$url$'>buradan dosya isteyiniz</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "Genel"
