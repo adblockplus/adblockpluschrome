@@ -51,10 +51,20 @@
     "message": "Список фільтрів"
   },
   "filter_must_follow_syntax": {
-    "message": "Ваш фільтр має відповідати <a>синтаксису фільтрів Adblock Plus</a>."
+    "message": "Ваш фільтр має відповідати <a href='$url$'>синтаксису фільтрів Adblock Plus</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "Знайшли помилку в Adblock Plus? Будь ласка, <a> повідомте про це тут </a>."
+    "message": "Знайшли помилку в Adblock Plus? Будь ласка, <a href='$url$'> повідомте про це тут </a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "Загальні"

@@ -51,10 +51,20 @@
     "message": "Filterlistor"
   },
   "filter_must_follow_syntax": {
-    "message": "Ditt filter måste följa <a>Adblock Plus filtersyntax</a>."
+    "message": "Ditt filter måste följa <a href='$url$'>Adblock Plus filtersyntax</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "Hittat ett fel eller vill du översätta Adblock Plus till ett annat språk? Vänligen, <a>meddela här</a>."
+    "message": "Hittat ett fel eller vill du översätta Adblock Plus till ett annat språk? Vänligen, <a href='$url$'>meddela här</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "Allmänt"

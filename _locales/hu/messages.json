@@ -51,10 +51,20 @@
     "message": "Szűrő lista"
   },
   "filter_must_follow_syntax": {
-    "message": "A szűrőd kövesse az <a>Adblock Plus szintaxisát</a>."
+    "message": "A szűrőd kövesse az <a href='$url$'>Adblock Plus szintaxisát</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "Találtál egy hibát az Adblock Plus-ban? Kérlek <a>jelentsd itt</a>."
+    "message": "Találtál egy hibát az Adblock Plus-ban? Kérlek <a href='$url$'>jelentsd itt</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "Általános"

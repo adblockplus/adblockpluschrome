@@ -51,10 +51,20 @@
     "message": "Liste de filtre"
   },
   "filter_must_follow_syntax": {
-    "message": "Filtrul tău trebuie să respecte <a> sintaxa Adblock Plus pentru filtre</a>."
+    "message": "Filtrul tău trebuie să respecte <a href='$url$'> sintaxa Adblock Plus pentru filtre</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "Ai gasit o eroare? Dorești să traduci Adblock Plus în limba ta?  <a>scrie o cerere aici</a>."
+    "message": "Ai gasit o eroare? Dorești să traduci Adblock Plus în limba ta?  <a href='$url$'>scrie o cerere aici</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "General"

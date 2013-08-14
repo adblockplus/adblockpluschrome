@@ -51,10 +51,20 @@
     "message": "Filtrų sąrašai"
   },
   "filter_must_follow_syntax": {
-    "message": "Jūsų filtras turi atitikti <a>Adblock Plus filtrų sintaksę</a>."
+    "message": "Jūsų filtras turi atitikti <a href='$url$'>Adblock Plus filtrų sintaksę</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "found_a_bug": {
-    "message": "Radote klaidą? Norite išversti Adblock Plus į savo kalbą? Užpildykite <a>prašymą čia</a>."
+    "message": "Radote klaidą? Norite išversti Adblock Plus į savo kalbą? Užpildykite <a>prašymą čia</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
   },
   "general": {
     "message": "Bendra"
