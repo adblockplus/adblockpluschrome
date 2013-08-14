@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
   },
+  "description": {
+    "message": "Công cụ chặn quảng cáo miễn phí cho Chrome: Chặn quảng cáo  gây phiền nhiễu như video trên YouTube, quảng cáo Facebook, biểu ngữ và nhiều hơn nữa."
+  },
   "disable_inline": {
     "message": "Chặn trực tiếp các quảng cáo chữ"
   },
@@ -47,8 +50,16 @@
   "filter_lists": {
     "message": "Danh sách các bộ lọc"
   },
+  "filter_must_follow_syntax": {
+    "message": "Bộ lọc của bạn phải tuân theo <a href='$url$'>cú pháp bộ lọc của Adblock Plusx</a>.",
+    "placeholders": {
+      "url": {
+        "content": "$1"
+      }
+    }
+  },
   "found_a_bug": {
-    "message": "Bạn phát hiện thấy lỗi? Bạn muuốn dịch Adblock Plus sang ngôn ngữ của bạn? Hãy <a href='$url$'>gửi yêu cầu tại đây</a>.",
+    "message": "Bạn phát hiện thấy lỗi? Bạn muốn dịch Adblock Plus sang ngôn ngữ của bạn? Hãy <a href='$url$'>gửi yêu cầu tại đây</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -64,6 +75,14 @@
       "date": {
         "content": "$2"
       },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Cập nhật lúc $time$ hôm nay",
+    "placeholders": {
       "time": {
         "content": "$1"
       }

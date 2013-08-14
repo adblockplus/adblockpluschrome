@@ -24,16 +24,16 @@
     "message": "Cancelar"
   },
   "clickhide_instructions": {
-    "message": "Após fechar este popup, clique (ou clique com o botão direito) num elemento na página."
+    "message": "Ao fechar esta janela, clique (ou clique com o botão direito) num elemento da página."
   },
   "description": {
-    "message": "A ferramenta gratuita, Adblock para o Chrome: Bloqueia anúncios irritantes no YouTube, Facebook, e outros sites."
+    "message": "A ferramentaAdblock para o Chrome: bloqueia anúncios irritantes no YouTube, Facebook, e outros sítios web."
   },
   "disable_inline": {
     "message": "Desativar anúncios de texto embutido"
   },
   "disabled_for_these_domains": {
-    "message": "O Adblock Plus está desativado para os domínios listados abaixo. Pode adicionar um domínio através do ícone do Adblock Plus na barra de endereços ou escrevendo o domínio (e não um URL) na caixa e clicando no botão \"Adicionar domínio\"."
+    "message": "O Adblock Plus está inativo nos domínios listados abaixo. Pode adicionar um domínio através do ícone do Adblock Plus na barra de endereço ou escrevendo o domínio (não o URL) na caixa e clicando no botão \"Adicionar domínio\"."
   },
   "easy_create_filter": {
     "message": "Criar rapidamente um filtro"
@@ -51,7 +51,7 @@
     "message": "Lista de filtros"
   },
   "filter_must_follow_syntax": {
-    "message": "O filtro deve seguir os  <a href='$url$'>parâmentros dos filtros do Adblock Plus</a>.",
+    "message": "O filtro deve seguir a <a href='$url'>sintaxe de filtros do AdblockPlus</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -59,7 +59,7 @@
     }
   },
   "found_a_bug": {
-    "message": "Encontrou um bug? Quer traduzir o Adblock Plus na sua língua? Por favor, <a href='$url$'>submeta um pedido aqui</a>.",
+    "message": "Encontrou um erro? Quer traduzir o Adblock Plus no seu idioma? Submeta o seu pedido <a href='$url'>aqui</a>.",
     "placeholders": {
       "url": {
         "content": "$1"
@@ -89,7 +89,7 @@
     }
   },
   "new_filters_added": {
-    "message": "Novos filtros adicionados; para os gerir consulte as <a id='options_url' target='_blank'>Opções</a>."
+    "message": "Novos filtros adicionados. Para os gerir consulte as <a id='options_url' target='_blank'>Opções</a>."
   },
   "options": {
     "message": "Opções do Adblock Plus"
@@ -104,7 +104,7 @@
     "message": "Mostrar 'Bloquear elemento' no menu de contexto do botão direito do rato"
   },
   "show_icon": {
-    "message": "Mostrar ícone na barra de endereços"
+    "message": "Mostrar ícone na barra de endereço"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor escolha uma subscrição de filtros da lista:"
@@ -113,6 +113,6 @@
     "message": "Atualizar agora"
   },
   "whitelisted_domains": {
-    "message": "Domínios da Whitelist"
+    "message": "Domínios permitidos"
   }
 }
