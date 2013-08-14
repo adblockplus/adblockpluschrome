@@ -51,12 +51,7 @@
     "message": "구독 필터"
   },
   "found_a_bug": {
-    "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? <a href='$url$'>연락하기</a>",
-    "placeholders": {
-      "url": {
-        "content": "$1"
-      }
-    }
+    "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? <a>연락하기</a>"
   },
   "general": {
     "message": "일반"
