@@ -320,8 +320,8 @@ function addSubscription(prevVersion)
   if (toRemove in FilterStorage.knownSubscriptions)
     FilterStorage.removeSubscription(FilterStorage.knownSubscriptions[toRemove]);
 
-  // Add "acceptable ads" subscription for new users and users updating from old ABP versions
-  var addAcceptable = (!prevVersion || Services.vc.compare(prevVersion, "2.1") < 0);
+  // Add "acceptable ads" subscription for new users
+  var addAcceptable = !prevVersion;
   if (addAcceptable)
   {
     addAcceptable = !FilterStorage.subscriptions.some(function(subscription)
