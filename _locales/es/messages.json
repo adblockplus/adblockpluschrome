@@ -54,7 +54,7 @@
     "message": "Tu filtro debe seguir la <a>sintaxis de filtros para Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "¿Encontró un error en Adblock Plus? ¿Quiere traducirlo a su idioma? Por favor <a>rellene aquí una petición</a>."
+    "message": "¿Ha encontrado un error? ¿Quiere traducir Adblock Plus a su idioma? Por favor <a>rellene una petición aquí</a>."
   },
   "general": {
     "message": "General"
