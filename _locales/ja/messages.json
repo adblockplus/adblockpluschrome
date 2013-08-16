@@ -51,10 +51,10 @@
     "message": "フィルタリスト"
   },
   "filter_must_follow_syntax": {
-    "message": "フィルタの記述は <a>Adblock Plus フィルタ書式</a> に従う必要があります。"
+    "message": "<a>Adblock Plus フィルタの書式</a> に準拠したフィルタを記述しなければなりません。"
   },
   "found_a_bug": {
-    "message": "バグが見つかりましたか? あなたの言語に翻訳したいですか? その場合は <a>こちら</a>へお願いします。"
+    "message": "バグを発見しましたか? Adblock Plus を翻訳したいですか? その場合は <a>ここよりリクエスト</a> 願います。"
   },
   "general": {
     "message": "一般"
