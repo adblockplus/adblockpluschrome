@@ -56,6 +56,13 @@ function onBeforeRequest(details)
     return {};
 
   var type = details.type;
+  
+  // Workaround: Under some circumstances Chrome 29+ gives top frame the
+  // type "object" instead of "main_frame". We work around that by assuming
+  // that the first request belongs to the top frame.
+  if (!(details.tabId in frames))
+    type = "main_frame";
+  
   if (type == "main_frame" || type == "sub_frame")
     recordFrame(details.tabId, details.frameId, details.parentFrameId, details.url);
 
