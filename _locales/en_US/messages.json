@@ -103,6 +103,63 @@
   "show_icon": {
     "message": "Show icon in address bar"
   },
+  "stats_label_page": {
+    "description": "This shows the number of blocked requests on a specific page in the popup.",
+    "message": "<strong>$number$</strong> on this page",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "description": "This shows the total number of blocked requests in the popup.",
+    "message": "<strong>$number$</strong> in total",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "description": "For some numbers the stats share message will say 'I blocked over 123 ads' instead of 'I blocked 123 ads'. This is a reference to the 'over 9000' meme. This string can be translated simply with '$number$' if that meme isn't known to the speakers of the language or if the resulting sentence would sound weird otherwise.",
+    "message": "over $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "description": "Label for link to adblockplus.org that is attached when the user wants to share the stats on Facebook.",
+    "message": "Download Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Share on Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Share on Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Share on Twitter"
+  },
+  "stats_share_message": {
+    "description": "This message will be posted to social networks if the user decides to share the stats.",
+    "message": "I blocked $number$ ads and trackers thanks to Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "description": "Label for the action in the popup which presents the user with all sharing options.",
+    "message": "Share this"
+  },
+  "stats_title": {
+    "description": "Title for the stats section in the popup.",
+    "message": "Blocked ads:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Please choose a filter subscription from the list:"
   },
