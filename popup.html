@@ -76,12 +76,47 @@ a { text-decoration: none }
   width: 5px;
   display: block;
 }
+
+#statsContainer
+{
+  margin: 10px 5px;
+  padding: 5px;
+  border: 1px solid rgb(150, 150, 200);
+  border-radius: 5px;
+  white-space: nowrap;
+  background: -webkit-linear-gradient(rgb(250, 250, 255), rgb(200, 200, 255) 50px);
+  background: linear-gradient(rgb(250, 250, 255), rgb(200, 200, 255) 50px);
+}
+
+#statsPage > strong,
+#statsTotal > strong
+{
+  display: inline-block;
+  min-width: 50px;
+  color: rgb(255, 50, 50);
+  text-align: right;
+}
+
+#share
+{
+  display: block;
+  color: rgb(75, 75, 200);
+  text-align: right;
+  text-decoration: underline;
+}
+
+#shareBox > a
+{
+  display: block;
+  margin-top: 5px;
+}
 </style>
 
 <script type="text/javascript" src="jquery-ui/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="i18n.js"></script>
 <script type="text/javascript" src="popup.js"></script>
 <script type="text/javascript" src="notification.js"></script>
+<script type="text/javascript" src="stats.js"></script>
 </head>
 <body id="main">
 <div id="notification" style="display: none">
@@ -99,6 +134,22 @@ a { text-decoration: none }
 <div id="clickHideMsg"><span class="i18n_clickhide_instructions"></span></div>
 <div class="spacer"></div>
 <button id="cancelButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"><span class="i18n_cancel"></span></button>
+</div>
+
+<div id="statsContainer" hidden>
+  <strong class="i18n_stats_title"></strong>
+  <div id="stats">
+    <div id="statsPage" class="label"></div>
+    <div id="statsTotal" class="label"></div>
+  </div>
+  <div>
+    <a id="share" class="i18n_stats_share_title" href="#"></a>
+    <div id="shareBox" hidden>
+      <a class="i18n_stats_share_label_fb ui-button ui-widget ui-state-default ui-corner-all" data-social="facebook"></a>
+      <a id="shareTwitter" class="i18n_stats_share_label_twitter ui-button ui-widget ui-state-default ui-corner-all" data-social="twitter"></a>
+      <a id="shareGplus" class="i18n_stats_share_label_gplus ui-button ui-widget ui-state-default ui-corner-all" data-social="gplus"></a>
+    </div>
+  </div>
 </div>
 
 </div>

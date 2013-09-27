@@ -15,6 +15,8 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var FilterNotifier = require("filterNotifier").FilterNotifier;
+
 chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
 chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {urls: ["http://*/*", "https://*/*"]}, ["responseHeaders"]);
 chrome.tabs.onRemoved.addListener(forgetTab);
@@ -37,7 +39,7 @@ var importantNotifications = {
   'load': true
 };
 
-require("filterNotifier").FilterNotifier.addListener(function(action)
+FilterNotifier.addListener(function(action)
 {
   if (action in importantNotifications)
   {
@@ -77,6 +79,7 @@ function onBeforeRequest(details)
 
   var frame = (type != "SUBDOCUMENT" ? details.frameId : details.parentFrameId);
   var filter = checkRequest(type, details.tabId, details.url, frame);
+  FilterNotifier.triggerListeners("filter.hitCount", filter, 0, 0, details.tabId);
   if (filter instanceof BlockingFilter)
     return {cancel: true};
   else
