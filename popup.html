@@ -118,7 +118,8 @@ a { text-decoration: none }
 <script type="text/javascript" src="notification.js"></script>
 <script type="text/javascript" src="stats.js"></script>
 </head>
-<body id="main">
+<!-- Set tabindex to work around Chromium issue 304532 -->
+<body id="main" tabindex="1">
 <div id="notification" style="display: none">
 <h1 id="title"></h1>
 <p id="message"></p>
