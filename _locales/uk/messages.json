@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Показати піктограму в адресному рядку"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> на цій сторінці",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> всього",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "понад $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Завантажити Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Поділитися на Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Поділитися на Google +"
+  },
+  "stats_share_label_twitter": {
+    "message": "Поділитися на Twitter"
+  },
+  "stats_share_message": {
+    "message": "Я заблокував $number$ оголошень і відстежувачів завдяки Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Розповісти про це"
+  },
+  "stats_title": {
+    "message": "Заблоковані оголошення:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Будь ласка виберіть фільтрову підписку з переліку:"
   },

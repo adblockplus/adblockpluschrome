@@ -54,7 +54,7 @@
     "message": "Seu filtro deve seguir o <a>uso correto do filtro sintaxe de Adblock plus</a>."
   },
   "found_a_bug": {
-    "message": "Encontrou um bug? Deseja traduzir o Adblock Plus para sua língua? Por favor <a>arquive um pedido aqui</a>."
+    "message": "Encontrou um erro? Deseja traduzir o Adblock Plus para seu idioma? Por favor <a>arquive um pedido aqui</a>."
   },
   "general": {
     "message": "Geral"
@@ -82,7 +82,7 @@
     "message": "Opções do Adblock Plus"
   },
   "out_of_date_lists": {
-    "message": "Listas obsoletas são atualizadas periodicamente."
+    "message": "Listas desatualizadas são atualizadas periodicamente."
   },
   "remove_button": {
     "message": "Remover selecionados"
@@ -92,6 +92,56 @@
   },
   "show_icon": {
     "message": "Mostrar ícone na barra de endereços"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> nesta página",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> no total",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "acima de $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Baixar o Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Compartilhar no Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Compartilhar no Google +"
+  },
+  "stats_share_label_twitter": {
+    "message": "Compartilhar no Twitter"
+  },
+  "stats_share_message": {
+    "message": "Eu bloqueei $number$ anúncios e rastreadores graças ao Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Compartilhar isso"
+  },
+  "stats_title": {
+    "message": "Anúncios bloqueados:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor, escolha uma inscrição de filtros da lista:"

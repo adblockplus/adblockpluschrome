@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Mutasd az ikont a címsorban"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> ezen az oldalon",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> összesen",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "több mint $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Adblock Plus letöltése"
+  },
+  "stats_share_label_fb": {
+    "message": "Megosztás Facebookon"
+  },
+  "stats_share_label_gplus": {
+    "message": "Megosztás Google+-on"
+  },
+  "stats_share_label_twitter": {
+    "message": "Megosztás Twitteren"
+  },
+  "stats_share_message": {
+    "message": "Kiszűrtem $number$ hirdetést és nyomkövetőt az Adblock Plusnak köszönhetően.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Megosztás"
+  },
+  "stats_title": {
+    "message": "Blokkolt hirdetések:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Kérem válassza ki a szűrőt a listából:"
   },

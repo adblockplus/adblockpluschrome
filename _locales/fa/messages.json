@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "نمایش آیکون در نوارآدرس"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> در این صفحه",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> in total",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "بیش از $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "دانلود adblock"
+  },
+  "stats_share_label_fb": {
+    "message": "اشتراک در فیس بوک"
+  },
+  "stats_share_label_gplus": {
+    "message": "اشتراک در گوگل+"
+  },
+  "stats_share_label_twitter": {
+    "message": "اشتراک در توییتر"
+  },
+  "stats_share_message": {
+    "message": "من $number$ تبلیغات و انتقالها رو مسدود کردم ، باتشکر از Adblock.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "به اشتراک بگذارید"
+  },
+  "stats_title": {
+    "message": "تبلیغات مسدود شده:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "لطفا اشتراک فیلتر را از لیست انتخاب کنید:"
   },

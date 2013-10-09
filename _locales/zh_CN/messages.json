@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "在地址栏显示按钮"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> 在此页上",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "总计<strong>$number$</strong> ",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "共 $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "下载 Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "分享到 Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "分享到 Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "分享到Twitter"
+  },
+  "stats_share_message": {
+    "message": "我用Adblock Plus阻止了$number$ 个广告和追踪器。",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "分享"
+  },
+  "stats_title": {
+    "message": "被屏蔽的广告："
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "从列表中选择过滤规则订阅组:"
   },

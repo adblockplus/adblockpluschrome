@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Afişează sigla în bara de adrese"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> pe această pagină",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> în total",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "peste $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Descarca Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Share pe Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Share pe Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Share pe Twitter"
+  },
+  "stats_share_message": {
+    "message": "Am blocat $number$ reclame cu ABP.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Opţiuni de share"
+  },
+  "stats_title": {
+    "message": "Reclame blocate:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Alegeți un set de filtre din listă:"
   },

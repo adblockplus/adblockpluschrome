@@ -39,7 +39,7 @@
     "message": "Let oprette filter"
   },
   "edit_filters_raw": {
-    "message": "Redigere filtre som rå tekst"
+    "message": "Rediger filtre som rå tekst"
   },
   "enable_only_the": {
     "message": "Aktiver kun de filterlister du har brug for. Alt for mange kan gøre at Chrome ikke reagerer."
@@ -54,7 +54,7 @@
     "message": "Filteret skal følge <a>Adblock Plus filter syntaks</a>."
   },
   "found_a_bug": {
-    "message": "Har du fundet en fejl? Vil du oversætte Adblock Plus til dit sprog? Send <a>venligst din anmodning anmodning her</a>."
+    "message": "Har du fundet en fejl? Vil du oversætte Adblock Plus til dit sprog? Send <a>venligst din anmodning her</a>."
   },
   "general": {
     "message": "Generelt"
@@ -92,6 +92,40 @@
   },
   "show_icon": {
     "message": "Vis ikonet i adresselinjen"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> på denne side",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Download Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Del på Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Del på Google +"
+  },
+  "stats_share_label_twitter": {
+    "message": "Del på Twitter"
+  },
+  "stats_share_message": {
+    "message": "Jeg blokerede $number$ annoncer og trackers takket være Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Del dette"
+  },
+  "stats_title": {
+    "message": "Blokerede annoncer:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vælg et filterabonnement fra listen:"

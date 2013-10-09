@@ -9,7 +9,7 @@
     "message": "Προσθήκη φίλτρου"
   },
   "add_filters_msg": {
-    "message": "Προσθήκη φίλτρων?"
+    "message": "Προσθήκη φίλτρων;"
   },
   "add_your_own_filters": {
     "message": "Προσθήκη δικών σας φίλτρων"
@@ -24,10 +24,10 @@
     "message": "Ακύρωση"
   },
   "clickhide_instructions": {
-    "message": "Μετά το κλείσιμο αυτού του παραθύρου, κάντε κλικ (ή κάντε δεξί κλικ) ένα στοιχείο στη σελίδα."
+    "message": "Μετά το κλείσιμο αυτού του παραθύρου, κάντε κλικ (ή κάντε δεξί κλικ) σ' ένα στοιχείο στη σελίδα."
   },
   "description": {
-    "message": "Το δωρεάν εργαλείο adblock για το Chrome: μπλοκάρει ενοχλητικές διαφημίσεις-βίντεο στο YouTube, διαφημίσεις στο Facebook, διαφημιστικά πλαίσια και πολλά ακόμα."
+    "message": "Το δωρεάν εργαλείο adblock για τον Chrome: μπλοκάρει ενοχλητικές διαφημίσεις-βίντεο στο YouTube, διαφημίσεις στο Facebook, διαφημιστικά πλαίσια και πολλά ακόμα."
   },
   "disable_inline": {
     "message": "Απενεργοποίηση των inline διαφημίσεων"
@@ -45,16 +45,16 @@
     "message": "Ενεργοποίηση μόνο της λίστας φίλτρων που χρειάζεστε. Υπερβολικά πολλές λίστες μπορεί να κάνουν το Chrome να μην ανταποκρίνεται. "
   },
   "enabled_for_site": {
-    "message": "Ενεργοποιημένο για αυτό το site"
+    "message": "Ενεργοποίηση σε αυτή την σελίδα"
   },
   "filter_lists": {
     "message": "Λίστες φίλτρων"
   },
   "filter_must_follow_syntax": {
-    "message": "Το φίλτρο σας πρέπει να ακολουθεί τη <a> σύνταξη φίλτρου του Adblock Plus</a>."
+    "message": "Το φίλτρο σας πρέπει να ακολουθεί τη <a>σύνταξη φίλτρου του Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "Βρήκατε σφάλματα; Θέλετε να μεταφράσετε το Adblock Plus στην γλώσσα σας; Παρακαλώ <a> στείλτε ένα αίτημα εδώ</a>."
+    "message": "Βρήκατε σφάλματα; Θέλετε να μεταφράσετε το Adblock Plus στην γλώσσα σας; Παρακαλώ <a>καταχωρείστε ένα αίτημα εδώ</a>."
   },
   "general": {
     "message": "Γενικά"
@@ -92,6 +92,56 @@
   },
   "show_icon": {
     "message": "Εμφάνιση εικονίδιου στη γραμμή διευθύνσεων"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> σε αυτή την σελίδα",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> συνολικά",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "πάνω από $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Κατεβάστε το Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Μοιραστείτε το στο Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Μοιραστείτε το στο Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Μοιραστείτε το στο Twitter"
+  },
+  "stats_share_message": {
+    "message": "Απέκλεισα $number$ διαφημίσεις και ιχνηλάτες χάρη στο Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Μοιραστείτε το"
+  },
+  "stats_title": {
+    "message": "Αποκλεισμένες διαφημίσεις:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Παρακαλώ επιλέξτε μια συνδρομή σε φίλτρα από την λίστα:"

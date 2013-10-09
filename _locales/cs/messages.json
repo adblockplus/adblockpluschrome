@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Zobrazit ikonu v adresním řádku"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> na této stránce",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "celkem <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Stáhnout Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Sdílet na Facebooku"
+  },
+  "stats_share_label_gplus": {
+    "message": "Sdílet na Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Sdílet na Twitteru"
+  },
+  "stats_share_message": {
+    "message": "Zablokoval jsem $number$ reklam a slídilů díky Adblocku Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Sdílet"
+  },
+  "stats_title": {
+    "message": "Blokované reklamy:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Prosím vyberte sadu filtrů ze seznamu:"
   },

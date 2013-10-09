@@ -51,10 +51,10 @@
     "message": "רשימות המסננים"
   },
   "filter_must_follow_syntax": {
-    "message": "המסנן שלכם חייב לציית ל<a>תחביר מסנן Adblock Plus</a>."
+    "message": "המסנן שלכם חייב לציית <a>לתחביר סינון Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "מצאת באג? ברצונך ליצור תרגום של Adblock Plus לשפתך? נא <a>לציין את בקשתך כאן</a>."
+    "message": "מצאת באג? ברצונך לתרגם את Adblock Plus לשפתך? אנא <a>הגישו בקשתכם כאן</a>."
   },
   "general": {
     "message": "כללי"
@@ -92,6 +92,56 @@
   },
   "show_icon": {
     "message": "הצגת סמל בסרגל הכתובות"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> בעמוד זה",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> בסך הכל",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "מעל $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "הורדת Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "שיתוף ב-Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "שיתוף ב-Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "שיתוף ב-Twitter"
+  },
+  "stats_share_message": {
+    "message": "אני חסמתי $number$ פרסומות ועוקבים הודות ל-Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "שתף את זה"
+  },
+  "stats_title": {
+    "message": "מודעות חסומות:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "יש לבחור הרשמת מסנן מהרשימה:"

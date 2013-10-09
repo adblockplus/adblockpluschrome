@@ -14,25 +14,142 @@
   "add_your_own_filters": {
     "message": "Tambah penapis anda sendiri"
   },
+  "apply_changes": {
+    "message": "Gunakan perubahan"
+  },
+  "block_element": {
+    "message": "Unsur blok"
+  },
   "cancel": {
     "message": "Batal"
   },
   "clickhide_instructions": {
-    "message": "Setelah menutup tetingkap timbul ini, klik (atau klik kanan) pada sesuatu unsur atas laman."
+    "message": "Setelah menutup tetingkap  ini, klik (atau klik butang kanan) pada sesuatu unsur atas laman."
+  },
+  "description": {
+    "message": "Alat percuma adblock untuk Chrome: Menyekat iklan yang menggangu video di YouTube,  iklan Facebook, sepanduk dan banyak lagi."
+  },
+  "disable_inline": {
+    "message": "Nyahaktifkan iklan teks sebaris"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus dinyahaktifkan untuk domain yang disenaraikan di bawah. Anda boleh menambah domain sama ada melalui ikon Adblock Plus  dalam bar alamat atau dengan menaip domain (bukan URL) di dalam kotak dan klik butang \"Add domain\"."
+  },
+  "easy_create_filter": {
+    "message": "Pencipta penapis mudah alih"
+  },
+  "edit_filters_raw": {
+    "message": "Mengedit penapis sebagai teks mentah"
+  },
+  "enable_only_the": {
+    "message": "Senraikan penapis yang anda perlukan sahaja.Jika terlebih banyak chrome akan tidak terkawal"
+  },
+  "enabled_for_site": {
+    "message": "Aktifkan untuk lamman web ini"
   },
   "filter_lists": {
     "message": "Senarai penapis"
   },
+  "filter_must_follow_syntax": {
+    "message": "Penapis anda mesti ikut <a>Adblock Plus filter syntax</a>."
+  },
+  "found_a_bug": {
+    "message": "Menjumpai bug? Ingin menterjemahkan Adblock Plus ke dalam bahasa anda? Sila <a>failkan permohonan di sini</a>."
+  },
   "general": {
     "message": "Umum"
+  },
+  "last_updated_at": {
+    "message": "Terakhir Dikemaskini pada $time$ pada $date$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Terakhir Dikemaskini pada $time$ semalam",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "options": {
+    "message": "pilihan Adblock Plus "
+  },
+  "out_of_date_lists": {
+    "message": "Senarai yang telah luput tarikh akan dikemas kini dari semasa ke semasa."
   },
   "remove_button": {
     "message": "Padamkan yang dipilih"
   },
+  "show_block_element_menu": {
+    "message": "Tunjukkan item menu 'Halang Elemen' pada butang klik kanan "
+  },
+  "show_icon": {
+    "message": "Papar ikon dalam bar alamat"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> pada halaman ini",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> secara keseluruhan",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$ ke atas",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Muat turun Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Kongsi di Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Kongsi di Google +"
+  },
+  "stats_share_label_twitter": {
+    "message": "Kongsi di Twitter"
+  },
+  "stats_share_message": {
+    "message": "Saya telah menyekat $number$ iklan dan penjejak berkat Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Kongsi ini"
+  },
+  "stats_title": {
+    "message": "Iklan yang disekat:"
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Sila pilih langganan penapis dalam senarai berikut:"
+  },
   "update_now": {
-    "message": "Kemas kini sekarang"
+    "message": "Kemaskini sekarang"
   },
   "whitelisted_domains": {
-    "message": "Domain disenaraiputihkan"
+    "message": "Domain yang telah disenarai putihkan"
   }
 }

@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Mostra la icona a la barra d'adreces"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> en aquesta pàgina",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> en total",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Baixa l'Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Compartir a Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Compartir a Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Compartir a Twitter"
+  },
+  "stats_share_message": {
+    "message": "He blocat $number$ anuncis i rastrejadors gràcies a Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Comparteix-ho"
+  },
+  "stats_title": {
+    "message": "Anuncis blocats:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Si us plau tria una subscripció de filtre a la llista:"
   },

@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Pēc šī aizvēršanas, noklikšķiniet (vai noklikšķiniet ar labo pogu) uz elementa šajā lapā."
   },
+  "description": {
+    "message": "Bez maksas reklāmu bloķēšanas rīks Chrome pārlūkam: Bloķē kaitinošos YouTube reklāmu video rullīšus, Facebook reklāmas, reklāmkarogus un daudz ko citu."
+  },
   "disable_inline": {
     "message": "Atspējot iekš-rindu teksta reklāmas"
   },
@@ -46,6 +49,9 @@
   },
   "filter_lists": {
     "message": "Filtru saraksts"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Filtram jāatbilst <a>Adblock Plus filtru sintaksei</a>."
   },
   "found_a_bug": {
     "message": "Atradi defektu? Vēlies iztulkot Adblock Plus savā valodā? Lūdzu <a>iesniedz pieprasījumu šeit</a>."

@@ -50,8 +50,11 @@
   "filter_lists": {
     "message": "Filter lists"
   },
+  "filter_must_follow_syntax": {
+    "message": "Your filter must follow the <a>Adblock Plus filter syntax</a>."
+  },
   "found_a_bug": {
-    "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a>file a request here</a>.\n"
+    "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a>file a request here</a>."
   },
   "general": {
     "message": "General"

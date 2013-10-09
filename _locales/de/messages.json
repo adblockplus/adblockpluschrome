@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Zeige Icon in der Adressleiste"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> auf dieser Seite",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> insgesamt",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "über $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Adblock Plus herunterladen"
+  },
+  "stats_share_label_fb": {
+    "message": "Auf Facebook teilen"
+  },
+  "stats_share_label_gplus": {
+    "message": "Auf Google+ teilen"
+  },
+  "stats_share_label_twitter": {
+    "message": "Auf Twitter teilen"
+  },
+  "stats_share_message": {
+    "message": "Ich habe $number$ Werbeanzeigen und Tracking-Dienste dank Adblock Plus geblockt.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Teile dies mit anderen"
+  },
+  "stats_title": {
+    "message": "Geblockte Werbeanzeigen:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Bitte wählen Sie ein Filterabonnement aus der Liste aus:"
   },
