@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Prikaži ikonu u adresnoj traci"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> na ovoj stranici",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> ukupno",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "preko $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Preuzmi Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Podijelite na Facebooku"
+  },
+  "stats_share_label_gplus": {
+    "message": "Podijelite na Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Podijelite na Twitteru"
+  },
+  "stats_share_message": {
+    "message": "Blokirao sam $number$ reklama i pratitelja zahvaljujući Adblock Plusu.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Podijelite ovo"
+  },
+  "stats_title": {
+    "message": "Blokirane reklame:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Molimo odaberite pretplatu na filter sa popisa:"
   },

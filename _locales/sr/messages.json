@@ -1,5 +1,155 @@
 {
+  "add": {
+    "message": "Додај"
+  },
+  "add_domain_button": {
+    "message": "Додај домен"
+  },
+  "add_filter_button": {
+    "message": "Додај филтер"
+  },
+  "add_filters_msg": {
+    "message": "Додавање филтера"
+  },
+  "add_your_own_filters": {
+    "message": "Додавање сопствених филтера"
+  },
+  "apply_changes": {
+    "message": "Потврди"
+  },
+  "block_element": {
+    "message": "Блокирај елемент"
+  },
+  "cancel": {
+    "message": "Откажи"
+  },
+  "clickhide_instructions": {
+    "message": "Након што затворите овај искачући прозор, притисните левим или десним кликом на елемент на овој страници."
+  },
+  "description": {
+    "message": "Бесплатна алатка за блокирање огласа у Chrome-у; блокира наметљиве огласе на YouTube-у, Facebook-у, рекламне натписе и још много тога."
+  },
+  "disable_inline": {
+    "message": "Сакриј уметнуте текстуалне огласе"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus не важи за домене у доњем списку. Домен можете да додате помоћу иконе Adblock Plus у адресној траци или уписивањем домена (не URL адресе) у поље испод и кликом на дугме „Додај домен“."
+  },
+  "easy_create_filter": {
+    "message": "Брзо креирај филтер"
+  },
+  "edit_filters_raw": {
+    "message": "Уреди филтере у режиму текста"
+  },
+  "enable_only_the": {
+    "message": "Омогућите спискове филтера који су вам заиста потребни. Превише спискова може да утиче на перформансе Chrome-а."
+  },
+  "enabled_for_site": {
+    "message": "Омогући на овом сајту"
+  },
+  "filter_lists": {
+    "message": "Спискови филтера"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Ваш филтер мора да следи <a>синтаксу за филтере Adblock Plus-а</a>."
+  },
+  "found_a_bug": {
+    "message": "Пронашли сте грешку или желите да преведете Adblock Plus на свој језик? <a>Овде поднесите захтев</a>."
+  },
+  "general": {
+    "message": "Опште"
+  },
+  "last_updated_at": {
+    "message": "Последњи пут ажурирано $date$ у $time$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Последњи пут ажурирано данас у $time$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "options": {
+    "message": "Опције додатка Adblock Plus"
+  },
+  "out_of_date_lists": {
+    "message": "Застарели спискови се редовно ажурирају."
+  },
+  "remove_button": {
+    "message": "Уклони изабрано"
+  },
+  "show_block_element_menu": {
+    "message": "Ставка „Блокирај елемент“ у контекстуалном менију"
+  },
+  "show_icon": {
+    "message": "Икона у адресној траци"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> на овој страници",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> укупно",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Преузми Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Дели на Facebook-у"
+  },
+  "stats_share_label_gplus": {
+    "message": "Дели на Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Дели на Twitter-у"
+  },
+  "stats_share_message": {
+    "message": "Блокирао сам $number$ огласа и пратилаца захваљујући додатку Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Дељење"
+  },
+  "stats_title": {
+    "message": "Блокирани огласи:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Изаберите једну претплату на филтер са списка:"
+    "message": "Изаберите пријаву на филтер са списка:"
+  },
+  "update_now": {
+    "message": "Ажурирај сада"
+  },
+  "whitelisted_domains": {
+    "message": "Дозвољени домени"
   }
 }

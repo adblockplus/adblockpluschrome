@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Mosta l'icona nella barra degli indirizzi"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> in questa pagina",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> in totale",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "oltre $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Scarica Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Condividi su Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Condividi su Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Condividi su Twitter"
+  },
+  "stats_share_message": {
+    "message": "Ho bloccato $number$ pubblicità e trackers grazie ad Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Condividilo"
+  },
+  "stats_title": {
+    "message": "Pubblicità bloccate:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Selezionare una sottoscrizione di filtri dalla seguente lista:"
   },

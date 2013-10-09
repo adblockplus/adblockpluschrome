@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Zobraziť ikonu v paneli s adresou"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> na tejto stránke",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> dokopy",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "viac ako $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Stiahnuť Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Zdielať na Facebooku"
+  },
+  "stats_share_label_gplus": {
+    "message": "Zdielať na Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Zdielať na Twitteri"
+  },
+  "stats_share_message": {
+    "message": "Zablokoval som $number$ reklám a sledovačov vďaka Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Zdielať to"
+  },
+  "stats_title": {
+    "message": "Zablokované reklamy:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Prosím, zvoľte odber filtra zo zoznamu:"
   },

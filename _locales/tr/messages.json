@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "İkonu adres çubuğunda göster."
   },
+  "stats_label_page": {
+    "message": "Bu sayfada <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> toplamda",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$ üzerinde",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Adblock Plus'ı indir"
+  },
+  "stats_share_label_fb": {
+    "message": "Facebook'ta Paylaş"
+  },
+  "stats_share_label_gplus": {
+    "message": "Google + Paylaş"
+  },
+  "stats_share_label_twitter": {
+    "message": "Twitter'da Paylaş"
+  },
+  "stats_share_message": {
+    "message": "Ben  $number$ reklamı ve trackerı engelledim teşekkürler Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Bunu paylaş"
+  },
+  "stats_title": {
+    "message": "Engellenen reklamlar:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lütfen listeden bir süzgeç aboneliği seçin:"
   },

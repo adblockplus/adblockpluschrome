@@ -24,7 +24,7 @@
     "message": "Anuluj"
   },
   "clickhide_instructions": {
-    "message": "Po zamknięciu tego okna kliknij na stronie lewym lub prawym przyciskiem myszy niechciany element."
+    "message": "Po zamknięciu tego okna kliknij na stronie niechciany element lewym lub prawym przyciskiem myszy."
   },
   "description": {
     "message": "Darmowe narzędzie blokujące reklamy dla Chrome. Blokuje denerwujące wideo reklamy w serwisie YouTube, reklamy na portalu społecznościowym Facebook, banery i wiele więcej."
@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Pokazuj ikonę na pasku adresu"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> na tej stronie",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> w sumie",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "ponad $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Pobierz Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Udostępnij na Facebooku"
+  },
+  "stats_share_label_gplus": {
+    "message": "Udostępnij w Google +"
+  },
+  "stats_share_label_twitter": {
+    "message": "Udostępnij na Twitterze"
+  },
+  "stats_share_message": {
+    "message": "Dzięki Adblock Plus zablokowano $number$ reklam i tropicieli.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Udostępnij to"
+  },
+  "stats_title": {
+    "message": "Zablokowane reklamy:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Wybierz z listy zestaw filtrów:"
   },
@@ -100,6 +150,6 @@
     "message": "Aktualizuj teraz"
   },
   "whitelisted_domains": {
-    "message": "Wykluczone strony"
+    "message": "Wykluczone domeny"
   }
 }

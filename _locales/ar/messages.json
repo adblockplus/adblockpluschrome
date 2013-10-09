@@ -6,7 +6,7 @@
     "message": "أضف نطاق"
   },
   "add_filter_button": {
-    "message": "أضف فلتر"
+    "message": "أضف مرشّح"
   },
   "add_filters_msg": {
     "message": "إضافة الفلاتر؟"
@@ -18,7 +18,7 @@
     "message": "تطبيق التغييرات"
   },
   "block_element": {
-    "message": "حذف العنصر"
+    "message": "حظر العنصر"
   },
   "cancel": {
     "message": "إلغاء"

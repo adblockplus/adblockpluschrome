@@ -24,7 +24,7 @@
     "message": "Batal"
   },
   "clickhide_instructions": {
-    "message": "setelah keluar dari popup , klik (atau klik kanan) pada elemen di halaman web."
+    "message": "Setelah keluar dari popup , klik (atau klik kanan) pada elemen di halaman web."
   },
   "description": {
     "message": "AdBlock gratis untuk Chrome : Blokir iklan yang mengganggu di video YouTube, Iklan Facebook, Banner dan lainnya."
@@ -92,6 +92,56 @@
   },
   "show_icon": {
     "message": "Tampilkan ikon pada bilah alamat"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> pada halaman ini",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> totalnya",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": " lebih dari $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Download Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Bagikan ke Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Bagikan ke Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Bagikan ke Twitter"
+  },
+  "stats_share_message": {
+    "message": "Aku memblokir $number$ iklan dan pelacak berkat Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Bagikan ini"
+  },
+  "stats_title": {
+    "message": "Iklan terblokir:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Silakan pilih langganan penyaring dari daftar:"

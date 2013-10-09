@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "Показать иконку в адресной строке"
   },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> на этой странице",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> всего",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "свыше $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Скачать Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Поделиться в Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Поделиться в Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Поделиться в Твиттере"
+  },
+  "stats_share_message": {
+    "message": "Я заблокировал $number$ объявления и трекеров благодаря Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Поделиться этим"
+  },
+  "stats_title": {
+    "message": "Заблокировано рекламы:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Пожалуйста, выберите подписку из списка:"
   },

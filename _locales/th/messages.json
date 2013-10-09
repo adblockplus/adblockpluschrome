@@ -9,16 +9,16 @@
     "message": "เพิ่มตัวกรอง"
   },
   "add_filters_msg": {
-    "message": "เพิ่มตัวกรองอะไรบ้าง?"
+    "message": "เพิ่มตัวกรองหรือไม่?"
   },
   "add_your_own_filters": {
     "message": "เพิ่มตัวกรองของคุณเอง"
   },
   "apply_changes": {
-    "message": "ใช้งานการเปลี่ยนแปลง"
+    "message": "นำการเปลี่ยนแปลงไปใช้"
   },
   "block_element": {
-    "message": "องค์ประกอบของบล็อก"
+    "message": "ปิดกั้นองค์ประกอบ"
   },
   "cancel": {
     "message": "ยกเลิก"
@@ -30,10 +30,10 @@
     "message": "โปรแกรมบล็อกโฆษณาฟรีสำหรับ Chrome: บล็อกโฆษณาที่น่ากวนใจต่างๆทั้ง คลิปโฆษณาของ YouTube,โฆษณาบน Facebook, แบนเนอร์บนเว็บ และอื่นๆอีกมากมาย"
   },
   "disable_inline": {
-    "message": "ปิดใช้งานข้อความโฆษณาแบบอินไลน์"
+    "message": "ปิดใช้งานข้อความโฆษณาแบบในบรรทัด"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus ถูกปิดใช้งานสำหรับโดเมนที่แสดงด้านล่าง คุณสามารถเพิ่มโดเมนได้ ผ่านคอน Adblock Plus ในแถบอยู่ หรือพิมพ์โดเมน (ไม่ URL) ในกล่อง และคลิกปุ่ม \"เพิ่มโดเมน\""
+    "message": "Adblock Plus ถูกปิดใช้งานสำหรับโดเมนที่แสดงอยู่ด้านล่าง คุณสามารถเพิ่มโดเมนได้ ผ่านไอคอน Adblock Plus ในแถบที่อยู่ หรือโดยพิมพ์โดเมน (ไม่ใช่ URL) ในกล่อง และคลิกปุ่ม \"เพิ่มโดเมน\""
   },
   "easy_create_filter": {
     "message": "สร้างตัวกรองอย่างง่าย"
@@ -42,7 +42,7 @@
     "message": "แก้ไขตัวกรองเป็นข้อความดิบ"
   },
   "enable_only_the": {
-    "message": "เปิดใช้งานเฉพาะรายการตัวกรองคุณต้องการ เกินไปมากจะทำให้โครเมี่ยมไม่ตอบสนองได้"
+    "message": "เปิดใช้งานเฉพาะรายการตัวกรองที่คุณต้องการ หากมากเกินไปจะทำให้ Chrome ไม่ตอบสนองได้"
   },
   "enabled_for_site": {
     "message": "เปิดใช้สำหรับเว็บนี้"
@@ -51,10 +51,10 @@
     "message": "รายชื่อตัวกรอง"
   },
   "filter_must_follow_syntax": {
-    "message": "ตัวกรองของคุณต้องทำตาม<a>ไวยากรณ์ตัวกรอง Adblock Plus</a>"
+    "message": "ตัวกรองของคุณต้องตรงตาม<a>ไวยากรณ์ตัวกรอง Adblock Plus</a>"
   },
   "found_a_bug": {
-    "message": "เจอบักงั้นหรอ?หรือต้องการแปล Adblock Plus เป็นภาษาของคุณเอง? กรุณา <a>ยื่นคำร้องได้ที่นี่</a>"
+    "message": "เจอบักงั้นหรอ? หรือต้องการแปล Adblock Plus เป็นภาษาของคุณเอง? <a>ยื่นคำร้องได้ที่นี่</a>"
   },
   "general": {
     "message": "ทั่วไป"
@@ -82,16 +82,66 @@
     "message": "ตัวเลือกของ Adblock Plus"
   },
   "out_of_date_lists": {
-    "message": "เลิกรายการปรับปรุงเป็นระยะ ๆ"
+    "message": "รายการที่ล้าสมัยจะได้รับการอัปเดตเป็นระยะ ๆ"
   },
   "remove_button": {
     "message": "ลบสิ่งที่เลือก"
   },
   "show_block_element_menu": {
-    "message": "แสดงรายการในเมนูคลิกขวา 'องค์ประกอบบล็อก'"
+    "message": "แสดงรายการในเมนูคลิกขวา \"ปิดกั้นองค์ประกอบ\""
   },
   "show_icon": {
-    "message": "แสดงไอคอนในแถบ address bar"
+    "message": "แสดงไอคอนในแถบที่อยู่"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> ในหน้านี้",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "รวม <strong>$number$</strong> อย่าง",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "มากกว่า $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "ดาวน์โหลด Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "แบ่งปันบน Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "แบ่งปันบน Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "แบ่งปันบน Twitter"
+  },
+  "stats_share_message": {
+    "message": "ฉันบล็อกโฆษณาและแทร็คเกอร์ไป $number$ อย่าง ขอบคุณ Adblock Plus",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "แบ่งปันสิ่งนี้"
+  },
+  "stats_title": {
+    "message": "โฆษณาที่ถูกบล็อก:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "กรุณาเลือกนามข้างท้ายตัวกรองจากรายชื่อ:"

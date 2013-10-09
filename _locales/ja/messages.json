@@ -24,7 +24,7 @@
     "message": "キャンセル"
   },
   "clickhide_instructions": {
-    "message": "このポップアップが閉じた後に、ページ上の要素をクリック(または右クリック)してください。"
+    "message": "このポップアップが閉じた後にページ上の要素をクリック(または右クリック)してください。"
   },
   "description": {
     "message": "無料の Chrome 用広告ブロックツール: 迷惑な YouTube のビデオ広告、Facebook 広告、バナー広告等をブロックします"
@@ -54,7 +54,7 @@
     "message": "<a>Adblock Plus フィルタの書式</a> に準拠したフィルタを記述しなければなりません。"
   },
   "found_a_bug": {
-    "message": "バグを発見しましたか? Adblock Plus を翻訳したいですか? その場合は <a>ここよりリクエスト</a> 願います。"
+    "message": "バグを発見? Adblock Plus を翻訳したい? その場合は <a>ここよりリクエスト</a> 願います。"
   },
   "general": {
     "message": "一般"
@@ -85,13 +85,63 @@
     "message": "リストは定期的に更新されます。"
   },
   "remove_button": {
-    "message": "選択項目の削除"
+    "message": "選択項目を削除"
   },
   "show_block_element_menu": {
     "message": "右クリックメニューに「要素をブロック」を表示"
   },
   "show_icon": {
     "message": "アドレスバーにアイコンを表示"
+  },
+  "stats_label_page": {
+    "message": "このページ内で <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "合計で  <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$ 以上",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Adblock Plus をダウンロード"
+  },
+  "stats_share_label_fb": {
+    "message": "Facebook で共有"
+  },
+  "stats_share_label_gplus": {
+    "message": "Google+ で共有"
+  },
+  "stats_share_label_twitter": {
+    "message": "Twitter で共有"
+  },
+  "stats_share_message": {
+    "message": "Adblock Plus のおかげで $number$ の広告と追跡がブロックされました。",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "共有する"
+  },
+  "stats_title": {
+    "message": "ブロックされた広告数:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "購読したいフィルタをリストから選択してください:"

@@ -27,7 +27,7 @@
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
   },
   "description": {
-    "message": "크롬 무료 광고차단 애드: 유투브, 페이스북, 배너 등등에서 나오는 광고들을 차단시켜 불편함을 줄여줍니다."
+    "message": "크롬 무료 광고차단 도구: 유투브, 페이스북, 배너 등에서 나오는 광고들을 차단시켜 불편함을 줄여줍니다."
   },
   "disable_inline": {
     "message": "인라인 텍스트 광고를 보지 않음"
@@ -36,7 +36,7 @@
     "message": "다음 도메인에서는 광고를 차단하지 않습니다. 주소 표시줄의 애드블록 플러스 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
   },
   "easy_create_filter": {
-    "message": "광고 영역 숨기기"
+    "message": "쉬운 필터 생성"
   },
   "edit_filters_raw": {
     "message": "필터 편집"
@@ -49,6 +49,9 @@
   },
   "filter_lists": {
     "message": "구독 필터"
+  },
+  "filter_must_follow_syntax": {
+    "message": "필터는 <a>애드블록 플러스 필터 구문</a>을 따라야합니다."
   },
   "found_a_bug": {
     "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? <a>연락하기</a>"
@@ -79,7 +82,7 @@
     "message": "Adblock Plus - 애드블록 플러스 옵션"
   },
   "out_of_date_lists": {
-    "message": "구독 필터는 주기적으로 자동 업데이트됩니다."
+    "message": "기한이 다 된 목록은 주기적으로 업데이트됩니다."
   },
   "remove_button": {
     "message": "선택 항목 제거"
@@ -89,6 +92,56 @@
   },
   "show_icon": {
     "message": "주소 표시줄에 아이콘 표시"
+  },
+  "stats_label_page": {
+    "message": "이 페이지에 $number$ 개",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "전체 $number$ 개",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$ 이상",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "애드블록 플러스 다운로드"
+  },
+  "stats_share_label_fb": {
+    "message": "페이스북으로 공유"
+  },
+  "stats_share_label_gplus": {
+    "message": "구글플러스로 공유"
+  },
+  "stats_share_label_twitter": {
+    "message": "트위터로 공유"
+  },
+  "stats_share_message": {
+    "message": "애드블록 플러스 덕분에 $number$ 개의 광고와 트래커를 차단했어요.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "공유하기"
+  },
+  "stats_title": {
+    "message": "차단된 광고들:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "목록에서 구독할 필터를 선택하십시오."

@@ -82,7 +82,7 @@
     "message": "Adblock Plus Alternativ"
   },
   "out_of_date_lists": {
-    "message": "Inaktuella listor uppdateras periodiskt."
+    "message": "Utdaterade listor uppdateras periodiskt."
   },
   "remove_button": {
     "message": "Ta bort markerad"
@@ -92,6 +92,56 @@
   },
   "show_icon": {
     "message": "Visa ikon i adressfältet"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> på den här sidan",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> totalt",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "över $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Ladda ner Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Dela på Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Dela på Google +"
+  },
+  "stats_share_label_twitter": {
+    "message": "Dela på Twitter"
+  },
+  "stats_share_message": {
+    "message": "Jag blockerade $number$ annonser och trackers tack vare Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Dela det här"
+  },
+  "stats_title": {
+    "message": "Blockerade annonser:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Var vänlig välj en filterprenumeration från listan:"

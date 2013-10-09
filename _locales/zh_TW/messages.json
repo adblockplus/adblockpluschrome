@@ -93,6 +93,56 @@
   "show_icon": {
     "message": "在網址列顯示 Adblock Plus 圖示"
   },
+  "stats_label_page": {
+    "message": "本頁有 <strong>$number$</strong>  項被過濾",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "共有 <strong>$number$</strong> 項被過濾",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "下載 Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "分享到 Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "分享到 Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "分享到 Twitter"
+  },
+  "stats_share_message": {
+    "message": "感謝 Adblock Plus，至今我已過濾掉了 $number$ 個廣告。",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "立即分享"
+  },
+  "stats_title": {
+    "message": "已阻擋廣告："
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "請從列表中選擇過濾條件集:"
   },

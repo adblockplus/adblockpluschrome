@@ -3,19 +3,22 @@
     "message": "Lisää"
   },
   "add_domain_button": {
-    "message": "Lisää sivu"
+    "message": "Lisää toimialue"
   },
   "add_filter_button": {
     "message": "Lisää suodatin"
   },
   "add_filters_msg": {
-    "message": "Lisää suodatin?"
+    "message": "Lisää suodatin\\suodattimia?"
   },
   "add_your_own_filters": {
-    "message": "Lisää omia suodattimia"
+    "message": "Lisää omat suodattimesi"
   },
   "apply_changes": {
     "message": "Hyväksy muutokset"
+  },
+  "block_element": {
+    "message": "Estä Elementti"
   },
   "cancel": {
     "message": "Peruuta"
@@ -23,14 +26,17 @@
   "clickhide_instructions": {
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
   },
+  "description": {
+    "message": "Ilmainen Adblock työkalu Chromelle: etää youtube videoiden mainokset, Facebookin mainokset, bannerit ja Paljon muuta."
+  },
   "disable_inline": {
-    "message": "Estä tekstimainokset"
+    "message": "poista tekstimainokset"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus ei estä mainoksia sivuilla jotka ovat alla listattuna. Voit lisätä sivun joko Adblock Plus kuvakkeesta osoiteriviltä tai kirjoittamalla sivun (ei osoitetta) laatikkoon ja klikkaamalla \"lisää sivu\" nappia."
   },
   "easy_create_filter": {
-    "message": "Lisää suodatin"
+    "message": "Helppo lisää suodatin"
   },
   "edit_filters_raw": {
     "message": "Editoi suodattimia tekstimuodossa"

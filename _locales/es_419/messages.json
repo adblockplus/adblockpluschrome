@@ -51,10 +51,10 @@
     "message": "Listas de filtros"
   },
   "filter_must_follow_syntax": {
-    "message": "El filtro debe seguir el <a> sintaxis del filtro de Adblock Plus</a>."
+    "message": "Tu filtro debe seguir la <a>sintaxis de filtro de Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "¡Encontraste un error? ¿Querés localizar Adblock Plus a tu idioma? Por favor, <a>realizá una petición acá</a>."
+    "message": "¿Encontraste un error? ¿Querés localizar Adblock Plus a tu idioma? Por favor, <a>realizá una petición acá</a>."
   },
   "general": {
     "message": "General"
@@ -92,6 +92,56 @@
   },
   "show_icon": {
     "message": "Mostrar ícono en la barra de direcciones"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> en esta página",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> en total",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "sobre $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Descargá Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Compartilo en Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Compartilo en Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Compartilo en Twitter"
+  },
+  "stats_share_message": {
+    "message": "Ya bloqueé $number$ publicidades y rastreadores gracias a Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Compartilo"
+  },
+  "stats_title": {
+    "message": "Publicidades bloqueadas:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor, seleccioná una suscripción de la lista:"

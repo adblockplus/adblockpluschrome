@@ -1,8 +1,155 @@
 {
   "add": {
-    "message": "key"
+    "message": "যুক্ত করুন"
   },
   "add_domain_button": {
-    "message": "home"
+    "message": "ডোমেইন যুক্ত করুন"
+  },
+  "add_filter_button": {
+    "message": "ফিল্টার যুক্ত করুন"
+  },
+  "add_filters_msg": {
+    "message": "ফিল্টার(সমূহ) যুক্ত করুন?"
+  },
+  "add_your_own_filters": {
+    "message": "আপনার নিজস্ব ফিল্টার যুক্ত করুন"
+  },
+  "apply_changes": {
+    "message": "পরিবর্তনগুলি প্রয়োগ করুন"
+  },
+  "block_element": {
+    "message": "উপাদান অবরুদ্ধ করুন"
+  },
+  "cancel": {
+    "message": "বাতিল"
+  },
+  "clickhide_instructions": {
+    "message": "এই পপআপ বন্ধ করার পরে, পাতার (অথবা রাইট-ক্লিক করে) একটি উপাদানে ক্লিক করুন।"
+  },
+  "description": {
+    "message": "ক্রোমের জন্য বিনামূল্যে অ্যাডব্লক সরঞ্জাম: ইউটিউব, ফেসবুক বিজ্ঞাপন, ব্যানার এবং আরো অনেক কিছুতে বিরক্তিকর ভিডিও বিজ্ঞাপন অবরুদ্ধ করে।"
+  },
+  "disable_inline": {
+    "message": "লাইনে পাঠ্য বিজ্ঞাপন নিষ্ক্রিয় করুন"
+  },
+  "disabled_for_these_domains": {
+    "message": "নীচে তালিকাভুক্ত করা ডোমেইনের জন্য Adblock Plus নিস্ক্রিয় করা আছে। আপনি হয় অ্যাড্রেস বারে Adblock Plus আইকনের মাধ্যমে একটি ডোমেইন যুক্ত করতে পারেন অথবা বাক্সে মধ্যে ডোমেইন লিখে (ইউআরএল নয়) এবং \"ডোমেইন যুক্ত করুন\"-এ ক্লিক করে।"
+  },
+  "easy_create_filter": {
+    "message": "সহজে তৈরি ফিল্টার"
+  },
+  "edit_filters_raw": {
+    "message": "স্বাভাবিক লেখা হিসেবে ফিল্টার সম্পাদনা"
+  },
+  "enable_only_the": {
+    "message": "আপনার প্রয়োজনে শুধুমাত্র ফিল্টার তালিকা সক্রিয় করুন। অনেকগুলি Chrome-কে অ-প্রতিক্রিয়াশীল করতে পারে।"
+  },
+  "enabled_for_site": {
+    "message": "এই সাইটের জন্য সক্রিয় করুন"
+  },
+  "filter_lists": {
+    "message": "ফিল্টারের তালিকা"
+  },
+  "filter_must_follow_syntax": {
+    "message": "আপনাকে <a>Adblock Plus ফিল্টার সিনট্যাক্স</a> অনুসরণ করা আবশ্যক।"
+  },
+  "found_a_bug": {
+    "message": "একটি বাগ খুঁজে পেয়েছেন? আপনার ভাষায় Adblock Plus অনুবাদ করতে চান? দয়া করে <a>এখানে একটি অনুরোধ ফাইল করুন</a>।"
+  },
+  "general": {
+    "message": "সাধারণ"
+  },
+  "last_updated_at": {
+    "message": "সর্বশেষ হালনাগাদ $date$ তারিখে $time$-এ",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "সর্বশেষ হালনাগাদ $time$-এ আজ",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "options": {
+    "message": "Adblock Plus অপশনস"
+  },
+  "out_of_date_lists": {
+    "message": "পুরনো তালিকা নিয়মিতই হালনাগাদ করা হয়।"
+  },
+  "remove_button": {
+    "message": "নির্বাচন করাগুলি সরান"
+  },
+  "show_block_element_menu": {
+    "message": "'অবরুদ্ধ উপাদান' রাইট-ক্লিক মেনু আইটেমে প্রদর্শন করান"
+  },
+  "show_icon": {
+    "message": "অ্যাড্রেস বারে আইকন দেখান"
+  },
+  "stats_label_page": {
+    "message": "এই পৃষ্ঠায় <strong>$number$টি</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "সর্বমোট <strong>$number$টি</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$ এর উপর",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Adblock Plus ডাউনলোড করুন"
+  },
+  "stats_share_label_fb": {
+    "message": "ফেসবুকে ভাগ করুন"
+  },
+  "stats_share_label_gplus": {
+    "message": "Google+ এ ভাগ করুন"
+  },
+  "stats_share_label_twitter": {
+    "message": "টুইটারে ভাগ করুন"
+  },
+  "stats_share_message": {
+    "message": "আমি $number$টি বিজ্ঞাপন ও ট্রেকারসকে অবরুধ করছি Adblock Plus কে ধন্যবাদ।",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "এটা ভাগ করুন"
+  },
+  "stats_title": {
+    "message": "অবরুদ্ধকৃত বিজ্ঞাপন:"
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "তালিকা থেকে একটি ফিল্টার সদস্যতা বাছাই করুন:"
+  },
+  "update_now": {
+    "message": "এখন হালনাগাদ করুন"
+  },
+  "whitelisted_domains": {
+    "message": "সাদাতালিকাভুক্ত ডোমেইন"
   }
 }
