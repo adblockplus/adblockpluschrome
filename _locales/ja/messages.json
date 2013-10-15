@@ -102,7 +102,7 @@
     }
   },
   "stats_label_total": {
-    "message": "合計で  <strong>$number$</strong>",
+    "message": "これまでの累計で  <strong>$number$</strong>",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -110,7 +110,7 @@
     }
   },
   "stats_over": {
-    "message": "$number$ 以上",
+    "message": "$number$ 以上の",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -130,7 +130,7 @@
     "message": "Twitter で共有"
   },
   "stats_share_message": {
-    "message": "Adblock Plus のおかげで $number$ の広告と追跡がブロックされました。",
+    "message": "Adblock Plus のおかげで $number$ 箇所の広告と追跡がブロックされました。",
     "placeholders": {
       "number": {
         "content": "$1"
