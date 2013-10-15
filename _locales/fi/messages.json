@@ -3,7 +3,7 @@
     "message": "Lisää"
   },
   "add_domain_button": {
-    "message": "Lisää toimialue"
+    "message": "Lisää sivu"
   },
   "add_filter_button": {
     "message": "Lisää suodatin"
@@ -12,7 +12,7 @@
     "message": "Lisää suodatin\\suodattimia?"
   },
   "add_your_own_filters": {
-    "message": "Lisää omat suodattimesi"
+    "message": "Lisää omia suodattimia"
   },
   "apply_changes": {
     "message": "Hyväksy muutokset"
@@ -27,10 +27,10 @@
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
   },
   "description": {
-    "message": "Ilmainen Adblock työkalu Chromelle: etää youtube videoiden mainokset, Facebookin mainokset, bannerit ja Paljon muuta."
+    "message": "Ilmainen Adblock työkalu Chromelle: Estää ärsyttävät Youtuben videomainokset, Facebookin mainokset, bannerit ja paljon muuta."
   },
   "disable_inline": {
-    "message": "poista tekstimainokset"
+    "message": "Estä tekstimainokset"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus ei estä mainoksia sivuilla jotka ovat alla listattuna. Voit lisätä sivun joko Adblock Plus kuvakkeesta osoiteriviltä tai kirjoittamalla sivun (ei osoitetta) laatikkoon ja klikkaamalla \"lisää sivu\" nappia."
@@ -49,6 +49,9 @@
   },
   "filter_lists": {
     "message": "Suodatinlistat"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Suodattimesi on noudatettava <a>Adblock Plus suodattimen syntaksia</a>."
   },
   "found_a_bug": {
     "message": "Löysitkö vian? Haluatko kääntää Adblock Plusin omalle kielellesi? Ole hyvä ja <a>kirjoita hakemus täällä</a>."
@@ -84,8 +87,61 @@
   "remove_button": {
     "message": "Poista valitut"
   },
+  "show_block_element_menu": {
+    "message": "Näytä 'Estä Elementti' oikea-klikkaus valikossa"
+  },
   "show_icon": {
     "message": "Näytä kuva osoiterivillä"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> tällä sivulla",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> yhteensä",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "yli $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Lataa Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Jaa Facebookissa"
+  },
+  "stats_share_label_gplus": {
+    "message": "Jaa Google +-palvelussa"
+  },
+  "stats_share_label_twitter": {
+    "message": "Jaa Twitterissä"
+  },
+  "stats_share_message": {
+    "message": "Estin $number$ mainosta ja trackeriä kiitos Adblock Plus;an.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Jaa tämä"
+  },
+  "stats_title": {
+    "message": "Estetyt mainokset:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Valitse suodatintilaus listasta:"
