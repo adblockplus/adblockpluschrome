@@ -1,6 +1,6 @@
 [general]
 basename = adblockpluschrome
-version = 1.6
+version = 1.6.1
 backgroundScripts = lib/compat.js
   lib/info.js
   lib/io.js
