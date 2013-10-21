@@ -130,7 +130,7 @@
     "message": "Twitter で共有"
   },
   "stats_share_message": {
-    "message": "Adblock Plus のおかげで $number$ 箇所の広告と追跡がブロックされました。",
+    "message": "Adblock Plus のおかげで累計 $number$ 箇所の広告と追跡がブロックされました。",
     "placeholders": {
       "number": {
         "content": "$1"

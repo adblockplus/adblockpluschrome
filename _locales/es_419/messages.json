@@ -9,52 +9,52 @@
     "message": "Agregar filtro"
   },
   "add_filters_msg": {
-    "message": "¿Agregar filtro/s?"
+    "message": "¿Agregar filtro(s)?"
   },
   "add_your_own_filters": {
-    "message": "Agregá tus propios filtros"
+    "message": "Agrega tus propios filtros"
   },
   "apply_changes": {
     "message": "Aplicar cambios"
   },
   "block_element": {
-    "message": "Bloquear elemento"
+    "message": "Bloquear Elemento"
   },
   "cancel": {
     "message": "Cancelar"
   },
   "clickhide_instructions": {
-    "message": "Después de cerrar esta ventana emergente, haga clic en un elemento de la página."
+    "message": "Después de cerrar esta ventana, haga click (o click derecho) en un elemento de la página."
   },
   "description": {
-    "message": "La herramienta AdBlock para Chrome: Bloqueá esos molestos anuncios en los vídeos de YouTube, anuncios en Facebook, banners y muchas cosas más."
+    "message": "La herramienta gratuita AdBlock para Chrome: Bloqea molestos anuncios de video en YouTube, la publicidad en Facebook, banners y mucho más."
   },
   "disable_inline": {
-    "message": "Deshabilitar publicidades en texto"
+    "message": "Desctivar anuncios de texto en línea"
   },
   "disabled_for_these_domains": {
-    "message": "AdBlock Plus está deshabilitado para los dominios que aparecen a continuación. Podés agregar un dominio, ya sea a través del ícono de Adblock Plus en la barra de direcciones o ingresando el dominio (no la dirección web entera) en el cuadro y haciendo clic en el botón \"Agregar dominio\"."
+    "message": "Adblock Plus está desactivado para los dominios mostrados a continuación. Puedes añadir un dominio ya sea con el icono de Adblock Plus en la barra de direcciones o escribiendo el dominio (No la URL) en el recuadro y haciendo click en el botón \"Agregar dominio\"."
   },
   "easy_create_filter": {
-    "message": "Crear filtro fácil"
+    "message": "Crear filtro fácilmente"
   },
   "edit_filters_raw": {
-    "message": "Editar filtros como texto sin formato"
+    "message": "Editar los filtros como texto plano"
   },
   "enable_only_the": {
-    "message": "Permitir sólo las listas de filtros que se necesitan. Demasiados pueden hacer que Chrome se cuelgue."
+    "message": "Activa sólo las listas de filtros que necesites. Activar demasiadas puede provocar que Chrome se bloquee."
   },
   "enabled_for_site": {
-    "message": "Habilitado para este sitio"
+    "message": "Activar para este sitio"
   },
   "filter_lists": {
     "message": "Listas de filtros"
   },
   "filter_must_follow_syntax": {
-    "message": "Tu filtro debe seguir la <a>sintaxis de filtro de Adblock Plus</a>."
+    "message": "El filtro debe seguir la <a>Sintaxis de filtros de Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "¿Encontraste un error? ¿Querés localizar Adblock Plus a tu idioma? Por favor, <a>realizá una petición acá</a>."
+    "message": "¿Encontraste un error? ¿Quieres traducir Adblock Plus en tu lenguaje? Por vafor <a>llene una solicitud aquí</a>."
   },
   "general": {
     "message": "General"
@@ -71,7 +71,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "Última actualización, hoy a las $time$",
+    "message": "Última actualización a las $time$ de hoy",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -82,16 +82,16 @@
     "message": "Opciones de Adblock Plus"
   },
   "out_of_date_lists": {
-    "message": "Las listas desactualizadas se actualizan periódicamente."
+    "message": "Las listas obsoletas se actualizarán preiódicamente."
   },
   "remove_button": {
-    "message": "Quitar lo seleccionado"
+    "message": "Eliminar seleccionados"
   },
   "show_block_element_menu": {
-    "message": "Mostrar \"Bloquear elemento\" en el menú contextual"
+    "message": "Mostrar opción \"Bloquear Elemento\" al hacer click derecho en el elemento"
   },
   "show_icon": {
-    "message": "Mostrar ícono en la barra de direcciones"
+    "message": "Mostrar icono en la barra de direcciones"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> en esta página",
@@ -110,7 +110,7 @@
     }
   },
   "stats_over": {
-    "message": "sobre $number$",
+    "message": "más de $number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -118,19 +118,19 @@
     }
   },
   "stats_share_download": {
-    "message": "Descargá Adblock Plus"
+    "message": "Descarga Adblock Plus"
   },
   "stats_share_label_fb": {
-    "message": "Compartilo en Facebook"
+    "message": "Compartir en Facebook"
   },
   "stats_share_label_gplus": {
-    "message": "Compartilo en Google+"
+    "message": "Compartir en Google+"
   },
   "stats_share_label_twitter": {
-    "message": "Compartilo en Twitter"
+    "message": "Compartir en Twitter"
   },
   "stats_share_message": {
-    "message": "Ya bloqueé $number$ publicidades y rastreadores gracias a Adblock Plus.",
+    "message": "He bloqueado $number$ anuncios y rastreadores gracias a Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -138,18 +138,18 @@
     }
   },
   "stats_share_title": {
-    "message": "Compartilo"
+    "message": "Comparte esto"
   },
   "stats_title": {
-    "message": "Publicidades bloqueadas:"
+    "message": "Anuncios bloqueados:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Por favor, seleccioná una suscripción de la lista:"
+    "message": "Por favor selecciona una suscripción de filtros de la lista:"
   },
   "update_now": {
     "message": "Actualizar ahora"
   },
   "whitelisted_domains": {
-    "message": "Dominios seguros"
+    "message": "Dominos autorizados"
   }
 }
