@@ -3,16 +3,16 @@
     "message": "Ekle"
   },
   "add_domain_button": {
-    "message": "Adres Ekle"
+    "message": "Site Ekle"
   },
   "add_filter_button": {
-    "message": "Filtre Ekle"
+    "message": "Filtre ekle"
   },
   "add_filters_msg": {
     "message": "Filtre(ler) Ekle?"
   },
   "add_your_own_filters": {
-    "message": "Kendi Filtrelerini Ekle"
+    "message": "Kendi filtrelerinizi ekleyin"
   },
   "apply_changes": {
     "message": "Değişiklikleri uygula"
@@ -79,7 +79,7 @@
     }
   },
   "options": {
-    "message": "Adblock Plus seçenekleri"
+    "message": "Adblock Plus Seçenekleri"
   },
   "out_of_date_lists": {
     "message": "Zamanı geçmiş listeler düzenli olarak güncellenmektedir."
@@ -102,7 +102,7 @@
     }
   },
   "stats_label_total": {
-    "message": "<strong>$number$</strong> toplamda",
+    "message": "Toplamda <strong>$number$</strong>",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -124,7 +124,7 @@
     "message": "Facebook'ta Paylaş"
   },
   "stats_share_label_gplus": {
-    "message": "Google + Paylaş"
+    "message": "Google+'da Paylaş"
   },
   "stats_share_label_twitter": {
     "message": "Twitter'da Paylaş"

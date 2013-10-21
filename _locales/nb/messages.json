@@ -8,6 +8,9 @@
   "add_filter_button": {
     "message": "Legg til filter"
   },
+  "add_filters_msg": {
+    "message": "Legg til filter/filtre?"
+  },
   "add_your_own_filters": {
     "message": "Legg til dine egne filtre"
   },
@@ -15,16 +18,65 @@
     "message": "Bruk endringer"
   },
   "block_element": {
-    "message": "Blokker element"
+    "message": "Blokkér element"
   },
   "cancel": {
     "message": "Avbryt"
+  },
+  "clickhide_instructions": {
+    "message": "Klikk (eller høyreklikk) på et element på siden etter at du har lukket dette vinduet."
+  },
+  "description": {
+    "message": "Det gratis reklameblokkeringsverktøet for Chrome: Blokkér irriterende videoreklamer på YouTube, Facebook-reklamer, bannere og mye mer."
+  },
+  "disable_inline": {
+    "message": "Deaktiver annonser i teksten på nettsider"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus er deaktivert for domenene listet nedenfor. Du kan legge til et domene enten ved å trykke på Adblock Plus-ikonet i adressefeltet, eller ved å skrive inn domenet (ikke via URL) i boksen og klikke på \"Legg til domene\"-knappen."
+  },
+  "easy_create_filter": {
+    "message": "Hurtigopprett filter"
+  },
+  "edit_filters_raw": {
+    "message": "Rediger filtre i råtekstform"
+  },
+  "enable_only_the": {
+    "message": "Aktiver kun de filterlistene du trenger. For mange filterlister kan få Chrome til å kjøre tregt."
   },
   "enabled_for_site": {
     "message": "Aktivert for denne siden"
   },
   "filter_lists": {
     "message": "Filterlister"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Filtrene må følge syntaksen til <a>Adblock Plus-filtrene</a>."
+  },
+  "found_a_bug": {
+    "message": "Har du funnet en feil? Vil du oversette Adblock Plus til ditt eget språk? Vennligst <a>send en forespørsel hit</a>."
+  },
+  "general": {
+    "message": "Generelt"
+  },
+  "last_updated_at": {
+    "message": "Sist oppdatert $time$ on $date$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Sist oppdatert klokken $time$ i dag",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
   },
   "options": {
     "message": "Alternativer for Adblock Plus"
@@ -35,10 +87,69 @@
   "remove_button": {
     "message": "Fjern valgte"
   },
+  "show_block_element_menu": {
+    "message": "Vis høyreklikkmenyvalget \"Blokkér element\""
+  },
+  "show_icon": {
+    "message": "Vis ikonet i adressefeltet"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> på denne siden",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> totalt",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Last ned Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Del på Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Del på Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Del på Twitter"
+  },
+  "stats_share_message": {
+    "message": "Jeg blokkerte $number$ annonser og trackere, takket være Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Del dette"
+  },
+  "stats_title": {
+    "message": "Blokkerte annonser:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vennligst velg et filterabonnement fra listen:"
   },
   "update_now": {
     "message": "Oppdater nå"
+  },
+  "whitelisted_domains": {
+    "message": "Hvitelistede domener"
   }
 }
