@@ -29,8 +29,14 @@
   "clickhide_instructions": {
     "message": "After closing this popup, click (or right-click) an element on the page."
   },
-  "description": {
+  "description_chrome": {
     "message": "The free adblock tool for Chrome: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
+  },
+  "description_opera": {
+    "message": "The free adblock tool for Opera: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
+  },
+  "description_safari": {
+    "message": "The free adblock tool for Safari: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
   },
   "disable_inline": {
     "message": "Disable inline text ads"
@@ -46,7 +52,7 @@
     "message": "Edit filters as raw text"
   },
   "enable_only_the": {
-    "message": "Enable only the filter lists you need. Too many can make Chrome unresponsive."
+    "message": "Enable only the filter lists you need. Too many can make your browser unresponsive."
   },
   "enabled_for_site": {
     "description": "Popup balloon checkbox label",

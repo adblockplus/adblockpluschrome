@@ -63,6 +63,9 @@ skin/social/weibo.png = adblockplus/chrome/skin/social/weibo.png
 qunit/qunit.js = adblockplustests/chrome/content/qunit.js
 qunit/qunit.css = adblockplustests/chrome/content/qunit.css
 
+[preprocess]
+firstRun.html =
+
 [convert_js]
 lib/io.js = lib/filesystem/io.js
   --arg module=true
