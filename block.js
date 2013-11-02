@@ -29,21 +29,20 @@ function init()
   // Apply jQuery UI styles
   $("button").button();
 
-  chrome.extension.sendRequest(
+  ext.backgroundPage.sendMessage(
+  {
+    type: "forward",
+    payload:
     {
-      reqtype: "forward",
-      request:
-      {
-        reqtype: "clickhide-init",
-        width: Math.max(document.body.offsetWidth || document.body.scrollWidth),
-        height: Math.max(document.body.offsetHeight || document.body.scrollHeight)
-      }
-    },
-    function(response)
-    {
-      document.getElementById("filters").value = response.filters.join("\n");
+      type: "clickhide-init",
+      width: Math.max(document.body.offsetWidth || document.body.scrollWidth),
+      height: Math.max(document.body.offsetHeight || document.body.scrollHeight)
     }
-  );
+  },
+  function(response)
+  {
+    document.getElementById("filters").value = response.filters.join("\n");
+  });
 
   document.getElementById("filters").focus();
 }
@@ -69,18 +68,18 @@ function addFilters()
   var filters = document.getElementById("filters").value.split(/[\r\n]+/)
                         .map(function(f) {return f.replace(/^\s+/, "").replace(/\s+$/, "");})
                         .filter(function(f) {return f != "";});
-  chrome.extension.sendRequest({reqtype: "add-filters", filters: filters});
+  ext.backgroundPage.sendMessage({type: "add-filters", filters: filters});
   closeDialog(true);
 }
 
 function closeDialog(success)
 {
-  chrome.extension.sendRequest(
+  ext.backgroundPage.sendMessage(
     {
-      reqtype: "forward",
-      request:
+      type: "forward",
+      payload:
       {
-        reqtype: "clickhide-close",
+        type: "clickhide-close",
         remove: (typeof success == "boolean" ? success : false)
       }
     }
@@ -104,12 +103,12 @@ function onDrag(event)
   var diff = [event.screenX - dragCoords[0], event.screenY - dragCoords[1]];
   if (diff[0] || diff[1])
   {
-    chrome.extension.sendRequest(
+    ext.backgroundPage.sendMessage(
       {
-        reqtype: "forward",
-        request:
+        type: "forward",
+        payload:
         {
-          reqtype: "clickhide-move",
+          type: "clickhide-move",
           x: diff[0],
           y: diff[1]
         }

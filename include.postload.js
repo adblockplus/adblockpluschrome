@@ -115,7 +115,7 @@ function clickHide_showDialog(left, top, filters)
   clickHide_filters = filters;
 
   clickHideFiltersDialog = document.createElement("iframe");
-  clickHideFiltersDialog.src = chrome.extension.getURL("block.html");
+  clickHideFiltersDialog.src = ext.getURL("block.html");
   clickHideFiltersDialog.setAttribute("style", "position: fixed !important; visibility: hidden; display: block !important; border: 0px !important;");
   clickHideFiltersDialog.style.WebkitBoxShadow = "5px 5px 20px rgba(0,0,0,0.5)";
   clickHideFiltersDialog.style.zIndex = 99999;
@@ -467,12 +467,16 @@ if (document.documentElement instanceof HTMLElement)
     if (!/^(https?|ftp):/.test(url))
       return;
 
-    chrome.extension.sendRequest({reqtype: "add-subscription", title: title, url: url});
+    ext.backgroundPage.sendMessage({
+      type: "add-subscription",
+      title: title,
+      url: url
+    });
   }, true);
   
-  chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
+  ext.onMessage.addListener(function(msg, sender, sendResponse)
   {
-    switch (request.reqtype)
+    switch (msg.type)
     {
       case "get-clickhide-state":
         sendResponse({active: clickHide_activated});
@@ -495,14 +499,16 @@ if (document.documentElement instanceof HTMLElement)
         // If we don't have the element with a src URL same as the filter, look for it.
         // Chrome's context menu API is terrible. Why can't it give us the friggin' element
         // to start with?
-        if(request.filter !== url) {
+        if(msg.filter !== url)
+        {
           // Grab all elements with a src attribute.
           // This won't work for all object/embed tags, but the context menu API doesn't
           // work on those, so we're OK for now.
           var elts = document.querySelectorAll('[src]');
           for(var i=0; i<elts.length; i++) {
             url = elts[i].src;
-            if(request.filter === url) {
+            if(msg.filter === url)
+            {
               // This is hopefully our element. In case of multiple elements
               // with the same src, only one will be highlighted.
               target = elts[i];
@@ -511,13 +517,13 @@ if (document.documentElement instanceof HTMLElement)
           }
         }
         // Following test will be true if we found the element with the filter URL
-        if(request.filter === url)
+        if(msg.filter === url)
         {
           // This request would have come from the chrome.contextMenu handler, so we
           // simulate the user having chosen the element to get rid of via the usual means.
           clickHide_activated = true;
           // FIXME: clickHideFilters is erased in clickHide_mouseClick anyway, so why set it?
-          clickHideFilters = [request.filter];
+          clickHideFilters = [msg.filter];
           // Coerce red highlighted overlay on top of element to remove.
           // TODO: Wow, the design of the clickHide stuff is really dumb - gotta fix it sometime
           currentElement = addElementOverlay(target);
@@ -532,8 +538,8 @@ if (document.documentElement instanceof HTMLElement)
         {
           sendResponse({filters: clickHide_filters});
 
-          clickHideFiltersDialog.style.width = (request.width + 5) + "px";
-          clickHideFiltersDialog.style.height = (request.height + 5) + "px";
+          clickHideFiltersDialog.style.width = (msg.width + 5) + "px";
+          clickHideFiltersDialog.style.height = (msg.height + 5) + "px";
           clickHideFiltersDialog.style.visibility = "visible";
         }
         break;
@@ -548,7 +554,7 @@ if (document.documentElement instanceof HTMLElement)
         if (clickHideFiltersDialog)
         {
           // Explicitly get rid of currentElement
-          if (request.remove && currentElement && currentElement.parentNode)
+          if (msg.remove && currentElement && currentElement.parentNode)
             currentElement.parentNode.removeChild(currentElement);
 
           clickHide_deactivate();

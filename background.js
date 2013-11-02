@@ -113,33 +113,37 @@ var activeNotification = null;
 // Adds or removes page action icon according to options.
 function refreshIconAndContextMenu(tab)
 {
-  // The tab could have been closed by the time this function is called
-  if(!tab)
+  if(!/^https?:/.test(tab.url))
     return;
 
-  var excluded = isWhitelisted(tab.url);
-  var iconFilename = excluded ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
-
-  if (activeNotification)
-    startIconAnimation(tab, iconFilename);
+  var iconFilename;
+  if (require("info").platform == "safari")
+    // There is no grayscale version of the icon for whitelisted tabs
+    // when using Safari, because icons are grayscale already and icons
+    // aren't per tab in Safari.
+    iconFilename = "icons/abp-16.png"
   else
-    chrome.pageAction.setIcon({tabId: tab.id, path: iconFilename});
-
-  // Only show icon for pages we can influence (http: and https:)
-  if(/^https?:/.test(tab.url))
   {
-    chrome.pageAction.setTitle({tabId: tab.id, title: "Adblock Plus"});
-    if ("shouldShowIcon" in localStorage && localStorage["shouldShowIcon"] == "false")
-      chrome.pageAction.hide(tab.id);
-    else
-      chrome.pageAction.show(tab.id);
+    var excluded = isWhitelisted(tab.url);
+    iconFilename = excluded ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
+  }
 
+  tab.pageAction.setIcon(iconFilename);
+  tab.pageAction.setTitle(ext.i18n.getMessage("name"));
+
+  iconAnimation.registerTab(tab, iconFilename);
+
+  if (localStorage.shouldShowIcon == "false")
+    tab.pageAction.hide();
+  else
+    tab.pageAction.show();
+
+  if (require("info").platform == "chromium") // TODO: Implement context menus for Safari
     // Set context menu status according to whether current tab has whitelisted domain
     if (excluded)
       chrome.contextMenus.removeAll();
     else
       showContextMenu();
-  }
 }
 
 /**
@@ -367,8 +371,9 @@ function addSubscription(prevVersion)
 
   function notifyUser()
   {
-    chrome.tabs.create({
-      url: chrome.extension.getURL("firstRun.html")
+    ext.windows.getLastFocused(function(win)
+    {
+      win.openTab(ext.getURL("firstRun.html"));
     });
   }
 
@@ -406,7 +411,7 @@ function showContextMenu()
   {
     if(typeof localStorage["shouldShowBlockElementMenu"] == "string" && localStorage["shouldShowBlockElementMenu"] == "true")
     {
-      chrome.contextMenus.create({'title': chrome.i18n.getMessage('block_element'), 'contexts': ['image', 'video', 'audio'], 'onclick': function(info, tab)
+      chrome.contextMenus.create({"title": chrome.i18n.getMessage("block_element"), "contexts": ["image", "video", "audio"], "onclick": function(info, tab)
       {
         if(info.srcUrl)
             chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl});
@@ -416,150 +421,34 @@ function showContextMenu()
 }
 
 /**
- * Opens Options window or focuses an existing one.
- * @param {Function} callback  function to be called with the window object of
- *                             the Options window
- */
+  * Opens options tab or focuses an existing one, within the last focused window.
+  * @param {Function} callback  function to be called with the
+                                Tab object of the options tab
+  */
 function openOptions(callback)
 {
-  function findOptions(selectTab)
+  ext.windows.getLastFocused(function(win)
   {
-    var views = chrome.extension.getViews({type: "tab"});
-    for (var i = 0; i < views.length; i++)
-      if ("startSubscriptionSelection" in views[i])
-        return views[i];
-
-    return null;
-  }
-
-  function selectOptionsTab()
-  {
-    chrome.windows.getAll({populate: true}, function(windows)
+    win.getAllTabs(function(tabs)
     {
-      var url = chrome.extension.getURL("options.html");
-      for (var i = 0; i < windows.length; i++)
-        for (var j = 0; j < windows[i].tabs.length; j++)
-          if (windows[i].tabs[j].url == url)
-            chrome.tabs.update(windows[i].tabs[j].id, {selected: true});
-    });
-  }
+      var optionsUrl = ext.getURL("options.html");
 
-  var view = findOptions();
-  if (view)
-  {
-    selectOptionsTab();
-    callback(view);
-  }
-  else
-  {
-    var onLoad = function()
-    {
-      var view = findOptions();
-      if (view)
-        callback(view);
-    };
-
-    chrome.tabs.create({url: chrome.extension.getURL("options.html")}, function(tab)
-    {
-      if (tab.status == "complete")
-        onLoad();
-      else
+      for (var i = 0; i < tabs.length; i++)
       {
-        var id = tab.id;
-        var listener = function(tabId, changeInfo, tab)
+        if (tabs[i].url == optionsUrl)
         {
-          if (tabId == id && changeInfo.status == "complete")
-          {
-            chrome.tabs.onUpdated.removeListener(listener);
-            onLoad();
-          }
-        };
-        chrome.tabs.onUpdated.addListener(listener);
+          tabs[i].activate();
+          if (callback)
+            callback(tabs[i]);
+          return;
+        }
       }
-    });
-  }
-}
 
-var iconAnimationTimer = null;
-var animatedIconTab = null;
-
-function stopIconAnimation()
-{
-  if (!iconAnimationTimer)
-    return;
-
-  clearTimeout(iconAnimationTimer);
-  iconAnimationTimer = null;
-  animatedIconTab = null;
-}
-
-function loadImages(imageFiles, callback)
-{
-  var images = {};
-  var imagesLoaded = 0;
-  imageFiles.forEach(function(imageFile)
-  {
-    var image = new Image();
-    image.src = imageFile;
-    image.addEventListener("load", function()
-    {
-      images[imageFile] = image;
-      if (++imagesLoaded === imageFiles.length)
-        callback(images);
-    });
-  });
-}
-
-function startIconAnimation(tab, iconPath)
-{
-  stopIconAnimation();
-  animatedIconTab = tab;
-
-  var severitySuffix = activeNotification.severity === "critical"
-      ? "critical" : "information";
-  var notificationIconPath = "icons/notification-" + severitySuffix + ".png";
-  var iconFiles = [iconPath, notificationIconPath];
-  loadImages(iconFiles, function(images)
-  {
-    var icon = images[iconPath];
-    var notificationIcon = images[notificationIconPath];
-
-    var canvas = document.createElement("canvas");
-    canvas.width = icon.width;
-    canvas.height = icon.height;
-    var context = canvas.getContext("2d");
-
-    var currentFrame = 0;
-    var frameOpacities = [0, 0.2, 0.4, 0.6, 0.8,
-                          1, 1, 1, 1, 1,
-                          0.8, 0.6, 0.4, 0.2, 0];
-
-    function animationStep()
-    {
-      var opacity = frameOpacities[currentFrame];
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      context.globalAlpha = 1;
-      context.drawImage(icon, 0, 0);
-      context.globalAlpha = opacity;
-      context.drawImage(notificationIcon, 0, 0);
-      var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      chrome.pageAction.setIcon({tabId: tab.id, imageData: imageData});
-
-      var interval;
-      currentFrame++;
-      if (currentFrame < frameOpacities.length)
+      win.openTab(optionsUrl, callback && function(tab)
       {
-        var duration = 3000;
-        interval = duration / frameOpacities.length;
-      }
-      else
-      {
-        currentFrame = 0;
-        interval = 10000;
-      }
-      iconAnimationTimer = setTimeout(animationStep, interval);
-    }
-    animationStep();
+        tab.onCompleted.addListener(callback);
+      });
+    });
   });
 }
 
@@ -567,19 +456,11 @@ function prepareNotificationIconAndPopup()
 {
   activeNotification.onClicked = function()
   {
-    var tab = animatedIconTab;
-    stopIconAnimation();
+    iconAnimation.stop();
     activeNotification = null;
-    refreshIconAndContextMenu(tab);
   };
 
-  chrome.windows.getLastFocused({populate: true}, function(window)
-  {
-    chrome.tabs.query({active: true, windowId: window.id}, function(tabs)
-    {
-      tabs.forEach(refreshIconAndContextMenu);
-    });
-  });
+  iconAnimation.update(activeNotification.severity);
 }
 
 function showNotification(notification)
@@ -599,44 +480,30 @@ function showNotification(notification)
 
 /**
  * This function is a hack - we only know the tabId and document URL for a
- * message but we need to know the frame ID. Try to find it in webRequest's
+ * message but we need to know the frame ID. Try to find it in webRequest"s
  * frame data.
  */
-function getFrameId(tabId, url)
+function getFrameId(tab, url)
 {
-  if (tabId in frames)
-  {
-    for (var f in frames[tabId])
-    {
-      if (getFrameUrl(tabId, f) == url)
-        return f;
-    }
-  }
+  for (var frameId in frames.get(tab))
+    if (getFrameUrl(tab, frameId) == url)
+      return frameId;
   return -1;
 }
 
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
+ext.onMessage.addListener(function (msg, sender, sendResponse)
 {
-  switch (request.reqtype)
+  switch (msg.type)
   {
-    case "get-settings":
-      var hostDomain = null;
+    case "get-selectors":
       var selectors = null;
+      var frameId = sender.tab ? getFrameId(sender.tab, msg.frameUrl) : -1;
 
-      var tabId = -1;
-      var frameId = -1;
-      if (sender.tab)
-      {
-        tabId = sender.tab.id;
-        frameId = getFrameId(tabId, request.frameUrl);
-      }
-
-      var enabled = !isFrameWhitelisted(tabId, frameId, "DOCUMENT") && !isFrameWhitelisted(tabId, frameId, "ELEMHIDE");
-      if (enabled && request.selectors)
+      if (!isFrameWhitelisted(sender.tab, frameId, "DOCUMENT") &&
+          !isFrameWhitelisted(sender.tab, frameId, "ELEMHIDE"))
       {
         var noStyleRules = false;
-        var host = extractHostFromURL(request.frameUrl);
-        hostDomain = getBaseDomain(host);
+        var host = extractHostFromURL(msg.frameUrl);
         for (var i = 0; i < noStyleRulesHosts.length; i++)
         {
           var noStyleHost = noStyleRulesHosts[i];
@@ -656,27 +523,21 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
         }
       }
 
-      sendResponse({enabled: enabled, hostDomain: hostDomain, selectors: selectors});
+      sendResponse(selectors);
       break;
     case "should-collapse":
-      var tabId = -1;
-      var frameId = -1;
-      if (sender.tab)
-      {
-        tabId = sender.tab.id;
-        frameId = getFrameId(tabId, request.documentUrl);
-      }
+      var frameId = sender.tab ? getFrameId(sender.tab, msg.documentUrl) : -1;
 
-      if (isFrameWhitelisted(tabId, frameId, "DOCUMENT"))
+      if (isFrameWhitelisted(sender.tab, frameId, "DOCUMENT"))
       {
         sendResponse(false);
         break;
       }
 
-      var requestHost = extractHostFromURL(request.url);
-      var documentHost = extractHostFromURL(request.documentUrl);
+      var requestHost = extractHostFromURL(msg.url);
+      var documentHost = extractHostFromURL(msg.documentUrl);
       var thirdParty = isThirdParty(requestHost, documentHost);
-      var filter = defaultMatcher.matchesAny(request.url, request.type, documentHost, thirdParty);
+      var filter = defaultMatcher.matchesAny(msg.url, msg.mediatype, documentHost, thirdParty);
       if (filter instanceof BlockingFilter)
       {
         var collapse = filter.collapse;
@@ -697,20 +558,20 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
       }
       break;
     case "add-filters":
-      if (request.filters && request.filters.length)
+      if (msg.filters && msg.filters.length)
       {
-        for (var i = 0; i < request.filters.length; i++)
-          FilterStorage.addFilter(Filter.fromText(request.filters[i]));
+        for (var i = 0; i < msg.filters.length; i++)
+          FilterStorage.addFilter(Filter.fromText(msg.filters[i]));
       }
       break;
     case "add-subscription":
-      openOptions(function(view)
+      openOptions(function(tab)
       {
-        view.startSubscriptionSelection(request.title, request.url);
+        tab.sendMessage(msg);
       });
       break;
     case "forward":
-      chrome.tabs.sendRequest(sender.tab.id, request.request, sendResponse);
+      tab.sendMessage(msg.payload, sendResponse);
       break;
     default:
       sendResponse({});
@@ -719,34 +580,22 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse)
 });
 
 // Show icon as page action for all tabs that already exist
-chrome.windows.getAll({populate: true}, function(windows)
+ext.windows.getAll(function(windows)
 {
   for (var i = 0; i < windows.length; i++)
-    for (var j = 0; j < windows[i].tabs.length; j++)
-      refreshIconAndContextMenu(windows[i].tabs[j]);
+  {
+    windows[i].getAllTabs(function(tabs)
+    {
+      tabs.forEach(refreshIconAndContextMenu);
+    });
+  }
 });
 
 // Update icon if a tab changes location
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
+ext.tabs.onBeforeNavigate.addListener(function(tab)
 {
-  chrome.tabs.sendRequest(tabId, {reqtype: "clickhide-deactivate"})
-  if(changeInfo.status == "loading")
-    refreshIconAndContextMenu(tab);
-});
-
-// Refresh icon when switching tabs or windows
-chrome.tabs.onActivated.addListener(function(activeInfo)
-{
-  refreshIconAndContextMenu(animatedIconTab);
-  chrome.tabs.get(activeInfo.tabId, refreshIconAndContextMenu);
-});
-chrome.windows.onFocusChanged.addListener(function(windowId)
-{
-  refreshIconAndContextMenu(animatedIconTab);
-  chrome.tabs.query({active: true, windowId: windowId}, function(tabs)
-  {
-    tabs.forEach(refreshIconAndContextMenu);
-  });
+  tab.sendMessage({type: "clickhide-deactivate"});
+  refreshIconAndContextMenu(tab);
 });
 
 setTimeout(function()

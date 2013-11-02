@@ -15,7 +15,7 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var backgroundPage = chrome.extension.getBackgroundPage();
+var backgroundPage = ext.backgroundPage.getWindow();
 var imports = ["require", "isWhitelisted", "extractHostFromURL", "refreshIconAndContextMenu"];
 for (var i = 0; i < imports.length; i++)
   window[imports[i]] = backgroundPage[imports[i]];
@@ -31,21 +31,19 @@ function init()
   $("#enabled").click(toggleEnabled);
   $("#clickHideButton").click(activateClickHide);
   $("#cancelButton").click(cancelClickHide);
+  $("#optionsButton").click(openOptions);
 
   // Ask content script whether clickhide is active. If so, show cancel button.
   // If that isn't the case, ask background.html whether it has cached filters. If so,
   // ask the user whether she wants those filters.
   // Otherwise, we are in default state.
-  chrome.windows.getCurrent(function(w)
-  {
-    chrome.tabs.getSelected(w.id, function(t)
-    {
+  ext.windows.getLastFocused(function(win) {
+    win.getActiveTab(function(t) {
       tab = t;
       document.getElementById("enabled").checked = !isWhitelisted(tab.url);
       document.getElementById("enabledCheckboxAndLabel").style.display = "block";
 
-      chrome.tabs.sendRequest(tab.id, {reqtype: "get-clickhide-state"}, function(response)
-      {
+      tab.sendMessage({type: "get-clickhide-state"}, function(response) {
         if(response.active)
           clickHideActiveStuff();
         else
@@ -90,7 +88,7 @@ function toggleEnabled()
 function activateClickHide()
 {
   clickHideActiveStuff();
-  chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-activate"});
+  tab.sendMessage({type: "clickhide-activate"});
 
   // Close the popup after a few seconds, so user doesn't have to
   activateClickHide.timeout = window.setTimeout(window.close, 5000);
@@ -104,7 +102,12 @@ function cancelClickHide()
     activateClickHide.timeout = null;
   }
   clickHideInactiveStuff();
-  chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-deactivate"});
+  tab.sendMessage({type: "clickhide-deactivate"});
+}
+
+function openOptions()
+{
+  backgroundPage.openOptions();
 }
 
 function clickHideActiveStuff()

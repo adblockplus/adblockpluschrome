@@ -15,9 +15,6 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var backgroundPage = chrome.extension.getBackgroundPage();
-var require = backgroundPage.require;
-
 with(require("filterClasses"))
 {
   this.Filter = Filter;
@@ -74,6 +71,8 @@ function loadOptions()
   initCheckbox("shouldShowBlockElementMenu");
   initCheckbox("hidePlaceholders");
 
+  ext.onMessage.addListener(onMessage);
+
   // Load recommended subscriptions
   loadRecommendations();
 
@@ -81,6 +80,18 @@ function loadOptions()
   reloadFilters();
 }
 $(loadOptions);
+
+function onMessage(msg)
+{
+  switch (msg.type)
+  {
+    case "add-subscription":
+      startSubscriptionSelection(msg.title, msg.url);
+      break;
+    default:
+      console.log("got unexpected message: " + msg.type);
+  }
+};
 
 // Reloads the displayed subscriptions and filters
 function reloadFilters()
@@ -229,7 +240,7 @@ function startSubscriptionSelection(title, url)
     return;
   }
 
-  $('#tabs').tabs('select', 0);
+  $("#tabs").tabs("select", 0);
   $("#addSubscriptionContainer").show();
   $("#addSubscriptionButton").hide();
   $("#subscriptionSelector").focus();

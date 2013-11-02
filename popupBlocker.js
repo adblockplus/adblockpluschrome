@@ -15,7 +15,7 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if ("webNavigation" in chrome)
+if (require("info").platform == "chromium" && "webNavigation" in chrome)
 {
   var tabsLoading = {};
 
