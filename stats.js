@@ -17,12 +17,12 @@
 
 (function()
 {
-  var backgroundPage = chrome.extension.getBackgroundPage();
+  var backgroundPage = ext.backgroundPage.getWindow();
   var require = backgroundPage.require;
   var getStats = require("stats").getStats;
   var FilterNotifier = require("filterNotifier").FilterNotifier;
   
-  var currentTabId;
+  var currentTab;
   var shareURL = "https://adblockplus.org/";
   
   var messageMark = {};
@@ -72,20 +72,17 @@
     document.getElementById("share").addEventListener("click", toggleShareBox, false);
     
     // Update stats
-    chrome.tabs.query({
-      active: true,
-      windowId: chrome.windows.WINDOW_ID_CURRENT
-    }, function(tabs)
+    ext.windows.getLastFocused(function(win)
     {
-      if (tabs.length > 0)
+      win.getActiveTab(function(tab)
       {
-        currentTabId = tabs[0].id;
+        currentTab = tab;
         updateStats();
-        
+
         FilterNotifier.addListener(onNotify);
-        
+
         document.getElementById("statsContainer").removeAttribute("hidden");
-      }
+      });
     });
   }
   
@@ -103,7 +100,7 @@
   function updateStats()
   {
     var statsPage = document.getElementById("statsPage");
-    var blockedPage = getStats("blocked", currentTabId).toLocaleString();
+    var blockedPage = getStats("blocked", currentTab).toLocaleString();
     i18n.setElementText(statsPage, "stats_label_page", [blockedPage]);
     
     var statsTotal = document.getElementById("statsTotal");
@@ -127,7 +124,7 @@
       blocked = i18n.getMessage("stats_over", (9000).toLocaleString());
     
     var url = createShareLink(ev.target.dataset.social, blocked);
-    chrome.tabs.create({url: url});
+    ext.windows.getLastFocused(function(win) { win.openTab(url); });
   }
   
   document.addEventListener("DOMContentLoaded", onLoad, false);

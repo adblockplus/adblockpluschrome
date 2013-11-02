@@ -17,15 +17,11 @@
 
 var FilterNotifier = require("filterNotifier").FilterNotifier;
 
-chrome.webRequest.onBeforeRequest.addListener(onBeforeRequest, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
-chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {urls: ["http://*/*", "https://*/*"]}, ["responseHeaders"]);
-chrome.tabs.onRemoved.addListener(forgetTab);
-
 var onFilterChangeTimeout = null;
 function onFilterChange()
 {
   onFilterChangeTimeout = null;
-  chrome.webRequest.handlerBehaviorChanged();
+  ext.webRequest.handlerBehaviorChanged();
 }
 
 var importantNotifications = {
@@ -50,146 +46,72 @@ FilterNotifier.addListener(function(action)
   }
 });
 
-var frames = {};
+var frames = new TabMap();
 
-function onBeforeRequest(details)
+function onBeforeRequest(url, type, tab, frameId, parentFrameId)
 {
-  if (details.tabId == -1)
-    return {};
-
-  var type = details.type;
+  if (!tab)
+    return true;
 
   // Assume that the first request belongs to the top frame. Chrome may give the
   // top frame the type "object" instead of "main_frame".
   // https://code.google.com/p/chromium/issues/detail?id=281711
-  if (details.frameId == 0 && !(details.tabId in frames) && type == "object")
+  if (frameId == 0 && !frames.has(tab) && type == "object")
     type = "main_frame";
 
   if (type == "main_frame" || type == "sub_frame")
-    recordFrame(details.tabId, details.frameId, details.parentFrameId, details.url);
-  else if (details.tabId in frames && !(details.frameId in frames[details.tabId]))
-    recordFrame(details.tabId, details.frameId, details.parentFrameId, null);
-
-  if (type == "main_frame")
-    return {};
-
-  // Type names match Mozilla's with main_frame and sub_frame being the only exceptions.
-  if (type == "sub_frame")
-    type = "SUBDOCUMENT";
-  else
-    type = type.toUpperCase();
-
-  var frame = (type != "SUBDOCUMENT" ? details.frameId : details.parentFrameId);
-  var filter = checkRequest(type, details.tabId, details.url, frame);
-  FilterNotifier.triggerListeners("filter.hitCount", filter, 0, 0, details.tabId);
-  if (filter instanceof BlockingFilter)
-    return {cancel: true};
-  else
-    return {};
-}
-
-function onHeadersReceived(details)
-{
-  if (details.tabId == -1)
-    return;
-
-  var type = details.type;
-  if (type != "main_frame" && type != "sub_frame")
-    return;
-
-  var url = getFrameUrl(details.tabId, details.frameId);
-  if (url != details.url)
-    return;
-
-  var key = null;
-  var signature = null;
-  for (var i = 0; i < details.responseHeaders.length; i++)
   {
-    var header = details.responseHeaders[i];
-    if (header.name.toLowerCase() == "x-adblock-key" && header.value)
-    {
-      var index = header.value.indexOf("_");
-      if (index >= 0)
-      {
-        var key = header.value.substr(0, index);
-        var signature = header.value.substr(index + 1);
-        break;
-      }
-    }
-  }
-  if (!key)
-    return;
+    recordFrame(tab, frameId, parentFrameId, url);
 
-  var parentUrl = null;
-  if (type == "sub_frame")
-    parentUrl = getFrameUrl(details.tabId, details.parentFrameId);
-  if (!parentUrl)
-    parentUrl = url;
-  var docDomain = extractHostFromURL(parentUrl);
-  var keyMatch = defaultMatcher.matchesByKey(url, key.replace(/=/g, ""), docDomain);
-  if (keyMatch)
-  {
-    // Website specifies a key that we know but is the signature valid?
-    var uri = new URI(url);
-    var host = uri.asciiHost;
-    if (uri.port > 0)
-      host += ":" + uri.port;
+    if (type == "main_frame")
+      return true;
 
-    var params = [
-      uri.path.replace(/#.*/, ""),  // REQUEST_URI
-      host,                         // HTTP_HOST
-      window.navigator.userAgent    // HTTP_USER_AGENT
-    ];
-    if (verifySignature(key, signature, params.join("\0")))
-      frames[details.tabId][details.frameId].keyException = true;
-  }
-}
-
-function recordFrame(tabId, frameId, parentFrameId, frameUrl)
-{
-  if (!(tabId in frames))
-    frames[tabId] = {};
-
-  if (frameUrl == null)
-  {
-    if (parentFrameId in frames[tabId])
-      frameUrl = frames[tabId][parentFrameId].url;
-    else
-      return;  // We cannot do anything meaningful here
+    type = "subdocument";
+    frameId = parentFrameId;
   }
 
-  frames[tabId][frameId] = {url: frameUrl, parent: parentFrameId};
+  var filter = checkRequest(type.toUpperCase(), tab, url, frameId);
+  FilterNotifier.triggerListeners("filter.hitCount", filter, 0, 0, tab);
+  return !(filter instanceof BlockingFilter);
 }
 
-function getFrameData(tabId, frameId)
+function recordFrame(tab, frameId, parentFrameId, url)
 {
-  if (tabId in frames && frameId in frames[tabId])
-    return frames[tabId][frameId];
-  else if (frameId > 0 && tabId in frames && 0 in frames[tabId])
+  var framesOfTab = frames.get(tab);
+
+  if (!framesOfTab)
+    frames.set(tab, (framesOfTab = {}));
+
+  framesOfTab[frameId] = {url: url, parent: parentFrameId};
+}
+
+function getFrameData(tab, frameId)
+{
+  var framesOfTab = frames.get(tab);
+
+  if (framesOfTab)
   {
+    if (frameId in framesOfTab)
+      return framesOfTab[frameId];
+
     // We don't know anything about javascript: or data: frames, use top frame
-    return frames[tabId][0];
+    if (frameId != -1)
+      return framesOfTab[0];
   }
-  return null;
 }
 
-function getFrameUrl(tabId, frameId)
+function getFrameUrl(tab, frameId)
 {
-  var frameData = getFrameData(tabId, frameId);
+  var frameData = getFrameData(tab, frameId);
   return (frameData ? frameData.url : null);
 }
 
-function forgetTab(tabId)
+function checkRequest(type, tab, url, frameId)
 {
-  delete frames[tabId];
-}
-
-function checkRequest(type, tabId, url, frameId)
-{
-  if (isFrameWhitelisted(tabId, frameId))
+  if (isFrameWhitelisted(tab, frameId))
     return false;
 
-  var documentUrl = getFrameUrl(tabId, frameId);
+  var documentUrl = getFrameUrl(tab, frameId);
   if (!documentUrl)
     return false;
 
@@ -199,17 +121,17 @@ function checkRequest(type, tabId, url, frameId)
   return defaultMatcher.matchesAny(url, type, documentHost, thirdParty);
 }
 
-function isFrameWhitelisted(tabId, frameId, type)
+function isFrameWhitelisted(tab, frameId, type)
 {
   var parent = frameId;
-  var parentData = getFrameData(tabId, parent);
+  var parentData = getFrameData(tab, parent);
   while (parentData)
   {
     var frame = parent;
     var frameData = parentData;
 
     parent = frameData.parent;
-    parentData = getFrameData(tabId, parent);
+    parentData = getFrameData(tab, parent);
 
     var frameUrl = frameData.url;
     var parentUrl = (parentData ? parentData.url : frameUrl);
@@ -217,4 +139,69 @@ function isFrameWhitelisted(tabId, frameId, type)
       return true;
   }
   return false;
+}
+
+ext.webRequest.onBeforeRequest.addListener(onBeforeRequest, ["http://*/*", "https://*/*"]);
+
+if (require("info").platform == "chromium")
+{
+  function onHeadersReceived(details)
+  {
+    if (details.tabId == -1)
+      return;
+
+    var type = details.type;
+    if (type != "main_frame" && type != "sub_frame")
+      return;
+
+    var tab = new Tab({id: details.tabId});
+    var url = getFrameUrl(tab, details.frameId);
+    if (url != details.url)
+      return;
+
+    var key = null;
+    var signature = null;
+    for (var i = 0; i < details.responseHeaders.length; i++)
+    {
+      var header = details.responseHeaders[i];
+      if (header.name.toLowerCase() == "x-adblock-key" && header.value)
+      {
+        var index = header.value.indexOf("_");
+        if (index >= 0)
+        {
+          key = header.value.substr(0, index);
+          signature = header.value.substr(index + 1);
+          break;
+        }
+      }
+    }
+    if (!key)
+      return;
+
+    var parentUrl = null;
+    if (type == "sub_frame")
+      parentUrl = getFrameUrl(tab, details.parentFrameId);
+    if (!parentUrl)
+      parentUrl = url;
+    var docDomain = extractHostFromURL(parentUrl);
+    var keyMatch = defaultMatcher.matchesByKey(url, key.replace(/=/g, ""), docDomain);
+    if (keyMatch)
+    {
+      // Website specifies a key that we know but is the signature valid?
+      var uri = new URI(url);
+      var host = uri.asciiHost;
+      if (uri.port > 0)
+        host += ":" + uri.port;
+
+      var params = [
+        uri.path.replace(/#.*/, ""),  // REQUEST_URI
+        host,                         // HTTP_HOST
+        window.navigator.userAgent    // HTTP_USER_AGENT
+      ];
+      if (verifySignature(key, signature, params.join("\0")))
+        frames.get(tab)[details.frameId].keyException = true;
+    }
+  }
+
+  chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {urls: ["http://*/*", "https://*/*"]}, ["responseHeaders"]);
 }

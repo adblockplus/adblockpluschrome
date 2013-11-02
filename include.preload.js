@@ -78,18 +78,26 @@ function checkCollapse(event)
     if (!url)
       return;
 
-    var type = typeMap[tag];
-    chrome.extension.sendRequest({reqtype: "should-collapse", url: url, documentUrl: document.URL, type: type}, function(response)
-    {
-      if (response && target.parentNode)
+    ext.backgroundPage.sendMessage(
       {
-        // <frame> cannot be removed, doing that will mess up the frameset
-        if (tag == "frame")
-          target.style.setProperty("visibility", "hidden", "!important");
-        else
-          target.parentNode.removeChild(target);
+        type: "should-collapse",
+        url: url,
+        documentUrl: document.URL,
+        mediatype: typeMap[tag]
+      },
+
+      function(response)
+      {
+        if (response && target.parentNode)
+        {
+          // <frame> cannot be removed, doing that will mess up the frameset
+          if (tag == "frame")
+            target.style.setProperty("visibility", "hidden", "!important");
+          else
+            target.parentNode.removeChild(target);
+        }
       }
-    });
+    );
   }
 }
 
@@ -102,10 +110,13 @@ function init()
   document.addEventListener("error", checkCollapse, true);
   document.addEventListener("load", checkCollapse, true);
 
-  chrome.extension.sendRequest({reqtype: "get-settings", selectors: true, frameUrl: window.location.href}, function(response)
-  {
-    setElemhideCSSRules(response.selectors);
-  });
+  ext.backgroundPage.sendMessage(
+    {
+      type: "get-selectors",
+      frameUrl: window.location.href
+    },
+    setElemhideCSSRules
+  );
 }
 
 // In Chrome 18 the document might not be initialized yet

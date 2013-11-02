@@ -15,7 +15,7 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var backgroundPage = chrome.extension.getBackgroundPage();
+var backgroundPage = ext.backgroundPage.getWindow();
 var require = backgroundPage.require;
 
 var Utils = require("utils").Utils;
@@ -85,7 +85,7 @@ window.addEventListener("load", function()
       return;
     event.preventDefault();
     event.stopPropagation();
-    chrome.tabs.create({url: link.href});
+    ext.windows.getLastFocused(function(win) { win.openTab(link.href); });
   });
 
   var notificationElement = document.getElementById("notification");

@@ -1,19 +1,9 @@
+[default]
+inherit = metadata.common
+
 [general]
 basename = adblockpluschrome
 version = 1.6.1
-backgroundScripts = lib/compat.js
-  lib/info.js
-  lib/io.js
-  lib/adblockplus.js
-  lib/punycode.js
-  lib/publicSuffixList.js
-  lib/basedomain.js
-  lib/sha1.js
-  lib/jsbn.js
-  lib/rsa.js
-  webrequest.js
-  popupBlocker.js
-  background.js
 permissions = tabs
   http://*/*
   https://*/*
@@ -28,91 +18,48 @@ pageAction = icons/abp-19.png popup.html
 icons = icons/abp-?.png
 webAccessible = block.html
 
-[contentScripts]
-document_start = include.preload.js
-document_end = include.postload.js
-
 [compat]
 chrome = 18.0
-
-[mapping]
-subscriptions.xml = adblockplus/chrome/content/ui/subscriptions.xml
-firstRun.html = adblockplus/chrome/content/ui/firstRun.html
-firstRun.js = adblockplus/chrome/content/ui/firstRun.js
-i18n.js = adblockplus/chrome/content/ui/i18n.js
-skin/firstRun.css = adblockplus/chrome/skin/firstRun.css
-skin/abp-icon-big.png = adblockplus/chrome/skin/abp-icon-big.png
-skin/ajax-loader.gif = adblockplus/chrome/skin/ajax-loader.gif
-skin/arrow-down.png = adblockplus/chrome/skin/arrow-down.png
-skin/arrow-up.png = adblockplus/chrome/skin/arrow-up.png
-skin/background.png = adblockplus/chrome/skin/background.png
-skin/background-candomore.png = adblockplus/chrome/skin/background-candomore.png
-skin/background-main.png = adblockplus/chrome/skin/background-main.png
-skin/background-share.png = adblockplus/chrome/skin/background-share.png
-skin/donate.png = adblockplus/chrome/skin/donate.png
-skin/features/malware.png = adblockplus/chrome/skin/features/malware.png
-skin/features/social.png = adblockplus/chrome/skin/features/social.png
-skin/features/tracking.png = adblockplus/chrome/skin/features/tracking.png
-skin/fonts/CreteRound-Italic.otf = adblockplus/chrome/skin/fonts/CreteRound-Italic.otf
-skin/fonts/CreteRound-Regular.otf = adblockplus/chrome/skin/fonts/CreteRound-Regular.otf
-skin/social/facebook.png = adblockplus/chrome/skin/social/facebook.png
-skin/social/googleplus.png = adblockplus/chrome/skin/social/googleplus.png
-skin/social/renren.png = adblockplus/chrome/skin/social/renren.png
-skin/social/twitter.png = adblockplus/chrome/skin/social/twitter.png
-skin/social/weibo.png = adblockplus/chrome/skin/social/weibo.png
-qunit/qunit.js = adblockplustests/chrome/content/qunit.js
-qunit/qunit.css = adblockplustests/chrome/content/qunit.css
-
-[preprocess]
-firstRun.html =
 
 [convert_js]
 lib/io.js = lib/filesystem/io.js
   --arg module=true
-lib/adblockplus.js = lib/prefs.js
-  lib/utils.js
-  lib/elemHideHitRegistration.js
-  adblockplus/lib/downloader.js
-  adblockplus/lib/filterNotifier.js
-  adblockplus/lib/filterClasses.js
-  adblockplus/lib/subscriptionClasses.js
-  adblockplus/lib/filterStorage.js
-  adblockplus/lib/elemHide.js
-  adblockplus/lib/matcher.js
-  adblockplus/lib/filterListener.js
-  adblockplus/lib/synchronizer.js
-  adblockplus/lib/notification.js
-  lib/stats.js
-  --arg module=true source_repo=https://hg.adblockplus.org/adblockplus/
 
-qunit/tests/adblockplus.js = adblockplustests/chrome/content/tests/domainRestrictions.js
-  adblockplustests/chrome/content/tests/filterClasses.js
-  adblockplustests/chrome/content/tests/filterNotifier.js
-  adblockplustests/chrome/content/tests/filterStorage.js
-  adblockplustests/chrome/content/tests/matcher.js
-  adblockplustests/chrome/content/tests/prefs.js
-  adblockplustests/chrome/content/tests/regexpFilters_matching.js
-  adblockplustests/chrome/content/tests/subscriptionClasses.js
-  --arg source_repo=https://hg.adblockplus.org/adblockplustests/
-
-[import_locales]
-adblockplus/chrome/locale/*/global.properties = subscription_invalid_location
-  remove_subscription_warning
-adblockplus/chrome/locale/*/overlay.dtd = hideplaceholders.label
-adblockplus/chrome/locale/*/filters.dtd = subscription.lastDownload.inProgress
-  subscription.lastDownload.invalidURL
-  subscription.lastDownload.connectionError
-  subscription.lastDownload.invalidData
-  subscription.lastDownload.checksumMismatch
-  subscription.enabled.label
-  subscription.delete.label
-  addSubscription.label
-  addSubscriptionAdd.label
-  addSubscriptionOther.label
-  acceptableAds2.label
-  viewList.label
-  readMore.label
-adblockplus/chrome/locale/*/subscriptionSelection.dtd = location.label
-  title.label
-adblockplus/chrome/locale/*/meta.properties = =name
-adblockplus/chrome/locale/*/firstRun.properties = =*
+[convert_img]
+icons/abp-19-notification-critical-1.png = icons/abp-19.png -> blend(icons/abp-19-notification-critical.png, 0.1)
+icons/abp-19-notification-critical-2.png = icons/abp-19.png -> blend(icons/abp-19-notification-critical.png, 0.2)
+icons/abp-19-notification-critical-3.png = icons/abp-19.png -> blend(icons/abp-19-notification-critical.png, 0.3)
+icons/abp-19-notification-critical-4.png = icons/abp-19.png -> blend(icons/abp-19-notification-critical.png, 0.4)
+icons/abp-19-notification-critical-5.png = icons/abp-19.png -> blend(icons/abp-19-notification-critical.png, 0.5)
+icons/abp-19-notification-critical-6.png = icons/abp-19.png -> blend(icons/abp-19-notification-critical.png, 0.6)
+icons/abp-19-notification-critical-7.png = icons/abp-19.png -> blend(icons/abp-19-notification-critical.png, 0.7)
+icons/abp-19-notification-critical-8.png = icons/abp-19.png -> blend(icons/abp-19-notification-critical.png, 0.8)
+icons/abp-19-notification-critical-9.png = icons/abp-19.png -> blend(icons/abp-19-notification-critical.png, 0.9)
+icons/abp-19-notification-information-1.png = icons/abp-19.png -> blend(icons/abp-19-notification-information.png, 0.1)
+icons/abp-19-notification-information-2.png = icons/abp-19.png -> blend(icons/abp-19-notification-information.png, 0.2)
+icons/abp-19-notification-information-3.png = icons/abp-19.png -> blend(icons/abp-19-notification-information.png, 0.3)
+icons/abp-19-notification-information-4.png = icons/abp-19.png -> blend(icons/abp-19-notification-information.png, 0.4)
+icons/abp-19-notification-information-5.png = icons/abp-19.png -> blend(icons/abp-19-notification-information.png, 0.5)
+icons/abp-19-notification-information-6.png = icons/abp-19.png -> blend(icons/abp-19-notification-information.png, 0.6)
+icons/abp-19-notification-information-7.png = icons/abp-19.png -> blend(icons/abp-19-notification-information.png, 0.7)
+icons/abp-19-notification-information-8.png = icons/abp-19.png -> blend(icons/abp-19-notification-information.png, 0.8)
+icons/abp-19-notification-information-9.png = icons/abp-19.png -> blend(icons/abp-19-notification-information.png, 0.9)
+icons/abp-19-whitelisted.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale
+icons/abp-19-whitelisted-notification-critical-1.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-critical.png, 0.1)
+icons/abp-19-whitelisted-notification-critical-2.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-critical.png, 0.2)
+icons/abp-19-whitelisted-notification-critical-3.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-critical.png, 0.3)
+icons/abp-19-whitelisted-notification-critical-4.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-critical.png, 0.4)
+icons/abp-19-whitelisted-notification-critical-5.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-critical.png, 0.5)
+icons/abp-19-whitelisted-notification-critical-6.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-critical.png, 0.6)
+icons/abp-19-whitelisted-notification-critical-7.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-critical.png, 0.7)
+icons/abp-19-whitelisted-notification-critical-8.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-critical.png, 0.8)
+icons/abp-19-whitelisted-notification-critical-9.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-critical.png, 0.9)
+icons/abp-19-whitelisted-notification-information-1.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-information.png, 0.1)
+icons/abp-19-whitelisted-notification-information-2.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-information.png, 0.2)
+icons/abp-19-whitelisted-notification-information-3.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-information.png, 0.3)
+icons/abp-19-whitelisted-notification-information-4.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-information.png, 0.4)
+icons/abp-19-whitelisted-notification-information-5.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-information.png, 0.5)
+icons/abp-19-whitelisted-notification-information-6.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-information.png, 0.6)
+icons/abp-19-whitelisted-notification-information-7.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-information.png, 0.7)
+icons/abp-19-whitelisted-notification-information-8.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-information.png, 0.8)
+icons/abp-19-whitelisted-notification-information-9.png = icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(icons/abp-19-notification-information.png, 0.9)

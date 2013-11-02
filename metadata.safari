@@ -1,0 +1,54 @@
+[default]
+inherit = metadata.common
+
+[general]
+basename = adblockplussafari
+version = 0.1
+author = Eyeo GmbH
+homepage = http://adblockplus.org/
+
+[mapping]
+ext/common.js = safari/common.js
+ext/background.js = safari/background.js
+ext/content.js = safari/content.js
+
+[convert_js]
+lib/io.js = lib/websql/io.js
+  --arg module=true
+
+[popovers]
+popup_filename = popup.html
+popup_width = 250
+popup_height = 240
+#popup_width = 155
+#popup_height = 70
+
+[toolbar_items]
+item_image = icons/abp-16.png
+item_popover = popup
+item_menu = menu
+item_label = will_be_replaced_with_translation
+item_tool_tip = will_be_replaced_with_translation
+
+[convert_img]
+icons/abp-16.png = icons/abp-16.png -> contrastToAlpha
+icons/abp-16-notification-critical-1.png = icons/abp-16.png -> blend(icons/abp-16-notification-critical.png, 0.1) -> contrastToAlpha
+icons/abp-16-notification-critical-2.png = icons/abp-16.png -> blend(icons/abp-16-notification-critical.png, 0.2) -> contrastToAlpha
+icons/abp-16-notification-critical-3.png = icons/abp-16.png -> blend(icons/abp-16-notification-critical.png, 0.3) -> contrastToAlpha
+icons/abp-16-notification-critical-4.png = icons/abp-16.png -> blend(icons/abp-16-notification-critical.png, 0.4) -> contrastToAlpha
+icons/abp-16-notification-critical-5.png = icons/abp-16.png -> blend(icons/abp-16-notification-critical.png, 0.5) -> contrastToAlpha
+icons/abp-16-notification-critical-6.png = icons/abp-16.png -> blend(icons/abp-16-notification-critical.png, 0.6) -> contrastToAlpha
+icons/abp-16-notification-critical-7.png = icons/abp-16.png -> blend(icons/abp-16-notification-critical.png, 0.7) -> contrastToAlpha
+icons/abp-16-notification-critical-8.png = icons/abp-16.png -> blend(icons/abp-16-notification-critical.png, 0.8) -> contrastToAlpha
+icons/abp-16-notification-critical-9.png = icons/abp-16.png -> blend(icons/abp-16-notification-critical.png, 0.9) -> contrastToAlpha
+icons/abp-16-notification-critical.png = icons/abp-16-notification-critical.png -> contrastToAlpha
+icons/abp-16-notification-information-1.png = icons/abp-16.png -> blend(icons/abp-16-notification-information.png, 0.1) -> contrastToAlpha
+icons/abp-16-notification-information-2.png = icons/abp-16.png -> blend(icons/abp-16-notification-information.png, 0.2) -> contrastToAlpha
+icons/abp-16-notification-information-3.png = icons/abp-16.png -> blend(icons/abp-16-notification-information.png, 0.3) -> contrastToAlpha
+icons/abp-16-notification-information-4.png = icons/abp-16.png -> blend(icons/abp-16-notification-information.png, 0.4) -> contrastToAlpha
+icons/abp-16-notification-information-5.png = icons/abp-16.png -> blend(icons/abp-16-notification-information.png, 0.5) -> contrastToAlpha
+icons/abp-16-notification-information-6.png = icons/abp-16.png -> blend(icons/abp-16-notification-information.png, 0.6) -> contrastToAlpha
+icons/abp-16-notification-information-7.png = icons/abp-16.png -> blend(icons/abp-16-notification-information.png, 0.7) -> contrastToAlpha
+icons/abp-16-notification-information-8.png = icons/abp-16.png -> blend(icons/abp-16-notification-information.png, 0.8) -> contrastToAlpha
+icons/abp-16-notification-information-9.png = icons/abp-16.png -> blend(icons/abp-16-notification-information.png, 0.9) -> contrastToAlpha
+icons/abp-16-notification-information.png = icons/abp-16-notification-information.png -> contrastToAlpha
