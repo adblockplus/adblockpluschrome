@@ -67,6 +67,8 @@ function onBeforeRequest(details)
 
   if (type == "main_frame" || type == "sub_frame")
     recordFrame(details.tabId, details.frameId, details.parentFrameId, details.url);
+  else if (details.tabId in frames && !(details.frameId in frames[details.tabId]))
+    recordFrame(details.tabId, details.frameId, details.parentFrameId, null);
 
   if (type == "main_frame")
     return {};
@@ -147,6 +149,15 @@ function recordFrame(tabId, frameId, parentFrameId, frameUrl)
 {
   if (!(tabId in frames))
     frames[tabId] = {};
+
+  if (frameUrl == null)
+  {
+    if (parentFrameId in frames[tabId])
+      frameUrl = frames[tabId][parentFrameId].url;
+    else
+      return;  // We cannot do anything meaningful here
+  }
+
   frames[tabId][frameId] = {url: frameUrl, parent: parentFrameId};
 }
 
