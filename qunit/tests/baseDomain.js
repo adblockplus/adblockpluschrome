@@ -25,6 +25,9 @@
     var tests = [
       [null, ""],
       ["/foo/bar", ""],
+      ["http://example.com", "example.com"],
+      ["http://example.com?foo#bar", "example.com"],
+      ["http://example.com#foo?bar", "example.com"],
       ["http://example.com/", "example.com"],
       ["http://example.com:8000/", "example.com"],
       ["http://foo:bar@example.com:8000/foo:bar/bas", "example.com"],
@@ -44,8 +47,8 @@
       null,
       "",
       "http:",
-      "http:foo.bar/",
-      "http://foo.bar"
+      "http://",
+      "http:foo.bar/"
     ];
     for (var i = 0; i < tests.length; i++)
     {
@@ -59,6 +62,33 @@
   test("URI parsing", function()
   {
     var tests = [
+      ["http://example.com", {
+        scheme: "http",
+        host: "example.com",
+        asciiHost: "example.com",
+        hostPort: "example.com",
+        port: -1,
+        path: "",
+        prePath: "http://example.com"
+      }],
+      ["http://example.com?foo#bar", {
+        scheme: "http",
+        host: "example.com",
+        asciiHost: "example.com",
+        hostPort: "example.com",
+        port: -1,
+        path: "?foo#bar",
+        prePath: "http://example.com"
+      }],
+      ["http://example.com#foo?bar", {
+        scheme: "http",
+        host: "example.com",
+        asciiHost: "example.com",
+        hostPort: "example.com",
+        port: -1,
+        path: "#foo?bar",
+        prePath: "http://example.com"
+      }],
       ["http://example.com/", {
         scheme: "http",
         host: "example.com",
