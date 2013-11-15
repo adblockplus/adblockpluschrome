@@ -592,7 +592,7 @@ ext.windows.getAll(function(windows)
 });
 
 // Update icon if a tab changes location
-ext.tabs.onBeforeNavigate.addListener(function(tab)
+ext.tabs.onLoading.addListener(function(tab)
 {
   tab.sendMessage({type: "clickhide-deactivate"});
   refreshIconAndContextMenu(tab);

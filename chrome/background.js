@@ -99,17 +99,17 @@
     }
   };
 
-  var BeforeNavigateTabEventTarget = function()
+  var LoadingTabEventTarget = function()
   {
     TabEventTarget.call(this, chrome.tabs.onUpdated);
   };
-  BeforeNavigateTabEventTarget.prototype = {
+  LoadingTabEventTarget.prototype = {
     __proto__: TabEventTarget.prototype,
     _wrapListener: function(listener)
     {
       return function(id, info, tab)
       {
-        if ("url" in info)
+        if (info.status == "loading")
           listener(new Tab(tab));
       };
     }
@@ -224,7 +224,7 @@
     this.url = tab.url;
     this.pageAction = new PageAction(tab.id);
 
-    this.onBeforeNavigate = ext.tabs.onBeforeNavigate._bindToTab(this);
+    this.onLoading = ext.tabs.onLoading._bindToTab(this);
     this.onCompleted = ext.tabs.onCompleted._bindToTab(this);
     this.onActivated = ext.tabs.onActivated._bindToTab(this);
     this.onRemoved = ext.tabs.onRemoved._bindToTab(this);
@@ -338,7 +338,7 @@
   };
 
   ext.tabs = {
-    onBeforeNavigate: new BeforeNavigateTabEventTarget(),
+    onLoading: new LoadingTabEventTarget(),
     onCompleted: new CompletedTabEventTarget(),
     onActivated: new ActivatedTabEventTarget(),
     onRemoved: new RemovedTabEventTarget()

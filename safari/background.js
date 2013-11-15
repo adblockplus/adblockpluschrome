@@ -35,6 +35,22 @@
     }
   };
 
+  var LoadingTabEventTarget = function(target)
+  {
+    WrappedEventTarget.call(this, target, "message", false);
+  };
+  LoadingTabEventTarget.prototype = {
+    __proto__: WrappedEventTarget.prototype,
+    _wrapListener: function(listener)
+    {
+      return function (event)
+      {
+        if (event.name == "loading" && event.message == event.target.url)
+          listener(new Tab(event.target));
+      };
+    }
+  };
+
   Tab = function(tab)
   {
     this._tab = tab;
@@ -42,7 +58,7 @@
     this._eventTarget = tab;
     this._messageDispatcher = tab.page;
 
-    this.onBeforeNavigate = new TabEventTarget(tab, "beforeNavigate", false);
+    this.onLoading = new LoadingTabEventTarget(tab);
     this.onCompleted = new TabEventTarget(tab, "navigate", false);
     this.onActivated = new TabEventTarget(tab, "activate", false);
     this.onRemoved = new TabEventTarget(tab, "close", false);
@@ -490,7 +506,7 @@
   };
 
   ext.tabs = {
-    onBeforeNavigate: new TabEventTarget(safari.application, "beforeNavigate", true),
+    onLoading: new LoadingTabEventTarget(safari.application),
     onCompleted: new TabEventTarget(safari.application, "navigate", true),
     onActivated: new TabEventTarget(safari.application, "activate", true),
     onRemoved: new TabEventTarget(safari.application, "close", true)
