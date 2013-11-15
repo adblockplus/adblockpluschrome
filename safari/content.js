@@ -17,6 +17,9 @@
 
 (function()
 {
+  safari.self.tab.dispatchMessage("loading", document.location.href);
+
+
   /* Background page proxy */
   var proxy = {
     objects: [],
