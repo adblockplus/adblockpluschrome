@@ -15,6 +15,8 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var require = ext.backgroundPage.getWindow().require;
+
 with(require("filterClasses"))
 {
   this.Filter = Filter;
