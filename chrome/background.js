@@ -194,6 +194,8 @@
 
   /* Tabs */
 
+  var sendMessage = chrome.tabs.sendMessage || chrome.tabs.sendRequest;
+
   var PageAction = function(tabId)
   {
     this._tabId = tabId;
@@ -240,7 +242,7 @@
     },
     sendMessage: function(message, responseCallback)
     {
-      chrome.tabs.sendMessage(this._id, message, responseCallback);
+      sendMessage(this._id, message, responseCallback);
     }
   };
 
