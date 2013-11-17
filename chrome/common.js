@@ -56,7 +56,7 @@
 
   var MessageEventTarget = function()
   {
-    WrappedEventTarget.call(this, chrome.runtime.onMessage || chrome.extension.onRequest);
+    WrappedEventTarget.call(this, (chrome.runtime || {}).onMessage || chrome.extension.onRequest);
   };
   MessageEventTarget.prototype = {
     __proto__: WrappedEventTarget.prototype,
@@ -73,7 +73,7 @@
 
   ext = {
     backgroundPage: {
-      sendMessage: chrome.runtime.sendMessage || chrome.extension.sendRequest,
+      sendMessage: (chrome.runtime || {}).sendMessage || chrome.extension.sendRequest,
       getWindow: chrome.extension.getBackgroundPage
     },
     getURL: chrome.extension.getURL,
