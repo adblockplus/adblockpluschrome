@@ -143,6 +143,10 @@
           return this.deserializeSequence(spec.items, array, memo);
       }
     },
+    getObjectId: function(obj)
+    {
+      return this.objects.indexOf(obj);
+    },
     getProperty: function(objectId, property)
     {
       return this.deserializeResult(
@@ -154,25 +158,26 @@
         })
       );
     },
-    createProperty: function(objectId, property, enumerable)
+    createProperty: function(property, enumerable)
     {
+      var proxy = this;
       return {
         get: function()
         {
-          return this.getProperty(objectId, property);
-        }.bind(this),
+          return proxy.getProperty(proxy.getObjectId(this), property);
+        },
         set: function(value)
         {
-          this.checkResult(
-            this.send(
+          proxy.checkResult(
+            proxy.send(
             {
               type: "setProperty",
-              objectId: objectId,
+              objectId: proxy.getObjectId(this),
               property: property,
-              value: this.serialize(value)
+              value: proxy.serialize(value)
             })
           );
-        }.bind(this),
+        },
         enumerable: enumerable,
         configurable: true
       };
@@ -187,7 +192,7 @@
           {
             type: "callFunction",
             functionId: objectId,
-            contextId: proxy.objects.indexOf(this),
+            contextId: proxy.getObjectId(this),
             args: Array.prototype.map.call(
               arguments,
               proxy.serialize.bind(proxy)
@@ -241,8 +246,7 @@
       for (var property in objectInfo.properties)
         if (ignored.indexOf(property) == -1)
           Object.defineProperty(obj, property, this.createProperty(
-            objectId, property,
-            objectInfo.properties[property].enumerable
+            property, objectInfo.properties[property].enumerable
           ));
 
       if (objectInfo.isFunction)
