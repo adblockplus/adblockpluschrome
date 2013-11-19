@@ -63,7 +63,7 @@
     _wrapListener: function(listener) {
       return function(message, sender, sendResponse)
       {
-        listener(message, {tab: sender.tab && new Tab(sender.tab)}, sendResponse);
+        return listener(message, {tab: sender.tab && new Tab(sender.tab)}, sendResponse);
       };
     }
   };
