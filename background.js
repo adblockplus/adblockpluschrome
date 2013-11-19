@@ -571,7 +571,13 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       });
       break;
     case "forward":
-      tab.sendMessage(msg.payload, sendResponse);
+      if (sender.tab)
+      {
+        sender.tab.sendMessage(msg.payload, sendResponse);
+        // Return true to indicate that we want to call
+        // sendResponse asynchronously
+        return true;
+      }
       break;
     default:
       sendResponse({});
