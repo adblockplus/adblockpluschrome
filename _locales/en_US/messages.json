@@ -39,6 +39,11 @@
   "description_safari": {
     "message": "The free adblock tool for Safari: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
   },
+  "disabled_for_site":
+  {
+    "description": "Popup balloon label to disable blocking",
+    "message": "<strong>Disabled</strong> on this site"
+  },
   "disable_inline": {
     "message": "Disable inline text ads"
   },
@@ -46,8 +51,8 @@
     "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
   },
   "easy_create_filter": {
-    "description": "Button label in popup balloon",
-    "message": "Easy create filter"
+    "description": "Popup balloon label for blocking elements on the current page",
+    "message": "Block element"
   },
   "edit_filters_raw": {
     "message": "Edit filters as raw text"
@@ -56,8 +61,8 @@
     "message": "Enable only the filter lists you need. Too many can make your browser unresponsive."
   },
   "enabled_for_site": {
-    "description": "Popup balloon checkbox label",
-    "message": "Enabled for this site"
+    "description": "Popup balloon label to enable blocking",
+    "message": "<strong>Enabled</strong> on this site"
   },
   "filter_lists": {
     "description": "This is a tab heading.",
@@ -96,6 +101,10 @@
   },
   "options": {
     "message": "Adblock Plus Options"
+  },
+  "options_short": {
+    "description": "Link to the options page from the popup balloon.",
+    "message": "Options"
   },
   "out_of_date_lists": {
     "message": "Out-of-date lists are updated periodically."
@@ -160,12 +169,16 @@
     }
   },
   "stats_share_title": {
-    "description": "Label for the action in the popup which presents the user with all sharing options.",
-    "message": "Share this"
+    "description": "Title for the share buttons to share stats.",
+    "message": "Share these numbers"
+  },
+  "stats_show_iconnumber": {
+    "description": "Toggle for displaying the number of blocked ads in the icon.",
+    "message": "Show number in icon"
   },
   "stats_title": {
     "description": "Title for the stats section in the popup.",
-    "message": "Blocked ads:"
+    "message": "Ads blocked"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Please choose a filter subscription from the list:"
