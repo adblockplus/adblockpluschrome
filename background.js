@@ -41,6 +41,7 @@ RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OT
 
 var isFirstRun = false;
 var seenDataCorruption = false;
+var importingOldData = false;
 require("filterNotifier").FilterNotifier.addListener(function(action)
 {
   if (action == "load")
@@ -48,12 +49,13 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
     importOldData();
 
     var addonVersion = require("info").addonVersion;
-    var prevVersion = localStorage["currentVersion"];
-    if (seenDataCorruption || prevVersion != addonVersion)
+    var prevVersion = localStorage.currentVersion;
+    if (prevVersion != addonVersion)
     {
       isFirstRun = !prevVersion;
-      localStorage["currentVersion"] = addonVersion;
-      addSubscription(prevVersion);
+      localStorage.currentVersion = addonVersion;
+      if (!importingOldData)
+        addSubscription(prevVersion);
     }
   }
 });
@@ -154,8 +156,8 @@ function importOldData()
 {
   if ("patterns.ini" in localStorage)
   {
+    importingOldData = true;
     FilterStorage.loadFromDisk(localStorage["patterns.ini"]);
-    seenDataCorruption = false;
 
     var remove = [];
     for (var key in localStorage)
@@ -178,7 +180,7 @@ function addSubscription(prevVersion)
     FilterStorage.removeSubscription(FilterStorage.knownSubscriptions[toRemove]);
 
   // Add "acceptable ads" subscription for new users
-  var addAcceptable = !prevVersion || seenDataCorruption;
+  var addAcceptable = !prevVersion;
   if (addAcceptable)
   {
     addAcceptable = !FilterStorage.subscriptions.some(function(subscription)
