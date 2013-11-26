@@ -147,169 +147,21 @@ function refreshIconAndContextMenu(tab)
 }
 
 /**
- * Old versions stored filter data in the localStorage object, this will import
- * it into FilterStorage properly.
+ * Old versions for Opera stored patterns.ini in the localStorage object, this
+ * will import it into FilterStorage properly.
  */
 function importOldData()
 {
-  function addSubscription(url, title)
+  if ("patterns.ini" in localStorage)
   {
-    try
-    {
-      var subscription = Subscription.fromURL(url);
-      if (subscription && !(subscription.url in FilterStorage.knownSubscriptions))
-      {
-        if (title)
-          subscription.title = title;
-        FilterStorage.addSubscription(subscription);
-        Synchronizer.execute(subscription);
-      }
-    }
-    catch (e)
-    {
-      reportError(e);
-    }
-  }
+    FilterStorage.loadFromDisk(localStorage["patterns.ini"]);
 
-  // Import user-defined subscriptions
-  if (typeof localStorage["userFilterURLs"] == "string")
-  {
-    try
-    {
-      var urls = JSON.parse(localStorage["userFilterURLs"]);
-      for (var key in urls)
-        addSubscription(urls[key]);
-      delete localStorage["userFilterURLs"];
-    }
-    catch (e)
-    {
-      reportError(e);
-    }
-  }
-
-  // Now import predefined subscriptions if enabled
-  if (typeof localStorage["filterFilesEnabled"] == "string")
-  {
-    try
-    {
-      var subscriptions = JSON.parse(localStorage["filterFilesEnabled"]);
-      if (subscriptions.korea)
-        subscriptions.easylist = true;
-      if (subscriptions.france)
-      {
-        addSubscription("https://easylist-downloads.adblockplus.org/liste_fr+easylist.txt", "Liste FR+EasyList");
-        subscriptions.easylist = false;
-      }
-      if (subscriptions.germany)
-      {
-        if (subscriptions.easylist)
-          addSubscription("https://easylist-downloads.adblockplus.org/easylistgermany+easylist.txt", "EasyList Germany+EasyList");
-        else
-          addSubscription("https://easylist-downloads.adblockplus.org/easylistgermany.txt", "EasyList Germany");
-        subscriptions.easylist = false;
-      }
-      if (subscriptions.china)
-      {
-        if (subscriptions.easylist)
-          addSubscription("https://easylist-downloads.adblockplus.org/chinalist+easylist.txt", "ChinaList+EasyList");
-        else
-          addSubscription("http://adblock-chinalist.googlecode.com/svn/trunk/adblock.txt", "ChinaList");
-        subscriptions.easylist = false;
-      }
-      if (subscriptions.russia)
-      {
-        if (subscriptions.easylist)
-          addSubscription("https://easylist-downloads.adblockplus.org/ruadlist+easylist.txt", "RU AdList+EasyList");
-        else
-          addSubscription("https://ruadlist.googlecode.com/svn/trunk/advblock.txt", "RU AdList");
-        subscriptions.easylist = false;
-      }
-      if (subscriptions.romania)
-      {
-        if (subscriptions.easylist)
-          addSubscription("https://easylist-downloads.adblockplus.org/rolist+easylist.txt", "ROList+EasyList");
-        else
-          addSubscription("http://www.zoso.ro/pages/rolist.txt", "ROList");
-        subscriptions.easylist = false;
-      }
-      if (subscriptions.easylist)
-        addSubscription("https://easylist-downloads.adblockplus.org/easylist.txt", "EasyList");
-      if (subscriptions.fanboy)
-        addSubscription("https://secure.fanboy.co.nz/fanboy-adblock.txt", "Fanboy's List");
-      if (subscriptions.fanboy_es)
-        addSubscription("https://secure.fanboy.co.nz/fanboy-espanol.txt", "Fanboy's Espa\xF1ol/Portugu\xEAs");
-      if (subscriptions.italy)
-        addSubscription("http://mozilla.gfsolone.com/filtri.txt", "Xfiles");
-      if (subscriptions.poland)
-        addSubscription("http://www.niecko.pl/adblock/adblock.txt", "PLgeneral");
-      if (subscriptions.hungary)
-        addSubscription("http://pete.teamlupus.hu/hufilter.txt", "hufilter");
-      if (subscriptions.extras)
-        addSubscription("https://easylist-downloads.adblockplus.org/chrome_supplement.txt", "Recommended filters for Google Chrome");
-
-      delete localStorage["filterFilesEnabled"];
-    }
-    catch (e)
-    {
-      reportError(e);
-    }
-  }
-
-  // Import user filters
-  if(typeof localStorage["userFilters"] == "string")
-  {
-    try
-    {
-      var userFilters = JSON.parse(localStorage["userFilters"]);
-      for (var i = 0; i < userFilters.length; i++)
-      {
-        var filterText = userFilters[i];
-
-        // Skip useless default filters
-        if (filterText == "qux.us###annoying_AdDiv" || filterText == "qux.us##.ad_class")
-          continue;
-
-        var filter = Filter.fromText(filterText);
-        FilterStorage.addFilter(filter);
-      }
-      delete localStorage["userFilters"];
-    }
-    catch (e)
-    {
-      reportError(e);
-    }
-  }
-
-  // Import "excluded domains"
-  if(typeof localStorage["excludedDomains"] == "string")
-  {
-    try
-    {
-      var excludedDomains = JSON.parse(localStorage["excludedDomains"]);
-      for (var domain in excludedDomains)
-      {
-        var filterText = "@@||" + domain + "^$document";
-        var filter = Filter.fromText(filterText);
-        FilterStorage.addFilter(filter);
-      }
-      delete localStorage["excludedDomains"];
-    }
-    catch (e)
-    {
-      reportError(e);
-    }
-  }
-
-  // Delete downloaded subscription data
-  try
-  {
+    var remove = [];
     for (var key in localStorage)
-      if (/^https?:/.test(key))
-        delete localStorage[key];
-  }
-  catch (e)
-  {
-    reportError(e);
+      if (key.indexOf("patterns.ini") == 0 || key.indexOf("patterns-backup") == 0)
+        remove.push(key);
+    for (var i = 0; i < remove.length; i++)
+      delete localStorage[remove[i]];
   }
 }
 

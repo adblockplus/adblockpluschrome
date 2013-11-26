@@ -3,7 +3,3 @@ inherit = metadata.chrome
 
 [general]
 basename = adblockplusopera
-
-[convert_js]
-lib/io.js = lib/localstorage/io.js
-  --arg module=true
