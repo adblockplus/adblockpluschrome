@@ -49,7 +49,7 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
 
     var addonVersion = require("info").addonVersion;
     var prevVersion = localStorage["currentVersion"];
-    if (prevVersion != addonVersion)
+    if (seenDataCorruption || prevVersion != addonVersion)
     {
       isFirstRun = !prevVersion;
       localStorage["currentVersion"] = addonVersion;
@@ -155,6 +155,7 @@ function importOldData()
   if ("patterns.ini" in localStorage)
   {
     FilterStorage.loadFromDisk(localStorage["patterns.ini"]);
+    seenDataCorruption = false;
 
     var remove = [];
     for (var key in localStorage)
@@ -177,7 +178,7 @@ function addSubscription(prevVersion)
     FilterStorage.removeSubscription(FilterStorage.knownSubscriptions[toRemove]);
 
   // Add "acceptable ads" subscription for new users
-  var addAcceptable = !prevVersion;
+  var addAcceptable = !prevVersion || seenDataCorruption;
   if (addAcceptable)
   {
     addAcceptable = !FilterStorage.subscriptions.some(function(subscription)
