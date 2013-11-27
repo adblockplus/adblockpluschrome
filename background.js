@@ -41,12 +41,11 @@ RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OT
 
 var isFirstRun = false;
 var seenDataCorruption = false;
-var importingOldData = false;
 require("filterNotifier").FilterNotifier.addListener(function(action)
 {
   if (action == "load")
   {
-    importOldData();
+    var importingOldData = importOldData();
 
     var addonVersion = require("info").addonVersion;
     var prevVersion = localStorage.currentVersion;
@@ -151,12 +150,12 @@ function refreshIconAndContextMenu(tab)
 /**
  * Old versions for Opera stored patterns.ini in the localStorage object, this
  * will import it into FilterStorage properly.
+ * @return {Boolean} true if data import is in progress
  */
 function importOldData()
 {
   if ("patterns.ini" in localStorage)
   {
-    importingOldData = true;
     FilterStorage.loadFromDisk(localStorage["patterns.ini"]);
 
     var remove = [];
@@ -165,7 +164,11 @@ function importOldData()
         remove.push(key);
     for (var i = 0; i < remove.length; i++)
       delete localStorage[remove[i]];
+
+    return true;
   }
+  else
+    return false;
 }
 
 /**
