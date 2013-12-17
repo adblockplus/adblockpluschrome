@@ -16,60 +16,72 @@
  */
 
 var backgroundPage = ext.backgroundPage.getWindow();
-var imports = ["require", "isWhitelisted", "extractHostFromURL", "refreshIconAndContextMenu"];
+var imports = ["require", "isWhitelisted", "extractHostFromURL", "refreshIconAndContextMenu", "openOptions"];
 for (var i = 0; i < imports.length; i++)
   window[imports[i]] = backgroundPage[imports[i]];
 
 var Filter = require("filterClasses").Filter;
 var FilterStorage = require("filterStorage").FilterStorage;
+var Prefs = require("prefs").Prefs;
 
 var tab = null;
 
 function init()
 {
+  // Mark page as local to hide non-relevant elements
+  ext.windows.getLastFocused(function(win)
+  {
+    win.getActiveTab(function(tab)
+    {
+      if (!/^https?:\/\//.exec(tab.url))
+        document.body.classList.add("local");
+    });
+  });
+  
   // Attach event listeners
-  $("#enabled").click(toggleEnabled);
-  $("#clickHideButton").click(activateClickHide);
-  $("#cancelButton").click(cancelClickHide);
-  $("#optionsButton").click(openOptions);
-
+  document.getElementById("enabled").addEventListener("click", toggleEnabled, false);
+  document.getElementById("clickhide").addEventListener("click", activateClickHide, false);
+  document.getElementById("clickhide-cancel").addEventListener("click", cancelClickHide, false);
+  document.getElementById("options").addEventListener("click", function()
+  {
+    openOptions();
+  }, false);
+  
+  // Set up collapsing of menu items
+  var collapsers = document.getElementsByClassName("collapse");
+  for (var i = 0; i < collapsers.length; i++)
+  {
+    var collapser = collapsers[i];
+    collapser.addEventListener("click", toggleCollapse, false);
+    if (!Prefs[collapser.dataset.option])
+      document.getElementById(collapser.dataset.collapsable).classList.add("collapsed");
+  }
+  
   // Ask content script whether clickhide is active. If so, show cancel button.
   // If that isn't the case, ask background.html whether it has cached filters. If so,
   // ask the user whether she wants those filters.
   // Otherwise, we are in default state.
-  ext.windows.getLastFocused(function(win) {
-    win.getActiveTab(function(t) {
+  ext.windows.getLastFocused(function(win)
+  {
+    win.getActiveTab(function(t)
+    {
       tab = t;
-      document.getElementById("enabled").checked = !isWhitelisted(tab.url);
-      document.getElementById("enabledCheckboxAndLabel").style.display = "block";
-
-      tab.sendMessage({type: "get-clickhide-state"}, function(response) {
-        if(response.active)
-          clickHideActiveStuff();
-        else
-          clickHideInactiveStuff();
+      document.getElementById("enabled").classList.toggle("off", isWhitelisted(tab.url));
+      
+      tab.sendMessage({type: "get-clickhide-state"}, function(response)
+      {
+        document.body.classList.toggle("clickhide-active", response.active);
       });
     });
   });
 }
-$(init);
+window.addEventListener("DOMContentLoaded", init, false);
 
 function toggleEnabled()
 {
-  var checked = document.getElementById("enabled").checked;
-  if (checked)
-  {
-    // Remove any exception rules applying to this URL
-    var filter = isWhitelisted(tab.url);
-    while (filter)
-    {
-      FilterStorage.removeFilter(filter);
-      if (filter.subscriptions.length)
-        filter.disabled = true;
-      filter = isWhitelisted(tab.url);
-    }
-  }
-  else
+  var enabledButton = document.getElementById("enabled")
+  var disabled = enabledButton.classList.toggle("off");
+  if (disabled)
   {
     var host = extractHostFromURL(tab.url).replace(/^www\./, "");
     var filter = Filter.fromText("@@||" + host + "^$document");
@@ -81,15 +93,27 @@ function toggleEnabled()
       FilterStorage.addFilter(filter);
     }
   }
-
+  else
+  {
+    // Remove any exception rules applying to this URL
+    var filter = isWhitelisted(tab.url);
+    while (filter)
+    {
+      FilterStorage.removeFilter(filter);
+      if (filter.subscriptions.length)
+        filter.disabled = true;
+      filter = isWhitelisted(tab.url);
+    }
+  }
+  
   refreshIconAndContextMenu(tab);
 }
 
 function activateClickHide()
 {
-  clickHideActiveStuff();
+  document.body.classList.add("clickhide-active");
   tab.sendMessage({type: "clickhide-activate"});
-
+  
   // Close the popup after a few seconds, so user doesn't have to
   activateClickHide.timeout = window.setTimeout(window.close, 5000);
 }
@@ -101,25 +125,13 @@ function cancelClickHide()
     window.clearTimeout(activateClickHide.timeout);
     activateClickHide.timeout = null;
   }
-  clickHideInactiveStuff();
+  document.body.classList.remove("clickhide-active");
   tab.sendMessage({type: "clickhide-deactivate"});
 }
 
-function openOptions()
+function toggleCollapse(event)
 {
-  backgroundPage.openOptions();
-}
-
-function clickHideActiveStuff()
-{
-  document.getElementById("enabledCheckboxAndLabel").style.display = "none";
-  document.getElementById("clickHideInactiveStuff").style.display = "none";
-  document.getElementById("clickHideActiveStuff").style.display = "inherit";
-}
-
-function clickHideInactiveStuff()
-{
-  document.getElementById("enabledCheckboxAndLabel").style.display = "block";
-  document.getElementById("clickHideActiveStuff").style.display = "none";
-  document.getElementById("clickHideInactiveStuff").style.display = "inherit";
+  var collapser = event.currentTarget;
+  Prefs[collapser.dataset.option] = !Prefs[collapser.dataset.option];
+  collapser.parentNode.classList.toggle("collapsed");
 }

@@ -196,26 +196,53 @@
 
   var sendMessage = chrome.tabs.sendMessage || chrome.tabs.sendRequest;
 
-  var PageAction = function(tabId)
+  var BrowserAction = function(tabId)
   {
     this._tabId = tabId;
   };
-  PageAction.prototype = {
+  BrowserAction.prototype = {
     setIcon: function(path)
     {
-      chrome.pageAction.setIcon({tabId: this._tabId, path: path});
+      chrome.browserAction.setIcon({tabId: this._tabId, path: path});
     },
     setTitle: function(title)
     {
-      chrome.pageAction.setTitle({tabId: this._tabId, title: title});
+      chrome.browserAction.setTitle({tabId: this._tabId, title: title});
     },
     hide: function()
     {
-      chrome.pageAction.hide(this._tabId);
+      chrome.browserAction.hide(this._tabId);
     },
     show: function()
     {
-      chrome.pageAction.show(this._tabId);
+      chrome.browserAction.show(this._tabId);
+    },
+    setBadge: function(badge)
+    {
+      if (!badge)
+      {
+        chrome.browserAction.setBadgeText({
+          tabId: this._tabId,
+          text: ""
+        });
+        return;
+      }
+      
+      if ("color" in badge)
+      {
+        chrome.browserAction.setBadgeBackgroundColor({
+          tabId: this._tabId,
+          color: badge.color
+        });
+      }
+  
+      if ("number" in badge)
+      {
+        chrome.browserAction.setBadgeText({
+          tabId: this._tabId,
+          text: badge.number.toString()
+        });
+      }
     }
   };
 
@@ -224,7 +251,7 @@
     this._id = tab.id;
 
     this.url = tab.url;
-    this.pageAction = new PageAction(tab.id);
+    this.browserAction = new BrowserAction(tab.id);
 
     this.onLoading = ext.tabs.onLoading._bindToTab(this);
     this.onCompleted = ext.tabs.onCompleted._bindToTab(this);

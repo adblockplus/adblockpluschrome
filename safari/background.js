@@ -77,8 +77,7 @@
       this._tab.activate();
     },
     sendMessage: sendMessage,
-    pageAction: {
-      // there are no page actions in safari, so we use toolbar items instead
+    browserAction: {
       setIcon: function(path)
       {
         safari.extension.toolbarItems[0].image = safari.extension.baseURI + path;
@@ -87,8 +86,15 @@
       {
         safari.extension.toolbarItems[0].toolTip = title;
       },
+      setBadge: function(badge)
+      {
+        if (!badge)
+          safari.extension.toolbarItems[0].badge = 0;
+        else if ("number" in badge)
+          safari.extension.toolbarItems[0].badge = badge.number;
+      },
 
-      // toolbar items in safari can"t get hidden
+      // The following features aren't supported by Safari
       hide: function() {},
       show: function() {}
     }

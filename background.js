@@ -111,7 +111,7 @@ function isWhitelisted(url, parentUrl, type)
 
 var activeNotification = null;
 
-// Adds or removes page action icon according to options.
+// Adds or removes browser action icon according to options.
 function refreshIconAndContextMenu(tab)
 {
   if(!/^https?:/.test(tab.url))
@@ -129,15 +129,15 @@ function refreshIconAndContextMenu(tab)
     iconFilename = excluded ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
   }
 
-  tab.pageAction.setIcon(iconFilename);
-  tab.pageAction.setTitle(ext.i18n.getMessage("name"));
+  tab.browserAction.setIcon(iconFilename);
+  tab.browserAction.setTitle(ext.i18n.getMessage("name"));
 
   iconAnimation.registerTab(tab, iconFilename);
 
   if (localStorage.shouldShowIcon == "false")
-    tab.pageAction.hide();
+    tab.browserAction.hide();
   else
-    tab.pageAction.show();
+    tab.browserAction.show();
 
   if (require("info").platform == "chromium") // TODO: Implement context menus for Safari
     // Set context menu status according to whether current tab has whitelisted domain
@@ -408,7 +408,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       break;
     case "get-domain-enabled-state":
       // Returns whether this domain is in the exclusion list.
-      // The page action popup asks us this.
+      // The browser action popup asks us this.
       if(sender.tab)
       {
         sendResponse({enabled: !isWhitelisted(sender.tab.url)});
@@ -443,7 +443,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
   }
 });
 
-// Show icon as page action for all tabs that already exist
+// Show icon as browser action for all tabs that already exist
 ext.windows.getAll(function(windows)
 {
   for (var i = 0; i < windows.length; i++)

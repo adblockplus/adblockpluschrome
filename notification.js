@@ -69,11 +69,11 @@ window.addEventListener("load", function()
     notification.onClicked();
 
   var texts = Notification.getLocalizedTexts(notification);
-  var titleElement = document.getElementById("title");
+  var titleElement = document.getElementById("notification-title");
   titleElement.textContent = texts.title;
 
   var docLinks = getDocLinks(notification);
-  var messageElement = document.getElementById("message");
+  var messageElement = document.getElementById("notification-message");
   insertMessage(messageElement, texts.message, docLinks);
 
   messageElement.addEventListener("click", function(event)
