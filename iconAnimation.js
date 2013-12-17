@@ -129,6 +129,6 @@ iconAnimation = {
       path = path.replace(/(?=\..+$)/, suffix);
     }
 
-    tab.pageAction.setIcon(path);
+    tab.browserAction.setIcon(path);
   }
 };

@@ -21,6 +21,7 @@
   var require = backgroundPage.require;
   var getStats = require("stats").getStats;
   var FilterNotifier = require("filterNotifier").FilterNotifier;
+  var Prefs = require("prefs").Prefs;
   
   var currentTab;
   var shareURL = "https://adblockplus.org/";
@@ -68,8 +69,11 @@
   
   function onLoad()
   {
-    document.getElementById("shareBox").addEventListener("click", share, false);
-    document.getElementById("share").addEventListener("click", toggleShareBox, false);
+    document.getElementById("share-box").addEventListener("click", share, false);
+    var showIconNumber = document.getElementById("show-iconnumber");
+    showIconNumber.setAttribute("aria-checked", Prefs.show_statsinicon);
+    showIconNumber.addEventListener("click", toggleIconNumber, false);
+    document.querySelector("label[for='show-iconnumber']").addEventListener("click", toggleIconNumber, false);
     
     // Update stats
     ext.windows.getLastFocused(function(win)
@@ -81,7 +85,7 @@
 
         FilterNotifier.addListener(onNotify);
 
-        document.getElementById("statsContainer").removeAttribute("hidden");
+        document.getElementById("stats-container").removeAttribute("hidden");
       });
     });
   }
@@ -99,19 +103,13 @@
   
   function updateStats()
   {
-    var statsPage = document.getElementById("statsPage");
+    var statsPage = document.getElementById("stats-page");
     var blockedPage = getStats("blocked", currentTab).toLocaleString();
     i18n.setElementText(statsPage, "stats_label_page", [blockedPage]);
     
-    var statsTotal = document.getElementById("statsTotal");
+    var statsTotal = document.getElementById("stats-total");
     var blockedTotal = getStats("blocked").toLocaleString();
     i18n.setElementText(statsTotal, "stats_label_total", [blockedTotal]);
-  }
-  
-  function toggleShareBox(ev)
-  {
-    var shareBox = document.getElementById("shareBox");
-    shareBox.hidden = !shareBox.hidden;
   }
   
   function share(ev)
@@ -125,6 +123,12 @@
     
     var url = createShareLink(ev.target.dataset.social, blocked);
     ext.windows.getLastFocused(function(win) { win.openTab(url); });
+  }
+  
+  function toggleIconNumber()
+  {
+    Prefs.show_statsinicon = !Prefs.show_statsinicon;
+    document.getElementById("show-iconnumber").setAttribute("aria-checked", Prefs.show_statsinicon);
   }
   
   document.addEventListener("DOMContentLoaded", onLoad, false);

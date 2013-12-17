@@ -150,15 +150,6 @@
     "description": "Label for link to adblockplus.org that is attached when the user wants to share the stats on Facebook.",
     "message": "Download Adblock Plus"
   },
-  "stats_share_label_fb": {
-    "message": "Share on Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Share on Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Share on Twitter"
-  },
   "stats_share_message": {
     "description": "This message will be posted to social networks if the user decides to share the stats.",
     "message": "I blocked $number$ ads and trackers thanks to Adblock Plus.",

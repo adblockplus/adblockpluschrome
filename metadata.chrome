@@ -14,7 +14,7 @@ permissions = tabs
   unlimitedStorage
   notifications
 options = options.html
-pageAction = icons/abp-19.png popup.html
+browserAction = icons/abp-19.png popup.html
 icons = icons/abp-?.png
 webAccessible = block.html
 
