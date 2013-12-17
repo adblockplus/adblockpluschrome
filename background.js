@@ -133,12 +133,11 @@ function refreshIconAndContextMenu(tab)
 
   iconAnimation.registerTab(tab, iconFilename);
 
-  if (require("info").platform == "chromium") // TODO: Implement context menus for Safari
-    // Set context menu status according to whether current tab has whitelisted domain
-    if (excluded)
-      chrome.contextMenus.removeAll();
-    else
-      showContextMenu();
+  // Set context menu status according to whether current tab has whitelisted domain
+  if (excluded)
+    chrome.contextMenus.removeAll();
+  else
+    showContextMenu();
 }
 
 /**
@@ -259,15 +258,15 @@ function addSubscription(prevVersion)
 // Set up context menu for user selection of elements to block
 function showContextMenu()
 {
-  chrome.contextMenus.removeAll(function()
+  ext.contextMenus.removeAll(function()
   {
     if(typeof localStorage["shouldShowBlockElementMenu"] == "string" && localStorage["shouldShowBlockElementMenu"] == "true")
     {
-      chrome.contextMenus.create({"title": chrome.i18n.getMessage("block_element"), "contexts": ["image", "video", "audio"], "onclick": function(info, tab)
+      ext.contextMenus.create(ext.i18n.getMessage("block_element"), ["image", "video", "audio"], function(srcUrl, tab)
       {
-        if(info.srcUrl)
-            chrome.tabs.sendRequest(tab.id, {reqtype: "clickhide-new-filter", filter: info.srcUrl});
-      }});
+        if(srcUrl)
+          tab.sendMessage({type: "clickhide-new-filter", filter: srcUrl});
+      });
     }
   });
 }
