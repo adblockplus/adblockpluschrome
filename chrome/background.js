@@ -209,14 +209,6 @@
     {
       chrome.browserAction.setTitle({tabId: this._tabId, title: title});
     },
-    hide: function()
-    {
-      chrome.browserAction.hide(this._tabId);
-    },
-    show: function()
-    {
-      chrome.browserAction.show(this._tabId);
-    },
     setBadge: function(badge)
     {
       if (!badge)
