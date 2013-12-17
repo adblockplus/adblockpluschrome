@@ -369,4 +369,22 @@
     onBeforeRequest: new BeforeRequestEventTarget(),
     handlerBehaviorChanged: chrome.webRequest.handlerBehaviorChanged
   };
+
+  ext.contextMenus = {
+    create: function(title, contexts, onclick)
+    {
+      chrome.contextMenus.create({
+        title: title,
+        contexts: contexts,
+        onclick: function(info, tab)
+        {
+          onclick(info.srcUrl, new Tab(tab));
+        }
+      });
+    },
+    removeAll: function(callback)
+    {
+      chrome.contextMenus.removeAll(callback);
+    }
+  };
 })();

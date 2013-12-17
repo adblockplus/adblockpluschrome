@@ -523,6 +523,11 @@
 
   ext.onMessage = new MessageEventTarget(safari.application);
 
+  // TODO: Implement context menu
+  ext.contextMenus = {
+    create: function(title, contexts, onclick) {},
+    removeAll: function(callback) {}
+  };
 
   // Safari will load the bubble once, and then show it everytime the icon is
   // clicked. While Chrome loads it everytime you click the icon. So in order to
