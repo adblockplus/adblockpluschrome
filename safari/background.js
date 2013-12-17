@@ -92,11 +92,7 @@
           safari.extension.toolbarItems[0].badge = 0;
         else if ("number" in badge)
           safari.extension.toolbarItems[0].badge = badge.number;
-      },
-
-      // The following features aren't supported by Safari
-      hide: function() {},
-      show: function() {}
+      }
     }
   };
 

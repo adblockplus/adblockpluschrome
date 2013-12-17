@@ -82,7 +82,6 @@ function setDefaultOptions()
       localStorage[opt] = val;
   }
 
-  defaultOptionValue("shouldShowIcon", "true");
   defaultOptionValue("shouldShowBlockElementMenu", "true");
 
   removeDeprecatedOptions();
@@ -133,11 +132,6 @@ function refreshIconAndContextMenu(tab)
   tab.browserAction.setTitle(ext.i18n.getMessage("name"));
 
   iconAnimation.registerTab(tab, iconFilename);
-
-  if (localStorage.shouldShowIcon == "false")
-    tab.browserAction.hide();
-  else
-    tab.browserAction.show();
 
   if (require("info").platform == "chromium") // TODO: Implement context menus for Safari
     // Set context menu status according to whether current tab has whitelisted domain

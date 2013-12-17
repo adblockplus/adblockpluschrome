@@ -69,7 +69,6 @@ function loadOptions()
   $(".removeButton").button("option", "icons", {primary: "ui-icon-minus"});
 
   // Popuplate option checkboxes
-  initCheckbox("shouldShowIcon");
   initCheckbox("shouldShowBlockElementMenu");
   initCheckbox("hidePlaceholders");
 
