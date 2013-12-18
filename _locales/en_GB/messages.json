@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "After closing this popup, click (or right-click) an element on the page."
   },
-  "description": {
+  "description_chrome": {
     "message": "The free adblock tool for Chrome: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
+  },
+  "description_opera": {
+    "message": "The free adblock tool for Opera: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
+  },
+  "description_safari": {
+    "message": "The free adblock tool for Safari: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
   },
   "disable_inline": {
     "message": "After closing this popup, click (or right-click) an element on the page."
+  },
+  "disabled_for_site": {
+    "message": "<strong>Disabled</strong> on this site"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
   },
   "easy_create_filter": {
-    "message": "Easy create filter"
+    "message": "Block element"
   },
   "edit_filters_raw": {
     "message": "Easy create filter"
   },
   "enable_only_the": {
-    "message": "Enable only the filter lists you need. Too many can make Chrome unresponsive."
+    "message": "Enable only the filter lists you need. Too many can make your browser unresponsive."
   },
   "enabled_for_site": {
-    "message": "Enabled for this site"
+    "message": "<strong>Enabled</strong> on this site"
   },
   "filter_lists": {
     "message": "Filter lists"
@@ -81,6 +90,9 @@
   "options": {
     "message": "Adblock Plus Options"
   },
+  "options_short": {
+    "message": "Options"
+  },
   "out_of_date_lists": {
     "message": "Out-of-date lists are updated periodically."
   },
@@ -92,6 +104,59 @@
   },
   "show_icon": {
     "message": "Show icon in address bar"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> on this page",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> in total",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "over $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Download Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Share on Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Share on Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Share on Twitter"
+  },
+  "stats_share_message": {
+    "message": "I blocked $number$ ads and trackers thanks to Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Share these numbers"
+  },
+  "stats_show_iconnumber": {
+    "message": "Show number in icon"
+  },
+  "stats_title": {
+    "message": "Ads blocked"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Please choose a filter subscription from the list:"

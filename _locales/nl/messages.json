@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Na het sluiten van deze popup, klik (of klik met de rechtermuisknop) op het pagina element."
   },
-  "description": {
-    "message": "De gratis adblocker voor Chrome: Blokkeert vervelende video-reclames op YouTube, Facebook advertenties, banners en nog veel meer."
+  "description_chrome": {
+    "message": "De gratis adblocker voor Chrome: Blokkeer vervelende video-reclames op YouTube,  advertenties op Facebook, reclame banners en nog v…"
+  },
+  "description_opera": {
+    "message": "De gratis adblocker voor Opera: Blokkeer vervelende video-reclames op YouTube,  advertenties op Facebook, reclame banners en nog veel meer."
+  },
+  "description_safari": {
+    "message": "De gratis adblocker voor Safari: Blokkeer vervelende video-reclames op YouTube,  advertenties op Facebook, reclame banners en nog veel meer."
   },
   "disable_inline": {
     "message": "Inline tekstadvertenties uitschakelen"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Uitgeschakeld</strong> op deze site"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus is uitgeschakeld voor de hieronder vermelde domeinen. U kunt een domein toevoegen via het Adblock Plus logo in de adresbalk, of door het domein (geen URL) in het vak te typen en te klikken op \"Domein toevoegen\"."
   },
   "easy_create_filter": {
-    "message": "Eenvoudig filter instellen"
+    "message": "Element blokkeren"
   },
   "edit_filters_raw": {
     "message": "Bewerk filters als tekst"
   },
   "enable_only_the": {
-    "message": "Schakel alleen de filters in die u gebruikt. Teveel filters kunnen ervoor zorgen dat Chrome niet meer reageert."
+    "message": "Schakel alleen de filterlijsten in die u nodig heeft. Te veel filterlijsten kunnen uw browser vast laten lopen."
   },
   "enabled_for_site": {
-    "message": "Ingeschakeld voor deze site"
+    "message": "<strong>Ingeschakeld</strong> op deze site"
   },
   "filter_lists": {
     "message": "Filterlijsten"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus opties"
+  },
+  "options_short": {
+    "message": "Opties"
   },
   "out_of_date_lists": {
     "message": "Verouderde lijsten worden regelmatig bijgewerkt."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Deel dit"
+    "message": "Deze nummers delen"
+  },
+  "stats_show_iconnumber": {
+    "message": "Nummer weergeven in pictogram"
   },
   "stats_title": {
-    "message": "Geblokkeerde advertenties:"
+    "message": "Advertenties geblokkeerd"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Kies a.u.b. een filterabonnement uit de lijst:"

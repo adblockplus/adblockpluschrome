@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Bu pencere kapandığında, engelleyeceğiniz ögeye tıklayın (veya sağ tıklayın)."
   },
-  "description": {
+  "description_chrome": {
     "message": "Chrome için ücretsiz reklam engelleyici: Facebook, YouTube, vb. sitelerdeki reklamları, banner'ları ve daha fazlasını engeller."
+  },
+  "description_opera": {
+    "message": "Opera için ücretsiz reklam engelleme aracı: Sinir bozan YouTube reklamlarını, Facebook reklamlarını, reklam bantlarını ve çok daha fazlasını engeller."
+  },
+  "description_safari": {
+    "message": "Safari için ücretsiz reklam engelleme aracı: Sinir bozan YouTube reklamlarını, Facebook reklamlarını, reklam bantlarını ve çok daha fazlasını engeller."
   },
   "disable_inline": {
     "message": "Metin reklamlarını devre dışı bırak"
   },
+  "disabled_for_site": {
+    "message": "Bu sitede <strong>engelli</strong>"
+  },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus aşağıdaki adresleri engelledi. Adresleri hem adres çubuğundaki Adblock ikonundan engelleyebilir veya domain'i (URL'yi değil) kutucuğa yazıp \"Adresi ekle\" butonuna tıklayabilirsin."
+    "message": "Adblock Plus aşağıdaki adresler için devre dışı bırakıldı. Adresleri adres çubuğundaki Adblock simgesinden ekleyebilir veya alan adını (URL'yi değil) kutucuğa yazıp \"Alan adını ekle\" butonuna tıklayabilirsin."
   },
   "easy_create_filter": {
-    "message": "Kolayca filtre yarat"
+    "message": "Blok ögesi"
   },
   "edit_filters_raw": {
     "message": "Filtreleri salt metin olarak düzenle"
   },
   "enable_only_the": {
-    "message": "Yalnızca gereksinim duyduğunuz filtreleri etkinleştirin. Çok fazla filtre Chrome'u yavaşlatabilir."
+    "message": "Yalnızca ihtiyacınız olan süzgeç listelerini etkinleştirin. Çok fazla seçim yapmak tarayıcınızın akıcılığını düşürebilir."
   },
   "enabled_for_site": {
-    "message": "Bu site için etkin"
+    "message": "Bu sitede <strong>etkin</strong>"
   },
   "filter_lists": {
     "message": "Süzgeç listesi"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus Seçenekleri"
+  },
+  "options_short": {
+    "message": "Seçenekler"
   },
   "out_of_date_lists": {
     "message": "Zamanı geçmiş listeler düzenli olarak güncellenmektedir."
@@ -130,7 +142,7 @@
     "message": "Twitter'da Paylaş"
   },
   "stats_share_message": {
-    "message": "Ben  $number$ reklamı ve trackerı engelledim teşekkürler Adblock Plus.",
+    "message": "$number$ reklamı ve izleyiciyi Adblock Plus sayesinde engelledim.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -138,16 +150,19 @@
     }
   },
   "stats_share_title": {
-    "message": "Bunu paylaş"
+    "message": "Bu numaralar paylaş"
+  },
+  "stats_show_iconnumber": {
+    "message": "Simgede numarayı göster"
   },
   "stats_title": {
-    "message": "Engellenen reklamlar:"
+    "message": "Engellenen reklamlar"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lütfen listeden bir süzgeç aboneliği seçin:"
   },
   "update_now": {
-    "message": "Şimdi güncelleştir"
+    "message": "Şimdi güncelle"
   },
   "whitelisted_domains": {
     "message": "Güvenilir adresler"

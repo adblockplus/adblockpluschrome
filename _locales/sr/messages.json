@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Након што затворите овај искачући прозор, притисните левим или десним кликом на елемент на овој страници."
   },
-  "description": {
-    "message": "Бесплатна алатка за блокирање огласа у Chrome-у; блокира наметљиве огласе на YouTube-у, Facebook-у, рекламне натписе и још много тога."
+  "description_chrome": {
+    "message": "Бесплатан додатак за Chrome који блокира досадне видео-огласе на YouTube-у, огласе на Facebook-у, рекламне натписе и још много тога."
+  },
+  "description_opera": {
+    "message": "Бесплатан додатак за прегледач Opera који блокира досадне видео-огласе на YouTube-у, огласе на Facebook-у, рекламне натписе и још много тога."
+  },
+  "description_safari": {
+    "message": "Бесплатан додатак за Safari који блокира досадне видео-огласе на YouTube-у, огласе на Facebook-у, рекламне натписе и још много тога."
   },
   "disable_inline": {
     "message": "Сакриј уметнуте текстуалне огласе"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Онемогући</strong> на овом сајту"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus не важи за домене у доњем списку. Домен можете да додате помоћу иконе Adblock Plus у адресној траци или уписивањем домена (не URL адресе) у поље испод и кликом на дугме „Додај домен“."
   },
   "easy_create_filter": {
-    "message": "Брзо креирај филтер"
+    "message": "Блокирај елемент"
   },
   "edit_filters_raw": {
     "message": "Уреди филтере у режиму текста"
   },
   "enable_only_the": {
-    "message": "Омогућите спискове филтера који су вам заиста потребни. Превише спискова може да утиче на перформансе Chrome-а."
+    "message": "Омогућите само оне спискове филтера који су вам потребни. Превише њих може да успори прегледач."
   },
   "enabled_for_site": {
-    "message": "Омогући на овом сајту"
+    "message": "<strong>Омогући</strong> на овом сајту"
   },
   "filter_lists": {
     "message": "Спискови филтера"
@@ -79,7 +88,10 @@
     }
   },
   "options": {
-    "message": "Опције додатка Adblock Plus"
+    "message": "Опције Adblock Plus-а"
+  },
+  "options_short": {
+    "message": "Опције"
   },
   "out_of_date_lists": {
     "message": "Застарели спискови се редовно ажурирају."
@@ -130,7 +142,7 @@
     "message": "Дели на Twitter-у"
   },
   "stats_share_message": {
-    "message": "Блокирао сам $number$ огласа и пратилаца захваљујући додатку Adblock Plus.",
+    "message": "Блокирао сам $number$ огласа и пратилаца захваљујући Adblock Plus-у.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -138,13 +150,16 @@
     }
   },
   "stats_share_title": {
-    "message": "Дељење"
+    "message": "Делите ове бројеве"
+  },
+  "stats_show_iconnumber": {
+    "message": "Прикажи број на икони"
   },
   "stats_title": {
-    "message": "Блокирани огласи:"
+    "message": "Блокирани огласи"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Изаберите пријаву на филтер са списка:"
+    "message": "Молим изаберите предплату са листе филтера:"
   },
   "update_now": {
     "message": "Ажурирај сада"

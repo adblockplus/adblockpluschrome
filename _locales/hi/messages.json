@@ -1,0 +1,29 @@
+{
+  "add": {
+    "message": "जोड़ें"
+  },
+  "add_domain_button": {
+    "message": "डोमेन जोड़ें"
+  },
+  "add_filter_button": {
+    "message": "फ़िल्टर जोड़ें"
+  },
+  "add_filters_msg": {
+    "message": "filter(s) जोडिए"
+  },
+  "add_your_own_filters": {
+    "message": "अपने ही फ़िल्टर्स जोड़ें"
+  },
+  "apply_changes": {
+    "message": "परिवर्तन लागू करें"
+  },
+  "block_element": {
+    "message": "खंड अंग"
+  },
+  "cancel": {
+    "message": "रद्द करें"
+  },
+  "clickhide_instructions": {
+    "message": "इस पॉपअप बंद करने, के बाद क्लिक करें (या राइट-क्लिक करें) यें पृष्ठके पर एक अंग  पर।"
+  }
+}

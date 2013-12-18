@@ -18,7 +18,7 @@
     "message": "Aplica els canvis"
   },
   "block_element": {
-    "message": "Bloca l'element"
+    "message": "Bloqueja l'element"
   },
   "cancel": {
     "message": "Cancel·la"
@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Després de tancar aquesta finestra, cliqueu sobre un element de la pàgina."
   },
-  "description": {
-    "message": "L'eina gratuïta de bloqueig d'anuncis a Chrome: Bloqueja els anuncis dins dels vídeos de YouTube, els anuncis de Facebook, els bàners i molts més."
+  "description_chrome": {
+    "message": "L'eina gratuita antianuncis del Chrome: Bloqueja anuncis molestos de vídeo al YouTube, anuncis del Facebook, bàners i molt més."
+  },
+  "description_opera": {
+    "message": "L'eina gratuita antianuncis per a l'Opera: Bloqueja anuncis molestos de vídeo al YouTube, anuncis del Facebook, bàners i molt més."
+  },
+  "description_safari": {
+    "message": "L'eina gratuita antianuncis per al Safari: Bloqueja anuncis molestos de vídeo al YouTube, anuncis del Facebook, bàners i molt més."
   },
   "disable_inline": {
     "message": "Desactiva els anuncis de text en línia"
+  },
+  "disabled_for_site": {
+    "message": "S'ha <strong>deshabilitat</strong> per a aquest lloc"
   },
   "disabled_for_these_domains": {
     "message": "L'AdBlock Plus està desactivat als dominis de la llista de sota. Podeu afegir un domini clicant la icona d'AdBlock Plus de la barra d'adreces o bé escrivint el domini (no la URL) al quadre de text i clicant \"Afegeix un domini\"."
   },
   "easy_create_filter": {
-    "message": "Crea un filtre fàcilment"
+    "message": "Bloqueja l'element"
   },
   "edit_filters_raw": {
     "message": "Edita els filtres com a text simple"
   },
   "enable_only_the": {
-    "message": "Activeu només les llistes de filtres que necessiteu. Masses poden alentir el Chromium."
+    "message": "Habiliteu només les llistes de filtres que necessiteu. Massa poden alentir el navegador."
   },
   "enabled_for_site": {
-    "message": "Activat per a aquest lloc"
+    "message": "S'ha <strong>habilitat</strong> en aquest lloc"
   },
   "filter_lists": {
     "message": "Llistes de filtres"
@@ -81,6 +90,9 @@
   "options": {
     "message": "Opcions de l'Adblock Plus"
   },
+  "options_short": {
+    "message": "Opcions"
+  },
   "out_of_date_lists": {
     "message": "Les llistes obsoletes són actualitzades periòdicament."
   },
@@ -88,7 +100,7 @@
     "message": "Suprimeix els seleccionats"
   },
   "show_block_element_menu": {
-    "message": "Mostra la opció \"Bloca l'element\" com a ítem d'un menú contextual"
+    "message": "Mostra la opció \"Bloqueja l'element\" com a ítem del menú contextual"
   },
   "show_icon": {
     "message": "Mostra la icona a la barra d'adreces"
@@ -121,13 +133,13 @@
     "message": "Baixa l'Adblock Plus"
   },
   "stats_share_label_fb": {
-    "message": "Compartir a Facebook"
+    "message": "Comparteix-ho a Facebook"
   },
   "stats_share_label_gplus": {
-    "message": "Compartir a Google+"
+    "message": "Comparteix-ho a Google+"
   },
   "stats_share_label_twitter": {
-    "message": "Compartir a Twitter"
+    "message": "Comparteix-ho a Twitter"
   },
   "stats_share_message": {
     "message": "He blocat $number$ anuncis i rastrejadors gràcies a Adblock Plus.",
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Comparteix-ho"
+    "message": "Comparteix aquests nombres"
+  },
+  "stats_show_iconnumber": {
+    "message": "Mostra el nombre a la icona"
   },
   "stats_title": {
-    "message": "Anuncis blocats:"
+    "message": "Anuncis bloquejats"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Si us plau tria una subscripció de filtre a la llista:"

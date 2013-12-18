@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Após o encerramento desta janela, clique (ou dê um clique com o botão direito) em um elemento da página."
   },
-  "description": {
-    "message": "O bloqueador de propagandas grátis para o Chrome: Bloqueie anúncios irritantes no youtube, no facebook, e muito mais."
+  "description_chrome": {
+    "message": "O bloqueador de propagandas grátis para o Chrome: Bloqueie anúncios irritantes no YouTube, Facebook, banners e muito mais."
+  },
+  "description_opera": {
+    "message": "A ferramenta gratuita de bloqueio de anúncios para o Opera: bloqueia anúncios no YouTube, Facebook, banners e muito mais."
+  },
+  "description_safari": {
+    "message": "A ferramenta gratuita de bloqueio de anúncios para o Safari: bloqueia anúncios no YouTube, Facebook, banners e muito mais."
   },
   "disable_inline": {
     "message": "Desativar propagandas de texto em linha"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Desativado</strong> neste site"
   },
   "disabled_for_these_domains": {
     "message": "O Adblock Plus está desabilitado para os domínios abaixo. Você pode adicionar um domínio, tanto pelo ícone do Adblock Plus na barra de endereços, quanto digitando o domínio (não a URL) dentro da caixa e clicando no botão \"Adicionar domínio\"."
   },
   "easy_create_filter": {
-    "message": "Crie fácil um filtro"
+    "message": "Bloquear elemento"
   },
   "edit_filters_raw": {
     "message": "Editar filtros manualmente"
   },
   "enable_only_the": {
-    "message": "Habilitar somente as listas de filtros que você precisa. Muitos filtros simultâneos podem causar o travamento do seu Chrome."
+    "message": "Ative apenas os filtros que precisa. Muitos filtros podem reduzir o desempenho do navegador."
   },
   "enabled_for_site": {
-    "message": "Habilitado para esse site"
+    "message": "<strong>Ativado</strong> neste site"
   },
   "filter_lists": {
     "message": "Lista de Filtros"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Opções do Adblock Plus"
+  },
+  "options_short": {
+    "message": "Opções"
   },
   "out_of_date_lists": {
     "message": "Listas desatualizadas são atualizadas periodicamente."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Compartilhar isso"
+    "message": "Compartilhar estes números"
+  },
+  "stats_show_iconnumber": {
+    "message": "Mostrar números no ícone"
   },
   "stats_title": {
-    "message": "Anúncios bloqueados:"
+    "message": "Anúncios bloqueados"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor, escolha uma inscrição de filtros da lista:"

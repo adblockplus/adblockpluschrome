@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "このポップアップが閉じた後にページ上の要素をクリック(または右クリック)してください。"
   },
-  "description": {
+  "description_chrome": {
     "message": "無料の Chrome 用広告ブロックツール: 迷惑な YouTube のビデオ広告、Facebook 広告、バナー広告等をブロックします"
+  },
+  "description_opera": {
+    "message": "無料の Opera 用広告ブロックツール: 迷惑な YouTube のビデオ広告、Facebook 広告、バナー広告等をブロックします"
+  },
+  "description_safari": {
+    "message": "無料の Safari 用広告ブロックツール: 迷惑な YouTube のビデオ広告、Facebook 広告、バナー広告等をブロックします"
   },
   "disable_inline": {
     "message": "インラインテキスト広告を無効にする"
+  },
+  "disabled_for_site": {
+    "message": "このサイトでは<strong>無効</strong>"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus を以下のドメインで無効にします。アドレスバーの Adblock Plus アイコン、または下の欄にドメイン（URL ではない）を入力し「ドメインを追加」ボタンで追加できます。"
   },
   "easy_create_filter": {
-    "message": "簡単にフィルタを作成する"
+    "message": "要素をブロック"
   },
   "edit_filters_raw": {
     "message": "フィルタを編集する"
   },
   "enable_only_the": {
-    "message": "必要とするフィルタリストのみを有効にしてください。フィルタリストが多すぎると Chrome の動作が遅くなることがあります。"
+    "message": "本当に必要なフィルタのみを有効にしてください。多過ぎるフィルタはブラウザを重くします。"
   },
   "enabled_for_site": {
-    "message": "このサイトで有効"
+    "message": "このサイトでは<strong>有効</strong>"
   },
   "filter_lists": {
     "message": "フィルタリスト"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus オプション"
+  },
+  "options_short": {
+    "message": "オプション"
   },
   "out_of_date_lists": {
     "message": "リストは定期的に更新されます。"
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "共有する"
+    "message": "これらの数字を共有"
+  },
+  "stats_show_iconnumber": {
+    "message": "アイコン上に数字を表示"
   },
   "stats_title": {
-    "message": "ブロックされた広告数:"
+    "message": "ブロックした広告"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "購読したいフィルタをリストから選択してください:"

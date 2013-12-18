@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Ao fechar esta janela, clique (ou clique com o botão direito) num elemento da página."
   },
-  "description": {
-    "message": "A ferramenta gratuita de bloqueio de anúncios para o Chrome: bloqueia anúncios irritantes no YouTube, anúncios do Facebook, banners e muito mais."
+  "description_chrome": {
+    "message": "A ferramenta gratuita de bloqueio de anúncios para o Chrome: bloqueia anúncios irritantes no YouTube, anúncios do Facebook, banners…"
+  },
+  "description_opera": {
+    "message": "A ferramenta gratuita de bloqueio de anúncios para o Opera: bloqueia anúncios no YouTube, Facebook, banners e muito mais."
+  },
+  "description_safari": {
+    "message": "A ferramenta gratuita de bloqueio de anúncios para o Safari: bloqueia anúncios no YouTube, Facebook, banners e muito mais."
   },
   "disable_inline": {
     "message": "Desativar anúncios de texto embutido"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Desativar</strong> neste sítio web"
   },
   "disabled_for_these_domains": {
     "message": "O Adblock Plus está inativo nos domínios listados abaixo. Pode adicionar um domínio através do ícone do Adblock Plus na barra de endereço ou escrevendo o domínio (não o URL) na caixa e clicando no botão \"Adicionar domínio\"."
   },
   "easy_create_filter": {
-    "message": "Criar rapidamente um filtro"
+    "message": "Bloquear elemento"
   },
   "edit_filters_raw": {
     "message": "Editar filtros como texto"
   },
   "enable_only_the": {
-    "message": "Ative apenas as listas de filtros que necessita. Demasiadas listas podem tornar o Chrome lento."
+    "message": "Ative apenas os filtros que precisa. Demasiados filtros podem reduzir o desempenho do navegador."
   },
   "enabled_for_site": {
-    "message": "Ativado para este site"
+    "message": "<strong>Ativar</strong> neste sítio web"
   },
   "filter_lists": {
     "message": "Lista de filtros"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Opções do Adblock Plus"
+  },
+  "options_short": {
+    "message": "Opções"
   },
   "out_of_date_lists": {
     "message": "Listas antigas são atualizadas periodicamente."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Partilhar isto"
+    "message": "Partilhar estes números"
+  },
+  "stats_show_iconnumber": {
+    "message": "Mostrar números no ícone"
   },
   "stats_title": {
-    "message": "Anúncios bloqueados:"
+    "message": "Anúncios bloqueados"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor escolha uma subscrição de filtros da lista:"

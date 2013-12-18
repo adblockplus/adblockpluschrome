@@ -6,10 +6,10 @@
     "message": "أضف نطاق"
   },
   "add_filter_button": {
-    "message": "أضف مرشّح"
+    "message": "أضف فلتر"
   },
   "add_filters_msg": {
-    "message": "إضافة الفلاتر؟"
+    "message": "إضافة فلتر\\فلاتر؟"
   },
   "add_your_own_filters": {
     "message": "أضف الفلاتر الخاصة بك"
@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "بعد إغلاق هذه النافذة، اضغط (أو اضغط بالزر الأيمن) على أحد العناصر في الصفحة."
   },
-  "description": {
-    "message": "أداة آدبلوك المجانية لكروم: تحذف إعلانات مقاطع الفيديو المزعجة في اليوتيوب وإعلانات الفيسبوك والشرائط الإعلانية وغيرها."
+  "description_chrome": {
+    "message": "تطبيق AdBlock المجاني لـ Chrome : يحظر مقاطع الفيديو الإعلانية المزعجة في YouTube, إعلانات Facebook, والشرائط الإعلانية وغيرها."
+  },
+  "description_opera": {
+    "message": "تطبيق AdBlock المجاني لـ Opera : يحظر مقاطع الفيديو الإعلانية المزعجة في YouTube, إعلانات Facebook, والشرائط الإعلانية وغيرها."
+  },
+  "description_safari": {
+    "message": "تطبيق AdBlock المجاني لـ Safari : يحظر مقاطع الفيديو الإعلانية المزعجة في YouTube, إعلانات Facebook, والشرائط الإعلانية وغيرها."
   },
   "disable_inline": {
     "message": "تعطيل الإعلانات المضمنة في النص."
+  },
+  "disabled_for_site": {
+    "message": "<strong>معطل</strong> في هذا الموقع"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال الضغط على أيقونة Adblock Plus في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"Add domain\"."
   },
   "easy_create_filter": {
-    "message": "إنشاء فلتر بسهولة"
+    "message": "حظر العنصر"
   },
   "edit_filters_raw": {
     "message": "تعديل الفلاتر في نص عادي"
   },
   "enable_only_the": {
-    "message": "فعل قوائم الفلاتر التي تحتاجها فقط. تفعيل الكثير منها من الممكن أن يجعل كروم لا يستجيب بشكل جيد."
+    "message": "تفعيل قائمة الترشيح التي تريد فقط. الكثير منها بإمكانه جعل متصفحك لا يستجيب."
   },
   "enabled_for_site": {
-    "message": "فعل لهذا الموقع"
+    "message": "<strong>تفعيل</strong> في هذا الموقع"
   },
   "filter_lists": {
     "message": "قائمة الفلاتر"
@@ -57,10 +66,10 @@
     "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a>الطلب هنا</a>."
   },
   "general": {
-    "message": "عـام"
+    "message": "عام"
   },
   "last_updated_at": {
-    "message": "أخر تحديث في $time$ on $date$",
+    "message": "أخر تحديث في $time$ عند $date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -81,17 +90,73 @@
   "options": {
     "message": "خيارات آدبلوك بلس"
   },
+  "options_short": {
+    "message": "الخيارات"
+  },
   "out_of_date_lists": {
     "message": "القوائم القديمة تحدث دورياً."
   },
   "remove_button": {
-    "message": "حذف الفلتر المحدد"
+    "message": "حذف المحدد"
   },
   "show_block_element_menu": {
     "message": "أظهر \"حذف العنصر\" في القائمة التي تظهر عند النقر بزر الفأرة الأيمن"
   },
   "show_icon": {
     "message": "أظهر الأيقونة في شريط العنوان"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> على هذه الصفحة",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number دولار</strong> في إجمالي",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "على مدى $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "تحميل Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "نشر على الفيس بوك"
+  },
+  "stats_share_label_gplus": {
+    "message": "نشر على جوجل +"
+  },
+  "stats_share_label_twitter": {
+    "message": "مشاركة على تويتر"
+  },
+  "stats_share_message": {
+    "message": "أنا منعت الإعلانات $ $number وتتبع بفضل زائد.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "مشاركة هذه الأرقام"
+  },
+  "stats_show_iconnumber": {
+    "message": "عرض الرقم في الصورة المرمزة"
+  },
+  "stats_title": {
+    "message": "حاظر الإعلانات"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "الرجاء اختيار اشتراك لفلتر من القائمة:"

@@ -26,26 +26,14 @@
   "clickhide_instructions": {
     "message": "Miután bezártad ezt a buborékot, kattints egy elemre az oldalon.."
   },
-  "description": {
-    "message": "Ingyenes reklámszűrő kiegészítő Chrome-hoz: blokkolja az idegesítő videóreklámokat a YouTube-n, a Facebook reklámjait, bannereket és még többet."
-  },
   "disable_inline": {
     "message": "Szöveges reklámok tiltása"
   },
   "disabled_for_these_domains": {
     "message": "Az Adblock Plus le van tiltva az alább felsorolt oldalakon. Egy domaint megadhatsz az Adblock Plus ikonra kattintva a címsorban, vagy beírhatod a domaint (nem az URL-t) a dobozba és kattints a \"Domain hozzáadása\" gombra."
   },
-  "easy_create_filter": {
-    "message": "Szűrő létrehozása"
-  },
   "edit_filters_raw": {
     "message": "Szűrők szerkesztése nyers szövegként"
-  },
-  "enable_only_the": {
-    "message": "Csak azokat a szűrőket engedélyezd, amelyekre szükséged van. A túl sok szűrő miatt a Chrome lefagyhat."
-  },
-  "enabled_for_site": {
-    "message": "Ezen az oldalon engedélyezve"
   },
   "filter_lists": {
     "message": "Szűrő lista"
@@ -136,12 +124,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Megosztás"
-  },
-  "stats_title": {
-    "message": "Blokkolt hirdetések:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Kérem válassza ki a szűrőt a listából:"

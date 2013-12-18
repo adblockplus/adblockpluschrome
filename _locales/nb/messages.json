@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Klikk (eller høyreklikk) på et element på siden etter at du har lukket dette vinduet."
   },
-  "description": {
-    "message": "Det gratis reklameblokkeringsverktøet for Chrome: Blokkér irriterende videoreklamer på YouTube, Facebook-reklamer, bannere og mye mer."
+  "description_chrome": {
+    "message": "Det gratis reklameblokkeringsverktøyet for Chrome: Blokkerer irriterende videoannonser på YouTube, Facebook-reklamer, bannere og my…"
+  },
+  "description_opera": {
+    "message": "Det gratis reklameblokkeringsverktøyet for Opera: Blokkerer irriterende videoannonser på YouTube, Facebook-reklamer, bannere og mye mer."
+  },
+  "description_safari": {
+    "message": "Det gratis reklameblokkeringsverktøyet for Safari: Blokkerer irriterende videoannonser på YouTube, Facebook-reklamer, bannere og mye mer."
   },
   "disable_inline": {
     "message": "Deaktiver annonser i teksten på nettsider"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Deaktivert</strong> på dette nettstedet"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus er deaktivert for domenene listet nedenfor. Du kan legge til et domene enten ved å trykke på Adblock Plus-ikonet i adressefeltet, eller ved å skrive inn domenet (ikke via URL) i boksen og klikke på \"Legg til domene\"-knappen."
   },
   "easy_create_filter": {
-    "message": "Hurtigopprett filter"
+    "message": "Blokkér element"
   },
   "edit_filters_raw": {
     "message": "Rediger filtre i råtekstform"
   },
   "enable_only_the": {
-    "message": "Aktiver kun de filterlistene du trenger. For mange filterlister kan få Chrome til å kjøre tregt."
+    "message": "Aktiver kun de filterlistene du har behov for. For mange filterlister kan gjøre nettleseren treg."
   },
   "enabled_for_site": {
-    "message": "Aktivert for denne siden"
+    "message": "<strong>Aktivert</strong> på dette nettstedet"
   },
   "filter_lists": {
     "message": "Filterlister"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Alternativer for Adblock Plus"
+  },
+  "options_short": {
+    "message": "Alternativer"
   },
   "out_of_date_lists": {
     "message": "Utdaterte lister blir oppdatert periodisk."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Del dette"
+    "message": "Del disse tallene"
+  },
+  "stats_show_iconnumber": {
+    "message": "Vis tall i ikonet"
   },
   "stats_title": {
-    "message": "Blokkerte annonser:"
+    "message": "Blokkerte annonser"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vennligst velg et filterabonnement fra listen:"

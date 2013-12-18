@@ -26,26 +26,14 @@
   "clickhide_instructions": {
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
   },
-  "description": {
-    "message": "Ilmainen Adblock työkalu Chromelle: Estää ärsyttävät Youtuben videomainokset, Facebookin mainokset, bannerit ja paljon muuta."
-  },
   "disable_inline": {
     "message": "Estä tekstimainokset"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus ei estä mainoksia sivuilla jotka ovat alla listattuna. Voit lisätä sivun joko Adblock Plus kuvakkeesta osoiteriviltä tai kirjoittamalla sivun (ei osoitetta) laatikkoon ja klikkaamalla \"lisää sivu\" nappia."
   },
-  "easy_create_filter": {
-    "message": "Helppo lisää suodatin"
-  },
   "edit_filters_raw": {
     "message": "Editoi suodattimia tekstimuodossa"
-  },
-  "enable_only_the": {
-    "message": "Valitse ainoastaan ne suodatinlistat joita tarvitset. Liian moni lista voi tehdä Chromesta epävakaan."
-  },
-  "enabled_for_site": {
-    "message": "Käytössä tällä sivulla"
   },
   "filter_lists": {
     "message": "Suodatinlistat"
@@ -136,12 +124,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Jaa tämä"
-  },
-  "stats_title": {
-    "message": "Estetyt mainokset:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Valitse suodatintilaus listasta:"

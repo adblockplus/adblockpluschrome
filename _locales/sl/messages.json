@@ -23,9 +23,6 @@
   "cancel": {
     "message": "Prekliči"
   },
-  "easy_create_filter": {
-    "message": "Enostavno ustvarite filter"
-  },
   "edit_filters_raw": {
     "message": "Uredi filtre kot golo besedilo"
   },
