@@ -158,7 +158,7 @@ function clickHide_activate() {
   document.addEventListener("mouseover", clickHide_mouseOver, false);
   document.addEventListener("mouseout", clickHide_mouseOut, false);
   document.addEventListener("click", clickHide_mouseClick, false);
-  document.addEventListener("keyup", clickHide_keyUp, false);
+  document.addEventListener("keydown", clickHide_keyDown, false);
 }
 
 // Called when user has clicked on something and we are waiting for confirmation
@@ -168,7 +168,7 @@ function clickHide_rulesPending() {
   document.removeEventListener("mouseover", clickHide_mouseOver, false);
   document.removeEventListener("mouseout", clickHide_mouseOut, false);
   document.removeEventListener("click", clickHide_mouseClick, false);
-  document.removeEventListener("keyup", clickHide_keyUp, false);
+  document.removeEventListener("keydown", clickHide_keyDown, false);
 }
 
 // Turn off click-to-hide
@@ -197,7 +197,7 @@ function clickHide_deactivate()
   document.removeEventListener("mouseover", clickHide_mouseOver, false);
   document.removeEventListener("mouseout", clickHide_mouseOut, false);
   document.removeEventListener("click", clickHide_mouseClick, false);
-  document.removeEventListener("keyup", clickHide_keyUp, false);
+  document.removeEventListener("keydown", clickHide_keyDown, false);
 
   // Remove overlays
   // For some reason iterating over the array returend by getElementsByClassName() doesn't work
@@ -248,11 +248,17 @@ function clickHide_mouseOut(e)
   currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, false);
 }
 
-// Selects the currently hovered-over filter
-function clickHide_keyUp(e) {
-  // Ctrl+Shift+E
-  if(e.ctrlKey && e.shiftKey && e.keyCode == 69)
-    clickHide_mouseClick(e);
+// Selects the currently hovered-over filter or cancels selection
+function clickHide_keyDown(e)
+{
+  if (!e.ctrlKey && !e.altKey && !e.shiftKey && e.keyCode == 13 /*DOM_VK_RETURN*/)
+     clickHide_mouseClick(e);
+  else if (!e.ctrlKey && !e.altKey && !e.shiftKey && e.keyCode == 27 /*DOM_VK_ESCAPE*/)
+  {
+    clickHide_deactivate();
+    e.preventDefault();
+    e.stopPropagation();
+  }
 }
 
 // When the user clicks, the currentElement is the one we want.
