@@ -26,26 +26,14 @@
   "clickhide_instructions": {
     "message": "இந்த விழிதிரை மூடிய பின், பக்கத்தில் உள்ள உறுப்பின் மேல் சொடுக்கவும். (அல்லது வலது விசையை சொடுக்கவும்.)"
   },
-  "description": {
-    "message": "குரோமிட்ற்கு ஏற்ற இந்த இலவச விளம்பரம் தடுக்கும் கருவி எரிச்சலூட்டும் யூடியூப், ஃபேஸ்புக் விளம்பரங்கள், பதாகைகள், மற்றும் வீடியோ விளம்பரங்களை தடுக்கும்."
-  },
   "disable_inline": {
     "message": "வரி விளம்பரங்களை முடக்கு"
   },
   "disabled_for_these_domains": {
     "message": "கீழே பட்டியலிடப்பட்டுள்ள களங்களுக்கு Adblock Plus முடக்கப்பட்டுள்ளது. களம் ஒன்றை சேர்க்க: முகவரிப் பட்டியில் உள்ள Adblock Plus படவுரு வழியாகவோ அல்லது பெட்டியில் களத்தை (URL அல்ல) தட்டச்சு செய்து   \"களத்தை சேர்\" பொத்தானை சொடுக்குவது மூலமாகவோ நீங்கள் சேர்க்கலாம்."
   },
-  "easy_create_filter": {
-    "message": "எளிதான வடிகட்டியை உருவாக்கு"
-  },
   "edit_filters_raw": {
     "message": "வடிகட்டிகளை வெறும் உரையாக திருத்து"
-  },
-  "enable_only_the": {
-    "message": "தேவையான வடிகட்டி பட்டியல்களை மட்டும் செயல்படுத்தவும். பல பட்டியல்களுக்கு Chrome எளிதாக பதிலளிக்காதது."
-  },
-  "enabled_for_site": {
-    "message": "இந்த தளத்திற்கு செயல்படுத்தப்பட்டுள்ளது"
   },
   "filter_lists": {
     "message": "வடிகட்டி பட்டியல்கள்"
@@ -92,6 +80,50 @@
   },
   "show_icon": {
     "message": "முகவரிப் பட்டியில் படவுருவை காண்பி"
+  },
+  "stats_label_page": {
+    "message": "இந்தப் பக்கத்தில் <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "மொத்தம் <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$க்கு மேல்",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Adblock Plusஐ பதிவிறக்கவும்"
+  },
+  "stats_share_label_fb": {
+    "message": "பேஸ்புக்கில் பகிர்"
+  },
+  "stats_share_label_gplus": {
+    "message": "Google + இல் பகிர்"
+  },
+  "stats_share_label_twitter": {
+    "message": "ட்விட்டரில் பகிர்"
+  },
+  "stats_share_message": {
+    "message": "நான் $number$ விளம்பரங்கள் மற்றும் trackerகளை தடுதுள்ளேன். நன்றி Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "பட்டியலில் இருந்து ஒரு வடிகட்டி சந்தாவை தேர்ந்தெடுக்கவும்:"

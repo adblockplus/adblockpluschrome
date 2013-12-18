@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "După închiderea acestui pop-up, clic (sau clic-dreapta) pe un element de pe pagină."
   },
-  "description": {
-    "message": "Instrumentul gratuit adblock pentru Chrome: blocheaza agasantele reclame video pe YouTube, reclamele Facebook, banere si multe altele."
+  "description_chrome": {
+    "message": "Adblock Plus pentru Chrome: instrument gratuit care blocheaza agasantele reclame video pe YouTube, reclamele Facebook, banere si mu…"
+  },
+  "description_opera": {
+    "message": "Adblock Plus pentru Opera: instrument gratuit care blocheaza agasantele reclame video pe YouTube, reclamele Facebook, banere si multe altele."
+  },
+  "description_safari": {
+    "message": "Adblock Plus pentru Safari: instrument gratuit care blocheaza agasantele reclame video pe YouTube, reclamele Facebook, banere si multe altele."
   },
   "disable_inline": {
     "message": "Dezactivează inserturile publicitare de tip text"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Dezactivat</strong> pe acest site"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus este dezactivat pentru domeniile listate mai jos. Poți adăuga un domeniu folosind iconița Adblock Plus in bara de adrese sau scriind domeniul (nu URL-ul) in spațiul de mai jos și făcând clic pe butonul \"Adaugă domeniu\"."
   },
   "easy_create_filter": {
-    "message": "Generare rapidă filtru"
+    "message": "Blochează elementul"
   },
   "edit_filters_raw": {
     "message": "Editor filtre în mod text"
   },
   "enable_only_the": {
-    "message": "Activaţi doar listele de filtre necesare. Prea multe încetinesc Chrome."
+    "message": "Folosiţi doar listele de filtre de care aveţi nevoie. Prea multe vor afecta browser-ul."
   },
   "enabled_for_site": {
-    "message": "Activat pentru acest site"
+    "message": "<strong>Activat</strong> pe acest site"
   },
   "filter_lists": {
     "message": "Liste de filtre"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Opţiuni Adblock Plus"
+  },
+  "options_short": {
+    "message": "Opţiuni"
   },
   "out_of_date_lists": {
     "message": "Listele vechi sunt actualizate periodic."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Opţiuni de share"
+    "message": "Arată şi altora aceste numere"
+  },
+  "stats_show_iconnumber": {
+    "message": "Arată numerele în pictograma"
   },
   "stats_title": {
-    "message": "Reclame blocate:"
+    "message": "Reclame blocate"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Alegeți un set de filtre din listă:"

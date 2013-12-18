@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Після закриття цього спливаючого вікна клацніть на елементі лівою або правою кнопкою миші."
   },
-  "description": {
-    "message": "Безкоштовний блокувач реклами для Chrome: Блокує настирливу відео-рекламу на YouTube, рекламу на Facebook, банери та багато іншого."
+  "description_chrome": {
+    "message": "Безкоштовний інструмент Adblock Plus для Chrome: Блокує настирливу  відео-рекламу на YouTube, Facebook, а також банери, фрейми та б…"
+  },
+  "description_opera": {
+    "message": "Безкоштовний інструмент Adblock Plus для Opera: Блокує настирливу  відео-рекламу на YouTube, Facebook, а також банери, фрейми та багато іншого."
+  },
+  "description_safari": {
+    "message": "Безкоштовний інструмент Adblock Plus для Safari: Блокує настирливу  відео-рекламу на YouTube, Facebook, а також банери, фрейми та багато іншого."
   },
   "disable_inline": {
     "message": "Приховувати елементи текстової реклами на сторінці"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Вимкнено</strong> на цьому сайті"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus вимкнений для перерахованих нижче доменів. Додаткові домени можна додати, клацнувши піктограму Adblock Plus на адресному рядку або надрукувавши назву домену (не посилання) в даній області і натиснувши на кнопку \"Додати домен\"."
   },
   "easy_create_filter": {
-    "message": "Швидкий фільтр"
+    "message": "Заблокувати елемент"
   },
   "edit_filters_raw": {
     "message": "Редагувати фільтри у текстовому режимі"
   },
   "enable_only_the": {
-    "message": "Включіть тільки списки фільтрів, які вам дійсно потрібні. Велика кількість фільтрів може позначитися на швидкодії Chrome."
+    "message": "Вмикайте лише потрібні вам списки фільтрів. Занадто велике число може призвести до некоректної роботи веб-переглядача."
   },
   "enabled_for_site": {
-    "message": "Увімкнено на цьому сайті"
+    "message": "<strong>Увімкнено</strong> на цьому сайті"
   },
   "filter_lists": {
     "message": "Список фільтрів"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Налаштування Adblock Plus"
+  },
+  "options_short": {
+    "message": "Параметри"
   },
   "out_of_date_lists": {
     "message": "Застарілі списки періодично оновлюються."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Розповісти про це"
+    "message": "Поділитися цими даними"
+  },
+  "stats_show_iconnumber": {
+    "message": "Показати число у піктограмі"
   },
   "stats_title": {
-    "message": "Заблоковані оголошення:"
+    "message": "Реклама заблокована"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Будь ласка виберіть фільтрову підписку з переліку:"

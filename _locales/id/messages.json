@@ -18,16 +18,13 @@
     "message": "Terapkan perubahan"
   },
   "block_element": {
-    "message": "Blokir Blemen"
+    "message": "Blokir Elemen"
   },
   "cancel": {
     "message": "Batal"
   },
   "clickhide_instructions": {
-    "message": "Setelah keluar dari popup , klik (atau klik kanan) pada elemen di halaman web."
-  },
-  "description": {
-    "message": "AdBlock gratis untuk Chrome : Blokir iklan yang mengganggu di video YouTube, Iklan Facebook, Banner dan lainnya."
+    "message": "Setelah menutup sembulan ini , klik (atau klik kanan) elemen pada halaman web."
   },
   "disable_inline": {
     "message": "Nonaktifkan iklan teks"
@@ -35,17 +32,8 @@
   "disabled_for_these_domains": {
     "message": "Adblock menonaktifkan daftar domain di bawah. Anda dapat menambah sebuah domain melalui ikon Adblock Plus pada alamat bar atau dengan mengetikan domain (tidak sebuah URL) di sebuah boks dan klik tombol \"Tambah Domain\""
   },
-  "easy_create_filter": {
-    "message": "Buat penyaring dengan mudah"
-  },
   "edit_filters_raw": {
     "message": "Ubah penyaring sebagai teks mentah"
-  },
-  "enable_only_the": {
-    "message": "Aktifkan hanya penyaring yang Anda butuhkan saja. Terlalu banyak penyaring membuat Chrome menjadi lambat."
-  },
-  "enabled_for_site": {
-    "message": "Izinkan untuk situs ini"
   },
   "filter_lists": {
     "message": "Daftar penyaring"
@@ -136,12 +124,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Bagikan ini"
-  },
-  "stats_title": {
-    "message": "Iklan terblokir:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Silakan pilih langganan penyaring dari daftar:"

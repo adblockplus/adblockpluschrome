@@ -1,25 +1,23 @@
-Thưởng thức lướt web không có quảng cáo gây khó chịu làm lộn xộn màn hình của bạn! 
+Thoải mái lướt web mà không bị các quảng cáo khó chịu xuất hiện lung tung trên màn hình của bạn.
 
-Adblock Plus dành cho Google Chrome hỗ trợ chặn các thành phần sau: 
-
+Adblock Plus cho Google Chrome sẽ chặn:
 · Biểu ngữ 
-· Quảng cáo video trên YouTube 
-· Facebook quảng cáo 
-· Pop-up 
-Tất cả các quảng cáo gây khó chịu khác 
+· Quảng cáo video của YouTube 
+· Quảng cáo của Facebook
+· Pop-up
+ 
+Đối với hầu hết các quảng cáo gây khó chịu, Adblock Plus là tiện ích mở rộng phổ biến nhất cho trình duyệt và được hàng triệu người dùng trên toàn thế giới sử dụng. Đây là một dự án mã nguồn mở theo hướng cộng đồng, với hàng trăm tình nguyện viên đang góp phần vào sự thành công của Adblock Plus, đảm bảo rằng tất cả các quảng cáo phiền nhiễu sẽ bị chặn tự động. 
 
-Adblock Plus là phần mở rộng trình duyệt phổ biến nhất thế giới, và được sử dụng bởi hàng triệu người dùng trên toàn thế giới. Nó là một dự án mã nguồn mở theo hướng cộng đồng, và hàng trăm tình nguyện viên đang góp phần vào sự thành công của Adblock Plus để đảm bảo rằng tất cả các quảng cáo gây phiền nhiễu sẽ tự động bị chặn. 
+Xin lưu ý: Khi cài đặt Adblock Plus cho Chrome, trình duyệt của bạn sẽ hiển thị một cảnh báo rằng Adblock Plus có quyền truy cập vào lịch sử duyệt web và dữ liệu của bạn. Đây là một thông điệp tiêu chuẩn, chúng tôi KHÔNG bao giờ thu thập bất kỳ thông tin nào! 
 
-Xin lưu ý: Khi cài đặt Adblock Plus cho Chrome, trình duyệt của bạn hiển thị một cảnh báo rằng Adblock Plus cho Chrome có quyền truy cập vào lịch sử duyệt web và dữ liệu của bạn. Đây là một thông điệp tiêu chuẩn, chúng tôi KHÔNG bao giờ thu thập bất kỳ thông tin nào! 
-
-Gần đây, cộng đồng Thêm Adblock giới thiệu các sáng kiến ​​quảng cáo chấp nhận được. Bằng cách cho phép một số quảng cáo nhỏ và tĩnh, bạn có hỗ trợ các trang web dựa vào quảng cáo nhưng chọn để làm điều đó một cách không xâm nhập. Tính năng này có thể bị vô hiệu hóa bất cứ lúc nào. Hãy truy cập http://adblockplus.org/en/acceptable-ads để tìm hiểu thêm. 
+Gần đây, cộng đồng Adblock Plus đã giới thiệu các sáng kiến ​​quảng cáo chấp nhận được. Bằng cách cho phép một vài quảng cáo nhỏ và tĩnh, bạn hỗ trợ các trang web dựa vào việc quảng cáo mà chọn để làm điều đó một cách không xâm nhập. Tính năng này có thể bị vô hiệu hóa bất cứ lúc nào. Hãy truy cập http://adblockplus.org/en/acceptable-ads để tìm hiểu thêm. 
 
 *********** 
-Thông báo phát hành và nhật ký thay đổi có thể được tìm thấy ở đây: http://adblockplus.org/releases/ 
+Thông báo phát hành và những thay đổi có thể được tìm thấy ở đây: http://adblockplus.org/releases/ 
 
-Nếu gặp phải vấn đề? Thử khởi động lại Chrome và / hoặc nhấp vào "Cập nhật ngay bây giờ" trong Adblock Plus Options. 
+Nếu gặp phải vấn đề? Thử khởi động lại Chrome và/hoặc nhấp vào "Update now" trong Adblock Plus Options. 
 
-Nếu bạn phát hiện lỗi? Chúng tôi nhận thức được một số vấn đề: http://adblockplus.org/en/known-issues-chrome. Nếu bạn tìm thấy nhiều hơn hoặc cần giúp đỡ, hãy truy cập diễn đàn của chúng tôi: https://adblockplus.org/forum/viewforum.php?f=10. 
+Nếu bạn phát hiện lỗi? Chúng tôi nhận thức được một số vấn đề: http://adblockplus.org/en/known-issues-chrome. Nếu bạn tìm thấy nhiều hơn hoặc cần giúp đỡ, hãy ghé thăm diễn đàn của chúng tôi: https://adblockplus.org/forum/viewforum.php?f=10. 
 
 ************* 
-Cảm giác phiêu lưu? Hãy thử một phát triển xây dựng để luôn luôn có được các tính năng mới nhất của Chrome Adblock Plus: http://adblockplus.org/en/development-builds (cập nhật riêng, cài đặt độc lập).
+Mạo hiểm phát không? Hãy thử bản build phát triển để luôn nhận được các tính năng mới nhất của Chrome Adblock Plus: http://adblockplus.org/en/development-builds (cập nhật riêng, cài đặt độc lập).

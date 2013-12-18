@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
   },
-  "description": {
+  "description_chrome": {
     "message": "Der kostenlose Werbeblocker für Chrome: Blockiert nervige Videowerbung auf YouTube, Facebook-Werbung, Werbebanner und vieles mehr."
+  },
+  "description_opera": {
+    "message": "Der kostenlose Werbeblocker für Opera: Blockiert nervige Videowerbung auf YouTube, Facebook-Werbung, Werbebanner und vieles mehr."
+  },
+  "description_safari": {
+    "message": "Der kostenlose Werbeblocker für Safari: Blockiert nervige Videowerbung auf YouTube, Facebook-Werbung, Werbebanner und vieles mehr."
   },
   "disable_inline": {
     "message": "Blockiere Inline Text Werbung"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Deaktiviert</strong> auf dieser Seite"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain über das Adblock Plus-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in das Textfeld und drücken auf \"Domain hinzufügen\"."
   },
   "easy_create_filter": {
-    "message": "Einfach Filter erstellen"
+    "message": "Element blockieren"
   },
   "edit_filters_raw": {
     "message": "Liste als Text bearbeiten"
   },
   "enable_only_the": {
-    "message": "Falls Sie einen langsamen Computer haben, wählen Sie bitte nur Filter aus, die Sie wirklich brauchen."
+    "message": "Aktivieren Sie nur die Filterlisten, die Sie brauchen. Zu viele Listen können die Performance Ihres Browser so stark einschränken, dass er nicht mehr reagiert."
   },
   "enabled_for_site": {
-    "message": "Für diese Seite aktivieren"
+    "message": "<strong>Aktiviert</strong> auf dieser Seite"
   },
   "filter_lists": {
     "message": "Filterlisten"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus Optionen"
+  },
+  "options_short": {
+    "message": "Optionen"
   },
   "out_of_date_lists": {
     "message": "Abgelaufene Filterlisten werden regelmäßig aktualisiert."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Teile dies mit anderen"
+    "message": "Diese Anzahl teilen"
+  },
+  "stats_show_iconnumber": {
+    "message": "Anzahl im Icon anzeigen"
   },
   "stats_title": {
-    "message": "Geblockte Werbeanzeigen:"
+    "message": "Blockierte Werbeanzeigen"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Bitte wählen Sie ein Filterabonnement aus der Liste aus:"

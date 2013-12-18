@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Setelah menutup tetingkap  ini, klik (atau klik butang kanan) pada sesuatu unsur atas laman."
   },
-  "description": {
+  "description_chrome": {
+    "message": "Alat percuma adblock untuk Chrome: Menyekat iklan yang menggangu video di YouTube,  iklan Facebook, sepanduk dan banyak lagi."
+  },
+  "description_opera": {
+    "message": "Alat percuma adblock untuk Chrome: Menyekat iklan yang menggangu video di YouTube,  iklan Facebook, sepanduk dan banyak lagi."
+  },
+  "description_safari": {
     "message": "Alat percuma adblock untuk Chrome: Menyekat iklan yang menggangu video di YouTube,  iklan Facebook, sepanduk dan banyak lagi."
   },
   "disable_inline": {
     "message": "Nyahaktifkan iklan teks sebaris"
   },
+  "disabled_for_site": {
+    "message": "<strong>Kurang Upaya</strong> di laman web ini"
+  },
   "disabled_for_these_domains": {
     "message": "Adblock Plus dinyahaktifkan untuk domain yang disenaraikan di bawah. Anda boleh menambah domain sama ada melalui ikon Adblock Plus  dalam bar alamat atau dengan menaip domain (bukan URL) di dalam kotak dan klik butang \"Add domain\"."
   },
   "easy_create_filter": {
-    "message": "Pencipta penapis mudah alih"
+    "message": "Unsur blok"
   },
   "edit_filters_raw": {
     "message": "Mengedit penapis sebagai teks mentah"
   },
   "enable_only_the": {
-    "message": "Senraikan penapis yang anda perlukan sahaja.Jika terlebih banyak chrome akan tidak terkawal"
+    "message": "Membolehkan hanya senarai penapis yang anda perlukan. Terlalu banyak boleh membuat pelayar anda tidak bertindak balas."
   },
   "enabled_for_site": {
-    "message": "Aktifkan untuk lamman web ini"
+    "message": "<strong>Kurang Upaya</strong> di laman web ini"
   },
   "filter_lists": {
     "message": "Senarai penapis"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "pilihan Adblock Plus "
+  },
+  "options_short": {
+    "message": "Pilihan"
   },
   "out_of_date_lists": {
     "message": "Senarai yang telah luput tarikh akan dikemas kini dari semasa ke semasa."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Kongsi ini"
+    "message": "Berkongsi nombor-nombor ini"
+  },
+  "stats_show_iconnumber": {
+    "message": "Menunjukkan nombor dalam ikon"
   },
   "stats_title": {
-    "message": "Iklan yang disekat:"
+    "message": "Iklan yang disekat"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Sila pilih langganan penapis dalam senarai berikut:"

@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Après avoir fermé ce pop-up, cliquez (ou cliquez-droit) sur un élément de la page."
   },
-  "description": {
-    "message": "Le pare-pub gratuit pour Chrome: Bloque les annonces gênantes sur YouTube, les pubs sur Facebook, les bannières et bien plus."
+  "description_chrome": {
+    "message": "Le pare-pub gratuit pour Chrome : bloque les annonces gênantes sur YouTube, les pubs sur Facebook, les bannières et bien plus."
+  },
+  "description_opera": {
+    "message": "Le pare-pub gratuit pour Opera : bloque les annonces gênantes sur YouTube, les pubs sur Facebook, les bannières et bien plus."
+  },
+  "description_safari": {
+    "message": "Le pare-pub gratuit pour Safari : bloque les annonces gênantes sur YouTube, les pubs sur Facebook, les bannières et bien plus."
   },
   "disable_inline": {
     "message": "Retirer les publicités intégrées aux textes"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Désactivé</strong> sur ce site"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus est désactivé sur les domaines ci-dessous. Vous pouvez ajouter un domaine via l'icône Adblock Plus de la barre d'adresse, ou en tapant le domaine (et non un URL) dans cette boîte de texte et en cliquant sur le bouton \"Ajouter le domaine\"."
   },
   "easy_create_filter": {
-    "message": "Création facile de filtre"
+    "message": "Bloquer l'élément"
   },
   "edit_filters_raw": {
     "message": "Éditer les filtres en texte brut"
   },
   "enable_only_the": {
-    "message": "Choisissez seulement les listes de filtres dont vous avez besoin. Trop de listes rendent Chrome inopérant."
+    "message": "Activez uniquement les listes de filtres dont vous avez besoin. En activer trop peut ralentir votre navigateur."
   },
   "enabled_for_site": {
-    "message": "Activé pour ce site"
+    "message": "<strong>Activé</strong> sur ce site"
   },
   "filter_lists": {
     "message": "Liste de filtres"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Options d'Adblock Plus"
+  },
+  "options_short": {
+    "message": "Options"
   },
   "out_of_date_lists": {
     "message": "Les listes périmées seront actualisées périodiquement."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Partager"
+    "message": "Partager ces statistiques"
+  },
+  "stats_show_iconnumber": {
+    "message": "Afficher le nombre sur l'icône"
   },
   "stats_title": {
-    "message": "Publicités bloquées:"
+    "message": "Annonces bloquées"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Veuillez choisir un abonnement dans la liste suivante :"

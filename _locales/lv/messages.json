@@ -26,26 +26,26 @@
   "clickhide_instructions": {
     "message": "Pēc šī aizvēršanas, noklikšķiniet (vai noklikšķiniet ar labo pogu) uz elementa šajā lapā."
   },
-  "description": {
-    "message": "Bez maksas reklāmu bloķēšanas rīks Chrome pārlūkam: Bloķē kaitinošos YouTube reklāmu video rullīšus, Facebook reklāmas, reklāmkarogus un daudz ko citu."
+  "description_chrome": {
+    "message": "Bez maksas reklāmu bloķēšanas rīks Chrome pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, reklāmkarogus un vē…"
+  },
+  "description_opera": {
+    "message": "Bez maksas reklāmu bloķēšanas rīks Opera pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, reklāmkarogus un vēl."
+  },
+  "description_safari": {
+    "message": "Bez maksas reklāmu bloķēšanas rīks Safari pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, reklāmkarogus un vēl."
   },
   "disable_inline": {
-    "message": "Atspējot iekš-rindu teksta reklāmas"
+    "message": "Atspējot iekšrindu teksta reklāmas"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus Jūsu izvēlētajos domēnos ir atslēgts. Jūs varat pievienot domēnu izmantojot Adblock Plus, kas atrodas adreses joslā, vai ievadot domēnu (nevis URL) kastē un noklikšķinot uz pogas \"Pievienot domēnu\"."
+    "message": "Adblock Plus Jūsu izvēlētajos domēnos ir atslēgts. Jūs varat pievienot domēnu, izmantojot Adblock Plus, kas atrodas adreses joslā, vai ievadot domēnu (nevis URL) kastē un noklikšķinot uz pogas „Pievienot domēnu”."
   },
   "easy_create_filter": {
-    "message": "Viegli izveidot filtru"
+    "message": "Bloķēt elementu"
   },
   "edit_filters_raw": {
     "message": "Labot filtrus kā jēlu tekstu"
-  },
-  "enable_only_the": {
-    "message": "Iespējo tikai vajadzīgos filtru sarakstus. Pārāk daudzi var padarīt Chrome nereaģējošu."
-  },
-  "enabled_for_site": {
-    "message": "Iespējots šajā vietnē"
   },
   "filter_lists": {
     "message": "Filtru saraksts"
@@ -81,6 +81,9 @@
   "options": {
     "message": "Adblock Plus Opcijas"
   },
+  "options_short": {
+    "message": "Iespējas"
+  },
   "out_of_date_lists": {
     "message": "Novecojušie saraksti tiek periodiski atjaunināti."
   },
@@ -92,6 +95,36 @@
   },
   "show_icon": {
     "message": "Rādīt ikonu adreses joslā"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> šajā lapā",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> pavisam",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Lejuplādēt Adblock Plus"
+  },
+  "stats_title": {
+    "message": "Bloķētās reklāmas"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lūdzu, izvēlieties filtru abonementu no saraksta:"

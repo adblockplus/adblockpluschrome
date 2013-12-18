@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Dopo la chiusura di questo pop-up, cliccate (o clic destro) su un elemento sulla pagina."
   },
-  "description": {
+  "description_chrome": {
     "message": "Lo strumento anti-pubblicità gratuito per Chrome: Blocca pubblicità indesiderate su YouTube, Facebook e molti altri siti."
+  },
+  "description_opera": {
+    "message": "Lo strumento anti-pubblicità gratuito per Opera: Blocca pubblicità indesiderate su YouTube, Facebook e molti altri siti."
+  },
+  "description_safari": {
+    "message": "Lo strumento anti-pubblicità gratuito per Safari: Blocca pubblicità indesiderate su YouTube, Facebook e molti altri siti."
   },
   "disable_inline": {
     "message": "Disabilita la pubblicità integrata nel testo"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Disattivato</strong> su questo sito"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus è disabilitato per i domini elencati qui in basso. Puoi aggiungere un dominio anche tramite l'icona di Adblock Plus nella barra degli indirizzi o digitando un dominio (non un URL) nell'apposito campo e premendo il pulante \"Aggiungi dominio\"."
   },
   "easy_create_filter": {
-    "message": "Creazione facile di un filtro"
+    "message": "Blocca Elemento"
   },
   "edit_filters_raw": {
     "message": "Modifica i filtri come testo"
   },
   "enable_only_the": {
-    "message": "Abilita solo le liste di filtri di cui hai bisogno. Troppe potrebbero rallentare Chrome."
+    "message": "Abilitare solo gli elenchi del filtri necessari. Troppi possono bloccare il vostro browser."
   },
   "enabled_for_site": {
-    "message": "Abilitato per questo sito"
+    "message": "<strong>Attivato</strong> su questo sito"
   },
   "filter_lists": {
     "message": "Liste di filtri"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Opzioni di Adblock Plus"
+  },
+  "options_short": {
+    "message": "Opzioni"
   },
   "out_of_date_lists": {
     "message": "Le liste scadute verranno aggiornate automaticamente."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Condividilo"
+    "message": "Condividi questi numeri"
+  },
+  "stats_show_iconnumber": {
+    "message": "Visualizza il numero nella banana"
   },
   "stats_title": {
-    "message": "Pubblicità bloccate:"
+    "message": "Annunci bloccati"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Selezionare una sottoscrizione di filtri dalla seguente lista:"

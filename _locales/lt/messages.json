@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Užvėrus šį iššokantį langą, paspauskite (arba dešiniu mygtuku) ant elemento esančio puslapyje."
   },
-  "description": {
-    "message": "Nemokamas reklamų blokavimo įrankis skirtas Chrome: blokuoja erzinančias reklamas YouTube tinklapyje,  Facebook reklamas, banerius ir dar daugiau."
+  "description_chrome": {
+    "message": "Nemokamas reklamų blokavimo įrankis skirtas Chrome: blokuoja erzinančias reklamas YouTube tinklapyje,  Facebook reklamas, banerius…"
+  },
+  "description_opera": {
+    "message": "Nemokamas reklamų blokavimo įrankis skirtas Opera: blokuoja erzinančias reklamas YouTube tinklapyje,  Facebook reklamas, banerius ir dar daugiau."
+  },
+  "description_safari": {
+    "message": "Nemokamas reklamų blokavimo įrankis skirtas Safari: blokuoja erzinančias reklamas YouTube tinklapyje,  Facebook reklamas, banerius ir dar daugiau."
   },
   "disable_inline": {
     "message": "Išjungti vietines teksto reklamas"
+  },
+  "disabled_for_site": {
+    "message": "Šiame puslapyje <strong>išjungta</strong>"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus žemiau išvardytiems domenams išjungtas. Pridėti domeną galite paspaudę Adblock Plus piktogramą, adreso juostoje arba įvesdami domeną (ne URL) ir paspausdami „Pridėti domeną“ mygtuką."
   },
   "easy_create_filter": {
-    "message": "Lengvai sukuriamas filtras"
+    "message": "Blokuoti elementą"
   },
   "edit_filters_raw": {
     "message": "Redaguoti filtrus kaip gryną tesktą"
   },
   "enable_only_the": {
-    "message": "Įjunkite tik reikalingus filtrų sąrašus. Per daug gali paversti Chrome neatsakančia."
+    "message": "Įjunkite tik tuos filtrų sąrašus kurių jums reikia. Jei įgalinsite per daug jūsų naršyklė gali sulėtėti."
   },
   "enabled_for_site": {
-    "message": "Įjungta šiam tinklapiui"
+    "message": "Šiame puslapyje <strong>įjungta</strong>"
   },
   "filter_lists": {
     "message": "Filtrų sąrašai"
@@ -81,6 +90,9 @@
   "options": {
     "message": "Adblock Plus parinktys"
   },
+  "options_short": {
+    "message": "Parinktys"
+  },
   "out_of_date_lists": {
     "message": "Pasenę sąrašai periodiškai atnaujinami."
   },
@@ -92,6 +104,59 @@
   },
   "show_icon": {
     "message": "Adreso juostoje rodyti piktogramą"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> šiame puslapyje",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> iš viso",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "daugiau nei $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Parsisiųsti Adblock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Dalintis Facebook"
+  },
+  "stats_share_label_gplus": {
+    "message": "Dalintis Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Dalintis Twitter"
+  },
+  "stats_share_message": {
+    "message": "Adblock dėka aš užblokavau $number$ reklamų.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Dalintis šiais skaičiais"
+  },
+  "stats_show_iconnumber": {
+    "message": "Piktogramoje rodyti skaičių"
+  },
+  "stats_title": {
+    "message": "Reklamos užblokuotos"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Pasirinkite filtro prenumeratą iš šio sąrašo:"

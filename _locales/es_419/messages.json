@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Después de cerrar esta ventana, haga click (o click derecho) en un elemento de la página."
   },
-  "description": {
-    "message": "La herramienta gratuita AdBlock para Chrome: Bloqea molestos anuncios de video en YouTube, la publicidad en Facebook, banners y mucho más."
+  "description_chrome": {
+    "message": "La herramienta gratuita para bloquear publicidad en Chrome: Bloquea molestos anuncios en YouTube, anuncios de Facebook, banners, y…"
+  },
+  "description_opera": {
+    "message": "La herramienta gratuita para bloquear publicidad en Opera: Bloquea molestos anuncios en YouTube, anuncios de Facebook, banners, y mucho más."
+  },
+  "description_safari": {
+    "message": "La herramienta gratuita para bloquear publicidad en Safari: Bloquea molestos anuncios en YouTube, anuncios de Facebook, banners, y mucho más."
   },
   "disable_inline": {
     "message": "Desctivar anuncios de texto en línea"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Deshabilitado</strong> en este sitio"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus está desactivado para los dominios mostrados a continuación. Puedes añadir un dominio ya sea con el icono de Adblock Plus en la barra de direcciones o escribiendo el dominio (No la URL) en el recuadro y haciendo click en el botón \"Agregar dominio\"."
   },
   "easy_create_filter": {
-    "message": "Crear filtro fácilmente"
+    "message": "Bloquear Elemento"
   },
   "edit_filters_raw": {
     "message": "Editar los filtros como texto plano"
   },
   "enable_only_the": {
-    "message": "Activa sólo las listas de filtros que necesites. Activar demasiadas puede provocar que Chrome se bloquee."
+    "message": "Habilite sólo las listas de filtros que necesite. Demasiadas pueden hacer que su navegador no responda."
   },
   "enabled_for_site": {
-    "message": "Activar para este sitio"
+    "message": "<strong>Habilitado</strong> en este sitio"
   },
   "filter_lists": {
     "message": "Listas de filtros"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Opciones de Adblock Plus"
+  },
+  "options_short": {
+    "message": "Opciones"
   },
   "out_of_date_lists": {
     "message": "Las listas obsoletas se actualizarán preiódicamente."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Comparte esto"
+    "message": "Compartir estos números"
+  },
+  "stats_show_iconnumber": {
+    "message": "Mostrar número en el icono"
   },
   "stats_title": {
-    "message": "Anuncios bloqueados:"
+    "message": "Anuncios bloqueados"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor selecciona una suscripción de filtros de la lista:"

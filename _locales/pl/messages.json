@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Po zamknięciu tego okna kliknij na stronie niechciany element lewym lub prawym przyciskiem myszy."
   },
-  "description": {
-    "message": "Darmowe narzędzie blokujące reklamy dla Chrome. Blokuje denerwujące wideo reklamy w serwisie YouTube, reklamy na portalu społecznościowym Facebook, banery i wiele więcej."
+  "description_chrome": {
+    "message": "Darmowe narzędzie Adblock dla Chrome. Blokuje denerwujące wideo reklamy w serwisie YouTube, reklamy na Facebooku, banery i wiele wi…"
+  },
+  "description_opera": {
+    "message": "Darmowe narzędzie Adblock dla Opery. Blokuje denerwujące wideo reklamy w serwisie YouTube, reklamy na Facebooku, banery i wiele więcej."
+  },
+  "description_safari": {
+    "message": "Darmowe narzędzie Adblock dla Safari. Blokuje denerwujące wideo reklamy w serwisie YouTube, reklamy na Facebooku, banery i wiele więcej."
   },
   "disable_inline": {
     "message": "Wyłącz wbudowane reklamy tekstowe"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Wyłączony</strong> na tej stronie"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus jest wyłączony dla niżej wymienionych domen. Możesz dodać domenę, używając ikony Adblock Plusa znajdującej się w pasku adresu lub wpisując domenę – nie adres URL – w polu i naciskając przycisk „Dodaj domenę”."
   },
   "easy_create_filter": {
-    "message": "Kreator filtrów"
+    "message": "Blokuj element"
   },
   "edit_filters_raw": {
     "message": "Edytuj filtry jako zwykły tekst"
   },
   "enable_only_the": {
-    "message": "Włącz tylko filtry, których potrzebujesz. Zbyt duża liczba filtrów może spowolnić działanie przeglądarki."
+    "message": "Włącz tylko listy filtrów, które potrzebujesz. Zbyt duża liczba filtrów może spowodować zawieszenie przeglądarki."
   },
   "enabled_for_site": {
-    "message": "Włącz dla tej strony"
+    "message": "<strong>Włączony</strong> na tej stronie"
   },
   "filter_lists": {
     "message": "Listy filtrów"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus – ustawienia"
+  },
+  "options_short": {
+    "message": "Opcje"
   },
   "out_of_date_lists": {
     "message": "Nieaktualne zestawy filtrów są uaktualniane okresowo."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Udostępnij to"
+    "message": "Udostępnij te statystyki"
+  },
+  "stats_show_iconnumber": {
+    "message": "Wyświetlaj liczbę w ikonie"
   },
   "stats_title": {
-    "message": "Zablokowane reklamy:"
+    "message": "Zablokowane reklamy"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Wybierz z listy zestaw filtrów:"

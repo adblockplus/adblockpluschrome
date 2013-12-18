@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Nakon zatvaranja ovog skočnog prozora, kliknite (ili desni klik miša) na element na ovoj stranici."
   },
-  "description": {
-    "message": "Besplatan alat za blokiranje reklama na Chromeu: blokira nametljive video reklame na YouTubeu, Facebooku, banere i još mnogo toga."
+  "description_chrome": {
+    "message": "Besplatan alat koji blokira reklame za Chrome. Blokira naporne video reklame na YouTubu, Facebook reklame, transparente i još mnogo…"
+  },
+  "description_opera": {
+    "message": "Besplatan alat koji blokira reklame za Operu. Blokira naporne video reklame na YouTubu, Facebook reklame, transparente i još mnogo toga."
+  },
+  "description_safari": {
+    "message": "Besplatan alat koji blokira reklame za Safari. Blokira naporne video reklame na YouTubu, Facebook reklame, transparente i još mnogo toga."
   },
   "disable_inline": {
     "message": "Onemogući tekstualne reklame iste linije"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Onemogućeno</strong> na ovoj stranici"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus je onemogućen za domene na popisu ispod. Možete dodati domenu ili pomoću Adblock Plus ikone u adresnoj traci ili upisivanjem domene (ne URL-a) u polju ispod i klikom na tipku \"Dodaj domenu\"."
   },
   "easy_create_filter": {
-    "message": "Lako napravi filter"
+    "message": "Blokiraj element"
   },
   "edit_filters_raw": {
     "message": "Uredi filtere kao raw tekst"
   },
   "enable_only_the": {
-    "message": "Omogućite samo popis filtera koji vam je potreban. Zbog previše omogućenih popisa Chrome može prestati raditi."
+    "message": "Omogućite samo popis filtra koji vam je potreban. Previše popisa filtra može učiniti vaš preglednik neupotrebljivim."
   },
   "enabled_for_site": {
-    "message": "Omogući za ovu stranicu"
+    "message": "<strong>Omogućeno</strong> na ovoj stranici"
   },
   "filter_lists": {
     "message": "Popisi filtera"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus mogućnosti"
+  },
+  "options_short": {
+    "message": "Mogućnosti"
   },
   "out_of_date_lists": {
     "message": "Zastarjeli popisi redovito se ažuriraju."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Podijelite ovo"
+    "message": "Dijeli ove brojeve"
+  },
+  "stats_show_iconnumber": {
+    "message": "Prikaži broj na ikoni"
   },
   "stats_title": {
-    "message": "Blokirane reklame:"
+    "message": "Reklama blokirana"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Molimo odaberite pretplatu na filter sa popisa:"

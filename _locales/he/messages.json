@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "לאחר סגירת חלונית זו, יש ללחוץ (לא משנה באיזה לחצן) על רכיב בעמוד זה."
   },
-  "description": {
-    "message": "כלי חסימת הפרסומות החינמי עבור Chrome: חסימת מודעות וידאו מטרידות ב-YouTube, מודעות Facebook, באנרים ועוד רבות."
+  "description_chrome": {
+    "message": "כלי חסימת הפרסומות החינמי עבור Chrome: חסימת מודעות וידאו מטרידות ב-YouTube, מודעות Facebook , באנרים ועוד רבות."
+  },
+  "description_opera": {
+    "message": "כלי חסימת הפרסומות החינמי עבור Opera: חסימת מודעות וידאו מטרידות ב-YouTube, מודעות Facebook , באנרים ועוד רבות."
+  },
+  "description_safari": {
+    "message": "כלי חסימת הפרסומות החינמי עבור Safari: חסימת מודעות וידאו מטרידות ב-YouTube, מודעות Facebook , באנרים ועוד רבות."
   },
   "disable_inline": {
     "message": "ניטרול מודעות טקסט"
+  },
+  "disabled_for_site": {
+    "message": "<strong>מנוטרל</strong> באתר זה"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus מנוטרל עבור שמות המתחם המופיעים להלן. ניתן להוסיף שם מתחם או דרך הסמל של Adblock Plus שבשורת הכתובות או על ידי הקלדת שם המתחם (לא הכתובת) בתיבה וללחוץ על הלחצן \"הוספת שם מתחם\"."
   },
   "easy_create_filter": {
-    "message": "יצירת מסנן בקלות"
+    "message": "חסימת אלמנט"
   },
   "edit_filters_raw": {
     "message": "עריכת מסננים כטקסט גולמי"
   },
   "enable_only_the": {
-    "message": "מומלץ להפעיל רק את רשימות המסננים בהן יש צורך. יותר מדי רשימות עלולות לפגוע בביצועי הדפדפן."
+    "message": "אפשרו רק את רשימות המסננים שהנכם צריכים. יותר מידיי רשימות יכולות לגרום לדפדפן שלכם לא להגיב."
   },
   "enabled_for_site": {
-    "message": "פעיל עבור אתר זה"
+    "message": "<strong>מאפשר</strong> באתר זה"
   },
   "filter_lists": {
     "message": "רשימות המסננים"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "אפשרויות Adblock Plus"
+  },
+  "options_short": {
+    "message": "אפשרויות"
   },
   "out_of_date_lists": {
     "message": "רשימות שאינן עדכניות מתעדכנות באופן תדיר."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "שתף את זה"
+    "message": "שיתוף מספרים אלו"
+  },
+  "stats_show_iconnumber": {
+    "message": "הצגת מספרים באייקון"
   },
   "stats_title": {
-    "message": "מודעות חסומות:"
+    "message": "מודעות חסומות"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "יש לבחור הרשמת מסנן מהרשימה:"

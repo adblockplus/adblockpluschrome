@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Po zavření tohoto vyskakovacího okna, klikněte levým (nebo pravým) tlačítkem myši na element na stránce."
   },
-  "description": {
-    "message": "Bezplatný nástroj na blokování reklam pro Chrome: Blokuje otravné video reklamy na YouTube, Facebookové reklamy, bannery a mnohem více."
+  "description_chrome": {
+    "message": "Bezplatný nástroj adblock pro Chrome: Bloky nepříjemné video reklamy na YouTube, Facebook reklamy, bannery a ještě mnohem více."
+  },
+  "description_opera": {
+    "message": "Volný adblock nástroj pro Operu: Bloky nepříjemné video reklamy na YouTube, Facebook reklamy, bannery a ještě mnohem více."
+  },
+  "description_safari": {
+    "message": "Volný adblock nástroj pro Safari: Bloky nepříjemné video reklamy na YouTube, Facebook reklamy, bannery a ještě mnohem více."
   },
   "disable_inline": {
     "message": "Zakázat \"inline text\" reklamy"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Vypnuto</strong> na této stránce"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus je zakázán pro domény uvedeny níže. Můžete přidat doménu buďto ikonou Adblock Plus v adresové liště nebo napsáním domény ( ne URL) do textového pole a kliknutím na tlačítko \"Přidat doménu\"."
   },
   "easy_create_filter": {
-    "message": "Jednoduché vytvoření filtru"
+    "message": "Blok prvek"
   },
   "edit_filters_raw": {
     "message": "Upravit filtry jako běžný text"
   },
   "enable_only_the": {
-    "message": "Povolte pouze filtry,které potřebujete.Příliš mnoho může způsobit,že Chrome nebude odpovídat."
+    "message": "Povolit pouze seznamů filtrů, které potřebujete. Příliš mnoho může, aby váš prohlížeč nereaguje."
   },
   "enabled_for_site": {
-    "message": "Povolit pro tuto stránku"
+    "message": "<strong>Zapnuto</strong> na této stránce"
   },
   "filter_lists": {
     "message": "Seznam filtrů"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Možnosti Adblock Plus"
+  },
+  "options_short": {
+    "message": "Možnosti"
   },
   "out_of_date_lists": {
     "message": "Zastaralé seznamy jsou pravidelně aktualizovány."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Sdílet"
+    "message": "Podíl těchto čísel"
+  },
+  "stats_show_iconnumber": {
+    "message": "Zobrazit číslo na ikonu"
   },
   "stats_title": {
-    "message": "Blokované reklamy:"
+    "message": "Blokované reklamy"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Prosím vyberte sadu filtrů ze seznamu:"

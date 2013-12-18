@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "Luk denne popup, og klik (eller højreklik) derefter på et element på siden."
   },
-  "description": {
+  "description_chrome": {
     "message": "Gratis adblock værktøj til Chrome: Blokerer irriterende video reklamer på YouTube, Facebook reklamer, bannere og meget mere."
+  },
+  "description_opera": {
+    "message": "Gratis adblock værktøj til Opera: Blokerer irriterende video reklamer på YouTube, Facebook reklamer, bannere og meget mere."
+  },
+  "description_safari": {
+    "message": "Gratis adblock værktøj til Safari: Blokerer irriterende video reklamer på YouTube, Facebook reklamer, bannere og meget mere."
   },
   "disable_inline": {
     "message": "Deaktiver inline tekstannoncer"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Deaktiveret</strong> på denne side"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus er deaktiveret for de domæner, der er angivet nedenfor. Du kan tilføje et domæne enten via ikonet Adblock Plus i adresselinjen eller ved at skrive domæne (ikke en URL) i boksen og klikke på knappen \"Tilføj domæne\"."
   },
   "easy_create_filter": {
-    "message": "Let oprette filter"
+    "message": "Bloker enhed"
   },
   "edit_filters_raw": {
     "message": "Rediger filtre som rå tekst"
   },
   "enable_only_the": {
-    "message": "Aktiver kun de filterlister du har brug for. Alt for mange kan gøre at Chrome ikke reagerer."
+    "message": "Aktivér kun de filter lister du skal bruge. For mange kan gøre at din browser ikke svarer."
   },
   "enabled_for_site": {
-    "message": "Aktiveret for dette websted"
+    "message": "<strong>Aktiveret</strong> på dette websted"
   },
   "filter_lists": {
     "message": "Filterlister"
@@ -81,6 +90,9 @@
   "options": {
     "message": "Adblock Plus indstillinger"
   },
+  "options_short": {
+    "message": "Indstillinger"
+  },
   "out_of_date_lists": {
     "message": "Forældede lister opdateres regelmæssigt."
   },
@@ -95,6 +107,22 @@
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> på denne side",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> i alt",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "over $number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -122,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Del dette"
+    "message": "Del disse tal"
+  },
+  "stats_show_iconnumber": {
+    "message": "Vis antal i ikonet"
   },
   "stats_title": {
-    "message": "Blokerede annoncer:"
+    "message": "Blokerede reklamer"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vælg et filterabonnement fra listen:"

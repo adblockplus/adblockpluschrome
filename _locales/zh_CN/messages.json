@@ -26,32 +26,41 @@
   "clickhide_instructions": {
     "message": "请点击（或右击）要屏蔽的元素"
   },
-  "description": {
-    "message": "适合 Chrome 的免费广告过滤工具：阻挡Youtube上烦人的视频广告、Facebook上的广告、大横幅广告等等。"
+  "description_chrome": {
+    "message": "用于Chrome 浏览器的免费的广告屏蔽工具：屏蔽 Youtube 上烦人的视频广告、Facebook上的广告、横幅广告以及其他广告。"
+  },
+  "description_opera": {
+    "message": "用于Opera 浏览器的免费的广告屏蔽工具：屏蔽 YouTbue 上的烦人的视频、Facebook上的广告、横幅广告以及其他广告。"
+  },
+  "description_safari": {
+    "message": "用于 Safari 浏览器的免费的广告屏蔽工具：屏蔽 YouTbue 上的烦人的视频、Facebook上的广告、横幅广告以及其他广告。"
   },
   "disable_inline": {
     "message": "屏蔽广告链接"
   },
+  "disabled_for_site": {
+    "message": "在本网站<strong>禁用</strong>"
+  },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus将不过滤以下域名。您可以通过地址栏的按钮添加，也可在下面输入域名(URL无效)并添加。 [注]:URL的排除可在“自定义过滤”中添加。"
+    "message": "Adblock Plus 不过滤下面列出的域。您可以通过点击地址栏的 Adblock Plus 图标进行添加，也可在下面输入域名（非URL）然后点击“添加域名”。"
   },
   "easy_create_filter": {
-    "message": "轻松建立过滤规则"
+    "message": "屏蔽此元素"
   },
   "edit_filters_raw": {
     "message": "以纯文本编辑"
   },
   "enable_only_the": {
-    "message": "请只启用您需要的过滤清单，开启过多会使浏览器变慢。"
+    "message": "请只启用您需要的过滤清单，启用过多会使浏览器变慢。"
   },
   "enabled_for_site": {
-    "message": "对该网站启用过滤"
+    "message": "在本网站<strong>启用</strong>"
   },
   "filter_lists": {
     "message": "过滤清单"
   },
   "filter_must_follow_syntax": {
-    "message": "您的过滤器必须遵循 <a> Adblock Plus 过滤器语法</a>。"
+    "message": "您的过滤规则必须遵循 <a> Adblock Plus 过滤规则语法</a>。"
   },
   "found_a_bug": {
     "message": "发现错误？想要帮忙翻译Adblock Plus？请前往<a>此处</a>"
@@ -81,20 +90,23 @@
   "options": {
     "message": "设置选项"
   },
+  "options_short": {
+    "message": "设置选项"
+  },
   "out_of_date_lists": {
     "message": "过滤清单会定期自动更新"
   },
   "remove_button": {
-    "message": "删除已选择"
+    "message": "删除所选项"
   },
   "show_block_element_menu": {
-    "message": "添加到右鍵菜单"
+    "message": "添加'屏蔽此元素'到右鍵菜单"
   },
   "show_icon": {
     "message": "在地址栏显示按钮"
   },
   "stats_label_page": {
-    "message": "<strong>$number$</strong> 在此页上",
+    "message": "本页<strong>$number$</strong>",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -110,7 +122,7 @@
     }
   },
   "stats_over": {
-    "message": "共 $number$",
+    "message": " $number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -130,7 +142,7 @@
     "message": "分享到Twitter"
   },
   "stats_share_message": {
-    "message": "我用Adblock Plus阻止了$number$ 个广告和追踪器。",
+    "message": "Adblock Plus帮我屏蔽了 $number$ 个广告和跟踪行为。",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -138,13 +150,16 @@
     }
   },
   "stats_share_title": {
-    "message": "分享"
+    "message": "分享数据"
+  },
+  "stats_show_iconnumber": {
+    "message": "在图标上显示数量"
   },
   "stats_title": {
-    "message": "被屏蔽的广告："
+    "message": "被屏蔽的广告:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "从列表中选择过滤规则订阅组:"
+    "message": "从列表中选择一份过滤清单:"
   },
   "update_now": {
     "message": "立即更新"

@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
   },
-  "description": {
-    "message": "크롬 무료 광고차단 도구: 유투브, 페이스북, 배너 등에서 나오는 광고들을 차단시켜 불편함을 줄여줍니다."
+  "description_chrome": {
+    "message": "크롬용 무료 광고 차단 도구 : 유튜브 비디오 광고, 페이스북 광고, 배너 이상의 것들을 차단합니다."
+  },
+  "description_opera": {
+    "message": "오페라용 무료 광고 차단 도구 : 유튜브 비디오 광고, 페이스북 광고, 배너 이상의 것들을 차단합니다."
+  },
+  "description_safari": {
+    "message": "사파리용 무료 광고 차단 도구 : 유튜브 비디오 광고, 페이스북 광고, 배너 이상의 것들을 차단합니다."
   },
   "disable_inline": {
     "message": "인라인 텍스트 광고를 보지 않음"
+  },
+  "disabled_for_site": {
+    "message": "이 사이트에서 <strong>사용 중지</strong>"
   },
   "disabled_for_these_domains": {
     "message": "다음 도메인에서는 광고를 차단하지 않습니다. 주소 표시줄의 애드블록 플러스 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
   },
   "easy_create_filter": {
-    "message": "쉬운 필터 생성"
+    "message": "요소 숨김"
   },
   "edit_filters_raw": {
     "message": "필터 편집"
   },
   "enable_only_the": {
-    "message": "필요한 구독 필터만 추가하십시오. 구독 필터를 필요 이상으로 많이 추가하면 페이지의 로딩 속도가 느려질 수 있습니다."
+    "message": "필요한 구독 필터만 추가하십시오. 구독 필터가 과도하게 많으면 브라우저가 응답하지 않을 수 있습니다."
   },
   "enabled_for_site": {
-    "message": "이 사이트에 필터 적용"
+    "message": "이 사이트에서 <strong>사용</strong>"
   },
   "filter_lists": {
     "message": "구독 필터"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus - 애드블록 플러스 옵션"
+  },
+  "options_short": {
+    "message": "옵션"
   },
   "out_of_date_lists": {
     "message": "기한이 다 된 목록은 주기적으로 업데이트됩니다."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "공유하기"
+    "message": "차단 통계 공유"
+  },
+  "stats_show_iconnumber": {
+    "message": "아이콘에 차단된 광고 개수 표시"
   },
   "stats_title": {
-    "message": "차단된 광고들:"
+    "message": "차단된 광고"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "목록에서 구독할 필터를 선택하십시오."

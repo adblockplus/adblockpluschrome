@@ -26,26 +26,35 @@
   "clickhide_instructions": {
     "message": "När denna popup stängs, klicka (eller högerklicka) ett objekt på sidan."
   },
-  "description": {
-    "message": "Den kostnadsfria annonsblockeraren för Chrome: Blockerar irriterande videoreklam på YouTube, Facebook-annonser, webbannonser och mycket mer."
+  "description_chrome": {
+    "message": "Fri adblock verktyg för Chrome: Blockerar irriterande videoannonser på YouTube, Facebook-annonser, banners och mycket mer."
+  },
+  "description_opera": {
+    "message": "Fri adblock verktyg för Opera: Blockerar irriterande videoannonser på YouTube, Facebook-annonser, banners och mycket mer."
+  },
+  "description_safari": {
+    "message": "Fri adblock verktyg för Safari: Blockerar irriterande videoannonser på YouTube, Facebook-annonser, banners och mycket mer"
   },
   "disable_inline": {
-    "message": "Inaktivera infogade textannonser"
+    "message": "Avaktivera infogade textannonser"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Avaktiverad</strong> på denna webbplats"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus är inaktiverad för domänerna i denna lista. Du kan lägga till en domän via Adblock Plus-ikonen i adressfältet eller genom att skriva domännamnet (inte URL) i textboxen och klicka på \"Lägg till domän\"."
+    "message": "Adblock Plus är avaktiverad för domänerna i denna lista. Du kan lägga till en domän via Adblock Plus-ikonen i adressfältet eller genom att skriva domännamnet (inte URL) i textboxen och klicka på \"Lägg till domän\"."
   },
   "easy_create_filter": {
-    "message": "Skapa filter"
+    "message": "Block-element"
   },
   "edit_filters_raw": {
     "message": "Redigera filter som ren text"
   },
   "enable_only_the": {
-    "message": "Aktivera bara dom filter du behöver. För många kan få Chrome att sluta svara."
+    "message": "Endast aktivera filtret listor du behöver. Alltför många kan få din webbläsare att inte svara."
   },
   "enabled_for_site": {
-    "message": "Aktiverad för den här sidan"
+    "message": "<strong>Ja</strong> på denna webbplats"
   },
   "filter_lists": {
     "message": "Filterlistor"
@@ -80,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus Alternativ"
+  },
+  "options_short": {
+    "message": "Alternativ"
   },
   "out_of_date_lists": {
     "message": "Utdaterade listor uppdateras periodiskt."
@@ -138,10 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Dela det här"
+    "message": "Dela med dig av dessa nummer"
+  },
+  "stats_show_iconnumber": {
+    "message": "Visa nummer i fältet"
   },
   "stats_title": {
-    "message": "Blockerade annonser:"
+    "message": "Annonser blockerad"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Var vänlig välj en filterprenumeration från listan:"

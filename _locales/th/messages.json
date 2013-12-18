@@ -26,8 +26,8 @@
   "clickhide_instructions": {
     "message": "หลังจากปิดนี้ผุดขึ้น คลิก (หรือคลิกขวา) องค์ประกอบบนเพจ"
   },
-  "description": {
-    "message": "โปรแกรมบล็อกโฆษณาฟรีสำหรับ Chrome: บล็อกโฆษณาที่น่ากวนใจต่างๆทั้ง คลิปโฆษณาของ YouTube,โฆษณาบน Facebook, แบนเนอร์บนเว็บ และอื่นๆอีกมากมาย"
+  "description_safari": {
+    "message": "เครื่องมือบล็อกโฆษณาสำหรับ Safari: บล็อกโฆษณาต่างๆเช่น คลิปโฆษณาบน Youtube, โฆษณาของ Facebook, ป้ายแบนเนอน์ต่างๆ และอื่นๆอีกมากมาย"
   },
   "disable_inline": {
     "message": "ปิดใช้งานข้อความโฆษณาแบบในบรรทัด"
@@ -35,17 +35,11 @@
   "disabled_for_these_domains": {
     "message": "Adblock Plus ถูกปิดใช้งานสำหรับโดเมนที่แสดงอยู่ด้านล่าง คุณสามารถเพิ่มโดเมนได้ ผ่านไอคอน Adblock Plus ในแถบที่อยู่ หรือโดยพิมพ์โดเมน (ไม่ใช่ URL) ในกล่อง และคลิกปุ่ม \"เพิ่มโดเมน\""
   },
-  "easy_create_filter": {
-    "message": "สร้างตัวกรองอย่างง่าย"
-  },
   "edit_filters_raw": {
     "message": "แก้ไขตัวกรองเป็นข้อความดิบ"
   },
-  "enable_only_the": {
-    "message": "เปิดใช้งานเฉพาะรายการตัวกรองที่คุณต้องการ หากมากเกินไปจะทำให้ Chrome ไม่ตอบสนองได้"
-  },
   "enabled_for_site": {
-    "message": "เปิดใช้สำหรับเว็บนี้"
+    "message": "<strong>เปิด</strong>บนเว็บไซต์นี้"
   },
   "filter_lists": {
     "message": "รายชื่อตัวกรอง"
@@ -136,12 +130,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "แบ่งปันสิ่งนี้"
-  },
-  "stats_title": {
-    "message": "โฆษณาที่ถูกบล็อก:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "กรุณาเลือกนามข้างท้ายตัวกรองจากรายชื่อ:"

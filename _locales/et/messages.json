@@ -23,14 +23,61 @@
   "cancel": {
     "message": "Loobu"
   },
+  "clickhide_instructions": {
+    "message": "Pärast sulgemist hüpikaken, klõpsake (või paremklõps) element lehel."
+  },
+  "description_chrome": {
+    "message": "Tasuta adblock vahend Chrome: Ploki tüütu video YouTube'is reklaame Facebook reklaame, plakatid ja palju muud."
+  },
+  "description_opera": {
+    "message": "Tasuta adblock vahend Opera: Ploki tüütu video YouTube'is reklaame Facebook reklaame, plakatid ja palju muud."
+  },
+  "description_safari": {
+    "message": "Tasuta adblock vahend Safari: Ploki tüütu video YouTube'is reklaame Facebook reklaame, plakatid ja palju muud."
+  },
+  "disable_inline": {
+    "message": "Keela inline tekst reklaame"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Puuetega</strong> sellel saidil"
+  },
+  "disabled_for_these_domains": {
+    "message": "AdBlock Plus on keelatud valdkondades, valesti on loetletud allpool. Saate lisada domeeni kas vahendusel AdBlock Plus aadressiribal ikooni VÕI kirjutades domeeni (Mitte URL) lahtrisse JA klõpsa \"Lisa domeen\" Nuppu."
+  },
+  "easy_create_filter": {
+    "message": "Block element"
+  },
+  "edit_filters_raw": {
+    "message": "Edit filtrid tekstigfail"
+  },
+  "enable_only_the": {
+    "message": "Luba ainult filter nimekirjad, mida vajate. Liiga palju on võimalik teha brauseris reageeri."
+  },
+  "enabled_for_site": {
+    "message": "<strong>lülitatud</strong> sellel saidil"
+  },
   "filter_lists": {
     "message": "Flitrite nimekirjad"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Teie filter peab järgima <a>AdBlock Plus filter süntaks</a>."
   },
   "found_a_bug": {
     "message": "Leidsid vea? Tahad tõlkida Adblock Plus'i enda keelde? Palun saada soovitus <a>siia</a>."
   },
   "general": {
     "message": "Üldine"
+  },
+  "last_updated_at": {
+    "message": "Viimati uuendatud: $aeg$ on $date$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
   },
   "last_updated_at_today": {
     "message": "Viimati uuendatud täna kell $time$",
@@ -43,16 +90,81 @@
   "options": {
     "message": "AdBlock Plus Valikud"
   },
+  "options_short": {
+    "message": "valik"
+  },
+  "out_of_date_lists": {
+    "message": "Out-of-date nimekirjad uuendatakse perioodiliselt."
+  },
   "remove_button": {
     "message": "Eemalda valitud"
   },
+  "show_block_element_menu": {
+    "message": "Näita \"Block Element\" paremklõpsake menüü kirje"
+  },
   "show_icon": {
     "message": "Näita ikooni aadressiribal"
+  },
+  "stats_label_page": {
+    "message": "<strong>$arv$</strong> Sellel lehel",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$arv$</strong> kokku",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "üle $ arv $",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Lae AdBlock Plus"
+  },
+  "stats_share_label_fb": {
+    "message": "Jaga Facebookis"
+  },
+  "stats_share_label_gplus": {
+    "message": "Jagada Google+"
+  },
+  "stats_share_label_twitter": {
+    "message": "Jaga Twitteris"
+  },
+  "stats_share_message": {
+    "message": "Ma blokeeritud $number,$ reklaamid ja jälgimisseadmed tänu Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Jagada need numbrid"
+  },
+  "stats_show_iconnumber": {
+    "message": "Näita numbrit ikooni"
+  },
+  "stats_title": {
+    "message": "Reklaamid on blokeeritud"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vali nimekirjast sobiv filtrite tellimus:"
   },
   "update_now": {
     "message": "Värskenda kohe"
+  },
+  "whitelisted_domains": {
+    "message": "Whitelisted domeenid"
   }
 }
