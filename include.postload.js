@@ -213,31 +213,38 @@ function clickHide_elementClickHandler(ev) {
 }
 
 // Hovering over an element so highlight it
-function clickHide_mouseOver(e) {
-  if(clickHide_activated == false)
+function clickHide_mouseOver(e)
+{
+  if (clickHide_activated == false)
     return;
 
-  if(e.target.id || e.target.className || e.target.src) {
-    currentElement = e.target;
-    currentElement_boxShadow = e.target.style.getPropertyValue("-webkit-box-shadow");
-    currentElement_backgroundColor = e.target.style.backgroundColor;
-    e.target.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #d6d84b");
-    e.target.style.backgroundColor = "#f8fa47";
+  var target = e.target;
+  while (target.parentNode && !(target.id || target.className || target.src))
+    target = target.parentNode;
+  if (target == document.documentElement || target == document.body)
+    target = null;
 
-    // TODO: save old context menu
-    e.target.addEventListener("contextmenu", clickHide_elementClickHandler, false);
+  if (target && target instanceof HTMLElement)
+  {
+    currentElement = target;
+    currentElement_boxShadow = target.style.getPropertyValue("-webkit-box-shadow");
+    currentElement_backgroundColor = target.style.backgroundColor;
+    target.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #d6d84b");
+    target.style.backgroundColor = "#f8fa47";
+
+    target.addEventListener("contextmenu", clickHide_elementClickHandler, false);
   }
 }
 
 // No longer hovering over this element so unhighlight it
-function clickHide_mouseOut(e) {
-  if(!clickHide_activated || !currentElement)
+function clickHide_mouseOut(e)
+{
+  if (!clickHide_activated || !currentElement)
     return;
 
   currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
   currentElement.style.backgroundColor = currentElement_backgroundColor;
 
-  // TODO: restore old context menu
   currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, false);
 }
 
