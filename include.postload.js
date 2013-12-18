@@ -33,7 +33,7 @@ var lastRightClickEvent = null;
 function highlightElements(selectorString) {
   if(highlightedElementsSelector)
     unhighlightElements();
-  
+
   var highlightedElements = document.querySelectorAll(selectorString);
   highlightedElementsSelector = selectorString;
   highlightedElementsBoxShadows = new Array();
@@ -80,7 +80,7 @@ function addElementOverlay(elt) {
   // If this element is enclosed in an object tag, we prefer to block that instead
   if(!elt)
     return null;
-      
+
   // If element doesn't have at least one of class name, ID or URL, give up
   // because we don't know how to construct a filter rule for it
   var url = getElementURL(elt);
@@ -135,8 +135,8 @@ function clickHide_showDialog(left, top, filters)
   {
     if (clickHideFiltersDialog)
       clickHideFiltersDialog.style.setProperty("opacity", "1.0");
-  } 
-  
+  }
+
   document.body.appendChild(clickHideFiltersDialog);
 }
 
@@ -144,7 +144,7 @@ function clickHide_showDialog(left, top, filters)
 function clickHide_activate() {
   if(document == null)
     return;
-  
+
   // If we are already selecting, abort now
   if (clickHide_activated || clickHideFiltersDialog)
     clickHide_deactivate();
@@ -153,7 +153,7 @@ function clickHide_activate() {
   var elts = document.querySelectorAll('object,embed,img,iframe');
   for(var i=0; i<elts.length; i++)
     addElementOverlay(elts[i]);
-  
+
   clickHide_activated = true;
   document.addEventListener("mouseover", clickHide_mouseOver, false);
   document.addEventListener("mouseout", clickHide_mouseOut, false);
@@ -198,7 +198,7 @@ function clickHide_deactivate()
   document.removeEventListener("mouseout", clickHide_mouseOut, false);
   document.removeEventListener("click", clickHide_mouseClick, false);
   document.removeEventListener("keyup", clickHide_keyUp, false);
-  
+
   // Remove overlays
   // For some reason iterating over the array returend by getElementsByClassName() doesn't work
   var elt;
@@ -233,10 +233,10 @@ function clickHide_mouseOver(e) {
 function clickHide_mouseOut(e) {
   if(!clickHide_activated || !currentElement)
     return;
-  
+
   currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
   currentElement.style.backgroundColor = currentElement_backgroundColor;
-  
+
   // TODO: restore old context menu
   currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, false);
 }
@@ -251,49 +251,55 @@ function clickHide_keyUp(e) {
 // When the user clicks, the currentElement is the one we want.
 // We should have ABP rules ready for when the
 // popup asks for them.
-function clickHide_mouseClick(e) {
-  if(!currentElement || !clickHide_activated)
+function clickHide_mouseClick(e)
+{
+  if (!currentElement || !clickHide_activated)
     return;
-      
+
   var elt = currentElement;
   var url = null;
-  if(currentElement.className && currentElement.className == "__adblockplus__overlay") {
+  if (currentElement.className && currentElement.className == "__adblockplus__overlay")
+  {
     elt = currentElement.prisoner;
     url = currentElement.prisonerURL;
-  } else if(elt.src) {
-    url = elt.src;
   }
+  else if (elt.src)
+    url = elt.src;
 
   // Only normalize when the element contains a URL (issue 328.)
   // The URL is not always normalized, so do it here
-  if(url)
+  if (url)
     url = normalizeURL(relativeToAbsoluteUrl(url));
-  
+
   // Construct filters. The popup will retrieve these.
   // Only one ID
   var elementId = elt.id ? elt.id.split(' ').join('') : null;
   // Can have multiple classes, and there might be extraneous whitespace
   var elementClasses = null;
-  if(elt.className) {
+  if (elt.className)
     elementClasses = elt.className.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '').split(' ');
-  }
+
   clickHideFilters = new Array();
   selectorList = new Array();
-  if(elementId) {
+  if (elementId)
+  {
     clickHideFilters.push(document.domain + "###" + elementId);
     selectorList.push("#" + elementId);
   }
-  if(elementClasses) {
-    for(var i = 0; i < elementClasses.length; i++) {
+  if (elementClasses)
+  {
+    for(var i = 0; i < elementClasses.length; i++)
+    {
       clickHideFilters.push(document.domain + "##." + elementClasses[i]);
       selectorList.push("." + elementClasses[i]);
     }
   }
-  if(url) {
+  if (url)
+  {
     clickHideFilters.push(relativeToAbsoluteUrl(url));
     selectorList.push(elt.localName + '[src="' + url + '"]');
   }
-  
+
   // Show popup
   clickHide_showDialog(e.clientX, e.clientY, clickHideFilters);
 
@@ -310,6 +316,10 @@ function clickHide_mouseClick(e) {
   // Now, actually highlight the element the user clicked on in red
   currentElement.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #fd1708");
   currentElement.style.backgroundColor = "#f6a1b5";
+
+  // Make sure the browser doesn't handle this click
+  e.preventDefault();
+  e.stopPropagation();
 }
 
 // Extracts source URL from an IMG, OBJECT, EMBED, or IFRAME
@@ -329,7 +339,7 @@ function getElementURL(elt) {
         url = params[0].getAttribute("value");
     }
   } else if(!url) {
-    url = elt.getAttribute("src") || elt.getAttribute("href"); 
+    url = elt.getAttribute("src") || elt.getAttribute("href");
   }
   return url;
 }
@@ -477,7 +487,7 @@ if (document.documentElement instanceof HTMLElement)
       url: url
     });
   }, true);
-  
+
   ext.onMessage.addListener(function(msg, sender, sendResponse)
   {
     switch (msg.type)
