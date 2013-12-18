@@ -3,7 +3,7 @@ inherit = metadata.common
 
 [general]
 basename = adblockpluschrome
-version = 1.6.2
+version = 1.7
 permissions = tabs
   http://*/*
   https://*/*
