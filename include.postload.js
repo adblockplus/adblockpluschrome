@@ -316,10 +316,6 @@ function clickHide_mouseClick(e)
   // Show popup
   clickHide_showDialog(e.clientX, e.clientY, clickHideFilters);
 
-  // Set background color in case it got selected using context menu
-  if (typeof currentElement_backgroundColor == "undefined")
-    currentElement_backgroundColor = currentElement.style.backgroundColor;
-
   // Highlight the unlucky elements
   // Restore currentElement's box-shadow and bgcolor so that highlightElements won't save those
   currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
@@ -554,6 +550,7 @@ if (document.documentElement instanceof HTMLElement)
           // Coerce red highlighted overlay on top of element to remove.
           // TODO: Wow, the design of the clickHide stuff is really dumb - gotta fix it sometime
           currentElement = addElementOverlay(target);
+          currentElement_backgroundColor = target.style.backgroundColor;
           // clickHide_mouseOver(lastRightClickEvent);
           clickHide_mouseClick(lastRightClickEvent);
         }
