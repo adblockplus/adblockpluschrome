@@ -56,14 +56,23 @@
 
   var MessageEventTarget = function()
   {
-    WrappedEventTarget.call(this, (chrome.runtime || {}).onMessage || chrome.extension.onRequest);
+    var target;
+    if ("runtime" in chrome && "onMessage" in chrome.runtime)
+      target = chrome.runtime.onMessage;
+    else if ("onMessage" in chrome.extension)
+      target = chrome.extension.onMessage;
+    else
+      target = chrome.extension.onRequest;
+    WrappedEventTarget.call(this, target);
   };
   MessageEventTarget.prototype = {
     __proto__: WrappedEventTarget.prototype,
     _wrapListener: function(listener) {
       return function(message, sender, sendResponse)
       {
-        return listener(message, {tab: sender.tab && new Tab(sender.tab)}, sendResponse);
+        if (sender.tab && sender.tab.id >= 0)
+          sender.tab = new Tab(sender.tab);
+        return listener(message, sender, sendResponse);
       };
     }
   };
@@ -73,11 +82,20 @@
 
   ext = {
     backgroundPage: {
-      sendMessage: (chrome.runtime || {}).sendMessage || chrome.extension.sendRequest,
-      getWindow: chrome.extension.getBackgroundPage
+      getWindow: function()
+      {
+        return chrome.extension.getBackgroundPage();
+      }
     },
     getURL: chrome.extension.getURL,
     onMessage: new MessageEventTarget(),
     i18n: chrome.i18n
   };
+
+  if ("runtime" in chrome && "sendMessage" in chrome.runtime)
+    ext.backgroundPage.sendMessage = chrome.runtime.sendMessage;
+  else if ("sendMessage" in chrome.extension)
+    ext.backgroundPage.sendMessage = chrome.extension.sendMessage;
+  else
+    ext.backgroundPage.sendMessage = chrome.extension.sendRequest;
 })();

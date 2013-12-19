@@ -37,7 +37,7 @@ function init()
         document.body.classList.add("local");
     });
   });
-  
+
   // Attach event listeners
   document.getElementById("enabled").addEventListener("click", toggleEnabled, false);
   document.getElementById("clickhide").addEventListener("click", activateClickHide, false);
@@ -46,7 +46,7 @@ function init()
   {
     openOptions();
   }, false);
-  
+
   // Set up collapsing of menu items
   var collapsers = document.getElementsByClassName("collapse");
   for (var i = 0; i < collapsers.length; i++)
@@ -56,7 +56,7 @@ function init()
     if (!Prefs[collapser.dataset.option])
       document.getElementById(collapser.dataset.collapsable).classList.add("collapsed");
   }
-  
+
   // Ask content script whether clickhide is active. If so, show cancel button.
   // If that isn't the case, ask background.html whether it has cached filters. If so,
   // ask the user whether she wants those filters.
@@ -67,10 +67,10 @@ function init()
     {
       tab = t;
       document.getElementById("enabled").classList.toggle("off", isWhitelisted(tab.url));
-      
+
       tab.sendMessage({type: "get-clickhide-state"}, function(response)
       {
-        document.body.classList.toggle("clickhide-active", response.active);
+        document.body.classList.toggle("clickhide-active", response && response.active);
       });
     });
   });
@@ -105,7 +105,7 @@ function toggleEnabled()
       filter = isWhitelisted(tab.url);
     }
   }
-  
+
   refreshIconAndContextMenu(tab);
 }
 
@@ -113,7 +113,7 @@ function activateClickHide()
 {
   document.body.classList.add("clickhide-active");
   tab.sendMessage({type: "clickhide-activate"});
-  
+
   // Close the popup after a few seconds, so user doesn't have to
   activateClickHide.timeout = window.setTimeout(window.close, 5000);
 }
