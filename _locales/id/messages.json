@@ -12,7 +12,7 @@
     "message": "Tambahkan penyaring?"
   },
   "add_your_own_filters": {
-    "message": "Tambahkan penyaring sendiri"
+    "message": "Tambahkan filter sendiri"
   },
   "apply_changes": {
     "message": "Terapkan perubahan"
@@ -26,14 +26,35 @@
   "clickhide_instructions": {
     "message": "Setelah menutup sembulan ini , klik (atau klik kanan) elemen pada halaman web."
   },
+  "description_chrome": {
+    "message": "Alat pemblokir iklan gratis untuk Chrome: Blokir iklan video yang menjengkelkan di YouTube, iklan Facebook, spanduk dan banyak lagi."
+  },
+  "description_opera": {
+    "message": "Alat pemblokir iklan gratis untuk Opera: Blokir iklan video yang menjengkelkan di YouTube, iklan Facebook, spanduk dan banyak lagi."
+  },
+  "description_safari": {
+    "message": "Alat pemblokir iklan gratis untuk Safari: Blokir iklan video yang menjengkelkan di YouTube, iklan Facebook, spanduk dan banyak lagi."
+  },
   "disable_inline": {
     "message": "Nonaktifkan iklan teks"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Nonaktifkan</strong> pada situs ini"
   },
   "disabled_for_these_domains": {
     "message": "Adblock menonaktifkan daftar domain di bawah. Anda dapat menambah sebuah domain melalui ikon Adblock Plus pada alamat bar atau dengan mengetikan domain (tidak sebuah URL) di sebuah boks dan klik tombol \"Tambah Domain\""
   },
+  "easy_create_filter": {
+    "message": "Blokir elemen"
+  },
   "edit_filters_raw": {
     "message": "Ubah penyaring sebagai teks mentah"
+  },
+  "enable_only_the": {
+    "message": "Aktifkan hanya daftar filter yang diperlukan. Terlalu banyak dapat membuat peramban menjadi tidak responsif."
+  },
+  "enabled_for_site": {
+    "message": "<strong>Aktifkan</strong> pada situs ini"
   },
   "filter_lists": {
     "message": "Daftar penyaring"
@@ -68,6 +89,9 @@
   },
   "options": {
     "message": "Pengaturan Adblock Plus"
+  },
+  "options_short": {
+    "message": "Opsi"
   },
   "out_of_date_lists": {
     "message": "Daftar lama diperbaharui secara berkala"
@@ -118,12 +142,21 @@
     "message": "Bagikan ke Twitter"
   },
   "stats_share_message": {
-    "message": "Aku memblokir $number$ iklan dan pelacak berkat Adblock Plus.",
+    "message": "Saya memblokir $number$ iklan dan pelacak berkat Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
       }
     }
+  },
+  "stats_share_title": {
+    "message": "Bagikan angka ini"
+  },
+  "stats_show_iconnumber": {
+    "message": "Tampilkan angka didalam ikon"
+  },
+  "stats_title": {
+    "message": "Iklan terblokir"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Silakan pilih langganan penyaring dari daftar:"

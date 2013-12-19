@@ -97,7 +97,7 @@
     "message": "Zastarané zoznamy sú pravidelne aktualizované."
   },
   "remove_button": {
-    "message": "Odstrániť vybraté"
+    "message": "Odstrániť vybrané"
   },
   "show_block_element_menu": {
     "message": "Zobraziť zablokovaný prvok kliknutím na položku pravým tlačidlom"
@@ -156,7 +156,7 @@
     "message": "Zobraziť počet v ikone"
   },
   "stats_title": {
-    "message": "Reklamy blokované"
+    "message": "Blokované reklamy"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Prosím, zvoľte odber filtra zo zoznamu:"
