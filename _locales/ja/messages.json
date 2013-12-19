@@ -39,7 +39,7 @@
     "message": "インラインテキスト広告を無効にする"
   },
   "disabled_for_site": {
-    "message": "このサイトでは<strong>無効</strong>"
+    "message": "このサイトで<strong>無効</strong>"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus を以下のドメインで無効にします。アドレスバーの Adblock Plus アイコン、または下の欄にドメイン（URL ではない）を入力し「ドメインを追加」ボタンで追加できます。"
@@ -54,7 +54,7 @@
     "message": "本当に必要なフィルタのみを有効にしてください。多過ぎるフィルタはブラウザを重くします。"
   },
   "enabled_for_site": {
-    "message": "このサイトでは<strong>有効</strong>"
+    "message": "このサイトで<strong>有効</strong>"
   },
   "filter_lists": {
     "message": "フィルタリスト"
