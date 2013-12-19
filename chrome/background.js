@@ -219,7 +219,7 @@
         });
         return;
       }
-      
+
       if ("color" in badge)
       {
         chrome.browserAction.setBadgeBackgroundColor({
@@ -227,7 +227,7 @@
           color: badge.color
         });
       }
-  
+
       if ("number" in badge)
       {
         chrome.browserAction.setBadgeText({
