@@ -22,9 +22,9 @@ document_start = ext/common.js ext/content.js include.preload.js
 document_end = include.postload.js
 
 [mapping]
-ext/common.js = chrome/common.js
-ext/background.js = chrome/background.js
-ext/content.js = chrome/content.js
+ext/common.js = chrome/ext/common.js
+ext/background.js = chrome/ext/background.js
+ext/content.js = chrome/ext/content.js
 subscriptions.xml = adblockplus/chrome/content/ui/subscriptions.xml
 firstRun.html = adblockplus/chrome/content/ui/firstRun.html
 firstRun.js = adblockplus/chrome/content/ui/firstRun.js

@@ -7,10 +7,14 @@ version = 0.1
 author = Eyeo GmbH
 homepage = http://adblockplus.org/
 
+[contentScripts]
+document_start = ext/common.js ext/content.js include.preload.js include.youtube.js
+
 [mapping]
-ext/common.js = safari/common.js
-ext/background.js = safari/background.js
-ext/content.js = safari/content.js
+ext/common.js = safari/ext/common.js
+ext/background.js = safari/ext/background.js
+ext/content.js = safari/ext/content.js
+include.youtube.js = safari/include.youtube.js
 Icon.png = icons/abp-128.png
 
 [convert_js]
