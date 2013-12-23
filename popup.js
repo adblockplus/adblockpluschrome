@@ -66,11 +66,13 @@ function init()
     win.getActiveTab(function(t)
     {
       tab = t;
-      document.getElementById("enabled").classList.toggle("off", isWhitelisted(tab.url));
+      if (isWhitelisted(tab.url))
+        document.getElementById("enabled").classList.add("off");
 
       tab.sendMessage({type: "get-clickhide-state"}, function(response)
       {
-        document.body.classList.toggle("clickhide-active", response && response.active);
+        if (response && response.active)
+          document.body.classList.add("clickhide-active");
       });
     });
   });
