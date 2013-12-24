@@ -11,6 +11,7 @@ homepage = http://adblockplus.org/
 ext/common.js = safari/common.js
 ext/background.js = safari/background.js
 ext/content.js = safari/content.js
+Icon.png = icons/abp-128.png
 
 [convert_js]
 lib/io.js = lib/websql/io.js
