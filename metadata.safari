@@ -3,7 +3,6 @@ inherit = metadata.common
 
 [general]
 basename = adblockplussafari
-version = 0.1
 author = Eyeo GmbH
 homepage = http://adblockplus.org/
 
