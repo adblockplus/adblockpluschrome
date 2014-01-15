@@ -45,7 +45,7 @@
     {
       return function (event)
       {
-        if (event.name == "loading" && event.message == event.target.url)
+        if (event.name == "loading")
           listener(new Tab(event.target));
       };
     }
