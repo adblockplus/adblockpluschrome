@@ -263,24 +263,24 @@
   {
     var type;
 
-    switch(event.target.nodeName)
+    switch(event.target.localName)
     {
-      case "FRAME":
-      case "IFRAME":
+      case "frame":
+      case "iframe":
         type = "frame";
         break;
-      case "IMG":
+      case "img":
         type = "image";
         break;
-      case "OBJECT":
-      case "EMBED":
+      case "object":
+      case "embed":
         type = "object";
         break;
-      case "SCRIPT":
+      case "script":
         type = "script";
         break;
-      case "LINK":
-        if (/(^|\s)stylesheet($|\s)/i.test(event.target.rel))
+      case "link":
+        if (/\bstylesheet\b/i.test(event.target.rel))
         {
           type = "stylesheet";
           break;
