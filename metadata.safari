@@ -30,9 +30,6 @@ popup_height = 420
 [toolbar_items]
 item_image = icons/abp-16.png
 item_popover = popup
-item_menu = menu
-item_label = will_be_replaced_with_translation
-item_tool_tip = will_be_replaced_with_translation
 
 [convert_img]
 icons/abp-16.png = icons/abp-16.png -> contrastToAlpha
