@@ -58,6 +58,12 @@
   // import ext into the javascript context of the popover. This code might fail,
   // when the background page isn't ready yet. So it is important to put it below
   // the reloading code above.
-  window.ext = backgroundPage.ext;
+  window.ext = {
+    __proto__: backgroundPage.ext,
+    closePopup: function()
+    {
+      safari.self.hide();
+    }
+  };
   window.TabMap = backgroundPage.TabMap;
 })();
