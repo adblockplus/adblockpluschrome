@@ -291,7 +291,16 @@
     }
 
     if (!safari.self.tab.canLoad(event, {type: "webRequest", payload: {url: event.url, type: type}}))
+    {
       event.preventDefault();
+
+      // Safari doesn't dispatch an "error" or "load" event when preventing an
+      // element from loading by cancelling the "beforeload" event. So we have
+      // to dispatch it manually. Otherwise element collapsing wouldn't work.
+      var evt = document.createEvent("Event");
+      evt.initEvent(type == "sub_frame" ? "load" : "error");
+      event.target.dispatchEvent(evt);
+    }
   }, true);
 
 
