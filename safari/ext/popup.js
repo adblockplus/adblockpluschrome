@@ -37,6 +37,15 @@
   });
 
 
+  // Safari doesn't hide popovers automatically, when we change the active tab
+  // programmatically, like when the options link is clicked. So we add an event
+  // listener to do so.
+  safari.application.addEventListener("activate", function()
+  {
+    safari.self.hide();
+  }, true);
+
+
   // import ext into the javascript context of the popover. This code might fail,
   // when the background page isn't ready yet. So it is important to put it below
   // the reloading code above.
