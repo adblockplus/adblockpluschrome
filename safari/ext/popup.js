@@ -10,6 +10,33 @@
     document.location.reload();
   }, true);
 
+
+  // Safari doesn't adjust the size of the popover automatically to the size
+  // of its content, like when the ad counter is expanded/collapsed. So we add
+  // event listeners to do so.
+  var updateSize = function()
+  {
+    safari.self.width = document.body.offsetWidth;
+    safari.self.height = document.body.offsetHeight;
+  };
+
+  window.addEventListener("load", function()
+  {
+    updateSize();
+
+    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    if (MutationObserver)
+    {
+      new MutationObserver(updateSize).observe(document, {
+        childList: true, attributes: true,
+        characterData: true, subtree: true
+      });
+    }
+    else
+      document.addEventListener("DOMSubtreeModified", updateSize);
+  });
+
+
   // import ext into the javascript context of the popover. This code might fail,
   // when the background page isn't ready yet. So it is important to put it below
   // the reloading code above.

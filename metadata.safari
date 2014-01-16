@@ -23,10 +23,6 @@ lib/io.js = lib/websql/io.js
 
 [popovers]
 popup_filename = popup.html
-popup_width = 250
-popup_height = 420
-#popup_width = 155
-#popup_height = 70
 
 [toolbar_items]
 item_image = icons/abp-16.png
