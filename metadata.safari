@@ -13,6 +13,7 @@ document_start = ext/common.js ext/content.js include.preload.js include.youtube
 ext/common.js = safari/ext/common.js
 ext/background.js = safari/ext/background.js
 ext/content.js = safari/ext/content.js
+ext/popup.js = safari/ext/popup.js
 include.youtube.js = safari/include.youtube.js
 Icon.png = icons/abp-128.png
 
