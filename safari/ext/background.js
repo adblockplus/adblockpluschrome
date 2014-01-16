@@ -188,307 +188,305 @@
     }
   };
 
-  if (safari.extension.globalPage.contentWindow == window)
-  {
-    /* Background page proxy */
 
-    var proxy = {
-      tabs: [],
-      objects: [],
+  /* Background page proxy */
 
-      registerObject: function(obj, objects)
+  var proxy = {
+    tabs: [],
+    objects: [],
+
+    registerObject: function(obj, objects)
+    {
+      var objectId = objects.indexOf(obj);
+
+      if (objectId == -1)
+        objectId = objects.push(obj) - 1;
+
+      return objectId;
+    },
+    serializeSequence: function(sequence, objects, memo)
+    {
+      if (!memo)
+        memo = {specs: [], arrays: []};
+
+      var items = [];
+      for (var i = 0; i < sequence.length; i++)
+        items.push(this.serialize(sequence[i], objects, memo));
+
+      return items;
+    },
+    serialize: function(obj, objects, memo)
+    {
+      if (typeof obj == "object" && obj != null || typeof obj == "function")
       {
-        var objectId = objects.indexOf(obj);
-
-        if (objectId == -1)
-          objectId = objects.push(obj) - 1;
-
-        return objectId;
-      },
-      serializeSequence: function(sequence, objects, memo)
-      {
-        if (!memo)
-          memo = {specs: [], arrays: []};
-
-        var items = [];
-        for (var i = 0; i < sequence.length; i++)
-          items.push(this.serialize(sequence[i], objects, memo));
-
-        return items;
-      },
-      serialize: function(obj, objects, memo)
-      {
-        if (typeof obj == "object" && obj != null || typeof obj == "function")
+        if (obj.constructor == Array)
         {
-          if (obj.constructor == Array)
-          {
-            if (!memo)
-              memo = {specs: [], arrays: []};
+          if (!memo)
+            memo = {specs: [], arrays: []};
 
-            var idx = memo.arrays.indexOf(obj);
-            if (idx != -1)
-              return memo.specs[idx];
-
-            var spec = {type: "array"};
-            memo.specs.push(spec);
-            memo.arrays.push(obj);
-
-            spec.items = this.serializeSequence(obj, objects, memo);
-            return spec;
-          }
-
-          if (obj.constructor != Date && obj.constructor != RegExp)
-            return {type: "object", objectId: this.registerObject(obj, objects)};
-        }
-
-        return {type: "value", value: obj};
-      },
-      createCallback: function(callbackId, tab)
-      {
-        var proxy = this;
-
-        return function()
-        {
-          var idx = proxy.tabs.indexOf(tab);
-
-          if (idx != -1) {
-            var objects = proxy.objects[idx];
-
-            tab.page.dispatchMessage("proxyCallback",
-            {
-              callbackId: callbackId,
-              contextId: proxy.registerObject(this, objects),
-              args: proxy.serializeSequence(arguments, objects)
-            });
-          }
-        };
-      },
-      deserialize: function(spec, objects, tab, memo)
-      {
-        switch (spec.type)
-        {
-          case "value":
-            return spec.value;
-          case "hosted":
-            return objects[spec.objectId];
-          case "callback":
-            return this.createCallback(spec.callbackId, tab);
-          case "object":
-          case "array":
-            if (!memo)
-              memo = {specs: [], objects: []};
-
-            var idx = memo.specs.indexOf(spec);
-            if (idx != -1)
-              return memo.objects[idx];
-
-            var obj;
-            if (spec.type == "array")
-              obj = [];
-            else
-              obj = {};
-
-            memo.specs.push(spec);
-            memo.objects.push(obj);
-
-            if (spec.type == "array")
-              for (var i = 0; i < spec.items.length; i++)
-                obj.push(this.deserialize(spec.items[i], objects, tab, memo));
-            else
-              for (var k in spec.properties)
-                obj[k] = this.deserialize(spec.properties[k], objects, tab, memo);
-
-            return obj;
-        }
-      },
-      createObjectCache: function(tab)
-      {
-        var objects = [window];
-
-        this.tabs.push(tab);
-        this.objects.push(objects);
-
-        tab.addEventListener("close", function()
-        {
-          var idx = this.tabs.indexOf(tab);
-
+          var idx = memo.arrays.indexOf(obj);
           if (idx != -1)
-          {
-            this.tabs.splice(idx, 1);
-            this.objects.splice(idx, 1);
-          }
-        }.bind(this));
+            return memo.specs[idx];
 
-        return objects;
-      },
-      getObjectCache: function(tab)
+          var spec = {type: "array"};
+          memo.specs.push(spec);
+          memo.arrays.push(obj);
+
+          spec.items = this.serializeSequence(obj, objects, memo);
+          return spec;
+        }
+
+        if (obj.constructor != Date && obj.constructor != RegExp)
+          return {type: "object", objectId: this.registerObject(obj, objects)};
+      }
+
+      return {type: "value", value: obj};
+    },
+    createCallback: function(callbackId, tab)
+    {
+      var proxy = this;
+
+      return function()
+      {
+        var idx = proxy.tabs.indexOf(tab);
+
+        if (idx != -1) {
+          var objects = proxy.objects[idx];
+
+          tab.page.dispatchMessage("proxyCallback",
+          {
+            callbackId: callbackId,
+            contextId: proxy.registerObject(this, objects),
+            args: proxy.serializeSequence(arguments, objects)
+          });
+        }
+      };
+    },
+    deserialize: function(spec, objects, tab, memo)
+    {
+      switch (spec.type)
+      {
+        case "value":
+          return spec.value;
+        case "hosted":
+          return objects[spec.objectId];
+        case "callback":
+          return this.createCallback(spec.callbackId, tab);
+        case "object":
+        case "array":
+          if (!memo)
+            memo = {specs: [], objects: []};
+
+          var idx = memo.specs.indexOf(spec);
+          if (idx != -1)
+            return memo.objects[idx];
+
+          var obj;
+          if (spec.type == "array")
+            obj = [];
+          else
+            obj = {};
+
+          memo.specs.push(spec);
+          memo.objects.push(obj);
+
+          if (spec.type == "array")
+            for (var i = 0; i < spec.items.length; i++)
+              obj.push(this.deserialize(spec.items[i], objects, tab, memo));
+          else
+            for (var k in spec.properties)
+              obj[k] = this.deserialize(spec.properties[k], objects, tab, memo);
+
+          return obj;
+      }
+    },
+    createObjectCache: function(tab)
+    {
+      var objects = [window];
+
+      this.tabs.push(tab);
+      this.objects.push(objects);
+
+      tab.addEventListener("close", function()
       {
         var idx = this.tabs.indexOf(tab);
-        var objects;
 
         if (idx != -1)
-          objects = this.objects[idx];
-        else
-          objects = this.objects[idx] = this.createObjectCache(tab);
+        {
+          this.tabs.splice(idx, 1);
+          this.objects.splice(idx, 1);
+        }
+      }.bind(this));
 
-        return objects;
-      },
-      fail: function(error)
+      return objects;
+    },
+    getObjectCache: function(tab)
+    {
+      var idx = this.tabs.indexOf(tab);
+      var objects;
+
+      if (idx != -1)
+        objects = this.objects[idx];
+      else
+        objects = this.objects[idx] = this.createObjectCache(tab);
+
+      return objects;
+    },
+    fail: function(error)
+    {
+      if (error instanceof Error)
+        error = error.message;
+      return {succeed: false, error: error};
+    },
+    _handleMessage: function(message, tab)
+    {
+      var objects = this.getObjectCache(tab);
+
+      switch (message.type)
       {
-        if (error instanceof Error)
-          error = error.message;
-        return {succeed: false, error: error};
-      },
+        case "getProperty":
+          var obj = objects[message.objectId];
+
+          try
+          {
+            var value = obj[message.property];
+          }
+          catch (e)
+          {
+            return this.fail(e);
+          }
+
+          return {succeed: true, result: this.serialize(value, objects)};
+        case "setProperty":
+          var obj = objects[message.objectId];
+          var value = this.deserialize(message.value, objects, tab);
+
+          try
+          {
+            obj[message.property] = value;
+          }
+          catch (e)
+          {
+            return this.fail(e);
+          }
+
+          return {succeed: true};
+        case "callFunction":
+          var func = objects[message.functionId];
+          var context = objects[message.contextId];
+
+          var args = [];
+          for (var i = 0; i < message.args.length; i++)
+            args.push(this.deserialize(message.args[i], objects, tab));
+
+          try
+          {
+            var result = func.apply(context, args);
+          }
+          catch (e)
+          {
+            return this.fail(e);
+          }
+
+          return {succeed: true, result: this.serialize(result, objects)};
+        case "inspectObject":
+          var obj = objects[message.objectId];
+          var objectInfo = {properties: {}, isFunction: typeof obj == "function"};
+
+          Object.getOwnPropertyNames(obj).forEach(function(prop)
+          {
+            objectInfo.properties[prop] = {
+              enumerable: Object.prototype.propertyIsEnumerable.call(obj, prop)
+            };
+          });
+
+          if (obj.__proto__)
+            objectInfo.prototypeId = this.registerObject(obj.__proto__, objects);
+
+          if (obj == Object.prototype)
+            objectInfo.prototypeOf = "Object";
+          if (obj == Function.prototype)
+            objectInfo.prototypeOf = "Function";
+
+          return objectInfo;
+      }
+    }
+  };
+
+
+  /* Web request blocking */
+
+  ext.webRequest = {
+    onBeforeRequest: {
+      _listeners: [],
+      _urlPatterns: [],
+
       _handleMessage: function(message, tab)
       {
-        var objects = this.getObjectCache(tab);
+        tab = new Tab(tab);
 
-        switch (message.type)
+        for (var i = 0; i < this._listeners.length; i++)
         {
-          case "getProperty":
-            var obj = objects[message.objectId];
+          var regex = this._urlPatterns[i];
 
-            try
-            {
-              var value = obj[message.property];
-            }
-            catch (e)
-            {
-              return this.fail(e);
-            }
-
-            return {succeed: true, result: this.serialize(value, objects)};
-          case "setProperty":
-            var obj = objects[message.objectId];
-            var value = this.deserialize(message.value, objects, tab);
-
-            try
-            {
-              obj[message.property] = value;
-            }
-            catch (e)
-            {
-              return this.fail(e);
-            }
-
-            return {succeed: true};
-          case "callFunction":
-            var func = objects[message.functionId];
-            var context = objects[message.contextId];
-
-            var args = [];
-            for (var i = 0; i < message.args.length; i++)
-              args.push(this.deserialize(message.args[i], objects, tab));
-
-            try
-            {
-              var result = func.apply(context, args);
-            }
-            catch (e)
-            {
-              return this.fail(e);
-            }
-
-            return {succeed: true, result: this.serialize(result, objects)};
-          case "inspectObject":
-            var obj = objects[message.objectId];
-            var objectInfo = {properties: {}, isFunction: typeof obj == "function"};
-
-            Object.getOwnPropertyNames(obj).forEach(function(prop)
-            {
-              objectInfo.properties[prop] = {
-                enumerable: Object.prototype.propertyIsEnumerable.call(obj, prop)
-              };
-            });
-
-            if (obj.__proto__)
-              objectInfo.prototypeId = this.registerObject(obj.__proto__, objects);
-
-            if (obj == Object.prototype)
-              objectInfo.prototypeOf = "Object";
-            if (obj == Function.prototype)
-              objectInfo.prototypeOf = "Function";
-
-            return objectInfo;
+          if ((!regex || regex.test(message.url)) && this._listeners[i](message.url, message.type, tab, 0, -1) === false)
+            return false;
         }
-      }
-    };
 
-
-    /* Web request blocking */
-
-    ext.webRequest = {
-      onBeforeRequest: {
-        _listeners: [],
-        _urlPatterns: [],
-
-        _handleMessage: function(message, tab)
-        {
-          tab = new Tab(tab);
-
-          for (var i = 0; i < this._listeners.length; i++)
-          {
-            var regex = this._urlPatterns[i];
-
-            if ((!regex || regex.test(message.url)) && this._listeners[i](message.url, message.type, tab, 0, -1) === false)
-              return false;
-          }
-
-          return true;
-        },
-        addListener: function(listener, urls)
-        {
-          var regex;
-
-          if (urls)
-            regex = new RegExp("^(?:" + urls.map(function(url)
-            {
-              return url.split("*").map(function(s)
-              {
-                return s.replace(/([.?+^$[\]\\(){}|-])/g, "\\$1");
-              }).join(".*");
-            }).join("|") + ")($|[?#])");
-
-          this._listeners.push(listener);
-          this._urlPatterns.push(regex);
-        },
-        removeListener: function(listener)
-        {
-          var idx = this._listeners.indexOf(listener);
-
-          if (idx != -1)
-          {
-            this._listeners.splice(idx, 1);
-            this._urlPatterns.splice(idx, 1);
-          }
-        }
+        return true;
       },
-      handlerBehaviorChanged: function() {}
-    };
-
-
-    /* Synchronous messaging */
-
-    safari.application.addEventListener("message", function(event)
-    {
-      if (event.name == "canLoad")
+      addListener: function(listener, urls)
       {
-        var handler;
+        var regex;
 
-        switch (event.message.type)
+        if (urls)
+          regex = new RegExp("^(?:" + urls.map(function(url)
+          {
+            return url.split("*").map(function(s)
+            {
+              return s.replace(/([.?+^$[\]\\(){}|-])/g, "\\$1");
+            }).join(".*");
+          }).join("|") + ")($|[?#])");
+
+        this._listeners.push(listener);
+        this._urlPatterns.push(regex);
+      },
+      removeListener: function(listener)
+      {
+        var idx = this._listeners.indexOf(listener);
+
+        if (idx != -1)
         {
-          case "proxy":
-            handler = proxy;
-            break;
-          case "webRequest":
-            handler = ext.webRequest.onBeforeRequest;
-            break;
+          this._listeners.splice(idx, 1);
+          this._urlPatterns.splice(idx, 1);
         }
-
-        event.message = handler._handleMessage(event.message.payload, event.target);
       }
-    }, true);
-  }
+    },
+    handlerBehaviorChanged: function() {}
+  };
+
+
+  /* Synchronous messaging */
+
+  safari.application.addEventListener("message", function(event)
+  {
+    if (event.name == "canLoad")
+    {
+      var handler;
+
+      switch (event.message.type)
+      {
+        case "proxy":
+          handler = proxy;
+          break;
+        case "webRequest":
+          handler = ext.webRequest.onBeforeRequest;
+          break;
+      }
+
+      event.message = handler._handleMessage(event.message.payload, event.target);
+    }
+  }, true);
 
 
   /* API */
@@ -528,15 +526,4 @@
     create: function(title, contexts, onclick) {},
     removeAll: function(callback) {}
   };
-
-  // Safari will load the bubble once, and then show it everytime the icon is
-  // clicked. While Chrome loads it everytime you click the icon. So in order to
-  // force the same behavior in Safari, we are going to reload the page of the
-  // bubble everytime it is shown.
-  if (safari.extension.globalPage.contentWindow != window)
-    safari.application.addEventListener("popover", function()
-    {
-      document.documentElement.style.display = "none";
-      document.location.reload();
-    }, true);
 })();

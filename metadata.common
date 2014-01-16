@@ -26,6 +26,7 @@ document_end = include.postload.js
 ext/common.js = chrome/ext/common.js
 ext/background.js = chrome/ext/background.js
 ext/content.js = chrome/ext/content.js
+ext/popup.js = chrome/ext/popup.js
 subscriptions.xml = adblockplus/chrome/content/ui/subscriptions.xml
 firstRun.html = adblockplus/chrome/content/ui/firstRun.html
 firstRun.js = adblockplus/chrome/content/ui/firstRun.js
