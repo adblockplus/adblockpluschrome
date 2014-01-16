@@ -70,7 +70,7 @@
     _wrapListener: function(listener) {
       return function(message, sender, sendResponse)
       {
-        if (sender.tab && sender.tab.id >= 0)
+        if ("Tab" in window && sender.tab && sender.tab.id >= 0)
           sender.tab = new Tab(sender.tab);
         return listener(message, sender, sendResponse);
       };

@@ -76,7 +76,7 @@
         var sender = {};
         var dispatcher;
 
-        if ("SafariBrowserTab" in window && event.target instanceof SafariBrowserTab)
+        if ("Tab" in window && "SafariBrowserTab" in window && event.target instanceof SafariBrowserTab)
         {
           dispatcher = event.target.page;
           sender.tab = new Tab(event.target);
