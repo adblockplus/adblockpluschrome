@@ -268,7 +268,7 @@
     {
       case "frame":
       case "iframe":
-        type = "sub_rame";
+        type = "sub_frame";
         break;
       case "img":
         type = "image";
