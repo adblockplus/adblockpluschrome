@@ -7,13 +7,13 @@
   // popover when the background page wasn't ready yet, since we have to access
   // the background page in the popover.
   var backgroundPage = safari.extension.globalPage.contentWindow;
-  var readyState = backgroundPage.document.readyState;
+  var valid = backgroundPage.document.readyState == "complete";
   var activeTab = safari.application.activeBrowserWindow.activeTab;
   var mayResize = true;
 
   safari.self.addEventListener("popover", function()
   {
-    if (activeTab != safari.application.activeBrowserWindow.activeTab || readyState != "complete")
+    if (!valid || activeTab != safari.application.activeBrowserWindow.activeTab)
     {
       mayResize = false;
       document.documentElement.style.display = "none";
@@ -68,6 +68,7 @@
     closePopup: function()
     {
       safari.self.hide();
+      valid = false;
     }
   };
   window.TabMap = backgroundPage.TabMap;
