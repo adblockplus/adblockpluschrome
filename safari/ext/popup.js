@@ -9,11 +9,13 @@
   var backgroundPage = safari.extension.globalPage.contentWindow;
   var readyState = backgroundPage.document.readyState;
   var activeTab = safari.application.activeBrowserWindow.activeTab;
+  var mayResize = true;
 
   safari.self.addEventListener("popover", function()
   {
     if (activeTab != safari.application.activeBrowserWindow.activeTab || readyState != "complete")
     {
+      mayResize = false;
       document.documentElement.style.display = "none";
       document.location.reload();
     }
@@ -25,8 +27,11 @@
   // event listeners to do so.
   var updateSize = function()
   {
-    safari.self.width = document.body.offsetWidth;
-    safari.self.height = document.body.offsetHeight;
+    if (mayResize)
+    {
+      safari.self.width = document.body.offsetWidth;
+      safari.self.height = document.body.offsetHeight;
+    ]
   };
 
   window.addEventListener("load", function()
