@@ -21,6 +21,25 @@
     safari.self.tab.dispatchMessage("loading");
 
 
+  /* Events */
+
+  var ContentMessageEventTarget = function()
+  {
+    MessageEventTarget.call(this, safari.self);
+  };
+  ContentMessageEventTarget.prototype = {
+    __proto__: MessageEventTarget.prototype,
+    _getResponseDispatcher: function(event)
+    {
+      return event.target.tab;
+    },
+    _getSenderDetails: function(event)
+    {
+      return {};
+    }
+  };
+
+
   /* Background page proxy */
   var proxy = {
     objects: [],
@@ -290,7 +309,17 @@
         type = "other";
     }
 
-    if (!safari.self.tab.canLoad(event, {type: "webRequest", payload: {url: event.url, type: type}}))
+    if (!safari.self.tab.canLoad(
+      event, {
+        type: "webRequest",
+        payload: {
+          url: event.url,
+          type: type,
+          documentUrl: document.location.href,
+          isTopLevel: window == window.top
+        }
+      }
+    ))
     {
       event.preventDefault();
 
@@ -307,14 +336,25 @@
   /* API */
 
   ext.backgroundPage = {
-    _eventTarget: safari.self,
-    _messageDispatcher: safari.self.tab,
-
-    sendMessage: sendMessage,
-    getWindow: function() { return proxy.getObject(0); }
+    sendMessage: function(message, responseCallback)
+    {
+      _sendMessage(
+        message, responseCallback,
+        safari.self.tab, safari.self,
+        {
+          documentUrl: document.location.href,
+          isTopLevel: window == window.top
+        }
+      );
+    },
+    getWindow: function()
+    {
+      return proxy.getObject(0);
+    }
   };
 
-  ext.onMessage = new MessageEventTarget(safari.self);
+  ext.onMessage = new ContentMessageEventTarget();
+
 
   // Safari does not pass the element which the context menu is refering to
   // so we need to add it to the event's user info.

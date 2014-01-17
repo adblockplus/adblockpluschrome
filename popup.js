@@ -16,13 +16,14 @@
  */
 
 var backgroundPage = ext.backgroundPage.getWindow();
-var imports = ["require", "isWhitelisted", "extractHostFromURL", "refreshIconAndContextMenu", "openOptions"];
+var imports = ["require", "extractHostFromURL", "refreshIconAndContextMenu", "openOptions"];
 for (var i = 0; i < imports.length; i++)
   window[imports[i]] = backgroundPage[imports[i]];
 
 var Filter = require("filterClasses").Filter;
 var FilterStorage = require("filterStorage").FilterStorage;
 var Prefs = require("prefs").Prefs;
+var isWhitelisted = require("whitelisting").isWhitelisted;
 
 var tab = null;
 

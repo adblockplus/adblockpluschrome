@@ -22,10 +22,12 @@ if (require("info").platform == "chromium" && "webNavigation" in chrome)
   chrome.webNavigation.onCreatedNavigationTarget.addListener(function(details)
   {
     var sourceTab = new Tab({id: details.sourceTabId});
-    if (isFrameWhitelisted(sourceTab, details.sourceFrameId))
+    var sourceFrame = new Frame({id: details.sourceFrameId, tab: sourceTab});
+
+    if (isFrameWhitelisted(sourceTab, sourceFrame))
       return;
 
-    var openerUrl = getFrameUrl(sourceTab, details.sourceFrameId);
+    var openerUrl = sourceFrame.url;
     if (!openerUrl)
     {
       // We don't know the opener tab
