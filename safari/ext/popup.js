@@ -31,7 +31,7 @@
     {
       safari.self.width = document.body.offsetWidth;
       safari.self.height = document.body.offsetHeight;
-    ]
+    }
   };
 
   window.addEventListener("load", function()
