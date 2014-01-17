@@ -59,7 +59,6 @@
     }
   };
 
-
   MessageEventTarget = function(target)
   {
     WrappedEventTarget.call(this, target, "message", false);
@@ -70,28 +69,16 @@
     {
       return function(event)
       {
-        if (event.name.indexOf("request-") != 0)
-          return;
-
-        var sender = {};
-        var dispatcher;
-
-        if ("Tab" in window && "SafariBrowserTab" in window && event.target instanceof SafariBrowserTab)
-        {
-          dispatcher = event.target.page;
-          sender.tab = new Tab(event.target);
-        }
-        else
-        {
-          dispatcher = event.target.tab;
-          sender.tab = null;
-        }
-
-        listener(event.message, sender, function(message)
-        {
-          dispatcher.dispatchMessage("response-" + event.name.substr(8), message);
-        });
-      };
+        if (event.name == "request")
+          listener(event.message.payload, this._getSenderDetails(event), function(message)
+          {
+            this._getResponseDispatcher(event).dispatchMessage("response",
+            {
+              requestId: event.message.requestId,
+              payload: message
+            });
+          }.bind(this));
+      }.bind(this);
     }
   };
 
@@ -100,25 +87,27 @@
 
   var requestCounter = 0;
 
-  sendMessage = function(message, responseCallback)
+  _sendMessage = function(message, responseCallback, messageDispatcher, responseEventTarget, extra)
   {
     var requestId = ++requestCounter;
 
     if (responseCallback)
     {
-      var eventTarget = this._eventTarget;
       var responseListener = function(event)
       {
-        if (event.name == "response-" + requestId)
+        if (event.name == "response" && event.message.requestId == requestId)
         {
-          eventTarget.removeEventListener("message", responseListener, false);
-          responseCallback(event.message);
+          responseEventTarget.removeEventListener("message", responseListener, false);
+          responseCallback(event.message.payload);
         }
       };
-      eventTarget.addEventListener("message", responseListener, false);
+      responseEventTarget.addEventListener("message", responseListener, false);
     }
 
-    this._messageDispatcher.dispatchMessage("request-" + requestId, message);
+    var rawMessage = {requestId: requestId, payload: message};
+    for (var k in extra)
+      rawMessage[k] = extra[k];
+    messageDispatcher.dispatchMessage("request", rawMessage);
   };
 
 

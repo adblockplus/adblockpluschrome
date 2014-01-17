@@ -17,7 +17,7 @@
 
 (function()
 {
-  /* Tabs */
+  /* Events */
 
   var TabEventTarget = function()
   {
@@ -51,16 +51,40 @@
     }
   };
 
+  var BackgroundMessageEventTarget = function()
+  {
+    MessageEventTarget.call(this, safari.application);
+  };
+  BackgroundMessageEventTarget.prototype = {
+    __proto__: MessageEventTarget.prototype,
+    _getResponseDispatcher: function(event)
+    {
+      return event.target.page;
+    },
+    _getSenderDetails: function(event)
+    {
+      return {
+        tab: new Tab(event.target),
+        frame: new Frame(
+          event.message.documentUrl,
+          event.message.isTopLevel,
+          event.target
+        )
+      };
+    }
+  };
+
+
+  /* Tabs */
+
   Tab = function(tab)
   {
     this._tab = tab;
 
-    this._eventTarget = tab;
-    this._messageDispatcher = tab.page;
-
     this.browserAction = new BrowserAction(this);
 
     this.onLoading = new LoadingTabEventTarget(tab);
+    this.onBeforeNavigate = new TabEventTarget(tab, "beforeNavigate", false);
     this.onCompleted = new TabEventTarget(tab, "navigate", false);
     this.onActivated = new TabEventTarget(tab, "activate", false);
     this.onRemoved = new TabEventTarget(tab, "close", false);
@@ -78,15 +102,22 @@
     {
       this._tab.activate();
     },
-    sendMessage: sendMessage
+    sendMessage: function(message, responseCallback)
+    {
+      _sendMessage(
+        message, responseCallback,
+        this._tab.page, this._tab
+      );
+    }
   };
 
-  TabMap = function()
+  TabMap = function(deleteTabOnBeforeNavigate)
   {
     this._tabs = [];
     this._values = [];
 
-    this._onClosed = this._onClosed.bind(this);
+    this._deleteOnEvent = this._deleteOnEvent.bind(this);
+    this._deleteTabOnBeforeNavigate = deleteTabOnBeforeNavigate;
   };
   TabMap.prototype =
   {
@@ -109,7 +140,9 @@
         this._tabs.push(tab._tab);
         this._values.push(value);
 
-        tab._tab.addEventListener("close", this._onClosed, false);
+        tab._tab.addEventListener("close", this._deleteOnEvent, false);
+        if (this._deleteTabOnBeforeNavigate)
+          tab._tab.addEventListener("beforeNavigate", this._deleteOnEvent, false);
       }
     },
     has: function(tab)
@@ -130,12 +163,14 @@
         this._tabs.splice(idx, 1);
         this._values.splice(idx, 1);
 
-        tab.removeEventListener("close", this._onClosed, false);
+        tab.removeEventListener("close", this._deleteOnEvent, false);
+        tab.removeEventListener("beforeNavigate", this._deleteOnEvent, false);
       }
     },
-    _onClosed: function(event)
+    _deleteOnEvent: function(event)
     {
-      this._delete(event.target);
+      // delay so that other event handlers can still look this tab up
+      setTimeout(this._delete.bind(this, event.target), 0);
     }
   };
   TabMap.prototype["delete"] = function(tab)
@@ -145,6 +180,7 @@
 
   ext.tabs = {
     onLoading: new LoadingTabEventTarget(safari.application),
+    onBeforeNavigate: new TabEventTarget(safari.application, "beforeNavigate", true),
     onCompleted: new TabEventTarget(safari.application, "navigate", true),
     onActivated: new TabEventTarget(safari.application, "activate", true),
     onRemoved: new TabEventTarget(safari.application, "close", true)
@@ -265,6 +301,22 @@
       if (callback)
         callback(new Tab(tab));
     }
+  };
+
+
+  /* Frames */
+
+  Frame = function(url, isTopLevel, tab)
+  {
+    this.url = url;
+
+    // there is no way to discover frames with Safari's API.
+    // so if this isn't the top level frame, assume that the parent is.
+    // this is the best we can do for Safari. :(
+    if (!isTopLevel)
+      this.parent = new Frame(tab.url, true);
+    else
+      this.parent = null;
   };
 
 
@@ -498,47 +550,29 @@
   ext.webRequest = {
     onBeforeRequest: {
       _listeners: [],
-      _urlPatterns: [],
 
-      _handleMessage: function(message, tab)
+      _handleMessage: function(message, rawTab)
       {
-        tab = new Tab(tab);
+        var tab = new Tab(rawTab);
+        var frame = new Frame(message.documentUrl, message.isTopLevel, rawTab);
 
         for (var i = 0; i < this._listeners.length; i++)
         {
-          var regex = this._urlPatterns[i];
-
-          if ((!regex || regex.test(message.url)) && this._listeners[i](message.url, message.type, tab, 0, -1) === false)
+          if (this._listeners[i](message.url, message.type, tab, frame) === false)
             return false;
         }
 
         return true;
       },
-      addListener: function(listener, urls)
+      addListener: function(listener)
       {
-        var regex;
-
-        if (urls)
-          regex = new RegExp("^(?:" + urls.map(function(url)
-          {
-            return url.split("*").map(function(s)
-            {
-              return s.replace(/([.?+^$[\]\\(){}|-])/g, "\\$1");
-            }).join(".*");
-          }).join("|") + ")($|[?#])");
-
         this._listeners.push(listener);
-        this._urlPatterns.push(regex);
       },
       removeListener: function(listener)
       {
         var idx = this._listeners.indexOf(listener);
-
         if (idx != -1)
-        {
           this._listeners.splice(idx, 1);
-          this._urlPatterns.splice(idx, 1);
-        }
       }
     },
     handlerBehaviorChanged: function() {}
@@ -591,7 +625,7 @@
     }
   };
 
-  ext.onMessage = new MessageEventTarget(safari.application);
+  ext.onMessage = new BackgroundMessageEventTarget();
 
   var contextMenuItems = [];
   var isContextMenuHidden = true;

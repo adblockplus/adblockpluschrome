@@ -82,7 +82,6 @@ function checkCollapse(event)
       {
         type: "should-collapse",
         url: url,
-        documentUrl: document.URL,
         mediatype: typeMap[tag]
       },
 
@@ -110,13 +109,11 @@ function init()
   document.addEventListener("error", checkCollapse, true);
   document.addEventListener("load", checkCollapse, true);
 
-  ext.backgroundPage.sendMessage(
-    {
-      type: "get-selectors",
-      frameUrl: window.location.href
-    },
-    setElemhideCSSRules
-  );
+  var attr = document.documentElement.getAttribute("data-adblockkey");
+  if (attr)
+    ext.backgroundPage.sendMessage({type: "add-key-exception", token: attr});
+
+  ext.backgroundPage.sendMessage({type: "get-selectors"}, setElemhideCSSRules);
 }
 
 // In Chrome 18 the document might not be initialized yet

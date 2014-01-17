@@ -27,6 +27,12 @@ with(require("subscriptionClasses"))
   this.Subscription = Subscription;
   this.DownloadableSubscription = DownloadableSubscription;
 }
+with(require("whitelisting"))
+{
+  this.isWhitelisted = isWhitelisted;
+  this.isFrameWhitelisted = isFrameWhitelisted;
+  this.processKeyException = processKeyException;
+}
 var FilterStorage = require("filterStorage").FilterStorage;
 var ElemHide = require("elemHide").ElemHide;
 var defaultMatcher = require("matcher").defaultMatcher;
@@ -75,24 +81,6 @@ function removeDeprecatedOptions()
 
 // Remove deprecated options before we do anything else.
 removeDeprecatedOptions();
-
-/**
- * Checks whether a page is whitelisted.
- * @param {String} url
- * @param {String} [parentUrl] URL of the parent frame
- * @param {String} [type] content type to be checked, default is "DOCUMENT"
- * @return {Filter} filter that matched the URL or null if not whitelisted
- */
-function isWhitelisted(url, parentUrl, type)
-{
-  // Ignore fragment identifier
-  var index = url.indexOf("#");
-  if (index >= 0)
-    url = url.substring(0, index);
-
-  var result = defaultMatcher.matchesAny(url, type || "DOCUMENT", extractHostFromURL(parentUrl || url), false);
-  return (result instanceof WhitelistFilter ? result : null);
-}
 
 var activeNotification = null;
 
@@ -319,32 +307,18 @@ function showNotification(notification)
     prepareNotificationIconAndPopup();
 }
 
-/**
- * This function is a hack - we only know the tabId and document URL for a
- * message but we need to know the frame ID. Try to find it in webRequest"s
- * frame data.
- */
-function getFrameId(tab, url)
-{
-  for (var frameId in frames.get(tab))
-    if (getFrameUrl(tab, frameId) == url)
-      return frameId;
-  return -1;
-}
-
 ext.onMessage.addListener(function (msg, sender, sendResponse)
 {
   switch (msg.type)
   {
     case "get-selectors":
       var selectors = null;
-      var frameId = sender.tab ? getFrameId(sender.tab, msg.frameUrl) : -1;
 
-      if (!isFrameWhitelisted(sender.tab, frameId, "DOCUMENT") &&
-          !isFrameWhitelisted(sender.tab, frameId, "ELEMHIDE"))
+      if (!isFrameWhitelisted(sender.tab, sender.frame, "DOCUMENT") &&
+          !isFrameWhitelisted(sender.tab, sender.frame, "ELEMHIDE"))
       {
         var noStyleRules = false;
-        var host = extractHostFromURL(msg.frameUrl);
+        var host = extractHostFromURL(sender.frame.url);
         for (var i = 0; i < noStyleRulesHosts.length; i++)
         {
           var noStyleHost = noStyleRulesHosts[i];
@@ -367,16 +341,14 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       sendResponse(selectors);
       break;
     case "should-collapse":
-      var frameId = sender.tab ? getFrameId(sender.tab, msg.documentUrl) : -1;
-
-      if (isFrameWhitelisted(sender.tab, frameId, "DOCUMENT"))
+      if (isFrameWhitelisted(sender.tab, sender.frame, "DOCUMENT"))
       {
         sendResponse(false);
         break;
       }
 
       var requestHost = extractHostFromURL(msg.url);
-      var documentHost = extractHostFromURL(msg.documentUrl);
+      var documentHost = extractHostFromURL(sender.frame.url);
       var thirdParty = isThirdParty(requestHost, documentHost);
       var filter = defaultMatcher.matchesAny(msg.url, msg.mediatype, documentHost, thirdParty);
       if (filter instanceof BlockingFilter)
@@ -410,6 +382,9 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       {
         tab.sendMessage(msg);
       });
+      break;
+    case "add-key-exception":
+      processKeyException(msg.token, sender.tab, sender.frame);
       break;
     case "forward":
       if (sender.tab)

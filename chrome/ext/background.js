@@ -99,6 +99,22 @@
     }
   };
 
+  var BeforeNavigateTabEventTarget = function()
+  {
+    TabEventTarget.call(this, chrome.webNavigation.onBeforeNavigate);
+  };
+  BeforeNavigateTabEventTarget.prototype = {
+    __proto__: TabEventTarget.prototype,
+    _wrapListener: function(listener)
+    {
+      return function(details)
+      {
+        if (details.frameId == 0)
+          listener(new Tab({id: details.tabId, url: details.url}));
+      };
+    }
+  };
+
   var LoadingTabEventTarget = function()
   {
     TabEventTarget.call(this, chrome.tabs.onUpdated);
@@ -161,33 +177,16 @@
     }
   };
 
-  var BeforeRequestEventTarget = function()
+  var BackgroundMessageEventTarget = function()
   {
-    WrappedEventTarget.call(this, chrome.webRequest.onBeforeRequest);
-  };
-  BeforeRequestEventTarget.prototype = {
-    __proto__: WrappedEventTarget.prototype,
-    _wrapListener: function(listener)
+    MessageEventTarget.call(this);
+  }
+  BackgroundMessageEventTarget.prototype = {
+    __proto__: MessageEventTarget.prototype,
+    _wrapSender: function(sender)
     {
-      return function(details)
-      {
-        var tab = null;
-
-        if (details.tabId != -1)
-          tab = new Tab({id: details.tabId});
-
-        return {cancel: listener(
-          details.url,
-          details.type,
-          tab,
-          details.frameId,
-          details.parentFrameId
-        ) === false};
-      };
-    },
-    _prepareExtraArguments: function(urls)
-    {
-      return [urls ? {urls: urls} : {}, ["blocking"]];
+      var tab = new Tab(sender.tab);
+      return {tab: tab, frame: new Frame({url: sender.url, tab: tab})};
     }
   };
 
@@ -241,16 +240,35 @@
   Tab = function(tab)
   {
     this._id = tab.id;
+    this._url = tab.url;
 
-    this.url = tab.url;
     this.browserAction = new BrowserAction(tab.id);
 
+    this.onBeforeNavigate = ext.tabs.onBeforeNavigate._bindToTab(this);
     this.onLoading = ext.tabs.onLoading._bindToTab(this);
     this.onCompleted = ext.tabs.onCompleted._bindToTab(this);
     this.onActivated = ext.tabs.onActivated._bindToTab(this);
     this.onRemoved = ext.tabs.onRemoved._bindToTab(this);
   };
   Tab.prototype = {
+    get url()
+    {
+      // usually our Tab objects are created from chrome Tab objects, which
+      // provide the url. So we can return the url given in the constructor.
+      if (this._url != null)
+        return this._url;
+
+      // but sometimes we only have the id when we create a Tab object.
+      // In that case we get the url from top frame of the tab, recorded by
+      // the onBeforeRequest handler.
+      var frames = framesOfTabs.get(this);
+      if (frames)
+      {
+        var frame = frames[0];
+        if (frame)
+          return frame.url;
+      }
+    },
     close: function()
     {
       chrome.tabs.remove(this._id);
@@ -265,10 +283,12 @@
     }
   };
 
-  TabMap = function()
+  TabMap = function(deleteTabOnBeforeNavigate)
   {
     this._map = {};
-    this.delete = this.delete.bind(this);
+
+    this._delete = this._delete.bind(this);
+    this._deleteTabOnBeforeNavigate = deleteTabOnBeforeNavigate;
   };
   TabMap.prototype = {
     get: function(tab)
@@ -278,7 +298,11 @@
     set: function(tab, value)
     {
       if (!(tab._id in this._map))
-        tab.onRemoved.addListener(this.delete);
+      {
+        tab.onRemoved.addListener(this._delete);
+        if (this._deleteTabOnBeforeNavigate)
+          tab.onBeforeNavigate.addListener(this._delete);
+      }
 
       this._map[tab._id] = {tab: tab, value: value};
     },
@@ -290,12 +314,19 @@
     {
       for (var id in this._map)
         this.delete(this._map[id].tab);
+    },
+    _delete: function(tab)
+    {
+      // delay so that other event handlers can still lookup this tab
+      setTimeout(this.delete.bind(this, tab), 0);
     }
   };
   TabMap.prototype["delete"] = function(tab)
   {
     delete this._map[tab._id];
-    tab.onRemoved.removeListener(this.delete);
+
+    tab.onRemoved.removeListener(this._delete);
+    tab.onBeforeNavigate.removeListener(this._delete);
   };
 
 
@@ -336,6 +367,118 @@
   };
 
 
+  /* Frames */
+
+  var framesOfTabs = new TabMap();
+
+  Frame = function(params)
+  {
+    this._tab = params.tab;
+    this._id = params.id;
+    this._url = params.url;
+  };
+  Frame.prototype = {
+    get url()
+    {
+      if (this._url != null)
+        return this._url;
+
+      var frames = framesOfTabs.get(this._tab);
+      if (frames)
+      {
+        var frame = frames[this._id];
+        if (frame)
+          return frame.url;
+      }
+    },
+    get parent()
+    {
+      var frames = framesOfTabs.get(this._tab);
+      if (frames)
+      {
+        var frame;
+        if (this._id != null)
+          frame = frames[this._id];
+        else
+        {
+          // the frame ID wasn't available when we created
+          // the Frame object (e.g. for the onMessage event),
+          // so we have to find the frame details by their URL.
+          for (var frameId in frames)
+          {
+            if (frames[frameId].url == this._url)
+            {
+              frame = frames[frameId];
+              break;
+            }
+          }
+        }
+
+        if (!frame || frame.parent == -1)
+          return null;
+
+        return new Frame({id: frame.parent, tab: this._tab});
+      }
+    }
+  };
+
+
+  /* Web request blocking */
+
+  chrome.webRequest.onBeforeRequest.addListener(function(details)
+  {
+    // the high-level code isn't interested in requests that aren't related
+    // to a tab and since those can only be handled in Chrome, we ignore
+    // them here instead of in the browser independent high-level code.
+    if (details.tabId == -1)
+      return;
+
+    var tab = new Tab({id: details.tabId});
+    var frames = framesOfTabs.get(tab);
+
+    if (!frames)
+    {
+      frames = [];
+      framesOfTabs.set(tab, frames);
+
+      // assume that the first request belongs to the top frame. Chrome
+      // may give the top frame the type "object" instead of "main_frame".
+      // https://code.google.com/p/chromium/issues/detail?id=281711
+      if (frameId == 0)
+        details.type = "main_frame";
+    }
+
+    var frameId;
+    if (details.type == "main_frame" || details.type == "sub_frame")
+    {
+      frameId = details.parentFrameId;
+      frames[details.frameId] = {url: details.url, parent: frameId};
+
+      // the high-level code isn't interested in top frame requests and
+      // since those can only be handled in Chrome, we ignore them here
+      // instead of in the browser independent high-level code.
+      if (details.type == "main_frame")
+        return;
+    }
+    else
+      frameId = details.frameId;
+
+    // the high-level code relies on the frame. However in case the frame can't
+    // be controlled by the extension or the extension was (re)loaded after the
+    // frame was loaded, the frame is unknown and we have to ignore the request.
+    if (!(frameId in frames))
+      return;
+
+    var frame = new Frame({id: frameId, tab: tab});
+
+    for (var i = 0; i < ext.webRequest.onBeforeRequest._listeners.length; i++)
+    {
+      if (ext.webRequest.onBeforeRequest._listeners[i](details.url, details.type, tab, frame) === false)
+        return {cancel: true};
+    }
+  }, {urls: ["<all_urls>"]}, ["blocking"]);
+
+
   /* API */
 
   ext.windows = {
@@ -359,6 +502,7 @@
   };
 
   ext.tabs = {
+    onBeforeNavigate: new BeforeNavigateTabEventTarget(),
     onLoading: new LoadingTabEventTarget(),
     onCompleted: new CompletedTabEventTarget(),
     onActivated: new ActivatedTabEventTarget(),
@@ -366,7 +510,7 @@
   };
 
   ext.webRequest = {
-    onBeforeRequest: new BeforeRequestEventTarget(),
+    onBeforeRequest: new SimpleEventTarget(),
     handlerBehaviorChanged: chrome.webRequest.handlerBehaviorChanged
   };
 
@@ -418,4 +562,6 @@
       isContextMenuHidden = true;
     }
   };
+
+  ext.onMessage = new BackgroundMessageEventTarget();
 })();
