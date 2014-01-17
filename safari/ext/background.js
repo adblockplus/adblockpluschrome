@@ -58,6 +58,8 @@
     this._eventTarget = tab;
     this._messageDispatcher = tab.page;
 
+    this.browserAction = new BrowserAction(this);
+
     this.onLoading = new LoadingTabEventTarget(tab);
     this.onCompleted = new TabEventTarget(tab, "navigate", false);
     this.onActivated = new TabEventTarget(tab, "activate", false);
@@ -76,24 +78,7 @@
     {
       this._tab.activate();
     },
-    sendMessage: sendMessage,
-    browserAction: {
-      setIcon: function(path)
-      {
-        safari.extension.toolbarItems[0].image = safari.extension.baseURI + path;
-      },
-      setTitle: function(title)
-      {
-        safari.extension.toolbarItems[0].toolTip = title;
-      },
-      setBadge: function(badge)
-      {
-        if (!badge)
-          safari.extension.toolbarItems[0].badge = 0;
-        else if ("number" in badge)
-          safari.extension.toolbarItems[0].badge = badge.number;
-      }
-    }
+    sendMessage: sendMessage
   };
 
   TabMap = function()
@@ -157,6 +142,100 @@
   {
     this._delete(tab._tab);
   };
+
+  ext.tabs = {
+    onLoading: new LoadingTabEventTarget(safari.application),
+    onCompleted: new TabEventTarget(safari.application, "navigate", true),
+    onActivated: new TabEventTarget(safari.application, "activate", true),
+    onRemoved: new TabEventTarget(safari.application, "close", true)
+  };
+
+
+  /* Browser actions */
+
+  var toolbarItemProperties = {};
+
+  var getToolbarItemProperty = function(name)
+  {
+    var property = toolbarItemProperties[name];
+    if (!property)
+    {
+      property = {tabs: new TabMap()};
+      toolbarItemProperties[name] = property;
+    }
+    return property;
+  };
+
+  var getToolbarItemForWindow = function(win)
+  {
+    for (var i = 0; i < safari.extension.toolbarItems.length; i++)
+    {
+      var toolbarItem = safari.extension.toolbarItems[i];
+
+      if (toolbarItem.browserWindow == win)
+        return toolbarItem;
+    }
+
+    return null;
+  };
+
+  var BrowserAction = function(tab)
+  {
+    this._tab = tab;
+  };
+  BrowserAction.prototype = {
+    _set: function(name, value)
+    {
+      var currentWindow = this._tab._tab.browserWindow;
+      var toolbarItem = getToolbarItemForWindow(currentWindow);
+
+      if (toolbarItem)
+      {
+        var property = getToolbarItemProperty(name);
+        property.tabs.set(this._tab, value);
+
+        if (!("global" in property))
+          property.global = toolbarItem[name];
+
+        if (this._tab._tab == currentWindow.activeTab)
+          toolbarItem[name] = value;
+      }
+    },
+    setIcon: function(path)
+    {
+      this._set("image", safari.extension.baseURI + path);
+    },
+    setTitle: function(title)
+    {
+      this._set("label", title);
+      this._set("toolTip", title);
+    },
+    setBadge: function(badge)
+    {
+      if (!badge)
+        this._set("badge", 0);
+      else if ("number" in badge)
+        this._set("badge", badge.number);
+    }
+  };
+
+  ext.tabs.onActivated.addListener(function(tab)
+  {
+    var toolbarItem = getToolbarItemForWindow(tab._tab.browserWindow);
+
+    if (!toolbarItem)
+      return;
+
+    for (var name in toolbarItemProperties)
+    {
+      var property = toolbarItemProperties[name];
+
+      if (property.tabs.has(tab))
+        toolbarItem[name] = property.tabs.get(tab);
+      else
+        toolbarItem[name] = property.global;
+    }
+  });
 
 
   /* Windows */
@@ -503,13 +582,6 @@
     {
       callback(new Window(safari.application.activeBrowserWindow));
     }
-  };
-
-  ext.tabs = {
-    onLoading: new LoadingTabEventTarget(safari.application),
-    onCompleted: new TabEventTarget(safari.application, "navigate", true),
-    onActivated: new TabEventTarget(safari.application, "activate", true),
-    onRemoved: new TabEventTarget(safari.application, "close", true)
   };
 
   ext.backgroundPage = {

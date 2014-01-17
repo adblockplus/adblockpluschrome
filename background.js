@@ -129,8 +129,6 @@ function refreshIconAndContextMenu(tab)
   }
 
   tab.browserAction.setIcon(iconFilename);
-  tab.browserAction.setTitle(ext.i18n.getMessage("name"));
-
   iconAnimation.registerTab(tab, iconFilename);
 
   // Set context menu status according to whether current tab has whitelisted domain
