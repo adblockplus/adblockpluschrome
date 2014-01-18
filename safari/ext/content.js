@@ -315,4 +315,15 @@
   };
 
   ext.onMessage = new MessageEventTarget(safari.self);
+
+  // Safari does not pass the element which the context menu is refering to
+  // so we need to add it to the event's user info.
+  document.addEventListener("contextmenu", function(event)
+  {
+    var element = event.srcElement;
+    safari.self.tab.setContextMenuEventUserInfo(event, {
+      srcUrl: ("src" in element) ? element.src : null,
+      tagName: element.tagName
+    });
+  }, false);
 })();

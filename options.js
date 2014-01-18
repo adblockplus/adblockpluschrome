@@ -133,10 +133,10 @@ function unloadOptions()
 function initCheckbox(id)
 {
   var checkbox = document.getElementById(id);
-  checkbox.checked = typeof localStorage[id] == "undefined" ? true : localStorage[id] == "true";
+  checkbox.checked = Prefs[id];
   checkbox.addEventListener("click", function()
   {
-    localStorage[id] = checkbox.checked;
+    Prefs[id] = checkbox.checked;
   }, false);
 }
 

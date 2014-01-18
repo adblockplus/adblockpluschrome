@@ -73,22 +73,8 @@ function removeDeprecatedOptions()
   });
 }
 
-// Sets options to defaults, upgrading old options from previous versions as necessary
-function setDefaultOptions()
-{
-  function defaultOptionValue(opt, val)
-  {
-    if(!(opt in localStorage))
-      localStorage[opt] = val;
-  }
-
-  defaultOptionValue("shouldShowBlockElementMenu", "true");
-
-  removeDeprecatedOptions();
-}
-
-// Upgrade options before we do anything else.
-setDefaultOptions();
+// Remove deprecated options before we do anything else.
+removeDeprecatedOptions();
 
 /**
  * Checks whether a page is whitelisted.
@@ -133,9 +119,9 @@ function refreshIconAndContextMenu(tab)
 
   // Set context menu status according to whether current tab has whitelisted domain
   if (excluded)
-    chrome.contextMenus.removeAll();
+    ext.contextMenus.hideMenu();
   else
-    showContextMenu();
+    ext.contextMenus.showMenu();
 }
 
 /**
@@ -253,21 +239,27 @@ function addSubscription(prevVersion)
     notifyUser();
 }
 
-// Set up context menu for user selection of elements to block
-function showContextMenu()
+function setContextMenu()
 {
-  ext.contextMenus.removeAll(function()
+  if (Prefs.shouldShowBlockElementMenu)
   {
-    if(typeof localStorage["shouldShowBlockElementMenu"] == "string" && localStorage["shouldShowBlockElementMenu"] == "true")
+    // Register context menu item
+    ext.contextMenus.addMenuItem(ext.i18n.getMessage("block_element"), ["image", "video", "audio"], function(srcUrl, tab)
     {
-      ext.contextMenus.create(ext.i18n.getMessage("block_element"), ["image", "video", "audio"], function(srcUrl, tab)
-      {
-        if(srcUrl)
-          tab.sendMessage({type: "clickhide-new-filter", filter: srcUrl});
-      });
-    }
-  });
+      if (srcUrl)
+        tab.sendMessage({type: "clickhide-new-filter", filter: srcUrl});
+    });
+  }
+  else
+    ext.contextMenus.removeMenuItems();
 }
+
+Prefs.addListener(function(name)
+{
+  if (name == "shouldShowBlockElementMenu")
+    setContextMenu();
+});
+setContextMenu();
 
 /**
   * Opens options tab or focuses an existing one, within the last focused window.
@@ -391,7 +383,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       {
         var collapse = filter.collapse;
         if (collapse == null)
-          collapse = (localStorage.hidePlaceholders != "false");
+          collapse = Prefs.hidePlaceholders;
         sendResponse(collapse);
       }
       else
