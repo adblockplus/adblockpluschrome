@@ -562,8 +562,8 @@ if (document.documentElement instanceof HTMLElement)
         {
           sendResponse({filters: clickHide_filters});
 
-          clickHideFiltersDialog.style.width = (msg.width + 5) + "px";
-          clickHideFiltersDialog.style.height = (msg.height + 5) + "px";
+          clickHideFiltersDialog.style.width = msg.width + "px";
+          clickHideFiltersDialog.style.height = msg.height + "px";
           clickHideFiltersDialog.style.visibility = "visible";
         }
         break;

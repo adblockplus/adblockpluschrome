@@ -46,7 +46,7 @@ function init()
 
   document.getElementById("filters").focus();
 }
-$(init);
+window.addEventListener("load", init, false);
 
 function onKeyDown(event)
 {
