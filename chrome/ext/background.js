@@ -370,10 +370,11 @@
     handlerBehaviorChanged: chrome.webRequest.handlerBehaviorChanged
   };
 
+  var contextMenu = [];
   ext.contextMenus = {
-    create: function(title, contexts, onclick)
+    addMenuItem: function(title, contexts, onclick)
     {
-      chrome.contextMenus.create({
+      contextMenu.push({
         title: title,
         contexts: contexts,
         onclick: function(info, tab)
@@ -382,9 +383,28 @@
         }
       });
     },
-    removeAll: function(callback)
+    removeMenuItems: function()
     {
-      chrome.contextMenus.removeAll(callback);
+      contextMenu = [];
+    },
+    showMenu: function()
+    {
+      chrome.contextMenus.removeAll(function()
+      {
+        for (var i = 0; i < contextMenu.length; i++)
+        {
+          var item = contextMenu[i];
+          chrome.contextMenus.create({
+            title: item.title,
+            contexts: item.contexts,
+            onclick: item.onclick
+          });
+        }
+      });
+    },
+    hideMenu: function()
+    {
+      chrome.contextMenus.removeAll();
     }
   };
 })();

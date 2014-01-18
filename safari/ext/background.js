@@ -593,9 +593,64 @@
 
   ext.onMessage = new MessageEventTarget(safari.application);
 
-  // TODO: Implement context menu
+  var contextMenu = [];
+  var isContextMenuHidden = false;
   ext.contextMenus = {
-    create: function(title, contexts, onclick) {},
-    removeAll: function(callback) {}
+    addMenuItem: function(title, contexts, onclick)
+    {
+      contextMenu.push({
+        id: "block-element", 
+        title: title,
+        item: null,
+        contexts: contexts,
+        onclick: onclick
+      });
+    },
+    removeMenuItems: function()
+    {
+      contextMenu = [];
+    },
+    showMenu: function()
+    {
+      isContextMenuHidden = false;
+    },
+    hideMenu: function()
+    {
+      isContextMenuHidden = true;
+    }
   };
+
+  // Create context menu items
+  safari.application.addEventListener("contextmenu", function(event)
+  {
+    var context = event.userInfo.tagName.toLowerCase();
+    if (context == "img")
+      context = "image";
+
+    for (var i = 0; i < contextMenu.length; i++)
+    {
+      if (isContextMenuHidden)
+        return;
+
+      // Supported contexts are: all, audio, image, video
+      var menuItem = contextMenu[i];
+      if (menuItem.contexts.indexOf("all") == -1 && menuItem.contexts.indexOf(context) == -1)
+        return;
+      
+      menuItem.item = event.contextMenu.appendContextMenuItem(menuItem.id, menuItem.title);
+    }
+  }, false);
+
+  // Handle context menu item clicks
+  safari.application.addEventListener("command", function(event)
+  {
+    for (var i = 0; i < contextMenu.length; i++)
+    {
+      if (contextMenu[i].id == event.command)
+      {
+        contextMenu[i].onclick(event.userInfo.srcUrl, new Tab(safari.application.activeBrowserWindow.activeTab));
+        break;
+      }
+    }
+  }, false);
 })();
