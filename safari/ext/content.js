@@ -323,7 +323,7 @@
     var element = event.srcElement;
     safari.self.tab.setContextMenuEventUserInfo(event, {
       srcUrl: ("src" in element) ? element.src : null,
-      tagName: element.tagName
+      tagName: element.localName
     });
   }, false);
 })();

@@ -119,9 +119,9 @@ function refreshIconAndContextMenu(tab)
 
   // Set context menu status according to whether current tab has whitelisted domain
   if (excluded)
-    ext.contextMenus.hideMenu();
+    ext.contextMenus.hideMenuItems();
   else
-    ext.contextMenus.showMenu();
+    ext.contextMenus.showMenuItems();
 }
 
 /**

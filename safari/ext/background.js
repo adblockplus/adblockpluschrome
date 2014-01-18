@@ -593,28 +593,30 @@
 
   ext.onMessage = new MessageEventTarget(safari.application);
 
-  var contextMenu = [];
-  var isContextMenuHidden = false;
+  var contextMenuItems = [];
+  var isContextMenuHidden = true;
   ext.contextMenus = {
     addMenuItem: function(title, contexts, onclick)
     {
-      contextMenu.push({
-        id: "block-element", 
+      contextMenuItems.push({
+        id: String(contextMenuItems.length), 
         title: title,
         item: null,
         contexts: contexts,
         onclick: onclick
       });
+      this.showMenuItems();
     },
     removeMenuItems: function()
     {
-      contextMenu = [];
+      contextMenuItems = [];
+      this.hideMenuItems();
     },
-    showMenu: function()
+    showMenuItems: function()
     {
       isContextMenuHidden = false;
     },
-    hideMenu: function()
+    hideMenuItems: function()
     {
       isContextMenuHidden = true;
     }
@@ -623,32 +625,34 @@
   // Create context menu items
   safari.application.addEventListener("contextmenu", function(event)
   {
-    var context = event.userInfo.tagName.toLowerCase();
+    if (isContextMenuHidden)
+      return;
+
+    var context = event.userInfo.tagName;
     if (context == "img")
       context = "image";
+    if (!event.userInfo.srcUrl)
+      context = null;
 
-    for (var i = 0; i < contextMenu.length; i++)
+    for (var i = 0; i < contextMenuItems.length; i++)
     {
-      if (isContextMenuHidden)
-        return;
-
       // Supported contexts are: all, audio, image, video
-      var menuItem = contextMenu[i];
+      var menuItem = contextMenuItems[i];
       if (menuItem.contexts.indexOf("all") == -1 && menuItem.contexts.indexOf(context) == -1)
-        return;
+        continue;
       
-      menuItem.item = event.contextMenu.appendContextMenuItem(menuItem.id, menuItem.title);
+      event.contextMenu.appendContextMenuItem(menuItem.id, menuItem.title);
     }
   }, false);
 
   // Handle context menu item clicks
   safari.application.addEventListener("command", function(event)
   {
-    for (var i = 0; i < contextMenu.length; i++)
+    for (var i = 0; i < contextMenuItems.length; i++)
     {
-      if (contextMenu[i].id == event.command)
+      if (contextMenuItems[i].id == event.command)
       {
-        contextMenu[i].onclick(event.userInfo.srcUrl, new Tab(safari.application.activeBrowserWindow.activeTab));
+        contextMenuItems[i].onclick(event.userInfo.srcUrl, new Tab(safari.application.activeBrowserWindow.activeTab));
         break;
       }
     }

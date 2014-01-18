@@ -370,11 +370,12 @@
     handlerBehaviorChanged: chrome.webRequest.handlerBehaviorChanged
   };
 
-  var contextMenu = [];
+  var contextMenuItems = [];
+  var isContextMenuHidden = true;
   ext.contextMenus = {
     addMenuItem: function(title, contexts, onclick)
     {
-      contextMenu.push({
+      contextMenuItems.push({
         title: title,
         contexts: contexts,
         onclick: function(info, tab)
@@ -382,18 +383,23 @@
           onclick(info.srcUrl, new Tab(tab));
         }
       });
+      this.showMenuItems();
     },
     removeMenuItems: function()
     {
-      contextMenu = [];
+      contextMenuItems = [];
+      this.hideMenuItems();
     },
-    showMenu: function()
+    showMenuItems: function()
     {
+      if (!isContextMenuHidden)
+        return;
+
       chrome.contextMenus.removeAll(function()
       {
-        for (var i = 0; i < contextMenu.length; i++)
+        for (var i = 0; i < contextMenuItems.length; i++)
         {
-          var item = contextMenu[i];
+          var item = contextMenuItems[i];
           chrome.contextMenus.create({
             title: item.title,
             contexts: item.contexts,
@@ -401,10 +407,15 @@
           });
         }
       });
+      isContextMenuHidden = false;
     },
-    hideMenu: function()
+    hideMenuItems: function()
     {
+      if (isContextMenuHidden)
+        return;
+
       chrome.contextMenus.removeAll();
+      isContextMenuHidden = true;
     }
   };
 })();
