@@ -151,6 +151,9 @@
         return null;
       }
 
+      if (xhr.status != 200 && xhr.status != 0)
+        return null;
+
       return JSON.parse(xhr.responseText);
     },
     getMessage: function(msgId, substitutions)
