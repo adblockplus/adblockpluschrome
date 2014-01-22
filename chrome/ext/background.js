@@ -463,11 +463,22 @@
     else
       frameId = details.frameId;
 
-    // the high-level code relies on the frame. However in case the frame can't
-    // be controlled by the extension or the extension was (re)loaded after the
-    // frame was loaded, the frame is unknown and we have to ignore the request.
     if (!(frameId in frames))
-      return;
+    {
+      // the high-level code relies on the frame. So ignore the request if we
+      // don't even know the top-level frame. That can happen for example when
+      // the extension was just (re)loaded.
+      if (!(0 in frames))
+        return;
+
+      // however when the src of the frame is a javascript: or data: URL, we
+      // don't know the frame either. But since we know the top-level frame we
+      // can just pretend that we are in the top-level frame, in order to have
+      // at least most domain-based filter rules working.
+      frameId = 0;
+      if (details.type == "sub_frame")
+        frames[details.frameId].parent = frameId;
+    }
 
     var frame = new Frame({id: frameId, tab: tab});
 
