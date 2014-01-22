@@ -26,14 +26,35 @@
   "clickhide_instructions": {
     "message": "Miután bezártad ezt a buborékot, kattints egy elemre az oldalon.."
   },
+  "description_chrome": {
+    "message": "Ingyenes reklámszűrő kiegészítő Chrome-hoz: blokkolja az idegesítő videóreklámokat a YouTube-on, a Facebook reklámjait, bannereket…"
+  },
+  "description_opera": {
+    "message": "Ingyenes reklámszűrő kiegészítő Opera-hoz: blokkolja az idegesítő videóreklámokat a YouTube-on, a Facebook reklámjait, bannereket és még többet."
+  },
+  "description_safari": {
+    "message": "Ingyenes reklámszűrő kiegészítő Safari-hoz: blokkolja az idegesítő videóreklámokat a YouTube-on, a Facebook reklámjait, bannereket és még többet."
+  },
   "disable_inline": {
     "message": "Szöveges reklámok tiltása"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Kikapcsolva</strong> ezen a weboldalon"
   },
   "disabled_for_these_domains": {
     "message": "Az Adblock Plus le van tiltva az alább felsorolt oldalakon. Egy domaint megadhatsz az Adblock Plus ikonra kattintva a címsorban, vagy beírhatod a domaint (nem az URL-t) a dobozba és kattints a \"Domain hozzáadása\" gombra."
   },
+  "easy_create_filter": {
+    "message": "Elem blokkolása"
+  },
   "edit_filters_raw": {
     "message": "Szűrők szerkesztése nyers szövegként"
+  },
+  "enable_only_the": {
+    "message": "Csak azokat a szűrőlistákat engedélyezze amelyekre feltétlenül szüksége van. Túl sok lista esetén számottevően lelassulhat a böngészés."
+  },
+  "enabled_for_site": {
+    "message": "<strong>Engedélyezve</strong> ezen a weboldalon"
   },
   "filter_lists": {
     "message": "Szűrő lista"
@@ -68,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus beállítások"
+  },
+  "options_short": {
+    "message": "Beállítások"
   },
   "out_of_date_lists": {
     "message": "Az elavult listák időközönként frissülnek."
@@ -124,6 +148,15 @@
         "content": "$1"
       }
     }
+  },
+  "stats_share_title": {
+    "message": "Ossza meg ezeket a számokat"
+  },
+  "stats_show_iconnumber": {
+    "message": "Blokkolt reklámok számának kijelzése az ikonon"
+  },
+  "stats_title": {
+    "message": "Blokkolt reklámok:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Kérem válassza ki a szűrőt a listából:"

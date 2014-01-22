@@ -25,5 +25,61 @@
   },
   "clickhide_instructions": {
     "message": "इस पॉपअप बंद करने, के बाद क्लिक करें (या राइट-क्लिक करें) यें पृष्ठके पर एक अंग  पर।"
+  },
+  "easy_create_filter": {
+    "message": "तत्वों को प्रतिबंधित करें "
+  },
+  "filter_lists": {
+    "message": "फ़िल्टर सूची "
+  },
+  "general": {
+    "message": "सामान्य "
+  },
+  "options_short": {
+    "message": "विकल्प "
+  },
+  "remove_button": {
+    "message": "चुने हुओं को हटाएँ "
+  },
+  "show_icon": {
+    "message": "एड्रैस बार में आइकॉन दिखाएँ "
+  },
+  "stats_share_download": {
+    "message": "ऍडब्लॉक प्लस डाऊनलोड करें "
+  },
+  "stats_share_label_fb": {
+    "message": "फ़ेसबुक  पर शेयर करें "
+  },
+  "stats_share_label_gplus": {
+    "message": "गूगल+ पर शेयर करें "
+  },
+  "stats_share_label_twitter": {
+    "message": "ट्विटर पर शेयर करें "
+  },
+  "stats_share_message": {
+    "message": "मैंने नंबर और प्रचारों को प्रतिबंधित किया, ऍड ब्लॉक प्लस को धन्यवाद ",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "इन अंकों को शेयर करें "
+  },
+  "stats_show_iconnumber": {
+    "message": "आइकॉन में अंक दर्शाएँ "
+  },
+  "stats_title": {
+    "message": "प्रचार अवरुद्ध किये गए "
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "लिस्ट में से एक फ़िल्टर सब्स्क्रिप्शन चुनें: "
+  },
+  "update_now": {
+    "message": "अपडेट करें "
+  },
+  "whitelisted_domains": {
+    "message": "अधिकृत डोमेन "
   }
 }

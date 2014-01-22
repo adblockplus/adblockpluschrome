@@ -27,13 +27,13 @@
     "message": "Dopo la chiusura di questo pop-up, cliccate (o clic destro) su un elemento sulla pagina."
   },
   "description_chrome": {
-    "message": "Lo strumento anti-pubblicità gratuito per Chrome: Blocca pubblicità indesiderate su YouTube, Facebook e molti altri siti."
+    "message": "Lo strumento blocca-pubblicità gratuito per Chrome: Blocca la pubblicità indesiderate su YouTube, Facebook e molti altri siti."
   },
   "description_opera": {
-    "message": "Lo strumento anti-pubblicità gratuito per Opera: Blocca pubblicità indesiderate su YouTube, Facebook e molti altri siti."
+    "message": "Lo strumento blocca-pubblicità gratuito per Opera: Blocca la pubblicità indesiderate su YouTube, Facebook e molti altri siti."
   },
   "description_safari": {
-    "message": "Lo strumento anti-pubblicità gratuito per Safari: Blocca pubblicità indesiderate su YouTube, Facebook e molti altri siti."
+    "message": "Lo strumento blocca-pubblicità gratuito per Safari: Blocca la pubblicità indesiderate su YouTube, Facebook e molti altri siti."
   },
   "disable_inline": {
     "message": "Disabilita la pubblicità integrata nel testo"
@@ -51,7 +51,7 @@
     "message": "Modifica i filtri come testo"
   },
   "enable_only_the": {
-    "message": "Abilitare solo gli elenchi del filtri necessari. Troppi possono bloccare il vostro browser."
+    "message": "Abilitare solo gli elenchi dei filtri necessari. Troppi possono bloccare il vostro browser."
   },
   "enabled_for_site": {
     "message": "<strong>Attivato</strong> su questo sito"

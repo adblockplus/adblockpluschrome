@@ -9,7 +9,7 @@
     "message": "Tambah penyaring"
   },
   "add_filters_msg": {
-    "message": "Tambahkan penyaring?"
+    "message": "Tambahkan filter?"
   },
   "add_your_own_filters": {
     "message": "Tambahkan filter sendiri"
@@ -27,7 +27,7 @@
     "message": "Setelah menutup sembulan ini , klik (atau klik kanan) elemen pada halaman web."
   },
   "description_chrome": {
-    "message": "Alat pemblokir iklan gratis untuk Chrome: Blokir iklan video yang menjengkelkan di YouTube, iklan Facebook, spanduk dan banyak lagi."
+    "message": "Alat blokir iklan gratis untuk Chrome: blokir iklan mengganggu pada video di YouTube, iklan Facebook, spanduk dan banyak lagi."
   },
   "description_opera": {
     "message": "Alat pemblokir iklan gratis untuk Opera: Blokir iklan video yang menjengkelkan di YouTube, iklan Facebook, spanduk dan banyak lagi."
@@ -133,13 +133,13 @@
     "message": "Download Adblock Plus"
   },
   "stats_share_label_fb": {
-    "message": "Bagikan ke Facebook"
+    "message": "Berbagi di Facebook"
   },
   "stats_share_label_gplus": {
     "message": "Bagikan ke Google+"
   },
   "stats_share_label_twitter": {
-    "message": "Bagikan ke Twitter"
+    "message": "Berbagi di Twitter"
   },
   "stats_share_message": {
     "message": "Saya memblokir $number$ iklan dan pelacak berkat Adblock Plus.",

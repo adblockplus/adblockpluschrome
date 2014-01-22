@@ -142,7 +142,7 @@
     "message": "Поделиться в Твиттере"
   },
   "stats_share_message": {
-    "message": "Я заблокировал $number$ объявления и трекеров благодаря Adblock Plus.",
+    "message": "Я заблокировал $number$ объявлений и трекеров благодаря Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -150,13 +150,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Поделиться цифрами"
+    "message": "Поделиться этими числами"
   },
   "stats_show_iconnumber": {
     "message": "Показывать число в иконке"
   },
   "stats_title": {
-    "message": "Заблокировано рекламы"
+    "message": "Статистика блокирования"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Пожалуйста, выберите подписку из списка:"
