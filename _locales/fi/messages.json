@@ -26,14 +26,35 @@
   "clickhide_instructions": {
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
   },
+  "description_chrome": {
+    "message": "Ilmainen Adblock työkalu Chromelle: Estää ärsyttävät Youtuben videomainokset, Facebookin mainokset, bannerit ja paljon muuta."
+  },
+  "description_opera": {
+    "message": "Ilmainen Adblock työkalu Operalle: Estää ärsyttävät Youtuben videomainokset, Facebookin mainokset, bannerit ja paljon muuta."
+  },
+  "description_safari": {
+    "message": "Ilmainen Adblock työkalu Safarille: Estää ärsyttävät Youtuben videomainokset, Facebookin mainokset, bannerit ja paljon muuta."
+  },
   "disable_inline": {
     "message": "Estä tekstimainokset"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Poistettu</strong> tältä sivulta"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus ei estä mainoksia sivuilla jotka ovat alla listattuna. Voit lisätä sivun joko Adblock Plus kuvakkeesta osoiteriviltä tai kirjoittamalla sivun (ei osoitetta) laatikkoon ja klikkaamalla \"lisää sivu\" nappia."
   },
+  "easy_create_filter": {
+    "message": "Estä elementti"
+  },
   "edit_filters_raw": {
     "message": "Editoi suodattimia tekstimuodossa"
+  },
+  "enable_only_the": {
+    "message": "Käytä vain tarvittavia suodattimia. Liian monta suodatinta voi aiheuttaa sen että selaimesi ei vastaa."
+  },
+  "enabled_for_site": {
+    "message": "<strong>Poistettu</strong> tältä sivulta"
   },
   "filter_lists": {
     "message": "Suodatinlistat"
@@ -68,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus asetukset"
+  },
+  "options_short": {
+    "message": "Asetukset"
   },
   "out_of_date_lists": {
     "message": "Vanhentuneet listat päivitetään säännöllisesti."
@@ -124,6 +148,15 @@
         "content": "$1"
       }
     }
+  },
+  "stats_share_title": {
+    "message": "Jaa nämä luvut"
+  },
+  "stats_show_iconnumber": {
+    "message": "Näytä numerot kuvakkeessa"
+  },
+  "stats_title": {
+    "message": "Mainokset estetty"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Valitse suodatintilaus listasta:"

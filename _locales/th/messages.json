@@ -26,17 +26,32 @@
   "clickhide_instructions": {
     "message": "หลังจากปิดนี้ผุดขึ้น คลิก (หรือคลิกขวา) องค์ประกอบบนเพจ"
   },
+  "description_chrome": {
+    "message": "โปรแกรมบล็อกโฆษณาฟรีสำหรับ Chrome: บล็อกโฆษณาที่น่ากวนใจต่างๆทั้ง คลิปโฆษณาของ YouTube,โฆษณาบน Facebook, แบนเนอร์บนเว็บ และอื่นๆอีก…"
+  },
+  "description_opera": {
+    "message": "เครื่องมือบล็อกโฆษณาสำหรับ Safari: บล็อกโฆษณาต่างๆเช่น คลิปโฆษณาบน Youtube, โฆษณาของ Facebook, ป้ายแบนเนอน์ต่างๆ และอื่นๆอีกมากมาย."
+  },
   "description_safari": {
     "message": "เครื่องมือบล็อกโฆษณาสำหรับ Safari: บล็อกโฆษณาต่างๆเช่น คลิปโฆษณาบน Youtube, โฆษณาของ Facebook, ป้ายแบนเนอน์ต่างๆ และอื่นๆอีกมากมาย"
   },
   "disable_inline": {
     "message": "ปิดใช้งานข้อความโฆษณาแบบในบรรทัด"
   },
+  "disabled_for_site": {
+    "message": "<strong>เปิด</strong>บนเว็บไซต์นี้"
+  },
   "disabled_for_these_domains": {
     "message": "Adblock Plus ถูกปิดใช้งานสำหรับโดเมนที่แสดงอยู่ด้านล่าง คุณสามารถเพิ่มโดเมนได้ ผ่านไอคอน Adblock Plus ในแถบที่อยู่ หรือโดยพิมพ์โดเมน (ไม่ใช่ URL) ในกล่อง และคลิกปุ่ม \"เพิ่มโดเมน\""
   },
+  "easy_create_filter": {
+    "message": "ปิดกั้นองค์ประกอบ"
+  },
   "edit_filters_raw": {
     "message": "แก้ไขตัวกรองเป็นข้อความดิบ"
+  },
+  "enable_only_the": {
+    "message": "เปิดใช้งานเฉพาะรายการตัวกรองคุณต้องการ เกินไปมากจะทำให้เบราว์เซอร์ของคุณไม่ตอบสนองได้"
   },
   "enabled_for_site": {
     "message": "<strong>เปิด</strong>บนเว็บไซต์นี้"
@@ -74,6 +89,9 @@
   },
   "options": {
     "message": "ตัวเลือกของ Adblock Plus"
+  },
+  "options_short": {
+    "message": "ตัวเลือก"
   },
   "out_of_date_lists": {
     "message": "รายการที่ล้าสมัยจะได้รับการอัปเดตเป็นระยะ ๆ"
@@ -130,6 +148,15 @@
         "content": "$1"
       }
     }
+  },
+  "stats_share_title": {
+    "message": "ใช้ตัวเลขเหล่านี้"
+  },
+  "stats_show_iconnumber": {
+    "message": "แสดงหมายเลขในไอคอน"
+  },
+  "stats_title": {
+    "message": "บล็อกโฆษณา"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "กรุณาเลือกนามข้างท้ายตัวกรองจากรายชื่อ:"

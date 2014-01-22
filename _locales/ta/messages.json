@@ -125,6 +125,9 @@
       }
     }
   },
+  "stats_title": {
+    "message": "விளம்பரங்கள் தடுக்கப்பட்டது"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "பட்டியலில் இருந்து ஒரு வடிகட்டி சந்தாவை தேர்ந்தெடுக்கவும்:"
   },

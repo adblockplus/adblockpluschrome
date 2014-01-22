@@ -26,14 +26,35 @@
   "clickhide_instructions": {
     "message": "請在此訊息關閉後點選網頁上的元素。"
   },
+  "description_chrome": {
+    "message": "專為 Chrome 設計的 adblock：過濾網路上所有煩人的廣告，YouTube，Facebook 等等，任何您想得到的，都解決了。 "
+  },
+  "description_opera": {
+    "message": "專為 Opera 設計的 adblock：過濾網路上所有煩人的廣告，YouTube，Facebook 等等，任何您想得到的，都解決了。 "
+  },
+  "description_safari": {
+    "message": "專為 Safari 設計的 adblock：過濾網路上所有煩人的廣告，YouTube，Facebook 等等，任何您想得到的，都解決了。 "
+  },
   "disable_inline": {
     "message": "阻擋文字廣告"
+  },
+  "disabled_for_site": {
+    "message": "此網站上 <strong>停用</strong>"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus 將在以下網域停用。您可以利用網址列上的 Adblock Plus 圖示新增，或在下方輸入網域 (而非網址) 並點擊「新增網域」按鈕。"
   },
+  "easy_create_filter": {
+    "message": "阻擋網頁元素"
+  },
   "edit_filters_raw": {
     "message": "以純文字編輯"
+  },
+  "enable_only_the": {
+    "message": "只啟用您需要的篩選器清單。太多可能使您的瀏覽器沒有回應。"
+  },
+  "enabled_for_site": {
+    "message": "此網站上 <strong>啟用</strong>"
   },
   "filter_lists": {
     "message": "過濾列表"
@@ -68,6 +89,9 @@
   },
   "options": {
     "message": "Adblock Plus 選項"
+  },
+  "options_short": {
+    "message": "選項"
   },
   "out_of_date_lists": {
     "message": "過濾列表會定期自動更新。"
@@ -124,6 +148,15 @@
         "content": "$1"
       }
     }
+  },
+  "stats_share_title": {
+    "message": "分享這些數字"
+  },
+  "stats_show_iconnumber": {
+    "message": "在圖示上顯示數量"
+  },
+  "stats_title": {
+    "message": "已阻止廣告"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "請從列表中選擇過濾條件集:"
