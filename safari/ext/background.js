@@ -273,6 +273,26 @@
     }
   });
 
+  ext.tabs.onLoading.addListener(function(tab)
+  {
+    var currentWindow = tab._tab.browserWindow;
+
+    var toolbarItem;
+    if (tab._tab == currentWindow.activeTab)
+      toolbarItem = getToolbarItemForWindow(currentWindow);
+    else
+      toolbarItem = null;
+
+    for (var name in toolbarItemProperties)
+    {
+      var property = toolbarItemProperties[name];
+      property.tabs.delete(tab);
+
+      if (toolbarItem)
+        toolbarItem[name] = property.global;
+    }
+  });
+
 
   /* Windows */
 
