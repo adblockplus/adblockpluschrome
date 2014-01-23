@@ -244,11 +244,15 @@
 
     this.browserAction = new BrowserAction(tab.id);
 
-    this.onBeforeNavigate = ext.tabs.onBeforeNavigate._bindToTab(this);
     this.onLoading = ext.tabs.onLoading._bindToTab(this);
     this.onCompleted = ext.tabs.onCompleted._bindToTab(this);
     this.onActivated = ext.tabs.onActivated._bindToTab(this);
     this.onRemoved = ext.tabs.onRemoved._bindToTab(this);
+
+    // the "beforeNavigate" event in Safari isn't dispatched when a new URL
+    // was entered into the address bar. So we can only use it only on Chrome,
+    // but we have to hide it from the browser-independent high level code.
+    this._onBeforeNavigate = ext.tabs._onBeforeNavigate._bindToTab(this);
   };
   Tab.prototype = {
     get url()
@@ -283,12 +287,12 @@
     }
   };
 
-  TabMap = function(deleteTabOnBeforeNavigate)
+  TabMap = function(deleteOnPageUnload)
   {
     this._map = {};
 
     this._delete = this._delete.bind(this);
-    this._deleteTabOnBeforeNavigate = deleteTabOnBeforeNavigate;
+    this._deleteOnPageUnload = deleteOnPageUnload;
   };
   TabMap.prototype = {
     get: function(tab)
@@ -300,8 +304,8 @@
       if (!(tab._id in this._map))
       {
         tab.onRemoved.addListener(this._delete);
-        if (this._deleteTabOnBeforeNavigate)
-          tab.onBeforeNavigate.addListener(this._delete);
+        if (this._deleteOnPageUnload)
+          tab._onBeforeNavigate.addListener(this._delete);
       }
 
       this._map[tab._id] = {tab: tab, value: value};
@@ -326,7 +330,7 @@
     delete this._map[tab._id];
 
     tab.onRemoved.removeListener(this._delete);
-    tab.onBeforeNavigate.removeListener(this._delete);
+    tab._onBeforeNavigate.removeListener(this._delete);
   };
 
 
@@ -513,11 +517,15 @@
   };
 
   ext.tabs = {
-    onBeforeNavigate: new BeforeNavigateTabEventTarget(),
     onLoading: new LoadingTabEventTarget(),
     onCompleted: new CompletedTabEventTarget(),
     onActivated: new ActivatedTabEventTarget(),
-    onRemoved: new RemovedTabEventTarget()
+    onRemoved: new RemovedTabEventTarget(),
+
+    // the "beforeNavigate" event in Safari isn't dispatched when a new URL
+    // was entered into the address bar. So we can only use it only on Chrome,
+    // but we have to hide it from the browser-independent high level code.
+    _onBeforeNavigate: new BeforeNavigateTabEventTarget()
   };
 
   ext.webRequest = {
