@@ -84,7 +84,6 @@
     this.browserAction = new BrowserAction(this);
 
     this.onLoading = new LoadingTabEventTarget(tab);
-    this.onBeforeNavigate = new TabEventTarget(tab, "beforeNavigate", false);
     this.onCompleted = new TabEventTarget(tab, "navigate", false);
     this.onActivated = new TabEventTarget(tab, "activate", false);
     this.onRemoved = new TabEventTarget(tab, "close", false);
@@ -111,76 +110,78 @@
     }
   };
 
-  TabMap = function(deleteTabOnBeforeNavigate)
+  TabMap = function(deleteOnPageUnload)
   {
-    this._tabs = [];
-    this._values = [];
+    this._data = [];
+    this._deleteOnPageUnload = deleteOnPageUnload;
 
-    this._deleteOnEvent = this._deleteOnEvent.bind(this);
-    this._deleteTabOnBeforeNavigate = deleteTabOnBeforeNavigate;
+    this.delete = this.delete.bind(this);
+    this._delete = this._delete.bind(this);
   };
   TabMap.prototype =
   {
+    _indexOf: function(tab)
+    {
+      for (var i = 0; i < this._data.length; i++)
+        if (this._data[i].tab._tab == tab._tab)
+          return i;
+
+      return -1;
+    },
+    _delete: function(tab)
+    {
+      // delay so that other onClosed listeners can still look this tab up
+      setTimeout(this.delete.bind(this, tab), 0);
+    },
     get: function(tab) {
       var idx;
 
-      if (!tab || (idx = this._tabs.indexOf(tab._tab)) == -1)
+      if (!tab || (idx = this._indexOf(tab)) == -1)
         return null;
 
-      return this._values[idx];
+      return this._data[idx].value;
     },
     set: function(tab, value)
     {
-      var idx = this._tabs.indexOf(tab._tab);
+      var idx = this._indexOf(tab);
 
       if (idx != -1)
-        this._values[idx] = value;
+        this._data[idx].value = value;
       else
       {
-        this._tabs.push(tab._tab);
-        this._values.push(value);
+        this._data.push({value: value, tab: tab});
 
-        tab._tab.addEventListener("close", this._deleteOnEvent, false);
-        if (this._deleteTabOnBeforeNavigate)
-          tab._tab.addEventListener("beforeNavigate", this._deleteOnEvent, false);
+        tab.onRemoved.addListener(this._delete);
+        if (this._deleteOnPageUnload)
+          tab.onLoading.addListener(this.delete);
       }
     },
     has: function(tab)
     {
-      return this._tabs.indexOf(tab._tab) != -1;
+      return this._indexOf(tab) != -1;
     },
     clear: function()
     {
-      while (this._tabs.length > 0)
-        this._delete(this._tabs[0]);
-    },
-    _delete: function(tab)
-    {
-      var idx = this._tabs.indexOf(tab);
-
-      if (idx != -1)
-      {
-        this._tabs.splice(idx, 1);
-        this._values.splice(idx, 1);
-
-        tab.removeEventListener("close", this._deleteOnEvent, false);
-        tab.removeEventListener("beforeNavigate", this._deleteOnEvent, false);
-      }
-    },
-    _deleteOnEvent: function(event)
-    {
-      // delay so that other event handlers can still look this tab up
-      setTimeout(this._delete.bind(this, event.target), 0);
+      while (this._data.length > 0)
+        this.delete(this._data[0].tab);
     }
   };
   TabMap.prototype["delete"] = function(tab)
   {
-    this._delete(tab._tab);
+    var idx = this._indexOf(tab);
+
+    if (idx != -1)
+    {
+      tab = this._data[idx].tab;
+      this._data.splice(idx, 1);
+
+      tab.onRemoved.removeListener(this._delete);
+      tab.onLoading.removeListener(this.delete);
+    }
   };
 
   ext.tabs = {
     onLoading: new LoadingTabEventTarget(safari.application),
-    onBeforeNavigate: new TabEventTarget(safari.application, "beforeNavigate", true),
     onCompleted: new TabEventTarget(safari.application, "navigate", true),
     onActivated: new TabEventTarget(safari.application, "activate", true),
     onRemoved: new TabEventTarget(safari.application, "close", true)
