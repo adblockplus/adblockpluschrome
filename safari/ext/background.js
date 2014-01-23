@@ -164,19 +164,19 @@
     {
       while (this._data.length > 0)
         this.delete(this._data[0].tab);
-    }
-  };
-  TabMap.prototype["delete"] = function(tab)
-  {
-    var idx = this._indexOf(tab);
-
-    if (idx != -1)
+    },
+    delete: function(tab)
     {
-      tab = this._data[idx].tab;
-      this._data.splice(idx, 1);
+      var idx = this._indexOf(tab);
 
-      tab.onRemoved.removeListener(this._delete);
-      tab.onLoading.removeListener(this.delete);
+      if (idx != -1)
+      {
+        tab = this._data[idx].tab;
+        this._data.splice(idx, 1);
+
+        tab.onRemoved.removeListener(this._delete);
+        tab.onLoading.removeListener(this.delete);
+      }
     }
   };
 
