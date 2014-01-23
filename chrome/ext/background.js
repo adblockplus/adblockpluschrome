@@ -323,14 +323,14 @@
     {
       // delay so that other event handlers can still lookup this tab
       setTimeout(this.delete.bind(this, tab), 0);
-    }
-  };
-  TabMap.prototype["delete"] = function(tab)
-  {
-    delete this._map[tab._id];
+    },
+    delete: function(tab)
+    {
+      delete this._map[tab._id];
 
-    tab.onRemoved.removeListener(this._delete);
-    tab._onBeforeNavigate.removeListener(this._delete);
+      tab.onRemoved.removeListener(this._delete);
+      tab._onBeforeNavigate.removeListener(this._delete);
+    }
   };
 
 
