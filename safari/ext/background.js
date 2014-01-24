@@ -242,11 +242,6 @@
     {
       this._set("image", safari.extension.baseURI + path);
     },
-    setTitle: function(title)
-    {
-      this._set("label", title);
-      this._set("toolTip", title);
-    },
     setBadge: function(badge)
     {
       if (!badge)

@@ -204,10 +204,6 @@
     {
       chrome.browserAction.setIcon({tabId: this._tabId, path: path});
     },
-    setTitle: function(title)
-    {
-      chrome.browserAction.setTitle({tabId: this._tabId, title: title});
-    },
     setBadge: function(badge)
     {
       if (!badge)
