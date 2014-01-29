@@ -45,7 +45,7 @@
     "message": "Adblock Plus aşağıdaki adresler için devre dışı bırakıldı. Adresleri adres çubuğundaki Adblock simgesinden ekleyebilir veya alan adını (URL'yi değil) kutucuğa yazıp \"Alan adını ekle\" butonuna tıklayabilirsin."
   },
   "easy_create_filter": {
-    "message": "Blok ögesi"
+    "message": "Öğeyi Engelle"
   },
   "edit_filters_raw": {
     "message": "Filtreleri salt metin olarak düzenle"
@@ -57,7 +57,7 @@
     "message": "Bu sitede <strong>etkin</strong>"
   },
   "filter_lists": {
-    "message": "Süzgeç listesi"
+    "message": "Filtre listesi"
   },
   "filter_must_follow_syntax": {
     "message": "Eklediğiniz filtre <a>Adblock Plus filtre kurallarına</a> uymak zorundadır."
@@ -150,7 +150,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Bu numaralar paylaş"
+    "message": "Bu numaraları paylaş"
   },
   "stats_show_iconnumber": {
     "message": "Simgede numarayı göster"
