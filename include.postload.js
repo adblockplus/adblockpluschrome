@@ -299,13 +299,15 @@ function clickHide_mouseClick(e)
     clickHideFilters.push(document.domain + "###" + elementId);
     selectorList.push("#" + elementId);
   }
-  if (elementClasses)
+  if (elementClasses && elementClasses.length > 0)
   {
-    for(var i = 0; i < elementClasses.length; i++)
+    var selector = elementClasses.map(function(elClass)
     {
-      clickHideFilters.push(document.domain + "##." + elementClasses[i]);
-      selectorList.push("." + elementClasses[i]);
-    }
+      return "." + elClass.replace(/([^\w-])/, "\\$1");
+    }).join("");
+
+    clickHideFilters.push(document.domain + "##" + selector);
+    selectorList.push(selector);
   }
   if (url)
   {
