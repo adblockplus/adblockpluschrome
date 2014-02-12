@@ -88,7 +88,7 @@ window.addEventListener("load", function()
       return;
     event.preventDefault();
     event.stopPropagation();
-    ext.windows.getLastFocused(function(win) { win.openTab(link.href); });
+    ext.pages.open(link.href);
   });
 
   if (notification.type == "question")

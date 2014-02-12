@@ -86,15 +86,9 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
   // due to loading filters or saving filter changes
   if (action == "load" || action == "save")
   {
-    ext.windows.getAll(function(windows)
+    ext.pages.query({}, function(pages)
     {
-      for (var i = 0; i < windows.length; i++)
-      {
-        windows[i].getAllTabs(function(tabs)
-        {
-          tabs.forEach(refreshIconAndContextMenu);
-        });
-      }
+      pages.forEach(refreshIconAndContextMenu);
     });
   }
 });
@@ -119,24 +113,25 @@ removeDeprecatedOptions();
 var activeNotification = null;
 
 // Adds or removes browser action icon according to options.
-function refreshIconAndContextMenu(tab)
+function refreshIconAndContextMenu(page)
 {
-  var whitelisted = isWhitelisted(tab.url);
+  var whitelisted = isWhitelisted(page.url);
 
   var iconFilename;
   if (whitelisted && require("info").platform != "safari")
-    // There is no grayscale version of the icon for whitelisted tabs
+    // There is no grayscale version of the icon for whitelisted pages
     // when using Safari, because icons are grayscale already and icons
-    // aren't per tab in Safari.
+    // aren't per page in Safari.
     iconFilename = "icons/abp-$size-whitelisted.png";
   else
     iconFilename = "icons/abp-$size.png";
 
-  tab.browserAction.setIcon(iconFilename);
-  iconAnimation.registerTab(tab, iconFilename);
+  page.browserAction.setIcon(iconFilename);
+  iconAnimation.registerPage(page, iconFilename);
 
-  // Set context menu status according to whether current tab has whitelisted domain
-  if (whitelisted || !/^https?:/.test(tab.url))
+  // show or hide the context menu entry dependent on whether
+  // adblocking is active on that page
+  if (whitelisted || !/^https?:/.test(page.url))
     ext.contextMenus.hideMenuItems();
   else
     ext.contextMenus.showMenuItems();
@@ -234,10 +229,7 @@ function addSubscription(prevVersion)
 
   function notifyUser()
   {
-    ext.windows.getLastFocused(function(win)
-    {
-      win.openTab(ext.getURL("firstRun.html"));
-    });
+    ext.pages.open(ext.getURL("firstRun.html"));
   }
 
   if (addSubscription)
@@ -272,10 +264,10 @@ function setContextMenu()
   if (Prefs.shouldShowBlockElementMenu)
   {
     // Register context menu item
-    ext.contextMenus.addMenuItem(ext.i18n.getMessage("block_element"), ["image", "video", "audio"], function(srcUrl, tab)
+    ext.contextMenus.addMenuItem(ext.i18n.getMessage("block_element"), ["image", "video", "audio"], function(srcUrl, page)
     {
       if (srcUrl)
-        tab.sendMessage({type: "clickhide-new-filter", filter: srcUrl});
+        page.sendMessage({type: "clickhide-new-filter", filter: srcUrl});
     });
   }
   else
@@ -290,34 +282,29 @@ Prefs.addListener(function(name)
 setContextMenu();
 
 /**
-  * Opens options tab or focuses an existing one, within the last focused window.
+  * Opens options page or focuses an existing one, within the last focused window.
   * @param {Function} callback  function to be called with the
-                                Tab object of the options tab
+                                Page object of the options page
   */
 function openOptions(callback)
 {
-  ext.windows.getLastFocused(function(win)
+  ext.pages.query({lastFocusedWindow: true}, function(pages)
   {
-    win.getAllTabs(function(tabs)
+    var optionsUrl = ext.getURL("options.html");
+
+    for (var i = 0; i < pages.length; i++)
     {
-      var optionsUrl = ext.getURL("options.html");
-
-      for (var i = 0; i < tabs.length; i++)
+      var page = pages[i];
+      if (page.url == optionsUrl)
       {
-        if (tabs[i].url == optionsUrl)
-        {
-          tabs[i].activate();
-          if (callback)
-            callback(tabs[i]);
-          return;
-        }
+        page.activate();
+        if (callback)
+          callback(page);
+        return;
       }
+    }
 
-      win.openTab(optionsUrl, callback && function(tab)
-      {
-        tab.onCompleted.addListener(callback);
-      });
-    });
+    ext.pages.open(optionsUrl, callback);
   });
 }
 
@@ -498,8 +485,8 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
     case "get-selectors":
       var selectors = null;
 
-      if (!isFrameWhitelisted(sender.tab, sender.frame, "DOCUMENT") &&
-          !isFrameWhitelisted(sender.tab, sender.frame, "ELEMHIDE"))
+      if (!isFrameWhitelisted(sender.page, sender.frame, "DOCUMENT") &&
+          !isFrameWhitelisted(sender.page, sender.frame, "ELEMHIDE"))
       {
         var noStyleRules = false;
         var host = extractHostFromURL(sender.frame.url);
@@ -525,7 +512,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       sendResponse(selectors);
       break;
     case "should-collapse":
-      if (isFrameWhitelisted(sender.tab, sender.frame, "DOCUMENT"))
+      if (isFrameWhitelisted(sender.page, sender.frame, "DOCUMENT"))
       {
         sendResponse(false);
         break;
@@ -548,9 +535,9 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
     case "get-domain-enabled-state":
       // Returns whether this domain is in the exclusion list.
       // The browser action popup asks us this.
-      if(sender.tab)
+      if(sender.page)
       {
-        sendResponse({enabled: !isWhitelisted(sender.tab.url)});
+        sendResponse({enabled: !isWhitelisted(sender.page.url)});
         return;
       }
       break;
@@ -562,18 +549,18 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       }
       break;
     case "add-subscription":
-      openOptions(function(tab)
+      openOptions(function(page)
       {
-        tab.sendMessage(msg);
+        page.sendMessage(msg);
       });
       break;
     case "add-key-exception":
-      processKeyException(msg.token, sender.tab, sender.frame);
+      processKeyException(msg.token, sender.page, sender.frame);
       break;
     case "forward":
-      if (sender.tab)
+      if (sender.page)
       {
-        sender.tab.sendMessage(msg.payload, sendResponse);
+        sender.page.sendMessage(msg.payload, sendResponse);
         // Return true to indicate that we want to call
         // sendResponse asynchronously
         return true;
@@ -585,11 +572,11 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
   }
 });
 
-// Update icon if a tab changes location
-ext.tabs.onLoading.addListener(function(tab)
+// update icon when page changes location
+ext.pages.onLoading.addListener(function(page)
 {
-  tab.sendMessage({type: "clickhide-deactivate"});
-  refreshIconAndContextMenu(tab);
+  page.sendMessage({type: "clickhide-deactivate"});
+  refreshIconAndContextMenu(page);
 });
 
 setTimeout(function()

@@ -22,39 +22,125 @@
   if (!("safari" in window))
     window.safari = window.parent.safari;
 
-  if (window == window.top)
-    safari.self.tab.dispatchMessage("loading");
 
+  /* Intialization */
 
-  /* Events */
+  var beforeLoadEvent = document.createEvent("Event");
+  beforeLoadEvent.initEvent("beforeload");
 
-  var ContentMessageEventTarget = function()
-  {
-    MessageEventTarget.call(this, safari.self);
-  };
-  ContentMessageEventTarget.prototype = {
-    __proto__: MessageEventTarget.prototype,
-    _getResponseDispatcher: function(event)
+  var isTopLevel = window == window.top;
+  var isPrerendered = document.visibilityState == "prerender";
+
+  var documentInfo = safari.self.tab.canLoad(
+    beforeLoadEvent,
     {
-      return event.target.tab;
-    },
-    _getSenderDetails: function(event)
-    {
-      return {};
+      category: "loading",
+      url: document.location.href,
+      referrer: document.referrer,
+      isTopLevel: isTopLevel,
+      isPrerendered: isPrerendered
     }
-  };
+  );
+
+  if (isTopLevel && isPrerendered)
+  {
+    var onVisibilitychange = function()
+    {
+      safari.self.tab.dispatchMessage("replaced", {pageId: documentInfo.pageId});
+      document.removeEventListener("visibilitychange", onVisibilitychange);
+    };
+    document.addEventListener("visibilitychange", onVisibilitychange);
+  }
 
 
-  /* Background page proxy */
-  var proxy = {
+  /* Web requests */
+
+  document.addEventListener("beforeload", function(event)
+  {
+    // we don't block non-HTTP requests anyway, so we can bail out
+    // without asking the background page. This is even necessary
+    // because passing large data (like a photo encoded as data: URL)
+    // to the background page, freezes Safari.
+    if (!/^https?:/.test(event.url))
+      return;
+
+    var type;
+    switch(event.target.localName)
+    {
+      case "frame":
+      case "iframe":
+        type = "sub_frame";
+        break;
+      case "img":
+        type = "image";
+        break;
+      case "object":
+      case "embed":
+        type = "object";
+        break;
+      case "script":
+        type = "script";
+        break;
+      case "link":
+        if (/\bstylesheet\b/i.test(event.target.rel))
+        {
+          type = "stylesheet";
+          break;
+        }
+      default:
+        type = "other";
+    }
+
+    if (!safari.self.tab.canLoad(
+      event, {
+        category: "webRequest",
+        url: event.url,
+        type: type,
+        pageId: documentInfo.pageId,
+        frameId: documentInfo.frameId
+      }
+    ))
+    {
+      event.preventDefault();
+
+      // Safari doesn't dispatch an "error" event when preventing an element
+      // from loading by cancelling the "beforeload" event. So we have to
+      // dispatch it manually. Otherwise element collapsing wouldn't work.
+      if (type != "sub_frame")
+      {
+        var evt = document.createEvent("Event");
+        evt.initEvent("error");
+        event.target.dispatchEvent(evt);
+      }
+    }
+  }, true);
+
+
+  /* Context menus */
+
+  document.addEventListener("contextmenu", function(event)
+  {
+    var element = event.srcElement;
+    safari.self.tab.setContextMenuEventUserInfo(event, {
+      pageId: documentInfo.pageId,
+      srcUrl: ("src" in element) ? element.src : null,
+      tagName: element.localName
+    });
+  });
+
+
+  /* Background page */
+
+  var backgroundPageProxy = {
     objects: [],
     callbacks: [],
 
     send: function(message)
     {
-      var evt = document.createEvent("Event");
-      evt.initEvent("beforeload");
-      return safari.self.tab.canLoad(evt, {type: "proxy", payload: message});
+      message.category = "proxy";
+      message.pageId = documentInfo.pageId;
+
+      return safari.self.tab.canLoad(beforeLoadEvent, message);
     },
     checkResult: function(result)
     {
@@ -75,23 +161,10 @@
       if (typeof obj == "function")
       {
         var callbackId = this.callbacks.indexOf(obj);
-
         if (callbackId == -1)
-        {
           callbackId = this.callbacks.push(obj) - 1;
 
-          safari.self.addEventListener("message", function(event)
-          {
-            if (event.name == "proxyCallback")
-            if (event.message.callbackId == callbackId)
-              obj.apply(
-                this.getObject(event.message.contextId),
-                this.deserializeSequence(event.message.args)
-              );
-          }.bind(this));
-        }
-
-        return {type: "callback", callbackId: callbackId};
+        return {type: "callback", callbackId: callbackId, frameId: documentInfo.frameId};
       }
 
       if (typeof obj == "object" &&
@@ -226,7 +299,15 @@
         );
       };
     },
-    getObject: function(objectId) {
+    handleCallback: function(message)
+    {
+      this.callbacks[message.callbackId].apply(
+        this.getObject(message.contextId),
+        this.deserializeSequence(message.args)
+      );
+    },
+    getObject: function(objectId)
+    {
       var objectInfo = this.send({
         type: "inspectObject",
         objectId: objectId
@@ -281,104 +362,44 @@
     }
   };
 
-
-  /* Web request blocking */
-
-  document.addEventListener("beforeload", function(event)
-  {
-    // we don't block non-HTTP requests anyway, so we can bail out
-    // without asking the background page. This is even necessary
-    // because passing large data (like a photo encoded as data: URL)
-    // to the background page, freezes Safari.
-    if (!/^https?:/.test(event.url))
-      return;
-
-    var type;
-
-    switch(event.target.localName)
-    {
-      case "frame":
-      case "iframe":
-        type = "sub_frame";
-        break;
-      case "img":
-        type = "image";
-        break;
-      case "object":
-      case "embed":
-        type = "object";
-        break;
-      case "script":
-        type = "script";
-        break;
-      case "link":
-        if (/\bstylesheet\b/i.test(event.target.rel))
-        {
-          type = "stylesheet";
-          break;
-        }
-      default:
-        type = "other";
-    }
-
-    if (!safari.self.tab.canLoad(
-      event, {
-        type: "webRequest",
-        payload: {
-          url: event.url,
-          type: type,
-          documentUrl: document.location.href,
-          isTopLevel: window == window.top
-        }
-      }
-    ))
-    {
-      event.preventDefault();
-
-      // Safari doesn't dispatch an "error" event when preventing an element
-      // from loading by cancelling the "beforeload" event. So we have to
-      // dispatch it manually. Otherwise element collapsing wouldn't work.
-      if (type != "sub_frame")
-      {
-        var evt = document.createEvent("Event");
-        evt.initEvent("error");
-        event.target.dispatchEvent(evt);
-      }
-    }
-  }, true);
-
-
-  /* API */
-
   ext.backgroundPage = {
     sendMessage: function(message, responseCallback)
     {
-      _sendMessage(
-        message, responseCallback,
-        safari.self.tab, safari.self,
-        {
-          documentUrl: document.location.href,
-          isTopLevel: window == window.top
-        }
-      );
+      messageProxy.sendMessage(message, responseCallback, documentInfo);
     },
     getWindow: function()
     {
-      return proxy.getObject(0);
+      return backgroundPageProxy.getObject(0);
     }
   };
 
-  ext.onMessage = new ContentMessageEventTarget();
 
+  /* Message processing */
 
-  // Safari does not pass the element which the context menu is refering to
-  // so we need to add it to the event's user info.
-  document.addEventListener("contextmenu", function(event)
+  var messageProxy = new ext._MessageProxy(safari.self.tab);
+
+  safari.self.addEventListener("message", function(event)
   {
-    var element = event.srcElement;
-    safari.self.tab.setContextMenuEventUserInfo(event, {
-      srcUrl: ("src" in element) ? element.src : null,
-      tagName: element.localName
-    });
-  }, false);
+    if (event.message.pageId == documentInfo.pageId)
+    {
+      if (event.name == "request")
+      {
+        messageProxy.handleRequest(event.message, {});
+        return;
+      }
+
+      if (event.message.frameId == documentInfo.frameId)
+      {
+        switch (event.name)
+        {
+          case "response":
+            messageProxy.handleResponse(event.message);
+            break;
+          case "proxyCallback":
+            backgroundPageProxy.handleCallback(event.message);
+            break;
+        }
+      }
+    }
+  });
 })();

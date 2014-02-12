@@ -23,7 +23,7 @@
   var FilterNotifier = require("filterNotifier").FilterNotifier;
   var Prefs = require("prefs").Prefs;
   
-  var currentTab;
+  var currentPage;
   var shareURL = "https://adblockplus.org/";
   
   var messageMark = {};
@@ -76,17 +76,14 @@
     document.querySelector("label[for='show-iconnumber']").addEventListener("click", toggleIconNumber, false);
     
     // Update stats
-    ext.windows.getLastFocused(function(win)
+    ext.pages.query({active: true, lastFocusedWindow: true}, function(pages)
     {
-      win.getActiveTab(function(tab)
-      {
-        currentTab = tab;
-        updateStats();
+      currentPage = pages[0];
+      updateStats();
 
-        FilterNotifier.addListener(onNotify);
+      FilterNotifier.addListener(onNotify);
 
-        document.getElementById("stats-container").removeAttribute("hidden");
-      });
+      document.getElementById("stats-container").removeAttribute("hidden");
     });
   }
   
@@ -104,7 +101,7 @@
   function updateStats()
   {
     var statsPage = document.getElementById("stats-page");
-    var blockedPage = getStats("blocked", currentTab).toLocaleString();
+    var blockedPage = getStats("blocked", currentPage).toLocaleString();
     i18n.setElementText(statsPage, "stats_label_page", [blockedPage]);
     
     var statsTotal = document.getElementById("stats-total");
@@ -121,8 +118,7 @@
     else
       blocked = i18n.getMessage("stats_over", (9000).toLocaleString());
     
-    var url = createShareLink(ev.target.dataset.social, blocked);
-    ext.windows.getLastFocused(function(win) { win.openTab(url); });
+    ext.pages.open(createShareLink(ev.target.dataset.social, blocked));
   }
   
   function toggleIconNumber()
