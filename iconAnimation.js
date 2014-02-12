@@ -16,8 +16,8 @@
  */
 
 iconAnimation = {
-  _icons: new TabMap(),
-  _animatedTabs: new TabMap(),
+  _icons: new ext.PageMap(),
+  _animatedPages: new ext.PageMap(),
   _step: 0,
 
   update: function(type)
@@ -37,31 +37,31 @@ iconAnimation = {
     delete this._interval;
     delete this._type;
 
-    this._animatedTabs.clear();
+    this._animatedPages.clear();
   },
-  registerTab: function(tab, icon)
+  registerPage: function(page, icon)
   {
-    this._icons.set(tab, icon);
+    this._icons.set(page, icon);
 
-    if (this._animatedTabs.has(tab))
-      this._updateIcon(tab);
+    if (this._animatedPages.has(page))
+      this._updateIcon(page);
   },
   _start: function()
   {
     this._interval = setInterval(function()
     {
-      this._getVisibleTabs(function(tabs)
+      ext.pages.query({active: true}, function(pages)
       {
-        if (tabs.length == 0)
+        if (pages.length == 0)
           return;
 
-        for (var i = 0; i < tabs.length; i++)
-          this._animatedTabs.set(tabs[i], null);
+        for (var i = 0; i < pages.length; i++)
+          this._animatedPages.set(pages[i], null);
 
         var interval = setInterval(function()
         {
           this._step++;
-          tabs.forEach(this._updateIcon.bind(this));
+          pages.forEach(this._updateIcon.bind(this));
 
           if (this._step < 10)
             return;
@@ -72,49 +72,22 @@ iconAnimation = {
             interval = setInterval(function()
             {
               this._step--;
-              tabs.forEach(this._updateIcon.bind(this));
+              pages.forEach(this._updateIcon.bind(this));
 
               if (this._step > 0)
                 return;
 
               clearInterval(interval);
-              this._animatedTabs.clear();
+              this._animatedPages.clear();
             }.bind(this), 100);
           }.bind(this), 1000);
         }.bind(this), 100);
       }.bind(this));
     }.bind(this), 15000);
   },
-  _getVisibleTabs: function(callback)
+  _updateIcon: function(page)
   {
-    ext.windows.getAll(function(windows)
-    {
-      var tabs = [];
-      var visibleWindows = windows.length;
-
-      for (var i = 0; i < windows.length; i++)
-      {
-        if (!windows[i].visible)
-        {
-          if (--visibleWindows == 0)
-            callback(tabs);
-
-          continue;
-        }
-
-        windows[i].getActiveTab(function(tab)
-        {
-          tabs.push(tab);
-
-          if (tabs.length == visibleWindows)
-            callback(tabs);
-        });
-      }
-    });
-  },
-  _updateIcon: function(tab)
-  {
-    var path = this._icons.get(tab);
+    var path = this._icons.get(page);
 
     if (!path)
       return;
@@ -129,6 +102,6 @@ iconAnimation = {
       path = path.replace(/(?=\..+$)/, suffix);
     }
 
-    tab.browserAction.setIcon(path);
+    page.browserAction.setIcon(path);
   }
 };

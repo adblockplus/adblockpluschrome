@@ -1,12 +1,8 @@
-(function()
-{
-  var backgroundPage = chrome.extension.getBackgroundPage();
-  window.ext = {
-    __proto__: backgroundPage.ext,
-    closePopup: function()
-    {
-      window.close();
-    }
-  };
-  window.TabMap = backgroundPage.TabMap;
-})();
+window.ext = {
+  __proto__: chrome.extension.getBackgroundPage().ext,
+
+  closePopup: function()
+  {
+    window.close();
+  }
+};

@@ -10,8 +10,6 @@ homepage = http://adblockplus.org/
 document_start = ext/common.js ext/content.js include.preload.js include.youtube.js
 
 [mapping]
-ext/common.js = safari/ext/common.js
-ext/background.js = safari/ext/background.js
 ext/content.js = safari/ext/content.js
 ext/popup.js = safari/ext/popup.js
 include.youtube.js = safari/include.youtube.js
@@ -20,6 +18,8 @@ Icon.png = icons/abp-128.png
 [convert_js]
 lib/io.js = lib/storage/io.js
   --arg module=true
+ext/common.js = ext/common.js safari/ext/common.js
+ext/background.js = ext/background.js safari/ext/background.js --arg brace_style=expand
 
 [popovers]
 popup_filename = popup.html

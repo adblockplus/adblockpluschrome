@@ -17,85 +17,35 @@
 
 (function()
 {
-  /* Events */
+  /* Pages */
 
-  var TabEventTarget = function()
+  var pages = {__proto__: null};
+  var pageCounter = 0;
+
+  var Page = function(id, tab, url, prerendered)
   {
-    WrappedEventTarget.apply(this, arguments);
-  };
-  TabEventTarget.prototype = {
-    __proto__: WrappedEventTarget.prototype,
-    _wrapListener: function(listener)
-    {
-      return function(event)
-      {
-        if (event.target instanceof SafariBrowserTab)
-          listener(new Tab(event.target));
-      };
-    }
-  };
-
-  var LoadingTabEventTarget = function(target)
-  {
-    WrappedEventTarget.call(this, target, "message", false);
-  };
-  LoadingTabEventTarget.prototype = {
-    __proto__: WrappedEventTarget.prototype,
-    _wrapListener: function(listener)
-    {
-      return function (event)
-      {
-        if (event.name == "loading")
-          listener(new Tab(event.target));
-      };
-    }
-  };
-
-  var BackgroundMessageEventTarget = function()
-  {
-    MessageEventTarget.call(this, safari.application);
-  };
-  BackgroundMessageEventTarget.prototype = {
-    __proto__: MessageEventTarget.prototype,
-    _getResponseDispatcher: function(event)
-    {
-      return event.target.page;
-    },
-    _getSenderDetails: function(event)
-    {
-      return {
-        tab: new Tab(event.target),
-        frame: new Frame(
-          event.message.documentUrl,
-          event.message.isTopLevel,
-          event.target
-        )
-      };
-    }
-  };
-
-
-  /* Tabs */
-
-  Tab = function(tab)
-  {
+    this._id = id;
     this._tab = tab;
+    this._frames = [{url: url, parent: null}];
+    this._prerendered = prerendered;
+
+    if (tab.page)
+      this._messageProxy = new ext._MessageProxy(tab.page);
+    else
+      // while the new tab page is shown on Safari 7, the 'page' property
+      // of the tab is undefined, and we can't send messages to that page
+      this._messageProxy = {
+        handleRequest: function() {},
+        handleResponse: function() {},
+        sendMessage: function() {}
+      };
 
     this.browserAction = new BrowserAction(this);
-
-    this.onLoading = new LoadingTabEventTarget(tab);
-    this.onCompleted = new TabEventTarget(tab, "navigate", false);
-    this.onActivated = new TabEventTarget(tab, "activate", false);
-    this.onRemoved = new TabEventTarget(tab, "close", false);
   };
-  Tab.prototype = {
+  Page.prototype = {
     get url()
     {
-      return this._tab.url;
-    },
-    close: function()
-    {
-      this._tab.close();
+      return this._frames[0].url;
     },
     activate: function()
     {
@@ -103,105 +53,97 @@
     },
     sendMessage: function(message, responseCallback)
     {
-      _sendMessage(
-        message, responseCallback,
-        this._tab.page, this._tab
-      );
+      this._messageProxy.sendMessage(message, responseCallback, {pageId: this._id});
     }
   };
 
-  TabMap = function(deleteOnPageUnload)
+  var isPageActive = function(page)
   {
-    this._data = [];
-    this._deleteOnPageUnload = deleteOnPageUnload;
-
-    this.delete = this.delete.bind(this);
-    this._delete = this._delete.bind(this);
+    return page._tab == page._tab.browserWindow.activeTab && !page._prerendered;
   };
-  TabMap.prototype =
+
+  var forgetPage = function(id)
   {
-    _indexOf: function(tab)
+    ext._removeFromAllPageMaps(id);
+    delete pages[id];
+  };
+
+  var replacePage = function(page)
+  {
+    for (var id in pages)
     {
-      for (var i = 0; i < this._data.length; i++)
-        if (this._data[i].tab._tab == tab._tab)
-          return i;
-
-      return -1;
-    },
-    _delete: function(tab)
-    {
-      // delay so that other onClosed listeners can still look this tab up
-      setTimeout(this.delete.bind(this, tab), 0);
-    },
-    get: function(tab) {
-      var idx;
-
-      if (!tab || (idx = this._indexOf(tab)) == -1)
-        return null;
-
-      return this._data[idx].value;
-    },
-    set: function(tab, value)
-    {
-      var idx = this._indexOf(tab);
-
-      if (idx != -1)
-        this._data[idx].value = value;
-      else
-      {
-        this._data.push({value: value, tab: tab});
-
-        tab.onRemoved.addListener(this._delete);
-        if (this._deleteOnPageUnload)
-          tab.onLoading.addListener(this.delete);
-      }
-    },
-    has: function(tab)
-    {
-      return this._indexOf(tab) != -1;
-    },
-    clear: function()
-    {
-      while (this._data.length > 0)
-        this.delete(this._data[0].tab);
-    },
-    delete: function(tab)
-    {
-      var idx = this._indexOf(tab);
-
-      if (idx != -1)
-      {
-        tab = this._data[idx].tab;
-        this._data.splice(idx, 1);
-
-        tab.onRemoved.removeListener(this._delete);
-        tab.onLoading.removeListener(this.delete);
-      }
+      if (id != page._id && pages[id]._tab == page._tab)
+        forgetPage(id);
     }
+
+    if (isPageActive(page))
+      updateToolbarItemForPage(page);
   };
 
-  ext.tabs = {
-    onLoading: new LoadingTabEventTarget(safari.application),
-    onCompleted: new TabEventTarget(safari.application, "navigate", true),
-    onActivated: new TabEventTarget(safari.application, "activate", true),
-    onRemoved: new TabEventTarget(safari.application, "close", true)
+  ext.pages = {
+    open: function(url, callback)
+    {
+      var tab = safari.application.activeBrowserWindow.openTab();
+      tab.url = url;
+
+      if (callback)
+      {
+        var onLoading = function(page)
+        {
+          if (page._tab == tab)
+          {
+            ext.pages.onLoading.removeListener(onLoading);
+            callback(page);
+          }
+        };
+        ext.pages.onLoading.addListener(onLoading);
+      }
+    },
+    query: function(info, callback)
+    {
+      var matchedPages = [];
+
+      for (var id in pages)
+      {
+        var page = pages[id];
+        var win = page._tab.browserWindow;
+
+        if ("active" in info && info.active != isPageActive(page))
+          continue;
+        if ("lastFocusedWindow" in info && info.lastFocusedWindow != (win == safari.application.activeBrowserWindow))
+          continue;
+
+        matchedPages.push(page);
+      };
+
+      callback(matchedPages);
+    },
+    onLoading: new ext._EventTarget()
   };
+
+  safari.application.addEventListener("close", function(event)
+  {
+    // this event is dispatched on closing windows and tabs. However when a
+    // window is closed, it is first dispatched on each tab in the window and
+    // then on the window itself. But we are only interested in closed tabs.
+    if (!(event.target instanceof SafariBrowserTab))
+      return;
+
+    // when a tab is closed, forget the previous page associated with that
+    // tab. Note that it wouldn't be sufficient do that when the old page
+    // is unloading, because Safari dispatches window.onunload only when
+    // reloading the page or following links, but not when closing the tab.
+    for (var id in pages)
+    {
+      if (pages[id]._tab == event.target)
+        forgetPage(id);
+    }
+  }, true);
 
 
   /* Browser actions */
 
   var toolbarItemProperties = {};
-
-  var getToolbarItemProperty = function(name)
-  {
-    var property = toolbarItemProperties[name];
-    if (!property)
-    {
-      property = {tabs: new TabMap()};
-      toolbarItemProperties[name] = property;
-    }
-    return property;
-  };
 
   var getToolbarItemForWindow = function(win)
   {
@@ -216,27 +158,44 @@
     return null;
   };
 
-  var BrowserAction = function(tab)
+  var updateToolbarItemForPage = function(page, win) {
+    var toolbarItem = getToolbarItemForWindow(win || page._tab.browserWindow);
+    if (!toolbarItem)
+      return;
+
+    for (var name in toolbarItemProperties)
+    {
+      var property = toolbarItemProperties[name];
+
+      if (page && property.pages.has(page))
+        toolbarItem[name] = property.pages.get(page);
+      else
+        toolbarItem[name] = property.global;
+    }
+  };
+
+  var BrowserAction = function(page)
   {
-    this._tab = tab;
+    this._page = page;
   };
   BrowserAction.prototype = {
     _set: function(name, value)
     {
-      var currentWindow = this._tab._tab.browserWindow;
-      var toolbarItem = getToolbarItemForWindow(currentWindow);
+      var toolbarItem = getToolbarItemForWindow(this._page._tab.browserWindow);
+      if (!toolbarItem)
+        return;
 
-      if (toolbarItem)
-      {
-        var property = getToolbarItemProperty(name);
-        property.tabs.set(this._tab, value);
+      var property = toolbarItemProperties[name];
+      if (!property)
+        property = toolbarItemProperties[name] = {
+          pages: new ext.PageMap(),
+          global: toolbarItem[name]
+        };
 
-        if (!("global" in property))
-          property.global = toolbarItem[name];
+      property.pages.set(this._page, value);
 
-        if (this._tab._tab == currentWindow.activeTab)
-          toolbarItem[name] = value;
-      }
+      if (isPageActive(this._page))
+        toolbarItem[name] = value;
     },
     setIcon: function(path)
     {
@@ -251,96 +210,121 @@
     }
   };
 
-  ext.tabs.onActivated.addListener(function(tab)
+  safari.application.addEventListener("activate", function(event)
   {
-    var toolbarItem = getToolbarItemForWindow(tab._tab.browserWindow);
-
-    if (!toolbarItem)
+    // this event is also dispatched on windows that got focused. But we
+    // are only interested in tabs, which became active in their window.
+    if (!(event.target instanceof SafariBrowserTab))
       return;
 
-    for (var name in toolbarItemProperties)
+    // update the toolbar item for the page visible in the tab that just
+    // became active. If we can't find that page (e.g. when a page was
+    // opened in a new tab, and our content script didn't run yet), the
+    // toolbar item of the window, is reset to its intial configuration.
+    var activePage = null;
+    for (var id in pages)
     {
-      var property = toolbarItemProperties[name];
+      var page = pages[id];
+      if (page._tab == event.target && !page._prerendered)
+      {
+        activePage = page;
+        break;
+      }
+    }
 
-      if (property.tabs.has(tab))
-        toolbarItem[name] = property.tabs.get(tab);
-      else
-        toolbarItem[name] = property.global;
+    updateToolbarItemForPage(activePage, event.target.browserWindow);
+  }, true);
+
+
+  /* Web requests */
+
+  ext.webRequest = {
+    onBeforeRequest: new ext._EventTarget(true),
+    handlerBehaviorChanged: function() {}
+  };
+
+
+  /* Context menus */
+
+  var contextMenuItems = [];
+  var isContextMenuHidden = true;
+
+  ext.contextMenus = {
+    addMenuItem: function(title, contexts, onclick)
+    {
+      contextMenuItems.push({
+        id: String(contextMenuItems.length),
+        title: title,
+        item: null,
+        contexts: contexts,
+        onclick: onclick
+      });
+      this.showMenuItems();
+    },
+    removeMenuItems: function()
+    {
+      contextMenuItems = [];
+      this.hideMenuItems();
+    },
+    showMenuItems: function()
+    {
+      isContextMenuHidden = false;
+    },
+    hideMenuItems: function()
+    {
+      isContextMenuHidden = true;
+    }
+  };
+
+  safari.application.addEventListener("contextmenu", function(event)
+  {
+    if (isContextMenuHidden)
+      return;
+
+    var context = event.userInfo.tagName;
+    if (context == "img")
+      context = "image";
+    if (!event.userInfo.srcUrl)
+      context = null;
+
+    for (var i = 0; i < contextMenuItems.length; i++)
+    {
+      // Supported contexts are: all, audio, image, video
+      var menuItem = contextMenuItems[i];
+      if (menuItem.contexts.indexOf("all") == -1 && menuItem.contexts.indexOf(context) == -1)
+        continue;
+
+      event.contextMenu.appendContextMenuItem(menuItem.id, menuItem.title);
     }
   });
 
-  ext.tabs.onLoading.addListener(function(tab)
+  safari.application.addEventListener("command", function(event)
   {
-    var currentWindow = tab._tab.browserWindow;
-
-    var toolbarItem;
-    if (tab._tab == currentWindow.activeTab)
-      toolbarItem = getToolbarItemForWindow(currentWindow);
-    else
-      toolbarItem = null;
-
-    for (var name in toolbarItemProperties)
+    for (var i = 0; i < contextMenuItems.length; i++)
     {
-      var property = toolbarItemProperties[name];
-      property.tabs.delete(tab);
-
-      if (toolbarItem)
-        toolbarItem[name] = property.global;
+      if (contextMenuItems[i].id == event.command)
+      {
+        contextMenuItems[i].onclick(event.userInfo.srcUrl, pages[event.userInfo.pageId]);
+        break;
+      }
     }
   });
 
 
-  /* Windows */
+  /* Background page */
 
-  Window = function(win)
-  {
-    this._win = win;
-  }
-  Window.prototype = {
-    get visible()
+  ext.backgroundPage = {
+    getWindow: function()
     {
-      return this._win.visible;
-    },
-    getAllTabs: function(callback)
-    {
-      callback(this._win.tabs.map(function(tab) { return new Tab(tab); }));
-    },
-    getActiveTab: function(callback)
-    {
-      callback(new Tab(this._win.activeTab));
-    },
-    openTab: function(url, callback)
-    {
-      var tab = this._win.openTab();
-      tab.url = url;
-
-      if (callback)
-        callback(new Tab(tab));
+      return window;
     }
   };
 
 
-  /* Frames */
+  /* Background page proxy (for access from content scripts) */
 
-  Frame = function(url, isTopLevel, tab)
-  {
-    this.url = url;
-
-    // there is no way to discover frames with Safari's API.
-    // so if this isn't the top level frame, assume that the parent is.
-    // this is the best we can do for Safari. :(
-    if (!isTopLevel)
-      this.parent = new Frame(tab.url, true);
-    else
-      this.parent = null;
-  };
-
-
-  /* Background page proxy */
-
-  var proxy = {
-    tabs: [],
-    objects: [],
+  var backgroundPageProxy = {
+    cache: new ext.PageMap(),
 
     registerObject: function(obj, objects)
     {
@@ -389,27 +373,31 @@
 
       return {type: "value", value: obj};
     },
-    createCallback: function(callbackId, tab)
+    createCallback: function(callbackId, pageId, frameId)
     {
       var proxy = this;
 
       return function()
       {
-        var idx = proxy.tabs.indexOf(tab);
+        var page = pages[pageId];
+        if (!page)
+          return;
 
-        if (idx != -1) {
-          var objects = proxy.objects[idx];
+        var objects = proxy.cache.get(page);
+        if (!objects)
+          return;
 
-          tab.page.dispatchMessage("proxyCallback",
-          {
-            callbackId: callbackId,
-            contextId: proxy.registerObject(this, objects),
-            args: proxy.serializeSequence(arguments, objects)
-          });
-        }
+        page._tab.page.dispatchMessage("proxyCallback",
+        {
+          pageId: pageId,
+          frameId: frameId,
+          callbackId: callbackId,
+          contextId: proxy.registerObject(this, objects),
+          args: proxy.serializeSequence(arguments, objects)
+        });
       };
     },
-    deserialize: function(spec, objects, tab, memo)
+    deserialize: function(spec, objects, pageId, memo)
     {
       switch (spec.type)
       {
@@ -418,7 +406,7 @@
         case "hosted":
           return objects[spec.objectId];
         case "callback":
-          return this.createCallback(spec.callbackId, tab);
+          return this.createCallback(spec.callbackId, pageId, spec.frameId);
         case "object":
         case "array":
           if (!memo)
@@ -439,44 +427,22 @@
 
           if (spec.type == "array")
             for (var i = 0; i < spec.items.length; i++)
-              obj.push(this.deserialize(spec.items[i], objects, tab, memo));
+              obj.push(this.deserialize(spec.items[i], objects, pageId, memo));
           else
             for (var k in spec.properties)
-              obj[k] = this.deserialize(spec.properties[k], objects, tab, memo);
+              obj[k] = this.deserialize(spec.properties[k], objects, pageId, memo);
 
           return obj;
       }
     },
-    createObjectCache: function(tab)
+    getObjectCache: function(page)
     {
-      var objects = [window];
-
-      this.tabs.push(tab);
-      this.objects.push(objects);
-
-      tab.addEventListener("close", function()
+      var objects = this.cache.get(page);
+      if (!objects)
       {
-        var idx = this.tabs.indexOf(tab);
-
-        if (idx != -1)
-        {
-          this.tabs.splice(idx, 1);
-          this.objects.splice(idx, 1);
-        }
-      }.bind(this));
-
-      return objects;
-    },
-    getObjectCache: function(tab)
-    {
-      var idx = this.tabs.indexOf(tab);
-      var objects;
-
-      if (idx != -1)
-        objects = this.objects[idx];
-      else
-        objects = this.objects[idx] = this.createObjectCache(tab);
-
+        objects = [window];
+        this.cache.set(page, objects);
+      }
       return objects;
     },
     fail: function(error)
@@ -485,9 +451,9 @@
         error = error.message;
       return {succeed: false, error: error};
     },
-    _handleMessage: function(message, tab)
+    handleMessage: function(message)
     {
-      var objects = this.getObjectCache(tab);
+      var objects = this.getObjectCache(pages[message.pageId]);
 
       switch (message.type)
       {
@@ -506,7 +472,7 @@
           return {succeed: true, result: this.serialize(value, objects)};
         case "setProperty":
           var obj = objects[message.objectId];
-          var value = this.deserialize(message.value, objects, tab);
+          var value = this.deserialize(message.value, objects, message.pageId);
 
           try
           {
@@ -524,7 +490,7 @@
 
           var args = [];
           for (var i = 0; i < message.args.length; i++)
-            args.push(this.deserialize(message.args[i], objects, tab));
+            args.push(this.deserialize(message.args[i], objects, message.pageId));
 
           try
           {
@@ -561,151 +527,140 @@
   };
 
 
-  /* Web request blocking */
-
-  ext.webRequest = {
-    onBeforeRequest: {
-      _listeners: [],
-
-      _handleMessage: function(message, rawTab)
-      {
-        var tab = new Tab(rawTab);
-        var frame = new Frame(message.documentUrl, message.isTopLevel, rawTab);
-
-        for (var i = 0; i < this._listeners.length; i++)
-        {
-          if (this._listeners[i](message.url, message.type, tab, frame) === false)
-            return false;
-        }
-
-        return true;
-      },
-      addListener: function(listener)
-      {
-        this._listeners.push(listener);
-      },
-      removeListener: function(listener)
-      {
-        var idx = this._listeners.indexOf(listener);
-        if (idx != -1)
-          this._listeners.splice(idx, 1);
-      }
-    },
-    handlerBehaviorChanged: function() {}
-  };
-
-
-  /* Synchronous messaging */
+  /* Message processing */
 
   safari.application.addEventListener("message", function(event)
   {
-    if (event.name == "canLoad")
+    switch (event.name)
     {
-      var handler;
+      case "canLoad":
+        switch (event.message.category)
+        {
+          case "loading":
+            var pageId;
+            var frameId;
 
-      switch (event.message.type)
-      {
-        case "proxy":
-          handler = proxy;
-          break;
-        case "webRequest":
-          handler = ext.webRequest.onBeforeRequest;
-          break;
-      }
+            if (event.message.isTopLevel)
+            {
+              pageId = ++pageCounter;
+              frameId = 0;
 
-      event.message = handler._handleMessage(event.message.payload, event.target);
-    }
-  }, true);
+              var isPrerendered = event.message.isPrerendered;
+              var page = pages[pageId] = new Page(
+                pageId,
+                event.target,
+                event.message.url,
+                isPrerendered
+              );
 
+              // when a new page is shown, forget the previous page associated
+              // with its tab, and reset the toolbar item if necessary.
+              // Note that it wouldn't be sufficient to do that when the old
+              // page is unloading, because Safari dispatches window.onunload
+              // only when reloading the page or following links, but not when
+              // you enter a new URL in the address bar.
+              if (!isPrerendered)
+                replacePage(page);
 
-  /* API */
+              ext.pages.onLoading._dispatch(page);
+            }
+            else
+            {
+              var page;
+              var parentFrame;
 
-  ext.windows = {
-    getAll: function(callback)
-    {
-      callback(safari.application.browserWindows.map(function(win)
-      {
-        return new Window(win);
-      }));
-    },
-    getLastFocused: function(callback)
-    {
-      callback(new Window(safari.application.activeBrowserWindow));
-    }
-  };
+              var lastPageId;
+              var lastPage;
+              var lastPageTopLevelFrame;
 
-  ext.backgroundPage = {
-    getWindow: function()
-    {
-      return safari.extension.globalPage.contentWindow;
-    }
-  };
+              // find the parent frame and its page for this sub frame,
+              // by matching its referrer with the URL of frames previously
+              // loaded in the same tab. If there is more than one match,
+              // the most recent loaded page and frame is preferred.
+              for (var curPageId in pages)
+              {
+                var curPage = pages[curPageId];
+                if (curPage._tab != event.target)
+                  continue;
 
-  ext.onMessage = new BackgroundMessageEventTarget();
-  ext.storage = safari.extension.settings;
+                for (var i = 0; i < curPage._frames.length; i++)
+                {
+                  var curFrame = curPage._frames[i];
 
-  var contextMenuItems = [];
-  var isContextMenuHidden = true;
-  ext.contextMenus = {
-    addMenuItem: function(title, contexts, onclick)
-    {
-      contextMenuItems.push({
-        id: String(contextMenuItems.length), 
-        title: title,
-        item: null,
-        contexts: contexts,
-        onclick: onclick
-      });
-      this.showMenuItems();
-    },
-    removeMenuItems: function()
-    {
-      contextMenuItems = [];
-      this.hideMenuItems();
-    },
-    showMenuItems: function()
-    {
-      isContextMenuHidden = false;
-    },
-    hideMenuItems: function()
-    {
-      isContextMenuHidden = true;
-    }
-  };
+                  if (curFrame.url == event.message.referrer)
+                  {
+                    pageId = curPageId;
+                    page = curPage;
+                    parentFrame = curFrame;
+                  }
 
-  // Create context menu items
-  safari.application.addEventListener("contextmenu", function(event)
-  {
-    if (isContextMenuHidden)
-      return;
+                  if (i == 0)
+                  {
+                    lastPageId = curPageId;
+                    lastPage = curPage;
+                    lastPageTopLevelFrame = curFrame;
+                  }
+                }
+              }
 
-    var context = event.userInfo.tagName;
-    if (context == "img")
-      context = "image";
-    if (!event.userInfo.srcUrl)
-      context = null;
+              // if we can't find the parent frame and its page, fall back to
+              // the page most recently loaded in the tab and its top level frame
+              if (!page)
+              {
+                pageId = lastPageId;
+                page = lastPage;
+                parentFrame = lastPageTopLevelFrame;
+              }
 
-    for (var i = 0; i < contextMenuItems.length; i++)
-    {
-      // Supported contexts are: all, audio, image, video
-      var menuItem = contextMenuItems[i];
-      if (menuItem.contexts.indexOf("all") == -1 && menuItem.contexts.indexOf(context) == -1)
-        continue;
-      
-      event.contextMenu.appendContextMenuItem(menuItem.id, menuItem.title);
-    }
-  }, false);
+              frameId = page._frames.length;
+              page._frames.push({
+                url: event.message.url,
+                parent: parentFrame
+              });
+            }
 
-  // Handle context menu item clicks
-  safari.application.addEventListener("command", function(event)
-  {
-    for (var i = 0; i < contextMenuItems.length; i++)
-    {
-      if (contextMenuItems[i].id == event.command)
-      {
-        contextMenuItems[i].onclick(event.userInfo.srcUrl, new Tab(safari.application.activeBrowserWindow.activeTab));
+            event.message = {pageId: pageId, frameId: frameId};
+            break;
+          case "webRequest":
+            var page = pages[event.message.pageId];
+
+            event.message = ext.webRequest.onBeforeRequest._dispatch(
+              event.message.url,
+              event.message.type,
+              page,
+              page._frames[event.message.frameId]
+            );
+            break;
+          case "proxy":
+            event.message = backgroundPageProxy.handleMessage(event.message);
+            break;
+        }
         break;
-      }
+      case "request":
+        var page = pages[event.message.pageId];
+        var sender = {page: page, frame: page._frames[event.message.frameId]};
+        page._messageProxy.handleRequest(event.message, sender);
+        break;
+      case "response":
+        pages[event.message.pageId]._messageProxy.handleResponse(event.message);
+        break;
+      case "replaced":
+        var page = pages[event.message.pageId];
+        page._prerendered = false;
+
+        // when a prerendered page is shown, forget the previous page
+        // associated with its tab, and reset the toolbar item if necessary.
+        // Note that it wouldn't be sufficient to do that when the old
+        // page is unloading, because Safari dispatches window.onunload
+        // only when reloading the page or following links, but not when
+        // the current page is replaced with a prerendered page.
+        replacePage(page);
+        break;
     }
-  }, false);
+  });
+
+
+  /* Storage */
+
+  ext.storage = safari.extension.settings;
 })();

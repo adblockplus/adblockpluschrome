@@ -47,9 +47,9 @@ FilterNotifier.addListener(function(action)
   }
 });
 
-function onBeforeRequest(url, type, tab, frame)
+function onBeforeRequest(url, type, page, frame)
 {
-  if (isFrameWhitelisted(tab, frame))
+  if (isFrameWhitelisted(page, frame))
     return true;
 
   var docDomain = extractHostFromURL(frame.url);
@@ -69,7 +69,7 @@ function onBeforeRequest(url, type, tab, frame)
       showNotification(notificationToShow);
   }
 
-  FilterNotifier.triggerListeners("filter.hitCount", filter, 0, 0, tab);
+  FilterNotifier.triggerListeners("filter.hitCount", filter, 0, 0, page);
   return !(filter instanceof BlockingFilter);
 }
 
@@ -85,8 +85,8 @@ if (platform == "chromium")
     if (details.type != "main_frame" && details.type != "sub_frame")
       return;
 
-    var tab = new Tab({id: details.tabId});
-    var frame = new Frame({id: details.frameId, tab: tab});
+    var page = new ext.Page({id: details.tabId});
+    var frame = new ext.Frame({frameId: details.frameId, tabId: details.tabId});
 
     if (frame.url != details.url)
       return;
@@ -95,7 +95,7 @@ if (platform == "chromium")
     {
       var header = details.responseHeaders[i];
       if (header.name.toLowerCase() == "x-adblock-key" && header.value)
-        processKeyException(header.value, tab, frame);
+        processKeyException(header.value, page, frame);
     }
 
     var notificationToShow = Notification.getNextToShow(details.url);

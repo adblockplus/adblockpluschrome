@@ -15,160 +15,130 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function() {
-  /* Events */
-
-  WrappedEventTarget = function(target, eventName, capture)
-  {
-    this._listeners = [];
-    this._wrappedListeners = [];
-
-    this._target = target;
-    this._eventName = eventName;
-    this._capture = capture;
-  };
-  WrappedEventTarget.prototype = {
-    addListener: function(listener)
-    {
-      var wrappedListener = this._wrapListener(listener);
-
-      this._listeners.push(listener);
-      this._wrappedListeners.push(wrappedListener);
-
-      this._target.addEventListener(
-        this._eventName,
-        wrappedListener,
-        this._capture
-      );
-    },
-    removeListener: function(listener)
-    {
-      var idx = this._listeners.indexOf(listener);
-
-      if (idx != -1)
-      {
-        this._target.removeEventListener(
-          this._eventName,
-          this._wrappedListeners[idx],
-          this._capture
-        );
-
-        this._listeners.splice(idx, 1);
-        this._wrappedListeners.splice(idx, 1);
-      }
-    }
-  };
-
-  MessageEventTarget = function(target)
-  {
-    WrappedEventTarget.call(this, target, "message", false);
-  };
-  MessageEventTarget.prototype = {
-    __proto__: WrappedEventTarget.prototype,
-    _wrapListener: function(listener)
-    {
-      return function(event)
-      {
-        if (event.name == "request")
-          listener(event.message.payload, this._getSenderDetails(event), function(message)
-          {
-            this._getResponseDispatcher(event).dispatchMessage("response",
-            {
-              requestId: event.message.requestId,
-              payload: message
-            });
-          }.bind(this));
-      }.bind(this);
-    }
-  };
-
-
+(function()
+{
   /* Message passing */
 
-  var requestCounter = 0;
-
-  _sendMessage = function(message, responseCallback, messageDispatcher, responseEventTarget, extra)
+  var MessageProxy = ext._MessageProxy = function(messageDispatcher)
   {
-    var requestId = ++requestCounter;
-
-    if (responseCallback)
-    {
-      var responseListener = function(event)
-      {
-        if (event.name == "response" && event.message.requestId == requestId)
-        {
-          responseEventTarget.removeEventListener("message", responseListener, false);
-          responseCallback(event.message.payload);
-        }
-      };
-      responseEventTarget.addEventListener("message", responseListener, false);
-    }
-
-    var rawMessage = {requestId: requestId, payload: message};
-    for (var k in extra)
-      rawMessage[k] = extra[k];
-    messageDispatcher.dispatchMessage("request", rawMessage);
+    this._messageDispatcher = messageDispatcher;
+    this._responseCallbacks = {__proto__: null};
+    this._responseCallbackCounter = 0;
   };
+  MessageProxy.prototype = {
+    _sendResponse: function(request, message)
+    {
+      var response = {};
+      for (var prop in request)
+        response[prop] = request[prop];
+      response.payload = message;
+
+      this._messageDispatcher.dispatchMessage("response", response);
+    },
+    handleRequest: function(request, sender)
+    {
+      var sendResponse;
+      if ("callbackId" in request)
+        sendResponse = this._sendResponse.bind(this, request);
+      else
+        sendResponse = function() {};
+
+      ext.onMessage._dispatch(request.payload, sender, sendResponse);
+    },
+    handleResponse: function(response)
+    {
+      var callbackId = response.callbackId;
+      var callback = this._responseCallbacks[callbackId];
+      if (callback)
+      {
+        delete this._responseCallbacks[callbackId];
+        callback(response.payload);
+      }
+    },
+    sendMessage: function(message, responseCallback, extra)
+    {
+      var request = {payload: message};
+
+      if (responseCallback)
+      {
+        request.callbackId = ++this._responseCallbackCounter;
+        this._responseCallbacks[request.callbackId] = responseCallback;
+      }
+
+      for (var prop in extra)
+        request[prop] = extra[prop];
+
+      this._messageDispatcher.dispatchMessage("request", request);
+    }
+  };
+
+  ext.onMessage = new ext._EventTarget();
 
 
   /* I18n */
 
-  var I18n = function()
+  var localeCandidates = null;
+  var uiLocale;
+
+  var getLocaleCandidates = function()
   {
-    this._localeCandidates = this._getLocaleCandidates();
-    this._uiLocale = this._localeCandidates[0];
+    var candidates = [];
+    var defaultLocale = "en_US";
+
+    var bits, i;
+    for (i = (bits = navigator.language.split("-")).length; i > 0; i--)
+    {
+      var locale = bits.slice(0, i).join("_");
+      candidates.push(locale);
+
+      if (locale == defaultLocale)
+        return candidates;
+    }
+
+    candidates.push(defaultLocale);
+    return candidates;
   };
-  I18n.prototype = {
-    _getLocaleCandidates: function()
+
+  var getCatalog = function(locale)
+  {
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("GET", safari.extension.baseURI + "_locales/" + locale + "/messages.json", false);
+
+    try {
+      xhr.send();
+    }
+    catch (e)
     {
-      var candidates = [];
-      var defaultLocale = "en_US";
+      return null;
+    }
 
-      var bits, i;
-      for (i = (bits = navigator.language.split("-")).length; i > 0; i--)
-      {
-        var locale = bits.slice(0, i).join("_");
-        candidates.push(locale);
+    if (xhr.status != 200 && xhr.status != 0)
+      return null;
 
-        if (locale == defaultLocale)
-          return candidates;
-      }
+    return JSON.parse(xhr.responseText);
+  };
 
-      candidates.push(defaultLocale);
-      return candidates;
-    },
-    _getCatalog: function(locale)
-    {
-      var xhr = new XMLHttpRequest();
-      
-      xhr.open("GET", safari.extension.baseURI + "_locales/" + locale + "/messages.json", false);
-
-      try {
-        xhr.send();
-      }
-      catch (e)
-      {
-        return null;
-      }
-
-      if (xhr.status != 200 && xhr.status != 0)
-        return null;
-
-      return JSON.parse(xhr.responseText);
-    },
+  ext.i18n = {
     getMessage: function(msgId, substitutions)
     {
-      if (msgId == "@@ui_locale")
-        return this._uiLocale;
-
-      for (var i = 0; i < this._localeCandidates.length; i++)
+      if (!localeCandidates)
       {
-        var catalog = this._getCatalog(this._localeCandidates[i]);
+        localeCandidates = getLocaleCandidates();
+        uiLocale = localeCandidates[0];
+      }
+
+      if (msgId == "@@ui_locale")
+        return uiLocale;
+
+      for (var i = 0; i < localeCandidates.length; i++)
+      {
+        var catalog = getCatalog(localeCandidates[i]);
         if (!catalog)
         {
           // if there is no catalog for this locale
           // candidate, don't try to load it again
-          this._localeCandidates.splice(i--, 1);
+          localeCandidates.splice(i--, 1);
           continue;
         }
 
@@ -193,7 +163,7 @@
             continue;
 
           var placeholderValue;
-          if (Object.prototype.toString.call(substitutions) == "[object Array]")
+          if (typeof substitutions != "string")
             placeholderValue = substitutions[placeholderIdx - 1];
           else if (placeholderIdx == 1)
             placeholderValue = substitutions;
@@ -209,13 +179,10 @@
   };
 
 
-  /* API */
+  /* Utils */
 
-  ext = {
-    getURL: function(path)
-    {
-      return safari.extension.baseURI + path;
-    },
-    i18n: new I18n()
+  ext.getURL = function(path)
+  {
+    return safari.extension.baseURI + path;
   };
 })();

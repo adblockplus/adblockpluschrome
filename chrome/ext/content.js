@@ -1,1 +1,1 @@
-ext.onMessage = new MessageEventTarget();
+ext._setupMessageListener(function() { return {}; });
