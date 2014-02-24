@@ -16,7 +16,7 @@
  */
 
 var backgroundPage = ext.backgroundPage.getWindow();
-var imports = ["require", "extractHostFromURL", "refreshIconAndContextMenu", "openOptions"];
+var imports = ["require", "extractHostFromURL", "openOptions"];
 for (var i = 0; i < imports.length; i++)
   window[imports[i]] = backgroundPage[imports[i]];
 
@@ -108,8 +108,6 @@ function toggleEnabled()
       filter = isWhitelisted(tab.url);
     }
   }
-
-  refreshIconAndContextMenu(tab);
 }
 
 function activateClickHide()
