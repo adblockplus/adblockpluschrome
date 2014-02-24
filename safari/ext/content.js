@@ -17,6 +17,11 @@
 
 (function()
 {
+  // the safari object is missing in frames created from javascript: URLs.
+  // So we have to fallback to the safari object from the parent frame.
+  if (!("safari" in window))
+    window.safari = window.parent.safari;
+
   if (window == window.top)
     safari.self.tab.dispatchMessage("loading");
 
