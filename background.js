@@ -63,6 +63,22 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
         addSubscription(prevVersion);
     }
   }
+
+  // update browser actions when whitelisting might have changed,
+  // due to loading filters or saving filter changes
+  if (action == "load" || action == "save")
+  {
+    ext.windows.getAll(function(windows)
+    {
+      for (var i = 0; i < windows.length; i++)
+      {
+        windows[i].getAllTabs(function(tabs)
+        {
+          tabs.forEach(refreshIconAndContextMenu);
+        });
+      }
+    });
+  }
 });
 
 // Special-case domains for which we cannot use style-based hiding rules.
@@ -394,18 +410,6 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
     default:
       sendResponse({});
       break;
-  }
-});
-
-// Show icon as browser action for all tabs that already exist
-ext.windows.getAll(function(windows)
-{
-  for (var i = 0; i < windows.length; i++)
-  {
-    windows[i].getAllTabs(function(tabs)
-    {
-      tabs.forEach(refreshIconAndContextMenu);
-    });
   }
 });
 
