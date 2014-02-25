@@ -91,4 +91,9 @@ window.addEventListener("load", function()
   var notificationElement = document.getElementById("notification");
   notificationElement.className = notification.severity;
   notificationElement.style.display = "block";
-});
+  
+  document.getElementById("close-notification").addEventListener("click", function()
+  {
+    notificationElement.style.display = "none";
+  }, false);
+}, false);
