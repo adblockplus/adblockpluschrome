@@ -4,13 +4,21 @@
   // of its content, like when the ad counter is expanded/collapsed. So we add
   // event listeners to do so.
   var mayResize = true;
+  var resizingScheduled = false;
 
   var updateSize = function()
   {
-    if (mayResize)
+    if (mayResize && !resizingScheduled)
     {
-      safari.self.width = document.body.offsetWidth;
-      safari.self.height = document.body.offsetHeight;
+      setTimeout(function()
+      {
+        safari.self.width = document.body.offsetWidth;
+        safari.self.height = document.body.offsetHeight;
+
+        resizingScheduled = false;
+      }, 0);
+
+      resizingScheduled = true;
     }
   };
 
