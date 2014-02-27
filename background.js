@@ -87,8 +87,7 @@ var activeNotification = null;
 // Adds or removes browser action icon according to options.
 function refreshIconAndContextMenu(tab)
 {
-  if(!/^https?:/.test(tab.url))
-    return;
+  var whitelisted = isWhitelisted(tab.url);
 
   var iconFilename;
   if (require("info").platform == "safari")
@@ -97,16 +96,13 @@ function refreshIconAndContextMenu(tab)
     // aren't per tab in Safari.
     iconFilename = "icons/abp-16.png"
   else
-  {
-    var excluded = isWhitelisted(tab.url);
-    iconFilename = excluded ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
-  }
+    iconFilename = whitelisted ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
 
   tab.browserAction.setIcon(iconFilename);
   iconAnimation.registerTab(tab, iconFilename);
 
   // Set context menu status according to whether current tab has whitelisted domain
-  if (excluded)
+  if (whitelisted || !/^https?:/.test(tab.url))
     ext.contextMenus.hideMenuItems();
   else
     ext.contextMenus.showMenuItems();
