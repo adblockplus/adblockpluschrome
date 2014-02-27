@@ -18,7 +18,7 @@
 iconAnimation = {
   _icons: new TabMap(),
   _animatedTabs: new TabMap(),
-  step: 0,
+  _step: 0,
 
   update: function(severity)
   {
