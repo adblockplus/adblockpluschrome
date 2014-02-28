@@ -579,4 +579,7 @@
   };
 
   ext.onMessage = new BackgroundMessageEventTarget();
+  // Chrome on Linux does not fully support chrome.notifications yet ( https://code.google.com/p/chromium/issues/detail?id=291485 )
+  if ("notifications" in chrome && navigator.platform.indexOf("Linux") == -1)
+    ext.browserNotifications = chrome.notifications;
 })();
