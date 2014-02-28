@@ -15,7 +15,7 @@ permissions = tabs
 options = options.html
 browserAction = icons/abp-19.png popup.html
 icons = icons/abp-?.png
-webAccessible = block.html
+webAccessible = block.html icons/abp-128.png
 
 [compat]
 chrome = 18.0

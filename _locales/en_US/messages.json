@@ -99,6 +99,12 @@
       }
     }
   },
+  "notification_with_buttons": {
+    "message": "Click 'OK' to open all links in this notification."
+  },
+  "notification_without_buttons": {
+    "message": "Click on the notification to open all links in it."
+  },
   "options": {
     "message": "Adblock Plus Options"
   },

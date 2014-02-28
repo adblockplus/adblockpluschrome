@@ -300,20 +300,93 @@ function prepareNotificationIconAndPopup()
     iconAnimation.stop();
     activeNotification = null;
   };
-
   iconAnimation.update(activeNotification.severity);
+}
+
+function openNotificationLinks() 
+{
+  if (activeNotification.links)
+  {
+    activeNotification.links.forEach(function(link)
+    {
+      ext.windows.getLastFocused(function(win)
+      {
+        win.openTab(Utils.getDocLink(link));
+      });
+    });
+  }
+}
+
+function notificationButtonClick(id, index)
+{
+  if (activeNotification.links && activeNotification.links[index])
+  {
+    ext.windows.getLastFocused(function(win)
+    {
+      win.openTab(Utils.getDocLink(activeNotification.links[index]));
+    });
+  }
 }
 
 function showNotification(notification)
 {
   activeNotification = notification;
-
-  if (activeNotification.severity === "critical"
-      && typeof webkitNotifications !== "undefined")
+  if (activeNotification.severity === "critical")
   {
-    var notification = webkitNotifications.createHTMLNotification("notification.html");
-    notification.show();
-    notification.addEventListener("close", prepareNotificationIconAndPopup);
+    var hasWebkitNotifications = typeof webkitNotifications !== "undefined";
+    if (hasWebkitNotifications && "createHTMLNotification" in webkitNotifications)
+    {
+      var notification = webkitNotifications.createHTMLNotification("notification.html");
+      notification.show();
+      notification.addEventListener("close", prepareNotificationIconAndPopup, false);
+      return;
+    }
+    
+    var texts = Notification.getLocalizedTexts(notification);
+    var title = texts.title || "";
+    var message = texts.message ? texts.message.replace(/<\/?(a|strong)>/g, "") : "";
+    var iconUrl = ext.getURL("icons/abp-128.png");
+    var hasLinks = activeNotification.links && activeNotification.links.length > 0;
+    if ("browserNotifications" in ext) 
+    {
+      var opts = {
+        type: "basic",
+        title: title,
+        message: message,
+        iconUrl: iconUrl,
+        buttons: []
+      };
+      var regex = /<a>(.*?)<\/a>/g;
+      var plainMessage = texts.message || "";
+      var match;
+      while (match = regex.exec(plainMessage))
+        opts.buttons.push({title: match[1]});
+      
+      var notification = ext.browserNotifications;
+      notification.create("", opts, function() {});
+      notification.onClosed.addListener(prepareNotificationIconAndPopup);
+      notification.onButtonClicked.addListener(notificationButtonClick);
+    }
+    else if (hasWebkitNotifications && "createNotification" in webkitNotifications)
+    {
+      if (hasLinks)
+        message += " " + ext.i18n.getMessage("notification_without_buttons");
+        
+      var notification = webkitNotifications.createNotification(iconUrl, title, message);
+      notification.show();
+      notification.addEventListener("close", prepareNotificationIconAndPopup, false);
+      notification.addEventListener("click", openNotificationLinks, false);
+    }
+    else
+    {
+      var message = title + "\n" + message;
+      if (hasLinks)
+        message += "\n\n" + ext.i18n.getMessage("notification_with_buttons");
+        
+      if (confirm(message))
+        openNotificationLinks();
+      prepareNotificationIconAndPopup();
+    }
   }
   else
     prepareNotificationIconAndPopup();
