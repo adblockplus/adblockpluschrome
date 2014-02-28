@@ -186,6 +186,10 @@
     _wrapSender: function(sender)
     {
       var tab = new Tab(sender.tab);
+      
+      //url parameter is missing in sender object (Chrome v28 and below)
+      if (!("url" in sender))
+        sender.url = tab.url;
       return {tab: tab, frame: new Frame({url: sender.url, tab: tab})};
     }
   };
