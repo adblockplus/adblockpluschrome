@@ -67,7 +67,12 @@
     // player with JavaScript which video and which ads to show next,
     // bypassing our flashvars rewrite code. So we disable
     // history.pushState on pages with YouTube's flash player.
-    document.location.href = "javascript:void(history.pushState = undefined);";
+    var script = document.createElement("script");
+    script.type = "application/javascript";
+    script.async = false;
+    script.textContent = "history.pushState = undefined;";
+    document.documentElement.appendChild(script);
+    document.documentElement.removeChild(script);
   }
 
   var deferred = [];
