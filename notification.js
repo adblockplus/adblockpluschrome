@@ -15,6 +15,12 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+//This case is true only for chrome when loading from notification.html
+if (typeof ext === "undefined")
+{
+  var ext = chrome.extension.getBackgroundPage().ext;
+}
+
 var backgroundPage = ext.backgroundPage.getWindow();
 var require = backgroundPage.require;
 
