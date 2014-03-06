@@ -347,7 +347,11 @@ function showNotification(notification)
     var message = texts.message ? texts.message.replace(/<\/?(a|strong)>/g, "") : "";
     var iconUrl = ext.getURL("icons/abp-128.png");
     var hasLinks = activeNotification.links && activeNotification.links.length > 0;
-    if ("browserNotifications" in ext) 
+    // Chrome on Linux does not fully support chrome.notifications yet 
+    // https://code.google.com/p/chromium/issues/detail?id=291485
+    if (require("info").platform == "chromium" && 
+        "notifications" in chrome && 
+        navigator.platform.indexOf("Linux") == -1)
     {
       var opts = {
         type: "basic",
@@ -362,7 +366,7 @@ function showNotification(notification)
       while (match = regex.exec(plainMessage))
         opts.buttons.push({title: match[1]});
       
-      var notification = ext.browserNotifications;
+      var notification = chrome.notifications;
       notification.create("", opts, function() {});
       notification.onClosed.addListener(prepareNotificationIconAndPopup);
       notification.onButtonClicked.addListener(notificationButtonClick);
