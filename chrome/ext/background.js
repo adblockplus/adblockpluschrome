@@ -533,6 +533,8 @@
     handlerBehaviorChanged: chrome.webRequest.handlerBehaviorChanged
   };
 
+  ext.storage = localStorage;
+
   var contextMenuItems = [];
   var isContextMenuHidden = true;
   ext.contextMenus = {

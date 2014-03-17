@@ -18,7 +18,7 @@ include.youtube.js = safari/include.youtube.js
 Icon.png = icons/abp-128.png
 
 [convert_js]
-lib/io.js = lib/websql/io.js
+lib/io.js = lib/storage/io.js
   --arg module=true
 
 [popovers]
