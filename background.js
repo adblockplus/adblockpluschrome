@@ -54,11 +54,11 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
     var importingOldData = importOldData();
 
     var addonVersion = require("info").addonVersion;
-    var prevVersion = localStorage.currentVersion;
+    var prevVersion = ext.storage.currentVersion;
     if (prevVersion != addonVersion)
     {
       isFirstRun = !prevVersion;
-      localStorage.currentVersion = addonVersion;
+      ext.storage.currentVersion = addonVersion;
       if (!importingOldData)
         addSubscription(prevVersion);
     }
@@ -90,8 +90,8 @@ function removeDeprecatedOptions()
   var deprecatedOptions = ["specialCaseYouTube", "experimental", "disableInlineTextAds"];
   deprecatedOptions.forEach(function(option)
   {
-    if (option in localStorage)
-      delete localStorage[option];
+    if (option in ext.storage)
+      delete ext.storage[option];
   });
 }
 

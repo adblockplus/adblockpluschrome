@@ -642,6 +642,7 @@
   };
 
   ext.onMessage = new BackgroundMessageEventTarget();
+  ext.storage = safari.extension.settings;
 
   var contextMenuItems = [];
   var isContextMenuHidden = true;
