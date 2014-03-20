@@ -431,65 +431,75 @@
 
   chrome.webRequest.onBeforeRequest.addListener(function(details)
   {
-    // the high-level code isn't interested in requests that aren't related
-    // to a tab and since those can only be handled in Chrome, we ignore
-    // them here instead of in the browser independent high-level code.
-    if (details.tabId == -1)
-      return;
-
-    var tab = new Tab({id: details.tabId});
-    var frames = framesOfTabs.get(tab);
-
-    if (!frames)
+    try
     {
-      frames = [];
-      framesOfTabs.set(tab, frames);
-
-      // assume that the first request belongs to the top frame. Chrome
-      // may give the top frame the type "object" instead of "main_frame".
-      // https://code.google.com/p/chromium/issues/detail?id=281711
-      if (frameId == 0)
-        details.type = "main_frame";
-    }
-
-    var frameId;
-    if (details.type == "main_frame" || details.type == "sub_frame")
-    {
-      frameId = details.parentFrameId;
-      frames[details.frameId] = {url: details.url, parent: frameId};
-
-      // the high-level code isn't interested in top frame requests and
-      // since those can only be handled in Chrome, we ignore them here
-      // instead of in the browser independent high-level code.
-      if (details.type == "main_frame")
-        return;
-    }
-    else
-      frameId = details.frameId;
-
-    if (!(frameId in frames))
-    {
-      // the high-level code relies on the frame. So ignore the request if we
-      // don't even know the top-level frame. That can happen for example when
-      // the extension was just (re)loaded.
-      if (!(0 in frames))
+      // the high-level code isn't interested in requests that aren't related
+      // to a tab and since those can only be handled in Chrome, we ignore
+      // them here instead of in the browser independent high-level code.
+      if (details.tabId == -1)
         return;
 
-      // however when the src of the frame is a javascript: or data: URL, we
-      // don't know the frame either. But since we know the top-level frame we
-      // can just pretend that we are in the top-level frame, in order to have
-      // at least most domain-based filter rules working.
-      frameId = 0;
-      if (details.type == "sub_frame")
-        frames[details.frameId].parent = frameId;
+      var tab = new Tab({id: details.tabId});
+      var frames = framesOfTabs.get(tab);
+
+      if (!frames)
+      {
+        frames = [];
+        framesOfTabs.set(tab, frames);
+
+        // assume that the first request belongs to the top frame. Chrome
+        // may give the top frame the type "object" instead of "main_frame".
+        // https://code.google.com/p/chromium/issues/detail?id=281711
+        if (frameId == 0)
+          details.type = "main_frame";
+      }
+
+      var frameId;
+      if (details.type == "main_frame" || details.type == "sub_frame")
+      {
+        frameId = details.parentFrameId;
+        frames[details.frameId] = {url: details.url, parent: frameId};
+
+        // the high-level code isn't interested in top frame requests and
+        // since those can only be handled in Chrome, we ignore them here
+        // instead of in the browser independent high-level code.
+        if (details.type == "main_frame")
+          return;
+      }
+      else
+        frameId = details.frameId;
+
+      if (!(frameId in frames))
+      {
+        // the high-level code relies on the frame. So ignore the request if we
+        // don't even know the top-level frame. That can happen for example when
+        // the extension was just (re)loaded.
+        if (!(0 in frames))
+          return;
+
+        // however when the src of the frame is a javascript: or data: URL, we
+        // don't know the frame either. But since we know the top-level frame we
+        // can just pretend that we are in the top-level frame, in order to have
+        // at least most domain-based filter rules working.
+        frameId = 0;
+        if (details.type == "sub_frame")
+          frames[details.frameId].parent = frameId;
+      }
+
+      var frame = new Frame({id: frameId, tab: tab});
+
+      for (var i = 0; i < ext.webRequest.onBeforeRequest._listeners.length; i++)
+      {
+        if (ext.webRequest.onBeforeRequest._listeners[i](details.url, details.type, tab, frame) === false)
+          return {cancel: true};
+      }
     }
-
-    var frame = new Frame({id: frameId, tab: tab});
-
-    for (var i = 0; i < ext.webRequest.onBeforeRequest._listeners.length; i++)
+    catch (e)
     {
-      if (ext.webRequest.onBeforeRequest._listeners[i](details.url, details.type, tab, frame) === false)
-        return {cancel: true};
+      // recent versions of Chrome cancel the request when an error occurs in
+      // the onBeforeRequest listener. However in our case it is preferred, to
+      // let potentially some ads through, rather than blocking legit requests.
+      console.error(e);
     }
   }, {urls: ["<all_urls>"]}, ["blocking"]);
 
