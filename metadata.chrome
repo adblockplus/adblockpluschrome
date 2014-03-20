@@ -14,7 +14,7 @@ permissions = tabs
   notifications
 options = options.html
 browserAction = icons/abp-19.png popup.html
-icons = icons/abp-?.png
+icons = icons/abp-16.png icons/abp-32.png icons/abp-48.png icons/abp-128.png
 webAccessible = block.html icons/abp-128.png
 
 [compat]
@@ -24,9 +24,13 @@ chrome = 18.0
 lib/io.js = lib/filesystem/io.js
   --arg module=true
 
-[convert_img]
+[mapping]
 icons/abp-19.png = chrome/icons/abp-19.png
 icons/abp-19-notification-critical.png = chrome/icons/abp-19-notification-critical.png
+icons/abp-19-notification-information.png = chrome/icons/abp-19-notification-information.png
+icons/abp-48.png = chrome/icons/abp-48.png
+
+[convert_img]
 icons/abp-19-notification-critical-1.png = chrome/icons/abp-19.png -> blend(chrome/icons/abp-19-notification-critical.png, 0.1)
 icons/abp-19-notification-critical-2.png = chrome/icons/abp-19.png -> blend(chrome/icons/abp-19-notification-critical.png, 0.2)
 icons/abp-19-notification-critical-3.png = chrome/icons/abp-19.png -> blend(chrome/icons/abp-19-notification-critical.png, 0.3)
@@ -36,7 +40,6 @@ icons/abp-19-notification-critical-6.png = chrome/icons/abp-19.png -> blend(chro
 icons/abp-19-notification-critical-7.png = chrome/icons/abp-19.png -> blend(chrome/icons/abp-19-notification-critical.png, 0.7)
 icons/abp-19-notification-critical-8.png = chrome/icons/abp-19.png -> blend(chrome/icons/abp-19-notification-critical.png, 0.8)
 icons/abp-19-notification-critical-9.png = chrome/icons/abp-19.png -> blend(chrome/icons/abp-19-notification-critical.png, 0.9)
-icons/abp-19-notification-information.png = chrome/icons/abp-19-notification-information.png
 icons/abp-19-notification-information-1.png = chrome/icons/abp-19.png -> blend(chrome/icons/abp-19-notification-information.png, 0.1)
 icons/abp-19-notification-information-2.png = chrome/icons/abp-19.png -> blend(chrome/icons/abp-19-notification-information.png, 0.2)
 icons/abp-19-notification-information-3.png = chrome/icons/abp-19.png -> blend(chrome/icons/abp-19-notification-information.png, 0.3)
@@ -65,4 +68,3 @@ icons/abp-19-whitelisted-notification-information-6.png = chrome/icons/abp-19.pn
 icons/abp-19-whitelisted-notification-information-7.png = chrome/icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(chrome/icons/abp-19-notification-information.png, 0.7)
 icons/abp-19-whitelisted-notification-information-8.png = chrome/icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(chrome/icons/abp-19-notification-information.png, 0.8)
 icons/abp-19-whitelisted-notification-information-9.png = chrome/icons/abp-19.png -> blend(255, 255, 255, 0.2) -> grayscale -> blend(chrome/icons/abp-19-notification-information.png, 0.9)
-icons/abp-48.png = chrome/icons/abp-48.png
