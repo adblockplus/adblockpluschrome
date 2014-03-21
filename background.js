@@ -18,6 +18,7 @@
 with(require("filterClasses"))
 {
   this.Filter = Filter;
+  this.ActiveFilter = ActiveFilter;
   this.RegExpFilter = RegExpFilter;
   this.BlockingFilter = BlockingFilter;
   this.WhitelistFilter = WhitelistFilter;
@@ -40,6 +41,7 @@ var Prefs = require("prefs").Prefs;
 var Synchronizer = require("synchronizer").Synchronizer;
 var Utils = require("utils").Utils;
 var Notification = require("notification").Notification;
+var initAntiAdblockNotification = require("antiadblockInit").initAntiAdblockNotification;
 
 // Some types cannot be distinguished
 RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
@@ -62,6 +64,8 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
       if (!importingOldData)
         addSubscription(prevVersion);
     }
+
+    initAntiAdblockNotification();
   }
 
   // update browser actions when whitelisting might have changed,
@@ -201,6 +205,16 @@ function addSubscription(prevVersion)
       addAcceptable = false;
   }
 
+  // Add "anti-adblock messages" subscription
+  var subscription = Subscription.fromURL(Prefs.subscriptions_antiadblockurl);
+  if (subscription)
+  {
+    subscription.disabled = true;
+    FilterStorage.addSubscription(subscription);
+    if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
+      Synchronizer.execute(subscription);
+  }
+
   if (!addSubscription && !addAcceptable)
     return;
 
@@ -295,12 +309,15 @@ function openOptions(callback)
 
 function prepareNotificationIconAndPopup()
 {
+  var animateIcon = (activeNotification.type !== "question");
   activeNotification.onClicked = function()
   {
-    iconAnimation.stop();
+    if (animateIcon)
+      iconAnimation.stop();
     activeNotification = null;
   };
-  iconAnimation.update(activeNotification.severity);
+  if (animateIcon)
+    iconAnimation.update(activeNotification.type);
 }
 
 function openNotificationLinks() 
@@ -319,7 +336,13 @@ function openNotificationLinks()
 
 function notificationButtonClick(id, index)
 {
-  if (activeNotification.links && activeNotification.links[index])
+  if (activeNotification.type === "question")
+  {
+    Notification.triggerQuestionListeners(activeNotification.id, index === 0);
+    Notification.markAsShown(activeNotification.id);
+    activeNotification.onClicked();
+  }
+  else if (activeNotification.links && activeNotification.links[index])
   {
     ext.windows.getLastFocused(function(win)
     {
@@ -330,15 +353,18 @@ function notificationButtonClick(id, index)
 
 function showNotification(notification)
 {
+  if (activeNotification && activeNotification.id === notification.id)
+    return;
+  
   activeNotification = notification;
-  if (activeNotification.severity === "critical")
+  if (activeNotification.type === "critical" || activeNotification.type === "question")
   {
     var hasWebkitNotifications = typeof webkitNotifications !== "undefined";
     if (hasWebkitNotifications && "createHTMLNotification" in webkitNotifications)
     {
       var notification = webkitNotifications.createHTMLNotification("notification.html");
       notification.show();
-      notification.addEventListener("close", prepareNotificationIconAndPopup, false);
+      prepareNotificationIconAndPopup();
       return;
     }
     
@@ -347,38 +373,43 @@ function showNotification(notification)
     var message = texts.message ? texts.message.replace(/<\/?(a|strong)>/g, "") : "";
     var iconUrl = ext.getURL("icons/abp-128.png");
     var hasLinks = activeNotification.links && activeNotification.links.length > 0;
-    // Chrome on Linux does not fully support chrome.notifications yet 
+    
+    // Chrome on Linux does not fully support chrome.notifications yet
     // https://code.google.com/p/chromium/issues/detail?id=291485
-    if (require("info").platform == "chromium" && 
-        "notifications" in chrome && 
-        navigator.platform.indexOf("Linux") == -1)
+    if (require("info").platform == "chromium" && "notifications" in chrome && navigator.platform.indexOf("Linux") == -1)
     {
       var opts = {
         type: "basic",
         title: title,
         message: message,
         iconUrl: iconUrl,
-        buttons: []
+        buttons: [],
+        priority: 2 // We use the highest priority to prevent the notification from closing automatically
       };
-      var regex = /<a>(.*?)<\/a>/g;
-      var plainMessage = texts.message || "";
-      var match;
-      while (match = regex.exec(plainMessage))
-        opts.buttons.push({title: match[1]});
+      if (activeNotification.type === "question")
+      {
+        opts.buttons.push({title: ext.i18n.getMessage("overlay_notification_button_yes")});
+        opts.buttons.push({title: ext.i18n.getMessage("overlay_notification_button_no")});
+      }
+      else
+      {
+        var regex = /<a>(.*?)<\/a>/g;
+        var plainMessage = texts.message || "";
+        var match;
+        while (match = regex.exec(plainMessage))
+          opts.buttons.push({title: match[1]});
+      }
       
-      var notification = chrome.notifications;
-      notification.create("", opts, function() {});
-      notification.onClosed.addListener(prepareNotificationIconAndPopup);
-      notification.onButtonClicked.addListener(notificationButtonClick);
+      chrome.notifications.create("", opts, function() {});
+      chrome.notifications.onButtonClicked.addListener(notificationButtonClick);
     }
-    else if (hasWebkitNotifications && "createNotification" in webkitNotifications)
+    else if (hasWebkitNotifications && "createNotification" in webkitNotifications && activeNotification.type !== "question")
     {
       if (hasLinks)
         message += " " + ext.i18n.getMessage("notification_without_buttons");
         
       var notification = webkitNotifications.createNotification(iconUrl, title, message);
       notification.show();
-      notification.addEventListener("close", prepareNotificationIconAndPopup, false);
       notification.addEventListener("click", openNotificationLinks, false);
     }
     else
@@ -387,13 +418,14 @@ function showNotification(notification)
       if (hasLinks)
         message += "\n\n" + ext.i18n.getMessage("notification_with_buttons");
         
-      if (confirm(message))
+      var approved = confirm(message);
+      if (activeNotification.type === "question")
+        notificationButtonClick(null, approved ? 0 : 1);
+      else if (approved)
         openNotificationLinks();
-      prepareNotificationIconAndPopup();
     }
   }
-  else
-    prepareNotificationIconAndPopup();
+  prepareNotificationIconAndPopup();
 }
 
 ext.onMessage.addListener(function (msg, sender, sendResponse)

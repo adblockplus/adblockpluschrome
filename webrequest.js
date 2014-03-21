@@ -87,6 +87,10 @@ if (require("info").platform == "chromium")
       if (header.name.toLowerCase() == "x-adblock-key" && header.value)
         processKeyException(header.value, tab, frame);
     }
+
+    var notificationToShow = Notification.getNextToShow(details.url);
+    if (notificationToShow)
+      showNotification(notificationToShow);
   }
 
   chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {urls: ["<all_urls>"]}, ["responseHeaders"]);

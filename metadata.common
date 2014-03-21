@@ -69,6 +69,7 @@ lib/adblockplus.js = lib/prefs.js
   adblockplus/lib/filterListener.js
   adblockplus/lib/synchronizer.js
   adblockplus/lib/notification.js
+  adblockplus/lib/antiadblockInit.js
   lib/stats.js
   lib/whitelisting.js
   --arg module=true source_repo=https://hg.adblockplus.org/adblockplus/
@@ -86,7 +87,12 @@ qunit/tests/adblockplus.js = adblockplustests/chrome/content/tests/domainRestric
 [import_locales]
 adblockplus/chrome/locale/*/global.properties = subscription_invalid_location
   remove_subscription_warning
+  notification_antiadblock_title
+  notification_antiadblock_message
 adblockplus/chrome/locale/*/overlay.dtd = hideplaceholders.label
+  notification.button.yes
+  notification.button.no
+  notification.button.close
 adblockplus/chrome/locale/*/filters.dtd = subscription.lastDownload.inProgress
   subscription.lastDownload.invalidURL
   subscription.lastDownload.connectionError
