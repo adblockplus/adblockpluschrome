@@ -20,22 +20,22 @@ iconAnimation = {
   _animatedTabs: new TabMap(),
   _step: 0,
 
-  update: function(severity)
+  update: function(type)
   {
-    if (severity == this._severity)
+    if (type == this._type)
        return;
 
-    if (!this._severity)
+    if (!this._type)
       this._start();
 
-    this._severity = severity;
+    this._type = type;
   },
   stop: function()
   {
     clearInterval(this._interval);
 
     delete this._interval;
-    delete this._severity;
+    delete this._type;
 
     this._animatedTabs.clear();
   },
@@ -121,7 +121,7 @@ iconAnimation = {
 
     if (this._step > 0)
     {
-      var suffix = "-notification-" + this._severity;
+      var suffix = "-notification-" + this._type;
 
       if (this._step < 10)
         suffix += "-" + this._step;

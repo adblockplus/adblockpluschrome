@@ -71,9 +71,6 @@ window.addEventListener("load", function()
   if (!notification)
     return;
 
-  if (notification.onClicked)
-    notification.onClicked();
-
   var texts = Notification.getLocalizedTexts(notification);
   var titleElement = document.getElementById("notification-title");
   titleElement.textContent = texts.title;
@@ -94,12 +91,35 @@ window.addEventListener("load", function()
     ext.windows.getLastFocused(function(win) { win.openTab(link.href); });
   });
 
+  if (notification.type == "question")
+  {
+    document.getElementById("notification-question").addEventListener("click", function(event)
+    {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      var approved = false;
+      switch (event.target.id)
+      {
+        case "notification-yes":
+          approved = true;
+        case "notification-no":
+          Notification.triggerQuestionListeners(notification.id, approved);
+          Notification.markAsShown(notification.id);
+          notification.onClicked();
+          break;
+      }
+      window.close();
+    }, true);
+  }
+
   var notificationElement = document.getElementById("notification");
-  notificationElement.className = notification.severity;
+  notificationElement.className = notification.type;
   notificationElement.style.display = "block";
   
   document.getElementById("close-notification").addEventListener("click", function()
   {
     notificationElement.style.display = "none";
+    notification.onClicked();
   }, false);
 }, false);

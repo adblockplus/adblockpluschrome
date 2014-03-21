@@ -7,6 +7,8 @@
         background-color: #f8f6f2;
         font-family: Arial, sans;
         font-size: 12px;
+        /* Notifications are not resized dynamically so we need to make it as big as possible */
+        height: 144px;
       }
 
       #notification
@@ -26,6 +28,7 @@
         margin: 5px;
       }
     </style>
+    <script src="i18n.js"></script>
     <script src="notification.js"></script>
   </head>
   <body>
@@ -33,6 +36,11 @@
     <div id="notification">
       <h1 id="notification-title"></h1>
       <p id="notification-message"></p>
+      <div id="notification-question">
+        <button id="notification-yes" class="i18n_overlay_notification_button_yes"></button>
+        <button id="notification-no" class="i18n_overlay_notification_button_no"></button>
+        <a id="notification-close" href="#" class="i18n_overlay_notification_button_close"></a>
+      </div>
     </div>
   </body>
 </html>
