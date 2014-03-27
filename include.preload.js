@@ -93,7 +93,7 @@ function checkCollapse(event)
           if (tag == "frame")
             target.style.setProperty("visibility", "hidden", "!important");
           else
-            target.parentNode.removeChild(target);
+            target.style.setProperty("display", "none", "!important");
         }
       }
     );
