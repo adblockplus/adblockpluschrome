@@ -16,6 +16,7 @@
  */
 
 var FilterNotifier = require("filterNotifier").FilterNotifier;
+var platform = require("info").platform;
 
 var onFilterChangeTimeout = null;
 function onFilterChange()
@@ -59,13 +60,22 @@ function onBeforeRequest(url, type, tab, frame)
     isThirdParty(extractHostFromURL(url), docDomain)
   );
 
+  // We can't listen to onHeadersReceived in Safari so we need to
+  // check for notifications here
+  if (platform != "chromium" && type == "sub_frame")
+  {
+    var notificationToShow = Notification.getNextToShow(url);
+    if (notificationToShow)
+      showNotification(notificationToShow);
+  }
+
   FilterNotifier.triggerListeners("filter.hitCount", filter, 0, 0, tab);
   return !(filter instanceof BlockingFilter);
 }
 
 ext.webRequest.onBeforeRequest.addListener(onBeforeRequest);
 
-if (require("info").platform == "chromium")
+if (platform == "chromium")
 {
   function onHeadersReceived(details)
   {
