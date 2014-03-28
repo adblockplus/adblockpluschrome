@@ -18,7 +18,6 @@
 with(require("filterClasses"))
 {
   this.Filter = Filter;
-  this.ActiveFilter = ActiveFilter;
   this.RegExpFilter = RegExpFilter;
   this.BlockingFilter = BlockingFilter;
   this.WhitelistFilter = WhitelistFilter;
@@ -47,6 +46,12 @@ var initAntiAdblockNotification = require("antiadblockInit").initAntiAdblockNoti
 RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
 RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OTHER;
 
+// Chrome on Linux does not fully support chrome.notifications until version 35
+// https://code.google.com/p/chromium/issues/detail?id=291485
+var canUseChromeNotifications = require("info").platform == "chromium"
+  && "notifications" in chrome
+  && (navigator.platform.indexOf("Linux") == -1 || parseInt(require("info").applicationVersion) > 34);
+
 var isFirstRun = false;
 var seenDataCorruption = false;
 require("filterNotifier").FilterNotifier.addListener(function(action)
@@ -65,6 +70,8 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
         addSubscription(prevVersion);
     }
 
+    if (canUseChromeNotifications)
+      initChromeNotifications();
     initAntiAdblockNotification();
   }
 
@@ -314,7 +321,7 @@ function prepareNotificationIconAndPopup()
   {
     if (animateIcon)
       iconAnimation.stop();
-    activeNotification = null;
+    notificationClosed();
   };
   if (animateIcon)
     iconAnimation.update(activeNotification.type);
@@ -334,21 +341,26 @@ function openNotificationLinks()
   }
 }
 
-function notificationButtonClick(id, index)
+function notificationButtonClick(buttonIndex)
 {
   if (activeNotification.type === "question")
   {
-    Notification.triggerQuestionListeners(activeNotification.id, index === 0);
+    Notification.triggerQuestionListeners(activeNotification.id, buttonIndex === 0);
     Notification.markAsShown(activeNotification.id);
     activeNotification.onClicked();
   }
-  else if (activeNotification.links && activeNotification.links[index])
+  else if (activeNotification.links && activeNotification.links[buttonIndex])
   {
     ext.windows.getLastFocused(function(win)
     {
-      win.openTab(Utils.getDocLink(activeNotification.links[index]));
+      win.openTab(Utils.getDocLink(activeNotification.links[buttonIndex]));
     });
   }
+}
+
+function notificationClosed()
+{
+  activeNotification = null;
 }
 
 function imgToBase64(url, callback)
@@ -365,6 +377,30 @@ function imgToBase64(url, callback)
     callback(canvas.toDataURL("image/png"));
     canvas = null;
   };
+}
+
+function initChromeNotifications()
+{
+  // Chrome hides notifications in notification center when clicked so we need to clear them
+  function clearActiveNotification(notificationId)
+  {
+    if (activeNotification && activeNotification.type != "question" && !("links" in activeNotification))
+      return;
+
+    chrome.notifications.clear(notificationId, function(wasCleared)
+    {
+      if (wasCleared)
+        notificationClosed();
+    });
+  }
+
+  chrome.notifications.onButtonClicked.addListener(function(notificationId, buttonIndex)
+  {
+    notificationButtonClick(buttonIndex);
+    clearActiveNotification(notificationId);
+  });
+  chrome.notifications.onClicked.addListener(clearActiveNotification);
+  chrome.notifications.onClosed.addListener(notificationClosed);
 }
 
 function showNotification(notification)
@@ -390,9 +426,7 @@ function showNotification(notification)
     var iconUrl = ext.getURL("icons/abp-128.png");
     var hasLinks = activeNotification.links && activeNotification.links.length > 0;
     
-    // Chrome on Linux does not fully support chrome.notifications yet
-    // https://code.google.com/p/chromium/issues/detail?id=291485
-    if (require("info").platform == "chromium" && "notifications" in chrome && navigator.platform.indexOf("Linux") == -1)
+    if (canUseChromeNotifications)
     {
       var opts = {
         type: "basic",
@@ -419,19 +453,19 @@ function showNotification(notification)
       {
         opts["iconUrl"] = iconData;
         chrome.notifications.create("", opts, function() {});
-        chrome.notifications.onButtonClicked.addListener(notificationButtonClick);
       });
     }
     else if (hasWebkitNotifications && "createNotification" in webkitNotifications && activeNotification.type !== "question")
     {
       if (hasLinks)
         message += " " + ext.i18n.getMessage("notification_without_buttons");
-        
+
       imgToBase64(iconUrl, function(iconData)
       {
         var notification = webkitNotifications.createNotification(iconData, title, message);
         notification.show();
         notification.addEventListener("click", openNotificationLinks, false);
+        notification.addEventListener("close", notificationClosed, false);
       });
     }
     else
@@ -442,7 +476,7 @@ function showNotification(notification)
         
       var approved = confirm(message);
       if (activeNotification.type === "question")
-        notificationButtonClick(null, approved ? 0 : 1);
+        notificationButtonClick(approved ? 0 : 1);
       else if (approved)
         openNotificationLinks();
     }
