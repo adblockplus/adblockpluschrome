@@ -351,6 +351,22 @@ function notificationButtonClick(id, index)
   }
 }
 
+function imgToBase64(url, callback)
+{
+  var canvas = document.createElement("canvas"),
+  ctx = canvas.getContext("2d"),
+  img = new Image;
+  img.src = url;
+  img.onload = function()
+  {
+    canvas.height = img.height;
+    canvas.width = img.width;
+    ctx.drawImage(img, 0, 0);
+    callback(canvas.toDataURL("image/png"));
+    canvas = null;
+  };
+}
+
 function showNotification(notification)
 {
   if (activeNotification && activeNotification.id === notification.id)
@@ -382,7 +398,6 @@ function showNotification(notification)
         type: "basic",
         title: title,
         message: message,
-        iconUrl: iconUrl,
         buttons: [],
         priority: 2 // We use the highest priority to prevent the notification from closing automatically
       };
@@ -400,17 +415,24 @@ function showNotification(notification)
           opts.buttons.push({title: match[1]});
       }
       
-      chrome.notifications.create("", opts, function() {});
-      chrome.notifications.onButtonClicked.addListener(notificationButtonClick);
+      imgToBase64(iconUrl, function(iconData)
+      {
+        opts["iconUrl"] = iconData;
+        chrome.notifications.create("", opts, function() {});
+        chrome.notifications.onButtonClicked.addListener(notificationButtonClick);
+      });
     }
     else if (hasWebkitNotifications && "createNotification" in webkitNotifications && activeNotification.type !== "question")
     {
       if (hasLinks)
         message += " " + ext.i18n.getMessage("notification_without_buttons");
         
-      var notification = webkitNotifications.createNotification(iconUrl, title, message);
-      notification.show();
-      notification.addEventListener("click", openNotificationLinks, false);
+      imgToBase64(iconUrl, function(iconData)
+      {
+        var notification = webkitNotifications.createNotification(iconData, title, message);
+        notification.show();
+        notification.addEventListener("click", openNotificationLinks, false);
+      });
     }
     else
     {
