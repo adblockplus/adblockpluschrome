@@ -206,7 +206,14 @@
   BrowserAction.prototype = {
     setIcon: function(path)
     {
-      chrome.browserAction.setIcon({tabId: this._tabId, path: path});
+      var paths = {};
+      for (var i = 1; i <= 2; i++)
+      {
+        var size = i * 19;
+        paths[size] = path.replace("$size", size);
+      }
+
+      chrome.browserAction.setIcon({tabId: this._tabId, path: paths});
     },
     setBadge: function(badge)
     {
