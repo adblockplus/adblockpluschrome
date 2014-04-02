@@ -240,7 +240,7 @@
     },
     setIcon: function(path)
     {
-      this._set("image", safari.extension.baseURI + path);
+      this._set("image", safari.extension.baseURI + path.replace("$size", "16"));
     },
     setBadge: function(badge)
     {

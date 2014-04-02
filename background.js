@@ -117,13 +117,13 @@ function refreshIconAndContextMenu(tab)
   var whitelisted = isWhitelisted(tab.url);
 
   var iconFilename;
-  if (require("info").platform == "safari")
+  if (whitelisted && require("info").platform != "safari")
     // There is no grayscale version of the icon for whitelisted tabs
     // when using Safari, because icons are grayscale already and icons
     // aren't per tab in Safari.
-    iconFilename = "icons/abp-16.png"
+    iconFilename = "icons/abp-$size-whitelisted.png";
   else
-    iconFilename = whitelisted ? "icons/abp-19-whitelisted.png" : "icons/abp-19.png";
+    iconFilename = "icons/abp-$size.png";
 
   tab.browserAction.setIcon(iconFilename);
   iconAnimation.registerTab(tab, iconFilename);
