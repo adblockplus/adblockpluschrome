@@ -21,6 +21,13 @@ with(require("filterClasses"))
   this.RegExpFilter = RegExpFilter;
   this.BlockingFilter = BlockingFilter;
   this.WhitelistFilter = WhitelistFilter;
+
+  // TODO: The import below isn't necessary anymore with
+  // https://hg.adblockplus.org/adblockplus/rev/7eb29729a72c
+  // However due to https://issues.adblockplus.org/ticket/189
+  // we can't update the subrepo yet. So please remove this
+  // line when the issue was fixed and the subrepo was updated.
+  this.ActiveFilter = ActiveFilter;
 }
 with(require("subscriptionClasses"))
 {
