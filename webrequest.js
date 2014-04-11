@@ -86,9 +86,9 @@ if (platform == "chromium")
       return;
 
     var page = new ext.Page({id: details.tabId});
-    var frame = new ext.Frame({frameId: details.frameId, tabId: details.tabId});
+    var frame = ext.getFrame(details.tabId, details.frameId);
 
-    if (frame.url != details.url)
+    if (!frame || frame.url != details.url)
       return;
 
     for (var i = 0; i < details.responseHeaders.length; i++)

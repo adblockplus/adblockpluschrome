@@ -22,9 +22,9 @@ if (require("info").platform == "chromium" && "webNavigation" in chrome)
   chrome.webNavigation.onCreatedNavigationTarget.addListener(function(details)
   {
     var sourcePage = new ext.Page({id: details.sourceTabId});
-    var sourceFrame = new ext.Frame({frameId: details.sourceFrameId, tabId: details.sourceTabId});
+    var sourceFrame = ext.getFrame(details.sourceTabId, details.sourceFrameId);
 
-    if (isFrameWhitelisted(sourcePage, sourceFrame))
+    if (!sourceFrame || isFrameWhitelisted(sourcePage, sourceFrame))
       return;
 
     var openerUrl = sourceFrame.url;
