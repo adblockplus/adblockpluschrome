@@ -169,68 +169,44 @@
   };
 
 
-  /* Frames */
+  /* Web requests */
 
   var framesOfTabs = {__proto__: null};
 
-  var Frame = ext.Frame = function(params)
+  ext.getFrame = function(tabId, frameId)
   {
-    this._frameId = params.frameId;
-    this._tabId = params.tabId;
-    this._url = params.url;
+    return (framesOfTabs[tabId] || {})[frameId];
   };
-  Frame.prototype = {
-    get url()
-    {
-      if (this._url != null)
-        return this._url;
-
-      var frames = framesOfTabs[this._tabId];
-      if (frames)
-      {
-        var frame = frames[this._frameId];
-        if (frame)
-          return frame.url;
-      }
-    },
-    get parent()
-    {
-      var frames = framesOfTabs[this._tabId];
-      if (frames)
-      {
-        var frame;
-        if (this._frameId != null)
-          frame = frames[this._frameId];
-        else
-        {
-          // the frame ID wasn't available when we created
-          // the Frame object (e.g. for the onMessage event),
-          // so we have to find the frame details by their URL.
-          for (var frameId in frames)
-          {
-            if (frames[frameId].url == this._url)
-            {
-              frame = frames[frameId];
-              break;
-            }
-          }
-        }
-
-        if (!frame || frame.parent == -1)
-          return null;
-
-        return new Frame({frameId: frame.parent, tabId: this._tabId});
-      }
-    }
-  };
-
-
-  /* Web requests */
 
   ext.webRequest = {
     onBeforeRequest: new ext._EventTarget(true),
     handlerBehaviorChanged: chrome.webRequest.handlerBehaviorChanged
   };
+
+  chrome.tabs.query({}, function(tabs)
+  {
+    tabs.forEach(function(tab)
+    {
+      chrome.webNavigation.getAllFrames({tabId: tab.id}, function(details)
+      {
+        if (details && details.length > 0)
+        {
+          var frames = framesOfTabs[tab.id] = {__proto__: null};
+
+          for (var i = 0; i < details.length; i++)
+            frames[details[i].frameId] = {url: details[i].url, parent: null};
+
+          for (var i = 0; i < details.length; i++)
+          {
+            var parentFrameId = details[i].parentFrameId;
+
+            if (parentFrameId != -1)
+              frames[details[i].frameId].parent = frames[parentFrameId];
+          }
+        }
+      });
+    });
+  });
 
   chrome.webRequest.onBeforeRequest.addListener(function(details)
   {
@@ -242,56 +218,39 @@
       if (details.tabId == -1)
         return;
 
-      var page = new Tab({id: details.tabId});
-      var frames = framesOfTabs[details.tabId];
-
-      if (!frames)
-      {
-        frames = framesOfTabs[details.tabId] = [];
-
+      var isMainFrame = details.type == "main_frame" || (
         // assume that the first request belongs to the top frame. Chrome
         // may give the top frame the type "object" instead of "main_frame".
         // https://code.google.com/p/chromium/issues/detail?id=281711
-        if (frameId == 0)
-          details.type = "main_frame";
-      }
+        details.frameId == 0 && !(details.tabId in framesOfTabs)
+      );
 
-      var frameId;
-      if (details.type == "main_frame" || details.type == "sub_frame")
+      var frames = null;
+      if (!isMainFrame)
+        frames = framesOfTabs[details.tabId];
+      if (!frames)
+        frames = framesOfTabs[details.tabId] = {__proto__: null};
+
+      var frame = null;
+      if (!isMainFrame)
       {
-        frameId = details.parentFrameId;
-        frames[details.frameId] = {url: details.url, parent: frameId};
-
-        // the high-level code isn't interested in top frame requests and
-        // since those can only be handled in Chrome, we ignore them here
-        // instead of in the browser independent high-level code.
-        if (details.type == "main_frame")
-          return;
-      }
-      else
-        frameId = details.frameId;
-
-      if (!(frameId in frames))
-      {
-        // the high-level code relies on the frame. So ignore the request if we
-        // don't even know the top-level frame. That can happen for example when
-        // the extension was just (re)loaded.
-        if (!(0 in frames))
-          return;
-
-        // however when the src of the frame is a javascript: or data: URL, we
-        // don't know the frame either. But since we know the top-level frame we
-        // can just pretend that we are in the top-level frame, in order to have
-        // at least most domain-based filter rules working.
-        frameId = 0;
+        // we are looking for the frame that contains the element that
+        // is about to load, however if a frame is loading the surrounding
+        // frame is indicated by parentFrameId instead of frameId
+        var frameId;
         if (details.type == "sub_frame")
-          frames[details.frameId].parent = frameId;
+          frameId = details.parentFrameId;
+        else
+          frameId = details.frameId;
+
+        frame = frames[frameId] || frames[0];
+
+        if (frame && !ext.webRequest.onBeforeRequest._dispatch(details.url, details.type, new Page({id: details.tabId}), frame))
+          return {cancel: true};
       }
 
-      var frame = new Frame({id: frameId, tabId: details.tabId});
-
-      if (!ext.webRequest.onBeforeRequest._dispatch(details.url, details.type, page, frame))
-        return {cancel: true};
+      if (isMainFrame || details.type == "sub_frame")
+        frames[details.frameId] = {url: details.url, parent: frame};
     }
     catch (e)
     {
@@ -362,7 +321,24 @@
   {
     return {
       page: new Page(sender.tab),
-      frame: new Frame({url: sender.url, tabId: sender.tab.id})
+      frame: {
+        url: sender.url,
+        get parent()
+        {
+          var frames = framesOfTabs[sender.tab.id];
+
+          if (!frames)
+            return null;
+
+          for (var frameId in frames)
+          {
+            if (frames[frameId].url == sender.url)
+              return frames[frameId].parent;
+          }
+
+          return frames[0];
+        }
+      }
     };
   });
 
