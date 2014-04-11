@@ -154,53 +154,57 @@
     },
     serialize: function(obj, memo)
     {
-      var objectId = this.objects.indexOf(obj);
-      if (objectId != -1)
-        return {type: "hosted", objectId: objectId};
-
-      if (typeof obj == "function")
+      if (typeof obj == "object" && obj != null || typeof obj == "function")
       {
-        var callbackId = this.callbacks.indexOf(obj);
-        if (callbackId == -1)
-          callbackId = this.callbacks.push(obj) - 1;
+        if ("__proxyObjectId" in obj)
+          return {type: "hosted", objectId: obj.__proxyObjectId};
 
-        return {type: "callback", callbackId: callbackId, frameId: documentInfo.frameId};
-      }
-
-      if (typeof obj == "object" &&
-          obj != null &&
-          obj.constructor != Date &&
-          obj.constructor != RegExp)
-      {
-        if (!memo)
-          memo = {specs: [], objects: []};
-
-        var idx = memo.objects.indexOf(obj);
-        if (idx != -1)
-          return memo.specs[idx];
-
-        var spec = {};
-        memo.specs.push(spec);
-        memo.objects.push(obj);
-
-        if (obj.constructor == Array)
+        if (typeof obj == "function")
         {
-          spec.type = "array";
-          spec.items = [];
+          var callbackId;
+          if ("__proxyCallbackId" in obj)
+            callbackId = obj.__proxyCallbackId;
+          else
+          {
+            callbackId = this.callbacks.push(obj) - 1;
+            Object.defineProperty(obj, "__proxyCallbackId", {value: callbackId});
+          }
 
-          for (var i = 0; i < obj.length; i++)
-            spec.items.push(this.serialize(obj[i], memo));
-        }
-        else
-        {
-          spec.type = "object";
-          spec.properties = {};
-
-          for (var k in obj)
-            spec.properties[k] = this.serialize(obj[k], memo);
+          return {type: "callback", callbackId: callbackId, frameId: documentInfo.frameId};
         }
 
-        return spec;
+        if (obj.constructor != Date && obj.constructor != RegExp)
+        {
+          if (!memo)
+            memo = {specs: [], objects: []};
+
+          var idx = memo.objects.indexOf(obj);
+          if (idx != -1)
+            return memo.specs[idx];
+
+          var spec = {};
+          memo.specs.push(spec);
+          memo.objects.push(obj);
+
+          if (obj.constructor == Array)
+          {
+            spec.type = "array";
+            spec.items = [];
+
+            for (var i = 0; i < obj.length; i++)
+              spec.items.push(this.serialize(obj[i], memo));
+          }
+          else
+          {
+            spec.type = "object";
+            spec.properties = {};
+
+            for (var k in obj)
+              spec.properties[k] = this.serialize(obj[k], memo);
+          }
+
+          return spec;
+        }
       }
 
       return {type: "value", value: obj};
@@ -241,10 +245,6 @@
           return this.deserializeSequence(spec.items, array, memo);
       }
     },
-    getObjectId: function(obj)
-    {
-      return this.objects.indexOf(obj);
-    },
     getProperty: function(objectId, property)
     {
       return this.deserializeResult(
@@ -262,7 +262,7 @@
       return {
         get: function()
         {
-          return proxy.getProperty(proxy.getObjectId(this), property);
+          return proxy.getProperty(this.__proxyObjectId, property);
         },
         set: function(value)
         {
@@ -270,7 +270,7 @@
             proxy.send(
             {
               type: "setProperty",
-              objectId: proxy.getObjectId(this),
+              objectId: this.__proxyObjectId,
               property: property,
               value: proxy.serialize(value)
             })
@@ -290,7 +290,7 @@
           {
             type: "callFunction",
             functionId: objectId,
-            contextId: proxy.getObjectId(this),
+            contextId: this.__proxyObjectId,
             args: Array.prototype.map.call(
               arguments,
               proxy.serialize.bind(proxy)
@@ -324,24 +324,27 @@
           obj = {};
 
         this.objects[objectId] = obj;
+        Object.defineProperty(obj, "__proxyObjectId", {value: objectId});
       }
 
-      var ignored = [];
+      var excluded = [];
+      var included = [];
       if ("prototypeOf" in objectInfo)
       {
         var prototype = window[objectInfo.prototypeOf].prototype;
 
-        ignored = Object.getOwnPropertyNames(prototype);
-        ignored.splice(ignored.indexOf("constructor"), 1);
+        excluded = Object.getOwnPropertyNames(prototype);
+        included = ["constructor"];
 
         obj.__proto__ = prototype;
       }
       else
       {
         if (objectInfo.isFunction)
-          ignored = Object.getOwnPropertyNames(function() {});
-        else
-          ignored = [];
+        {
+          excluded = Object.getOwnPropertyNames(function() {});
+          included = ["prototype"];
+        }
 
         if ("prototypeId" in objectInfo)
           obj.__proto__ = this.getObject(objectInfo.prototypeId);
@@ -350,13 +353,21 @@
       }
 
       for (var property in objectInfo.properties)
-        if (ignored.indexOf(property) == -1)
-          Object.defineProperty(obj, property, this.createProperty(
-            property, objectInfo.properties[property].enumerable
-          ));
+      {
+        if (excluded.indexOf(property) == -1 || included.indexOf(property) != -1)
+        {
+          var desc = Object.getOwnPropertyDescriptor(obj, property);
 
-      if (objectInfo.isFunction)
-        obj.prototype = this.getProperty(objectId, "prototype");
+          if (!desc || desc.configurable)
+          {
+            Object.defineProperty(obj, property, this.createProperty(
+              property, objectInfo.properties[property].enumerable
+            ));
+          }
+          else if (desc.writable)
+            obj[property] = this.getProperty(objectId, property);
+        }
+      }
 
       return obj;
     }
