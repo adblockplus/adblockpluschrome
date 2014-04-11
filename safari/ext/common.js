@@ -85,17 +85,18 @@
     var candidates = [];
     var defaultLocale = "en_US";
 
-    var bits, i;
-    for (i = (bits = navigator.language.split("-")).length; i > 0; i--)
-    {
-      var locale = bits.slice(0, i).join("_");
-      candidates.push(locale);
+    // e.g. "ja-jp-mac" -> "ja", "jp", note that the part after the second
+    // dash is dropped, since we only support language and region
+    var [language, region] = navigator.language.split("-");
 
-      if (locale == defaultLocale)
-        return candidates;
-    }
+    if (region)
+      candidates.push(language + "_" + region.toUpperCase());
 
-    candidates.push(defaultLocale);
+    candidates.push(language);
+
+    if (candidates.indexOf(defaultLocale) == -1)
+      candidates.push(defaultLocale);
+
     return candidates;
   };
 
