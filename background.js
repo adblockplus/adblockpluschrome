@@ -59,7 +59,6 @@ var canUseChromeNotifications = require("info").platform == "chromium"
   && "notifications" in chrome
   && (navigator.platform.indexOf("Linux") == -1 || parseInt(require("info").applicationVersion) > 34);
 
-var isFirstRun = false;
 var seenDataCorruption = false;
 require("filterNotifier").FilterNotifier.addListener(function(action)
 {
@@ -69,9 +68,9 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
 
     var addonVersion = require("info").addonVersion;
     var prevVersion = ext.storage.currentVersion;
-    if (prevVersion != addonVersion)
+    if (prevVersion != addonVersion || FilterStorage.firstRun)
     {
-      isFirstRun = !prevVersion;
+      seenDataCorruption = prevVersion && FilterStorage.firstRun;
       ext.storage.currentVersion = addonVersion;
       if (!importingOldData)
         addSubscription(prevVersion);
@@ -321,7 +320,7 @@ function prepareNotificationIconAndPopup()
     iconAnimation.update(activeNotification.type);
 }
 
-function openNotificationLinks() 
+function openNotificationLinks()
 {
   if (activeNotification.links)
   {
@@ -401,7 +400,7 @@ function showNotification(notification)
 {
   if (activeNotification && activeNotification.id === notification.id)
     return;
-  
+
   activeNotification = notification;
   if (activeNotification.type === "critical" || activeNotification.type === "question")
   {
@@ -413,13 +412,13 @@ function showNotification(notification)
       prepareNotificationIconAndPopup();
       return;
     }
-    
+
     var texts = Notification.getLocalizedTexts(notification);
     var title = texts.title || "";
     var message = texts.message ? texts.message.replace(/<\/?(a|strong)>/g, "") : "";
     var iconUrl = ext.getURL("icons/abp-128.png");
     var hasLinks = activeNotification.links && activeNotification.links.length > 0;
-    
+
     if (canUseChromeNotifications)
     {
       var opts = {
@@ -442,7 +441,7 @@ function showNotification(notification)
         while (match = regex.exec(plainMessage))
           opts.buttons.push({title: match[1]});
       }
-      
+
       imgToBase64(iconUrl, function(iconData)
       {
         opts["iconUrl"] = iconData;
@@ -467,7 +466,7 @@ function showNotification(notification)
       var message = title + "\n" + message;
       if (hasLinks)
         message += "\n\n" + ext.i18n.getMessage("notification_with_buttons");
-        
+
       var approved = confirm(message);
       if (activeNotification.type === "question")
         notificationButtonClick(approved ? 0 : 1);
