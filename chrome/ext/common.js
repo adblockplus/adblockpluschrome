@@ -39,7 +39,7 @@
 
     onMessage.addListener(function(message, sender, sendResponse)
     {
-      ext.onMessage._dispatch(message, wrapSender(sender), sendResponse);
+      return ext.onMessage._dispatch(message, wrapSender(sender), sendResponse);
     });
   };
 

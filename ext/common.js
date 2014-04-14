@@ -37,15 +37,19 @@
       if (idx != -1)
         this._listeners.splice(idx, 1);
     },
-    _dispatch: function(cancelable, args)
+    _dispatch: function()
     {
+      var result = null;
+
       for (var i = 0; i < this._listeners.length; i++)
       {
-        var result = this._listeners[i].apply(null, arguments);
+        result = this._listeners[i].apply(null, arguments);
+
         if (this._cancelable && result === false)
-          return false;
+          break;
       }
-      return true;
+
+      return result;
     }
   };
 })();
