@@ -17,44 +17,41 @@
 
 var SELECTOR_GROUP_SIZE = 20;
 
-var elemhideElt = null;
-
 // Sets the currently used CSS rules for elemhide filters
 function setElemhideCSSRules(selectors)
 {
-  if (elemhideElt && elemhideElt.parentNode)
-    elemhideElt.parentNode.removeChild(elemhideElt);
-
   if (!selectors)
     return;
 
-  elemhideElt = document.createElement("style");
-  elemhideElt.setAttribute("type", "text/css");
+  var style = document.createElement("style");
+  style.setAttribute("type", "text/css");
 
-  // Try to insert the style into the <head> tag, inserting directly under the
-  // document root breaks dev tools functionality:
-  // http://code.google.com/p/chromium/issues/detail?id=178109
-  (document.head || document.documentElement).appendChild(elemhideElt);
-
-  var elt = elemhideElt;  // Use a local variable to avoid racing conditions
-  function setRules()
+  // Use Shadow DOM if available to don't mess with web pages
+  // that rely on the order of their own <style> tags (#309)
+  if ("webkitCreateShadowRoot" in document.documentElement)
   {
-    if (!elt.sheet)
-    {
-      // Stylesheet didn't initialize yet, wait a little longer
-      window.setTimeout(setRules, 0);
-      return;
-    }
+    var shadow = document.documentElement.webkitCreateShadowRoot();
+    shadow.appendChild(document.createElement("shadow"));
+    shadow.appendChild(style);
 
-    // WebKit apparently chokes when the selector list in a CSS rule is huge.
-    // So we split the elemhide selectors into groups.
-    for (var i = 0, j = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE, j++)
-    {
-      var selector = selectors.slice(i, i + SELECTOR_GROUP_SIZE).join(", ");
-      elt.sheet.insertRule(selector + " { display: none !important; }", j);
-    }
+    for (var i = 0; i < selectors.length; i++)
+      selectors[i] = "::-webkit-distributed(" + selectors[i] + ")";
   }
-  setRules();
+  else
+  {
+    // Try to insert the style into the <head> tag, inserting directly under the
+    // document root breaks dev tools functionality:
+    // http://code.google.com/p/chromium/issues/detail?id=178109
+    (document.head || document.documentElement).appendChild(style);
+  }
+
+  // WebKit apparently chokes when the selector list in a CSS rule is huge.
+  // So we split the elemhide selectors into groups.
+  for (var i = 0; selectors.length > 0; i++)
+  {
+    var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
+    style.sheet.insertRule(selector + " { display: none !important; }", i);
+  }
 }
 
 var typeMap = {
