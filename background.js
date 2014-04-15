@@ -475,7 +475,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
   switch (msg.type)
   {
     case "get-selectors":
-      var selectors = null;
+      var selectors = [];
 
       if (!isFrameWhitelisted(sender.page, sender.frame, "DOCUMENT") &&
           !isFrameWhitelisted(sender.page, sender.frame, "ELEMHIDE"))
