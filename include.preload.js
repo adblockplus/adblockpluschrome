@@ -20,7 +20,7 @@ var SELECTOR_GROUP_SIZE = 20;
 // Sets the currently used CSS rules for elemhide filters
 function setElemhideCSSRules(selectors)
 {
-  if (!selectors)
+  if (selectors.length == 0)
     return;
 
   var style = document.createElement("style");
