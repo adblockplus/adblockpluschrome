@@ -26,6 +26,7 @@ with(require("subscriptionClasses"))
 {
   this.Subscription = Subscription;
   this.DownloadableSubscription = DownloadableSubscription;
+  this.SpecialSubscription = SpecialSubscription;
 }
 with(require("whitelisting"))
 {
@@ -468,6 +469,33 @@ function showNotification(notification)
     }
   }
   prepareNotificationIconAndPopup();
+}
+
+// This is a hack to speedup loading of the options page on Safari.
+// Once we replaced the background page proxy with message passing
+// this global function should removed.
+function getUserFilters()
+{
+  var filters = [];
+  var exceptions = [];
+
+  for (var i = 0; i < FilterStorage.subscriptions.length; i++)
+  {
+    var subscription = FilterStorage.subscriptions[i];
+    if (!(subscription instanceof SpecialSubscription))
+      continue;
+
+    for (var j = 0; j < subscription.filters.length; j++)
+    {
+      var filter = subscription.filters[j];
+      if (filter instanceof WhitelistFilter &&  /^@@\|\|([^\/:]+)\^\$document$/.test(filter.text))
+        exceptions.push(RegExp.$1);
+      else
+        filters.push(filter.text);
+    }
+  }
+
+  return {filters: filters, exceptions: exceptions};
 }
 
 ext.onMessage.addListener(function (msg, sender, sendResponse)

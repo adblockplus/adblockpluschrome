@@ -15,7 +15,8 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var require = ext.backgroundPage.getWindow().require;
+var backgroundPage = ext.backgroundPage.getWindow();
+var require = backgroundPage.require;
 
 with(require("filterClasses"))
 {
@@ -121,7 +122,9 @@ function reloadFilters()
   $("#acceptableAds").prop("checked", hasAcceptable);
 
   // User-entered filters
-  showUserFilters();
+  var userFilters = backgroundPage.getUserFilters();
+  populateList("userFiltersBox", userFilters.filters);
+  populateList("excludedDomainsBox", userFilters.exceptions);
 }
 
 // Cleans up when the options window is closed
@@ -138,30 +141,6 @@ function initCheckbox(id)
   {
     Prefs[id] = checkbox.checked;
   }, false);
-}
-
-function showUserFilters()
-{
-  var filters = [];
-  var exceptions = [];
-  for (var i = 0; i < FilterStorage.subscriptions.length; i++)
-  {
-    var subscription = FilterStorage.subscriptions[i];
-    if (!(subscription instanceof SpecialSubscription))
-      continue;
-
-    for (var j = 0; j < subscription.filters.length; j++)
-    {
-      var filter = subscription.filters[j];
-      if (filter instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(filter.text))
-        exceptions.push(RegExp.$1)
-      else
-        filters.push(filter.text);
-    }
-  }
-
-  populateList("userFiltersBox", filters);
-  populateList("excludedDomainsBox", exceptions);
 }
 
 var delayedSubscriptionSelection = null;
