@@ -1,1 +1,4 @@
-ext._setupMessageListener(function() { return {}; });
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)
+{
+  return ext.onMessage._dispatch(message, {}, sendResponse);
+});

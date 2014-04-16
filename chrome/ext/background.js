@@ -19,8 +19,6 @@
 {
   /* Pages */
 
-  var sendMessage = chrome.tabs.sendMessage || chrome.tabs.sendRequest;
-
   var Page = ext.Page = function(tab)
   {
     this._id = tab.id;
@@ -53,7 +51,7 @@
     },
     sendMessage: function(message, responseCallback)
     {
-      sendMessage(this._id, message, responseCallback);
+      chrome.tabs.sendMessage(this._id, message, responseCallback);
     }
   };
 
@@ -317,22 +315,22 @@
 
   /* Message passing */
 
-  ext._setupMessageListener(function(sender)
+  chrome.runtime.onMessage.addListener(function(message, rawSender, sendResponse)
   {
-    return {
-      page: new Page(sender.tab),
+    var sender = {
+      page: new Page(rawSender.tab),
       frame: {
-        url: sender.url,
+        url: rawSender.url,
         get parent()
         {
-          var frames = framesOfTabs[sender.tab.id];
+          var frames = framesOfTabs[rawSender.tab.id];
 
           if (!frames)
             return null;
 
           for (var frameId in frames)
           {
-            if (frames[frameId].url == sender.url)
+            if (frames[frameId].url == rawSender.url)
               return frames[frameId].parent;
           }
 
@@ -340,6 +338,8 @@
         }
       }
     };
+
+    return ext.onMessage._dispatch(message, sender, sendResponse);
   });
 
 
