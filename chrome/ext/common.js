@@ -19,37 +19,13 @@
 {
   /* Message passing */
 
-  var sendMessage;
-  if ("runtime" in chrome && "sendMessage" in chrome.runtime)
-    sendMessage = chrome.runtime.sendMessage;
-  else if ("sendMessage" in chrome.extension)
-    sendMessage = chrome.extension.sendMessage;
-  else
-    sendMessage = chrome.extension.sendRequest;
-
-  ext._setupMessageListener = function(wrapSender)
-  {
-    var onMessage;
-    if ("runtime" in chrome && "onMessage" in chrome.runtime)
-      onMessage = chrome.runtime.onMessage;
-    else if ("onMessage" in chrome.extension)
-      onMessage = chrome.extension.onMessage;
-    else
-      onMessage = chrome.extension.onRequest;
-
-    onMessage.addListener(function(message, sender, sendResponse)
-    {
-      return ext.onMessage._dispatch(message, wrapSender(sender), sendResponse);
-    });
-  };
-
   ext.onMessage = new ext._EventTarget();
 
 
   /* Background page */
 
   ext.backgroundPage = {
-    sendMessage: sendMessage,
+    sendMessage: chrome.runtime.sendMessage,
     getWindow: function()
     {
       return chrome.extension.getBackgroundPage();

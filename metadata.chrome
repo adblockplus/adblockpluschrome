@@ -18,7 +18,7 @@ icons = icons/abp-16.png icons/abp-32.png icons/abp-48.png icons/abp-128.png
 webAccessible = block.html
 
 [compat]
-chrome = 19.0
+chrome = 28.0
 
 [convert_js]
 lib/io.js = lib/filesystem/io.js
