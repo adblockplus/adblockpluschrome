@@ -34,8 +34,18 @@ function setElemhideCSSRules(selectors)
     shadow.appendChild(document.createElement("shadow"));
     shadow.appendChild(style);
 
-    for (var i = 0; i < selectors.length; i++)
-      selectors[i] = "::-webkit-distributed(" + selectors[i] + ")";
+    try
+    {
+      document.querySelector("::content");
+
+      for (var i = 0; i < selectors.length; i++)
+        selectors[i] = "::content " + selectors[i];
+    }
+    catch (e)
+    {
+      for (var i = 0; i < selectors.length; i++)
+        selectors[i] = "::-webkit-distributed(" + selectors[i] + ")";
+    }
   }
   else
   {
