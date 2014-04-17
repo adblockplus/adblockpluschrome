@@ -98,9 +98,9 @@ function checkCollapse(event)
         {
           // <frame> cannot be removed, doing that will mess up the frameset
           if (tag == "frame")
-            target.style.setProperty("visibility", "hidden", "!important");
+            target.style.setProperty("visibility", "hidden", "important");
           else
-            target.style.setProperty("display", "none", "!important");
+            target.style.setProperty("display", "none", "important");
         }
       }
     );
