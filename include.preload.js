@@ -26,9 +26,10 @@ function setElemhideCSSRules(selectors)
   var style = document.createElement("style");
   style.setAttribute("type", "text/css");
 
-  // Use Shadow DOM if available to don't mess with web pages
-  // that rely on the order of their own <style> tags (#309)
-  if ("webkitCreateShadowRoot" in document.documentElement)
+  // Use Shadow DOM if available to don't mess with web pages that
+  // rely on the order of their own <style> tags. However
+  // the <shadow> element is broken in Chrome 32.0.1700 (#309)
+  if ("webkitCreateShadowRoot" in document.documentElement && !/\bChrome\/32\.0\.1700\b/.test(navigator.userAgent))
   {
     var shadow = document.documentElement.webkitCreateShadowRoot();
     shadow.appendChild(document.createElement("shadow"));
