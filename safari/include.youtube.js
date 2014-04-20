@@ -96,7 +96,7 @@
       onBeforeLoadYoutubeVideo = patchPlayer;
     }
     else
-      document.removeEventListener("beforeload", onBeforeLoad);
+      document.removeEventListener("beforeload", onBeforeLoad, true);
   });
 
   document.addEventListener("beforeload", onBeforeLoad, true);
