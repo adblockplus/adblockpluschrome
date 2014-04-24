@@ -25,6 +25,7 @@
     this._url = tab.url;
 
     this.browserAction = new BrowserAction(tab.id);
+    this.contextMenus = new ContextMenus(this);
   };
   Page.prototype = {
     get url()
@@ -167,6 +168,74 @@
   };
 
 
+  /* Context menus */
+
+  var contextMenuItems = new ext.PageMap();
+  var contextMenuUpdating = false;
+
+  var updateContextMenu = function()
+  {
+    if (contextMenuUpdating)
+      return;
+
+    contextMenuUpdating = true;
+
+    chrome.tabs.query({active: true, lastFocusedWindow: true}, function(tabs)
+    {
+      chrome.contextMenus.removeAll(function()
+      {
+        contextMenuUpdating = false;
+
+        if (tabs.length == 0)
+          return;
+
+        var items = contextMenuItems.get({_id: tabs[0].id});
+
+        if (!items)
+          return;
+
+        for (var i = 0; i < items.length; i++)
+        {
+          chrome.contextMenus.create({
+            title:    items[i].title,
+            contexts: items[i].contexts,
+            onclick:  items[i].onclick
+          });
+        }
+      });
+    });
+  };
+
+  var ContextMenus = function(page)
+  {
+    this._page = page;
+  };
+  ContextMenus.prototype = {
+    create: function(item)
+    {
+      var items = contextMenuItems.get(this._page);
+      if (!items)
+        contextMenuItems.set(this._page, items = []);
+
+      items.push(item);
+      updateContextMenu();
+    },
+    removeAll: function()
+    {
+      contextMenuItems.delete(this._page);
+      updateContextMenu();
+    }
+  };
+
+  chrome.tabs.onActivated.addListener(updateContextMenu);
+
+  chrome.windows.onFocusChanged.addListener(function(windowId)
+  {
+    if (windowId != chrome.windows.WINDOW_ID_NONE)
+      updateContextMenu();
+  });
+
+
   /* Web requests */
 
   var framesOfTabs = {__proto__: null};
@@ -258,59 +327,6 @@
       console.error(e);
     }
   }, {urls: ["<all_urls>"]}, ["blocking"]);
-
-
-  /* Context menus */
-
-  var contextMenuItems = [];
-  var isContextMenuHidden = true;
-
-  ext.contextMenus = {
-    addMenuItem: function(title, contexts, onclick)
-    {
-      contextMenuItems.push({
-        title: title,
-        contexts: contexts,
-        onclick: function(info, tab)
-        {
-          onclick(info.srcUrl, new Page(tab));
-        }
-      });
-      this.showMenuItems();
-    },
-    removeMenuItems: function()
-    {
-      contextMenuItems = [];
-      this.hideMenuItems();
-    },
-    showMenuItems: function()
-    {
-      if (!isContextMenuHidden)
-        return;
-
-      chrome.contextMenus.removeAll(function()
-      {
-        for (var i = 0; i < contextMenuItems.length; i++)
-        {
-          var item = contextMenuItems[i];
-          chrome.contextMenus.create({
-            title: item.title,
-            contexts: item.contexts,
-            onclick: item.onclick
-          });
-        }
-      });
-      isContextMenuHidden = false;
-    },
-    hideMenuItems: function()
-    {
-      if (isContextMenuHidden)
-        return;
-
-      chrome.contextMenus.removeAll();
-      isContextMenuHidden = true;
-    }
-  };
 
 
   /* Message passing */
