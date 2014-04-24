@@ -78,12 +78,7 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
   // update browser actions when whitelisting might have changed,
   // due to loading filters or saving filter changes
   if (action == "load" || action == "save")
-  {
-    ext.pages.query({}, function(pages)
-    {
-      pages.forEach(refreshIconAndContextMenu);
-    });
-  }
+    refreshIconAndContextMenuForAllPages();
 });
 
 // Special-case domains for which we cannot use style-based hiding rules.
@@ -105,6 +100,16 @@ removeDeprecatedOptions();
 
 var activeNotification = null;
 
+var contextMenuItem = {
+  title: ext.i18n.getMessage("block_element"),
+  contexts: ["image", "video", "audio"],
+  onclick: function(srcUrl, page)
+  {
+    if (srcUrl)
+      page.sendMessage({type: "clickhide-new-filter", filter: srcUrl});
+  }
+};
+
 // Adds or removes browser action icon according to options.
 function refreshIconAndContextMenu(page)
 {
@@ -124,10 +129,18 @@ function refreshIconAndContextMenu(page)
 
   // show or hide the context menu entry dependent on whether
   // adblocking is active on that page
-  if (whitelisted || !/^https?:/.test(page.url))
-    ext.contextMenus.hideMenuItems();
-  else
-    ext.contextMenus.showMenuItems();
+  page.contextMenus.removeAll();
+
+  if (Prefs.shouldShowBlockElementMenu && !whitelisted && /^https?:/.test(page.url))
+    page.contextMenus.create(contextMenuItem);
+}
+
+function refreshIconAndContextMenuForAllPages()
+{
+  ext.pages.query({}, function(pages)
+  {
+    pages.forEach(refreshIconAndContextMenu);
+  });
 }
 
 /**
@@ -252,27 +265,11 @@ function addSubscription(prevVersion)
     notifyUser();
 }
 
-function setContextMenu()
-{
-  if (Prefs.shouldShowBlockElementMenu)
-  {
-    // Register context menu item
-    ext.contextMenus.addMenuItem(ext.i18n.getMessage("block_element"), ["image", "video", "audio"], function(srcUrl, page)
-    {
-      if (srcUrl)
-        page.sendMessage({type: "clickhide-new-filter", filter: srcUrl});
-    });
-  }
-  else
-    ext.contextMenus.removeMenuItems();
-}
-
 Prefs.addListener(function(name)
 {
   if (name == "shouldShowBlockElementMenu")
-    setContextMenu();
+    refreshIconAndContextMenuForAllPages();
 });
-setContextMenu();
 
 /**
   * Opens options page or focuses an existing one, within the last focused window.

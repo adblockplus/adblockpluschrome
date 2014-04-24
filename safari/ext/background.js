@@ -41,6 +41,7 @@
       };
 
     this.browserAction = new BrowserAction(this);
+    this.contextMenus = new ContextMenus(this);
   };
   Page.prototype = {
     get url()
@@ -236,49 +237,38 @@
   }, true);
 
 
-  /* Web requests */
-
-  ext.webRequest = {
-    onBeforeRequest: new ext._EventTarget(true),
-    handlerBehaviorChanged: function() {}
-  };
-
-
   /* Context menus */
 
-  var contextMenuItems = [];
-  var isContextMenuHidden = true;
+  var contextMenuItems = new ext.PageMap();
 
-  ext.contextMenus = {
-    addMenuItem: function(title, contexts, onclick)
+  var ContextMenus = function(page)
+  {
+    this._page = page;
+  };
+  ContextMenus.prototype = {
+    create: function(item)
     {
-      contextMenuItems.push({
-        id: String(contextMenuItems.length),
-        title: title,
-        item: null,
-        contexts: contexts,
-        onclick: onclick
-      });
-      this.showMenuItems();
+      var items = contextMenuItems.get(this._page);
+      if (!items)
+        contextMenuItems.set(this._page, items = []);
+
+      items.push(item);
     },
-    removeMenuItems: function()
+    removeAll: function()
     {
-      contextMenuItems = [];
-      this.hideMenuItems();
-    },
-    showMenuItems: function()
-    {
-      isContextMenuHidden = false;
-    },
-    hideMenuItems: function()
-    {
-      isContextMenuHidden = true;
+      contextMenuItems.delete(this._page);
     }
   };
 
   safari.application.addEventListener("contextmenu", function(event)
   {
-    if (isContextMenuHidden)
+    var pageId = event.userInfo.pageId;
+    if (!pageId)
+      return;
+
+    var page = pages[event.userInfo.pageId];
+    var items = contextMenuItems.get(page);
+    if (!items)
       return;
 
     var context = event.userInfo.tagName;
@@ -287,28 +277,32 @@
     if (!event.userInfo.srcUrl)
       context = null;
 
-    for (var i = 0; i < contextMenuItems.length; i++)
+    for (var i = 0; i < items.length; i++)
     {
       // Supported contexts are: all, audio, image, video
-      var menuItem = contextMenuItems[i];
+      var menuItem = items[i];
       if (menuItem.contexts.indexOf("all") == -1 && menuItem.contexts.indexOf(context) == -1)
         continue;
 
-      event.contextMenu.appendContextMenuItem(menuItem.id, menuItem.title);
+      event.contextMenu.appendContextMenuItem(i, menuItem.title);
     }
   });
 
   safari.application.addEventListener("command", function(event)
   {
-    for (var i = 0; i < contextMenuItems.length; i++)
-    {
-      if (contextMenuItems[i].id == event.command)
-      {
-        contextMenuItems[i].onclick(event.userInfo.srcUrl, pages[event.userInfo.pageId]);
-        break;
-      }
-    }
+    var page = pages[event.userInfo.pageId];
+    var items = contextMenuItems.get(page);
+
+    items[event.command].onclick(event.userInfo.srcUrl, page);
   });
+
+
+  /* Web requests */
+
+  ext.webRequest = {
+    onBeforeRequest: new ext._EventTarget(true),
+    handlerBehaviorChanged: function() {}
+  };
 
 
   /* Background page */
