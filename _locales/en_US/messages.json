@@ -99,6 +99,10 @@
       }
     }
   },
+  "name_devbuild": {
+    "description": "Extension name to be shown for development builds",
+    "message": "Adblock Plus development build"
+  },
   "notification_with_buttons": {
     "message": "Click 'OK' to open all links in this notification."
   },
