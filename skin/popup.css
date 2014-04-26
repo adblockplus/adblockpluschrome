@@ -281,6 +281,12 @@ li li
   padding-right: 25px;
 }
 
+.collapse-icon-placeholder
+{
+  display: none;
+  width: 45px;
+}
+
 .collapse-icon
 {
   display: inline-block;

@@ -12,7 +12,7 @@
     {
       setTimeout(function()
       {
-        safari.self.width = document.body.offsetWidth;
+        safari.self.width = document.body.scrollWidth;
         safari.self.height = document.body.offsetHeight;
 
         resizingScheduled = false;
@@ -37,6 +37,16 @@
     else
       document.addEventListener("DOMSubtreeModified", updateSize);
   });
+
+  // when using "white-space: nowrap", the overflown text overlaps the padding
+  // and neither clientWidth nor scrollWidth, we rely on when adjusting the size
+  // of the popover, inlcudes the overlapped area. So we have to use additional
+  // placeholders, in order to preserve padding. Since the dimensions of the
+  // popover are automatically correctly adjusted on Chrome, those placeholders
+  // would add extra empty space and therefore must only be rendered on Safari.
+  var style = document.createElement("style");
+  style.textContent = ".safari-inline-block { display: inline-block; }";
+  document.head.appendChild(style);
 
 
   // Safari will load the popover once, and then show it everytime the icon is
