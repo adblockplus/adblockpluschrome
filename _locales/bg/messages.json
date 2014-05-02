@@ -102,9 +102,6 @@
   "show_block_element_menu": {
     "message": "Показвай „Блокирай елемента“ в контекстното меню"
   },
-  "show_icon": {
-    "message": "Показвай иконата в адресната лента"
-  },
   "stats_label_page": {
     "message": "<strong>$number$</strong> — в страницата",
     "placeholders": {
@@ -131,15 +128,6 @@
   },
   "stats_share_download": {
     "message": "Изтегли Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Сподели във Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Подели във Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Сподели във Twitter"
   },
   "stats_share_message": {
     "message": "Благодарение на Adblock Plus са блокирани $number$ реклами и проследявания.",

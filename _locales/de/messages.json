@@ -39,7 +39,7 @@
     "message": "Blockiere Inline Text Werbung"
   },
   "disabled_for_site": {
-    "message": "<strong>Deaktiviert</strong> auf dieser Seite"
+    "message": "Auf dieser Seite <strong>deaktiviert</strong>"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain über das Adblock Plus-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in das Textfeld und drücken auf \"Domain hinzufügen\"."
@@ -51,10 +51,10 @@
     "message": "Liste als Text bearbeiten"
   },
   "enable_only_the": {
-    "message": "Aktivieren Sie nur die Filterlisten, die Sie brauchen. Zu viele Listen können die Performance Ihres Browser so stark einschränken, dass er nicht mehr reagiert."
+    "message": "Aktivieren Sie nur die Filterlisten, die Sie brauchen. Zu viele Listen können die Leistung Ihres Browsers so stark einschränken, dass er nicht mehr reagiert."
   },
   "enabled_for_site": {
-    "message": "<strong>Aktiviert</strong> auf dieser Seite"
+    "message": "Auf dieser Seite <strong>aktiviert</strong>"
   },
   "filter_lists": {
     "message": "Filterlisten"
@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus (Entwicklungsversion)"
+  },
+  "notification_with_buttons": {
+    "message": "Auf »OK« klicken, um alle Links in dieser Benachrichtigung zu öffnen."
+  },
+  "notification_without_buttons": {
+    "message": "Auf die Benachrichtigung klicken, um alle enthaltenen Links zu öffnen."
+  },
   "options": {
     "message": "Adblock Plus Optionen"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Zeige Rechtsklickmenü-Eintrag 'Element blockieren'"
-  },
-  "show_icon": {
-    "message": "Zeige Icon in der Adressleiste"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> auf dieser Seite",
@@ -132,17 +138,8 @@
   "stats_share_download": {
     "message": "Adblock Plus herunterladen"
   },
-  "stats_share_label_fb": {
-    "message": "Auf Facebook teilen"
-  },
-  "stats_share_label_gplus": {
-    "message": "Auf Google+ teilen"
-  },
-  "stats_share_label_twitter": {
-    "message": "Auf Twitter teilen"
-  },
   "stats_share_message": {
-    "message": "Ich habe $number$ Werbeanzeigen und Tracking-Dienste dank Adblock Plus geblockt.",
+    "message": "Ich habe $number$ Werbeanzeigen und Verfolgungsdienste dank Adblock Plus blockiert.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -150,10 +147,10 @@
     }
   },
   "stats_share_title": {
-    "message": "Diese Anzahl teilen"
+    "message": "Diese Anzahlen freigeben"
   },
   "stats_show_iconnumber": {
-    "message": "Anzahl im Icon anzeigen"
+    "message": "Anzahl im Symbol anzeigen"
   },
   "stats_title": {
     "message": "Blockierte Werbeanzeigen"

@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus (тестовая сборка)"
+  },
+  "notification_with_buttons": {
+    "message": "Щелкните 'OK', чтобы открыть все ссылки в этом уведомлении."
+  },
+  "notification_without_buttons": {
+    "message": "Щелкните по уведомлению, чтобы открыть все ссылки."
+  },
   "options": {
     "message": "Настройки Adblock Plus"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Показывать 'Заблокировать элемент' в контекстном меню"
-  },
-  "show_icon": {
-    "message": "Показать иконку в адресной строке"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> на этой странице",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Скачать Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Поделиться в Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Поделиться в Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Поделиться в Твиттере"
   },
   "stats_share_message": {
     "message": "Я заблокировал $number$ объявлений и трекеров благодаря Adblock Plus.",

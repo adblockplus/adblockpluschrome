@@ -102,9 +102,6 @@
   "show_block_element_menu": {
     "message": "Näytä 'Estä Elementti' oikea-klikkaus valikossa"
   },
-  "show_icon": {
-    "message": "Näytä kuva osoiterivillä"
-  },
   "stats_label_page": {
     "message": "<strong>$number$</strong> tällä sivulla",
     "placeholders": {
@@ -131,15 +128,6 @@
   },
   "stats_share_download": {
     "message": "Lataa Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Jaa Facebookissa"
-  },
-  "stats_share_label_gplus": {
-    "message": "Jaa Google +-palvelussa"
-  },
-  "stats_share_label_twitter": {
-    "message": "Jaa Twitterissä"
   },
   "stats_share_message": {
     "message": "Estin $number$ mainosta ja trackeriä kiitos Adblock Plus;an.",

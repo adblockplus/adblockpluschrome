@@ -15,16 +15,16 @@
     "message": "Thêm bộ lọc của bạn"
   },
   "apply_changes": {
-    "message": "Lưu các thay đổi"
+    "message": "Áp dụng các thay đổi"
   },
   "block_element": {
-    "message": "Khóa đối tượng này"
+    "message": "Chặn phần từ này"
   },
   "cancel": {
     "message": "Hủy bỏ"
   },
   "clickhide_instructions": {
-    "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
+    "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào phần tử mà bạn cần chặn trên trang."
   },
   "description_chrome": {
     "message": "Công cụ chặn quảng cáo miễn phí cho Chrome: Khối quảng cáo video trên YouTube gây phiền nhiễu, quảng cáo Facebook, biểu ngữ và nhiề…"
@@ -39,13 +39,13 @@
     "message": "Chặn trực tiếp các quảng cáo chữ"
   },
   "disabled_for_site": {
-    "message": "<strong>Đã loại bỏ</strong> trên trang này"
+    "message": "<strong>Đã vô hiệu</strong> trên trang này"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus không hoạt động ở các tên miền dưới đây. Bạn có thể thêm một tên miền bằng cách bấm vào biểu tượng Adblock Plus nằm trên thanh địa chỉ, hoặc gõ tên miền (không phải là URL) trong khung bên dưới và ấn nút \"Thêm tên miền\"."
   },
   "easy_create_filter": {
-    "message": "yếu tố khối"
+    "message": "Chặn phần từ"
   },
   "edit_filters_raw": {
     "message": "Chỉnh sửa bộ lọc như văn bản thô"
@@ -69,7 +69,7 @@
     "message": "Tổng quan"
   },
   "last_updated_at": {
-    "message": "cập nhật lần cuối lúc $time$ ngày $date$",
+    "message": "Cập nhật lần cuối lúc $time$ ngày $date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -100,10 +100,7 @@
     "message": "Xóa mục đã chọn"
   },
   "show_block_element_menu": {
-    "message": "Hiển thị lệnh 'Block Element' ở trình đơn khi ấn chuột phải"
-  },
-  "show_icon": {
-    "message": "Hiện biểu tượng ở thanh địa chỉ"
+    "message": "Hiển thị mục 'Chặn phần tử' ở trình đơn chuột phải"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> trên trang này",
@@ -130,19 +127,10 @@
     }
   },
   "stats_share_download": {
-    "message": "Download Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Chia sẻ lên Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Chia sẻ lên Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Chia sẻ lên Twitter"
+    "message": "Tải Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Tôi đã chặn $number$ quảng cáo và tracker Cảm ơn Adblock Plus.",
+    "message": "Tôi đã chặn $number$ quảng cáo và những bộ theo dõi Cảm ơn Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -150,13 +138,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Chia sẻ những con số"
+    "message": "Chia sẻ những con số này"
   },
   "stats_show_iconnumber": {
-    "message": "Hiện số ads đã chặn trong icon ABP"
+    "message": "Hiện số trong biểu tượng"
   },
   "stats_title": {
-    "message": "quảng cáo bị chặn"
+    "message": "Quảng cáo đã bị chặn"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vui lòng chọn một bộ lọc trọn gói từ danh sách:"

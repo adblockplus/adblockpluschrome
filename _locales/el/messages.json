@@ -102,9 +102,6 @@
   "show_block_element_menu": {
     "message": "Εμφάνιση του \"Μπλοκαρισμένο Στοιχείο\" στο μενού του δεξιού κλικ"
   },
-  "show_icon": {
-    "message": "Εμφάνιση εικονίδιου στη γραμμή διευθύνσεων"
-  },
   "stats_label_page": {
     "message": "<strong>$number$</strong> σε αυτή την σελίδα",
     "placeholders": {
@@ -131,15 +128,6 @@
   },
   "stats_share_download": {
     "message": "Κατεβάστε το Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Μοιραστείτε το στο Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Μοιραστείτε το στο Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Μοιραστείτε το στο Twitter"
   },
   "stats_share_message": {
     "message": "Απέκλεισα $number$ διαφημίσεις και ιχνηλάτες χάρη στο Adblock Plus.",

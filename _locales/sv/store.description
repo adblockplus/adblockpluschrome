@@ -1,25 +1,26 @@
-Njut av att surfa på webben utan störande reklam som fyller din skärm!
+Adblock Plus blockerar störande annonser, och stöttar som standard hemsidor genom att inte blockera diskreta annonser (konfigurerbart).
 
-Adblock Plus för Google Chrome blockerar:
+Njut av att surfa på webben utan störande reklam som fyller din skärm! Adblock Plus för Google Chrome blockerar:
 
-· Webbannonser
-· Videoreklam på YouTube
-· Annonser på Facebook
+· Banners
+· YouTube videoannonser
+· Facebook-reklam
 · Popup-fönster
-· Alla andra störande annonser
+· All annan störande reklam
 
-Adblock Plus är världens populäraste webbläsartillägg, och används av miljontals användare världen över. Det är ett gemenskapsdrivet projekt med öppen källkod, hundratals frivilliga bidrar till framgången av Adblock Plus för att säkerställa att alla störande annonser automatiskt blockeras.
+Adblock Plus är världens mest populära webbläsartillägg, och används av miljoner användare världen över. Det är ett communitydrivet öppen källkodsprojekt, och hundratals frivilliga bidrar till Adblock Plus framgångar att se till att all störande reklam automatiskt blockeras.
 
-Vänligen notera: När du installerar Adblock Plus för Chrome visar din webbläsare en varning att Adblock Plus för Chrome har tillgång till din historik och data. Detta är ett standardmeddelande, vi samlar ALDRIG någon information!
+Var vänlig notera: När du installerar Adblock Plus för Chrome, visar din webbläsare en varning för att Adblock Plus för Chrome har tillgång till din webbläsarhistorik och data. Detta är en standardmeddelande, vi samlar ALDRIG in någon information överhuvudtaget!
 
-Nyligen har Adblock Plus gemenskapen introducerat Acceptabla Annonser initiativet. Genom att tillåta små och statiska annonser, stöder du webbsidor som är beroende avannonser men som väljer att göra det på ett icke-störande sätt. Denna funktion kan inaktiveras närsomhelst. Gå till http://adblockplus.org/en/acceptable-ads för att ta reda på mer.
+Nyligen, introducerade Adblock Plus-communityt Acceptabla Annonser-initiativet. Genom att tillåta vissa små och statiska annonser, stöttar du hemsidor som lever på annonsering men väljer att göra det på ett icke-störande sätt. Denna funktion går att stänga av när som helst. Gå till http://adblockplus.org/en/acceptable-ads för att läsa mer.
 
 ***********
-Publiceringsmeddelanden och ändringsloggar kan hittas här: http://adblockplus.org/releases/
+Utgåveinformation och ändringsloggar går att hitta här:
+http://adblockplus.org/releases/
 
-Problem? Försök starta om Chrome och/eller klicka "Uppdatera nu" i Adblock Plus Inställningarna.
+Problem? Testa att starta om Chrome och/eller klicka på "Uppdatera nu" i Adblock Plus inställningar.
 
-Hittat en bugg? Vi är medvetna om några problem: http://adblockplus.org/en/known-issues-chrome. Om du hittar mera eller behöver hjälp, besök vårat forum: https://adblockplus.org/forum/viewforum.php?f=10.
+Hittat en bugg? Vi är medvetna om en del problem: http://adblockplus.org/en/known-issues-chrome. Om du hittar fler eller behöver hjälp, besök vårt forum: https://adblockplus.org/forum/viewforum.php?f=10.
 
 *************
-Känner du dig våghalsig? Prova en utvecklingsversion för att alltid få de senaste funktionerna i Chrome Adblock Plus: http://adblockplus.org/en/development-builds (uppdateras separat, fristående inställningar).
+Känner du dig äventyrlig? Testa en utvecklarversion för att få de senaste funktionerna i Adblock Plus för Chrome: http://adblockplus.org/en/development-builds (uppdateras separat, självständiga inställningar).

@@ -36,7 +36,7 @@
     "message": "La herramienta gratuita para bloquear publicidad en Safari: Bloquea molestos anuncios en YouTube, anuncios de Facebook, banners, y mucho más."
   },
   "disable_inline": {
-    "message": "Desctivar anuncios de texto"
+    "message": "Desctivar anuncios de texto entre lineas"
   },
   "disabled_for_site": {
     "message": "<strong>Deshabilitado</strong> en este sitio"
@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Herramienta de desarrollo de Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "Haz click en 'OK' para abrir todos los enlaces en esta notificación."
+  },
+  "notification_without_buttons": {
+    "message": "Haz click en la notificación para abrir todos los enlaces en él."
+  },
   "options": {
     "message": "Opciones de Adblock Plus"
   },
@@ -97,13 +106,10 @@
     "message": "Las listas obsoletas se actualizarán preiódicamente."
   },
   "remove_button": {
-    "message": "Eliminar selecciones"
+    "message": "Eliminar seleccionados"
   },
   "show_block_element_menu": {
     "message": "Mostrar opción \"Bloquear Elemento\" al hacer click derecho en el elemento"
-  },
-  "show_icon": {
-    "message": "Mostrar icono en la barra de direcciones"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> en esta página",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Descarga Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Compartir en Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Compartir en Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Compartir en Twitter"
   },
   "stats_share_message": {
     "message": "He bloqueado $number$ anuncios y rastreadores gracias a Adblock Plus.",

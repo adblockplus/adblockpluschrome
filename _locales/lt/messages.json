@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "AdBlock Plus plėtros statyti"
+  },
+  "notification_with_buttons": {
+    "message": "Paspauskite „Gerai“ ir bus atvertos visos šio pranešimo nuorodos."
+  },
+  "notification_without_buttons": {
+    "message": "Paspauskite ant pranešimo ir bus atvertos visos nuorodos jame."
+  },
   "options": {
     "message": "Adblock Plus parinktys"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Dešinio mygtuko meniu rodyti „Blokuoti elementą“"
-  },
-  "show_icon": {
-    "message": "Adreso juostoje rodyti piktogramą"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> šiame puslapyje",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Parsisiųsti Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Dalintis Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Dalintis Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Dalintis Twitter"
   },
   "stats_share_message": {
     "message": "Adblock dėka aš užblokavau $number$ reklamų.",

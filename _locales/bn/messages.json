@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "অ্যাডব্লক প্লাসের উন্নয়ন গঠন"
+  },
+  "notification_with_buttons": {
+    "message": "এই বিজ্ঞপ্তিতে সব লিঙ্ক খোলার জন্য 'ঠিক আছে' ক্লিক করুন।"
+  },
+  "notification_without_buttons": {
+    "message": "এটিতে সকল লিংক খোলার জন্য বিজ্ঞপ্তিতে ক্লিক করুন।"
+  },
   "options": {
     "message": "Adblock Plus অপশনস"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "'অবরুদ্ধ উপাদান' রাইট-ক্লিক মেনু আইটেমে প্রদর্শন করান"
-  },
-  "show_icon": {
-    "message": "ঠিকানা দণ্ডে আইকন দেখান"
   },
   "stats_label_page": {
     "message": "এই পৃষ্ঠায় <strong>$number$টি</strong>",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Adblock Plus ডাউনলোড করুন"
-  },
-  "stats_share_label_fb": {
-    "message": "ফেসবুকে ভাগ করুন"
-  },
-  "stats_share_label_gplus": {
-    "message": "Google+ এ ভাগ করুন"
-  },
-  "stats_share_label_twitter": {
-    "message": "টুইটারে ভাগ করুন"
   },
   "stats_share_message": {
     "message": "আমি $number$টি বিজ্ঞাপন ও ট্রেকারসকে অবরুধ করছি Adblock Plus কে ধন্যবাদ।",

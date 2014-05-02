@@ -1,25 +1,26 @@
-Élvezze a webes szörfözést anélkül, hogy idegesítő reklámokkal lenne tele a képernyője!
+Az Adblock Plus kiszűri a bosszantó hirdetéseket és támogatja a weboldalakat a nem tolakodó reklámok alapértelmezett engedélyezésével (kikapcsolható).
 
-Az Adblock Plus for Google Chrome segítségével megszabadulhat az alábbiaktól:
+Élvezze a webet háborítatlanul a bosszantó reklámok eltüntetésével! Az Adblock Plus Google Chrome-hoz kiszűri az alábbiakat:
 
-· Bannerek
-· YouTube videó reklámok
-· Facebook hirdetések
-· Felugró ablakok
-· Minden tolakodó reklám
+- Bannerek
+- YouTube videó reklámok
+- Facebook hirdetések
+- Felugró ablakok
+- Minden más tolakodó hirdetés
 
-Az Adblock Plus a világ legnépszerűbb böngésző kiterjesztése, melyet világszerte sok millióan használnak. Ez egy közösség által fejlesztett, nyílt forráskódú projekt, melyhez több száz önkéntes járul hozzá, hogy az idegesítő reklámoktól automatikusan megszabadulhasson.
+Az Adblock Plus a világ legnépszerűbb böngésző bővítménye, felhasználók milliói használják világszerte. Ez egy közösség által fejlesztett, nyílt forráskódú projekt, önkéntesek százai vesznek részt az Adblock Plus fejlesztésében, hogy automatikusan eltüntessék a bosszantó hirdetéseket.
 
-Megjegyzés: az Adblock Plus for Chrome telepítésekor a böngészője megjelenít egy figyelmeztetést, miszerint az Adblock Plus for Chrome hozzáférhet a lapokhoz és a böngészési tevékenységhez. Ez egy szabvány üzenet, mi SOSEM gyűjtünk információkat az Ön böngészési tevékenységéről!
+Megjegyzés: az Adblock Plus Chrome-hoz telepítésekor a böngésző figyelmezteti, hogy az Adblock Plus hozzáférhet az Ön adataihoz az összes webhelyen, a lapokhoz és a böngészési tevékenységeihez. Ez egy szabványos üzenet, viszont mi nem gyűjtünk semmilyen információt a felhasználóról!
 
-Az Adblock Plus közösség nemrég elfogadta az Elfogadható hirdetések kezdeményezést. A kicsi és statikus hirdetések engedélyezésével támogathatja azokat oldalakat, amelyen vállalják, hogy nem alkalmaznak tolakodó hirdetési módokat. Ezt a funkciót bármikor kikapcsolhatja. Látogasson el a http://adblockplus.org/hu/acceptable-ads oldalra további információkért.
+Nemrég az Adblock Plus közösség bevezette az Elfogadható hirdetések kezdeményezést. Kisebb, nem látványos hirdetésekkel támogatja az adott weboldalt, amely a hirdetési bevételekre építi az üzleti modelljét, viszont azt nem tolakodó módon teszi. Ezt a funkciót bármikor kikapcsolhatja, látogasson el a http://adblockplus.org/hu/acceptable-ads oldalra további információkért.
 
 ***********
-Új verziók és a verziónkénti változások itt találhatók: http://adblockplus.org/releases/
+Megjelenési információk és a verzió előzmények itt találhatóak: http://adblockplus.org/releases/
 
-Gondja akadt? Próbálja meg újraindítani a Chrome-ot és/vagy kattintson a "Frissítés most" gombra az Adblock Plus beállításaiban.
+Gond van a bővítménnyel? Indítsa újra a Chrome-ot, és/vagy kattintson a Frissítés most hivatkozásra az Adblock Plus beállításaiban.
 
-Hibát talált? Néhány hibáról tudunk: http://adblockplus.org/en/known-issues-chrome. Ha újat talált vagy segítségre van szüksége, keresse fel a fórumunkat: https://adblockplus.org/forum/viewforum.php?f=10.
+Hibát talált? Néhány hibáról már tudunk: http://adblockplus.org/en/known-issues-chrome. Ha talált egy újat, akkor kérem látogasson el a fórumunkba: https://adblockplus.org/forum/viewforum.php?f=10.
 
 *************
-Kalandra vágyik? Próbálja ki a fejlesztői változatot a Chrome Adblock Plus legújabb funkciónak kipróbálásához: http://adblockplus.org/en/development-builds (külön frissül, független beállításokkal).
+Kalandra vágyik? Próbálja ki a fejlesztői változatot, hogy mindig a naprakész legyen az Adblock Plus Chrome új funkcióit illetően:
+http://adblockplus.org/en/development-builds (külön frissül, külön beállításokkal rendelkezik).

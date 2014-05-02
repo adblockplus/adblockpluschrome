@@ -1,20 +1,22 @@
-Disfrute navegando por Internet sin que su pantalla se llene de anuncios molestos.  
-Adblock Plus para Google Chrome bloquea: 
-· Banners 
-· Anuncios en vídeos de YouTube
-· Publicidad en Facebook 
-· Ventanas emergentes 
-· Todo tipo de publicidad molesta
-Adblock Plus es la extensión de navegador más popular, utilizada por millones de usuarios de todo el mundo. Se trata de un proyecto de código abierto impulsado por la comunidad, con cientos de voluntarios que contribuyen a su éxito asegurándose de que se bloquean automáticamente todos los anuncios molestos.  
-Tenga en cuenta que al instalarla en su navegador le mostrará el aviso de que Adblock Plus para Chrome tendrá acceso a su historial y datos de navegación. Se trata de un mensaje estándar, nosotros NUNCA recopilaremos su información personal.
-Recientemente la comunidad de Adblock Plus presentó su iniciativa sobre publicidad aceptable. Al permitir algunos anuncios estáticos y de pequeño tamaño estará ayudando a páginas web que dependen de la publicidad, pero que deciden hacerlo de manera no intrusiva. Esta función puede desactivarse en cualquier momento. Consulte http://adblockplus.org/en/acceptable-ads para más información.  
+Adblock Plus bloquea todos los anuncios importunos y ayuda a los sitios web al permitir por defecto la publicidad no intrusiva (opción configurable).
+Disfrute navegando por Internet sin que la publicidad agresiva ocupe toda la pantalla. Adblock Plus para Google Chrome bloquea:
 
-*********** 
-Puede consultar los anuncios de nuevas versiones y las listas de cambios en: http://adblockplus.org/releases/ 
+· Banners
+· Vídeos publicitarios en YouTube
+· Anuncios en Facebook 
+· Ventanas emergentes (pop ups)
+· Todo tipo de publicidad agresiva
 
-¿Ha surgido algún problema? Pruebe a reiniciar Chrome y/o pulse en "Actualizar ahora" dentro de las Opciones de Adblock Plus.  
+Adblock Plus es la extensión de navegador más popular, utilizada por millones de usuarios de todo el mundo. Se trata de un proyecto de código abierto orientado a la comunidad, en el que cientos de voluntarios contribuyen al éxito de Adblock Plus para garantizar que toda la publicidad molesta se bloquee automáticamente.
+Tenga en cuenta que al instalar Adblock Plus para Chrome su navegador le advertirá que esta extensión tendrá acceso a su historial y datos de navegación. Se trata de un mensaje que aparece por defecto, nosotros NUNCA recolectamos ningún tipo de información.
+Hace poco la comunidad de Adblock Plus introdujo la iniciativa de publicidad aceptable. Al permitir algunos anuncios estáticos y de pequeño tamaño ayudará a los sitios web que dependen de la publicidad, pero que prefieren hacerlo de forma no agresiva. Esta funcionalidad puede deshabilitarse en cualquier momento. Para más información, puede consultar en http://adblockplus.org/en/acceptable-ads.
 
-¿Encontró un error? Conocemos algunos problemas aún pendientes: http://adblockplus.org/en/known-issues-chrome. Si ha encontrado otros diferentes o necesita ayuda, puede visitar nuestro foro: https://adblockplus.org/forum/viewforum.php?f=10. 
+***********
+
+Puede encontrar los anuncios de nuevas versiones y las listas de cambios en http://adblockplus.org/releases/
+¿Algún problema? Pruebe a reiniciar Chrome y/o pulsar "Actualizar ahora" en las Opciones de Adblock Plus.
+¿Encontró un fallo? Ya estamos al tanto de  algunos de ellos: http://adblockplus.org/en/known-issues-chrome. Si encontró otro diferente o necesita ayuda, puede visitar nuestro foro: https://adblockplus.org/forum/viewforum.php?f=10.
 
 *************
-¿Se siente aventurero? Pruebe una versión de desarrollo para obtener las que son siempre las funcionalidades más novedosas de Adblock Plus para Chrome: http://adblockplus.org/en/development-builds (se actualizan por separado, con predisposiciones independientes). 
+
+¿Se siente aventurero? Pruebe una versión de desarrollo para tener siempre las funcionalidades más recientes de Adblock Plus para Chrome: http://adblockplus.org/en/development-builds (se actualizan independientemente, y tienen predisposiciones diferentes).

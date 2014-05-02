@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus (versió en desenvolupament)"
+  },
+  "notification_with_buttons": {
+    "message": "Feu clic a «D'acord» per obrir tots els enllaços en aquesta notificació."
+  },
+  "notification_without_buttons": {
+    "message": "Feu clic a la notificació per obrir-ne tots els enllaços."
+  },
   "options": {
     "message": "Opcions de l'Adblock Plus"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Mostra la opció \"Bloqueja l'element\" com a ítem del menú contextual"
-  },
-  "show_icon": {
-    "message": "Mostra la icona a la barra d'adreces"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> en aquesta pàgina",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Baixa l'Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Comparteix-ho a Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Comparteix-ho a Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Comparteix-ho a Twitter"
   },
   "stats_share_message": {
     "message": "He blocat $number$ anuncis i rastrejadors gràcies a Adblock Plus.",

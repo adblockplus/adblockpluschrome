@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Versiune de test Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "Clic 'OK' pentru a deschide toate link-urile în această notificare."
+  },
+  "notification_without_buttons": {
+    "message": "Clic pe notificare pentru a deschide toate link-urile incluse în ea."
+  },
   "options": {
     "message": "Opţiuni Adblock Plus"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Arată 'Blochează Elementul' in meniul asociat unui obiect cu clic dreapta"
-  },
-  "show_icon": {
-    "message": "Afişează sigla în bara de adrese"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pe această pagină",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Descarca Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Share pe Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Share pe Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Share pe Twitter"
   },
   "stats_share_message": {
     "message": "Am blocat $number$ reclame cu ABP.",

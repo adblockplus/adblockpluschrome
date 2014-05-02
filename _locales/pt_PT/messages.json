@@ -27,13 +27,13 @@
     "message": "Ao fechar esta janela, clique (ou clique com o botão direito) num elemento da página."
   },
   "description_chrome": {
-    "message": "A ferramenta gratuita de bloqueio de anúncios para o Chrome: bloqueia anúncios irritantes no YouTube, anúncios do Facebook, banners…"
+    "message": "A ferramenta gratuita de adblock, para o Chrome: bloqueia anúncios irritantes no YouTube, anúncios do Facebook, banners e muito mai…"
   },
   "description_opera": {
-    "message": "A ferramenta gratuita de bloqueio de anúncios para o Opera: bloqueia anúncios no YouTube, Facebook, banners e muito mais."
+    "message": "A ferramenta gratuita do adblock para o Opera: bloqueia anúncios irritantes no YouTube, Facebook, banners e muito mais."
   },
   "description_safari": {
-    "message": "A ferramenta gratuita de bloqueio de anúncios para o Safari: bloqueia anúncios no YouTube, Facebook, banners e muito mais."
+    "message": "A ferramenta gratuita adblock para o Safari: bloqueia anúncios no YouTube irritantes, Facebook, banners e muito mais."
   },
   "disable_inline": {
     "message": "Desativar anúncios de texto embutido"
@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Versão de desenvolvimento do Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "Clique em 'OK' para abrir todas as ligações nesta notificação."
+  },
+  "notification_without_buttons": {
+    "message": "Clique na notificação para abrir todas as ligações."
+  },
   "options": {
     "message": "Opções do Adblock Plus"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Mostrar 'Bloquear elemento' no menu de contexto do botão direito do rato"
-  },
-  "show_icon": {
-    "message": "Mostrar ícone na barra de endereço"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> nesta página",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Transferir o Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Partilhar no Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Partilhar no Google +"
-  },
-  "stats_share_label_twitter": {
-    "message": "Partilhar no Twitter"
   },
   "stats_share_message": {
     "message": "Bloqueei $number$ anúncios e trackers graças ao Adblock Plus.",

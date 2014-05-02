@@ -102,9 +102,6 @@
   "show_block_element_menu": {
     "message": "Ставка „Блокирај елемент“ у контекстуалном менију"
   },
-  "show_icon": {
-    "message": "Икона у адресној траци"
-  },
   "stats_label_page": {
     "message": "<strong>$number$</strong> на овој страници",
     "placeholders": {
@@ -131,15 +128,6 @@
   },
   "stats_share_download": {
     "message": "Преузми Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Дели на Facebook-у"
-  },
-  "stats_share_label_gplus": {
-    "message": "Дели на Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Дели на Twitter-у"
   },
   "stats_share_message": {
     "message": "Блокирао сам $number$ огласа и пратилаца захваљујући Adblock Plus-у.",

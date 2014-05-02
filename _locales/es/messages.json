@@ -102,9 +102,6 @@
   "show_block_element_menu": {
     "message": "Mostrar la opción \"Bloquear elemento\" en el menú contextual"
   },
-  "show_icon": {
-    "message": "Mostrar icono en la barra de direcciones"
-  },
   "stats_label_page": {
     "message": "<strong>$number$</strong> en esta página",
     "placeholders": {
@@ -131,15 +128,6 @@
   },
   "stats_share_download": {
     "message": "Descargar Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Compartir en Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Compartir en Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Compartir en Twitter"
   },
   "stats_share_message": {
     "message": "He bloqueado $number$ anuncios y rastreadores gracias a Adblock Plus.",

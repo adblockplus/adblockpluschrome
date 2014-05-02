@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus utvecklings version"
+  },
+  "notification_with_buttons": {
+    "message": "Klicka på 'OK' för att öppna alla länkar i detta meddelandet."
+  },
+  "notification_without_buttons": {
+    "message": "Klicka på meddelandet för att öppna länkar i den."
+  },
   "options": {
     "message": "Adblock Plus Alternativ"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Visa 'Blockera objekt' i högerklicksmeny"
-  },
-  "show_icon": {
-    "message": "Visa ikon i adressfältet"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> på den här sidan",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Ladda ner Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Dela på Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Dela på Google +"
-  },
-  "stats_share_label_twitter": {
-    "message": "Dela på Twitter"
   },
   "stats_share_message": {
     "message": "Jag blockerade $number$ annonser och trackers tack vare Adblock Plus.",

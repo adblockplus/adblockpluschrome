@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus geliştirme derlemesi"
+  },
+  "notification_with_buttons": {
+    "message": "Bu bildirimdeki tüm bağlantıları açmak için 'Tamam' düğmesine tıklayın."
+  },
+  "notification_without_buttons": {
+    "message": "Bildirimdeki tüm bağlantıları açmak için bildirim üzerine tıklayın."
+  },
   "options": {
     "message": "Adblock Plus Seçenekleri"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Sağ tıkladığınızda \"Öğeyi Engelle\" seçeneğini göster"
-  },
-  "show_icon": {
-    "message": "İkonu adres çubuğunda göster."
   },
   "stats_label_page": {
     "message": "Bu sayfada <strong>$number$</strong>",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Adblock Plus'ı indir"
-  },
-  "stats_share_label_fb": {
-    "message": "Facebook'ta Paylaş"
-  },
-  "stats_share_label_gplus": {
-    "message": "Google+'da Paylaş"
-  },
-  "stats_share_label_twitter": {
-    "message": "Twitter'da Paylaş"
   },
   "stats_share_message": {
     "message": "$number$ reklamı ve izleyiciyi Adblock Plus sayesinde engelledim.",

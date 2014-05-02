@@ -93,9 +93,6 @@
   "show_block_element_menu": {
     "message": "Rādīt 'Bloķēt elementu''labā klikšķa izvēlnē"
   },
-  "show_icon": {
-    "message": "Rādīt ikonu adreses joslā"
-  },
   "stats_label_page": {
     "message": "<strong>$number$</strong> šajā lapā",
     "placeholders": {

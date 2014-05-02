@@ -1,25 +1,25 @@
-享受清净的网络世界，远离塞满您屏幕的烦人广告。
+Adblock Plus 可屏蔽各网站上的各类广告，并允许显示并不恼人的广告（可配置）。
 
-Adblock Plus for Google Chrome 会过滤：
+就在此时，享受没有恼人广告的网络世界！Adblock Plus for Google Chrome 可屏蔽：
 
 · 横幅广告
 · YouTube 视频广告
-· Facebook 广告
+· Facebook 广告活动
 · 弹出窗口
-· 所有其他带有骚扰性的广告
+· 以及其他突兀的广告
 
-Adblock Plus 是世界上最流行的浏览器扩展，全球数百万用户都在使用。这是一个社区推动的开源项目，有数百名志愿者为 Adblock Plus 的成功作出了贡献，以确保所有烦人的广告被自动过滤。
+Adblock Plus 是世界上最流行的浏览器扩展，在全球有着数以百万计的用户。这是一个社区驱动的开源项目，并有着数百名志愿者正在促成着 Adblock Plus 成功阻止所有烦人的广告。
 
-请注意：当安装 Adblock Plus for Chrome 时，您的浏览器会显示一个警告，说 Adblock Plus for Chrome 会获取您的浏览历史和数据。这是一个规范的消息，我们从不、绝不会收集任何用户的信息！
+请注意，在您安装 Adblock Plus for Chrome 之时，您的浏览器会显示一个警告，表示 Adblock Plus for Chrome 要访问您的浏览历史和数据。这是一项公式化的消息，我们从来并永远不会收集任何信息！
 
-最近，Adblock Plus 社区提出了可接受广告倡议。您可以选择通过允许一些小的静态的广告的存在，来支持网站的运营，这些广告都是不具有骚扰性质的。这个功能可以随时禁用。到 http://adblockplus.org/zh_CN/acceptable-ads 可以了解更多细节。
+近日，Adblock Plus 社区推出了可接受广告的倡议。通过观看一些小型或静态的广告，您可以支持依赖于非侵入式广告生存的网站。您也可在任何时间禁用此功能。查阅 http://adblockplus.org/en/acceptable-ads 了解细节。
 
 ***********
-新版本发行和更新日志请浏览: http://adblockplus.org/releases/
+发布公告和更新日志位于: http://adblockplus.org/releases/
 
-遇到问题？试试重新启动 Chrome 并且（或者）在 Adblock Plus 选项中点击“立即更新”。
+遇到问题？请尝试：重启 Chrome，在 Adblock Plus 选项中点击“立即更新”。
 
-发现了错误？我们已经意识到一些问题: http://adblockplus.org/zh_CN/known-issues-chrome 。如果您发现了其他问题或者需要帮助，请访问我们的论坛: https://adblockplus.org/forum/viewforum.php?f=10
+发现 bug？我们已经知道了一些问题: http://adblockplus.org/en/known-issues-chrome。如果您发现了我们未知的 bug 或者需要帮助，请访问我们的论坛: https://adblockplus.org/forum/viewforum.php?f=10。
 
 *************
-想要冒险？试试开发中的版本，随时获得 Chrome Adblock Plus 的最新功能: http://adblockplus.org/en/development-builds （分别更新，独立设置）。
+喜欢冒险的感觉？试试我们的开发版本，最先体验 Chrome Adblock Plus 的最新功能: http://adblockplus.org/en/development-builds （单独更新，独立设置）。

@@ -1,25 +1,25 @@
-Nauti surffailusta verkossa ilman häiritseviä mainoksia, jotka täyttävät näyttösi!
+Adblock Plus estää kaikki ärsyttävät mainokset ja ei estä huomaamattomia mainoksia oletuksena (konfiguroitavissa).
 
-Adblock Plus Google Chromelle estää:
+ Nauti netin surffailua ilman häiritseviä mainoksia näytölläsi! Adblock Plus Google Chromelle estää:
 
-· Bannerit
-· Youtube-videoiden mainokset
-· Facebook-mainokset
-· Ponnahdusikkunat
-· Kaikki muut häiritsevät mainokset
+• Bannerit
+• YouTube videomainokset
+• Facebook mainokset
+• Ponnahdusikkunat
+• Kaikki muut häiritsevät mainokset
 
-Adblock Plus on maailman suosituin selainlaajennus ja sitä käyttävät miljoonat ihmiset kautta maailman. Se on yhteisö-johtoinen vapaan lähdekoodin projekti ja sadat vapaaehtoiset ovat edistäneet Adblock Plussan menestystä tehden varmaksi, että kaikki kiusalliset mainokset estetään automaattisesti.
+Adblock Plus on maailman suosituin selainlaajennus, ja sitä käyttää miljoonia käyttäjiä maailmanlaajuisesti. Se on avoimen lähdekoodin projekti, ja sadat vapaaehtoiset edistää että Adblock Plus estäisi kaikki ärsyttävät mainokset.
 
-Huomaa: kun lataat Adblock Plussan Chromelle, selaimesi näyttää varoituksen että Adblock Plus for Chromella on pääsy selaushistoriaasi ja dataan. Tämä on normaali viesti, me emme KOSKAAN kerää mitään tietojasi mitä ikinä tapahtuukin!
+Huomaa: Asentaessa Adblock Plus Chromelle laajennusta, selaimesi näyttää varoituksen että Adblock Plus Chromella on oikeus sivuhistoriaasi ja dataan. Tämä on yleinen ilmoitus, me emme KOSKAAN kerää mitään tietoja!
 
-Äskettäin Adblock Plussan yhteisö otti käyttöön hyväksyttävien mainosten ehdotuksen. Sallimalla pieniä ja staattisia mainoksia, tuet verkkosivuja, joihin luotat näyttämällä mainoksia mutta voit toki halutessasi tehdä sen ei-tunkeilevalla tavalla. Tämä ominaisuus voidaan poistaa milloin tahansa. Mene sivulle http://adblockplus.org/en/acceptable-ads löytääksesi lisätietoa.
+Äskettäin Adblock Plus yhteisö aloitti Hyväksyttävät Mainokset aloitteen. Sallimalla joitakin pieniä ja staattisia mainoksia, autat sivustoja jotka luottavat mainontaan mutta valitse että se tehdään noninvasiitivisesellä tavalla. Tämän toiminnon voi poistaa käytöstä koska tahansa. Mene osoitteesen http://adblockplus.org/en/acceptable-ads tietääksesi lisää.
 
-*************
-Julkaisutiedotteet ja muutoslokit löydät täältä: http://adblockplus.org/releases/
+***********
+Julkaisutiedotteet ja muutosloki voit löytää täältä: http://adblockplus.org/releases/
 
-Ongelmia? Yritä käynnistää Chrome ja/tai klikkaa "Päivitä nyt" Adblock Plussan asetuksissa.
+Ongelmia? Yritä uudelleenkäynnistämällä Chrome ja/tai klikkaamalla "Päivitä nyt" Adblock Plus:in Asetuksissa.
 
-Löysitkö bugin? Olemme tietoinen joistain kysymyksistä: http://adblockplus.org/en/known-issues-chrome. Jos löysit enemmän tai tarvitset apua, käy foorumillamme: https://adblockplus.org/forum/viewforum.php?f=10.
+Löysitkö bugin? Me olemme tietoisia joistakin ongelmista: http://adblockplus.org/en/known-issues-chrome. Jos löysit lisää tai tarvitset apua, käy foorumillamme: https://adblockplus.org/forum/viewforum.php?f=10.
 
-*************
-Oletko seikkailunhaluinen? Kokeile kehittää aina vain parempia ominaisuuksia Adblock Plussalle: http://adblockplus.org/en/development-builds (päivitetty erikseen, riippumaton asetuksistasi).
+***********
+Oletko kokeilunhaluinen? Kokeile edistymistä saadaksesi aina uusimmat ominaisuudet Adblock Plus Chromelle: http://adblockplus.org/en/development-builds (päivitetty erikseen, riippumattomina asetuksista).

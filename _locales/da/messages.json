@@ -18,40 +18,40 @@
     "message": "Anvend ændringer"
   },
   "block_element": {
-    "message": "Bloker enhed"
+    "message": "Blokér element"
   },
   "cancel": {
     "message": "Annuller"
   },
   "clickhide_instructions": {
-    "message": "Luk denne popup, og klik (eller højreklik) derefter på et element på siden."
+    "message": "Luk dette popup-vindue, og klik (eller højreklik) derefter på et element på siden."
   },
   "description_chrome": {
-    "message": "Gratis adblock værktøj til Chrome: Blokerer irriterende video reklamer på YouTube, Facebook reklamer, bannere og meget mere."
+    "message": "Gratis værktøj til blokering af reklamer i Chrome: Blokerer irriterende reklamer i videoer på YouTube, Facebook-reklamer, bannerann…"
   },
   "description_opera": {
-    "message": "Gratis adblock værktøj til Opera: Blokerer irriterende video reklamer på YouTube, Facebook reklamer, bannere og meget mere."
+    "message": "Gratis værktøj til blokering af reklamer i Opera: Blokerer irriterende reklamer i videoer på YouTube, Facebook-reklamer, bannerannoncer og meget mere."
   },
   "description_safari": {
-    "message": "Gratis adblock værktøj til Safari: Blokerer irriterende video reklamer på YouTube, Facebook reklamer, bannere og meget mere."
+    "message": "Gratis værktøj til blokering af reklamer i Safari: Blokerer irriterende reklamer i videoer på YouTube, Facebook-reklamer, bannerannoncer og meget mere."
   },
   "disable_inline": {
-    "message": "Deaktiver inline tekstannoncer"
+    "message": "Deaktiver inline-tekstannoncer"
   },
   "disabled_for_site": {
-    "message": "<strong>Deaktiveret</strong> på denne side"
+    "message": "<strong>Deaktiveret</strong> på dette websted"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus er deaktiveret for de domæner, der er angivet nedenfor. Du kan tilføje et domæne enten via ikonet Adblock Plus i adresselinjen eller ved at skrive domæne (ikke en URL) i boksen og klikke på knappen \"Tilføj domæne\"."
   },
   "easy_create_filter": {
-    "message": "Bloker enhed"
+    "message": "Blokér element"
   },
   "edit_filters_raw": {
     "message": "Rediger filtre som rå tekst"
   },
   "enable_only_the": {
-    "message": "Aktivér kun de filter lister du skal bruge. For mange kan gøre at din browser ikke svarer."
+    "message": "Aktivér kun de filterlister, du skal bruge. For mange filterlister kan medføre lange svartider i din browser."
   },
   "enabled_for_site": {
     "message": "<strong>Aktiveret</strong> på dette websted"
@@ -60,7 +60,7 @@
     "message": "Filterlister"
   },
   "filter_must_follow_syntax": {
-    "message": "Filteret skal følge <a>Adblock Plus filter syntaks</a>."
+    "message": "Dit filter skal følge <a>Adblock Plus' filtersyntaks</a>."
   },
   "found_a_bug": {
     "message": "Har du fundet en fejl? Vil du oversætte Adblock Plus til dit sprog? Send <a>venligst din anmodning her</a>."
@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus-udviklingsversion"
+  },
+  "notification_with_buttons": {
+    "message": "Klik på 'OK' for åbne alle genveje i denne meddelelse."
+  },
+  "notification_without_buttons": {
+    "message": "Klik på meddelelsen for at åbne alle genveje i den."
+  },
   "options": {
     "message": "Adblock Plus indstillinger"
   },
@@ -97,13 +106,10 @@
     "message": "Forældede lister opdateres regelmæssigt."
   },
   "remove_button": {
-    "message": "Fjern markerede"
+    "message": "Fjern valgte"
   },
   "show_block_element_menu": {
-    "message": "Vis \"Blokelement\" Højreklik på menupunktet"
-  },
-  "show_icon": {
-    "message": "Vis ikonet i adresselinjen"
+    "message": "Vis \"Blokér element\" i højrekliksmenu"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> på denne side",
@@ -132,17 +138,8 @@
   "stats_share_download": {
     "message": "Download Adblock Plus"
   },
-  "stats_share_label_fb": {
-    "message": "Del på Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Del på Google +"
-  },
-  "stats_share_label_twitter": {
-    "message": "Del på Twitter"
-  },
   "stats_share_message": {
-    "message": "Jeg blokerede $number$ annoncer og trackers takket være Adblock Plus.",
+    "message": "Jeg har blokeret $number$ annoncer og sporingstjenester takket være Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -165,6 +162,6 @@
     "message": "Opdater nu"
   },
   "whitelisted_domains": {
-    "message": "Ønskede domæner"
+    "message": "Tilladte domæner"
   }
 }

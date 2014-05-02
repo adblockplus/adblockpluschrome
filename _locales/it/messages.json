@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Versiune di sviluppo di Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "Clic 'OK' per aprire tutti i collegamenti in questa notifica."
+  },
+  "notification_without_buttons": {
+    "message": "Clic sulla notifica per aprire tutti i link contenuti."
+  },
   "options": {
     "message": "Opzioni di Adblock Plus"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Mostra 'Blocca Elemento' nel menu contestuale"
-  },
-  "show_icon": {
-    "message": "Mosta l'icona nella barra degli indirizzi"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> in questa pagina",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Scarica Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Condividi su Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Condividi su Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Condividi su Twitter"
   },
   "stats_share_message": {
     "message": "Ho bloccato $number$ pubblicità e trackers grazie ad Adblock Plus.",

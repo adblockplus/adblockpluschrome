@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus fejlesztői változat"
+  },
+  "notification_with_buttons": {
+    "message": "Kattints az OK gombra az értesítésben lévő összes link megnyitásához."
+  },
+  "notification_without_buttons": {
+    "message": "Kattints az értesítésre a benne lévő összes link megnyitásához."
+  },
   "options": {
     "message": "Adblock Plus beállítások"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "'Elem blokkolása' megjelenítése a környezeti menüben"
-  },
-  "show_icon": {
-    "message": "Mutasd az ikont a címsorban"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> ezen az oldalon",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Adblock Plus letöltése"
-  },
-  "stats_share_label_fb": {
-    "message": "Megosztás Facebookon"
-  },
-  "stats_share_label_gplus": {
-    "message": "Megosztás Google+-on"
-  },
-  "stats_share_label_twitter": {
-    "message": "Megosztás Twitteren"
   },
   "stats_share_message": {
     "message": "Kiszűrtem $number$ hirdetést és nyomkövetőt az Adblock Plusnak köszönhetően.",
