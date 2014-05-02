@@ -1,25 +1,25 @@
-目障りな広告に画面を荒らされることなく Web サーフィンを楽しもう！
+Adblock Plus はすべての迷惑な広告をブロックしつつ、デフォルトで「控えめな広告を許可」することで Web サイトも支援します (設定変更可能) 。
 
-Adblock Plus for Google Chrome は以下をブロックします：
+画面上に散らばる迷惑な広告なしで Web サーフィンを楽しみましょう！Adblock Plus for Google Chrome のブロック対象は以下の通り：
 
-・ バナー
-・ YouTube ビデオ広告
-・ Facebook 広告
-・ ポップアップ
-・ その他目障りな広告全て
+・バナー
+・Youtube 動画広告
+・Facebook 広告
+・ポップアップ
+・その他の目障りな広告すべて
 
-Adblock Plus は世界で最も人気があるブラウザの拡張機能で、世界中で何百万人ものユーザーに利用されています。このコミュニティ主導のオープンソースプロジェクトでは、迷惑な広告を自動的にブロックできるよう何百人ものボランティアが貢献し続けています。
+Adblock Plus は世界で最も人気のあるブラウザ拡張で、世界に数百万のユーザーがいます。迷惑な広告がきちんとすべて自動的にブロックされ、Adblock Plus がうまくいくよう数百人のボランティアが貢献しているコミュニティ主導のオープンソースプロジェクトです。
 
-注意：Adblock Plus for Chrome インストール時、ブラウザが Adblock Plus for Chrome が閲覧履歴やデータにアクセスを行う旨の警告を表示します。これは定型メッセージであり、私たちは情報を一切収集しません！
+注意：インストールの際は Adblock Plus for Chrome がブラウジング履歴とデータにアクセスする旨の警告が表示されます。これは普通のことで、何らかの情報を集めるということは決してありません！
 
-先ごろ Adblock Plus コミュニティは「控えめな広告」を導入しました。小さくて静的な広告を受け入れることで、広告収入を当てにしつつも目障りにならないような方法を選んだ Web サイトを支援します。この機能はいつでも無効にすることが出来ます。詳細は http://adblockplus.org/en/acceptable-ads まで。
+さきごろ Adblock Plus コミュニティは控えめな広告を許可する構想を発表しました。小さく静的な広告をある程度許可することで、目障りにならない広告に頼る Web サイトを選択的に支援します。この機能はいつでも無効にできます。詳細は http://adblockplus.org/en/acceptable-ads をご覧ください。
 
 ***********
-リリースのお知らせや変更履歴はこちら: http://adblockplus.org/releases/
+リリースのお知らせや更新履歴はこちら： http://adblockplus.org/releases/
 
-問題発生？ まずは Chrome を再起動したり、オプション画面の「今すぐ更新」をクリックしてみてください。
+何か問題ありましたか？ブラウザ再起動や Adblock Plus オプションの「今すぐ更新」を試してみてください。
 
-バグ発見？ 既知の問題かもしれません: http://adblockplus.org/en/known-issues-chrome 他の問題を発見したり助けが必要な場合はフォーラムまで: https://adblockplus.org/forum/viewforum.php?f=10
+不具合を見つけましたか？我々は問題に気付いているかもしれません： http://adblockplus.org/en/known-issues-chrome 。新たな問題を見つけたりヘルプが必要ならフォーラムへお越しください： https://adblockplus.org/forum/viewforum.php?f=10
 
 *************
-冒険したい？ 最新の Chrome Adblock Plus 開発版を試用してみてください: http://adblockplus.org/en/development-builds (安定版とは別更新で、設定も独立)
+冒険心はありますか？最新の Adblock Plus 機能を試せる開発版 (development build) を使ってみてください： http://adblockplus.org/en/development-builds (正式版とは別更新／別設定)。

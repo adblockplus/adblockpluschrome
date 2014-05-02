@@ -102,9 +102,6 @@
   "show_block_element_menu": {
     "message": "Zobraziť zablokovaný prvok kliknutím na položku pravým tlačidlom"
   },
-  "show_icon": {
-    "message": "Zobraziť ikonu v paneli s adresou"
-  },
   "stats_label_page": {
     "message": "<strong>$number$</strong> na tejto stránke",
     "placeholders": {
@@ -131,15 +128,6 @@
   },
   "stats_share_download": {
     "message": "Stiahnuť Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Zdielať na Facebooku"
-  },
-  "stats_share_label_gplus": {
-    "message": "Zdielať na Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Zdielať na Twitteri"
   },
   "stats_share_message": {
     "message": "Zablokoval som $number$ reklám a sledovačov vďaka Adblock Plus.",

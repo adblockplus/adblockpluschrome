@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus utviklerutgave"
+  },
+  "notification_with_buttons": {
+    "message": "Trykk på \"OK\" for å åpne alle koblingene i denne meldingen."
+  },
+  "notification_without_buttons": {
+    "message": "Trykk på varselet for å åpne alle koblingene."
+  },
   "options": {
     "message": "Alternativer for Adblock Plus"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Vis høyreklikkmenyvalget \"Blokkér element\""
-  },
-  "show_icon": {
-    "message": "Vis ikonet i adressefeltet"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> på denne siden",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Last ned Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Del på Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Del på Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Del på Twitter"
   },
   "stats_share_message": {
     "message": "Jeg blokkerte $number$ annonser og trackere, takket være Adblock Plus.",

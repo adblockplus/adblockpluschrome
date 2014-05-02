@@ -24,7 +24,7 @@
     "message": "Batal"
   },
   "clickhide_instructions": {
-    "message": "Setelah menutup sembulan ini , klik (atau klik kanan) elemen pada halaman web."
+    "message": "Setelah menutup munculan ini , klik (atau klik kanan) elemen pada halaman web."
   },
   "description_chrome": {
     "message": "Alat blokir iklan gratis untuk Chrome: blokir iklan mengganggu pada video di YouTube, iklan Facebook, spanduk dan banyak lagi."
@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Struktur pengembangan Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "Klik 'OK' untuk membuka semua link pada pemberitahuan ini."
+  },
+  "notification_without_buttons": {
+    "message": "Klik pada pemberitahuan untuk membuka semua link di dalamnya."
+  },
   "options": {
     "message": "Pengaturan Adblock Plus"
   },
@@ -94,16 +103,13 @@
     "message": "Opsi"
   },
   "out_of_date_lists": {
-    "message": "Daftar lama diperbaharui secara berkala"
+    "message": "Daftar lama akan diperbaharui secara berkala."
   },
   "remove_button": {
     "message": "Hapus yang dipilih"
   },
   "show_block_element_menu": {
-    "message": "Tampilkan \"Elemen Blok\" klik kanan menu item"
-  },
-  "show_icon": {
-    "message": "Tampilkan ikon pada bilah alamat"
+    "message": "Tampilkan item menu \"Blokir Elemen\""
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pada halaman ini",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Download Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Berbagi di Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Bagikan ke Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Berbagi di Twitter"
   },
   "stats_share_message": {
     "message": "Saya memblokir $number$ iklan dan pelacak berkat Adblock Plus.",

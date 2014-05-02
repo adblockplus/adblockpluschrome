@@ -87,6 +87,12 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus 開発版"
+  },
+  "notification_with_buttons": {
+    "message": "この通知のすべてのリンクを開くには、'OK' をクリックしてください。"
+  },
   "options": {
     "message": "Adblock Plus オプション"
   },
@@ -101,9 +107,6 @@
   },
   "show_block_element_menu": {
     "message": "右クリックメニューに「要素をブロック」を表示"
-  },
-  "show_icon": {
-    "message": "アドレスバーにアイコンを表示"
   },
   "stats_label_page": {
     "message": "このページ内で <strong>$number$</strong>",
@@ -131,15 +134,6 @@
   },
   "stats_share_download": {
     "message": "Adblock Plus をダウンロード"
-  },
-  "stats_share_label_fb": {
-    "message": "Facebook で共有"
-  },
-  "stats_share_label_gplus": {
-    "message": "Google+ で共有"
-  },
-  "stats_share_label_twitter": {
-    "message": "Twitter で共有"
   },
   "stats_share_message": {
     "message": "Adblock Plus のおかげで累計 $number$ 箇所の広告と追跡がブロックされました。",

@@ -44,9 +44,6 @@
   "show_block_element_menu": {
     "message": "Prikaži 'Blokiraj element' v meniju desnega klika"
   },
-  "show_icon": {
-    "message": "Prikaži ikono v naslovni vrstici"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Prosim izberite naročnino na filter s seznama:"
   },

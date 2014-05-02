@@ -27,13 +27,13 @@
     "message": "请点击（或右击）要屏蔽的元素"
   },
   "description_chrome": {
-    "message": "用于Chrome 浏览器的免费的广告屏蔽工具：屏蔽 Youtube 上烦人的视频广告、Facebook上的广告、横幅广告以及其他广告。"
+    "message": "用于Chrome 浏览器的免费的广告拦截工具：拦截 Youtube 上烦人的视频广告、Facebook上的广告、横幅广告以及其他广告。"
   },
   "description_opera": {
-    "message": "用于Opera 浏览器的免费的广告屏蔽工具：屏蔽 YouTbue 上的烦人的视频、Facebook上的广告、横幅广告以及其他广告。"
+    "message": "用于Opera 浏览器的免费的广告拦截工具：拦截 YouTbue 上的烦人的视频、Facebook上的广告、横幅广告以及其他广告。"
   },
   "description_safari": {
-    "message": "用于 Safari 浏览器的免费的广告屏蔽工具：屏蔽 YouTbue 上的烦人的视频、Facebook上的广告、横幅广告以及其他广告。"
+    "message": "用于 Safari 浏览器的免费的广告拦截工具：拦截 YouTbue 上的烦人的视频、Facebook上的广告、横幅广告以及其他广告。"
   },
   "disable_inline": {
     "message": "屏蔽广告链接"
@@ -45,7 +45,7 @@
     "message": "Adblock Plus 不过滤下面列出的域。您可以通过点击地址栏的 Adblock Plus 图标进行添加，也可在下面输入域名（非URL）然后点击“添加域名”。"
   },
   "easy_create_filter": {
-    "message": "屏蔽当前网站某个元素"
+    "message": "拦截当前网站某个元素"
   },
   "edit_filters_raw": {
     "message": "以纯文本编辑"
@@ -69,7 +69,7 @@
     "message": "常规"
   },
   "last_updated_at": {
-    "message": "最近更新于 $time$ $date$",
+    "message": "最近更新于 $date$$time$ ",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -80,12 +80,21 @@
     }
   },
   "last_updated_at_today": {
-    "message": "最近更新于 $time$ 今日",
+    "message": "最近更新于 今天$time$",
     "placeholders": {
       "time": {
         "content": "$1"
       }
     }
+  },
+  "name_devbuild": {
+    "message": "Adblock Plus 开发版"
+  },
+  "notification_with_buttons": {
+    "message": "点击“确定”打开此通知中的所有链接。"
+  },
+  "notification_without_buttons": {
+    "message": "点击通知打开它的所有链接。"
   },
   "options": {
     "message": "设置选项"
@@ -100,10 +109,7 @@
     "message": "删除所选项"
   },
   "show_block_element_menu": {
-    "message": "添加'屏蔽此元素'到右鍵菜单"
-  },
-  "show_icon": {
-    "message": "在地址栏显示按钮"
+    "message": "添加'拦截此元素'到右鍵菜单"
   },
   "stats_label_page": {
     "message": "本页 <strong>$number$</strong> 条",
@@ -132,17 +138,8 @@
   "stats_share_download": {
     "message": "下载 Adblock Plus"
   },
-  "stats_share_label_fb": {
-    "message": "分享到 Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "分享到 Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "分享到Twitter"
-  },
   "stats_share_message": {
-    "message": "Adblock Plus帮我屏蔽了 $number$ 个广告和跟踪行为。",
+    "message": "感谢Adblock Plus拦截了 $number$ 个广告和跟踪行为。",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -156,7 +153,7 @@
     "message": "在图标上显示数量"
   },
   "stats_title": {
-    "message": "被屏蔽的广告:"
+    "message": "已拦截广告:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "从列表中选择一份过滤清单:"

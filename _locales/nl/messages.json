@@ -15,7 +15,7 @@
     "message": "Eigen filters toevoegen"
   },
   "apply_changes": {
-    "message": "Wijzigingen toepassen"
+    "message": "Bevestigen"
   },
   "block_element": {
     "message": "Element blokkeren"
@@ -24,7 +24,7 @@
     "message": "Annuleren"
   },
   "clickhide_instructions": {
-    "message": "Na het sluiten van deze popup, klik (of klik met de rechtermuisknop) op het pagina element."
+    "message": "Na het sluiten van deze popup, klik (of klik met de rechtermuisknop) op het pagina-element."
   },
   "description_chrome": {
     "message": "De gratis adblocker voor Chrome: Blokkeer vervelende video-reclames op YouTube,  advertenties op Facebook, reclame banners en nog v…"
@@ -102,11 +102,8 @@
   "show_block_element_menu": {
     "message": "Toon 'Blokkeer Element' in het rechtermuisklik menu"
   },
-  "show_icon": {
-    "message": "Pictogram in de adresbalk weergeven"
-  },
   "stats_label_page": {
-    "message": "<strong>$number$</strong> op deze pagina",
+    "message": "<strong>$getal$</strong> op deze pagina.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -114,7 +111,7 @@
     }
   },
   "stats_label_total": {
-    "message": "<strong>$number$</strong> in totaal",
+    "message": "<strong>$number$</strong> in totaal.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -122,7 +119,7 @@
     }
   },
   "stats_over": {
-    "message": "meer dan $number$",
+    "message": "Meer dan $getal$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -132,17 +129,8 @@
   "stats_share_download": {
     "message": "Adblock Plus downloaden"
   },
-  "stats_share_label_fb": {
-    "message": "Deel op Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Deel op Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Deel op Twitter"
-  },
   "stats_share_message": {
-    "message": "Ik heb $number$ advertenties en trackers geblokkeerd dankzij Adblock Plus.",
+    "message": "Ik heb $getal$ advertenties en trackers geblokkeerd dankzij Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"

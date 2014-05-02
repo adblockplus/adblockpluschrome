@@ -15,46 +15,46 @@
     "message": "Tambah penapis anda sendiri"
   },
   "apply_changes": {
-    "message": "Gunakan perubahan"
+    "message": "Simpan"
   },
   "block_element": {
-    "message": "Unsur blok"
+    "message": "Halang elemen"
   },
   "cancel": {
     "message": "Batal"
   },
   "clickhide_instructions": {
-    "message": "Setelah menutup tetingkap  ini, klik (atau klik butang kanan) pada sesuatu unsur atas laman."
+    "message": "Setelah menutup tetingkap ini, klik (atau klik butang kanan) pada sesuatu unsur atas laman."
   },
   "description_chrome": {
-    "message": "Alat percuma adblock untuk Chrome: Menyekat iklan yang menggangu video di YouTube,  iklan Facebook, sepanduk dan banyak lagi."
+    "message": "Alat percuma penyekat iklan untuk Chrome: Menyekat iklan video menjengkelkan di YouTube, iklan Facebook, sepanduk dan banyak lagi."
   },
   "description_opera": {
-    "message": "Alat percuma adblock untuk Chrome: Menyekat iklan yang menggangu video di YouTube,  iklan Facebook, sepanduk dan banyak lagi."
+    "message": "Alat percuma penyekat iklan untuk Opera: Menyekat iklan video yang menjengkelkan di YouTube, iklan Facebook, sepanduk dan banyak lagi."
   },
   "description_safari": {
-    "message": "Alat percuma adblock untuk Chrome: Menyekat iklan yang menggangu video di YouTube,  iklan Facebook, sepanduk dan banyak lagi."
+    "message": "Alat percuma penyekat iklan untuk Safari: Menyekat iklan video di YouTube yang menjengkelkan,  iklan Facebook, sepanduk dan banyak lagi."
   },
   "disable_inline": {
     "message": "Nyahaktifkan iklan teks sebaris"
   },
   "disabled_for_site": {
-    "message": "<strong>Kurang Upaya</strong> di laman web ini"
+    "message": "<strong>Dinyahaktifkan</strong> pada laman web ini"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus dinyahaktifkan untuk domain yang disenaraikan di bawah. Anda boleh menambah domain sama ada melalui ikon Adblock Plus  dalam bar alamat atau dengan menaip domain (bukan URL) di dalam kotak dan klik butang \"Add domain\"."
+    "message": "Adblock Plus dinyahaktifkan untuk domain-domain yang disenaraikan di bawah. Anda boleh menambah domain sama ada melalui ikon Adblock Plus di sebelah bar alamat atau dengan menaip domain (bukan URL) di dalam kotak dan klik butang \"Tambah domain\"."
   },
   "easy_create_filter": {
-    "message": "Unsur blok"
+    "message": "Halang elemen"
   },
   "edit_filters_raw": {
-    "message": "Mengedit penapis sebagai teks mentah"
+    "message": "Edit penapis dalam format teks"
   },
   "enable_only_the": {
-    "message": "Membolehkan hanya senarai penapis yang anda perlukan. Terlalu banyak boleh membuat pelayar anda tidak bertindak balas."
+    "message": "Hanya aktifkan senarai penapis yang diperlukan. Terlalu banyak penapis secara serentak boleh membuat pelayar anda tidak bertindak balas."
   },
   "enabled_for_site": {
-    "message": "<strong>Kurang Upaya</strong> di laman web ini"
+    "message": "<strong>Dinyahaktifkan</strong> pada laman web ini"
   },
   "filter_lists": {
     "message": "Senarai penapis"
@@ -63,7 +63,7 @@
     "message": "Penapis anda mesti ikut <a>Adblock Plus filter syntax</a>."
   },
   "found_a_bug": {
-    "message": "Menjumpai bug? Ingin menterjemahkan Adblock Plus ke dalam bahasa anda? Sila <a>failkan permohonan di sini</a>."
+    "message": "Ralat dijumpai? Atau ingin terjemahkan Adblock Plus kepada bahasa anda? Sila <a>failkan permohonan anda di sini</a>."
   },
   "general": {
     "message": "Umum"
@@ -88,10 +88,10 @@
     }
   },
   "options": {
-    "message": "pilihan Adblock Plus "
+    "message": "Tetapan Adblock Plus"
   },
   "options_short": {
-    "message": "Pilihan"
+    "message": "Tetapan"
   },
   "out_of_date_lists": {
     "message": "Senarai yang telah luput tarikh akan dikemas kini dari semasa ke semasa."
@@ -100,10 +100,7 @@
     "message": "Padamkan yang dipilih"
   },
   "show_block_element_menu": {
-    "message": "Tunjukkan item menu 'Halang Elemen' pada butang klik kanan "
-  },
-  "show_icon": {
-    "message": "Papar ikon dalam bar alamat"
+    "message": "Paparkan item menu 'Halang Elemen' pada butang klik kanan"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pada halaman ini",
@@ -132,17 +129,8 @@
   "stats_share_download": {
     "message": "Muat turun Adblock Plus"
   },
-  "stats_share_label_fb": {
-    "message": "Kongsi di Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Kongsi di Google +"
-  },
-  "stats_share_label_twitter": {
-    "message": "Kongsi di Twitter"
-  },
   "stats_share_message": {
-    "message": "Saya telah menyekat $number$ iklan dan penjejak berkat Adblock Plus.",
+    "message": "Saya telah menyekat $number$ iklan dan penjejak dengan berkat Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -150,13 +138,13 @@
     }
   },
   "stats_share_title": {
-    "message": "Berkongsi nombor-nombor ini"
+    "message": "Kongsikan nombor-nombor ini"
   },
   "stats_show_iconnumber": {
-    "message": "Menunjukkan nombor dalam ikon"
+    "message": "Paparkan nombor dalam ikon"
   },
   "stats_title": {
-    "message": "Iklan yang disekat"
+    "message": "Iklan-iklan disekat"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Sila pilih langganan penapis dalam senarai berikut:"
@@ -165,6 +153,6 @@
     "message": "Kemaskini sekarang"
   },
   "whitelisted_domains": {
-    "message": "Domain yang telah disenarai putihkan"
+    "message": "Domain disenaraiputihkan"
   }
 }

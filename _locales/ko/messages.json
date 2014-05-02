@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "애드블록 플러스 개발 빌드"
+  },
+  "notification_with_buttons": {
+    "message": "이 알림에 포함된 모든 링크를 열려면 '확인'을 클릭하세요."
+  },
+  "notification_without_buttons": {
+    "message": "알림에 포함된 모든 링크를 열려면 클릭하세요."
+  },
   "options": {
     "message": "Adblock Plus - 애드블록 플러스 옵션"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "문맥 메뉴에 '요소 숨김' 항목 표시"
-  },
-  "show_icon": {
-    "message": "주소 표시줄에 아이콘 표시"
   },
   "stats_label_page": {
     "message": "이 페이지에 $number$ 개",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "애드블록 플러스 다운로드"
-  },
-  "stats_share_label_fb": {
-    "message": "페이스북으로 공유"
-  },
-  "stats_share_label_gplus": {
-    "message": "구글플러스로 공유"
-  },
-  "stats_share_label_twitter": {
-    "message": "트위터로 공유"
   },
   "stats_share_message": {
     "message": "애드블록 플러스 덕분에 $number$ 개의 광고와 트래커를 차단했어요.",

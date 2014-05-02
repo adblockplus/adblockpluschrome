@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus – wersja rozwojowa"
+  },
+  "notification_with_buttons": {
+    "message": "Naciśnij przycisk „OK”, aby otworzyć wszystkie odnośniki znajdujące się w tym powiadomieniu."
+  },
+  "notification_without_buttons": {
+    "message": "Kliknij powiadomienie, aby otworzyć wszystkie znajdujące się w nim odnośniki."
+  },
   "options": {
     "message": "Adblock Plus – ustawienia"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Wyświetlaj element „Blokuj element” w menu kontekstowym"
-  },
-  "show_icon": {
-    "message": "Pokazuj ikonę na pasku adresu"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> na tej stronie",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Pobierz Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Udostępnij na Facebooku"
-  },
-  "stats_share_label_gplus": {
-    "message": "Udostępnij w Google +"
-  },
-  "stats_share_label_twitter": {
-    "message": "Udostępnij na Twitterze"
   },
   "stats_share_message": {
     "message": "Dzięki Adblock Plus zablokowano $number$ reklam i tropicieli.",

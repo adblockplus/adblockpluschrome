@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus (тестова збiрка)"
+  },
+  "notification_with_buttons": {
+    "message": "Натисніть кнопку \"ОК\", щоб відкрити всі посилання в цьому повідомленні."
+  },
+  "notification_without_buttons": {
+    "message": "Клацніть повідомлення, щоб відкрити всі посилання в ньому."
+  },
   "options": {
     "message": "Налаштування Adblock Plus"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Показувати 'Заблокувати елемент' в контекстному меню"
-  },
-  "show_icon": {
-    "message": "Показати піктограму в адресному рядку"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> на цій сторінці",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Завантажити Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Поділитися на Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Поділитися на Google +"
-  },
-  "stats_share_label_twitter": {
-    "message": "Поділитися на Twitter"
   },
   "stats_share_message": {
     "message": "Я заблокував $number$ оголошень і відстежувачів завдяки Adblock Plus.",

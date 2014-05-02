@@ -102,9 +102,6 @@
   "show_block_element_menu": {
     "message": "Näita \"Block Element\" paremklõpsake menüü kirje"
   },
-  "show_icon": {
-    "message": "Näita ikooni aadressiribal"
-  },
   "stats_label_page": {
     "message": "<strong>$arv$</strong> Sellel lehel",
     "placeholders": {
@@ -131,15 +128,6 @@
   },
   "stats_share_download": {
     "message": "Lae AdBlock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Jaga Facebookis"
-  },
-  "stats_share_label_gplus": {
-    "message": "Jagada Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Jaga Twitteris"
   },
   "stats_share_message": {
     "message": "Ma blokeeritud $number,$ reklaamid ja jälgimisseadmed tänu Adblock Plus.",

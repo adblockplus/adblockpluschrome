@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "גרסאות פיתוח Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "לחיצה על 'אישור' לפתיחת כל הקישורים בהתראה זו."
+  },
+  "notification_without_buttons": {
+    "message": "לחיצה על התראה לפתיחת כל הקישורים שבתוכה."
+  },
   "options": {
     "message": "אפשרויות Adblock Plus"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "הצגת הפריט 'חסימת אלמנט' בתפריט הלחצן הימני"
-  },
-  "show_icon": {
-    "message": "הצגת סמל בסרגל הכתובות"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> בעמוד זה",
@@ -132,15 +138,6 @@
   "stats_share_download": {
     "message": "הורדת Adblock Plus"
   },
-  "stats_share_label_fb": {
-    "message": "שיתוף ב-Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "שיתוף ב-Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "שיתוף ב-Twitter"
-  },
   "stats_share_message": {
     "message": "אני חסמתי $number$ פרסומות ועוקבים הודות ל-Adblock Plus.",
     "placeholders": {
@@ -162,7 +159,7 @@
     "message": "יש לבחור הרשמת מסנן מהרשימה:"
   },
   "update_now": {
-    "message": "עדכון כעת"
+    "message": "עדכן כעת"
   },
   "whitelisted_domains": {
     "message": "שמות מתחם מורשים"

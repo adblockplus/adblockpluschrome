@@ -33,7 +33,7 @@
     "message": "Le pare-pub gratuit pour Opera : bloque les annonces gênantes sur YouTube, les pubs sur Facebook, les bannières et bien plus."
   },
   "description_safari": {
-    "message": "Le pare-pub gratuit pour Safari : bloque les annonces gênantes sur YouTube, les pubs sur Facebook, les bannières et bien plus."
+    "message": "L'anti-pubs gratuit pour Safari : bloque les vidéos de pub gênantes sur YouTube, les pubs sur Facebook, les bannières et bien plus."
   },
   "disable_inline": {
     "message": "Retirer les publicités intégrées aux textes"
@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Version de développement d'Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "Cliquez sur 'OK' pour ouvrir tous les liens dans cette notification."
+  },
+  "notification_without_buttons": {
+    "message": "Cliquez sur la notification pour ouvrir tous les liens qu'elle contient."
+  },
   "options": {
     "message": "Options d'Adblock Plus"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Afficher 'bloquer l'élément' dans le menu clic-droit"
-  },
-  "show_icon": {
-    "message": "Afficher l’icône dans la barre d'adresse"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> sur cette page",
@@ -132,15 +138,6 @@
   "stats_share_download": {
     "message": "Télécharger Adblock Plus"
   },
-  "stats_share_label_fb": {
-    "message": "Partager sur Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "Partager sur Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Partagez sur Twitter"
-  },
   "stats_share_message": {
     "message": "J'ai bloqué $number$ publicités et trackers grâce à Adblock Plus.",
     "placeholders": {
@@ -156,7 +153,7 @@
     "message": "Afficher le nombre sur l'icône"
   },
   "stats_title": {
-    "message": "Annonces bloquées"
+    "message": "Publicités bloquées"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Veuillez choisir un abonnement dans la liste suivante :"

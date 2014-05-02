@@ -102,9 +102,6 @@
   "show_block_element_menu": {
     "message": "أظهر \"حذف العنصر\" في القائمة التي تظهر عند النقر بزر الفأرة الأيمن"
   },
-  "show_icon": {
-    "message": "أظهر الأيقونة في شريط العنوان"
-  },
   "stats_label_page": {
     "message": "<strong>$number$</strong> على هذه الصفحة",
     "placeholders": {
@@ -131,15 +128,6 @@
   },
   "stats_share_download": {
     "message": "تحميل Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "نشر على الفيس بوك"
-  },
-  "stats_share_label_gplus": {
-    "message": "نشر على جوجل +"
-  },
-  "stats_share_label_twitter": {
-    "message": "مشاركة على تويتر"
   },
   "stats_share_message": {
     "message": "أنا منعت الإعلانات $ $number وتتبع بفضل زائد.",

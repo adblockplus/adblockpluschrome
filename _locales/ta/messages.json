@@ -78,9 +78,6 @@
   "show_block_element_menu": {
     "message": "'உறுப்பை தடு' வலது-கிளிக் மெனு உருப்படியை காண்பி"
   },
-  "show_icon": {
-    "message": "முகவரிப் பட்டியில் படவுருவை காண்பி"
-  },
   "stats_label_page": {
     "message": "இந்தப் பக்கத்தில் <strong>$number$</strong>",
     "placeholders": {
@@ -107,15 +104,6 @@
   },
   "stats_share_download": {
     "message": "Adblock Plusஐ பதிவிறக்கவும்"
-  },
-  "stats_share_label_fb": {
-    "message": "பேஸ்புக்கில் பகிர்"
-  },
-  "stats_share_label_gplus": {
-    "message": "Google + இல் பகிர்"
-  },
-  "stats_share_label_twitter": {
-    "message": "ட்விட்டரில் பகிர்"
   },
   "stats_share_message": {
     "message": "நான் $number$ விளம்பரங்கள் மற்றும் trackerகளை தடுதுள்ளேன். நன்றி Adblock Plus.",

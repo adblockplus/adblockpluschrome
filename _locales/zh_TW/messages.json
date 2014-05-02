@@ -27,13 +27,13 @@
     "message": "請在此訊息關閉後點選網頁上的元素。"
   },
   "description_chrome": {
-    "message": "專為 Chrome 設計的 adblock：過濾網路上所有煩人的廣告，YouTube，Facebook 等等，任何您想得到的，都解決了。 "
+    "message": "專為 Chrome 設計的 adblock ：過濾網路上所有煩人的廣告，YouTube、Facebook 等，任何您想得到的，都解決了。 "
   },
   "description_opera": {
-    "message": "專為 Opera 設計的 adblock：過濾網路上所有煩人的廣告，YouTube，Facebook 等等，任何您想得到的，都解決了。 "
+    "message": "專為 Opera 設計的 adblock ：過濾網路上所有煩人的廣告，YouTube、Facebook 等，任何您想得到的，都解決了。 "
   },
   "description_safari": {
-    "message": "專為 Safari 設計的 adblock：過濾網路上所有煩人的廣告，YouTube，Facebook 等等，任何您想得到的，都解決了。 "
+    "message": "專為 Safari 設計的 adblock ：過濾網路上所有煩人的廣告，YouTube、Facebook 等，任何您想得到的，都解決了。 "
   },
   "disable_inline": {
     "message": "阻擋文字廣告"
@@ -51,7 +51,7 @@
     "message": "以純文字編輯"
   },
   "enable_only_the": {
-    "message": "只啟用您需要的過濾清單。太多可能使您的瀏覽器回應變慢。"
+    "message": "只啟用您需要的過濾列表。啟用太多的過濾列表可能導致您的瀏覽器停止回應。"
   },
   "enabled_for_site": {
     "message": "在此網站上 <strong>啟用</strong>"
@@ -102,9 +102,6 @@
   "show_block_element_menu": {
     "message": "在右鍵選單顯示「阻擋網頁元素」"
   },
-  "show_icon": {
-    "message": "在網址列顯示 Adblock Plus 圖示"
-  },
   "stats_label_page": {
     "message": "本頁有 <strong>$number$</strong>  項被過濾",
     "placeholders": {
@@ -132,15 +129,6 @@
   "stats_share_download": {
     "message": "下載 Adblock Plus"
   },
-  "stats_share_label_fb": {
-    "message": "分享到 Facebook"
-  },
-  "stats_share_label_gplus": {
-    "message": "分享到 Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "分享到 Twitter"
-  },
   "stats_share_message": {
     "message": "感謝 Adblock Plus，至今我已過濾掉了 $number$ 個廣告。",
     "placeholders": {
@@ -156,7 +144,7 @@
     "message": "在圖示上顯示數量"
   },
   "stats_title": {
-    "message": "已阻止廣告"
+    "message": "已過濾廣告"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "請從列表中選擇過濾條件集:"

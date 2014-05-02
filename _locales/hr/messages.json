@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus razvojna verzija"
+  },
+  "notification_with_buttons": {
+    "message": "Klikni 'U redu' za otvaranje svih linkova u ovoj obavijesti."
+  },
+  "notification_without_buttons": {
+    "message": "Klikni na obavijest za otvaranje svih linkova u njoj."
+  },
   "options": {
     "message": "Adblock Plus mogućnosti"
   },
@@ -101,9 +110,6 @@
   },
   "show_block_element_menu": {
     "message": "Prikaži 'Blokiraj element' stavku izbornika desnog klika"
-  },
-  "show_icon": {
-    "message": "Prikaži ikonu u adresnoj traci"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> na ovoj stranici",
@@ -131,15 +137,6 @@
   },
   "stats_share_download": {
     "message": "Preuzmi Adblock Plus"
-  },
-  "stats_share_label_fb": {
-    "message": "Podijelite na Facebooku"
-  },
-  "stats_share_label_gplus": {
-    "message": "Podijelite na Google+"
-  },
-  "stats_share_label_twitter": {
-    "message": "Podijelite na Twitteru"
   },
   "stats_share_message": {
     "message": "Blokirao sam $number$ reklama i pratitelja zahvaljujući Adblock Plusu.",
