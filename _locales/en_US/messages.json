@@ -1,4 +1,7 @@
 {
+  "name_devbuild": {
+    "message": "Adblock Plus development build"
+  },
   "add": {
     "description": "This is the label for the 'Add' buttons.",
     "message": "Add"
