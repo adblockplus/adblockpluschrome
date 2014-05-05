@@ -220,14 +220,17 @@ function addSubscription(prevVersion)
       addAcceptable = false;
   }
 
-  // Add "anti-adblock messages" subscription
-  var subscription = Subscription.fromURL(Prefs.subscriptions_antiadblockurl);
-  if (subscription)
+  // Add "anti-adblock messages" subscription for new users and users updating from old ABP versions
+  if (!prevVersion || Services.vc.compare(prevVersion, "1.8") < 0)
   {
-    subscription.disabled = true;
-    FilterStorage.addSubscription(subscription);
-    if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
-      Synchronizer.execute(subscription);
+    var subscription = Subscription.fromURL(Prefs.subscriptions_antiadblockurl);
+    if (subscription && !(subscription.url in FilterStorage.knownSubscriptions))
+    {
+      subscription.disabled = true;
+      FilterStorage.addSubscription(subscription);
+      if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
+        Synchronizer.execute(subscription);
+    }
   }
 
   if (!addSubscription && !addAcceptable)
