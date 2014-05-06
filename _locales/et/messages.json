@@ -87,6 +87,9 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus arendusväljalase"
+  },
   "options": {
     "message": "AdBlock Plus Valikud"
   },

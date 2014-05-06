@@ -88,7 +88,7 @@
     }
   },
   "name_devbuild": {
-    "message": "Herramienta de desarrollo de Adblock Plus"
+    "message": "Versión de desarrollo de Adblock Plus"
   },
   "notification_with_buttons": {
     "message": "Haz click en 'OK' para abrir todos los enlaces en esta notificación."

@@ -12,7 +12,7 @@
     "message": "Voleu afegir els filtres?"
   },
   "add_your_own_filters": {
-    "message": "Afegiu els vostres filtres"
+    "message": "Afegeix filtres personalitzats"
   },
   "apply_changes": {
     "message": "Aplica els canvis"
@@ -24,7 +24,7 @@
     "message": "Cancel·la"
   },
   "clickhide_instructions": {
-    "message": "Després de tancar aquesta finestra, cliqueu sobre un element de la pàgina."
+    "message": "Després de tancar aquest Pop-up, clica (o fes clic amb el botó dret) a un element de la pàgina."
   },
   "description_chrome": {
     "message": "L'eina gratuita antianuncis del Chrome: Bloqueja anuncis molestos de vídeo al YouTube, anuncis del Facebook, bàners i molt més."
@@ -57,7 +57,7 @@
     "message": "S'ha <strong>habilitat</strong> en aquest lloc"
   },
   "filter_lists": {
-    "message": "Llistes de filtres"
+    "message": "Llista de filtres"
   },
   "filter_must_follow_syntax": {
     "message": "El vostre filtre ha de seguir la <a>Sintaxi de filtres d'Adblock Plus</a>."

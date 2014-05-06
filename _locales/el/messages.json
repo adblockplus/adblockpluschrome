@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus δοκιμαστική έκδοση"
+  },
+  "notification_with_buttons": {
+    "message": "Κάντε κλικ στο \"ΟΚ\" για να ανοίξετε όλους τις συνδέσεις σε αυτή την ειδοποίηση."
+  },
+  "notification_without_buttons": {
+    "message": "Κάντε κλικ στην ειδοποίηση για να ανοίξετε όλες τις συνδέσεις σε αυτή."
+  },
   "options": {
     "message": "Επιλογές Adblock Plus"
   },

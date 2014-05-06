@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus開發版"
+  },
+  "notification_with_buttons": {
+    "message": "點擊＂確定＂打開通知中的所有鏈接．"
+  },
+  "notification_without_buttons": {
+    "message": "點擊通知打開它的所有鏈接"
+  },
   "options": {
     "message": "Adblock Plus 選項"
   },

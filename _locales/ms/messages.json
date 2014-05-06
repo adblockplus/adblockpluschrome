@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Versi pemaju Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "Klik 'OK' untuk membuka semua pautan dalam notifikasi ini."
+  },
+  "notification_without_buttons": {
+    "message": "Klik pada notifikasi untuk membuka semua pautan yang terkandung dalamnya."
+  },
   "options": {
     "message": "Tetapan Adblock Plus"
   },

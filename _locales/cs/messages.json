@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Pluc vývojářská verze"
+  },
+  "notification_with_buttons": {
+    "message": "Kliknetě na OK k otevření všech odkazů v tomto oznámení."
+  },
+  "notification_without_buttons": {
+    "message": "Klikněte na oznámení k otevření všech odkazů v něm."
+  },
   "options": {
     "message": "Možnosti Adblock Plus"
   },

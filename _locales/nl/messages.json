@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "AdBlock Plus experimentele versie"
+  },
+  "notification_with_buttons": {
+    "message": "Klik 'OK' om alle links in het bericht te openen"
+  },
+  "notification_without_buttons": {
+    "message": "Klik op het bericht om de link te openen"
+  },
   "options": {
     "message": "Adblock Plus opties"
   },
