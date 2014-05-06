@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus (versión de desarrollo)"
+  },
+  "notification_with_buttons": {
+    "message": "Pulse \"Aceptar\" parar abrir todos los enlaces de este aviso."
+  },
+  "notification_without_buttons": {
+    "message": "Pulse en el aviso para abrir todos los enlaces que contiene."
+  },
   "options": {
     "message": "Opciones de Adblock Plus"
   },

@@ -39,7 +39,7 @@
     "message": "Metin reklamlarını devre dışı bırak"
   },
   "disabled_for_site": {
-    "message": "Bu sitede <strong>engelli</strong>"
+    "message": "Bu sitede <strong>devre dışı</strong>"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus aşağıdaki adresler için devre dışı bırakıldı. Adresleri adres çubuğundaki Adblock simgesinden ekleyebilir veya alan adını (URL'yi değil) kutucuğa yazıp \"Alan adını ekle\" butonuna tıklayabilirsin."
@@ -88,7 +88,7 @@
     }
   },
   "name_devbuild": {
-    "message": "Adblock Plus geliştirme derlemesi"
+    "message": "Adblock Plus geliştirme sürümü"
   },
   "notification_with_buttons": {
     "message": "Bu bildirimdeki tüm bağlantıları açmak için 'Tamam' düğmesine tıklayın."
@@ -147,7 +147,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Bu numaraları paylaş"
+    "message": "Numaraları paylaş"
   },
   "stats_show_iconnumber": {
     "message": "Simgede numarayı göster"
