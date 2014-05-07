@@ -194,14 +194,17 @@
         if (!items)
           return;
 
-        for (var i = 0; i < items.length; i++)
+        items.forEach(function(item)
         {
           chrome.contextMenus.create({
-            title:    items[i].title,
-            contexts: items[i].contexts,
-            onclick:  items[i].onclick
+            title: item.title,
+            contexts: item.contexts,
+            onclick: function(info, tab)
+            {
+              item.onclick(info.srcUrl, new Page(tab));
+            }
           });
-        }
+        });
       });
     });
   };
