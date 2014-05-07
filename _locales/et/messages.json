@@ -133,7 +133,7 @@
     "message": "Lae AdBlock Plus"
   },
   "stats_share_message": {
-    "message": "Ma blokeeritud $number,$ reklaamid ja jälgimisseadmed tänu Adblock Plus.",
+    "message": "Ma blokeeritud $number$ reklaamid ja jälgimisseadmed tänu Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
