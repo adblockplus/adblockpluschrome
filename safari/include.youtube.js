@@ -61,18 +61,6 @@
 
     if (flashvarsChanged)
       player.parentNode.replaceChild(newPlayer, player);
-
-    // if history.pushState is available, YouTube uses the history API
-    // when navigation from one video to another, and tells the flash
-    // player with JavaScript which video and which ads to show next,
-    // bypassing our flashvars rewrite code. So we disable
-    // history.pushState on pages with YouTube's flash player.
-    var script = document.createElement("script");
-    script.type = "application/javascript";
-    script.async = false;
-    script.textContent = "history.pushState = undefined;";
-    document.documentElement.appendChild(script);
-    document.documentElement.removeChild(script);
   }
 
   var deferred = [];
@@ -100,4 +88,16 @@
   });
 
   document.addEventListener("beforeload", onBeforeLoad, true);
+
+  // if history.pushState is available, YouTube uses the history API
+  // when navigation from one video to another, and tells the flash
+  // player with JavaScript which video and which ads to show next,
+  // bypassing our flashvars rewrite code. So we disable
+  // history.pushState before YouTube's JavaScript runs.
+  var script = document.createElement("script");
+  script.type = "application/javascript";
+  script.async = false;
+  script.textContent = "history.pushState = undefined;";
+  document.documentElement.appendChild(script);
+  document.documentElement.removeChild(script);
 })();
