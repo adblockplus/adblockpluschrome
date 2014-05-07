@@ -111,7 +111,7 @@
     }
   },
   "stats_label_total": {
-    "message": "<strong>$number دولار</strong> في إجمالي",
+    "message": "<strong>$number$</strong> دولار في إجمالي",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -130,7 +130,7 @@
     "message": "تحميل Adblock Plus"
   },
   "stats_share_message": {
-    "message": "أنا منعت الإعلانات $ $number وتتبع بفضل زائد.",
+    "message": "أنا منعت الإعلانات $number$ وتتبع بفضل زائد.",
     "placeholders": {
       "number": {
         "content": "$1"

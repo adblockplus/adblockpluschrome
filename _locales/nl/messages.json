@@ -112,7 +112,7 @@
     "message": "Toon 'Blokkeer Element' in het rechtermuisklik menu"
   },
   "stats_label_page": {
-    "message": "<strong>$getal$</strong> op deze pagina.",
+    "message": "<strong>$number$</strong> op deze pagina",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -128,7 +128,7 @@
     }
   },
   "stats_over": {
-    "message": "Meer dan $getal$",
+    "message": "meer dan $number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -139,7 +139,7 @@
     "message": "Adblock Plus downloaden"
   },
   "stats_share_message": {
-    "message": "Ik heb $getal$ advertenties en trackers geblokkeerd dankzij Adblock Plus.",
+    "message": "Ik heb $number$ advertenties en trackers geblokkeerd dankzij Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
