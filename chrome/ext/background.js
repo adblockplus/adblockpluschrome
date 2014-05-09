@@ -313,7 +313,7 @@
         else
           frameId = details.frameId;
 
-        frame = frames[frameId] || frames[0];
+        frame = frames[frameId] || frames[Object.keys(frames)[0]];
 
         if (frame && !ext.webRequest.onBeforeRequest._dispatch(details.url, details.type, new Page({id: details.tabId}), frame))
           return {cancel: true};
