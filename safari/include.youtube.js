@@ -97,7 +97,7 @@
   var script = document.createElement("script");
   script.type = "application/javascript";
   script.async = false;
-  script.textContent = "history.pushState = undefined;";
+  script.textContent = "History.prototype.pushState = undefined;";
   document.documentElement.appendChild(script);
   document.documentElement.removeChild(script);
 })();
