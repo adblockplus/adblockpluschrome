@@ -17,6 +17,19 @@
 
 var SELECTOR_GROUP_SIZE = 20;
 
+// use Shadow DOM if available to don't mess with web pages that
+// rely on the order of their own <style> tags. However
+// the <shadow> element is broken in some Chrome 32 builds (#309)
+//
+// also we must not create the shadow root in the response callback passed
+// to sendMessage(), otherwise Chrome breaks some websites (#450)
+var shadow = null;
+if ("webkitCreateShadowRoot" in document.documentElement && !/\bChrome\/32\b/.test(navigator.userAgent))
+{
+  shadow = document.documentElement.webkitCreateShadowRoot();
+  shadow.appendChild(document.createElement("shadow"));
+}
+
 // Sets the currently used CSS rules for elemhide filters
 function setElemhideCSSRules(selectors)
 {
@@ -26,13 +39,8 @@ function setElemhideCSSRules(selectors)
   var style = document.createElement("style");
   style.setAttribute("type", "text/css");
 
-  // Use Shadow DOM if available to don't mess with web pages that
-  // rely on the order of their own <style> tags. However
-  // the <shadow> element is broken in some Chrome 32 builts (#309)
-  if ("webkitCreateShadowRoot" in document.documentElement && !/\bChrome\/32\b/.test(navigator.userAgent))
+  if (shadow)
   {
-    var shadow = document.documentElement.webkitCreateShadowRoot();
-    shadow.appendChild(document.createElement("shadow"));
     shadow.appendChild(style);
 
     try
