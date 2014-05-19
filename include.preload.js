@@ -21,10 +21,13 @@ var SELECTOR_GROUP_SIZE = 20;
 // rely on the order of their own <style> tags. However
 // the <shadow> element is broken in some Chrome 32 builds (#309)
 //
+// also Chrome 31-33 crashes in some situations on some pages when using
+// ShadowDOM, e.g. when pressing tab key on Wikipedia and Facebook (#498)
+//
 // also we must not create the shadow root in the response callback passed
 // to sendMessage(), otherwise Chrome breaks some websites (#450)
 var shadow = null;
-if ("webkitCreateShadowRoot" in document.documentElement && !/\bChrome\/32\b/.test(navigator.userAgent))
+if ("webkitCreateShadowRoot" in document.documentElement && !/\bChrome\/3[1-3]\b/.test(navigator.userAgent))
 {
   shadow = document.documentElement.webkitCreateShadowRoot();
   shadow.appendChild(document.createElement("shadow"));
