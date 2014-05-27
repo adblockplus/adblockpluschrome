@@ -54,6 +54,7 @@ var canUseChromeNotifications = require("info").platform == "chromium"
   && (navigator.platform.indexOf("Linux") == -1 || parseInt(require("info").applicationVersion) > 34);
 
 var seenDataCorruption = false;
+var filterlistsReinitialized = false;
 require("filterNotifier").FilterNotifier.addListener(function(action)
 {
   if (action == "load")
@@ -62,6 +63,14 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
 
     var addonVersion = require("info").addonVersion;
     var prevVersion = ext.storage.currentVersion;
+
+    // There are no filters stored so we need to reinitialize all filterlists
+    if (!FilterStorage.firstRun && FilterStorage.subscriptions.length === 0)
+    {
+      filterlistsReinitialized = true;
+      prevVersion = null;
+    }
+
     if (prevVersion != addonVersion || FilterStorage.firstRun)
     {
       seenDataCorruption = prevVersion && FilterStorage.firstRun;
