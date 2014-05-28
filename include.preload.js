@@ -119,6 +119,32 @@ function checkCollapse(event)
   }
 }
 
+// Converts relative to absolute URL
+// e.g.: foo.swf on http://example.com/whatever/bar.html
+//  -> http://example.com/whatever/foo.swf
+function relativeToAbsoluteUrl(url)
+{
+  // If URL is already absolute, don't mess with it
+  if (!url || /^[\w\-]+:/i.test(url))
+    return url;
+
+  // Leading / means absolute path
+  // Leading // means network path
+  if (url[0] == '/')
+  {
+    if (url[1] == '/')
+      return document.location.protocol + url;
+    else
+      return document.location.protocol + "//" + document.location.host + url;
+  }
+
+  // Remove filename and add relative URL to it
+  var base = document.baseURI.match(/.+\//);
+  if (!base)
+    return document.baseURI + "/" + url;
+  return base[0] + url;
+}
+
 function init()
 {
   // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything

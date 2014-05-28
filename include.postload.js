@@ -355,32 +355,6 @@ function getElementURL(elt) {
   return url;
 }
 
-// Converts relative to absolute URL
-// e.g.: foo.swf on http://example.com/whatever/bar.html
-//  -> http://example.com/whatever/foo.swf
-function relativeToAbsoluteUrl(url)
-{
-  // If URL is already absolute, don't mess with it
-  if (!url || /^[\w\-]+:/i.test(url))
-    return url;
-
-  // Leading / means absolute path
-  // Leading // means network path
-  if (url[0] == '/')
-  {
-    if (url[1] == '/')
-      return document.location.protocol + url;
-    else
-      return document.location.protocol + "//" + document.location.host + url;
-  }
-
-  // Remove filename and add relative URL to it
-  var base = document.baseURI.match(/.+\//);
-  if (!base)
-    return document.baseURI + "/" + url;
-  return base[0] + url;
-}
-
 // This function Copyright (c) 2008 Jeni Tennison, from jquery.uri.js
 // and licensed under the MIT license. See jquery-*.min.js for details.
 function removeDotSegments(u) {
