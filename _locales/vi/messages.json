@@ -87,8 +87,17 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus bản dựng phát triển"
+  },
+  "notification_with_buttons": {
+    "message": "Nhấn 'OK' để mở tất cả liên kết trong thông báo này."
+  },
+  "notification_without_buttons": {
+    "message": "Nhấn vào thông báo để mở tất cả liên kết trong nó."
+  },
   "options": {
-    "message": "Cấu hình ABP"
+    "message": "Tuỳ chọn Adblock Plus"
   },
   "options_short": {
     "message": "Tùy chọn"

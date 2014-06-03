@@ -32,6 +32,9 @@
   "general": {
     "message": "Splošno"
   },
+  "name_devbuild": {
+    "message": "Adblock plus razvojna gradnja"
+  },
   "options": {
     "message": "Adblock Plus možnosti"
   },

@@ -51,13 +51,13 @@
     "message": "Уреди филтере у режиму текста"
   },
   "enable_only_the": {
-    "message": "Омогућите само оне спискове филтера који су вам потребни. Превише њих може да успори прегледач."
+    "message": "Омогућите само оне листе филтера које су вам потребне. Превише њих може да успори прегледач."
   },
   "enabled_for_site": {
     "message": "<strong>Омогући</strong> на овом сајту"
   },
   "filter_lists": {
-    "message": "Спискови филтера"
+    "message": "Листе филтера"
   },
   "filter_must_follow_syntax": {
     "message": "Ваш филтер мора да следи <a>синтаксу за филтере Adblock Plus-а</a>."
@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Развојна верзија Adblock Plus-а"
+  },
+  "notification_with_buttons": {
+    "message": "Кликните на „У реду“ да бисте отворили све везе у овом обавештењу."
+  },
+  "notification_without_buttons": {
+    "message": "Кликните на обавештење да бисте отворили све везе у њему."
+  },
   "options": {
     "message": "Опције Adblock Plus-а"
   },
@@ -94,7 +103,7 @@
     "message": "Опције"
   },
   "out_of_date_lists": {
-    "message": "Застарели спискови се редовно ажурирају."
+    "message": "Застареле листе се редовно ажурирају."
   },
   "remove_button": {
     "message": "Уклони изабрано"
@@ -147,7 +156,7 @@
     "message": "Блокирани огласи"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Молим изаберите предплату са листе филтера:"
+    "message": "Изаберите филтер на који желите да се пријавите:"
   },
   "update_now": {
     "message": "Ажурирај сада"

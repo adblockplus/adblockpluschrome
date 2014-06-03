@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus kehittäjän versio"
+  },
+  "notification_with_buttons": {
+    "message": "Valitse 'OK' aukaeksesi kaikki linkit tässä ilmoituksessa."
+  },
+  "notification_without_buttons": {
+    "message": "Napsauttamalla ilmoitusta voit avata kaikki linkit siitä."
+  },
   "options": {
     "message": "Adblock Plus asetukset"
   },

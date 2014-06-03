@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "توسعه ساخت AdBlock"
+  },
+  "notification_with_buttons": {
+    "message": "برای باز شدن همه لینک های این هشدار ، روی OK کلیک کنید."
+  },
+  "notification_without_buttons": {
+    "message": "برای باز شدن همه لینک های داخلش ، روی هشدار کلیک کنید."
+  },
   "options": {
     "message": "تنظیمات Adblock Plus"
   },

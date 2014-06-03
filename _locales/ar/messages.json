@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "رقم نسخة تطوير Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "اضغط موافق لفتح جميع الروابط في هذا التنبيه."
+  },
+  "notification_without_buttons": {
+    "message": "اضغط على التنبيه لفتح كل الروابط الموجودة."
+  },
   "options": {
     "message": "خيارات آدبلوك بلس"
   },
