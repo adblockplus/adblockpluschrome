@@ -1,15 +1,162 @@
 {
+  "add": {
+    "message": "Magdagdag"
+  },
+  "add_domain_button": {
+    "message": "Magdagdag ng domain"
+  },
+  "add_filter_button": {
+    "message": "Magdagdag ng  filter"
+  },
+  "add_filters_msg": {
+    "message": "Magdagdag ng filter(s)?"
+  },
+  "add_your_own_filters": {
+    "message": "Magdagdag ng sariling filters"
+  },
+  "apply_changes": {
+    "message": "Ilapat ang mga pagbabago"
+  },
+  "block_element": {
+    "message": "Isara ang element"
+  },
   "cancel": {
     "message": "I-cancel"
   },
+  "clickhide_instructions": {
+    "message": "Pagkatapos isara itong pop-up, pindutin ang kaliwang mouse button (o kanang mouse button) ang element ng pahinang ito."
+  },
+  "description_chrome": {
+    "message": "Ang libreng adblock tool para sa Chrome browser: Inaalis ang mga video ads sa YouTube, Facebook, banners at marami pang iba."
+  },
+  "description_opera": {
+    "message": "Ang libreng adblock tool para sa Opera browser: Inaalis ang mga video ads sa YouTube, Facebook, banners at marami pang iba."
+  },
+  "description_safari": {
+    "message": "Ang libreng adblock tool para sa Safari browser: Inaalis ang mga video ads sa YouTube, Facebook, banners at marami pang iba."
+  },
+  "disable_inline": {
+    "message": "Isawalang bisa ang inline text ads"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Hindi Maaari</strong> sa site na ito"
+  },
+  "disabled_for_these_domains": {
+    "message": "Ang Adblock Plus ay hindi gumagana sa mga nakalistang domains. Maaari kang magdagdag ng domain sa pamamagitan ng Adblock Plus icon sa address bar o maaari ding ilagay ang domain (hindi URL) sa may kahon at pindutin ang \"Add domain\" button."
+  },
+  "easy_create_filter": {
+    "message": "Ihinto ang element"
+  },
+  "edit_filters_raw": {
+    "message": "Ayusin ang filter bilang texto lamang"
+  },
+  "enable_only_the": {
+    "message": "Paganahin lamang ang mga filter na nais ninyong gamitin. Kapag sobrang sobrang daming nailagay ay maaaring bumagal ang inyong browser."
+  },
+  "enabled_for_site": {
+    "message": "<strong>Gumagana</strong> sa site na ito"
+  },
+  "filter_lists": {
+    "message": "Listahan ng mga Filter"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Ang iyong filter ay dapat nakasunod sa <a>Adblock Plus filter syntax</a>."
+  },
+  "found_a_bug": {
+    "message": "Nakadiskobre ng bug? Gusto mo bang isalin ang Adblock Plus sa inyong wika? <a>ilagay ang inyong request dito</a>."
+  },
   "general": {
-    "message": "rtfft"
+    "message": "General"
+  },
+  "last_updated_at": {
+    "message": "Huling na update noong $time$ sa $date$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Huling na update kaninang $time$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "name_devbuild": {
+    "message": "pagbuo ng Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "Pindutin ang 'OK' para mabuksan ang lahat ng links sa notifikasyon na ito."
+  },
+  "notification_without_buttons": {
+    "message": "Pindutin ang notification para mabuksan ang mga links."
   },
   "options": {
     "message": "Opsyon sa Adblock Plus"
   },
+  "options_short": {
+    "message": "Mga pagpipilian"
+  },
+  "out_of_date_lists": {
+    "message": "Ang mga listahan na hindi pa nauupdate ay maayos bawat pagkakataon."
+  },
   "remove_button": {
     "message": "Alisin ang napili"
+  },
+  "show_block_element_menu": {
+    "message": "Ipakita ang 'Block Element' sa right-click menu item"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> sa pahinang ito",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> sa kabuuan",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "sobra ng $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "I - download ang Adblock Plus"
+  },
+  "stats_share_message": {
+    "message": "Napigilan ko ang $number$ ads at trackers salamat sa Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Ibahagi itong mga numero"
+  },
+  "stats_show_iconnumber": {
+    "message": "Ipakita ang mga numero bilang icon"
+  },
+  "stats_title": {
+    "message": "Napigilan ang mga ads"
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Mamili ng filter sa listahan:"
   },
   "update_now": {
     "message": "I-update ngayon"

@@ -88,13 +88,13 @@
     }
   },
   "name_devbuild": {
-    "message": "Adblock Plus razvojna verzija"
+    "message": "Adblock Plus razvojna inačica"
   },
   "notification_with_buttons": {
-    "message": "Klikni 'U redu' za otvaranje svih linkova u ovoj obavijesti."
+    "message": "Kliknite 'U redu' za otvaranje svih poveznica u ovoj obavijesti."
   },
   "notification_without_buttons": {
-    "message": "Klikni na obavijest za otvaranje svih linkova u njoj."
+    "message": "Kliknite na obavijest za otvaranje svih poveznica koje sadrži."
   },
   "options": {
     "message": "Adblock Plus mogućnosti"
@@ -153,7 +153,7 @@
     "message": "Prikaži broj na ikoni"
   },
   "stats_title": {
-    "message": "Reklama blokirana"
+    "message": "Blokirano reklama"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Molimo odaberite pretplatu na filter sa popisa:"
