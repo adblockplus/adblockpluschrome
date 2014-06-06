@@ -110,9 +110,12 @@
       // dispatch it manually. Otherwise element collapsing wouldn't work.
       if (type != "sub_frame")
       {
-        var evt = document.createEvent("Event");
-        evt.initEvent("error");
-        event.target.dispatchEvent(evt);
+        setTimeout(function()
+        {
+          var evt = document.createEvent("Event");
+          evt.initEvent("error");
+          event.target.dispatchEvent(evt);
+        }, 0);
       }
     }
   }, true);
