@@ -22,12 +22,11 @@
   var pages = {__proto__: null};
   var pageCounter = 0;
 
-  var Page = function(id, tab, url, prerendered)
+  var Page = function(id, tab, url)
   {
     this._id = id;
     this._tab = tab;
     this._frames = [{url: url, parent: null}];
-    this._prerendered = prerendered;
 
     if (tab.page)
       this._messageProxy = new ext._MessageProxy(tab.page);
@@ -60,25 +59,31 @@
 
   var isPageActive = function(page)
   {
-    return page._tab == page._tab.browserWindow.activeTab && !page._prerendered;
+    var tab = page._tab;
+    return tab == tab.browserWindow.activeTab && page == tab._visiblePage;
   };
 
   var forgetPage = function(id)
   {
     ext._removeFromAllPageMaps(id);
+
+    delete pages[id]._tab._pages[id];
     delete pages[id];
   };
 
   var replacePage = function(page)
   {
-    for (var id in pages)
+    var tab = page._tab;
+    tab._visiblePage = page;
+
+    for (var id in tab._pages)
     {
-      if (id != page._id && pages[id]._tab == page._tab)
+      if (id != page._id)
         forgetPage(id);
     }
 
     if (isPageActive(page))
-      updateToolbarItemForPage(page);
+      updateToolbarItemForPage(page, tab.browserWindow);
   };
 
   ext.pages = {
@@ -134,11 +139,8 @@
     // tab. Note that it wouldn't be sufficient do that when the old page
     // is unloading, because Safari dispatches window.onunload only when
     // reloading the page or following links, but not when closing the tab.
-    for (var id in pages)
-    {
-      if (pages[id]._tab == event.target)
-        forgetPage(id);
-    }
+    for (var id in event.target._pages)
+      forgetPage(id);
   }, true);
 
 
@@ -160,7 +162,7 @@
   };
 
   var updateToolbarItemForPage = function(page, win) {
-    var toolbarItem = getToolbarItemForWindow(win || page._tab.browserWindow);
+    var toolbarItem = getToolbarItemForWindow(win);
     if (!toolbarItem)
       return;
 
@@ -222,18 +224,7 @@
     // became active. If we can't find that page (e.g. when a page was
     // opened in a new tab, and our content script didn't run yet), the
     // toolbar item of the window, is reset to its intial configuration.
-    var activePage = null;
-    for (var id in pages)
-    {
-      var page = pages[id];
-      if (page._tab == event.target && !page._prerendered)
-      {
-        activePage = page;
-        break;
-      }
-    }
-
-    updateToolbarItemForPage(activePage, event.target.browserWindow);
+    updateToolbarItemForPage(event.target._visiblePage, event.target.browserWindow);
   }, true);
 
 
@@ -531,21 +522,22 @@
         switch (event.message.category)
         {
           case "loading":
+            var tab = event.target;
+            var message = event.message;
+
             var pageId;
             var frameId;
 
-            if (event.message.isTopLevel)
+            if (message.isTopLevel)
             {
               pageId = ++pageCounter;
               frameId = 0;
 
-              var isPrerendered = event.message.isPrerendered;
-              var page = pages[pageId] = new Page(
-                pageId,
-                event.target,
-                event.message.url,
-                isPrerendered
-              );
+              if (!('_pages' in tab))
+                tab._pages = {__proto__: null};
+
+              var page = new Page(pageId, tab, message.url);
+              pages[pageId] = tab._pages[pageId] = page;
 
               // when a new page is shown, forget the previous page associated
               // with its tab, and reset the toolbar item if necessary.
@@ -553,7 +545,7 @@
               // page is unloading, because Safari dispatches window.onunload
               // only when reloading the page or following links, but not when
               // you enter a new URL in the address bar.
-              if (!isPrerendered)
+              if (!message.isPrerendered)
                 replacePage(page);
 
               ext.pages.onLoading._dispatch(page);
@@ -571,17 +563,15 @@
               // by matching its referrer with the URL of frames previously
               // loaded in the same tab. If there is more than one match,
               // the most recent loaded page and frame is preferred.
-              for (var curPageId in pages)
+              for (var curPageId in tab._pages)
               {
                 var curPage = pages[curPageId];
-                if (curPage._tab != event.target)
-                  continue;
 
                 for (var i = 0; i < curPage._frames.length; i++)
                 {
                   var curFrame = curPage._frames[i];
 
-                  if (curFrame.url == event.message.referrer)
+                  if (curFrame.url == message.referrer)
                   {
                     pageId = curPageId;
                     page = curPage;
@@ -607,10 +597,7 @@
               }
 
               frameId = page._frames.length;
-              page._frames.push({
-                url: event.message.url,
-                parent: parentFrame
-              });
+              page._frames.push({url: message.url, parent: parentFrame});
             }
 
             event.message = {pageId: pageId, frameId: frameId};
@@ -639,16 +626,13 @@
         pages[event.message.pageId]._messageProxy.handleResponse(event.message);
         break;
       case "replaced":
-        var page = pages[event.message.pageId];
-        page._prerendered = false;
-
         // when a prerendered page is shown, forget the previous page
         // associated with its tab, and reset the toolbar item if necessary.
         // Note that it wouldn't be sufficient to do that when the old
         // page is unloading, because Safari dispatches window.onunload
         // only when reloading the page or following links, but not when
         // the current page is replaced with a prerendered page.
-        replacePage(page);
+        replacePage(pages[event.message.pageId]);
         break;
     }
   });
