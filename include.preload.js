@@ -17,65 +17,6 @@
 
 var SELECTOR_GROUP_SIZE = 20;
 
-// use Shadow DOM if available to don't mess with web pages that
-// rely on the order of their own <style> tags. However
-// the <shadow> element is broken in some Chrome 32 builds (#309)
-//
-// also Chrome 31-33 crashes in some situations on some pages when using
-// ShadowDOM, e.g. when pressing tab key on Wikipedia and Facebook (#498)
-//
-// also we must not create the shadow root in the response callback passed
-// to sendMessage(), otherwise Chrome breaks some websites (#450)
-var shadow = null;
-if ("webkitCreateShadowRoot" in document.documentElement && !/\bChrome\/3[1-3]\b/.test(navigator.userAgent))
-{
-  shadow = document.documentElement.webkitCreateShadowRoot();
-  shadow.appendChild(document.createElement("shadow"));
-}
-
-// Sets the currently used CSS rules for elemhide filters
-function setElemhideCSSRules(selectors)
-{
-  if (selectors.length == 0)
-    return;
-
-  var style = document.createElement("style");
-  style.setAttribute("type", "text/css");
-
-  if (shadow)
-  {
-    shadow.appendChild(style);
-
-    try
-    {
-      document.querySelector("::content");
-
-      for (var i = 0; i < selectors.length; i++)
-        selectors[i] = "::content " + selectors[i];
-    }
-    catch (e)
-    {
-      for (var i = 0; i < selectors.length; i++)
-        selectors[i] = "::-webkit-distributed(" + selectors[i] + ")";
-    }
-  }
-  else
-  {
-    // Try to insert the style into the <head> tag, inserting directly under the
-    // document root breaks dev tools functionality:
-    // http://code.google.com/p/chromium/issues/detail?id=178109
-    (document.head || document.documentElement).appendChild(style);
-  }
-
-  // WebKit apparently chokes when the selector list in a CSS rule is huge.
-  // So we split the elemhide selectors into groups.
-  for (var i = 0; selectors.length > 0; i++)
-  {
-    var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
-    style.sheet.insertRule(selector + " { display: none !important; }", i);
-  }
-}
-
 var typeMap = {
   "img": "IMAGE",
   "input": "IMAGE",
@@ -85,15 +26,13 @@ var typeMap = {
   "iframe": "SUBDOCUMENT"
 };
 
-function checkCollapse(event)
+function checkCollapse(element)
 {
-  var target = event.target;
-  var tag = target.localName;
-  var expectedEvent = (tag == "iframe" || tag == "frame" ? "load" : "error");
-  if (tag in typeMap && event.type == expectedEvent)
+  var tag = element.localName;
+  if (tag in typeMap)
   {
     // This element failed loading, did we block it?
-    var url = target.src;
+    var url = element.src;
     if (!url)
       return;
 
@@ -106,16 +45,44 @@ function checkCollapse(event)
 
       function(response)
       {
-        if (response && target.parentNode)
+        if (response && element.parentNode)
         {
           // <frame> cannot be removed, doing that will mess up the frameset
           if (tag == "frame")
-            target.style.setProperty("visibility", "hidden", "important");
+            element.style.setProperty("visibility", "hidden", "important");
           else
-            target.style.setProperty("display", "none", "important");
+            element.style.setProperty("display", "none", "important");
         }
       }
     );
+  }
+}
+
+function checkExceptionKey()
+{
+  var attr = document.documentElement.getAttribute("data-adblockkey");
+  if (attr)
+    ext.backgroundPage.sendMessage({type: "add-key-exception", token: attr});
+}
+
+function hasInlineURL(element, attribute)
+{
+  var value = element.getAttribute(attribute);
+  return value == null || /^\s*(javascript:|about:|$)/i.test(value);
+}
+
+function isInlineFrame(element)
+{
+  switch (element.localName)
+  {
+    case "iframe":
+      return hasInlineURL(element, "src") || element.hasAttribute("srcdoc");
+    case "frame":
+      return hasInlineURL(element, "src");
+    case "object":
+      return hasInlineURL(element, "data") && element.contentDocument;
+    default:
+      return false;
   }
 }
 
@@ -145,24 +112,121 @@ function relativeToAbsoluteUrl(url)
   return base[0] + url;
 }
 
-function init()
+function init(document)
 {
-  // Make sure this is really an HTML page, as Chrome runs these scripts on just about everything
-  if (!(document.documentElement instanceof HTMLElement))
-    return;
+  var canUseShadow = "webkitCreateShadowRoot" in document.documentElement;
+  var fixInlineFrames = false;
 
-  document.addEventListener("error", checkCollapse, true);
-  document.addEventListener("load", checkCollapse, true);
+  var match = navigator.userAgent.match(/\bChrome\/(\d+)/);
+  if (match)
+  {
+    var chromeVersion = parseInt(match[1]);
 
-  var attr = document.documentElement.getAttribute("data-adblockkey");
-  if (attr)
-    ext.backgroundPage.sendMessage({type: "add-key-exception", token: attr});
+    // the <shadow> element is ignored in Chrome 32 (#309). Also Chrome 31-33
+    // crashes in some situations on some pages when using shadow DOM (#498).
+    // So we must not use Shadow DOM on those versions of Chrome.
+    if (chromeVersion >= 31 && chromeVersion <= 33)
+      canUseShadow = false;
+
+    // prior to Chrome 37, content scripts don't run on about:blank
+    // and about:srcdoc. So we have to apply element hiding and collapsing
+    // from the parent frame, when inline frames are loaded.
+    if (chromeVersion < 37)
+      fixInlineFrames = true;
+  }
+
+  // use Shadow DOM if available to don't mess with web pages that
+  // rely on the order of their own <style> tags (#309). However we
+  // must not create the shadow root in the response callback passed
+  // to sendMessage(), otherwise Chrome breaks some websites (#450).
+  if (canUseShadow)
+  {
+    var shadow = document.documentElement.webkitCreateShadowRoot();
+    shadow.appendChild(document.createElement("shadow"));
+  }
+
+  // Sets the currently used CSS rules for elemhide filters
+  var setElemhideCSSRules = function(selectors)
+  {
+    if (selectors.length == 0)
+      return;
+
+    var style = document.createElement("style");
+    style.setAttribute("type", "text/css");
+
+    if (canUseShadow)
+    {
+      shadow.appendChild(style);
+
+      try
+      {
+        document.querySelector("::content");
+
+        for (var i = 0; i < selectors.length; i++)
+          selectors[i] = "::content " + selectors[i];
+      }
+      catch (e)
+      {
+        for (var i = 0; i < selectors.length; i++)
+          selectors[i] = "::-webkit-distributed(" + selectors[i] + ")";
+      }
+    }
+    else
+    {
+      // Try to insert the style into the <head> tag, inserting directly under the
+      // document root breaks dev tools functionality:
+      // http://code.google.com/p/chromium/issues/detail?id=178109
+      (document.head || document.documentElement).appendChild(style);
+    }
+
+    var setRules = function()
+    {
+      // The sheet property might not exist yet if the
+      // <style> element was created for a sub frame
+      if (!style.sheet)
+      {
+        setTimeout(setRules, 0);
+        return;
+      }
+
+      // WebKit apparently chokes when the selector list in a CSS rule is huge.
+      // So we split the elemhide selectors into groups.
+      for (var i = 0; selectors.length > 0; i++)
+      {
+        var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
+        style.sheet.insertRule(selector + " { display: none !important; }", i);
+      }
+    };
+
+    setRules();
+  };
+
+  document.addEventListener("error", function(event)
+  {
+    checkCollapse(event.target);
+  }, true);
+
+  document.addEventListener("load", function(event)
+  {
+    var element = event.target;
+
+    if (/^i?frame$/.test(element.localName))
+      checkCollapse(element);
+
+    if (fixInlineFrames && isInlineFrame(element))
+    {
+      init(element.contentDocument);
+
+      for (var tagName in typeMap)
+        Array.prototype.forEach.call(element.contentDocument.getElementsByTagName(tagName), checkCollapse);
+    }
+  }, true);
 
   ext.backgroundPage.sendMessage({type: "get-selectors"}, setElemhideCSSRules);
 }
 
-// In Chrome 18 the document might not be initialized yet
-if (document.documentElement)
-  init();
-else
-  window.setTimeout(init, 0);
+if (document.documentElement instanceof HTMLElement)
+{
+  checkExceptionKey();
+  init(document);
+}

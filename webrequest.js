@@ -52,7 +52,7 @@ function onBeforeRequest(url, type, page, frame)
   if (isFrameWhitelisted(page, frame))
     return true;
 
-  var docDomain = extractHostFromURL(frame.url);
+  var docDomain = extractHostFromFrame(frame);
   var filter = defaultMatcher.matchesAny(
     url,
     type == "sub_frame" ? "SUBDOCUMENT" : type.toUpperCase(),
