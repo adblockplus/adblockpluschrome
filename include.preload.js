@@ -225,7 +225,7 @@ function init(document)
   ext.backgroundPage.sendMessage({type: "get-selectors"}, setElemhideCSSRules);
 }
 
-if (document.documentElement instanceof HTMLElement)
+if (document instanceof HTMLDocument)
 {
   checkExceptionKey();
   init(document);
