@@ -518,7 +518,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
           !isFrameWhitelisted(sender.page, sender.frame, "ELEMHIDE"))
       {
         var noStyleRules = false;
-        var host = extractHostFromURL(sender.frame.url);
+        var host = extractHostFromFrame(sender.frame);
         for (var i = 0; i < noStyleRulesHosts.length; i++)
         {
           var noStyleHost = noStyleRulesHosts[i];
@@ -548,7 +548,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       }
 
       var requestHost = extractHostFromURL(msg.url);
-      var documentHost = extractHostFromURL(sender.frame.url);
+      var documentHost = extractHostFromFrame(sender.frame);
       var thirdParty = isThirdParty(requestHost, documentHost);
       var filter = defaultMatcher.matchesAny(msg.url, msg.mediatype, documentHost, thirdParty);
       if (filter instanceof BlockingFilter)
