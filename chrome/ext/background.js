@@ -329,7 +329,7 @@
       // let potentially some ads through, rather than blocking legit requests.
       console.error(e);
     }
-  }, {urls: ["<all_urls>"]}, ["blocking"]);
+  }, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
 
 
   /* Message passing */
