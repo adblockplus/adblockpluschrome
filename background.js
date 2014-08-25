@@ -59,8 +59,6 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
 {
   if (action == "load")
   {
-    var importingOldData = importOldData();
-
     var addonVersion = require("info").addonVersion;
     var prevVersion = ext.storage.currentVersion;
 
@@ -75,8 +73,7 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
     {
       seenDataCorruption = prevVersion && FilterStorage.firstRun;
       ext.storage.currentVersion = addonVersion;
-      if (!importingOldData)
-        addSubscription(prevVersion);
+      addSubscription(prevVersion);
     }
 
     if (canUseChromeNotifications)
@@ -150,30 +147,6 @@ function refreshIconAndContextMenuForAllPages()
   {
     pages.forEach(refreshIconAndContextMenu);
   });
-}
-
-/**
- * Old versions for Opera stored patterns.ini in the localStorage object, this
- * will import it into FilterStorage properly.
- * @return {Boolean} true if data import is in progress
- */
-function importOldData()
-{
-  if ("patterns.ini" in localStorage)
-  {
-    FilterStorage.loadFromDisk(localStorage["patterns.ini"]);
-
-    var remove = [];
-    for (var key in localStorage)
-      if (key.indexOf("patterns.ini") == 0 || key.indexOf("patterns-backup") == 0)
-        remove.push(key);
-    for (var i = 0; i < remove.length; i++)
-      delete localStorage[remove[i]];
-
-    return true;
-  }
-  else
-    return false;
 }
 
 /**
