@@ -114,34 +114,20 @@ function relativeToAbsoluteUrl(url)
 
 function init(document)
 {
-  var canUseShadow = "webkitCreateShadowRoot" in document.documentElement;
-  var fixInlineFrames = false;
-
+  // prior to Chrome 37, content scripts don't run on about:blank
+  // and about:srcdoc. So we have to apply element hiding and collapsing
+  // from the parent frame, when inline frames are loaded.
   var match = navigator.userAgent.match(/\bChrome\/(\d+)/);
-  if (match)
-  {
-    var chromeVersion = parseInt(match[1]);
-
-    // the <shadow> element is ignored in Chrome 32 (#309). Also Chrome 31-33
-    // crashes in some situations on some pages when using shadow DOM (#498).
-    // So we must not use Shadow DOM on those versions of Chrome.
-    if (chromeVersion >= 31 && chromeVersion <= 33)
-      canUseShadow = false;
-
-    // prior to Chrome 37, content scripts don't run on about:blank
-    // and about:srcdoc. So we have to apply element hiding and collapsing
-    // from the parent frame, when inline frames are loaded.
-    if (chromeVersion < 37)
-      fixInlineFrames = true;
-  }
+  var fixInlineFrames = match && parseInt(match[1]) < 37;
 
   // use Shadow DOM if available to don't mess with web pages that
   // rely on the order of their own <style> tags (#309). However we
   // must not create the shadow root in the response callback passed
   // to sendMessage(), otherwise Chrome breaks some websites (#450).
-  if (canUseShadow)
+  var shadow = null;
+  if ("createShadowRoot" in document.documentElement)
   {
-    var shadow = document.documentElement.webkitCreateShadowRoot();
+    shadow = document.documentElement.createShadowRoot();
     shadow.appendChild(document.createElement("shadow"));
   }
 
@@ -154,22 +140,12 @@ function init(document)
     var style = document.createElement("style");
     style.setAttribute("type", "text/css");
 
-    if (canUseShadow)
+    if (shadow)
     {
       shadow.appendChild(style);
 
-      try
-      {
-        document.querySelector("::content");
-
-        for (var i = 0; i < selectors.length; i++)
-          selectors[i] = "::content " + selectors[i];
-      }
-      catch (e)
-      {
-        for (var i = 0; i < selectors.length; i++)
-          selectors[i] = "::-webkit-distributed(" + selectors[i] + ")";
-      }
+      for (var i = 0; i < selectors.length; i++)
+        selectors[i] = "::content " + selectors[i];
     }
     else
     {
