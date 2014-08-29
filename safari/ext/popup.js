@@ -57,7 +57,7 @@
   {
     mayResize = false;
     document.documentElement.style.display = "none";
-    document.location.reload();
+    window.location.reload();
   });
 
 

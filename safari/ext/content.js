@@ -35,7 +35,7 @@
     beforeLoadEvent,
     {
       category: "loading",
-      url: document.location.href,
+      url: window.location.href,
       referrer: document.referrer,
       isTopLevel: isTopLevel,
       isPrerendered: isPrerendered
