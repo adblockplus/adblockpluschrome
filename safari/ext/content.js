@@ -383,6 +383,18 @@
     {
       messageProxy.sendMessage(message, responseCallback, documentInfo);
     },
+    sendMessageSync: function(message)
+    {
+      return safari.self.tab.canLoad(
+        beforeLoadEvent,
+        {
+          category: "request",
+          pageId: documentInfo.pageId,
+          frameId: documentInfo.frameId,
+          payload: message
+        }
+      );
+    },
     getWindow: function()
     {
       return backgroundPageProxy.getObject(0);

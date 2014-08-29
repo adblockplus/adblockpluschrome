@@ -615,6 +615,17 @@
           case "proxy":
             event.message = backgroundPageProxy.handleMessage(event.message);
             break;
+          case "request":
+            var page = pages[event.message.pageId];
+            var sender = {page: page, frame: page._frames[event.message.frameId]};
+
+            var response = null;
+            var sendResponse = function(message) { response = message; };
+
+            ext.onMessage._dispatch(event.message.payload, sender, sendResponse);
+
+            event.message = response;
+            break;
         }
         break;
       case "request":
