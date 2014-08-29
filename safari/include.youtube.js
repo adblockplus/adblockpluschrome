@@ -19,6 +19,9 @@
   if (document.domain != "www.youtube.com")
     return;
 
+  if (!ext.backgroundPage.sendMessageSync({type: "get-domain-enabled-state"}).enabled)
+    return;
+
   function rewriteFlashvars(flashvars)
   {
     var pairs = flashvars.split("&");
@@ -63,31 +66,11 @@
       player.parentNode.replaceChild(newPlayer, player);
   }
 
-  var deferred = [];
-  function patchPlayerDeferred(player)
-  {
-    deferred.push(player);
-  }
-
-  var onBeforeLoadYoutubeVideo = patchPlayerDeferred;
-  function onBeforeLoad(event)
+  document.addEventListener("beforeload", function(event)
   {
     if ((event.target.localName == "object" || event.target.localName == "embed") && /:\/\/[^\/]*\.ytimg\.com\//.test(event.url))
-      onBeforeLoadYoutubeVideo(event.target);
-  }
-
-  ext.backgroundPage.sendMessage({type: "get-domain-enabled-state"}, function(response)
-  {
-    if (response.enabled)
-    {
-      deferred.forEach(patchPlayer);
-      onBeforeLoadYoutubeVideo = patchPlayer;
-    }
-    else
-      document.removeEventListener("beforeload", onBeforeLoad, true);
-  });
-
-  document.addEventListener("beforeload", onBeforeLoad, true);
+      patchPlayer(event.target);
+  }, true);
 
   // if history.pushState is available, YouTube uses the history API
   // when navigation from one video to another, and tells the flash
