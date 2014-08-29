@@ -100,9 +100,9 @@ function relativeToAbsoluteUrl(url)
   if (url[0] == '/')
   {
     if (url[1] == '/')
-      return document.location.protocol + url;
+      return window.location.protocol + url;
     else
-      return document.location.protocol + "//" + document.location.host + url;
+      return window.location.protocol + "//" + window.location.host + url;
   }
 
   // Remove filename and add relative URL to it
