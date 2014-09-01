@@ -118,7 +118,7 @@ function clickHide_showDialog(left, top, filters)
   clickHideFiltersDialog.src = ext.getURL("block.html");
   clickHideFiltersDialog.setAttribute("style", "position: fixed !important; visibility: hidden; display: block !important; border: 0px !important;");
   clickHideFiltersDialog.style.WebkitBoxShadow = "5px 5px 20px rgba(0,0,0,0.5)";
-  clickHideFiltersDialog.style.zIndex = 99999;
+  clickHideFiltersDialog.style.zIndex = 0x7FFFFFFF;
 
   // Position in upper-left all the time
   clickHideFiltersDialog.style.left = "50px";
