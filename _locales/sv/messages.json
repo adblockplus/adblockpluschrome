@@ -27,7 +27,7 @@
     "message": "När denna popup stängs, klicka (eller högerklicka) ett objekt på sidan."
   },
   "description_chrome": {
-    "message": "Fri adblock verktyg för Chrome: Blockerar irriterande videoannonser på YouTube, Facebook-annonser, banners och mycket mer."
+    "message": "Gratis reklamblockerare för Chrome: Blockerar irriterande videoannonser på YouTube, Facebook-annonser, banners och mycket mer."
   },
   "description_opera": {
     "message": "Gratis reklamblockerare för Opera: Blockerar irriterande videoannonser på YouTube, Facebook-annonser, banners och mycket mer."
@@ -45,16 +45,16 @@
     "message": "Adblock Plus är avaktiverad för domänerna i denna lista. Du kan lägga till en domän via Adblock Plus-ikonen i adressfältet eller genom att skriva domännamnet (inte URL) i textboxen och klicka på \"Lägg till domän\"."
   },
   "easy_create_filter": {
-    "message": "Block-element"
+    "message": "Blockera objekt"
   },
   "edit_filters_raw": {
     "message": "Redigera filter som ren text"
   },
   "enable_only_the": {
-    "message": "Endast aktivera filtret listor du behöver. Alltför många kan få din webbläsare att inte svara."
+    "message": "Aktivera endast de filterlistor du behöver. För många kan göra att webbläsaren inte svarar."
   },
   "enabled_for_site": {
-    "message": "<strong>Ja</strong> på denna webbplats"
+    "message": "<strong>Aktiverat</strong> på denna webbplats"
   },
   "filter_lists": {
     "message": "Filterlistor"
@@ -63,7 +63,7 @@
     "message": "Ditt filter måste följa <a>Adblock Plus filtersyntax</a>."
   },
   "found_a_bug": {
-    "message": "Hittat ett fel eller vill du översätta Adblock Plus till ett annat språk? Vänligen, <a>meddela här</a>."
+    "message": "Hittat ett fel? Vill du översätta Adblock Plus till ett annat språk? Vänligen, <a>skapa en förfrågan här</a>."
   },
   "general": {
     "message": "Allmänt"
@@ -88,13 +88,13 @@
     }
   },
   "name_devbuild": {
-    "message": "Adblock Plus utvecklings version"
+    "message": "Adblock Plus utvecklingsversion"
   },
   "notification_with_buttons": {
-    "message": "Klicka på 'OK' för att öppna alla länkar i detta meddelandet."
+    "message": "Klicka på 'OK' för att öppna alla länkar i detta meddelande."
   },
   "notification_without_buttons": {
-    "message": "Klicka på meddelandet för att öppna länkar i den."
+    "message": "Klicka på meddelandet för att öppna alla länkar i det."
   },
   "options": {
     "message": "Adblock Plus Alternativ"
@@ -150,10 +150,10 @@
     "message": "Dela med dig av dessa nummer"
   },
   "stats_show_iconnumber": {
-    "message": "Visa nummer i fältet"
+    "message": "Visa nummer vid ikon"
   },
   "stats_title": {
-    "message": "Annonser blockerad"
+    "message": "Annonser blockerade"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Var vänlig välj en filterprenumeration från listan:"

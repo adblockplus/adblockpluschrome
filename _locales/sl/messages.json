@@ -33,7 +33,7 @@
     "message": "Splošno"
   },
   "name_devbuild": {
-    "message": "Adblock plus razvojna gradnja"
+    "message": "Adblock Plus razvojna različica"
   },
   "options": {
     "message": "Adblock Plus možnosti"
@@ -48,9 +48,9 @@
     "message": "Prikaži 'Blokiraj element' v meniju desnega klika"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Prosim izberite naročnino na filter s seznama:"
+    "message": "Prosimo, izberite naročnino na filter s seznama:"
   },
   "update_now": {
-    "message": "Posodobi sedaj"
+    "message": "Posodobi"
   }
 }

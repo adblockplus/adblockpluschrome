@@ -90,6 +90,12 @@
   "name_devbuild": {
     "message": "Adblock Plus arendusväljalase"
   },
+  "notification_with_buttons": {
+    "message": "Cliquez sur « OK » pour ouvrir tous les liens de cette notification."
+  },
+  "notification_without_buttons": {
+    "message": "Cliquez sur la notification pour ouvrir tous les liens qu'elle contient."
+  },
   "options": {
     "message": "AdBlock Plus Valikud"
   },

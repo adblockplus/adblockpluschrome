@@ -63,7 +63,7 @@
     "message": "Penapis anda mesti ikut <a>Adblock Plus filter syntax</a>."
   },
   "found_a_bug": {
-    "message": "Ralat dijumpai? Atau ingin terjemahkan Adblock Plus kepada bahasa anda? Sila <a>failkan permohonan anda di sini</a>."
+    "message": "Menghadapi masalah? Ingin terjemahkan Adblock Plus kepada bahasa anda? Sila <a>failkan permohonan anda di sini</a>."
   },
   "general": {
     "message": "Umum"
@@ -153,7 +153,7 @@
     "message": "Paparkan nombor dalam ikon"
   },
   "stats_title": {
-    "message": "Iklan-iklan disekat"
+    "message": "Iklan disekat"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Sila pilih langganan penapis dalam senarai berikut:"
