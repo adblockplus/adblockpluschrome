@@ -24,19 +24,22 @@
     "message": "Atcelt"
   },
   "clickhide_instructions": {
-    "message": "Pēc šī aizvēršanas, noklikšķiniet (vai noklikšķiniet ar labo pogu) uz elementa šajā lapā."
+    "message": "Pēc šī uznirstošā loga aizvēršanas, noklikšķiniet (vai noklikšķiniet ar labo pogu) uz elementa šajā lapā."
   },
   "description_chrome": {
-    "message": "Bez maksas reklāmu bloķēšanas rīks Chrome pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, reklāmkarogus un vē…"
+    "message": "Bezmaksas reklāmu bloķēšanas rīks Chrome pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, banerus un vēl."
   },
   "description_opera": {
-    "message": "Bez maksas reklāmu bloķēšanas rīks Opera pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, reklāmkarogus un vēl."
+    "message": "Bezmaksas reklāmu bloķēšanas rīks Opera pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, banerus un vēl."
   },
   "description_safari": {
-    "message": "Bez maksas reklāmu bloķēšanas rīks Safari pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, reklāmkarogus un vēl."
+    "message": "Bezmaksas reklāmu bloķēšanas rīks Safari pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, banerus un vēl."
   },
   "disable_inline": {
     "message": "Atspējot iekšrindu teksta reklāmas"
+  },
+  "disabled_for_site": {
+    "message": "<strong>Izslēgts</strong>šajā lapā"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus Jūsu izvēlētajos domēnos ir atslēgts. Jūs varat pievienot domēnu, izmantojot Adblock Plus, kas atrodas adreses joslā, vai ievadot domēnu (nevis URL) kastē un noklikšķinot uz pogas „Pievienot domēnu”."
@@ -46,6 +49,12 @@
   },
   "edit_filters_raw": {
     "message": "Labot filtrus kā jēlu tekstu"
+  },
+  "enable_only_the": {
+    "message": "Iespējojiet tikai Jums nepieciešamos filtrus. Daudz filtru var padarīt pārlūka veiktspēju lēnāku."
+  },
+  "enabled_for_site": {
+    "message": "<strong>Ieslēgts</strong> šajā lapā"
   },
   "filter_lists": {
     "message": "Filtru saraksts"
@@ -77,6 +86,15 @@
         "content": "$1"
       }
     }
+  },
+  "name_devbuild": {
+    "message": "AdBlock Plus attīstības programma"
+  },
+  "notification_with_buttons": {
+    "message": "noklikšķiniet uz \"OK\", lai atvērtu visas paziņošanas saites."
+  },
+  "notification_without_buttons": {
+    "message": "Noklikšķiniet uz paziņojuma, lai atvērtu visas saites tajā."
   },
   "options": {
     "message": "Adblock Plus Opcijas"
@@ -119,6 +137,20 @@
   },
   "stats_share_download": {
     "message": "Lejuplādēt Adblock Plus"
+  },
+  "stats_share_message": {
+    "message": "Es esmu bloķējis $number$ reklāmas un trackerus, Paldies AdBlock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Padaīties ar skaitļiem"
+  },
+  "stats_show_iconnumber": {
+    "message": "Parādīt skaitli ikonā"
   },
   "stats_title": {
     "message": "Bloķētās reklāmas"

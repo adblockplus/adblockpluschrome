@@ -36,7 +36,7 @@
     "message": "Bezplatný blokovač reklamy pre Safari: Blokuje otravné videoreklamy na YouTube, Facebook reklamy, banery a omnoho viac."
   },
   "disable_inline": {
-    "message": "Vypnutie vnútroriadkových textových reklám"
+    "message": "Zakázať vnorené textové reklamy"
   },
   "disabled_for_site": {
     "message": "<strong>Zakázané</strong> na tejto stránke"
@@ -86,6 +86,15 @@
         "content": "$1"
       }
     }
+  },
+  "name_devbuild": {
+    "message": "Vývojová verzia Adblock Plus"
+  },
+  "notification_with_buttons": {
+    "message": "Stlačte 'OK' pre otvorenie všetkých odkazov v tomto upozornení."
+  },
+  "notification_without_buttons": {
+    "message": "Kliknite na upozornenie pre otvorenie všetkých odkazov v ňom."
   },
   "options": {
     "message": "Adblock Plus nastavenia"

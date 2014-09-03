@@ -27,22 +27,22 @@
     "message": "Ao fechar esta janela, clique (ou clique com o botão direito) num elemento da página."
   },
   "description_chrome": {
-    "message": "A ferramenta gratuita de adblock, para o Chrome: bloqueia anúncios irritantes no YouTube, anúncios do Facebook, banners e muito mai…"
+    "message": "A ferramenta adblock gratuita para o Chrome: bloqueia anúncios de vídeo irritantes no YouTube, anúncios do Facebook, faixas e muito…"
   },
   "description_opera": {
-    "message": "A ferramenta gratuita do adblock para o Opera: bloqueia anúncios irritantes no YouTube, Facebook, banners e muito mais."
+    "message": "A ferramenta adblock gratuita para o Opera: bloqueia anúncios de vídeo irritantes no YouTube, Facebook, faixas e muito mais."
   },
   "description_safari": {
-    "message": "A ferramenta gratuita adblock para o Safari: bloqueia anúncios no YouTube irritantes, Facebook, banners e muito mais."
+    "message": "A ferramenta adblock gratuita para o Safari: bloqueia anúncios de vídeo irritantes no YouTube, Facebook, faixas e muito mais."
   },
   "disable_inline": {
     "message": "Desativar anúncios de texto embutido"
   },
   "disabled_for_site": {
-    "message": "<strong>Desativar</strong> neste sítio web"
+    "message": "<strong>Desativado</strong> neste site"
   },
   "disabled_for_these_domains": {
-    "message": "O Adblock Plus está inativo nos domínios listados abaixo. Pode adicionar um domínio através do ícone do Adblock Plus na barra de endereço ou escrevendo o domínio (não o URL) na caixa e clicando no botão \"Adicionar domínio\"."
+    "message": "O Adblock Plus está desativado nos domínios abaixo listados. Pode adicionar um domínio através do ícone do Adblock Plus na barra de endereço ou digitando o domínio (não um URL) na caixa e clicando no botão \"Adicionar domínio\"."
   },
   "easy_create_filter": {
     "message": "Bloquear elemento"
@@ -54,16 +54,16 @@
     "message": "Ative apenas os filtros que precisa. Demasiados filtros podem reduzir o desempenho do navegador."
   },
   "enabled_for_site": {
-    "message": "<strong>Ativar</strong> neste sítio web"
+    "message": "<strong>Ativado</strong> neste site"
   },
   "filter_lists": {
     "message": "Lista de filtros"
   },
   "filter_must_follow_syntax": {
-    "message": "O filtro deve seguir a <a>sintaxe de filtros do AdblockPlus</a>."
+    "message": "O filtro deve seguir a <a>sintaxe do filtro AdblockPlus</a>."
   },
   "found_a_bug": {
-    "message": "Encontrou um erro? Quer traduzir o Adblock Plus no seu idioma? Submeta o seu pedido <a>aqui</a>."
+    "message": "Encontrou um erro? Quer traduzir o Adblock Plus para o seu idioma? Por favor, submeta <a>aqui</a> o seu pedido."
   },
   "general": {
     "message": "Geral"
@@ -91,10 +91,10 @@
     "message": "Versão de desenvolvimento do Adblock Plus"
   },
   "notification_with_buttons": {
-    "message": "Clique em 'OK' para abrir todas as ligações nesta notificação."
+    "message": "Clique em 'OK' para abrir todas as hiperligações nesta notificação."
   },
   "notification_without_buttons": {
-    "message": "Clique na notificação para abrir todas as ligações."
+    "message": "Clique na notificação para abrir todas as hiperligações."
   },
   "options": {
     "message": "Opções do Adblock Plus"
@@ -109,7 +109,7 @@
     "message": "Remover seleção"
   },
   "show_block_element_menu": {
-    "message": "Mostrar 'Bloquear elemento' no menu de contexto do botão direito do rato"
+    "message": "Mostrar 'Bloquear Elemento' botão direito do rato no item do menu"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> nesta página",
@@ -139,7 +139,7 @@
     "message": "Transferir o Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Bloqueei $number$ anúncios e trackers graças ao Adblock Plus.",
+    "message": "Eu bloqueei $number$ anúncios e rastreamentos graças ao Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -156,12 +156,12 @@
     "message": "Anúncios bloqueados"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Por favor escolha uma subscrição de filtros da lista:"
+    "message": "Por favor, escolha uma subscrição de filtro da lista:"
   },
   "update_now": {
     "message": "Atualizar agora"
   },
   "whitelisted_domains": {
-    "message": "Domínios permitidos"
+    "message": "Domínios na lista branca"
   }
 }

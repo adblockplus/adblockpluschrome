@@ -69,7 +69,7 @@
     "message": "Bendra"
   },
   "last_updated_at": {
-    "message": "Paskutinį kartą atnaujinta $date$ $time$",
+    "message": "Paskutinį kartą atnaujinta $time$ $date$",
     "placeholders": {
       "date": {
         "content": "$2"

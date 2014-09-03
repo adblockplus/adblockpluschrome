@@ -15,7 +15,7 @@
     "message": "Eigen filters toevoegen"
   },
   "apply_changes": {
-    "message": "Bevestigen"
+    "message": "Wijzigingen toepassen"
   },
   "block_element": {
     "message": "Element blokkeren"

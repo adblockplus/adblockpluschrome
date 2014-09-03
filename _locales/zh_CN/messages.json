@@ -100,7 +100,7 @@
     "message": "设置选项"
   },
   "options_short": {
-    "message": "设置选项"
+    "message": "选项"
   },
   "out_of_date_lists": {
     "message": "过滤清单会定期自动更新"
@@ -128,7 +128,7 @@
     }
   },
   "stats_over": {
-    "message": " $number$",
+    "message": "超过$number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -139,7 +139,7 @@
     "message": "下载 Adblock Plus"
   },
   "stats_share_message": {
-    "message": "感谢Adblock Plus拦截了 $number$ 个广告和跟踪行为。",
+    "message": "感谢Adblock Plus拦截了$number$个广告和跟踪行为。",
     "placeholders": {
       "number": {
         "content": "$1"

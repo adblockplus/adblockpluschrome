@@ -48,7 +48,7 @@
     "message": "Blokiraj element"
   },
   "edit_filters_raw": {
-    "message": "Uredi filtere kao raw tekst"
+    "message": "Uredi filtere kao običan tekst"
   },
   "enable_only_the": {
     "message": "Omogućite samo popis filtra koji vam je potreban. Previše popisa filtra može učiniti vaš preglednik neupotrebljivim."
@@ -60,7 +60,7 @@
     "message": "Popisi filtera"
   },
   "filter_must_follow_syntax": {
-    "message": "Vaši filtri moraju slijediti <a>Adblock Plus filter sintaksa</a>."
+    "message": "Vaš filter mora slijediti <a>Adblock Plus filter sintaksu</a>."
   },
   "found_a_bug": {
     "message": "Pronašli ste grešku? Želite prevesti Adblock Plus na svoj jezik? <a>Podnesite zahtjev ovdje</a>."

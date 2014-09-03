@@ -9,7 +9,7 @@
     "message": "Adaugă filtru"
   },
   "add_filters_msg": {
-    "message": "Adaugă filtre?"
+    "message": "Adaugă filtru/filtre?"
   },
   "add_your_own_filters": {
     "message": "Adaugă propriile filtre"
@@ -48,7 +48,7 @@
     "message": "Blochează elementul"
   },
   "edit_filters_raw": {
-    "message": "Editor filtre în mod text"
+    "message": "Editează filtre în mod text"
   },
   "enable_only_the": {
     "message": "Folosiţi doar listele de filtre de care aveţi nevoie. Prea multe vor afecta browser-ul."
@@ -94,7 +94,7 @@
     "message": "Clic 'OK' pentru a deschide toate link-urile în această notificare."
   },
   "notification_without_buttons": {
-    "message": "Clic pe notificare pentru a deschide toate link-urile incluse în ea."
+    "message": "Clic 'OK' pentru a deschide toate link-urile din această notificare."
   },
   "options": {
     "message": "Opţiuni Adblock Plus"
@@ -106,7 +106,7 @@
     "message": "Listele vechi sunt actualizate periodic."
   },
   "remove_button": {
-    "message": "Șterge filtrul evidenţiat"
+    "message": "Elimină selecţia"
   },
   "show_block_element_menu": {
     "message": "Arată 'Blochează Elementul' in meniul asociat unui obiect cu clic dreapta"
@@ -136,7 +136,7 @@
     }
   },
   "stats_share_download": {
-    "message": "Descarca Adblock Plus"
+    "message": "Descarcă Adblock Plus"
   },
   "stats_share_message": {
     "message": "Am blocat $number$ reclame cu ABP.",
