@@ -1,7 +1,4 @@
 {
-  "name_devbuild": {
-    "message": "Adblock Plus development build"
-  },
   "add": {
     "description": "This is the label for the 'Add' buttons.",
     "message": "Add"
@@ -103,7 +100,7 @@
     }
   },
   "name_devbuild": {
-    "description": "Extension name to be shown for development builds",
+    "description": "Extension name to be shown for development builds. Note: this cannot be longer than 45 characters.",
     "message": "Adblock Plus development build"
   },
   "notification_with_buttons": {
