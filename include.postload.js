@@ -19,45 +19,136 @@
 var clickHide_activated = false;
 var clickHide_filters = null;
 var currentElement = null;
-var currentElement_boxShadow = null;
-var currentElement_backgroundColor;
 var clickHideFilters = null;
 var highlightedElementsSelector = null;
-var highlightedElementsBoxShadows = null;
-var highlightedElementsBGColors = null;
 var clickHideFiltersDialog = null;
 var lastRightClickEvent = null;
+
+function supportsShadowRoot(element)
+{
+  if (!("createShadowRoot" in element))
+    return false;
+
+  // There are some elements (e.g. <textarea>), which don't
+  // support author created shadow roots and throw an exception.
+  var clone = element.cloneNode(false);
+  try
+  {
+    clone.createShadowRoot();
+  }
+  catch (e)
+  {
+    return false;
+  }
+
+  // There are some elements (e.g. <input>), which support
+  // author created shadow roots, but ignore insertion points.
+  var child = document.createTextNode("");
+  clone.appendChild(child);
+
+  var shadow = document.createElement("shadow");
+  clone.shadowRoot.appendChild(shadow);
+
+  return shadow.getDistributedNodes()[0] == child;
+}
+
+function highlightElement(element, shadowColor, backgroundColor)
+{
+  unhighlightElement(element);
+
+  var originalBoxShadowPriority = element.style.getPropertyPriority("box-shadow");
+  var originalBackgroundColorPriority = element.style.getPropertyPriority("background-color");
+
+  var boxShadow = "inset 0px 0px 5px " + shadowColor;
+
+  var highlightWithShadowDOM = function()
+  {
+    var style = document.createElement("style");
+    style.textContent = ":host {" +
+      "box-shadow:" + boxShadow + " !important;" +
+      "background-color:" + backgroundColor + " !important;" +
+    "}";
+
+    var root = element.createShadowRoot();
+    root.appendChild(document.createElement("shadow"));
+    root.appendChild(style);
+
+    element._unhighlight = function()
+    {
+      root.removeChild(style);
+    };
+  };
+
+  var highlightWithStyleAttribute = function()
+  {
+    var originalBoxShadow = element.style.getPropertyValue("box-shadow");
+    var originalBackgroundColor = element.style.getPropertyValue("background-color");
+
+    element.style.setProperty("box-shadow", boxShadow, "important");
+    element.style.setProperty("background-color", backgroundColor, "important");
+
+    element._unhighlight = function()
+    {
+      this.style.removeProperty("box-shadow");
+      this.style.setProperty(
+        "box-shadow",
+        originalBoxShadow,
+        originalBoxShadowPriority
+      );
+
+      this.style.removeProperty("background-color");
+      this.style.setProperty(
+        "background-color",
+        originalBackgroundColor,
+        originalBackgroundColorPriority
+      );
+    };
+  };
+
+  // Use shadow DOM if posibble to avoid side effects when the
+  // web page updates style while highlighted. However, if the
+  // element has important styles we can't override them with shadow DOM.
+  if (supportsShadowRoot(element) && originalBoxShadowPriority       != "important" &&
+                                     originalBackgroundColorPriority != "important")
+    highlightWithShadowDOM();
+  else
+    highlightWithStyleAttribute();
+}
+
+
+function unhighlightElement(element)
+{
+  if ("_unhighlight" in element)
+  {
+    element._unhighlight();
+    delete element._unhighlight;
+  }
+}
 
 // Highlight elements according to selector string. This would include
 // all elements that would be affected by proposed filters.
 function highlightElements(selectorString) {
-  if(highlightedElementsSelector)
-    unhighlightElements();
+  unhighlightElements();
 
   var highlightedElements = document.querySelectorAll(selectorString);
   highlightedElementsSelector = selectorString;
-  highlightedElementsBoxShadows = new Array();
-  highlightedElementsBGColors = new Array();
 
-  for(var i = 0; i < highlightedElements.length; i++) {
-    highlightedElementsBoxShadows[i] = highlightedElements[i].style.getPropertyValue("-webkit-box-shadow");
-    highlightedElementsBGColors[i] = highlightedElements[i].style.backgroundColor;
-    highlightedElements[i].style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #fd6738");
-    highlightedElements[i].style.backgroundColor = "#f6e1e5";
-  }
+  for(var i = 0; i < highlightedElements.length; i++)
+    highlightElement(highlightedElements[i], "#fd6738", "#f6e1e5");
 }
 
 // Unhighlight all elements, including those that would be affected by
 // the proposed filters
 function unhighlightElements() {
-  if(highlightedElementsSelector == null)
-    return;
-  var highlightedElements = document.querySelectorAll(highlightedElementsSelector);
-  for(var i = 0; i < highlightedElements.length; i++) {
-    highlightedElements[i].style.setProperty("-webkit-box-shadow", highlightedElementsBoxShadows[i]);
-    highlightedElements[i].style.backgroundColor = highlightedElementsBGColors[i];
+  if (highlightedElementsSelector)
+  {
+    Array.prototype.forEach.call(
+      document.querySelectorAll(highlightedElementsSelector),
+      unhighlightElement
+    );
+
+    highlightedElementsSelector = null;
   }
-  highlightedElementsSelector = null;
 }
 
 // Gets the absolute position of an element by walking up the DOM tree,
@@ -183,8 +274,7 @@ function clickHide_deactivate()
   if(currentElement) {
     currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, false);
     unhighlightElements();
-    currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
-    currentElement.style.backgroundColor = currentElement_backgroundColor;
+    unhighlightElement(currentElement);
     currentElement = null;
     clickHideFilters = null;
   }
@@ -227,11 +317,8 @@ function clickHide_mouseOver(e)
   if (target && target instanceof HTMLElement)
   {
     currentElement = target;
-    currentElement_boxShadow = target.style.getPropertyValue("-webkit-box-shadow");
-    currentElement_backgroundColor = target.style.backgroundColor;
-    target.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #d6d84b");
-    target.style.backgroundColor = "#f8fa47";
 
+    highlightElement(target, "#d6d84b", "#f8fa47");
     target.addEventListener("contextmenu", clickHide_elementClickHandler, false);
   }
 }
@@ -242,9 +329,7 @@ function clickHide_mouseOut(e)
   if (!clickHide_activated || !currentElement)
     return;
 
-  currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
-  currentElement.style.backgroundColor = currentElement_backgroundColor;
-
+  unhighlightElement(currentElement);
   currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, false);
 }
 
@@ -320,13 +405,11 @@ function clickHide_mouseClick(e)
 
   // Highlight the unlucky elements
   // Restore currentElement's box-shadow and bgcolor so that highlightElements won't save those
-  currentElement.style.setProperty("-webkit-box-shadow", currentElement_boxShadow);
-  currentElement.style.backgroundColor = currentElement_backgroundColor;
+  unhighlightElement(currentElement);
   // Highlight the elements specified by selector in yellow
   highlightElements(selectorList.join(","));
   // Now, actually highlight the element the user clicked on in red
-  currentElement.style.setProperty("-webkit-box-shadow", "inset 0px 0px 5px #fd1708");
-  currentElement.style.backgroundColor = "#f6a1b5";
+  highlightElement(currentElement, "#fd1708", "#f6a1b5");
 
   // Make sure the browser doesn't handle this click
   e.preventDefault();
@@ -526,7 +609,6 @@ if (document.documentElement instanceof HTMLElement)
           // Coerce red highlighted overlay on top of element to remove.
           // TODO: Wow, the design of the clickHide stuff is really dumb - gotta fix it sometime
           currentElement = addElementOverlay(target);
-          currentElement_backgroundColor = target.style.backgroundColor;
           // clickHide_mouseOver(lastRightClickEvent);
           clickHide_mouseClick(lastRightClickEvent);
         }
