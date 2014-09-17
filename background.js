@@ -32,8 +32,7 @@ with(require("whitelisting"))
 {
   this.isWhitelisted = isWhitelisted;
   this.isFrameWhitelisted = isFrameWhitelisted;
-  this.processKey = processKey;
-  this.getKey = getKey;
+  this.processKeyException = processKeyException;
 }
 var FilterStorage = require("filterStorage").FilterStorage;
 var ElemHide = require("elemHide").ElemHide;
@@ -557,8 +556,8 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
         page.sendMessage(msg);
       });
       break;
-    case "add-sitekey":
-      processKey(msg.token, sender.page, sender.frame);
+    case "add-key-exception":
+      processKeyException(msg.token, sender.page, sender.frame);
       break;
     case "forward":
       if (sender.page)
