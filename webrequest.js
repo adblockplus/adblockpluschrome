@@ -53,13 +53,11 @@ function onBeforeRequest(url, type, page, frame)
     return true;
 
   var docDomain = extractHostFromFrame(frame);
-  var key = getKey(page, frame);
   var filter = defaultMatcher.matchesAny(
     url,
     type == "sub_frame" ? "SUBDOCUMENT" : type.toUpperCase(),
     docDomain,
-    isThirdParty(extractHostFromURL(url), docDomain),
-    key
+    isThirdParty(extractHostFromURL(url), docDomain)
   );
 
   // We can't listen to onHeadersReceived in Safari so we need to
@@ -97,7 +95,7 @@ if (platform == "chromium")
     {
       var header = details.responseHeaders[i];
       if (header.name.toLowerCase() == "x-adblock-key" && header.value)
-        processKey(header.value, page, frame);
+        processKeyException(header.value, page, frame);
     }
 
     var notificationToShow = Notification.getNextToShow(details.url);
