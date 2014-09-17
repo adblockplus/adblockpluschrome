@@ -58,11 +58,11 @@ function checkCollapse(element)
   }
 }
 
-function checkExceptionKey()
+function checkSitekey()
 {
   var attr = document.documentElement.getAttribute("data-adblockkey");
   if (attr)
-    ext.backgroundPage.sendMessage({type: "add-key-exception", token: attr});
+    ext.backgroundPage.sendMessage({type: "add-sitekey", token: attr});
 }
 
 function hasInlineURL(element, attribute)
@@ -203,6 +203,6 @@ function init(document)
 
 if (document instanceof HTMLDocument)
 {
-  checkExceptionKey();
+  checkSitekey();
   init(document);
 }
