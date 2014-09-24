@@ -28,6 +28,13 @@ var typeMap = {
 
 function checkCollapse(element)
 {
+  // <input type="image"> elements try to load their image again
+  // when the "display" CSS property is changed by the
+  // collapsing code below. So we have to bail out, if collapsing
+  // is already in progress, to avoid an infinite recursion.
+  if (element._collapsing)
+    return;
+
   var tag = element.localName;
   if (tag in typeMap)
   {
@@ -47,6 +54,8 @@ function checkCollapse(element)
       {
         if (response && element.parentNode)
         {
+          element._collapsing = true;
+
           // <frame> cannot be removed, doing that will mess up the frameset
           if (tag == "frame")
             element.style.setProperty("visibility", "hidden", "important");
