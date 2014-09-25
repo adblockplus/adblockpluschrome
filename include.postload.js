@@ -479,11 +479,7 @@ function normalizeURL(url)
   return components[1] + newPath;
 }
 
-// Content scripts are apparently invoked on non-HTML documents, so we have to
-// check for that before doing stuff. |document instanceof HTMLDocument| check
-// will fail on some sites like planet.mozilla.org because WebKit creates
-// Document instances for XHTML documents, have to test the root element.
-if (document.documentElement instanceof HTMLElement)
+if (document instanceof HTMLDocument)
 {
   // Use a contextmenu handler to save the last element the user right-clicked on.
   // To make things easier, we actually save the DOM event.
@@ -645,4 +641,7 @@ if (document.documentElement instanceof HTMLElement)
         break;
     }
   });
+
+  if (window == window.top)
+    ext.backgroundPage.sendMessage({type: "report-html-page"});
 }

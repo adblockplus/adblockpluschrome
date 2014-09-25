@@ -92,6 +92,8 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
 // See http://crbug.com/68705.
 var noStyleRulesHosts = ["mail.google.com", "mail.yahoo.com", "www.google.com"];
 
+var htmlPages = new ext.PageMap();
+
 function removeDeprecatedOptions()
 {
   var deprecatedOptions = ["specialCaseYouTube", "experimental", "disableInlineTextAds"];
@@ -138,7 +140,7 @@ function refreshIconAndContextMenu(page)
   // adblocking is active on that page
   page.contextMenus.removeAll();
 
-  if (Prefs.shouldShowBlockElementMenu && !whitelisted && /^https?:/.test(page.url))
+  if (Prefs.shouldShowBlockElementMenu && !whitelisted && htmlPages.has(page))
     page.contextMenus.create(contextMenuItem);
 }
 
@@ -559,6 +561,10 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       break;
     case "add-sitekey":
       processKey(msg.token, sender.page, sender.frame);
+      break;
+    case "report-html-page":
+      htmlPages.set(sender.page, null);
+      refreshIconAndContextMenu(sender.page);
       break;
     case "forward":
       if (sender.page)

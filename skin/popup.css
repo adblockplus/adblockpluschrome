@@ -29,6 +29,11 @@ body.local #stats-page
   display: none;
 }
 
+body.nohtml #clickhide
+{
+  display: none;
+}
+
 header
 {
   height: 45px;
