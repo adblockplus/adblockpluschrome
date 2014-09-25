@@ -364,11 +364,6 @@ function clickHide_mouseClick(e)
   else if (elt.src)
     url = elt.src;
 
-  // Only normalize when the element contains a URL (issue 328.)
-  // The URL is not always normalized, so do it here
-  if (url)
-    url = normalizeURL(relativeToAbsoluteUrl(url));
-
   // Construct filters. The popup will retrieve these.
   // Only one ID
   var elementId = elt.id ? elt.id.split(' ').join('') : null;
@@ -432,8 +427,11 @@ function getElementURL(elt) {
       if(params[0])
         url = params[0].getAttribute("value");
     }
+
+    if (url)
+      url = normalizeURL(url);
   } else if(!url) {
-    url = elt.getAttribute("src") || elt.getAttribute("href");
+    url = elt.src || elt.href;
   }
   return url;
 }
