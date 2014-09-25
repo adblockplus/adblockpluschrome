@@ -33,9 +33,11 @@ function init()
   {
     page = pages[0];
 
-    // Mark page as local to hide non-relevant elements
+    // Mark page as 'local' or 'nohtml' to hide non-relevant elements
     if (!page || !/^https?:\/\//.test(page.url))
       document.body.classList.add("local");
+    else if (!backgroundPage.htmlPages.has(page))
+      document.body.classList.add("nohtml");
 
     // Ask content script whether clickhide is active. If so, show cancel button.
     // If that isn't the case, ask background.html whether it has cached filters. If so,
