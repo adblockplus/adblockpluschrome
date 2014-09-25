@@ -288,7 +288,9 @@
       if (details.tabId == -1)
         return;
 
-      var isMainFrame = details.type == "main_frame" || (
+      var requestType = details.type;
+      var isMainFrame = requestType == "main_frame" || (
+
         // assume that the first request belongs to the top frame. Chrome
         // may give the top frame the type "object" instead of "main_frame".
         // https://code.google.com/p/chromium/issues/detail?id=281711
@@ -308,15 +310,24 @@
         // is about to load, however if a frame is loading the surrounding
         // frame is indicated by parentFrameId instead of frameId
         var frameId;
-        if (details.type == "sub_frame")
+        if (requestType == "sub_frame")
           frameId = details.parentFrameId;
         else
           frameId = details.frameId;
 
         frame = frames[frameId] || frames[Object.keys(frames)[0]];
 
-        if (frame && !ext.webRequest.onBeforeRequest._dispatch(details.url, details.type, new Page({id: details.tabId}), frame))
-          return {cancel: true};
+        if (frame)
+        {
+          // Chrome 38 mistakenly reports requests of type 'object'
+          // (e.g. requests initiated by Flash) with the type 'other'.
+          // https://code.google.com/p/chromium/issues/detail?id=410382
+          if (requestType == "other" && / Chrome\/38\b/.test(navigator.userAgent))
+            requestType = "object";
+
+          if (!ext.webRequest.onBeforeRequest._dispatch(details.url, requestType, new Page({id: details.tabId}), frame))
+            return {cancel: true};
+        }
       }
 
       if (isMainFrame || details.type == "sub_frame")
