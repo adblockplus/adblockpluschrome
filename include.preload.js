@@ -97,30 +97,11 @@ function isInlineFrame(element)
   }
 }
 
-// Converts relative to absolute URL
-// e.g.: foo.swf on http://example.com/whatever/bar.html
-//  -> http://example.com/whatever/foo.swf
-function relativeToAbsoluteUrl(url)
+function resolveURL(url)
 {
-  // If URL is already absolute, don't mess with it
-  if (!url || /^[\w\-]+:/i.test(url))
-    return url;
-
-  // Leading / means absolute path
-  // Leading // means network path
-  if (url[0] == '/')
-  {
-    if (url[1] == '/')
-      return window.location.protocol + url;
-    else
-      return window.location.protocol + "//" + window.location.host + url;
-  }
-
-  // Remove filename and add relative URL to it
-  var base = document.baseURI.match(/.+\//);
-  if (!base)
-    return document.baseURI + "/" + url;
-  return base[0] + url;
+  var a = document.createElement("a");
+  a.href = url;
+  return a.href;
 }
 
 function init(document)

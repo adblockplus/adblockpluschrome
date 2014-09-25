@@ -391,8 +391,8 @@ function clickHide_mouseClick(e)
   }
   if (url)
   {
-    clickHideFilters.push(relativeToAbsoluteUrl(url));
-    selectorList.push(elt.localName + '[src="' + url + '"]');
+    clickHideFilters.push(url);
+    selectorList.push('[src="' + elt.getAttribute("src") + '"]');
   }
 
   // Show popup
@@ -429,7 +429,7 @@ function getElementURL(elt) {
     }
 
     if (url)
-      url = normalizeURL(url);
+      url = resolveURL(url);
   } else if(!url) {
     url = elt.src || elt.href;
   }
@@ -463,20 +463,6 @@ function removeDotSegments(u) {
   } else {
     return u;
   }
-}
-
-// Does some degree of URL normalization
-function normalizeURL(url)
-{
-  var components = url.match(/(.+:\/\/.+?)\/(.*)/);
-  if(!components)
-    return url;
-  var newPath = removeDotSegments(components[2]);
-  if(newPath.length == 0)
-    return components[1];
-  if(newPath[0] != '/')
-    newPath = '/' + newPath;
-  return components[1] + newPath;
 }
 
 if (document instanceof HTMLDocument)

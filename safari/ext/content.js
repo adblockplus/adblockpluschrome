@@ -57,7 +57,7 @@
 
   document.addEventListener("beforeload", function(event)
   {
-    var url = relativeToAbsoluteUrl(event.url);
+    var url = resolveURL(event.url);
 
     // we don't block non-HTTP requests anyway, so we can bail out
     // without asking the background page. This is even necessary
