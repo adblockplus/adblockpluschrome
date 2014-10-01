@@ -391,7 +391,7 @@ function clickHide_mouseClick(e)
   }
   if (url)
   {
-    clickHideFilters.push(url);
+    clickHideFilters.push(url.replace(/^[\w\-]+:\/+(?:www\.)?/, "||"));
     selectorList.push('[src="' + elt.getAttribute("src") + '"]');
   }
 
