@@ -27,7 +27,7 @@
     "message": "Ao fechar esta janela, clique (ou clique com o botão direito) num elemento da página."
   },
   "description_chrome": {
-    "message": "A ferramenta adblock gratuita para o Chrome: bloqueia anúncios de vídeo irritantes no YouTube, anúncios do Facebook, faixas e muito…"
+    "message": "A ferramenta adblock gratuita para o Chrome: bloqueia anúncios de vídeo irritantes no YouTube, anúncios do Facebook, faixas e muito mais."
   },
   "description_opera": {
     "message": "A ferramenta adblock gratuita para o Opera: bloqueia anúncios de vídeo irritantes no YouTube, Facebook, faixas e muito mais."
@@ -162,6 +162,6 @@
     "message": "Atualizar agora"
   },
   "whitelisted_domains": {
-    "message": "Domínios na lista branca"
+    "message": "Domínios permitidos"
   }
 }
