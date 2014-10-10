@@ -91,7 +91,7 @@
     "message": "Adblock Plus 開発版"
   },
   "notification_with_buttons": {
-    "message": "この通知内すべてのリンクを開くには 'OK' をクリックしてください。"
+    "message": "この通知のすべてのリンクを開くには [OK] をクリックしてください。"
   },
   "notification_without_buttons": {
     "message": "通知内すべてのリンクを開くにはここをクリックしてください。"

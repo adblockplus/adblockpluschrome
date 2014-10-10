@@ -27,7 +27,7 @@
     "message": "Após o encerramento desta janela, clique (ou dê um clique com o botão direito) em um elemento da página."
   },
   "description_chrome": {
-    "message": "A ferramenta gratuita de bloqueio de anúncios para o Chrome: Bloqueie anúncios irritantes nos vídeos do Youtube, propagandas no Fac…"
+    "message": "A ferramenta gratuita de bloqueio de anúncios para o Chrome: Bloqueie anúncios irritantes nos vídeos do Youtube, propagandas no Facebook, banners e muito mais."
   },
   "description_opera": {
     "message": "A ferramenta gratuita de bloqueio de anúncios para o Opera: bloqueia anúncios no YouTube, Facebook, banners e muito mais."
@@ -36,7 +36,7 @@
     "message": "A ferramenta gratuita de bloqueio de anúncios para o Safari: bloqueia anúncios no YouTube, Facebook, banners e muito mais."
   },
   "disable_inline": {
-    "message": "Desativar propagandas de texto em linha"
+    "message": "Desativar anúncios de texto embutido"
   },
   "disabled_for_site": {
     "message": "<strong>Desativado</strong> neste site"
