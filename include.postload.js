@@ -408,11 +408,18 @@ function clickHide_mouseClick(e)
 
   if (url)
   {
-    clickHideFilters.push(url.replace(/^[\w\-]+:\/+(?:www\.)?/, "||"));
-
     var src = elt.getAttribute("src");
-    if (src)
-      selectorList.push('[src=' + quote(src) + ']');
+    var selector = src && elt.localName + '[src=' + quote(src) + ']';
+
+    if (/^https?:/i.test(url))
+    {
+      clickHideFilters.push(url.replace(/^[\w\-]+:\/+(?:www\.)?/, "||"));
+
+      if (selector)
+        selectorList.push(selector);
+    }
+    else if (selector)
+      addSelector(selector);
   }
 
   // restore the original style, before generating the fallback filter that
