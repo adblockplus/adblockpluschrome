@@ -319,10 +319,10 @@
 
         if (frame)
         {
-          // Chrome 38 mistakenly reports requests of type 'object'
+          // Chrome 38 and 39 mistakenly reports requests of type 'object'
           // (e.g. requests initiated by Flash) with the type 'other'.
           // https://code.google.com/p/chromium/issues/detail?id=410382
-          if (requestType == "other" && / Chrome\/38\b/.test(navigator.userAgent))
+          if (requestType == "other" && / Chrome\/3[8-9]\b/.test(navigator.userAgent))
             requestType = "object";
 
           if (!ext.webRequest.onBeforeRequest._dispatch(details.url, requestType, new Page({id: details.tabId}), frame))
