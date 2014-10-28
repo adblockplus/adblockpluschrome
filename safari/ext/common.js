@@ -77,9 +77,6 @@
 
   /* I18n */
 
-  var localeCandidates = null;
-  var uiLocale;
-
   var getLocaleCandidates = function()
   {
     var candidates = [];
@@ -100,82 +97,81 @@
     return candidates;
   };
 
-  var getCatalog = function(locale)
+  var locales = getLocaleCandidates();
+  var catalog = {__proto__: null, "@@ui_locale": [locales[0], []]};
+
+  var replacePlaceholder = function(text, placeholder, content)
+  {
+    return text.split("$" + placeholder + "$").join(content || "");
+  };
+
+  var parseMessage = function(rawMessage)
+  {
+    var text = rawMessage.message;
+    var placeholders = [];
+
+    for (var placeholder in rawMessage.placeholders)
+    {
+      var content = rawMessage.placeholders[placeholder].content;
+
+      if (/^\$\d+$/.test(content))
+        placeholders[parseInt(content.substr(1)) - 1] = placeholder;
+      else
+        text = replacePlaceholder(text, placeholder, content);
+    }
+
+    return [text, placeholders];
+  };
+
+  var readCatalog = function(locale)
   {
     var xhr = new XMLHttpRequest();
-
     xhr.open("GET", safari.extension.baseURI + "_locales/" + locale + "/messages.json", false);
 
-    try {
+    try
+    {
       xhr.send();
     }
     catch (e)
     {
-      return null;
+      return;
     }
 
     if (xhr.status != 200 && xhr.status != 0)
-      return null;
+      return;
 
-    return JSON.parse(xhr.responseText);
+    var rawCatalog = JSON.parse(xhr.responseText);
+    for (var msgId in rawCatalog)
+    {
+      if (!(msgId in catalog))
+        catalog[msgId] = parseMessage(rawCatalog[msgId]);
+    }
   };
 
   ext.i18n = {
     getMessage: function(msgId, substitutions)
     {
-      if (!localeCandidates)
+      while (true)
       {
-        localeCandidates = getLocaleCandidates();
-        uiLocale = localeCandidates[0];
-      }
-
-      if (msgId == "@@ui_locale")
-        return uiLocale;
-
-      for (var i = 0; i < localeCandidates.length; i++)
-      {
-        var catalog = getCatalog(localeCandidates[i]);
-        if (!catalog)
+        var message = catalog[msgId];
+        if (message)
         {
-          // if there is no catalog for this locale
-          // candidate, don't try to load it again
-          localeCandidates.splice(i--, 1);
-          continue;
+          var [text, placeholders] = message;
+
+          if (!(substitutions instanceof Array))
+            substitutions = [substitutions];
+
+          for (var i = 0; i < placeholders.length; i++)
+            text = replacePlaceholder(text, placeholders[i], substitutions[i]);
+
+          return text;
         }
 
-        var msg = catalog[msgId];
-        if (!msg)
-          continue;
+        if (locales.length == 0)
+          return "";
 
-        var msgstr = msg.message;
-        if (!msgstr)
-          continue;
-
-        for (var placeholder in msg.placeholders)
-        {
-          var placeholderDetails = msg.placeholders[placeholder];
-          if (!placeholderDetails || !placeholderDetails.content)
-            continue;
-          if (placeholderDetails.content.indexOf("$") != 0)
-            continue;
-
-          var placeholderIdx = parseInt(placeholderDetails.content.substr(1));
-          if (isNaN(placeholderIdx) || placeholderIdx < 1)
-            continue;
-
-          var placeholderValue;
-          if (typeof substitutions != "string")
-            placeholderValue = substitutions[placeholderIdx - 1];
-          else if (placeholderIdx == 1)
-            placeholderValue = substitutions;
-
-          msgstr = msgstr.replace("$" + placeholder + "$", placeholderValue || "");
-        }
-
-        return msgstr;
+        readCatalog(locales.shift());
       }
-
-      return "";
     }
   };
 
