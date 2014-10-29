@@ -16,7 +16,7 @@
  */
 
 var backgroundPage = ext.backgroundPage.getWindow();
-var imports = ["require", "extractHostFromURL", "openOptions"];
+var imports = ["require", "extractHostFromURL"];
 for (var i = 0; i < imports.length; i++)
   window[imports[i]] = backgroundPage[imports[i]];
 
@@ -62,7 +62,7 @@ function init()
   document.getElementById("clickhide-cancel").addEventListener("click", cancelClickHide, false);
   document.getElementById("options").addEventListener("click", function()
   {
-    openOptions();
+    ext.showOptions();
   }, false);
 
   // Set up collapsing of menu items
