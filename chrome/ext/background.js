@@ -376,4 +376,40 @@
   /* Storage */
 
   ext.storage = localStorage;
+
+
+  /* Options */
+
+  ext.showOptions = function(callback)
+  {
+    chrome.windows.getLastFocused(function(win)
+    {
+      var optionsUrl = chrome.extension.getURL("options.html");
+      var queryInfo = {url: optionsUrl};
+
+      // extension pages can't be accessed in incognito windows. In order to
+      // correctly mimic the way in which Chrome opens extension options,
+      // we have to focus the options page in any other window.
+      if (!win.incognito)
+        queryInfo.windowId = win.id;
+
+      chrome.tabs.query(queryInfo, function(tabs)
+      {
+        if (tabs.length > 0)
+        {
+          var tab = tabs[0];
+
+          chrome.windows.update(tab.windowId, {focused: true});
+          chrome.tabs.update(tab.id, {selected: true});
+
+          if (callback)
+            callback(new Page(tab));
+        }
+        else
+        {
+          ext.pages.open(optionsUrl, callback);
+        }
+      });
+    });
+  };
 })();

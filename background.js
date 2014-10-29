@@ -259,32 +259,9 @@ Prefs.addListener(function(name)
     refreshIconAndContextMenuForAllPages();
 });
 
-/**
-  * Opens options page or focuses an existing one, within the last focused window.
-  * @param {Function} callback  function to be called with the
-                                Page object of the options page
-  */
-function openOptions(callback)
-{
-  ext.pages.query({lastFocusedWindow: true}, function(pages)
-  {
-    var optionsUrl = ext.getURL("options.html");
-
-    for (var i = 0; i < pages.length; i++)
-    {
-      var page = pages[i];
-      if (page.url == optionsUrl)
-      {
-        page.activate();
-        if (callback)
-          callback(page);
-        return;
-      }
-    }
-
-    ext.pages.open(optionsUrl, callback);
-  });
-}
+// TODO: This hack should be removed, however currently
+// the firstRun page still calls backgroundPage.openOptions()
+openOptions = ext.showOptions;
 
 function prepareNotificationIconAndPopup()
 {
@@ -554,7 +531,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       }
       break;
     case "add-subscription":
-      openOptions(function(page)
+      ext.showOptions(function(page)
       {
         page.sendMessage(msg);
       });

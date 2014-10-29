@@ -652,4 +652,27 @@
   /* Storage */
 
   ext.storage = safari.extension.settings;
+
+
+  /* Options */
+
+  ext.showOptions = function(callback)
+  {
+    var optionsUrl = safari.extension.baseURI + "options.html";
+
+    for (var id in pages)
+    {
+      var page = pages[id];
+
+      if (page.url == optionsUrl && page._tab.browserWindow == safari.application.activeBrowserWindow)
+      {
+        page.activate();
+        if (callback)
+          callback(page);
+        return;
+      }
+    }
+
+    ext.pages.open(optionsUrl, callback);
+  };
 })();
