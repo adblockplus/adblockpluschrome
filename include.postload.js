@@ -600,7 +600,7 @@ if (document instanceof HTMLDocument)
           clickHide_mouseClick(lastRightClickEvent);
         }
         else
-          console.log("clickhide-new-filter: URLs don't match. Couldn't find that element.", request.filter, url, lastRightClickEvent.target.src);
+          console.log("clickhide-new-filter: URLs don't match. Couldn't find that element.", msg.filter, url, lastRightClickEvent.target.src);
         break;
       case "clickhide-init":
         if (clickHideFiltersDialog)
@@ -615,8 +615,8 @@ if (document instanceof HTMLDocument)
       case "clickhide-move":
         if (clickHideFiltersDialog)
         {
-          clickHideFiltersDialog.style.left = (parseInt(clickHideFiltersDialog.style.left, 10) + request.x) + "px";
-          clickHideFiltersDialog.style.top = (parseInt(clickHideFiltersDialog.style.top, 10) + request.y) + "px";
+          clickHideFiltersDialog.style.left = (parseInt(clickHideFiltersDialog.style.left, 10) + msg.x) + "px";
+          clickHideFiltersDialog.style.top = (parseInt(clickHideFiltersDialog.style.top, 10) + msg.y) + "px";
         }
         break;
       case "clickhide-close":
