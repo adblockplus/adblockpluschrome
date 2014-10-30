@@ -340,7 +340,14 @@ function clickHide_keyDown(e)
      clickHide_mouseClick(e);
   else if (!e.ctrlKey && !e.altKey && !e.shiftKey && e.keyCode == 27 /*DOM_VK_ESCAPE*/)
   {
-    clickHide_deactivate();
+    ext.backgroundPage.sendMessage(
+    {
+      type: "forward",
+      payload:
+      {
+        type: "clickhide-deactivate"
+      }
+    });
     e.preventDefault();
     e.stopPropagation();
   }
@@ -618,9 +625,8 @@ if (document instanceof HTMLDocument)
           // Explicitly get rid of currentElement
           if (msg.remove && currentElement && currentElement.parentNode)
             currentElement.parentNode.removeChild(currentElement);
-
-          clickHide_deactivate();
         }
+        clickHide_deactivate();
         break;
       default:
         sendResponse({});
