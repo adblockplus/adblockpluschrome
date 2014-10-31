@@ -115,7 +115,7 @@
       var content = rawMessage.placeholders[placeholder].content;
 
       if (/^\$\d+$/.test(content))
-        placeholders[parseInt(content.substr(1)) - 1] = placeholder;
+        placeholders[parseInt(content.substr(1), 10) - 1] = placeholder;
       else
         text = replacePlaceholder(text, placeholder, content);
     }

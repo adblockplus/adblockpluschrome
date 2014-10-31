@@ -52,7 +52,7 @@ RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OT
 // https://code.google.com/p/chromium/issues/detail?id=291485
 var canUseChromeNotifications = require("info").platform == "chromium"
   && "notifications" in chrome
-  && (navigator.platform.indexOf("Linux") == -1 || parseInt(require("info").applicationVersion) > 34);
+  && (navigator.platform.indexOf("Linux") == -1 || parseInt(require("info").applicationVersion, 10) > 34);
 
 var seenDataCorruption = false;
 var filterlistsReinitialized = false;

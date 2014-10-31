@@ -110,7 +110,7 @@ function init(document)
   // and about:srcdoc. So we have to apply element hiding and collapsing
   // from the parent frame, when inline frames are loaded.
   var match = navigator.userAgent.match(/\bChrome\/(\d+)/);
-  var fixInlineFrames = match && parseInt(match[1]) < 37;
+  var fixInlineFrames = match && parseInt(match[1], 10) < 37;
 
   // use Shadow DOM if available to don't mess with web pages that
   // rely on the order of their own <style> tags (#309). However we
