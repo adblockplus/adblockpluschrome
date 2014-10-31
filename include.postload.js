@@ -24,6 +24,11 @@ var highlightedElementsSelector = null;
 var clickHideFiltersDialog = null;
 var lastRightClickEvent = null;
 
+function quote(value)
+{
+  return '"' + value.replace(/(["\\])/g, "\\$1") + '"';
+}
+
 function supportsShadowRoot(element)
 {
   if (!("createShadowRoot" in element))
@@ -309,7 +314,7 @@ function clickHide_mouseOver(e)
     return;
 
   var target = e.target;
-  while (target.parentNode && !(target.id || target.className || target.src))
+  while (target.parentNode && !(target.id || target.className || target.src || /:.+:/.test(target.getAttribute("style"))))
     target = target.parentNode;
   if (target == document.documentElement || target == document.body)
     target = null;
@@ -381,33 +386,50 @@ function clickHide_mouseClick(e)
 
   clickHideFilters = new Array();
   selectorList = new Array();
-  if (elementId)
-  {
-    clickHideFilters.push(document.domain + "###" + elementId);
-    selectorList.push("#" + elementId);
-  }
-  if (elementClasses && elementClasses.length > 0)
-  {
-    var selector = elementClasses.map(function(elClass)
-    {
-      return "." + elClass.replace(/([^\w-])/, "\\$1");
-    }).join("");
 
+  var addSelector = function(selector)
+  {
     clickHideFilters.push(document.domain + "##" + selector);
     selectorList.push(selector);
+  };
+
+  if (elementId)
+    addSelector("#" + elementId);
+
+  if (elementClasses && elementClasses.length > 0)
+  {
+    var selector = "";
+
+    for (var i = 0; i < elt.classList.length; i++)
+      selector += "." + elt.classList[i].replace(/([^\w-])/g, "\\$1");
+
+    addSelector(selector);
   }
+
   if (url)
   {
     clickHideFilters.push(url.replace(/^[\w\-]+:\/+(?:www\.)?/, "||"));
-    selectorList.push('[src="' + elt.getAttribute("src") + '"]');
+
+    var src = elt.getAttribute("src");
+    if (src)
+      selectorList.push('[src=' + quote(src) + ']');
+  }
+
+  // restore the original style, before generating the fallback filter that
+  // will include the style, and to prevent highlightElements from saving those
+  unhighlightElement(currentElement);
+
+  // as last resort, create a filter based on inline styles
+  if (clickHideFilters.length == 0)
+  {
+    var style = elt.getAttribute("style");
+    if (style)
+      addSelector(elt.localName + '[style=' + quote(style) + ']');
   }
 
   // Show popup
   clickHide_showDialog(e.clientX, e.clientY, clickHideFilters);
 
-  // Highlight the unlucky elements
-  // Restore currentElement's box-shadow and bgcolor so that highlightElements won't save those
-  unhighlightElement(currentElement);
   // Highlight the elements specified by selector in yellow
   highlightElements(selectorList.join(","));
   // Now, actually highlight the element the user clicked on in red
