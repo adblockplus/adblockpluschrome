@@ -472,7 +472,10 @@ function removeDotSegments(u) {
   }
 }
 
-if (document instanceof HTMLDocument)
+// In Chrome 37-39, the document_end content script (this one) runs properly, while the 
+// document_start content scripts (that defines ext) do not. Check whether variable ext
+// exists before continuing to avoid "Uncaught ReferenceError: ext is not defined".
+if ("ext" in window && document instanceof HTMLDocument)
 {
   // Use a contextmenu handler to save the last element the user right-clicked on.
   // To make things easier, we actually save the DOM event.
