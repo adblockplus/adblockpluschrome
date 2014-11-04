@@ -368,7 +368,7 @@ function clickHide_mouseClick(e)
 
   var elt = currentElement;
   var url = null;
-  if (currentElement.className && currentElement.className == "__adblockplus__overlay")
+  if (currentElement.classList.contains("__adblockplus__overlay"))
   {
     elt = currentElement.prisoner;
     url = currentElement.prisonerURL;
@@ -379,10 +379,6 @@ function clickHide_mouseClick(e)
   // Construct filters. The popup will retrieve these.
   // Only one ID
   var elementId = elt.id ? elt.id.split(' ').join('') : null;
-  // Can have multiple classes, and there might be extraneous whitespace
-  var elementClasses = null;
-  if (elt.className)
-    elementClasses = elt.className.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '').split(' ');
 
   clickHideFilters = new Array();
   selectorList = new Array();
@@ -396,7 +392,7 @@ function clickHide_mouseClick(e)
   if (elementId)
     addSelector("#" + elementId);
 
-  if (elementClasses && elementClasses.length > 0)
+  if (elt.classList.length > 0)
   {
     var selector = "";
 
