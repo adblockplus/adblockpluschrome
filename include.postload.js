@@ -24,9 +24,24 @@ var highlightedElementsSelector = null;
 var clickHideFiltersDialog = null;
 var lastRightClickEvent = null;
 
+function escapeChar(chr)
+{
+  var code = chr.charCodeAt(0);
+
+  if (code <= 0x1F || code == 0x7F || /\d/.test(chr))
+    return "\\" + code.toString(16) + " ";
+
+  return "\\" + chr;
+}
+
 function quote(value)
 {
-  return '"' + value.replace(/(["\\])/g, "\\$1") + '"';
+  return '"' + value.replace(/["\\\x00-\x1F\x7F]/g, escapeChar) + '"';
+}
+
+function escapeCSS(s)
+{
+  return s.replace(/^[\d\-]|[^\w\-\u0080-\uFFFF]/g, escapeChar);
 }
 
 function supportsShadowRoot(element)
@@ -376,10 +391,6 @@ function clickHide_mouseClick(e)
   else if (elt.src)
     url = elt.src;
 
-  // Construct filters. The popup will retrieve these.
-  // Only one ID
-  var elementId = elt.id ? elt.id.split(' ').join('') : null;
-
   clickHideFilters = new Array();
   selectorList = new Array();
 
@@ -389,15 +400,15 @@ function clickHide_mouseClick(e)
     selectorList.push(selector);
   };
 
-  if (elementId)
-    addSelector("#" + elementId);
+  if (elt.id)
+    addSelector("#" + escapeCSS(elt.id));
 
   if (elt.classList.length > 0)
   {
     var selector = "";
 
     for (var i = 0; i < elt.classList.length; i++)
-      selector += "." + elt.classList[i].replace(/([^\w-])/g, "\\$1");
+      selector += "." + escapeCSS(elt.classList[i]);
 
     addSelector(selector);
   }
@@ -405,7 +416,7 @@ function clickHide_mouseClick(e)
   if (url)
   {
     var src = elt.getAttribute("src");
-    var selector = src && elt.localName + '[src=' + quote(src) + ']';
+    var selector = src && escapeCSS(elt.localName) + '[src=' + quote(src) + ']';
 
     if (/^https?:/i.test(url))
     {
@@ -427,7 +438,7 @@ function clickHide_mouseClick(e)
   {
     var style = elt.getAttribute("style");
     if (style)
-      addSelector(elt.localName + '[style=' + quote(style) + ']');
+      addSelector(escapeCSS(elt.localName) + '[style=' + quote(style) + ']');
   }
 
   // Show popup
