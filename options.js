@@ -29,6 +29,11 @@ with(require("subscriptionClasses"))
   this.SpecialSubscription = SpecialSubscription;
   this.DownloadableSubscription = DownloadableSubscription;
 }
+with(require("filterValidation"))
+{
+  this.parseFilter = parseFilter;
+  this.parseFilters = parseFilters;
+}
 var FilterStorage = require("filterStorage").FilterStorage;
 var FilterNotifier = require("filterNotifier").FilterNotifier;
 var Prefs = require("prefs").Prefs;
@@ -472,12 +477,23 @@ function addTypedFilter(event)
 {
   event.preventDefault();
 
-  var filterText = Filter.normalize(document.getElementById("newFilter").value);
-  document.getElementById("newFilter").value = "";
-  if (!filterText)
-    return;
+  var element = document.getElementById("newFilter");
+  var filter;
 
-  FilterStorage.addFilter(Filter.fromText(filterText));
+  try
+  {
+    filter = parseFilter(element.value);
+  }
+  catch (error)
+  {
+    alert(error);
+    return;
+  }
+
+  if (filter)
+    FilterStorage.addFilter(filter);
+
+  element.value = "";
 }
 
 // Removes currently selected whitelisted domains
@@ -529,21 +545,25 @@ function toggleFiltersInRawFormat(event)
 // Imports filters in the raw text box
 function importRawFiltersText()
 {
-  $("#rawFilters").hide();
-  var filters = document.getElementById("rawFiltersText").value.split("\n");
-  var seenFilter = {__proto__: null};
-  for (var i = 0; i < filters.length; i++)
+  var text = document.getElementById("rawFiltersText").value;
+
+  var add;
+  try
   {
-    var text = Filter.normalize(filters[i]);
-    if (!text)
-      continue;
+    add = parseFilters(text, true);
+  }
+  catch (error)
+  {
+    alert(error);
+    return;
+  }
 
-    // Don't import filter list header
-    if (/^\[/.test(text))
-      continue;
-
-    FilterStorage.addFilter(Filter.fromText(text));
-    seenFilter[text] = true;
+  var seenFilter = {__proto__: null};
+  for (var i = 0; i < add.length; i++)
+  {
+    var filter = add[i];
+    FilterStorage.addFilter(filter);
+    seenFilter[filter.text] = null;
   }
 
   var remove = [];
@@ -563,8 +583,11 @@ function importRawFiltersText()
         remove.push(filter);
     }
   }
+
   for (var i = 0; i < remove.length; i++)
     FilterStorage.removeFilter(remove[i]);
+
+  $("#rawFilters").hide();
 }
 
 // Called when user explicitly requests filter list updates

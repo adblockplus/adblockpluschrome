@@ -43,6 +43,7 @@ var Synchronizer = require("synchronizer").Synchronizer;
 var Utils = require("utils").Utils;
 var Notification = require("notification").Notification;
 var initAntiAdblockNotification = require("antiadblockInit").initAntiAdblockNotification;
+var parseFilters = require("filterValidation").parseFilters;
 
 // Some types cannot be distinguished
 RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
@@ -524,11 +525,21 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       }
       break;
     case "add-filters":
-      if (msg.filters && msg.filters.length)
+      var filters;
+      try
       {
-        for (var i = 0; i < msg.filters.length; i++)
-          FilterStorage.addFilter(Filter.fromText(msg.filters[i]));
+        filters = parseFilters(msg.text);
       }
+      catch (error)
+      {
+        sendResponse({status: "invalid", error: error});
+        break;
+      }
+
+      for (var i = 0; i < filters.length; i++)
+        FilterStorage.addFilter(filters[i]);
+
+      sendResponse({status: "ok"});
       break;
     case "add-subscription":
       ext.showOptions(function(page)

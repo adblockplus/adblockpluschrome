@@ -187,5 +187,25 @@
   "whitelisted_domains": {
     "description": "This is a tab heading.",
     "message": "Whitelisted domains"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filter list headers aren't allowed here"
+  },
+  "invalid_css_selector": {
+    "message": "$selector$ is not a valid CSS selector",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Line $number$",
+    "description": "Prepended to error messages to indicate the line number (e.g. \"Line 42: Some error on this line\")",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
   }
 }
