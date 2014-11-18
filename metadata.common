@@ -70,6 +70,7 @@ lib/adblockplus.js = lib/prefs.js
   adblockplus/lib/antiadblockInit.js
   lib/stats.js
   lib/whitelisting.js
+  lib/filterValidation.js
   --arg module=true source_repo=https://hg.adblockplus.org/adblockplus/
 ext/common.js = ext/common.js chrome/ext/common.js
 ext/background.js = ext/background.js chrome/ext/background.js --arg brace_style=expand
