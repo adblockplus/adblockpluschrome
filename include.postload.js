@@ -508,7 +508,7 @@ function removeDotSegments(u) {
   }
 }
 
-// In Chrome 37-39, the document_end content script (this one) runs properly, while the
+// In Chrome 37-40, the document_end content script (this one) runs properly, while the
 // document_start content scripts (that defines ext) might not. Check whether variable ext
 // exists before continuing to avoid "Uncaught ReferenceError: ext is not defined".
 // See https://crbug.com/416907
