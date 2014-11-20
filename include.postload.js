@@ -28,7 +28,11 @@ function escapeChar(chr)
 {
   var code = chr.charCodeAt(0);
 
-  if (code <= 0x1F || code == 0x7F || /\d/.test(chr))
+  // Control characters and leading digits must be escaped based on
+  // their char code in CSS. Moreover, curly brackets aren't allowed
+  // in elemhide filters, and therefore must be escaped based on their
+  // char code as well.
+  if (code <= 0x1F || code == 0x7F || /[\d\{\}]/.test(chr))
     return "\\" + code.toString(16) + " ";
 
   return "\\" + chr;
@@ -36,7 +40,7 @@ function escapeChar(chr)
 
 function quote(value)
 {
-  return '"' + value.replace(/["\\\x00-\x1F\x7F]/g, escapeChar) + '"';
+  return '"' + value.replace(/["\\\{\}\x00-\x1F\x7F]/g, escapeChar) + '"';
 }
 
 function escapeCSS(s)
