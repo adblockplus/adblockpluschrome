@@ -270,20 +270,20 @@ function clickHide_activate() {
     addElementOverlay(elts[i]);
 
   clickHide_activated = true;
-  document.addEventListener("mouseover", clickHide_mouseOver, false);
-  document.addEventListener("mouseout", clickHide_mouseOut, false);
-  document.addEventListener("click", clickHide_mouseClick, false);
-  document.addEventListener("keydown", clickHide_keyDown, false);
+  document.addEventListener("mouseover", clickHide_mouseOver, true);
+  document.addEventListener("mouseout", clickHide_mouseOut, true);
+  document.addEventListener("click", clickHide_mouseClick, true);
+  document.addEventListener("keydown", clickHide_keyDown, true);
 }
 
 // Called when user has clicked on something and we are waiting for confirmation
 // on whether the user actually wants these filters
 function clickHide_rulesPending() {
   clickHide_activated = false;
-  document.removeEventListener("mouseover", clickHide_mouseOver, false);
-  document.removeEventListener("mouseout", clickHide_mouseOut, false);
-  document.removeEventListener("click", clickHide_mouseClick, false);
-  document.removeEventListener("keydown", clickHide_keyDown, false);
+  document.removeEventListener("mouseover", clickHide_mouseOver, true);
+  document.removeEventListener("mouseout", clickHide_mouseOut, true);
+  document.removeEventListener("click", clickHide_mouseClick, true);
+  document.removeEventListener("keydown", clickHide_keyDown, true);
 }
 
 // Turn off click-to-hide
@@ -308,10 +308,10 @@ function clickHide_deactivate()
   clickHide_filters = null;
   if(!document)
     return; // This can happen inside a nuked iframe...I think
-  document.removeEventListener("mouseover", clickHide_mouseOver, false);
-  document.removeEventListener("mouseout", clickHide_mouseOut, false);
-  document.removeEventListener("click", clickHide_mouseClick, false);
-  document.removeEventListener("keydown", clickHide_keyDown, false);
+  document.removeEventListener("mouseover", clickHide_mouseOver, true);
+  document.removeEventListener("mouseout", clickHide_mouseOut, true);
+  document.removeEventListener("click", clickHide_mouseClick, true);
+  document.removeEventListener("keydown", clickHide_keyDown, true);
 
   // Remove overlays
   // For some reason iterating over the array returend by getElementsByClassName() doesn't work
@@ -343,7 +343,7 @@ function clickHide_mouseOver(e)
     currentElement = target;
 
     highlightElement(target, "#d6d84b", "#f8fa47");
-    target.addEventListener("contextmenu", clickHide_elementClickHandler, false);
+    target.addEventListener("contextmenu", clickHide_elementClickHandler, true);
   }
 }
 
@@ -354,7 +354,7 @@ function clickHide_mouseOut(e)
     return;
 
   unhighlightElement(currentElement);
-  currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, false);
+  currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, true);
 }
 
 // Selects the currently hovered-over filter or cancels selection
@@ -524,7 +524,7 @@ if ("ext" in window && document instanceof HTMLDocument)
   // DOM element.
   document.addEventListener('contextmenu', function(e) {
     lastRightClickEvent = e;
-  }, false);
+  }, true);
 
   document.addEventListener("click", function(event)
   {
