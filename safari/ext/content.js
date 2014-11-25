@@ -66,12 +66,15 @@
     if (!/^https?:/.test(url))
       return;
 
-    var type;
+    var type = "other";
+    var eventName = "error";
+
     switch(event.target.localName)
     {
       case "frame":
       case "iframe":
         type = "sub_frame";
+        eventName = "load";
         break;
       case "img":
         type = "image";
@@ -85,12 +88,8 @@
         break;
       case "link":
         if (/\bstylesheet\b/i.test(event.target.rel))
-        {
           type = "stylesheet";
-          break;
-        }
-      default:
-        type = "other";
+        break;
     }
 
     if (!safari.self.tab.canLoad(
@@ -105,18 +104,17 @@
     {
       event.preventDefault();
 
-      // Safari doesn't dispatch an "error" event when preventing an element
-      // from loading by cancelling the "beforeload" event. So we have to
-      // dispatch it manually. Otherwise element collapsing wouldn't work.
-      if (type != "sub_frame")
+      // Safari doesn't dispatch the expected events for elements that have been
+      // prevented from loading by having their "beforeload" event cancelled.
+      // That is a "load" event for blocked frames, and an "error" event for
+      // other blocked elements. We need to dispatch those events manually here
+      // to avoid breaking element collapsing and pages that rely on those events.
+      setTimeout(function()
       {
-        setTimeout(function()
-        {
-          var evt = document.createEvent("Event");
-          evt.initEvent("error");
-          event.target.dispatchEvent(evt);
-        }, 0);
-      }
+        var evt = document.createEvent("Event");
+        evt.initEvent(eventName);
+        event.target.dispatchEvent(evt);
+      }, 0);
     }
   }, true);
 
