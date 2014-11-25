@@ -253,6 +253,9 @@
 
   safari.application.addEventListener("contextmenu", function(event)
   {
+    if (!event.userInfo)
+      return;
+
     var pageId = event.userInfo.pageId;
     if (!pageId)
       return;
