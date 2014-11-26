@@ -461,7 +461,8 @@ function clickHide_mouseClick(e)
   clickHide_showDialog(e.clientX, e.clientY, clickHideFilters);
 
   // Highlight the elements specified by selector in yellow
-  highlightElements(selectorList.join(","));
+  if (selectorList.length > 0)
+    highlightElements(selectorList.join(","));
   // Now, actually highlight the element the user clicked on in red
   highlightElement(currentElement, "#fd1708", "#f6a1b5");
 
