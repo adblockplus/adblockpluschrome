@@ -674,11 +674,12 @@ if ("ext" in window && document instanceof HTMLDocument)
         }
         break;
       case "clickhide-close":
-        if (clickHideFiltersDialog)
+        if (clickHideFiltersDialog && msg.remove)
         {
           // Explicitly get rid of currentElement
-          if (msg.remove && currentElement && currentElement.parentNode)
-            currentElement.parentNode.removeChild(currentElement);
+          var element = currentElement.prisoner || currentElement;
+          if (element && element.parentNode)
+            element.parentNode.removeChild(element);
         }
         clickHide_deactivate();
         break;
