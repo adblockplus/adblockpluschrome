@@ -33,7 +33,7 @@ function checkCollapse(element)
   {
     // This element failed loading, did we block it?
     var url = element.src;
-    if (!url)
+    if (!url || !/^https?:/i.test(url))
       return;
 
     ext.backgroundPage.sendMessage(
