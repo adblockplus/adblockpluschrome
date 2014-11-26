@@ -201,6 +201,12 @@ function addElementOverlay(elt) {
   var url = getElementURL(elt);
   if(!elt.className && !elt.id && !url)
     return;
+
+  // If the element isn't rendered (since its or one of its ancestor's
+  // "diplay" property is "none"), the overlay wouldn't match the element.
+  if (!elt.offsetParent)
+    return;
+
   var thisStyle = getComputedStyle(elt, null);
   var overlay = document.createElement('div');
   overlay.prisoner = elt;
