@@ -212,10 +212,16 @@ function addElementOverlay(elt) {
   overlay.prisoner = elt;
   overlay.prisonerURL = url;
   overlay.className = "__adblockplus__overlay";
-  overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box; z-index: 99999');
+  overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box;');
   var pos = getAbsolutePosition(elt);
   overlay.style.left = pos[0] + "px";
   overlay.style.top = pos[1] + "px";
+
+  if (thisStyle.position != "static")
+    overlay.style.zIndex = thisStyle.zIndex;
+  else
+    overlay.style.zIndex = getComputedStyle(elt.offsetParent).zIndex;
+
   // elt.parentNode.appendChild(overlay, elt);
   document.body.appendChild(overlay);
   return overlay;
