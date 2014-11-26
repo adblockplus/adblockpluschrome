@@ -233,11 +233,7 @@ function clickHide_showDialog(left, top, filters)
 {
   // If we are already selecting, abort now
   if (clickHide_activated || clickHideFiltersDialog)
-  {
-    var savedElement = (currentElement.prisoner ? currentElement.prisoner : currentElement);
-    clickHide_deactivate();
-    currentElement = savedElement;
-  }
+    clickHide_deactivate(true);
 
   clickHide_filters = filters;
 
@@ -299,22 +295,13 @@ function clickHide_rulesPending() {
 }
 
 // Turn off click-to-hide
-function clickHide_deactivate()
+function clickHide_deactivate(keepOverlays)
 {
   if (clickHideFiltersDialog)
   {
     document.body.removeChild(clickHideFiltersDialog);
     clickHideFiltersDialog = null;
   }
-
-  if(currentElement) {
-    currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, true);
-    unhighlightElements();
-    unhighlightElement(currentElement);
-    currentElement = null;
-    clickHideFilters = null;
-  }
-  unhighlightElements();
 
   clickHide_activated = false;
   clickHide_filters = null;
@@ -325,11 +312,21 @@ function clickHide_deactivate()
   document.removeEventListener("click", clickHide_mouseClick, true);
   document.removeEventListener("keydown", clickHide_keyDown, true);
 
-  // Remove overlays
-  // For some reason iterating over the array returend by getElementsByClassName() doesn't work
-  var elt;
-  while(elt = document.querySelector('.__adblockplus__overlay'))
-    elt.parentNode.removeChild(elt);
+  if (!keepOverlays)
+  {
+    if (currentElement) {
+      currentElement.removeEventListener("contextmenu",  clickHide_elementClickHandler, true);
+      unhighlightElements();
+      unhighlightElement(currentElement);
+      currentElement = null;
+      clickHideFilters = null;
+    }
+    unhighlightElements();
+
+    var overlays = document.getElementsByClassName("__adblockplus__overlay");
+    while (overlays.length > 0)
+      overlays[0].parentNode.removeChild(overlays[0]);
+  }
 }
 
 function clickHide_elementClickHandler(ev) {
