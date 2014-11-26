@@ -127,7 +127,6 @@
     var element = event.srcElement;
     safari.self.tab.setContextMenuEventUserInfo(event, {
       pageId: documentInfo.pageId,
-      srcUrl: ("src" in element) ? element.src : null,
       tagName: element.localName
     });
   });

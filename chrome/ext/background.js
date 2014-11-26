@@ -201,7 +201,7 @@
             contexts: item.contexts,
             onclick: function(info, tab)
             {
-              item.onclick(info.srcUrl, new Page(tab));
+              item.onclick(new Page(tab));
             }
           });
         });
