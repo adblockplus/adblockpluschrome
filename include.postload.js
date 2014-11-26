@@ -296,7 +296,7 @@ function clickHide_deactivate()
   }
 
   if(currentElement) {
-    currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, false);
+    currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, true);
     unhighlightElements();
     unhighlightElement(currentElement);
     currentElement = null;
