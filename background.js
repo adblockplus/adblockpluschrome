@@ -113,10 +113,9 @@ var activeNotification = null;
 var contextMenuItem = {
   title: ext.i18n.getMessage("block_element"),
   contexts: ["image", "video", "audio"],
-  onclick: function(srcUrl, page)
+  onclick: function(page)
   {
-    if (srcUrl)
-      page.sendMessage({type: "clickhide-new-filter", filter: srcUrl});
+    page.sendMessage({type: "clickhide-new-filter"});
   }
 };
 

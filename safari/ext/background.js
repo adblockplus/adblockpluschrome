@@ -268,8 +268,6 @@
     var context = event.userInfo.tagName;
     if (context == "img")
       context = "image";
-    if (!event.userInfo.srcUrl)
-      context = null;
 
     for (var i = 0; i < items.length; i++)
     {
@@ -287,7 +285,7 @@
     var page = pages[event.userInfo.pageId];
     var items = contextMenuItems.get(page);
 
-    items[event.command].onclick(event.userInfo.srcUrl, page);
+    items[event.command].onclick(page);
   });
 
 
