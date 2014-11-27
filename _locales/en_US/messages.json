@@ -19,7 +19,7 @@
     "message": "Apply changes"
   },
   "block_element": {
-    "description": "Label for 'Block Element' context menu item",
+    "description": "Context menu item that adds a filter which blocks the selected element",
     "message": "Block element"
   },
   "cancel": {
@@ -27,6 +27,7 @@
     "message": "Cancel"
   },
   "clickhide_instructions": {
+    "description": "Instructions shown in popup UI before it disapears, when \"Block element\" action is executed",
     "message": "After closing this popup, click (or right-click) an element on the page."
   },
   "description_chrome": {
@@ -48,7 +49,7 @@
     "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
   },
   "easy_create_filter": {
-    "description": "Popup balloon label for blocking elements on the current page",
+    "description": "Action in popup UI to add a filter which blocks an element selected from the current page",
     "message": "Block element"
   },
   "edit_filters_raw": {
@@ -164,7 +165,7 @@
     }
   },
   "stats_share_title": {
-    "description": "Title for the share buttons to share stats.",
+    "description": "Label for social media buttons sharing the number of blocked ads",
     "message": "Share these numbers"
   },
   "stats_show_iconnumber": {
@@ -186,6 +187,7 @@
     "message": "Whitelisted domains"
   },
   "unexpected_filter_list_header": {
+    "description": "Error message shown when the user attempts to add a custom filter that has the format of a header (e.g. \"[Adblock Plus 2.0]\") which are only allowed in filter lists",
     "message": "Filter list headers aren't allowed here"
   },
   "invalid_css_selector": {
