@@ -68,6 +68,14 @@
   "general": {
     "message": "Общи"
   },
+  "invalid_css_selector": {
+    "message": "Недействителен селектор на каскаден лист със стилове [CSS]: $selector$",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Последно обновен на $date$ в $time$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Последно обновен днес в $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Ред $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Моля, посочете абонамент за филтър от списъка:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Непозволени оглавления на филтри"
   },
   "update_now": {
     "message": "Обнови"

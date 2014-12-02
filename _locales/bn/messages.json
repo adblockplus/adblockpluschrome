@@ -68,6 +68,14 @@
   "general": {
     "message": "সাধারণ"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ একটি বৈধ CSS নির্বাচক নয়",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "সর্বশেষ হালনাগাদ $date$ তারিখে $time$-এ",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "সর্বশেষ হালনাগাদ আজ $time$-এ",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "$number$ নং লাইন",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "তালিকা থেকে একটি ফিল্টার সদস্যতা বাছাই করুন:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "ফিল্টার তালিকার শীর্ষচরণ এখানে অনুমোদিত নয়"
   },
   "update_now": {
     "message": "এখন হালনাগাদ করুন"

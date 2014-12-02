@@ -68,6 +68,14 @@
   "general": {
     "message": "Umum"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ bukan pemilih CSS (CSS selector) yang sah",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Terakhir Dikemaskini pada $time$ pada $date$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Terakhir Dikemaskini pada $time$ semalam",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Baris $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Sila pilih langganan penapis dalam senarai berikut:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Header penapis senarai tidak dibenarkan sini"
   },
   "update_now": {
     "message": "Kemaskini sekarang"

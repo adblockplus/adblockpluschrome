@@ -68,6 +68,14 @@
   "general": {
     "message": "一般"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ は有効な CSS セレクタではありません",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "最終更新日 $date$ $time$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "最終更新日  今日 $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "$number$ 行目",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "購読したいフィルタをリストから選択してください:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "ここにフィルタリストのヘッダーは記述できません"
   },
   "update_now": {
     "message": "今すぐ更新"

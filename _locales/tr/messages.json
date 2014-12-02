@@ -68,6 +68,14 @@
   "general": {
     "message": "Genel"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ geçerli bir CSS seçicisi değildir",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Son Güncellenme: $date$ $time$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "En son bugün güncellendi. Güncelleme saati: $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Satır $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lütfen listeden bir süzgeç aboneliği seçin:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filtre liste başlıklarına burada izin verilmiyor"
   },
   "update_now": {
     "message": "Şimdi güncelle"

@@ -68,6 +68,14 @@
   "general": {
     "message": "عام"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ غير صالح كأداة لـ CSS",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "أخر تحديث في $time$ عند $date$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "أخر تحديث في $time$ من اليوم",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Line $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "الرجاء اختيار اشتراك لفلتر من القائمة:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filter list headers غير مسموح به هنا"
   },
   "update_now": {
     "message": "التحديث الان"

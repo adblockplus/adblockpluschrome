@@ -68,6 +68,14 @@
   "general": {
     "message": "Allgemein"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ ist keine gültiger CSS selector",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Zuletzt aktualisiert: $date$ um $time$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Zuletzt aktualisiert: heute um $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Zeile $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Bitte wählen Sie ein Filterabonnement aus der Liste aus:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filterlisten-Header sind nicht erlaubt hier"
   },
   "update_now": {
     "message": "Jetzt aktualisieren"

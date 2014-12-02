@@ -68,6 +68,14 @@
   "general": {
     "message": "Bendra"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ yra neteisingas CSS selektorius",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Paskutinį kartą atnaujinta $time$ $date$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Paskutinį kartą atnaujinta šiandien $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Eilutė $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Pasirinkite filtro prenumeratą iš šio sąrašo:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filtro eilučių antraštės čia yra neleidžiamos"
   },
   "update_now": {
     "message": "Atnaujinti"

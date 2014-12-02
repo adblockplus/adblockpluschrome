@@ -68,6 +68,14 @@
   "general": {
     "message": "Загальні"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ не є правильним CSS селектором",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Останнє оновлення: $date$ о $time$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Останнє оновлення: сьогодні о $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Рядок $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Будь ласка виберіть фільтрову підписку з переліку:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Заголовки списків фільтрів тут не дозволені"
   },
   "update_now": {
     "message": "Оновити зараз"

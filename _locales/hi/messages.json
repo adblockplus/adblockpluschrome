@@ -87,6 +87,12 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "एड ब्लॉक प्लस विकास निर्माण"
+  },
+  "notification_with_buttons": {
+    "message": "इस अधिसूचना के सारे लिंक खोलने के लिए \"ok\" बटन दबाये"
+  },
   "options": {
     "message": "Adblock Plus विकल्प"
   },

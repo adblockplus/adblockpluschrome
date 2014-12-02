@@ -1,8 +1,25 @@
-สนุกกับการท่องเว็บที่คุณชื่นชอบ โดยไม่มีโฆษณาบนจอมากวนใจคุณ
+Adblock Plus บล็อคโฆษณาที่ไม่จำเป็นทั้งหมด, และยังสนับสนุนเว็บไซต์โดยการไม่ปิดกั้นโฆษณาที่ไม่สร้างความรำคาญโดยค่าพื้นฐาน (ถูกกำหนด)
 
-Adblock Plus สำหรับ Google Chrome สามารถที่จะป้องกัน
-- แบนเนอร์
-- โฆษณาผ่าน ยูทูป วิดีโอ
-- โฆษณาผ่าน Facebook
-- โฆษณาแบบป๊อบอัพ
-- รวมถึงโฆษณาแบบอื่นๆ ด้วย
+สนุกไปกับการท่องเว็บโดยปราศจากโฆษณาที่ขึ้นมารกหน้าจอของคุณ! Adblock Plus สำหรับ Google Chrome บล็อค:
+
+· แบนเนอร์
+· โฆษณาบน YouTube video
+· การโฆษณาของ Facebook
+· ป๊อปอัพ
+· โฆษณาที่ไม่พึงประสงค์อื่นๆ ทั้งหมด
+
+Adblock Plus is the world’s most popular browser extension, and is used by millions of users worldwide. It is a community-driven open source project, and hundreds of volunteers are contributing to the success of Adblock Plus to make sure that all annoying ads are automatically blocked.
+
+Please note: When installing Adblock Plus for Chrome, your browser shows a warning that Adblock Plus for Chrome has access to your browsing history and data. This is a standard message, we NEVER collect any information whatsoever!
+
+Recently, the Adblock Plus community introduced the Acceptable Ads initiative. By allowing some small and static ads, you support websites that rely on advertising but choose to do it in a non-intrusive way. This feature can be disabled at any time. Go to http://adblockplus.org/en/acceptable-ads to find out more.
+
+***********
+Release announcements and changelogs can be found here: http://adblockplus.org/releases/
+
+Problems? Try restarting Chrome and/or clicking "Update now" in the Adblock Plus Options.
+
+Found a bug? We are aware of some issues: http://adblockplus.org/en/known-issues-chrome. If you found more or need help, visit our forum: https://adblockplus.org/forum/viewforum.php?f=10.
+
+*************
+Feeling adventurous? Try out a development build to always get the latest features of Chrome Adblock Plus: http://adblockplus.org/en/development-builds (updated separately, independent settings).

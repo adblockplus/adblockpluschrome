@@ -23,8 +23,17 @@
   "cancel": {
     "message": "Prekliči"
   },
+  "description_chrome": {
+    "message": "Brezplačno orodje Adblock Plus za Chrome, ki blokira video oglase na Youtub-u, Facebook-u oglase in še veliko drugih oglasov."
+  },
+  "easy_create_filter": {
+    "message": "Blokiraj element"
+  },
   "edit_filters_raw": {
     "message": "Uredi filtre kot golo besedilo"
+  },
+  "enabled_for_site": {
+    "message": "<strong>Omogočen</strong> na tej strani"
   },
   "filter_lists": {
     "message": "Seznam filtrov"
@@ -38,6 +47,9 @@
   "options": {
     "message": "Adblock Plus možnosti"
   },
+  "options_short": {
+    "message": "Možnosti"
+  },
   "out_of_date_lists": {
     "message": "Zastareli seznami se redno posodabljajo."
   },
@@ -47,10 +59,41 @@
   "show_block_element_menu": {
     "message": "Prikaži 'Blokiraj element' v meniju desnega klika"
   },
+  "stats_over": {
+    "message": "več kot $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Prenesi Adblock Plus"
+  },
+  "stats_share_message": {
+    "message": "Blokiral sem $number$ oglasov in sledilcev z Adblock Plus.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_title": {
+    "message": "Deli te številke"
+  },
+  "stats_show_iconnumber": {
+    "message": "Pokaži število v ikoni"
+  },
+  "stats_title": {
+    "message": "Blokiranih oglasov"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Prosimo, izberite naročnino na filter s seznama:"
   },
   "update_now": {
     "message": "Posodobi"
+  },
+  "whitelisted_domains": {
+    "message": "Dovoljene domene"
   }
 }

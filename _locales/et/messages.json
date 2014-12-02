@@ -68,6 +68,14 @@
   "general": {
     "message": "Üldine"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ ei ole kehtiv CSS valija",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Viimati uuendatud: $time$ on $date$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Viimati uuendatud täna kell $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Rida $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vali nimekirjast sobiv filtrite tellimus:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filtrite loetelu päised pole siin lubatud"
   },
   "update_now": {
     "message": "Värskenda kohe"

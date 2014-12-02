@@ -30,19 +30,19 @@
     "message": "Bezmaksas reklāmu bloķēšanas rīks Chrome pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, banerus un vēl."
   },
   "description_opera": {
-    "message": "Bezmaksas reklāmu bloķēšanas rīks Opera pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, banerus un vēl."
+    "message": "Bez maksas reklāmu bloķēšanas rīks Opera pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, reklāmkarogus un vēl."
   },
   "description_safari": {
     "message": "Bezmaksas reklāmu bloķēšanas rīks Safari pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, banerus un vēl."
   },
   "disable_inline": {
-    "message": "Atspējot iekšrindu teksta reklāmas"
+    "message": "Atspējot iekš-rindu teksta reklāmas"
   },
   "disabled_for_site": {
-    "message": "<strong>Izslēgts</strong>šajā lapā"
+    "message": "<strong>Islegts</strong>"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus Jūsu izvēlētajos domēnos ir atslēgts. Jūs varat pievienot domēnu, izmantojot Adblock Plus, kas atrodas adreses joslā, vai ievadot domēnu (nevis URL) kastē un noklikšķinot uz pogas „Pievienot domēnu”."
+    "message": "Adblock Plus Jūsu izvēlētajos domēnos ir atslēgts. Jūs varat pievienot domēnu izmantojot Adblock Plus, kas atrodas adreses joslā, vai ievadot domēnu (nevis URL) kastē un noklikšķinot uz pogas \"Pievienot domēnu\"."
   },
   "easy_create_filter": {
     "message": "Bloķēt elementu"
@@ -51,7 +51,7 @@
     "message": "Labot filtrus kā jēlu tekstu"
   },
   "enable_only_the": {
-    "message": "Iespējojiet tikai Jums nepieciešamos filtrus. Daudz filtru var padarīt pārlūka veiktspēju lēnāku."
+    "message": "Jums ir nepieciešams tikai ieslēgt filtrēšanu caur sarakstu. Daudz filtresana var nogalinat jusu internet mekletaju."
   },
   "enabled_for_site": {
     "message": "<strong>Ieslēgts</strong> šajā lapā"
@@ -68,6 +68,14 @@
   "general": {
     "message": "Vispārīgi"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ nav derīgs  CSS atlasītājs",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Pēdējo reiz atjaunināts $time$ $date$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Pēdējo reiz atjaunināts šodien plkst. $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Līnijas $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lūdzu, izvēlieties filtru abonementu no saraksta:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filtra saraksta galvenes šeit nav atļautas"
   },
   "update_now": {
     "message": "Atjaunināt tagad"

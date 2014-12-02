@@ -21,55 +21,63 @@
     "message": "Blokovat prvek"
   },
   "cancel": {
-    "message": "Storno"
+    "message": "Zrušit"
   },
   "clickhide_instructions": {
-    "message": "Po zavření tohoto vyskakovacího okna, klikněte levým (nebo pravým) tlačítkem myši na element na stránce."
+    "message": "Po zavření tohoto vyskakovacího okna klikněte levým (nebo pravým) tlačítkem myši na prvek na stránce."
   },
   "description_chrome": {
-    "message": "Bezplatný nástroj adblock pro Chrome: Bloky nepříjemné video reklamy na YouTube, Facebook reklamy, bannery a ještě mnohem více."
+    "message": "Bezplatný nástroj na blokování reklam pro Chrome: Blokuje otravné video reklamy na YouTube, reklamy na Facebooku, bannery a mnohem více."
   },
   "description_opera": {
-    "message": "Volný adblock nástroj pro Operu: Bloky nepříjemné video reklamy na YouTube, Facebook reklamy, bannery a ještě mnohem více."
+    "message": "Bezplatný nástroj na blokování reklam pro Operu: Blokuje otravné video reklamy na YouTube, reklamy na Facebooku, bannery a mnohem více."
   },
   "description_safari": {
-    "message": "Volný adblock nástroj pro Safari: Bloky nepříjemné video reklamy na YouTube, Facebook reklamy, bannery a ještě mnohem více."
+    "message": "Bezplatný nástroj na blokování reklam pro Safari: Blokuje otravné video reklamy na YouTube, reklamy na Facebooku, bannery a mnohem více."
   },
   "disable_inline": {
-    "message": "Zakázat \"inline text\" reklamy"
+    "message": "Zakázat vložené textové reklamy"
   },
   "disabled_for_site": {
-    "message": "<strong>Vypnuto</strong> na této stránce"
+    "message": "<strong>Zakázáno</strong> na této stránce"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus je zakázán pro domény uvedeny níže. Můžete přidat doménu buďto ikonou Adblock Plus v adresové liště nebo napsáním domény ( ne URL) do textového pole a kliknutím na tlačítko \"Přidat doménu\"."
+    "message": "Adblock Plus je zakázán pro níže uvedené domény. Doménu můžete přidat buď pomocí ikony Adblock Plus v adresním řádku, nebo napsáním domény (ne URL) do pole a kliknutím na tlačítko \"Přidat doménu\"."
   },
   "easy_create_filter": {
-    "message": "Blok prvek"
+    "message": "Blokovat prvek"
   },
   "edit_filters_raw": {
     "message": "Upravit filtry jako běžný text"
   },
   "enable_only_the": {
-    "message": "Povolit pouze seznamů filtrů, které potřebujete. Příliš mnoho může, aby váš prohlížeč nereaguje."
+    "message": "Povolte pouze seznamy filtrů, které potřebujete. Příliš mnoho seznamů může způsobit, že váš prohlížeč přestane reagovat."
   },
   "enabled_for_site": {
-    "message": "<strong>Zapnuto</strong> na této stránce"
+    "message": "<strong>Povoleno</strong> na této stránce"
   },
   "filter_lists": {
-    "message": "Seznam filtrů"
+    "message": "Seznamy filtrů"
   },
   "filter_must_follow_syntax": {
-    "message": "Váš filtr musí obsahovat <a>Filtrovou syntaxi Adblocku Plus</a>."
+    "message": "Váš filtr musí odpovídat <a>syntaxi filtru Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "Našli jste chybu? Chcete přeložit Adblock Plus do vašeho jazyka? Prosím <a>vyplňte žádost zde</a>."
+    "message": "Našli jste chybu? Chcete přeložit Adblock Plus do svého jazyka? <a>Zde vyplňte žádost</a>, prosím."
   },
   "general": {
     "message": "Obecné"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ není platný selektor CSS",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
-    "message": "Naposled aktualizováno v $time$ $date$",
+    "message": "Naposledy aktualizováno v $time$ $date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -87,14 +95,22 @@
       }
     }
   },
+  "line": {
+    "message": "Řádek $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
   "name_devbuild": {
-    "message": "Adblock Pluc vývojářská verze"
+    "message": "Vývojové sestavení Adblock Plus"
   },
   "notification_with_buttons": {
-    "message": "Kliknetě na OK k otevření všech odkazů v tomto oznámení."
+    "message": "Klepněte na 'OK' pro otevření všech odkazů v tomto oznámení."
   },
   "notification_without_buttons": {
-    "message": "Klikněte na oznámení k otevření všech odkazů v něm."
+    "message": "Klepněte na oznámení pro otevření všech obsažených odkazů."
   },
   "options": {
     "message": "Možnosti Adblock Plus"
@@ -109,7 +125,7 @@
     "message": "Odebrat vybrané"
   },
   "show_block_element_menu": {
-    "message": "Ukázat 'Blokovat Element' v menu při kliknutí pravým tlačítkem myši"
+    "message": "Zobrazit položku nabídky 'Blokovat prvek' při kliknutí pravým tlačítkem myši"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> na této stránce",
@@ -120,7 +136,7 @@
     }
   },
   "stats_label_total": {
-    "message": "celkem <strong>$number$</strong>",
+    "message": "<strong>$number$</strong> celkem",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -128,7 +144,7 @@
     }
   },
   "stats_over": {
-    "message": "$number$",
+    "message": "více než $number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -139,7 +155,7 @@
     "message": "Stáhnout Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Zablokoval jsem $number$ reklam a slídilů díky Adblocku Plus.",
+    "message": "Zablokoval jsem $number$ reklam a slídilů díky Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -147,16 +163,19 @@
     }
   },
   "stats_share_title": {
-    "message": "Podíl těchto čísel"
+    "message": "Sdílejte tato čísla"
   },
   "stats_show_iconnumber": {
-    "message": "Zobrazit číslo na ikoně"
+    "message": "Zobrazit číslo v ikoně"
   },
   "stats_title": {
     "message": "Blokované reklamy"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Prosím vyberte sadu filtrů ze seznamu:"
+    "message": "Zvolte odběr filtrů ze seznamu, prosím:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Záhlaví seznamů filtrů zde nejsou povoleny"
   },
   "update_now": {
     "message": "Aktualizovat nyní"
