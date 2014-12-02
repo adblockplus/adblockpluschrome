@@ -44,9 +44,6 @@
     "description": "Popup balloon label to disable blocking",
     "message": "<strong>Disabled</strong> on this site"
   },
-  "disable_inline": {
-    "message": "Disable inline text ads"
-  },
   "disabled_for_these_domains": {
     "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
   },
