@@ -77,6 +77,7 @@
         eventName = "load";
         break;
       case "img":
+      case "input":
         type = "image";
         break;
       case "object":
