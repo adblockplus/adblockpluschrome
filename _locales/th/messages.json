@@ -87,6 +87,15 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus development build"
+  },
+  "notification_with_buttons": {
+    "message": "คลิ๊ก 'ตกลง' เพื่อเปิดลิ้งก์ทั้งหมดในการแจ้งเตือนนี้"
+  },
+  "notification_without_buttons": {
+    "message": "คลิ๊กบนการแจ้งเตือนเพื่อเปิดลิ้งก์ทั้งหมด"
+  },
   "options": {
     "message": "ตัวเลือกของ Adblock Plus"
   },

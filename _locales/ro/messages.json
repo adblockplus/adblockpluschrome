@@ -68,6 +68,14 @@
   "general": {
     "message": "General"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ nu este un selector de CSS valid",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Ultima actualizare la ora $time$ pe data $date$",
     "placeholders": {
@@ -87,6 +95,14 @@
       }
     }
   },
+  "line": {
+    "message": "Linia $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
   "name_devbuild": {
     "message": "Versiune de test Adblock Plus"
   },
@@ -94,7 +110,7 @@
     "message": "Clic 'OK' pentru a deschide toate link-urile în această notificare."
   },
   "notification_without_buttons": {
-    "message": "Clic 'OK' pentru a deschide toate link-urile din această notificare."
+    "message": "Clic pe notificare pentru a deschide toate link-urile incluse în ea."
   },
   "options": {
     "message": "Opţiuni Adblock Plus"
@@ -139,7 +155,7 @@
     "message": "Descarcă Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Am blocat $number$ reclame cu ABP.",
+    "message": "Am blocat $number$ reclame si trackere datorita lui Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Alegeți un set de filtre din listă:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Antetul listei de filtre nu este permis aici"
   },
   "update_now": {
     "message": "Actualizează acum"

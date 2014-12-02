@@ -18,7 +18,7 @@
     "message": "Apply changes"
   },
   "block_element": {
-    "message": "Block Element"
+    "message": "Block element"
   },
   "cancel": {
     "message": "Cancel"
@@ -68,6 +68,14 @@
   "general": {
     "message": "General"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ is not a valid CSS selector",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Last updated at $time$ on $date$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Last updated at $time$ today",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Line $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Please choose a filter subscription from the list:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filter list headers aren't allowed here"
   },
   "update_now": {
     "message": "Update now"

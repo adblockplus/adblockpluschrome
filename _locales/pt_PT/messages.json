@@ -36,7 +36,7 @@
     "message": "A ferramenta adblock gratuita para o Safari: bloqueia anúncios de vídeo irritantes no YouTube, Facebook, faixas e muito mais."
   },
   "disable_inline": {
-    "message": "Desativar anúncios de texto embutido"
+    "message": "Desativar anúncios de texto em linha"
   },
   "disabled_for_site": {
     "message": "<strong>Desativado</strong> neste site"

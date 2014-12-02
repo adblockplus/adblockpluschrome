@@ -20,7 +20,7 @@
   },
   "block_element": {
     "description": "Label for 'Block Element' context menu item",
-    "message": "Block Element"
+    "message": "Block element"
   },
   "cancel": {
     "description": "Cancel button label",

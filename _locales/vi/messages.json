@@ -9,7 +9,7 @@
     "message": "Thêm bộ lọc"
   },
   "add_filters_msg": {
-    "message": "Thêm bộ lọc?"
+    "message": "Thêm (nhiều) bộ lọc?"
   },
   "add_your_own_filters": {
     "message": "Thêm bộ lọc của bạn"
@@ -18,28 +18,28 @@
     "message": "Áp dụng các thay đổi"
   },
   "block_element": {
-    "message": "Chặn phần từ này"
+    "message": "Khóa đối tượng này"
   },
   "cancel": {
     "message": "Hủy bỏ"
   },
   "clickhide_instructions": {
-    "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào phần tử mà bạn cần chặn trên trang."
+    "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
   },
   "description_chrome": {
-    "message": "Công cụ chặn quảng cáo miễn phí cho Chrome: Khối quảng cáo video trên YouTube gây phiền nhiễu, quảng cáo Facebook, biểu ngữ và nhiều hơn nữa."
+    "message": "Công cụ chặn quảng cáo miễn phí cho Chrome: Chặn những quảng cáo video trên YouTube gây phiền nhiễu, quảng cáo trên Facebook, biểu ngữ và nhiều hơn nữa."
   },
   "description_opera": {
-    "message": "Công cụ chặn quảng cáo miễn phí cho Opera: Khối quảng cáo video trên YouTube gây phiền nhiễu, quảng cáo Facebook, biểu ngữ và nhiều hơn nữa."
+    "message": "Công cụ chặn quảng cáo miễn phí cho Opera: Chặnquảng cáo video trên YouTube gây phiền nhiễu, quảng cáo Facebook, biểu ngữ và nhiều hơn nữa."
   },
   "description_safari": {
-    "message": "Công cụ chặn quảng cáo miễn phí cho Safari: Khối quảng cáo video trên YouTube gây phiền nhiễu, quảng cáo Facebook, biểu ngữ và nhiều hơn nữa."
+    "message": "Công cụ chặn quảng cáo miễn phí cho Safari: Chặn quảng cáo video trên YouTube gây phiền nhiễu, quảng cáo Facebook, biểu ngữ và nhiều hơn nữa."
   },
   "disable_inline": {
     "message": "Chặn trực tiếp các quảng cáo chữ"
   },
   "disabled_for_site": {
-    "message": "<strong>Đã vô hiệu</strong> trên trang này"
+    "message": "<strong>Đã loại bỏ</strong> trên trang này"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus không hoạt động ở các tên miền dưới đây. Bạn có thể thêm một tên miền bằng cách bấm vào biểu tượng Adblock Plus nằm trên thanh địa chỉ, hoặc gõ tên miền (không phải là URL) trong khung bên dưới và ấn nút \"Thêm tên miền\"."
@@ -68,6 +68,14 @@
   "general": {
     "message": "Tổng quan"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ không phải là phương thức chọn CSS hợp lệ",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Cập nhật lần cuối lúc $time$ ngày $date$",
     "placeholders": {
@@ -80,15 +88,23 @@
     }
   },
   "last_updated_at_today": {
-    "message": "Cập nhật lần cuối lúc $time$ hôm nay",
+    "message": "Cập nhật lúc $time$ hôm nay",
     "placeholders": {
       "time": {
         "content": "$1"
       }
     }
   },
+  "line": {
+    "message": "Dòng $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
   "name_devbuild": {
-    "message": "Adblock Plus bản dựng phát triển"
+    "message": "Adblock Plus bản phát triển"
   },
   "notification_with_buttons": {
     "message": "Nhấn 'OK' để mở tất cả liên kết trong thông báo này."
@@ -97,7 +113,7 @@
     "message": "Nhấn vào thông báo để mở tất cả liên kết trong nó."
   },
   "options": {
-    "message": "Tuỳ chọn Adblock Plus"
+    "message": "Tuỳ chỉnh Adblock Plus"
   },
   "options_short": {
     "message": "Tùy chọn"
@@ -139,7 +155,7 @@
     "message": "Tải Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Tôi đã chặn $number$ quảng cáo và những bộ theo dõi Cảm ơn Adblock Plus.",
+    "message": "Tôi đã chặn $number$ quảng cáo và những bộ theo dõi nhờ có Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -150,7 +166,7 @@
     "message": "Chia sẻ những con số này"
   },
   "stats_show_iconnumber": {
-    "message": "Hiện số trong biểu tượng"
+    "message": "Hiện số ads đã chặn trong icon ABP"
   },
   "stats_title": {
     "message": "Quảng cáo đã bị chặn"

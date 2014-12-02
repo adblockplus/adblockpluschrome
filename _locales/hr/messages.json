@@ -68,6 +68,14 @@
   "general": {
     "message": "Općenito"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ nije ispravan CSS selektor",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Posljednji put je ažurirano $date$ u $time$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Posljednj put je ažurirano danas u $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Linija $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Molimo odaberite pretplatu na filter sa popisa:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Zaglavlja filter listi nisu dozvoljena ovdje"
   },
   "update_now": {
     "message": "Ažuriraj odmah"

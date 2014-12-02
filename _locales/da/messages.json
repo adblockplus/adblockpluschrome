@@ -68,6 +68,14 @@
   "general": {
     "message": "Generelt"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ er ikke en gyldig CSS-indikator",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Senest opdateret kl. $time$ d. $date$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Senest opdateret kl. $time$ i dag",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Linje $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vælg et filterabonnement fra listen:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filterliste-toptekster er ikke tilladt her"
   },
   "update_now": {
     "message": "Opdater nu"

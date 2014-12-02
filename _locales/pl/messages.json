@@ -68,6 +68,14 @@
   "general": {
     "message": "Ogólne"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ nie jest poprawnym selektorem CSS",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Ostatnia aktualizacja: $date$ o $time$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Ostatnia aktualizacja: dzisiaj o $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Wiersz $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Wybierz z listy zestaw filtrów:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Nagłówki listy filtrów są tutaj zabronione"
   },
   "update_now": {
     "message": "Aktualizuj teraz"

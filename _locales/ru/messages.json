@@ -68,6 +68,14 @@
   "general": {
     "message": "Общие"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ не является допустимым CSS селектором",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Последнее обновление: $date$ в $time$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Последнее обновление: сегодня в $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Строка $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Пожалуйста, выберите подписку из списка:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Нельзя использовать названия фильтров"
   },
   "update_now": {
     "message": "Обновить сейчас"

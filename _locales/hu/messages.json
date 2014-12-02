@@ -68,6 +68,14 @@
   "general": {
     "message": "Általános"
   },
+  "invalid_css_selector": {
+    "message": "Érvénytelen CSS kiválasztó: $selector$",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Utoljára ekkor lett frissítve: $date$ $time$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Utoljára ekkor lett frissítve: ma $time$-kor",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "$number$. sor",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Kérem válassza ki a szűrőt a listából:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "A szűrő lista fejlécek itt nem engedélyezettek"
   },
   "update_now": {
     "message": "Frissítés most"

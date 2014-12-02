@@ -68,6 +68,14 @@
   "general": {
     "message": "General"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ no es un selector CSS válido",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Última actualización a las $time$ del $date$",
     "placeholders": {
@@ -83,6 +91,14 @@
     "message": "Última actualización a las $time$ de hoy",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Línea $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +173,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor elija una suscripción de filtros de la lista:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Los encabezados de listas de filtros no se permiten aquí"
   },
   "update_now": {
     "message": "Actualizar ahora"
