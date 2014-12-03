@@ -32,13 +32,13 @@
   },
   "description_chrome": {
     "description": "Note: this cannot be longer than 132 characters",
-    "message": "The free adblock tool for Chrome: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
+    "message": "Used by over 50 million people, a free ad blocker for Chrome that blocks ALL annoying ads, malware and tracking."
   },
   "description_opera": {
-    "message": "The free adblock tool for Opera: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
+    "message": "Used by over 50 million people, a free ad blocker for Opera that blocks ALL annoying ads, malware and tracking."
   },
   "description_safari": {
-    "message": "The free adblock tool for Safari: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
+    "message": "Used by over 50 million people, a free ad blocker for Safari that blocks ALL annoying ads, malware and tracking."
   },
   "disabled_for_site":
   {
