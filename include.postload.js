@@ -76,6 +76,14 @@ function supportsShadowRoot(element)
   return shadow.getDistributedNodes()[0] == child;
 }
 
+function getOriginalStyle(element)
+{
+  if ("_originalStyle" in element)
+    return element._originalStyle;
+
+  return element.getAttribute("style");
+}
+
 function highlightElement(element, shadowColor, backgroundColor)
 {
   unhighlightElement(element);
@@ -107,6 +115,8 @@ function highlightElement(element, shadowColor, backgroundColor)
   {
     var originalBoxShadow = element.style.getPropertyValue("box-shadow");
     var originalBackgroundColor = element.style.getPropertyValue("background-color");
+
+    element._originalStyle = getOriginalStyle(element);
 
     element.style.setProperty("box-shadow", boxShadow, "important");
     element.style.setProperty("background-color", backgroundColor, "important");
@@ -342,7 +352,7 @@ function clickHide_mouseOver(e)
     return;
 
   var target = e.target;
-  while (target.parentNode && !(target.id || target.className || target.src || /:.+:/.test(target.getAttribute("style"))))
+  while (target.parentNode && !(target.id || target.className || target.src || /:.+:/.test(getOriginalStyle(target))))
     target = target.parentNode;
   if (target == document.documentElement || target == document.body)
     target = null;
@@ -442,14 +452,10 @@ function clickHide_mouseClick(e)
       addSelector(selector);
   }
 
-  // restore the original style, before generating the fallback filter that
-  // will include the style, and to prevent highlightElements from saving those
-  unhighlightElement(currentElement);
-
   // as last resort, create a filter based on inline styles
   if (clickHideFilters.length == 0)
   {
-    var style = elt.getAttribute("style");
+    var style = getOriginalStyle(elt);
     if (style)
       addSelector(escapeCSS(elt.localName) + '[style=' + quote(style) + ']');
   }
