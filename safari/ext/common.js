@@ -82,12 +82,19 @@
     var candidates = [];
     var defaultLocale = "en_US";
 
-    // e.g. "ja-jp-mac" -> "ja", "jp", note that the part after the second
+    // e.g. "ja-jp-mac" -> "ja_JP", note that the part after the second
     // dash is dropped, since we only support language and region
     var [language, region] = navigator.language.split("-");
+    region = region.toUpperCase();
+
+    // e.g. "es-AR" -> "es_419", note that we combine all dialects of
+    // Spanish outside of Spain, the same way Google Chrome does,
+    // since we use the same translations as for the Chrome extension
+    if (language == "es" && region && region != "ES")
+      region = "419";
 
     if (region)
-      candidates.push(language + "_" + region.toUpperCase());
+      candidates.push(language + "_" + region);
 
     candidates.push(language);
 
