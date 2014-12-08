@@ -185,6 +185,106 @@ function unhighlightElements() {
   }
 }
 
+function getURLsFromObjectElement(element)
+{
+  var url = element.getAttribute("data");
+  if (url)
+    return [resolveURL(url)];
+
+  for (var i = 0; i < element.children.length; i++)
+  {
+    var child = element.children[i];
+    if (child.localName != "param")
+      continue;
+
+    var name = child.getAttribute("name");
+    if (name != "movie"  && // Adobe Flash
+        name != "source" && // Silverlight
+        name != "src"    && // Real Media + Quicktime
+        name != "FileName") // Windows Media
+      continue;
+
+    var value = child.getAttribute("value");
+    if (!value)
+      continue;
+
+    return [resolveURL(value)];
+  }
+
+  return [];
+}
+
+function getURLsFromAttributes(element)
+{
+  var urls = [];
+
+  if (element.src)
+    urls.push(element.src);
+
+  if (element.srcset)
+  {
+    var candidates = element.srcset.split(",");
+    for (var i = 0; i < candidates.length; i++)
+    {
+      var url = candidates[i].trim().replace(/\s+\S+$/, "");
+      if (url)
+        urls.push(resolveURL(url));
+    }
+  }
+
+  return urls;
+}
+
+function getURLsFromMediaElement(element)
+{
+  var urls = getURLsFromAttributes(element);
+
+  for (var i = 0; i < element.children.length; i++)
+  {
+    var child = element.children[i];
+    if (child.localName == "source" || child.localName == "track")
+      urls.push.apply(urls, getURLsFromAttributes(child));
+  }
+
+  if (element.poster)
+    urls.push(element.poster);
+
+  return urls;
+}
+
+function getURLsFromElement(element) {
+  switch (element.localName)
+  {
+    case "object":
+      return getURLsFromObjectElement(element);
+
+    case "video":
+    case "audio":
+    case "picture":
+      return getURLsFromMediaElement(element);
+  }
+
+  return getURLsFromAttributes(element);
+}
+
+function isBlockable(element)
+{
+  if (element.id)
+    return true;
+  if (element.classList.length > 0)
+    return true;
+  if (getURLsFromElement(element).length > 0)
+    return true;
+
+  // We only generate filters based on the "style" attribute,
+  // if this is the only way we can generate a filter, and
+  // only if there are at least two CSS properties defined.
+  if (/:.+:/.test(getOriginalStyle(element)))
+    return true;
+
+  return false;
+}
+
 // Gets the absolute position of an element by walking up the DOM tree,
 // adding up offsets.
 // I hope there's a better way because it just seems absolutely stupid
@@ -208,8 +308,7 @@ function addElementOverlay(elt) {
 
   // If element doesn't have at least one of class name, ID or URL, give up
   // because we don't know how to construct a filter rule for it
-  var url = getElementURL(elt);
-  if(!elt.className && !elt.id && !url)
+  if(!isBlockable(elt))
     return;
 
   // If the element isn't rendered (since its or one of its ancestor's
@@ -220,7 +319,6 @@ function addElementOverlay(elt) {
   var thisStyle = getComputedStyle(elt, null);
   var overlay = document.createElement('div');
   overlay.prisoner = elt;
-  overlay.prisonerURL = url;
   overlay.className = "__adblockplus__overlay";
   overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box;');
   var pos = getAbsolutePosition(elt);
@@ -283,7 +381,7 @@ function clickHide_activate() {
     clickHide_deactivate();
 
   // Add overlays for elements with URLs so user can easily click them
-  var elts = document.querySelectorAll('object,embed,img,iframe');
+  var elts = document.querySelectorAll('object,embed,img,iframe,video,audio,picture');
   for(var i=0; i<elts.length; i++)
     addElementOverlay(elts[i]);
 
@@ -352,7 +450,7 @@ function clickHide_mouseOver(e)
     return;
 
   var target = e.target;
-  while (target.parentNode && !(target.id || target.className || target.src || /:.+:/.test(getOriginalStyle(target))))
+  while (target.parentNode && !isBlockable(target))
     target = target.parentNode;
   if (target == document.documentElement || target == document.body)
     target = null;
@@ -405,20 +503,17 @@ function clickHide_mouseClick(e)
     return;
 
   var elt = currentElement;
-  var url = null;
   if (currentElement.classList.contains("__adblockplus__overlay"))
-  {
     elt = currentElement.prisoner;
-    url = currentElement.prisonerURL;
-  }
-  else if (elt.src)
-    url = elt.src;
 
   clickHideFilters = new Array();
   selectorList = new Array();
 
   var addSelector = function(selector)
   {
+    if (selectorList.indexOf(selector) != -1)
+      return;
+
     clickHideFilters.push(document.domain + "##" + selector);
     selectorList.push(selector);
   };
@@ -436,20 +531,23 @@ function clickHide_mouseClick(e)
     addSelector(selector);
   }
 
-  if (url)
+  var urls = getURLsFromElement(elt);
+  for (var i = 0; i < urls.length; i++)
   {
-    var src = elt.getAttribute("src");
-    var selector = src && escapeCSS(elt.localName) + '[src=' + quote(src) + ']';
+    var url = urls[i];
 
     if (/^https?:/i.test(url))
     {
-      clickHideFilters.push(url.replace(/^[\w\-]+:\/+(?:www\.)?/, "||"));
+      var filter = url.replace(/^[\w\-]+:\/+(?:www\.)?/, "||");
 
-      if (selector)
-        selectorList.push(selector);
+      if (clickHideFilters.indexOf(filter) == -1)
+        clickHideFilters.push(filter);
+
+      continue;
     }
-    else if (selector)
-      addSelector(selector);
+
+    if (url == elt.src)
+      addSelector(escapeCSS(elt.localName) + '[src=' + quote(elt.getAttribute("src")) + ']');
   }
 
   // as last resort, create a filter based on inline styles
@@ -472,31 +570,6 @@ function clickHide_mouseClick(e)
   // Make sure the browser doesn't handle this click
   e.preventDefault();
   e.stopPropagation();
-}
-
-// Extracts source URL from an IMG, OBJECT, EMBED, or IFRAME
-function getElementURL(elt) {
-  // Check children of object nodes for "param" nodes with name="movie" that specify a URL
-  // in value attribute
-  var url;
-  if(elt.localName.toUpperCase() == "OBJECT" && !(url = elt.getAttribute("data"))) {
-    // No data attribute, look in PARAM child tags for a URL for the swf file
-    var params = elt.querySelectorAll("param[name=\"movie\"]");
-    // This OBJECT could contain an EMBED we already nuked, in which case there's no URL
-    if(params[0])
-      url = params[0].getAttribute("value");
-    else {
-      params = elt.querySelectorAll("param[name=\"src\"]");
-      if(params[0])
-        url = params[0].getAttribute("value");
-    }
-
-    if (url)
-      url = resolveURL(url);
-  } else if(!url) {
-    url = elt.src || elt.href;
-  }
-  return url;
 }
 
 // This function Copyright (c) 2008 Jeni Tennison, from jquery.uri.js
