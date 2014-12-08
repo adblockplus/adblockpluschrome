@@ -260,7 +260,7 @@ function addSubscription()
     doAddSubscription(data.url, data.title, data.homepage);
   else
   {
-    var url = document.getElementById("customSubscriptionLocation").value.replace(/^\s+/, "").replace(/\s+$/, "");
+    var url = document.getElementById("customSubscriptionLocation").value.trim();
     if (!/^https?:/i.test(url))
     {
       alert(i18n.getMessage("global_subscription_invalid_location"));
@@ -268,7 +268,7 @@ function addSubscription()
       return;
     }
 
-    var title = document.getElementById("customSubscriptionTitle").value.replace(/^\s+/, "").replace(/\s+$/, "");
+    var title = document.getElementById("customSubscriptionTitle").value.trim();
     if (!title)
       title = url;
 

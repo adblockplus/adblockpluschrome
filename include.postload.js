@@ -591,8 +591,8 @@ if ("ext" in window && document instanceof HTMLDocument)
       title = url;
 
     // Trim spaces in title and URL
-    title = title.replace(/^\s+/, "").replace(/\s+$/, "");
-    url = url.replace(/^\s+/, "").replace(/\s+$/, "");
+    title = title.trim();
+    url = url.trim();
     if (!/^(https?|ftp):/.test(url))
       return;
 
