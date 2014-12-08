@@ -81,6 +81,11 @@ require("filterNotifier").FilterNotifier.addListener(function(action)
     if (canUseChromeNotifications)
       initChromeNotifications();
     initAntiAdblockNotification();
+
+    // The "Hide placeholders" option has been removed from the UI in 1.8.8.1285
+    // So we reset the option for users updating from older versions.
+    if (prevVersion && Services.vc.compare(prevVersion, "1.8.8.1285") < 0)
+      Prefs.hidePlaceholders = true;
   }
 
   // update browser actions when whitelisting might have changed,

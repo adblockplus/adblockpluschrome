@@ -76,7 +76,6 @@ function loadOptions()
 
   // Popuplate option checkboxes
   initCheckbox("shouldShowBlockElementMenu");
-  initCheckbox("hidePlaceholders");
 
   ext.onMessage.addListener(onMessage);
 
