@@ -104,8 +104,19 @@
     return candidates;
   };
 
+  var initCatalog = function(uiLocale)
+  {
+    var bidiDir = /^(ar|fa|he|ug|ur)(_|$)/.test(uiLocale) ? "rtl" : "ltr";
+    var catalog = Object.create(null);
+
+    catalog["@@ui_locale"] = [uiLocale, []];
+    catalog["@@bidi_dir" ] = [bidiDir,  []];
+
+    return catalog;
+  };
+
   var locales = getLocaleCandidates();
-  var catalog = {__proto__: null, "@@ui_locale": [locales[0], []]};
+  var catalog = initCatalog(locales[0]);
 
   var replacePlaceholder = function(text, placeholder, content)
   {
