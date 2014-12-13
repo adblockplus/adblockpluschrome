@@ -60,7 +60,8 @@
   var isPageActive = function(page)
   {
     var tab = page._tab;
-    return tab == tab.browserWindow.activeTab && page == tab._visiblePage;
+    var win = tab.browserWindow;
+    return win && tab == win.activeTab && page == tab._visiblePage;
   };
 
   var forgetPage = function(id)
