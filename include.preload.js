@@ -104,6 +104,54 @@ function resolveURL(url)
   return a.href;
 }
 
+function reinjectRulesWhenRemoved(document, style)
+{
+  var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+  if (!MutationObserver)
+    return;
+
+  var observer = new MutationObserver(function(mutations)
+  {
+    var isStyleRemoved = false;
+    for (var i = 0; i < mutations.length; i++)
+    {
+      if ([].indexOf.call(mutations[i].removedNodes, style) != -1)
+      {
+        isStyleRemoved = true;
+        break;
+      }
+    }
+    if (!isStyleRemoved)
+      return;
+
+    observer.disconnect();
+
+    var n = document.styleSheets.length;
+    if (n == 0)
+      return;
+
+    var stylesheet = document.styleSheets[n - 1];
+    ext.backgroundPage.sendMessage(
+      {type: "get-selectors"},
+
+      function(selectors)
+      {
+        while (selectors.length > 0)
+        {
+          var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
+
+          // Using non-standard addRule() here. This is the only way
+          // to add rules at the end of a cross-origin stylesheet
+          // because we don't know how many rules are already in there
+          stylesheet.addRule(selector, "display: none !important;");
+        }
+      }
+    );
+  });
+
+  observer.observe(style.parentNode, {childList: true});
+}
+
 function init(document)
 {
   // prior to Chrome 37, content scripts don't run on about:blank
@@ -167,6 +215,7 @@ function init(document)
     };
 
     setRules();
+    reinjectRulesWhenRemoved(document, style);
   };
 
   document.addEventListener("error", function(event)
