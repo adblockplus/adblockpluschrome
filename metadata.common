@@ -13,6 +13,7 @@ backgroundScripts = ext/common.js
   lib/jsbn.js
   lib/rsa.js
   webrequest.js
+  messageResponder.js
   popupBlocker.js
   iconAnimation.js
   background.js
@@ -27,31 +28,29 @@ ext/content.js = chrome/ext/content.js
 ext/popup.js = chrome/ext/popup.js
 notification.html = chrome/notification.html
 subscriptions.xml = adblockplus/chrome/content/ui/subscriptions.xml
-firstRun.html = adblockplus/chrome/content/ui/firstRun.html
-firstRun.js = adblockplus/chrome/content/ui/firstRun.js
-i18n.js = adblockplus/chrome/content/ui/i18n.js
-skin/firstRun.css = adblockplus/chrome/skin/firstRun.css
-skin/abp-icon-big.png = adblockplus/chrome/skin/abp-icon-big.png
-skin/ajax-loader.gif = adblockplus/chrome/skin/ajax-loader.gif
-skin/background.png = adblockplus/chrome/skin/background.png
-skin/background-main.png = adblockplus/chrome/skin/background-main.png
-skin/background-share.png = adblockplus/chrome/skin/background-share.png
-skin/donate.png = adblockplus/chrome/skin/donate.png
-skin/features/malware.png = adblockplus/chrome/skin/features/malware.png
-skin/features/social.png = adblockplus/chrome/skin/features/social.png
-skin/features/tracking.png = adblockplus/chrome/skin/features/tracking.png
-skin/fonts/CreteRound-Italic.otf = adblockplus/chrome/skin/fonts/CreteRound-Italic.otf
-skin/fonts/CreteRound-Regular.otf = adblockplus/chrome/skin/fonts/CreteRound-Regular.otf
-skin/social/facebook.png = adblockplus/chrome/skin/social/facebook.png
-skin/social/googleplus.png = adblockplus/chrome/skin/social/googleplus.png
-skin/social/renren.png = adblockplus/chrome/skin/social/renren.png
-skin/social/twitter.png = adblockplus/chrome/skin/social/twitter.png
-skin/social/weibo.png = adblockplus/chrome/skin/social/weibo.png
+firstRun.html = adblockplusui/firstRun.html
+firstRun.js = adblockplusui/firstRun.js
+i18n.js = adblockplusui/i18n.js
+messageResponder.js = adblockplusui/messageResponder.js
+skin/firstRun.css = adblockplusui/skin/firstRun.css
+skin/abp-icon-big.png = adblockplusui/skin/abp-icon-big.png
+skin/ajax-loader.gif = adblockplusui/skin/ajax-loader.gif
+skin/background.png = adblockplusui/skin/background.png
+skin/background-main.png = adblockplusui/skin/background-main.png
+skin/background-share.png = adblockplusui/skin/background-share.png
+skin/donate.png = adblockplusui/skin/donate.png
+skin/features/malware.png = adblockplusui/skin/features/malware.png
+skin/features/social.png = adblockplusui/skin/features/social.png
+skin/features/tracking.png = adblockplusui/skin/features/tracking.png
+skin/fonts/CreteRound-Italic.otf = adblockplusui/skin/fonts/CreteRound-Italic.otf
+skin/fonts/CreteRound-Regular.otf = adblockplusui/skin/fonts/CreteRound-Regular.otf
+skin/social/facebook.png = adblockplusui/skin/social/facebook.png
+skin/social/googleplus.png = adblockplusui/skin/social/googleplus.png
+skin/social/renren.png = adblockplusui/skin/social/renren.png
+skin/social/twitter.png = adblockplusui/skin/social/twitter.png
+skin/social/weibo.png = adblockplusui/skin/social/weibo.png
 qunit/qunit.js = adblockplustests/chrome/content/qunit.js
 qunit/qunit.css = adblockplustests/chrome/content/qunit.css
-
-[preprocess]
-firstRun.html =
 
 [convert_js]
 lib/adblockplus.js = lib/prefs.js
@@ -112,4 +111,4 @@ adblockplus/chrome/locale/*/filters.dtd = subscription.lastDownload.inProgress
 adblockplus/chrome/locale/*/subscriptionSelection.dtd = location.label
   title.label
 adblockplus/chrome/locale/*/meta.properties = =name
-adblockplus/chrome/locale/*/firstRun.properties = =*
+adblockplusui/locale/*/firstRun.json = =*

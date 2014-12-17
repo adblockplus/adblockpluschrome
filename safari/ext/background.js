@@ -57,6 +57,11 @@
     }
   };
 
+  ext._getPage = function(id)
+  {
+    return pages[id];
+  };
+
   var isPageActive = function(page)
   {
     var tab = page._tab;

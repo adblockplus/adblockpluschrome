@@ -89,14 +89,8 @@ $(loadOptions);
 
 function onMessage(msg)
 {
-  switch (msg.type)
-  {
-    case "add-subscription":
-      startSubscriptionSelection(msg.title, msg.url);
-      break;
-    default:
-      console.log("got unexpected message: " + msg.type);
-  }
+  if (msg.type == "add-subscription")
+    startSubscriptionSelection(msg.title, msg.url);
 };
 
 // Reloads the displayed subscriptions and filters

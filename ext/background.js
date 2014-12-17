@@ -22,7 +22,7 @@
 
   var PageMap = ext.PageMap = function()
   {
-    this._map = {__proto__: null};
+    this._map = Object.create(null);
     this._id = ++pageMapCounter;
   };
   PageMap.prototype = {
@@ -32,6 +32,10 @@
 
       if (Object.keys(this._map).length == 0)
         delete nonEmptyPageMaps[this._id];
+    },
+    keys: function()
+    {
+      return Object.keys(this._map).map(ext._getPage);
     },
     get: function(page)
     {
