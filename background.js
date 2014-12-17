@@ -567,9 +567,6 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
         return true;
       }
       break;
-    default:
-      sendResponse({});
-      break;
   }
 });
 

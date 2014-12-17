@@ -724,9 +724,6 @@ if ("ext" in window && document instanceof HTMLDocument)
         }
         clickHide_deactivate();
         break;
-      default:
-        sendResponse({});
-        break;
     }
   });
 

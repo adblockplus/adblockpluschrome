@@ -56,6 +56,11 @@
     }
   };
 
+  ext._getPage = function(id)
+  {
+    return new Page({id: parseInt(id, 10)});
+  };
+
   ext.pages = {
     open: function(url, callback)
     {
