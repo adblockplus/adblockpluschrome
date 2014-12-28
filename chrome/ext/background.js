@@ -358,10 +358,21 @@
           if (!frames)
             return null;
 
-          for (var frameId in frames)
+          if ("frameId" in rawSender)
           {
-            if (frames[frameId].url == rawSender.url)
-              return frames[frameId].parent;
+            // Chrome 41+
+            var frame = frames[rawSender.frameId];
+            if (frame)
+              return frame.parent;
+          }
+          else
+          {
+            // Chrome 28-40
+            for (var frameId in frames)
+            {
+              if (frames[frameId].url == rawSender.url)
+                return frames[frameId].parent;
+            }
           }
 
           return frames[0];
