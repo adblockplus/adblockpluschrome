@@ -48,7 +48,7 @@
     },
     activate: function()
     {
-      chrome.tabs.update(this._id, {selected: true});
+      chrome.tabs.update(this._id, {highlighted: true});
     },
     sendMessage: function(message, responseCallback)
     {
@@ -411,7 +411,7 @@
           var tab = tabs[0];
 
           chrome.windows.update(tab.windowId, {focused: true});
-          chrome.tabs.update(tab.id, {selected: true});
+          chrome.tabs.update(tab.id, {highlighted: true});
 
           if (callback)
             callback(new Page(tab));
