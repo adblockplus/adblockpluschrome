@@ -27,16 +27,13 @@
     "message": "After closing this popup, click (or right-click) an element on the page."
   },
   "description_chrome": {
-    "message": "The free adblock tool for Chrome: Blocks annoying video ads on YouTube, Facebook ads, banners and much more."
+    "message": "Used by over 50 million people, a free ad blocker for Chrome that blocks ALL annoying ads, malware and tracking."
   },
   "description_opera": {
-    "message": "The free adblock tool for Opera: Block annoying video ads on Youtube, Facebook ads, Banners and much others."
+    "message": "Used by over 50 million people, a free ad blocker for Opera that blocks ALL annoying ads, malware and tracking."
   },
   "description_safari": {
-    "message": "The free adblock tool for Safari: Block annoying video ads on Youtube, Facebook ads, Banners and much others."
-  },
-  "disable_inline": {
-    "message": "After closing this popup, click (or right-click) an element on the page."
+    "message": "Used by over 50 million people, a free ad blocker for Safari that blocks ALL annoying ads, malware and tracking."
   },
   "disabled_for_site": {
     "message": "<strong>Disabled</strong> on this site"

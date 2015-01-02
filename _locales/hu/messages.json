@@ -27,16 +27,13 @@
     "message": "Miután bezártad ezt a buborékot, kattints egy elemre az oldalon.."
   },
   "description_chrome": {
-    "message": "Ingyenes reklámszűrő kiegészítő Chrome-hoz: blokkolja az idegesítő videóreklámokat a YouTube-on, a Facebook reklámjait, bannereket és még többet."
+    "message": "Több mint 50 millióan használják ezt az ingyenes hirdetés szűrőt Chrome-hoz, amely letiltja az ÖSSZES idegesítő reklámot, kártevőt."
   },
   "description_opera": {
-    "message": "Ingyenes reklámszűrő kiegészítő Opera-hoz: blokkolja az idegesítő videóreklámokat a YouTube-on, a Facebook reklámjait, bannereket és még többet."
+    "message": "Több mint 50 millió felhasználóval rendelkező, ingyenes hirdetés szűrő Operahoz, amely letiltja az ÖSSZES idegesítő reklámot, kártevőt és követőkódot."
   },
   "description_safari": {
-    "message": "Ingyenes reklámszűrő kiegészítő Safari-hoz: blokkolja az idegesítő videóreklámokat a YouTube-on, a Facebook reklámjait, bannereket és még többet."
-  },
-  "disable_inline": {
-    "message": "Szöveges reklámok tiltása"
+    "message": "Több mint 50 millió felhasználóval rendelkező, ingyenes hirdetés szűrő Safarihoz, amely letiltja az ÖSSZES idegesítő reklámot, kártevőt és követőkódot."
   },
   "disabled_for_site": {
     "message": "<strong>Kikapcsolva</strong> ezen a weboldalon"

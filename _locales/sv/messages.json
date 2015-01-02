@@ -27,16 +27,13 @@
     "message": "När denna popup stängs, klicka (eller högerklicka) ett objekt på sidan."
   },
   "description_chrome": {
-    "message": "Gratis reklamblockerare för Chrome: Blockerar irriterande videoannonser på YouTube, Facebook-annonser, banners och mycket mer."
+    "message": "Över 50 miljoner användare. En gratis annonsblockerare för Chrome som blockerar ALLA irriterande annonser, malware och spårning."
   },
   "description_opera": {
-    "message": "Gratis reklamblockerare för Opera: Blockerar irriterande videoannonser på YouTube, Facebook-annonser, banners och mycket mer."
+    "message": "Över 50 miljoner användare. En gratis annonsblockerare för Opera som blockerar ALLA irriterande annonser, malware och spårning."
   },
   "description_safari": {
-    "message": "Gratis reklamblockerare för Safari: Blockerar irriterande videoannonser på YouTube, Facebook-annonser, banners och mycket mer."
-  },
-  "disable_inline": {
-    "message": "Avaktivera infogade textannonser"
+    "message": "Över 50 miljoner användare. En gratis annonsblockerare för Safari som blockerar ALLA irriterande annonser, malware och spårning."
   },
   "disabled_for_site": {
     "message": "<strong>Avaktiverad</strong> på denna webbplats"
@@ -68,6 +65,14 @@
   "general": {
     "message": "Allmänt"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ är inte en giltig CSS-väljare",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Senast uppdaterad den $date$ $time$",
     "placeholders": {
@@ -83,6 +88,14 @@
     "message": "Senast uppdaterad i dag $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Rad $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +170,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Var vänlig välj en filterprenumeration från listan:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filterlistrubriker är inte tillåtna här"
   },
   "update_now": {
     "message": "Uppdatera nu"

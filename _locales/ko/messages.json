@@ -26,18 +26,6 @@
   "clickhide_instructions": {
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
   },
-  "description_chrome": {
-    "message": "Chrome 브라우저용 무료 광고 차단 도구 : 유튜브 비디오 광고, 페이스북 광고, 배너 이상의 것들을 차단합니다."
-  },
-  "description_opera": {
-    "message": "Opera 브라우저용 무료 광고 차단 도구 : 유튜브 비디오 광고, 페이스북 광고, 배너 이상의 것들을 차단합니다."
-  },
-  "description_safari": {
-    "message": "Safari 브라우저용 무료 광고 차단 도구 : 유튜브 비디오 광고, 페이스북 광고, 배너 이상의 것들을 차단합니다."
-  },
-  "disable_inline": {
-    "message": "인라인 텍스트 광고를 보지 않음"
-  },
   "disabled_for_site": {
     "message": "이 사이트에서 <strong>을 사용 중지</strong> 합니다."
   },

@@ -18,25 +18,13 @@
     "message": "Áp dụng các thay đổi"
   },
   "block_element": {
-    "message": "Khóa đối tượng này"
+    "message": "Chặn phần từ"
   },
   "cancel": {
     "message": "Hủy bỏ"
   },
   "clickhide_instructions": {
     "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
-  },
-  "description_chrome": {
-    "message": "Công cụ chặn quảng cáo miễn phí cho Chrome: Chặn những quảng cáo video trên YouTube gây phiền nhiễu, quảng cáo trên Facebook, biểu ngữ và nhiều hơn nữa."
-  },
-  "description_opera": {
-    "message": "Công cụ chặn quảng cáo miễn phí cho Opera: Chặnquảng cáo video trên YouTube gây phiền nhiễu, quảng cáo Facebook, biểu ngữ và nhiều hơn nữa."
-  },
-  "description_safari": {
-    "message": "Công cụ chặn quảng cáo miễn phí cho Safari: Chặn quảng cáo video trên YouTube gây phiền nhiễu, quảng cáo Facebook, biểu ngữ và nhiều hơn nữa."
-  },
-  "disable_inline": {
-    "message": "Chặn trực tiếp các quảng cáo chữ"
   },
   "disabled_for_site": {
     "message": "<strong>Đã loại bỏ</strong> trên trang này"

@@ -27,16 +27,13 @@
     "message": "Na het sluiten van deze popup, klik (of klik met de rechtermuisknop) op het pagina-element."
   },
   "description_chrome": {
-    "message": "De gratis adblocker voor Chrome: Blokkeer vervelende video-reclames op YouTube,  advertenties op Facebook, reclame banners en nog veel meer."
+    "message": "Een gratis adblocker voor Chrome met meer dan 50 miljoen gebruikers, die ALLE vervelende advertenties, malware en tracking blokkeert"
   },
   "description_opera": {
-    "message": "De gratis adblocker voor Opera: Blokkeer vervelende video-reclames op YouTube,  advertenties op Facebook, reclame banners en nog veel meer."
+    "message": "Een gratis adblocker voor Opera met meer dan 50 miljoen gebruikers, die ALLE vervelende advertenties, malware en tracking blokkeert."
   },
   "description_safari": {
-    "message": "De gratis adblocker voor Safari: Blokkeer vervelende video-reclames op YouTube,  advertenties op Facebook, reclame banners en nog veel meer."
-  },
-  "disable_inline": {
-    "message": "Inline tekstadvertenties uitschakelen"
+    "message": "Een gratis adblocker voor Safari met meer dan 50 miljoen gebruikers, die ALLE vervelende advertenties, malware en tracking blokkeert."
   },
   "disabled_for_site": {
     "message": "<strong>Uitgeschakeld</strong> op deze site"

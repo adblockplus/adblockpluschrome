@@ -27,16 +27,13 @@
     "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
   },
   "description_chrome": {
-    "message": "Der kostenlose Werbeblocker für Chrome: Blockiert nervige Videowerbung auf YouTube, Facebook-Werbung, Werbebanner und vieles mehr."
+    "message": "Mit über 50 Millionen Benutzern, ein kostenloser Werbeblocker für Chrome der ALLE nervende Werbung, Malware und Tracking blockiert."
   },
   "description_opera": {
-    "message": "Der kostenlose Werbeblocker für Opera: Blockiert nervige Videowerbung auf YouTube, Facebook-Werbung, Werbebanner und vieles mehr."
+    "message": "Mit über 50 Millionen Benutzern, ein kostenloser Werbeblocker für Opera der ALLE nervende Werbung, Malware und Tracking blockiert."
   },
   "description_safari": {
-    "message": "Der kostenlose Werbeblocker für Safari: Blockiert nervige Videowerbung auf YouTube, Facebook-Werbung, Werbebanner und vieles mehr."
-  },
-  "disable_inline": {
-    "message": "Blockiere Inline Text Werbung"
+    "message": "Mit über 50 Millionen Benutzern, ein kostenloser Werbeblocker für Safari der ALLE nervende Werbung, Malware und Tracking blockiert."
   },
   "disabled_for_site": {
     "message": "Auf dieser Seite <strong>deaktiviert</strong>"
@@ -69,7 +66,7 @@
     "message": "Allgemein"
   },
   "invalid_css_selector": {
-    "message": "$selector$ ist keine gültiger CSS selector",
+    "message": "$selector$ ist keine gültige CSS Auswahl",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -166,7 +163,7 @@
     "message": "Diese Statistiken teilen"
   },
   "stats_show_iconnumber": {
-    "message": "Anzahl im Symbol anzeigen"
+    "message": "Die Anzahl, blockierter Werbung, am Icon anzeigen lassen"
   },
   "stats_title": {
     "message": "Blockierte Werbeanzeigen"
@@ -175,7 +172,7 @@
     "message": "Bitte wählen Sie ein Filterabonnement aus der Liste aus:"
   },
   "unexpected_filter_list_header": {
-    "message": "Filterlisten-Header sind nicht erlaubt hier"
+    "message": "Filterlisten-Header sind hier nicht erlaubt"
   },
   "update_now": {
     "message": "Jetzt aktualisieren"

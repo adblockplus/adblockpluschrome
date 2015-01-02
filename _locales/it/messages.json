@@ -27,16 +27,13 @@
     "message": "Dopo la chiusura di questo pop-up, cliccate (o clic destro) su un elemento sulla pagina."
   },
   "description_chrome": {
-    "message": "Lo strumento blocca-pubblicità gratuito per Chrome: Blocca la pubblicità indesiderate su YouTube, Facebook e molti altri siti."
+    "message": "Estensione gratuita per Chrome, usata da oltre 50 milioni persone, blocca TUTTE le pubblicità fastidiose, malware e tracking."
   },
   "description_opera": {
-    "message": "Lo strumento blocca-pubblicità gratuito per Opera: Blocca la pubblicità indesiderate su YouTube, Facebook e molti altri siti."
+    "message": "Estensione gratuita per Opera, usata da oltre 50 milioni persone, blocca TUTTE le pubblicità fastidiose, malware e tracking."
   },
   "description_safari": {
-    "message": "Lo strumento blocca-pubblicità gratuito per Safari: Blocca la pubblicità indesiderate su YouTube, Facebook e molti altri siti."
-  },
-  "disable_inline": {
-    "message": "Disabilita la pubblicità integrata nel testo"
+    "message": "Estensione gratuita per Safari, usata da oltre 50 milioni persone, blocca TUTTE le pubblicità fastidiose, malware e tracking."
   },
   "disabled_for_site": {
     "message": "<strong>Disattivato</strong> su questo sito"

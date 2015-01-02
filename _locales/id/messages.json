@@ -18,7 +18,7 @@
     "message": "Terapkan perubahan"
   },
   "block_element": {
-    "message": "Blokir Elemen"
+    "message": "Blokir elemen"
   },
   "cancel": {
     "message": "Batal"
@@ -27,16 +27,13 @@
     "message": "Setelah menutup munculan ini , klik (atau klik kanan) elemen pada halaman web."
   },
   "description_chrome": {
-    "message": "Alat blokir iklan gratis untuk Chrome: blokir iklan mengganggu pada video di YouTube, iklan Facebook, spanduk dan banyak lagi."
+    "message": "Digunakan oleh 50 juta orang, pemblok iklan gratis untuk Chrome yang memblok SEMUA iklan yang mengganggu, malware, dan pelacak."
   },
   "description_opera": {
-    "message": "Alat pemblokir iklan gratis untuk Opera: Blokir iklan video yang menjengkelkan di YouTube, iklan Facebook, spanduk dan banyak lagi."
+    "message": "Digunakan oleh 50 juta orang, pemblok iklan gratis untuk Opera yang memblok SEMUA iklan yang mengganggu, malware, dan pelacak."
   },
   "description_safari": {
-    "message": "Alat pemblokir iklan gratis untuk Safari: Blokir iklan video yang menjengkelkan di YouTube, iklan Facebook, spanduk dan banyak lagi."
-  },
-  "disable_inline": {
-    "message": "Nonaktifkan iklan teks"
+    "message": "Digunakan oleh 50 juta orang, pemblok iklan gratis untuk Safari yang memblok SEMUA iklan yang mengganggu, malware, dan pelacak."
   },
   "disabled_for_site": {
     "message": "<strong>Nonaktifkan</strong> pada situs ini"
@@ -68,6 +65,14 @@
   "general": {
     "message": "Umum"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ bukanlah CSS Selector yang valid",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Terakhir diperbaharui pada pukul $time$ tanggal $date$",
     "placeholders": {
@@ -87,6 +92,14 @@
       }
     }
   },
+  "line": {
+    "message": "Baris $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
   "name_devbuild": {
     "message": "Struktur pengembangan Adblock Plus"
   },
@@ -100,7 +113,7 @@
     "message": "Pengaturan Adblock Plus"
   },
   "options_short": {
-    "message": "Opsi"
+    "message": "Pilihan"
   },
   "out_of_date_lists": {
     "message": "Daftar lama akan diperbaharui secara berkala."
@@ -157,6 +170,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Silakan pilih langganan penyaring dari daftar:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filter list headers tidak diperbolehkan disini"
   },
   "update_now": {
     "message": "Perbaharui sekarang"

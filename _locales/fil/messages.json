@@ -18,25 +18,13 @@
     "message": "Ilapat ang mga pagbabago"
   },
   "block_element": {
-    "message": "Isara ang element"
+    "message": "Ihinto ang element"
   },
   "cancel": {
     "message": "I-cancel"
   },
   "clickhide_instructions": {
     "message": "Pagkatapos isara itong pop-up, pindutin ang kaliwang mouse button (o kanang mouse button) ang element ng pahinang ito."
-  },
-  "description_chrome": {
-    "message": "Ang libreng adblock tool para sa Chrome browser: Inaalis ang mga video ads sa YouTube, Facebook, banners at marami pang iba."
-  },
-  "description_opera": {
-    "message": "Ang libreng adblock tool para sa Opera browser: Inaalis ang mga video ads sa YouTube, Facebook, banners at marami pang iba."
-  },
-  "description_safari": {
-    "message": "Ang libreng adblock tool para sa Safari browser: Inaalis ang mga video ads sa YouTube, Facebook, banners at marami pang iba."
-  },
-  "disable_inline": {
-    "message": "Isawalang bisa ang inline text ads"
   },
   "disabled_for_site": {
     "message": "<strong>Hindi Maaari</strong> sa site na ito"

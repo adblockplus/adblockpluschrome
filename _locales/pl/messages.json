@@ -27,16 +27,13 @@
     "message": "Po zamknięciu tego okna kliknij na stronie niechciany element lewym lub prawym przyciskiem myszy."
   },
   "description_chrome": {
-    "message": "Darmowe narzędzie Adblock dla Chrome. Blokuje denerwujące wideo reklamy w serwisie YouTube, reklamy na Facebooku, banery i wiele więcej."
+    "message": "Używany przez ponad 50 milionów ludzi dodatek do Chrome, blokujący irytujące reklamy, złośliwe oprogramowanie i programy śledzące."
   },
   "description_opera": {
-    "message": "Darmowe narzędzie Adblock dla Opery. Blokuje denerwujące wideo reklamy w serwisie YouTube, reklamy na Facebooku, banery i wiele więcej."
+    "message": "Używany przez ponad 50 milionów ludzi darmowy dodatek do przeglądarki Opera, blokujący irytujące reklamy, złośliwe oprogramowanie i programy śledzące zachowanie internautów w sieci."
   },
   "description_safari": {
-    "message": "Darmowe narzędzie Adblock dla Safari. Blokuje denerwujące wideo reklamy w serwisie YouTube, reklamy na Facebooku, banery i wiele więcej."
-  },
-  "disable_inline": {
-    "message": "Wyłącz wbudowane reklamy tekstowe"
+    "message": "Używany przez ponad 50 milionów ludzi darmowy dodatek do przeglądarki Safari, blokujący irytujące reklamy, złośliwe oprogramowanie i programy śledzące zachowanie internautów w sieci."
   },
   "disabled_for_site": {
     "message": "<strong>Wyłączony</strong> na tej stronie"

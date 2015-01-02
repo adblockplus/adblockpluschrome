@@ -1,0 +1,17 @@
+{
+  "add": {
+    "message": "ഉള്പെടുത്തുക"
+  },
+  "add_domain_button": {
+    "message": "ഡൊമൈൻ  ഉള്പെടുത്തുക"
+  },
+  "add_filter_button": {
+    "message": "ഫിൽറ്റർ ഉള്പെടുത്തുക"
+  },
+  "add_filters_msg": {
+    "message": "ഫിൽറ്റർ / ഫിൽറ്ററുകൾ ഉള്പെടുത്തുക?"
+  },
+  "add_your_own_filters": {
+    "message": "സ്വന്തം ഫിൽറ്റർ ഉള്പെടുത്തുക"
+  }
+}

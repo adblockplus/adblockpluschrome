@@ -27,16 +27,13 @@
     "message": "Pēc šī uznirstošā loga aizvēršanas, noklikšķiniet (vai noklikšķiniet ar labo pogu) uz elementa šajā lapā."
   },
   "description_chrome": {
-    "message": "Bezmaksas reklāmu bloķēšanas rīks Chrome pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, banerus un vēl."
+    "message": "Izmanto vairāk kā 50 miljoni cilvēku. Bezmaksas bloķētājs Chrome, kas bloķē kaitinošās reklāmas, malware un izsekošanas programmas."
   },
   "description_opera": {
-    "message": "Bez maksas reklāmu bloķēšanas rīks Opera pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, reklāmkarogus un vēl."
+    "message": "Izmanto vairāk kā 50 miljoni cilvēku. Bezmaksas bloķētājs Opera, kas bloķē kaitinošās reklāmas, malware un izsekošanas programmas."
   },
   "description_safari": {
-    "message": "Bezmaksas reklāmu bloķēšanas rīks Safari pārlūkam: Bloķē kaitinošās YouTube video reklāmas, Facebook reklāmas, banerus un vēl."
-  },
-  "disable_inline": {
-    "message": "Atspējot iekš-rindu teksta reklāmas"
+    "message": "Izmanto vairāk kā 50 miljoni cilvēku. Bezmaksas bloķētājs Safari, kas bloķē kaitinošās reklāmas, malware un izsekošanas programmas."
   },
   "disabled_for_site": {
     "message": "<strong>Islegts</strong>"

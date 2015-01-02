@@ -27,16 +27,13 @@
     "message": "Po zatvorení tohto okna, kliknite (alebo kliknite pravým tlačidlom myši) na prvok na stránke."
   },
   "description_chrome": {
-    "message": "Bezplatný blokovač reklamy pre Chrome: Blokuje otravné videoreklamy na YouTube, Facebook reklamy, banery a omnoho viac."
+    "message": "Používa viac ako 50 miliónov ľudí. Zadarmo blokuje VŠETKY obťažujúce reklamy, malware a sledovanie."
   },
   "description_opera": {
-    "message": "Bezplatný blokovač reklamy pre Operu: Blokuje otravné videoreklamy na YouTube, Facebook reklamy, banery a omnoho viac."
+    "message": "Používa viac ako 50 miliónov ľudí. Zadarmo blokuje VŠETKY obťažujúce reklamy, malware a sledovanie."
   },
   "description_safari": {
-    "message": "Bezplatný blokovač reklamy pre Safari: Blokuje otravné videoreklamy na YouTube, Facebook reklamy, banery a omnoho viac."
-  },
-  "disable_inline": {
-    "message": "Zakázať vnorené textové reklamy"
+    "message": "Používa viac ako 50 miliónov ľudí. Zadarmo blokuje VŠETKY obťažujúce reklamy, malware a sledovanie."
   },
   "disabled_for_site": {
     "message": "<strong>Zakázané</strong> na tejto stránke"
@@ -68,6 +65,14 @@
   "general": {
     "message": "Všeobecné"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ nie je platný CSS identifikátor",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Posledná aktualizácia nastala o $time$, $date$",
     "placeholders": {
@@ -83,6 +88,14 @@
     "message": "Posledná aktualizácia nastala dnes o $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Riadok $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +170,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Prosím, zvoľte odber filtra zo zoznamu:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Hlavičky filtra nie sú povolené"
   },
   "update_now": {
     "message": "Aktualizovať teraz"

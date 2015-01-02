@@ -18,25 +18,13 @@
     "message": "Hyväksy muutokset"
   },
   "block_element": {
-    "message": "Estä Elementti"
+    "message": "Estä elementti"
   },
   "cancel": {
     "message": "Peruuta"
   },
   "clickhide_instructions": {
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
-  },
-  "description_chrome": {
-    "message": "Ilmainen Adblock työkalu Chromelle: Estää ärsyttävät Youtuben videomainokset, Facebookin mainokset, bannerit ja paljon muuta."
-  },
-  "description_opera": {
-    "message": "Ilmainen Adblock työkalu Operalle: Estää ärsyttävät Youtuben videomainokset, Facebookin mainokset, bannerit ja paljon muuta."
-  },
-  "description_safari": {
-    "message": "Ilmainen Adblock työkalu Safarille: Estää ärsyttävät Youtuben videomainokset, Facebookin mainokset, bannerit ja paljon muuta."
-  },
-  "disable_inline": {
-    "message": "Estä tekstimainokset"
   },
   "disabled_for_site": {
     "message": "<strong>Poistettu</strong> tältä sivulta"

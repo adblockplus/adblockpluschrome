@@ -12,7 +12,7 @@
     "message": "Dodaj filtre?"
   },
   "add_your_own_filters": {
-    "message": "Dodaj svoje lastne filtre"
+    "message": "Dodaj lastne filtre"
   },
   "apply_changes": {
     "message": "Uveljavi spremembe"
@@ -23,8 +23,8 @@
   "cancel": {
     "message": "Prekliči"
   },
-  "description_chrome": {
-    "message": "Brezplačno orodje Adblock Plus za Chrome, ki blokira video oglase na Youtub-u, Facebook-u oglase in še veliko drugih oglasov."
+  "disabled_for_site": {
+    "message": "<strong>Omogočeno</strong> na tej strani"
   },
   "easy_create_filter": {
     "message": "Blokiraj element"
@@ -32,17 +32,64 @@
   "edit_filters_raw": {
     "message": "Uredi filtre kot golo besedilo"
   },
+  "enable_only_the": {
+    "message": "Omogočite samo sezname filtrov, ki jih potrebujete. Preveč seznamov lahko upčasni brskalnik."
+  },
   "enabled_for_site": {
-    "message": "<strong>Omogočen</strong> na tej strani"
+    "message": "<strong>Omogočeno</strong> na tej strani"
   },
   "filter_lists": {
-    "message": "Seznam filtrov"
+    "message": "Seznami filtrov"
+  },
+  "found_a_bug": {
+    "message": "Ste našli hrošča? Želite prevesti Adblock Plus v vaš jezik? Prosimo <a>oddajte zahtevo tukaj</a>."
   },
   "general": {
     "message": "Splošno"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ ni veljaven CSS izbirnik",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at": {
+    "message": "Zadnja posodobitev: $date$ ob $time$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "Zadnja posodobitev danes ob $time$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Vrstica $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
   "name_devbuild": {
     "message": "Adblock Plus razvojna različica"
+  },
+  "notification_with_buttons": {
+    "message": "Klinite \"OK\" da odprete vse povezave v tem obvestilu."
+  },
+  "notification_without_buttons": {
+    "message": "Kliknite na obvestilo, da odprete vse povezeave v njem."
   },
   "options": {
     "message": "Adblock Plus možnosti"
@@ -58,6 +105,22 @@
   },
   "show_block_element_menu": {
     "message": "Prikaži 'Blokiraj element' v meniju desnega klika"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> na tej strani",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> skupaj",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
   },
   "stats_over": {
     "message": "več kot $number$",
@@ -89,6 +152,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Prosimo, izberite naročnino na filter s seznama:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Glave seznamov filtrov tukaj niso dovoljene"
   },
   "update_now": {
     "message": "Posodobi"

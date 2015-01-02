@@ -26,18 +26,6 @@
   "clickhide_instructions": {
     "message": "Klikk (eller høyreklikk) på et element på siden etter at du har lukket dette vinduet."
   },
-  "description_chrome": {
-    "message": "Det gratis reklameblokkeringsverktøyet for Chrome: Blokkerer irriterende videoannonser på YouTube, Facebook-reklamer, bannere og mye mer."
-  },
-  "description_opera": {
-    "message": "Det gratis reklameblokkeringsverktøyet for Opera: Blokkerer irriterende videoannonser på YouTube, Facebook-reklamer, bannere og mye mer."
-  },
-  "description_safari": {
-    "message": "Det gratis reklameblokkeringsverktøyet for Safari: Blokkerer irriterende videoannonser på YouTube, Facebook-reklamer, bannere og mye mer."
-  },
-  "disable_inline": {
-    "message": "Deaktiver annonser i teksten på nettsider"
-  },
   "disabled_for_site": {
     "message": "<strong>Deaktivert</strong> på dette nettstedet"
   },

@@ -26,18 +26,6 @@
   "clickhide_instructions": {
     "message": "پس از بسته شدن این پنجره، روی بخشی از صفحه کلیک (یا راست کلیک) کن."
   },
-  "description_chrome": {
-    "message": "ابزار رایگان AdBlock برای کروم: تبلیغات ویدئویی آزار دهنده در یوتیوب، تبلیغات فیس بوک، آگهی ها و خیلی چیزهای دیگه رو  حذف میکنه."
-  },
-  "description_opera": {
-    "message": "ابزار رایگان AdBlock برای اپرا : تبلیغات ویدئویی آزار دهنده در یوتیوب، تبلیغات فیس بوک، آگهی ها و خیلی چیزهای دیگه رو  حذف میکنه."
-  },
-  "description_safari": {
-    "message": "ابزار رایگان AdBlock برای سافاری: تبلیغات ویدئویی آزار دهنده در یوتیوب، تبلیغات فیس بوک، آگهی ها و خیلی چیزهای دیگه رو  حذف میکنه."
-  },
-  "disable_inline": {
-    "message": "غیرفعال کردن تبلیغات متنی"
-  },
   "disabled_for_site": {
     "message": "<strong>غیرفعال باشد</strong> توی این سایت"
   },
@@ -60,10 +48,10 @@
     "message": "لیست فیلتر"
   },
   "filter_must_follow_syntax": {
-    "message": "فیلتر خودتون باید از <a>آرایش فیلتر Adblock</a> پیروی کند."
+    "message": "فیلتر خود را باید <a> ترکیب فیلتر Adblock Plus</a> را دنبال کنید."
   },
   "found_a_bug": {
-    "message": "باگ پیدا کردی؟ می خوای Adblock رو به زبون خودتون ترجمه کنی؟ <a>فایل درخواست اینجاست</a>."
+    "message": "باگ پیدا کردی؟ می خوای Adblock Plus رو به زبون خودتون ترجمه کنی؟ <a>فایل درخواست اینجاست</a>."
   },
   "general": {
     "message": "صفحه اصلی"
@@ -104,7 +92,7 @@
     }
   },
   "name_devbuild": {
-    "message": "توسعه ساخت AdBlock"
+    "message": "توسعه ساخت Adblock Plus"
   },
   "notification_with_buttons": {
     "message": "برای باز شدن همه لینک های این هشدار ، روی OK کلیک کنید."
@@ -155,7 +143,7 @@
     "message": "دانلود Adblock Plus"
   },
   "stats_share_message": {
-    "message": "من $number$ تبلیغات و انتقالها رو مسدود کردم ، باتشکر از Adblock.",
+    "message": "من $number$ تبلیغات و انتقالها رو مسدود کردم ، باتشکر از Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"

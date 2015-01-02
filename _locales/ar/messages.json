@@ -6,7 +6,7 @@
     "message": "أضف نطاق"
   },
   "add_filter_button": {
-    "message": "أضف فلتر"
+    "message": "أضف مرشّح"
   },
   "add_filters_msg": {
     "message": "إضافة فلتر\\فلاتر؟"
@@ -18,7 +18,7 @@
     "message": "تطبيق التغييرات"
   },
   "block_element": {
-    "message": "حظر العنصر"
+    "message": "حجب العنصر"
   },
   "cancel": {
     "message": "إلغاء"
@@ -27,49 +27,46 @@
     "message": "بعد إغلاق هذه النافذة، اضغط (أو اضغط بالزر الأيمن) على أحد العناصر في الصفحة."
   },
   "description_chrome": {
-    "message": "تطبيق AdBlock المجاني لـ Chrome : يحظر مقاطع الفيديو الإعلانية المزعجة في YouTube, إعلانات Facebook, والشرائط الإعلانية وغيرها."
+    "message": "يزيد مستخدموه على 50 مليوناً، حاجب إعلانات مجاني للمتصفح كروم Chrome، بحجب كل الاعلانات المزعجة و البرامج الضارة و المتتبّعات."
   },
   "description_opera": {
-    "message": "تطبيق AdBlock المجاني لـ Opera : يحظر مقاطع الفيديو الإعلانية المزعجة في YouTube, إعلانات Facebook, والشرائط الإعلانية وغيرها."
+    "message": "يزيد مستخدموه على 50 مليوناً، حاجب إعلانات مجاني للمتصفح اوبرا Opera، بحجب كل الاعلانات المزعجة و البرامج الضارة و المتتبّعات."
   },
   "description_safari": {
-    "message": "تطبيق AdBlock المجاني لـ Safari : يحظر مقاطع الفيديو الإعلانية المزعجة في YouTube, إعلانات Facebook, والشرائط الإعلانية وغيرها."
-  },
-  "disable_inline": {
-    "message": "تعطيل الإعلانات المضمنة في النص."
+    "message": "يزيد مستخدموه على 50 مليوناً، حاجب إعلانات مجاني للمتصفح سفاري Safari، بحجب كل الاعلانات المزعجة و البرامج الضارة و المتتبّعات."
   },
   "disabled_for_site": {
     "message": "<strong>معطل</strong> في هذا الموقع"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال الضغط على أيقونة Adblock Plus في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"Add domain\"."
+    "message": "ﺁﺪﺒﻟﻮك بلس معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال أيقونة ﺁﺪﺒﻟﻮك بلس في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"أضف نطاق\"."
   },
   "easy_create_filter": {
-    "message": "حظر العنصر"
+    "message": "حجب العنصر"
   },
   "edit_filters_raw": {
     "message": "تعديل الفلاتر في نص عادي"
   },
   "enable_only_the": {
-    "message": "تفعيل قائمة الترشيح التي تريد فقط. الكثير منها بإمكانه جعل متصفحك لا يستجيب."
+    "message": "فعّل قائمة الترشيح التي تريد فقط. الكثير منها بإمكانه جعل متصفحك لا يستجيب."
   },
   "enabled_for_site": {
-    "message": "<strong>تفعيل</strong> في هذا الموقع"
+    "message": "<strong>مفعّل</strong> في هذا الموقع"
   },
   "filter_lists": {
-    "message": "قائمة الفلاتر"
+    "message": "قوائم المرشحات"
   },
   "filter_must_follow_syntax": {
-    "message": "فلترك يجب أن يتبع <a> Adblock Plus filter syntax</a>."
+    "message": "مرشحك يجب ان يتبع <a>قواعد ترشيح آدبلوك بلس</a>."
   },
   "found_a_bug": {
-    "message": "هل وجدت خطأ برمجي؟ تريد ترجمة Adblock Plus إلى لغتك؟ الرجاء <a>الطلب هنا</a>."
+    "message": "هل وجدت خطأ برمجي؟ تريد ترجمة ﺁﺪﺒﻟﻮﻛ ﺐﻠﺳ إلى لغتك؟ الرجاء <a>الطلب هنا</a>."
   },
   "general": {
     "message": "عام"
   },
   "invalid_css_selector": {
-    "message": "$selector$ غير صالح كأداة لـ CSS",
+    "message": "$selector$ غير صالح كمحدد لـ CSS",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -96,7 +93,7 @@
     }
   },
   "line": {
-    "message": "Line $number$",
+    "message": "السطر $number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -104,13 +101,13 @@
     }
   },
   "name_devbuild": {
-    "message": "رقم نسخة تطوير Adblock Plus"
+    "message": "رقم نسخة تطوير آدبلوك بلس"
   },
   "notification_with_buttons": {
     "message": "اضغط موافق لفتح جميع الروابط في هذا التنبيه."
   },
   "notification_without_buttons": {
-    "message": "اضغط على التنبيه لفتح كل الروابط الموجودة."
+    "message": "اضغط على التنبيه لفتح كل الروابط الموجودة فيه."
   },
   "options": {
     "message": "خيارات آدبلوك بلس"
@@ -122,10 +119,10 @@
     "message": "القوائم القديمة تحدث دورياً."
   },
   "remove_button": {
-    "message": "حذف المحدد"
+    "message": "إزالة المحدد"
   },
   "show_block_element_menu": {
-    "message": "أظهر \"حذف العنصر\" في القائمة التي تظهر عند النقر بزر الفأرة الأيمن"
+    "message": "أظهر فقرة \"حجب العنصر\" في قائمة النقرة اليمنى"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> على هذه الصفحة",
@@ -136,7 +133,7 @@
     }
   },
   "stats_label_total": {
-    "message": "<strong>$number$</strong> دولار في إجمالي",
+    "message": "<strong>$number$</strong> الكلي",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -144,7 +141,7 @@
     }
   },
   "stats_over": {
-    "message": "على مدى $number$",
+    "message": "ما يضاهي $number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -152,10 +149,10 @@
     }
   },
   "stats_share_download": {
-    "message": "تحميل Adblock Plus"
+    "message": "تحميل آدبلوك بلس"
   },
   "stats_share_message": {
-    "message": "أنا منعت الإعلانات $number$ وتتبع بفضل زائد.",
+    "message": "أنا منعت $number$ إعلاناً و متتبعاً بفضل آدبلوك بلس.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -169,13 +166,13 @@
     "message": "عرض الرقم في الصورة المرمزة"
   },
   "stats_title": {
-    "message": "حاظر الإعلانات"
+    "message": "الإعلانات المحجوبة"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "الرجاء اختيار اشتراك لفلتر من القائمة:"
   },
   "unexpected_filter_list_header": {
-    "message": "Filter list headers غير مسموح به هنا"
+    "message": "ترويسات قائمة المرشحات غير مسموح بها هنا"
   },
   "update_now": {
     "message": "التحديث الان"

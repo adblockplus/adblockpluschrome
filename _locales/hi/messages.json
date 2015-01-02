@@ -18,7 +18,7 @@
     "message": "परिवर्तन लागू करें"
   },
   "block_element": {
-    "message": "तत्व का खंडन करे"
+    "message": "तत्वों को प्रतिबंधित करें"
   },
   "cancel": {
     "message": "रद्द करें"
@@ -27,16 +27,13 @@
     "message": "इस पॉपअप को बंद करने के बाद पृष्ठ के किसी एक अंग पर क्लिक (अथवा दाएं क्लिक) करे।"
   },
   "description_chrome": {
-    "message": "adblocker, Chrome ब्रॉउज़र के लिया: YouTube विडियो विज्ञापनो, Facebook के बैनरो तथा आदि से मुक्ति के लिया एक निः शुल्क विस्तार।"
+    "message": "50 लाख से अधिक लोगों द्वारा इस्तेमाल, Chrome में  सब कष्टप्रद विज्ञापनों, मैलवेयर और ट्रैकिंग को  ब्लॉक करने एक मुफ़्त ad blocker."
   },
   "description_opera": {
-    "message": "adblock, Opera ब्रॉउज़र के लिया: YouTube विडियो विज्ञापनो, Facebook के बैनरो तथा आदि से मुक्ति के लिया एक निः शुल्क विस्तार।"
+    "message": "50 लाख से अधिक लोगों द्वारा इस्तेमाल किया गया, Opera में  सब कष्टप्रद विज्ञापनों, मैलवेयर और ट्रैकिंग को  ब्लॉक करने के लिए एक मुफ़्त ad blocker."
   },
   "description_safari": {
-    "message": "adblock, Safari ब्रॉउज़र के लिया: YouTube विडियो विज्ञापनो, Facebook के बैनरो तथा आदि से मुक्ति के लिया एक निः शुल्क विस्तार।."
-  },
-  "disable_inline": {
-    "message": "इनलाइन पाठ विज्ञापनों को अक्षम करें"
+    "message": "50 लाख से अधिक लोगों द्वारा इस्तेमाल किया गया, Safari में  सब कष्टप्रद विज्ञापनों, मैलवेयर और ट्रैकिंग को  ब्लॉक करने के लिए एक मुफ़्त ad blocker."
   },
   "disabled_for_site": {
     "message": "इस साइट पर <strong>इस्तेमाल न करे</strong>"
@@ -45,7 +42,7 @@
     "message": "निम्नलिखित डोमिन पर Adblock Plus का इस्ताल नहीं किआ जा रहा। आप ऄड्रेस बार मै Adblock Plus आइकॉन को क्लिक कर अथवा डिब्बी मे डोमेन (यूआरएल नहीं) टाइप कर, फिर \"ऐड डोमेन\" बटन दबा कर, नए अपवाद बना सकते है।"
   },
   "easy_create_filter": {
-    "message": "तत्वों को प्रतिबंधित करें "
+    "message": "तत्वों को प्रतिबंधित करें"
   },
   "edit_filters_raw": {
     "message": "फिल्टरों को रौ टेक्स्ट के रूप मै सम्पादित करे"
@@ -68,6 +65,14 @@
   "general": {
     "message": "सामान्य "
   },
+  "invalid_css_selector": {
+    "message": "$selector$ एक मान्य सीएसएस चयनकर्ता नहीं है",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "पिछली अद्यतन तिथि: $time$ $date$ को संपन्न",
     "placeholders": {
@@ -87,11 +92,22 @@
       }
     }
   },
+  "line": {
+    "message": "रेखा $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
   "name_devbuild": {
     "message": "एड ब्लॉक प्लस विकास निर्माण"
   },
   "notification_with_buttons": {
     "message": "इस अधिसूचना के सारे लिंक खोलने के लिए \"ok\" बटन दबाये"
+  },
+  "notification_without_buttons": {
+    "message": "अधिसूचना में यह सभी लिंक को खोलने को क्लिक करें।"
   },
   "options": {
     "message": "Adblock Plus विकल्प"
