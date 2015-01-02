@@ -18,7 +18,7 @@
     "message": "Aplicar mudanças"
   },
   "block_element": {
-    "message": "Bloquear Elemento"
+    "message": "Bloquear elemento"
   },
   "cancel": {
     "message": "Cancelar"
@@ -27,16 +27,13 @@
     "message": "Após o encerramento desta janela, clique (ou dê um clique com o botão direito) em um elemento da página."
   },
   "description_chrome": {
-    "message": "A ferramenta gratuita de bloqueio de anúncios para o Chrome: Bloqueie anúncios irritantes nos vídeos do Youtube, propagandas no Facebook, banners e muito mais."
+    "message": "Usado por mais 50 milhões de pessoas, um bloqueador de anúncios grátis para o Chrome que bloqueia anúncios, malware e rastreamento."
   },
   "description_opera": {
-    "message": "A ferramenta gratuita de bloqueio de anúncios para o Opera: bloqueia anúncios no YouTube, Facebook, banners e muito mais."
+    "message": "Usado por mais 50 milhões de pessoas, um bloqueador de anúncios gratuitos para o Opera que bloqueia TODOS os anúncios irritantes, malware e rastreamento."
   },
   "description_safari": {
-    "message": "A ferramenta gratuita de bloqueio de anúncios para o Safari: bloqueia anúncios no YouTube, Facebook, banners e muito mais."
-  },
-  "disable_inline": {
-    "message": "Desativar anúncios de texto embutido"
+    "message": "Usado por mais 50 milhões de pessoas, um bloqueador de anúncios gratuitos para o Safari que bloqueia TODOS os anúncios irritantes, malware e rastreamento."
   },
   "disabled_for_site": {
     "message": "<strong>Desativado</strong> neste site"

@@ -26,18 +26,6 @@
   "clickhide_instructions": {
     "message": "Després de tancar aquest Pop-up, clica (o fes clic amb el botó dret) a un element de la pàgina."
   },
-  "description_chrome": {
-    "message": "L'eina gratuita antianuncis del Chrome: Bloqueja anuncis molestos de vídeo al YouTube, anuncis del Facebook, bàners i molt més."
-  },
-  "description_opera": {
-    "message": "L'eina gratuita antianuncis per a l'Opera: Bloqueja anuncis molestos de vídeo al YouTube, anuncis del Facebook, bàners i molt més."
-  },
-  "description_safari": {
-    "message": "L'eina gratuita antianuncis per al Safari: Bloqueja anuncis molestos de vídeo al YouTube, anuncis del Facebook, bàners i molt més."
-  },
-  "disable_inline": {
-    "message": "Desactiva els anuncis de text en línia"
-  },
   "disabled_for_site": {
     "message": "S'ha <strong>deshabilitat</strong> per a aquest lloc"
   },

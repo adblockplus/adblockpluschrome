@@ -27,16 +27,13 @@
     "message": "Po zavření tohoto vyskakovacího okna klikněte levým (nebo pravým) tlačítkem myši na prvek na stránce."
   },
   "description_chrome": {
-    "message": "Bezplatný nástroj na blokování reklam pro Chrome: Blokuje otravné video reklamy na YouTube, reklamy na Facebooku, bannery a mnohem více."
+    "message": "Rozšiření pro Chrome, které zablokuje všechny otravné reklamy, malware, sledování a je zdarma. Používá více než 50 milionů lidí."
   },
   "description_opera": {
-    "message": "Bezplatný nástroj na blokování reklam pro Operu: Blokuje otravné video reklamy na YouTube, reklamy na Facebooku, bannery a mnohem více."
+    "message": "Rozšíření pro Operu, které zablokuje všechny otravné reklamy, malware, sledování a je zdarma. Používá více než 50 milionů lidí."
   },
   "description_safari": {
-    "message": "Bezplatný nástroj na blokování reklam pro Safari: Blokuje otravné video reklamy na YouTube, reklamy na Facebooku, bannery a mnohem více."
-  },
-  "disable_inline": {
-    "message": "Zakázat vložené textové reklamy"
+    "message": "Rozšíření pro Safari, které zablokuje všechny otravné reklamy, malware, sledování a je zdarma. Používá více než 50 milionů lidí."
   },
   "disabled_for_site": {
     "message": "<strong>Zakázáno</strong> na této stránce"

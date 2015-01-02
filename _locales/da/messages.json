@@ -27,16 +27,13 @@
     "message": "Luk dette popup-vindue, og klik (eller højreklik) derefter på et element på siden."
   },
   "description_chrome": {
-    "message": "Gratis værktøj til blokering af reklamer i Chrome: Blokerer irriterende reklamer i videoer på YouTube, Facebook-reklamer, bannerannoncer og meget mere."
+    "message": "brugt af over 50 millioner mennesker, en gratis reklame blokker til Chrome som blokere Alle irriterrende reklamer, malware og sporing."
   },
   "description_opera": {
-    "message": "Gratis værktøj til blokering af reklamer i Opera: Blokerer irriterende reklamer i videoer på YouTube, Facebook-reklamer, bannerannoncer og meget mere."
+    "message": "brugt af over 50 millioner mennesker, en gratis reklame blokker til Opera som blokere Alle irriterrende reklamer, malware og sporing."
   },
   "description_safari": {
-    "message": "Gratis værktøj til blokering af reklamer i Safari: Blokerer irriterende reklamer i videoer på YouTube, Facebook-reklamer, bannerannoncer og meget mere."
-  },
-  "disable_inline": {
-    "message": "Deaktiver inline-tekstannoncer"
+    "message": "brugt af over 50 millioner mennesker, en gratis reklame blokker til Safari som blokere Alle irriterrende reklamer, malware og sporing."
   },
   "disabled_for_site": {
     "message": "<strong>Deaktiveret</strong> på dette websted"

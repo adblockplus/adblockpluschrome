@@ -27,16 +27,13 @@
     "message": "Užvėrus šį iššokantį langą, paspauskite (arba dešiniu mygtuku) ant elemento esančio puslapyje."
   },
   "description_chrome": {
-    "message": "Nemokamas reklamų blokavimo įrankis skirtas Chrome: blokuoja erzinančias reklamas YouTube tinklapyje,  Facebook reklamas, banerius ir dar daugiau."
+    "message": "Populiari, nemokama reklamų blokavimo programa „Chrome” naršyklei blokuoja įkyrias reklamas, kenkėjišką įrangą ir sekimą."
   },
   "description_opera": {
-    "message": "Nemokamas reklamų blokavimo įrankis skirtas Opera: blokuoja erzinančias reklamas YouTube tinklapyje,  Facebook reklamas, banerius ir dar daugiau."
+    "message": "Populiari, nemokama reklamų blokavimo programa „Opera” naršyklei blokuoja įkyrias reklamas, kenkėjišką įrangą ir sekimą."
   },
   "description_safari": {
-    "message": "Nemokamas reklamų blokavimo įrankis skirtas Safari: blokuoja erzinančias reklamas YouTube tinklapyje,  Facebook reklamas, banerius ir dar daugiau."
-  },
-  "disable_inline": {
-    "message": "Išjungti vietines teksto reklamas"
+    "message": "Populiari, nemokama reklamų blokavimo programa „Safari” naršyklei blokuoja įkyrias reklamas, kenkėjišką įrangą ir sekimą."
   },
   "disabled_for_site": {
     "message": "Šiame puslapyje <strong>išjungta</strong>"

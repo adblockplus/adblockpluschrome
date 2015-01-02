@@ -18,25 +18,13 @@
     "message": "Rakenda muudatused"
   },
   "block_element": {
-    "message": "Blokeeri Element"
+    "message": "Blokeeri element"
   },
   "cancel": {
     "message": "Loobu"
   },
   "clickhide_instructions": {
     "message": "Pärast sulgemist hüpikaken, klõpsake (või paremklõps) element lehel."
-  },
-  "description_chrome": {
-    "message": "Tasuta adblock vahend Chrome: Ploki tüütu video YouTube'is reklaame Facebook reklaame, plakatid ja palju muud."
-  },
-  "description_opera": {
-    "message": "Tasuta adblock vahend Opera: Ploki tüütu video YouTube'is reklaame Facebook reklaame, plakatid ja palju muud."
-  },
-  "description_safari": {
-    "message": "Tasuta adblock vahend Safari: Ploki tüütu video YouTube'is reklaame Facebook reklaame, plakatid ja palju muud."
-  },
-  "disable_inline": {
-    "message": "Keela inline tekst reklaame"
   },
   "disabled_for_site": {
     "message": "<strong>Puuetega</strong> sellel saidil"
@@ -45,7 +33,7 @@
     "message": "AdBlock Plus on keelatud valdkondades, valesti on loetletud allpool. Saate lisada domeeni kas vahendusel AdBlock Plus aadressiribal ikooni VÕI kirjutades domeeni (Mitte URL) lahtrisse JA klõpsa \"Lisa domeen\" Nuppu."
   },
   "easy_create_filter": {
-    "message": "Block element"
+    "message": "Blokeeri element"
   },
   "edit_filters_raw": {
     "message": "Edit filtrid tekstigfail"

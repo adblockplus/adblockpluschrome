@@ -27,16 +27,13 @@
     "message": "Ao fechar esta janela, clique (ou clique com o botão direito) num elemento da página."
   },
   "description_chrome": {
-    "message": "A ferramenta adblock gratuita para o Chrome: bloqueia anúncios de vídeo irritantes no YouTube, anúncios do Facebook, faixas e muito mais."
+    "message": "Usada por 50 milhões de pessoas, o bloqueador de anúncios para o Chrome que bloqueia os anúncios irritantes, malware e rastreadores."
   },
   "description_opera": {
-    "message": "A ferramenta adblock gratuita para o Opera: bloqueia anúncios de vídeo irritantes no YouTube, Facebook, faixas e muito mais."
+    "message": "Usada por 50 milhões de pessoas, o bloqueador de anúncios para o Opera que bloqueia os anúncios irritantes, malware e rastreadores."
   },
   "description_safari": {
-    "message": "A ferramenta adblock gratuita para o Safari: bloqueia anúncios de vídeo irritantes no YouTube, Facebook, faixas e muito mais."
-  },
-  "disable_inline": {
-    "message": "Desativar anúncios de texto em linha"
+    "message": "Usada por 50 milhões de pessoas, o bloqueador de anúncios para o Safari que bloqueia os anúncios irritantes, malware e rastreadores."
   },
   "disabled_for_site": {
     "message": "<strong>Desativado</strong> neste site"
@@ -68,6 +65,14 @@
   "general": {
     "message": "Geral"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ não é um seletor CSS válido",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Última atualização às $time$ de $date$",
     "placeholders": {
@@ -83,6 +88,14 @@
     "message": "Última atualização hoje às $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Linha $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -157,6 +170,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Por favor, escolha uma subscrição de filtro da lista:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filtrar lista de cabeçalhos não é permitido aqui"
   },
   "update_now": {
     "message": "Atualizar agora"

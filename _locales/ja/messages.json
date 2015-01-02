@@ -27,16 +27,13 @@
     "message": "このポップアップが閉じた後にページ上の要素をクリック(または右クリック)してください。"
   },
   "description_chrome": {
-    "message": "無料の Chrome 用広告ブロックツール: 迷惑な YouTube のビデオ広告、Facebook 広告、バナー広告等をブロックします"
+    "message": "5,000万人以上に利用されている、Chrome 用の無料の広告ブロッカーです。目障りな広告、マルウェア、行動追跡を根こそぎブロックします。"
   },
   "description_opera": {
-    "message": "無料の Opera 用広告ブロックツール: 迷惑な YouTube のビデオ広告、Facebook 広告、バナー広告等をブロックします"
+    "message": "5,000万人以上に利用されている、Opera 用の無料の広告ブロッカーです。目障りな広告、マルウェア、行動追跡を根こそぎブロックします。"
   },
   "description_safari": {
-    "message": "無料の Safari 用広告ブロックツール: 迷惑な YouTube のビデオ広告、Facebook 広告、バナー広告等をブロックします"
-  },
-  "disable_inline": {
-    "message": "インラインテキスト広告を無効にする"
+    "message": "5,000万人以上に利用されている、Safari 用の無料の広告ブロッカーです。目障りな広告、マルウェア、行動追跡を根こそぎブロックします。"
   },
   "disabled_for_site": {
     "message": "このサイトで<strong>無効</strong>"
@@ -175,7 +172,7 @@
     "message": "購読したいフィルタをリストから選択してください:"
   },
   "unexpected_filter_list_header": {
-    "message": "ここにフィルタリストのヘッダーは記述できません"
+    "message": "ここにフィルタのヘッダーを記述することはできません"
   },
   "update_now": {
     "message": "今すぐ更新"

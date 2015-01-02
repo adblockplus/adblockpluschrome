@@ -27,16 +27,13 @@
     "message": "Nakon zatvaranja ovog skočnog prozora, kliknite (ili desni klik miša) na element na ovoj stranici."
   },
   "description_chrome": {
-    "message": "Besplatan alat koji blokira reklame za Chrome. Blokira naporne video reklame na YouTubu, Facebook reklame, transparente i još mnogo toga."
+    "message": "Koristi ga više od 50 miliona ljudi, addblocker Chrome blokira iritirajuće oglase, zlonamjerne programe i praćenje."
   },
   "description_opera": {
-    "message": "Besplatan alat koji blokira reklame za Operu. Blokira naporne video reklame na YouTubu, Facebook reklame, transparente i još mnogo toga."
+    "message": "Koristi ga više od 50 miliona ljudi, addblocker Opera blokira iritirajuće oglase, zlonamjerne programe i praćenje."
   },
   "description_safari": {
-    "message": "Besplatan alat koji blokira reklame za Safari. Blokira naporne video reklame na YouTubu, Facebook reklame, transparente i još mnogo toga."
-  },
-  "disable_inline": {
-    "message": "Onemogući tekstualne reklame iste linije"
+    "message": "Koristi ga više od 50 miliona ljudi, addblocker Safari blokira iritirajuće oglase, zlonamjerne programe i praćenje."
   },
   "disabled_for_site": {
     "message": "<strong>Onemogućeno</strong> na ovoj stranici"

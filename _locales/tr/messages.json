@@ -27,16 +27,13 @@
     "message": "Bu pencere kapandığında, engelleyeceğiniz ögeye tıklayın (veya sağ tıklayın)."
   },
   "description_chrome": {
-    "message": "Chrome için ücretsiz reklam engelleyici: Facebook, YouTube, vb. sitelerdeki reklamları, banner'ları ve daha fazlasını engeller."
+    "message": "50 milyondan fazla kişinin kullandığı, Tüm reklamları ve zararlıları engelleyen Chrome için bedava bir reklam engelleyicisidir."
   },
   "description_opera": {
-    "message": "Opera için ücretsiz reklam engelleme aracı: Sinir bozan YouTube reklamlarını, Facebook reklamlarını, reklam bantlarını ve çok daha fazlasını engeller."
+    "message": "50 milyondan fazla kişinin kullandığı, Tüm reklamları ve zararlıları engelleyen, Opera için bedava bir reklam engelleyicisidir."
   },
   "description_safari": {
-    "message": "Safari için ücretsiz reklam engelleme aracı: Sinir bozan YouTube reklamlarını, Facebook reklamlarını, reklam bantlarını ve çok daha fazlasını engeller."
-  },
-  "disable_inline": {
-    "message": "Metin reklamlarını devre dışı bırak"
+    "message": "50 milyondan fazla kişinin kullandığı, Tüm reklamları ve zararlıları engelleyen Safari için bedava bir reklam engelleyicisidir."
   },
   "disabled_for_site": {
     "message": "Bu sitede <strong>devre dışı</strong>"

@@ -26,18 +26,6 @@
   "clickhide_instructions": {
     "message": "לאחר סגירת חלון זה, לחצו (אפשרי לחיצה-ימנית) על רכיב בעמוד זה."
   },
-  "description_chrome": {
-    "message": "כלי חסימת הפרסומות החינמי עבור Chrome: חסימת מודעות וידאו מטרידות ב-YouTube, מודעות Facebook , באנרים ועוד רבות."
-  },
-  "description_opera": {
-    "message": "כלי חסימת הפרסומות החינמי עבור Opera: חסימת מודעות וידאו מטרידות ב-YouTube, מודעות Facebook , באנרים ועוד רבות."
-  },
-  "description_safari": {
-    "message": "כלי חסימת הפרסומות החינמי עבור Safari: חסימת מודעות וידאו מטרידות ב-YouTube, מודעות Facebook , באנרים ועוד רבות."
-  },
-  "disable_inline": {
-    "message": "ניטרול מודעות טקסט"
-  },
   "disabled_for_site": {
     "message": "<strong>מנוטרל</strong> באתר זה"
   },

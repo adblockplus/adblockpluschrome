@@ -27,16 +27,13 @@
     "message": "Tras cerrar este menú desplegable, pulse (o con botón derecho) en un elemento de la página."
   },
   "description_chrome": {
-    "message": "La herramienta gratuita para bloquear publicidad en Chrome: anuncios en vídeos de YouTube y en Facebook, banners, y mucho más."
+    "message": "Un bloqueador gratuito para Chrome de TODA la publicidad molesta, el malware y el tracking, con más de 50 millones de usuarios."
   },
   "description_opera": {
-    "message": "La herramienta gratuita para bloquear publicidad en Opera: anuncios en vídeos de YouTube y en Facebook, banners, y mucho más."
+    "message": "Un bloqueador gratuito para Opera de TODA la publicidad molesta, el malware y el tracking, con más de 50 millones de usuarios."
   },
   "description_safari": {
-    "message": "La herramienta gratuita para bloquear publicidad en Safari: anuncios en vídeos de YouTube y en Facebook, banners, y mucho más."
-  },
-  "disable_inline": {
-    "message": "Desactivar anuncios de texto en línea"
+    "message": "Un bloqueador gratuito para Safari de TODA la publicidad molesta, el malware y el tracking, con más de 50 millones de usuarios."
   },
   "disabled_for_site": {
     "message": "<strong>Desactivado</strong> en este sitio"
