@@ -26,7 +26,6 @@ document_end = include.postload.js
 [mapping]
 ext/content.js = chrome/ext/content.js
 ext/popup.js = chrome/ext/popup.js
-notification.html = chrome/notification.html
 subscriptions.xml = adblockplus/chrome/content/ui/subscriptions.xml
 firstRun.html = adblockplusui/firstRun.html
 firstRun.js = adblockplusui/firstRun.js
