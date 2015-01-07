@@ -41,7 +41,7 @@ var defaultMatcher = require("matcher").defaultMatcher;
 var Prefs = require("prefs").Prefs;
 var Synchronizer = require("synchronizer").Synchronizer;
 var Utils = require("utils").Utils;
-var Notification = require("notification").Notification;
+var NotificationStorage = require("notification").Notification;
 var initAntiAdblockNotification = require("antiadblockInit").initAntiAdblockNotification;
 var parseFilters = require("filterValidation").parseFilters;
 
@@ -299,8 +299,8 @@ function notificationButtonClick(buttonIndex)
 {
   if (activeNotification.type === "question")
   {
-    Notification.triggerQuestionListeners(activeNotification.id, buttonIndex === 0);
-    Notification.markAsShown(activeNotification.id);
+    NotificationStorage.triggerQuestionListeners(activeNotification.id, buttonIndex === 0);
+    NotificationStorage.markAsShown(activeNotification.id);
     activeNotification.onClicked();
   }
   else if (activeNotification.links && activeNotification.links[buttonIndex])
@@ -365,16 +365,7 @@ function showNotification(notification)
   activeNotification = notification;
   if (activeNotification.type === "critical" || activeNotification.type === "question")
   {
-    var hasWebkitNotifications = typeof webkitNotifications !== "undefined";
-    if (hasWebkitNotifications && "createHTMLNotification" in webkitNotifications)
-    {
-      var notification = webkitNotifications.createHTMLNotification("notification.html");
-      notification.show();
-      prepareNotificationIconAndPopup();
-      return;
-    }
-
-    var texts = Notification.getLocalizedTexts(notification);
+    var texts = NotificationStorage.getLocalizedTexts(notification);
     var title = texts.title || "";
     var message = texts.message ? texts.message.replace(/<\/?(a|strong)>/g, "") : "";
     var iconUrl = ext.getURL("icons/abp-128.png");
@@ -409,17 +400,25 @@ function showNotification(notification)
         chrome.notifications.create("", opts, function() {});
       });
     }
-    else if (hasWebkitNotifications && "createNotification" in webkitNotifications && activeNotification.type !== "question")
+    else if ("Notification" in window && activeNotification.type !== "question")
     {
       if (hasLinks)
         message += " " + ext.i18n.getMessage("notification_without_buttons");
 
       imgToBase64(iconUrl, function(iconData)
       {
-        var notification = webkitNotifications.createNotification(iconData, title, message);
-        notification.show();
-        notification.addEventListener("click", openNotificationLinks, false);
-        notification.addEventListener("close", notificationClosed, false);
+        var notification = new Notification(
+          title,
+          {
+            lang: Utils.appLocale,
+            dir: ext.i18n.getMessage("@@bidi_dir"),
+            body: message,
+            icon: iconData
+          }
+        );
+
+        notification.addEventListener("click", openNotificationLinks);
+        notification.addEventListener("close", notificationClosed);
       });
     }
     else
@@ -579,7 +578,7 @@ ext.pages.onLoading.addListener(function(page)
 
 setTimeout(function()
 {
-  var notificationToShow = Notification.getNextToShow();
+  var notificationToShow = NotificationStorage.getNextToShow();
   if (notificationToShow)
     showNotification(notificationToShow);
 }, 3 * 60 * 1000);

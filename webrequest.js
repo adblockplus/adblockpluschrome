@@ -66,7 +66,7 @@ function onBeforeRequest(url, type, page, frame)
   // check for notifications here
   if (platform != "chromium" && type == "sub_frame")
   {
-    var notificationToShow = Notification.getNextToShow(url);
+    var notificationToShow = NotificationStorage.getNextToShow(url);
     if (notificationToShow)
       showNotification(notificationToShow);
   }
@@ -100,7 +100,7 @@ if (platform == "chromium")
         processKey(header.value, page, frame);
     }
 
-    var notificationToShow = Notification.getNextToShow(details.url);
+    var notificationToShow = NotificationStorage.getNextToShow(details.url);
     if (notificationToShow)
       showNotification(notificationToShow);
   }
