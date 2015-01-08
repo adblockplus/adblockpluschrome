@@ -330,7 +330,14 @@
           if (requestType == "other" && parseInt(navigator.userAgent.match(/\bChrome\/(\d+)/)[1], 10) >= 38)
             requestType = "object";
 
-          if (!ext.webRequest.onBeforeRequest._dispatch(details.url, requestType, new Page({id: details.tabId}), frame))
+          var results = ext.webRequest.onBeforeRequest._dispatch(
+            details.url,
+            requestType,
+            new Page({id: details.tabId}),
+            frame
+          );
+
+          if (results.indexOf(false) != -1)
             return {cancel: true};
         }
       }
