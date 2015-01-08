@@ -37,13 +37,28 @@
     },
     handleRequest: function(request, sender)
     {
-      var sendResponse;
       if ("callbackId" in request)
-        sendResponse = this._sendResponse.bind(this, request);
-      else
-        sendResponse = function() {};
+      {
+        var sent = false;
+        var sendResponse = function(message)
+        {
+          this._sendResponse(request, message);
+          sent = true;
+        }.bind(this);
 
-      ext.onMessage._dispatch(request.payload, sender, sendResponse);
+        var results = ext.onMessage._dispatch(request.payload, sender, sendResponse);
+
+        // The onMessage listener has to return true to indicate that a response
+        // is sent later asynchronously. Otherwise if no response was sent yet,
+        // we sent a response indicating that there is no response, that
+        // the other end can remove the callback and doesn't leak memory.
+        if (!sent && results.indexOf(true) == -1)
+          this._sendResponse(request, undefined);
+      }
+      else
+      {
+        ext.onMessage._dispatch(request.payload, sender, function() {});
+      }
     },
     handleResponse: function(response)
     {
@@ -52,7 +67,9 @@
       if (callback)
       {
         delete this._responseCallbacks[callbackId];
-        callback(response.payload);
+
+        if (typeof response.payload != "undefined")
+          callback(response.payload);
       }
     },
     sendMessage: function(message, responseCallback, extra)

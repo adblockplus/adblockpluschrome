@@ -611,13 +611,14 @@
             break;
           case "webRequest":
             var page = pages[event.message.pageId];
-
-            event.message = ext.webRequest.onBeforeRequest._dispatch(
+            var results = ext.webRequest.onBeforeRequest._dispatch(
               event.message.url,
               event.message.type,
               page,
               page._frames[event.message.frameId]
             );
+
+            event.message = (results.indexOf(false) == -1);
             break;
           case "proxy":
             event.message = backgroundPageProxy.handleMessage(event.message);
