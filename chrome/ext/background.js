@@ -254,7 +254,7 @@
   };
 
   ext.webRequest = {
-    onBeforeRequest: new ext._EventTarget(true),
+    onBeforeRequest: new ext._EventTarget(),
     handlerBehaviorChanged: chrome.webRequest.handlerBehaviorChanged
   };
 
@@ -392,7 +392,7 @@
       }
     };
 
-    return ext.onMessage._dispatch(message, sender, sendResponse);
+    return ext.onMessage._dispatch(message, sender, sendResponse).indexOf(true) != -1;
   });
 
 
