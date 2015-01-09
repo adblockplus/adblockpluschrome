@@ -298,7 +298,7 @@
   /* Web requests */
 
   ext.webRequest = {
-    onBeforeRequest: new ext._EventTarget(true),
+    onBeforeRequest: new ext._EventTarget(),
     handlerBehaviorChanged: function() {}
   };
 
