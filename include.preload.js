@@ -154,12 +154,16 @@ function reinjectRulesWhenRemoved(document, style)
 
 function init(document)
 {
-  // use Shadow DOM if available to don't mess with web pages that
-  // rely on the order of their own <style> tags (#309). However we
-  // must not create the shadow root in the response callback passed
-  // to sendMessage(), otherwise Chrome breaks some websites (#450).
+  // Use Shadow DOM if available to don't mess with web pages that rely on
+  // the order of their own <style> tags (#309).
+  //
+  // However, creating a shadow root breaks running CSS transitions. So we
+  // have to create the shadow root before transistions might start (#452).
+  //
+  // Also, we can't use shadow DOM on Google Docs, since it breaks printing
+  // there (#1770).
   var shadow = null;
-  if ("createShadowRoot" in document.documentElement)
+  if ("createShadowRoot" in document.documentElement && document.domain != "docs.google.com")
   {
     shadow = document.documentElement.createShadowRoot();
     shadow.appendChild(document.createElement("shadow"));
