@@ -252,26 +252,47 @@ function getAbsolutePosition(elt) {
 
 // Adds an overlay to an element, which is probably a Flash object
 function addElementOverlay(elt) {
-  // If the element isn't rendered (since its or one of its ancestor's
-  // "display" property is "none"), the overlay wouldn't match the element.
-  if (!elt.offsetParent)
-    return;
+  var zIndex = "auto";
+  var position = "absolute";
 
-  var thisStyle = getComputedStyle(elt, null);
+  for (var e = elt; e; e = e.parentElement)
+  {
+    var style = getComputedStyle(e);
+
+    // If the element isn't rendered (since its or one of its ancestor's
+    // "display" property is "none"), the overlay wouldn't match the element.
+    if (style.display == "none")
+      return null;
+
+    // If the element or one of its ancestors uses fixed postioning, the overlay
+    // has to use fixed postioning too. Otherwise it might not match the element.
+    if (style.position == "fixed")
+      position = "fixed";
+
+    // Determine the effective z-index, which is the highest z-index used
+    // by the element and its offset ancestors. When using a lower z-index
+    // the element would cover the overlay. When using a higher z-index the
+    // overlay might also cover other elements.
+    if (style.position != "static" && style.zIndex != "auto")
+    {
+      if (zIndex == "auto")
+        zIndex = style.zIndex;
+      else
+        zIndex = Math.max(zIndex, style.zIndex);
+    }
+  }
+
   var overlay = document.createElement('div');
   overlay.prisoner = elt;
   overlay.className = "__adblockplus__overlay";
-  overlay.setAttribute('style', 'opacity:0.4; display:inline-box; position:absolute; overflow:hidden; box-sizing:border-box;');
+  overlay.setAttribute('style', 'opacity:0.4; display:inline-box; overflow:hidden; box-sizing:border-box;');
   var pos = getAbsolutePosition(elt);
   overlay.style.width = elt.offsetWidth + "px";
   overlay.style.height = elt.offsetHeight + "px";
   overlay.style.left = pos[0] + "px";
   overlay.style.top = pos[1] + "px";
-
-  if (thisStyle.position != "static")
-    overlay.style.zIndex = thisStyle.zIndex;
-  else
-    overlay.style.zIndex = getComputedStyle(elt.offsetParent).zIndex;
+  overlay.style.position = position;
+  overlay.style.zIndex = zIndex;
 
   // elt.parentNode.appendChild(overlay, elt);
   document.body.appendChild(overlay);
