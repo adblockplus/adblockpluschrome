@@ -48,77 +48,31 @@ function escapeCSS(s)
   return s.replace(/^[\d\-]|[^\w\-\u0080-\uFFFF]/g, escapeChar);
 }
 
-function supportsShadowRoot(element)
-{
-  if (!("createShadowRoot" in element))
-    return false;
-
-  // There are some elements (e.g. <textarea>), which don't
-  // support author created shadow roots and throw an exception.
-  var clone = element.cloneNode(false);
-  try
-  {
-    clone.createShadowRoot();
-  }
-  catch (e)
-  {
-    return false;
-  }
-
-  // There are some elements (e.g. <input>), which support
-  // author created shadow roots, but ignore insertion points.
-  var child = document.createTextNode("");
-  clone.appendChild(child);
-
-  var shadow = document.createElement("shadow");
-  clone.shadowRoot.appendChild(shadow);
-
-  return shadow.getDistributedNodes()[0] == child;
-}
-
-function getOriginalStyle(element)
-{
-  if ("_originalStyle" in element)
-    return element._originalStyle;
-
-  return element.getAttribute("style");
-}
-
 function highlightElement(element, shadowColor, backgroundColor)
 {
   unhighlightElement(element);
 
-  var originalBoxShadowPriority = element.style.getPropertyPriority("box-shadow");
-  var originalBackgroundColorPriority = element.style.getPropertyPriority("background-color");
-
-  var boxShadow = "inset 0px 0px 5px " + shadowColor;
-
-  var highlightWithShadowDOM = function()
+  var highlightWithOverlay = function()
   {
-    var style = document.createElement("style");
-    style.textContent = ":host {" +
-      "box-shadow:" + boxShadow + " !important;" +
-      "background-color:" + backgroundColor + " !important;" +
-    "}";
+    var overlay = addElementOverlay(element);
 
-    var root = element.createShadowRoot();
-    root.appendChild(document.createElement("shadow"));
-    root.appendChild(style);
+    highlightElement(overlay, shadowColor, backgroundColor);
+    overlay.style.pointerEvents = "none";
 
     element._unhighlight = function()
     {
-      root.removeChild(style);
+      overlay.parentNode.removeChild(overlay);
     };
   };
 
   var highlightWithStyleAttribute = function()
   {
     var originalBoxShadow = element.style.getPropertyValue("box-shadow");
+    var originalBoxShadowPriority = element.style.getPropertyPriority("box-shadow");
     var originalBackgroundColor = element.style.getPropertyValue("background-color");
+    var originalBackgroundColorPriority = element.style.getPropertyPriority("background-color");
 
-    element._originalStyle = getOriginalStyle(element);
-
-    element.style.setProperty("box-shadow", boxShadow, "important");
+    element.style.setProperty("box-shadow", "inset 0px 0px 5px " + shadowColor, "important");
     element.style.setProperty("background-color", backgroundColor, "important");
 
     element._unhighlight = function()
@@ -139,14 +93,10 @@ function highlightElement(element, shadowColor, backgroundColor)
     };
   };
 
-  // Use shadow DOM if posibble to avoid side effects when the
-  // web page updates style while highlighted. However, if the
-  // element has important styles we can't override them with shadow DOM.
-  if (supportsShadowRoot(element) && originalBoxShadowPriority       != "important" &&
-                                     originalBackgroundColorPriority != "important")
-    highlightWithShadowDOM();
-  else
+  if ("prisoner" in element)
     highlightWithStyleAttribute();
+  else
+    highlightWithOverlay();
 }
 
 
@@ -279,7 +229,7 @@ function isBlockable(element)
   // We only generate filters based on the "style" attribute,
   // if this is the only way we can generate a filter, and
   // only if there are at least two CSS properties defined.
-  if (/:.+:/.test(getOriginalStyle(element)))
+  if (/:.+:/.test(element.getAttribute("style")))
     return true;
 
   return false;
@@ -302,15 +252,6 @@ function getAbsolutePosition(elt) {
 
 // Adds an overlay to an element, which is probably a Flash object
 function addElementOverlay(elt) {
-  // If this element is enclosed in an object tag, we prefer to block that instead
-  if(!elt)
-    return null;
-
-  // If element doesn't have at least one of class name, ID or URL, give up
-  // because we don't know how to construct a filter rule for it
-  if(!isBlockable(elt))
-    return;
-
   // If the element isn't rendered (since its or one of its ancestor's
   // "display" property is "none"), the overlay wouldn't match the element.
   if (!elt.offsetParent)
@@ -320,8 +261,10 @@ function addElementOverlay(elt) {
   var overlay = document.createElement('div');
   overlay.prisoner = elt;
   overlay.className = "__adblockplus__overlay";
-  overlay.setAttribute('style', 'opacity:0.4; background-color:#ffffff; display:inline-box; ' + 'width:' + thisStyle.width + '; height:' + thisStyle.height + '; position:absolute; overflow:hidden; -webkit-box-sizing:border-box;');
+  overlay.setAttribute('style', 'opacity:0.4; display:inline-box; position:absolute; overflow:hidden; box-sizing:border-box;');
   var pos = getAbsolutePosition(elt);
+  overlay.style.width = elt.offsetWidth + "px";
+  overlay.style.height = elt.offsetHeight + "px";
   overlay.style.left = pos[0] + "px";
   overlay.style.top = pos[1] + "px";
 
@@ -380,10 +323,14 @@ function clickHide_activate() {
   if (clickHide_activated || clickHideFiltersDialog)
     clickHide_deactivate();
 
-  // Add overlays for elements with URLs so user can easily click them
-  var elts = document.querySelectorAll('object,embed,img,iframe,video,audio,picture');
+  // Add overlays for blockable elements that don't emit mouse events that they can still be selected
+  var elts = document.querySelectorAll('object,embed,iframe');
   for(var i=0; i<elts.length; i++)
-    addElementOverlay(elts[i]);
+  {
+    var element = elts[i];
+    if (isBlockable(element))
+      addElementOverlay(element);
+  }
 
   clickHide_activated = true;
   document.addEventListener("mouseover", clickHide_mouseOver, true);
@@ -553,7 +500,7 @@ function clickHide_mouseClick(e)
   // as last resort, create a filter based on inline styles
   if (clickHideFilters.length == 0)
   {
-    var style = getOriginalStyle(elt);
+    var style = elt.getAttribute("style");
     if (style)
       addSelector(escapeCSS(elt.localName) + '[style=' + quote(style) + ']');
   }
@@ -693,7 +640,7 @@ if ("ext" in window && document instanceof HTMLDocument)
         if(lastRightClickEvent)
         {
           clickHide_activated = true;
-          currentElement = addElementOverlay(lastRightClickEvent.target);
+          currentElement = lastRightClickEvent.target;
           clickHide_mouseClick(lastRightClickEvent);
         }
         break;
