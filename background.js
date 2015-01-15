@@ -264,10 +264,6 @@ Prefs.addListener(function(name)
     refreshIconAndContextMenuForAllPages();
 });
 
-// TODO: This hack should be removed, however currently
-// the firstRun page still calls backgroundPage.openOptions()
-openOptions = ext.showOptions;
-
 function prepareNotificationIconAndPopup()
 {
   var animateIcon = (activeNotification.type !== "question");
