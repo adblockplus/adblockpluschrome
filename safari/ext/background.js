@@ -47,10 +47,6 @@
     {
       return this._frames[0].url;
     },
-    activate: function()
-    {
-      this._tab.activate();
-    },
     sendMessage: function(message, responseCallback)
     {
       this._messageProxy.sendMessage(message, responseCallback, {pageId: this._id});
@@ -671,10 +667,11 @@
     for (var id in pages)
     {
       var page = pages[id];
+      var tab = page._tab;
 
-      if (page.url == optionsUrl && page._tab.browserWindow == safari.application.activeBrowserWindow)
+      if (page.url == optionsUrl && tab.browserWindow == safari.application.activeBrowserWindow)
       {
-        page.activate();
+        tab.activate();
         if (callback)
           callback(page);
         return;

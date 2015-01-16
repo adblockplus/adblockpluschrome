@@ -46,19 +46,6 @@
           return frame.url;
       }
     },
-    activate: function()
-    {
-      chrome.tabs.get(this._id, function(tab)
-      {
-        chrome.tabs.highlight(
-          {
-            windowId: tab.windowId,
-            tabs: [tab.index]
-          },
-          function() {}
-        );
-      });
-    },
     sendMessage: function(message, responseCallback)
     {
       chrome.tabs.sendMessage(this._id, message, responseCallback);
