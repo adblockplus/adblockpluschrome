@@ -48,7 +48,16 @@
     },
     activate: function()
     {
-      chrome.tabs.update(this._id, {highlighted: true});
+      chrome.tabs.get(this._id, function(tab)
+      {
+        chrome.tabs.highlight(
+          {
+            windowId: tab.windowId,
+            tabs: [tab.index]
+          },
+          function() {}
+        );
+      });
     },
     sendMessage: function(message, responseCallback)
     {
@@ -423,7 +432,13 @@
           var tab = tabs[0];
 
           chrome.windows.update(tab.windowId, {focused: true});
-          chrome.tabs.update(tab.id, {highlighted: true});
+          chrome.tabs.highlight(
+            {
+              windowId: tab.windowId,
+              tabs: [tab.index]
+            },
+            function() {}
+          );
 
           if (callback)
             callback(new Page(tab));
