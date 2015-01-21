@@ -32,6 +32,7 @@ function init()
   ext.backgroundPage.sendMessage(
   {
     type: "forward",
+    expectsResponse: true,
     payload:
     {
       type: "clickhide-init",

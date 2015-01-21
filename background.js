@@ -560,10 +560,13 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
     case "forward":
       if (sender.page)
       {
-        sender.page.sendMessage(msg.payload, sendResponse);
-        // Return true to indicate that we want to call
-        // sendResponse asynchronously
-        return true;
+        if (msg.expectsResponse)
+        {
+          sender.page.sendMessage(msg.payload, sendResponse);
+          return true;
+        }
+
+        sender.page.sendMessage(msg.payload);
       }
       break;
   }
