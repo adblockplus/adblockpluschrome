@@ -19,7 +19,6 @@
 var clickHide_activated = false;
 var clickHide_filters = null;
 var currentElement = null;
-var clickHideFilters = null;
 var highlightedElementsSelector = null;
 var clickHideFiltersDialog = null;
 var lastRightClickEvent = null;
@@ -395,7 +394,6 @@ function clickHide_deactivate(keepOverlays)
       unhighlightElements();
       unhighlightElement(currentElement);
       currentElement = null;
-      clickHideFilters = null;
     }
     unhighlightElements();
 
@@ -474,8 +472,8 @@ function clickHide_mouseClick(e)
   if (currentElement.classList.contains("__adblockplus__overlay"))
     elt = currentElement.prisoner;
 
-  clickHideFilters = new Array();
-  selectorList = new Array();
+  var clickHideFilters = [];
+  var selectorList = [];
 
   var addSelector = function(selector)
   {
