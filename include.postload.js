@@ -325,12 +325,12 @@ function clickHide_showDialog(left, top, filters)
   {
     if (clickHideFiltersDialog)
       clickHideFiltersDialog.style.setProperty("opacity", "0.7");
-  }
+  };
   clickHideFiltersDialog.onmouseover = function()
   {
     if (clickHideFiltersDialog)
       clickHideFiltersDialog.style.setProperty("opacity", "1.0");
-  }
+  };
 
   document.body.appendChild(clickHideFiltersDialog);
 }
