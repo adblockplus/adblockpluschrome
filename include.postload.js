@@ -22,6 +22,7 @@ var currentElement = null;
 var highlightedElementsSelector = null;
 var clickHideFiltersDialog = null;
 var lastRightClickEvent = null;
+var lastRightClickEventValid = false;
 
 function escapeChar(chr)
 {
@@ -389,6 +390,8 @@ function clickHide_deactivate(keepOverlays)
 
   if (!keepOverlays)
   {
+    lastRightClickEvent = null;
+
     if (currentElement) {
       currentElement.removeEventListener("contextmenu",  clickHide_elementClickHandler, true);
       unhighlightElements();
@@ -524,8 +527,21 @@ function clickHide_mouseClick(e)
       addSelector(escapeCSS(elt.localName) + '[style=' + quote(style) + ']');
   }
 
-  // Show popup
-  clickHide_showDialog(e.clientX, e.clientY, clickHideFilters);
+  // Show popup, or if inside frame tell the parent to do it
+  if (window.self == window.top)
+    clickHide_showDialog(e.clientX, e.clientY, clickHideFilters);
+  else
+    ext.backgroundPage.sendMessage(
+    {
+      type: "forward",
+      payload:
+      {
+        type: "clickhide-show-dialog",
+        screenX: e.screenX,
+        screenY: e.screenY,
+        clickHideFilters: clickHideFilters
+      }
+    });
 
   // Highlight the elements specified by selector in yellow
   if (selectorList.length > 0)
@@ -577,8 +593,20 @@ if ("ext" in window && document instanceof HTMLDocument)
   // To make things easier, we actually save the DOM event.
   // We have to do this because the contextMenu API only provides a URL, not the actual
   // DOM element.
-  document.addEventListener('contextmenu', function(e) {
+  document.addEventListener('contextmenu', function(e)
+  {
     lastRightClickEvent = e;
+    // We also need to ensure any old lastRightClickEvent variables in other
+    // frames are cleared.
+    lastRightClickEventValid = true;
+    ext.backgroundPage.sendMessage(
+    {
+      type: "forward",
+      payload:
+      {
+        type: "clickhide-clear-last-right-click-event"
+      }
+    });
   }, true);
 
   document.addEventListener("click", function(event)
@@ -681,7 +709,7 @@ if ("ext" in window && document instanceof HTMLDocument)
         }
         break;
       case "clickhide-close":
-        if (clickHideFiltersDialog && msg.remove)
+        if (currentElement && msg.remove)
         {
           // Explicitly get rid of currentElement
           var element = currentElement.prisoner || currentElement;
@@ -689,6 +717,18 @@ if ("ext" in window && document instanceof HTMLDocument)
             element.parentNode.removeChild(element);
         }
         clickHide_deactivate();
+        break;
+      case "clickhide-show-dialog":
+        if (window.self == window.top)
+          clickHide_showDialog(msg.screenX + window.pageXOffset,
+                               msg.screenY + window.pageYOffset,
+                               msg.clickHideFilters);
+        break;
+      case "clickhide-clear-last-right-click-event":
+        if (lastRightClickEventValid)
+          lastRightClickEventValid = false;
+        else
+          lastRightClickEvent = null;
         break;
     }
   });
