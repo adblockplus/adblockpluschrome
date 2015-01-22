@@ -152,6 +152,39 @@ function reinjectRulesWhenRemoved(document, style)
   observer.observe(style.parentNode, {childList: true});
 }
 
+function convertSelectorsForShadowDOM(selectors)
+{
+  var result = [];
+  var prefix = "::content ";
+
+  for (var i = 0; i < selectors.length; i++)
+  {
+    var selector = selectors[i];
+    var start = 0;
+    var sep = "";
+
+    for (var j = 0; j < selector.length; j++)
+    {
+      var chr = selector[j];
+      if (chr == "\\")
+        j++;
+      else if (chr == sep)
+        sep = "";
+      else if (chr == '"' || chr == "'")
+        sep = chr;
+      else if (chr == "," && sep == "")
+      {
+        result.push(prefix + selector.substring(start, j));
+        start = j + 1;
+      }
+    }
+
+    result.push(prefix + selector.substring(start));
+  }
+
+  return result;
+}
+
 function init(document)
 {
   // Use Shadow DOM if available to don't mess with web pages that rely on
@@ -181,9 +214,7 @@ function init(document)
     if (shadow)
     {
       shadow.appendChild(style);
-
-      for (var i = 0; i < selectors.length; i++)
-        selectors[i] = "::content " + selectors[i];
+      selectors = convertSelectorsForShadowDOM(selectors);
     }
     else
     {
