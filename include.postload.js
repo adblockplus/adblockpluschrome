@@ -270,15 +270,15 @@ function addElementOverlay(elt) {
       position = "fixed";
 
     // Determine the effective z-index, which is the highest z-index used
-    // by the element and its offset ancestors. When using a lower z-index
-    // the element would cover the overlay. When using a higher z-index the
-    // overlay might also cover other elements.
+    // by the element and its offset ancestors, and increase it by one.
+    // When using a lower z-index the element would cover the overlay.
+    // When using a higher z-index the overlay might also cover other elements.
     if (style.position != "static" && style.zIndex != "auto")
     {
-      if (zIndex == "auto")
-        zIndex = style.zIndex;
-      else
-        zIndex = Math.max(zIndex, style.zIndex);
+      var curZIndex = parseInt(style.zIndex, 10) + 1;
+
+      if (zIndex == "auto" || curZIndex > zIndex)
+        zIndex = curZIndex;
     }
   }
 
