@@ -1,6 +1,4 @@
-^devenv$
-
-syntax:glob
+/devenv/
 *.zip
 *.crx
 *.safariextz
