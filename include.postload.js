@@ -419,12 +419,12 @@ function clickHide_mouseOver(e)
     return;
 
   var target = e.target;
-  while (target.parentNode && !isBlockable(target))
+  while (target.parentNode && !(target instanceof HTMLElement && isBlockable(target)))
     target = target.parentNode;
   if (target == document.documentElement || target == document.body)
     target = null;
 
-  if (target && target instanceof HTMLElement)
+  if (target)
   {
     currentElement = target;
 
