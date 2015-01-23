@@ -56,6 +56,11 @@ function highlightElement(element, shadowColor, backgroundColor)
   {
     var overlay = addElementOverlay(element);
 
+    // If the element isn't displayed no overlay will be added.
+    // Moreover, we don't need to highlight anything then.
+    if (!overlay)
+      return;
+
     highlightElement(overlay, shadowColor, backgroundColor);
     overlay.style.pointerEvents = "none";
 
