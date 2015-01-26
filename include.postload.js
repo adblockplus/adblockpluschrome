@@ -350,7 +350,7 @@ function clickHide_activate() {
     clickHide_deactivate();
 
   // Add overlays for blockable elements that don't emit mouse events that they can still be selected
-  var elts = document.querySelectorAll('object,embed,iframe');
+  var elts = document.querySelectorAll('object,embed,iframe,frame');
   for(var i=0; i<elts.length; i++)
   {
     var element = elts[i];
