@@ -240,21 +240,6 @@ function isBlockable(element)
   return false;
 }
 
-// Gets the absolute position of an element by walking up the DOM tree,
-// adding up offsets.
-// I hope there's a better way because it just seems absolutely stupid
-// that the DOM wouldn't have a direct way to get this, given that it
-// has hundreds and hundreds of other methods that do random junk.
-function getAbsolutePosition(elt) {
-  var l = 0;
-  var t = 0;
-  for(; elt; elt = elt.offsetParent) {
-    l += elt.offsetLeft;
-    t += elt.offsetTop;
-  }
-  return [l, t];
-}
-
 // Adds an overlay to an element, which is probably a Flash object
 function addElementOverlay(elt) {
   var zIndex = "auto";
@@ -291,11 +276,11 @@ function addElementOverlay(elt) {
   overlay.prisoner = elt;
   overlay.className = "__adblockplus__overlay";
   overlay.setAttribute('style', 'opacity:0.4; display:inline-box; overflow:hidden; box-sizing:border-box;');
-  var pos = getAbsolutePosition(elt);
-  overlay.style.width = elt.offsetWidth + "px";
-  overlay.style.height = elt.offsetHeight + "px";
-  overlay.style.left = pos[0] + "px";
-  overlay.style.top = pos[1] + "px";
+  var rect = elt.getBoundingClientRect();
+  overlay.style.width = rect.width + "px";
+  overlay.style.height = rect.height + "px";
+  overlay.style.left = (rect.left + window.scrollX) + "px";
+  overlay.style.top = (rect.top + window.scrollY) + "px";
   overlay.style.position = position;
   overlay.style.zIndex = zIndex;
 
