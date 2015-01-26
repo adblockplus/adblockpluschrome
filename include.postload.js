@@ -300,7 +300,7 @@ function addElementOverlay(elt) {
   overlay.style.zIndex = zIndex;
 
   // elt.parentNode.appendChild(overlay, elt);
-  document.body.appendChild(overlay);
+  document.documentElement.appendChild(overlay);
   return overlay;
 }
 
@@ -337,7 +337,7 @@ function clickHide_showDialog(left, top, filters)
       clickHideFiltersDialog.style.setProperty("opacity", "1.0");
   };
 
-  document.body.appendChild(clickHideFiltersDialog);
+  document.documentElement.appendChild(clickHideFiltersDialog);
 }
 
 // Turn on the choose element to create filter thing
@@ -382,7 +382,7 @@ function clickHide_deactivate(keepOverlays)
 {
   if (clickHideFiltersDialog)
   {
-    document.body.removeChild(clickHideFiltersDialog);
+    document.documentElement.removeChild(clickHideFiltersDialog);
     clickHideFiltersDialog = null;
   }
 
