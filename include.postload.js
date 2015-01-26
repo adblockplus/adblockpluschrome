@@ -349,8 +349,10 @@ function clickHide_activate() {
   if (clickHide_activated || clickHideFiltersDialog)
     clickHide_deactivate();
 
-  // Add overlays for blockable elements that don't emit mouse events that they can still be selected
-  var elts = document.querySelectorAll('object,embed,iframe,frame');
+  // Add overlays for blockable elements that don't emit mouse events that they
+  // can still be selected. While images generally emit mouse events we have
+  // also to add overlays for them, in case <area> elments are used (#1868).
+  var elts = document.querySelectorAll('object,embed,iframe,frame,img');
   for(var i=0; i<elts.length; i++)
   {
     var element = elts[i];
