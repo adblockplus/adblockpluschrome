@@ -358,6 +358,8 @@ function clickHide_activate() {
   document.addEventListener("mouseout", clickHide_mouseOut, true);
   document.addEventListener("click", clickHide_mouseClick, true);
   document.addEventListener("keydown", clickHide_keyDown, true);
+
+  ext.onExtensionUnloaded.addListener(clickHide_deactivate);
 }
 
 // Called when user has clicked on something and we are waiting for confirmation
@@ -388,7 +390,7 @@ function clickHide_deactivate(keepOverlays)
   document.removeEventListener("click", clickHide_mouseClick, true);
   document.removeEventListener("keydown", clickHide_keyDown, true);
 
-  if (!keepOverlays)
+  if (keepOverlays !== true)
   {
     lastRightClickEvent = null;
 
@@ -403,6 +405,8 @@ function clickHide_deactivate(keepOverlays)
     var overlays = document.getElementsByClassName("__adblockplus__overlay");
     while (overlays.length > 0)
       overlays[0].parentNode.removeChild(overlays[0]);
+
+    ext.onExtensionUnloaded.removeListener(clickHide_deactivate);
   }
 }
 

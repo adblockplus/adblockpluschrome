@@ -391,6 +391,11 @@
     return ext.onMessage._dispatch(message, sender, sendResponse).indexOf(true) != -1;
   });
 
+  // We have to ensure there is at least one listener for the onConnect event.
+  // Otherwise we can't connect a port later, which we need to do in order to
+  // detect when the extension is reloaded, disabled or uninstalled.
+  chrome.runtime.onConnect.addListener(function() {});
+
 
   /* Storage */
 
