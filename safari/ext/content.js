@@ -428,4 +428,12 @@
       }
     }
   });
+
+
+  /* Detecting extension reload/disable/uninstall (not supported on Safari) */
+
+  ext.onExtensionUnloaded = {
+    addListener: function() {},
+    removeListener: function() {}
+  };
 })();
