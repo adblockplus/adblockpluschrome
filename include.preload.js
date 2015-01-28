@@ -20,10 +20,13 @@ var SELECTOR_GROUP_SIZE = 20;
 var typeMap = {
   "img": "IMAGE",
   "input": "IMAGE",
+  "picture": "IMAGE",
   "audio": "MEDIA",
   "video": "MEDIA",
   "frame": "SUBDOCUMENT",
-  "iframe": "SUBDOCUMENT"
+  "iframe": "SUBDOCUMENT",
+  "object": "OBJECT",
+  "embed": "OBJECT"
 };
 
 function checkCollapse(element)

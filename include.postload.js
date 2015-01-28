@@ -23,6 +23,7 @@ var highlightedElementsSelector = null;
 var clickHideFiltersDialog = null;
 var lastRightClickEvent = null;
 var lastRightClickEventValid = false;
+var lastMouseOverEvent = null;
 
 function highlightElement(element, shadowColor, backgroundColor)
 {
@@ -198,24 +199,6 @@ function getURLsFromElement(element) {
   return getURLsFromAttributes(element);
 }
 
-function isBlockable(element)
-{
-  if (element.id)
-    return true;
-  if (element.classList.length > 0)
-    return true;
-  if (getURLsFromElement(element).length > 0)
-    return true;
-
-  // We only generate filters based on the "style" attribute,
-  // if this is the only way we can generate a filter, and
-  // only if there are at least two CSS properties defined.
-  if (/:.+:/.test(element.getAttribute("style")))
-    return true;
-
-  return false;
-}
-
 // Adds an overlay to an element, which is probably a Flash object
 function addElementOverlay(elt) {
   var zIndex = "auto";
@@ -312,13 +295,17 @@ function clickHide_activate() {
 
   // Add overlays for blockable elements that don't emit mouse events,
   // so that they can still be selected.
-  var elts = document.querySelectorAll('object,embed,iframe,frame');
-  for(var i=0; i<elts.length; i++)
-  {
-    var element = elts[i];
-    if (isBlockable(element))
-      addElementOverlay(element);
-  }
+  [].forEach.call(
+    document.querySelectorAll('object,embed,iframe,frame'),
+    function(element)
+    {
+      getFiltersForElement(element, function(filters)
+      {
+        if (filters.length > 0)
+          addElementOverlay(element);
+      });
+    }
+  );
 
   clickHide_activated = true;
   document.addEventListener("mousedown", clickHide_stopPropagation, true);
@@ -401,63 +388,94 @@ function clickHide_elementClickHandler(e) {
   clickHide_mouseClick(e);
 }
 
-function getBlockableElementOrAncestor(element)
+function getBlockableElementOrAncestor(element, callback)
 {
+  // We assume that the user doesn't want to block the whole page.
+  // So we never consider the <html> or <body> element.
   while (element && element != document.documentElement
                  && element != document.body)
   {
-    if (element instanceof HTMLElement && element.localName != "area")
+    // We can't handle non-HTML (like SVG) elements, as well as
+    // <area> elements (see below). So fall back to the parent element.
+    if (!(element instanceof HTMLElement) || element.localName == "area")
+      element = element.parentElement;
+
+    // If image maps are used mouse events occur for the <area> element.
+    // But we have to block the image associated with the <map> element.
+    else if (element.localName == "map")
     {
-      // Handle <area> and their <map> elements specially,
-      // blocking the image they are associated with
-      if (element.localName == "map")
+      var images = document.querySelectorAll("img[usemap]");
+      var image = null;
+
+      for (var i = 0; i < images.length; i++)
       {
-        var images = document.querySelectorAll("img[usemap]");
-        for (var i = 0; i < images.length; i++)
+        var usemap = image.getAttribute("usemap");
+        var index = usemap.indexOf("#");
+
+        if (index != -1 && usemap.substr(index + 1) == element.name)
         {
-          var image = images[i];
-          var usemap = image.getAttribute("usemap");
-          var index = usemap.indexOf("#");
-
-          if (index != -1 && usemap.substr(index + 1) == element.name)
-            return getBlockableElementOrAncestor(image);
+          image = images[i];
+          break;
         }
-
-        return null;
       }
 
-      if (isBlockable(element))
-        return element;
+      element = image;
     }
 
-    element = element.parentElement;
+    // Finally, if none of the above is true, check whether we can generate
+    // any filters for this element. Otherwise fall back to its parent element.
+    else
+    {
+      getFiltersForElement(element, function(filters)
+      {
+        if (filters.length > 0)
+          callback(element);
+        else
+          getBlockableElementOrAncestor(element.parentElement, callback);
+      });
+
+      return;
+    }
   }
 
-  return null;
+  // We reached the document root without finding a blockable element.
+  callback(null);
 }
 
 // Hovering over an element so highlight it
 function clickHide_mouseOver(e)
 {
-  if (clickHide_activated == false)
-    return;
+  lastMouseOverEvent = e;
 
-  var target = getBlockableElementOrAncestor(e.target);
-
-  if (target)
+  getBlockableElementOrAncestor(e.target, function(element)
   {
-    currentElement = target;
+    if (e == lastMouseOverEvent)
+    {
+      lastMouseOverEvent = null;
 
-    highlightElement(target, "#d6d84b", "#f8fa47");
-    target.addEventListener("contextmenu", clickHide_elementClickHandler, true);
-  }
+      if (clickHide_activated)
+      {
+        if (currentElement)
+          unhighlightElement(currentElement);
+
+        if (element)
+        {
+          highlightElement(element, "#d6d84b", "#f8fa47");
+          element.addEventListener("contextmenu", clickHide_elementClickHandler, true);
+        }
+
+        currentElement = element;
+      }
+    }
+  });
+
   e.stopPropagation();
 }
 
 // No longer hovering over this element so unhighlight it
 function clickHide_mouseOut(e)
 {
-  if (!clickHide_activated || !currentElement)
+  if (!clickHide_activated || currentElement != e.target)
     return;
 
   unhighlightElement(currentElement);
@@ -496,6 +514,7 @@ function getFiltersForElement(element, callback)
       style: element.getAttribute("style"),
       classes: [].slice.call(element.classList),
       urls: getURLsFromElement(element),
+      mediatype: typeMap[element.localName],
       baseURL: document.location.href
     },
     function(response)
@@ -674,9 +693,12 @@ if ("ext" in window && document instanceof HTMLDocument)
       case "clickhide-new-filter":
         if(lastRightClickEvent)
         {
-          clickHide_activated = true;
-          currentElement = getBlockableElementOrAncestor(lastRightClickEvent.target);
-          clickHide_mouseClick(lastRightClickEvent);
+          getBlockableElementOrAncestor(lastRightClickEvent.target, function(element)
+          {
+            clickHide_activated = true;
+            currentElement = element;
+            clickHide_mouseClick(lastRightClickEvent);
+          });
         }
         break;
       case "clickhide-init":
