@@ -553,10 +553,18 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       refreshIconAndContextMenu(sender.page);
       break;
     case "compose-filters":
-      sendResponse(composeFilters(
-        msg.tagName, msg.id, msg.src, msg.style,
-        msg.classes, msg.urls, new URL(msg.baseURL)
-      ));
+      sendResponse(composeFilters({
+        tagName: msg.tagName,
+        id: msg.id,
+        src: msg.src,
+        style: msg.style,
+        classes: msg.classes,
+        urls: msg.urls,
+        type: msg.mediatype,
+        baseURL: msg.baseURL,
+        page: sender.page,
+        frame: sender.frame
+      }));
       break;
     case "forward":
       if (sender.page)
