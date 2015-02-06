@@ -490,8 +490,9 @@ function addTypedFilter(event)
 }
 
 // Removes currently selected whitelisted domains
-function removeSelectedExcludedDomain()
+function removeSelectedExcludedDomain(event)
 {
+  event.preventDefault();
   var excludedDomainsBox = document.getElementById("excludedDomainsBox");
   var remove = [];
   for (var i = 0; i < excludedDomainsBox.length; i++)
@@ -505,8 +506,9 @@ function removeSelectedExcludedDomain()
 }
 
 // Removes all currently selected filters
-function removeSelectedFilters()
+function removeSelectedFilters(event)
 {
+  event.preventDefault();
   var userFiltersBox = document.getElementById("userFiltersBox");
   var remove = [];
   for (var i = 0; i < userFiltersBox.length; i++)
