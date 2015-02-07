@@ -108,17 +108,24 @@
       ext.pages.onLoading._dispatch(new Page(tab));
   });
 
-  chrome.webNavigation.onBeforeNavigate.addListener(function(details)
-  {
-    if (details.frameId == 0)
-      ext._removeFromAllPageMaps(details.tabId);
-  });
-
-  chrome.tabs.onRemoved.addListener(function(tabId)
+  function forgetTab(tabId)
   {
     ext._removeFromAllPageMaps(tabId);
     delete framesOfTabs[tabId];
+  }
+
+  chrome.webNavigation.onBeforeNavigate.addListener(function(details)
+  {
+    if (details.frameId == 0)
+      forgetTab(details.tabId);
   });
+
+  chrome.tabs.onReplaced.addListener(function(addedTabId, removedTabId)
+  {
+    forgetTab(removedTabId);
+  });
+
+  chrome.tabs.onRemoved.addListener(forgetTab);
 
 
   /* Browser actions */
@@ -126,44 +133,93 @@
   var BrowserAction = function(tabId)
   {
     this._tabId = tabId;
+    this._changes = null;
   };
   BrowserAction.prototype = {
-    setIcon: function(path)
+    _applyChanges: function()
     {
-      var paths = {};
-      for (var i = 1; i <= 2; i++)
+      if ("iconPath" in this._changes)
       {
-        var size = i * 19;
-        paths[size] = path.replace("$size", size);
+        chrome.browserAction.setIcon({
+          tabId: this._tabId,
+          path: {
+            19: this._changes.iconPath.replace("$size", "19"),
+            38: this._changes.iconPath.replace("$size", "38")
+          }
+        });
       }
 
-      chrome.browserAction.setIcon({tabId: this._tabId, path: paths});
+      if ("badgeText" in this._changes)
+      {
+        chrome.browserAction.setBadgeText({
+          tabId: this._tabId,
+          text: this._changes.badgeText
+        });
+      }
+
+      if ("badgeColor" in this._changes)
+      {
+        chrome.browserAction.setBadgeBackgroundColor({
+          tabId: this._tabId,
+          color: this._changes.badgeColor
+        });
+      }
+
+      this._changes = null;
+    },
+    _queueChanges: function()
+    {
+      chrome.tabs.get(this._tabId, function()
+      {
+        // If the tab is prerendered, chrome.tabs.get() sets
+        // chrome.runtime.lastError and we have to delay our changes
+        // until the currently visible tab is replaced with the
+        // prerendered tab. Otherwise chrome.browserAction.set* fails.
+        if (chrome.runtime.lastError)
+        {
+          var onReplaced = function(addedTabId, removedTabId)
+          {
+            if (addedTabId == this._tabId)
+            {
+              chrome.tabs.onReplaced.removeListener(onReplaced);
+              this._applyChanges();
+            }
+          }.bind(this);
+          chrome.tabs.onReplaced.addListener(onReplaced);
+        }
+        else
+        {
+          this._applyChanges();
+        }
+      }.bind(this));
+    },
+    _addChange: function(name, value)
+    {
+      if (!this._changes)
+      {
+        this._changes = {};
+        this._queueChanges();
+      }
+
+      this._changes[name] = value;
+    },
+    setIcon: function(path)
+    {
+      this._addChange("iconPath", path);
     },
     setBadge: function(badge)
     {
       if (!badge)
       {
-        chrome.browserAction.setBadgeText({
-          tabId: this._tabId,
-          text: ""
-        });
-        return;
+        this._addChange("badgeText", "");
       }
-
-      if ("color" in badge)
+      else
       {
-        chrome.browserAction.setBadgeBackgroundColor({
-          tabId: this._tabId,
-          color: badge.color
-        });
-      }
+        if ("number" in badge)
+          this._addChange("badgeText", badge.number.toString());
 
-      if ("number" in badge)
-      {
-        chrome.browserAction.setBadgeText({
-          tabId: this._tabId,
-          text: badge.number.toString()
-        });
+        if ("color" in badge)
+          this._addChange("badgeColor", badge.color);
       }
     }
   };
