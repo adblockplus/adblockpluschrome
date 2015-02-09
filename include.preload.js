@@ -76,25 +76,22 @@ function checkSitekey()
     ext.backgroundPage.sendMessage({type: "add-sitekey", token: attr});
 }
 
-function hasInlineURL(element, attribute)
-{
-  var value = element.getAttribute(attribute);
-  return value == null || /^\s*(javascript:|about:|$)/i.test(value);
-}
-
 function isInlineFrame(element)
 {
-  switch (element.localName)
+  var contentDocument;
+  try
   {
-    case "iframe":
-      return hasInlineURL(element, "src") || element.hasAttribute("srcdoc");
-    case "frame":
-      return hasInlineURL(element, "src");
-    case "object":
-      return hasInlineURL(element, "data") && element.contentDocument;
-    default:
-      return false;
+    contentDocument = element.contentDocument;
   }
+  catch (e)
+  {
+    return false;  // third-party
+  }
+
+  if (!contentDocument)
+    return false;  // not a frame
+
+  return contentDocument.location.protocol == "about:";
 }
 
 function resolveURL(url)
