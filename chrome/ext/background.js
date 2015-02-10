@@ -108,17 +108,38 @@
       ext.pages.onLoading._dispatch(new Page(tab));
   });
 
+  chrome.webNavigation.onBeforeNavigate.addListener(function(details)
+  {
+    if (details.frameId == 0)
+    {
+      ext._removeFromAllPageMaps(details.tabId);
+
+      chrome.tabs.get(details.tabId, function()
+      {
+        // If the tab is prerendered, chrome.tabs.get() sets
+        // chrome.runtime.lastError and we have to dispatch the onLoading event,
+        // since the onUpdated event isn't dispatched for prerendered tabs.
+        // However, we have to keep relying on the unUpdated event for tabs that
+        // are already visible. Otherwise browser action changes get overridden
+        // when Chrome automatically resets them on navigation.
+        if (chrome.runtime.lastError)
+        {
+          ext.pages.onLoading._dispatch(
+            new Page({
+              id: details.tabId,
+              url: details.url
+            })
+          );
+        }
+      });
+    }
+  });
+
   function forgetTab(tabId)
   {
     ext._removeFromAllPageMaps(tabId);
     delete framesOfTabs[tabId];
   }
-
-  chrome.webNavigation.onBeforeNavigate.addListener(function(details)
-  {
-    if (details.frameId == 0)
-      forgetTab(details.tabId);
-  });
 
   chrome.tabs.onReplaced.addListener(function(addedTabId, removedTabId)
   {
