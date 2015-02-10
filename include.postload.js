@@ -334,10 +334,9 @@ function clickHide_activate() {
   if (clickHide_activated || clickHideFiltersDialog)
     clickHide_deactivate();
 
-  // Add overlays for blockable elements that don't emit mouse events that they
-  // can still be selected. While images generally emit mouse events we have
-  // also to add overlays for them, in case <area> elments are used (#1868).
-  var elts = document.querySelectorAll('object,embed,iframe,frame,img');
+  // Add overlays for blockable elements that don't emit mouse events,
+  // so that they can still be selected.
+  var elts = document.querySelectorAll('object,embed,iframe,frame');
   for(var i=0; i<elts.length; i++)
   {
     var element = elts[i];
@@ -408,17 +407,48 @@ function clickHide_elementClickHandler(ev) {
   clickHide_mouseClick(ev);
 }
 
+function getBlockableElementOrAncestor(element)
+{
+  while (element && element != document.documentElement
+                 && element != document.body)
+  {
+    if (element instanceof HTMLElement && element.localName != "area")
+    {
+      // Handle <area> and their <map> elements specially,
+      // blocking the image they are associated with
+      if (element.localName == "map")
+      {
+        var images = document.querySelectorAll("img[usemap]");
+        for (var i = 0; i < images.length; i++)
+        {
+          var image = images[i];
+          var usemap = image.getAttribute("usemap");
+          var index = usemap.indexOf("#");
+
+          if (index != -1 && usemap.substr(index + 1) == element.name)
+            return getBlockableElementOrAncestor(image);
+        }
+
+        return null;
+      }
+
+      if (isBlockable(element))
+        return element;
+    }
+
+    element = element.parentElement;
+  }
+
+  return null;
+}
+
 // Hovering over an element so highlight it
 function clickHide_mouseOver(e)
 {
   if (clickHide_activated == false)
     return;
 
-  var target = e.target;
-  while (target.parentNode && !(target instanceof HTMLElement && isBlockable(target)))
-    target = target.parentNode;
-  if (target == document.documentElement || target == document.body)
-    target = null;
+  var target = getBlockableElementOrAncestor(e.target);
 
   if (target)
   {
@@ -683,7 +713,7 @@ if ("ext" in window && document instanceof HTMLDocument)
         if(lastRightClickEvent)
         {
           clickHide_activated = true;
-          currentElement = lastRightClickEvent.target;
+          currentElement = getBlockableElementOrAncestor(lastRightClickEvent.target);
           clickHide_mouseClick(lastRightClickEvent);
         }
         break;
