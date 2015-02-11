@@ -339,7 +339,7 @@
       {
         if (details && details.length > 0)
         {
-          var frames = framesOfTabs[tab.id] = Object.create.(null);
+          var frames = framesOfTabs[tab.id] = Object.create(null);
 
           for (var i = 0; i < details.length; i++)
             frames[details[i].frameId] = {url: details[i].url, parent: null};
