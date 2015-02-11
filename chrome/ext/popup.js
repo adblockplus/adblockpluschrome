@@ -1,8 +1,6 @@
-window.ext = {
-  __proto__: chrome.extension.getBackgroundPage().ext,
+window.ext = Object.create(chrome.extension.getBackgroundPage().ext);
 
-  closePopup: function()
-  {
-    window.close();
-  }
+ext.closePopup = function()
+{
+  window.close();
 };

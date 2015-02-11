@@ -553,7 +553,7 @@ function importRawFiltersText()
     return;
   }
 
-  var seenFilter = {__proto__: null};
+  var seenFilter = Object.create(null);
   for (var i = 0; i < add.length; i++)
   {
     var filter = add[i];
