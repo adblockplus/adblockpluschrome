@@ -30,10 +30,16 @@ with(require("subscriptionClasses"))
 }
 with(require("whitelisting"))
 {
-  this.isWhitelisted = isWhitelisted;
+  this.isPageWhitelisted = isPageWhitelisted;
   this.isFrameWhitelisted = isFrameWhitelisted;
   this.processKey = processKey;
   this.getKey = getKey;
+}
+with(require("url"))
+{
+  this.stringifyURL = stringifyURL;
+  this.isThirdParty = isThirdParty;
+  this.extractHostFromFrame = extractHostFromFrame;
 }
 var FilterStorage = require("filterStorage").FilterStorage;
 var ElemHide = require("elemHide").ElemHide;
@@ -127,7 +133,7 @@ var contextMenuItem = {
 // Adds or removes browser action icon according to options.
 function refreshIconAndContextMenu(page)
 {
-  var whitelisted = isWhitelisted(page.url);
+  var whitelisted = isPageWhitelisted(page);
 
   var iconFilename;
   if (whitelisted && require("info").platform != "safari")
@@ -500,10 +506,13 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
         break;
       }
 
-      var requestHost = extractHostFromURL(msg.url);
+      var url = new URL(msg.url);
       var documentHost = extractHostFromFrame(sender.frame);
-      var thirdParty = isThirdParty(requestHost, documentHost);
-      var filter = defaultMatcher.matchesAny(msg.url, msg.mediatype, documentHost, thirdParty);
+      var filter = defaultMatcher.matchesAny(
+        stringifyURL(url), msg.mediatype,
+        documentHost, isThirdParty(url, documentHost)
+      );
+
       if (filter instanceof BlockingFilter)
       {
         var collapse = filter.collapse;
@@ -519,7 +528,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       // The browser action popup asks us this.
       if(sender.page)
       {
-        sendResponse({enabled: !isWhitelisted(sender.page.url)});
+        sendResponse({enabled: !isPageWhitelisted(sender.page)});
         return;
       }
       break;

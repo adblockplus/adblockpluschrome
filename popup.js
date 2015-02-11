@@ -16,14 +16,13 @@
  */
 
 var backgroundPage = ext.backgroundPage.getWindow();
-var imports = ["require", "extractHostFromURL"];
-for (var i = 0; i < imports.length; i++)
-  window[imports[i]] = backgroundPage[imports[i]];
+var require = backgroundPage.require;
 
 var Filter = require("filterClasses").Filter;
 var FilterStorage = require("filterStorage").FilterStorage;
 var Prefs = require("prefs").Prefs;
-var isWhitelisted = require("whitelisting").isWhitelisted;
+var isPageWhitelisted = require("whitelisting").isPageWhitelisted;
+var getDecodedHostname = require("url").getDecodedHostname;
 
 var page = null;
 
@@ -34,7 +33,8 @@ function init()
     page = pages[0];
 
     // Mark page as 'local' or 'nohtml' to hide non-relevant elements
-    if (!page || !/^https?:\/\//.test(page.url))
+    if (!page || (page.url.protocol != "http:" &&
+                  page.url.protocol != "https:"))
       document.body.classList.add("local");
     else if (!backgroundPage.htmlPages.has(page))
       document.body.classList.add("nohtml");
@@ -45,7 +45,7 @@ function init()
     // Otherwise, we are in default state.
     if (page)
     {
-      if (isWhitelisted(page.url))
+      if (isPageWhitelisted(page))
         document.getElementById("enabled").classList.add("off");
 
       page.sendMessage({type: "get-clickhide-state"}, function(response)
@@ -83,7 +83,7 @@ function toggleEnabled()
   var disabled = enabledButton.classList.toggle("off");
   if (disabled)
   {
-    var host = extractHostFromURL(page.url).replace(/^www\./, "");
+    var host = getDecodedHostname(page.url).replace(/^www\./, "");
     var filter = Filter.fromText("@@||" + host + "^$document");
     if (filter.subscriptions.length && filter.disabled)
       filter.disabled = false;
@@ -96,13 +96,13 @@ function toggleEnabled()
   else
   {
     // Remove any exception rules applying to this URL
-    var filter = isWhitelisted(page.url);
+    var filter = isPageWhitelisted(page);
     while (filter)
     {
       FilterStorage.removeFilter(filter);
       if (filter.subscriptions.length)
         filter.disabled = true;
-      filter = isWhitelisted(page.url);
+      filter = isPageWhitelisted(page);
     }
   }
 }
