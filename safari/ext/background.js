@@ -19,7 +19,7 @@
 {
   /* Pages */
 
-  var pages = {__proto__: null};
+  var pages = Object.create(null);
   var pageCounter = 0;
 
   var Page = function(id, tab, url)
@@ -501,8 +501,9 @@
             };
           });
 
-          if (obj.__proto__)
-            objectInfo.prototypeId = this.registerObject(obj.__proto__, objects);
+          var proto = Object.getPrototypeOf(obj);
+          if (proto)
+            objectInfo.prototypeId = this.registerObject(proto, objects);
 
           if (obj == Object.prototype)
             objectInfo.prototypeOf = "Object";
@@ -537,7 +538,7 @@
               frameId = 0;
 
               if (!('_pages' in tab))
-                tab._pages = {__proto__: null};
+                tab._pages = Object.create(null);
 
               var page = new Page(pageId, tab, message.url);
               pages[pageId] = tab._pages[pageId] = page;

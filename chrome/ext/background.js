@@ -319,7 +319,7 @@
 
   /* Web requests */
 
-  var framesOfTabs = {__proto__: null};
+  var framesOfTabs = Object.create(null);
 
   ext.getFrame = function(tabId, frameId)
   {
@@ -339,7 +339,7 @@
       {
         if (details && details.length > 0)
         {
-          var frames = framesOfTabs[tab.id] = {__proto__: null};
+          var frames = framesOfTabs[tab.id] = Object.create.(null);
 
           for (var i = 0; i < details.length; i++)
             frames[details[i].frameId] = {url: details[i].url, parent: null};
@@ -379,7 +379,7 @@
       if (!isMainFrame)
         frames = framesOfTabs[details.tabId];
       if (!frames)
-        frames = framesOfTabs[details.tabId] = {__proto__: null};
+        frames = framesOfTabs[details.tabId] = Object.create(null);
 
       var frame = null;
       if (!isMainFrame)

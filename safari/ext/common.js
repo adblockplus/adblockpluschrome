@@ -22,7 +22,7 @@
   var MessageProxy = ext._MessageProxy = function(messageDispatcher)
   {
     this._messageDispatcher = messageDispatcher;
-    this._responseCallbacks = {__proto__: null};
+    this._responseCallbacks = Object.create(null);
     this._responseCallbackCounter = 0;
   };
   MessageProxy.prototype = {

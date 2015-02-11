@@ -73,12 +73,10 @@
   // import ext into the javascript context of the popover. This code might fail,
   // when the background page isn't ready yet. So it is important to put it below
   // the reloading code above.
-  window.ext = {
-    __proto__: safari.extension.globalPage.contentWindow.ext,
+  window.ext = Object.create(safari.extension.globalPage.contentWindow.ext);
 
-    closePopup: function()
-    {
-      safari.self.hide();
-    }
+  ext.closePopup = function()
+  {
+    safari.self.hide();
   };
 })();

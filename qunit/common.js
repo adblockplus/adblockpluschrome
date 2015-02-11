@@ -28,9 +28,9 @@ importAll("utils", this);
 function prepareFilterComponents(keepListeners)
 {
   FilterStorage.subscriptions = [];
-  FilterStorage.knownSubscriptions = {__proto__: null};
-  Subscription.knownSubscriptions = {__proto__: null};
-  Filter.knownFilters = {__proto__: null};
+  FilterStorage.knownSubscriptions = Object.create(null);
+  Subscription.knownSubscriptions = Object.create(null);
+  Filter.knownFilters = Object.create(null);
 
   defaultMatcher.clear();
   ElemHide.clear();
@@ -42,7 +42,7 @@ function restoreFilterComponents()
 
 function preparePrefs()
 {
-  this._pbackup = {__proto__: null};
+  this._pbackup = Object.create(null);
   for (var pref in Prefs)
     if (Prefs.__lookupSetter__(pref))
       this._pbackup[pref] = Prefs[pref];

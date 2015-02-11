@@ -17,7 +17,7 @@
 
 (function()
 {
-  var nonEmptyPageMaps = {__proto__: null};
+  var nonEmptyPageMaps = Object.create(null);
   var pageMapCounter = 0;
 
   var PageMap = ext.PageMap = function()
