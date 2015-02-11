@@ -22,7 +22,7 @@
   var Page = ext.Page = function(tab)
   {
     this._id = tab.id;
-    this._url = tab.url;
+    this._url = tab.url && new URL(tab.url);
 
     this.browserAction = new BrowserAction(tab.id);
     this.contextMenus = new ContextMenus(this);
@@ -32,7 +32,7 @@
     {
       // usually our Page objects are created from Chrome's Tab objects, which
       // provide the url. So we can return the url given in the constructor.
-      if (this._url != null)
+      if (this._url)
         return this._url;
 
       // but sometimes we only have the tab id when we create a Page object.
@@ -342,7 +342,7 @@
           var frames = framesOfTabs[tab.id] = Object.create(null);
 
           for (var i = 0; i < details.length; i++)
-            frames[details[i].frameId] = {url: details[i].url, parent: null};
+            frames[details[i].frameId] = {url: new URL(details[i].url), parent: null};
 
           for (var i = 0; i < details.length; i++)
           {
@@ -382,6 +382,7 @@
         frames = framesOfTabs[details.tabId] = Object.create(null);
 
       var frame = null;
+      var url = new URL(details.url);
       if (!isMainFrame)
       {
         // we are looking for the frame that contains the element that
@@ -404,7 +405,7 @@
             requestType = "object";
 
           var results = ext.webRequest.onBeforeRequest._dispatch(
-            details.url,
+            url,
             requestType,
             new Page({id: details.tabId}),
             frame
@@ -416,7 +417,7 @@
       }
 
       if (isMainFrame || details.type == "sub_frame")
-        frames[details.frameId] = {url: details.url, parent: frame};
+        frames[details.frameId] = {url: url, parent: frame};
     }
     catch (e)
     {
@@ -435,7 +436,7 @@
     var sender = {
       page: new Page(rawSender.tab),
       frame: {
-        url: rawSender.url,
+        url: new URL(rawSender.url),
         get parent()
         {
           var frames = framesOfTabs[rawSender.tab.id];
@@ -455,7 +456,7 @@
             // Chrome 28-40
             for (var frameId in frames)
             {
-              if (frames[frameId].url == rawSender.url)
+              if (frames[frameId].url.href == this.url.href)
                 return frames[frameId].parent;
             }
           }

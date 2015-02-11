@@ -26,7 +26,7 @@
   {
     this._id = id;
     this._tab = tab;
-    this._frames = [{url: url, parent: null}];
+    this._frames = [{url: new URL(url), parent: null}];
 
     if (tab.page)
       this._messageProxy = new ext._MessageProxy(tab.page);
@@ -575,7 +575,7 @@
                 {
                   var curFrame = curPage._frames[i];
 
-                  if (curFrame.url == message.referrer)
+                  if (curFrame.url.href == message.referrer)
                   {
                     pageId = curPageId;
                     page = curPage;
@@ -601,18 +601,18 @@
               }
 
               frameId = page._frames.length;
-              page._frames.push({url: message.url, parent: parentFrame});
+              page._frames.push({url: new URL(message.url), parent: parentFrame});
             }
 
             event.message = {pageId: pageId, frameId: frameId};
             break;
           case "webRequest":
             var page = pages[event.message.pageId];
+            var frame = page._frames[event.message.frameId];
+
             var results = ext.webRequest.onBeforeRequest._dispatch(
-              event.message.url,
-              event.message.type,
-              page,
-              page._frames[event.message.frameId]
+              new URL(event.message.url, frame.url),
+              event.message.type, page, frame
             );
 
             event.message = (results.indexOf(false) == -1);
@@ -670,7 +670,7 @@
       var page = pages[id];
       var tab = page._tab;
 
-      if (page.url == optionsUrl && tab.browserWindow == safari.application.activeBrowserWindow)
+      if (page.url.href == optionsUrl && tab.browserWindow == safari.application.activeBrowserWindow)
       {
         tab.activate();
         if (callback)

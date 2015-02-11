@@ -27,15 +27,12 @@ if (require("info").platform == "chromium")
     if (!sourceFrame || isFrameWhitelisted(sourcePage, sourceFrame))
       return;
 
-    var openerUrl = sourceFrame.url;
-    if (!openerUrl)
-    {
-      // We don't know the opener tab
+    var documentHost = extractHostFromFrame(sourceFrame);
+    if (!documentHost)
       return;
-    }
-    tabsLoading[details.tabId] = openerUrl;
 
-    checkPotentialPopup(details.tabId, details.url, openerUrl);
+    tabsLoading[details.tabId] = documentHost;
+    checkPotentialPopup(details.tabId, details.url, documentHost);
   });
 
   chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
@@ -54,12 +51,15 @@ if (require("info").platform == "chromium")
   });
 }
 
-function checkPotentialPopup(tabId, url, opener)
+function checkPotentialPopup(tabId, url, documentHost)
 {
-  var requestHost = extractHostFromURL(url);
-  var documentHost = extractHostFromURL(opener);
-  var thirdParty = isThirdParty(requestHost, documentHost);
-  var filter = defaultMatcher.matchesAny(url || "about:blank", "POPUP", documentHost, thirdParty);
+  url = new URL(url || "about:blank");
+
+  var filter = defaultMatcher.matchesAny(
+    stringifyURL(url), "POPUP",
+    documentHost, isThirdParty(url, documentHost)
+  );
+
   if (filter instanceof BlockingFilter)
     chrome.tabs.remove(tabId);
 }

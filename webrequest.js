@@ -55,10 +55,10 @@ function onBeforeRequest(url, type, page, frame)
   var docDomain = extractHostFromFrame(frame);
   var key = getKey(page, frame);
   var filter = defaultMatcher.matchesAny(
-    url,
+    stringifyURL(url),
     type == "sub_frame" ? "SUBDOCUMENT" : type.toUpperCase(),
     docDomain,
-    isThirdParty(extractHostFromURL(url), docDomain),
+    isThirdParty(url, docDomain),
     key
   );
 
@@ -66,7 +66,7 @@ function onBeforeRequest(url, type, page, frame)
   // check for notifications here
   if (platform != "chromium" && type == "sub_frame")
   {
-    var notificationToShow = NotificationStorage.getNextToShow(url);
+    var notificationToShow = NotificationStorage.getNextToShow(stringifyURL(url));
     if (notificationToShow)
       showNotification(notificationToShow);
   }
@@ -90,7 +90,7 @@ if (platform == "chromium")
     var page = new ext.Page({id: details.tabId});
     var frame = ext.getFrame(details.tabId, details.frameId);
 
-    if (!frame || frame.url != details.url)
+    if (!frame || frame.url.href != details.url)
       return;
 
     for (var i = 0; i < details.responseHeaders.length; i++)
@@ -100,7 +100,7 @@ if (platform == "chromium")
         processKey(header.value, page, frame);
     }
 
-    var notificationToShow = NotificationStorage.getNextToShow(details.url);
+    var notificationToShow = NotificationStorage.getNextToShow(stringifyURL(new URL(details.url)));
     if (notificationToShow)
       showNotification(notificationToShow);
   }

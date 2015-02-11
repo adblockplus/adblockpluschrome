@@ -57,13 +57,11 @@
 
   document.addEventListener("beforeload", function(event)
   {
-    var url = resolveURL(event.url);
-
     // we don't block non-HTTP requests anyway, so we can bail out
     // without asking the background page. This is even necessary
     // because passing large data (like a photo encoded as data: URL)
     // to the background page, freezes Safari.
-    if (!/^https?:/.test(url))
+    if (/^(?!https?:)[\w-]+:/.test(event.url))
       return;
 
     var type = "other";
@@ -96,7 +94,7 @@
     if (!safari.self.tab.canLoad(
       event, {
         category: "webRequest",
-        url: url,
+        url: event.url,
         type: type,
         pageId: documentInfo.pageId,
         frameId: documentInfo.frameId
