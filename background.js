@@ -41,6 +41,12 @@ with(require("url"))
   this.isThirdParty = isThirdParty;
   this.extractHostFromFrame = extractHostFromFrame;
 }
+with(require("icon"))
+{
+  this.updateIcon = updateIcon;
+  this.startIconAnimation = startIconAnimation;
+  this.stopIconAnimation = stopIconAnimation;
+}
 var FilterStorage = require("filterStorage").FilterStorage;
 var ElemHide = require("elemHide").ElemHide;
 var defaultMatcher = require("matcher").defaultMatcher;
@@ -134,23 +140,11 @@ var contextMenuItem = {
 function refreshIconAndContextMenu(page)
 {
   var whitelisted = isPageWhitelisted(page);
-
-  var iconFilename;
-  if (whitelisted && require("info").platform != "safari")
-    // There is no grayscale version of the icon for whitelisted pages
-    // when using Safari, because icons are grayscale already and icons
-    // aren't per page in Safari.
-    iconFilename = "icons/abp-$size-whitelisted.png";
-  else
-    iconFilename = "icons/abp-$size.png";
-
-  page.browserAction.setIcon(iconFilename);
-  iconAnimation.registerPage(page, iconFilename);
+  updateIcon(page, whitelisted);
 
   // show or hide the context menu entry dependent on whether
   // adblocking is active on that page
   page.contextMenus.removeAll();
-
   if (Prefs.shouldShowBlockElementMenu && !whitelisted && htmlPages.has(page))
     page.contextMenus.create(contextMenuItem);
 }
@@ -276,11 +270,11 @@ function prepareNotificationIconAndPopup()
   activeNotification.onClicked = function()
   {
     if (animateIcon)
-      iconAnimation.stop();
+      stopIconAnimation();
     notificationClosed();
   };
   if (animateIcon)
-    iconAnimation.update(activeNotification.type);
+    startIconAnimation(activeNotification.type);
 }
 
 function openNotificationLinks()
