@@ -345,6 +345,10 @@ function clickHide_activate() {
   }
 
   clickHide_activated = true;
+  document.addEventListener("mousedown", clickHide_stopPropagation, true);
+  document.addEventListener("mouseup", clickHide_stopPropagation, true);
+  document.addEventListener("mouseenter", clickHide_stopPropagation, true);
+  document.addEventListener("mouseleave", clickHide_stopPropagation, true);
   document.addEventListener("mouseover", clickHide_mouseOver, true);
   document.addEventListener("mouseout", clickHide_mouseOut, true);
   document.addEventListener("click", clickHide_mouseClick, true);
@@ -357,6 +361,10 @@ function clickHide_activate() {
 // on whether the user actually wants these filters
 function clickHide_rulesPending() {
   clickHide_activated = false;
+  document.removeEventListener("mousedown", clickHide_stopPropagation, true);
+  document.removeEventListener("mouseup", clickHide_stopPropagation, true);
+  document.removeEventListener("mouseenter", clickHide_stopPropagation, true);
+  document.removeEventListener("mouseleave", clickHide_stopPropagation, true);
   document.removeEventListener("mouseover", clickHide_mouseOver, true);
   document.removeEventListener("mouseout", clickHide_mouseOut, true);
   document.removeEventListener("click", clickHide_mouseClick, true);
@@ -376,6 +384,11 @@ function clickHide_deactivate(keepOverlays)
   clickHide_filters = null;
   if(!document)
     return; // This can happen inside a nuked iframe...I think
+
+  document.removeEventListener("mousedown", clickHide_stopPropagation, true);
+  document.removeEventListener("mouseup", clickHide_stopPropagation, true);
+  document.removeEventListener("mouseenter", clickHide_stopPropagation, true);
+  document.removeEventListener("mouseleave", clickHide_stopPropagation, true);
   document.removeEventListener("mouseover", clickHide_mouseOver, true);
   document.removeEventListener("mouseout", clickHide_mouseOut, true);
   document.removeEventListener("click", clickHide_mouseClick, true);
@@ -401,10 +414,15 @@ function clickHide_deactivate(keepOverlays)
   }
 }
 
-function clickHide_elementClickHandler(ev) {
-  ev.preventDefault();
-  ev.stopPropagation();
-  clickHide_mouseClick(ev);
+function clickHide_stopPropagation(e)
+{
+  e.stopPropagation();
+}
+
+function clickHide_elementClickHandler(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  clickHide_mouseClick(e);
 }
 
 function getBlockableElementOrAncestor(element)
@@ -457,6 +475,7 @@ function clickHide_mouseOver(e)
     highlightElement(target, "#d6d84b", "#f8fa47");
     target.addEventListener("contextmenu", clickHide_elementClickHandler, true);
   }
+  e.stopPropagation();
 }
 
 // No longer hovering over this element so unhighlight it
@@ -467,6 +486,7 @@ function clickHide_mouseOut(e)
 
   unhighlightElement(currentElement);
   currentElement.removeEventListener("contextmenu", clickHide_elementClickHandler, true);
+  e.stopPropagation();
 }
 
 // Selects the currently hovered-over filter or cancels selection
