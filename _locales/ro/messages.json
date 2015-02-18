@@ -27,13 +27,13 @@
     "message": "După închiderea acestui pop-up, clic (sau clic-dreapta) pe un element de pe pagină."
   },
   "description_chrome": {
-    "message": "Extensie gratuita pentru Chrome, folosita de peste 50 milioane persoane, blochează TOATE reclamele enervante, malware şi tracking."
+    "message": "Extensie gratuită pentru Chrome, folosită de peste 50 milioane de persoane, blochează TOATE reclamele enervante,malware şi tracking."
   },
   "description_opera": {
-    "message": "Extensie gratuita pentru Opera, folosita de peste 50 milioane persoane, blochează TOATE reclamele enervante, malware şi tracking."
+    "message": "Extensie gratuită pentru Opera, folosită de peste 50 milioane de persoane, blochează TOATE reclamele enervante, malware şi tracking."
   },
   "description_safari": {
-    "message": "Extensie gratuita pentru Safari, folosita de peste 50 milioane persoane, blochează TOATE reclamele enervante, malware şi tracking."
+    "message": "Extensie gratuită pentru Safari, folosită de peste 50 milioane de persoane, blochează TOATE reclamele enervante, malware şi tracking."
   },
   "disabled_for_site": {
     "message": "<strong>Dezactivat</strong> pe acest site"
@@ -93,7 +93,7 @@
     }
   },
   "line": {
-    "message": "Linia $number$",
+    "message": "Linie $number$",
     "placeholders": {
       "number": {
         "content": "$1"

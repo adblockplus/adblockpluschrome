@@ -85,7 +85,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "أخر تحديث في $time$ من اليوم",
+    "message": "آخر تحديث في $time$ اليوم",
     "placeholders": {
       "time": {
         "content": "$1"

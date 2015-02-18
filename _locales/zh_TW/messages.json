@@ -26,6 +26,15 @@
   "clickhide_instructions": {
     "message": "請在此訊息關閉後點選網頁上的元素。"
   },
+  "description_chrome": {
+    "message": "被50萬人採用，免費廣告攔截插件在Chrome上禁止所有煩人的廣告，惡意軟件和追踪。"
+  },
+  "description_opera": {
+    "message": "被50萬人採用，免費廣告攔截插件在Opera上禁止所有煩人的廣告，惡意軟件和追踪。"
+  },
+  "description_safari": {
+    "message": "被50萬人採用，免費廣告攔截插件在Safari上禁止所有煩人的廣告，惡意軟件和追踪。"
+  },
   "disabled_for_site": {
     "message": "在此網站上 <strong>停用</strong>"
   },
@@ -56,6 +65,14 @@
   "general": {
     "message": "一般設定"
   },
+  "invalid_css_selector": {
+    "message": "$selector$不是一個有效的CSS選擇器",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "最後更新於 $date$ $time$",
     "placeholders": {
@@ -71,6 +88,14 @@
     "message": "最近更新於今天 $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "線$number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -145,6 +170,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "請從列表中選擇過濾條件集:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "在這裡不允許過濾器列表"
   },
   "update_now": {
     "message": "立即更新"

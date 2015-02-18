@@ -26,6 +26,15 @@
   "clickhide_instructions": {
     "message": "Након што затворите овај искачући прозор, притисните левим или десним кликом на елемент на овој страници."
   },
+  "description_chrome": {
+    "message": "Користи више од 50 милиона људи, слободном ад блокер Цхроме који блокира СВЕ нервира огласи, малваре и праћење."
+  },
+  "description_opera": {
+    "message": "Користи више од 50 милиона људи, слободном ад блокер Опере да блокира СВЕ нервира огласи, малваре и праћење."
+  },
+  "description_safari": {
+    "message": "Користи више од 50 милиона људи, слободном ад блокер Фирефок да блокира СВЕ нервира огласи, малваре и праћење."
+  },
   "disabled_for_site": {
     "message": "<strong>Онемогући</strong> на овом сајту"
   },
@@ -56,6 +65,14 @@
   "general": {
     "message": "Опште"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ није важећа селектор ЦСС",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Последњи пут ажурирано $date$ у $time$",
     "placeholders": {
@@ -71,6 +88,14 @@
     "message": "Последњи пут ажурирано данас у $time$",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "линија $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -145,6 +170,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Изаберите филтер на који желите да се пријавите:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Заглавља листа филтер нису дозвољени овде"
   },
   "update_now": {
     "message": "Ажурирај сада"

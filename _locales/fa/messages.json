@@ -12,7 +12,7 @@
     "message": "اضافه کردن فیلتر (ها) ؟"
   },
   "add_your_own_filters": {
-    "message": "اضافه کردن فیلتر خودتون"
+    "message": "اضافه کردن فیلتر خودتان"
   },
   "apply_changes": {
     "message": "اعمال تغییرات"
@@ -21,7 +21,7 @@
     "message": "مسدود کردن این عنصر"
   },
   "cancel": {
-    "message": "بیخیال"
+    "message": "لغو"
   },
   "clickhide_instructions": {
     "message": "پس از بسته شدن این پنجره، روی بخشی از صفحه کلیک (یا راست کلیک) کن."
@@ -57,16 +57,16 @@
     "message": "لیست فیلتر"
   },
   "filter_must_follow_syntax": {
-    "message": "فیلتر خود را باید <a> ترکیب فیلتر Adblock Plus</a> را دنبال کنید."
+    "message": "فیلترهایی که می‌نویسید باید از <a> قواعد فیلترنویسی Adblock Plus</a> پیروی کند."
   },
   "found_a_bug": {
-    "message": "باگ پیدا کردی؟ می خوای Adblock Plus رو به زبون خودتون ترجمه کنی؟ <a>فایل درخواست اینجاست</a>."
+    "message": "باگ پیدا کردید؟ مایلید Adblock Plus را به زبان خودتان ترجمه کنید؟ <a>درخواستتان را اینجا مطرح کنید</a>."
   },
   "general": {
     "message": "صفحه اصلی"
   },
   "invalid_css_selector": {
-    "message": "$selector$ انتخابگر استایل معتبر نیست",
+    "message": "$selector$ انتخابگر معتبری در CSS نیست",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -74,7 +74,7 @@
     }
   },
   "last_updated_at": {
-    "message": "آخرین ارتقاء در زمان $time$ و تاریخ $date$",
+    "message": "آخرین بروزرسانی در زمان $time$ و تاریخ $date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -85,7 +85,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "آخرین ارتقاء در ساعت $time$ امروز",
+    "message": "آخرین بروز رسانی در $time$ امروز",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -152,7 +152,7 @@
     "message": "دانلود Adblock Plus"
   },
   "stats_share_message": {
-    "message": "من $number$ تبلیغات و انتقالها رو مسدود کردم ، باتشکر از Adblock Plus.",
+    "message": "به واسطه Adblock Plus من $number$ تبلیغ و ردگیر را مسدود کردم.",
     "placeholders": {
       "number": {
         "content": "$1"

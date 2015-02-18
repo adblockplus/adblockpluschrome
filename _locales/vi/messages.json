@@ -26,6 +26,15 @@
   "clickhide_instructions": {
     "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
   },
+  "description_chrome": {
+    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Chrome chặn tất cả quảng cáo,phần mềm độc hại và phần mềm gián điệp."
+  },
+  "description_opera": {
+    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Opera chặn tất cả quảng cáo,phần mềm độc hại và phần mềm gián điệp."
+  },
+  "description_safari": {
+    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Safari chặn tất cả quảng cáo,phần mềm độc hại và phần mềm gián điệp."
+  },
   "disabled_for_site": {
     "message": "<strong>Đã loại bỏ</strong> trên trang này"
   },
@@ -104,7 +113,7 @@
     "message": "Tuỳ chỉnh Adblock Plus"
   },
   "options_short": {
-    "message": "Tùy chọn"
+    "message": "Tùy chỉnh"
   },
   "out_of_date_lists": {
     "message": "Các danh sách cũ đã được cập nhật định kỳ."
@@ -161,6 +170,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vui lòng chọn một bộ lọc trọn gói từ danh sách:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Bộ lọc danh sách tiêu đề không được phép ở đây"
   },
   "update_now": {
     "message": "Cập nhật ngay"

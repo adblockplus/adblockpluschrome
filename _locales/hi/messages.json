@@ -171,6 +171,9 @@
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "लिस्ट में से एक फ़िल्टर सब्स्क्रिप्शन चुनें: "
   },
+  "unexpected_filter_list_header": {
+    "message": "फ़िल्टर सूची हेडर यहाँ की अनुमति नहीं है"
+  },
   "update_now": {
     "message": "अपडेट करें "
   },
