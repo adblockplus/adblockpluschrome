@@ -36,7 +36,7 @@
     "message": "Över 50 miljoner användare. En gratis annonsblockerare för Safari som blockerar ALLA irriterande annonser, malware och spårning."
   },
   "disabled_for_site": {
-    "message": "<strong>Avaktiverad</strong> på denna webbplats"
+    "message": "<strong>Avaktiverat</strong> på denna webbplats"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus är avaktiverad för domänerna i denna lista. Du kan lägga till en domän via Adblock Plus-ikonen i adressfältet eller genom att skriva domännamnet (inte URL) i textboxen och klicka på \"Lägg till domän\"."
@@ -113,7 +113,7 @@
     "message": "Adblock Plus Alternativ"
   },
   "options_short": {
-    "message": "Alternativ"
+    "message": "Inställningar"
   },
   "out_of_date_lists": {
     "message": "Utdaterade listor uppdateras periodiskt."
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Dela med dig av dessa nummer"
+    "message": "Dela dessa nummer"
   },
   "stats_show_iconnumber": {
     "message": "Visa nummer vid ikon"

@@ -23,8 +23,23 @@
   "cancel": {
     "message": "Prekliči"
   },
+  "clickhide_instructions": {
+    "message": "Po zaključku tega popup kliknite (ali desni klik) element na strani."
+  },
+  "description_chrome": {
+    "message": "Uporablja ga več kot 50 milijonov ljudi, brezplačno ad blocker za Google Chrome ki blokira VSE nadležno oglasi, malware in sledenje."
+  },
+  "description_opera": {
+    "message": "Uporablja ga več kot 50 milijonov ljudi, brezplačno ad blocker za Opera, ki blokira VSE nadležno oglasi, malware in sledenje."
+  },
+  "description_safari": {
+    "message": "Uporablja ga več kot 50 milijonov ljudi, brezplačno ad blocker za Safari, ki blokira VSE nadležno oglasi, malware in sledenje."
+  },
   "disabled_for_site": {
     "message": "<strong>Omogočeno</strong> na tej strani"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus je onemogočeno področjih, navedenih spodaj. Lahko dodate domeno bodisi prek ikone Adblock Plus v naslovni vrstici ali jih vnesete domeno (ne URL) v polje in s klikom na gumb \"Dodaj domeno\"."
   },
   "easy_create_filter": {
     "message": "Blokiraj element"
@@ -40,6 +55,9 @@
   },
   "filter_lists": {
     "message": "Seznami filtrov"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Vaš filter je treba slediti <a>Adblock Plus filter syntax</a>."
   },
   "found_a_bug": {
     "message": "Ste našli hrošča? Želite prevesti Adblock Plus v vaš jezik? Prosimo <a>oddajte zahtevo tukaj</a>."

@@ -26,6 +26,15 @@
   "clickhide_instructions": {
     "message": "Klikk (eller høyreklikk) på et element på siden etter at du har lukket dette vinduet."
   },
+  "description_chrome": {
+    "message": "Brukes av over 50 millioner personer - et gratisverktøy for Chrome som blokkerer alle sjenerende annonser, malware og sporing."
+  },
+  "description_opera": {
+    "message": "Brukes av over 50 millioner personer - et gratisverktøy for Opera som blokkerer alle sjenerende annonser, malware og sporing."
+  },
+  "description_safari": {
+    "message": "Brukes av over 50 millioner personer - et gratisverktøy for Safari som blokkerer alle sjenerende annonser, malware og sporing."
+  },
   "disabled_for_site": {
     "message": "<strong>Deaktivert</strong> på dette nettstedet"
   },
@@ -65,7 +74,7 @@
     }
   },
   "last_updated_at": {
-    "message": "Sist oppdatert $time$ on $date$",
+    "message": "Sist oppdatert klokken $time$ $date$",
     "placeholders": {
       "date": {
         "content": "$2"

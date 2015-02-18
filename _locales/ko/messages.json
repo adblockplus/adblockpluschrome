@@ -26,6 +26,15 @@
   "clickhide_instructions": {
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
   },
+  "description_chrome": {
+    "message": "만 50 명 이상, 크롬에 대한 무료 광고 차단에 의해 사용됩니다."
+  },
+  "description_opera": {
+    "message": "만 50 명 이상, 오페라에 대한 무료 광고 차단에 의해 사용됩니다."
+  },
+  "description_safari": {
+    "message": "만 50 명 이상, 사파리를위한 무료 광고 차단에 의해 사용됩니다."
+  },
   "disabled_for_site": {
     "message": "이 사이트에서 <strong>을 사용 중지</strong> 합니다."
   },
@@ -56,6 +65,14 @@
   "general": {
     "message": "일반"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ 유효한 CSS 선택은 아니다",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "$date$ $time$에 마지막으로 업데이트됨",
     "placeholders": {
@@ -71,6 +88,14 @@
     "message": "오늘 $time$에 마지막으로 업데이트됨",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "라인 $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -145,6 +170,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "목록에서 구독할 필터를 선택하십시오."
+  },
+  "unexpected_filter_list_header": {
+    "message": "필터 목록 헤더는 허용되지 않습니다 여기"
   },
   "update_now": {
     "message": "지금 업데이트"

@@ -26,6 +26,15 @@
   "clickhide_instructions": {
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
   },
+  "description_chrome": {
+    "message": "Yli 50 miljoonan ihmisen käyttämä ilmainen mainostenesto-ohjelma Chromelle. Estää KAIKKI mainokset, haittaohjelmat ja seurannan."
+  },
+  "description_opera": {
+    "message": "Yli 50 miljoonan ihmisen käyttämä ilmainen mainostenesto-ohjelma Operalle. Estää KAIKKI mainokset, haittaohjelmat ja seurannan."
+  },
+  "description_safari": {
+    "message": "Yli 50 miljoonan ihmisen käyttämä ilmainen mainostenesto-ohjelma Safarille. Estää KAIKKI mainokset, haittaohjelmat ja seurannan."
+  },
   "disabled_for_site": {
     "message": "<strong>Poistettu</strong> tältä sivulta"
   },

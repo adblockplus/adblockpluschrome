@@ -27,13 +27,13 @@
     "message": "Užvėrus šį iššokantį langą, paspauskite (arba dešiniu mygtuku) ant elemento esančio puslapyje."
   },
   "description_chrome": {
-    "message": "Populiari, nemokama reklamų blokavimo programa „Chrome” naršyklei blokuoja įkyrias reklamas, kenkėjišką įrangą ir sekimą."
+    "message": "Populiari, nemokama reklamų blokavimo programa Chrome naršyklei blokuoja įkyrias reklamas, kenkėjiškas programas ir sekimą."
   },
   "description_opera": {
-    "message": "Populiari, nemokama reklamų blokavimo programa „Opera” naršyklei blokuoja įkyrias reklamas, kenkėjišką įrangą ir sekimą."
+    "message": "Populiari, nemokama reklamų blokavimo programa „Opera” naršyklei blokuoja įkyrias reklamas, kenkėjiškas programas ir sekimą."
   },
   "description_safari": {
-    "message": "Populiari, nemokama reklamų blokavimo programa „Safari” naršyklei blokuoja įkyrias reklamas, kenkėjišką įrangą ir sekimą."
+    "message": "Populiari, nemokama reklamų blokavimo programa „Safari” naršyklei blokuoja įkyrias reklamas, kenkėjiškas programas ir sekimą."
   },
   "disabled_for_site": {
     "message": "Šiame puslapyje <strong>išjungta</strong>"
@@ -66,7 +66,7 @@
     "message": "Bendra"
   },
   "invalid_css_selector": {
-    "message": "$selector$ yra neteisingas CSS selektorius",
+    "message": "$selector$ yra neteisingas CSS pasirinkimas",
     "placeholders": {
       "selector": {
         "content": "$1"

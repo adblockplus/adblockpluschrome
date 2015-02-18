@@ -26,11 +26,20 @@
   "clickhide_instructions": {
     "message": "Pärast sulgemist hüpikaken, klõpsake (või paremklõps) element lehel."
   },
+  "description_chrome": {
+    "message": "Kasutab üle 50 miljoni inimese, tasuta reklaami blokeerija Chrome, mis blokeerib KÕIK tüütuid reklaame, pahavara ja jälgimist."
+  },
+  "description_opera": {
+    "message": "Kasutab üle 50 miljoni inimese, tasuta reklaami blokeerija Opera mis blokeerib kõik tüütuid reklaame, pahavara ja jälgimist."
+  },
+  "description_safari": {
+    "message": "Kasutab üle 50 miljoni inimese, tasuta reklaami blokeerija Safari, mis blokeerib kõik tüütuid reklaame, pahavara ja jälgimist."
+  },
   "disabled_for_site": {
     "message": "<strong>Puuetega</strong> sellel saidil"
   },
   "disabled_for_these_domains": {
-    "message": "AdBlock Plus on keelatud valdkondades, valesti on loetletud allpool. Saate lisada domeeni kas vahendusel AdBlock Plus aadressiribal ikooni VÕI kirjutades domeeni (Mitte URL) lahtrisse JA klõpsa \"Lisa domeen\" Nuppu."
+    "message": "Adblock Plus on keelatud valdkondades, valesti on loetletud allpool. Saate lisada domeeni kas vahendusel Adblock Plus aadressiribal ikooni VÕI kirjutades domeeni (Mitte URL) lahtrisse JA klõpsa \"Lisa domeen\" Nuppu."
   },
   "easy_create_filter": {
     "message": "Blokeeri element"
@@ -140,7 +149,7 @@
     }
   },
   "stats_share_download": {
-    "message": "Lae AdBlock Plus"
+    "message": "Lae Adblock Plus"
   },
   "stats_share_message": {
     "message": "Ma blokeeritud $number$ reklaamid ja jälgimisseadmed tänu Adblock Plus.",

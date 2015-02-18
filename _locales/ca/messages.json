@@ -26,6 +26,15 @@
   "clickhide_instructions": {
     "message": "Després de tancar aquest Pop-up, clica (o fes clic amb el botó dret) a un element de la pàgina."
   },
+  "description_chrome": {
+    "message": "Utilitzat per més de 50 milions de persones, un bloquejador d'anuncis classificats gratis per Chrome."
+  },
+  "description_opera": {
+    "message": "Utilitzat per més de 50 milions de persones, un bloquejador d'anuncis classificats gratis per a Opera."
+  },
+  "description_safari": {
+    "message": "Utilitzat per més de 50 milions de persones, un bloquejador d'anuncis classificats gratis per a Safari."
+  },
   "disabled_for_site": {
     "message": "S'ha <strong>deshabilitat</strong> per a aquest lloc"
   },
@@ -56,6 +65,14 @@
   "general": {
     "message": "General"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ no és un selector CSS vàlid",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "Última actualització a les $time$ a $date$",
     "placeholders": {
@@ -71,6 +88,14 @@
     "message": "Última actualització a les $time$ avui",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "Línia $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -145,6 +170,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Si us plau tria una subscripció de filtre a la llista:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Llista de filtres encapçalats no estan permesos aquí"
   },
   "update_now": {
     "message": "Actualitza ara"
