@@ -102,16 +102,19 @@
     // e.g. "ja-jp-mac" -> "ja_JP", note that the part after the second
     // dash is dropped, since we only support language and region
     var [language, region] = navigator.language.split("-");
-    region = region.toUpperCase();
-
-    // e.g. "es-AR" -> "es_419", note that we combine all dialects of
-    // Spanish outside of Spain, the same way Google Chrome does,
-    // since we use the same translations as for the Chrome extension
-    if (language == "es" && region && region != "ES")
-      region = "419";
 
     if (region)
+    {
+      region = region.toUpperCase();
+
+      // e.g. "es-AR" -> "es_419", note that we combine all dialects of
+      // Spanish outside of Spain, the same way Google Chrome does,
+      // since we use the same translations as for the Chrome extension
+      if (language == "es" && region != "ES")
+        region = "419";
+
       candidates.push(language + "_" + region);
+    }
 
     candidates.push(language);
 
