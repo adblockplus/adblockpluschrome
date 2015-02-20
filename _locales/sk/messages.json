@@ -122,7 +122,7 @@
     "message": "Odstrániť vybrané"
   },
   "show_block_element_menu": {
-    "message": "Zobraziť zablokovaný prvok kliknutím na položku pravým tlačidlom"
+    "message": "Zobrazovať v kontextovom menu položku blokovania prvkov"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> na tejto stránke",
