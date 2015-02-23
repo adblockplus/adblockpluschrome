@@ -326,9 +326,35 @@
     return (framesOfTabs[tabId] || {})[frameId];
   };
 
+  var handlerBehaviorChangedQuota = chrome.webRequest.MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES;
+
+  function propagateHandlerBehaviorChange()
+  {
+    // Make sure to not call handlerBehaviorChanged() more often than allowed
+    // by chrome.webRequest.MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES.
+    // Otherwise Chrome notifies the user that this extension is causing issues.
+    if (handlerBehaviorChangedQuota > 0)
+    {
+      chrome.webNavigation.onBeforeNavigate.removeListener(propagateHandlerBehaviorChange);
+      chrome.webRequest.handlerBehaviorChanged();
+
+      handlerBehaviorChangedQuota--;
+      setTimeout(function() { handlerBehaviorChangedQuota++; }, 600000);
+    }
+  }
+
   ext.webRequest = {
     onBeforeRequest: new ext._EventTarget(),
-    handlerBehaviorChanged: chrome.webRequest.handlerBehaviorChanged
+    handlerBehaviorChanged: function()
+    {
+      // Defer handlerBehaviorChanged() until navigation occurs.
+      // There wouldn't be any visible effect when calling it earlier,
+      // but it's an expensive operation and that way we avoid to call
+      // it multiple times, if multiple filters are added/removed.
+      var onBeforeNavigate = chrome.webNavigation.onBeforeNavigate;
+      if (!onBeforeNavigate.hasListener(propagateHandlerBehaviorChange))
+        onBeforeNavigate.addListener(propagateHandlerBehaviorChange);
+    }
   };
 
   // Since Chrome 38 requests of type 'object' (e.g. requests
