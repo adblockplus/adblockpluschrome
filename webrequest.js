@@ -19,13 +19,6 @@ var FilterNotifier = require("filterNotifier").FilterNotifier;
 var RegExpFilter = require("filterClasses").RegExpFilter;
 var platform = require("info").platform;
 
-var onFilterChangeTimeout = null;
-function onFilterChange()
-{
-  onFilterChangeTimeout = null;
-  ext.webRequest.handlerBehaviorChanged();
-}
-
 var importantNotifications = {
   'filter.added': true,
   'filter.removed': true,
@@ -46,12 +39,7 @@ ext.webRequest.indistinguishableTypes.forEach(function(types)
 FilterNotifier.addListener(function(action)
 {
   if (action in importantNotifications)
-  {
-    // Execute delayed to prevent multiple executions in a quick succession
-    if (onFilterChangeTimeout != null)
-      window.clearTimeout(onFilterChangeTimeout);
-    onFilterChangeTimeout = window.setTimeout(onFilterChange, 2000);
-  }
+    ext.webRequest.handlerBehaviorChanged();
 });
 
 function onBeforeRequest(url, type, page, frame)
