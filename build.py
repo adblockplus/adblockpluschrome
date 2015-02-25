@@ -3,13 +3,14 @@
 
 import os, sys, subprocess
 
-DEPENDENCY_SCRIPT = os.path.join(os.path.dirname(__file__), "ensure_dependencies.py")
+BASE_DIR = os.path.dirname(__file__)
+DEPENDENCY_SCRIPT = os.path.join(BASE_DIR, "ensure_dependencies.py")
 
 try:
-  subprocess.check_call([sys.executable, DEPENDENCY_SCRIPT])
+  subprocess.check_call([sys.executable, DEPENDENCY_SCRIPT, BASE_DIR])
 except subprocess.CalledProcessError as e:
   print >>sys.stderr, e
   print >>sys.stderr, "Failed to ensure dependencies being up-to-date!"
 
 import buildtools.build
-buildtools.build.processArgs('.', sys.argv)
+buildtools.build.processArgs(BASE_DIR, sys.argv)
