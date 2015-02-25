@@ -22,10 +22,6 @@ webAccessible = block.html
 [compat]
 chrome = 28.0
 
-[convert_js]
-lib/io.js = lib/filesystem/io.js
-  --arg module=true
-
 [mapping]
 icons/abp-19.png = chrome/icons/abp-19.png
 icons/abp-19-whitelisted.png = chrome/icons/abp-19-whitelisted.png

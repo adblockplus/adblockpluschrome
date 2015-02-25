@@ -4,7 +4,6 @@ backgroundScripts = ext/common.js
   ext/background.js
   lib/compat.js
   lib/info.js
-  lib/io.js
   lib/adblockplus.js
   lib/punycode.js
   lib/publicSuffixList.js
@@ -52,6 +51,7 @@ qunit/qunit.css = adblockplustests/chrome/content/qunit.css
 [convert_js]
 lib/adblockplus.js = lib/prefs.js
   lib/utils.js
+  lib/io.js
   lib/elemHideHitRegistration.js
   adblockplus/lib/downloader.js
   adblockplus/lib/filterNotifier.js

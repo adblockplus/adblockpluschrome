@@ -559,6 +559,55 @@
         localStorage.clear();
         hooks.done();
       });
+    },
+
+    // Migrate FileSystem API to chrome.storage.local. For simplicity
+    // only patterns.ini is considered. Backups are left behind.
+    migrateFiles: function(callback)
+    {
+      if ("webkitRequestFileSystem" in window)
+      {
+        webkitRequestFileSystem(PERSISTENT, 0, function(fs)
+        {
+          fs.root.getFile("patterns.ini", {}, function(entry)
+          {
+            entry.getMetadata(function(metadata)
+            {
+              entry.file(function(file)
+              {
+                var reader = new FileReader();
+                reader.onloadend = function()
+                {
+                  if (!reader.error)
+                  {
+                    chrome.storage.local.set(
+                      {
+                        "file:patterns.ini": {
+                          content: reader.result.split(/[\r\n]+/),
+                          lastModified: metadata.modificationTime.getTime()
+                        }
+                      },
+                      function()
+                      {
+                        fs.root.removeRecursively(callback, callback);
+                      }
+                    );
+                  }
+                  else
+                  {
+                    callback();
+                  }
+                };
+                reader.readAsText(file);
+              }, callback);
+            }, callback);
+          }, callback);
+        }, callback);
+      }
+      else
+      {
+        callback();
+      }
     }
   };
 

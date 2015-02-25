@@ -742,6 +742,37 @@
       }
 
       hooks.done();
+    },
+
+    // While moving away from the FileSystem API on Chrome the data structure
+    // for files on Safari changed as well, in order to keep thing consistent.
+    migrateFiles: function(callback)
+    {
+      var settings = safari.extension.settings;
+
+      for (var key in settings)
+      {
+        var match = key.match(/^(.*)\/lastModified$/)
+
+        if (match)
+        {
+          var filename = match[1];
+          var content = settings[filename];
+
+          if (typeof content == "string")
+          {
+            settings["file:" + filename] = {
+              content: content.split(/[\r\n]+/),
+              lastModified: settings[key]
+            };
+
+            delete settings[key];
+            delete settings[filename];
+          }
+        }
+      }
+
+      callback();
     }
   };
 
