@@ -17,8 +17,6 @@ include.youtube.js = safari/include.youtube.js
 Icon.png = adblockplusui/skin/abp-128.png
 
 [convert_js]
-lib/io.js = lib/storage/io.js
-  --arg module=true
 ext/common.js = ext/common.js safari/ext/common.js
 ext/background.js = ext/background.js safari/ext/background.js --arg brace_style=expand
 
