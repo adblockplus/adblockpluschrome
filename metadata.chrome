@@ -14,7 +14,7 @@ permissions = tabs
   notifications
 options = options.html
 browserAction = icons/abp-19.png icons/abp-38.png popup.html
-icons = icons/abp-16.png icons/abp-32.png icons/abp-48.png icons/abp-128.png
+icons = icons/abp-16.png icons/abp-32.png icons/abp-48.png icons/abp-64.png icons/abp-128.png
 webAccessible = block.html
 
 [compat]

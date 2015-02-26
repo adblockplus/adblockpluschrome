@@ -44,13 +44,10 @@ header
 
 #logo
 {
+  display: block;
   position: relative;
-  top: 20px;
-  width: 55px;
-  height: 55px;
+  top: 15px;
   margin: 0px auto;
-  background-image: url(abp-icon-big.png);
-  background-size: 100%;
 }
 
 #wrapper
