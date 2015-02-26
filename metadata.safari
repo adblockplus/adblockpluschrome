@@ -14,7 +14,7 @@ document_start = ext/common.js ext/content.js include.preload.js include.youtube
 ext/content.js = safari/ext/content.js
 ext/popup.js = safari/ext/popup.js
 include.youtube.js = safari/include.youtube.js
-Icon.png = icons/abp-128.png
+Icon.png = icons/detailed/abp-128.png
 
 [convert_js]
 lib/io.js = lib/storage/io.js

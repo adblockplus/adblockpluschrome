@@ -364,7 +364,7 @@ function showNotification(notification)
     var texts = NotificationStorage.getLocalizedTexts(notification);
     var title = texts.title || "";
     var message = texts.message ? texts.message.replace(/<\/?(a|strong)>/g, "") : "";
-    var iconUrl = ext.getURL("icons/abp-128.png");
+    var iconUrl = ext.getURL("icons/detailed/abp-128.png");
     var hasLinks = activeNotification.links && activeNotification.links.length > 0;
 
     if (canUseChromeNotifications)
