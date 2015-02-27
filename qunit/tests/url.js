@@ -81,8 +81,9 @@
     testPreservedURL("http://example.com/foo", "includes path");
     testPreservedURL("http://example.com/?foo=bar", "includes query");
     testPreservedURL("http://example.com:8080/", "includes port");
+    testPreservedURL("http://example.com/?", "with empty query string");
     testNormalizedURL("http://example.com/#top","http://example.com/", "stripped hash");
-    testNormalizedURL("http://user:password@example.com/","http://example.com/", "stripped auth credentials");
+    testNormalizedURL("http://example.com/#top?", "http://example.com/", "stripped hash with trailing question mark");
     testNormalizedURL("http://xn--f-1gaa.com/","http://f\u00f6\u00f6.com/", "decoded punycode");
     testPreservedURL("about:blank", "about:blank");
     testPreservedURL("data:text/plain,foo", "data: URL");
