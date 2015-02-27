@@ -3,7 +3,7 @@
 
 import os, sys, subprocess
 
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DEPENDENCY_SCRIPT = os.path.join(BASE_DIR, "ensure_dependencies.py")
 
 try:
