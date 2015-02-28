@@ -4,35 +4,14 @@
   var Filter = filterClasses.Filter;
   var ElemHideFilter = filterClasses.ElemHideFilter;
 
-  module(
-    "CSS escaping",
-    {
-      setup: function()
-      {
-        var frame = document.createElement("iframe");
-        frame.srcdoc = '<script src="../include.postload.js"></script>';
+  var filterComposer = require("filterComposer");
+  var escapeCSS = filterComposer.escapeCSS;
+  var quoteCSS = filterComposer.quoteCSS;
 
-        stop();
-        frame.addEventListener("load", function()
-        {
-          start();
-
-          this.escapeCSS = frame.contentWindow.escapeCSS;
-          this.quote = frame.contentWindow.quote;
-
-          document.body.removeChild(frame);
-        }.bind(this));
-
-        document.body.appendChild(frame);
-      }
-    }
-  );
+  module("CSS escaping");
 
   test("CSS escaping", function()
   {
-    var escapeCSS = this.escapeCSS;
-    var quote = this.quote;
-
     function testSelector(opts)
     {
       var mustMatch = opts.mustMatch !== false;
@@ -103,7 +82,7 @@
       });
 
       testSelector({
-        selector: "[foo=" + quote(s) + "]",
+        selector: "[foo=" + quoteCSS(s) + "]",
         attributes: {foo: s}
       });
     }

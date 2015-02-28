@@ -94,13 +94,6 @@ function isInlineFrame(element)
   return contentDocument.location.protocol == "about:";
 }
 
-function resolveURL(url)
-{
-  var a = document.createElement("a");
-  a.href = url;
-  return a.href;
-}
-
 function reinjectRulesWhenRemoved(document, style)
 {
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
