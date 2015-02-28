@@ -56,15 +56,14 @@ function onBeforeRequest(url, type, page, frame)
   var key = getKey(page, frame);
   var filter = defaultMatcher.matchesAny(
     stringifyURL(url),
-    type == "sub_frame" ? "SUBDOCUMENT" : type.toUpperCase(),
-    docDomain,
+    type, docDomain,
     isThirdParty(url, docDomain),
     key
   );
 
   // We can't listen to onHeadersReceived in Safari so we need to
   // check for notifications here
-  if (platform != "chromium" && type == "sub_frame")
+  if (platform != "chromium" && type == "SUBDOCUMENT")
   {
     var notificationToShow = NotificationStorage.getNextToShow(stringifyURL(url));
     if (notificationToShow)

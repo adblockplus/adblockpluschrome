@@ -366,8 +366,7 @@
       if (details.tabId == -1)
         return;
 
-      var requestType = details.type;
-      var isMainFrame = requestType == "main_frame" || (
+      var isMainFrame = details.type == "main_frame" || (
 
         // assume that the first request belongs to the top frame. Chrome
         // may give the top frame the type "object" instead of "main_frame".
@@ -389,10 +388,17 @@
         // is about to load, however if a frame is loading the surrounding
         // frame is indicated by parentFrameId instead of frameId
         var frameId;
-        if (requestType == "sub_frame")
+        var requestType;
+        if (details.type == "sub_frame")
+        {
           frameId = details.parentFrameId;
+          requestType = "SUBDOCUMENT";
+        }
         else
+        {
           frameId = details.frameId;
+          requestType = details.type.toUpperCase();
+        }
 
         frame = frames[frameId] || frames[Object.keys(frames)[0]];
 
@@ -401,8 +407,8 @@
           // Since Chrome 38 requests of type 'object' (e.g. requests
           // initiated by Flash) are mistakenly reported with the type 'other'.
           // https://code.google.com/p/chromium/issues/detail?id=410382
-          if (requestType == "other" && parseInt(navigator.userAgent.match(/\bChrome\/(\d+)/)[1], 10) >= 38)
-            requestType = "object";
+          if (requestType == "OTHER" && parseInt(navigator.userAgent.match(/\bChrome\/(\d+)/)[1], 10) >= 38)
+            requestType = "OBJECT";
 
           var results = ext.webRequest.onBeforeRequest._dispatch(
             url,

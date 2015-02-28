@@ -64,30 +64,30 @@
     if (/^(?!https?:)[\w-]+:/.test(event.url))
       return;
 
-    var type = "other";
+    var type = "OTHER";
     var eventName = "error";
 
     switch(event.target.localName)
     {
       case "frame":
       case "iframe":
-        type = "sub_frame";
+        type = "SUBDOCUMENT";
         eventName = "load";
         break;
       case "img":
       case "input":
-        type = "image";
+        type = "IMAGE";
         break;
       case "object":
       case "embed":
-        type = "object";
+        type = "OBJECT";
         break;
       case "script":
-        type = "script";
+        type = "SCRIPT";
         break;
       case "link":
         if (/\bstylesheet\b/i.test(event.target.rel))
-          type = "stylesheet";
+          type = "STYLESHEET";
         break;
     }
 
