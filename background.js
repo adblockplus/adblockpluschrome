@@ -55,6 +55,7 @@ var Utils = require("utils").Utils;
 var NotificationStorage = require("notification").Notification;
 var initAntiAdblockNotification = require("antiadblockInit").initAntiAdblockNotification;
 var parseFilters = require("filterValidation").parseFilters;
+var composeFilters = require("filterComposer").composeFilters;
 
 // Chrome on Linux does not fully support chrome.notifications until version 35
 // https://code.google.com/p/chromium/issues/detail?id=291485
@@ -550,6 +551,12 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
     case "report-html-page":
       htmlPages.set(sender.page, null);
       refreshIconAndContextMenu(sender.page);
+      break;
+    case "compose-filters":
+      sendResponse(composeFilters(
+        msg.tagName, msg.id, msg.src, msg.style,
+        msg.classes, msg.urls, new URL(msg.baseURL)
+      ));
       break;
     case "forward":
       if (sender.page)

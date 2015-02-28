@@ -24,30 +24,6 @@ var clickHideFiltersDialog = null;
 var lastRightClickEvent = null;
 var lastRightClickEventValid = false;
 
-function escapeChar(chr)
-{
-  var code = chr.charCodeAt(0);
-
-  // Control characters and leading digits must be escaped based on
-  // their char code in CSS. Moreover, curly brackets aren't allowed
-  // in elemhide filters, and therefore must be escaped based on their
-  // char code as well.
-  if (code <= 0x1F || code == 0x7F || /[\d\{\}]/.test(chr))
-    return "\\" + code.toString(16) + " ";
-
-  return "\\" + chr;
-}
-
-function quote(value)
-{
-  return '"' + value.replace(/["\\\{\}\x00-\x1F\x7F]/g, escapeChar) + '"';
-}
-
-function escapeCSS(s)
-{
-  return s.replace(/^[\d\-]|[^\w\-\u0080-\uFFFF]/g, escapeChar);
-}
-
 function highlightElement(element, shadowColor, backgroundColor)
 {
   unhighlightElement(element);
@@ -144,7 +120,7 @@ function getURLsFromObjectElement(element)
 {
   var url = element.getAttribute("data");
   if (url)
-    return [resolveURL(url)];
+    return [url];
 
   for (var i = 0; i < element.children.length; i++)
   {
@@ -163,7 +139,7 @@ function getURLsFromObjectElement(element)
     if (!value)
       continue;
 
-    return [resolveURL(value)];
+    return [value];
   }
 
   return [];
@@ -183,7 +159,7 @@ function getURLsFromAttributes(element)
     {
       var url = candidates[i].trim().replace(/\s+\S+$/, "");
       if (url)
-        urls.push(resolveURL(url));
+        urls.push(url);
     }
   }
 
@@ -509,6 +485,26 @@ function clickHide_keyDown(e)
   }
 }
 
+function getFiltersForElement(element, callback)
+{
+  ext.backgroundPage.sendMessage(
+    {
+      type: "compose-filters",
+      tagName: element.localName,
+      id: element.id,
+      src: element.getAttribute("src"),
+      style: element.getAttribute("style"),
+      classes: [].slice.call(element.classList),
+      urls: getURLsFromElement(element),
+      baseURL: document.location.href
+    },
+    function(response)
+    {
+      callback(response.filters, response.selectors);
+    }
+  );
+}
+
 // When the user clicks, the currentElement is the one we want.
 // We should have ABP rules ready for when the
 // popup asks for them.
@@ -521,62 +517,8 @@ function clickHide_mouseClick(e)
   if (currentElement.classList.contains("__adblockplus__overlay"))
     elt = currentElement.prisoner;
 
-  var clickHideFilters = [];
-  var selectorList = [];
-
-  var addSelector = function(selector)
+  getFiltersForElement(elt, function(filters, selectors)
   {
-    if (selectorList.indexOf(selector) != -1)
-      return;
-
-    clickHideFilters.push(document.domain + "##" + selector);
-    selectorList.push(selector);
-  };
-
-  if (elt.id)
-    addSelector("#" + escapeCSS(elt.id));
-
-  if (elt.classList.length > 0)
-  {
-    var selector = "";
-
-    for (var i = 0; i < elt.classList.length; i++)
-      selector += "." + escapeCSS(elt.classList[i]);
-
-    addSelector(selector);
-  }
-
-  var urls = getURLsFromElement(elt);
-  for (var i = 0; i < urls.length; i++)
-  {
-    var url = urls[i];
-
-    if (/^https?:/i.test(url))
-    {
-      var filter = url.replace(/^[\w\-]+:\/+(?:www\.)?/, "||");
-
-      if (clickHideFilters.indexOf(filter) == -1)
-        clickHideFilters.push(filter);
-
-      continue;
-    }
-
-    if (url == elt.src)
-      addSelector(escapeCSS(elt.localName) + '[src=' + quote(elt.getAttribute("src")) + ']');
-  }
-
-  // as last resort, create a filter based on inline styles
-  if (clickHideFilters.length == 0)
-  {
-    var style = elt.getAttribute("style");
-    if (style)
-      addSelector(escapeCSS(elt.localName) + '[style=' + quote(style) + ']');
-  }
-
-  // Show popup, or if inside frame tell the parent to do it
-  if (window.self == window.top)
-    clickHide_showDialog(e.clientX, e.clientY, clickHideFilters);
-  else
     ext.backgroundPage.sendMessage(
     {
       type: "forward",
@@ -585,15 +527,15 @@ function clickHide_mouseClick(e)
         type: "clickhide-show-dialog",
         screenX: e.screenX,
         screenY: e.screenY,
-        clickHideFilters: clickHideFilters
+        clickHideFilters: filters
       }
     });
 
-  // Highlight the elements specified by selector in yellow
-  if (selectorList.length > 0)
-    highlightElements(selectorList.join(","));
-  // Now, actually highlight the element the user clicked on in red
-  highlightElement(currentElement, "#fd1708", "#f6a1b5");
+    if (selectors.length > 0)
+      highlightElements(selectors.join(","));
+
+    highlightElement(currentElement, "#fd1708", "#f6a1b5");
+  });
 
   // Make sure the browser doesn't handle this click
   e.preventDefault();
