@@ -299,16 +299,6 @@
   };
 
 
-  /* Background page */
-
-  ext.backgroundPage = {
-    getWindow: function()
-    {
-      return window;
-    }
-  };
-
-
   /* Background page proxy (for access from content scripts) */
 
   var backgroundPageProxy = {
