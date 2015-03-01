@@ -73,10 +73,29 @@
   // import ext into the javascript context of the popover. This code might fail,
   // when the background page isn't ready yet. So it is important to put it below
   // the reloading code above.
-  window.ext = Object.create(safari.extension.globalPage.contentWindow.ext);
+  var backgroundPage = safari.extension.globalPage.contentWindow;
+  window.ext = Object.create(backgroundPage.ext);
 
   ext.closePopup = function()
   {
     safari.self.hide();
   };
+
+  ext.backgroundPage = {
+    getWindow: function()
+    {
+      return backgroundPage;
+    },
+
+    // On Safari, you can't send messages from the popup to the
+    // background page. So we call the message listeners directly.
+    sendMessage: function(message, responseCallback)
+    {
+      if (!responseCallback)
+        responseCallback = function () {};
+
+      backgroundPage.ext.onMessage._dispatch(message, {}, responseCallback);
+    }
+  };
+
 })();

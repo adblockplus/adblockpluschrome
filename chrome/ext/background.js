@@ -439,9 +439,14 @@
 
   chrome.runtime.onMessage.addListener(function(message, rawSender, sendResponse)
   {
-    var sender = {
-      page: new Page(rawSender.tab),
-      frame: {
+    var sender = {};
+
+    // Add "page" and "frame" if the message was sent by a content script.
+    // If sent by popup or the background page itself, there is no "tab".
+    if ("tab" in rawSender)
+    {
+      sender.page = new Page(rawSender.tab);
+      sender.frame = {
         url: new URL(rawSender.url),
         get parent()
         {
@@ -469,8 +474,8 @@
 
           return frames[0];
         }
-      }
-    };
+      };
+    }
 
     return ext.onMessage._dispatch(message, sender, sendResponse).indexOf(true) != -1;
   });
