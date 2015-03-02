@@ -513,13 +513,7 @@
           var tab = tabs[0];
 
           chrome.windows.update(tab.windowId, {focused: true});
-          chrome.tabs.highlight(
-            {
-              windowId: tab.windowId,
-              tabs: [tab.index]
-            },
-            function() {}
-          );
+          chrome.tabs.update(tab.id, {active: true});
 
           if (callback)
             callback(new Page(tab));
