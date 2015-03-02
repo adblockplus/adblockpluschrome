@@ -16,6 +16,7 @@
  */
 
 var FilterNotifier = require("filterNotifier").FilterNotifier;
+var RegExpFilter = require("filterClasses").RegExpFilter;
 var platform = require("info").platform;
 
 var onFilterChangeTimeout = null;
@@ -35,6 +36,12 @@ var importantNotifications = {
   'subscription.updated': true,
   'load': true
 };
+
+ext.webRequest.indistinguishableTypes.forEach(function(types)
+{
+  for (var i = 1; i < types.length; i++)
+    RegExpFilter.typeMap[types[i]] = RegExpFilter.typeMap[types[0]];
+});
 
 FilterNotifier.addListener(function(action)
 {

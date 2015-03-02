@@ -78,6 +78,11 @@
       case "input":
         type = "IMAGE";
         break;
+      case "video":
+      case "audio":
+      case "source":
+        type = "MEDIA";
+        break;
       case "object":
       case "embed":
         type = "OBJECT";

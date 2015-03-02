@@ -295,7 +295,8 @@
 
   ext.webRequest = {
     onBeforeRequest: new ext._EventTarget(),
-    handlerBehaviorChanged: function() {}
+    handlerBehaviorChanged: function() {},
+    indistinguishableTypes: [["OTHER", "FONT"]]
   };
 
 

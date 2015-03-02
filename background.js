@@ -18,7 +18,6 @@
 with(require("filterClasses"))
 {
   this.Filter = Filter;
-  this.RegExpFilter = RegExpFilter;
   this.BlockingFilter = BlockingFilter;
   this.WhitelistFilter = WhitelistFilter;
 }
@@ -56,10 +55,6 @@ var Utils = require("utils").Utils;
 var NotificationStorage = require("notification").Notification;
 var initAntiAdblockNotification = require("antiadblockInit").initAntiAdblockNotification;
 var parseFilters = require("filterValidation").parseFilters;
-
-// Some types cannot be distinguished
-RegExpFilter.typeMap.OBJECT_SUBREQUEST = RegExpFilter.typeMap.OBJECT;
-RegExpFilter.typeMap.MEDIA = RegExpFilter.typeMap.FONT = RegExpFilter.typeMap.OTHER;
 
 // Chrome on Linux does not fully support chrome.notifications until version 35
 // https://code.google.com/p/chromium/issues/detail?id=291485

@@ -331,6 +331,23 @@
     handlerBehaviorChanged: chrome.webRequest.handlerBehaviorChanged
   };
 
+  // Since Chrome 38 requests of type 'object' (e.g. requests
+  // initiated by Flash) are mistakenly reported with the type 'other'.
+  // https://code.google.com/p/chromium/issues/detail?id=410382
+  if (parseInt(navigator.userAgent.match(/\bChrome\/(\d+)/)[1], 10) >= 38)
+  {
+    ext.webRequest.indistinguishableTypes = [
+      ["OTHER", "OBJECT", "OBJECT_SUBREQUEST"]
+    ];
+  }
+  else
+  {
+    ext.webRequest.indistinguishableTypes = [
+      ["OBJECT", "OBJECT_SUBREQUEST"],
+      ["OTHER", "MEDIA", "FONT"]
+    ];
+  }
+
   chrome.tabs.query({}, function(tabs)
   {
     tabs.forEach(function(tab)
@@ -404,12 +421,6 @@
 
         if (frame)
         {
-          // Since Chrome 38 requests of type 'object' (e.g. requests
-          // initiated by Flash) are mistakenly reported with the type 'other'.
-          // https://code.google.com/p/chromium/issues/detail?id=410382
-          if (requestType == "OTHER" && parseInt(navigator.userAgent.match(/\bChrome\/(\d+)/)[1], 10) >= 38)
-            requestType = "OBJECT";
-
           var results = ext.webRequest.onBeforeRequest._dispatch(
             url,
             requestType,
