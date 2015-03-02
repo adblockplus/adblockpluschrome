@@ -44,8 +44,10 @@ function preparePrefs()
 {
   this._pbackup = Object.create(null);
   for (var pref in Prefs)
-    if (Prefs.__lookupSetter__(pref))
+  {
+    if (typeof Prefs[pref] != "function")
       this._pbackup[pref] = Prefs[pref];
+  }
   Prefs.enabled = true;
 }
 
