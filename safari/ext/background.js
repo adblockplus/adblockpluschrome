@@ -17,133 +17,65 @@
 
 (function()
 {
-  /* Pages */
+  /* Context menus */
 
-  var pages = Object.create(null);
-  var pageCounter = 0;
+  var contextMenuItems = new ext.PageMap();
 
-  var Page = function(id, tab, url)
+  var ContextMenus = function(page)
   {
-    this._id = id;
-    this._tab = tab;
-    this._frames = [{url: new URL(url), parent: null}];
-
-    if (tab.page)
-      this._messageProxy = new ext._MessageProxy(tab.page);
-    else
-      // while the new tab page is shown on Safari 7, the 'page' property
-      // of the tab is undefined, and we can't send messages to that page
-      this._messageProxy = {
-        handleRequest: function() {},
-        handleResponse: function() {},
-        sendMessage: function() {}
-      };
-
-    this.browserAction = new BrowserAction(this);
-    this.contextMenus = new ContextMenus(this);
+    this._page = page;
   };
-  Page.prototype = {
-    get url()
+  ContextMenus.prototype = {
+    create: function(item)
     {
-      return this._frames[0].url;
+      var items = contextMenuItems.get(this._page);
+      if (!items)
+        contextMenuItems.set(this._page, items = []);
+
+      items.push(item);
     },
-    sendMessage: function(message, responseCallback)
+    removeAll: function()
     {
-      this._messageProxy.sendMessage(message, responseCallback, {pageId: this._id});
+      contextMenuItems.delete(this._page);
     }
   };
 
-  ext._getPage = function(id)
+  safari.application.addEventListener("contextmenu", function(event)
   {
-    return pages[id];
-  };
-
-  var isPageActive = function(page)
-  {
-    var tab = page._tab;
-    var win = tab.browserWindow;
-    return win && tab == win.activeTab && page == tab._visiblePage;
-  };
-
-  var forgetPage = function(id)
-  {
-    ext._removeFromAllPageMaps(id);
-
-    delete pages[id]._tab._pages[id];
-    delete pages[id];
-  };
-
-  var replacePage = function(page)
-  {
-    var tab = page._tab;
-    tab._visiblePage = page;
-
-    for (var id in tab._pages)
-    {
-      if (id != page._id)
-        forgetPage(id);
-    }
-
-    if (isPageActive(page))
-      updateToolbarItemForPage(page, tab.browserWindow);
-  };
-
-  ext.pages = {
-    open: function(url, callback)
-    {
-      var tab = safari.application.activeBrowserWindow.openTab();
-      tab.url = url;
-
-      if (callback)
-      {
-        var onLoading = function(page)
-        {
-          if (page._tab == tab)
-          {
-            ext.pages.onLoading.removeListener(onLoading);
-            callback(page);
-          }
-        };
-        ext.pages.onLoading.addListener(onLoading);
-      }
-    },
-    query: function(info, callback)
-    {
-      var matchedPages = [];
-
-      for (var id in pages)
-      {
-        var page = pages[id];
-        var win = page._tab.browserWindow;
-
-        if ("active" in info && info.active != isPageActive(page))
-          continue;
-        if ("lastFocusedWindow" in info && info.lastFocusedWindow != (win == safari.application.activeBrowserWindow))
-          continue;
-
-        matchedPages.push(page);
-      };
-
-      callback(matchedPages);
-    },
-    onLoading: new ext._EventTarget()
-  };
-
-  safari.application.addEventListener("close", function(event)
-  {
-    // this event is dispatched on closing windows and tabs. However when a
-    // window is closed, it is first dispatched on each tab in the window and
-    // then on the window itself. But we are only interested in closed tabs.
-    if (!(event.target instanceof SafariBrowserTab))
+    if (!event.userInfo)
       return;
 
-    // when a tab is closed, forget the previous page associated with that
-    // tab. Note that it wouldn't be sufficient do that when the old page
-    // is unloading, because Safari dispatches window.onunload only when
-    // reloading the page or following links, but not when closing the tab.
-    for (var id in event.target._pages)
-      forgetPage(id);
-  }, true);
+    var pageId = event.userInfo.pageId;
+    if (!pageId)
+      return;
+
+    var page = pages[event.userInfo.pageId];
+    var items = contextMenuItems.get(page);
+    if (!items)
+      return;
+
+    var context = event.userInfo.tagName;
+    if (context == "img")
+      context = "image";
+
+    for (var i = 0; i < items.length; i++)
+    {
+      // Supported contexts are: all, audio, image, video
+      var menuItem = items[i];
+      if (menuItem.contexts.indexOf("all") == -1 && menuItem.contexts.indexOf(context) == -1)
+        continue;
+
+      event.contextMenu.appendContextMenuItem(i, menuItem.title);
+    }
+  });
+
+  safari.application.addEventListener("command", function(event)
+  {
+    var page = pages[event.userInfo.pageId];
+    var items = contextMenuItems.get(page);
+
+    items[event.command].onclick(page);
+  });
 
 
   /* Browser actions */
@@ -230,64 +162,171 @@
   }, true);
 
 
-  /* Context menus */
+  /* Pages */
 
-  var contextMenuItems = new ext.PageMap();
+  var pages = Object.create(null);
+  var pageCounter = 0;
 
-  var ContextMenus = function(page)
+  var Page = function(id, tab, url)
   {
-    this._page = page;
-  };
-  ContextMenus.prototype = {
-    create: function(item)
-    {
-      var items = contextMenuItems.get(this._page);
-      if (!items)
-        contextMenuItems.set(this._page, items = []);
+    this._id = id;
+    this._tab = tab;
+    this._frames = [{url: new URL(url), parent: null}];
 
-      items.push(item);
+    if (tab.page)
+      this._messageProxy = new ext._MessageProxy(tab.page);
+    else
+      // while the new tab page is shown on Safari 7, the 'page' property
+      // of the tab is undefined, and we can't send messages to that page
+      this._messageProxy = {
+        handleRequest: function() {},
+        handleResponse: function() {},
+        sendMessage: function() {}
+      };
+
+    this.browserAction = new BrowserAction(this);
+    this.contextMenus = new ContextMenus(this);
+  };
+  Page.prototype = {
+    get url()
+    {
+      return this._frames[0].url;
     },
-    removeAll: function()
+    sendMessage: function(message, responseCallback)
     {
-      contextMenuItems.delete(this._page);
+      this._messageProxy.sendMessage(message, responseCallback, {pageId: this._id});
     }
   };
 
-  safari.application.addEventListener("contextmenu", function(event)
+  ext._getPage = function(id)
   {
-    if (!event.userInfo)
-      return;
+    return pages[id];
+  };
 
-    var pageId = event.userInfo.pageId;
-    if (!pageId)
-      return;
+  var isPageActive = function(page)
+  {
+    var tab = page._tab;
+    var win = tab.browserWindow;
+    return win && tab == win.activeTab && page == tab._visiblePage;
+  };
 
-    var page = pages[event.userInfo.pageId];
-    var items = contextMenuItems.get(page);
-    if (!items)
-      return;
+  var forgetPage = function(id)
+  {
+    ext._removeFromAllPageMaps(id);
 
-    var context = event.userInfo.tagName;
-    if (context == "img")
-      context = "image";
+    delete pages[id]._tab._pages[id];
+    delete pages[id];
+  };
 
-    for (var i = 0; i < items.length; i++)
+  var replacePage = function(page)
+  {
+    var tab = page._tab;
+    tab._visiblePage = page;
+
+    for (var id in tab._pages)
     {
-      // Supported contexts are: all, audio, image, video
-      var menuItem = items[i];
-      if (menuItem.contexts.indexOf("all") == -1 && menuItem.contexts.indexOf(context) == -1)
-        continue;
-
-      event.contextMenu.appendContextMenuItem(i, menuItem.title);
+      if (id != page._id)
+        forgetPage(id);
     }
-  });
 
-  safari.application.addEventListener("command", function(event)
+    if (isPageActive(page))
+      updateToolbarItemForPage(page, tab.browserWindow);
+  };
+
+  var addPage = function(tab, url, prerendered)
   {
-    var page = pages[event.userInfo.pageId];
-    var items = contextMenuItems.get(page);
+    var pageId = ++pageCounter;
 
-    items[event.command].onclick(page);
+    if (!('_pages' in tab))
+      tab._pages = Object.create(null);
+
+    var page = new Page(pageId, tab, url);
+    pages[pageId] = tab._pages[pageId] = page;
+
+    // When a new page is shown, forget the previous page associated
+    // with its tab, and reset the toolbar item if necessary.
+    // Note that it wouldn't be sufficient to do that when the old
+    // page is unloading, because Safari dispatches window.onunload
+    // only when reloading the page or following links, but not when
+    // you enter a new URL in the address bar.
+    if (!prerendered)
+      replacePage(page);
+
+    return pageId;
+  };
+
+  ext.pages = {
+    open: function(url, callback)
+    {
+      var tab = safari.application.activeBrowserWindow.openTab();
+      tab.url = url;
+
+      if (callback)
+      {
+        var onLoading = function(page)
+        {
+          if (page._tab == tab)
+          {
+            ext.pages.onLoading.removeListener(onLoading);
+            callback(page);
+          }
+        };
+        ext.pages.onLoading.addListener(onLoading);
+      }
+    },
+    query: function(info, callback)
+    {
+      var matchedPages = [];
+
+      for (var id in pages)
+      {
+        var page = pages[id];
+        var win = page._tab.browserWindow;
+
+        if ("active" in info && info.active != isPageActive(page))
+          continue;
+        if ("lastFocusedWindow" in info && info.lastFocusedWindow != (win == safari.application.activeBrowserWindow))
+          continue;
+
+        matchedPages.push(page);
+      };
+
+      callback(matchedPages);
+    },
+    onLoading: new ext._EventTarget()
+  };
+
+  safari.application.addEventListener("close", function(event)
+  {
+    // this event is dispatched on closing windows and tabs. However when a
+    // window is closed, it is first dispatched on each tab in the window and
+    // then on the window itself. But we are only interested in closed tabs.
+    if (!(event.target instanceof SafariBrowserTab))
+      return;
+
+    // when a tab is closed, forget the previous page associated with that
+    // tab. Note that it wouldn't be sufficient do that when the old page
+    // is unloading, because Safari dispatches window.onunload only when
+    // reloading the page or following links, but not when closing the tab.
+    for (var id in event.target._pages)
+      forgetPage(id);
+  }, true);
+
+  // We generally rely on content scripts to report new pages,
+  // since Safari's extension API doesn't consider pre-rendered
+  // pages. However, when the extension initializes we have to
+  // use  Safari's extension API to detect existing tabs.
+  safari.application.browserWindows.forEach(function(win)
+  {
+    for (var i = 0; i < win.tabs.length; i++)
+    {
+      var tab = win.tabs[i];
+      var url = tab.url;
+
+      // For the new tab page the url property is undefined.
+      if (url)
+        addPage(tab, url, false);
+    }
   });
 
 
@@ -525,25 +564,10 @@
 
             if (message.isTopLevel)
             {
-              pageId = ++pageCounter;
+              pageId = addPage(tab, message.url, message.isPrerendered);
               frameId = 0;
 
-              if (!('_pages' in tab))
-                tab._pages = Object.create(null);
-
-              var page = new Page(pageId, tab, message.url);
-              pages[pageId] = tab._pages[pageId] = page;
-
-              // when a new page is shown, forget the previous page associated
-              // with its tab, and reset the toolbar item if necessary.
-              // Note that it wouldn't be sufficient to do that when the old
-              // page is unloading, because Safari dispatches window.onunload
-              // only when reloading the page or following links, but not when
-              // you enter a new URL in the address bar.
-              if (!message.isPrerendered)
-                replacePage(page);
-
-              ext.pages.onLoading._dispatch(page);
+              ext.pages.onLoading._dispatch(pages[pageId]);
             }
             else
             {
@@ -594,7 +618,6 @@
               frameId = page._frames.length;
               page._frames.push({url: new URL(message.url), parent: parentFrame});
             }
-
             event.message = {pageId: pageId, frameId: frameId};
             break;
           case "webRequest":
