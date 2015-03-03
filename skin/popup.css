@@ -29,7 +29,8 @@ body.local #stats-page
   display: none;
 }
 
-body.nohtml #clickhide
+body.nohtml #clickhide,
+body.disabled #clickhide
 {
   display: none;
 }
@@ -193,18 +194,18 @@ li li
   background-position: -50px -1px ;
 }
 
-#enabled.off .icon
+body.disabled #enabled .icon
 {
   background-position: -50px -17px;
 }
 
 #enabled-no,
-#enabled.off #enabled-yes
+body.disabled #enabled #enabled-yes
 {
   display: none;
 }
 
-#enabled.off #enabled-no
+body.disabled #enabled #enabled-no
 {
   display: inline;
 }

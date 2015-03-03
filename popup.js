@@ -46,7 +46,7 @@ function init()
     if (page)
     {
       if (isPageWhitelisted(page))
-        document.getElementById("enabled").classList.add("off");
+        document.body.classList.add("disabled");
 
       page.sendMessage({type: "get-clickhide-state"}, function(response)
       {
@@ -79,8 +79,7 @@ window.addEventListener("DOMContentLoaded", init, false);
 
 function toggleEnabled()
 {
-  var enabledButton = document.getElementById("enabled")
-  var disabled = enabledButton.classList.toggle("off");
+  var disabled = document.body.classList.toggle("disabled");
   if (disabled)
   {
     var host = getDecodedHostname(page.url).replace(/^www\./, "");
