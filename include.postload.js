@@ -254,7 +254,7 @@ function clickHide_showDialog(left, top, filters)
 {
   // If we are already selecting, abort now
   if (clickHide_activated || clickHideFiltersDialog)
-    clickHide_deactivate(true);
+    clickHide_rulesPending();
 
   clickHide_filters = filters;
 
@@ -334,47 +334,32 @@ function clickHide_rulesPending() {
   document.removeEventListener("keydown", clickHide_keyDown, true);
 }
 
-// Turn off click-to-hide
-function clickHide_deactivate(keepOverlays)
+function clickHide_deactivate()
 {
+  clickHide_rulesPending();
+
   if (clickHideFiltersDialog)
   {
     document.documentElement.removeChild(clickHideFiltersDialog);
     clickHideFiltersDialog = null;
   }
 
-  clickHide_activated = false;
   clickHide_filters = null;
-  if(!document)
-    return; // This can happen inside a nuked iframe...I think
+  lastRightClickEvent = null;
 
-  document.removeEventListener("mousedown", clickHide_stopPropagation, true);
-  document.removeEventListener("mouseup", clickHide_stopPropagation, true);
-  document.removeEventListener("mouseenter", clickHide_stopPropagation, true);
-  document.removeEventListener("mouseleave", clickHide_stopPropagation, true);
-  document.removeEventListener("mouseover", clickHide_mouseOver, true);
-  document.removeEventListener("mouseout", clickHide_mouseOut, true);
-  document.removeEventListener("click", clickHide_mouseClick, true);
-  document.removeEventListener("keydown", clickHide_keyDown, true);
-
-  if (keepOverlays !== true)
-  {
-    lastRightClickEvent = null;
-
-    if (currentElement) {
-      currentElement.removeEventListener("contextmenu",  clickHide_elementClickHandler, true);
-      unhighlightElements();
-      unhighlightElement(currentElement);
-      currentElement = null;
-    }
+  if (currentElement) {
+    currentElement.removeEventListener("contextmenu",  clickHide_elementClickHandler, true);
     unhighlightElements();
-
-    var overlays = document.getElementsByClassName("__adblockplus__overlay");
-    while (overlays.length > 0)
-      overlays[0].parentNode.removeChild(overlays[0]);
-
-    ext.onExtensionUnloaded.removeListener(clickHide_deactivate);
+    unhighlightElement(currentElement);
+    currentElement = null;
   }
+  unhighlightElements();
+
+  var overlays = document.getElementsByClassName("__adblockplus__overlay");
+  while (overlays.length > 0)
+    overlays[0].parentNode.removeChild(overlays[0]);
+
+  ext.onExtensionUnloaded.removeListener(clickHide_deactivate);
 }
 
 function clickHide_stopPropagation(e)
