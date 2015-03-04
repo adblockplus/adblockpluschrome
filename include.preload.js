@@ -79,7 +79,7 @@ function checkSitekey()
     ext.backgroundPage.sendMessage({type: "add-sitekey", token: attr});
 }
 
-function isInlineFrame(element)
+function isFrameWithoutContentScript(element)
 {
   var contentDocument;
   try
@@ -88,13 +88,20 @@ function isInlineFrame(element)
   }
   catch (e)
   {
-    return false;  // third-party
+    // This is a third-party frame. Hence we can't access it.
+    // But that's fine, our content script should already run there.
+    return false;
   }
 
+  // The element isn't a <frame>, <iframe> or <object> with "data" attribute.
   if (!contentDocument)
-    return false;  // not a frame
+    return false;
 
-  return contentDocument.location.protocol == "about:";
+  // Return true, if the element is a first-party frame which doesn't
+  // have this function, hence our content script isn't running there.
+  // Those are dynamically created frames as well as frames
+  // with "about:blank", "about:srcdoc" and "javascript:" URL.
+  return !("isFrameWithoutContentScript" in contentDocument.defaultView);
 }
 
 function reinjectRulesWhenRemoved(document, style)
@@ -256,7 +263,7 @@ function init(document)
     // about:srcdoc and javascript: URLs. Moreover, as of Chrome 40
     // "load" and "error" events aren't dispatched there. So we have
     // to apply element hiding and collapsing from the parent frame.
-    if (/\bChrome\//.test(navigator.userAgent) && isInlineFrame(element))
+    if (/\bChrome\//.test(navigator.userAgent) && isFrameWithoutContentScript(element))
     {
       init(element.contentDocument);
 
