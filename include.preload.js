@@ -150,6 +150,7 @@ function reinjectRulesWhenRemoved(document, style)
   });
 
   observer.observe(style.parentNode, {childList: true});
+  return observer;
 }
 
 function convertSelectorsForShadowDOM(selectors)
@@ -187,6 +188,10 @@ function convertSelectorsForShadowDOM(selectors)
 
 function init(document)
 {
+  var shadow = null;
+  var style = null;
+  var observer = null;
+
   // Use Shadow DOM if available to don't mess with web pages that rely on
   // the order of their own <style> tags (#309).
   //
@@ -195,57 +200,64 @@ function init(document)
   //
   // Also, we can't use shadow DOM on Google Docs, since it breaks printing
   // there (#1770).
-  var shadow = null;
   if ("createShadowRoot" in document.documentElement && document.domain != "docs.google.com")
   {
     shadow = document.documentElement.createShadowRoot();
     shadow.appendChild(document.createElement("shadow"));
   }
 
-  // Sets the currently used CSS rules for elemhide filters
-  var setElemhideCSSRules = function(selectors)
+  var updateStylesheet = function(reinject)
   {
-    if (selectors.length == 0)
-      return;
-
-    var style = document.createElement("style");
-    style.setAttribute("type", "text/css");
-
-    if (shadow)
+    ext.backgroundPage.sendMessage({type: "get-selectors"}, function(selectors)
     {
-      shadow.appendChild(style);
-      selectors = convertSelectorsForShadowDOM(selectors);
-    }
-    else
-    {
-      // Try to insert the style into the <head> tag, inserting directly under the
-      // document root breaks dev tools functionality:
-      // http://code.google.com/p/chromium/issues/detail?id=178109
-      (document.head || document.documentElement).appendChild(style);
-    }
-
-    var setRules = function()
-    {
-      // The sheet property might not exist yet if the
-      // <style> element was created for a sub frame
-      if (!style.sheet)
+      if (observer)
       {
-        setTimeout(setRules, 0);
-        return;
+        observer.disconnect();
+        observer = null;
       }
 
-      // WebKit apparently chokes when the selector list in a CSS rule is huge.
-      // So we split the elemhide selectors into groups.
-      for (var i = 0; selectors.length > 0; i++)
+      if (style && style.parentElement)
       {
-        var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
-        style.sheet.insertRule(selector + " { display: none !important; }", i);
+        style.parentElement.removeChild(style);
+        style = null;
       }
-    };
 
-    setRules();
-    reinjectRulesWhenRemoved(document, style);
+      if (selectors.length > 0)
+      {
+        // Create <style> element lazily, only if we add styles. Add it to
+        // the shadow DOM if possible. Otherwise fallback to the <head> or
+        // <html> element. If we have injected a style element before that
+        // has been removed (the sheet property is null), create a new one.
+        style = document.createElement("style");
+        (shadow || document.head || document.documentElement).appendChild(style);
+
+        // It can happen that the frame already navigated to a different
+        // document while we were waiting for the background page to respond.
+        // In that case the sheet property will stay null, after addind the
+        // <style> element to the shadow DOM.
+        if (style.sheet)
+        {
+          // If using shadow DOM, we have to add the ::content pseudo-element
+          // before each selector, in order to match elements within the
+          // insertion point.
+          if (shadow)
+            selectors = convertSelectorsForShadowDOM(selectors);
+
+          // WebKit (and Blink?) apparently chokes when the selector list in a
+          // CSS rule is huge. So we split the elemhide selectors into groups.
+          for (var i = 0; selectors.length > 0; i++)
+          {
+            var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
+            style.sheet.insertRule(selector + " { display: none !important; }", i);
+          }
+        }
+
+        observer = reinjectRulesWhenRemoved(document, style);
+      }
+    });
   };
+
+  updateStylesheet();
 
   document.addEventListener("error", function(event)
   {
@@ -272,11 +284,11 @@ function init(document)
     }
   }, true);
 
-  ext.backgroundPage.sendMessage({type: "get-selectors"}, setElemhideCSSRules);
+  return updateStylesheet;
 }
 
 if (document instanceof HTMLDocument)
 {
   checkSitekey();
-  init(document);
+  window.updateStylesheet = init(document);
 }

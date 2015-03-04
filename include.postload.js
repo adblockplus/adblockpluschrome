@@ -707,10 +707,15 @@ if ("ext" in window && document instanceof HTMLDocument)
       case "clickhide-close":
         if (currentElement && msg.remove)
         {
-          // Explicitly get rid of currentElement
-          var element = currentElement.prisoner || currentElement;
-          if (element && element.parentNode)
-            element.parentNode.removeChild(element);
+          // Hide the selected element itself if an added blocking
+          // filter is causing it to collapse. Note that this
+          // behavior is incomplete, but the best we can do here,
+          // e.g. if an added blocking filter matches other elements,
+          // the effect won't be visible until the page is is reloaded.
+          checkCollapse(currentElement.prisoner || currentElement);
+
+          // Apply added element hiding filters.
+          updateStylesheet();
         }
         clickHide_deactivate();
         break;
