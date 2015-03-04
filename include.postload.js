@@ -253,7 +253,7 @@ function addElementOverlay(elt) {
 function clickHide_showDialog(left, top, filters)
 {
   // If we are already selecting, abort now
-  if (clickHide_activated || clickHideFiltersDialog)
+  if (clickHide_activated)
     clickHide_rulesPending();
 
   clickHide_filters = filters;
@@ -347,7 +347,8 @@ function clickHide_deactivate()
   clickHide_filters = null;
   lastRightClickEvent = null;
 
-  if (currentElement) {
+  if (currentElement)
+  {
     currentElement.removeEventListener("contextmenu",  clickHide_elementClickHandler, true);
     unhighlightElements();
     unhighlightElement(currentElement);
