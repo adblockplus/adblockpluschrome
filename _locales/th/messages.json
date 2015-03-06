@@ -65,6 +65,14 @@
   "general": {
     "message": "ทั่วไป"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ กำหนดค่า CSS selector ไม่ถูกต้อง",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "อัปเดตล่าสุดเมื่อ $date$ เวลา $time$",
     "placeholders": {
@@ -92,14 +100,11 @@
       }
     }
   },
-  "name_devbuild": {
-    "message": "Adblock Plus development build"
-  },
   "notification_with_buttons": {
     "message": "คลิ๊ก 'ตกลง' เพื่อเปิดลิ้งก์ทั้งหมดในการแจ้งเตือนนี้"
   },
   "notification_without_buttons": {
-    "message": "คลิ๊กบนการแจ้งเตือนเพื่อเปิดลิ้งก์ทั้งหมด"
+    "message": "คลิกบนการแจ้งเตือนเพื่อเปิดลิงก์ทั้งหมด"
   },
   "options": {
     "message": "ตัวเลือกของ Adblock Plus"
@@ -162,6 +167,9 @@
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "กรุณาเลือกนามข้างท้ายตัวกรองจากรายชื่อ:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "หัวข้อรายการของตัวกรองยังไม่ได้รับอนุญาตให้ใช้งานที่นี่"
   },
   "update_now": {
     "message": "อัพเดทเดี๋ยวนี้"
