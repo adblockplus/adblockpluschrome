@@ -172,7 +172,7 @@
     "message": "Selezionare una sottoscrizione di filtri dalla seguente lista:"
   },
   "unexpected_filter_list_header": {
-    "message": "Le intestazioni dell'elenco dei filtri non sono ammesse qui"
+    "message": "Gli header delle liste dei filtri non sono ammessi qui"
   },
   "update_now": {
     "message": "Aggiorna adesso"
