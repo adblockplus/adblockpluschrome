@@ -395,7 +395,7 @@ function getBlockableElementOrAncestor(element, callback)
 
       for (var i = 0; i < images.length; i++)
       {
-        var usemap = image.getAttribute("usemap");
+        var usemap = images[i].getAttribute("usemap");
         var index = usemap.indexOf("#");
 
         if (index != -1 && usemap.substr(index + 1) == element.name)
