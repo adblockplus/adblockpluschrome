@@ -3,4 +3,5 @@
 *.crx
 *.safariextz
 *.pyc
+*.pyo
 *.sh
