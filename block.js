@@ -20,7 +20,6 @@ function init()
   // Attach event listeners
   window.addEventListener("keydown", onKeyDown, false);
   window.addEventListener("dragstart", onDragStart, false);
-  window.addEventListener("drag", onDrag, false);
   window.addEventListener("dragend", onDragEnd, false);
 
   $("#addButton").click(addFilters);
@@ -95,40 +94,49 @@ function closeDialog(success)
   );
 }
 
-var dragCoords = null;
+var dragStartX;
+var dragStartY;
+var dragEndX = null;
+var dragEndY = null;
+
 function onDragStart(event)
 {
-  dragCoords = [event.screenX, event.screenY];
-}
-
-function onDrag(event)
-{
-  if (!dragCoords)
-    return;
-
-  if (!event.screenX && !event.screenY)
-    return;
-
-  var diff = [event.screenX - dragCoords[0], event.screenY - dragCoords[1]];
-  if (diff[0] || diff[1])
-  {
-    ext.backgroundPage.sendMessage(
-      {
-        type: "forward",
-        payload:
-        {
-          type: "clickhide-move",
-          x: diff[0],
-          y: diff[1]
-        }
-      }
-    );
-    dragCoords = [event.screenX, event.screenY];
-  }
+  dragStartX = event.screenX;
+  dragStartY = event.screenY;
 }
 
 function onDragEnd(event)
 {
-  onDrag(event);
-  dragCoords = null;
+  if (dragEndX == null)
+    dragEndX = event.screenX;
+  if (dragEndY == null)
+    dragEndY = event.screenY;
+
+  ext.backgroundPage.sendMessage({
+    type: "forward",
+    payload:
+    {
+      type: "clickhide-move",
+      x: dragEndX - dragStartX,
+      y: dragEndY - dragStartY
+    }
+  });
+
+  dragStartX = null;
+  dragStartY = null;
+  dragEndX = null;
+  dragEndY = null;
+}
+
+// The coordinates in the dragend event are unreliable on Safari. So we
+// need to get the destination coordinates from the drag event instead.
+// However on Chrome, the coordinates in the drag event are unreliable.
+// So we need to get the coordinates from dragend event there.
+if (navigator.userAgent.indexOf(" Version/") != -1)
+{
+  window.addEventListener("drag", function(event)
+  {
+    dragEndX = event.screenX;
+    dragEndY = event.screenY;
+  }, false);
 }
