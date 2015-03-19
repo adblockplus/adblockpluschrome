@@ -167,11 +167,34 @@
   var pages = Object.create(null);
   var pageCounter = 0;
 
+  var Frame = function(url, parent)
+  {
+    this._urlString = url;
+    this._urlObj = null;
+
+    this.parent = parent;
+  }
+  Frame.prototype = {
+    get url()
+    {
+      // On Safari 6 and before, the URL constuctor doesn't exist.
+      // The "urls" module provides a polifill, but it might not
+      // be loaded yet. So we have to lazily parse URLs.
+      if (!this._urlObj)
+      {
+        this._urlObj = new URL(this._urlString);
+        this._urlString = null;
+      }
+
+      return this._urlObj;
+    }
+  };
+
   var Page = function(id, tab, url)
   {
     this._id = id;
     this._tab = tab;
-    this._frames = [{url: new URL(url), parent: null}];
+    this._frames = [new Frame(url, null)];
 
     if (tab.page)
       this._messageProxy = new ext._MessageProxy(tab.page);
@@ -616,7 +639,7 @@
               }
 
               frameId = page._frames.length;
-              page._frames.push({url: new URL(message.url), parent: parentFrame});
+              page._frames.push(new Frame(message.url, parentFrame));
             }
             event.message = {pageId: pageId, frameId: frameId};
             break;
