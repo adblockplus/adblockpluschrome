@@ -101,8 +101,18 @@ var dragEndY = null;
 
 function onDragStart(event)
 {
-  dragStartX = event.screenX;
-  dragStartY = event.screenY;
+  var element = document.elementFromPoint(event.clientX, event.clientY);
+  if (element && element.localName == "textarea")
+  {
+    // Don't drag the dialog when the user has clicked into the textarea.
+    // Most likely the user just wants to focus it or select text there.
+    event.preventDefault();
+  }
+  else
+  {
+    dragStartX = event.screenX;
+    dragStartY = event.screenY;
+  }
 }
 
 function onDragEnd(event)
