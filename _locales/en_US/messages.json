@@ -166,7 +166,7 @@
   },
   "stats_share_title": {
     "description": "Label for social media buttons sharing the number of blocked ads",
-    "message": "Share these numbers"
+    "message": "Share this number"
   },
   "stats_show_iconnumber": {
     "description": "Toggle for displaying the number of blocked ads in the icon.",
