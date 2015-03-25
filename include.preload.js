@@ -70,6 +70,8 @@ function checkCollapse(element)
       }
     );
   }
+
+  window.collapsing = true;
 }
 
 function checkSitekey()
@@ -79,29 +81,16 @@ function checkSitekey()
     ext.backgroundPage.sendMessage({type: "add-sitekey", token: attr});
 }
 
-function isFrameWithoutContentScript(element)
+function getContentDocument(element)
 {
-  var contentDocument;
   try
   {
-    contentDocument = element.contentDocument;
+    return element.contentDocument;
   }
   catch (e)
   {
-    // This is a third-party frame. Hence we can't access it.
-    // But that's fine, our content script should already run there.
-    return false;
+    return null;
   }
-
-  // The element isn't a <frame>, <iframe> or <object> with "data" attribute.
-  if (!contentDocument)
-    return false;
-
-  // Return true, if the element is a first-party frame which doesn't
-  // have this function, hence our content script isn't running there.
-  // Those are dynamically created frames as well as frames
-  // with "about:blank", "about:srcdoc" and "javascript:" URL.
-  return !("isFrameWithoutContentScript" in contentDocument.defaultView);
 }
 
 function reinjectRulesWhenRemoved(document, style)
@@ -271,16 +260,29 @@ function init(document)
     if (/^i?frame$/.test(element.localName))
       checkCollapse(element);
 
-    // prior to Chrome 37, content scripts cannot run on about:blank,
-    // about:srcdoc and javascript: URLs. Moreover, as of Chrome 40
-    // "load" and "error" events aren't dispatched there. So we have
-    // to apply element hiding and collapsing from the parent frame.
-    if (/\bChrome\//.test(navigator.userAgent) && isFrameWithoutContentScript(element))
+    if (/\bChrome\//.test(navigator.userAgent))
     {
-      init(element.contentDocument);
+      var contentDocument = getContentDocument(element);
+      if (contentDocument)
+      {
+        var contentWindow = contentDocument.defaultView;
+        if (contentDocument instanceof contentWindow.HTMLDocument)
+        {
+          // Prior to Chrome 37, content scripts cannot run in
+          // dynamically created frames. Also on Chrome 37-40
+          // document_start content scripts (like this one) don't
+          // run either in those frames due to https://crbug.com/416907.
+          // So we have to apply element hiding from the parent frame.
+          if (!("init" in contentWindow))
+            init(contentDocument);
 
-      for (var tagName in typeMap)
-        Array.prototype.forEach.call(element.contentDocument.getElementsByTagName(tagName), checkCollapse);
+          // Moreover, "load" and "error" events aren't dispatched for elements
+          // in dynamically created frames due to https://crbug.com/442107.
+          // So we also have to apply element collpasing from the parent frame.
+          if (!contentWindow.collapsing)
+            [].forEach.call(contentDocument.querySelectorAll(Object.keys(typeMap).join(",")), checkCollapse);
+        }
+      }
     }
   }, true);
 
