@@ -610,22 +610,28 @@ if ("ext" in window && document instanceof HTMLDocument)
 
     // Search the link associated with the click
     var link = event.target;
-    while (link && !(link instanceof HTMLAnchorElement))
+    while (!(link instanceof HTMLAnchorElement))
+    {
       link = link.parentNode;
 
-    if (!link || link.protocol != "abp:")
+      if (!link)
+        return;
+    }
+
+    if (link.protocol == "http:" || link.protocol == "https:")
+    {
+      if (link.host != "subscribe.adblockplus.org" || link.pathname != "/")
+        return;
+    }
+    else if (!/^abp:\/*subscribe\/*\?/i.test(link.href))
       return;
 
     // This is our link - make sure the browser doesn't handle it
     event.preventDefault();
     event.stopPropagation();
 
-    var linkTarget = link.href;
-    if (!/^abp:\/*subscribe\/*\?(.*)/i.test(linkTarget))  /**/
-      return;
-
     // Decode URL parameters
-    var params = RegExp.$1.split("&");
+    var params = link.search.substr(1).split("&");
     var title = null;
     var url = null;
     for (var i = 0; i < params.length; i++)
