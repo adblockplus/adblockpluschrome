@@ -250,7 +250,7 @@ function addElementOverlay(elt) {
 
 // Show dialog asking user whether she wants to add the proposed filters derived
 // from selected page element
-function clickHide_showDialog(left, top, filters)
+function clickHide_showDialog(filters)
 {
   // If we are already selecting, abort now
   if (clickHide_activated)
@@ -530,8 +530,6 @@ function clickHide_mouseClick(e)
       payload:
       {
         type: "clickhide-show-dialog",
-        screenX: e.screenX,
-        screenY: e.screenY,
         clickHideFilters: filters
       }
     });
@@ -731,9 +729,7 @@ if ("ext" in window && document instanceof HTMLDocument)
         break;
       case "clickhide-show-dialog":
         if (window.self == window.top)
-          clickHide_showDialog(msg.screenX + window.pageXOffset,
-                               msg.screenY + window.pageYOffset,
-                               msg.clickHideFilters);
+          clickHide_showDialog(msg.clickHideFilters);
         break;
       case "clickhide-clear-last-right-click-event":
         if (lastRightClickEventValid)
