@@ -706,8 +706,12 @@ if ("ext" in window && document instanceof HTMLDocument)
       case "clickhide-move":
         if (clickHideFiltersDialog)
         {
-          clickHideFiltersDialog.style.left = (parseInt(clickHideFiltersDialog.style.left, 10) + msg.x) + "px";
-          clickHideFiltersDialog.style.top = (parseInt(clickHideFiltersDialog.style.top, 10) + msg.y) + "px";
+          var rect = clickHideFiltersDialog.getBoundingClientRect();
+          var x = Math.max(0, Math.min(rect.left + msg.x, window.innerWidth - rect.width));
+          var y = Math.max(0, Math.min(rect.top + msg.y, window.innerHeight - rect.height));
+          
+          clickHideFiltersDialog.style.left = x + "px";
+          clickHideFiltersDialog.style.top = y + "px";
         }
         break;
       case "clickhide-close":
