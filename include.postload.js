@@ -204,6 +204,9 @@ function addElementOverlay(elt) {
   var zIndex = "auto";
   var position = "absolute";
 
+  var offsetX = window.scrollX;
+  var offsetY = window.scrollY;
+
   for (var e = elt; e; e = e.parentElement)
   {
     var style = getComputedStyle(e);
@@ -216,7 +219,10 @@ function addElementOverlay(elt) {
     // If the element or one of its ancestors uses fixed postioning, the overlay
     // has to use fixed postioning too. Otherwise it might not match the element.
     if (style.position == "fixed")
+    {
       position = "fixed";
+      offsetX = offsetY = 0;
+    }
 
     // Determine the effective z-index, which is the highest z-index used
     // by the element and its offset ancestors, and increase it by one.
@@ -238,8 +244,8 @@ function addElementOverlay(elt) {
   var rect = elt.getBoundingClientRect();
   overlay.style.width = rect.width + "px";
   overlay.style.height = rect.height + "px";
-  overlay.style.left = (rect.left + window.scrollX) + "px";
-  overlay.style.top = (rect.top + window.scrollY) + "px";
+  overlay.style.left = (rect.left + offsetX) + "px";
+  overlay.style.top = (rect.top + offsetY) + "px";
   overlay.style.position = position;
   overlay.style.zIndex = zIndex;
 
