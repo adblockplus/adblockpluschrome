@@ -222,9 +222,7 @@ function getURLsFromElement(element) {
 
 // Adds an overlay to an element, which is probably a Flash object
 function addElementOverlay(elt) {
-  var zIndex = "auto";
   var position = "absolute";
-
   var offsetX = window.scrollX;
   var offsetY = window.scrollY;
 
@@ -244,18 +242,6 @@ function addElementOverlay(elt) {
       position = "fixed";
       offsetX = offsetY = 0;
     }
-
-    // Determine the effective z-index, which is the highest z-index used
-    // by the element and its offset ancestors, and increase it by one.
-    // When using a lower z-index the element would cover the overlay.
-    // When using a higher z-index the overlay might also cover other elements.
-    if (style.position != "static" && style.zIndex != "auto")
-    {
-      var curZIndex = parseInt(style.zIndex, 10) + 1;
-
-      if (zIndex == "auto" || curZIndex > zIndex)
-        zIndex = curZIndex;
-    }
   }
 
   var overlay = document.createElement('div');
@@ -268,7 +254,7 @@ function addElementOverlay(elt) {
   overlay.style.left = (rect.left + offsetX) + "px";
   overlay.style.top = (rect.top + offsetY) + "px";
   overlay.style.position = position;
-  overlay.style.zIndex = zIndex;
+  overlay.style.zIndex = 0x7FFFFFFE;
 
   // elt.parentNode.appendChild(overlay, elt);
   document.documentElement.appendChild(overlay);
