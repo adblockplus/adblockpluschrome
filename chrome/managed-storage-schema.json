@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "properties": {
+    "suppress_first_run_page": {
+      "type": "boolean"
+    }
+  }
+}

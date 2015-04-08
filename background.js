@@ -253,7 +253,8 @@ function addSubscription(prevVersion)
 
   function notifyUser()
   {
-    ext.pages.open(ext.getURL("firstRun.html"));
+    if (!Prefs.suppress_first_run_page)
+      ext.pages.open(ext.getURL("firstRun.html"));
   }
 
   if (addSubscription)
