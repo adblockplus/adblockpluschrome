@@ -20,6 +20,7 @@ var clickHide_activated = false;
 var clickHide_filters = null;
 var currentElement = null;
 var highlightedElementsSelector = null;
+var highlightedElementsInterval = null;
 var clickHideFiltersDialog = null;
 var lastRightClickEvent = null;
 var lastRightClickEventValid = false;
@@ -96,16 +97,36 @@ function unhighlightElement(element)
 function highlightElements(selectorString) {
   unhighlightElements();
 
-  var highlightedElements = document.querySelectorAll(selectorString);
+  var elements = Array.prototype.slice.call(document.querySelectorAll(selectorString));
   highlightedElementsSelector = selectorString;
 
-  for(var i = 0; i < highlightedElements.length; i++)
-    highlightElement(highlightedElements[i], "#fd6738", "#f6e1e5");
+  // Highlight elements progressively. Otherwise the page freezes
+  // when a lot of elements get highlighted at the same time.
+  highlightedElementsInterval = setInterval(function()
+  {
+    if (elements.length > 0)
+    {
+      var element = elements.shift();
+      if (element != currentElement)
+        highlightElement(element, "#fd6738", "#f6e1e5");
+    }
+    else
+    {
+      clearInterval(highlightedElementsInterval);
+      highlightedElementsInterval = null;
+    }
+  }, 0);
 }
 
 // Unhighlight all elements, including those that would be affected by
 // the proposed filters
 function unhighlightElements() {
+  if (highlightedElementsInterval)
+  {
+    clearInterval(highlightedElementsInterval)
+    highlightedElementsInterval = null;
+  }
+
   if (highlightedElementsSelector)
   {
     Array.prototype.forEach.call(
