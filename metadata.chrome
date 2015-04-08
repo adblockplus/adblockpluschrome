@@ -18,6 +18,7 @@ browserAction = icons/abp-19.png icons/abp-38.png popup.html
 icons = icons/abp-16.png icons/abp-32.png icons/detailed/abp-48.png
   icons/detailed/abp-64.png icons/detailed/abp-128.png
 webAccessible = block.html
+managedStorageSchema = managed-storage-schema.json
 
 [compat]
 chrome = 28.0
@@ -32,6 +33,7 @@ icons/abp-38-whitelisted.png = chrome/icons/abp-38-whitelisted.png
 icons/abp-38-notification-critical.png = chrome/icons/abp-38-notification-critical.png
 icons/abp-38-notification-information.png = chrome/icons/abp-38-notification-information.png
 icons/detailed/abp-48.png = chrome/icons/detailed/abp-48.png
+managed-storage-schema.json = chrome/managed-storage-schema.json
 
 [convert_img]
 icons/abp-19-notification-critical-1.png = chrome/icons/abp-19.png -> blend(chrome/icons/abp-19-notification-critical.png, 0.1)
