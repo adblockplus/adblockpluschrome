@@ -330,6 +330,13 @@ function clickHide_activate() {
 // on whether the user actually wants these filters
 function clickHide_rulesPending() {
   clickHide_activated = false;
+
+  if (clickHideFiltersDialog)
+  {
+    document.documentElement.removeChild(clickHideFiltersDialog);
+    clickHideFiltersDialog = null;
+  }
+
   document.removeEventListener("mousedown", clickHide_stopPropagation, true);
   document.removeEventListener("mouseup", clickHide_stopPropagation, true);
   document.removeEventListener("mouseenter", clickHide_stopPropagation, true);
@@ -343,12 +350,6 @@ function clickHide_rulesPending() {
 function clickHide_deactivate()
 {
   clickHide_rulesPending();
-
-  if (clickHideFiltersDialog)
-  {
-    document.documentElement.removeChild(clickHideFiltersDialog);
-    clickHideFiltersDialog = null;
-  }
 
   clickHide_filters = null;
   lastRightClickEvent = null;
