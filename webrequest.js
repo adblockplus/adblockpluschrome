@@ -19,27 +19,31 @@ var FilterNotifier = require("filterNotifier").FilterNotifier;
 var RegExpFilter = require("filterClasses").RegExpFilter;
 var platform = require("info").platform;
 
-var importantNotifications = {
-  'filter.added': true,
-  'filter.removed': true,
-  'filter.disabled': true,
-  'subscription.added': true,
-  'subscription.removed': true,
-  'subscription.disabled': true,
-  'subscription.updated': true,
-  'load': true
-};
-
 ext.webRequest.indistinguishableTypes.forEach(function(types)
 {
   for (var i = 1; i < types.length; i++)
     RegExpFilter.typeMap[types[i]] = RegExpFilter.typeMap[types[0]];
 });
 
-FilterNotifier.addListener(function(action)
+FilterNotifier.addListener(function(action, arg)
 {
-  if (action in importantNotifications)
-    ext.webRequest.handlerBehaviorChanged();
+  switch (action)
+  {
+    case "filter.added":
+    case "filter.removed":
+    case "filter.disabled":
+      // Only request blocking/whitelisting filters have
+      // an effect on the webRequest handler behavior.
+      if (!(arg instanceof RegExpFilter))
+        break;
+    case "subscription.added":
+    case "subscription.removed":
+    case "subscription.disabled":
+    case "subscription.updated":
+    case "load":
+      ext.webRequest.handlerBehaviorChanged();
+      break;
+  }
 });
 
 function onBeforeRequest(url, type, page, frame)
