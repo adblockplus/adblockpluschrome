@@ -697,11 +697,12 @@ if ("ext" in window && document instanceof HTMLDocument)
       case "clickhide-new-filter":
         if(lastRightClickEvent)
         {
-          getBlockableElementOrAncestor(lastRightClickEvent.target, function(element)
+          var event = lastRightClickEvent;
+          getBlockableElementOrAncestor(event.target, function(element)
           {
-            clickHide_activated = true;
+            clickHide_activate();
             currentElement = element;
-            clickHide_mouseClick(lastRightClickEvent);
+            clickHide_mouseClick(event);
           });
         }
         break;
