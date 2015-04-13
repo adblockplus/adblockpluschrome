@@ -10,6 +10,7 @@ permissions = tabs
   webRequest
   webRequestBlocking
   webNavigation
+  storage
   unlimitedStorage
   notifications
 options = options.html

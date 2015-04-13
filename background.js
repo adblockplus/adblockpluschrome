@@ -47,6 +47,7 @@ with(require("icon"))
   this.stopIconAnimation = stopIconAnimation;
 }
 var FilterStorage = require("filterStorage").FilterStorage;
+var FilterNotifier = require("filterNotifier").FilterNotifier;
 var ElemHide = require("elemHide").ElemHide;
 var defaultMatcher = require("matcher").defaultMatcher;
 var Prefs = require("prefs").Prefs;
@@ -59,68 +60,96 @@ var composeFilters = require("filterComposer").composeFilters;
 
 // Chrome on Linux does not fully support chrome.notifications until version 35
 // https://code.google.com/p/chromium/issues/detail?id=291485
-var canUseChromeNotifications = require("info").platform == "chromium"
-  && "notifications" in chrome
-  && (navigator.platform.indexOf("Linux") == -1 || parseInt(require("info").applicationVersion, 10) > 34);
+var canUseChromeNotifications = (function()
+{
+  var info = require("info");
+  if (info.platform == "chromium" && "notifications" in chrome)
+  {
+    if (navigator.platform.indexOf("Linux") == -1)
+      return true;
+    if (Services.vc.compare(info.applicationVersion, "35") >= 0)
+      return true;
+  }
+  return false;
+})();
 
 var seenDataCorruption = false;
 var filterlistsReinitialized = false;
-require("filterNotifier").FilterNotifier.addListener(function(action)
+
+function init()
 {
-  if (action == "load")
+  var filtersLoaded = false;
+  var prefsLoaded = false;
+
+  var checkLoaded = function()
   {
-    var addonVersion = require("info").addonVersion;
-    var prevVersion = ext.storage.currentVersion;
+    if (!filtersLoaded || !prefsLoaded)
+      return;
+
+    var info = require("info");
+    var previousVersion = Prefs.currentVersion;
 
     // There are no filters stored so we need to reinitialize all filterlists
     if (!FilterStorage.firstRun && FilterStorage.subscriptions.length === 0)
     {
       filterlistsReinitialized = true;
-      prevVersion = null;
+      previousVersion = null;
     }
 
-    if (prevVersion != addonVersion || FilterStorage.firstRun)
+    if (previousVersion != info.addonVersion || FilterStorage.firstRun)
     {
-      seenDataCorruption = prevVersion && FilterStorage.firstRun;
-      ext.storage.currentVersion = addonVersion;
-      addSubscription(prevVersion);
+      seenDataCorruption = previousVersion && FilterStorage.firstRun;
+      Prefs.currentVersion = info.addonVersion;
+      addSubscription(previousVersion);
     }
+
+    // The "Hide placeholders" option has been removed from the UI in 1.8.8.1285
+    // So we reset the option for users updating from older versions.
+    if (previousVersion && Services.vc.compare(previousVersion, "1.8.8.1285") < 0)
+      Prefs.hidePlaceholders = true;
 
     if (canUseChromeNotifications)
       initChromeNotifications();
     initAntiAdblockNotification();
 
-    // The "Hide placeholders" option has been removed from the UI in 1.8.8.1285
-    // So we reset the option for users updating from older versions.
-    if (prevVersion && Services.vc.compare(prevVersion, "1.8.8.1285") < 0)
-      Prefs.hidePlaceholders = true;
-  }
-
-  // update browser actions when whitelisting might have changed,
-  // due to loading filters or saving filter changes
-  if (action == "load" || action == "save")
+    // Update browser actions and context menus when whitelisting might have
+    // changed. That is now when initally loading the filters and later when
+    // importing backups or saving filter changes.
+    FilterNotifier.addListener(function(action)
+    {
+      if (action == "load" || action == "save")
+        refreshIconAndContextMenuForAllPages();
+    });
     refreshIconAndContextMenuForAllPages();
-});
+  };
+
+  var onFilterAction = function(action)
+  {
+    if (action == "load")
+    {
+      FilterNotifier.removeListener(onFilterAction);
+      filtersLoaded = true;
+      checkLoaded();
+    }
+  };
+
+  var onPrefsLoaded = function()
+  {
+    Prefs.onLoaded.removeListener(onPrefsLoaded);
+    prefsLoaded = true;
+    checkLoaded();
+  };
+
+  FilterNotifier.addListener(onFilterAction);
+  Prefs.onLoaded.addListener(onPrefsLoaded);
+}
+init();
 
 // Special-case domains for which we cannot use style-based hiding rules.
 // See http://crbug.com/68705.
 var noStyleRulesHosts = ["mail.google.com", "mail.yahoo.com", "www.google.com"];
 
 var htmlPages = new ext.PageMap();
-
-function removeDeprecatedOptions()
-{
-  var deprecatedOptions = ["specialCaseYouTube", "experimental", "disableInlineTextAds"];
-  deprecatedOptions.forEach(function(option)
-  {
-    if (option in ext.storage)
-      delete ext.storage[option];
-  });
-}
-
-// Remove deprecated options before we do anything else.
-removeDeprecatedOptions();
-
 var activeNotification = null;
 
 var contextMenuItem = {
@@ -254,7 +283,7 @@ function addSubscription(prevVersion)
     notifyUser();
 }
 
-Prefs.addListener(function(name)
+Prefs.onChanged.addListener(function(name)
 {
   if (name == "shouldShowBlockElementMenu")
     refreshIconAndContextMenuForAllPages();

@@ -693,7 +693,70 @@
 
   /* Storage */
 
-  ext.storage = safari.extension.settings;
+  ext.storage = {
+    get: function(keys, callback)
+    {
+      var items = {};
+      var settings = safari.extension.settings;
+
+      for (var i = 0; i < keys.length; i++)
+      {
+        var key = keys[i];
+        if (key in settings)
+          items[key] = settings[key];
+      }
+
+      setTimeout(callback, 0, items);
+    },
+    set: function(key, value, callback)
+    {
+      safari.extension.settings[key] = value;
+
+      if (callback)
+        setTimeout(callback, 0);
+    },
+    remove: function(key, callback)
+    {
+      delete safari.extension.settings[key];
+
+      if (callback)
+        setTimeout(callback, 0);
+    },
+    onChanged: new ext._EventTarget(),
+
+    // Preferences were previously encoded as JSON for compatibility
+    // with localStorage, which has been used on Chrome.
+    migratePrefs: function(hooks)
+    {
+      var settings = safari.extension.settings;
+
+      for (var key in settings)
+      {
+        var item = hooks.map(key, settings[key]);
+
+        if (item)
+        {
+          delete settings[key];
+          settings[item.key] = item.value;
+        }
+      }
+
+      hooks.done();
+    }
+  };
+
+  safari.extension.settings.addEventListener("change", function(event)
+  {
+    var changes = {};
+    var change = changes[event.key] = {};
+
+    if (event.oldValue != null)
+      change.oldValue = event.oldValue;
+    if (event.newValue != null)
+      change.newValue = event.newValue;
+
+    ext.storage.onChanged._dispatch(changes);
+  });
 
 
   /* Options */
