@@ -525,8 +525,42 @@
 
   /* Storage */
 
-  ext.storage = localStorage;
+  ext.storage = {
+    get: function(keys, callback)
+    {
+      chrome.storage.local.get(keys, callback);
+    },
+    set: function(key, value, callback)
+    {
+      let items = {};
+      items[key] = value;
+      chrome.storage.local.set(items, callback);
+    },
+    remove: function(key, callback)
+    {
+      chrome.storage.local.remove(key, callback);
+    },
+    onChanged: chrome.storage.onChanged,
 
+    // Migrate localStorage to chrome.storage.local,
+    // ignoring unkown and invalid preferences.
+    migratePrefs: function(hooks)
+    {
+      var items = {};
+
+      for (let key in localStorage)
+      {
+        var item = hooks.map(key, localStorage[key]);
+        if (item)
+          items[item.key] = item.value;
+      }
+
+      chrome.storage.local.set(items, function() {
+        localStorage.clear();
+        hooks.done();
+      });
+    }
+  };
 
   /* Options */
 
