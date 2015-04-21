@@ -589,7 +589,21 @@
                       },
                       function()
                       {
-                        fs.root.removeRecursively(callback, callback);
+                        fs.root.createReader().readEntries(function(entries)
+                        {
+                          var emptyFunc = function() {};
+
+                          for (var i = 0; i < entries.length; i++)
+                          {
+                            var entry = entries[i];
+                            if (entry.isDirectory)
+                              entry.removeRecursively(emptyFunc, emptyFunc);
+                            else
+                              entry.remove(emptyFunc, emptyFunc);
+                          }
+                        });
+
+                        callback();
                       }
                     );
                   }
