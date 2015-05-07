@@ -265,10 +265,6 @@ function addElementOverlay(elt) {
 // from selected page element
 function clickHide_showDialog(filters)
 {
-  // If we are already selecting, abort now
-  if (clickHide_activated)
-    clickHide_rulesPending();
-
   clickHide_filters = filters;
 
   clickHideFiltersDialog = document.createElement("iframe");
@@ -742,6 +738,7 @@ if ("ext" in window && document instanceof HTMLDocument)
         clickHide_deactivate();
         break;
       case "clickhide-show-dialog":
+        clickHide_rulesPending();
         if (window.self == window.top)
           clickHide_showDialog(msg.clickHideFilters);
         break;
