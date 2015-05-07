@@ -160,12 +160,15 @@ function convertSelectorsForShadowDOM(selectors)
         j++;
       else if (chr == sep)
         sep = "";
-      else if (chr == '"' || chr == "'")
-        sep = chr;
-      else if (chr == "," && sep == "")
+      else if (sep == "")
       {
-        result.push(prefix + selector.substring(start, j));
-        start = j + 1;
+        if (chr == '"' || chr == "'")
+          sep = chr;
+        else if (chr == ",")
+        {
+          result.push(prefix + selector.substring(start, j));
+          start = j + 1;
+        }
       }
     }
 
