@@ -150,9 +150,14 @@ function convertSelectorsForShadowDOM(selectors)
   for (var i = 0; i < selectors.length; i++)
   {
     var selector = selectors[i];
+    if (selector.indexOf(",") == -1)
+    {
+      result.push(prefix + selector);
+      continue;
+    }
+
     var start = 0;
     var sep = "";
-
     for (var j = 0; j < selector.length; j++)
     {
       var chr = selector[j];
