@@ -46,6 +46,21 @@ FilterNotifier.addListener(function(action, arg)
   }
 });
 
+function onBeforeRequestAsync(url, type, page, filter)
+{
+  // We can't listen to onHeadersReceived in Safari so we need to
+  // check for notifications here
+  if (platform != "chromium" && type == "SUBDOCUMENT")
+  {
+    var notificationToShow = NotificationStorage.getNextToShow(stringifyURL(url));
+    if (notificationToShow)
+      showNotification(notificationToShow);
+  }
+
+  if (filter)
+    FilterNotifier.triggerListeners("filter.hitCount", filter, 0, 0, page);
+}
+
 function onBeforeRequest(url, type, page, frame)
 {
   if (isFrameWhitelisted(page, frame))
@@ -60,16 +75,8 @@ function onBeforeRequest(url, type, page, frame)
     key
   );
 
-  // We can't listen to onHeadersReceived in Safari so we need to
-  // check for notifications here
-  if (platform != "chromium" && type == "SUBDOCUMENT")
-  {
-    var notificationToShow = NotificationStorage.getNextToShow(stringifyURL(url));
-    if (notificationToShow)
-      showNotification(notificationToShow);
-  }
+  setTimeout(onBeforeRequestAsync, 0, url, type, page, filter);
 
-  FilterNotifier.triggerListeners("filter.hitCount", filter, 0, 0, page);
   return !(filter instanceof BlockingFilter);
 }
 
