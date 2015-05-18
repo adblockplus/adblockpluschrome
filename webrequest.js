@@ -86,12 +86,6 @@ if (platform == "chromium")
 {
   function onHeadersReceived(details)
   {
-    if (details.tabId == -1)
-      return;
-
-    if (details.type != "main_frame" && details.type != "sub_frame")
-      return;
-
     var page = new ext.Page({id: details.tabId});
     var frame = ext.getFrame(details.tabId, details.frameId);
 
@@ -110,5 +104,12 @@ if (platform == "chromium")
       showNotification(notificationToShow);
   }
 
-  chrome.webRequest.onHeadersReceived.addListener(onHeadersReceived, {urls: ["http://*/*", "https://*/*"]}, ["responseHeaders"]);
+  chrome.webRequest.onHeadersReceived.addListener(
+    onHeadersReceived,
+    {
+      urls: ["http://*/*", "https://*/*"],
+      types: ["main_frame", "sub_frame"]
+    },
+    ["responseHeaders"]
+  );
 }
