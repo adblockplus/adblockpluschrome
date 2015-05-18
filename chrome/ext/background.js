@@ -360,7 +360,8 @@
   // Since Chrome 38 requests of type 'object' (e.g. requests
   // initiated by Flash) are mistakenly reported with the type 'other'.
   // https://code.google.com/p/chromium/issues/detail?id=410382
-  if (parseInt(navigator.userAgent.match(/\bChrome\/(\d+)/)[1], 10) >= 38)
+  var match = navigator.userAgent.match(/\bChrome\/(\d+)/);
+  if (match && parseInt(match[1], 10) >= 38)
   {
     ext.webRequest.indistinguishableTypes = [
       ["OTHER", "OBJECT", "OBJECT_SUBREQUEST"]
