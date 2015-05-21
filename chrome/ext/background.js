@@ -402,74 +402,64 @@
 
   chrome.webRequest.onBeforeRequest.addListener(function(details)
   {
-    try
+    // the high-level code isn't interested in requests that aren't related
+    // to a tab and since those can only be handled in Chrome, we ignore
+    // them here instead of in the browser independent high-level code.
+    if (details.tabId == -1)
+      return;
+
+    var isMainFrame = details.type == "main_frame" || (
+
+      // assume that the first request belongs to the top frame. Chrome
+      // may give the top frame the type "object" instead of "main_frame".
+      // https://code.google.com/p/chromium/issues/detail?id=281711
+      details.frameId == 0 && !(details.tabId in framesOfTabs)
+    );
+
+    var frames = null;
+    if (!isMainFrame)
+      frames = framesOfTabs[details.tabId];
+    if (!frames)
+      frames = framesOfTabs[details.tabId] = Object.create(null);
+
+    var frame = null;
+    var url = new URL(details.url);
+    if (!isMainFrame)
     {
-      // the high-level code isn't interested in requests that aren't related
-      // to a tab and since those can only be handled in Chrome, we ignore
-      // them here instead of in the browser independent high-level code.
-      if (details.tabId == -1)
-        return;
-
-      var isMainFrame = details.type == "main_frame" || (
-
-        // assume that the first request belongs to the top frame. Chrome
-        // may give the top frame the type "object" instead of "main_frame".
-        // https://code.google.com/p/chromium/issues/detail?id=281711
-        details.frameId == 0 && !(details.tabId in framesOfTabs)
-      );
-
-      var frames = null;
-      if (!isMainFrame)
-        frames = framesOfTabs[details.tabId];
-      if (!frames)
-        frames = framesOfTabs[details.tabId] = Object.create(null);
-
-      var frame = null;
-      var url = new URL(details.url);
-      if (!isMainFrame)
+      // we are looking for the frame that contains the element that
+      // is about to load, however if a frame is loading the surrounding
+      // frame is indicated by parentFrameId instead of frameId
+      var frameId;
+      var requestType;
+      if (details.type == "sub_frame")
       {
-        // we are looking for the frame that contains the element that
-        // is about to load, however if a frame is loading the surrounding
-        // frame is indicated by parentFrameId instead of frameId
-        var frameId;
-        var requestType;
-        if (details.type == "sub_frame")
-        {
-          frameId = details.parentFrameId;
-          requestType = "SUBDOCUMENT";
-        }
-        else
-        {
-          frameId = details.frameId;
-          requestType = details.type.toUpperCase();
-        }
-
-        frame = frames[frameId] || frames[Object.keys(frames)[0]];
-
-        if (frame)
-        {
-          var results = ext.webRequest.onBeforeRequest._dispatch(
-            url,
-            requestType,
-            new Page({id: details.tabId}),
-            frame
-          );
-
-          if (results.indexOf(false) != -1)
-            return {cancel: true};
-        }
+        frameId = details.parentFrameId;
+        requestType = "SUBDOCUMENT";
+      }
+      else
+      {
+        frameId = details.frameId;
+        requestType = details.type.toUpperCase();
       }
 
-      if (isMainFrame || details.type == "sub_frame")
-        frames[details.frameId] = {url: url, parent: frame};
+      frame = frames[frameId] || frames[Object.keys(frames)[0]];
+
+      if (frame)
+      {
+        var results = ext.webRequest.onBeforeRequest._dispatch(
+          url,
+          requestType,
+          new Page({id: details.tabId}),
+          frame
+        );
+
+        if (results.indexOf(false) != -1)
+          return {cancel: true};
+      }
     }
-    catch (e)
-    {
-      // recent versions of Chrome cancel the request when an error occurs in
-      // the onBeforeRequest listener. However in our case it is preferred, to
-      // let potentially some ads through, rather than blocking legit requests.
-      console.error(e);
-    }
+
+    if (isMainFrame || details.type == "sub_frame")
+      frames[details.frameId] = {url: url, parent: frame};
   }, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
 
 
