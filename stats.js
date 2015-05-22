@@ -19,7 +19,7 @@
 {
   var backgroundPage = ext.backgroundPage.getWindow();
   var require = backgroundPage.require;
-  var getStats = require("stats").getStats;
+  var getBlockedPerPage = require("stats").getBlockedPerPage;
   var FilterNotifier = require("filterNotifier").FilterNotifier;
   var Prefs = require("prefs").Prefs;
   
@@ -101,18 +101,18 @@
   function updateStats()
   {
     var statsPage = document.getElementById("stats-page");
-    var blockedPage = getStats("blocked", currentPage).toLocaleString();
+    var blockedPage = getBlockedPerPage(currentPage).toLocaleString();
     i18n.setElementText(statsPage, "stats_label_page", [blockedPage]);
     
     var statsTotal = document.getElementById("stats-total");
-    var blockedTotal = getStats("blocked").toLocaleString();
+    var blockedTotal = Prefs.blocked_total.toLocaleString();
     i18n.setElementText(statsTotal, "stats_label_total", [blockedTotal]);
   }
   
   function share(ev)
   {
     // Easter Egg
-    var blocked = getStats("blocked");
+    var blocked = Prefs.blocked_total;
     if (blocked <= 9000 || blocked >= 10000)
       blocked = blocked.toLocaleString();
     else
