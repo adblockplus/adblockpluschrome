@@ -5,7 +5,7 @@ inherit = metadata.common
 basename = adblockplussafari
 author = Eyeo GmbH
 homepage = https://adblockplus.org/
-updateURL = https://adblockplus.org/updates.plist
+updateURL = https://update.adblockplus.org/adblockplussafari/updates.plist
 
 [contentScripts]
 document_start = ext/common.js ext/content.js include.preload.js include.youtube.js
