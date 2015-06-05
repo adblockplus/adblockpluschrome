@@ -40,12 +40,6 @@ with(require("url"))
   this.isThirdParty = isThirdParty;
   this.extractHostFromFrame = extractHostFromFrame;
 }
-with(require("icon"))
-{
-  this.updateIcon = updateIcon;
-  this.startIconAnimation = startIconAnimation;
-  this.stopIconAnimation = stopIconAnimation;
-}
 var FilterStorage = require("filterStorage").FilterStorage;
 var FilterNotifier = require("filterNotifier").FilterNotifier;
 var ElemHide = require("elemHide").ElemHide;
@@ -53,25 +47,10 @@ var defaultMatcher = require("matcher").defaultMatcher;
 var Prefs = require("prefs").Prefs;
 var Synchronizer = require("synchronizer").Synchronizer;
 var Utils = require("utils").Utils;
-var NotificationStorage = require("notification").Notification;
-var initAntiAdblockNotification = require("antiadblockInit").initAntiAdblockNotification;
 var parseFilters = require("filterValidation").parseFilters;
 var composeFilters = require("filterComposer").composeFilters;
-
-// Chrome on Linux does not fully support chrome.notifications until version 35
-// https://code.google.com/p/chromium/issues/detail?id=291485
-var canUseChromeNotifications = (function()
-{
-  var info = require("info");
-  if (info.platform == "chromium" && "notifications" in chrome)
-  {
-    if (navigator.platform.indexOf("Linux") == -1)
-      return true;
-    if (Services.vc.compare(info.applicationVersion, "35") >= 0)
-      return true;
-  }
-  return false;
-})();
+var updateIcon = require("icon").updateIcon;
+var initNotifications = require("notificationHelper").initNotifications;
 
 var seenDataCorruption = false;
 var filterlistsReinitialized = false;
@@ -108,9 +87,7 @@ function init()
     if (previousVersion && Services.vc.compare(previousVersion, "1.8.8.1285") < 0)
       Prefs.hidePlaceholders = true;
 
-    if (canUseChromeNotifications)
-      initChromeNotifications();
-    initAntiAdblockNotification();
+    initNotifications();
 
     // Update browser actions and context menus when whitelisting might have
     // changed. That is now when initally loading the filters and later when
@@ -150,7 +127,6 @@ init();
 var noStyleRulesHosts = ["mail.google.com", "mail.yahoo.com", "www.google.com"];
 
 var htmlPages = new ext.PageMap();
-var activeNotification = null;
 
 var contextMenuItem = {
   title: ext.i18n.getMessage("block_element"),
@@ -289,175 +265,6 @@ Prefs.onChanged.addListener(function(name)
   if (name == "shouldShowBlockElementMenu")
     refreshIconAndContextMenuForAllPages();
 });
-
-function prepareNotificationIconAndPopup()
-{
-  var animateIcon = (activeNotification.type !== "question");
-  activeNotification.onClicked = function()
-  {
-    if (animateIcon)
-      stopIconAnimation();
-    notificationClosed();
-  };
-  if (animateIcon)
-    startIconAnimation(activeNotification.type);
-}
-
-function openNotificationLinks()
-{
-  if (activeNotification.links)
-  {
-    activeNotification.links.forEach(function(link)
-    {
-      ext.windows.getLastFocused(function(win)
-      {
-        win.openTab(Utils.getDocLink(link));
-      });
-    });
-  }
-}
-
-function notificationButtonClick(buttonIndex)
-{
-  if (activeNotification.type === "question")
-  {
-    NotificationStorage.triggerQuestionListeners(activeNotification.id, buttonIndex === 0);
-    NotificationStorage.markAsShown(activeNotification.id);
-    activeNotification.onClicked();
-  }
-  else if (activeNotification.links && activeNotification.links[buttonIndex])
-  {
-    ext.windows.getLastFocused(function(win)
-    {
-      win.openTab(Utils.getDocLink(activeNotification.links[buttonIndex]));
-    });
-  }
-}
-
-function notificationClosed()
-{
-  activeNotification = null;
-}
-
-function imgToBase64(url, callback)
-{
-  var canvas = document.createElement("canvas"),
-  ctx = canvas.getContext("2d"),
-  img = new Image;
-  img.src = url;
-  img.onload = function()
-  {
-    canvas.height = img.height;
-    canvas.width = img.width;
-    ctx.drawImage(img, 0, 0);
-    callback(canvas.toDataURL("image/png"));
-    canvas = null;
-  };
-}
-
-function initChromeNotifications()
-{
-  // Chrome hides notifications in notification center when clicked so we need to clear them
-  function clearActiveNotification(notificationId)
-  {
-    if (activeNotification && activeNotification.type != "question" && !("links" in activeNotification))
-      return;
-
-    chrome.notifications.clear(notificationId, function(wasCleared)
-    {
-      if (wasCleared)
-        notificationClosed();
-    });
-  }
-
-  chrome.notifications.onButtonClicked.addListener(function(notificationId, buttonIndex)
-  {
-    notificationButtonClick(buttonIndex);
-    clearActiveNotification(notificationId);
-  });
-  chrome.notifications.onClicked.addListener(clearActiveNotification);
-  chrome.notifications.onClosed.addListener(notificationClosed);
-}
-
-function showNotification(notification)
-{
-  if (activeNotification && activeNotification.id === notification.id)
-    return;
-
-  activeNotification = notification;
-  if (activeNotification.type === "critical" || activeNotification.type === "question")
-  {
-    var texts = NotificationStorage.getLocalizedTexts(notification);
-    var title = texts.title || "";
-    var message = texts.message ? texts.message.replace(/<\/?(a|strong)>/g, "") : "";
-    var iconUrl = ext.getURL("icons/detailed/abp-128.png");
-    var hasLinks = activeNotification.links && activeNotification.links.length > 0;
-
-    if (canUseChromeNotifications)
-    {
-      var opts = {
-        type: "basic",
-        title: title,
-        message: message,
-        buttons: [],
-        priority: 2 // We use the highest priority to prevent the notification from closing automatically
-      };
-      if (activeNotification.type === "question")
-      {
-        opts.buttons.push({title: ext.i18n.getMessage("overlay_notification_button_yes")});
-        opts.buttons.push({title: ext.i18n.getMessage("overlay_notification_button_no")});
-      }
-      else
-      {
-        var regex = /<a>(.*?)<\/a>/g;
-        var plainMessage = texts.message || "";
-        var match;
-        while (match = regex.exec(plainMessage))
-          opts.buttons.push({title: match[1]});
-      }
-
-      imgToBase64(iconUrl, function(iconData)
-      {
-        opts["iconUrl"] = iconData;
-        chrome.notifications.create("", opts, function() {});
-      });
-    }
-    else if ("Notification" in window && activeNotification.type !== "question")
-    {
-      if (hasLinks)
-        message += " " + ext.i18n.getMessage("notification_without_buttons");
-
-      imgToBase64(iconUrl, function(iconData)
-      {
-        var notification = new Notification(
-          title,
-          {
-            lang: Utils.appLocale,
-            dir: ext.i18n.getMessage("@@bidi_dir"),
-            body: message,
-            icon: iconData
-          }
-        );
-
-        notification.addEventListener("click", openNotificationLinks);
-        notification.addEventListener("close", notificationClosed);
-      });
-    }
-    else
-    {
-      var message = title + "\n" + message;
-      if (hasLinks)
-        message += "\n\n" + ext.i18n.getMessage("notification_with_buttons");
-
-      var approved = confirm(message);
-      if (activeNotification.type === "question")
-        notificationButtonClick(approved ? 0 : 1);
-      else if (approved)
-        openNotificationLinks();
-    }
-  }
-  prepareNotificationIconAndPopup();
-}
 
 // This is a hack to speedup loading of the options page on Safari.
 // Once we replaced the background page proxy with message passing
@@ -617,10 +424,3 @@ ext.pages.onLoading.addListener(function(page)
   page.sendMessage({type: "clickhide-deactivate"});
   refreshIconAndContextMenu(page);
 });
-
-setTimeout(function()
-{
-  var notificationToShow = NotificationStorage.getNextToShow();
-  if (notificationToShow)
-    showNotification(notificationToShow);
-}, 3 * 60 * 1000);
