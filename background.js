@@ -333,22 +333,30 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
         break;
       }
 
-      var url = new URL(msg.url);
       var documentHost = extractHostFromFrame(sender.frame);
-      var filter = defaultMatcher.matchesAny(
-        stringifyURL(url), msg.mediatype,
-        documentHost, isThirdParty(url, documentHost)
-      );
+      var blocked = false;
 
-      if (filter instanceof BlockingFilter)
+      for (var i = 0; i < msg.urls.length; i++)
       {
-        var collapse = filter.collapse;
-        if (collapse == null)
-          collapse = Prefs.hidePlaceholders;
-        sendResponse(collapse);
+        var url = new URL(msg.urls[i], msg.baseURL);
+        var filter = defaultMatcher.matchesAny(
+          stringifyURL(url), msg.mediatype,
+          documentHost, isThirdParty(url, documentHost)
+        );
+
+        if (filter instanceof BlockingFilter)
+        {
+          if (filter.collapse != null)
+          {
+            sendResponse(filter.collapse);
+            return;
+          }
+
+          blocked = true;
+        }
       }
-      else
-        sendResponse(false);
+
+      sendResponse(blocked && Prefs.hidePlaceholders);
       break;
     case "get-domain-enabled-state":
       // Returns whether this domain is in the exclusion list.
