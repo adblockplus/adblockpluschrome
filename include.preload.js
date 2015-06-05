@@ -29,21 +29,118 @@ var typeMap = {
   "embed": "OBJECT"
 };
 
+function getURLsFromObjectElement(element)
+{
+  var url = element.getAttribute("data");
+  if (url)
+    return [url];
+
+  for (var i = 0; i < element.children.length; i++)
+  {
+    var child = element.children[i];
+    if (child.localName != "param")
+      continue;
+
+    var name = child.getAttribute("name");
+    if (name != "movie"  && // Adobe Flash
+        name != "source" && // Silverlight
+        name != "src"    && // Real Media + Quicktime
+        name != "FileName") // Windows Media
+      continue;
+
+    var value = child.getAttribute("value");
+    if (!value)
+      continue;
+
+    return [value];
+  }
+
+  return [];
+}
+
+function getURLsFromAttributes(element)
+{
+  var urls = [];
+
+  if (element.src)
+    urls.push(element.src);
+
+  if (element.srcset)
+  {
+    var candidates = element.srcset.split(",");
+    for (var i = 0; i < candidates.length; i++)
+    {
+      var url = candidates[i].trim().replace(/\s+\S+$/, "");
+      if (url)
+        urls.push(url);
+    }
+  }
+
+  return urls;
+}
+
+function getURLsFromMediaElement(element)
+{
+  var urls = getURLsFromAttributes(element);
+
+  for (var i = 0; i < element.children.length; i++)
+  {
+    var child = element.children[i];
+    if (child.localName == "source" || child.localName == "track")
+      urls.push.apply(urls, getURLsFromAttributes(child));
+  }
+
+  if (element.poster)
+    urls.push(element.poster);
+
+  return urls;
+}
+
+function getURLsFromElement(element)
+{
+  var urls;
+  switch (element.localName)
+  {
+    case "object":
+      urls = getURLsFromObjectElement(element);
+      break;
+
+    case "video":
+    case "audio":
+    case "picture":
+      urls = getURLsFromMediaElement(element);
+      break;
+
+    default:
+      urls = getURLsFromAttributes(element);
+      break;
+  }
+
+  for (var i = 0; i < urls.length; i++)
+  {
+    if (/^(?!https?:)[\w-]+:/i.test(urls[i]))
+      urls.splice(i--, 1);
+  }
+
+  return urls;
+}
+
 function checkCollapse(element)
 {
   var tag = element.localName;
   if (tag in typeMap)
   {
     // This element failed loading, did we block it?
-    var url = element.src;
-    if (!url || !/^https?:/i.test(url))
+    var urls = getURLsFromElement(element);
+    if (urls.length == 0)
       return;
 
     ext.backgroundPage.sendMessage(
       {
         type: "should-collapse",
-        url: url,
-        mediatype: typeMap[tag]
+        urls: urls,
+        mediatype: typeMap[tag],
+        baseURL: document.location.href
       },
 
       function(response)
