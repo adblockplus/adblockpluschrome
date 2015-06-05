@@ -20,6 +20,7 @@ var require = backgroundPage.require;
 
 var Utils = require("utils").Utils;
 var Notification = require("notification").Notification;
+var getActiveNotification = require("notificationHelper").getActiveNotification;
 
 function getDocLinks(notification)
 {
@@ -61,7 +62,7 @@ function insertMessage(element, text, links)
 
 window.addEventListener("load", function()
 {
-  var notification = backgroundPage.activeNotification;
+  var notification = getActiveNotification();
   if (!notification)
     return;
 
