@@ -360,19 +360,16 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       }
       break;
     case "add-filters":
-      var filters;
-      try
+      var result = parseFilters(msg.text);
+
+      if (result.error)
       {
-        filters = parseFilters(msg.text);
-      }
-      catch (error)
-      {
-        sendResponse({status: "invalid", error: error});
+        sendResponse({status: "invalid", error: result.error});
         break;
       }
 
-      for (var i = 0; i < filters.length; i++)
-        FilterStorage.addFilter(filters[i]);
+      for (var i = 0; i < result.filters.length; i++)
+        FilterStorage.addFilter(result.filters[i]);
 
       sendResponse({status: "ok"});
       break;

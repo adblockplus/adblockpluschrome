@@ -13,11 +13,10 @@
 
   test("Detecting invalid filters", function()
   {
-    throws(parseFilter.bind(null, "||example.com^$unknown"), "unknown option");
-    throws(parseFilter.bind(null, "[foobar]"), "filter list header");
-    throws(parseFilter.bind(null, "##[foo"), "invalid selector");
-
-    throws(parseFilters.bind(null, "!comment\r\n||example.com^\n\n##/"), /\b4\b/, "error contains corresponding line number");
+    ok(parseFilter("||example.com^$unknown").error, "unknown option");
+    ok(parseFilter("[foobar]").error, "filter list header");
+    ok(parseFilter("##[foo").error, "invalid selector");
+    ok(/\b4\b/.test(parseFilters("!comment\r\n||example.com^\n\n##/").error), "error contains corresponding line number");
   });
 
   test("Allowing valid filters", function()
@@ -25,34 +24,34 @@
     var text, filter;
 
     text = "||example.com^";
-    filter = parseFilter(text);
+    filter = parseFilter(text).filter;
     ok(filter instanceof BlockingFilter, "blocking filter parsed");
     equal(filter.text, text, "blocking filter text matches");
 
     text = '##div:first-child a[src="http://example.com"] > .foo + #bar'
-    filter = parseFilter(text);
+    filter = parseFilter(text).filter;
     ok(filter instanceof ElemHideFilter, "elemhide filter parsed");
     equal(filter.text, text, "elemhide filter text matches");
 
     text = "! foo bar"
-    filter = parseFilter(text);
+    filter = parseFilter(text).filter;
     ok(filter instanceof CommentFilter, "comment filter parsed");
     equal(filter.text, text, "comment filter text matches");
 
-    equal(parseFilter(""), null, "empty filter parsed as 'null'");
+    equal(parseFilter("").filter, null, "empty filter parsed as 'null'");
   });
 
   test("Normalizing filters", function()
   {
     var ws = " \t\r\n";
 
-    equal(parseFilter(ws + "@@" + ws + "||" + ws + "example.com" + ws + "^" + ws).text, "@@||example.com^", "unnecessary spaces");
-    equal(parseFilter(ws), null, "only spaces");
+    equal(parseFilter(ws + "@@" + ws + "||" + ws + "example.com" + ws + "^" + ws).filter.text, "@@||example.com^", "unnecessary spaces");
+    equal(parseFilter(ws).filter, null, "only spaces");
   });
 
   test("Parsing multiple filters", function()
   {
-    var filters = parseFilters("||example.com^\n \n###foobar\r\n! foo bar\n");
+    var filters = parseFilters("||example.com^\n \n###foobar\r\n! foo bar\n").filters;
 
     equal(filters.length, 3, "all filters parsed");
 
@@ -68,7 +67,7 @@
 
   test("Parsing multiple filters, stripping filter list headers", function()
   {
-    var filters = parseFilters("[foobar]\n \n||example.com^\r\n! foo bar\n", true);
+    var filters = parseFilters("[foobar]\n \n||example.com^\r\n! foo bar\n", true).filters;
 
     equal(filters.length, 2, "all filters parsed");
 

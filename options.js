@@ -471,20 +471,16 @@ function addTypedFilter(event)
   event.preventDefault();
 
   var element = document.getElementById("newFilter");
-  var filter;
+  var result = parseFilter(element.value);
 
-  try
+  if (result.error)
   {
-    filter = parseFilter(element.value);
-  }
-  catch (error)
-  {
-    alert(error);
+    alert(result.error);
     return;
   }
 
-  if (filter)
-    FilterStorage.addFilter(filter);
+  if (result.filter)
+    FilterStorage.addFilter(result.filter);
 
   element.value = "";
 }
@@ -541,22 +537,18 @@ function toggleFiltersInRawFormat(event)
 function importRawFiltersText()
 {
   var text = document.getElementById("rawFiltersText").value;
+  var result = parseFilters(text, true);
 
-  var add;
-  try
+  if (result.error)
   {
-    add = parseFilters(text, true);
-  }
-  catch (error)
-  {
-    alert(error);
+    alert(result.error);
     return;
   }
 
   var seenFilter = Object.create(null);
-  for (var i = 0; i < add.length; i++)
+  for (var i = 0; i < result.filters.length; i++)
   {
-    var filter = add[i];
+    var filter = result.filters[i];
     FilterStorage.addFilter(filter);
     seenFilter[filter.text] = null;
   }
