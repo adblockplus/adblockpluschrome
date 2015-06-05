@@ -34,6 +34,10 @@ A dependencies file should look like this:
   buildtools = buildtools hg:016d16f7137b git:f3f8692f82e5
 """
 
+SKIP_DEPENDENCY_UPDATES = os.environ.get(
+  "SKIP_DEPENDENCY_UPDATES", ""
+).lower() not in ("", "0", "false")
+
 class Mercurial():
   def istype(self, repodir):
     return os.path.exists(os.path.join(repodir, ".hg"))
@@ -79,6 +83,9 @@ class Mercurial():
       module = os.path.relpath(target, repo)
       _ensure_line_exists(ignore_path, module)
 
+  def postprocess_url(self, url):
+    return url
+
 class Git():
   def istype(self, repodir):
     return os.path.exists(os.path.join(repodir, ".git"))
@@ -94,7 +101,20 @@ class Git():
     return subprocess.check_output(command, cwd=repo).strip()
 
   def pull(self, repo):
+    # Fetch tracked branches, new tags and the list of available remote branches
     subprocess.check_call(["git", "fetch", "--quiet", "--all", "--tags"], cwd=repo)
+    # Next we need to ensure all remote branches are tracked
+    newly_tracked = False
+    remotes = subprocess.check_output(["git", "branch", "--remotes"], cwd=repo)
+    for match in re.finditer(r"^\s*(origin/(\S+))$", remotes, re.M):
+      remote, local = match.groups()
+      with open(os.devnull, "wb") as devnull:
+        if subprocess.call(["git", "branch", "--track", local, remote],
+                           cwd=repo, stdout=devnull, stderr=devnull) == 0:
+          newly_tracked = True
+    # Finally fetch any newly tracked remote branches
+    if newly_tracked:
+      subprocess.check_call(["git", "fetch", "--quiet", "origin"], cwd=repo)
 
   def update(self, repo, rev):
     subprocess.check_call(["git", "checkout", "--quiet", rev], cwd=repo)
@@ -103,6 +123,12 @@ class Git():
     module = os.path.relpath(target, repo)
     exclude_file = os.path.join(repo, ".git", "info", "exclude")
     _ensure_line_exists(exclude_file, module)
+
+  def postprocess_url(self, url):
+    # Handle alternative syntax of SSH URLS
+    if "@" in url and ":" in url and not urlparse.urlsplit(url).scheme:
+      return "ssh://" + url.replace(":", "/", 1)
+    return url
 
 repo_types = OrderedDict((
   ("hg", Mercurial()),
@@ -158,7 +184,7 @@ def read_deps(repodir):
 
 def safe_join(path, subpath):
   # This has been inspired by Flask's safe_join() function
-  forbidden = set([os.sep, os.altsep]) - set([posixpath.sep, None])
+  forbidden = {os.sep, os.altsep} - {posixpath.sep, None}
   if any(sep in subpath for sep in forbidden):
     raise Exception("Illegal directory separator in dependency path %s" % subpath)
 
@@ -179,6 +205,11 @@ def ensure_repo(parentrepo, target, roots, sourcename):
   if os.path.exists(target):
     return
 
+  if SKIP_DEPENDENCY_UPDATES:
+    logging.warning("SKIP_DEPENDENCY_UPDATES environment variable set, "
+                    "%s not cloned", target)
+    return
+
   parenttype = get_repo_type(parentrepo)
   type = None
   for key in roots:
@@ -187,10 +218,14 @@ def ensure_repo(parentrepo, target, roots, sourcename):
   if type is None:
     raise Exception("No valid source found to create %s" % target)
 
-  if os.path.exists(roots[type]):
-    url = os.path.join(roots[type], sourcename)
+  postprocess_url = repo_types[type].postprocess_url
+  root = postprocess_url(roots[type])
+  sourcename = postprocess_url(sourcename)
+
+  if os.path.exists(root):
+    url = os.path.join(root, sourcename)
   else:
-    url = urlparse.urljoin(roots[type], sourcename)
+    url = urlparse.urljoin(root, sourcename)
 
   logging.info("Cloning repository %s into %s" % (url, target))
   repo_types[type].clone(url, target)
@@ -214,15 +249,21 @@ def update_repo(target, revisions):
     return
 
   resolved_revision = repo_types[type].get_revision_id(target, revision)
-  if not resolved_revision:
-    logging.info("Revision %s is unknown, downloading remote changes" % revision)
-    repo_types[type].pull(target)
-    resolved_revision = repo_types[type].get_revision_id(target, revision)
-    if not resolved_revision:
-      raise Exception("Failed to resolve revision %s" % revision)
-
   current_revision = repo_types[type].get_revision_id(target)
+
   if resolved_revision != current_revision:
+    if SKIP_DEPENDENCY_UPDATES:
+      logging.warning("SKIP_DEPENDENCY_UPDATES environment variable set, "
+                      "%s not checked out to %s", target, revision)
+      return
+
+    if not resolved_revision:
+      logging.info("Revision %s is unknown, downloading remote changes" % revision)
+      repo_types[type].pull(target)
+      resolved_revision = repo_types[type].get_revision_id(target, revision)
+      if not resolved_revision:
+        raise Exception("Failed to resolve revision %s" % revision)
+
     logging.info("Updating repository %s to revision %s" % (target, resolved_revision))
     repo_types[type].update(target, resolved_revision)
 
@@ -234,6 +275,7 @@ def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdep
     return
   if level >= 10:
     logging.warning("Too much subrepository nesting, ignoring %s" % repo)
+    return
 
   if overrideroots is not None:
     config["_root"] = overrideroots
