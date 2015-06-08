@@ -537,11 +537,16 @@ function toggleFiltersInRawFormat(event)
 function importRawFiltersText()
 {
   var text = document.getElementById("rawFiltersText").value;
-  var result = parseFilters(text, true);
+  var result = parseFilters(text);
 
-  if (result.error)
+  var errors = result.errors.filter(function(e)
   {
-    alert(result.error);
+    return e.type != "unexpected-filter-list-header";
+  });
+
+  if (errors.length > 0)
+  {
+    alert(errors.join("\n"));
     return;
   }
 

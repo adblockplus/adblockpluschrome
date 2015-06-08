@@ -370,9 +370,9 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
     case "add-filters":
       var result = parseFilters(msg.text);
 
-      if (result.error)
+      if (result.errors.length > 0)
       {
-        sendResponse({status: "invalid", error: result.error});
+        sendResponse({status: "invalid", error: result.errors.join("\n")});
         break;
       }
 
