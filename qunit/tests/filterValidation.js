@@ -13,10 +13,10 @@
 
   test("Detecting invalid filters", function()
   {
-    ok(parseFilter("||example.com^$unknown").error, "unknown option");
-    ok(parseFilter("[foobar]").error, "filter list header");
-    ok(parseFilter("##[foo").error, "invalid selector");
-    ok(/\b4\b/.test(parseFilters("!comment\r\n||example.com^\n\n##/").error), "error contains corresponding line number");
+    equal(parseFilter("||example.com^$unknown").error.type, "invalid-filter", "unknown option");
+    equal(parseFilter("[foobar]").error.type, "unexpected-filter-list-header", "filter list header");
+    equal(parseFilter("##[foo").error.type, "invalid-css-selector", "invalid selector");
+    ok(/\b4\b/.test(parseFilters("!comment\r\n||example.com^\n\n##/").errors[0]), "error contains corresponding line number");
   });
 
   test("Allowing valid filters", function()
@@ -51,30 +51,18 @@
 
   test("Parsing multiple filters", function()
   {
-    var filters = parseFilters("||example.com^\n \n###foobar\r\n! foo bar\n").filters;
+    var result = parseFilters("||example.com^\n \n###foobar\r\n! foo bar\n");
 
-    equal(filters.length, 3, "all filters parsed");
+    equal(result.errors.length, 0, "no error occurred");
+    equal(result.filters.length, 3, "all filters parsed");
 
-    ok(filters[0] instanceof BlockingFilter, "1st filter is blocking");
-    equal(filters[0].text, "||example.com^", "1st filter text matches");
+    ok(result.filters[0] instanceof BlockingFilter, "1st filter is blocking");
+    equal(result.filters[0].text, "||example.com^", "1st filter text matches");
 
-    ok(filters[1] instanceof ElemHideFilter, "2nd filter is elemhide");
-    equal(filters[1].text, "###foobar",      "2nd filter text matches");
+    ok(result.filters[1] instanceof ElemHideFilter, "2nd filter is elemhide");
+    equal(result.filters[1].text, "###foobar",      "2nd filter text matches");
 
-    ok(filters[2] instanceof CommentFilter,  "3rd filter is comment");
-    equal(filters[2].text, "! foo bar",      "3rd filter text matches");
-  });
-
-  test("Parsing multiple filters, stripping filter list headers", function()
-  {
-    var filters = parseFilters("[foobar]\n \n||example.com^\r\n! foo bar\n", true).filters;
-
-    equal(filters.length, 2, "all filters parsed");
-
-    ok(filters[0] instanceof BlockingFilter, "1st filter is blocking");
-    equal(filters[0].text, "||example.com^", "1st filter text matches");
-
-    ok(filters[1] instanceof CommentFilter,  "2nd filter is comment");
-    equal(filters[1].text, "! foo bar",      "2nd filter text matches");
+    ok(result.filters[2] instanceof CommentFilter,  "3rd filter is comment");
+    equal(result.filters[2].text, "! foo bar",      "3rd filter text matches");
   });
 })();
