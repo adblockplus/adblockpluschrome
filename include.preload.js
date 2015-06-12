@@ -292,12 +292,9 @@ function init(document)
   // However, creating a shadow root breaks running CSS transitions. So we
   // have to create the shadow root before transistions might start (#452).
   //
-  // Also, we can't use shadow DOM on Google Docs since it breaks printing
-  // there (#1770), and Google Mail since the feedback from breaks the layout
-  // there when using shadow DOM (#2602).
-  if ("createShadowRoot" in document.documentElement
-      && document.domain != "docs.google.com"
-      && document.domain != "mail.google.com")
+  // Also, using shadow DOM causes issues on some Google websites,
+  // including Goolgle Docs and Gmail (#1770, #2602).
+  if ("createShadowRoot" in document.documentElement && !/\.google\.com$/.test(document.domain))
   {
     shadow = document.documentElement.createShadowRoot();
     shadow.appendChild(document.createElement("shadow"));
