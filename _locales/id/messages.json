@@ -60,7 +60,7 @@
     "message": "Daftar penyaring Anda harus mengikuti <a>Sintaks Penyaring Adblock Plus</a>"
   },
   "found_a_bug": {
-    "message": "Menemukan sebuah celah? Ingin menerjemahkan Adblock ke bahasa Anda? Silahkan  <a>minta sebuah berkas disini</a>."
+    "message": "Menemukan sebuah celah? Ingin menerjemahkan Adblock Plus ke bahasa Anda? Silahkan  <a>minta sebuah berkas disini</a>."
   },
   "general": {
     "message": "Umum"
@@ -122,7 +122,7 @@
     "message": "Hapus yang dipilih"
   },
   "show_block_element_menu": {
-    "message": "Tampilkan item menu \"Blokir Elemen\""
+    "message": "Tampilkan item menu \"Blokir elemen\" saat klik kanan"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pada halaman ini",
@@ -149,7 +149,7 @@
     }
   },
   "stats_share_download": {
-    "message": "Download Adblock Plus"
+    "message": "Unduh Adblock Plus"
   },
   "stats_share_message": {
     "message": "Saya memblokir $number$ iklan dan pelacak berkat Adblock Plus.",
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Bagikan angka ini"
+    "message": "Bagikan nomor ini"
   },
   "stats_show_iconnumber": {
     "message": "Tampilkan angka didalam ikon"

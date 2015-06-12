@@ -39,7 +39,7 @@
     "message": "S'ha <strong>deshabilitat</strong> per a aquest lloc"
   },
   "disabled_for_these_domains": {
-    "message": "L'AdBlock Plus està desactivat als dominis de la llista de sota. Podeu afegir un domini clicant la icona d'AdBlock Plus de la barra d'adreces o bé escrivint el domini (no la URL) al quadre de text i clicant \"Afegeix un domini\"."
+    "message": "L'Adblock Plus està desactivat als dominis de la llista de sota. Podeu afegir un domini clicant la icona d'Adblock Plus de la barra d'adreces o bé escrivint el domini (no la URL) al quadre de text i clicant \"Afegeix un domini\"."
   },
   "easy_create_filter": {
     "message": "Bloqueja l'element"
@@ -60,7 +60,7 @@
     "message": "El vostre filtre ha de seguir la <a>Sintaxi de filtres d'Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "Heu trobat un error? Voleu traduïr l'AdBlock Plus al vostre idioma? Si us plau, <a>demaneu-ho aquí</a>."
+    "message": "Heu trobat un error? Voleu traduïr l'Adblock Plus al vostre idioma? Si us plau, <a>demaneu-ho aquí</a>."
   },
   "general": {
     "message": "General"

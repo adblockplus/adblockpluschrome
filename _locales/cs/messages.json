@@ -30,7 +30,7 @@
     "message": "Rozšiření pro Chrome, které zablokuje všechny otravné reklamy, malware, sledování a je zdarma. Používá více než 50 milionů lidí."
   },
   "description_opera": {
-    "message": "Rozšíření pro Operu, které zablokuje všechny otravné reklamy, malware, sledování a je zdarma. Používá více než 50 milionů lidí."
+    "message": "Rozšiření pro Opera, které zablokuje všechny otravné reklamy, malware, sledování a je zdarma. Používá více než 50 milionů lidí."
   },
   "description_safari": {
     "message": "Rozšíření pro Safari, které zablokuje všechny otravné reklamy, malware, sledování a je zdarma. Používá více než 50 milionů lidí."
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Sdílejte tato čísla"
+    "message": "Sdílet toto číslo"
   },
   "stats_show_iconnumber": {
     "message": "Zobrazit číslo v ikoně"

@@ -27,13 +27,13 @@
     "message": "Miután bezártad ezt a buborékot, kattints egy elemre az oldalon.."
   },
   "description_chrome": {
-    "message": "Több mint 50 millióan használják ezt az ingyenes hirdetés szűrőt Chrome-hoz, amely letiltja az ÖSSZES idegesítő reklámot, kártevőt."
+    "message": "Több mint 50 millióan használják a Chrome-hoz ezt az ingyenes hirdetésszűrőt, amely letilt MINDEN idegesítő reklámot és kártevőt."
   },
   "description_opera": {
-    "message": "Több mint 50 millió felhasználóval rendelkező, ingyenes hirdetés szűrő Operahoz, amely letiltja az ÖSSZES idegesítő reklámot, kártevőt és követőkódot."
+    "message": "Több mint 50 millióan használják a Opera-hoz ezt az ingyenes hirdetésszűrőt, amely letilt MINDEN idegesítő reklámot és kártevőt."
   },
   "description_safari": {
-    "message": "Több mint 50 millió felhasználóval rendelkező, ingyenes hirdetés szűrő Safarihoz, amely letiltja az ÖSSZES idegesítő reklámot, kártevőt és követőkódot."
+    "message": "Több mint 50 millióan használják a Safari-hoz ezt az ingyenes hirdetésszűrőt, amely letilt MINDEN idegesítő reklámot és kártevőt."
   },
   "disabled_for_site": {
     "message": "<strong>Kikapcsolva</strong> ezen a weboldalon"
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Ossza meg ezeket a számokat"
+    "message": "Statisztika megosztása"
   },
   "stats_show_iconnumber": {
     "message": "Blokkolt reklámok számának kijelzése az ikonon"

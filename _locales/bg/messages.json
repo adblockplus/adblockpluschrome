@@ -133,7 +133,7 @@
     }
   },
   "stats_label_total": {
-    "message": "<strong>$number$</strong> — всичко",
+    "message": "<strong>$number$</strong> — общо",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -152,7 +152,7 @@
     "message": "Изтегли Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Благодарение на Adblock Plus са блокирани $number$ реклами и проследявания.",
+    "message": "С Adblock Plus блокирах $number$ реклами и проследявания.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Сподели броя на блокираните"
+    "message": "Сподели числата"
   },
   "stats_show_iconnumber": {
     "message": "Отброявай блокираните в иконата"
@@ -172,12 +172,12 @@
     "message": "Моля, посочете абонамент за филтър от списъка:"
   },
   "unexpected_filter_list_header": {
-    "message": "Непозволени оглавления на филтри"
+    "message": "Непозволени заглавия на филтри"
   },
   "update_now": {
     "message": "Обнови"
   },
   "whitelisted_domains": {
-    "message": "Бял списък с домейни"
+    "message": "Изключени домейни"
   }
 }

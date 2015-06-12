@@ -122,7 +122,7 @@
     "message": "Poista valitut"
   },
   "show_block_element_menu": {
-    "message": "Näytä 'Estä Elementti' oikea-klikkaus valikossa"
+    "message": "Näytä 'Estä elementti' oikea-klikkaus valikossa"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> tällä sivulla",

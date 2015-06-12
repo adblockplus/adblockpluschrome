@@ -27,13 +27,13 @@
     "message": "Después de cerrar esta ventana, haga click (o click derecho) en un elemento de la página."
   },
   "description_chrome": {
-    "message": "Utilizado por más 50 millones de personas, un bloqueador de anuncios gratuito para Chrome que bloquea todos los anuncios molestos, malware y seguimiento."
+    "message": "Un bloqueador gratuito para Chrome de TODA la publicidad molesta, el malware y el tracking, con más de 50 millones de usuarios."
   },
   "description_opera": {
-    "message": "Utilizado por más 50 millones de personas, un bloqueador de anuncios gratuito para Opera que bloquea todos los anuncios molestos, malware y seguimiento."
+    "message": "Un bloqueador gratuito para Opera de TODA la publicidad molesta, el malware y el tracking, con más de 50 millones de usuarios."
   },
   "description_safari": {
-    "message": "Utilizado por más de 50 millones de usuarios, un bloqueador de anuncios gratuito para Safari que bloquea TODOS los anuncios molestos, malware y tracking."
+    "message": "Un bloqueador gratuito para Safari de TODA la publicidad molesta, el malware y el tracking, con más de 50 millones de usuarios."
   },
   "disabled_for_site": {
     "message": "<strong>Deshabilitado</strong> en este sitio"
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Compartir estos números"
+    "message": "Comparte este número"
   },
   "stats_show_iconnumber": {
     "message": "Mostrar número en el icono"

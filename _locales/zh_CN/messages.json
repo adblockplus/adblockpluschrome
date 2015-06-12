@@ -110,7 +110,7 @@
     "message": "点击通知打开它的所有链接。"
   },
   "options": {
-    "message": "设置选项"
+    "message": "Adblock Plus 选项"
   },
   "options_short": {
     "message": "选项"
@@ -122,7 +122,7 @@
     "message": "删除所选项"
   },
   "show_block_element_menu": {
-    "message": "添加‘过滤元素’到右鍵菜单"
+    "message": "添加‘拦截元素’到右鍵菜单"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> 在此页上",
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "分享数据"
+    "message": "分享屏蔽广告总数"
   },
   "stats_show_iconnumber": {
     "message": "在图标上显示数量"
