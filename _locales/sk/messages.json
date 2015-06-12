@@ -57,7 +57,7 @@
     "message": "Zoznamy filtrov"
   },
   "filter_must_follow_syntax": {
-    "message": "Váš filter musí spĺňať <a> syntax filtrov Adblocku Plus</a>."
+    "message": "Váš filter musí spĺňať <a>syntax filtrov Adblock Plus</a>."
   },
   "found_a_bug": {
     "message": "Nájdené chyba? Chcete preložiť Adblock Plus do vášho jazyka? Prosím <a> zadajte žiadosť tu</a>."
@@ -122,7 +122,7 @@
     "message": "Odstrániť vybrané"
   },
   "show_block_element_menu": {
-    "message": "Zobrazovať v kontextovom menu položku blokovania prvkov"
+    "message": "Zobrazovať v kontextovom menu položku 'Blokovať prvok'"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> na tejto stránke",
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Zdieľať tieto čísla"
+    "message": "Zdieľať tento počet"
   },
   "stats_show_iconnumber": {
     "message": "Zobraziť počet v ikone"

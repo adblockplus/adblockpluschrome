@@ -101,7 +101,7 @@
     }
   },
   "name_devbuild": {
-    "message": "एड ब्लॉक प्लस विकास निर्माण"
+    "message": "Adblock Plus विकास निर्माण"
   },
   "notification_with_buttons": {
     "message": "इस अधिसूचना के सारे लिंक खोलने के लिए \"ok\" बटन दबाये"
@@ -122,7 +122,7 @@
     "message": "चुने हुओं को हटाएँ "
   },
   "show_block_element_menu": {
-    "message": "'खंड तत्व' दाएँ क्लिक के मेनू आइटम में प्रदर्शित करे"
+    "message": "'तत्वों को प्रतिबंधित करें' दाएँ क्लिक के मेनू आइटम में प्रदर्शित करे"
   },
   "stats_label_page": {
     "message": "इस पृष्ठ पर <strong>$number$</strong>",
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "इन अंकों को शेयर करें "
+    "message": "इस संख्या को साझा"
   },
   "stats_show_iconnumber": {
     "message": "आइकॉन में अंक दर्शाएँ "

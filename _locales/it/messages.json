@@ -12,7 +12,7 @@
     "message": "Aggiungi filtro(i)?"
   },
   "add_your_own_filters": {
-    "message": "Aggiungi filtri personalizzati"
+    "message": "Aggiungi i tuoi filtri personali"
   },
   "apply_changes": {
     "message": "Applica modifiche"
@@ -39,7 +39,7 @@
     "message": "<strong>Disattivato</strong> su questo sito"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus è disabilitato per i domini elencati qui in basso. Puoi aggiungere un dominio anche tramite l'icona di Adblock Plus nella barra degli indirizzi o digitando un dominio (non un URL) nell'apposito campo e premendo il pulante \"Aggiungi dominio\"."
+    "message": "Adblock Plus è disabilitato per i domini elencati di seguito. È possibile aggiungere un dominio tramite l'icona di Adblock Plus nella barra degli indirizzi o digitando il dominio (non un URL) nella casella e facendo clic sul pulsante \"Aggiungi dominio\"."
   },
   "easy_create_filter": {
     "message": "Blocca Elemento"
@@ -48,7 +48,7 @@
     "message": "Modifica i filtri come testo"
   },
   "enable_only_the": {
-    "message": "Abilitare solo gli elenchi dei filtri necessari. Troppi possono bloccare il vostro browser."
+    "message": "Abilitare solo gli elenchi del filtri necessari. Troppi possono bloccare il vostro browser."
   },
   "enabled_for_site": {
     "message": "<strong>Attivato</strong> su questo sito"
@@ -57,7 +57,7 @@
     "message": "Liste di filtri"
   },
   "filter_must_follow_syntax": {
-    "message": "Il tuo filtro deve rispettare la <a>sintassi filtri di Adblock Plus</a>."
+    "message": "Il tuo filtro deve rispettare la <a>sintassi dei filtri di Adblock Plus</a>."
   },
   "found_a_bug": {
     "message": "Hai trovato un bug? Vuoi tradurre Adblock Plus nella tua lingua? Per favore <a>compila questa rischiesta</a>."
@@ -93,7 +93,7 @@
     }
   },
   "line": {
-    "message": "Linea $number$",
+    "message": "Riga $number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -116,10 +116,10 @@
     "message": "Opzioni"
   },
   "out_of_date_lists": {
-    "message": "Le liste scadute verranno aggiornate automaticamente."
+    "message": "Le liste scadute sono aggiornate periodicamente."
   },
   "remove_button": {
-    "message": "Rimuovi selezionato"
+    "message": "Rimuovi selezionati"
   },
   "show_block_element_menu": {
     "message": "Mostra 'Blocca Elemento' nel menu contestuale"
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Condividi questi numeri"
+    "message": "Condivi questo numero"
   },
   "stats_show_iconnumber": {
     "message": "Visualizza il numero nell'icona"

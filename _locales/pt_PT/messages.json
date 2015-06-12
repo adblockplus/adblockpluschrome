@@ -3,7 +3,7 @@
     "message": "Adicionar"
   },
   "add_domain_button": {
-    "message": "Adicionar domínio"
+    "message": "Adicionar Domínio"
   },
   "add_filter_button": {
     "message": "Adicionar filtro"
@@ -27,7 +27,7 @@
     "message": "Após fechar este popup, clique (ou clique com o botão direito) num elemento na página."
   },
   "description_chrome": {
-    "message": "Usada por 50 milhões de pessoas, o bloqueador de anúncios para o Chrome que bloqueia os anúncios irritantes, malware e rastreadores."
+    "message": "Usado por mais de 50 milhões de pessoas, um bloqueador de anúncios grátis para o Chrome que bloqueia pub., malware e rastreadores,"
   },
   "description_opera": {
     "message": "Usada por 50 milhões de pessoas, o bloqueador de anúncios para o Opera que bloqueia os anúncios irritantes, malware e rastreadores."
@@ -48,7 +48,7 @@
     "message": "Editar filtros como texto"
   },
   "enable_only_the": {
-    "message": "Ative apenas os filtros que precisa. Demasiados filtros podem reduzir o desempenho do navegador."
+    "message": "Ative apenas os filtros que precisa. Demasiados filtros podem reduzir o desempenho do seu navegador."
   },
   "enabled_for_site": {
     "message": "<strong>Ativado</strong> neste site"
@@ -57,7 +57,7 @@
     "message": "Lista de filtros"
   },
   "filter_must_follow_syntax": {
-    "message": "O filtro deve seguir a <a>sintaxe do filtro AdblockPlus</a>."
+    "message": "O filtro deve seguir a <a>sintaxe do filtro Adblock Plus</a>."
   },
   "found_a_bug": {
     "message": "Encontrou um erro? Quer traduzir o Adblock Plus para o seu idioma? Por favor, submeta <a>aqui</a> o seu pedido."
@@ -104,7 +104,7 @@
     "message": "Versão de desenvolvimento do Adblock Plus"
   },
   "notification_with_buttons": {
-    "message": "Clique em 'OK' para abrir todas as hiperligações nesta notificação."
+    "message": "Clique em 'CONFIRMAR' para abrir todas as hiperligações nesta notificação."
   },
   "notification_without_buttons": {
     "message": "Clique na notificação para abrir todas as hiperligações."
@@ -116,13 +116,13 @@
     "message": "Opções"
   },
   "out_of_date_lists": {
-    "message": "Listas antigas são atualizadas periodicamente."
+    "message": "As listas desatualizadas são atualizadas periodicamente."
   },
   "remove_button": {
     "message": "Remover seleção"
   },
   "show_block_element_menu": {
-    "message": "Mostrar 'Bloquear Elemento' botão direito do rato no item do menu"
+    "message": "Mostrar 'Bloquear elemento' botão direito do rato no item do menu"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> nesta página",
@@ -160,10 +160,10 @@
     }
   },
   "stats_share_title": {
-    "message": "Partilhar estes números"
+    "message": "Partilha este numero"
   },
   "stats_show_iconnumber": {
-    "message": "Mostrar números no ícone"
+    "message": "Mostrar número no ícone"
   },
   "stats_title": {
     "message": "Anúncios bloqueados"
@@ -178,6 +178,6 @@
     "message": "Atualizar agora"
   },
   "whitelisted_domains": {
-    "message": "Domínios permitidos"
+    "message": "Domínios na lista branca"
   }
 }

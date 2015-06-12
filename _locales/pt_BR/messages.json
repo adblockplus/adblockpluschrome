@@ -122,7 +122,7 @@
     "message": "Remover selecionados"
   },
   "show_block_element_menu": {
-    "message": "Mostrar 'Bloquear Elemento' no menu ao clicar com o botão direito"
+    "message": "Mostrar 'Bloquear elemento' no menu ao clicar com o botão direito"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> nesta página",
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Compartilhar estes números"
+    "message": "Compartilhar este número"
   },
   "stats_show_iconnumber": {
     "message": "Mostrar números no ícone"

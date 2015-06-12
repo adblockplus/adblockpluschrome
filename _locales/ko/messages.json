@@ -27,19 +27,19 @@
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
   },
   "description_chrome": {
-    "message": "만 50 명 이상, 크롬에 대한 무료 광고 차단에 의해 사용됩니다."
+    "message": "만 50 명 이상, Chrome 에 대한 무료 광고 차단에 의해 사용됩니다."
   },
   "description_opera": {
-    "message": "만 50 명 이상, 오페라에 대한 무료 광고 차단에 의해 사용됩니다."
+    "message": "만 50 명 이상, Opera 에 대한 무료 광고 차단에 의해 사용됩니다."
   },
   "description_safari": {
-    "message": "만 50 명 이상, 사파리를위한 무료 광고 차단에 의해 사용됩니다."
+    "message": "만 50 명 이상, Safari 에 대한 무료 광고 차단에 의해 사용됩니다."
   },
   "disabled_for_site": {
     "message": "이 사이트에서 <strong>을 사용 중지</strong> 합니다."
   },
   "disabled_for_these_domains": {
-    "message": "다음 도메인에서는 광고를 차단하지 않습니다. 주소 표시줄의 애드블록 플러스 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
+    "message": "다음 도메인에서는 광고를 차단하지 않습니다. 주소 표시줄의 Adblock Plus 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
   },
   "easy_create_filter": {
     "message": "요소 숨김"
@@ -57,10 +57,10 @@
     "message": "구독 필터"
   },
   "filter_must_follow_syntax": {
-    "message": "필터는 <a>애드블록 플러스 필터 구문</a>을 따라야합니다."
+    "message": "필터는 <a>Adblock Plus 필터 구문</a>을 따라야합니다."
   },
   "found_a_bug": {
-    "message": "버그를 발견하셨습니까? 애드블록 플러스를 여러분의 언어로 번역하고 싶습니까? <a>연락하기</a>"
+    "message": "버그를 발견하셨습니까? Adblock Plus 여러분의 언어로 번역하고 싶습니까? <a>연락하기</a>"
   },
   "general": {
     "message": "일반"
@@ -101,7 +101,7 @@
     }
   },
   "name_devbuild": {
-    "message": "애드블록 플러스 개발 빌드"
+    "message": "Adblock Plus 개발 빌드"
   },
   "notification_with_buttons": {
     "message": "이 알림에 포함된 모든 링크를 열려면 '확인'을 클릭하세요."
@@ -110,7 +110,7 @@
     "message": "알림에 포함된 모든 링크를 열려면 클릭하세요."
   },
   "options": {
-    "message": "Adblock Plus - 애드블록 플러스 옵션"
+    "message": "Adblock Plus 옵션"
   },
   "options_short": {
     "message": "옵션"
@@ -149,10 +149,10 @@
     }
   },
   "stats_share_download": {
-    "message": "애드블록 플러스 다운로드"
+    "message": "다운로드 Adblock Plus"
   },
   "stats_share_message": {
-    "message": "애드블록 플러스 덕분에 $number$ 개의 광고와 트래커를 차단했어요.",
+    "message": "Adblock Plus 덕분에 $number$ 개의 광고와 트래커를 차단했어요.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "차단 통계 공유"
+    "message": "이 숫자를 공유"
   },
   "stats_show_iconnumber": {
     "message": "아이콘에 차단된 광고 개수 표시"

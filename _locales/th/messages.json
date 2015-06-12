@@ -100,6 +100,9 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "Adblock Plus รุ่นกำลังพัฒนา"
+  },
   "notification_with_buttons": {
     "message": "คลิ๊ก 'ตกลง' เพื่อเปิดลิ้งก์ทั้งหมดในการแจ้งเตือนนี้"
   },
@@ -157,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "ใช้ตัวเลขเหล่านี้"
+    "message": "แชร์จำนวนโฆษณาที่บล็อคแล้ว"
   },
   "stats_show_iconnumber": {
     "message": "แสดงหมายเลขในไอคอน"

@@ -45,7 +45,7 @@
     "message": "Block element"
   },
   "edit_filters_raw": {
-    "message": "Easy create filter"
+    "message": "Edit filters as raw text"
   },
   "enable_only_the": {
     "message": "Enable only the filter lists you need. Too many can make your browser unresponsive."
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Share these numbers"
+    "message": "Share this number"
   },
   "stats_show_iconnumber": {
     "message": "Show number in icon"

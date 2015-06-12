@@ -1,0 +1,124 @@
+{
+  "add": {
+    "message": "kuongeza filter watu"
+  },
+  "add_domain_button": {
+    "message": "kuongeza miliki"
+  },
+  "add_filter_button": {
+    "message": "kuongeza filter"
+  },
+  "add_filters_msg": {
+    "message": "kuongeza filter(s) ?"
+  },
+  "add_your_own_filters": {
+    "message": "kuongeza filters yako mwenyewe"
+  },
+  "apply_changes": {
+    "message": "kuomba mabadiliko"
+  },
+  "block_element": {
+    "message": "kuzuia kipengele"
+  },
+  "cancel": {
+    "message": "kufuta"
+  },
+  "clickhide_instructions": {
+    "message": "baada ya kufunga dukizi hii , click (au haki-click ) kipengele kwenye ukurasa huu."
+  },
+  "description_chrome": {
+    "message": "Kutumiwa na zaidi ya milioni 50 watu , bure tangazo blocker kwa Chrome kwamba vitalu ALL annoying matangazo , zisizo na kufuatilia."
+  },
+  "description_opera": {
+    "message": "Kutumiwa na zaidi ya milioni 50 watu , bure tangazo blocker kwa Opera kwamba vitalu ALL annoying matangazo , zisizo na kufuatilia."
+  },
+  "description_safari": {
+    "message": "Kutumiwa na zaidi ya milioni 50 watu , bure tangazo blocker kwa Safari kwamba vitalu ALL annoying matangazo , zisizo na kufuatilia."
+  },
+  "disabled_for_site": {
+    "message": "<strong>walemavu</strong> kwenye tovuti hii"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus pamoja ni walemavu kwa ajili ya nyanja hapa chini. Unaweza kuongeza miliki aidha kupitia Adblock Plus pamoja na icon katika bar anwani au kwa kuandika miliki (sio URL) katika sanduku na kubonyeza \" kuongeza miliki \" kifungo ."
+  },
+  "easy_create_filter": {
+    "message": "kuzuia kipengele"
+  },
+  "edit_filters_raw": {
+    "message": "hariri filter kama maandishi mbichi"
+  },
+  "enable_only_the": {
+    "message": "Kuwawezesha tu orodha filter unahitaji. Wengi mno wanaweza kufanya browser yako imekwama."
+  },
+  "enabled_for_site": {
+    "message": "<strong>Kuwezeshwa</strong> kwenye tovuti hii"
+  },
+  "filter_lists": {
+    "message": "filter listd"
+  },
+  "filter_must_follow_syntax": {
+    "message": "Filter yako lazima kufuata <a> Adblock Plus chujio syntax </a> ."
+  },
+  "found_a_bug": {
+    "message": "Kupatikana mdudu ? Wanataka kutafsiri Adblock Plus katika lugha yako ? Tafadhali <a> faili ombi hapa </a> ."
+  },
+  "general": {
+    "message": "ujumla"
+  },
+  "invalid_css_selector": {
+    "message": "$selector$ si halali CSS selector",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at": {
+    "message": "mwisho updated saa $time$ juu ya $date$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "mwisho updated saa $time$ leo",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "mstari $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "name_devbuild": {
+    "message": "Adblock Plus pamoja na maendeleo ya kujenga"
+  },
+  "notification_with_buttons": {
+    "message": "Bonyeza 'OK' kufungua viungo vyote katika taarifa hii."
+  },
+  "notification_without_buttons": {
+    "message": "Bonyeza kwenye taarifa ya kufungua viungo vyote ndani yake."
+  },
+  "options": {
+    "message": "Adblock Plus options"
+  },
+  "options_short": {
+    "message": "chaguzi"
+  },
+  "out_of_date_lists": {
+    "message": "Nje ya tarehe orodha ni updated mara kwa mara."
+  },
+  "remove_button": {
+    "message": "ut kuondoa"
+  }
+}

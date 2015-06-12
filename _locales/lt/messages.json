@@ -27,13 +27,13 @@
     "message": "Užvėrus šį iššokantį langą, paspauskite (arba dešiniu mygtuku) ant elemento esančio puslapyje."
   },
   "description_chrome": {
-    "message": "Populiari, nemokama reklamų blokavimo programa Chrome naršyklei blokuoja įkyrias reklamas, kenkėjiškas programas ir sekimą."
+    "message": "Virš 50 milijonų vartotojų turintis nemokamas „Chrome“ plėtinys, blokuojantis VISAS įkyrias reklamas, žalingas programas ir sekimą."
   },
   "description_opera": {
-    "message": "Populiari, nemokama reklamų blokavimo programa „Opera” naršyklei blokuoja įkyrias reklamas, kenkėjiškas programas ir sekimą."
+    "message": "Virš 50-ies milijonų žmonių naudojamas nemokamas „Opera“ plėtinys, blokuojantis VISAS įkyrias reklamas, žalingas programas ir sekimą."
   },
   "description_safari": {
-    "message": "Populiari, nemokama reklamų blokavimo programa „Safari” naršyklei blokuoja įkyrias reklamas, kenkėjiškas programas ir sekimą."
+    "message": "Virš 50-ies milijonų žmonių naudojamas nemokamas „Safari“ plėtinys, blokuojantis VISAS įkyrias reklamas, žalingas programas ir sekimą."
   },
   "disabled_for_site": {
     "message": "Šiame puslapyje <strong>išjungta</strong>"
@@ -66,7 +66,7 @@
     "message": "Bendra"
   },
   "invalid_css_selector": {
-    "message": "$selector$ yra neteisingas CSS pasirinkimas",
+    "message": "$selector$ nėra tinkamas CSS selektorius",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -101,7 +101,7 @@
     }
   },
   "name_devbuild": {
-    "message": "AdBlock Plus plėtros statyti"
+    "message": "Adblock Plus plėtros statyti"
   },
   "notification_with_buttons": {
     "message": "Paspauskite „Gerai“ ir bus atvertos visos šio pranešimo nuorodos."
@@ -152,7 +152,7 @@
     "message": "Parsisiųsti Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Adblock dėka aš užblokavau $number$ reklamų.",
+    "message": "Adblock Plus dėka aš užblokavau $number$ reklamų.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Dalintis šiais skaičiais"
+    "message": "Dalintis šiuo skaičiumi"
   },
   "stats_show_iconnumber": {
     "message": "Piktogramoje rodyti skaičių"
@@ -172,7 +172,7 @@
     "message": "Pasirinkite filtro prenumeratą iš šio sąrašo:"
   },
   "unexpected_filter_list_header": {
-    "message": "Filtro eilučių antraštės čia yra neleidžiamos"
+    "message": "Čia negalima naudoti filtrų sąrašo antraščių"
   },
   "update_now": {
     "message": "Atnaujinti"

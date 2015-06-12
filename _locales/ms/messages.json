@@ -15,7 +15,7 @@
     "message": "Tambah penapis anda sendiri"
   },
   "apply_changes": {
-    "message": "Simpan"
+    "message": "Simpan perubahan"
   },
   "block_element": {
     "message": "Halang elemen"
@@ -27,13 +27,13 @@
     "message": "Setelah menutup tetingkap ini, klik (atau klik butang kanan) pada sesuatu unsur atas laman."
   },
   "description_chrome": {
-    "message": "Digunakan olehlebih 50 juta orang,penyekat ikl. yg percuma utk Chrome yg menghalang semua ikl. yg menjengkelkan,malware danpenjejak."
+    "message": "Lebih 50 juta menggunakannya, penyekat iklan untuk Chrome yang boleh blok semua iklan menjengkelkan, malware dan penjejak."
   },
   "description_opera": {
-    "message": "Digunakan oleh lebih 50 juta orang, penyekat iklan yg percuma utk Chrome yg menghalang semua iklan yg menjengkelkan,malware dan penjejak."
+    "message": "Lebih 50 juta menggunakannya, penyekat iklan untuk Opera yang boleh blok semua iklan menjengkelkan, malware dan penjejak."
   },
   "description_safari": {
-    "message": "Digunakan oleh lebih 50 juta orang, penyekat iklan yg percuma utk Chrome yg menghalang semua iklan yg menjengkelkan,malware dan penjejak."
+    "message": "Lebih 50 juta menggunakannya, penyekat iklan untuk Safari yang boleh blok semua iklan menjengkelkan, malware dan penjejak."
   },
   "disabled_for_site": {
     "message": "<strong>Dinyahaktifkan</strong> pada laman web ini"
@@ -122,7 +122,7 @@
     "message": "Padamkan yang dipilih"
   },
   "show_block_element_menu": {
-    "message": "Paparkan item menu 'Halang Elemen' pada butang klik kanan"
+    "message": "Paparkan item menu 'Halang elemen' pada butang klik kanan"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pada halaman ini",
@@ -141,7 +141,7 @@
     }
   },
   "stats_over": {
-    "message": "$number$ ke atas",
+    "message": "lebih $number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Kongsikan nombor-nombor ini"
+    "message": "Kongsikan nombor ini"
   },
   "stats_show_iconnumber": {
     "message": "Paparkan nombor dalam ikon"

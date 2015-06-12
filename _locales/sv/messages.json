@@ -160,7 +160,10 @@
     }
   },
   "stats_share_title": {
-    "message": "Dela dessa nummer"
+    "message": "Dela detta nummer"
+  },
+  "stats_share_title": {
+    "message": "இந்த எண்களை பகிர்"
   },
   "stats_show_iconnumber": {
     "message": "Visa nummer vid ikon"

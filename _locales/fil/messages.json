@@ -122,7 +122,7 @@
     "message": "Alisin ang napili"
   },
   "show_block_element_menu": {
-    "message": "Ipakita ang 'Block Element' sa right-click menu item"
+    "message": "Ipakita ang 'Ihinto ang element' sa right-click menu item"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> sa pahinang ito",
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Ibahagi itong mga numero"
+    "message": "Ibahagi ang numerong ito"
   },
   "stats_show_iconnumber": {
     "message": "Ipakita ang mga numero sa icon"

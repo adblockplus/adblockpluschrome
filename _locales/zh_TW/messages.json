@@ -27,13 +27,13 @@
     "message": "請在此訊息關閉後點選網頁上的元素。"
   },
   "description_chrome": {
-    "message": "被50萬人採用，免費廣告攔截插件在Chrome上禁止所有煩人的廣告，惡意軟件和追踪。"
+    "message": "被50萬人次採用了，免費的廣告攔截在Chrome瀏覽器上，阻止所有煩人的廣告，惡意軟件和追踪。"
   },
   "description_opera": {
-    "message": "被50萬人採用，免費廣告攔截插件在Opera上禁止所有煩人的廣告，惡意軟件和追踪。"
+    "message": "被50萬人次採用了，免費的廣告攔截在Opera瀏覽器上，阻止所有煩人的廣告，惡意軟件和追踪。"
   },
   "description_safari": {
-    "message": "被50萬人採用，免費廣告攔截插件在Safari上禁止所有煩人的廣告，惡意軟件和追踪。"
+    "message": "被50萬人次採用了，免費的廣告攔截在Safari瀏覽器上，阻止所有煩人的廣告，惡意軟件和追踪。"
   },
   "disabled_for_site": {
     "message": "在此網站上 <strong>停用</strong>"

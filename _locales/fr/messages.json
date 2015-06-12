@@ -27,7 +27,7 @@
     "message": "Après avoir fermé ce pop-up, cliquez (ou cliquez-droit) sur un élément de la page."
   },
   "description_chrome": {
-    "message": "Comme plus de 50 millions d'utilisateurs, bloquez gratuitement TOUTES les publicités intrusives, logiciels malveillants et trackers."
+    "message": "Utilisé par plus de 50 millions de personnes, Adblock Plus est gratuit et bloque toutes les publicités, malware et trackers."
   },
   "description_opera": {
     "message": "Utilisé par plus de 50 millions de personnes, Adblock Plus pour Opera est gratuit et bloque TOUTES les publicités intrusives, les logiciels malveillants et les trackers."
@@ -122,7 +122,7 @@
     "message": "Supprimer la sélection"
   },
   "show_block_element_menu": {
-    "message": "Afficher 'bloquer l'élément' dans le menu clic-droit"
+    "message": "Afficher 'Bloquer l'élément' dans le menu clic-droit"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> sur cette page",
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Partager ces statistiques"
+    "message": "Partager le nombre de blocages"
   },
   "stats_show_iconnumber": {
     "message": "Afficher le nombre sur l'icône"

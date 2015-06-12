@@ -122,7 +122,7 @@
     "message": "Xóa mục đã chọn"
   },
   "show_block_element_menu": {
-    "message": "Hiển thị mục 'Chặn phần tử' ở trình đơn chuột phải"
+    "message": "Hiển thị mục 'Chặn phần từ' ở trình đơn chuột phải"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> trên trang này",
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Chia sẻ những con số này"
+    "message": "Chia sẻ con số này"
   },
   "stats_show_iconnumber": {
     "message": "Hiện số ads đã chặn trong icon ABP"
