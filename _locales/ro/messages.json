@@ -33,7 +33,7 @@
     "message": "Extensie gratuită pentru Opera, folosită de peste 50 milioane persoane, blochează TOATE reclamele enervante, malware şi tracking."
   },
   "description_safari": {
-    "message": "Extensie gratuită pentru Safari, folosită de peste 50 milioane de persoane, blochează TOATE reclamele enervante, malware şi tracking."
+    "message": "Extensie gratuită pentru Safari, folosită de peste 50 milioane persoane, blochează TOATE reclamele enervante, malware şi tracking."
   },
   "disabled_for_site": {
     "message": "<strong>Dezactivat</strong> pe acest site"
@@ -122,7 +122,7 @@
     "message": "Șterge filtrul evidenţiat"
   },
   "show_block_element_menu": {
-    "message": "Arată 'Blochează elementul' in meniul asociat unui obiect cu clic dreapta"
+    "message": "Arată 'Blochează elementul' în meniul asociat unui obiect cu clic dreapta"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pe această pagină",

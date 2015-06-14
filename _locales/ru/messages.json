@@ -169,7 +169,7 @@
     "message": "Статистика блокирования"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Пожалуйста, выберите фильтровую подписку из списка:"
+    "message": "Пожалуйста, выберите подписку из списка:"
   },
   "unexpected_filter_list_header": {
     "message": "Заголовки списка фильтров здесь не допускаются"

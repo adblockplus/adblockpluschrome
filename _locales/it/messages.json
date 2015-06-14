@@ -48,7 +48,7 @@
     "message": "Modifica i filtri come testo"
   },
   "enable_only_the": {
-    "message": "Abilitare solo gli elenchi del filtri necessari. Troppi possono bloccare il vostro browser."
+    "message": "Abilitare solo gli elenchi dei filtri necessari. Troppi possono bloccare il vostro browser."
   },
   "enabled_for_site": {
     "message": "<strong>Attivato</strong> su questo sito"
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Condivi questo numero"
+    "message": "Condividi questo numero"
   },
   "stats_show_iconnumber": {
     "message": "Visualizza il numero nell'icona"
