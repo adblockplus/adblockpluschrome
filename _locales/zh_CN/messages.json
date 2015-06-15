@@ -15,7 +15,7 @@
     "message": "自定义过滤"
   },
   "apply_changes": {
-    "message": "应用"
+    "message": "确认更改"
   },
   "block_element": {
     "message": "拦截元素"
@@ -24,7 +24,7 @@
     "message": "取消"
   },
   "clickhide_instructions": {
-    "message": "请点击（或右击）要屏蔽的元素"
+    "message": "此消息框关闭后，请点击（或右击）网页上的一个元素。"
   },
   "description_chrome": {
     "message": "超过5000万人使用，适用于 Chrome 的免费的广告拦截器，可阻止所有烦人的广告及恶意软件和跟踪。"
@@ -39,13 +39,13 @@
     "message": "对当前网站<strong>禁用</strong>"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus 不过滤下面列出的域。您可以通过点击地址栏的 Adblock Plus 图标进行添加，也可在下面输入域名（非URL）然后点击“添加域名”。"
+    "message": "Adblock Plus 将不过滤以下域名。您可以通过点击地址栏的 Adblock Plus 图标进行添加，也可在下面输入域名（非URL）然后点击“添加过滤规则”。"
   },
   "easy_create_filter": {
     "message": "拦截元素"
   },
   "edit_filters_raw": {
-    "message": "以纯文本编辑"
+    "message": "以纯文本编辑过滤规则"
   },
   "enable_only_the": {
     "message": "请只启用您需要的过滤清单，启用过多会使浏览器变慢。"
@@ -54,13 +54,13 @@
     "message": "对当前网站<strong>启用</strong>"
   },
   "filter_lists": {
-    "message": "过滤清单"
+    "message": "过滤规则列表"
   },
   "filter_must_follow_syntax": {
     "message": "您的过滤规则必须遵循 <a> Adblock Plus 过滤规则语法</a>。"
   },
   "found_a_bug": {
-    "message": "发现错误？想要帮忙翻译Adblock Plus？请前往<a>此处</a>"
+    "message": "发现漏洞？想要帮忙翻译Adblock Plus？请前往<a>此处询问</a>"
   },
   "general": {
     "message": "常规"
@@ -74,7 +74,7 @@
     }
   },
   "last_updated_at": {
-    "message": "最近更新于 $date$$time$ ",
+    "message": "最后更新于$time$  $date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -107,16 +107,16 @@
     "message": "点击“确定”打开此通知中的所有链接。"
   },
   "notification_without_buttons": {
-    "message": "点击通知打开它的所有链接。"
+    "message": "点击通知打开它上面的所有链接。"
   },
   "options": {
     "message": "Adblock Plus 选项"
   },
   "options_short": {
-    "message": "选项"
+    "message": "设置"
   },
   "out_of_date_lists": {
-    "message": "过滤清单会定期自动更新"
+    "message": "过滤列表会定期自动更新"
   },
   "remove_button": {
     "message": "删除所选项"
@@ -152,7 +152,7 @@
     "message": "下载 Adblock Plus"
   },
   "stats_share_message": {
-    "message": "我用Adblock Plus过滤了$number$ 个广告和跟踪脚本。",
+    "message": "感谢Adblock Plus拦截了$number$个广告和跟踪行为。",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -169,7 +169,7 @@
     "message": "已拦截广告"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "从列表中选择一份过滤清单:"
+    "message": "从列表中选择过滤规则订阅组:"
   },
   "unexpected_filter_list_header": {
     "message": "这里不允许过滤列表标题"
@@ -178,6 +178,6 @@
     "message": "立即更新"
   },
   "whitelisted_domains": {
-    "message": "排除域名"
+    "message": "白名单"
   }
 }

@@ -104,7 +104,7 @@
     "message": "Adblock Plus (Entwicklungsversion)"
   },
   "notification_with_buttons": {
-    "message": "Auf »OK« klicken, um alle Links in dieser Benachrichtigung zu öffnen."
+    "message": "Auf 'OK' klicken, um alle Links in dieser Benachrichtigung zu öffnen."
   },
   "notification_without_buttons": {
     "message": "Auf die Benachrichtigung klicken, um alle enthaltenen Links zu öffnen."
