@@ -11,7 +11,7 @@ Building
 
 ### Requirements
 
-- [Python 2.x](https://www.python.org)
+- [Python 2.7](https://www.python.org)
 - [The Jinja2 module](http://jinja.pocoo.org/docs)
 - [The PIL module](http://www.pythonware.com/products/pil/)
 - For signed Chrome and Opera builds: [M2Crypto module](https://github.com/martinpaljak/M2Crypto)
