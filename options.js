@@ -39,6 +39,7 @@ var FilterNotifier = require("filterNotifier").FilterNotifier;
 var Prefs = require("prefs").Prefs;
 var Synchronizer = require("synchronizer").Synchronizer;
 var Utils = require("utils").Utils;
+var NotificationStorage = require("notification").Notification;
 
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions()
@@ -76,6 +77,22 @@ function loadOptions()
 
   // Popuplate option checkboxes
   initCheckbox("shouldShowBlockElementMenu");
+  if (Prefs.notifications_showui)
+  {
+    initCheckbox("shouldShowNotifications", {
+      get: function()
+      {
+        return Prefs.notifications_ignoredcategories.indexOf("*") == -1;
+      },
+      toggle: function()
+      {
+        NotificationStorage.toggleIgnoreCategory("*");
+        return this.get();
+      }
+    });
+  }
+  else
+    document.getElementById("shouldShowNotificationsContainer").hidden = true;
 
   ext.onMessage.addListener(onMessage);
 
@@ -131,12 +148,19 @@ function unloadOptions()
   FilterNotifier.removeListener(onFilterChange);
 }
 
-function initCheckbox(id)
+function initCheckbox(id, descriptor)
 {
   var checkbox = document.getElementById(id);
-  checkbox.checked = Prefs[id];
+  if (descriptor && descriptor.get)
+    checkbox.checked = descriptor.get();
+  else
+    checkbox.checked = Prefs[id];
+
   checkbox.addEventListener("click", function()
   {
+    if (descriptor && descriptor.toggle)
+      checkbox.checked = descriptor.toggle();
+
     Prefs[id] = checkbox.checked;
   }, false);
 }

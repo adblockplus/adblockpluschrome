@@ -110,11 +110,20 @@ window.addEventListener("load", function()
 
   var notificationElement = document.getElementById("notification");
   notificationElement.className = notification.type;
-  notificationElement.style.display = "block";
-  
-  document.getElementById("close-notification").addEventListener("click", function()
+  notificationElement.hidden = false;
+  notificationElement.addEventListener("click", function(event)
   {
-    notificationElement.style.display = "none";
-    notification.onClicked();
-  }, false);
+    switch (event.target.id)
+    {
+      case "notification-close":
+        notificationElement.classList.add("closing");
+        break;
+      case "notification-optout":
+        Notification.toggleIgnoreCategory("*", true);
+      case "notification-hide":
+        notificationElement.hidden = true;
+        notification.onClicked();
+        break;
+    }
+  }, true);
 }, false);
