@@ -35,12 +35,20 @@
 </header>
 
 <div id="wrapper">
-  <div id="notification">
-    <h1>
-      <span id="notification-title"></span>
-      <span id="close-notification"></span>
-    </h1>
-    <div id="notification-message"></div>
+  <div id="notification" hidden>
+    <div id="notification-content">
+      <h1>
+        <span id="notification-title"></span>
+        <span id="notification-close"></span>
+      </h1>
+      <p id="notification-message"></p>
+    </div>
+    <ul id="notification-close-content">
+      <li id="notification-hide"
+        class="i18n_overlay_notification_closing_button_hide"></li>
+      <li id="notification-optout"
+        class="i18n_overlay_notification_closing_button_optout"></li>
+    </ul>
   </div>
 
   <div id="clickhide-instructions" class="i18n_clickhide_instructions"></div>

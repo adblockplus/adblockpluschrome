@@ -63,7 +63,6 @@ header
 
 #notification
 {
-  display: none;
   position: relative;
   margin-top: -70px;
   min-height: 50px;
@@ -96,7 +95,7 @@ header
   color: #fff;
 }
 
-#close-notification
+#notification-close
 {
   cursor: pointer;
   display: inline-block;
@@ -107,6 +106,40 @@ header
   height: 8px;
   background-image: url(popup.png);
   background-position: -34px -89px;
+}
+
+#notification.closing
+{
+  border-color: #000;
+  background-color: #020D14;
+}
+
+#notification.closing #notification-content,
+#notification:not(.closing) #notification-close-content
+{
+  display: none;
+}
+
+#notification-close-content li
+{
+  padding: 7px 7px 7px 17px;
+  color: #FFF;
+  text-decoration: underline;
+  white-space: inherit;
+  border: none;
+}
+
+#notification-close-content li::before
+{
+  content: "\0203A";
+  display: inline-block; /* prevent pseudo element from being underlined */
+  width: 10px;
+  margin-left: -10px;
+}
+
+#notification-close-content li:hover
+{
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 footer
