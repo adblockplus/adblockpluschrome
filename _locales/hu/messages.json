@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Az elavult listák időközönként frissülnek."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Értesítés bezárása"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Ne jelenjenek meg értesítések"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Hasznos értesítések megjelenítése"
+  },
   "remove_button": {
     "message": "Kijelölt eltávolítása"
   },

@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "لیست های تاریخ گذشته مرتباً آپدیت می شوند."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "بستن این اعلان"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "عدم نمایش اعلان ها"
+  },
+  "overlay_shownotifications_label": {
+    "message": "نمایش اعلان های مفید"
+  },
   "remove_button": {
     "message": "حذف انتخاب شده"
   },

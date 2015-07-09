@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Les listes périmées seront actualisées périodiquement."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Fermer cette notification"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Cesser d'afficher les notifications"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Afficher les notifications utiles"
+  },
   "remove_button": {
     "message": "Supprimer la sélection"
   },

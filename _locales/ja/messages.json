@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "リストは定期的に更新されます。"
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "この通知を閉じる"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "通知の表示を停止"
+  },
+  "overlay_shownotifications_label": {
+    "message": "有用な通知を表示"
+  },
   "remove_button": {
     "message": "選択項目を削除"
   },

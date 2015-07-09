@@ -3,15 +3,84 @@
     "message": "ചേര്‍ക്കുക"
   },
   "add_domain_button": {
-    "message": "ഡൊമൈൻ  ഉള്പെടുത്തുക"
+    "message": "ഡൊമൈൻ  ചേര്‍ക്കുക"
   },
   "add_filter_button": {
-    "message": "ഫിൽറ്റർ ഉള്പെടുത്തുക"
+    "message": "ഫിൽറ്റർ ചേര്‍ക്കുക"
   },
   "add_filters_msg": {
     "message": "ഫിൽറ്റർ / ഫിൽറ്ററുകൾ ഉള്പെടുത്തുക?"
   },
   "add_your_own_filters": {
-    "message": "സ്വന്തം ഫിൽറ്റർ ഉള്പെടുത്തുക"
+    "message": "സ്വന്തം ഫിൽറ്റർ ചേര്‍ക്കുക"
+  },
+  "apply_changes": {
+    "message": "മാറ്റങ്ങള്‍ നടപ്പിലാക്കുക"
+  },
+  "block_element": {
+    "message": "എലമെന്റ് തടയുക"
+  },
+  "cancel": {
+    "message": "റദ്ദാക്കുക"
+  },
+  "clickhide_instructions": {
+    "message": "ഈ പോപ്പപ്പ് ക്ലോസ് ചെയ്ത ശേഷം താളിലെ എലമെന്റില്‍ ക്ലിക്കോ റൈറ്റ് ക്ലിക്കോ ചെയ്യുക."
+  },
+  "easy_create_filter": {
+    "message": "എലമെന്റ് തടയുക"
+  },
+  "edit_filters_raw": {
+    "message": "അരിപ്പകള്‍ റോ ടെക്സ്റ്റ് (ഫോര്‍മാറ്റിങ് ഇല്ലാതെ) ആയി തിരുത്തുക"
+  },
+  "filter_lists": {
+    "message": "പട്ടികകള്‍ അരിക്കുക"
+  },
+  "general": {
+    "message": "പലവക"
+  },
+  "last_updated_at": {
+    "message": "അവസാനം പുതുക്കിയത് $date$, $time$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "അവസാനം പുതുക്കിയത് ഇന്ന് $time$",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "വരി $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "remove_button": {
+    "message": "തെരഞ്ഞെടുത്തത് നീക്കംചെയ്യുക"
+  },
+  "stats_share_download": {
+    "message": "ആഡ്ബ്ലോക്ക് പ്ലസ് ഡൗണ്‍ലോഡ് ചെയ്യുക"
+  },
+  "stats_share_title": {
+    "message": "ഈ സംഖ്യ പങ്കുവയ്ക്കുക"
+  },
+  "stats_show_iconnumber": {
+    "message": "ഐക്കണില്‍ സംഖ്യ കാണിക്കുക"
+  },
+  "stats_title": {
+    "message": "തടഞ്ഞ പരസ്യങ്ങള്‍"
+  },
+  "update_now": {
+    "message": "ഇപ്പോള്‍ത്തന്നെ പുതുക്കുക"
   }
 }

@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Abgelaufene Filterlisten werden regelmäßig aktualisiert."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Schließe diese Benachrichtigung"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Zeige keine weiteren Benachrichtigungen"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Zeige nützliche Benachrichtigungen"
+  },
   "remove_button": {
     "message": "Ausgewählte entfernen"
   },

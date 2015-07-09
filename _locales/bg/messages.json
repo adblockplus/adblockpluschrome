@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Остарелите списъци се обновяват периодично."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Затвори уведомяването"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Спри извеждането на уведомявания"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Показвай полезни уведомявания"
+  },
   "remove_button": {
     "message": "Премахни избрания"
   },

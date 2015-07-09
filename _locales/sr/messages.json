@@ -24,7 +24,7 @@
     "message": "Откажи"
   },
   "clickhide_instructions": {
-    "message": "Након што затворите овај искачући прозор, притисните левим или десним кликом на елемент на овој страници."
+    "message": "Након што затворите овај искачући прозор, притисните левим или десним тастером миша на елемент на овој страници."
   },
   "description_chrome": {
     "message": "Бесплатан блокер огласа за Chrome који користи преко 50 милиона људи и блокира СВЕ досадне огласе, малвере и тракере."
@@ -117,6 +117,15 @@
   },
   "out_of_date_lists": {
     "message": "Застареле листе се редовно ажурирају."
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Затвори ово обавештење"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Не приказуј обавештења"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Приказуј корисна обавештења"
   },
   "remove_button": {
     "message": "Уклони изабрано"
