@@ -27,13 +27,13 @@
     "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
   },
   "description_chrome": {
-    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Chrome chặn tất cả quảng cáo,phần mềm độc hại và phần mềm gián điệp."
+    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Chrome chặn tất cả quảng cáo, phần mềm độc hại và phần mềm gián điệp."
   },
   "description_opera": {
-    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Opera chặn tất cả quảng cáo,phần mềm độc hại và phần mềm gián điệp."
+    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Opera chặn tất cả quảng cáo, phần mềm độc hại và phần mềm gián điệp."
   },
   "description_safari": {
-    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Safari chặn tất cả quảng cáo,phần mềm độc hại và phần mềm gián điệp."
+    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Safari chặn tất cả quảng cáo, phần mềm độc hại và phần mềm gián điệp."
   },
   "disabled_for_site": {
     "message": "<strong>Đã loại bỏ</strong> trên trang này"
@@ -45,7 +45,7 @@
     "message": "Chặn phần từ"
   },
   "edit_filters_raw": {
-    "message": "Chỉnh sửa bộ lọc như văn bản thô"
+    "message": "Chỉnh sửa bộ lọc như văn bản"
   },
   "enable_only_the": {
     "message": "Chỉ cho phép danh sách bộ lọc mà bạn cần. Quá nhiều bộ lọc có thể làm trình duyệt của bạn không đáp ứng kịp."
@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Các danh sách cũ đã được cập nhật định kỳ."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Đóng thông báo này"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Dừng hiện thông báo"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Hiện thông báo hữu ích"
+  },
   "remove_button": {
     "message": "Xóa mục đã chọn"
   },
@@ -172,7 +181,7 @@
     "message": "Vui lòng chọn một bộ lọc trọn gói từ danh sách:"
   },
   "unexpected_filter_list_header": {
-    "message": "Bộ lọc danh sách tiêu đề không được phép ở đây"
+    "message": "Tiêu đề danh sách bộ lọc không được phép tại đây"
   },
   "update_now": {
     "message": "Cập nhật ngay"

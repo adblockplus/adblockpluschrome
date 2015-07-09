@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Nieaktualne zestawy filtrów są uaktualniane okresowo."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Zamknij to powiadomienie"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Nie wyświetlaj powiadomień"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Wyświetlaj użyteczne powiadomienia"
+  },
   "remove_button": {
     "message": "Usuń zaznaczone"
   },

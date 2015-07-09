@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Verouderde lijsten worden regelmatig bijgewerkt."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Sluit deze notificatie"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Alle notificaties stopzetten"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Nuttige notificaties weergeven"
+  },
   "remove_button": {
     "message": "Verwijder geselecteerde"
   },

@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Le liste scadute sono aggiornate periodicamente."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Chiudi questa notifica"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Interrompere la visualizzazione delle notifiche"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Mostra notifiche utili"
+  },
   "remove_button": {
     "message": "Rimuovi selezionati"
   },

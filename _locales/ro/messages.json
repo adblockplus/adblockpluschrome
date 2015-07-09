@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Listele vechi sunt actualizate periodic."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Închideţi această notificare"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Opreşte afişarea notificărilor"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Arată notificări utile"
+  },
   "remove_button": {
     "message": "Șterge filtrul evidenţiat"
   },

@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Μη ενημερωμένες λίστες ενημερώνονται περιοδικά. "
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Κλείσιμο αυτής της ειδοποίησης"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Διακοπή εμφάνισης ειδοποιήσεων"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Εμφάνιση χρήσιμων ειδοποιήσεων"
+  },
   "remove_button": {
     "message": "Αφαίρεση επιλεγμένων"
   },

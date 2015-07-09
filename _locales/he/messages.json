@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "רשימות שאינן עדכניות מתעדכנות באופן תדיר."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "סגירת התראה זו"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "הפסקת הצגת התראות"
+  },
+  "overlay_shownotifications_label": {
+    "message": "הצגת התראות שימושיות"
+  },
   "remove_button": {
     "message": "הסרת הבחירה"
   },

@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Устаревшие списки периодически обновляются."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Закрыть это уведомление"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Запретить показ уведомлений"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Показывать полезные уведомления"
+  },
   "remove_button": {
     "message": "Удалить"
   },

@@ -118,6 +118,12 @@
   "out_of_date_lists": {
     "message": "รายการที่ล้าสมัยจะได้รับการอัปเดตเป็นระยะ ๆ"
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "ปิดการแจ้งเตือนนี้"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "หยุดแสดงการแจ้งเตือน"
+  },
   "remove_button": {
     "message": "ลบสิ่งที่เลือก"
   },

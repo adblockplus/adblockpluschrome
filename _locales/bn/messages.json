@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "পুরনো তালিকা নিয়মিত হালনাগাদ করা হয়।"
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "এই বিজ্ঞপ্তি বন্ধ করুন"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "বিজ্ঞপ্তি দেখানো বন্ধ করুন"
+  },
+  "overlay_shownotifications_label": {
+    "message": "দরকারী বিজ্ঞপ্তি দেখান"
+  },
   "remove_button": {
     "message": "নির্বাচন করাগুলি সরান"
   },
@@ -152,7 +161,7 @@
     "message": "Adblock Plus ডাউনলোড করুন"
   },
   "stats_share_message": {
-    "message": "আমি $number$টি বিজ্ঞাপন ও ট্রেকারসকে অবরুধ করছি Adblock Plus কে ধন্যবাদ।",
+    "message": "আমি $number$টি বিজ্ঞাপন ও ট্রেকারকে অবরুদ্ধ করছি, এ জন্য Adblock Plus কে ধন্যবাদ।",
     "placeholders": {
       "number": {
         "content": "$1"

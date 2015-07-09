@@ -27,7 +27,7 @@
     "message": "Após fechar este popup, clique (ou clique com o botão direito) num elemento na página."
   },
   "description_chrome": {
-    "message": "Usado por mais de 50 milhões de pessoas, um bloqueador de anúncios grátis para o Chrome que bloqueia pub., malware e rastreadores,"
+    "message": "Usada por 50 milhões de pessoas, o bloqueador de anúncios para o Chrome que bloqueia os anúncios irritantes, malware e rastreadores."
   },
   "description_opera": {
     "message": "Usada por 50 milhões de pessoas, o bloqueador de anúncios para o Opera que bloqueia os anúncios irritantes, malware e rastreadores."
@@ -104,10 +104,10 @@
     "message": "Versão de desenvolvimento do Adblock Plus"
   },
   "notification_with_buttons": {
-    "message": "Clique em 'CONFIRMAR' para abrir todas as hiperligações nesta notificação."
+    "message": "Clique em 'CONFIRMAR' para abrir todos os links nesta notificação."
   },
   "notification_without_buttons": {
-    "message": "Clique na notificação para abrir todas as hiperligações."
+    "message": "Clique na notificação para abrir todos os links nele."
   },
   "options": {
     "message": "Opções do Adblock Plus"
@@ -117,6 +117,15 @@
   },
   "out_of_date_lists": {
     "message": "As listas desatualizadas são atualizadas periodicamente."
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Fechar esta notificação"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Parar de mostrar notificações"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Mostrar notificações úteis"
   },
   "remove_button": {
     "message": "Remover seleção"
