@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Zamanı geçmiş listeler düzenli olarak güncellenmektedir."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Bu bildirim kapat"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Bildirimleri göstermeyi durdur"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Yararlı bildirimlerini göster"
+  },
   "remove_button": {
     "message": "Seçili olanı kaldır"
   },

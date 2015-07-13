@@ -39,7 +39,7 @@
     "message": "Auf dieser Seite <strong>deaktiviert</strong>"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain über das Adblock Plus-Icon in der Adressleiste hinzufügen oder Sie schreiben eine Domain in das Textfeld und drücken auf \"Domain hinzufügen\"."
+    "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain über das Adblock Plus-Symbol in der Adressleiste hinzufügen oder Sie schreiben eine Domain in das Textfeld und drücken auf \"Domain hinzufügen\"."
   },
   "easy_create_filter": {
     "message": "Element blockieren"
@@ -172,7 +172,7 @@
     "message": "Diese Zahl teilen"
   },
   "stats_show_iconnumber": {
-    "message": "Anzahl im Icon anzeigen"
+    "message": "Anzahl im Symbol anzeigen"
   },
   "stats_title": {
     "message": "Blockierte Werbeanzeigen"
