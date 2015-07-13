@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "القوائم القديمة تحدث دورياً."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "إغلاق الإشعارات"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "إيقاف عرض الإشعارات"
+  },
+  "overlay_shownotifications_label": {
+    "message": "أظهر الأشعارات الهامة"
+  },
   "remove_button": {
     "message": "إزالة المحدد"
   },

@@ -131,7 +131,7 @@
     "message": "Xóa mục đã chọn"
   },
   "show_block_element_menu": {
-    "message": "Hiển thị mục 'Chặn phần từ' ở trình đơn chuột phải"
+    "message": "Hiển thị mục 'Chặn phần từ' ở menu nhấn chuột phải"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> trên trang này",

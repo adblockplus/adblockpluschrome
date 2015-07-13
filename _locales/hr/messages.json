@@ -118,6 +118,15 @@
   "out_of_date_lists": {
     "message": "Zastarjeli popisi redovito se ažuriraju."
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Zatvori ovu obavijest"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Ne prikazuj više obavijesti"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Prikaži korisne obavijesti"
+  },
   "remove_button": {
     "message": "Ukloni odabrano"
   },

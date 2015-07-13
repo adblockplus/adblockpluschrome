@@ -54,7 +54,7 @@
     "message": "<strong>Омогући</strong> на овом сајту"
   },
   "filter_lists": {
-    "message": "Листе филтера"
+    "message": "Спискови филтера"
   },
   "filter_must_follow_syntax": {
     "message": "Ваш филтер мора да следи <a>синтаксу за филтере Adblock Plus-а</a>."
