@@ -56,7 +56,7 @@ function checkPotentialPopup(tabId, url, documentHost)
   url = new URL(url || "about:blank");
 
   var filter = defaultMatcher.matchesAny(
-    stringifyURL(url), "POPUP",
+    stringifyURL(url), RegExpFilter.typeMap.POPUP,
     documentHost, isThirdParty(url, documentHost)
   );
 

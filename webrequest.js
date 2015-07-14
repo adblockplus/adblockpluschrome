@@ -67,7 +67,7 @@ function onBeforeRequest(url, type, page, frame)
   var key = getKey(page, frame);
   var filter = defaultMatcher.matchesAny(
     stringifyURL(url),
-    type, docDomain,
+    RegExpFilter.typeMap[type], docDomain,
     isThirdParty(url, docDomain),
     key
   );

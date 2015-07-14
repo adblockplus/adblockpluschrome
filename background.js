@@ -20,6 +20,7 @@ with(require("filterClasses"))
   this.Filter = Filter;
   this.BlockingFilter = BlockingFilter;
   this.WhitelistFilter = WhitelistFilter;
+  this.RegExpFilter = RegExpFilter;
 }
 with(require("subscriptionClasses"))
 {
@@ -300,8 +301,8 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
     case "get-selectors":
       var selectors = [];
 
-      if (!isFrameWhitelisted(sender.page, sender.frame, "DOCUMENT") &&
-          !isFrameWhitelisted(sender.page, sender.frame, "ELEMHIDE"))
+      if (!isFrameWhitelisted(sender.page, sender.frame,
+                              RegExpFilter.typeMap.DOCUMENT | RegExpFilter.typeMap.ELEMHIDE))
       {
         var noStyleRules = false;
         var host = extractHostFromFrame(sender.frame);
@@ -327,12 +328,13 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       sendResponse(selectors);
       break;
     case "should-collapse":
-      if (isFrameWhitelisted(sender.page, sender.frame, "DOCUMENT"))
+      if (isFrameWhitelisted(sender.page, sender.frame, RegExpFilter.typeMap.DOCUMENT))
       {
         sendResponse(false);
         break;
       }
 
+      var typeMask = RegExpFilter.typeMap[msg.mediatype];
       var documentHost = extractHostFromFrame(sender.frame);
       var blocked = false;
 
@@ -340,7 +342,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       {
         var url = new URL(msg.urls[i], msg.baseURL);
         var filter = defaultMatcher.matchesAny(
-          stringifyURL(url), msg.mediatype,
+          stringifyURL(url), typeMask,
           documentHost, isThirdParty(url, documentHost)
         );
 
