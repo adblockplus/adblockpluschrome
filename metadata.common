@@ -1,5 +1,5 @@
 [general]
-version = 1.9.1
+version = 1.9.2
 backgroundScripts = ext/common.js
   ext/background.js
   lib/compat.js
