@@ -293,7 +293,7 @@ function init(document)
   // have to create the shadow root before transistions might start (#452).
   //
   // Also, using shadow DOM causes issues on some Google websites,
-  // including Goolgle Docs and Gmail (#1770, #2602).
+  // including Google Docs and Gmail (#1770, #2602).
   if ("createShadowRoot" in document.documentElement && !/\.google\.com$/.test(document.domain))
   {
     shadow = document.documentElement.createShadowRoot();
@@ -327,7 +327,7 @@ function init(document)
 
         // It can happen that the frame already navigated to a different
         // document while we were waiting for the background page to respond.
-        // In that case the sheet property will stay null, after addind the
+        // In that case the sheet property will stay null, after adding the
         // <style> element to the shadow DOM.
         if (style.sheet)
         {
