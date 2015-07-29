@@ -117,15 +117,6 @@
   "out_of_date_lists": {
     "message": "Out-of-date lists are updated periodically."
   },
-  "overlay_notification_closing_button_hide": {
-    "message": "Close this notification"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Stop showing notifications"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Show useful notifications"
-  },
   "remove_button": {
     "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Remove selected"
