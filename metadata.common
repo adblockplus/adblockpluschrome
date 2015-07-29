@@ -95,7 +95,9 @@ adblockplus/chrome/locale/*/global.properties = subscription_invalid_location
 adblockplus/chrome/locale/*/overlay.dtd = hideplaceholders.label
   notification.button.yes
   notification.button.no
-  notification.button.close
+  notification.closing.button.hide
+  notification.closing.button.optout
+  shownotifications.label
 adblockplus/chrome/locale/*/filters.dtd = subscription.lastDownload.inProgress
   subscription.lastDownload.invalidURL
   subscription.lastDownload.connectionError
