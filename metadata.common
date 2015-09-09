@@ -14,6 +14,24 @@ backgroundScripts = ext/common.js
   messageResponder.js
   popupBlocker.js
   background.js
+testScripts = ../ext/common.js
+  ../ext/background.js
+  ../lib/compat.js
+  ../lib/info.js
+  ../lib/io.js
+  ../lib/adblockplus.js
+  ../lib/publicSuffixList.js
+  ../lib/punycode.js
+  ../lib/sha1.js
+  ../lib/jsbn.js
+  ../lib/rsa.js
+  ../webrequest.js
+  common.js
+  tests/adblockplus.js
+  tests/versionComparator.js
+  tests/url.js
+  tests/signatures.js
+  tests/cssEscaping.js
 permissions = http://*/* https://*/*
 
 [contentScripts]
