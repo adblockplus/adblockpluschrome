@@ -20,7 +20,9 @@ var require = backgroundPage.require;
 
 var Utils = require("utils").Utils;
 var Notification = require("notification").Notification;
-var getActiveNotification = require("notificationHelper").getActiveNotification;
+var notificationHelper = require("notificationHelper");
+var getActiveNotification = notificationHelper.getActiveNotification;
+var shouldDisplayNotification = notificationHelper.shouldDisplay;
 
 function getDocLinks(notification)
 {
@@ -63,7 +65,7 @@ function insertMessage(element, text, links)
 window.addEventListener("load", function()
 {
   var notification = getActiveNotification();
-  if (!notification)
+  if (!notification || !shouldDisplayNotification("popup", notification.type))
     return;
 
   var texts = Notification.getLocalizedTexts(notification);
@@ -85,28 +87,6 @@ window.addEventListener("load", function()
     event.stopPropagation();
     ext.pages.open(link.href);
   });
-
-  if (notification.type == "question")
-  {
-    document.getElementById("notification-question").addEventListener("click", function(event)
-    {
-      event.preventDefault();
-      event.stopPropagation();
-      
-      var approved = false;
-      switch (event.target.id)
-      {
-        case "notification-yes":
-          approved = true;
-        case "notification-no":
-          Notification.triggerQuestionListeners(notification.id, approved);
-          Notification.markAsShown(notification.id);
-          notification.onClicked();
-          break;
-      }
-      window.close();
-    }, true);
-  }
 
   var notificationElement = document.getElementById("notification");
   notificationElement.className = notification.type;
