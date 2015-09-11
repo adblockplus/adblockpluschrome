@@ -108,6 +108,24 @@ function onMessage(msg)
 {
   if (msg.type == "add-subscription")
     startSubscriptionSelection(msg.title, msg.url);
+  else if (msg.type == "focus-section")
+  {
+    var tabs = document.getElementsByClassName("ui-tabs-panel");
+    for (var i = 0; i < tabs.length; i++)
+    {
+      var found = tabs[i].querySelector("[data-section='" + msg.section + "']");
+      if (!found)
+        continue;
+
+      var previous = document.getElementsByClassName("focused");
+      if (previous.length > 0)
+        previous[0].classList.remove("focused");
+
+      var tab = $("[href='#" + tabs[i].id + "']");
+      $("#tabs").tabs("select", tab.parent().index());
+      found.classList.add("focused");
+    }
+  }
 };
 
 // Reloads the displayed subscriptions and filters
