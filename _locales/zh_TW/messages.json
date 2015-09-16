@@ -118,15 +118,6 @@
   "out_of_date_lists": {
     "message": "過濾列表會定期自動更新。"
   },
-  "overlay_notification_closing_button_hide": {
-    "message": "關閉此通知"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "停止顯示通知"
-  },
-  "overlay_shownotifications_label": {
-    "message": "顯示有用的通知"
-  },
   "remove_button": {
     "message": "刪除已選擇項目"
   },

@@ -39,7 +39,7 @@
     "message": "Auf dieser Seite <strong>deaktiviert</strong>"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain über das Adblock Plus-Symbol in der Adressleiste hinzufügen oder Sie schreiben eine Domain in das Textfeld und drücken auf \"Domain hinzufügen\"."
+    "message": "Adblock Plus wird für die unten aufgelisteten Domains deaktiviert. Sie können eine Domain über das Adblock Plus-Symbol in der Adressleiste hinzufügen oder Sie schreiben eine Domain in das Textfeld und klicken auf „Domain hinzufügen“."
   },
   "easy_create_filter": {
     "message": "Element blockieren"
@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus (Entwicklungsversion)"
   },
+  "notification_configure": {
+    "message": "Benachrichtigungen konfigurieren"
+  },
+  "notification_open_all": {
+    "message": "Öffne alle Links in dieser Benachrichtigung"
+  },
   "notification_with_buttons": {
     "message": "Auf 'OK' klicken, um alle Links in dieser Benachrichtigung zu öffnen."
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "Abgelaufene Filterlisten werden regelmäßig aktualisiert."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Schließe diese Benachrichtigung"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Zeige keine weiteren Benachrichtigungen"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Zeige nützliche Benachrichtigungen"
   },
   "remove_button": {
     "message": "Ausgewählte entfernen"

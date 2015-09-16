@@ -26,6 +26,15 @@
   "clickhide_instructions": {
     "message": "இந்த விழிதிரை மூடிய பின், பக்கத்தில் உள்ள உறுப்பின் மேல் சொடுக்கவும். (அல்லது வலது விசையை சொடுக்கவும்.)"
   },
+  "description_chrome": {
+    "message": "50 மில்லியன் மக்கள் பயன்படுத்தும் இலவச குரோம் விளம்பர தடுப்பான், தீம்பொருள் மற்றும் கண்காணிப்பு அனைத்து விளம்பரங்களையும் தடுக்கும்."
+  },
+  "description_opera": {
+    "message": "50 மில்லியன் மக்கள் பயன்படுத்தும் இலவச ஒபேரா விளம்பர தடுப்பான், தீம்பொருள் மற்றும் கண்காணிப்பு அனைத்து விளம்பரங்களையும் தடுக்கும்."
+  },
+  "description_safari": {
+    "message": "50 மில்லியன் மக்கள் பயன்படுத்தும் இலவச சப்ஹாரி விளம்பர தடுப்பான், தீம்பொருள் மற்றும் கண்காணிப்பு அனைத்து விளம்பரங்களையும் தடுக்கும்."
+  },
   "disabled_for_site": {
     "message": "இந்த தளத்தில் <strong> முடக்கப்பட்டுள்ளது</strong>"
   },
@@ -56,6 +65,14 @@
   "general": {
     "message": "பொது"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ ஒரு செல்லுபடியாகும் CSS தேர்வுக்குழு இல்லை",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
   "last_updated_at": {
     "message": "$date$ $time$ இல் புதுப்பிக்கப்பட்டது",
     "placeholders": {
@@ -71,6 +88,14 @@
     "message": "இன்று  $time$ க்கு புதுப்பிக்கப்பட்டது",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "வரி $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -134,14 +159,20 @@
       }
     }
   },
+  "stats_share_title": {
+    "message": "இந்த எண்ணை பகிரவும்"
+  },
   "stats_show_iconnumber": {
-    "message": "படவுருவில் எண்ணை காண்பி"
+    "message": "படவுருவில் எண்ணை காட்டு"
   },
   "stats_title": {
     "message": "தடுக்கப்பட்ட விளம்பரங்கள்"
   },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "பட்டியலில் இருந்து ஒரு வடிகட்டி சந்தாவை தேர்ந்தெடுக்கவும்:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "வடிகட்டி பட்டியலில் தலைப்புகள் இங்கே அனுமதி இல்லை"
   },
   "update_now": {
     "message": "இப்போது புதுப்பிக்கவும்"

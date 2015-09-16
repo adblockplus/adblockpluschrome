@@ -18,7 +18,7 @@
     "message": "Áp dụng các thay đổi"
   },
   "block_element": {
-    "message": "Chặn phần từ"
+    "message": "Chặn quảng cáo"
   },
   "cancel": {
     "message": "Hủy bỏ"
@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus bản phát triển"
   },
+  "notification_configure": {
+    "message": "Cấu hình thiết lập thông báo"
+  },
+  "notification_open_all": {
+    "message": "Mở tất cả liên kết từ thông báo này"
+  },
   "notification_with_buttons": {
     "message": "Nhấn 'OK' để mở tất cả liên kết trong thông báo này."
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "Các danh sách cũ đã được cập nhật định kỳ."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Đóng thông báo này"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Dừng hiện thông báo"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Hiện thông báo hữu ích"
   },
   "remove_button": {
     "message": "Xóa mục đã chọn"
@@ -161,7 +158,7 @@
     "message": "Tải Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Tôi đã chặn $number$ quảng cáo và những bộ theo dõi nhờ có Adblock Plus.",
+    "message": "Tôi đã chặn $number$ quảng cáo và những phần mềm theo dõi nhờ có Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -169,7 +166,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Chia sẻ con số này"
+    "message": "Chia sẻ"
   },
   "stats_show_iconnumber": {
     "message": "Hiện số ads đã chặn trong icon ABP"

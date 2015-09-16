@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus (тестовая сборка)"
   },
+  "notification_configure": {
+    "message": "Настроить параметры уведомлений"
+  },
+  "notification_open_all": {
+    "message": "Открыть все ссылки из этого уведомления"
+  },
   "notification_with_buttons": {
     "message": "Щёлкните «OK», чтобы открыть все ссылки в этом уведомлении."
   },
@@ -118,17 +124,8 @@
   "out_of_date_lists": {
     "message": "Устаревшие списки периодически обновляются."
   },
-  "overlay_notification_closing_button_hide": {
-    "message": "Закрыть это уведомление"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Запретить показ уведомлений"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Показывать полезные уведомления"
-  },
   "remove_button": {
-    "message": "Удалить"
+    "message": "Удалить выбранное"
   },
   "show_block_element_menu": {
     "message": "Показывать «Заблокировать элемент» в контекстном меню"

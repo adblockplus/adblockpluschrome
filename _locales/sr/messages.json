@@ -12,10 +12,10 @@
     "message": "Додавање филтера"
   },
   "add_your_own_filters": {
-    "message": "Додавање сопствених филтера"
+    "message": "Сопствени филтери"
   },
   "apply_changes": {
-    "message": "Потврди"
+    "message": "Сачувај"
   },
   "block_element": {
     "message": "Блокирај елемент"
@@ -27,19 +27,19 @@
     "message": "Након што затворите овај искачући прозор, притисните левим или десним тастером миша на елемент на овој страници."
   },
   "description_chrome": {
-    "message": "Бесплатан блокер огласа за Chrome који користи преко 50 милиона људи и блокира СВЕ досадне огласе, малвере и тракере."
+    "message": "Преко 50 милиона људи користи бесплатни блокатор за Chrome који блокира СВЕ досадне огласе, злонамерне и шпијунске програме."
   },
   "description_opera": {
-    "message": "Бесплатан блокер огласа за Opera који користи преко 50 милиона људи и блокира СВЕ досадне огласе, малвере и тракере."
+    "message": "Преко 50 милиона људи користи бесплатни блокатор за Oper-у који блокира СВЕ досадне огласе, злонамерне и шпијунске програме."
   },
   "description_safari": {
-    "message": "Бесплатан блокер огласа за Safari који користи преко 50 милиона људи и блокира СВЕ досадне огласе, малвере и тракере."
+    "message": "Преко 50 милиона људи користи бесплатни блокатор за Safari који блокира СВЕ досадне огласе, злонамерне и шпијунске програме."
   },
   "disabled_for_site": {
     "message": "<strong>Онемогући</strong> на овом сајту"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus не важи за домене у доњем списку. Домен можете да додате помоћу иконе Adblock Plus у адресној траци или уписивањем домена (не URL адресе) у поље испод и кликом на дугме „Додај домен“."
+    "message": "Adblock Plus не важи за доленаведене домене. Нови домен можете додати путем иконе Adblock Plus-а или тако што ћете унети домен (не URL) у поље и кликнути на дугме „Додај домен“."
   },
   "easy_create_filter": {
     "message": "Блокирај елемент"
@@ -48,7 +48,7 @@
     "message": "Уреди филтере у режиму текста"
   },
   "enable_only_the": {
-    "message": "Омогућите само оне листе филтера које су вам потребне. Превише њих може да успори прегледач."
+    "message": "Омогућите само оне спискове филтера који су вам потребни. Превише њих може да успори прегледач."
   },
   "enabled_for_site": {
     "message": "<strong>Омогући</strong> на овом сајту"
@@ -66,7 +66,7 @@
     "message": "Опште"
   },
   "invalid_css_selector": {
-    "message": "$selector$ није важећи CSS селектор",
+    "message": "$selector$ није исправан CSS бирач",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Развојна верзија Adblock Plus-а"
   },
+  "notification_configure": {
+    "message": "Подеси поставке обавештавања"
+  },
+  "notification_open_all": {
+    "message": "Отвори све везе из овог обавештења"
+  },
   "notification_with_buttons": {
     "message": "Кликните на „У реду“ да бисте отворили све везе у овом обавештењу."
   },
@@ -116,16 +122,7 @@
     "message": "Опције"
   },
   "out_of_date_lists": {
-    "message": "Застареле листе се редовно ажурирају."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Затвори ово обавештење"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Не приказуј обавештења"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Приказуј корисна обавештења"
+    "message": "Застарели спискови се редовно ажурирају."
   },
   "remove_button": {
     "message": "Уклони изабрано"
@@ -134,7 +131,7 @@
     "message": "Ставка „Блокирај елемент“ у контекстуалном менију"
   },
   "stats_label_page": {
-    "message": "<strong>$number$</strong> на овој страници",
+    "message": "На овој страници: <strong>$number$</strong>",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -142,7 +139,7 @@
     }
   },
   "stats_label_total": {
-    "message": "<strong>$number$</strong> укупно",
+    "message": "Укупно: <strong>$number$</strong>",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -150,7 +147,7 @@
     }
   },
   "stats_over": {
-    "message": "преко $number$",
+    "message": "$number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -178,13 +175,13 @@
     "message": "Блокирани огласи"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Изаберите филтер на који желите да се пријавите:"
+    "message": "Изаберите пријаву са списка:"
   },
   "unexpected_filter_list_header": {
-    "message": "Заглавља листа филтер нису дозвољени овде"
+    "message": "Заглавља списка филтера овде нису дозвољена"
   },
   "update_now": {
-    "message": "Ажурирај сада"
+    "message": "Ажурирај"
   },
   "whitelisted_domains": {
     "message": "Дозвољени домени"

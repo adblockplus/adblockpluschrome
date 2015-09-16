@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus উন্নয়ন গঠন"
   },
+  "notification_configure": {
+    "message": "বিজ্ঞপ্তি সেটিংস কনফিগার করুন"
+  },
+  "notification_open_all": {
+    "message": "এই বিজ্ঞপ্তি থেকে সমস্ত লিঙ্ক খুলুন"
+  },
   "notification_with_buttons": {
     "message": "এই বিজ্ঞপ্তিতে সব লিঙ্ক খোলার জন্য 'ঠিক আছে' ক্লিক করুন।"
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "পুরনো তালিকা নিয়মিত হালনাগাদ করা হয়।"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "এই বিজ্ঞপ্তি বন্ধ করুন"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "বিজ্ঞপ্তি দেখানো বন্ধ করুন"
-  },
-  "overlay_shownotifications_label": {
-    "message": "দরকারী বিজ্ঞপ্তি দেখান"
   },
   "remove_button": {
     "message": "নির্বাচন করাগুলি সরান"

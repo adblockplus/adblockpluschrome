@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus – wersja rozwojowa"
   },
+  "notification_configure": {
+    "message": "Konfiguruj ustawienia powiadomień"
+  },
+  "notification_open_all": {
+    "message": "Otwórz wszystkie odnośniki z tego powiadomienia"
+  },
   "notification_with_buttons": {
     "message": "Naciśnij przycisk „OK”, aby otworzyć wszystkie odnośniki znajdujące się w tym powiadomieniu."
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "Nieaktualne zestawy filtrów są uaktualniane okresowo."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Zamknij to powiadomienie"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Nie wyświetlaj powiadomień"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Wyświetlaj użyteczne powiadomienia"
   },
   "remove_button": {
     "message": "Usuń zaznaczone"
@@ -172,7 +169,7 @@
     "message": "Udostępnij tę liczbę"
   },
   "stats_show_iconnumber": {
-    "message": "Wyświetlaj liczbę w ikonie"
+    "message": "Wyświetlaj liczbę na ikonie"
   },
   "stats_title": {
     "message": "Zablokowane reklamy"

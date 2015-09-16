@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus รุ่นกำลังพัฒนา"
   },
+  "notification_configure": {
+    "message": "ตั้งค่าการแจ้งเตือน"
+  },
+  "notification_open_all": {
+    "message": "เปิดลิงค์ทั้งหมดจากแจ้งเตือนนี้"
+  },
   "notification_with_buttons": {
     "message": "คลิ๊ก 'ตกลง' เพื่อเปิดลิ้งก์ทั้งหมดในการแจ้งเตือนนี้"
   },
@@ -117,12 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "รายการที่ล้าสมัยจะได้รับการอัปเดตเป็นระยะ ๆ"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "ปิดการแจ้งเตือนนี้"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "หยุดแสดงการแจ้งเตือน"
   },
   "remove_button": {
     "message": "ลบสิ่งที่เลือก"

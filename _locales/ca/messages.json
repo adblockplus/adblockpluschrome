@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus (versió en desenvolupament)"
   },
+  "notification_configure": {
+    "message": "Configura les notificacions"
+  },
+  "notification_open_all": {
+    "message": "Obre tots els enllaços d'aquesta notificació"
+  },
   "notification_with_buttons": {
     "message": "Feu clic a «D'acord» per obrir tots els enllaços en aquesta notificació."
   },
@@ -160,7 +166,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Comparteix aquests nombres"
+    "message": "Comparteix aquest nombre"
   },
   "stats_show_iconnumber": {
     "message": "Mostra el nombre a la icona"

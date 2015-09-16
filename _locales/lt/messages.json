@@ -101,7 +101,7 @@
     }
   },
   "name_devbuild": {
-    "message": "Adblock Plus plėtros statyti"
+    "message": "Adblock Plus vystomasis leidimas"
   },
   "notification_with_buttons": {
     "message": "Paspauskite „Gerai“ ir bus atvertos visos šio pranešimo nuorodos."
@@ -117,15 +117,6 @@
   },
   "out_of_date_lists": {
     "message": "Pasenę sąrašai periodiškai atnaujinami."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Uždaryti šį pranešimą"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Nustoti rodyti pranešimus"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Rodyti naudingus pranešimus"
   },
   "remove_button": {
     "message": "Pašalinti pasirinktą"

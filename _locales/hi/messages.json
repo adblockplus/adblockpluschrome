@@ -66,7 +66,7 @@
     "message": "सामान्य "
   },
   "invalid_css_selector": {
-    "message": "$selector$ एक मान्य सीएसएस चयनकर्ता नहीं है",
+    "message": "$selector$ एक मान्य CSS चयनकर्ता नहीं है",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -101,13 +101,13 @@
     }
   },
   "name_devbuild": {
-    "message": "Adblock Plus विकास निर्माण"
+    "message": "Adblock Plus विकास संस्करण"
   },
   "notification_with_buttons": {
     "message": "इस अधिसूचना के सारे लिंक खोलने के लिए \"ok\" बटन दबाये"
   },
   "notification_without_buttons": {
-    "message": "अधिसूचना में यह सभी लिंक को खोलने को क्लिक करें।"
+    "message": "सभी लिंक को खोलने के लिए अधिसूचना पर क्लिक करें"
   },
   "options": {
     "message": "Adblock Plus विकल्प"
@@ -160,7 +160,7 @@
     }
   },
   "stats_share_title": {
-    "message": "इस संख्या को साझा"
+    "message": "इस संख्या को शेयर करें"
   },
   "stats_show_iconnumber": {
     "message": "आइकॉन में अंक दर्शाएँ "
@@ -172,7 +172,7 @@
     "message": "लिस्ट में से एक फ़िल्टर सब्स्क्रिप्शन चुनें: "
   },
   "unexpected_filter_list_header": {
-    "message": "फ़िल्टर सूची हेडर यहाँ की अनुमति नहीं है"
+    "message": "फ़िल्टर सूची हेडर को यहाँ होने की अनुमति नहीं है"
   },
   "update_now": {
     "message": "अपडेट करें "

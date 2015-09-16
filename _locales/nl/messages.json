@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus experimentele versie"
   },
+  "notification_configure": {
+    "message": "Configureer notificatie instellingen"
+  },
+  "notification_open_all": {
+    "message": "Open alle links van deze notificatie"
+  },
   "notification_with_buttons": {
     "message": "Klik 'OK' om alle links in het bericht te openen"
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "Verouderde lijsten worden regelmatig bijgewerkt."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Sluit deze notificatie"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Alle notificaties stopzetten"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Nuttige notificaties weergeven"
   },
   "remove_button": {
     "message": "Verwijder geselecteerde"
@@ -169,7 +166,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Deel dit getal"
+    "message": "Deel dit aantal"
   },
   "stats_show_iconnumber": {
     "message": "Nummer weergeven in pictogram"

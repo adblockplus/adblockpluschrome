@@ -33,7 +33,7 @@
     "message": "50 milyondan fazla kişinin kullandığı, Tüm reklamları ve zararlıları engelleyen, Opera için bedava bir reklam engelleyicisidir."
   },
   "description_safari": {
-    "message": "50 milyondan fazla kişinin kullandığı, Tüm reklamları ve zararlıları engelleyen Safari için bedava bir reklam engelleyicisidir."
+    "message": "50 milyondan fazla kişinin kullandığı, Safari için TÜM reklamları ve zararlı öğeleri engelleyen bedava bir reklam engelleyicisidir."
   },
   "disabled_for_site": {
     "message": "Bu sitede <strong>devre dışı</strong>"
@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus geliştirme sürümü"
   },
+  "notification_configure": {
+    "message": "Bildirim ayarlarını yapılandırma"
+  },
+  "notification_open_all": {
+    "message": "bu bildirimden gelen tüm bağlantıları aç"
+  },
   "notification_with_buttons": {
     "message": "Bu bildirimdeki tüm bağlantıları açmak için 'Tamam' düğmesine tıklayın."
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "Zamanı geçmiş listeler düzenli olarak güncellenmektedir."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Bu bildirim kapat"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Bildirimleri göstermeyi durdur"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Yararlı bildirimlerini göster"
   },
   "remove_button": {
     "message": "Seçili olanı kaldır"

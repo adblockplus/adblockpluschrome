@@ -18,7 +18,7 @@
     "message": "적용"
   },
   "block_element": {
-    "message": "요소 숨김"
+    "message": "이 요소 숨기기"
   },
   "cancel": {
     "message": "취소"
@@ -27,7 +27,7 @@
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
   },
   "description_chrome": {
-    "message": "만 50 명 이상, Chrome 에 대한 무료 광고 차단에 의해 사용됩니다."
+    "message": "50만 명 이상의 사람들이 모든 성가신 광고, 멀웨어, 사용자 추적을 차단하는 구글 크롬용 무료 광고 차단 프로그램를 사용하고 있습니다."
   },
   "description_opera": {
     "message": "만 50 명 이상, Opera 에 대한 무료 광고 차단에 의해 사용됩니다."
@@ -36,37 +36,37 @@
     "message": "만 50 명 이상, Safari 에 대한 무료 광고 차단에 의해 사용됩니다."
   },
   "disabled_for_site": {
-    "message": "이 사이트에서 <strong>을 사용 중지</strong> 합니다."
+    "message": "이 사이트에서 <strong>광고 차단을 사용 중지</strong> 합니다."
   },
   "disabled_for_these_domains": {
-    "message": "다음 도메인에서는 광고를 차단하지 않습니다. 주소 표시줄의 Adblock Plus 아이콘 또는 허용 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
+    "message": "다음 도메인에서는 광고를 차단하지 않습니다. 주소 표시줄의 애드블록 플러스 아이콘 또는 허용된 도메인 탭에서 도메인을 입력한 후 \"도메인 추가\" 버튼을 누르십시오."
   },
   "easy_create_filter": {
-    "message": "요소 숨김"
+    "message": "요소 숨기기"
   },
   "edit_filters_raw": {
     "message": "필터 편집"
   },
   "enable_only_the": {
-    "message": "필요한 구독 필터만 추가하십시오. 구독 필터가 과도하게 많으면 브라우저가 응답하지 않을 수 있습니다."
+    "message": "꼭 필요한 구독 필터만 추가하세요. 구독 필터가 지나치게 많으면 브라우저가 응답하지 않을 수 있습니다."
   },
   "enabled_for_site": {
-    "message": "이 사이트에서 <strong>을 사용</strong>합니다"
+    "message": "이 사이트에서 <strong>광고 차단을 사용</strong>합니다"
   },
   "filter_lists": {
     "message": "구독 필터"
   },
   "filter_must_follow_syntax": {
-    "message": "필터는 <a>Adblock Plus 필터 구문</a>을 따라야합니다."
+    "message": "필터는 <a>Adblock Plus 필터 구문</a>을 따라야 합니다."
   },
   "found_a_bug": {
-    "message": "버그를 발견하셨습니까? Adblock Plus 여러분의 언어로 번역하고 싶습니까? <a>연락하기</a>"
+    "message": "버그를 발견하셨습니까? Adblock Plus를 여러분이 사용하는 언어로 번역하고 싶습니까? <a>연락하기</a>"
   },
   "general": {
     "message": "일반"
   },
   "invalid_css_selector": {
-    "message": "$selector$ 유효한 CSS 선택은 아니다",
+    "message": "$selector$은/는 유효한 CSS 선택이 아닙니다",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -93,7 +93,7 @@
     }
   },
   "line": {
-    "message": "라인 $number$",
+    "message": "$number$번째 줄",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -110,22 +110,22 @@
     "message": "알림에 포함된 모든 링크를 열려면 클릭하세요."
   },
   "options": {
-    "message": "Adblock Plus 옵션"
+    "message": "Adblock Plus 설정"
   },
   "options_short": {
-    "message": "옵션"
+    "message": "설정"
   },
   "out_of_date_lists": {
-    "message": "기한이 다 된 목록은 주기적으로 업데이트됩니다."
+    "message": "오래된 목록은 주기적으로 업데이트됩니다."
   },
   "remove_button": {
     "message": "선택 항목 제거"
   },
   "show_block_element_menu": {
-    "message": "마우스 우클릭시 나오는 메뉴에 '요소 숨김' 항목을 표시합니다."
+    "message": "마우스 우클릭시 나오는 메뉴에 '이 요소 숨기기' 항목을 표시합니다."
   },
   "stats_label_page": {
-    "message": "이 페이지에 $number$ 개",
+    "message": "이 페이지에서 $number$ 개",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -133,7 +133,7 @@
     }
   },
   "stats_label_total": {
-    "message": "전체 $number$ 개",
+    "message": "총 $number$ 개",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -149,7 +149,7 @@
     }
   },
   "stats_share_download": {
-    "message": "다운로드 Adblock Plus"
+    "message": "애드블록 플러스를 내려받습니다."
   },
   "stats_share_message": {
     "message": "Adblock Plus 덕분에 $number$ 개의 광고와 트래커를 차단했어요.",
@@ -166,13 +166,13 @@
     "message": "아이콘에 차단된 광고 개수 표시"
   },
   "stats_title": {
-    "message": "광고가 차단됨"
+    "message": "차단된 광고"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "목록에서 구독할 필터를 선택하십시오."
+    "message": "다음 목록에서 구독할 필터를 선택하십시오."
   },
   "unexpected_filter_list_header": {
-    "message": "필터 목록 헤더는 허용되지 않습니다 여기"
+    "message": "여기에서 필터 목록 헤더가 허용되지 않습니다"
   },
   "update_now": {
     "message": "지금 업데이트"

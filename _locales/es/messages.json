@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus (versión de desarrollo)"
   },
+  "notification_configure": {
+    "message": "Configurar opciones de notificación"
+  },
+  "notification_open_all": {
+    "message": "Abrir todos los enlaces de esta notificación"
+  },
   "notification_with_buttons": {
     "message": "Pulse \"Aceptar\" parar abrir todos los enlaces de este aviso."
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "Las listas obsoletas se actualizarán periódicamente."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Cerrar este aviso"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Dejar de mostrar avisos"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Mostrar avisos útiles"
   },
   "remove_button": {
     "message": "Eliminar"

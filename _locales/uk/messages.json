@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus (тестова збiрка)"
   },
+  "notification_configure": {
+    "message": "Налаштувати параметри повідомлень"
+  },
+  "notification_open_all": {
+    "message": "Відкрити всі посилання з цього повідомлення"
+  },
   "notification_with_buttons": {
     "message": "Клацніть «OK», щоб відкрити всі посилання у цьому повідомленні."
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "Застарілі списки періодично оновлюються."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Закрити це повідомлення"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Заборонити показ повідомлень"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Показувати корисні повідомлення"
   },
   "remove_button": {
     "message": "Видалити вибране"

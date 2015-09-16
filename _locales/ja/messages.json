@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus 開発版"
   },
+  "notification_configure": {
+    "message": "通知について設定する"
+  },
+  "notification_open_all": {
+    "message": "この通知内のリンクをすべて開く"
+  },
   "notification_with_buttons": {
     "message": "この通知のすべてのリンクを開くには [OK] をクリックしてください。"
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "リストは定期的に更新されます。"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "この通知を閉じる"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "通知の表示を停止"
-  },
-  "overlay_shownotifications_label": {
-    "message": "有用な通知を表示"
   },
   "remove_button": {
     "message": "選択項目を削除"

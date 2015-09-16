@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus development build"
   },
+  "notification_configure": {
+    "message": "Configure notification settings"
+  },
+  "notification_open_all": {
+    "message": "Open all links from this notification"
+  },
   "notification_with_buttons": {
     "message": "Click 'OK' to open all links in this notification."
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "Out-of-date lists are updated periodically."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Close this notification"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Stop showing notifications"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Show useful notifications"
   },
   "remove_button": {
     "message": "Remove selected"

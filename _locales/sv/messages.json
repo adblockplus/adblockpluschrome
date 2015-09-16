@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus utvecklingsversion"
   },
+  "notification_configure": {
+    "message": "Notifikationsinställningar"
+  },
+  "notification_open_all": {
+    "message": "Öppna alla länkar från denna notifikationen"
+  },
   "notification_with_buttons": {
     "message": "Klicka på 'OK' för att öppna alla länkar i detta meddelande."
   },
@@ -161,9 +167,6 @@
   },
   "stats_share_title": {
     "message": "Dela detta nummer"
-  },
-  "stats_share_title": {
-    "message": "இந்த எண்களை பகிர்"
   },
   "stats_show_iconnumber": {
     "message": "Visa nummer vid ikon"

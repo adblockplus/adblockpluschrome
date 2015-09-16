@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Версия за разработчици на Adblock Plus"
   },
+  "notification_configure": {
+    "message": "Конфигуриране на настройките на уведомяване"
+  },
+  "notification_open_all": {
+    "message": "Отваряй всички препратки от уведомяването"
+  },
   "notification_with_buttons": {
     "message": "Натиснете „ДА“ за отваряне на всички препратки от това уведомяване."
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "Остарелите списъци се обновяват периодично."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Затвори уведомяването"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Спри извеждането на уведомявания"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Показвай полезни уведомявания"
   },
   "remove_button": {
     "message": "Премахни избрания"

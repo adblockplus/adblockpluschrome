@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Vývojová verzia Adblock Plus"
   },
+  "notification_configure": {
+    "message": "Konfigurovať nastavenia upozornení"
+  },
+  "notification_open_all": {
+    "message": "Otvoriť všetky odkazy z tohto upozornenia"
+  },
   "notification_with_buttons": {
     "message": "Stlačte 'OK' pre otvorenie všetkých odkazov v tomto upozornení."
   },
@@ -117,15 +123,6 @@
   },
   "out_of_date_lists": {
     "message": "Zastarané zoznamy sú pravidelne aktualizované."
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Zatvoriť toto upozornenie"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Prestať zobrazovať upozornenia"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Zobraziť užitočné upozornenia"
   },
   "remove_button": {
     "message": "Odstrániť vybrané"
