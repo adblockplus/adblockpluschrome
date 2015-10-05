@@ -31,8 +31,14 @@ if (require("info").platform == "chromium")
     if (!documentHost)
       return;
 
-    tabsLoading[details.tabId] = documentHost;
-    checkPotentialPopup(details.tabId, details.url, documentHost);
+    var specificOnly = isFrameWhitelisted(sourcePage, sourceFrame,
+                                          RegExpFilter.typeMap.GENERICBLOCK);
+
+    tabsLoading[details.tabId] = {
+      documentHost: documentHost,
+      specificOnly: specificOnly
+    };
+    checkPotentialPopup(details.tabId, details.url, documentHost, specificOnly);
   });
 
   chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
@@ -44,20 +50,25 @@ if (require("info").platform == "chromium")
     }
 
     if ("url" in changeInfo)
-      checkPotentialPopup(tabId, tab.url, tabsLoading[tabId]);
+    {
+      var source = tabsLoading[tabId];
+      checkPotentialPopup(tabId, tab.url, source.documentHost,
+                          source.specificOnly);
+    }
 
     if ("status" in changeInfo && changeInfo.status == "complete" && tab.url != "about:blank")
       delete tabsLoading[tabId];
   });
 }
 
-function checkPotentialPopup(tabId, url, documentHost)
+function checkPotentialPopup(tabId, url, documentHost, specificOnly)
 {
   url = new URL(url || "about:blank");
 
   var filter = defaultMatcher.matchesAny(
     stringifyURL(url), RegExpFilter.typeMap.POPUP,
-    documentHost, isThirdParty(url, documentHost)
+    documentHost, isThirdParty(url, documentHost),
+    null, specificOnly
   );
 
   if (filter instanceof BlockingFilter)

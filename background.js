@@ -305,7 +305,10 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
                               RegExpFilter.typeMap.DOCUMENT | RegExpFilter.typeMap.ELEMHIDE))
       {
         var noStyleRules = false;
+        var specificOnly = isFrameWhitelisted(sender.page, sender.frame,
+                                              RegExpFilter.typeMap.GENERICHIDE);
         var host = extractHostFromFrame(sender.frame);
+
         for (var i = 0; i < noStyleRulesHosts.length; i++)
         {
           var noStyleHost = noStyleRulesHosts[i];
@@ -315,7 +318,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
             noStyleRules = true;
           }
         }
-        selectors = ElemHide.getSelectorsForDomain(host, false);
+        selectors = ElemHide.getSelectorsForDomain(host, specificOnly);
         if (noStyleRules)
         {
           selectors = selectors.filter(function(s)

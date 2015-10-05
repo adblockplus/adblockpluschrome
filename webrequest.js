@@ -65,11 +65,14 @@ function onBeforeRequest(url, type, page, frame)
 
   var docDomain = extractHostFromFrame(frame);
   var key = getKey(page, frame);
+  var specificOnly = isFrameWhitelisted(page, frame,
+                                        RegExpFilter.typeMap.GENERICBLOCK);
   var filter = defaultMatcher.matchesAny(
     stringifyURL(url),
     RegExpFilter.typeMap[type], docDomain,
     isThirdParty(url, docDomain),
-    key
+    key,
+    specificOnly
   );
 
   setTimeout(onBeforeRequestAsync, 0, url, type, page, filter);
