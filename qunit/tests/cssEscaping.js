@@ -87,7 +87,7 @@
       });
     }
 
-    for (var i = 0; i < 0x80; i++)
+    for (var i = 1; i < 0x80; i++)
     {
       var chr = String.fromCharCode(i);
 
