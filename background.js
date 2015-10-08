@@ -339,6 +339,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
 
       var typeMask = RegExpFilter.typeMap[msg.mediatype];
       var documentHost = extractHostFromFrame(sender.frame);
+      var sitekey = getKey(sender.page, sender.frame);
       var blocked = false;
 
       for (var i = 0; i < msg.urls.length; i++)
@@ -346,7 +347,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
         var url = new URL(msg.urls[i], msg.baseURL);
         var filter = defaultMatcher.matchesAny(
           stringifyURL(url), typeMask,
-          documentHost, isThirdParty(url, documentHost)
+          documentHost, isThirdParty(url, documentHost), sitekey
         );
 
         if (filter instanceof BlockingFilter)
