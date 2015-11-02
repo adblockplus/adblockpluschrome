@@ -71,7 +71,6 @@ qunit/qunit.css = adblockplustests/chrome/content/qunit.css
 lib/adblockplus.js = lib/prefs.js
   lib/utils.js
   lib/io.js
-  lib/elemHideHitRegistration.js
   adblockplus/lib/downloader.js
   adblockplus/lib/filterNotifier.js
   adblockplus/lib/filterClasses.js
