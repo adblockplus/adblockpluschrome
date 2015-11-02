@@ -18,7 +18,6 @@
 var FilterNotifier = require("filterNotifier").FilterNotifier;
 var RegExpFilter = require("filterClasses").RegExpFilter;
 var platform = require("info").platform;
-var showNextNotificationForUrl = require("notificationHelper").showNextNotificationForUrl;
 
 ext.webRequest.indistinguishableTypes.forEach(function(types)
 {
@@ -49,11 +48,6 @@ FilterNotifier.addListener(function(action, arg)
 
 function onBeforeRequestAsync(url, type, page, filter)
 {
-  // We can't listen to onHeadersReceived in Safari so we need to
-  // check for notifications here
-  if (platform != "chromium" && type == "SUBDOCUMENT")
-    showNextNotificationForUrl(url);
-
   if (filter)
     FilterNotifier.triggerListeners("filter.hitCount", filter, 0, 0, page);
 }
@@ -98,8 +92,6 @@ if (platform == "chromium")
       if (header.name.toLowerCase() == "x-adblock-key" && header.value)
         processKey(header.value, page, frame);
     }
-
-    showNextNotificationForUrl(new URL(details.url));
   }
 
   chrome.webRequest.onHeadersReceived.addListener(

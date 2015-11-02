@@ -52,6 +52,7 @@ var parseFilters = require("filterValidation").parseFilters;
 var composeFilters = require("filterComposer").composeFilters;
 var updateIcon = require("icon").updateIcon;
 var initNotifications = require("notificationHelper").initNotifications;
+var showNextNotificationForUrl = require("notificationHelper").showNextNotificationForUrl;
 
 var seenDataCorruption = false;
 var filterlistsReinitialized = false;
@@ -434,4 +435,5 @@ ext.pages.onLoading.addListener(function(page)
 {
   page.sendMessage({type: "clickhide-deactivate"});
   refreshIconAndContextMenu(page);
+  showNextNotificationForUrl(page.url);
 });
