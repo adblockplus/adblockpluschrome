@@ -26,12 +26,18 @@ A dependencies file should look like this:
   _root = hg:https://hg.adblockplus.org/ git:https://github.com/adblockplus/
   # File to update this script from (optional)
   _self = buildtools/ensure_dependencies.py
-  # Check out elemhidehelper repository into extensions/elemhidehelper directory
-  # at tag "1.2".
+  # Clone elemhidehelper repository into extensions/elemhidehelper directory at
+  # tag "1.2".
   extensions/elemhidehelper = elemhidehelper 1.2
-  # Check out buildtools repository into buildtools directory at VCS-specific
+  # Clone buildtools repository into buildtools directory at VCS-specific
   # revision IDs.
   buildtools = buildtools hg:016d16f7137b git:f3f8692f82e5
+  # Clone the adblockplus repository into adblockplus directory, overwriting the
+  # usual source URL for Git repository and specifying VCS specific revision IDs.
+  adblockplus = adblockplus hg:893426c6a6ab git:git@github.com:user/adblockplus.git@b2ffd52b
+  # Clone the adblockpluschrome repository into the adblockpluschrome directory,
+  # from a specific Git repository, specifying the revision ID.
+  adblockpluschrome = git:git@github.com:user/adblockpluschrome.git@1fad3a7
 """
 
 SKIP_DEPENDENCY_UPDATES = os.environ.get(
@@ -60,7 +66,7 @@ class Mercurial():
   def pull(self, repo):
     subprocess.check_call(["hg", "pull", "--repository", repo, "--quiet"])
 
-  def update(self, repo, rev):
+  def update(self, repo, rev, revname):
     subprocess.check_call(["hg", "update", "--repository", repo, "--quiet", "--check", "--rev", rev])
 
   def ignore(self, target, repo):
@@ -116,11 +122,11 @@ class Git():
     if newly_tracked:
       subprocess.check_call(["git", "fetch", "--quiet", "origin"], cwd=repo)
 
-  def update(self, repo, rev):
-    subprocess.check_call(["git", "checkout", "--quiet", rev], cwd=repo)
+  def update(self, repo, rev, revname):
+    subprocess.check_call(["git", "checkout", "--quiet", revname], cwd=repo)
 
   def ignore(self, target, repo):
-    module = os.path.relpath(target, repo)
+    module = os.path.sep + os.path.relpath(target, repo)
     exclude_file = os.path.join(repo, ".git", "info", "exclude")
     _ensure_line_exists(exclude_file, module)
 
@@ -135,6 +141,27 @@ repo_types = OrderedDict((
   ("git", Git()),
 ))
 
+# [vcs:]value
+item_regexp = re.compile(
+  "^(?:(" + "|".join(map(re.escape, repo_types.keys())) +"):)?"
+  "(.+)$"
+)
+
+# [url@]rev
+source_regexp = re.compile(
+  "^(?:(.*)@)?"
+  "(.+)$"
+)
+
+def merge_seqs(seq1, seq2):
+  """Return a list of any truthy values from the suplied sequences
+
+  (None, 2), (1,)      => [1, 2]
+  None, (1, 2)         => [1, 2]
+  (1, 2), (3, 4)       => [3, 4]
+  """
+  return map(lambda item1, item2: item2 or item1, seq1 or (), seq2 or ())
+
 def parse_spec(path, line):
   if "=" not in line:
     logging.warning("Invalid line in file %s: %s" % (path, line))
@@ -148,18 +175,30 @@ def parse_spec(path, line):
     return key, None
 
   result = OrderedDict()
-  if not key.startswith("_"):
-    result["_source"] = items.pop(0)
+  is_dependency_field = not key.startswith("_")
 
-  for item in items:
-    if ":" in item:
-      type, value = item.split(":", 1)
-    else:
-      type, value = ("*", item)
-    if type in result:
-      logging.warning("Ignoring duplicate value for type %s (key %s in file %s)" % (type, key, path))
-    else:
-      result[type] = value
+  for i, item in enumerate(items):
+    try:
+      vcs, value = re.search(item_regexp, item).groups()
+      vcs = vcs or "*"
+      if is_dependency_field:
+        if i == 0 and vcs == "*":
+          # In order to be backwards compatible we have to assume that the first
+          # source contains only a URL/path for the repo if it does not contain
+          # the VCS part
+          url_rev = (value, None)
+        else:
+          url_rev = re.search(source_regexp, value).groups()
+        result[vcs] = merge_seqs(result.get(vcs), url_rev)
+      else:
+        if vcs in result:
+          logging.warning("Ignoring duplicate value for type %r "
+                          "(key %r in file %r)" % (vcs, key, path))
+        result[vcs] = value
+    except AttributeError:
+      logging.warning("Ignoring invalid item %r for type %r "
+                      "(key %r in file %r)" % (item, vcs, key, path))
+      continue
   return key, result
 
 def read_deps(repodir):
@@ -201,7 +240,7 @@ def get_repo_type(repo):
       return name
   return None
 
-def ensure_repo(parentrepo, target, roots, sourcename):
+def ensure_repo(parentrepo, parenttype, target, type, root, sourcename):
   if os.path.exists(target):
     return
 
@@ -210,16 +249,8 @@ def ensure_repo(parentrepo, target, roots, sourcename):
                     "%s not cloned", target)
     return
 
-  parenttype = get_repo_type(parentrepo)
-  type = None
-  for key in roots:
-    if key == parenttype or (key in repo_types and type is None):
-      type = key
-  if type is None:
-    raise Exception("No valid source found to create %s" % target)
-
   postprocess_url = repo_types[type].postprocess_url
-  root = postprocess_url(roots[type])
+  root = postprocess_url(root)
   sourcename = postprocess_url(sourcename)
 
   if os.path.exists(root):
@@ -229,25 +260,9 @@ def ensure_repo(parentrepo, target, roots, sourcename):
 
   logging.info("Cloning repository %s into %s" % (url, target))
   repo_types[type].clone(url, target)
+  repo_types[parenttype].ignore(target, parentrepo)
 
-  for repo in repo_types.itervalues():
-    if repo.istype(parentrepo):
-      repo.ignore(target, parentrepo)
-
-def update_repo(target, revisions):
-  type = get_repo_type(target)
-  if type is None:
-    logging.warning("Type of repository %s unknown, skipping update" % target)
-    return
-
-  if type in revisions:
-    revision = revisions[type]
-  elif "*" in revisions:
-    revision = revisions["*"]
-  else:
-    logging.warning("No revision specified for repository %s (type %s), skipping update" % (target, type))
-    return
-
+def update_repo(target, type, revision):
   resolved_revision = repo_types[type].get_revision_id(target, revision)
   current_revision = repo_types[type].get_revision_id(target)
 
@@ -265,7 +280,7 @@ def update_repo(target, revisions):
         raise Exception("Failed to resolve revision %s" % revision)
 
     logging.info("Updating repository %s to revision %s" % (target, resolved_revision))
-    repo_types[type].update(target, resolved_revision)
+    repo_types[type].update(target, resolved_revision, revision)
 
 def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdependencies=set()):
   config = read_deps(repodir)
@@ -280,13 +295,28 @@ def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdep
   if overrideroots is not None:
     config["_root"] = overrideroots
 
-  for dir, revisions in config.iteritems():
-    if dir.startswith("_") or revisions["_source"] in skipdependencies:
+  for dir, sources in config.iteritems():
+    if (dir.startswith("_") or
+        skipdependencies.intersection([s[0] for s in sources if s[0]])):
       continue
+
     target = safe_join(repodir, dir)
-    ensure_repo(repodir, target, config.get("_root", {}), revisions["_source"])
-    update_repo(target, revisions)
-    resolve_deps(target, level + 1, self_update=False, overrideroots=overrideroots, skipdependencies=skipdependencies)
+    parenttype = get_repo_type(repodir)
+    _root = config.get("_root", {})
+
+    for key in sources.keys() + _root.keys():
+      if key == parenttype or key is None and vcs != "*":
+        vcs = key
+    source, rev = merge_seqs(sources.get("*"), sources.get(vcs))
+
+    if not (vcs and source and rev):
+      logging.warning("No valid source / revision found to create %s" % target)
+      continue
+
+    ensure_repo(repodir, parenttype, target, vcs, _root.get(vcs, ""), source)
+    update_repo(target, vcs, rev)
+    resolve_deps(target, level + 1, self_update=False,
+                 overrideroots=overrideroots, skipdependencies=skipdependencies)
 
   if self_update and "_self" in config and "*" in config["_self"]:
     source = safe_join(repodir, config["_self"]["*"])
