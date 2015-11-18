@@ -18,7 +18,6 @@ testScripts = ../ext/common.js
   ../ext/background.js
   ../lib/compat.js
   ../lib/info.js
-  ../lib/io.js
   ../lib/adblockplus.js
   ../lib/publicSuffixList.js
   ../lib/punycode.js
