@@ -27,13 +27,13 @@
     "message": "Luk dette popup-vindue, og klik (eller højreklik) derefter på et element på siden."
   },
   "description_chrome": {
-    "message": "brugt af over 50 millioner mennesker, en gratis reklame blokker til Chrome som blokere Alle irriterrende reklamer, malware og sporing."
+    "message": "Brugt af over 50 millioner mennesker, en gratis reklame blokker til Chrome som blokerer ALLE irriterende reklamer og sporing."
   },
   "description_opera": {
-    "message": "brugt af over 50 millioner mennesker, en gratis reklame blokker til Opera som blokere Alle irriterrende reklamer, malware og sporing."
+    "message": "Brugt af over 50 millioner mennesker, en gratis reklame blokker til Opera som blokerer ALLE irriterende reklamer, malware og sporing."
   },
   "description_safari": {
-    "message": "brugt af over 50 millioner mennesker, en gratis reklame blokker til Safari som blokere Alle irriterrende reklamer, malware og sporing."
+    "message": "Brugt af over 50 millioner mennesker, en gratis reklame blokker til Safari som blokerer ALLE irriterende reklamer, malware og sporing."
   },
   "disabled_for_site": {
     "message": "<strong>Deaktiveret</strong> på dette websted"
@@ -110,7 +110,7 @@
     "message": "Åbn alle links i denne underretning"
   },
   "notification_with_buttons": {
-    "message": "Klik på 'OK' for åbne alle genveje i denne meddelelse."
+    "message": "Klik på 'OK' for åbne alle links i denne meddelelse."
   },
   "notification_without_buttons": {
     "message": "Klik på meddelelsen for at åbne alle genveje i den."

@@ -62,9 +62,6 @@
   "found_a_bug": {
     "message": "Nakadiskobre ng bug? Gusto mo bang isalin ang Adblock Plus sa inyong wika? <a>ilagay ang inyong request dito</a>."
   },
-  "general": {
-    "message": "General"
-  },
   "invalid_css_selector": {
     "message": "$selector$ ay hindi valid na CSS selector",
     "placeholders": {
@@ -88,14 +85,6 @@
     "message": "Huling na update kaninang $time$",
     "placeholders": {
       "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "line": {
-    "message": "Line $number$",
-    "placeholders": {
-      "number": {
         "content": "$1"
       }
     }
@@ -176,8 +165,5 @@
   },
   "update_now": {
     "message": "I-update ngayon"
-  },
-  "whitelisted_domains": {
-    "message": "Whitelisted domains"
   }
 }

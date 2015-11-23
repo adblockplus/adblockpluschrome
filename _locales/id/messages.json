@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Struktur pengembangan Adblock Plus"
   },
+  "notification_configure": {
+    "message": "Mengatur pengaturan pemberitahuan"
+  },
+  "notification_open_all": {
+    "message": "Buka semua tautan dari pemberitahuan ini"
+  },
   "notification_with_buttons": {
     "message": "Klik 'OK' untuk membuka semua link pada pemberitahuan ini."
   },

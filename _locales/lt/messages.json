@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus vystomasis leidimas"
   },
+  "notification_configure": {
+    "message": "Konfigūruoti pranešimų nustatymus"
+  },
+  "notification_open_all": {
+    "message": "Atidaryti visas šio pranešimo nuorodas"
+  },
   "notification_with_buttons": {
     "message": "Paspauskite „Gerai“ ir bus atvertos visos šio pranešimo nuorodos."
   },

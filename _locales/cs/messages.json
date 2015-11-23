@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Vývojové sestavení Adblock Plus"
   },
+  "notification_configure": {
+    "message": "Konfigurovat nastavení oznámení"
+  },
+  "notification_open_all": {
+    "message": "Otevřít všechny odkazy z tohoto oznámení"
+  },
   "notification_with_buttons": {
     "message": "Klepněte na 'OK' pro otevření všech odkazů v tomto oznámení."
   },

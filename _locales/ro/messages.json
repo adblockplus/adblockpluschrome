@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Versiune de test Adblock Plus"
   },
+  "notification_configure": {
+    "message": "Configuraţi setările de notificare"
+  },
+  "notification_open_all": {
+    "message": "Deschide toate link-urile din această notificare"
+  },
   "notification_with_buttons": {
     "message": "Clic 'OK' pentru a deschide toate link-urile în această notificare."
   },

@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus kehittäjän versio"
   },
+  "notification_configure": {
+    "message": "Määritä ilmoitusasetukset"
+  },
+  "notification_open_all": {
+    "message": "Avata kaikki linkit tästä ilmoituksesta"
+  },
   "notification_with_buttons": {
     "message": "Valitse 'OK' aukaeksesi kaikki linkit tässä ilmoituksessa."
   },

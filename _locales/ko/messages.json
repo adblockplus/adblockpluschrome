@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus 개발 빌드"
   },
+  "notification_configure": {
+    "message": "알림 설정 구성"
+  },
+  "notification_open_all": {
+    "message": "이 알림에 있는 모든 링크를 엽니다"
+  },
   "notification_with_buttons": {
     "message": "이 알림에 포함된 모든 링크를 열려면 '확인'을 클릭하세요."
   },
