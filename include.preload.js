@@ -285,6 +285,7 @@ function init(document)
   var shadow = null;
   var style = null;
   var observer = null;
+  var propertyFilters = new CSSPropertyFilters(window, addElemHideSelectors);
 
   // Use Shadow DOM if available to don't mess with web pages that rely on
   // the order of their own <style> tags (#309).
@@ -300,54 +301,77 @@ function init(document)
     shadow.appendChild(document.createElement("shadow"));
   }
 
-  var updateStylesheet = function(reinject)
+  function addElemHideSelectors(selectors)
   {
-    ext.backgroundPage.sendMessage({type: "get-selectors"}, function(selectors)
+    if (selectors.length == 0)
+      return;
+
+    if (!style)
     {
+      // Create <style> element lazily, only if we add styles. Add it to
+      // the shadow DOM if possible. Otherwise fallback to the <head> or
+      // <html> element. If we have injected a style element before that
+      // has been removed (the sheet property is null), create a new one.
+      style = document.createElement("style");
+      (shadow || document.head || document.documentElement).appendChild(style);
+
+      // It can happen that the frame already navigated to a different
+      // document while we were waiting for the background page to respond.
+      // In that case the sheet property will stay null, after addind the
+      // <style> element to the shadow DOM.
+      if (!style.sheet)
+        return;
+
+      observer = reinjectRulesWhenRemoved(document, style);
+    }
+
+    // If using shadow DOM, we have to add the ::content pseudo-element
+    // before each selector, in order to match elements within the
+    // insertion point.
+    if (shadow)
+      selectors = convertSelectorsForShadowDOM(selectors);
+
+    // WebKit (and Blink?) apparently chokes when the selector list in a
+    // CSS rule is huge. So we split the elemhide selectors into groups.
+    while (selectors.length > 0)
+    {
+      var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
+      style.sheet.addRule(selector, "display: none !important;");
+    }
+  };
+
+  var updateStylesheet = function()
+  {
+    var selectors = null;
+    var CSSPropertyFiltersLoaded = false;
+
+    var checkLoaded = function()
+    {
+      if (!selectors || !CSSPropertyFiltersLoaded)
+        return;
+
       if (observer)
-      {
         observer.disconnect();
-        observer = null;
-      }
+      observer = null;
 
       if (style && style.parentElement)
-      {
         style.parentElement.removeChild(style);
-        style = null;
-      }
+      style = null;
 
-      if (selectors.length > 0)
-      {
-        // Create <style> element lazily, only if we add styles. Add it to
-        // the shadow DOM if possible. Otherwise fallback to the <head> or
-        // <html> element. If we have injected a style element before that
-        // has been removed (the sheet property is null), create a new one.
-        style = document.createElement("style");
-        (shadow || document.head || document.documentElement).appendChild(style);
+      addElemHideSelectors(selectors);
+      propertyFilters.apply();
+    };
 
-        // It can happen that the frame already navigated to a different
-        // document while we were waiting for the background page to respond.
-        // In that case the sheet property will stay null, after adding the
-        // <style> element to the shadow DOM.
-        if (style.sheet)
-        {
-          // If using shadow DOM, we have to add the ::content pseudo-element
-          // before each selector, in order to match elements within the
-          // insertion point.
-          if (shadow)
-            selectors = convertSelectorsForShadowDOM(selectors);
+    ext.backgroundPage.sendMessage({type: "get-selectors"}, function(response)
+    {
+      selectors = response;
+      checkLoaded();
+    });
 
-          // WebKit (and Blink?) apparently chokes when the selector list in a
-          // CSS rule is huge. So we split the elemhide selectors into groups.
-          for (var i = 0; selectors.length > 0; i++)
-          {
-            var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
-            style.sheet.insertRule(selector + " { display: none !important; }", i);
-          }
-        }
-
-        observer = reinjectRulesWhenRemoved(document, style);
-      }
+    propertyFilters.load(function()
+    {
+      CSSPropertyFiltersLoaded = true;
+      checkLoaded();
     });
   };
 

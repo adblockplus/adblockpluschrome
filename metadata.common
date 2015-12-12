@@ -34,10 +34,11 @@ testScripts = ../ext/common.js
 permissions = http://*/* https://*/*
 
 [contentScripts]
-document_start = ext/common.js ext/content.js include.preload.js
+document_start = ext/common.js ext/content.js cssProperties.js include.preload.js
 document_end = include.postload.js
 
 [mapping]
+cssProperties.js = adblockplus/chrome/content/cssProperties.js
 ext/content.js = chrome/ext/content.js
 ext/popup.js = chrome/ext/popup.js
 subscriptions.xml = adblockplus/chrome/content/ui/subscriptions.xml
@@ -79,6 +80,7 @@ lib/adblockplus.js = lib/prefs.js
   adblockplus/lib/filterStorage.js
   adblockplus/lib/elemHide.js
   adblockplus/lib/matcher.js
+  adblockplus/lib/cssRules.js
   adblockplus/lib/filterListener.js
   adblockplus/lib/synchronizer.js
   adblockplus/lib/notification.js
@@ -111,6 +113,7 @@ adblockplus/chrome/locale/*/global.properties = subscription_invalid_location
   notification_antiadblock_message
   filter_elemhide_duplicate_id
   filter_elemhide_nocriteria
+  filter_cssproperty_nodomain
 adblockplus/chrome/locale/*/overlay.dtd = hideplaceholders.label
   notification.button.yes
   notification.button.no

@@ -8,7 +8,7 @@ homepage = https://adblockplus.org/
 updateURL = https://update.adblockplus.org/adblockplussafari/updates.plist
 
 [contentScripts]
-document_start = ext/common.js ext/content.js include.preload.js include.youtube.js
+document_start = ext/common.js ext/content.js cssProperties.js include.preload.js include.youtube.js
 
 [mapping]
 ext/content.js = safari/ext/content.js
