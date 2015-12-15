@@ -19,6 +19,7 @@ Icon.png = adblockplusui/skin/abp-128.png
 [convert_js]
 ext/common.js = ext/common.js safari/ext/common.js
 ext/background.js = ext/background.js safari/ext/background.js --arg brace_style=expand
+lib/adblockplus.js -= lib/uninstall.js
 
 [popovers]
 popup_filename = popup.html
