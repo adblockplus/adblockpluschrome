@@ -39,9 +39,10 @@
     _dispatch: function()
     {
       var results = [];
+      var listeners = this._listeners.slice();
 
-      for (var i = 0; i < this._listeners.length; i++)
-        results.push(this._listeners[i].apply(null, arguments));
+      for (var i = 0; i < listeners.length; i++)
+        results.push(listeners[i].apply(null, arguments));
 
       return results;
     }
