@@ -727,58 +727,7 @@
       if (callback)
         setTimeout(callback, 0);
     },
-    onChanged: new ext._EventTarget(),
-
-    // Preferences were previously encoded as JSON for compatibility
-    // with localStorage, which has been used on Chrome.
-    migratePrefs: function(hooks)
-    {
-      var settings = safari.extension.settings;
-
-      for (var key in settings)
-      {
-        var item = hooks.map(key, settings[key]);
-
-        if (item)
-        {
-          delete settings[key];
-          settings[item.key] = item.value;
-        }
-      }
-
-      hooks.done();
-    },
-
-    // While moving away from the FileSystem API on Chrome the data structure
-    // for files on Safari changed as well, in order to keep thing consistent.
-    migrateFiles: function(callback)
-    {
-      var settings = safari.extension.settings;
-
-      for (var key in settings)
-      {
-        var match = key.match(/^(.*)\/lastModified$/)
-
-        if (match)
-        {
-          var filename = match[1];
-          var content = settings[filename];
-
-          if (typeof content == "string")
-          {
-            settings["file:" + filename] = {
-              content: content.split(/[\r\n]+/),
-              lastModified: settings[key]
-            };
-
-            delete settings[key];
-            delete settings[filename];
-          }
-        }
-      }
-
-      callback();
-    }
+    onChanged: new ext._EventTarget()
   };
 
   safari.extension.settings.addEventListener("change", function(event)
