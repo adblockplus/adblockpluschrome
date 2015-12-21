@@ -84,11 +84,6 @@ function init()
       addSubscription(previousVersion);
     }
 
-    // The "Hide placeholders" option has been removed from the UI in 1.8.8.1285
-    // So we reset the option for users updating from older versions.
-    if (previousVersion && Services.vc.compare(previousVersion, "1.8.8.1285") < 0)
-      Prefs.hidePlaceholders = true;
-
     initNotifications();
 
     // Update browser actions and context menus when whitelisting might have
