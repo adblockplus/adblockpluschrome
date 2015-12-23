@@ -410,7 +410,7 @@
 
     var isMainFrame = details.type == "main_frame" || (
 
-      // assume that the first request belongs to the top frame. Chrome
+      // assume that the first request belongs to the top frame. Chrome 29
       // may give the top frame the type "object" instead of "main_frame".
       // https://code.google.com/p/chromium/issues/detail?id=281711
       details.frameId == 0 && !(details.tabId in framesOfTabs)
