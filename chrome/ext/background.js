@@ -354,26 +354,32 @@
       var onBeforeNavigate = chrome.webNavigation.onBeforeNavigate;
       if (!onBeforeNavigate.hasListener(propagateHandlerBehaviorChange))
         onBeforeNavigate.addListener(propagateHandlerBehaviorChange);
+    },
+    getIndistinguishableTypes: function()
+    {
+      // Chrome 38-48 mistakenly reports requests of type `object`
+      // (e.g. requests initiated by Flash) with the type `other`.
+      // https://code.google.com/p/chromium/issues/detail?id=410382
+      var match = navigator.userAgent.match(/\bChrome\/(\d+)/);
+      if (match)
+      {
+        var version = parseInt(match[1], 10);
+        if (version >= 38 && version <= 48)
+          return [["OTHER", "OBJECT", "OBJECT_SUBREQUEST"]];
+      }
+
+      // Before Chrome 49, requests of the type `font` and `ping`
+      // have been reported with the type `other`.
+      // https://code.google.com/p/chromium/issues/detail?id=410382
+      var otherTypes = ["OTHER", "MEDIA"];
+      if (!("FONT" in chrome.webRequest.ResourceType))
+        otherTypes.push("FONT");
+      if (!("PING" in chrome.webRequest.ResourceType))
+        otherTypes.push("PING");
+
+      return [["OBJECT", "OBJECT_SUBREQUEST"], otherTypes];
     }
   };
-
-  // Since Chrome 38 requests of type 'object' (e.g. requests
-  // initiated by Flash) are mistakenly reported with the type 'other'.
-  // https://code.google.com/p/chromium/issues/detail?id=410382
-  var match = navigator.userAgent.match(/\bChrome\/(\d+)/);
-  if (match && parseInt(match[1], 10) >= 38)
-  {
-    ext.webRequest.indistinguishableTypes = [
-      ["OTHER", "OBJECT", "OBJECT_SUBREQUEST"]
-    ];
-  }
-  else
-  {
-    ext.webRequest.indistinguishableTypes = [
-      ["OBJECT", "OBJECT_SUBREQUEST"],
-      ["OTHER", "MEDIA", "FONT"]
-    ];
-  }
 
   chrome.tabs.query({}, function(tabs)
   {
