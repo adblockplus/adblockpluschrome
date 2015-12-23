@@ -362,7 +362,7 @@
     },
     getIndistinguishableTypes: function()
     {
-      return [["OTHER", "FONT"]];
+      return [];
     }
   };
 
