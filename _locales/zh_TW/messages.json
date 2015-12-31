@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus 開發版"
   },
+  "notification_configure": {
+    "message": "設置通知設定"
+  },
+  "notification_open_all": {
+    "message": "打開此通知的所有連結"
+  },
   "notification_with_buttons": {
     "message": "點擊＂確定＂打開通知中的所有鏈接．"
   },
