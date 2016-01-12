@@ -26,7 +26,7 @@ var getDecodedHostname = require("url").getDecodedHostname;
 
 var page = null;
 
-function init()
+function onLoad()
 {
   ext.pages.query({active: true, lastFocusedWindow: true}, function(pages)
   {
@@ -57,6 +57,7 @@ function init()
   });
 
   // Attach event listeners
+  ext.onMessage.addListener(onMessage);
   document.getElementById("enabled").addEventListener("click", toggleEnabled, false);
   document.getElementById("clickhide").addEventListener("click", activateClickHide, false);
   document.getElementById("clickhide-cancel").addEventListener("click", cancelClickHide, false);
@@ -75,7 +76,17 @@ function init()
       document.getElementById(collapser.dataset.collapsable).classList.add("collapsed");
   }
 }
-window.addEventListener("DOMContentLoaded", init, false);
+
+function onUnload()
+{
+  ext.onMessage.removeListener(onMessage);
+}
+
+function onMessage(message, sender, callback)
+{
+  if (message.type == "report-html-page" && sender.page._id == page._id)
+    document.body.classList.remove("nohtml");
+}
 
 function toggleEnabled()
 {
@@ -132,3 +143,6 @@ function toggleCollapse(event)
   Prefs[collapser.dataset.option] = !Prefs[collapser.dataset.option];
   collapser.parentNode.classList.toggle("collapsed");
 }
+
+document.addEventListener("DOMContentLoaded", onLoad, false);
+window.addEventListener("unload", onUnload, false);
