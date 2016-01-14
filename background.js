@@ -383,12 +383,6 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
 
       sendResponse({status: "ok"});
       break;
-    case "add-subscription":
-      ext.showOptions(function(page)
-      {
-        page.sendMessage(msg);
-      });
-      break;
     case "add-sitekey":
       processKey(msg.token, sender.page, sender.frame);
       break;

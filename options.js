@@ -95,6 +95,10 @@ function loadOptions()
     document.getElementById("shouldShowNotificationsContainer").hidden = true;
 
   ext.onMessage.addListener(onMessage);
+  ext.backgroundPage.sendMessage({
+    type: "app.listen",
+    filter: ["addSubscription"]
+  });
 
   // Load recommended subscriptions
   loadRecommendations();
@@ -106,8 +110,14 @@ $(loadOptions);
 
 function onMessage(msg)
 {
-  if (msg.type == "add-subscription")
-    startSubscriptionSelection(msg.title, msg.url);
+  if (msg.type == "app.listen")
+  {
+    if (msg.action == "addSubscription")
+    {
+      var subscription = msg.args[0];
+      startSubscriptionSelection(subscription.title, subscription.url);
+    }
+  }
   else if (msg.type == "focus-section")
   {
     var tabs = document.getElementsByClassName("ui-tabs-panel");
