@@ -197,68 +197,75 @@ var delayedSubscriptionSelection = null;
 
 function loadRecommendations()
 {
-  var request = new XMLHttpRequest();
-  request.open("GET", "subscriptions.xml");
-  request.onload = function()
-  {
-    var selectedIndex = 0;
-    var selectedPrefix = null;
-    var matchCount = 0;
-
-    var list = document.getElementById("subscriptionSelector");
-    var elements = request.responseXML.documentElement.getElementsByTagName("subscription");
-    for (var i = 0; i < elements.length; i++)
+  fetch("subscriptions.xml")
+    .then(function(response)
     {
-      var element = elements[i];
-      var option = new Option();
-      option.text = element.getAttribute("title") + " (" + element.getAttribute("specialization") + ")";
-      option._data = {
-        title: element.getAttribute("title"),
-        url: element.getAttribute("url"),
-        homepage: element.getAttribute("homepage")
-      };
+      return response.text();
+    })
+    .then(function(text)
+    {
+      var selectedIndex = 0;
+      var selectedPrefix = null;
+      var matchCount = 0;
 
-      var prefix = Utils.checkLocalePrefixMatch(element.getAttribute("prefixes"));
-      if (prefix)
+      var list = document.getElementById("subscriptionSelector");
+      var doc = new DOMParser().parseFromString(text, "application/xml");
+      var elements = doc.documentElement.getElementsByTagName("subscription");
+
+      for (var i = 0; i < elements.length; i++)
       {
-        option.style.fontWeight = "bold";
-        option.style.backgroundColor = "#E0FFE0";
-        option.style.color = "#000000";
-        if (!selectedPrefix || selectedPrefix.length < prefix.length)
-        {
-          selectedIndex = i;
-          selectedPrefix = prefix;
-          matchCount = 1;
-        }
-        else if (selectedPrefix && selectedPrefix.length == prefix.length)
-        {
-          matchCount++;
+        var element = elements[i];
+        var option = new Option();
+        option.text = element.getAttribute("title") + " (" +
+                      element.getAttribute("specialization") + ")";
+        option._data = {
+          title: element.getAttribute("title"),
+          url: element.getAttribute("url"),
+          homepage: element.getAttribute("homepage")
+        };
 
-          // If multiple items have a matching prefix of the same length:
-          // Select one of the items randomly, probability should be the same
-          // for all items. So we replace the previous match here with
-          // probability 1/N (N being the number of matches).
-          if (Math.random() * matchCount < 1)
+        var prefixes = element.getAttribute("prefixes");
+        var prefix = Utils.checkLocalePrefixMatch(prefixes);
+        if (prefix)
+        {
+          option.style.fontWeight = "bold";
+          option.style.backgroundColor = "#E0FFE0";
+          option.style.color = "#000000";
+          if (!selectedPrefix || selectedPrefix.length < prefix.length)
           {
             selectedIndex = i;
             selectedPrefix = prefix;
+            matchCount = 1;
+          }
+          else if (selectedPrefix && selectedPrefix.length == prefix.length)
+          {
+            matchCount++;
+
+            // If multiple items have a matching prefix of the same length:
+            // Select one of the items randomly, probability should be the same
+            // for all items. So we replace the previous match here with
+            // probability 1/N (N being the number of matches).
+            if (Math.random() * matchCount < 1)
+            {
+              selectedIndex = i;
+              selectedPrefix = prefix;
+            }
           }
         }
+        list.appendChild(option);
       }
+
+      var option = new Option();
+      var label = i18n.getMessage("filters_addSubscriptionOther_label");
+      option.text = label + "\u2026";
+      option._data = null;
       list.appendChild(option);
-    }
 
-    var option = new Option();
-    option.text = i18n.getMessage("filters_addSubscriptionOther_label") + "\u2026";
-    option._data = null;
-    list.appendChild(option);
+      list.selectedIndex = selectedIndex;
 
-    list.selectedIndex = selectedIndex;
-
-    if (delayedSubscriptionSelection)
-      startSubscriptionSelection.apply(null, delayedSubscriptionSelection);
-  };
-  request.send(null);
+      if (delayedSubscriptionSelection)
+        startSubscriptionSelection.apply(null, delayedSubscriptionSelection);
+    });
 }
 
 function startSubscriptionSelection(title, url)

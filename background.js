@@ -224,37 +224,37 @@ function addSubscription(prevVersion)
   if (!addSubscription && !addAcceptable)
     return;
 
-  function notifyUser()
-  {
-    if (!Prefs.suppress_first_run_page)
-      ext.pages.open(ext.getURL("firstRun.html"));
-  }
-
-  if (addSubscription)
-  {
-    // Load subscriptions data
-    var request = new XMLHttpRequest();
-    request.open("GET", "subscriptions.xml");
-    request.addEventListener("load", function()
+  Promise.resolve(addSubscription && fetch("subscriptions.xml")
+    .then(function(response)
     {
-      var node = Utils.chooseFilterSubscription(request.responseXML.getElementsByTagName("subscription"));
-      var subscription = (node ? Subscription.fromURL(node.getAttribute("url")) : null);
+      return response.text();
+    })
+    .then(function(text)
+    {
+      var doc = new DOMParser().parseFromString(text, "application/xml");
+      var nodes = doc.getElementsByTagName("subscription");
+      var node = Utils.chooseFilterSubscription(nodes);
+      var subscription = node && Subscription.fromURL(node.getAttribute("url"));
+
       if (subscription)
       {
         FilterStorage.addSubscription(subscription);
+
         subscription.disabled = false;
         subscription.title = node.getAttribute("title");
         subscription.homepage = node.getAttribute("homepage");
-        if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
-          Synchronizer.execute(subscription);
 
-          notifyUser();
+        if (subscription instanceof DownloadableSubscription &&
+            !subscription.lastDownload)
+          Synchronizer.execute(subscription);
       }
-    }, false);
-    request.send(null);
-  }
-  else
-    notifyUser();
+    })
+  )
+  .then(function()
+  {
+    if (!Prefs.suppress_first_run_page)
+      ext.pages.open(ext.getURL("firstRun.html"));
+  });
 }
 
 Prefs.onChanged.addListener(function(name)
