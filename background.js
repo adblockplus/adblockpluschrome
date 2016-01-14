@@ -59,14 +59,21 @@ var filterlistsReinitialized = false;
 
 function init()
 {
-  var filtersLoaded = false;
-  var prefsLoaded = false;
-
-  var checkLoaded = function()
+  var filtersLoaded = new Promise(function(resolve)
   {
-    if (!filtersLoaded || !prefsLoaded)
-      return;
+    function onFilterAction(action)
+    {
+      if (action == "load")
+      {
+        FilterNotifier.removeListener(onFilterAction);
+        resolve();
+      }
+    }
+    FilterNotifier.addListener(onFilterAction);
+  });
 
+  function onLoaded()
+  {
     var info = require("info");
     var previousVersion = Prefs.currentVersion;
 
@@ -95,27 +102,9 @@ function init()
         refreshIconAndContextMenuForAllPages();
     });
     refreshIconAndContextMenuForAllPages();
-  };
+  }
 
-  var onFilterAction = function(action)
-  {
-    if (action == "load")
-    {
-      FilterNotifier.removeListener(onFilterAction);
-      filtersLoaded = true;
-      checkLoaded();
-    }
-  };
-
-  var onPrefsLoaded = function()
-  {
-    Prefs.onLoaded.removeListener(onPrefsLoaded);
-    prefsLoaded = true;
-    checkLoaded();
-  };
-
-  FilterNotifier.addListener(onFilterAction);
-  Prefs.onLoaded.addListener(onPrefsLoaded);
+  Promise.all([filtersLoaded, Prefs.isLoaded]).then(onLoaded);
 }
 init();
 
