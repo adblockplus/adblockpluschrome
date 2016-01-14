@@ -1,6 +1,7 @@
 [general]
 version = 1.10
 backgroundScripts = lib/polyfills/promise.js
+  lib/polyfills/fetch.js
   ext/common.js
   ext/background.js
   lib/compat.js
