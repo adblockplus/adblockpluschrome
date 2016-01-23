@@ -127,7 +127,7 @@ var contextMenuItem = {
 function refreshIconAndContextMenu(page)
 {
   var whitelisted = isPageWhitelisted(page);
-  updateIcon(page, whitelisted && true || false);
+  updateIcon(page, whitelisted);
 
   // show or hide the context menu entry dependent on whether
   // adblocking is active on that page
