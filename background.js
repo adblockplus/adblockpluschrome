@@ -131,7 +131,7 @@ function refreshIconAndContextMenu(page)
 
   // show or hide the context menu entry dependent on whether
   // adblocking is active on that page
-  page.contextMenus.removeAll();
+  page.contextMenus.remove(contextMenuItem);
   if (Prefs.shouldShowBlockElementMenu && !whitelisted && htmlPages.has(page))
     page.contextMenus.create(contextMenuItem);
 }

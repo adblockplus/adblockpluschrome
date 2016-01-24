@@ -34,9 +34,15 @@
 
       items.push(item);
     },
-    removeAll: function()
+    remove: function(item)
     {
-      contextMenuItems.delete(this._page);
+      let items = contextMenuItems.get(this._page);
+      if (items)
+      {
+        let index = items.indexOf(item);
+        if (index != -1)
+          items.splice(index, 1);
+      }
     }
   };
 
