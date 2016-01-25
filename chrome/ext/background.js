@@ -376,13 +376,16 @@
           return [["OTHER", "OBJECT", "OBJECT_SUBREQUEST"]];
       }
 
+      // Chrome <44 doesn't have ResourceType.
+      var ResourceType = chrome.webRequest.ResourceType || {};
+
       // Before Chrome 49, requests of the type `font` and `ping`
       // have been reported with the type `other`.
       // https://code.google.com/p/chromium/issues/detail?id=410382
       var otherTypes = ["OTHER", "MEDIA"];
-      if (!("FONT" in chrome.webRequest.ResourceType))
+      if (!("FONT" in ResourceType))
         otherTypes.push("FONT");
-      if (!("PING" in chrome.webRequest.ResourceType))
+      if (!("PING" in ResourceType))
         otherTypes.push("PING");
 
       return [["OBJECT", "OBJECT_SUBREQUEST"], otherTypes];
