@@ -1,0 +1,61 @@
+{
+  "add": {
+    "message": "ጨምር"
+  },
+  "add_domain_button": {
+    "message": "አድራሻ ጨምር"
+  },
+  "add_filter_button": {
+    "message": "ማጣሪያ ጨምር"
+  },
+  "add_filters_msg": {
+    "message": "ማጣሪያ(ዎች) ጨምር?"
+  },
+  "add_your_own_filters": {
+    "message": "የራስዎትን ማጣሪያ ይጨምሩ"
+  },
+  "apply_changes": {
+    "message": "ለውጡን ተቀበል"
+  },
+  "block_element": {
+    "message": "ይሄንን ከልክል"
+  },
+  "cancel": {
+    "message": "ይቅር"
+  },
+  "filter_lists": {
+    "message": "የማጣሪያ ዝርዝር"
+  },
+  "general": {
+    "message": "አጠቃላይ"
+  },
+  "line": {
+    "message": "መስመር $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "options": {
+    "message": "የአድብሎክ ፕላስ ምርጫዎች"
+  },
+  "options_short": {
+    "message": "ምርጫዎች"
+  },
+  "remove_button": {
+    "message": "የተመረጠውን አጥፋ"
+  },
+  "stats_show_iconnumber": {
+    "message": "ቁጥር ምልክት ላይ አሳይ"
+  },
+  "stats_title": {
+    "message": "የተከለከሉ ማስታወቂያዎች"
+  },
+  "update_now": {
+    "message": "ማሻሻያ አሁን አርግ"
+  },
+  "whitelisted_domains": {
+    "message": "የተፈቀዱ አድራሻዎች"
+  }
+}

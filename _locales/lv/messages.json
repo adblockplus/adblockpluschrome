@@ -36,7 +36,7 @@
     "message": "Izmanto vairāk kā 50 miljoni cilvēku. Bezmaksas bloķētājs Safari, kas bloķē kaitinošās reklāmas, malware un izsekošanas programmas."
   },
   "disabled_for_site": {
-    "message": "<strong>Islegts</strong>"
+    "message": "<strong>Izslēgts</strong> šajā lapā"
   },
   "disabled_for_these_domains": {
     "message": "Adblock Plus Jūsu izvēlētajos domēnos ir atslēgts. Jūs varat pievienot domēnu izmantojot Adblock Plus, kas atrodas adreses joslā, vai ievadot domēnu (nevis URL) kastē un noklikšķinot uz pogas \"Pievienot domēnu\"."
