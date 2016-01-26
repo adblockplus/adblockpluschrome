@@ -99,7 +99,8 @@
         }));
       });
     },
-    onLoading: new ext._EventTarget()
+    onLoading: new ext._EventTarget(),
+    onActivated: new ext._EventTarget()
   };
 
   chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
@@ -147,6 +148,11 @@
   });
 
   chrome.tabs.onRemoved.addListener(forgetTab);
+
+  chrome.tabs.onActivated.addListener(details =>
+  {
+    ext.pages.onActivated._dispatch(new Page({id: details.tabId}));
+  });
 
 
   /* Browser actions */

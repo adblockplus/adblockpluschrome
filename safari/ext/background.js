@@ -160,11 +160,15 @@
     if (!(event.target instanceof SafariBrowserTab))
       return;
 
+    let visiblePage = event.target._visiblePage;
+    if (visiblePage)
+      ext.pages.onActivated._dispatch(visiblePage);
+
     // update the toolbar item for the page visible in the tab that just
     // became active. If we can't find that page (e.g. when a page was
     // opened in a new tab, and our content script didn't run yet), the
     // toolbar item of the window, is reset to its intial configuration.
-    updateToolbarItemForPage(event.target._visiblePage, event.target.browserWindow);
+    updateToolbarItemForPage(visiblePage, event.target.browserWindow);
   }, true);
 
 
@@ -299,7 +303,8 @@
 
       callback(matchedPages);
     },
-    onLoading: new ext._EventTarget()
+    onLoading: new ext._EventTarget(),
+    onActivated: new ext._EventTarget(),
   };
 
   safari.application.addEventListener("close", function(event)
