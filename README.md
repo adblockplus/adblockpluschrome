@@ -45,14 +45,15 @@ development environment. For that run one of the following commands:
     ./build.py -t opera devenv
     ./build.py -t safari devenv
 
-This will create a _devenv_ directory in the repository. In Chrome and Opera you
-should load it as an unpacked extension directory. After making changes to the
-source code re-run the command to update the development environment, the
-extension should reload automatically after a few seconds.
+This will create a _devenv.platform_ directory in the repository. In Chrome and
+Opera you should load _devenv.chrome_ or _devenv.opera_ as an unpacked extension
+directory. After making changes to the source code re-run the command to update
+the development environment, the extension should reload automatically after a
+few seconds.
 
-In Safari you should load _devenv/adblockplussafari.safariextension_ as unpacked
-extension directory. After making changes to the source code re-run the command
-to update the development environment. You will still need to reload the
+In Safari you should load _devenv.safari/adblockplussafari.safariextension_ as
+unpacked extension directory. After making changes to the source code re-run the
+command to update the development environment. You will still need to reload the
 extension explicitly in the Extension Builder, Safari currently doesn't allow
 automating this action.
 
