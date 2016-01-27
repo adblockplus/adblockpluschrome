@@ -1,4 +1,4 @@
-^devenv$
+^devenv.*$
 
 syntax:glob
 *.zip
