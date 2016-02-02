@@ -409,7 +409,10 @@ function init(document)
           // in dynamically created frames due to https://crbug.com/442107.
           // So we also have to apply element collpasing from the parent frame.
           if (!contentWindow.collapsing)
-            [].forEach.call(contentDocument.querySelectorAll(Object.keys(typeMap).join(",")), checkCollapse);
+            Array.prototype.forEach.call(
+              contentDocument.querySelectorAll(Object.keys(typeMap).join(",")),
+              checkCollapse
+            );
         }
       }
     }
