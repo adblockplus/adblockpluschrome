@@ -26,7 +26,7 @@ icons/abp-16-notification-information@2x.png = safari/icons/abp-32-notification-
 [convert_js]
 ext/common.js = ext/common.js safari/ext/common.js
 ext/background.js = ext/background.js safari/ext/background.js --arg brace_style=expand
-lib/adblockplus.js -= lib/uninstall.js
+lib/adblockplus.js -= lib/uninstall.js lib/devtools.js
 
 [popovers]
 popup_filename = popup.html

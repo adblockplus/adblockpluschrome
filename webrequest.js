@@ -18,6 +18,7 @@
 var FilterNotifier = require("filterNotifier").FilterNotifier;
 var RegExpFilter = require("filterClasses").RegExpFilter;
 var platform = require("info").platform;
+var devtools = require("devtools");
 
 ext.webRequest.getIndistinguishableTypes().forEach(function(types)
 {
@@ -46,30 +47,44 @@ FilterNotifier.addListener(function(action, arg)
   }
 });
 
-function onBeforeRequestAsync(url, type, page, filter)
+function onBeforeRequestAsync(page, url, type, docDomain,
+                              thirdParty, key, specificOnly,
+                              filter)
 {
   if (filter)
     FilterNotifier.triggerListeners("filter.hitCount", filter, 0, 0, page);
+
+  if (devtools)
+    devtools.logRequest(
+      page, url, type, docDomain,
+      thirdParty, key, specificOnly,
+      filter
+    );
 }
 
 function onBeforeRequest(url, type, page, frame)
 {
-  if (isFrameWhitelisted(page, frame))
+  if (checkWhitelisted(page, frame))
     return true;
 
+  var urlString = stringifyURL(url);
   var docDomain = extractHostFromFrame(frame);
+  var thirdParty = isThirdParty(url, docDomain);
   var key = getKey(page, frame);
-  var specificOnly = isFrameWhitelisted(page, frame,
-                                        RegExpFilter.typeMap.GENERICBLOCK);
-  var filter = defaultMatcher.matchesAny(
-    stringifyURL(url),
-    RegExpFilter.typeMap[type], docDomain,
-    isThirdParty(url, docDomain),
-    key,
-    specificOnly
+
+  var specificOnly = !!checkWhitelisted(
+    page, frame, RegExpFilter.typeMap.GENERICBLOCK
   );
 
-  setTimeout(onBeforeRequestAsync, 0, url, type, page, filter);
+  var filter = defaultMatcher.matchesAny(
+    urlString, RegExpFilter.typeMap[type],
+    docDomain, thirdParty, key, specificOnly
+  );
+
+  setTimeout(onBeforeRequestAsync, 0, page, urlString,
+                                      type, docDomain,
+                                      thirdParty, key,
+                                      specificOnly, filter);
 
   return !(filter instanceof BlockingFilter);
 }

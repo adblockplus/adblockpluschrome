@@ -17,6 +17,7 @@
 
 if (require("info").platform == "chromium")
 {
+  var logRequest = require("devtools").logRequest;
   var tabsLoading = {};
 
   chrome.webNavigation.onCreatedNavigationTarget.addListener(function(details)
@@ -24,21 +25,22 @@ if (require("info").platform == "chromium")
     var sourcePage = new ext.Page({id: details.sourceTabId});
     var sourceFrame = ext.getFrame(details.sourceTabId, details.sourceFrameId);
 
-    if (!sourceFrame || isFrameWhitelisted(sourcePage, sourceFrame))
+    if (checkWhitelisted(sourcePage, sourceFrame))
       return;
 
     var documentHost = extractHostFromFrame(sourceFrame);
     if (!documentHost)
       return;
 
-    var specificOnly = isFrameWhitelisted(sourcePage, sourceFrame,
+    var specificOnly = !!checkWhitelisted(sourcePage, sourceFrame,
                                           RegExpFilter.typeMap.GENERICBLOCK);
 
     tabsLoading[details.tabId] = {
+      page: sourcePage,
       documentHost: documentHost,
       specificOnly: specificOnly
     };
-    checkPotentialPopup(details.tabId, details.url, documentHost, specificOnly);
+    checkPotentialPopup(details.tabId, details.url, sourcePage, documentHost, specificOnly);
   });
 
   chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
@@ -52,8 +54,9 @@ if (require("info").platform == "chromium")
     if ("url" in changeInfo)
     {
       var source = tabsLoading[tabId];
-      checkPotentialPopup(tabId, tab.url, source.documentHost,
-                          source.specificOnly);
+      checkPotentialPopup(tabId, tab.url, source.page,
+                                          source.documentHost,
+                                          source.specificOnly);
     }
 
     if ("status" in changeInfo && changeInfo.status == "complete" && tab.url != "about:blank")
@@ -61,16 +64,22 @@ if (require("info").platform == "chromium")
   });
 }
 
-function checkPotentialPopup(tabId, url, documentHost, specificOnly)
+function checkPotentialPopup(tabId, url, sourcePage, documentHost, specificOnly)
 {
-  url = new URL(url || "about:blank");
+  var urlObj = new URL(url || "about:blank");
+  var urlString = stringifyURL(urlObj);
+  var thirdParty = isThirdParty(urlObj, documentHost);
 
   var filter = defaultMatcher.matchesAny(
-    stringifyURL(url), RegExpFilter.typeMap.POPUP,
-    documentHost, isThirdParty(url, documentHost),
-    null, specificOnly
+    urlString, RegExpFilter.typeMap.POPUP,
+    documentHost, thirdParty, null, specificOnly
   );
 
   if (filter instanceof BlockingFilter)
     chrome.tabs.remove(tabId);
+
+  logRequest(
+    sourcePage, urlString, "POPUP", documentHost,
+    thirdParty, null, specificOnly, filter
+  );
 }

@@ -90,6 +90,7 @@ lib/adblockplus.js = lib/prefs.js
   adblockplus/lib/antiadblockInit.js
   lib/url.js
   lib/stats.js
+  lib/devtools.js
   lib/whitelisting.js
   lib/filterValidation.js
   lib/filterComposer.js

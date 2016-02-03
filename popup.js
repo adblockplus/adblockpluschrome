@@ -21,7 +21,7 @@ var require = backgroundPage.require;
 var Filter = require("filterClasses").Filter;
 var FilterStorage = require("filterStorage").FilterStorage;
 var Prefs = require("prefs").Prefs;
-var isPageWhitelisted = require("whitelisting").isPageWhitelisted;
+var checkWhitelisted = require("whitelisting").checkWhitelisted;
 var getDecodedHostname = require("url").getDecodedHostname;
 
 var page = null;
@@ -45,7 +45,7 @@ function onLoad()
     // Otherwise, we are in default state.
     if (page)
     {
-      if (isPageWhitelisted(page))
+      if (checkWhitelisted(page))
         document.body.classList.add("disabled");
 
       page.sendMessage({type: "get-clickhide-state"}, function(response)
@@ -106,13 +106,13 @@ function toggleEnabled()
   else
   {
     // Remove any exception rules applying to this URL
-    var filter = isPageWhitelisted(page);
+    var filter = checkWhitelisted(page);
     while (filter)
     {
       FilterStorage.removeFilter(filter);
       if (filter.subscriptions.length)
         filter.disabled = true;
-      filter = isPageWhitelisted(page);
+      filter = checkWhitelisted(page);
     }
   }
 }

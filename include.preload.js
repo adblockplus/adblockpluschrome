@@ -190,6 +190,147 @@ function getContentDocument(element)
   }
 }
 
+function ElementHidingTracer(document, selectors)
+{
+  this.document = document;
+  this.selectors = selectors;
+
+  this.changedNodes = [];
+  this.timeout = null;
+
+  this.observer = new MutationObserver(this.observe.bind(this));
+  this.trace = this.trace.bind(this);
+
+  if (document.readyState == "loading")
+    document.addEventListener("DOMContentLoaded", this.trace);
+  else
+    this.trace();
+}
+ElementHidingTracer.prototype = {
+  checkNodes: function(nodes)
+  {
+    var matchedSelectors = [];
+
+    // Find all selectors that match any hidden element inside the given nodes.
+    for (var i = 0; i < this.selectors.length; i++)
+    {
+      var selector = this.selectors[i];
+
+      for (var j = 0; j < nodes.length; j++)
+      {
+        var elements = nodes[j].querySelectorAll(selector);
+        var matched = false;
+
+        for (var k = 0; k < elements.length; k++)
+        {
+          // Only consider selectors that actually have an effect on the
+          // computed styles, and aren't overridden by rules with higher
+          // priority, or haven't been circumvented in a different way.
+          if (getComputedStyle(elements[k]).display == "none")
+          {
+            matchedSelectors.push(selector);
+            matched = true;
+            break;
+          }
+        }
+
+        if (matched)
+          break;
+      }
+    }
+
+    if (matchedSelectors.length > 0)
+      ext.backgroundPage.sendMessage({
+        type: "trace-elemhide",
+        selectors: matchedSelectors
+      });
+  },
+
+  onTimeout: function()
+  {
+    this.checkNodes(this.changedNodes);
+    this.changedNodes = [];
+    this.timeout = null;
+  },
+
+  observe: function(mutations)
+  {
+    // Forget previously changed nodes that are no longer in the DOM.
+    for (var i = 0; i < this.changedNodes.length; i++)
+    {
+      if (!this.document.contains(this.changedNodes[i]))
+        this.changedNodes.splice(i--, 1);
+    }
+
+    for (var j = 0; j < mutations.length; j++)
+    {
+      var mutation = mutations[j];
+      var node = mutation.target;
+
+      // Ignore mutations of nodes that aren't in the DOM anymore.
+      if (!this.document.contains(node))
+        continue;
+
+      // Since querySelectorAll() doesn't consider the root itself
+      // and since CSS selectors can also match siblings, we have
+      // to consider the parent node for attribute mutations.
+      if (mutation.type == "attributes")
+        node = node.parentNode;
+
+      var addNode = true;
+      for (var k = 0; k < this.changedNodes.length; k++)
+      {
+        var previouslyChangedNode = this.changedNodes[k];
+
+        // If we are already going to check an ancestor of this node,
+        // we can ignore this node, since it will be considered anyway
+        // when checking one of its ancestors.
+        if (previouslyChangedNode.contains(node))
+        {
+          addNode = false;
+          break;
+        }
+
+        // If this node is an ancestor of a node that previously changed,
+        // we can ignore that node, since it will be considered anyway
+        // when checking one of its ancestors.
+        if (node.contains(previouslyChangedNode))
+          this.changedNodes.splice(k--, 1);
+      }
+
+      if (addNode)
+        this.changedNodes.push(node);
+    }
+
+    // Check only nodes whose descendants have changed, and not more often
+    // than once a second. Otherwise large pages with a lot of DOM mutations
+    // (like YouTube) freeze when the devtools panel is active.
+    if (this.timeout == null)
+      this.timeout = setTimeout(this.onTimeout.bind(this), 1000);
+  },
+
+  trace: function()
+  {
+    this.checkNodes([this.document]);
+
+    this.observer.observe(
+      this.document,
+      {
+        childList: true,
+        attributes: true,
+        subtree: true
+      }
+    );
+  },
+
+  disconnect: function()
+  {
+    this.document.removeEventListener("DOMContentLoaded", this.trace);
+    this.observer.disconnect();
+    clearTimeout(this.timeout);
+  }
+};
+
 function reinjectRulesWhenRemoved(document, style)
 {
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
@@ -220,8 +361,9 @@ function reinjectRulesWhenRemoved(document, style)
     ext.backgroundPage.sendMessage(
       {type: "get-selectors"},
 
-      function(selectors)
+      function(response)
       {
+        var selectors = response.selectors;
         while (selectors.length > 0)
         {
           var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
@@ -285,6 +427,7 @@ function init(document)
   var shadow = null;
   var style = null;
   var observer = null;
+  var tracer = null;
   var propertyFilters = new CSSPropertyFilters(window, addElemHideSelectors);
 
   // Use Shadow DOM if available to don't mess with web pages that rely on
@@ -354,12 +497,19 @@ function init(document)
         observer.disconnect();
       observer = null;
 
+      if (tracer)
+        tracer.disconnect();
+      tracer = null;
+
       if (style && style.parentElement)
         style.parentElement.removeChild(style);
       style = null;
 
-      addElemHideSelectors(selectors);
+      addElemHideSelectors(selectors.selectors);
       propertyFilters.apply();
+
+      if (selectors.trace)
+        tracer = new ElementHidingTracer(document, selectors.selectors);
     };
 
     ext.backgroundPage.sendMessage({type: "get-selectors"}, function(response)

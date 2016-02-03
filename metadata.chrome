@@ -14,6 +14,7 @@ permissions = tabs
   unlimitedStorage
   notifications
 options = options.html
+devtools = devtools.html
 browserAction = icons/abp-19.png icons/abp-38.png popup.html
 icons = icons/abp-16.png icons/abp-32.png icons/detailed/abp-48.png
   icons/detailed/abp-64.png icons/detailed/abp-128.png
@@ -21,7 +22,7 @@ webAccessible = block.html
 managedStorageSchema = managed-storage-schema.json
 
 [compat]
-chrome = 28.0
+chrome = 29.0
 
 [mapping]
 icons/abp-19.png = chrome/icons/abp-19.png
@@ -33,4 +34,10 @@ icons/abp-38-whitelisted.png = chrome/icons/abp-38-whitelisted.png
 icons/abp-38-notification-critical.png = chrome/icons/abp-38-notification-critical.png
 icons/abp-38-notification-information.png = chrome/icons/abp-38-notification-information.png
 icons/detailed/abp-48.png = chrome/icons/detailed/abp-48.png
+ext/devtools.js = chrome/ext/devtools.js
+devtools.html = chrome/devtools.html
+devtools.js = chrome/devtools.js
+devtools-panel.html = adblockplusui/devtools-panel.html
+devtools-panel.js = adblockplusui/devtools-panel.js
+skin/devtools-panel.css = adblockplusui/skin/devtools-panel.css
 managed-storage-schema.json = chrome/managed-storage-schema.json

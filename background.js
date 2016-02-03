@@ -30,8 +30,7 @@ with(require("subscriptionClasses"))
 }
 with(require("whitelisting"))
 {
-  this.isPageWhitelisted = isPageWhitelisted;
-  this.isFrameWhitelisted = isFrameWhitelisted;
+  this.checkWhitelisted = checkWhitelisted;
   this.processKey = processKey;
   this.getKey = getKey;
 }
@@ -53,6 +52,7 @@ var composeFilters = require("filterComposer").composeFilters;
 var updateIcon = require("icon").updateIcon;
 var initNotifications = require("notificationHelper").initNotifications;
 var showNextNotificationForUrl = require("notificationHelper").showNextNotificationForUrl;
+var devtools = require("devtools");
 
 var seenDataCorruption = false;
 var filterlistsReinitialized = false;
@@ -126,7 +126,7 @@ var contextMenuItem = {
 // Adds or removes browser action icon according to options.
 function refreshIconAndContextMenu(page)
 {
-  var whitelisted = isPageWhitelisted(page);
+  var whitelisted = !!checkWhitelisted(page);
   updateIcon(page, whitelisted);
 
   // show or hide the context menu entry dependent on whether
@@ -285,13 +285,15 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
   {
     case "get-selectors":
       var selectors = [];
+      var trace = devtools && devtools.hasPanel(sender.page);
 
-      if (!isFrameWhitelisted(sender.page, sender.frame,
-                              RegExpFilter.typeMap.DOCUMENT | RegExpFilter.typeMap.ELEMHIDE))
+      if (!checkWhitelisted(sender.page, sender.frame,
+                            RegExpFilter.typeMap.DOCUMENT |
+                            RegExpFilter.typeMap.ELEMHIDE))
       {
         var noStyleRules = false;
-        var specificOnly = isFrameWhitelisted(sender.page, sender.frame,
-                                              RegExpFilter.typeMap.GENERICHIDE);
+        var specificOnly = checkWhitelisted(sender.page, sender.frame,
+                                            RegExpFilter.typeMap.GENERICHIDE);
         var host = extractHostFromFrame(sender.frame);
 
         for (var i = 0; i < noStyleRulesHosts.length; i++)
@@ -313,10 +315,10 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
         }
       }
 
-      sendResponse(selectors);
+      sendResponse({selectors: selectors, trace: trace});
       break;
     case "should-collapse":
-      if (isFrameWhitelisted(sender.page, sender.frame, RegExpFilter.typeMap.DOCUMENT))
+      if (checkWhitelisted(sender.page, sender.frame))
       {
         sendResponse(false);
         break;
@@ -354,7 +356,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       // The browser action popup asks us this.
       if(sender.page)
       {
-        sendResponse({enabled: !isPageWhitelisted(sender.page)});
+        sendResponse({enabled: !checkWhitelisted(sender.page)});
         return;
       }
       break;
@@ -392,6 +394,12 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
         page: sender.page,
         frame: sender.frame
       }));
+      break;
+    case "trace-elemhide":
+      devtools.logHiddenElements(
+        sender.page, msg.selectors,
+        extractHostFromFrame(sender.frame)
+      );
       break;
     case "forward":
       if (sender.page)
