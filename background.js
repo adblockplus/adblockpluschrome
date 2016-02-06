@@ -329,12 +329,18 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       var sitekey = getKey(sender.page, sender.frame);
       var blocked = false;
 
+      var specificOnly = checkWhitelisted(
+        sender.page, sender.frame,
+        RegExpFilter.typeMap.GENERICBLOCK
+      );
+
       for (var i = 0; i < msg.urls.length; i++)
       {
         var url = new URL(msg.urls[i], msg.baseURL);
         var filter = defaultMatcher.matchesAny(
           stringifyURL(url), typeMask,
-          documentHost, isThirdParty(url, documentHost), sitekey
+          documentHost, isThirdParty(url, documentHost),
+          sitekey, specificOnly
         );
 
         if (filter instanceof BlockingFilter)
