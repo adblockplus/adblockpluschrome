@@ -40,10 +40,10 @@ document_start = ext/common.js ext/content.js cssProperties.js include.preload.j
 document_end = include.postload.js
 
 [mapping]
-cssProperties.js = adblockplus/chrome/content/cssProperties.js
+cssProperties.js = adblockpluscore/chrome/content/cssProperties.js
 ext/content.js = chrome/ext/content.js
 ext/popup.js = chrome/ext/popup.js
-subscriptions.xml = adblockplus/chrome/content/ui/subscriptions.xml
+subscriptions.xml = adblockpluscore/chrome/content/ui/subscriptions.xml
 firstRun.html = adblockplusui/firstRun.html
 common.js = adblockplusui/common.js
 firstRun.js = adblockplusui/firstRun.js
@@ -75,18 +75,18 @@ qunit/qunit.css = adblockplustests/chrome/content/qunit.css
 lib/adblockplus.js = lib/prefs.js
   lib/utils.js
   lib/io.js
-  adblockplus/lib/downloader.js
-  adblockplus/lib/filterNotifier.js
-  adblockplus/lib/filterClasses.js
-  adblockplus/lib/subscriptionClasses.js
-  adblockplus/lib/filterStorage.js
-  adblockplus/lib/elemHide.js
-  adblockplus/lib/matcher.js
-  adblockplus/lib/cssRules.js
-  adblockplus/lib/filterListener.js
-  adblockplus/lib/synchronizer.js
-  adblockplus/lib/notification.js
-  adblockplus/lib/antiadblockInit.js
+  adblockpluscore/lib/downloader.js
+  adblockpluscore/lib/filterNotifier.js
+  adblockpluscore/lib/filterClasses.js
+  adblockpluscore/lib/subscriptionClasses.js
+  adblockpluscore/lib/filterStorage.js
+  adblockpluscore/lib/elemHide.js
+  adblockpluscore/lib/matcher.js
+  adblockpluscore/lib/cssRules.js
+  adblockpluscore/lib/filterListener.js
+  adblockpluscore/lib/synchronizer.js
+  adblockpluscore/lib/notification.js
+  adblockpluscore/lib/antiadblockInit.js
   lib/url.js
   lib/stats.js
   lib/devtools.js
@@ -97,7 +97,7 @@ lib/adblockplus.js = lib/prefs.js
   lib/notificationHelper.js
   lib/popupBlocker.js
   lib/uninstall.js
-  --arg module=true source_repo=https://hg.adblockplus.org/adblockplus/
+  --arg module=true source_repo=https://hg.adblockplus.org/adblockpluscore/
 ext/common.js = ext/common.js chrome/ext/common.js
 ext/background.js = ext/background.js chrome/ext/background.js --arg brace_style=expand
 
