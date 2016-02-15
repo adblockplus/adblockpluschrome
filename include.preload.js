@@ -381,47 +381,6 @@ function reinjectRulesWhenRemoved(document, style)
   return observer;
 }
 
-function convertSelectorsForShadowDOM(selectors)
-{
-  var result = [];
-  var prefix = "::content ";
-
-  for (var i = 0; i < selectors.length; i++)
-  {
-    var selector = selectors[i];
-    if (selector.indexOf(",") == -1)
-    {
-      result.push(prefix + selector);
-      continue;
-    }
-
-    var start = 0;
-    var sep = "";
-    for (var j = 0; j < selector.length; j++)
-    {
-      var chr = selector[j];
-      if (chr == "\\")
-        j++;
-      else if (chr == sep)
-        sep = "";
-      else if (sep == "")
-      {
-        if (chr == '"' || chr == "'")
-          sep = chr;
-        else if (chr == ",")
-        {
-          result.push(prefix + selector.substring(start, j));
-          start = j + 1;
-        }
-      }
-    }
-
-    result.push(prefix + selector.substring(start));
-  }
-
-  return result;
-}
-
 function init(document)
 {
   var shadow = null;
@@ -472,7 +431,16 @@ function init(document)
     // before each selector, in order to match elements within the
     // insertion point.
     if (shadow)
-      selectors = convertSelectorsForShadowDOM(selectors);
+    {
+      var preparedSelectors = [];
+      for (var i = 0; i < selectors.length; i++)
+      {
+        var subSelectors = splitSelector(selectors[i]);
+        for (var j = 0; j < subSelectors.length; j++)
+          preparedSelectors.push("::content " + subSelectors[j]);
+      }
+      selectors = preparedSelectors;
+    }
 
     // WebKit (and Blink?) apparently chokes when the selector list in a
     // CSS rule is huge. So we split the elemhide selectors into groups.
