@@ -179,7 +179,7 @@
 
   var Page = function(id, tab, url)
   {
-    this._id = id;
+    this.id = id;
     this._tab = tab;
     this._frames = [{url: new URL(url), parent: null}];
 
@@ -204,11 +204,11 @@
     },
     sendMessage: function(message, responseCallback)
     {
-      this._messageProxy.sendMessage(message, responseCallback, {pageId: this._id});
+      this._messageProxy.sendMessage(message, responseCallback, {pageId: this.id});
     }
   };
 
-  ext._getPage = function(id)
+  ext.getPage = function(id)
   {
     return pages[id];
   };
@@ -222,6 +222,8 @@
 
   var forgetPage = function(id)
   {
+    ext.pages.onRemoved._dispatch(id);
+
     ext._removeFromAllPageMaps(id);
 
     delete pages[id]._tab._pages[id];
@@ -235,7 +237,7 @@
 
     for (var id in tab._pages)
     {
-      if (id != page._id)
+      if (id != page.id)
         forgetPage(id);
     }
 
@@ -273,15 +275,16 @@
 
       if (callback)
       {
-        var onLoading = function(page)
+        var onNavigate = function(event)
         {
-          if (page._tab == tab)
+          if (event.target == tab)
           {
-            ext.pages.onLoading.removeListener(onLoading);
-            callback(page);
+            safari.application.removeEventListener(onNavigate);
+            callback(tab._visiblePage);
           }
         };
-        ext.pages.onLoading.addListener(onLoading);
+
+        safari.application.addEventListener("navigate", onNavigate);
       }
     },
     query: function(info, callback)
@@ -305,6 +308,7 @@
     },
     onLoading: new ext._EventTarget(),
     onActivated: new ext._EventTarget(),
+    onRemoved: new ext._EventTarget()
   };
 
   safari.application.addEventListener("close", function(event)
@@ -753,5 +757,15 @@
     }
 
     ext.pages.open(optionsUrl, callback);
+  };
+
+  /* Windows */
+  ext.windows = {
+    // Safari doesn't provide as rich a windows API as Chrome does, so instead
+    // of chrome.windows.create we have to fall back to just opening a new tab.
+    create: function(createData, callback)
+    {
+      ext.pages.open(createData.url, callback);
+    }
   };
 })();

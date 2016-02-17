@@ -21,7 +21,7 @@
 
   var Page = ext.Page = function(tab)
   {
-    this._id = tab.id;
+    this.id = tab.id;
     this._url = tab.url && new URL(tab.url);
 
     this.browserAction = new BrowserAction(tab.id);
@@ -38,7 +38,7 @@
       // but sometimes we only have the tab id when we create a Page object.
       // In that case we get the url from top frame of the tab, recorded by
       // the onBeforeRequest handler.
-      var frames = framesOfTabs[this._id];
+      var frames = framesOfTabs[this.id];
       if (frames)
       {
         var frame = frames[0];
@@ -48,35 +48,35 @@
     },
     sendMessage: function(message, responseCallback)
     {
-      chrome.tabs.sendMessage(this._id, message, responseCallback);
+      chrome.tabs.sendMessage(this.id, message, responseCallback);
     }
   };
 
-  ext._getPage = function(id)
+  ext.getPage = function(id)
   {
     return new Page({id: parseInt(id, 10)});
   };
 
+  function afterTabLoaded(callback)
+  {
+     return function(openedTab)
+     {
+       var onUpdated = function(tabId, changeInfo, tab)
+       {
+         if (tabId == openedTab.id && changeInfo.status == "complete")
+         {
+           chrome.tabs.onUpdated.removeListener(onUpdated);
+           callback(new Page(openedTab));
+         }
+       };
+       chrome.tabs.onUpdated.addListener(onUpdated);
+     };
+  }
+
   ext.pages = {
     open: function(url, callback)
     {
-      if (callback)
-      {
-        chrome.tabs.create({url: url}, function(openedTab)
-        {
-          var onUpdated = function(tabId, changeInfo, tab)
-          {
-            if (tabId == openedTab.id && changeInfo.status == "complete")
-            {
-              chrome.tabs.onUpdated.removeListener(onUpdated);
-              callback(new Page(tab));
-            }
-          };
-          chrome.tabs.onUpdated.addListener(onUpdated);
-        });
-      }
-      else
-        chrome.tabs.create({url: url});
+      chrome.tabs.create({url: url}, callback && afterTabLoaded(callback));
     },
     query: function(info, callback)
     {
@@ -100,7 +100,8 @@
       });
     },
     onLoading: new ext._EventTarget(),
-    onActivated: new ext._EventTarget()
+    onActivated: new ext._EventTarget(),
+    onRemoved: new ext._EventTarget()
   };
 
   chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
@@ -138,6 +139,8 @@
 
   function forgetTab(tabId)
   {
+    ext.pages.onRemoved._dispatch(tabId);
+
     ext._removeFromAllPageMaps(tabId);
     delete framesOfTabs[tabId];
   }
@@ -149,7 +152,7 @@
 
   chrome.tabs.onRemoved.addListener(forgetTab);
 
-  chrome.tabs.onActivated.addListener(details =>
+  chrome.tabs.onActivated.addListener(function(details)
   {
     ext.pages.onActivated._dispatch(new Page({id: details.tabId}));
   });
@@ -273,7 +276,7 @@
         if (tabs.length == 0)
           return;
 
-        var items = contextMenuItems.get({_id: tabs[0].id});
+        var items = contextMenuItems.get({id: tabs[0].id});
 
         if (!items)
           return;
@@ -585,5 +588,16 @@
         }
       });
     });
+  };
+
+  /* Windows */
+  ext.windows = {
+    create: function(createData, callback)
+    {
+      chrome.windows.create(createData, function(createdWindow)
+      {
+        afterTabLoaded(callback)(createdWindow.tabs[0]);
+      });
+    }
   };
 })();

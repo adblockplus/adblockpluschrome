@@ -48,7 +48,7 @@ function onLoad()
       if (checkWhitelisted(page))
         document.body.classList.add("disabled");
 
-      page.sendMessage({type: "get-clickhide-state"}, function(response)
+      page.sendMessage({type: "blockelement-get-state"}, function(response)
       {
         if (response && response.active)
           document.body.classList.add("clickhide-active");
@@ -84,7 +84,7 @@ function onUnload()
 
 function onMessage(message, sender, callback)
 {
-  if (message.type == "report-html-page" && sender.page._id == page._id)
+  if (message.type == "report-html-page" && sender.page.id == page.id)
     document.body.classList.remove("nohtml");
 }
 
@@ -120,7 +120,7 @@ function toggleEnabled()
 function activateClickHide()
 {
   document.body.classList.add("clickhide-active");
-  page.sendMessage({type: "clickhide-activate"});
+  page.sendMessage({type: "blockelement-start-picking-element"});
 
   // Close the popup after a few seconds, so user doesn't have to
   activateClickHide.timeout = window.setTimeout(ext.closePopup, 5000);
@@ -134,7 +134,7 @@ function cancelClickHide()
     activateClickHide.timeout = null;
   }
   document.body.classList.remove("clickhide-active");
-  page.sendMessage({type: "clickhide-deactivate"});
+  page.sendMessage({type: "blockelement-finished"});
 }
 
 function toggleCollapse(event)

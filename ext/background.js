@@ -35,20 +35,20 @@
     },
     keys: function()
     {
-      return Object.keys(this._map).map(ext._getPage);
+      return Object.keys(this._map).map(ext.getPage);
     },
     get: function(page)
     {
-      return this._map[page._id];
+      return this._map[page.id];
     },
     set: function(page, value)
     {
-      this._map[page._id] = value;
+      this._map[page.id] = value;
       nonEmptyPageMaps[this._id] = this;
     },
     has: function(page)
     {
-      return page._id in this._map;
+      return page.id in this._map;
     },
     clear: function()
     {
@@ -57,7 +57,7 @@
     },
     delete: function(page)
     {
-      this._delete(page._id);
+      this._delete(page.id);
     }
   };
 

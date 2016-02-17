@@ -119,7 +119,7 @@ var contextMenuItem = {
   contexts: ["image", "video", "audio"],
   onclick: function(page)
   {
-    page.sendMessage({type: "clickhide-new-filter"});
+    page.sendMessage({type: "blockelement-context-menu-clicked"});
   }
 };
 
@@ -283,6 +283,35 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
 {
   switch (msg.type)
   {
+    case "blockelement-open-popup":
+      ext.windows.create({
+        url: ext.getURL("block.html"),
+        left: 50,
+        top: 50,
+        width: 420,
+        height: 200,
+        focused: true,
+        type: "popup"
+      },
+      function (popupPage) {
+        var popupPageId = popupPage.id;
+        function onRemoved(removedPageId)
+        {
+          if (popupPageId == removedPageId)
+          {
+            sender.page.sendMessage({
+              type: "blockelement-popup-closed",
+              popupId: popupPageId
+            });
+            ext.pages.onRemoved.removeListener(onRemoved);
+          }
+        }
+        ext.pages.onRemoved.addListener(onRemoved);
+
+        sendResponse(popupPageId);
+      });
+      return true;
+      break;
     case "get-selectors":
       var selectors = [];
       var trace = devtools && devtools.hasPanel(sender.page);
@@ -408,15 +437,22 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
       );
       break;
     case "forward":
-      if (sender.page)
+      var targetPage;
+      if (msg.targetPageId)
+        targetPage = ext.getPage(msg.targetPageId);
+      else
+        targetPage = sender.page;
+
+      if (targetPage)
       {
+        msg.payload.sender = sender.page.id;
         if (msg.expectsResponse)
         {
-          sender.page.sendMessage(msg.payload, sendResponse);
+          targetPage.sendMessage(msg.payload, sendResponse);
           return true;
         }
 
-        sender.page.sendMessage(msg.payload);
+        targetPage.sendMessage(msg.payload);
       }
       break;
   }
@@ -425,7 +461,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
 // update icon when page changes location
 ext.pages.onLoading.addListener(function(page)
 {
-  page.sendMessage({type: "clickhide-deactivate"});
+  page.sendMessage({type: "blockelement-finished"});
   refreshIconAndContextMenu(page);
   showNextNotificationForUrl(page.url);
 });
