@@ -387,19 +387,37 @@ function elementPicked(event)
     {
       type: "blockelement-open-popup"
     },
-    response =>
+    popupId =>
     {
-      blockelementPopupId = response;
       ext.backgroundPage.sendMessage(
       {
         type: "forward",
-        targetPageId: blockelementPopupId,
+        targetPageId: popupId,
         payload:
         {
           type: "blockelement-popup-init",
           filters: filters
         }
       });
+
+      // Only the top frame keeps a record of the popup window's ID,
+      // so if this isn't the top frame we need to pass the ID on.
+      if (window == window.top)
+      {
+        blockelementPopupId = popupId;
+      }
+      else
+      {
+        ext.backgroundPage.sendMessage(
+        {
+          type: "forward",
+          payload:
+          {
+            type: "blockelement-popup-opened",
+            popupId: popupId
+          }
+        });
+      }
     });
 
     if (selectors.length > 0)
@@ -543,6 +561,10 @@ if ("ext" in window && document instanceof HTMLDocument)
         if (!lastRightClickEventIsMostRecent)
           lastRightClickEvent = null;
         lastRightClickEventIsMostRecent = false;
+        break;
+      case "blockelement-popup-opened":
+        if (window == window.top)
+          blockelementPopupId = msg.popupId;
         break;
       case "blockelement-popup-closed":
         // The onRemoved hook for the popup can create a race condition, so we
