@@ -150,11 +150,6 @@ function refreshIconAndContextMenuForAllPages()
  */
 function addSubscription(prevVersion)
 {
-  // Make sure to remove "Recommended filters", no longer necessary
-  var toRemove = "https://easylist-downloads.adblockplus.org/chrome_supplement.txt";
-  if (toRemove in FilterStorage.knownSubscriptions)
-    FilterStorage.removeSubscription(FilterStorage.knownSubscriptions[toRemove]);
-
   // Add "acceptable ads" subscription for new users
   var addAcceptable = !prevVersion;
   if (addAcceptable)
@@ -195,19 +190,6 @@ function addSubscription(prevVersion)
     }
     else
       addAcceptable = false;
-  }
-
-  // Add "anti-adblock messages" subscription for new users and users updating from old ABP versions
-  if (!prevVersion || Services.vc.compare(prevVersion, "1.8") < 0)
-  {
-    var subscription = Subscription.fromURL(Prefs.subscriptions_antiadblockurl);
-    if (subscription && !(subscription.url in FilterStorage.knownSubscriptions))
-    {
-      subscription.disabled = true;
-      FilterStorage.addSubscription(subscription);
-      if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
-        Synchronizer.execute(subscription);
-    }
   }
 
   if (!addSubscription && !addAcceptable)
