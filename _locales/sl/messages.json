@@ -103,6 +103,12 @@
   "name_devbuild": {
     "message": "Adblock Plus razvojna različica"
   },
+  "notification_configure": {
+    "message": "Konfigurirajte nastavitve obveščanja"
+  },
+  "notification_open_all": {
+    "message": "Odprite vse povezave iz tega obvestila"
+  },
   "notification_with_buttons": {
     "message": "Klinite \"OK\" da odprete vse povezave v tem obvestilu."
   },
@@ -158,6 +164,9 @@
         "content": "$1"
       }
     }
+  },
+  "stats_share_title": {
+    "message": "Deli to število"
   },
   "stats_show_iconnumber": {
     "message": "Pokaži število v ikoni"
