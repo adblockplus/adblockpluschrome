@@ -29,13 +29,25 @@
 <script type="text/javascript" src="i18n.js" charset="utf-8"></script>
 <script type="text/javascript" src="block.js" charset="utf-8"></script>
 <style type="text/css">
+  *
+  {
+    box-sizing: border-box;
+  }
+  html
+  {
+    height: 100%;
+  }
   body
   {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
+    height: 100%;
     margin: 0px;
     padding: 5px;
-    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
   }
   #title,
   #filters
@@ -50,13 +62,19 @@
   {
     margin-right: 5px;
   }
+  #title, #buttons
+  {
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+  }
   #filters
   {
-    width: 400px;
-    height: 100px;
+    width: 100%;
     resize: none;
     white-space: pre;
     word-wrap: normal;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
   }
   #buttons
   {
