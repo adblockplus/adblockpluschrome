@@ -17,16 +17,9 @@
 
 with(require("filterClasses"))
 {
-  this.Filter = Filter;
   this.BlockingFilter = BlockingFilter;
   this.WhitelistFilter = WhitelistFilter;
   this.RegExpFilter = RegExpFilter;
-}
-with(require("subscriptionClasses"))
-{
-  this.Subscription = Subscription;
-  this.DownloadableSubscription = DownloadableSubscription;
-  this.SpecialSubscription = SpecialSubscription;
 }
 with(require("whitelisting"))
 {
@@ -42,71 +35,15 @@ with(require("url"))
 }
 var FilterStorage = require("filterStorage").FilterStorage;
 var FilterNotifier = require("filterNotifier").FilterNotifier;
+var SpecialSubscription = require("subscriptionClasses").SpecialSubscription;
 var ElemHide = require("elemHide").ElemHide;
 var defaultMatcher = require("matcher").defaultMatcher;
 var Prefs = require("prefs").Prefs;
-var Synchronizer = require("synchronizer").Synchronizer;
-var Utils = require("utils").Utils;
 var parseFilters = require("filterValidation").parseFilters;
 var composeFilters = require("filterComposer").composeFilters;
 var updateIcon = require("icon").updateIcon;
-var initNotifications = require("notificationHelper").initNotifications;
 var showNextNotificationForUrl = require("notificationHelper").showNextNotificationForUrl;
 var devtools = require("devtools");
-
-var seenDataCorruption = false;
-var filterlistsReinitialized = false;
-
-function init()
-{
-  var filtersLoaded = new Promise(function(resolve)
-  {
-    function onFilterAction(action)
-    {
-      if (action == "load")
-      {
-        FilterNotifier.removeListener(onFilterAction);
-        resolve();
-      }
-    }
-    FilterNotifier.addListener(onFilterAction);
-  });
-
-  function onLoaded()
-  {
-    var info = require("info");
-    var previousVersion = Prefs.currentVersion;
-
-    // There are no filters stored so we need to reinitialize all filterlists
-    if (!FilterStorage.firstRun && FilterStorage.subscriptions.length === 0)
-    {
-      filterlistsReinitialized = true;
-      previousVersion = null;
-    }
-
-    if (previousVersion != info.addonVersion || FilterStorage.firstRun)
-    {
-      seenDataCorruption = previousVersion && FilterStorage.firstRun;
-      Prefs.currentVersion = info.addonVersion;
-      addSubscription(previousVersion);
-    }
-
-    initNotifications();
-
-    // Update browser actions and context menus when whitelisting might have
-    // changed. That is now when initally loading the filters and later when
-    // importing backups or saving filter changes.
-    FilterNotifier.addListener(function(action)
-    {
-      if (action == "load" || action == "save")
-        refreshIconAndContextMenuForAllPages();
-    });
-    refreshIconAndContextMenuForAllPages();
-  }
-
-  Promise.all([filtersLoaded, Prefs.isLoaded]).then(onLoaded);
-}
-init();
 
 // Special-case domains for which we cannot use style-based hiding rules.
 // See http://crbug.com/68705.
@@ -144,104 +81,11 @@ function refreshIconAndContextMenuForAllPages()
   });
 }
 
-/**
- * This function is called on an extension update. It will add the default
- * filter subscription if necessary.
- */
-function addSubscription(prevVersion)
+FilterNotifier.addListener(function(action)
 {
-  // Add "acceptable ads" subscription for new users
-  var addAcceptable = !prevVersion;
-  if (addAcceptable)
-  {
-    addAcceptable = !FilterStorage.subscriptions.some(function(subscription)
-    {
-      return subscription.url == Prefs.subscriptions_exceptionsurl;
-    });
-  }
-
-  // Don't add subscription if the user has a subscription already
-  var addSubscription = !FilterStorage.subscriptions.some(function(subscription)
-  {
-    return subscription instanceof DownloadableSubscription &&
-           subscription.url != Prefs.subscriptions_exceptionsurl;
-  });
-
-  // If this isn't the first run, only add subscription if the user has no custom filters
-  if (addSubscription && prevVersion)
-  {
-    addSubscription = !FilterStorage.subscriptions.some(function(subscription)
-    {
-      return subscription.url != Prefs.subscriptions_exceptionsurl &&
-             subscription.filters.length;
-    });
-  }
-
-  // Add "acceptable ads" subscription
-  if (addAcceptable)
-  {
-    var subscription = Subscription.fromURL(Prefs.subscriptions_exceptionsurl);
-    if (subscription)
-    {
-      subscription.title = "Allow non-intrusive advertising";
-      FilterStorage.addSubscription(subscription);
-      if (subscription instanceof DownloadableSubscription &&
-          !subscription.lastDownload)
-        Synchronizer.execute(subscription);
-    }
-    else
-      addAcceptable = false;
-  }
-
-  // Add "anti-adblock messages" subscription for new users
-  if (!prevVersion)
-  {
-    var subscription = Subscription.fromURL(Prefs.subscriptions_antiadblockurl);
-    if (subscription && !(subscription.url in FilterStorage.knownSubscriptions))
-    {
-      subscription.disabled = true;
-      FilterStorage.addSubscription(subscription);
-      if (subscription instanceof DownloadableSubscription &&
-          !subscription.lastDownload)
-        Synchronizer.execute(subscription);
-    }
-  }
-
-  if (!addSubscription && !addAcceptable)
-    return;
-
-  Promise.resolve(addSubscription && fetch("subscriptions.xml")
-    .then(function(response)
-    {
-      return response.text();
-    })
-    .then(function(text)
-    {
-      var doc = new DOMParser().parseFromString(text, "application/xml");
-      var nodes = doc.getElementsByTagName("subscription");
-      var node = Utils.chooseFilterSubscription(nodes);
-      var subscription = node && Subscription.fromURL(node.getAttribute("url"));
-
-      if (subscription)
-      {
-        FilterStorage.addSubscription(subscription);
-
-        subscription.disabled = false;
-        subscription.title = node.getAttribute("title");
-        subscription.homepage = node.getAttribute("homepage");
-
-        if (subscription instanceof DownloadableSubscription &&
-            !subscription.lastDownload)
-          Synchronizer.execute(subscription);
-      }
-    })
-  )
-  .then(function()
-  {
-    if (!Prefs.suppress_first_run_page)
-      ext.pages.open(ext.getURL("firstRun.html"));
-  });
-}
+  if (action == "load" || action == "save")
+    refreshIconAndContextMenuForAllPages();
+});
 
 Prefs.onChanged.addListener(function(name)
 {

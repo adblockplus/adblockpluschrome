@@ -95,6 +95,7 @@ lib/adblockplus.js = lib/prefs.js
   lib/filterComposer.js
   lib/icon.js
   lib/notificationHelper.js
+  lib/subscriptionInit.js
   lib/popupBlocker.js
   lib/uninstall.js
   --arg module=true source_repo=https://hg.adblockplus.org/adblockpluscore/
