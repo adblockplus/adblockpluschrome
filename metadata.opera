@@ -1,5 +1,0 @@
-[default]
-inherit = metadata.chrome
-
-[general]
-basename = adblockplusopera

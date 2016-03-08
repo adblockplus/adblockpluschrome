@@ -14,7 +14,7 @@ Building
 - [Python 2.7](https://www.python.org)
 - [The Jinja2 module](http://jinja.pocoo.org/docs)
 - [The PIL module](http://www.pythonware.com/products/pil/)
-- For signed Chrome and Opera builds: [M2Crypto module](https://github.com/martinpaljak/M2Crypto)
+- For signed Chrome builds: [M2Crypto module](https://github.com/martinpaljak/M2Crypto)
 - For signed Safari builds: A [patched version of the xar command line tool](https://github.com/mackyle/xar/)
 
 ### Building the extension
@@ -23,12 +23,11 @@ Run one of the following commands in the project directory, depending on your
 target platform:
 
     ./build.py -t chrome build -k adblockpluschrome.pem
-    ./build.py -t opera build -k adblockplusopera.pem
     ./build.py -t safari build -k adblockplussafari.pem
 
 This will create a build with a name in the form
 _adblockpluschrome-1.2.3.nnnn.crx_ or _adblockplussafari-1.2.3.nnnn.safariextz_.
-Note that you don't need an existing signing key for Chrome or Opera, a new key
+Note that you don't need an existing signing key for Chrome, a new key
 will be created automatically if the file doesn't exist. Safari on the other
 hand always requires a valid developer certificate, you need to get one in the
 Apple Developer Center first. _adblockplussafari.pem_ should contain the private
@@ -42,14 +41,12 @@ To simplify the process of testing your changes you can create an unpacked
 development environment. For that run one of the following commands:
 
     ./build.py -t chrome devenv
-    ./build.py -t opera devenv
     ./build.py -t safari devenv
 
-This will create a _devenv.platform_ directory in the repository. In Chrome and
-Opera you should load _devenv.chrome_ or _devenv.opera_ as an unpacked extension
-directory. After making changes to the source code re-run the command to update
-the development environment, the extension should reload automatically after a
-few seconds.
+This will create a _devenv.platform_ directory in the repository. In Chrome you
+should load _devenv.chrome_ as an unpacked extension directory. After making
+changes to the source code re-run the command to update the development
+environment, the extension should reload automatically after a few seconds.
 
 In Safari you should load _devenv.safari/adblockplussafari.safariextension_ as
 unpacked extension directory. After making changes to the source code re-run the
