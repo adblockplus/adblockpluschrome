@@ -377,20 +377,6 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
         return;
       }
       break;
-    case "add-filters":
-      var result = parseFilters(msg.text);
-
-      if (result.errors.length > 0)
-      {
-        sendResponse({status: "invalid", error: result.errors.join("\n")});
-        break;
-      }
-
-      for (var i = 0; i < result.filters.length; i++)
-        FilterStorage.addFilter(result.filters[i]);
-
-      sendResponse({status: "ok"});
-      break;
     case "add-sitekey":
       processKey(msg.token, sender.page, sender.frame);
       break;

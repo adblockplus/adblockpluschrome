@@ -35,15 +35,15 @@ function addFilters()
 {
   ext.backgroundPage.sendMessage(
   {
-    type: "add-filters",
+    type: "filters.importRaw",
     text: document.getElementById("filters").value
   },
-  function(response)
+  function(errors)
   {
-    if (response.status == "ok")
-      closeDialog(true);
+    if (errors.length > 0)
+      alert(errors.join("\n"));
     else
-      alert(response.error);
+      closeDialog(true);
   });
 }
 
