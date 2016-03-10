@@ -117,6 +117,8 @@ adblockplus/chrome/locale/*/global.properties = subscription_invalid_location
   remove_subscription_warning
   notification_antiadblock_title
   notification_antiadblock_message
+  filter_unknown_option
+  filter_invalid_regexp
   filter_elemhide_duplicate_id
   filter_elemhide_nocriteria
   filter_cssproperty_nodomain
