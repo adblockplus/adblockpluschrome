@@ -19,6 +19,12 @@
 
 (function()
 {
+  // Both Edge and Mozilla Web Extensions use the namespace
+  // 'browser' instead of 'chrome'. Edge has chrome namespace defined,
+  // in some cases, but only with one property: 'app'.
+  if (typeof chrome == "undefined" || typeof chrome.extension == "undefined")
+    window.chrome = window.browser;
+
   window.ext = {};
 
   let EventTarget = ext._EventTarget = function()

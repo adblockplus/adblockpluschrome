@@ -70,6 +70,7 @@ const importRawFilters = wrapper({type: "filters.importRaw"},
                                  "text", "removeExisting");
 const addFilter = wrapper({type: "filters.add"}, "text");
 const removeFilter = wrapper({type: "filters.remove"}, "text");
+const quoteCSS = wrapper({type: "composer.quoteCSS"}, "CSS");
 
 const whitelistedDomainRegexp = /^@@\|\|([^/:]+)\^\$document$/;
 const statusMessages = new Map([
@@ -529,9 +530,14 @@ function appendToListBox(boxId, text)
 function removeFromListBox(boxId, text)
 {
   let list = document.getElementById(boxId);
-  let selector = "option[value=" + CSS.escape(text) + "]";
-  for (let option of list.querySelectorAll(selector))
-    list.removeChild(option);
+  // Edge does not support CSS.escape yet:
+  // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/101410/
+  quoteCSS(text, escapedCSS =>
+  {
+    let selector = "option[value=" + escapedCSS + "]";
+    for (let option of list.querySelectorAll(selector))
+      list.removeChild(option);
+  });
 }
 
 function addWhitelistDomain(event)

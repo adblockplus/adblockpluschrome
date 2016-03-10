@@ -618,7 +618,9 @@
       sender.page = new Page(rawSender.tab);
       sender.frame = {
         id: rawSender.frameId,
-        url: new URL(rawSender.url),
+        // In Edge requests from internal extension pages
+        // (protocol ms-browser-extension://) do no have a sender URL.
+        url: rawSender.url ? new URL(rawSender.url) : null,
         get parent()
         {
           let frames = framesOfTabs.get(rawSender.tab.id);
@@ -696,11 +698,14 @@
   {
     // Edge does not yet support runtime.openOptionsPage (tested version 38)
     // and so this workaround needs to stay for now.
+    // We are not using extension.getURL to get the absolute path here
+    // because of the Edge issue:
+    // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/10276332/
     ext.showOptions = callback =>
     {
       chrome.windows.getLastFocused(win =>
       {
-        let optionsUrl = chrome.extension.getURL("options.html");
+        let optionsUrl = "options.html";
         let queryInfo = {url: optionsUrl};
 
         // extension pages can't be accessed in incognito windows. In order to

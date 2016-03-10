@@ -1,10 +1,10 @@
-Adblock Plus for Chrome, Opera and Firefox
-==========================================
+Adblock Plus for Chrome, Opera, Microsoft Edge and Firefox
+==========================================================
 
 This repository contains the platform-specific Adblock Plus source code for
-Chrome, Opera and Firefox. It can be used to build Adblock Plus for these
-platforms, generic Adblock Plus code will be extracted from other repositories
-automatically (see _dependencies_ file).
+Chrome, Opera, Microsoft Edge and Firefox. It can be used to build
+Adblock Plus for these platforms, generic Adblock Plus code will be extracted
+from other repositories automatically (see _dependencies_ file).
 
 Note that the Firefox extension built from this repository is the new
 [WebExtension](https://developer.mozilla.org/en-US/Add-ons/WebExtensions).
@@ -28,13 +28,19 @@ Run one of the following commands in the project directory, depending on your
 target platform:
 
     ./build.py -t chrome build -k adblockpluschrome.pem
+    ./build.py -t edge build
     ./build.py -t gecko-webext build
 
 This will create a build with a name in the form
-_adblockpluschrome-1.2.3.nnnn.crx_ or _adblockplusfirefox-1.2.3.nnnn.xpi_
+_adblockpluschrome-1.2.3.nnnn.crx_, _adblockplusedge-1.2.3.nnnn.appx_ or
+_adblockplusfirefox-1.2.3.nnnn.xpi_.
 
 Note that you don't need an existing signing key for Chrome, a new key
 will be created automatically if the file doesn't exist.
+
+The Microsoft Edge build _adblockplusedge-1.2.3.nnnn.appx_ is unsigned and
+is only useful for uploading into Windows Store, where it will be signed. For
+testing use the devenv build.
 
 The Firefox extension will be unsigned, and therefore is mostly only useful for
 upload to Mozilla Add-ons. You can also also load it for testing purposes under
@@ -46,13 +52,20 @@ To simplify the process of testing your changes you can create an unpacked
 development environment. For that run one of the following commands:
 
     ./build.py -t chrome devenv
+    ./build.py -t edge devenv
     ./build.py -t gecko-webext devenv
 
 This will create a _devenv.*_ directory in the repository. You can load the
 directory as an unpacked extension, under _chrome://extensions_ in Chrome,
-or under _about:debugging_ in Firefox. After making changes to the
-source code re-run the command to update the development environment, the
-extension should reload automatically after a few seconds.
+under _about:debugging_ in Firefox or in _Extensions_ menu in Microsoft Edge,
+after enabling extension development features in _about:flags_.
+After making changes to the source code re-run the command to update the
+development environment. In Chrome and Firefox the extension should reload
+automatically after a few seconds.
+
+Builds for Microsoft Edge do not automatically detect changes, so after
+rebuilding the extension you should manually force reloading it in Edge by
+hitting the _Reload Extension_ button.
 
 Running the unit tests
 ----------------------
