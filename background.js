@@ -185,11 +185,26 @@ function addSubscription(prevVersion)
     {
       subscription.title = "Allow non-intrusive advertising";
       FilterStorage.addSubscription(subscription);
-      if (subscription instanceof DownloadableSubscription && !subscription.lastDownload)
+      if (subscription instanceof DownloadableSubscription &&
+          !subscription.lastDownload)
         Synchronizer.execute(subscription);
     }
     else
       addAcceptable = false;
+  }
+
+  // Add "anti-adblock messages" subscription for new users
+  if (!prevVersion)
+  {
+    var subscription = Subscription.fromURL(Prefs.subscriptions_antiadblockurl);
+    if (subscription && !(subscription.url in FilterStorage.knownSubscriptions))
+    {
+      subscription.disabled = true;
+      FilterStorage.addSubscription(subscription);
+      if (subscription instanceof DownloadableSubscription &&
+          !subscription.lastDownload)
+        Synchronizer.execute(subscription);
+    }
   }
 
   if (!addSubscription && !addAcceptable)
