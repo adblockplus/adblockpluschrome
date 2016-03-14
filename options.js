@@ -40,6 +40,7 @@ var Prefs = require("prefs").Prefs;
 var Synchronizer = require("synchronizer").Synchronizer;
 var Utils = require("utils").Utils;
 var NotificationStorage = require("notification").Notification;
+var info = require("info");
 
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions()
@@ -51,7 +52,7 @@ function loadOptions()
   $("#acceptableAdsLink").attr("href", Prefs.subscriptions_exceptionsurl);
   $("#acceptableAdsDocs").attr("href", Utils.getDocLink("acceptable_ads"));
   setLinks("filter-must-follow-syntax", Utils.getDocLink("filterdoc"));
-  setLinks("found-a-bug", Utils.getDocLink(require("info").application + "_support"));
+  setLinks("found-a-bug", Utils.getDocLink(info.application + "_support"));
 
   // Add event listeners
   window.addEventListener("unload", unloadOptions, false);
@@ -77,21 +78,22 @@ function loadOptions()
 
   // Popuplate option checkboxes
   initCheckbox("shouldShowBlockElementMenu");
-  if (Prefs.notifications_showui)
-  {
-    initCheckbox("shouldShowNotifications", {
-      get: function()
-      {
-        return Prefs.notifications_ignoredcategories.indexOf("*") == -1;
-      },
-      toggle: function()
-      {
-        NotificationStorage.toggleIgnoreCategory("*");
-        return this.get();
-      }
-    });
-  }
-  else
+  initCheckbox("show_devtools_panel");
+  initCheckbox("shouldShowNotifications", {
+    get: function()
+    {
+      return Prefs.notifications_ignoredcategories.indexOf("*") == -1;
+    },
+    toggle: function()
+    {
+      NotificationStorage.toggleIgnoreCategory("*");
+      return this.get();
+    }
+  });
+
+  if (info.platform != "chromium")
+    document.getElementById("showDevtoolsPanelContainer").hidden = true;
+  if (!Prefs.notifications_showui)
     document.getElementById("shouldShowNotificationsContainer").hidden = true;
 
   ext.onMessage.addListener(onMessage);

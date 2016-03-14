@@ -263,6 +263,9 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
         extractHostFromFrame(sender.frame)
       );
       break;
+    case "has-devtools-panel":
+      sendResponse(Prefs.show_devtools_panel);
+      break;
     case "forward":
       var targetPage;
       if (msg.targetPageId)

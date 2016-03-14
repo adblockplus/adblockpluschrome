@@ -128,6 +128,9 @@
   "show_block_element_menu": {
     "message": "Show 'Block Element' right-click menu item"
   },
+  "show_devtools_panel": {
+    "message": "Show 'Adblock Plus' panel in the developer tools"
+  },
   "stats_label_page": {
     "description": "This shows the number of blocked requests on a specific page in the popup.",
     "message": "<strong>$number$</strong> on this page",
