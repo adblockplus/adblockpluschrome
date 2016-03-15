@@ -3,6 +3,12 @@
   "properties": {
     "suppress_first_run_page": {
       "type": "boolean"
+    },
+    "additional_subscriptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   }
 }

@@ -672,6 +672,8 @@ function addSubscriptionEntry(subscription)
 
     FilterStorage.removeSubscription(subscription);
   }, false);
+  if (Prefs.additional_subscriptions.indexOf(subscription.url) != -1)
+    removeButton.style.visibility = "hidden";
 
   var enabled = element.getElementsByClassName("subscriptionEnabled")[0];
   enabled.addEventListener("click", function()
