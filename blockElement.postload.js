@@ -44,7 +44,7 @@ function getFiltersForElement(element, callback)
 {
   ext.backgroundPage.sendMessage(
   {
-    type: "compose-filters",
+    type: "composer.getFilters",
     tagName: element.localName,
     id: element.id,
     src: element.getAttribute("src"),
@@ -385,7 +385,7 @@ function elementPicked(event)
 
     ext.backgroundPage.sendMessage(
     {
-      type: "blockelement-open-popup"
+      type: "composer.openDialog"
     },
     popupId =>
     {
@@ -395,7 +395,7 @@ function elementPicked(event)
         targetPageId: popupId,
         payload:
         {
-          type: "blockelement-popup-init",
+          type: "composer.dialog.init",
           filters: filters
         }
       });
@@ -413,7 +413,7 @@ function elementPicked(event)
           type: "forward",
           payload:
           {
-            type: "blockelement-popup-opened",
+            type: "composer.content.dialogOpened",
             popupId: popupId
           }
         });
@@ -462,7 +462,7 @@ function deactivateBlockElement()
       targetPageId: blockelementPopupId,
       payload:
       {
-        type: "blockelement-close-popup"
+        type: "composer.dialog.close"
       }
     });
 
@@ -508,7 +508,7 @@ if ("ext" in window && document instanceof HTMLDocument)
       type: "forward",
       payload:
       {
-        type: "blockelement-clear-previous-right-click-event"
+        type: "composer.content.clearPreviousRightClickEvent"
       }
     });
   }, true);
@@ -517,17 +517,17 @@ if ("ext" in window && document instanceof HTMLDocument)
   {
     switch (msg.type)
     {
-      case "blockelement-get-state":
+      case "composer.content.getState":
         if (window == window.top)
           sendResponse({
             active: currentlyPickingElement || blockelementPopupId != null
           });
         break;
-      case "blockelement-start-picking-element":
+      case "composer.content.startPickingElement":
         if (window == window.top)
           startPickingElement();
         break;
-      case "blockelement-context-menu-clicked":
+      case "composer.content.contextMenuClicked":
         let event = lastRightClickEvent;
         deactivateBlockElement();
         if (event)
@@ -542,7 +542,7 @@ if ("ext" in window && document instanceof HTMLDocument)
           });
         }
         break;
-      case "blockelement-finished":
+      case "composer.content.finished":
         if (currentElement && msg.remove)
         {
           // Hide the selected element itself if an added blocking
@@ -557,16 +557,16 @@ if ("ext" in window && document instanceof HTMLDocument)
         }
         deactivateBlockElement();
         break;
-      case "blockelement-clear-previous-right-click-event":
+      case "composer.content.clearPreviousRightClickEvent":
         if (!lastRightClickEventIsMostRecent)
           lastRightClickEvent = null;
         lastRightClickEventIsMostRecent = false;
         break;
-      case "blockelement-popup-opened":
+      case "composer.content.dialogOpened":
         if (window == window.top)
           blockelementPopupId = msg.popupId;
         break;
-      case "blockelement-popup-closed":
+      case "composer.content.dialogClosed":
         // The onRemoved hook for the popup can create a race condition, so we
         // to be careful here. (This is not perfect, but best we can do.)
         if (window == window.top && blockelementPopupId == msg.popupId)
@@ -576,7 +576,7 @@ if ("ext" in window && document instanceof HTMLDocument)
             type: "forward",
             payload:
             {
-              type: "blockelement-finished"
+              type: "composer.content.finished"
             }
           });
         }
@@ -585,5 +585,5 @@ if ("ext" in window && document instanceof HTMLDocument)
   });
 
   if (window == window.top)
-    ext.backgroundPage.sendMessage({type: "report-html-page"});
+    ext.backgroundPage.sendMessage({type: "composer.ready"});
 }

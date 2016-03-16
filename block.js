@@ -55,7 +55,7 @@ function closeDialog(success)
     targetPageId: targetPageId,
     payload:
     {
-      type: "blockelement-finished",
+      type: "composer.content.finished",
       remove: (typeof success == "boolean" ? success : false)
     }
   });
@@ -81,11 +81,11 @@ function init()
   {
     switch (msg.type)
     {
-      case "blockelement-popup-init":
+      case "composer.dialog.init":
         targetPageId = msg.sender;
         document.getElementById("filters").value = msg.filters.join("\n");
         break;
-      case "blockelement-close-popup":
+      case "composer.dialog.close":
         window.close();
         break;
     }

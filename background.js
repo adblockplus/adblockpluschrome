@@ -56,7 +56,7 @@ var contextMenuItem = {
   contexts: ["image", "video", "audio"],
   onclick: function(page)
   {
-    page.sendMessage({type: "blockelement-context-menu-clicked"});
+    page.sendMessage({type: "composer.content.contextMenuClicked"});
   }
 };
 
@@ -124,7 +124,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
 {
   switch (msg.type)
   {
-    case "blockelement-open-popup":
+    case "composer.openDialog":
       ext.windows.create({
         url: ext.getURL("block.html"),
         left: 50,
@@ -141,7 +141,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
           if (popupPageId == removedPageId)
           {
             sender.page.sendMessage({
-              type: "blockelement-popup-closed",
+              type: "composer.content.dialogClosed",
               popupId: popupPageId
             });
             ext.pages.onRemoved.removeListener(onRemoved);
@@ -239,11 +239,11 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
     case "add-sitekey":
       processKey(msg.token, sender.page, sender.frame);
       break;
-    case "report-html-page":
+    case "composer.ready":
       htmlPages.set(sender.page, null);
       refreshIconAndContextMenu(sender.page);
       break;
-    case "compose-filters":
+    case "composer.getFilters":
       sendResponse(composeFilters({
         tagName: msg.tagName,
         id: msg.id,
@@ -291,7 +291,7 @@ ext.onMessage.addListener(function (msg, sender, sendResponse)
 // update icon when page changes location
 ext.pages.onLoading.addListener(function(page)
 {
-  page.sendMessage({type: "blockelement-finished"});
+  page.sendMessage({type: "composer.content.finished"});
   refreshIconAndContextMenu(page);
   showNextNotificationForUrl(page.url);
 });
