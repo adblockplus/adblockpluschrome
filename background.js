@@ -85,11 +85,7 @@ FilterNotifier.addListener(function(action)
     refreshIconAndContextMenuForAllPages();
 });
 
-Prefs.onChanged.addListener(function(name)
-{
-  if (name == "shouldShowBlockElementMenu")
-    refreshIconAndContextMenuForAllPages();
-});
+Prefs.on("shouldShowBlockElementMenu", refreshIconAndContextMenuForAllPages);
 
 // This is a hack to speedup loading of the options page on Safari.
 // Once we replaced the background page proxy with message passing

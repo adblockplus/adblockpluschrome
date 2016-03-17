@@ -72,7 +72,8 @@ qunit/qunit.js = adblockplustests/chrome/content/qunit.js
 qunit/qunit.css = adblockplustests/chrome/content/qunit.css
 
 [convert_js]
-lib/adblockplus.js = lib/prefs.js
+lib/adblockplus.js = lib/events.js
+  lib/prefs.js
   lib/utils.js
   lib/io.js
   adblockpluscore/lib/downloader.js

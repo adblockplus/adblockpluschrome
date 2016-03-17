@@ -46,8 +46,7 @@ function preparePrefs()
   for (var pref in Prefs)
   {
     var value = Prefs[pref];
-    if (!(value instanceof ext._EventTarget))
-      this._pbackup[pref] = value;
+    this._pbackup[pref] = value;
   }
   Prefs.enabled = true;
 }
