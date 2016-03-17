@@ -88,9 +88,10 @@ if ("ext" in window && document instanceof HTMLDocument)
       return;
 
     ext.backgroundPage.sendMessage({
-      type: "add-subscription",
+      type: "subscriptions.add",
       title: title,
-      url: url
+      url: url,
+      confirm: true
     });
   }, true);
 }
