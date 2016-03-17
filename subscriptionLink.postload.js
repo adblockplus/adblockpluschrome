@@ -29,6 +29,10 @@ if ("ext" in window && document instanceof HTMLDocument)
     if (event.button == 2)
       return;
 
+    // Ignore simulated clicks.
+    if (event.isTrusted == false)
+      return;
+
     // Search the link associated with the click
     var link = event.target;
     while (!(link instanceof HTMLAnchorElement))
