@@ -331,54 +331,67 @@ ElementHidingTracer.prototype = {
   }
 };
 
-function reinjectRulesWhenRemoved(document, style)
+function reinjectStyleSheetWhenRemoved(document, style)
 {
-  var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+  var MutationObserver = window.MutationObserver ||
+                         window.WebKitMutationObserver;
   if (!MutationObserver)
-    return;
+    return null;
 
-  var observer = new MutationObserver(function(mutations)
+  var parentNode = style.parentNode;
+  var observer = new MutationObserver(function()
   {
-    var isStyleRemoved = false;
-    for (var i = 0; i < mutations.length; i++)
-    {
-      if ([].indexOf.call(mutations[i].removedNodes, style) != -1)
-      {
-        isStyleRemoved = true;
-        break;
-      }
-    }
-    if (!isStyleRemoved)
-      return;
-
-    observer.disconnect();
-
-    var n = document.styleSheets.length;
-    if (n == 0)
-      return;
-
-    var stylesheet = document.styleSheets[n - 1];
-    ext.backgroundPage.sendMessage(
-      {type: "get-selectors"},
-
-      function(response)
-      {
-        var selectors = response.selectors;
-        while (selectors.length > 0)
-        {
-          var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
-
-          // Using non-standard addRule() here. This is the only way
-          // to add rules at the end of a cross-origin stylesheet
-          // because we don't know how many rules are already in there
-          stylesheet.addRule(selector, "display: none !important;");
-        }
-      }
-    );
+    if (style.parentNode != parentNode)
+      parentNode.appendChild(style);
   });
 
-  observer.observe(style.parentNode, {childList: true});
+  observer.observe(parentNode, {childList: true});
   return observer;
+}
+
+function protectStyleSheet(document, style)
+{
+  var id = Math.random().toString(36).substr(2)
+  style.id = id;
+
+  var code = [
+    "(function()",
+    "{",
+    '  var style = document.getElementById("' + id + '") ||',
+    '              document.documentElement.shadowRoot.getElementById("' + id + '");',
+    '  style.removeAttribute("id");'
+  ];
+
+  var disableables = ["style", "style.sheet"];
+  for (var i = 0; i < disableables.length; i++)
+  {
+    code.push("  Object.defineProperty(" + disableables[i] + ', "disabled", '
+                                         + "{value: false, enumerable: true});");
+  }
+
+  var methods = ["deleteRule", "removeRule"];
+  for (var j = 0; j < methods.length; j++)
+  {
+    var method = methods[j];
+    if (method in CSSStyleSheet.prototype)
+    {
+      var origin = "CSSStyleSheet.prototype." + method;
+      code.push("  var " + method + " = " + origin + ";",
+                "  " + origin + " = function(index)",
+                "  {",
+                "    if (this != style.sheet)",
+                "      " + method + ".apply(this, index);",
+                "  }");
+    }
+  }
+
+  code.push("})();");
+
+  var script = document.createElement("script");
+  script.async = false;
+  script.textContent = code.join("\n");
+  document.documentElement.appendChild(script);
+  document.documentElement.removeChild(script);
 }
 
 function init(document)
@@ -424,7 +437,8 @@ function init(document)
       if (!style.sheet)
         return;
 
-      observer = reinjectRulesWhenRemoved(document, style);
+      observer = reinjectStyleSheetWhenRemoved(document, style);
+      protectStyleSheet(document, style);
     }
 
     // If using shadow DOM, we have to add the ::content pseudo-element
