@@ -29,6 +29,10 @@
     _sendResponse: function(request, message)
     {
       var response = {};
+
+      if ("documentId" in request)
+        response["targetDocuments"] = [request["documentId"]];
+
       for (var prop in request)
         response[prop] = request[prop];
       response.payload = message;

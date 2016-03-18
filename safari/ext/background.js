@@ -20,6 +20,7 @@
   /* Context menus */
 
   var contextMenuItems = new ext.PageMap();
+  var lastContextMenuTab;
 
   var ContextMenus = function(page)
   {
@@ -48,14 +49,16 @@
 
   safari.application.addEventListener("contextmenu", function(event)
   {
+    lastContextMenuTab = event.target;
+
     if (!event.userInfo)
       return;
 
-    var pageId = event.userInfo.pageId;
-    if (!pageId)
+    var documentId = event.userInfo.documentId;
+    if (!documentId)
       return;
 
-    var page = pages[event.userInfo.pageId];
+    var page = pages[event.target._documentLookup[documentId].pageId];
     var items = contextMenuItems.get(page);
     if (!items)
       return;
@@ -77,7 +80,8 @@
 
   safari.application.addEventListener("command", function(event)
   {
-    var page = pages[event.userInfo.pageId];
+    var documentId = event.userInfo.documentId;
+    var page = pages[lastContextMenuTab._documentLookup[documentId].pageId];
     var items = contextMenuItems.get(page);
 
     items[event.command].onclick(page);
@@ -204,7 +208,13 @@
     },
     sendMessage: function(message, responseCallback)
     {
-      this._messageProxy.sendMessage(message, responseCallback, {pageId: this.id});
+      var documentIds = [];
+      for (var documentId in this._tab._documentLookup)
+        if (this._tab._documentLookup[documentId].pageId == this.id)
+          documentIds.push(documentId);
+
+      this._messageProxy.sendMessage(message, responseCallback,
+                                     {targetDocuments: documentIds});
     }
   };
 
@@ -226,7 +236,15 @@
 
     ext._removeFromAllPageMaps(id);
 
-    delete pages[id]._tab._pages[id];
+    var tab = pages[id]._tab;
+
+    for (var documentId in tab._documentLookup)
+    {
+      if (tab._documentLookup[documentId].pageId == id)
+        delete tab._documentLookup[documentId];
+    }
+
+    delete tab._pages[id];
     delete pages[id];
   };
 
@@ -251,6 +269,9 @@
 
     if (!('_pages' in tab))
       tab._pages = Object.create(null);
+
+    if (!('_documentLookup' in tab))
+      tab._documentLookup = Object.create(null);
 
     var page = new Page(pageId, tab, url);
     pages[pageId] = tab._pages[pageId] = page;
@@ -340,7 +361,10 @@
 
       // For the new tab page the url property is undefined.
       if (url)
-        addPage(tab, url, false);
+      {
+        var pageId = addPage(tab, url, false);
+        tab.page.dispatchMessage("requestDocumentId", {pageId: pageId});
+      }
     }
   });
 
@@ -425,17 +449,29 @@
         if (!objects)
           return;
 
+        var targetDocument;
+        for (var documentId in page._tab._documentLookup)
+        {
+          var result = page._tab._documentLookup[documentId];
+          if (result.pageId == pageId && result.frameId == frameId)
+          {
+            targetDocument = documentId;
+            break;
+          }
+        }
+        if (!targetDocument)
+          return;
+
         page._tab.page.dispatchMessage("proxyCallback",
         {
-          pageId: pageId,
-          frameId: frameId,
+          targetDocuments: [targetDocument],
           callbackId: callbackId,
           contextId: proxy.registerObject(this, objects),
           args: proxy.serializeSequence(arguments, objects)
         });
       };
     },
-    deserialize: function(spec, objects, pageId, memo)
+    deserialize: function(spec, objects, pageId, frameId, memo)
     {
       switch (spec.type)
       {
@@ -444,7 +480,7 @@
         case "hosted":
           return objects[spec.objectId];
         case "callback":
-          return this.createCallback(spec.callbackId, pageId, spec.frameId);
+          return this.createCallback(spec.callbackId, pageId, frameId);
         case "object":
         case "array":
           if (!memo)
@@ -465,10 +501,12 @@
 
           if (spec.type == "array")
             for (var i = 0; i < spec.items.length; i++)
-              obj.push(this.deserialize(spec.items[i], objects, pageId, memo));
+              obj.push(this.deserialize(spec.items[i], objects,
+                                        pageId, frameId, memo));
           else
             for (var k in spec.properties)
-              obj[k] = this.deserialize(spec.properties[k], objects, pageId, memo);
+              obj[k] = this.deserialize(spec.properties[k], objects,
+                                        pageId, frameId, memo);
 
           return obj;
       }
@@ -510,7 +548,8 @@
           return {succeed: true, result: this.serialize(value, objects)};
         case "setProperty":
           var obj = objects[message.objectId];
-          var value = this.deserialize(message.value, objects, message.pageId);
+          var value = this.deserialize(message.value, objects,
+                                       message.pageId, message.frameId);
 
           try
           {
@@ -528,7 +567,8 @@
 
           var args = [];
           for (var i = 0; i < message.args.length; i++)
-            args.push(this.deserialize(message.args[i], objects, message.pageId));
+            args.push(this.deserialize(message.args[i], objects,
+                                       message.pageId, message.frameId));
 
           try
           {
@@ -570,110 +610,55 @@
 
   safari.application.addEventListener("message", function(event)
   {
+    var tab = event.target;
+    var message = event.message;
+    var sender;
+    if ("documentId" in message && "_documentLookup" in tab)
+    {
+      sender = tab._documentLookup[message.documentId];
+      if (sender)
+      {
+        sender.page = pages[sender.pageId];
+        sender.frame = sender.page._frames[sender.frameId];
+      }
+    }
+
     switch (event.name)
     {
       case "canLoad":
-        switch (event.message.category)
+        switch (message.category)
         {
-          case "loading":
-            var tab = event.target;
-            var message = event.message;
-
-            var pageId;
-            var frameId;
-
-            if (message.isTopLevel)
-            {
-              pageId = addPage(tab, message.url, message.isPrerendered);
-              frameId = 0;
-
-              ext.pages.onLoading._dispatch(pages[pageId]);
-            }
-            else
-            {
-              var page;
-              var parentFrame;
-
-              var lastPageId;
-              var lastPage;
-              var lastPageTopLevelFrame;
-
-              // find the parent frame and its page for this sub frame,
-              // by matching its referrer with the URL of frames previously
-              // loaded in the same tab. If there is more than one match,
-              // the most recent loaded page and frame is preferred.
-              for (var curPageId in tab._pages)
-              {
-                var curPage = pages[curPageId];
-
-                for (var i = 0; i < curPage._frames.length; i++)
-                {
-                  var curFrame = curPage._frames[i];
-
-                  if (curFrame.url.href == message.referrer)
-                  {
-                    pageId = curPageId;
-                    page = curPage;
-                    parentFrame = curFrame;
-                  }
-
-                  if (i == 0)
-                  {
-                    lastPageId = curPageId;
-                    lastPage = curPage;
-                    lastPageTopLevelFrame = curFrame;
-                  }
-                }
-              }
-
-              // if we can't find the parent frame and its page, fall back to
-              // the page most recently loaded in the tab and its top level frame
-              if (!page)
-              {
-                pageId = lastPageId;
-                page = lastPage;
-                parentFrame = lastPageTopLevelFrame;
-              }
-
-              frameId = page._frames.length;
-              page._frames.push({url: new URL(message.url), parent: parentFrame});
-            }
-            event.message = {pageId: pageId, frameId: frameId};
-            break;
           case "webRequest":
-            var page = pages[event.message.pageId];
-            var frame = page._frames[event.message.frameId];
-
             var results = ext.webRequest.onBeforeRequest._dispatch(
-              new URL(event.message.url, frame.url),
-              event.message.type, page, frame
+              new URL(message.url, sender.frame.url),
+              message.type, sender.page, sender.frame
             );
 
             event.message = (results.indexOf(false) == -1);
             break;
           case "proxy":
-            event.message = backgroundPageProxy.handleMessage(event.message);
+            message.pageId = sender.pageId;
+            message.frameId = sender.frameId;
+            event.message = backgroundPageProxy.handleMessage(message);
             break;
           case "request":
-            var page = pages[event.message.pageId];
-            var sender = {page: page, frame: page._frames[event.message.frameId]};
-
             var response = null;
             var sendResponse = function(message) { response = message; };
 
-            ext.onMessage._dispatch(event.message.payload, sender, sendResponse);
+            ext.onMessage._dispatch(message.payload, sender, sendResponse);
 
             event.message = response;
             break;
         }
         break;
       case "request":
-        var page = pages[event.message.pageId];
-        var sender = {page: page, frame: page._frames[event.message.frameId]};
-        page._messageProxy.handleRequest(event.message, sender);
+        sender.page._messageProxy.handleRequest(message, sender);
         break;
       case "response":
-        pages[event.message.pageId]._messageProxy.handleResponse(event.message);
+        // All documents within a page have the same pageId and that's all we
+        // care about here.
+        var pageId = tab._documentLookup[message.targetDocuments[0]].pageId;
+        pages[pageId]._messageProxy.handleResponse(message);
         break;
       case "replaced":
         // when a prerendered page is shown, forget the previous page
@@ -682,7 +667,76 @@
         // page is unloading, because Safari dispatches window.onunload
         // only when reloading the page or following links, but not when
         // the current page is replaced with a prerendered page.
-        replacePage(pages[event.message.pageId]);
+        replacePage(sender.page);
+        break;
+      case "loading":
+        var pageId;
+        var frameId;
+        var documentId = message.documentId;
+
+        if (message.isTopLevel)
+        {
+          pageId = addPage(tab, message.url, message.isPrerendered);
+          frameId = 0;
+
+          ext.pages.onLoading._dispatch(pages[pageId]);
+        }
+        else
+        {
+          var page;
+          var parentFrame;
+
+          var lastPageId;
+          var lastPage;
+          var lastPageTopLevelFrame;
+
+          // find the parent frame and its page for this sub frame,
+          // by matching its referrer with the URL of frames previously
+          // loaded in the same tab. If there is more than one match,
+          // the most recent loaded page and frame is preferred.
+          for (var curPageId in tab._pages)
+          {
+            var curPage = pages[curPageId];
+
+            for (var i = 0; i < curPage._frames.length; i++)
+            {
+              var curFrame = curPage._frames[i];
+
+              if (curFrame.url.href == message.referrer)
+              {
+                pageId = curPageId;
+                page = curPage;
+                parentFrame = curFrame;
+              }
+
+              if (i == 0)
+              {
+                lastPageId = curPageId;
+                lastPage = curPage;
+                lastPageTopLevelFrame = curFrame;
+              }
+            }
+          }
+
+          // if we can't find the parent frame and its page, fall back to
+          // the page most recently loaded in the tab and its top level frame
+          if (!page)
+          {
+            pageId = lastPageId;
+            page = lastPage;
+            parentFrame = lastPageTopLevelFrame;
+          }
+
+          frameId = page._frames.length;
+          page._frames.push({url: new URL(message.url), parent: parentFrame});
+        }
+
+        tab._documentLookup[documentId] = {pageId: pageId, frameId: frameId};
+        break;
+      case "documentId":
+        tab._documentLookup[message.documentId] = {
+          pageId: message.pageId, frameId: 0
+        };
         break;
     }
   });

@@ -31,22 +31,24 @@
   var isTopLevel = window == window.top;
   var isPrerendered = document.visibilityState == "prerender";
 
-  var documentInfo = safari.self.tab.canLoad(
-    beforeLoadEvent,
-    {
-      category: "loading",
-      url: window.location.href,
-      referrer: document.referrer,
-      isTopLevel: isTopLevel,
-      isPrerendered: isPrerendered
-    }
-  );
+  // Notify the background page that this frame is loading, generating ourselves
+  // a random documentId while we're at it. That way the background page can
+  // communicate with us reliably, despite limitations in Safari's extension
+  // API.
+  var documentId = Math.random().toString().substr(2);
+  safari.self.tab.dispatchMessage("loading",  {
+    url: window.location.href,
+    referrer: document.referrer,
+    isTopLevel: isTopLevel,
+    isPrerendered: isPrerendered,
+    documentId: documentId
+  });
 
   if (isTopLevel && isPrerendered)
   {
     var onVisibilitychange = function()
     {
-      safari.self.tab.dispatchMessage("replaced", {pageId: documentInfo.pageId});
+      safari.self.tab.dispatchMessage("replaced", {documentId: documentId});
       document.removeEventListener("visibilitychange", onVisibilitychange);
     };
     document.addEventListener("visibilitychange", onVisibilitychange);
@@ -96,15 +98,11 @@
         break;
     }
 
-    if (!safari.self.tab.canLoad(
-      event, {
+    if (!safari.self.tab.canLoad(event, {
         category: "webRequest",
         url: event.url,
         type: type,
-        pageId: documentInfo.pageId,
-        frameId: documentInfo.frameId
-      }
-    ))
+        documentId: documentId}))
     {
       event.preventDefault();
 
@@ -129,7 +127,7 @@
   {
     var element = event.srcElement;
     safari.self.tab.setContextMenuEventUserInfo(event, {
-      pageId: documentInfo.pageId,
+      documentId: documentId,
       tagName: element.localName
     });
   });
@@ -144,7 +142,7 @@
     send: function(message)
     {
       message.category = "proxy";
-      message.pageId = documentInfo.pageId;
+      message.documentId = documentId;
 
       return safari.self.tab.canLoad(beforeLoadEvent, message);
     },
@@ -176,7 +174,8 @@
             Object.defineProperty(obj, "__proxyCallbackId", {value: callbackId});
           }
 
-          return {type: "callback", callbackId: callbackId, frameId: documentInfo.frameId};
+          return {type: "callback", callbackId: callbackId,
+                  documentId: documentId};
         }
 
         if (obj.constructor != Date && obj.constructor != RegExp)
@@ -382,7 +381,8 @@
   ext.backgroundPage = {
     sendMessage: function(message, responseCallback)
     {
-      messageProxy.sendMessage(message, responseCallback, documentInfo);
+      messageProxy.sendMessage(message, responseCallback,
+                               {documentId: documentId});
     },
     sendMessageSync: function(message)
     {
@@ -390,8 +390,7 @@
         beforeLoadEvent,
         {
           category: "request",
-          pageId: documentInfo.pageId,
-          frameId: documentInfo.frameId,
+          documentId: documentId,
           payload: message
         }
       );
@@ -409,25 +408,26 @@
 
   safari.self.addEventListener("message", function(event)
   {
-    if (event.message.pageId == documentInfo.pageId)
+    if (event.name == "requestDocumentId" && isTopLevel)
     {
-      if (event.name == "request")
+      safari.self.tab.dispatchMessage("documentId",  {
+        pageId: event.message.pageId,
+        documentId: documentId
+      });
+    }
+    else if (event.message.targetDocuments.indexOf(documentId) != -1)
+    {
+      switch (event.name)
       {
-        messageProxy.handleRequest(event.message, {});
-        return;
-      }
-
-      if (event.message.frameId == documentInfo.frameId)
-      {
-        switch (event.name)
-        {
-          case "response":
-            messageProxy.handleResponse(event.message);
-            break;
-          case "proxyCallback":
-            backgroundPageProxy.handleCallback(event.message);
-            break;
-        }
+        case "request":
+          messageProxy.handleRequest(event.message, {});
+          break;
+        case "response":
+          messageProxy.handleResponse(event.message);
+          break;
+        case "proxyCallback":
+          backgroundPageProxy.handleCallback(event.message);
+          break;
       }
     }
   });
