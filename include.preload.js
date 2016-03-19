@@ -15,6 +15,7 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 var SELECTOR_GROUP_SIZE = 20;
 
 var typeMap = {
@@ -127,48 +128,49 @@ function getURLsFromElement(element)
 
 function checkCollapse(element)
 {
-  var tag = element.localName;
-  if (tag in typeMap)
-  {
-    // This element failed loading, did we block it?
-    var urls = getURLsFromElement(element);
-    if (urls.length == 0)
-      return;
-
-    ext.backgroundPage.sendMessage(
-      {
-        type: "should-collapse",
-        urls: urls,
-        mediatype: typeMap[tag],
-        baseURL: document.location.href
-      },
-
-      function(response)
-      {
-        if (response && element.parentNode)
-        {
-          var property = "display";
-          var value = "none";
-
-          // <frame> cannot be removed, doing that will mess up the frameset
-          if (tag == "frame")
-          {
-            property = "visibility";
-            value = "hidden";
-          }
-
-          // <input type="image"> elements try to load their image again
-          // when the "display" CSS property is set. So we have to check
-          // that it isn't already collapsed to avoid an infinite recursion.
-          if (element.style.getPropertyValue(property) != value ||
-              element.style.getPropertyPriority(property) != "important")
-            element.style.setProperty(property, value, "important");
-        }
-      }
-    );
-  }
-
   window.collapsing = true;
+
+  var mediatype = typeMap[element.localName];
+  if (!mediatype)
+    return;
+
+  var urls = getURLsFromElement(element);
+  if (urls.length == 0)
+    return;
+
+  ext.backgroundPage.sendMessage(
+    {
+      type: "should-collapse",
+      urls: urls,
+      mediatype: mediatype,
+      baseURL: document.location.href
+    },
+
+    function(collapse)
+    {
+      function collapseElement()
+      {
+        if (element.localName == "frame")
+          element.style.setProperty("visibility", "hidden", "important");
+        else
+          element.style.setProperty("display", "none", "important");
+      }
+
+      if (collapse && !element._collapsed)
+      {
+        collapseElement();
+        element._collapsed = true;
+
+        if (MutationObserver)
+          new MutationObserver(collapseElement).observe(
+            element, {
+              attributes: true,
+              attributeFilter: ["style"]
+            }
+          );
+      }
+    }
+  );
 }
 
 function checkSitekey()
@@ -333,8 +335,6 @@ ElementHidingTracer.prototype = {
 
 function reinjectStyleSheetWhenRemoved(document, style)
 {
-  var MutationObserver = window.MutationObserver ||
-                         window.WebKitMutationObserver;
   if (!MutationObserver)
     return null;
 
