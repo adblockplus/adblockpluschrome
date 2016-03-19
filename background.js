@@ -43,10 +43,6 @@ var showNextNotificationForUrl = require("notificationHelper").showNextNotificat
 var port = require("messaging").port;
 var devtools = require("devtools");
 
-// Special-case domains for which we cannot use style-based hiding rules.
-// See http://crbug.com/68705.
-var noStyleRulesHosts = ["mail.google.com", "mail.yahoo.com", "www.google.com"];
-
 var htmlPages = new ext.PageMap();
 
 var contextMenuItem = {
@@ -116,36 +112,19 @@ function getUserFilters()
 
 port.on("get-selectors", function(msg, sender)
 {
-  var selectors = [];
+  var selectors;
   var trace = devtools && devtools.hasPanel(sender.page);
 
   if (!checkWhitelisted(sender.page, sender.frame,
                         RegExpFilter.typeMap.DOCUMENT |
                         RegExpFilter.typeMap.ELEMHIDE))
-  {
-    var noStyleRules = false;
-    var specificOnly = checkWhitelisted(sender.page, sender.frame,
-                                        RegExpFilter.typeMap.GENERICHIDE);
-    var host = extractHostFromFrame(sender.frame);
-
-    for (var i = 0; i < noStyleRulesHosts.length; i++)
-    {
-      var noStyleHost = noStyleRulesHosts[i];
-      if (host == noStyleHost || (host.length > noStyleHost.length &&
-                                  host.substr(host.length - noStyleHost.length - 1) == "." + noStyleHost))
-      {
-        noStyleRules = true;
-      }
-    }
-    selectors = ElemHide.getSelectorsForDomain(host, specificOnly);
-    if (noStyleRules)
-    {
-      selectors = selectors.filter(function(s)
-      {
-        return !/\[style[\^\$]?=/.test(s);
-      });
-    }
-  }
+    selectors = ElemHide.getSelectorsForDomain(
+      extractHostFromFrame(sender.frame),
+      checkWhitelisted(sender.page, sender.frame,
+                       RegExpFilter.typeMap.GENERICHIDE)
+    );
+  else
+    selectors = [];
 
   return {selectors: selectors, trace: trace};
 });
