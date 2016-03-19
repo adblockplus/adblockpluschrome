@@ -36,7 +36,7 @@ function onLoad()
     if (!page || (page.url.protocol != "http:" &&
                   page.url.protocol != "https:"))
       document.body.classList.add("local");
-    else if (!backgroundPage.htmlPages.has(page))
+    else if (!require("filterComposer").isPageReady(page))
     {
       document.body.classList.add("nohtml");
       require("messaging").getPort(window).on(

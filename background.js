@@ -33,55 +33,13 @@ with(require("url"))
   this.extractHostFromFrame = extractHostFromFrame;
 }
 var FilterStorage = require("filterStorage").FilterStorage;
-var FilterNotifier = require("filterNotifier").FilterNotifier;
 var SpecialSubscription = require("subscriptionClasses").SpecialSubscription;
 var ElemHide = require("elemHide").ElemHide;
 var defaultMatcher = require("matcher").defaultMatcher;
 var Prefs = require("prefs").Prefs;
-var updateIcon = require("icon").updateIcon;
 var showNextNotificationForUrl = require("notificationHelper").showNextNotificationForUrl;
 var port = require("messaging").port;
 var devtools = require("devtools");
-
-var htmlPages = new ext.PageMap();
-
-var contextMenuItem = {
-  title: ext.i18n.getMessage("block_element"),
-  contexts: ["image", "video", "audio"],
-  onclick: function(page)
-  {
-    page.sendMessage({type: "composer.content.contextMenuClicked"});
-  }
-};
-
-// Adds or removes browser action icon according to options.
-function refreshIconAndContextMenu(page)
-{
-  var whitelisted = !!checkWhitelisted(page);
-  updateIcon(page, whitelisted);
-
-  // show or hide the context menu entry dependent on whether
-  // adblocking is active on that page
-  page.contextMenus.remove(contextMenuItem);
-  if (Prefs.shouldShowBlockElementMenu && !whitelisted && htmlPages.has(page))
-    page.contextMenus.create(contextMenuItem);
-}
-
-function refreshIconAndContextMenuForAllPages()
-{
-  ext.pages.query({}, function(pages)
-  {
-    pages.forEach(refreshIconAndContextMenu);
-  });
-}
-
-FilterNotifier.addListener(function(action)
-{
-  if (action == "load" || action == "save")
-    refreshIconAndContextMenuForAllPages();
-});
-
-Prefs.on("shouldShowBlockElementMenu", refreshIconAndContextMenuForAllPages);
 
 // This is a hack to speedup loading of the options page on Safari.
 // Once we replaced the background page proxy with message passing
@@ -186,6 +144,5 @@ port.on("forward", function(msg, sender)
 ext.pages.onLoading.addListener(function(page)
 {
   page.sendMessage({type: "composer.content.finished"});
-  refreshIconAndContextMenu(page);
   showNextNotificationForUrl(page.url);
 });
