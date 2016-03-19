@@ -409,8 +409,9 @@ function init(document)
   // have to create the shadow root before transistions might start (#452).
   //
   // Also, using shadow DOM causes issues on some Google websites,
-  // including Google Docs and Gmail (#1770, #2602).
-  if ("createShadowRoot" in document.documentElement && !/\.google\.com$/.test(document.domain))
+  // including Google Docs, Gmail and Blogger (#1770, #2602, #2687).
+  if ("createShadowRoot" in document.documentElement &&
+      !/\.(?:google|blogger)\.com$/.test(document.domain))
   {
     shadow = document.documentElement.createShadowRoot();
     shadow.appendChild(document.createElement("shadow"));
