@@ -37,7 +37,6 @@ var SpecialSubscription = require("subscriptionClasses").SpecialSubscription;
 var ElemHide = require("elemHide").ElemHide;
 var defaultMatcher = require("matcher").defaultMatcher;
 var Prefs = require("prefs").Prefs;
-var showNextNotificationForUrl = require("notificationHelper").showNextNotificationForUrl;
 var port = require("messaging").port;
 var devtools = require("devtools");
 
@@ -138,11 +137,4 @@ port.on("forward", function(msg, sender)
       return new Promise(targetPage.sendMessage.bind(targetPage, msg.payload));
     targetPage.sendMessage(msg.payload);
   }
-});
-
-// update icon when page changes location
-ext.pages.onLoading.addListener(function(page)
-{
-  page.sendMessage({type: "composer.content.finished"});
-  showNextNotificationForUrl(page.url);
 });
