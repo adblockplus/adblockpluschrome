@@ -177,7 +177,7 @@ function checkSitekey()
 {
   var attr = document.documentElement.getAttribute("data-adblockkey");
   if (attr)
-    ext.backgroundPage.sendMessage({type: "add-sitekey", token: attr});
+    ext.backgroundPage.sendMessage({type: "filter.addKey", token: attr});
 }
 
 function getContentDocument(element)
@@ -243,7 +243,7 @@ ElementHidingTracer.prototype = {
 
     if (matchedSelectors.length > 0)
       ext.backgroundPage.sendMessage({
-        type: "trace-elemhide",
+        type: "devtools.traceElemHide",
         selectors: matchedSelectors
       });
   },

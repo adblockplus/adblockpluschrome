@@ -17,10 +17,16 @@
 
 "use strict";
 
-chrome.runtime.sendMessage({type: "has-devtools-panel"}, function(response)
-{
-  if (response)
-    chrome.devtools.panels.create("Adblock Plus",
-                                  "icons/detailed/abp-48.png",
-                                  "devtools-panel.html");
-});
+chrome.runtime.sendMessage(
+  {
+    type: "prefs.get",
+    key: "show_devtools_panel"
+  },
+  function(enabled)
+  {
+    if (enabled)
+      chrome.devtools.panels.create("Adblock Plus",
+                                    "icons/detailed/abp-48.png",
+                                    "devtools-panel.html");
+  }
+);

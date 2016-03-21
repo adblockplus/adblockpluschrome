@@ -87,6 +87,7 @@ lib/adblockplus.js = lib/prefs.js
   adblockpluscore/lib/synchronizer.js
   adblockpluscore/lib/notification.js
   adblockpluscore/lib/antiadblockInit.js
+  lib/messaging.js
   lib/url.js
   lib/stats.js
   lib/devtools.js

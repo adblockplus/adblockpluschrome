@@ -37,7 +37,16 @@ function onLoad()
                   page.url.protocol != "https:"))
       document.body.classList.add("local");
     else if (!backgroundPage.htmlPages.has(page))
+    {
       document.body.classList.add("nohtml");
+      require("messaging").getPort(window).on(
+        "composer.ready", function(message, sender)
+        {
+          if (sender.page.id == page.id)
+            document.body.classList.remove("nohtml");
+        }
+      );
+    }
 
     // Ask content script whether clickhide is active. If so, show cancel button.
     // If that isn't the case, ask background.html whether it has cached filters. If so,
@@ -56,8 +65,6 @@ function onLoad()
     }
   });
 
-  // Attach event listeners
-  ext.onMessage.addListener(onMessage);
   document.getElementById("enabled").addEventListener("click", toggleEnabled, false);
   document.getElementById("clickhide").addEventListener("click", activateClickHide, false);
   document.getElementById("clickhide-cancel").addEventListener("click", cancelClickHide, false);
@@ -75,17 +82,6 @@ function onLoad()
     if (!Prefs[collapser.dataset.option])
       document.getElementById(collapser.dataset.collapsable).classList.add("collapsed");
   }
-}
-
-function onUnload()
-{
-  ext.onMessage.removeListener(onMessage);
-}
-
-function onMessage(message, sender, callback)
-{
-  if (message.type == "composer.ready" && sender.page.id == page.id)
-    document.body.classList.remove("nohtml");
 }
 
 function toggleEnabled()
@@ -145,4 +141,3 @@ function toggleCollapse(event)
 }
 
 document.addEventListener("DOMContentLoaded", onLoad, false);
-window.addEventListener("unload", onUnload, false);

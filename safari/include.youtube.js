@@ -19,7 +19,7 @@
   if (document.domain != "www.youtube.com")
     return;
 
-  if (!ext.backgroundPage.sendMessageSync({type: "get-domain-enabled-state"}).enabled)
+  if (ext.backgroundPage.sendMessageSync({type: "filters.isPageWhitelisted"}))
     return;
 
   var badArgumentsRegex = /^((.*_)?(ad|ads|afv|adsense)(_.*)?|(ad3|st)_module|prerolls|interstitial|infringe|iv_cta_url)$/;
