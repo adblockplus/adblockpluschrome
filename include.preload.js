@@ -380,7 +380,7 @@ function protectStyleSheet(document, style)
                 "  " + origin + " = function(index)",
                 "  {",
                 "    if (this != style.sheet)",
-                "      " + method + ".apply(this, index);",
+                "      " + method + ".call(this, index);",
                 "  }");
     }
   }
