@@ -13,7 +13,6 @@ backgroundScripts = lib/polyfills/url.js
   lib/sha1.js
   lib/jsbn.js
   lib/rsa.js
-  webrequest.js
   messageResponder.js
   background.js
 testScripts = ../ext/common.js
@@ -26,7 +25,6 @@ testScripts = ../ext/common.js
   ../lib/sha1.js
   ../lib/jsbn.js
   ../lib/rsa.js
-  ../webrequest.js
   common.js
   tests/adblockplus.js
   tests/versionComparator.js
@@ -98,6 +96,7 @@ lib/adblockplus.js = lib/events.js
   lib/icon.js
   lib/notificationHelper.js
   lib/subscriptionInit.js
+  lib/requestBlocker.js
   lib/popupBlocker.js
   lib/uninstall.js
   --arg module=true source_repo=https://hg.adblockplus.org/adblockpluscore/

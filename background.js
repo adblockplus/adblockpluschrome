@@ -17,26 +17,14 @@
 
 with(require("filterClasses"))
 {
-  this.BlockingFilter = BlockingFilter;
-  this.WhitelistFilter = WhitelistFilter;
   this.RegExpFilter = RegExpFilter;
-}
-with(require("whitelisting"))
-{
-  this.checkWhitelisted = checkWhitelisted;
-  this.getKey = getKey;
-}
-with(require("url"))
-{
-  this.stringifyURL = stringifyURL;
-  this.isThirdParty = isThirdParty;
-  this.extractHostFromFrame = extractHostFromFrame;
+  this.WhitelistFilter = WhitelistFilter;
 }
 var FilterStorage = require("filterStorage").FilterStorage;
 var SpecialSubscription = require("subscriptionClasses").SpecialSubscription;
 var ElemHide = require("elemHide").ElemHide;
-var defaultMatcher = require("matcher").defaultMatcher;
-var Prefs = require("prefs").Prefs;
+var checkWhitelisted = require("whitelisting").checkWhitelisted;
+var extractHostFromFrame = require("url").extractHostFromFrame;
 var port = require("messaging").port;
 var devtools = require("devtools");
 
@@ -84,42 +72,6 @@ port.on("get-selectors", function(msg, sender)
     selectors = [];
 
   return {selectors: selectors, trace: trace};
-});
-
-port.on("should-collapse", function(msg, sender)
-{
-  if (checkWhitelisted(sender.page, sender.frame))
-    return false;
-
-  var typeMask = RegExpFilter.typeMap[msg.mediatype];
-  var documentHost = extractHostFromFrame(sender.frame);
-  var sitekey = getKey(sender.page, sender.frame);
-  var blocked = false;
-
-  var specificOnly = checkWhitelisted(
-    sender.page, sender.frame,
-    RegExpFilter.typeMap.GENERICBLOCK
-  );
-
-  for (var i = 0; i < msg.urls.length; i++)
-  {
-    var url = new URL(msg.urls[i], msg.baseURL);
-    var filter = defaultMatcher.matchesAny(
-      stringifyURL(url), typeMask,
-      documentHost, isThirdParty(url, documentHost),
-      sitekey, specificOnly
-    );
-
-    if (filter instanceof BlockingFilter)
-    {
-      if (filter.collapse != null)
-        return filter.collapse;
-
-      blocked = true;
-    }
-  }
-
-  return blocked && Prefs.hidePlaceholders;
 });
 
 port.on("forward", function(msg, sender)

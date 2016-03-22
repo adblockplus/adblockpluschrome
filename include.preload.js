@@ -140,7 +140,7 @@ function checkCollapse(element)
 
   ext.backgroundPage.sendMessage(
     {
-      type: "should-collapse",
+      type: "filters.collapse",
       urls: urls,
       mediatype: mediatype,
       baseURL: document.location.href
