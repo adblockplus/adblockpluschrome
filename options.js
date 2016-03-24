@@ -67,7 +67,17 @@ function loadOptions()
   $("#removeCustomFilter").click(removeSelectedFilters);
   $("#rawFiltersButton").click(toggleFiltersInRawFormat);
   $("#importRawFilters").click(importRawFiltersText);
-  FilterNotifier.addListener(onFilterChange);
+
+  FilterNotifier.on("load", reloadFilters);
+  FilterNotifier.on("subscription.title", onSubscriptionChange);
+  FilterNotifier.on("subscription.disabled", onSubscriptionChange);
+  FilterNotifier.on("subscription.homepage", onSubscriptionChange);
+  FilterNotifier.on("subscription.lastDownload", onSubscriptionChange);
+  FilterNotifier.on("subscription.downloadStatus", onSubscriptionChange);
+  FilterNotifier.on("subscription.added", onSubscriptionAdded);
+  FilterNotifier.on("subscription.removed", onSubscriptionRemoved);
+  FilterNotifier.on("filter.added", onFilterAdded);
+  FilterNotifier.on("filter.removed", onFilterRemoved);
 
   // Display jQuery UI elements
   $("#tabs").tabs();
@@ -175,7 +185,16 @@ function reloadFilters()
 // Cleans up when the options window is closed
 function unloadOptions()
 {
-  FilterNotifier.removeListener(onFilterChange);
+  FilterNotifier.off("load", reloadFilters);
+  FilterNotifier.off("subscription.title", onSubscriptionChange);
+  FilterNotifier.off("subscription.disabled", onSubscriptionChange);
+  FilterNotifier.off("subscription.homepage", onSubscriptionChange);
+  FilterNotifier.off("subscription.lastDownload", onSubscriptionChange);
+  FilterNotifier.off("subscription.downloadStatus", onSubscriptionChange);
+  FilterNotifier.off("subscription.added", onSubscriptionAdded);
+  FilterNotifier.off("subscription.removed", onSubscriptionRemoved);
+  FilterNotifier.off("filter.added", onFilterAdded);
+  FilterNotifier.off("filter.removed", onFilterRemoved);
 }
 
 function initCheckbox(id, descriptor)
@@ -421,61 +440,59 @@ function updateSubscriptionInfo(element)
   }
 }
 
-function onFilterChange(action, item, param1, param2)
+function onSubscriptionChange(subscription)
 {
-  switch (action)
+  var element = findSubscriptionElement(subscription);
+  if (element)
+    updateSubscriptionInfo(element);
+}
+
+function onSubscriptionAdded(subscription)
+{
+  if (subscription instanceof SpecialSubscription)
   {
-    case "load":
-      reloadFilters();
-      break;
-    case "subscription.title":
-    case "subscription.disabled":
-    case "subscription.homepage":
-    case "subscription.lastDownload":
-    case "subscription.downloadStatus":
-      var element = findSubscriptionElement(item);
-      if (element)
-        updateSubscriptionInfo(element);
-      break;
-    case "subscription.added":
-      if (item instanceof SpecialSubscription)
-      {
-        for (var i = 0; i < item.filters.length; i++)
-          onFilterChange("filter.added", item.filters[i]);
-      }
-      else if (item.url == Prefs.subscriptions_exceptionsurl)
-        $("#acceptableAds").prop("checked", true);
-      else if (!findSubscriptionElement(item))
-        addSubscriptionEntry(item);
-      break;
-    case "subscription.removed":
-      if (item instanceof SpecialSubscription)
-      {
-        for (var i = 0; i < item.filters.length; i++)
-          onFilterChange("filter.removed", item.filters[i]);
-      }
-      else if (item.url == Prefs.subscriptions_exceptionsurl)
-        $("#acceptableAds").prop("checked", false);
-      else
-      {
-        var element = findSubscriptionElement(item);
-        if (element)
-          element.parentNode.removeChild(element);
-      }
-      break;
-    case "filter.added":
-      if (item instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(item.text))
-        appendToListBox("excludedDomainsBox", RegExp.$1);
-      else
-        appendToListBox("userFiltersBox", item.text);
-      break;
-    case "filter.removed":
-      if (item instanceof WhitelistFilter && /^@@\|\|([^\/:]+)\^\$document$/.test(item.text))
-        removeFromListBox("excludedDomainsBox", RegExp.$1);
-      else
-        removeFromListBox("userFiltersBox", item.text);
-      break;
+    for (var i = 0; i < subscription.filters.length; i++)
+      onFilterChange("filter.added", subscription.filters[i]);
   }
+  else if (subscription.url == Prefs.subscriptions_exceptionsurl)
+    $("#acceptableAds").prop("checked", true);
+  else if (!findSubscriptionElement(subscription))
+    addSubscriptionEntry(subscription);
+}
+
+function onSubscriptionRemoved(subscription)
+{
+  if (subscription instanceof SpecialSubscription)
+  {
+    for (var i = 0; i < subscription.filters.length; i++)
+      onFilterChange("filter.removed", subscription.filters[i]);
+  }
+  else if (subscription.url == Prefs.subscriptions_exceptionsurl)
+    $("#acceptableAds").prop("checked", false);
+  else
+  {
+    var element = findSubscriptionElement(subscription);
+    if (element)
+      element.parentNode.removeChild(element);
+  }
+}
+
+function onFilterAdded(filter)
+{
+  if (filter instanceof WhitelistFilter &&
+      /^@@\|\|([^\/:]+)\^\$document$/.test(filter.text))
+    appendToListBox("excludedDomainsBox", RegExp.$1);
+  else
+    appendToListBox("userFiltersBox", filter.text);
+}
+
+function onFilterRemoved(filter)
+{
+  if (filter instanceof WhitelistFilter &&
+      /^@@\|\|([^\/:]+)\^\$document$/.test(filter.text))
+    removeFromListBox("excludedDomainsBox", RegExp.$1);
+  else
+    removeFromListBox("userFiltersBox", filter.text);
 }
 
 // Populates a list box with a number of entries

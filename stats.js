@@ -81,7 +81,7 @@
       currentPage = pages[0];
       updateStats();
 
-      FilterNotifier.addListener(onNotify);
+      FilterNotifier.on("filter.hitCount", updateStats);
 
       document.getElementById("stats-container").removeAttribute("hidden");
     });
@@ -89,13 +89,7 @@
   
   function onUnload()
   {
-    FilterNotifier.removeListener(onNotify);
-  }
-  
-  function onNotify(action, item)
-  {
-    if (action == "filter.hitCount")
-      updateStats();
+    FilterNotifier.off("filter.hitCount", updateStats);
   }
   
   function updateStats()
