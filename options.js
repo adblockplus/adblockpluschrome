@@ -452,7 +452,7 @@ function onSubscriptionAdded(subscription)
   if (subscription instanceof SpecialSubscription)
   {
     for (var i = 0; i < subscription.filters.length; i++)
-      onFilterChange("filter.added", subscription.filters[i]);
+      onFilterAdded(subscription.filters[i]);
   }
   else if (subscription.url == Prefs.subscriptions_exceptionsurl)
     $("#acceptableAds").prop("checked", true);
@@ -465,7 +465,7 @@ function onSubscriptionRemoved(subscription)
   if (subscription instanceof SpecialSubscription)
   {
     for (var i = 0; i < subscription.filters.length; i++)
-      onFilterChange("filter.removed", subscription.filters[i]);
+      onFilterRemoved(subscription.filters[i]);
   }
   else if (subscription.url == Prefs.subscriptions_exceptionsurl)
     $("#acceptableAds").prop("checked", false);
