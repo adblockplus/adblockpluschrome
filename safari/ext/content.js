@@ -28,22 +28,40 @@
   var beforeLoadEvent = document.createEvent("Event");
   beforeLoadEvent.initEvent("beforeload");
 
-  var isTopLevel = window == window.top;
-  var isPrerendered = document.visibilityState == "prerender";
+  var isTopLevel;
+  var isPrerendered;
+  var documentId;
+  function notifyFrameLoading()
+  {
+    isTopLevel = window == window.top;
+    isPrerendered = document.visibilityState == "prerender";
+    documentId = Math.random().toString().substr(2);
 
-  // Notify the background page that this frame is loading, generating ourselves
-  // a random documentId while we're at it. That way the background page can
-  // communicate with us reliably, despite limitations in Safari's extension
-  // API.
-  var documentId = Math.random().toString().substr(2);
-  safari.self.tab.dispatchMessage("loading",  {
-    url: window.location.href,
-    referrer: document.referrer,
-    isTopLevel: isTopLevel,
-    isPrerendered: isPrerendered,
-    documentId: documentId
+    // Notify the background page that this frame is loading, generating
+    // ourselves a random documentId while we're at it. That way the background
+    // page can communicate with us reliably, despite limitations in Safari's
+    // extension API.
+    safari.self.tab.dispatchMessage("loading",  {
+      url: window.location.href,
+      referrer: document.referrer,
+      isTopLevel: isTopLevel,
+      isPrerendered: isPrerendered,
+      documentId: documentId
+    });
+  }
+
+  // We must notify the background page when this page is first loadeding (now)
+  // but also when it is re-shown (if the user uses the back button to return to
+  // this page in the future).
+  notifyFrameLoading();
+  window.addEventListener("pageshow", function(event)
+  {
+    if (event.persisted)
+      notifyFrameLoading();
   });
 
+  // Notify the background page when a prerendered page is displayed. That way
+  // the existing page of the tab can be replaced with this new one.
   if (isTopLevel && isPrerendered)
   {
     var onVisibilitychange = function()
