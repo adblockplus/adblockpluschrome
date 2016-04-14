@@ -192,6 +192,21 @@ function loadOptions()
 }
 $(loadOptions);
 
+function convertSpecialSubscription(subscription)
+{
+  getFilters(subscription.url, function(filters)
+  {
+    for (var j = 0; j < filters.length; j++)
+    {
+      var filter = filters[j].text;
+      if (whitelistedDomainRegexp.test(filter))
+        appendToListBox("excludedDomainsBox", RegExp.$1);
+      else
+        appendToListBox("userFiltersBox", filter);
+    }
+  });
+}
+
 // Reloads the displayed subscriptions and filters
 function reloadFilters()
 {
@@ -219,17 +234,7 @@ function reloadFilters()
     clearListBox("excludedDomainsBox");
 
     for (var i = 0; i < subscriptions.length; i++)
-      getFilters(subscriptions[i].url, function(filters)
-      {
-        for (var j = 0; j < filters.length; j++)
-        {
-          var filter = filters[j].text;
-          if (whitelistedDomainRegexp.test(filter))
-            appendToListBox("excludedDomainsBox", RegExp.$1);
-          else
-            appendToListBox("userFiltersBox", filter);
-        }
-      });
+      convertSpecialSubscription(subscriptions[i]);
   });
 }
 
@@ -469,7 +474,9 @@ function onSubscriptionMessage(action, subscription)
         updateSubscriptionInfo(element, subscription);
       break;
     case "added":
-      if (subscription.url == acceptableAdsUrl)
+      if (subscription.url.indexOf("~user") == 0)
+        convertSpecialSubscription(subscription);
+      else if (subscription.url == acceptableAdsUrl)
         $("#acceptableAds").prop("checked", true);
       else if (!element)
         addSubscriptionEntry(subscription);
