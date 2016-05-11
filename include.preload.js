@@ -459,9 +459,9 @@ function init(document)
 
     // WebKit (and Blink?) apparently chokes when the selector list in a
     // CSS rule is huge. So we split the elemhide selectors into groups.
-    while (selectors.length > 0)
+    for (var i = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE)
     {
-      var selector = selectors.splice(0, SELECTOR_GROUP_SIZE).join(", ");
+      var selector = selectors.slice(i, i + SELECTOR_GROUP_SIZE).join(", ");
       style.sheet.addRule(selector, "display: none !important;");
     }
   };
