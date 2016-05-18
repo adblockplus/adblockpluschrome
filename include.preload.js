@@ -400,7 +400,16 @@ function init(document)
   var style = null;
   var observer = null;
   var tracer = null;
-  var propertyFilters = new CSSPropertyFilters(window, addElemHideSelectors);
+
+  function getPropertyFilters(callback)
+  {
+    ext.backgroundPage.sendMessage({
+      type: "filters.get",
+      what: "cssproperties"
+    }, callback);
+  }
+  var propertyFilters = new CSSPropertyFilters(window, getPropertyFilters,
+                                               addElemHideSelectors);
 
   // Use Shadow DOM if available to don't mess with web pages that rely on
   // the order of their own <style> tags (#309).
