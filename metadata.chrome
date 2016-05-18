@@ -40,3 +40,6 @@ devtools-panel.html = adblockplusui/devtools-panel.html
 devtools-panel.js = adblockplusui/devtools-panel.js
 skin/devtools-panel.css = adblockplusui/skin/devtools-panel.css
 managed-storage-schema.json = chrome/managed-storage-schema.json
+
+[convert_js]
+lib/adblockplus.js -= abp2blocklist/lib/abp2blocklist.js safari/contentBlocking.js

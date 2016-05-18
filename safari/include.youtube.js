@@ -19,6 +19,22 @@
   if (document.domain != "www.youtube.com")
     return;
 
+  var usingContentBlockerAPI = true;
+  try
+  {
+    if (safari.self.tab.canLoad(beforeLoadEvent,
+                                {category: "request",
+                                 payload: {type: "prefs.get",
+                                           key: "safariContentBlocker"}}) != true)
+      usingContentBlockerAPI = false;
+  }
+  catch (e)
+  {
+  }
+
+  if (usingContentBlockerAPI)
+    return;
+
   if (ext.backgroundPage.sendMessageSync({type: "filters.isPageWhitelisted"}))
     return;
 
@@ -33,7 +49,7 @@
     return pairs.join("&");
   }
 
-  function patchPlayer(player) 
+  function patchPlayer(player)
   {
     var newPlayer = player.cloneNode(true);
     var flashvarsChanged = false;

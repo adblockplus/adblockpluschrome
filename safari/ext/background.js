@@ -384,6 +384,7 @@
 
   /* Message processing */
 
+  var dispatchedLegacyAPISupportMessage = false;
   safari.application.addEventListener("message", function(event)
   {
     var tab = event.target;
@@ -503,6 +504,15 @@
         }
 
         tab._documentLookup[documentId] = {pageId: pageId, frameId: frameId};
+
+        if (!dispatchedLegacyAPISupportMessage)
+        {
+          ext.onMessage._dispatch({
+            type: "safari.legacyAPISupported",
+            legacyAPISupported: message.legacyAPISupported
+          });
+          dispatchedLegacyAPISupportMessage = true;
+        }
         break;
       case "documentId":
         tab._documentLookup[message.documentId] = {

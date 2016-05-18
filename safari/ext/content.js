@@ -28,6 +28,22 @@
   var beforeLoadEvent = document.createEvent("Event");
   beforeLoadEvent.initEvent("beforeload");
 
+  // Decide if we should use the new content blocker API or not. (Note when the
+  // API is used Safari breaks the canLoad function, making it either throw an
+  // exception or return true when used.)
+  var usingContentBlockerAPI = true;
+  try
+  {
+    if (safari.self.tab.canLoad(beforeLoadEvent,
+                                {category: "request",
+                                 payload: {type: "prefs.get",
+                                           key: "safariContentBlocker"}}) != true)
+      usingContentBlockerAPI = false;
+  }
+  catch (e)
+  {
+  }
+
   var isTopLevel;
   var isPrerendered;
   var documentId;
@@ -46,7 +62,9 @@
       referrer: document.referrer,
       isTopLevel: isTopLevel,
       isPrerendered: isPrerendered,
-      documentId: documentId
+      documentId: documentId,
+      legacyAPISupported: "canLoad" in safari.self.tab &&
+                          "onbeforeload" in Element.prototype
     });
   }
 
@@ -60,83 +78,87 @@
       notifyFrameLoading();
   });
 
-  // Notify the background page when a prerendered page is displayed. That way
-  // the existing page of the tab can be replaced with this new one.
-  if (isTopLevel && isPrerendered)
+  if (!usingContentBlockerAPI)
   {
-    var onVisibilitychange = function()
+    // Notify the background page when a prerendered page is displayed. That way
+    // the existing page of the tab can be replaced with this new one.
+    if (isTopLevel && isPrerendered)
     {
-      safari.self.tab.dispatchMessage("replaced", {documentId: documentId});
-      document.removeEventListener("visibilitychange", onVisibilitychange);
-    };
-    document.addEventListener("visibilitychange", onVisibilitychange);
-  }
-
+      var onVisibilitychange = function()
+      {
+        safari.self.tab.dispatchMessage("replaced", {documentId: documentId});
+        document.removeEventListener("visibilitychange", onVisibilitychange);
+      };
+      document.addEventListener("visibilitychange", onVisibilitychange);
+    }
 
   /* Web requests */
 
-  document.addEventListener("beforeload", function(event)
-  {
-    // we don't block non-HTTP requests anyway, so we can bail out
-    // without asking the background page. This is even necessary
-    // because passing large data (like a photo encoded as data: URL)
-    // to the background page, freezes Safari.
-    if (/^(?!https?:)[\w-]+:/.test(event.url))
-      return;
-
-    var type = "OTHER";
-    var eventName = "error";
-
-    switch(event.target.localName)
+    document.addEventListener("beforeload", function(event)
     {
-      case "frame":
-      case "iframe":
-        type = "SUBDOCUMENT";
-        eventName = "load";
-        break;
-      case "img":
-      case "input":
-        type = "IMAGE";
-        break;
-      case "video":
-      case "audio":
-      case "source":
-        type = "MEDIA";
-        break;
-      case "object":
-      case "embed":
-        type = "OBJECT";
-        break;
-      case "script":
-        type = "SCRIPT";
-        break;
-      case "link":
-        if (/\bstylesheet\b/i.test(event.target.rel))
-          type = "STYLESHEET";
-        break;
-    }
+      // we don't block non-HTTP requests anyway, so we can bail out
+      // without asking the background page. This is even necessary
+      // because passing large data (like a photo encoded as data: URL)
+      // to the background page, freezes Safari.
+      if (/^(?!https?:)[\w-]+:/.test(event.url))
+        return;
 
-    if (!safari.self.tab.canLoad(event, {
-        category: "webRequest",
-        url: event.url,
-        type: type,
-        documentId: documentId}))
-    {
-      event.preventDefault();
+      var type = "OTHER";
+      var eventName = "error";
 
-      // Safari doesn't dispatch the expected events for elements that have been
-      // prevented from loading by having their "beforeload" event cancelled.
-      // That is a "load" event for blocked frames, and an "error" event for
-      // other blocked elements. We need to dispatch those events manually here
-      // to avoid breaking element collapsing and pages that rely on those events.
-      setTimeout(function()
+      switch(event.target.localName)
       {
-        var evt = document.createEvent("Event");
-        evt.initEvent(eventName);
-        event.target.dispatchEvent(evt);
-      }, 0);
-    }
-  }, true);
+        case "frame":
+        case "iframe":
+          type = "SUBDOCUMENT";
+          eventName = "load";
+          break;
+        case "img":
+        case "input":
+          type = "IMAGE";
+          break;
+        case "video":
+        case "audio":
+        case "source":
+          type = "MEDIA";
+          break;
+        case "object":
+        case "embed":
+          type = "OBJECT";
+          break;
+        case "script":
+          type = "SCRIPT";
+          break;
+        case "link":
+          if (/\bstylesheet\b/i.test(event.target.rel))
+            type = "STYLESHEET";
+          break;
+      }
+
+      if (!safari.self.tab.canLoad(
+        event, {
+          category: "webRequest",
+          url: event.url,
+          type: type,
+          documentId: documentId}))
+      {
+        event.preventDefault();
+
+        // Safari doesn't dispatch the expected events for elements that have
+        // been prevented from loading by having their "beforeload" event
+        // cancelled. That is a "load" event for blocked frames, and an "error"
+        // event for other blocked elements. We need to dispatch those events
+        // manually here to avoid breaking element collapsing and pages that
+        // rely on those events.
+        setTimeout(function()
+        {
+          var evt = document.createEvent("Event");
+          evt.initEvent(eventName);
+          event.target.dispatchEvent(evt);
+        });
+      }
+    }, true);
+  }
 
 
   /* Context menus */
