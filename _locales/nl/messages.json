@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Na het sluiten van deze popup, klik (of klik met de rechtermuisknop) op het pagina-element."
   },
-  "description_chrome": {
-    "message": "Een gratis adblocker voor Chrome met meer dan 50 miljoen gebruikers, die ALLE vervelende advertenties, malware en tracking blokkeert"
-  },
-  "description_opera": {
-    "message": "Een gratis adblocker voor Opera met meer dan 50 miljoen gebruikers, die ALLE vervelende advertenties, malware en tracking blokkeert."
-  },
-  "description_safari": {
-    "message": "Een gratis adblocker voor Safari met meer dan 50 miljoen gebruikers, die ALLE vervelende advertenties, malware en tracking blokkeert."
+  "description": {
+    "message": "Een gratis adblocker met meer dan 50 miljoen gebruikers, die ALLE vervelende advertenties, malware en tracking blokkeert."
   },
   "disabled_for_site": {
     "message": "<strong>Uitgeschakeld</strong> op deze site"
@@ -127,8 +121,14 @@
   "remove_button": {
     "message": "Verwijder geselecteerde"
   },
+  "safari_content_blocker": {
+    "message": "Gebruik Safari's eigen inhoudsblokkering (experimenteel)"
+  },
   "show_block_element_menu": {
     "message": "Toon 'Element blokkeren' in het rechtermuisklik menu"
+  },
+  "show_devtools_panel": {
+    "message": "Toon \"Adblock Plus\" paneel in het ontwikkellaarsscherm"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> op deze pagina",

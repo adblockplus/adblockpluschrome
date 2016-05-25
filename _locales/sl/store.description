@@ -1,25 +1,5 @@
-Adblock Plus blokira vse nadležnih oglasov, in podpira spletnih strani, ki jih ne blokira nevsiljive oglase privzeto (nastavljiv).
-
-Uživajte v brskanju po spletu brez nevpadljivi oglasi nered vaš zaslon! Adblock Plus za Google Chrome blokov:
-
-· Pasice
-· YouTube video oglasi
-· Facebook oglasi
-· Pop-up
-· Vse druge nevpadljivi oglasi
-
-Adblock Plus je najbolj priljubljena razširitev brskalnika na svetu, in na milijone uporabnikov po vsem svetu. To je odprtokodni projekt skupnost usmerjenih, in na stotine prostovoljcev prispevajo k uspehu Adblock Plus se prepričajte, da so vsi siten oglasi samodejno blokirana.
-
-Prosimo, upoštevajte: Pri namestitvi Adblock Plus za Chrome, brskalnik prikaže opozorilo, da ima Adblock Plus za Chrome dostop do vaše zgodovine brskanja in podatkov. To je standardno sporočilo, mi nikoli ne zbira podatkov o kakršnikoli!
-
-V zadnjem času, skupnost Adblock Plus predstavil pobudo sprejemljiv oglasov. S tem, nekaj manjših in statičnih oglasov, podpira spletnih strani, ki se zanašajo na oglaševanje, ampak se odločijo, da to storite v ne-vsiljiv način. To funkcijo lahko kadar koli onemogočite. Pojdi na http://adblockplus.org/en/acceptable-ads izvedeti več.
-
-***********
-Sporočila za javnost in Dnevniki sprememb lahko najdete tukaj: http://adblockplus.org/releases/
-
-Težave? Poskusite znova zagnati Chrome in / ali klikom na "Update Now" v Adblock Možnosti Plus.
-
-Našli napako? Zavedamo se nekaterih vprašanj: http://adblockplus.org/en/known-issues-chrome. Če ste našli bolj ali potrebujejo pomoč, obiščite naš forum: https://adblockplus.org/forum/viewforum.php?f=10.
-
-*************
-Občutek pustolovski? Preizkusite testno vedno dobili najnovejše funkcije Chrome Adblock Plus: http://adblockplus.org/en/development-builds (posodobljeno ločeno, neodvisne nastavitve).
+{
+  "store.description": {
+    "message": "Adblock Plus blokira vse nadležnih oglasov, in podpira spletnih strani, ki jih ne blokira nevsiljive oglase privzeto (nastavljiv).\n\nUživajte v brskanju po spletu brez nevpadljivi oglasi nered vaš zaslon! Adblock Plus za Google Chrome blokov:\n\n· Pasice\n· YouTube video oglasi\n· Facebook oglasi\n· Pop-up\n· Vse druge nevpadljivi oglasi\n\nAdblock Plus je najbolj priljubljena razširitev brskalnika na svetu, in na milijone uporabnikov po vsem svetu. To je odprtokodni projekt skupnost usmerjenih, in na stotine prostovoljcev prispevajo k uspehu Adblock Plus se prepričajte, da so vsi siten oglasi samodejno blokirana.\n\nProsimo, upoštevajte: Pri namestitvi Adblock Plus za Chrome, brskalnik prikaže opozorilo, da ima Adblock Plus za Chrome dostop do vaše zgodovine brskanja in podatkov. To je standardno sporočilo, mi nikoli ne zbira podatkov o kakršnikoli!\n\nV zadnjem času, skupnost Adblock Plus predstavil pobudo sprejemljiv oglasov. S tem, nekaj manjših in statičnih oglasov, podpira spletnih strani, ki se zanašajo na oglaševanje, ampak se odločijo, da to storite v ne-vsiljiv način. To funkcijo lahko kadar koli onemogočite. Pojdi na http://adblockplus.org/en/acceptable-ads izvedeti več.\n\n***********\nSporočila za javnost in Dnevniki sprememb lahko najdete tukaj: http://adblockplus.org/releases/\n\nTežave? Poskusite znova zagnati Chrome in / ali klikom na \"Update Now\" v Adblock Možnosti Plus.\n\nNašli napako? Zavedamo se nekaterih vprašanj: http://adblockplus.org/en/known-issues-chrome. Če ste našli bolj ali potrebujejo pomoč, obiščite naš forum: https://adblockplus.org/forum/viewforum.php?f=10.\n\n*************\nObčutek pustolovski? Preizkusite testno vedno dobili najnovejše funkcije Chrome Adblock Plus: http://adblockplus.org/en/development-builds (posodobljeno ločeno, neodvisne nastavitve).\n"
+  }
+}

@@ -26,13 +26,7 @@
   "clickhide_instructions": {
     "message": "Po zatvorení tohto okna, kliknite (alebo kliknite pravým tlačidlom myši) na prvok na stránke."
   },
-  "description_chrome": {
-    "message": "Používa viac ako 50 miliónov ľudí. Zadarmo blokuje VŠETKY obťažujúce reklamy, malware a sledovanie."
-  },
-  "description_opera": {
-    "message": "Používa viac ako 50 miliónov ľudí. Zadarmo blokuje VŠETKY obťažujúce reklamy, malware a sledovanie."
-  },
-  "description_safari": {
+  "description": {
     "message": "Používa viac ako 50 miliónov ľudí. Zadarmo blokuje VŠETKY obťažujúce reklamy, malware a sledovanie."
   },
   "disabled_for_site": {
@@ -127,8 +121,14 @@
   "remove_button": {
     "message": "Odstrániť vybrané"
   },
+  "safari_content_blocker": {
+    "message": "Použite Safari natívne blokovanie obsahu (experimentálne)"
+  },
   "show_block_element_menu": {
     "message": "Zobrazovať v kontextovom menu položku 'Blokovať prvok'"
+  },
+  "show_devtools_panel": {
+    "message": "Ukázať \"Adblock Plus\" panel v sekcii vývojárske nástroje"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> na tejto stránke",

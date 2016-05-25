@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "이 팝업을 닫은 후 웹 페이지에서 HTML 요소를 클릭하십시오."
   },
-  "description_chrome": {
-    "message": "50만 명 이상의 사람들이 모든 성가신 광고, 멀웨어, 사용자 추적을 차단하는 구글 크롬용 무료 광고 차단 프로그램를 사용하고 있습니다."
-  },
-  "description_opera": {
-    "message": "만 50 명 이상, Opera 에 대한 무료 광고 차단에 의해 사용됩니다."
-  },
-  "description_safari": {
-    "message": "만 50 명 이상, Safari 에 대한 무료 광고 차단에 의해 사용됩니다."
+  "description": {
+    "message": "5000만명 이상이 모든 귀찮은 광고들과 악성 소스 그리고 사용자 추적을 차단하는 무료 앱을 사용"
   },
   "disabled_for_site": {
     "message": "이 사이트에서 <strong>광고 차단을 사용 중지</strong> 합니다."
@@ -129,6 +123,9 @@
   },
   "show_block_element_menu": {
     "message": "마우스 우클릭시 나오는 메뉴에 '이 요소 숨기기' 항목을 표시합니다."
+  },
+  "show_devtools_panel": {
+    "message": "개발자 도구에서 ' 애드 플러스 ' 패널 표시"
   },
   "stats_label_page": {
     "message": "이 페이지에서 $number$ 개",

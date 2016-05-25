@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
   },
-  "description_chrome": {
-    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Chrome chặn tất cả quảng cáo, phần mềm độc hại và phần mềm gián điệp."
-  },
-  "description_opera": {
-    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Opera chặn tất cả quảng cáo, phần mềm độc hại và phần mềm gián điệp."
-  },
-  "description_safari": {
-    "message": "Được hơn 50 triệu người sử dụng, một phần mềm miễn phí cho Safari chặn tất cả quảng cáo, phần mềm độc hại và phần mềm gián điệp."
+  "description": {
+    "message": "Được hơn 50 triệu người sử dụng, một tiện ích miễn phí chặn tất cả quảng cáo phiền phức, phần mềm độc hại và phần mềm gián điệp."
   },
   "disabled_for_site": {
     "message": "<strong>Đã loại bỏ</strong> trên trang này"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Xóa mục đã chọn"
   },
+  "safari_content_blocker": {
+    "message": "Dùng phương thức chặn nội dung sẵn có của Safari (thử nghiệm)"
+  },
+  "safari_restart": {
+    "message": "Hãy khởi động lại Safari"
+  },
   "show_block_element_menu": {
     "message": "Hiển thị mục 'Chặn phần từ' ở menu nhấn chuột phải"
+  },
+  "show_devtools_panel": {
+    "message": "Hiện bảng điều khiển 'Adblock Plus' trong công cụ của nhà phát triển"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> trên trang này",

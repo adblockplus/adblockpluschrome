@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Užvėrus šį iššokantį langą, paspauskite (arba dešiniu mygtuku) ant elemento esančio puslapyje."
   },
-  "description_chrome": {
-    "message": "Virš 50 milijonų vartotojų turintis nemokamas „Chrome“ plėtinys, blokuojantis VISAS įkyrias reklamas, žalingas programas ir sekimą."
-  },
-  "description_opera": {
-    "message": "Virš 50-ies milijonų žmonių naudojamas nemokamas „Opera“ plėtinys, blokuojantis VISAS įkyrias reklamas, žalingas programas ir sekimą."
-  },
-  "description_safari": {
-    "message": "Virš 50-ies milijonų žmonių naudojamas nemokamas „Safari“ plėtinys, blokuojantis VISAS įkyrias reklamas, žalingas programas ir sekimą."
+  "description": {
+    "message": "Naudojamas daugiau nei 50-ies milijonų žmonių blokuojantis VISAS erzinančias reklamas, žalingas programas ir sekimą."
   },
   "disabled_for_site": {
     "message": "Šiame puslapyje <strong>išjungta</strong>"
@@ -127,8 +121,14 @@
   "remove_button": {
     "message": "Pašalinti pasirinktą"
   },
+  "safari_content_blocker": {
+    "message": "Naudoti „Safari” įmontuotą turinio blokavimą (eksperimentinis)"
+  },
   "show_block_element_menu": {
     "message": "Dešinio mygtuko meniu rodyti „Blokuoti elementą“"
+  },
+  "show_devtools_panel": {
+    "message": "Rodyti „Adblock Plus“ valdymo pultą kūrėjo įrankiuose"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> šiame puslapyje",

@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "پس از بسته شدن این پنجره، روی بخشی از صفحه کلیک (یا راست کلیک) کن."
   },
-  "description_chrome": {
-    "message": "مورد استفاده بیش از 50 میلیون نفر، یک مسدودکننده رایگان برای Chrome که تمامی تبلیغات آزاردهنده را مسدود می کند."
-  },
-  "description_opera": {
-    "message": "مورد استفاده بیش از 50 میلیون نفر، یک مسدودکننده رایگان برای Opera که تمامی تبلیغات آزاردهنده را مسدود می کند."
-  },
-  "description_safari": {
-    "message": "مورد استفاده بیش از 50 میلیون نفر، یک مسدودکننده رایگان برای Safari که تمامی تبلیغات آزاردهنده را مسدود می کند."
+  "description": {
+    "message": "بیش از 50 میلیون نفر الان استفاده میکنند ، مسدودکننده تبلیغات رایگان که تمامی تبلیغات آزاردهنده ، جاسوس و ردیاب را مسدود می کند."
   },
   "disabled_for_site": {
     "message": "<strong>غیرفعال باشد</strong> توی این سایت"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "حذف انتخاب شده"
   },
+  "safari_content_blocker": {
+    "message": "استفاده از سیستم بومی مسدودسازی سافاری (تجربی)"
+  },
+  "safari_restart": {
+    "message": "سافاری را ریستارت کن"
+  },
   "show_block_element_menu": {
     "message": "نمایش گزینه «مسدود کردن این عنصر» در منوی کلیک راست"
+  },
+  "show_devtools_panel": {
+    "message": "نمایش پنل Adblock در بخش developer tools"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> در این صفحه",

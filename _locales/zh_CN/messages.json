@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "此消息框关闭后，请点击（或右击）网页上的一个元素。"
   },
-  "description_chrome": {
-    "message": "超过5000万人使用，适用于 Chrome 的免费的广告拦截器，可阻止所有烦人的广告及恶意软件和跟踪。"
-  },
-  "description_opera": {
-    "message": "超过5000万人使用，适用于 Opera 的免费的广告拦截器，可阻止所有烦人的广告及恶意软件和跟踪。"
-  },
-  "description_safari": {
-    "message": "超过5000万人使用，适用于 Safari 的免费的广告拦截器，可阻止所有烦人的广告及恶意软件和跟踪。"
+  "description": {
+    "message": "超过5000万人使用，免费的广告拦截器，可阻止所有烦人的广告及恶意软件和跟踪。"
   },
   "disabled_for_site": {
     "message": "对当前网站<strong>禁用</strong>"
@@ -107,7 +101,7 @@
     "message": "配置通知设置"
   },
   "notification_open_all": {
-    "message": "打开这则通知中的所有链接"
+    "message": "打开此通知中的所有链接"
   },
   "notification_with_buttons": {
     "message": "点击“确定”打开此通知中的所有链接。"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "删除所选项"
   },
+  "safari_content_blocker": {
+    "message": "使用 Safari 原生的内容拦截器（实验性）"
+  },
+  "safari_restart": {
+    "message": "请重新启动 Safari"
+  },
   "show_block_element_menu": {
     "message": "添加‘拦截元素’到右鍵菜单"
+  },
+  "show_devtools_panel": {
+    "message": "在开发者工具中显示 Adblock Plus 面板"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> 在此页上",

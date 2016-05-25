@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Bu pencere kapandığında, engelleyeceğiniz ögeye tıklayın (veya sağ tıklayın)."
   },
-  "description_chrome": {
-    "message": "50 milyondan fazla kişinin kullandığı, Tüm reklamları ve zararlıları engelleyen Chrome için bedava bir reklam engelleyicisidir."
-  },
-  "description_opera": {
-    "message": "50 milyondan fazla kişinin kullandığı, Tüm reklamları ve zararlıları engelleyen, Opera için bedava bir reklam engelleyicisidir."
-  },
-  "description_safari": {
-    "message": "50 milyondan fazla kişinin kullandığı, Safari için TÜM reklamları ve zararlı öğeleri engelleyen bedava bir reklam engelleyicisidir."
+  "description": {
+    "message": "50 milyondan fazla kişinin kullandığı, TÜM reklamları ve zararlıları engelleyen bedava bir reklam engelleyicisidir."
   },
   "disabled_for_site": {
     "message": "Bu sitede <strong>devre dışı</strong>"
@@ -119,7 +113,7 @@
     "message": "Adblock Plus Seçenekleri"
   },
   "options_short": {
-    "message": "Seçenekler"
+    "message": "Ayarlar"
   },
   "out_of_date_lists": {
     "message": "Zamanı geçmiş listeler düzenli olarak güncellenmektedir."
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Seçili olanı kaldır"
   },
+  "safari_content_blocker": {
+    "message": "Safari'nin yerel İçerik Engellemesini kullan (deneysel)"
+  },
+  "safari_restart": {
+    "message": "Lütfen Safari'yi yeniden başlatın"
+  },
   "show_block_element_menu": {
     "message": "Sağ tık menüsünde 'Öğeyi Engelle' seçeneğini göster"
+  },
+  "show_devtools_panel": {
+    "message": "Geliştirici araçlarında 'Adblock Plus' panelini göster"
   },
   "stats_label_page": {
     "message": "Bu sayfada <strong>$number$</strong>",

@@ -1,25 +1,5 @@
-Adblock Plus 可屏蔽各网站上的烦人的广告，并允许显示非侵入式的广告（可配置）。
-
-享受没有恼人广告的网络世界！Google Chrome 上的 Adblock Plus 可屏蔽：
-
-· 横幅广告
-· YouTube 视频广告
-· Facebook 广告活动
-· 弹出窗口
-· 以及其他侵入式的广告
-
-Adblock Plus 是世界上最流行的浏览器扩展，在全球有着数以千万计的用户。这是一个社区驱动的开源项目，并有着数百名志愿者为 Adblock Plus 的成功做着极大的贡献，来保证过滤所有烦人的广告。
-
-请注意，在您安装 Adblock Plus for Chrome 之时，您的浏览器会显示一个警告，表示 Adblock Plus for Chrome 有权访问您的浏览历史和数据。这只是一条统一的信息，我们从未并且永远不会收集任何信息！
-
-近日，Adblock Plus 社区推出了可接受广告的倡议。通过观看一些小型或静态的广告，您可以支持依赖于非侵入式广告生存的网站。您也可在任何时间禁用此功能。查阅 http://adblockplus.org/en/acceptable-ads 了解细节。
-
-***********
-发布公告和更新日志位于: http://adblockplus.org/releases/
-
-遇到问题？请尝试：重启 Chrome，在 Adblock Plus 选项中点击“立即更新”。
-
-发现 bug？我们已经知道了一些问题: http://adblockplus.org/en/known-issues-chrome。如果您发现了我们未知的 bug 或者需要帮助，请访问我们的论坛: https://adblockplus.org/forum/viewforum.php?f=10。
-
-*************
-喜欢冒险的感觉？试试我们的开发版本，最先体验 Chrome Adblock Plus 的最新功能: http://adblockplus.org/en/development-builds （单独更新，独立设置）。
+{
+  "store.description": {
+    "message": "Adblock Plus 可屏蔽各网站上的烦人的广告，并允许显示非侵入式的广告（可配置）。\n\n享受没有恼人广告的网络世界！Google Chrome 上的 Adblock Plus 可屏蔽：\n\n· 横幅广告\n· YouTube 视频广告\n· Facebook 广告活动\n· 弹出窗口\n· 以及其他侵入式的广告\n\nAdblock Plus 是世界上最流行的浏览器扩展，在全球有着数以千万计的用户。这是一个社区驱动的开源项目，并有着数百名志愿者为 Adblock Plus 的成功做着极大的贡献，来保证过滤所有烦人的广告。\n\n请注意，在您安装 Adblock Plus for Chrome 之时，您的浏览器会显示一个警告，表示 Adblock Plus for Chrome 有权访问您的浏览历史和数据。这只是一条统一的信息，我们从未并且永远不会收集任何信息！\n\n近日，Adblock Plus 社区推出了可接受广告的倡议。通过观看一些小型或静态的广告，您可以支持依赖于非侵入式广告生存的网站。您也可在任何时间禁用此功能。查阅 http://adblockplus.org/en/acceptable-ads 了解细节。\n\n***********\n发布公告和更新日志位于: http://adblockplus.org/releases/\n\n遇到问题？请尝试：重启 Chrome，在 Adblock Plus 选项中点击“立即更新”。\n\n发现 bug？我们已经知道了一些问题: http://adblockplus.org/en/known-issues-chrome。如果您发现了我们未知的 bug 或者需要帮助，请访问我们的论坛: https://adblockplus.org/forum/viewforum.php?f=10。\n\n*************\n喜欢冒险的感觉？试试我们的开发版本，最先体验 Chrome Adblock Plus 的最新功能: http://adblockplus.org/en/development-builds （单独更新，独立设置）。"
+  }
+}

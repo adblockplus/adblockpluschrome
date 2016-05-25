@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Miután bezártad ezt a buborékot, kattints egy elemre az oldalon.."
   },
-  "description_chrome": {
-    "message": "Több mint 50 millióan használják a Chrome-hoz ezt az ingyenes hirdetésszűrőt, amely letilt MINDEN idegesítő reklámot és kártevőt."
-  },
-  "description_opera": {
-    "message": "Több mint 50 millióan használják a Opera-hoz ezt az ingyenes hirdetésszűrőt, amely letilt MINDEN idegesítő reklámot és kártevőt."
-  },
-  "description_safari": {
-    "message": "Több mint 50 millióan használják a Safari-hoz ezt az ingyenes hirdetésszűrőt, amely letilt MINDEN idegesítő reklámot és kártevőt."
+  "description": {
+    "message": "Több mint 50 millióan használják ezt az ingyenes hirdetésszűrőt, amely letilt MINDEN idegesítő reklámot és kártevőt."
   },
   "disabled_for_site": {
     "message": "<strong>Kikapcsolva</strong> ezen a weboldalon"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Kijelölt eltávolítása"
   },
+  "safari_content_blocker": {
+    "message": "Használja a Safari beépített tartalom blokkolási funkcióját (kísérleti)"
+  },
+  "safari_restart": {
+    "message": "Kérjük indítsa újra a Safarit"
+  },
   "show_block_element_menu": {
     "message": "'Elem blokkolása' megjelenítése a környezeti menüben"
+  },
+  "show_devtools_panel": {
+    "message": "'Adblock Plus' panel megjelenítése a fejlesztői eszközökben"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> ezen az oldalon",

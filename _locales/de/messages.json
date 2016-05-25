@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
   },
-  "description_chrome": {
+  "description": {
     "message": "Ein kostenloser Werbeblocker mit über 50 Mio Nutzern, der ALLE nervenden Werbeanzeigen, Malware- und Tracking-Angriffe blockiert."
-  },
-  "description_opera": {
-    "message": "Ein kostenloser Werbeblocker für Opera mit über 50 Mio Nutzern, der ALLE nervenden Werbeanzeigen, Malware- und Tracking-Angriffe blockiert."
-  },
-  "description_safari": {
-    "message": "Ein kostenloser Werbeblocker für Safari mit über 50 Mio Nutzern, der ALLE nervenden Werbeanzeigen, Malware- und Tracking-Angriffe blockiert."
   },
   "disabled_for_site": {
     "message": "Auf dieser Seite <strong>deaktiviert</strong>"
@@ -127,8 +121,14 @@
   "remove_button": {
     "message": "Ausgewählte entfernen"
   },
+  "safari_content_blocker": {
+    "message": "Verwenden Sie nativen Blockierung von Inhalten für Safari (experimentell)"
+  },
   "show_block_element_menu": {
     "message": "Zeige Rechtsklickmenü-Eintrag 'Element blockieren'"
+  },
+  "show_devtools_panel": {
+    "message": "'Adblock Plus' Panel in den Entwickler Einstellungen anzeigen"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> auf dieser Seite",

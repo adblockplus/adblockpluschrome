@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "När denna popup stängs, klicka (eller högerklicka) ett objekt på sidan."
   },
-  "description_chrome": {
-    "message": "Över 50 miljoner användare. En gratis annonsblockerare för Chrome som blockerar ALLA irriterande annonser, malware och spårning."
-  },
-  "description_opera": {
-    "message": "Över 50 miljoner användare. En gratis annonsblockerare för Opera som blockerar ALLA irriterande annonser, malware och spårning."
-  },
-  "description_safari": {
-    "message": "Över 50 miljoner användare. En gratis annonsblockerare för Safari som blockerar ALLA irriterande annonser, malware och spårning."
+  "description": {
+    "message": "Används av mer än 50 miljoner människor, en gratis reklam blockerare som blockerar ALL irriterande reklam, malware och spårning."
   },
   "disabled_for_site": {
     "message": "<strong>Avaktiverat</strong> på denna webbplats"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Ta bort markerad"
   },
+  "safari_content_blocker": {
+    "message": "Använd Safaris egna innehållsblockering (experimentell)"
+  },
+  "safari_restart": {
+    "message": "Vänligen starta om Safari"
+  },
   "show_block_element_menu": {
     "message": "Visa 'Blockera objekt' i högerklicksmeny"
+  },
+  "show_devtools_panel": {
+    "message": "Visa 'Adblock Plus'-panelen i utvecklarverktygen"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> på den här sidan",
@@ -175,7 +178,7 @@
     "message": "Annonser blockerade"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Var vänlig välj en filterprenumeration från listan:"
+    "message": "Vänligen välj en filterprenumeration från listan:"
   },
   "unexpected_filter_list_header": {
     "message": "Filterlistrubriker är inte tillåtna här"

@@ -1,25 +1,5 @@
-Adblock Plus blokuje všechny otravné reklamy a podporuje webové stránky tím, že ve výchozím nastavení neblokuje nevtíravé reklamy (konfigurovatelné).
-
-Užívejte si prohlížení webu bez obtěžujících reklam zaplňujících vaši obrazovku! Adblock Plus pro Google Chrome blokuje:
-
-· Bannery
-· Video reklamy na YouTube
-· Reklamy na Facebooku
-· Vyskakovací okna
-· Všechny ostatní obtěžující reklamy
-
-Adblock Plus je nejoblíbenějším rozšířením prohlížeče na světě a používají ho miliony uživatelů po celém světě. Jedná se o open source projekt řízený komunitou a stovky dobrovolníků se podílejí na úspěchu Adblock Plus, aby byly automaticky blokovány všechny otravné reklamy.
-
-Upozornění: Při instalaci Adblocku Plus pro Chrome váš prohlížeč zobrazí varování, že Adblock Plus pro Chrome má přístup k vaší historii prohlížení a datům. Jedná se o standardní zprávu, NIKDY neshromažďujeme žádné informace!
-
-Nedávno komunita Adblock Plus představila iniciativu Přijatelných reklam. Povolením některých malých a statických reklam podporujete webové stránky, které jsou závislé na reklamě, ale zvolily si ji dělat nerušivým způsobem. Tato funkce se dá kdykoliv zakázat. Přejděte na http://adblockplus.org/en/acceptable-ads (anglicky), abyste zjistili více.
-
-***********
-Oznámení o vydání a seznamy změn naleznete zde: http://adblockplus.org/releases/ (anglicky)
-
-Problémy? Zkuste restartovat Chrome a/nebo kliknout na "Aktualizovat nyní" v nastavení Adblock Plus.
-
-Nalezli jste chybu? Jsme si vědomi některých problémů: http://adblockplus.org/en/known-issues-chrome (anglicky). Pokud naleznete další nebo potřebujete pomoct, navštivte naše fórum: https://adblockplus.org/forum/viewforum.php?f=10 (anglicky) .
-
-*************
-Máte dobrodružnou náladu? Vyzkoušejte vývojové sestavení, abyste získali vždy ty nejnovější funkce Adblock Plus pro Chrome: http://adblockplus.org/en/development-builds (anglicky) (aktualizováno samostatně, nezávislé nastavení).
+{
+  "store.description": {
+    "message": "Adblock Plus blokuje všechny otravné reklamy a podporuje webové stránky tím, že ve výchozím nastavení neblokuje nevtíravé reklamy (konfigurovatelné).\n\nUžívejte si prohlížení webu bez obtěžujících reklam zaplňujících vaši obrazovku! Adblock Plus pro Google Chrome blokuje:\n\n· Bannery\n· Video reklamy na YouTube\n· Reklamy na Facebooku\n· Vyskakovací okna\n· Všechny ostatní obtěžující reklamy\n\nAdblock Plus je nejoblíbenějším rozšířením prohlížeče na světě a používají ho miliony uživatelů po celém světě. Jedná se o open source projekt řízený komunitou a stovky dobrovolníků se podílejí na úspěchu Adblock Plus, aby byly automaticky blokovány všechny otravné reklamy.\n\nUpozornění: Při instalaci Adblocku Plus pro Chrome váš prohlížeč zobrazí varování, že Adblock Plus pro Chrome má přístup k vaší historii prohlížení a datům. Jedná se o standardní zprávu, NIKDY neshromažďujeme žádné informace!\n\nNedávno komunita Adblock Plus představila iniciativu Přijatelných reklam. Povolením některých malých a statických reklam podporujete webové stránky, které jsou závislé na reklamě, ale zvolily si ji dělat nerušivým způsobem. Tato funkce se dá kdykoliv zakázat. Přejděte na http://adblockplus.org/en/acceptable-ads (anglicky), abyste zjistili více.\n\n***********\nOznámení o vydání a seznamy změn naleznete zde: http://adblockplus.org/releases/ (anglicky)\n\nProblémy? Zkuste restartovat Chrome a/nebo kliknout na \"Aktualizovat nyní\" v nastavení Adblock Plus.\n\nNalezli jste chybu? Jsme si vědomi některých problémů: http://adblockplus.org/en/known-issues-chrome (anglicky). Pokud naleznete další nebo potřebujete pomoct, navštivte naše fórum: https://adblockplus.org/forum/viewforum.php?f=10 (anglicky) .\n\n*************\nMáte dobrodružnou náladu? Vyzkoušejte vývojové sestavení, abyste získali vždy ty nejnovější funkce Adblock Plus pro Chrome: http://adblockplus.org/en/development-builds (anglicky) (aktualizováno samostatně, nezávislé nastavení).\n"
+  }
+}

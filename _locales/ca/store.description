@@ -1,25 +1,5 @@
-Adblock Plus bloca tots els anuncis molestos, i ajuda als llocs web perquè permet els anuncis no obtrusius (per defecte).
-
-Gaudiu d'una navegació sense anuncis molestos omplint la pantalla! L'Adblock Plus per a Google Chrome bloca:
-
-· Bàners
-· Anuncis de vídeo al YouTube
-· Anuncis al Facebook
-· Finestres emergents
-· Tots els altres anuncis obtrusius
-
-Adblock Plus és l'extensió de navegador més popular del món, i és utilitzada per milions d'usuaris arreu del món. És un projecte de codi obert dirigit per la comunitat, i centenars de voluntaris estan contribuint a l'èxit d'Adblock Plus per assegurar-se que tots els anuncis molestos es bloquin automaticament.
-
-Nota: En instal·lar Adblock Plus per a Chrome, el navegador mostra alerta que Adblock Plus té accés a l'historial i les dades de navegació. Aquest és un missatge estàndard, nosaltres MAI recollim cap informació!
-
-Recentment, la comunitat d'Adblock Plus ha introduït la iniciativa d'Anuncis Acceptables. Permetent alguns anuncis petits i estàtics, esteu ajudant als llocs web que necessiten anuncis però trien fer-ho de manera no intrusiva. Aquesta característica es pot deshabilitar en qualsevol moment. Visiteu https://adblockplus.org/en/acceptable-ads per a més informació.
-
-***********
-Release announcements and changelogs can be found here: http://adblockplus.org/releases/
-
-Problems? Try restarting Chrome and/or clicking "Update now" in the Adblock Plus Options.
-
-Found a bug? We are aware of some issues: http://adblockplus.org/en/known-issues-chrome. If you found more or need help, visit our forum: https://adblockplus.org/forum/viewforum.php?f=10.
-
-*************
-Feeling adventurous? Try out a development build to always get the latest features of Chrome Adblock Plus: http://adblockplus.org/en/development-builds (updated separately, independent settings).
+{
+  "store.description": {
+    "message": "Adblock Plus bloca tots els anuncis molestos, i ajuda als llocs web perquè permet els anuncis no obtrusius (per defecte).\n\nGaudiu d'una navegació sense anuncis molestos omplint la pantalla! L'Adblock Plus per a Google Chrome bloca:\n\n· Bàners\n· Anuncis de vídeo al YouTube\n· Anuncis al Facebook\n· Finestres emergents\n· Tots els altres anuncis obtrusius\n\nAdblock Plus és l'extensió de navegador més popular del món, i és utilitzada per milions d'usuaris arreu del món. És un projecte de codi obert dirigit per la comunitat, i centenars de voluntaris estan contribuint a l'èxit d'Adblock Plus per assegurar-se que tots els anuncis molestos es bloquin automaticament.\n\nNota: En instal·lar Adblock Plus per a Chrome, el navegador mostra alerta que Adblock Plus té accés a l'historial i les dades de navegació. Aquest és un missatge estàndard, nosaltres MAI recollim cap informació!\n\nRecentment, la comunitat d'Adblock Plus ha introduït la iniciativa d'Anuncis Acceptables. Permetent alguns anuncis petits i estàtics, esteu ajudant als llocs web que necessiten anuncis però trien fer-ho de manera no intrusiva. Aquesta característica es pot deshabilitar en qualsevol moment. Visiteu https://adblockplus.org/en/acceptable-ads per a més informació.\n\n***********\nRelease announcements and changelogs can be found here: http://adblockplus.org/releases/\n\nProblems? Try restarting Chrome and/or clicking \"Update now\" in the Adblock Plus Options.\n\nFound a bug? We are aware of some issues: http://adblockplus.org/en/known-issues-chrome. If you found more or need help, visit our forum: https://adblockplus.org/forum/viewforum.php?f=10.\n\n*************\nFeeling adventurous? Try out a development build to always get the latest features of Chrome Adblock Plus: http://adblockplus.org/en/development-builds (updated separately, independent settings).\n"
+  }
+}

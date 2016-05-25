@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Pärast hüpikakna sulgemist klõpsake (paremklõpsake) mõnel lehe elemendil"
   },
-  "description_chrome": {
-    "message": "Kasutab üle 50 miljoni inimese, tasuta reklaami blokeerija Chrome, mis blokeerib KÕIK tüütuid reklaame, pahavara ja jälgimist."
-  },
-  "description_opera": {
-    "message": "Kasutab üle 50 miljoni inimese, tasuta reklaami blokeerija Opera, mis blokeerib KÕIK tüütuid reklaame, pahavara ja jälgimist."
-  },
-  "description_safari": {
-    "message": "Kasutab üle 50 miljoni inimese, tasuta reklaami blokeerija Safari, mis blokeerib KÕIK tüütuid reklaame, pahavara ja jälgimist."
+  "description": {
+    "message": "Kasutatud üle 50 miljoni inimese, tasuta reklaami blokeerija, mis blokeerib KÕIK tüütuid reklaame, pahavara ja jälgimine."
   },
   "disabled_for_site": {
     "message": "<strong>Keelatud</strong> sellel saidil"
@@ -127,8 +121,14 @@
   "remove_button": {
     "message": "Eemalda valitud"
   },
+  "safari_content_blocker": {
+    "message": "Kasuta Safari oma sisublokeerijat (eksperimentaalne)"
+  },
   "show_block_element_menu": {
     "message": "Näita \"Blokeeri element\" paremklõpsu menüüd"
+  },
+  "show_devtools_panel": {
+    "message": "Näita Adblock Plus paneeli arendaja tööriistades"
   },
   "stats_label_page": {
     "message": "Sellel lehel <strong>$number$</strong>",

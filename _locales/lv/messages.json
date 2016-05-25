@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Pēc šī uznirstošā loga aizvēršanas, noklikšķiniet (vai noklikšķiniet ar labo pogu) uz elementa šajā lapā."
   },
-  "description_chrome": {
-    "message": "Izmanto vairāk kā 50 miljoni cilvēku. Bezmaksas bloķētājs Chrome, kas bloķē kaitinošās reklāmas, malware un izsekošanas programmas."
-  },
-  "description_opera": {
-    "message": "Izmanto vairāk kā 50 miljoni cilvēku. Bezmaksas bloķētājs Opera, kas bloķē kaitinošās reklāmas, malware un izsekošanas programmas."
-  },
-  "description_safari": {
-    "message": "Izmanto vairāk kā 50 miljoni cilvēku. Bezmaksas bloķētājs Safari, kas bloķē kaitinošās reklāmas, malware un izsekošanas programmas."
+  "description": {
+    "message": "Izmanto vairāk nekā 50 miljoni cilvēku. Bezmaksas reklāmu bloķētājs, kas bloķē visas kaitinošas reklāmas, malware un izsekošanu."
   },
   "disabled_for_site": {
     "message": "<strong>Izslēgts</strong> šajā lapā"
@@ -127,8 +121,14 @@
   "remove_button": {
     "message": "Noņemt izvēlēto"
   },
+  "safari_content_blocker": {
+    "message": "Lietojiet iebūvēto Safari satura bloķēšanu (eksperimentāls)"
+  },
   "show_block_element_menu": {
     "message": "Rādīt \"Bloķēt elementu'' labā klikšķa izvēlnē"
+  },
+  "show_devtools_panel": {
+    "message": "Parādīt \"Adblock Plus\" paneli izstrādātāja rīkos"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> šajā lapā",

@@ -1,25 +1,5 @@
-Adblock Plus menghalang iklan-iklan menjengkelkan, serta menyokong laman-laman web yang memaparkan iklan-iklan tidak terlalu obtrusif (boleh diubah).
-
-Nikmati pengalaman web tanpa iklan-iklan yang menghalang skrin anda! Adblock Plus untuk Google Chrome menghalang:
-
-· Sepanduk iklan
-· Iklan video YouTube
-· Iklan Facebook
-· "Pop-up"
-· Mana-mana iklan obtrusif yang lain
-
-Adblock Plus adalah ekstensi pelayar web paling popular di dunia dan digunakan oleh berjuta-juta pengguna. Ia merupakan projek komuniti sumber terbuka. Ratusan sukarelawan dan sukarelawati menyumbang kepada projek ini untuk memastikan iklan-iklan terus disekat secara automatik.
-
-Perhatian: Apabila menambah Adblock Plus kepada pelayar Chrome, pelayar akan menunjukkan amaran bahawa program ini dapat mengakses sejarah layaran dan data lain. Ini adalah mesej yang standard; kami TIDAK PERNAH dan TIDAK AKAN menyimpan mana-mana data sekalipun!
-
-Baru-baru ini, komuniti Adblock Plus melancarkan inisiatif iklan-iklan yang boleh diterima. Dengan membenarkan iklan-iklan kecil dan statik, anda dapat menyokong laman-laman web yang bergantung kapada pengiklanan tetapi membuat pilihan untuk melakukannya secara tidak intrusif. Ciri ini boleh dinyahaktifkan pada bila-bila masa. Layari http://adblockplus.org/en/acceptable-ads untuk pengetahuan lanjut.
-
-***********
-Pengumuman dan log perubahan boleh didapati di sini: http://adblockplus.org/releases/
-
-Masalah? Cuba buka Chrome semula dan/atau klik "Kemaskini sekarang" dalam tetapan Adblock Plus.
-
-Terjumpa ralat? Kami sedar tentang beberapa isu: http://adblockplus.org/en/known-issues-chrome . Jika anda menjumpai ralat-ralat lain atau perlukan bantuan, kunjungilah forum kami: https://adblockplus.org/forum/viewforum.php?f=10 .
-
-*************
-Anda berani? Cubalah versi beta untuk sentiasa mendapat ciri-ciri Adblock Plus Chrome terkini: http://adblockplus.org/en/development-builds (dikemaskini berasingan, tetapan berbeza).
+{
+  "store.description": {
+    "message": "Adblock Plus menghalang iklan-iklan menjengkelkan, serta menyokong laman-laman web yang memaparkan iklan-iklan tidak terlalu obtrusif (boleh diubah).\n\nNikmati pengalaman web tanpa iklan-iklan yang menghalang skrin anda! Adblock Plus untuk Google Chrome menghalang:\n\n· Sepanduk iklan\n· Iklan video YouTube\n· Iklan Facebook\n· \"Pop-up\"\n· Mana-mana iklan obtrusif yang lain\n\nAdblock Plus adalah ekstensi pelayar web paling popular di dunia dan digunakan oleh berjuta-juta pengguna. Ia merupakan projek komuniti sumber terbuka. Ratusan sukarelawan dan sukarelawati menyumbang kepada projek ini untuk memastikan iklan-iklan terus disekat secara automatik.\n\nPerhatian: Apabila menambah Adblock Plus kepada pelayar Chrome, pelayar akan menunjukkan amaran bahawa program ini dapat mengakses sejarah layaran dan data lain. Ini adalah mesej yang standard; kami TIDAK PERNAH dan TIDAK AKAN menyimpan mana-mana data sekalipun!\n\nBaru-baru ini, komuniti Adblock Plus melancarkan inisiatif iklan-iklan yang boleh diterima. Dengan membenarkan iklan-iklan kecil dan statik, anda dapat menyokong laman-laman web yang bergantung kapada pengiklanan tetapi membuat pilihan untuk melakukannya secara tidak intrusif. Ciri ini boleh dinyahaktifkan pada bila-bila masa. Layari http://adblockplus.org/en/acceptable-ads untuk pengetahuan lanjut.\n\n***********\nPengumuman dan log perubahan boleh didapati di sini: http://adblockplus.org/releases/\n\nMasalah? Cuba buka Chrome semula dan/atau klik \"Kemaskini sekarang\" dalam tetapan Adblock Plus.\n\nTerjumpa ralat? Kami sedar tentang beberapa isu: http://adblockplus.org/en/known-issues-chrome . Jika anda menjumpai ralat-ralat lain atau perlukan bantuan, kunjungilah forum kami: https://adblockplus.org/forum/viewforum.php?f=10 .\n\n*************\nAnda berani? Cubalah versi beta untuk sentiasa mendapat ciri-ciri Adblock Plus Chrome terkini: http://adblockplus.org/en/development-builds (dikemaskini berasingan, tetapan berbeza).\n"
+  }
+}

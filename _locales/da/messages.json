@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Luk dette popup-vindue, og klik (eller højreklik) derefter på et element på siden."
   },
-  "description_chrome": {
-    "message": "Brugt af over 50 millioner mennesker, en gratis reklame blokker til Chrome som blokerer ALLE irriterende reklamer og sporing."
-  },
-  "description_opera": {
-    "message": "Brugt af over 50 millioner mennesker, en gratis reklame blokker til Opera som blokerer ALLE irriterende reklamer, malware og sporing."
-  },
-  "description_safari": {
-    "message": "Brugt af over 50 millioner mennesker, en gratis reklame blokker til Safari som blokerer ALLE irriterende reklamer, malware og sporing."
+  "description": {
+    "message": "Anvendt af over 50 millioner mennesker, gratis reklame blokering der blokere ALLE irreterende reklamer, malware or sporing."
   },
   "disabled_for_site": {
     "message": "<strong>Deaktiveret</strong> på dette websted"
@@ -127,8 +121,14 @@
   "remove_button": {
     "message": "Fjern valgte"
   },
+  "safari_content_blocker": {
+    "message": "Anvend Safaris indbyggede indholdsblokering (eksperimental)"
+  },
   "show_block_element_menu": {
     "message": "Vis \"Blokér element\" i højrekliksmenu"
+  },
+  "show_devtools_panel": {
+    "message": "Vis \"Adblock Plus\"-panelet under Udviklingsværktøjer"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> på denne side",

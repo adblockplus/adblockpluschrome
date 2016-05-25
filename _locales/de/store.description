@@ -1,28 +1,5 @@
-Adblock Plus blockiert nervige Werbung und unterstützt Webseiten, indem es unaufdringliche Werbung standardmäßig nicht blockiert (änderbar).
-
-Erleben Sie das Internet ohne störende Werbung! Adblock Plus für Google Chrome blockiert:
-
-· Werbebanner
-· Werbespots in YouTube Videos
-· Werbung auf Facebook
-· Pop-ups
-· Jede andere aufdringliche Werbung
-
-Adblock Plus ist weltweit die beliebteste Browser-Erweiterung und wird auf verschiedenen Browsern von über 20 Millionen Menschen täglich genutzt. Adblock Plus ist Open-Source und wird von einer großen Community freiwilliger Helfer unterstützt, sodass immer jede störende Werbung automatisch blockiert wird.
-
-Wichtig: Bei der Installation wird eine Warnung angezeigt, dass Adblock Plus Zugriff auf private Informationen wie den Browserverlauf hat. Dies ist eine Standard-Meldung, Adblock Plus erhebt NIEMALS persönliche Daten.
-
-Die Adblock Plus Community hat kürzlich die Acceptable Ads Initiative eingeführt. Durch das Zulassen  von ein wenig unaufdringlich gestalteter Werbung können Sie Websites unterstützen, die von Werbung abhängig sind und auf dezente Werbung setzen. Diese Funktionalität kann jederzeit dektiviert werden. Unter   https://adblockplus.org/de/acceptable-ads erfahren Sie mehr.
-
-
-***********
-
-Die neusten Änderungen finden Sie hier: https://adblockplus.org/releases/  
-
-Probleme? Starten Sie Chrome neu und/oder klicken Sie den "Jetzt aktualisieren" Button in den Adblock Plus Optionen.
-  
-Haben Sie einen Fehler gefunden? Einige Probleme sind uns bereits bekannt: https://adblockplus.org/de/known-issues-chrome. Wenn Sie ein weiteres Problem gefunden haben oder Hilfe benötigen, dann besuchen Sie unser Forum: https://adblockplus.org/forum/viewforum.php?f=10
-
-*************
-
-Wenn Sie abenteuerlustig sind, können Sie auch eine Entwicklungsversion ausprobieren, um stets die neuesten Features von Adblock Plus für Chrome zu erhalten:https://adblockplus.org/de/development-builds (separat aktualisiert, unabhängige Einstellungen).
+{
+  "store.description": {
+    "message": "Adblock Plus blockiert nervige Werbung und unterstützt Webseiten, indem es unaufdringliche Werbung standardmäßig nicht blockiert (änderbar).\n\nErleben Sie das Internet ohne störende Werbung! Adblock Plus für Google Chrome blockiert:\n\n· Werbebanner\n· Werbespots in YouTube Videos\n· Werbung auf Facebook\n· Pop-ups\n· Jede andere aufdringliche Werbung\n\nAdblock Plus ist weltweit die beliebteste Browser-Erweiterung und wird auf verschiedenen Browsern von über 20 Millionen Menschen täglich genutzt. Adblock Plus ist Open-Source und wird von einer großen Community freiwilliger Helfer unterstützt, sodass immer jede störende Werbung automatisch blockiert wird.\n\nWichtig: Bei der Installation wird eine Warnung angezeigt, dass Adblock Plus Zugriff auf private Informationen wie den Browserverlauf hat. Dies ist eine Standard-Meldung, Adblock Plus erhebt NIEMALS persönliche Daten.\n\nDie Adblock Plus Community hat kürzlich die Acceptable Ads Initiative eingeführt. Durch das Zulassen  von ein wenig unaufdringlich gestalteter Werbung können Sie Websites unterstützen, die von Werbung abhängig sind und auf dezente Werbung setzen. Diese Funktionalität kann jederzeit dektiviert werden. Unter   https://adblockplus.org/de/acceptable-ads erfahren Sie mehr.\n\n\n***********\n\nDie neusten Änderungen finden Sie hier: https://adblockplus.org/releases/  \n\nProbleme? Starten Sie Chrome neu und/oder klicken Sie den \"Jetzt aktualisieren\" Button in den Adblock Plus Optionen.\n  \nHaben Sie einen Fehler gefunden? Einige Probleme sind uns bereits bekannt: https://adblockplus.org/de/known-issues-chrome. Wenn Sie ein weiteres Problem gefunden haben oder Hilfe benötigen, dann besuchen Sie unser Forum: https://adblockplus.org/forum/viewforum.php?f=10\n\n*************\n\nWenn Sie abenteuerlustig sind, können Sie auch eine Entwicklungsversion ausprobieren, um stets die neuesten Features von Adblock Plus für Chrome zu erhalten:https://adblockplus.org/de/development-builds (separat aktualisiert, unabhängige Einstellungen).\n"
+  }
+}

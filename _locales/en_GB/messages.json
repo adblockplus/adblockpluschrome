@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "After closing this popup, click (or right-click) an element on the page."
   },
-  "description_chrome": {
-    "message": "Used by over 50 million people, a free ad blocker for Chrome that blocks ALL annoying ads, malware and tracking."
-  },
-  "description_opera": {
-    "message": "Used by over 50 million people, a free ad blocker for Opera that blocks ALL annoying ads, malware and tracking."
-  },
-  "description_safari": {
-    "message": "Used by over 50 million people, a free ad blocker for Safari that blocks ALL annoying ads, malware and tracking."
+  "description": {
+    "message": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking."
   },
   "disabled_for_site": {
     "message": "<strong>Disabled</strong> on this site"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Remove selected"
   },
+  "safari_content_blocker": {
+    "message": "Use Safari's native Content Blocking (experimental)"
+  },
+  "safari_restart": {
+    "message": "Please restart Safari"
+  },
   "show_block_element_menu": {
     "message": "Show 'Block Element' right-click menu item"
+  },
+  "show_devtools_panel": {
+    "message": "Show 'Adblock Plus' panel in the developer tools"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> on this page",

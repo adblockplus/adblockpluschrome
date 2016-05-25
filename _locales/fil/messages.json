@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Pagkatapos isara itong pop-up, pindutin ang kaliwang mouse button (o kanang mouse button) ang element ng pahinang ito."
   },
-  "description_chrome": {
-    "message": "Ginagamit ng halos 50 milyong tao, ito ay isang libreng ad blocker para sa Chrome na nag-aalis ng di kanais-nais na ads."
-  },
-  "description_opera": {
-    "message": "Ginagamit ng halos 50 milyong tao, ito ay isang libreng ad blocker para sa Opera na nag-aalis ng di kanais-nais na ads."
-  },
-  "description_safari": {
-    "message": "Ginagamit ng halos 50 milyong tao, ito ay isang libreng ad blocker para sa Safari na nag-aalis ng di kanais-nais na ads."
+  "description": {
+    "message": "Ginagamit ng halos 50 milyong tao, ito ay isang libreng ad blocker na nag-aalis ng di kanais-nais na ads, malware at tracking."
   },
   "disabled_for_site": {
     "message": "<strong>Hindi Maaari</strong> sa site na ito"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Alisin ang napili"
   },
+  "safari_content_blocker": {
+    "message": "Gamitin ang native Content Blocking ng Safari"
+  },
+  "safari_restart": {
+    "message": "Paki-restart ang Safari"
+  },
   "show_block_element_menu": {
     "message": "Ipakita ang 'Ihinto ang element' sa right-click menu item"
+  },
+  "show_devtools_panel": {
+    "message": "Ipakita ang 'Adblock Plus' panel sa developer tools"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> sa pahinang ito",
@@ -182,5 +185,8 @@
   },
   "update_now": {
     "message": "I-update ngayon"
+  },
+  "whitelisted_domains": {
+    "message": "Mga ni-whitelist na domain"
   }
 }

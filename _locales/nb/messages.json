@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Klikk (eller høyreklikk) på et element på siden etter at du har lukket dette vinduet."
   },
-  "description_chrome": {
-    "message": "Brukes av over 50 millioner personer - et gratisverktøy for Chrome som blokkerer alle sjenerende annonser, malware og sporing."
-  },
-  "description_opera": {
-    "message": "Brukes av over 50 millioner personer - et gratisverktøy for Opera som blokkerer alle sjenerende annonser, malware og sporing."
-  },
-  "description_safari": {
-    "message": "Brukes av over 50 millioner personer - et gratisverktøy for Safari som blokkerer alle sjenerende annonser, malware og sporing."
+  "description": {
+    "message": "Brukes av over 50 millioner personer - et gratisverktøy som blokkerer alle sjenerende annonser, malware og sporing."
   },
   "disabled_for_site": {
     "message": "<strong>Deaktivert</strong> på dette nettstedet"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Fjern valgte"
   },
+  "safari_content_blocker": {
+    "message": "Bruk Safari sitt eget innholdsblokkeringssystem (eksperimentell)"
+  },
+  "safari_restart": {
+    "message": "Vennligst start Safari på nytt"
+  },
   "show_block_element_menu": {
     "message": "Vis høyreklikkmenyvalget \"Blokkér element\""
+  },
+  "show_devtools_panel": {
+    "message": "Vis \"Adblock Plus\"-panel i utviklerverktøyene"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> på denne siden",

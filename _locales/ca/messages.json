@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Després de tancar aquest Pop-up, clica (o fes clic amb el botó dret) a un element de la pàgina."
   },
-  "description_chrome": {
-    "message": "Utilitzat per més de 50 milions de persones, un bloquejador d'anuncis classificats gratis per Chrome."
-  },
-  "description_opera": {
-    "message": "Utilitzat per més de 50 milions de persones, un bloquejador d'anuncis classificats gratis per a Opera."
-  },
-  "description_safari": {
-    "message": "Utilitzat per més de 50 milions de persones, un bloquejador d'anuncis classificats gratis per a Safari."
+  "description": {
+    "message": "Usat per més de 50 milions de persones, un bloquejador de publicitat gratuït que bloqueja TOTS els anuncis amoïnadors."
   },
   "disabled_for_site": {
     "message": "S'ha <strong>deshabilitat</strong> per a aquest lloc"
@@ -127,8 +121,14 @@
   "remove_button": {
     "message": "Suprimeix els seleccionats"
   },
+  "safari_content_blocker": {
+    "message": "Utilitza el bloqueig de contingut natiu de Safari (experimental)"
+  },
   "show_block_element_menu": {
     "message": "Mostra la opció \"Bloqueja l'element\" com a ítem del menú contextual"
+  },
+  "show_devtools_panel": {
+    "message": "Mostra el quadre \"Adblock Plus\" a les eines de desenvolupador"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> en aquesta pàgina",

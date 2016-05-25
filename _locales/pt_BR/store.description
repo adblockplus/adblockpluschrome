@@ -1,28 +1,5 @@
-O Adblock Plus bloqueia todos os anúncios irritantes, oferecendo amparo para aqueles que não possuem anúncios intrusivos ou irritantes (configurável).
-
-Aprecie a navegação na web sem anúncios desagradáveis em sua tela! O Adblock Plus para Google Chrome pode bloquear:
-
-· Banners
-· Anúncios em vídeo do YouTube
-· Anúncios do Facebook
-· Pop-ups
-· Todos os outros anúncios intrusivos
-
-O Adblock Plus é a extensão de navegador mais popular do mundo sendo usada por milhões de usuários. É um projeto open source, conduzido pela comunidade, onde centenas de voluntários contribuem para este sucesso certificando-se que todos os anúncios irritantes são automaticamente bloqueados.
-
-OBSERVAÇÃO: note que ao instalar o Adblock Plus, seu navegador mostra um aviso que esta extensão terá acesso ao seu histórico e também aos seus dados, lembre-se que é uma mensagem de notificação padrão, o Adblock Plus nunca irá recolher qualquer informação sobre suas atividades na web.
-
-Recentemente, a comunidade Adblock Plus introduziu a iniciativa de Anúncios Aceitáveis. Permitindo anúncios pequenos e estáticos presentes em sites que você apoia, mas que dependem de publicidade e optam por fazer isto de uma forma não-intrusiva. Este recurso pode ser desativado a qualquer momento acessando: http://adblockplus.org/en/acceptable-ads e saiba mais.
-
-***********
-
-Anúncios de lançamento e logs de mudanças podem ser encontrados aqui: http://adblockplus.org/releases/
-
-Problemas? Tente reiniciar o Chrome e/ou clique em "Atualizar agora" nas opções do Adblock Plus.
-
-Encontrou um bug? Estamos conscientes de alguns: http://adblockplus.org/en/known-issues-chrome.
-Se você encontrou mais ou precisa de ajuda, visite nosso fórum: https://adblockplus.org/forum/viewforum.php?f=10.
-
-*************
-
-Gosta de aventuras? Experimente uma versão de desenvolvimento para obter sempre as mais recentes funcionalidades do Adblock Plus para: http://adblockplus.org/en/development-builds (atualizado separadamente, configurações independentes).
+{
+  "store.description": {
+    "message": "O Adblock Plus bloqueia todos os anúncios irritantes, oferecendo amparo para aqueles que não possuem anúncios intrusivos ou irritantes (configurável).\n\nAprecie a navegação na web sem anúncios desagradáveis em sua tela! O Adblock Plus para Google Chrome pode bloquear:\n\n· Banners\n· Anúncios em vídeo do YouTube\n· Anúncios do Facebook\n· Pop-ups\n· Todos os outros anúncios intrusivos\n\nO Adblock Plus é a extensão de navegador mais popular do mundo sendo usada por milhões de usuários. É um projeto open source, conduzido pela comunidade, onde centenas de voluntários contribuem para este sucesso certificando-se que todos os anúncios irritantes são automaticamente bloqueados.\n\nOBSERVAÇÃO: note que ao instalar o Adblock Plus, seu navegador mostra um aviso que esta extensão terá acesso ao seu histórico e também aos seus dados, lembre-se que é uma mensagem de notificação padrão, o Adblock Plus nunca irá recolher qualquer informação sobre suas atividades na web.\n\nRecentemente, a comunidade Adblock Plus introduziu a iniciativa de Anúncios Aceitáveis. Permitindo anúncios pequenos e estáticos presentes em sites que você apoia, mas que dependem de publicidade e optam por fazer isto de uma forma não-intrusiva. Este recurso pode ser desativado a qualquer momento acessando: http://adblockplus.org/en/acceptable-ads e saiba mais.\n\n***********\n\nAnúncios de lançamento e logs de mudanças podem ser encontrados aqui: http://adblockplus.org/releases/\n\nProblemas? Tente reiniciar o Chrome e/ou clique em \"Atualizar agora\" nas opções do Adblock Plus.\n\nEncontrou um bug? Estamos conscientes de alguns: http://adblockplus.org/en/known-issues-chrome.\nSe você encontrou mais ou precisa de ajuda, visite nosso fórum: https://adblockplus.org/forum/viewforum.php?f=10.\n\n*************\n\nGosta de aventuras? Experimente uma versão de desenvolvimento para obter sempre as mais recentes funcionalidades do Adblock Plus para: http://adblockplus.org/en/development-builds (atualizado separadamente, configurações independentes).\n"
+  }
+}

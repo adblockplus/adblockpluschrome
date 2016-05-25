@@ -1,26 +1,5 @@
-Adblock Plus bloque toutes les publicités agaçantes et supporte les sites web en ne  bloquant pas, par défaut (configurable), les publicités non envahissantes.
-
-Amusez vous à surfer sur Internet sans publicités dérangeantes obstruant votre écran ! Adblock Plus bloque sur Google Chrome :
-
-· Les bannières
-· Les publicités de Youtube
-· Les publicités de Facebook
-· Les pop-ups
-· Et toutes les autres publicités envahissantes
-
-Adblock Plus est l'extension pour navigateur la plus populaire au monde et est utilisé par des millions d'utilisateurs autour du globe. C'est un projet open-source communautaire et des centaines de volontaires contribuent au succès de Adblock Plus pour assurer que toutes publicités irritantes soient automatiquement bloquées. 
-
-Veuillez Noter: Lors de l'installation de Adblock Plus sur Chrome, votre navigateur affiche un avertissement informant que Adblock Plus a accès à votre historique de navigation et à vos données. Ceci est un message de sécurité standard, nous ne collectons JAMAIS aucunes informations quelles qu'elles soient!
-
-Récemment, la communauté Adblock Plus a introduit l'initiative des "Acceptable Ads"(Publicités acceptables). En autorisant certaines petites publicités statiques, vous soutenez les sites qui dépendent des publicités mais ont opté de le faire d'une manière non intrusive. Cette fonctionnalité peut être désactivée à tout moment. Allez sur https://adblockplus.org/fr/acceptable-ads pour plus d'informations.
-
-***********
-Les dernières annonces et les changelogs peuvent être trouvés ici:  http://adblockplus.org/releases/
-
-Des problèmes ? Essayez de redémarrer Chrome et/ou cliquez sur "Mettre à jour" dans les options Adblock Plus.
-
-Vous avez trouvé un bug? Nous sommes conscients de certains problèmes: https://adblockplus.org/fr/known-issues-chrome (anglophone). Si vous trouvez d'autres bugs ou vous avez besoin d'aide, visitez notre forum (anglophone):
-https://adblockplus.org/forum/viewforum.php?f=10
-
-***********
-Vous vous sentez aventureux ? Essayez une version développée afin de toujours avoir les dernières fonctionnalités de Adblock Plus: http://adblockplus.org/fr/development-builds (mise à jour séparément, configurations indépendantes).
+{
+  "store.description": {
+    "message": "Adblock Plus bloque toutes les publicités agaçantes et supporte les sites web en ne  bloquant pas, par défaut (configurable), les publicités non envahissantes.\n\nAmusez vous à surfer sur Internet sans publicités dérangeantes obstruant votre écran ! Adblock Plus bloque sur Google Chrome :\n\n· Les bannières\n· Les publicités de Youtube\n· Les publicités de Facebook\n· Les pop-ups\n· Et toutes les autres publicités envahissantes\n\nAdblock Plus est l'extension pour navigateur la plus populaire au monde et est utilisé par des millions d'utilisateurs autour du globe. C'est un projet open-source communautaire et des centaines de volontaires contribuent au succès de Adblock Plus pour assurer que toutes publicités irritantes soient automatiquement bloquées. \n\nVeuillez Noter: Lors de l'installation de Adblock Plus sur Chrome, votre navigateur affiche un avertissement informant que Adblock Plus a accès à votre historique de navigation et à vos données. Ceci est un message de sécurité standard, nous ne collectons JAMAIS aucunes informations quelles qu'elles soient!\n\nRécemment, la communauté Adblock Plus a introduit l'initiative des \"Acceptable Ads\"(Publicités acceptables). En autorisant certaines petites publicités statiques, vous soutenez les sites qui dépendent des publicités mais ont opté de le faire d'une manière non intrusive. Cette fonctionnalité peut être désactivée à tout moment. Allez sur https://adblockplus.org/fr/acceptable-ads pour plus d'informations.\n\n***********\nLes dernières annonces et les changelogs peuvent être trouvés ici:  http://adblockplus.org/releases/\n\nDes problèmes ? Essayez de redémarrer Chrome et/ou cliquez sur \"Mettre à jour\" dans les options Adblock Plus.\n\nVous avez trouvé un bug? Nous sommes conscients de certains problèmes: https://adblockplus.org/fr/known-issues-chrome (anglophone). Si vous trouvez d'autres bugs ou vous avez besoin d'aide, visitez notre forum (anglophone):\nhttps://adblockplus.org/forum/viewforum.php?f=10\n\n***********\nVous vous sentez aventureux ? Essayez une version développée afin de toujours avoir les dernières fonctionnalités de Adblock Plus: http://adblockplus.org/fr/development-builds (mise à jour séparément, configurations indépendantes).\n"
+  }
+}

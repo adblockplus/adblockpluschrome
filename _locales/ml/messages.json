@@ -26,6 +26,12 @@
   "clickhide_instructions": {
     "message": "ഈ പോപ്പപ്പ് ക്ലോസ് ചെയ്ത ശേഷം താളിലെ എലമെന്റില്‍ ക്ലിക്കോ റൈറ്റ് ക്ലിക്കോ ചെയ്യുക."
   },
+  "description": {
+    "message": "അഞ്ചുകോടിയിലേറെ ആളുകള്‍ ഉപയോഗിക്കുന്ന, എല്ലാ പരസ്യങ്ങളും മാല്‍വെയറും ട്രാക്കിങ്ങും തടയുന്ന ഒരു സൗജന്യ ആഡ് ബ്ലോക്കര്‍."
+  },
+  "disabled_for_site": {
+    "message": "ഈ സൈറ്റില്‍ <strong>ഡിസേബിള്‍</strong> ചെയ്തിരിക്കുന്നു"
+  },
   "easy_create_filter": {
     "message": "എലമെന്റ് തടയുക"
   },
@@ -68,8 +74,22 @@
   "notification_configure": {
     "message": "നോട്ടിഫിക്കേഷന്‍ ക്രമീകരണങ്ങള്‍ ചിട്ടപ്പെടുത്തുക"
   },
+  "options_short": {
+    "message": "സൗകര്യങ്ങള്‍"
+  },
+  "out_of_date_lists": {
+    "message": "പഴകിയ പട്ടികകള്‍ പതിവായി പുതുക്കുന്നു."
+  },
   "remove_button": {
     "message": "തെരഞ്ഞെടുത്തത് നീക്കംചെയ്യുക"
+  },
+  "stats_over": {
+    "message": "$number$-നു മേല്‍",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
   },
   "stats_share_download": {
     "message": "ആഡ്ബ്ലോക്ക് പ്ലസ് ഡൗണ്‍ലോഡ് ചെയ്യുക"

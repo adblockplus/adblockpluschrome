@@ -26,15 +26,6 @@
   "clickhide_instructions": {
     "message": "Setelah menutup tetingkap ini, klik (atau klik butang kanan) pada sesuatu unsur atas laman."
   },
-  "description_chrome": {
-    "message": "Lebih 50 juta menggunakannya, penyekat iklan untuk Chrome yang boleh blok semua iklan menjengkelkan, malware dan penjejak."
-  },
-  "description_opera": {
-    "message": "Lebih 50 juta menggunakannya, penyekat iklan untuk Opera yang boleh blok semua iklan menjengkelkan, malware dan penjejak."
-  },
-  "description_safari": {
-    "message": "Lebih 50 juta menggunakannya, penyekat iklan untuk Safari yang boleh blok semua iklan menjengkelkan, malware dan penjejak."
-  },
   "disabled_for_site": {
     "message": "<strong>Dinyahaktifkan</strong> pada laman web ini"
   },

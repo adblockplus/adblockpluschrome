@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Dopo la chiusura di questo pop-up, cliccate (o clic destro) su un elemento sulla pagina."
   },
-  "description_chrome": {
-    "message": "Estensione gratuita per Chrome, usata da oltre 50 milioni persone, blocca TUTTE le pubblicità fastidiose, malware e tracking."
-  },
-  "description_opera": {
-    "message": "Estensione gratuita per Opera, usata da oltre 50 milioni persone, blocca TUTTE le pubblicità fastidiose, malware e tracking."
-  },
-  "description_safari": {
-    "message": "Estensione gratuita per Safari, usata da oltre 50 milioni persone, blocca TUTTE le pubblicità fastidiose, malware e tracking."
+  "description": {
+    "message": "Estensione gratuita, usata da oltre 50 milioni persone, blocca TUTTE le pubblicità fastidiose, malware e tracking."
   },
   "disabled_for_site": {
     "message": "<strong>Disattivato</strong> su questo sito"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Rimuovi selezionati"
   },
+  "safari_content_blocker": {
+    "message": "Usa il Content Blocking nativo di Safari (sperimentale)"
+  },
+  "safari_restart": {
+    "message": "Riavvia Safari per favore"
+  },
   "show_block_element_menu": {
     "message": "Mostra 'Blocca Elemento' nel menu contestuale"
+  },
+  "show_devtools_panel": {
+    "message": "Mostra il pannello 'Adblock Plus' in developer tools"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> in questa pagina",

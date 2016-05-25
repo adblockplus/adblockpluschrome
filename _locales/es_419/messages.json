@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Después de cerrar esta ventana, haga click (o click derecho) en un elemento de la página."
   },
-  "description_chrome": {
-    "message": "Un bloqueador gratuito para Chrome de TODA la publicidad molesta, el malware y el tracking, con más de 50 millones de usuarios."
-  },
-  "description_opera": {
-    "message": "Un bloqueador gratuito para Opera de TODA la publicidad molesta, el malware y el tracking, con más de 50 millones de usuarios."
-  },
-  "description_safari": {
-    "message": "Un bloqueador gratuito para Safari de TODA la publicidad molesta, el malware y el tracking, con más de 50 millones de usuarios."
+  "description": {
+    "message": "Usado por más de 50 millones de personas, un bloqueador gratuito que bloquea TODOS los anuncios molestos, malware y tracking."
   },
   "disabled_for_site": {
     "message": "<strong>Deshabilitado</strong> en este sitio"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Eliminar seleccionados"
   },
+  "safari_content_blocker": {
+    "message": "Usar el bloqueador nativo de Safari (experimental)"
+  },
+  "safari_restart": {
+    "message": "Por favor, reinicie Safari"
+  },
   "show_block_element_menu": {
     "message": "Mostrar opción \"Bloquear Elemento\" al hacer click derecho en el elemento"
+  },
+  "show_devtools_panel": {
+    "message": "Mostrar el panel de \"Adblock Plus\" en las herramientas de desarrollador"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> en esta página",

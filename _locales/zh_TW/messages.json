@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "請在此訊息關閉後點選網頁上的元素。"
   },
-  "description_chrome": {
-    "message": "被超過50萬人次使用，Chrome瀏覽器上免費的廣告過濾器，阻止所有煩人的廣告，惡意軟件和追踪。"
-  },
-  "description_opera": {
-    "message": "被超過50萬人次使用，Opera瀏覽器上免費的廣告過濾器，阻止所有煩人的廣告，惡意軟件和追踪。"
-  },
-  "description_safari": {
-    "message": "被超過50萬人次使用，Safari瀏覽器上免費的廣告過濾器，阻止所有煩人的廣告，惡意軟件和追踪。"
+  "description": {
+    "message": "超過50萬人次使用，免費的瀏覽器廣告過濾，阻止所有煩人的廣告，惡意軟體和追踪。"
   },
   "disabled_for_site": {
     "message": "在此網站上 <strong>停用</strong>"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "刪除已選擇項目"
   },
+  "safari_content_blocker": {
+    "message": "使用 Safari 的本機內容阻止 (實驗中)"
+  },
+  "safari_restart": {
+    "message": "請重新啟動 Safari"
+  },
   "show_block_element_menu": {
     "message": "在右鍵選單顯示「過濾網頁元素」"
+  },
+  "show_devtools_panel": {
+    "message": "顯示 Adblock Plus 面板中的開發人員工具"
   },
   "stats_label_page": {
     "message": "本頁有 <strong>$number$</strong>  項被過濾",

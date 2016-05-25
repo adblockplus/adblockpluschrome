@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Setelah menutup munculan ini , klik (atau klik kanan) elemen pada halaman web."
   },
-  "description_chrome": {
-    "message": "Digunakan oleh 50 juta orang, pemblok iklan gratis untuk Chrome yang memblok SEMUA iklan yang mengganggu, malware, dan pelacak."
-  },
-  "description_opera": {
-    "message": "Digunakan oleh 50 juta orang, pemblok iklan gratis untuk Opera yang memblok SEMUA iklan yang mengganggu, malware, dan pelacak."
-  },
-  "description_safari": {
-    "message": "Digunakan oleh 50 juta orang, pemblok iklan gratis untuk Safari yang memblok SEMUA iklan yang mengganggu, malware, dan pelacak."
+  "description": {
+    "message": "Digunakan oleh lebih dari 50 juta orang, pemblokir iklan gratis yang memblokir semua iklan yang mengganggu, malware, dan pelacak."
   },
   "disabled_for_site": {
     "message": "<strong>Nonaktifkan</strong> pada situs ini"
@@ -60,13 +54,13 @@
     "message": "Daftar penyaring Anda harus mengikuti <a>Sintaks Penyaring Adblock Plus</a>"
   },
   "found_a_bug": {
-    "message": "Menemukan sebuah celah? Ingin menerjemahkan Adblock Plus ke bahasa Anda? Silahkan  <a>minta sebuah berkas disini</a>."
+    "message": "Menemukan sebuah celah? Ingin menerjemahkan Adblock Plus ke bahasa Anda? Silahkan  <a>Minta disini</a>."
   },
   "general": {
     "message": "Umum"
   },
   "invalid_css_selector": {
-    "message": "$selector$ bukanlah CSS Selector yang valid",
+    "message": "$selector$ bukan CSS Selector yang valid",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Hapus yang dipilih"
   },
+  "safari_content_blocker": {
+    "message": "Gunakan Pemblokiran Konten asli milik Safari (eksperimental)"
+  },
+  "safari_restart": {
+    "message": "Mohon buka ulang Safari"
+  },
   "show_block_element_menu": {
     "message": "Tampilkan item menu \"Blokir elemen\" saat klik kanan"
+  },
+  "show_devtools_panel": {
+    "message": "Tampilkan panel 'Adblock Plus' pada peralatan pengembang"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pada halaman ini",
@@ -178,7 +181,7 @@
     "message": "Silakan pilih langganan penyaring dari daftar:"
   },
   "unexpected_filter_list_header": {
-    "message": "Filter list headers tidak diperbolehkan disini"
+    "message": "Header daftar saringan tidak diperbolehkan disini"
   },
   "update_now": {
     "message": "Perbaharui sekarang"

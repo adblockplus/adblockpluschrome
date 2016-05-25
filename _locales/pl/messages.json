@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Po zamknięciu tego okna kliknij na stronie niechciany element lewym lub prawym przyciskiem myszy."
   },
-  "description_chrome": {
-    "message": "Używany przez ponad 50 milionów ludzi dodatek do Chrome, blokujący irytujące reklamy, złośliwe oprogramowanie i programy śledzące."
-  },
-  "description_opera": {
-    "message": "Używany przez ponad 50 milionów ludzi darmowy dodatek do przeglądarki Opera, blokujący irytujące reklamy, złośliwe oprogramowanie i programy śledzące zachowanie internautów w sieci."
-  },
-  "description_safari": {
-    "message": "Używany przez ponad 50 milionów ludzi darmowy dodatek do przeglądarki Safari, blokujący irytujące reklamy, złośliwe oprogramowanie i programy śledzące zachowanie internautów w sieci."
+  "description": {
+    "message": "Używany przez ponad 50 milionów ludzi, darmowy dodatek blokujący irytujące reklamy, złośliwe oprogramowanie i programy śledzące."
   },
   "disabled_for_site": {
     "message": "<strong>Wyłączony</strong> na tej stronie"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Usuń zaznaczone"
   },
+  "safari_content_blocker": {
+    "message": "Używaj natywnego sposobu blokowania treści Safari (eksperymentalne)"
+  },
+  "safari_restart": {
+    "message": "Uruchom ponownie Safari"
+  },
   "show_block_element_menu": {
     "message": "Wyświetlaj element „Blokuj element” w menu kontekstowym"
+  },
+  "show_devtools_panel": {
+    "message": "Wyświetlaj panel „Adblock Plus” w narzędziach dla deweloperów"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> na tej stronie",

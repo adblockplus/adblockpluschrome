@@ -26,14 +26,8 @@
   "clickhide_instructions": {
     "message": "Po zaključku tega popup kliknite (ali desni klik) element na strani."
   },
-  "description_chrome": {
-    "message": "Uporablja ga več kot 50 milijonov ljudi, brezplačno ad blocker za Chrome, ki blokira VSE nadležno oglasi, malware in sledenje."
-  },
-  "description_opera": {
-    "message": "Uporablja ga več kot 50 milijonov ljudi, brezplačno ad blocker za Opera, ki blokira VSE nadležno oglasi, malware in sledenje."
-  },
-  "description_safari": {
-    "message": "Uporablja ga več kot 50 milijonov ljudi, brezplačno ad blocker za Safari, ki blokira VSE nadležno oglasi, malware in sledenje."
+  "description": {
+    "message": "Brezplačni ad blocker, ki ga uporablja preko 50 milijonov ljudi, blokira VSE nadležne oglase, malware in sledenje."
   },
   "disabled_for_site": {
     "message": "<strong>Omogočeno</strong> na tej strani"
@@ -127,8 +121,17 @@
   "remove_button": {
     "message": "Odstrani izbrane"
   },
+  "safari_content_blocker": {
+    "message": "Uporabi izvirni Content Blocking brskalnika Safari (poskusno)"
+  },
+  "safari_restart": {
+    "message": "Prosimo ponovno zaženite Safari"
+  },
   "show_block_element_menu": {
     "message": "Prikaži 'Blokiraj element' v meniju desnega klika"
+  },
+  "show_devtools_panel": {
+    "message": "Prikaži \"Adblock Plus\" vrstico v orodjih za razvijalce"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> na tej strani",

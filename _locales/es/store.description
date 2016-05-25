@@ -1,22 +1,5 @@
-Adblock Plus bloquea todos los anuncios importunos y ayuda a los sitios web al permitir por defecto la publicidad no intrusiva (opción configurable).
-Disfrute navegando por Internet sin que la publicidad agresiva ocupe toda la pantalla. Adblock Plus para Google Chrome bloquea:
-
-· Banners
-· Vídeos publicitarios en YouTube
-· Anuncios en Facebook 
-· Ventanas emergentes (pop ups)
-· Todo tipo de publicidad agresiva
-
-Adblock Plus es la extensión de navegador más popular, utilizada por millones de usuarios de todo el mundo. Se trata de un proyecto de código abierto orientado a la comunidad, en el que cientos de voluntarios contribuyen al éxito de Adblock Plus para garantizar que toda la publicidad molesta se bloquee automáticamente.
-Tenga en cuenta que al instalar Adblock Plus para Chrome su navegador le advertirá que esta extensión tendrá acceso a su historial y datos de navegación. Se trata de un mensaje que aparece por defecto, nosotros NUNCA recolectamos ningún tipo de información.
-Hace poco la comunidad de Adblock Plus introdujo la iniciativa de publicidad aceptable. Al permitir algunos anuncios estáticos y de pequeño tamaño ayudará a los sitios web que dependen de la publicidad, pero que prefieren hacerlo de forma no agresiva. Esta funcionalidad puede deshabilitarse en cualquier momento. Para más información, puede consultar en http://adblockplus.org/en/acceptable-ads.
-
-***********
-
-Puede encontrar los anuncios de nuevas versiones y las listas de cambios en http://adblockplus.org/releases/
-¿Algún problema? Pruebe a reiniciar Chrome y/o pulsar "Actualizar ahora" en las Opciones de Adblock Plus.
-¿Encontró un fallo? Ya estamos al tanto de  algunos de ellos: http://adblockplus.org/en/known-issues-chrome. Si encontró otro diferente o necesita ayuda, puede visitar nuestro foro: https://adblockplus.org/forum/viewforum.php?f=10.
-
-*************
-
-¿Se siente aventurero? Pruebe una versión de desarrollo para tener siempre las funcionalidades más recientes de Adblock Plus para Chrome: http://adblockplus.org/en/development-builds (se actualizan independientemente, y tienen predisposiciones diferentes).
+{
+  "store.description": {
+    "message": "Adblock Plus bloquea todos los anuncios importunos y ayuda a los sitios web al permitir por defecto la publicidad no intrusiva (opción configurable).\nDisfrute navegando por Internet sin que la publicidad agresiva ocupe toda la pantalla. Adblock Plus para Google Chrome bloquea:\n\n· Banners\n· Vídeos publicitarios en YouTube\n· Anuncios en Facebook \n· Ventanas emergentes (pop ups)\n· Todo tipo de publicidad agresiva\n\nAdblock Plus es la extensión de navegador más popular, utilizada por millones de usuarios de todo el mundo. Se trata de un proyecto de código abierto orientado a la comunidad, en el que cientos de voluntarios contribuyen al éxito de Adblock Plus para garantizar que toda la publicidad molesta se bloquee automáticamente.\nTenga en cuenta que al instalar Adblock Plus para Chrome su navegador le advertirá que esta extensión tendrá acceso a su historial y datos de navegación. Se trata de un mensaje que aparece por defecto, nosotros NUNCA recolectamos ningún tipo de información.\nHace poco la comunidad de Adblock Plus introdujo la iniciativa de publicidad aceptable. Al permitir algunos anuncios estáticos y de pequeño tamaño ayudará a los sitios web que dependen de la publicidad, pero que prefieren hacerlo de forma no agresiva. Esta funcionalidad puede deshabilitarse en cualquier momento. Para más información, puede consultar en http://adblockplus.org/en/acceptable-ads.\n\n***********\n\nPuede encontrar los anuncios de nuevas versiones y las listas de cambios en http://adblockplus.org/releases/\n¿Algún problema? Pruebe a reiniciar Chrome y/o pulsar \"Actualizar ahora\" en las Opciones de Adblock Plus.\n¿Encontró un fallo? Ya estamos al tanto de  algunos de ellos: http://adblockplus.org/en/known-issues-chrome. Si encontró otro diferente o necesita ayuda, puede visitar nuestro foro: https://adblockplus.org/forum/viewforum.php?f=10.\n\n*************\n\n¿Se siente aventurero? Pruebe una versión de desarrollo para tener siempre las funcionalidades más recientes de Adblock Plus para Chrome: http://adblockplus.org/en/development-builds (se actualizan independientemente, y tienen predisposiciones diferentes).\n"
+  }
+}

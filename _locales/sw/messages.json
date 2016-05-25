@@ -26,15 +26,6 @@
   "clickhide_instructions": {
     "message": "baada ya kufunga dukizi hii , click (au haki-click ) kipengele kwenye ukurasa huu."
   },
-  "description_chrome": {
-    "message": "Kutumiwa na zaidi ya milioni 50 watu , bure tangazo blocker kwa Chrome kwamba vitalu ALL annoying matangazo , zisizo na kufuatilia."
-  },
-  "description_opera": {
-    "message": "Kutumiwa na zaidi ya milioni 50 watu , bure tangazo blocker kwa Opera kwamba vitalu ALL annoying matangazo , zisizo na kufuatilia."
-  },
-  "description_safari": {
-    "message": "Kutumiwa na zaidi ya milioni 50 watu , bure tangazo blocker kwa Safari kwamba vitalu ALL annoying matangazo , zisizo na kufuatilia."
-  },
   "disabled_for_site": {
     "message": "<strong>walemavu</strong> kwenye tovuti hii"
   },
