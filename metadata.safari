@@ -3,7 +3,6 @@ inherit = metadata.common
 
 [general]
 basename = adblockplussafari
-author = Eyeo GmbH
 homepage = https://adblockplus.org/
 updateURL = https://update.adblockplus.org/adblockplussafari/updates.plist
 

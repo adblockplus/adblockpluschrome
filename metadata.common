@@ -30,6 +30,7 @@ testScripts = ../ext/common.js
   tests/signatures.js
   tests/cssEscaping.js
 permissions = http://*/* https://*/*
+author = Eyeo GmbH
 
 [contentScripts]
 document_start = ext/common.js ext/content.js cssProperties.js include.preload.js
