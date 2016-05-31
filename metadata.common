@@ -86,6 +86,7 @@ lib/adblockplus.js = adblockpluscore/lib/events.js
   adblockpluscore/lib/antiadblockInit.js
   lib/messaging.js
   lib/tldjs.js
+  lib/punycode.js
   lib/url.js
   lib/stats.js
   lib/devtools.js
@@ -98,7 +99,6 @@ lib/adblockplus.js = adblockpluscore/lib/events.js
   lib/requestBlocker.js
   lib/popupBlocker.js
   lib/uninstall.js
-  lib/punycode.js
   abp2blocklist/lib/abp2blocklist.js
   safari/contentBlocking.js
   --arg module=true source_repo=https://hg.adblockplus.org/adblockpluscore/
