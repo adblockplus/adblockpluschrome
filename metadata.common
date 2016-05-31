@@ -68,40 +68,42 @@ qunit/qunit.js = adblockplustests/chrome/content/qunit.js
 qunit/qunit.css = adblockplustests/chrome/content/qunit.css
 
 [convert_js]
-lib/adblockplus.js = adblockpluscore/lib/events.js
-  lib/prefs.js
-  lib/utils.js
-  lib/io.js
-  adblockpluscore/lib/downloader.js
-  adblockpluscore/lib/filterNotifier.js
-  adblockpluscore/lib/filterClasses.js
-  adblockpluscore/lib/subscriptionClasses.js
-  adblockpluscore/lib/filterStorage.js
-  adblockpluscore/lib/elemHide.js
-  adblockpluscore/lib/matcher.js
-  adblockpluscore/lib/cssRules.js
-  adblockpluscore/lib/filterListener.js
-  adblockpluscore/lib/synchronizer.js
-  adblockpluscore/lib/notification.js
-  adblockpluscore/lib/antiadblockInit.js
-  lib/messaging.js
-  lib/tldjs.js
-  lib/punycode.js
-  lib/url.js
-  lib/stats.js
+lib/adblockplus.js =
   lib/devtools.js
-  lib/whitelisting.js
-  lib/filterValidation.js
   lib/filterComposer.js
+  lib/filterValidation.js
   lib/icon.js
+  lib/io.js
+  lib/messaging.js
   lib/notificationHelper.js
-  lib/subscriptionInit.js
-  lib/requestBlocker.js
   lib/popupBlocker.js
+  lib/prefs.js
+  lib/punycode.js
+  lib/requestBlocker.js
+  lib/stats.js
+  lib/subscriptionInit.js
+  lib/tldjs.js
   lib/uninstall.js
-  abp2blocklist/lib/abp2blocklist.js
+  lib/url.js
+  lib/utils.js
+  lib/whitelisting.js
   safari/contentBlocking.js
+  abp2blocklist/lib/abp2blocklist.js
+  adblockpluscore/lib/antiadblockInit.js
+  adblockpluscore/lib/cssRules.js
+  adblockpluscore/lib/downloader.js
+  adblockpluscore/lib/elemHide.js
+  adblockpluscore/lib/events.js
+  adblockpluscore/lib/filterClasses.js
+  adblockpluscore/lib/filterListener.js
+  adblockpluscore/lib/filterNotifier.js
+  adblockpluscore/lib/filterStorage.js
+  adblockpluscore/lib/matcher.js
+  adblockpluscore/lib/notification.js
+  adblockpluscore/lib/subscriptionClasses.js
+  adblockpluscore/lib/synchronizer.js
   --arg module=true source_repo=https://hg.adblockplus.org/adblockpluscore/
+  autoload=filterListener,synchronizer,requestBlocker,popupBlocker,contentBlocking,subscriptionInit,filterComposer,stats,uninstall
 ext/common.js = ext/common.js chrome/ext/common.js
 ext/background.js = ext/background.js chrome/ext/background.js --arg brace_style=expand
 include.postload.js = subscriptionLink.postload.js composer.postload.js
