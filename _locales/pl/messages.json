@@ -51,7 +51,7 @@
     "message": "Listy filtrów"
   },
   "filter_must_follow_syntax": {
-    "message": "Filtr musi przestrzegać <a>składni filtra Adblock Plusa</a>."
+    "message": "Filtr musi przestrzegać <a>składni filtra Adblock Plus</a>."
   },
   "found_a_bug": {
     "message": "Znalazłeś błąd? Chcesz przetłumaczyć Adblock Plus na swój język? Zgłoś <a>tutaj</a>."

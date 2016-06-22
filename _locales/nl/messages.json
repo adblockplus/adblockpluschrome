@@ -124,6 +124,9 @@
   "safari_content_blocker": {
     "message": "Gebruik Safari's eigen inhoudsblokkering (experimenteel)"
   },
+  "safari_restart": {
+    "message": "Start Safari opnieuw op"
+  },
   "show_block_element_menu": {
     "message": "Toon 'Element blokkeren' in het rechtermuisklik menu"
   },

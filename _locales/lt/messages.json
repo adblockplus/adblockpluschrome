@@ -124,6 +124,9 @@
   "safari_content_blocker": {
     "message": "Naudoti „Safari” įmontuotą turinio blokavimą (eksperimentinis)"
   },
+  "safari_restart": {
+    "message": "Iš naujo paleiskite „Safari”"
+  },
   "show_block_element_menu": {
     "message": "Dešinio mygtuko meniu rodyti „Blokuoti elementą“"
   },

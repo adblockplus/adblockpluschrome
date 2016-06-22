@@ -124,6 +124,9 @@
   "safari_content_blocker": {
     "message": "Anvend Safaris indbyggede indholdsblokering (eksperimental)"
   },
+  "safari_restart": {
+    "message": "Genstart Safari"
+  },
   "show_block_element_menu": {
     "message": "Vis \"Blokér element\" i højrekliksmenu"
   },

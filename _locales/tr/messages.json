@@ -3,7 +3,7 @@
     "message": "Ekle"
   },
   "add_domain_button": {
-    "message": "Site Ekle"
+    "message": "Alan adı ekle"
   },
   "add_filter_button": {
     "message": "Filtre ekle"
@@ -113,7 +113,7 @@
     "message": "Adblock Plus Seçenekleri"
   },
   "options_short": {
-    "message": "Ayarlar"
+    "message": "Seçenekler"
   },
   "out_of_date_lists": {
     "message": "Zamanı geçmiş listeler düzenli olarak güncellenmektedir."

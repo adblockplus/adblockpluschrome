@@ -124,6 +124,9 @@
   "safari_content_blocker": {
     "message": "Utilitza el bloqueig de contingut natiu de Safari (experimental)"
   },
+  "safari_restart": {
+    "message": "Reinicia Safari per favor"
+  },
   "show_block_element_menu": {
     "message": "Mostra la opció \"Bloqueja l'element\" com a ítem del menú contextual"
   },

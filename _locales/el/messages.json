@@ -124,6 +124,9 @@
   "safari_content_blocker": {
     "message": "Χρήση του Safari μητρική φραγή περιεχομένου (πειραματική)"
   },
+  "safari_restart": {
+    "message": "Παρακαλώ επανεκκινήσετε τον Safari"
+  },
   "show_block_element_menu": {
     "message": "Εμφάνιση \"Φραγή στοιχείου\" στο μενού του δεξί κλικ"
   },

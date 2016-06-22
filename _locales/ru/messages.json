@@ -98,7 +98,7 @@
     "message": "Adblock Plus (тестовая сборка)"
   },
   "notification_configure": {
-    "message": "Настроить параметры уведомлений"
+    "message": "Настройка параметров уведомлений"
   },
   "notification_open_all": {
     "message": "Открыть все ссылки из этого уведомления"

@@ -124,6 +124,9 @@
   "safari_content_blocker": {
     "message": "Verwenden Sie nativen Blockierung von Inhalten für Safari (experimentell)"
   },
+  "safari_restart": {
+    "message": "Starten Sie Safari neu"
+  },
   "show_block_element_menu": {
     "message": "Zeige Rechtsklickmenü-Eintrag 'Element blockieren'"
   },
