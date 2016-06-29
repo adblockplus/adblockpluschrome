@@ -135,6 +135,16 @@
         }
       });
     }
+
+    // Add or update frame in frame structure
+    var frames = framesOfTabs[details.tabId];
+    if (!frames)
+      frames = framesOfTabs[details.tabId] = Object.create(null);
+
+    frames[details.frameId] = {
+      parent: frames[details.parentFrameId] || null,
+      url: new URL(details.url)
+    };
   });
 
   function forgetTab(tabId)
@@ -435,21 +445,12 @@
       return;
 
     var isMainFrame = details.type == "main_frame" || (
-
       // assume that the first request belongs to the top frame. Chrome 29
       // may give the top frame the type "object" instead of "main_frame".
       // https://code.google.com/p/chromium/issues/detail?id=281711
       details.frameId == 0 && !(details.tabId in framesOfTabs)
     );
 
-    var frames = null;
-    if (!isMainFrame)
-      frames = framesOfTabs[details.tabId];
-    if (!frames)
-      frames = framesOfTabs[details.tabId] = Object.create(null);
-
-    var frame = null;
-    var url = new URL(details.url);
     if (!isMainFrame)
     {
       // we are looking for the frame that contains the element that
@@ -468,12 +469,11 @@
         requestType = details.type.toUpperCase();
       }
 
-      frame = frames[frameId] || frames[Object.keys(frames)[0]];
-
+      var frame = ext.getFrame(details.tabId, frameId);
       if (frame)
       {
         var results = ext.webRequest.onBeforeRequest._dispatch(
-          url,
+          new URL(details.url),
           requestType,
           new Page({id: details.tabId}),
           frame
@@ -483,9 +483,6 @@
           return {cancel: true};
       }
     }
-
-    if (isMainFrame || details.type == "sub_frame")
-      frames[details.frameId] = {url: url, parent: frame};
   }, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
 
 
