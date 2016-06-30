@@ -78,22 +78,22 @@
       notifyFrameLoading();
   });
 
-  if (!usingContentBlockerAPI)
+  // Notify the background page when a prerendered page is displayed. That way
+  // the existing page of the tab can be replaced with this new one.
+  if (isTopLevel && isPrerendered)
   {
-    // Notify the background page when a prerendered page is displayed. That way
-    // the existing page of the tab can be replaced with this new one.
-    if (isTopLevel && isPrerendered)
+    var onVisibilitychange = function()
     {
-      var onVisibilitychange = function()
-      {
-        safari.self.tab.dispatchMessage("replaced", {documentId: documentId});
-        document.removeEventListener("visibilitychange", onVisibilitychange);
-      };
-      document.addEventListener("visibilitychange", onVisibilitychange);
-    }
+      safari.self.tab.dispatchMessage("replaced", {documentId: documentId});
+      document.removeEventListener("visibilitychange", onVisibilitychange);
+    };
+    document.addEventListener("visibilitychange", onVisibilitychange);
+  }
 
   /* Web requests */
 
+  if (!usingContentBlockerAPI)
+  {
     document.addEventListener("beforeload", function(event)
     {
       // we don't block non-HTTP requests anyway, so we can bail out
