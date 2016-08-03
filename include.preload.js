@@ -177,7 +177,7 @@ function checkSitekey()
 {
   var attr = document.documentElement.getAttribute("data-adblockkey");
   if (attr)
-    ext.backgroundPage.sendMessage({type: "filter.addKey", token: attr});
+    ext.backgroundPage.sendMessage({type: "filters.addKey", token: attr});
 }
 
 function getContentDocument(element)
