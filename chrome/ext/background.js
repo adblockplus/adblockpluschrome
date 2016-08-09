@@ -183,8 +183,12 @@
         chrome.browserAction.setIcon({
           tabId: this._tabId,
           path: {
+            16: this._changes.iconPath.replace("$size", "16"),
             19: this._changes.iconPath.replace("$size", "19"),
-            38: this._changes.iconPath.replace("$size", "38")
+            20: this._changes.iconPath.replace("$size", "20"),
+            32: this._changes.iconPath.replace("$size", "32"),
+            38: this._changes.iconPath.replace("$size", "38"),
+            40: this._changes.iconPath.replace("$size", "40")
           }
         });
       }
