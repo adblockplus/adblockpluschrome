@@ -86,24 +86,16 @@
       player.parentNode.replaceChild(newPlayer, player);
   }
 
-  function runInPage(fn, arg)
-  {
-    var script = document.createElement("script");
-    script.type = "application/javascript";
-    script.async = false;
-    script.textContent = "(" + fn + ")(" + arg + ");";
-    document.documentElement.appendChild(script);
-    document.documentElement.removeChild(script);
-  }
-
   document.addEventListener("beforeload", function(event)
   {
     if ((event.target.localName == "object" || event.target.localName == "embed") && /:\/\/[^\/]*\.ytimg\.com\//.test(event.url))
       patchPlayer(event.target);
   }, true);
 
-  runInPage(function(badArgumentsRegex)
+  runInPage(function(badArgumentsRegexSource)
   {
+    var badArgumentsRegex = new RegExp(badArgumentsRegexSource);
+
     // If history.pushState is available, YouTube uses the history API
     // when navigation from one video to another, and tells the flash
     // player with JavaScript which video and which ads to show next,
@@ -179,5 +171,5 @@
         ytplayer.config = rawYtplayer.config;
       }
     });
-  }, badArgumentsRegex);
+  }, badArgumentsRegex.source);
 })();
