@@ -92,7 +92,7 @@
       patchPlayer(event.target);
   }, true);
 
-  runInPage(function(badArgumentsRegexSource)
+  runInDocument(document, function(badArgumentsRegexSource)
   {
     var badArgumentsRegex = new RegExp(badArgumentsRegexSource);
 

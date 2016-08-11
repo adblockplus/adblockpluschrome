@@ -17,7 +17,6 @@
 
 var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 var SELECTOR_GROUP_SIZE = 200;
-var id = Math.random().toString(36).substr(2);
 
 var typeMap = {
   "img": "IMAGE",
@@ -334,23 +333,7 @@ ElementHidingTracer.prototype = {
   }
 };
 
-function reinjectStyleSheetWhenRemoved(document, style)
-{
-  if (!MutationObserver)
-    return null;
-
-  var parentNode = style.parentNode;
-  var observer = new MutationObserver(function()
-  {
-    if (style.parentNode != parentNode)
-      parentNode.appendChild(style);
-  });
-
-  observer.observe(parentNode, {childList: true});
-  return observer;
-}
-
-function runInPage(fn, arg)
+function runInDocument(document, fn, arg)
 {
   var script = document.createElement("script");
   script.type = "application/javascript";
@@ -360,44 +343,17 @@ function runInPage(fn, arg)
   document.documentElement.removeChild(script);
 }
 
-function protectStyleSheet(document, style)
-{
-  style.id = id;
-
-  runInPage(function(id)
-  {
-    var style = document.getElementById(id) ||
-                document.documentElement.shadowRoot.getElementById(id);
-    style.removeAttribute("id");
-
-    var disableables = [style, style.sheet];
-    for (var i = 0; i < disableables.length; i++)
-      Object.defineProperty(disableables[i], "disabled",
-                            {value: false, enumerable: true});
-
-    ["deleteRule", "removeRule"].forEach(function(method)
-    {
-      var original = CSSStyleSheet.prototype[method];
-      CSSStyleSheet.prototype[method] = function(index)
-      {
-        if (this != style.sheet)
-          original.call(this, index);
-      };
-    });
-  }, id);
-}
-
 // Neither Chrome[1] nor Safari allow us to intercept WebSockets, and therefore
 // some ad networks are misusing them as a way to serve adverts and circumvent
 // us. As a workaround we wrap WebSocket, preventing blocked WebSocket
 // connections from being opened.
 // [1] - https://bugs.chromium.org/p/chromium/issues/detail?id=129353
-function wrapWebSocket()
+function wrapWebSocket(document)
 {
   if (typeof WebSocket == "undefined")
     return;
 
-  var eventName = "abpws-" + id;
+  var eventName = "abpws-" + Math.random().toString(36).substr(2);
 
   document.addEventListener(eventName, function(event)
   {
@@ -412,7 +368,7 @@ function wrapWebSocket()
     });
   });
 
-  runInPage(function(eventName)
+  runInDocument(document, function(eventName)
   {
     // As far as possible we must track everything we use that could be
     // sabotaged by the website later in order to circumvent us.
@@ -474,7 +430,7 @@ function init(document)
   var observer = null;
   var tracer = null;
 
-  wrapWebSocket();
+  wrapWebSocket(document);
 
   function getPropertyFilters(callback)
   {
@@ -499,6 +455,22 @@ function init(document)
   {
     shadow = document.documentElement.createShadowRoot();
     shadow.appendChild(document.createElement("shadow"));
+
+    // Stop the website from messing with our shadowRoot
+    runInDocument(document, function()
+    {
+      var ourShadowRoot = document.documentElement.shadowRoot;
+      var desc = Object.getOwnPropertyDescriptor(Element.prototype, "shadowRoot");
+      var shadowRoot = Function.prototype.call.bind(desc.get);
+
+      Object.defineProperty(Element.prototype, "shadowRoot", {
+        conifgurable: true, enumerable: true, get: function()
+        {
+          var shadow = shadowRoot(this);
+          return shadow == ourShadowRoot ? null : shadow;
+        }
+      });
+    }, null);
   }
 
   function addElemHideSelectors(selectors)
@@ -521,9 +493,6 @@ function init(document)
       // <style> element to the shadow DOM.
       if (!style.sheet)
         return;
-
-      observer = reinjectStyleSheetWhenRemoved(document, style);
-      protectStyleSheet(document, style);
     }
 
     // If using shadow DOM, we have to add the ::content pseudo-element
