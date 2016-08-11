@@ -150,16 +150,22 @@ function checkCollapse(element)
     {
       function collapseElement()
       {
+        var propertyName = "display";
+        var propertyValue = "none";
         if (element.localName == "frame")
-          element.style.setProperty("visibility", "hidden", "important");
-        else
-          element.style.setProperty("display", "none", "important");
+        {
+          propertyName = "visibility";
+          propertyValue = "hidden";
+        }
+
+        if (element.style.getPropertyValue(propertyName) != propertyValue ||
+            element.style.getPropertyPriority(propertyName) != "important")
+          element.style.setProperty(propertyName, propertyValue, "important");
       }
 
-      if (collapse && !element._collapsed)
+      if (collapse)
       {
         collapseElement();
-        element._collapsed = true;
 
         if (MutationObserver)
           new MutationObserver(collapseElement).observe(
