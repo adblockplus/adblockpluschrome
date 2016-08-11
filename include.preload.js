@@ -463,20 +463,23 @@ function init(document)
     shadow.appendChild(document.createElement("shadow"));
 
     // Stop the website from messing with our shadowRoot
-    runInDocument(document, function()
+    if ("shadowRoot" in Element.prototype)
     {
-      var ourShadowRoot = document.documentElement.shadowRoot;
-      var desc = Object.getOwnPropertyDescriptor(Element.prototype, "shadowRoot");
-      var shadowRoot = Function.prototype.call.bind(desc.get);
+      runInDocument(document, function()
+      {
+        var ourShadowRoot = document.documentElement.shadowRoot;
+        var desc = Object.getOwnPropertyDescriptor(Element.prototype, "shadowRoot");
+        var shadowRoot = Function.prototype.call.bind(desc.get);
 
-      Object.defineProperty(Element.prototype, "shadowRoot", {
-        conifgurable: true, enumerable: true, get: function()
-        {
-          var shadow = shadowRoot(this);
-          return shadow == ourShadowRoot ? null : shadow;
-        }
-      });
-    }, null);
+        Object.defineProperty(Element.prototype, "shadowRoot", {
+          conifgurable: true, enumerable: true, get: function()
+          {
+            var shadow = shadowRoot(this);
+            return shadow == ourShadowRoot ? null : shadow;
+          }
+        });
+      }, null);
+    }
   }
 
   function addElemHideSelectors(selectors)
