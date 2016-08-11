@@ -128,8 +128,6 @@ function getURLsFromElement(element)
 
 function checkCollapse(element)
 {
-  window.collapsing = true;
-
   var mediatype = typeMap[element.localName];
   if (!mediatype)
     return;
@@ -606,15 +604,6 @@ function init(document)
           // So we have to apply element hiding from the parent frame.
           if (!("init" in contentWindow))
             init(contentDocument);
-
-          // Moreover, "load" and "error" events aren't dispatched for elements
-          // in dynamically created frames due to https://crbug.com/442107.
-          // So we also have to apply element collpasing from the parent frame.
-          if (!contentWindow.collapsing)
-            Array.prototype.forEach.call(
-              contentDocument.querySelectorAll(Object.keys(typeMap).join(",")),
-              checkCollapse
-            );
         }
       }
     }
