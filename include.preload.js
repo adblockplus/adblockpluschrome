@@ -406,7 +406,11 @@ function wrapWebSocket(document)
       if (!(this instanceof WrappedWebSocket)) return RealWebSocket();
       if (arguments.length < 1) return new RealWebSocket();
 
-      var websocket = new RealWebSocket(url, protocols);
+      var websocket;
+      if (arguments.length == 1)
+        websocket = new RealWebSocket(url);
+      else
+        websocket = new RealWebSocket(url, protocols);
 
       checkRequest(websocket.url, function(blocked)
       {
