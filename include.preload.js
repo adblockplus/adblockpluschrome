@@ -474,7 +474,7 @@ function init(document)
         var shadowRoot = Function.prototype.call.bind(desc.get);
 
         Object.defineProperty(Element.prototype, "shadowRoot", {
-          conifgurable: true, enumerable: true, get: function()
+          configurable: true, enumerable: true, get: function()
           {
             var shadow = shadowRoot(this);
             return shadow == ourShadowRoot ? null : shadow;
