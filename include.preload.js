@@ -362,7 +362,7 @@ function wrapWebSocket(document)
   document.addEventListener(eventName, function(event)
   {
     ext.backgroundPage.sendMessage({
-      type: "websocket-request",
+      type: "request.websocket",
       url: event.detail.url
     }, function (block)
     {
@@ -398,7 +398,7 @@ function wrapWebSocket(document)
       }));
     }
 
-    WebSocket = function WrappedWebSocket(url, protocols)
+    function WrappedWebSocket(url)
     {
       // Throw correct exceptions if the constructor is used improperly.
       if (!(this instanceof WrappedWebSocket)) return RealWebSocket();
@@ -408,7 +408,7 @@ function wrapWebSocket(document)
       if (arguments.length == 1)
         websocket = new RealWebSocket(url);
       else
-        websocket = new RealWebSocket(url, protocols);
+        websocket = new RealWebSocket(url, arguments[1]);
 
       checkRequest(websocket.url, function(blocked)
       {
@@ -417,8 +417,9 @@ function wrapWebSocket(document)
       });
 
       return websocket;
-    }.bind();
-
+    }
+    WrappedWebSocket.prototype = RealWebSocket.prototype;
+    WebSocket = WrappedWebSocket.bind();
     Object.defineProperties(WebSocket, {
       CONNECTING: {value: RealWebSocket.CONNECTING, enumerable: true},
       OPEN: {value: RealWebSocket.OPEN, enumerable: true},
