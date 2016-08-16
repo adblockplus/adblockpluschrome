@@ -170,27 +170,36 @@
 
   /* Browser actions */
 
+  var supportedIconSizes = ["19", "38", "16", "32", "20", "40"];
+
   var BrowserAction = function(tabId)
   {
     this._tabId = tabId;
     this._changes = null;
   };
   BrowserAction.prototype = {
+    _iconDetails: function()
+    {
+      var details = {tabId: this._tabId, path: {}};
+      for (var size of supportedIconSizes)
+        details.path[size] = this._changes.iconPath.replace("$size", size);
+      return details;
+    },
     _applyChanges: function()
     {
       if ("iconPath" in this._changes)
       {
-        chrome.browserAction.setIcon({
-          tabId: this._tabId,
-          path: {
-            16: this._changes.iconPath.replace("$size", "16"),
-            19: this._changes.iconPath.replace("$size", "19"),
-            20: this._changes.iconPath.replace("$size", "20"),
-            32: this._changes.iconPath.replace("$size", "32"),
-            38: this._changes.iconPath.replace("$size", "38"),
-            40: this._changes.iconPath.replace("$size", "40")
-          }
-        });
+        try
+        {
+          chrome.browserAction.setIcon(this._iconDetails());
+        }
+        catch (e)
+        {
+          // Edge and newer versions of Chrome prefer different icon sizes, but
+          // older versions of Chrome cannot handle them being present!
+          supportedIconSizes.splice(2);
+          chrome.browserAction.setIcon(this._iconDetails());
+        }
       }
 
       if ("badgeText" in this._changes)
