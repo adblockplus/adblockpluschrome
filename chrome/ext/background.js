@@ -170,36 +170,54 @@
 
   /* Browser actions */
 
-  var supportedIconSizes = ["19", "38", "16", "32", "20", "40"];
-
   var BrowserAction = function(tabId)
   {
     this._tabId = tabId;
     this._changes = null;
   };
   BrowserAction.prototype = {
-    _iconDetails: function()
+    _legacySetIcon: function(details)
     {
-      var details = {tabId: this._tabId, path: {}};
-      for (var size of supportedIconSizes)
-        details.path[size] = this._changes.iconPath.replace("$size", size);
-      return details;
+      var legacyDetails = {};
+      for (var key in details)
+      {
+        var value = details[key];
+        if (typeof value == "object")
+          value = {19: value[19], 38: value[38]};
+        legacyDetails[key] = value;
+      }
+      chrome.browserAction.setIcon(legacyDetails);
+    },
+    _safeSetIcon: function(details)
+    {
+      try
+      {
+        chrome.browserAction.setIcon(details);
+      }
+      catch (e)
+      {
+        // Older versions of Chrome do not allow any sizes other than 19 and 38
+        // to be present, but newer versions of Chrome (and Edge) prefer
+        // different sizes.
+        this._safeSetIcon = this._legacySetIcon;
+        this._legacySetIcon(details);
+      }
     },
     _applyChanges: function()
     {
       if ("iconPath" in this._changes)
       {
-        try
-        {
-          chrome.browserAction.setIcon(this._iconDetails());
-        }
-        catch (e)
-        {
-          // Edge and newer versions of Chrome prefer different icon sizes, but
-          // older versions of Chrome cannot handle them being present!
-          supportedIconSizes.splice(2);
-          chrome.browserAction.setIcon(this._iconDetails());
-        }
+        this._safeSetIcon({
+          tabId: this._tabId,
+          path: {
+            16: this._changes.iconPath.replace("$size", "16"),
+            19: this._changes.iconPath.replace("$size", "19"),
+            20: this._changes.iconPath.replace("$size", "20"),
+            32: this._changes.iconPath.replace("$size", "32"),
+            38: this._changes.iconPath.replace("$size", "38"),
+            40: this._changes.iconPath.replace("$size", "40")
+          }
+        });
       }
 
       if ("badgeText" in this._changes)
