@@ -54,13 +54,13 @@
     "message": "Daftar penyaring Anda harus mengikuti <a>Sintaks Penyaring Adblock Plus</a>"
   },
   "found_a_bug": {
-    "message": "Menemukan sebuah celah? Ingin menerjemahkan Adblock Plus ke bahasa Anda? Silahkan  <a>Minta disini</a>."
+    "message": "Menemukan sebuah celah? Ingin menerjemahkan Adblock Plus ke bahasa Anda? Silahkan <a>Minta disini</a>."
   },
   "general": {
     "message": "Umum"
   },
   "invalid_css_selector": {
-    "message": "$selector$ bukan CSS Selector yang valid",
+    "message": "$selector$ bukan pemilih CSS yang benar",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -95,7 +95,7 @@
     }
   },
   "name_devbuild": {
-    "message": "Struktur pengembangan Adblock Plus"
+    "message": "Membangun pengembangan Adblock Plus"
   },
   "notification_configure": {
     "message": "Mengatur pengaturan pemberitahuan"
@@ -181,7 +181,7 @@
     "message": "Silakan pilih langganan penyaring dari daftar:"
   },
   "unexpected_filter_list_header": {
-    "message": "Header daftar saringan tidak diperbolehkan disini"
+    "message": "Daftar saringan header tidak diperbolehkan disini"
   },
   "update_now": {
     "message": "Perbaharui sekarang"

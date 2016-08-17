@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Setelah menutup tetingkap ini, klik (atau klik butang kanan) pada sesuatu unsur atas laman."
   },
+  "description": {
+    "message": "Digunakan oleh lebih dari 50 juta orang, penyekat iklan percuma yang menyekat SEMUA iklan merimaskan, malware dan penjejakan web."
+  },
   "disabled_for_site": {
     "message": "<strong>Dinyahaktifkan</strong> pada laman web ini"
   },
@@ -94,6 +97,12 @@
   "name_devbuild": {
     "message": "Versi pemaju Adblock Plus"
   },
+  "notification_configure": {
+    "message": "Konfigurasi tetapan notifikasi"
+  },
+  "notification_open_all": {
+    "message": "Buka Semua link dari notifikasi ini"
+  },
   "notification_with_buttons": {
     "message": "Klik 'OK' untuk membuka semua pautan dalam notifikasi ini."
   },
@@ -112,8 +121,17 @@
   "remove_button": {
     "message": "Padamkan yang dipilih"
   },
+  "safari_content_blocker": {
+    "message": "Gunakan Sekatan Kandungan Safari (eksperimen)"
+  },
+  "safari_restart": {
+    "message": "Sila mula semula Safari"
+  },
   "show_block_element_menu": {
     "message": "Paparkan item menu 'Halang elemen' pada butang klik kanan"
+  },
+  "show_devtools_panel": {
+    "message": "Papar Panel 'Adblock Plus' pada fungsi \"Developer Tools\""
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pada halaman ini",

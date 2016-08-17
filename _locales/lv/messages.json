@@ -124,6 +124,9 @@
   "safari_content_blocker": {
     "message": "Lietojiet iebūvēto Safari satura bloķēšanu (eksperimentāls)"
   },
+  "safari_restart": {
+    "message": "Lūdzu, restartējiet Safari"
+  },
   "show_block_element_menu": {
     "message": "Rādīt \"Bloķēt elementu'' labā klikšķa izvēlnē"
   },

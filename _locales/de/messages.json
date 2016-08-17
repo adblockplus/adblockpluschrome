@@ -27,7 +27,7 @@
     "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
   },
   "description": {
-    "message": "Ein kostenloser Werbeblocker mit über 50 Mio Nutzern, der ALLE nervenden Werbeanzeigen, Malware- und Tracking-Angriffe blockiert."
+    "message": "Ein kostenloser Werbeblocker mit über 50 Mio Nutzern, der ALLE nervenden Werbeanzeigen, Malware- und Tracking-Versuche blockiert."
   },
   "disabled_for_site": {
     "message": "Auf dieser Seite <strong>deaktiviert</strong>"
@@ -122,7 +122,7 @@
     "message": "Ausgewählte entfernen"
   },
   "safari_content_blocker": {
-    "message": "Verwenden Sie nativen Blockierung von Inhalten für Safari (experimentell)"
+    "message": "Verwenden Sie die native Blockierung von Inhalten für Safari (experimentell!)"
   },
   "safari_restart": {
     "message": "Starten Sie Safari neu"

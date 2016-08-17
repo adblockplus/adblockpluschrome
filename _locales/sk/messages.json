@@ -42,7 +42,7 @@
     "message": "Upraviť filtre ako surový text"
   },
   "enable_only_the": {
-    "message": "Povoľ len zoznam filtrov ktoré potrebuješ. Príliš veľa filtrov môže spôsobiť nereagovanie prehliadača."
+    "message": "Povolte iba tie zoznamy filtrov, ktoré potrebujete. Príliš veľa filtrov môže spôsobiť nereagovanie prehliadača."
   },
   "enabled_for_site": {
     "message": "<strong>Povolené</strong> na tejto stránke"
@@ -123,6 +123,9 @@
   },
   "safari_content_blocker": {
     "message": "Použite Safari natívne blokovanie obsahu (experimentálne)"
+  },
+  "safari_restart": {
+    "message": "Reštartujte Safari, prosím"
   },
   "show_block_element_menu": {
     "message": "Zobrazovať v kontextovom menu položku 'Blokovať prvok'"
