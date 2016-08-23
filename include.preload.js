@@ -583,6 +583,15 @@ function init(document)
     checkCollapse(event.target);
   }, true);
 
+  // The CSS property filters approach won't work because we cannot find an
+  // unambiguous CSS3 selector for an arbitrary element. We need to remove the
+  // filters from the style sheet and apply them via JS.
+
+  // For Yandex it should suffice to do this on document load, but in theory
+  // it's possible to circumvent this by adding the element to the DOM
+  // dynamically. Same issue with CSS property filters. How do we tackle it
+  // there? If at all.
+
   document.addEventListener("load", function(event)
   {
     var element = event.target;
