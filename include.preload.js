@@ -16,7 +16,6 @@
  */
 
 var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-var SELECTOR_GROUP_SIZE = 200;
 
 var typeMap = {
   "img": "IMAGE",
@@ -196,9 +195,8 @@ function getContentDocument(element)
   }
 }
 
-function ElementHidingTracer(document, selectors)
+function ElementHidingTracer(selectors)
 {
-  this.document = document;
   this.selectors = selectors;
 
   this.changedNodes = [];
@@ -264,7 +262,7 @@ ElementHidingTracer.prototype = {
     // Forget previously changed nodes that are no longer in the DOM.
     for (var i = 0; i < this.changedNodes.length; i++)
     {
-      if (!this.document.contains(this.changedNodes[i]))
+      if (!document.contains(this.changedNodes[i]))
         this.changedNodes.splice(i--, 1);
     }
 
@@ -274,7 +272,7 @@ ElementHidingTracer.prototype = {
       var node = mutation.target;
 
       // Ignore mutations of nodes that aren't in the DOM anymore.
-      if (!this.document.contains(node))
+      if (!document.contains(node))
         continue;
 
       // Since querySelectorAll() doesn't consider the root itself
@@ -317,10 +315,10 @@ ElementHidingTracer.prototype = {
 
   trace: function()
   {
-    this.checkNodes([this.document]);
+    this.checkNodes([document]);
 
     this.observer.observe(
-      this.document,
+      document,
       {
         childList: true,
         attributes: true,
@@ -331,13 +329,13 @@ ElementHidingTracer.prototype = {
 
   disconnect: function()
   {
-    this.document.removeEventListener("DOMContentLoaded", this.trace);
+    document.removeEventListener("DOMContentLoaded", this.trace);
     this.observer.disconnect();
     clearTimeout(this.timeout);
   }
 };
 
-function runInDocument(document, fn, arg)
+function runInPageContext(fn, arg)
 {
   var script = document.createElement("script");
   script.type = "application/javascript";
@@ -352,7 +350,7 @@ function runInDocument(document, fn, arg)
 // us. As a workaround we wrap WebSocket, preventing blocked WebSocket
 // connections from being opened.
 // [1] - https://bugs.chromium.org/p/chromium/issues/detail?id=129353
-function wrapWebSocket(document)
+function wrapWebSocket()
 {
   if (typeof WebSocket == "undefined")
     return;
@@ -372,7 +370,7 @@ function wrapWebSocket(document)
     });
   });
 
-  runInDocument(document, function(eventName)
+  runInPageContext(function(eventName)
   {
     // As far as possible we must track everything we use that could be
     // sabotaged by the website later in order to circumvent us.
@@ -432,43 +430,48 @@ function wrapWebSocket(document)
   }, eventName);
 }
 
-function init(document)
+function ElemHide()
 {
-  var shadow = null;
-  var style = null;
-  var observer = null;
-  var tracer = null;
+  this.shadow = this.createShadowTree();
+  this.style = null;
+  this.tracer = null;
 
-  wrapWebSocket(document);
+  this.propertyFilters = new CSSPropertyFilters(
+    window,
+    function(callback)
+    {
+      ext.backgroundPage.sendMessage({
+        type: "filters.get",
+        what: "cssproperties"
+      }, callback);
+    },
+    this.addSelectors.bind(this)
+  );
+}
+ElemHide.prototype = {
+  selectorGroupSize: 200,
 
-  function getPropertyFilters(callback)
+  createShadowTree: function()
   {
-    ext.backgroundPage.sendMessage({
-      type: "filters.get",
-      what: "cssproperties"
-    }, callback);
-  }
-  var propertyFilters = new CSSPropertyFilters(window, getPropertyFilters,
-                                               addElemHideSelectors);
+    // Use Shadow DOM if available as to not mess with with web pages that
+    // rely on the order of their own <style> tags (#309). However, creating
+    // a shadow root breaks running CSS transitions. So we have to create
+    // the shadow root before transistions might start (#452).
+    if (!("createShadowRoot" in document.documentElement))
+      return null;
 
-  // Use Shadow DOM if available to don't mess with web pages that rely on
-  // the order of their own <style> tags (#309).
-  //
-  // However, creating a shadow root breaks running CSS transitions. So we
-  // have to create the shadow root before transistions might start (#452).
-  //
-  // Also, using shadow DOM causes issues on some Google websites,
-  // including Google Docs, Gmail and Blogger (#1770, #2602, #2687).
-  if ("createShadowRoot" in document.documentElement &&
-      !/\.(?:google|blogger)\.com$/.test(document.domain))
-  {
-    shadow = document.documentElement.createShadowRoot();
+    // Using shadow DOM causes issues on some Google websites,
+    // including Google Docs, Gmail and Blogger (#1770, #2602, #2687).
+    if (/\.(?:google|blogger)\.com$/.test(document.domain))
+      return null;
+
+    var shadow = document.documentElement.createShadowRoot();
     shadow.appendChild(document.createElement("shadow"));
 
-    // Stop the website from messing with our shadowRoot
+    // Stop the website from messing with our shadow root (#4191, #4298).
     if ("shadowRoot" in Element.prototype)
     {
-      runInDocument(document, function()
+      runInPageContext(function()
       {
         var ourShadowRoot = document.documentElement.shadowRoot;
         var desc = Object.getOwnPropertyDescriptor(Element.prototype, "shadowRoot");
@@ -483,34 +486,37 @@ function init(document)
         });
       }, null);
     }
-  }
 
-  function addElemHideSelectors(selectors)
+    return shadow;
+  },
+
+  addSelectors: function(selectors)
   {
     if (selectors.length == 0)
       return;
 
-    if (!style)
+    if (!this.style)
     {
       // Create <style> element lazily, only if we add styles. Add it to
       // the shadow DOM if possible. Otherwise fallback to the <head> or
       // <html> element. If we have injected a style element before that
       // has been removed (the sheet property is null), create a new one.
-      style = document.createElement("style");
-      (shadow || document.head || document.documentElement).appendChild(style);
+      this.style = document.createElement("style");
+      (this.shadow || document.head
+                   || document.documentElement).appendChild(this.style);
 
       // It can happen that the frame already navigated to a different
       // document while we were waiting for the background page to respond.
       // In that case the sheet property will stay null, after addind the
       // <style> element to the shadow DOM.
-      if (!style.sheet)
+      if (!this.style.sheet)
         return;
     }
 
     // If using shadow DOM, we have to add the ::content pseudo-element
     // before each selector, in order to match elements within the
     // insertion point.
-    if (shadow)
+    if (this.shadow)
     {
       var preparedSelectors = [];
       for (var i = 0; i < selectors.length; i++)
@@ -527,41 +533,37 @@ function init(document)
     // (Chrome also has a limit, larger... but we're not certain exactly what it
     //  is! Edge apparently has no such limit.)
     // [1] - https://github.com/WebKit/webkit/blob/1cb2227f6b2a1035f7bdc46e5ab69debb75fc1de/Source/WebCore/css/RuleSet.h#L68
-    for (var i = 0; i < selectors.length; i += SELECTOR_GROUP_SIZE)
+    for (var i = 0; i < selectors.length; i += this.selectorGroupSize)
     {
-      var selector = selectors.slice(i, i + SELECTOR_GROUP_SIZE).join(", ");
-      style.sheet.addRule(selector, "display: none !important;");
+      var selector = selectors.slice(i, i + this.selectorGroupSize).join(", ");
+      this.style.sheet.addRule(selector, "display: none !important;");
     }
-  };
+  },
 
-  var updateStylesheet = function()
+  apply: function()
   {
     var selectors = null;
-    var CSSPropertyFiltersLoaded = false;
+    var propertyFiltersLoaded = false;
 
     var checkLoaded = function()
     {
-      if (!selectors || !CSSPropertyFiltersLoaded)
+      if (!selectors || !propertyFiltersLoaded)
         return;
 
-      if (observer)
-        observer.disconnect();
-      observer = null;
+      if (this.tracer)
+        this.tracer.disconnect();
+      this.tracer = null;
 
-      if (tracer)
-        tracer.disconnect();
-      tracer = null;
+      if (this.style && this.style.parentElement)
+        this.style.parentElement.removeChild(this.style);
+      this.style = null;
 
-      if (style && style.parentElement)
-        style.parentElement.removeChild(style);
-      style = null;
-
-      addElemHideSelectors(selectors.selectors);
-      propertyFilters.apply();
+      this.addSelectors(selectors.selectors);
+      this.propertyFilters.apply();
 
       if (selectors.trace)
-        tracer = new ElementHidingTracer(document, selectors.selectors);
-    };
+        this.tracer = new ElementHidingTracer(selectors.selectors);
+    }.bind(this);
 
     ext.backgroundPage.sendMessage({type: "get-selectors"}, function(response)
     {
@@ -569,14 +571,21 @@ function init(document)
       checkLoaded();
     });
 
-    propertyFilters.load(function()
+    this.propertyFilters.load(function()
     {
-      CSSPropertyFiltersLoaded = true;
+      propertyFiltersLoaded = true;
       checkLoaded();
     });
-  };
+  }
+};
 
-  updateStylesheet();
+if (document instanceof HTMLDocument)
+{
+  checkSitekey();
+  wrapWebSocket();
+
+  var elemhide = new ElemHide();
+  elemhide.apply();
 
   document.addEventListener("error", function(event)
   {
@@ -586,35 +595,7 @@ function init(document)
   document.addEventListener("load", function(event)
   {
     var element = event.target;
-
     if (/^i?frame$/.test(element.localName))
       checkCollapse(element);
-
-    if (/\bChrome\//.test(navigator.userAgent))
-    {
-      var contentDocument = getContentDocument(element);
-      if (contentDocument)
-      {
-        var contentWindow = contentDocument.defaultView;
-        if (contentDocument instanceof contentWindow.HTMLDocument)
-        {
-          // Prior to Chrome 37, content scripts cannot run in
-          // dynamically created frames. Also on Chrome 37-40
-          // document_start content scripts (like this one) don't
-          // run either in those frames due to https://crbug.com/416907.
-          // So we have to apply element hiding from the parent frame.
-          if (!("init" in contentWindow))
-            init(contentDocument);
-        }
-      }
-    }
   }, true);
-
-  return updateStylesheet;
-}
-
-if (document instanceof HTMLDocument)
-{
-  checkSitekey();
-  window.updateStylesheet = init(document);
 }

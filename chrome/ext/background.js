@@ -483,50 +483,41 @@
 
   chrome.webRequest.onBeforeRequest.addListener(function(details)
   {
-    // the high-level code isn't interested in requests that aren't related
-    // to a tab and since those can only be handled in Chrome, we ignore
-    // them here instead of in the browser independent high-level code.
-    if (details.tabId == -1)
+    // The high-level code isn't interested in requests that aren't
+    // related to a tab or requests loading a top-level document,
+    // those should never be blocked.
+    if (details.tabId == -1 || details.type == "main_frame")
       return;
 
-    var isMainFrame = details.type == "main_frame" || (
-      // assume that the first request belongs to the top frame. Chrome 29
-      // may give the top frame the type "object" instead of "main_frame".
-      // https://code.google.com/p/chromium/issues/detail?id=281711
-      details.frameId == 0 && !(details.tabId in framesOfTabs)
-    );
-
-    if (!isMainFrame)
+    // We are looking for the frame that contains the element which
+    // has triggered this request. For most requests (e.g. images) we
+    // can just use the request's frame ID, but for subdocument requests
+    // (e.g. iframes) we must instead use the request's parent frame ID.
+    var frameId;
+    var requestType;
+    if (details.type == "sub_frame")
     {
-      // we are looking for the frame that contains the element that
-      // is about to load, however if a frame is loading the surrounding
-      // frame is indicated by parentFrameId instead of frameId
-      var frameId;
-      var requestType;
-      if (details.type == "sub_frame")
-      {
-        frameId = details.parentFrameId;
-        requestType = "SUBDOCUMENT";
-      }
-      else
-      {
-        frameId = details.frameId;
-        requestType = details.type.toUpperCase();
-      }
+      frameId = details.parentFrameId;
+      requestType = "SUBDOCUMENT";
+    }
+    else
+    {
+      frameId = details.frameId;
+      requestType = details.type.toUpperCase();
+    }
 
-      var frame = ext.getFrame(details.tabId, frameId);
-      if (frame)
-      {
-        var results = ext.webRequest.onBeforeRequest._dispatch(
-          new URL(details.url),
-          requestType,
-          new Page({id: details.tabId}),
-          frame
-        );
+    var frame = ext.getFrame(details.tabId, frameId);
+    if (frame)
+    {
+      var results = ext.webRequest.onBeforeRequest._dispatch(
+        new URL(details.url),
+        requestType,
+        new Page({id: details.tabId}),
+        frame
+      );
 
-        if (results.indexOf(false) != -1)
-          return {cancel: true};
-      }
+      if (results.indexOf(false) != -1)
+        return {cancel: true};
     }
   }, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
 
