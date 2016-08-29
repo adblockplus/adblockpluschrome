@@ -7,7 +7,7 @@ homepage = https://adblockplus.org/
 updateURL = https://update.adblockplus.org/adblockplussafari/updates.plist
 
 [contentScripts]
-document_start = ext/common.js ext/content.js cssProperties.js include.preload.js include.youtube.js
+document_start += include.youtube.js
 
 [mapping]
 ext/content.js = safari/ext/content.js
@@ -21,11 +21,10 @@ icons/abp-16-notification-critical@2x.png = safari/icons/abp-32-notification-cri
 icons/abp-16-notification-information.png = safari/icons/abp-16-notification-information.png
 icons/abp-16-notification-information@2x.png = safari/icons/abp-32-notification-information.png
 
-
 [convert_js]
-ext/common.js = ext/common.js safari/ext/common.js
-ext/background.js = ext/background.js safari/ext/background.js --arg brace_style=expand
-lib/adblockplus.js -= lib/devtools.js lib/popupBlocker.js lib/uninstall.js
+lib/adblockplus.js += abp2blocklist/lib/abp2blocklist.js safari/contentBlocking.js
+ext/common.js += safari/ext/common.js
+ext/background.js += safari/ext/background.js
 
 [popovers]
 popup_filename = popup.html

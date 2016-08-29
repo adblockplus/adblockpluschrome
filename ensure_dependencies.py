@@ -220,7 +220,7 @@ def read_deps(repodir):
                 if spec:
                     result[key] = spec
         return result
-    except IOError, e:
+    except IOError as e:
         if e.errno != errno.ENOENT:
             raise
         return None
@@ -332,7 +332,7 @@ def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdep
         try:
             with io.open(source, 'rb') as handle:
                 sourcedata = handle.read()
-        except IOError, e:
+        except IOError as e:
             if e.errno != errno.ENOENT:
                 raise
             logging.warning("File %s doesn't exist, skipping self-update" % source)

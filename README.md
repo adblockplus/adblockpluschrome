@@ -15,8 +15,7 @@ Building
 - [Python 2.7](https://www.python.org)
 - [The Jinja2 module](http://jinja.pocoo.org/docs)
 - [The PIL module](http://www.pythonware.com/products/pil/)
-- For signed Chrome builds: [M2Crypto module](https://github.com/martinpaljak/M2Crypto)
-- For signed Safari builds: A [patched version of the xar command line tool](https://github.com/mackyle/xar/)
+- For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
 
 ### Building the extension
 
