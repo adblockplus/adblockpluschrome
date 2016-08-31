@@ -110,7 +110,27 @@
       ext.pages.onLoading._dispatch(new Page(tab));
   });
 
+  function createFrame(tabId, frameId)
+  {
+    var frames = framesOfTabs[tabId];
+    if (!frames)
+      frames = framesOfTabs[tabId] = Object.create(null);
+
+    var frame = frames[frameId];
+    if (!frame)
+      frame = frames[frameId] = {};
+
+    return frame;
+  }
+
   chrome.webNavigation.onBeforeNavigate.addListener(function(details)
+  {
+    // Capture parent frame here because onCommitted doesn't get this info.
+    var frame = createFrame(details.tabId, details.frameId);
+    frame.parent = framesOfTabs[details.tabId][details.parentFrameId] || null;
+  });
+
+  chrome.webNavigation.onCommitted.addListener(function(details)
   {
     if (details.frameId == 0)
     {
@@ -136,15 +156,9 @@
       });
     }
 
-    // Add or update frame in frame structure
-    var frames = framesOfTabs[details.tabId];
-    if (!frames)
-      frames = framesOfTabs[details.tabId] = Object.create(null);
-
-    frames[details.frameId] = {
-      parent: frames[details.parentFrameId] || null,
-      url: new URL(details.url)
-    };
+    // Update frame URL in frame structure
+    var frame = createFrame(details.tabId, details.frameId);
+    frame.url = new URL(details.url);
   });
 
   function forgetTab(tabId)
