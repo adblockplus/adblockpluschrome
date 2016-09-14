@@ -85,6 +85,7 @@ lib/adblockplus.js =
   lib/url.js
   lib/utils.js
   lib/whitelisting.js
+  adblockpluscore/lib/coreUtils.js
   adblockpluscore/lib/antiadblockInit.js
   adblockpluscore/lib/cssRules.js
   adblockpluscore/lib/downloader.js
