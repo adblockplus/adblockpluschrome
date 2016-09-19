@@ -26,7 +26,7 @@
   /* Intialization */
 
   var beforeLoadEvent = document.createEvent("Event");
-  beforeLoadEvent.initEvent("beforeload");
+  beforeLoadEvent.initEvent("beforeload", false, true);
 
   // Decide if we should use the new content blocker API or not. (Note when the
   // API is used Safari breaks the canLoad function, making it either throw an
@@ -153,7 +153,7 @@
         setTimeout(function()
         {
           var evt = document.createEvent("Event");
-          evt.initEvent(eventName);
+          evt.initEvent(eventName, false, false);
           event.target.dispatchEvent(evt);
         });
       }
