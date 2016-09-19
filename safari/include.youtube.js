@@ -22,12 +22,8 @@
   var usingContentBlockerAPI = true;
   try
   {
-    var beforeLoadEvent = document.createEvent("Event");
-    beforeLoadEvent.initEvent("beforeload");
-    if (safari.self.tab.canLoad(beforeLoadEvent,
-                                {category: "request",
-                                 payload: {type: "prefs.get",
-                                           key: "safariContentBlocker"}}) != true)
+    if (ext.backgroundPage.sendMessageSync({type: "prefs.get",
+                                            key: "safariContentBlocker"}) != true)
       usingContentBlockerAPI = false;
   }
   catch (e)
