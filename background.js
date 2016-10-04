@@ -30,13 +30,18 @@ port.on("get-selectors", function(msg, sender)
   if (!checkWhitelisted(sender.page, sender.frame,
                         RegExpFilter.typeMap.DOCUMENT |
                         RegExpFilter.typeMap.ELEMHIDE))
+  {
+    var specificOnly = checkWhitelisted(sender.page, sender.frame,
+                                        RegExpFilter.typeMap.GENERICHIDE);
     selectors = ElemHide.getSelectorsForDomain(
       extractHostFromFrame(sender.frame),
-      checkWhitelisted(sender.page, sender.frame,
-                       RegExpFilter.typeMap.GENERICHIDE)
+      specificOnly ? ElemHide.SPECIFIC_ONLY : ElemHide.ALL_MATCHING
     );
+  }
   else
+  {
     selectors = [];
+  }
 
   return {selectors: selectors, trace: trace};
 });
