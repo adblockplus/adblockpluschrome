@@ -5,4 +5,3 @@ abp2blocklist = abp2blocklist hg:c2c40f08f9ce git:183568e
 adblockplus = adblockplus hg:af8f16224345 git:ceeac8c
 adblockpluscore = adblockpluscore hg:7ff7f906eeb9 git:44dafd7
 adblockplusui = adblockplusui hg:0593d76f1106 git:9de6da7
-adblockplustests = adblockplustests hg:592c6d74a9cc git:cfbe11f
