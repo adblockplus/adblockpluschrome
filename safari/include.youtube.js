@@ -97,7 +97,8 @@
     // player with JavaScript which video and which ads to show next,
     // bypassing our flashvars rewrite code. So we disable
     // history.pushState before YouTube's JavaScript runs.
-    History.prototype.pushState = undefined;
+    if (typeof History != "undefined")
+      History.prototype.pushState = undefined;
 
     // The HTML5 player is configured via ytplayer.config.args. We have
     // to make sure that ad-related arguments are ignored as they are set.
