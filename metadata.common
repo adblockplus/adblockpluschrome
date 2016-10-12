@@ -95,7 +95,7 @@ lib/adblockplus.js =
   adblockpluscore/lib/synchronizer.js
 lib/adblockplus.js[module] = true
 lib/adblockplus.js[source_repo] = https://hg.adblockplus.org/adblockpluscore/
-lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,contentBlocking,subscriptionInit,filterComposer,stats,uninstall
+lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,contentBlocking,subscriptionInit,filterComposer,stats,uninstall,csp
 ext/common.js = ext/common.js
 ext/background.js = ext/background.js
 ext/background.js[brace_style] = expand

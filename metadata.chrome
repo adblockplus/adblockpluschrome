@@ -58,6 +58,6 @@ skin/devtools-panel.css = adblockplusui/skin/devtools-panel.css
 managed-storage-schema.json = chrome/managed-storage-schema.json
 
 [convert_js]
-lib/adblockplus.js += lib/devtools.js lib/popupBlocker.js lib/uninstall.js
+lib/adblockplus.js += lib/devtools.js lib/popupBlocker.js lib/uninstall.js lib/csp.js
 ext/common.js += chrome/ext/common.js
 ext/background.js += chrome/ext/background.js
