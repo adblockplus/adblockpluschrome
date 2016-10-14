@@ -42,12 +42,13 @@ let lastRightClickEventIsMostRecent = false;
 
 function getFiltersForElement(element, callback)
 {
+  let src = element.getAttribute("src");
   ext.backgroundPage.sendMessage(
   {
     type: "composer.getFilters",
     tagName: element.localName,
     id: element.id,
-    src: element.getAttribute("src"),
+    src: src && src.length <= 1000 ? src : null,
     style: element.getAttribute("style"),
     classes: Array.prototype.slice.call(element.classList),
     urls: getURLsFromElement(element),
