@@ -125,13 +125,13 @@
     "message": "Verwenden Sie die native Blockierung von Inhalten für Safari (experimentell!)"
   },
   "safari_restart": {
-    "message": "Starten Sie Safari neu"
+    "message": "Bitte starten Sie Safari neu"
   },
   "show_block_element_menu": {
     "message": "Zeige Rechtsklickmenü-Eintrag 'Element blockieren'"
   },
   "show_devtools_panel": {
-    "message": "'Adblock Plus' Panel in den Entwickler Einstellungen anzeigen"
+    "message": "'Adblock Plus' Panel in den Entwicklertools anzeigen"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> auf dieser Seite",

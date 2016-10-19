@@ -60,7 +60,7 @@
     "message": "Umum"
   },
   "invalid_css_selector": {
-    "message": "$selector$ bukan pemilih CSS yang benar",
+    "message": "$selector$ bukan selector CSS yang benar",
     "placeholders": {
       "selector": {
         "content": "$1"

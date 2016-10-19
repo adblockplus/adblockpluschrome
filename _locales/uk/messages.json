@@ -98,7 +98,7 @@
     "message": "Adblock Plus (тестова збiрка)"
   },
   "notification_configure": {
-    "message": "Налаштування повідомлень"
+    "message": "Налаштувати параметри повідомлень"
   },
   "notification_open_all": {
     "message": "Відкрити всі посилання з цього сповіщення"

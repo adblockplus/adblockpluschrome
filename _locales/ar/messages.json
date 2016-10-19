@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "بعد إغلاق هذه النافذة، اضغط (أو اضغط بالزر الأيمن) على أحد العناصر في الصفحة."
   },
+  "description": {
+    "message": "يستعملها أكثر من 50 مليون شخص، مانع إعلانات مجاني يحجب جميع الإعلانات المملة، المواقع الخبيثة و المتتبعة."
+  },
   "disabled_for_site": {
     "message": "<strong>معطل</strong> في هذا الموقع"
   },
@@ -118,8 +121,17 @@
   "remove_button": {
     "message": "إزالة المحدد"
   },
+  "safari_content_blocker": {
+    "message": "استخدام حاجب المحتوى الأصلي لسفاري (تجريبي)"
+  },
+  "safari_restart": {
+    "message": "رجاءا أعد تشغيل سفاري"
+  },
   "show_block_element_menu": {
     "message": "أظهر فقرة \"حجب العنصر\" في قائمة النقرة اليمنى"
+  },
+  "show_devtools_panel": {
+    "message": "أظهر لوحة ‘أدبلوك بلس‘ في أدوات المطور"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> على هذه الصفحة",

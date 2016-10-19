@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
   },
+  "description": {
+    "message": "Yli 50 miljoonan ihmisen käyttämä ilmainen mainostenesto-ohjelma. Estää KAIKKI ärsyttävät mainokset, haittaohjelmat ja seurannan."
+  },
   "disabled_for_site": {
     "message": "<strong>Poistettu</strong> tältä sivulta"
   },
@@ -123,6 +126,9 @@
   },
   "show_block_element_menu": {
     "message": "Näytä 'Estä elementti' oikea-klikkaus valikossa"
+  },
+  "show_devtools_panel": {
+    "message": "Näytä \"Adblock Plus\" -paneeli kehittäjätyökalut"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> tällä sivulla",

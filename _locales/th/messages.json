@@ -124,6 +124,9 @@
   "safari_content_blocker": {
     "message": "ใช้การบล็อคเนื้อหาแบบเนทีฟของซาฟารี (แบบทดลอง)"
   },
+  "safari_restart": {
+    "message": "กรุณาเริ่มSafariใหม่อีกครั้ง"
+  },
   "show_block_element_menu": {
     "message": "แสดงรายการในเมนูคลิกขวา \"ปิดกั้นองค์ประกอบ\""
   },

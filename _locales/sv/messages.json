@@ -98,7 +98,7 @@
     "message": "Adblock Plus utvecklingsversion"
   },
   "notification_configure": {
-    "message": "Notifikationsinställningar"
+    "message": "Ändra notifikationsinställningar"
   },
   "notification_open_all": {
     "message": "Öppna alla länkar från denna notifikationen"
