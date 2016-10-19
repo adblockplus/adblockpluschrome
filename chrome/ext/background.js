@@ -130,35 +130,47 @@
     frame.parent = framesOfTabs[details.tabId][details.parentFrameId] || null;
   });
 
-  chrome.webNavigation.onCommitted.addListener(function(details)
-  {
-    if (details.frameId == 0)
-    {
-      ext._removeFromAllPageMaps(details.tabId);
+  var eagerlyUpdatedPages = new ext.PageMap();
 
-      chrome.tabs.get(details.tabId, function()
+  ext._updatePageFrameStructure = function(frameId, tabId, url, eager)
+  {
+    if (frameId == 0)
+    {
+      let page = new Page({id: tabId, url: url});
+
+      if (eagerlyUpdatedPages.get(page) != url)
       {
-        // If the tab is prerendered, chrome.tabs.get() sets
-        // chrome.runtime.lastError and we have to dispatch the onLoading event,
-        // since the onUpdated event isn't dispatched for prerendered tabs.
-        // However, we have to keep relying on the unUpdated event for tabs that
-        // are already visible. Otherwise browser action changes get overridden
-        // when Chrome automatically resets them on navigation.
-        if (chrome.runtime.lastError)
+        ext._removeFromAllPageMaps(tabId);
+
+        // When a sitekey header is received we must immediately update the page
+        // structure in order to record and use the key. We want to avoid
+        // trashing the page structure if the onCommitted event is then fired
+        // for the page.
+        if (eager)
+          eagerlyUpdatedPages.set(page, url);
+
+        chrome.tabs.get(tabId, function()
         {
-          ext.pages.onLoading._dispatch(
-            new Page({
-              id: details.tabId,
-              url: details.url
-            })
-          );
-        }
-      });
+          // If the tab is prerendered, chrome.tabs.get() sets
+          // chrome.runtime.lastError and we have to dispatch the onLoading event,
+          // since the onUpdated event isn't dispatched for prerendered tabs.
+          // However, we have to keep relying on the unUpdated event for tabs that
+          // are already visible. Otherwise browser action changes get overridden
+          // when Chrome automatically resets them on navigation.
+          if (chrome.runtime.lastError)
+            ext.pages.onLoading._dispatch(page);
+        });
+      }
     }
 
     // Update frame URL in frame structure
-    var frame = createFrame(details.tabId, details.frameId);
-    frame.url = new URL(details.url);
+    var frame = createFrame(tabId, frameId);
+    frame.url = new URL(url);
+  };
+
+  chrome.webNavigation.onCommitted.addListener(function(details)
+  {
+    ext._updatePageFrameStructure(details.frameId, details.tabId, details.url);
   });
 
   function forgetTab(tabId)
