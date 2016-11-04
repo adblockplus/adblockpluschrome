@@ -137,6 +137,13 @@ button
   box-shadow: 0px 0px 10px #e03030;
 }
 
+#whitelistForm #newWhitelistDomain,
+#customFilterForm #newFilter
+ {
+  width: 496px;
+}
+
+
 </style>
 </head>
 <body>
@@ -218,8 +225,8 @@ button
     <form id="whitelistForm" action="#">
     <table>
       <tr>
-        <td style="max-width:100%">
-          <input type="text" value="" id="newWhitelistDomain" style="width:100%">
+        <td>
+          <input type="text" value="" id="newWhitelistDomain">
         </td>
         <td>
           <button class="addButton" type="submit"><span class="i18n_add_domain_button"></span></button>
@@ -245,7 +252,7 @@ button
     <table>
       <tr>
         <td>
-          <input type="text" value="" id="newFilter" style="width:500px">
+          <input type="text" value="" id="newFilter">
         </td>
         <td>
           <button class="addButton" type="submit"><span class="i18n_add_filter_button"></span></button>
