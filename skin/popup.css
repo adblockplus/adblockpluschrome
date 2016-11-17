@@ -35,11 +35,6 @@ body.disabled #clickhide
   display: none;
 }
 
-body.contentblocking-active #stats-container
-{
-  display: none;
-}
-
 header
 {
   height: 45px;

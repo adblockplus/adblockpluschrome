@@ -1,9 +1,9 @@
-Adblock Plus for Chrome, Opera and Safari
-=========================================
+Adblock Plus for Chrome and Opera
+=================================
 
 This repository contains the platform-specific Adblock Plus source code for
-Chrome, Opera and Safari. It can be used to build Adblock Plus for these
-platforms, generic Adblock Plus code will be extracted from other repositories
+Chrome and Opera. It can be used to build Adblock Plus for these platforms,
+generic Adblock Plus code will be extracted from other repositories
 automatically (see _dependencies_ file).
 
 Building
@@ -19,40 +19,26 @@ Building
 
 ### Building the extension
 
-Run one of the following commands in the project directory, depending on your
-target platform:
+Run the following command in the project directory:
 
     ./build.py -t chrome build -k adblockpluschrome.pem
-    ./build.py -t safari build -k adblockplussafari.pem
 
 This will create a build with a name in the form
-_adblockpluschrome-1.2.3.nnnn.crx_ or _adblockplussafari-1.2.3.nnnn.safariextz_.
+_adblockpluschrome-1.2.3.nnnn.crx_
 Note that you don't need an existing signing key for Chrome, a new key
-will be created automatically if the file doesn't exist. Safari on the other
-hand always requires a valid developer certificate, you need to get one in the
-Apple Developer Center first. _adblockplussafari.pem_ should contain the private
-key for your developer certificate, the developer certificate itself as well as
-all the certificates it was signed with (Apple's root certificate and
-intermediate certificates) in PEM format - in that order.
+will be created automatically if the file doesn't exist.
 
 ### Development environment
 
 To simplify the process of testing your changes you can create an unpacked
-development environment. For that run one of the following commands:
+development environment. For that run the following command:
 
     ./build.py -t chrome devenv
-    ./build.py -t safari devenv
 
-This will create a _devenv.platform_ directory in the repository. In Chrome you
-should load _devenv.chrome_ as an unpacked extension directory. After making
-changes to the source code re-run the command to update the development
-environment, the extension should reload automatically after a few seconds.
-
-In Safari you should load _devenv.safari/adblockplussafari.safariextension_ as
-unpacked extension directory. After making changes to the source code re-run the
-command to update the development environment. You will still need to reload the
-extension explicitly in the Extension Builder, Safari currently doesn't allow
-automating this action.
+This will create a _devenv.chrome_ directory in the repository. In Chrome you
+should load the directory as an unpacked extension. After making changes to the
+source code re-run the command to update the development environment, the
+extension should reload automatically after a few seconds.
 
 Running the unit tests
 ----------------------

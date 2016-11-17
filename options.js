@@ -147,22 +147,11 @@ function loadOptions()
   initCheckbox("shouldShowBlockElementMenu");
   initCheckbox("show_devtools_panel");
   initCheckbox("shouldShowNotifications", "notifications_ignoredcategories");
-  initCheckbox("safariContentBlocker");
 
   getInfo("features", function(features)
   {
     if (!features.devToolsPanel)
       document.getElementById("showDevtoolsPanelContainer").hidden = true;
-
-    // Only show the option for Safari content blocking API if the user is
-    // running Safari and both the legacy and content blocking APIs are
-    // available.
-    document.getElementById("safariContentBlockerContainer").hidden = !(
-      features.safariContentBlocker &&
-      typeof safari != "undefined" &&
-      "canLoad" in safari.self.tab &&
-      "onbeforeload" in Element.prototype
-    );
   });
   getPref("notifications_showui", function(notifications_showui)
   {
@@ -184,8 +173,7 @@ function loadOptions()
   {
     type: "prefs.listen",
     filter: ["notifications_ignoredcategories", "notifications_showui",
-             "safariContentBlocker", "show_devtools_panel",
-             "shouldShowBlockElementMenu"]
+             "show_devtools_panel", "shouldShowBlockElementMenu"]
   });
   ext.backgroundPage.sendMessage(
   {
@@ -507,20 +495,6 @@ function onPrefMessage(key, value)
       key = "shouldShowNotifications";
       value = value.indexOf("*") == -1;
       break;
-    case "safariContentBlocker":
-      var restartMessage = document.getElementById("restart-safari");
-      restartMessage.hidden = true;
-      // When the user has chosen to use the legacy APIs but Safari has disabled
-      // them we need to show a "Please restart Safari" message.
-      if (!value)
-      {
-        ext.backgroundPage.sendMessage({type: "safari.contentBlockingActive"},
-        function(contentBlockingActive)
-        {
-          if (contentBlockingActive)
-            restartMessage.hidden = false;
-        });
-      }
   }
   var checkbox = document.getElementById(key);
   if (checkbox)

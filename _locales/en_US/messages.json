@@ -121,14 +121,6 @@
     "description": "This is the label for the 'Remove selected' buttons.",
     "message": "Remove selected"
   },
-  "safari_content_blocker": {
-    "description": "Switch between classic and Safari's Content Blocking",
-    "message": "Use Safari's native Content Blocking (experimental)"
-  },
-  "safari_restart": {
-    "description": "Shown next to the option for Safai Content Blockers if disabled in order to indicate that a restart is required",
-    "message": "Please restart Safari"
-  },
   "show_block_element_menu": {
     "message": "Show 'Block Element' right-click menu item"
   },

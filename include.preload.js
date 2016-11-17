@@ -345,16 +345,13 @@ function runInPageContext(fn, arg)
   document.documentElement.removeChild(script);
 }
 
-// Neither Chrome[1] nor Safari allow us to intercept WebSockets, and therefore
+// Chrome doesn't allow us to intercept WebSockets[1], and therefore
 // some ad networks are misusing them as a way to serve adverts and circumvent
 // us. As a workaround we wrap WebSocket, preventing blocked WebSocket
 // connections from being opened.
 // [1] - https://bugs.chromium.org/p/chromium/issues/detail?id=129353
 function wrapWebSocket()
 {
-  if (typeof WebSocket == "undefined")
-    return;
-
   var eventName = "abpws-" + Math.random().toString(36).substr(2);
 
   document.addEventListener(eventName, function(event)

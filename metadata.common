@@ -1,8 +1,6 @@
 [general]
 version = 1.12.4
-backgroundScripts = lib/polyfills/url.js
-  lib/polyfills/promise.js
-  lib/polyfills/fetch.js
+backgroundScripts = lib/polyfills/fetch.js
   ext/common.js
   ext/background.js
   lib/compat.js
@@ -92,7 +90,7 @@ lib/adblockplus.js =
   adblockpluscore/lib/synchronizer.js
 lib/adblockplus.js[module] = true
 lib/adblockplus.js[source_repo] = https://hg.adblockplus.org/adblockpluscore/
-lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,contentBlocking,subscriptionInit,filterComposer,stats,uninstall,csp
+lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,subscriptionInit,filterComposer,stats,uninstall,csp
 ext/common.js = ext/common.js
 ext/background.js = ext/background.js
 ext/background.js[brace_style] = expand

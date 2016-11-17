@@ -63,17 +63,6 @@ function onLoad()
           document.body.classList.add("clickhide-active");
       });
     }
-
-    // For Safari, if the content blocking API is active we need to hide the
-    // stats section. (The content blocking API doesn't provide a way for us to
-    // offer those blocking statistics.)
-    ext.backgroundPage.sendMessage({type: "safari.contentBlockingActive"},
-      function (contentBlockingActive)
-      {
-        if (contentBlockingActive)
-          document.body.classList.add("contentblocking-active");
-      }
-    );
   });
 
   document.getElementById("enabled").addEventListener("click", toggleEnabled, false);
