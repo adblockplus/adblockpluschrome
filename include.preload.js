@@ -503,7 +503,11 @@ ElemHide.prototype = {
     if (/\.(?:google|blogger)\.com$/.test(document.domain))
       return null;
 
-    var shadow = document.documentElement.createShadowRoot();
+    // Finally since some users have both AdBlock and Adblock Plus installed we
+    // have to consider how the two extensions interact. For example we want to
+    // avoid creating the shadowRoot twice.
+    var shadow = document.documentElement.shadowRoot ||
+                 document.documentElement.createShadowRoot();
     shadow.appendChild(document.createElement("shadow"));
 
     // Stop the website from messing with our shadow root (#4191, #4298).
@@ -512,6 +516,8 @@ ElemHide.prototype = {
       runInPageContext(function()
       {
         var ourShadowRoot = document.documentElement.shadowRoot;
+        if (!ourShadowRoot)
+          return;
         var desc = Object.getOwnPropertyDescriptor(Element.prototype, "shadowRoot");
         var shadowRoot = Function.prototype.call.bind(desc.get);
 
