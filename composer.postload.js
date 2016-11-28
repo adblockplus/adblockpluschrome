@@ -146,8 +146,9 @@ function addElementOverlay(element)
   let overlay = document.createElement("div");
   overlay.prisoner = element;
   overlay.className = "__adblockplus__overlay";
-  overlay.setAttribute("style", "opacity:0.4; display:inline-box; " +
-                                "overflow:hidden; box-sizing:border-box;");
+  overlay.setAttribute("style",
+                       "opacity:0.4; display:inline-block !important; " +
+                       "overflow:hidden; box-sizing:border-box;");
   let rect = element.getBoundingClientRect();
   overlay.style.width = rect.width + "px";
   overlay.style.height = rect.height + "px";
