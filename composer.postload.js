@@ -118,7 +118,7 @@ function getBlockableElementOrAncestor(element, callback)
 
 /* Element highlighting */
 
-// Adds an overlay to an element, which is probably a Flash object.
+// Adds an overlay to an element in order to highlight it.
 function addElementOverlay(element)
 {
   let position = "absolute";
@@ -214,6 +214,9 @@ function highlightElement(element, shadowColor, backgroundColor)
     };
   };
 
+  // If this element is an overlay that we've created previously then we need
+  // to give it a background colour. Otherwise we need to create an overlay
+  // and then recurse in order to set the overlay's background colour.
   if ("prisoner" in element)
     highlightWithStyleAttribute();
   else
@@ -344,8 +347,8 @@ function startPickingElement()
 {
   currentlyPickingElement = true;
 
-  // Add overlays for blockable elements that don't emit mouse events,
-  // so that they can still be selected.
+  // Add (currently invisible) overlays for blockable elements that don't emit
+  // mouse events, so that they can still be selected.
   Array.prototype.forEach.call(
     document.querySelectorAll("object,embed,iframe,frame"),
     element =>
