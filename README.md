@@ -13,7 +13,7 @@ Building
 
 - [Mercurial](https://www.mercurial-scm.org/) or [Git](https://git-scm.com/) (whichever you used to clone this repository)
 - [Python 2.7](https://www.python.org)
-- [The Jinja2 module](http://jinja.pocoo.org/docs)
+- [The Jinja2 module](http://jinja.pocoo.org/docs) (>= 2.8)
 - [The PIL module](http://www.pythonware.com/products/pil/)
 - For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
 
