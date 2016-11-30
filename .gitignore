@@ -1,6 +1,7 @@
 /devenv*/
 *.zip
 *.crx
+*.xpi
 *.pyc
 *.pyo
 *.sh
