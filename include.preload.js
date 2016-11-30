@@ -580,7 +580,8 @@ ElemHide.prototype = {
     for (var i = 0; i < selectors.length; i += this.selectorGroupSize)
     {
       var selector = selectors.slice(i, i + this.selectorGroupSize).join(", ");
-      this.style.sheet.addRule(selector, "display: none !important;");
+      this.style.sheet.insertRule(selector + "{display: none !important;}",
+                                  this.style.sheet.cssRules.length);
     }
   },
 
