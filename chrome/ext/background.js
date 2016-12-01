@@ -602,38 +602,47 @@
 
   /* Options */
 
-  ext.showOptions = function(callback)
+  if ("openOptionsPage" in chrome.runtime)
   {
-    chrome.windows.getLastFocused(function(win)
+    ext.showOptions = chrome.runtime.openOptionsPage;
+  }
+  else
+  {
+    // Edge does not yet support runtime.openOptionsPage (tested version 38)
+    // and so this workaround needs to stay for now.
+    ext.showOptions = function(callback)
     {
-      var optionsUrl = chrome.extension.getURL("options.html");
-      var queryInfo = {url: optionsUrl};
-
-      // extension pages can't be accessed in incognito windows. In order to
-      // correctly mimic the way in which Chrome opens extension options,
-      // we have to focus the options page in any other window.
-      if (!win.incognito)
-        queryInfo.windowId = win.id;
-
-      chrome.tabs.query(queryInfo, function(tabs)
+      chrome.windows.getLastFocused(function(win)
       {
-        if (tabs.length > 0)
-        {
-          var tab = tabs[0];
+        var optionsUrl = chrome.extension.getURL("options.html");
+        var queryInfo = {url: optionsUrl};
 
-          chrome.windows.update(tab.windowId, {focused: true});
-          chrome.tabs.update(tab.id, {active: true});
+        // extension pages can't be accessed in incognito windows. In order to
+        // correctly mimic the way in which Chrome opens extension options,
+        // we have to focus the options page in any other window.
+        if (!win.incognito)
+          queryInfo.windowId = win.id;
 
-          if (callback)
-            callback(new Page(tab));
-        }
-        else
+        chrome.tabs.query(queryInfo, function(tabs)
         {
-          ext.pages.open(optionsUrl, callback);
-        }
+          if (tabs.length > 0)
+          {
+            var tab = tabs[0];
+
+            chrome.windows.update(tab.windowId, {focused: true});
+            chrome.tabs.update(tab.id, {active: true});
+
+            if (callback)
+              callback(new Page(tab));
+          }
+          else
+          {
+            ext.pages.open(optionsUrl, callback);
+          }
+        });
       });
-    });
-  };
+    };
+  }
 
   /* Windows */
   ext.windows = {
