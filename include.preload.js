@@ -427,47 +427,6 @@ function wrapWebSocket()
   }, eventName);
 }
 
-function wrapContentWindow()
-{
-  // Since our content scripts can't run in sandboxed iframes we must be careful
-  // to avoid their unwrapped APIs from being accessed.
-  runInPageContext(function()
-  {
-    var contentWindowDesc = Object.getOwnPropertyDescriptor(
-      HTMLIFrameElement.prototype, "contentWindow"
-    );
-    var shadowRootDesc = Object.getOwnPropertyDescriptor(
-      Element.prototype, "shadowRoot"
-    );
-    var webSocketDesc = Object.getOwnPropertyDescriptor(
-      window, "WebSocket"
-    );
-    var getContentWindow = Function.prototype.call.bind(contentWindowDesc.get);
-    var defineProperty = Object.defineProperty;
-
-    contentWindowDesc.get = function()
-    {
-      var contentWindow = getContentWindow(this);
-      // We can't redefine the APIs for cross-origin frames, but that doesn't
-      // matter since the page cannot access them anyway.
-      try
-      {
-        defineProperty(contentWindow.HTMLIFrameElement.prototype,
-                       "contentWindow", contentWindowDesc);
-        defineProperty(contentWindow.Element.prototype, "shadowRoot",
-                       shadowRootDesc);
-        defineProperty(contentWindow, "WebSocket", webSocketDesc);
-      }
-      catch (e)
-      {
-      }
-      return contentWindow;
-    };
-    defineProperty(HTMLIFrameElement.prototype, "contentWindow",
-                   contentWindowDesc);
-  }, null);
-}
-
 function ElemHide()
 {
   this.shadow = this.createShadowTree();
@@ -631,8 +590,6 @@ if (document instanceof HTMLDocument)
 
   var elemhide = new ElemHide();
   elemhide.apply();
-
-  wrapContentWindow();
 
   document.addEventListener("error", function(event)
   {
