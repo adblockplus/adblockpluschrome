@@ -1,7 +1,6 @@
 [general]
 version = 1.12.4
-backgroundScripts = lib/polyfills/fetch.js
-  ext/common.js
+backgroundScripts = ext/common.js
   ext/background.js
   lib/compat.js
   lib/info.js

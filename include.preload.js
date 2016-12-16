@@ -15,8 +15,6 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-
 var typeMap = {
   "img": "IMAGE",
   "input": "IMAGE",
@@ -164,13 +162,12 @@ function checkCollapse(element)
       {
         collapseElement();
 
-        if (MutationObserver)
-          new MutationObserver(collapseElement).observe(
-            element, {
-              attributes: true,
-              attributeFilter: ["style"]
-            }
-          );
+        new MutationObserver(collapseElement).observe(
+          element, {
+            attributes: true,
+            attributeFilter: ["style"]
+          }
+        );
       }
     }
   );

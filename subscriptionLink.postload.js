@@ -17,11 +17,7 @@
 
 "use strict";
 
-// In Chrome 37-40, the document_end content script (this one) runs properly,
-// while the document_start content scripts (that defines ext) might not. Check
-// whether variable ext exists before continuing to avoid
-// "Uncaught ReferenceError: ext is not defined". See https://crbug.com/416907
-if ("ext" in window && document instanceof HTMLDocument)
+if (document instanceof HTMLDocument)
 {
   document.addEventListener("click", function(event)
   {
@@ -43,23 +39,12 @@ if ("ext" in window && document instanceof HTMLDocument)
         return;
     }
 
-    let queryString = null;
     if (link.protocol == "http:" || link.protocol == "https:")
     {
-      if (link.host == "subscribe.adblockplus.org" && link.pathname == "/")
-        queryString = link.search.substr(1);
+      if (link.host != "subscribe.adblockplus.org" || link.pathname != "/")
+        return;
     }
-    else
-    {
-      // Old versions of Chrome (30) don't populate the "search" property for
-      // links with non-standard URL schemes so we need to extract the query
-      // string manually.
-      let match = /^abp:\/*subscribe\/*\?(.*)/i.exec(link.href);
-      if (match)
-        queryString = match[1];
-    }
-
-    if (!queryString)
+    else if (!/^abp:\/*subscribe\/*\?/i.test(link.href))
       return;
 
     // This is our link - make sure the browser doesn't handle it
@@ -67,7 +52,7 @@ if ("ext" in window && document instanceof HTMLDocument)
     event.stopPropagation();
 
     // Decode URL parameters
-    var params = queryString.split("&");
+    var params = link.search.substr(1).split("&");
     var title = null;
     var url = null;
     for (var i = 0; i < params.length; i++)

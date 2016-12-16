@@ -21,7 +21,7 @@ icons = icons/abp-16.png icons/abp-32.png icons/detailed/abp-48.png
 managedStorageSchema = managed-storage-schema.json
 
 [compat]
-chrome = 41.0
+chrome = 49.0
 
 [mapping]
 icons/abp-16.png = chrome/icons/abp-16.png

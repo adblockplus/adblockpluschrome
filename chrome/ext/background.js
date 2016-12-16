@@ -202,38 +202,11 @@
     this._changes = null;
   };
   BrowserAction.prototype = {
-    _legacySetIcon: function(details)
-    {
-      var legacyDetails = {};
-      for (var key in details)
-      {
-        var value = details[key];
-        if (typeof value == "object")
-          value = {19: value[19], 38: value[38]};
-        legacyDetails[key] = value;
-      }
-      chrome.browserAction.setIcon(legacyDetails);
-    },
-    _safeSetIcon: function(details)
-    {
-      try
-      {
-        chrome.browserAction.setIcon(details);
-      }
-      catch (e)
-      {
-        // Older versions of Chrome do not allow any sizes other than 19 and 38
-        // to be present, but newer versions of Chrome (and Edge) prefer
-        // different sizes.
-        this._safeSetIcon = this._legacySetIcon;
-        this._legacySetIcon(details);
-      }
-    },
     _applyChanges: function()
     {
       if ("iconPath" in this._changes)
       {
-        this._safeSetIcon({
+        chrome.browserAction.setIcon({
           tabId: this._tabId,
           path: {
             16: this._changes.iconPath.replace("$size", "16"),
@@ -438,33 +411,6 @@
       var onBeforeNavigate = chrome.webNavigation.onBeforeNavigate;
       if (!onBeforeNavigate.hasListener(propagateHandlerBehaviorChange))
         onBeforeNavigate.addListener(propagateHandlerBehaviorChange);
-    },
-    getIndistinguishableTypes: function()
-    {
-      // Chrome 38-48 mistakenly reports requests of type `object`
-      // (e.g. requests initiated by Flash) with the type `other`.
-      // https://code.google.com/p/chromium/issues/detail?id=410382
-      var match = navigator.userAgent.match(/\bChrome\/(\d+)/);
-      if (match)
-      {
-        var version = parseInt(match[1], 10);
-        if (version >= 38 && version <= 48)
-          return [["OTHER", "OBJECT", "OBJECT_SUBREQUEST"]];
-      }
-
-      // Chrome <44 doesn't have ResourceType.
-      var ResourceType = chrome.webRequest.ResourceType || {};
-
-      // Before Chrome 49, requests of the type `font` and `ping`
-      // have been reported with the type `other`.
-      // https://code.google.com/p/chromium/issues/detail?id=410382
-      var otherTypes = ["OTHER", "MEDIA"];
-      if (!("FONT" in ResourceType))
-        otherTypes.push("FONT");
-      if (!("PING" in ResourceType))
-        otherTypes.push("PING");
-
-      return [["OBJECT", "OBJECT_SUBREQUEST"], otherTypes];
     }
   };
 
@@ -554,22 +500,9 @@
           if (!frames)
             return null;
 
-          if ("frameId" in rawSender)
-          {
-            // Chrome 41+
-            var frame = frames[rawSender.frameId];
-            if (frame)
-              return frame.parent;
-          }
-          else
-          {
-            // Chrome 28-40
-            for (var frameId in frames)
-            {
-              if (frames[frameId].url.href == this.url.href)
-                return frames[frameId].parent;
-            }
-          }
+          var frame = frames[rawSender.frameId];
+          if (frame)
+            return frame.parent;
 
           return frames[0];
         }

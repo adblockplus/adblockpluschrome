@@ -56,12 +56,7 @@ function wrapper(baseMessage /* , [paramKeys] */)
         message[paramKeys[i]] = arguments[i];
     }
 
-    // Chrome 30 throws an exception when sendMessage is called with a callback
-    // parameter of undefined, so we work around that here. (See issue 4052)
-    if (callback)
-      ext.backgroundPage.sendMessage(message, callback);
-    else
-      ext.backgroundPage.sendMessage(message);
+    ext.backgroundPage.sendMessage(message, callback);
   };
 }
 
