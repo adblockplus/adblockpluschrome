@@ -430,13 +430,13 @@ function ElemHide()
   this.style = null;
   this.tracer = null;
 
-  this.propertyFilters = new CSSPropertyFilters(
+  this.elemHideEmulation = new ElemHideEmulation(
     window,
     function(callback)
     {
       ext.backgroundPage.sendMessage({
         type: "filters.get",
-        what: "cssproperties"
+        what: "elemhideemulation"
       }, callback);
     },
     this.addSelectors.bind(this)
@@ -544,11 +544,11 @@ ElemHide.prototype = {
   apply: function()
   {
     var selectors = null;
-    var propertyFiltersLoaded = false;
+    var elemHideEmulationLoaded = false;
 
     var checkLoaded = function()
     {
-      if (!selectors || !propertyFiltersLoaded)
+      if (!selectors || !elemHideEmulationLoaded)
         return;
 
       if (this.tracer)
@@ -560,7 +560,7 @@ ElemHide.prototype = {
       this.style = null;
 
       this.addSelectors(selectors.selectors);
-      this.propertyFilters.apply();
+      this.elemHideEmulation.apply();
 
       if (selectors.trace)
         this.tracer = new ElementHidingTracer(selectors.selectors);
@@ -572,9 +572,9 @@ ElemHide.prototype = {
       checkLoaded();
     });
 
-    this.propertyFilters.load(function()
+    this.elemHideEmulation.load(function()
     {
-      propertyFiltersLoaded = true;
+      elemHideEmulationLoaded = true;
       checkLoaded();
     });
   }

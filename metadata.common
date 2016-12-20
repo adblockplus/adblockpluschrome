@@ -23,11 +23,10 @@ permissions = http://*/* https://*/*
 author = Eyeo GmbH
 
 [contentScripts]
-document_start = ext/common.js ext/content.js cssProperties.js include.preload.js
+document_start = ext/common.js ext/content.js elemHideEmulation.js include.preload.js
 document_end = include.postload.js
 
 [mapping]
-cssProperties.js = adblockpluscore/chrome/content/cssProperties.js
 ext/content.js = chrome/ext/content.js
 ext/popup.js = chrome/ext/popup.js
 subscriptions.xml = adblockpluscore/chrome/content/ui/subscriptions.xml
@@ -72,9 +71,10 @@ lib/adblockplus.js =
   lib/whitelisting.js
   adblockpluscore/lib/coreUtils.js
   adblockpluscore/lib/antiadblockInit.js
-  adblockpluscore/lib/cssRules.js
+  adblockpluscore/lib/common.js
   adblockpluscore/lib/downloader.js
   adblockpluscore/lib/elemHide.js
+  adblockpluscore/lib/elemHideEmulation.js
   adblockpluscore/lib/events.js
   adblockpluscore/lib/filterClasses.js
   adblockpluscore/lib/filterListener.js
@@ -92,6 +92,7 @@ lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupB
 ext/common.js = ext/common.js
 ext/background.js = ext/background.js
 include.postload.js = subscriptionLink.postload.js composer.postload.js
+elemHideEmulation.js = adblockpluscore/lib/common.js adblockpluscore/chrome/content/elemHideEmulation.js
 
 [import_locales]
 adblockplus/chrome/locale/*/global.properties = subscription_invalid_location
@@ -102,7 +103,7 @@ adblockplus/chrome/locale/*/global.properties = subscription_invalid_location
   filter_invalid_regexp
   filter_elemhide_duplicate_id
   filter_elemhide_nocriteria
-  filter_cssproperty_nodomain
+  filter_elemhideemulation_nodomain
 adblockplus/chrome/locale/*/overlay.dtd = hideplaceholders.label
   notification.button.yes
   notification.button.no
