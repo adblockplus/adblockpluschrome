@@ -223,8 +223,8 @@ function reloadFilters()
   // User-entered filters
   getSubscriptions(false, true, function(subscriptions)
   {
-    clearListBox("userFiltersBox");
-    clearListBox("excludedDomainsBox");
+    document.getElementById("userFiltersBox").innerHTML = "";
+    document.getElementById("excludedDomainsBox").innerHTML = "";
 
     for (var i = 0; i < subscriptions.length; i++)
       convertSpecialSubscription(subscriptions[i]);
@@ -518,13 +518,6 @@ function onFilterMessage(action, filter)
   }
 }
 
-function clearListBox(id)
-{
-  var list = document.getElementById(id);
-  while (list.lastChild)
-    list.removeChild(list.lastChild);
-}
-
 // Add a filter string to the list box.
 function appendToListBox(boxId, text)
 {
@@ -538,10 +531,10 @@ function appendToListBox(boxId, text)
 // Remove a filter string from a list box.
 function removeFromListBox(boxId, text)
 {
-  var list = document.getElementById(boxId);
-  for (var i = 0; i < list.length; i++)
-    if (list.options[i].value == text)
-      list.remove(i--);
+  let list = document.getElementById(boxId);
+  let selector = "option[value=" + CSS.escape(text) + "]";
+  for (let option of list.querySelectorAll(selector))
+    list.removeChild(option);
 }
 
 function addWhitelistDomain(event)
@@ -592,16 +585,8 @@ function removeSelectedExcludedDomain(event)
 function removeSelectedFilters(event)
 {
   event.preventDefault();
-  var userFiltersBox = document.getElementById("userFiltersBox");
-  var remove = [];
-  for (var i = 0; i < userFiltersBox.length; i++)
-    if (userFiltersBox.options[i].selected)
-      remove.push(userFiltersBox.options[i].value);
-  if (!remove.length)
-    return;
-
-  for (var i = 0; i < remove.length; i++)
-    removeFilter(remove[i]);
+  for (let option of document.querySelectorAll("#userFiltersBox > option:checked"))
+    removeFilter(option.value);
 }
 
 // Shows raw filters box and fills it with the current user filters
@@ -609,15 +594,21 @@ function toggleFiltersInRawFormat(event)
 {
   event.preventDefault();
 
-  $("#rawFilters").toggle();
-  if ($("#rawFilters").is(":visible"))
+  let rawFilters = document.getElementById("rawFilters");
+  let filters = [];
+
+  if (rawFilters.style.display != "table-row")
   {
-    var userFiltersBox = document.getElementById("userFiltersBox");
-    var text = "";
-    for (var i = 0; i < userFiltersBox.length; i++)
-      text += userFiltersBox.options[i].value + "\n";
-    document.getElementById("rawFiltersText").value = text;
+    rawFilters.style.display = "table-row";
+    for (let option of document.getElementById("userFiltersBox").options)
+      filters.push(option.value);
   }
+  else
+  {
+    rawFilters.style.display = "none";
+  }
+
+  document.getElementById("rawFiltersText").value = filters.join("\n");
 }
 
 // Imports filters in the raw text box
