@@ -21,7 +21,7 @@ ext.onExtensionUnloaded = (function()
     {
       if (port)
       {
-        port.onDisconnect.removeListener(listener)
+        port.onDisconnect.removeListener(listener);
 
         if (!port.onDisconnect.hasListeners())
         {
