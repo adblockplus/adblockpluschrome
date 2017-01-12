@@ -537,7 +537,32 @@
 
   if ("openOptionsPage" in chrome.runtime)
   {
-    ext.showOptions = chrome.runtime.openOptionsPage;
+    ext.showOptions = function(callback)
+    {
+      if (!callback)
+      {
+        chrome.runtime.openOptionsPage();
+      }
+      else
+      {
+        chrome.runtime.openOptionsPage(() =>
+        {
+          if (chrome.runtime.lastError)
+            return;
+
+          chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs =>
+          {
+            if (tabs.length > 0)
+            {
+              window.setTimeout(() =>
+              {
+                callback(new Page(tabs[0]));
+              });
+            }
+          });
+        });
+      }
+    };
   }
   else
   {
