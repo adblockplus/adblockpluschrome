@@ -27,7 +27,7 @@
     "message": "Pagkatapos isara itong pop-up, pindutin ang kaliwang mouse button (o kanang mouse button) ang element ng pahinang ito."
   },
   "description": {
-    "message": "Ginagamit ng halos 50 milyong tao, ito ay isang libreng ad blocker na nag-aalis ng di kanais-nais na ads, malware at tracking."
+    "message": "Ginagamit sa mahigit 100 milyong device, ang Adblock Plus ay ang pinakasikat na ad blocker sa mundo."
   },
   "disabled_for_site": {
     "message": "<strong>Hindi Maaari</strong> sa site na ito"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Alisin ang napili"
-  },
-  "safari_content_blocker": {
-    "message": "Gamitin ang native Content Blocking ng Safari"
-  },
-  "safari_restart": {
-    "message": "Paki-restart ang Safari"
   },
   "show_block_element_menu": {
     "message": "Ipakita ang 'Ihinto ang element' sa right-click menu item"

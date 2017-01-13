@@ -27,7 +27,7 @@
     "message": "Pēc šī uznirstošā loga aizvēršanas, noklikšķiniet (vai noklikšķiniet ar labo pogu) uz elementa šajā lapā."
   },
   "description": {
-    "message": "Izmanto vairāk nekā 50 miljoni cilvēku. Bezmaksas reklāmu bloķētājs, kas bloķē visas kaitinošas reklāmas, malware un izsekošanu."
+    "message": "Izmantots vairāk nekā 100 miljoni ierīču, Adblock Plus ir pasaulē populārākais reklāmu bloķētājs."
   },
   "disabled_for_site": {
     "message": "<strong>Izslēgts</strong> šajā lapā"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Noņemt izvēlēto"
-  },
-  "safari_content_blocker": {
-    "message": "Lietojiet iebūvēto Safari satura bloķēšanu (eksperimentāls)"
-  },
-  "safari_restart": {
-    "message": "Lūdzu, restartējiet Safari"
   },
   "show_block_element_menu": {
     "message": "Rādīt \"Bloķēt elementu'' labā klikšķa izvēlnē"

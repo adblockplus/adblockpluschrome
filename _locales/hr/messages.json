@@ -27,7 +27,7 @@
     "message": "Nakon zatvaranja ovog skočnog prozora, kliknite (ili desni klik miša) na element na ovoj stranici."
   },
   "description": {
-    "message": "Koristi ga više od 50 miliona ljudi, besplatni blker oglasa blokira SVE iritirajuće oglase, zlonamjerne programe i praćenje."
+    "message": "Adblock Plus je najpopularniji program za uklanjanje reklama - koristi se na gotovo 100 milijuna uređaja."
   },
   "disabled_for_site": {
     "message": "<strong>Onemogućeno</strong> na ovoj stranici"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Ukloni odabrano"
-  },
-  "safari_content_blocker": {
-    "message": "Koristi izvorni Safarijev bloker sadržaja (eksperimentalno)"
-  },
-  "safari_restart": {
-    "message": "Ponovno pokrenite Safari"
   },
   "show_block_element_menu": {
     "message": "Prikaži 'Blokiraj element' stavku izbornika desnog klika"

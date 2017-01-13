@@ -27,13 +27,13 @@
     "message": "Klikk (eller høyreklikk) på et element på siden etter at du har lukket dette vinduet."
   },
   "description": {
-    "message": "Brukes av over 50 millioner personer - et gratisverktøy som blokkerer alle sjenerende annonser, malware og sporing."
+    "message": "Benyttet på mer enn 100 millioner enheter. Adblock Plus er verdens mest brukte reklamefjerner."
   },
   "disabled_for_site": {
     "message": "<strong>Deaktivert</strong> på dette nettstedet"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus er deaktivert for domenene listet nedenfor. Du kan legge til et domene enten ved å trykke på Adblock Plus-ikonet i adressefeltet, eller ved å skrive inn domenet (ikke via URL) i boksen og klikke på \"Legg til domene\"-knappen."
+    "message": "Adblock Plus er deaktivert for domenene listet nedenfor. Du kan legge til et domene enten ved å trykke på Adblock Plus-ikonet i adressefeltet, eller ved å skrive inn domenet (ikke URL-en) i boksen og deretter klikke på \"Legg til domene\"-knappen."
   },
   "easy_create_filter": {
     "message": "Blokkér element"
@@ -121,12 +121,6 @@
   "remove_button": {
     "message": "Fjern valgte"
   },
-  "safari_content_blocker": {
-    "message": "Bruk Safari sitt eget innholdsblokkeringssystem (eksperimentell)"
-  },
-  "safari_restart": {
-    "message": "Vennligst start Safari på nytt"
-  },
   "show_block_element_menu": {
     "message": "Vis høyreklikkmenyvalget \"Blokkér element\""
   },
@@ -150,7 +144,7 @@
     }
   },
   "stats_over": {
-    "message": "$number$",
+    "message": "over $number$",
     "placeholders": {
       "number": {
         "content": "$1"

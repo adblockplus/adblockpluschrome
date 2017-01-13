@@ -27,7 +27,7 @@
     "message": "Miután bezártad ezt a buborékot, kattints egy elemre az oldalon.."
   },
   "description": {
-    "message": "Több mint 50 millióan használják ezt az ingyenes hirdetésszűrőt, amely letilt MINDEN idegesítő reklámot és kártevőt."
+    "message": "Több mint 100 millió eszközön használják, az Adblock Plus a világ legnépszerűbb hirdetés szűrője."
   },
   "disabled_for_site": {
     "message": "<strong>Kikapcsolva</strong> ezen a weboldalon"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Kijelölt eltávolítása"
-  },
-  "safari_content_blocker": {
-    "message": "Használja a Safari beépített tartalom blokkolási funkcióját (kísérleti)"
-  },
-  "safari_restart": {
-    "message": "Kérjük indítsa újra a Safarit"
   },
   "show_block_element_menu": {
     "message": "'Elem blokkolása' megjelenítése a környezeti menüben"

@@ -27,7 +27,7 @@
     "message": "Nachdem dieses Fenster geschlossen ist, klicken Sie ein Element auf der Seite an, welches Sie blockieren wollen."
   },
   "description": {
-    "message": "Ein kostenloser Werbeblocker mit über 50 Mio Nutzern, der ALLE nervenden Werbeanzeigen, Malware- und Tracking-Versuche blockiert."
+    "message": "Wird auf über 100 Millionen Geräten verwendet, Adblock Plus ist die beliebteste Adblocker der Welt."
   },
   "disabled_for_site": {
     "message": "Auf dieser Seite <strong>deaktiviert</strong>"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Ausgewählte entfernen"
-  },
-  "safari_content_blocker": {
-    "message": "Verwenden Sie die native Blockierung von Inhalten für Safari (experimentell!)"
-  },
-  "safari_restart": {
-    "message": "Bitte starten Sie Safari neu"
   },
   "show_block_element_menu": {
     "message": "Zeige Rechtsklickmenü-Eintrag 'Element blockieren'"

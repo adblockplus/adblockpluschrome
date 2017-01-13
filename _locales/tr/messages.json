@@ -27,7 +27,7 @@
     "message": "Bu pencere kapandığında, engelleyeceğiniz ögeye tıklayın (veya sağ tıklayın)."
   },
   "description": {
-    "message": "50 milyondan fazla kişinin kullandığı, TÜM reklamları ve zararlıları engelleyen bedava bir reklam engelleyicisidir."
+    "message": "100 milyondan fazla cihazda kullanılan Adblock Plus dünyanın en popüler reklam engelleyicisidir."
   },
   "disabled_for_site": {
     "message": "Bu sitede <strong>devre dışı</strong>"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Seçili olanı kaldır"
-  },
-  "safari_content_blocker": {
-    "message": "Safari'nin yerel İçerik Engellemesini kullan (deneysel)"
-  },
-  "safari_restart": {
-    "message": "Lütfen Safari'yi yeniden başlatın"
   },
   "show_block_element_menu": {
     "message": "Sağ tık menüsünde 'Öğeyi Engelle' seçeneğini göster"

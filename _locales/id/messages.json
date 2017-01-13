@@ -27,7 +27,7 @@
     "message": "Setelah menutup munculan ini , klik (atau klik kanan) elemen pada halaman web."
   },
   "description": {
-    "message": "Digunakan oleh lebih dari 50 juta orang, pemblokir iklan gratis yang memblokir semua iklan yang mengganggu, malware, dan pelacak."
+    "message": "Digunakan pada lebih dari 100 juta perangkat, Adblock Plus merupakan pemblok Iklan terpopuler di dunia."
   },
   "disabled_for_site": {
     "message": "<strong>Nonaktifkan</strong> pada situs ini"
@@ -54,7 +54,7 @@
     "message": "Daftar penyaring Anda harus mengikuti <a>Sintaks Penyaring Adblock Plus</a>"
   },
   "found_a_bug": {
-    "message": "Menemukan sebuah celah? Ingin menerjemahkan Adblock Plus ke bahasa Anda? Silahkan <a>Minta disini</a>."
+    "message": "Menemukan sebuah celah? Ingin menerjemahkan Adblock Plus ke bahasa Anda? Silakan <a>berkaskan permintaan Anda di sini</a>."
   },
   "general": {
     "message": "Umum"
@@ -79,7 +79,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "Hari ini tearkhir diperbaharui pada pukul $time$",
+    "message": "Terakhir diperbaharui pada hari ini pukul $time$",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -98,7 +98,7 @@
     "message": "Membangun pengembangan Adblock Plus"
   },
   "notification_configure": {
-    "message": "Mengatur pengaturan pemberitahuan"
+    "message": "Atur pengaturan pemberitahuan"
   },
   "notification_open_all": {
     "message": "Buka semua tautan dari pemberitahuan ini"
@@ -121,14 +121,8 @@
   "remove_button": {
     "message": "Hapus yang dipilih"
   },
-  "safari_content_blocker": {
-    "message": "Gunakan Pemblokiran Konten asli milik Safari (eksperimental)"
-  },
-  "safari_restart": {
-    "message": "Mohon buka ulang Safari"
-  },
   "show_block_element_menu": {
-    "message": "Tampilkan item menu \"Blokir elemen\" saat klik kanan"
+    "message": "Tampilkan butir menu \"Blokir Elemen\" saat klik kanan"
   },
   "show_devtools_panel": {
     "message": "Tampilkan panel 'Adblock Plus' pada peralatan pengembang"

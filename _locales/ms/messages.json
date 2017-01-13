@@ -15,7 +15,7 @@
     "message": "Tambah penapis anda sendiri"
   },
   "apply_changes": {
-    "message": "Simpan perubahan"
+    "message": "Simpan"
   },
   "block_element": {
     "message": "Halang elemen"
@@ -27,7 +27,7 @@
     "message": "Setelah menutup tetingkap ini, klik (atau klik butang kanan) pada sesuatu unsur atas laman."
   },
   "description": {
-    "message": "Digunakan oleh lebih dari 50 juta orang, penyekat iklan percuma yang menyekat SEMUA iklan merimaskan, malware dan penjejakan web."
+    "message": "Digunakan pada lebih dari 100 juta peranti, Adblock Plus merupakan Penyekat Iklan yang paling popular di dunia."
   },
   "disabled_for_site": {
     "message": "<strong>Dinyahaktifkan</strong> pada laman web ini"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Padamkan yang dipilih"
-  },
-  "safari_content_blocker": {
-    "message": "Gunakan Sekatan Kandungan Safari (eksperimen)"
-  },
-  "safari_restart": {
-    "message": "Sila mula semula Safari"
   },
   "show_block_element_menu": {
     "message": "Paparkan item menu 'Halang elemen' pada butang klik kanan"

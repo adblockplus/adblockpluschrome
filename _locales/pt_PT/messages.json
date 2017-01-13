@@ -27,7 +27,7 @@
     "message": "Após fechar este popup, clique (ou clique com o botão direito) num elemento na página."
   },
   "description": {
-    "message": "Usado por mais de 50 milhões de pessoas, um ad blocker gratuito que bloqueia TODOS os malwares, publicidade chata e rastreamento."
+    "message": "Usado em mais de 100 milhões de dispositivos, Adblock Plus é o bloqueador de anúncios mais popular no mundo."
   },
   "disabled_for_site": {
     "message": "<strong>Desativado</strong> neste site"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Remover seleção"
-  },
-  "safari_content_blocker": {
-    "message": "Usa o Bloqueio de Conteudo nativo do Safari (experimental)"
-  },
-  "safari_restart": {
-    "message": "Por favor, reinicie o Safari"
   },
   "show_block_element_menu": {
     "message": "Mostrar 'Bloquear elemento' botão direito do rato no item do menu"

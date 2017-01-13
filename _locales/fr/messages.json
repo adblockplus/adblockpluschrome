@@ -27,7 +27,7 @@
     "message": "Après avoir fermé ce pop-up, cliquez (ou cliquez-droit) sur un élément de la page."
   },
   "description": {
-    "message": "Utilisé par plus de 50 millions de personnes, une extension gratuite qui bloque TOUTES les publicités, les malware et les trackers."
+    "message": "Utilisé sur plus de 100 millions d'appareils, Adblock Plus est le bloqueur de publicités le plus populaire au monde."
   },
   "disabled_for_site": {
     "message": "<strong>Désactivé</strong> sur ce site"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Supprimer la sélection"
-  },
-  "safari_content_blocker": {
-    "message": "Utilisez le blocage de contenu natif de Safari (expérimental)"
-  },
-  "safari_restart": {
-    "message": "Redémarrez Safari"
   },
   "show_block_element_menu": {
     "message": "Afficher 'Bloquer l'élément' dans le menu clic-droit"

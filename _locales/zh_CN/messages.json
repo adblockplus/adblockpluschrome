@@ -27,7 +27,7 @@
     "message": "此消息框关闭后，请点击（或右击）网页上的一个元素。"
   },
   "description": {
-    "message": "超过5000万人使用，免费的广告拦截器，可阻止所有烦人的广告及恶意软件和跟踪。"
+    "message": "Adblock Plus 已被超过 1 亿台设备使用，是世界上最受欢迎的广告拦截软件。"
   },
   "disabled_for_site": {
     "message": "对当前网站<strong>禁用</strong>"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "删除所选项"
-  },
-  "safari_content_blocker": {
-    "message": "使用 Safari 原生的内容拦截器(测试性功能)"
-  },
-  "safari_restart": {
-    "message": "请重新启动 Safari"
   },
   "show_block_element_menu": {
     "message": "添加‘拦截元素’到右鍵菜单"

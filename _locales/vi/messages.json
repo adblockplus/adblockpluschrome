@@ -27,7 +27,7 @@
     "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
   },
   "description": {
-    "message": "Được hơn 50 triệu người sử dụng, một tiện ích miễn phí chặn tất cả quảng cáo phiền phức, phần mềm độc hại và phần mềm gián điệp."
+    "message": "Được sử dụng trên hơn 100 triệu thiết bị. Adblock Plus là trình chặn quảng cáo phổ biến nhất trên thế giới."
   },
   "disabled_for_site": {
     "message": "<strong>Đã loại bỏ</strong> trên trang này"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Xóa mục đã chọn"
-  },
-  "safari_content_blocker": {
-    "message": "Dùng phương thức chặn nội dung sẵn có của Safari (thử nghiệm)"
-  },
-  "safari_restart": {
-    "message": "Hãy khởi động lại Safari"
   },
   "show_block_element_menu": {
     "message": "Hiển thị mục 'Chặn phần tử' ở menu nhấn chuột phải"

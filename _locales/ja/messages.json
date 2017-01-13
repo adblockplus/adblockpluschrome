@@ -27,7 +27,7 @@
     "message": "このポップアップが閉じた後にページ上の要素をクリック(または右クリック)してください。"
   },
   "description": {
-    "message": "5,000万人以上に利用されている、無料の広告ブロッカーです。目障りな広告、マルウェア、行動追跡を根こそぎブロックします。"
+    "message": "1億以上の端末で使用されている Adblock Plus は、世界で最も人気のある広告ブロッカーです。"
   },
   "disabled_for_site": {
     "message": "このサイトで<strong>無効</strong>"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "選択項目を削除"
-  },
-  "safari_content_blocker": {
-    "message": "Safari 標準のコンテンツブロッカーを利用する (実験的機能)"
-  },
-  "safari_restart": {
-    "message": "Safari を再起動してください"
   },
   "show_block_element_menu": {
     "message": "右クリックメニューに「要素をブロック」を表示"

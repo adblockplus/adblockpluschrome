@@ -27,7 +27,7 @@
     "message": "Luk dette popup-vindue, og klik (eller højreklik) derefter på et element på siden."
   },
   "description": {
-    "message": "Anvendt af over 50 millioner mennesker, gratis reklame blokering der blokere ALLE irreterende reklamer, malware or sporing."
+    "message": "Adblock Plus anvendes på over 100 millioner enheder og er således verdens mest populære ad blocker."
   },
   "disabled_for_site": {
     "message": "<strong>Deaktiveret</strong> på dette websted"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Fjern valgte"
-  },
-  "safari_content_blocker": {
-    "message": "Anvend Safaris indbyggede indholdsblokering (eksperimental)"
-  },
-  "safari_restart": {
-    "message": "Genstart Safari"
   },
   "show_block_element_menu": {
     "message": "Vis \"Blokér element\" i højrekliksmenu"

@@ -27,7 +27,7 @@
     "message": "Po zaključku tega popup kliknite (ali desni klik) element na strani."
   },
   "description": {
-    "message": "Brezplačni ad blocker, ki ga uporablja preko 50 milijonov ljudi, blokira VSE nadležne oglase, malware in sledenje."
+    "message": "Adblock Plus je v uporabi na več kot 100 milijonih naprav, zato je najbolj priljubljeno orodje za blokiranje oglasov na svetu."
   },
   "disabled_for_site": {
     "message": "<strong>Omogočeno</strong> na tej strani"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Odstrani izbrane"
-  },
-  "safari_content_blocker": {
-    "message": "Uporabi izvirni Content Blocking brskalnika Safari (poskusno)"
-  },
-  "safari_restart": {
-    "message": "Prosimo ponovno zaženite Safari"
   },
   "show_block_element_menu": {
     "message": "Prikaži 'Blokiraj element' v meniju desnega klika"

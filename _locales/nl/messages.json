@@ -27,7 +27,7 @@
     "message": "Na het sluiten van deze popup, klik (of klik met de rechtermuisknop) op het pagina-element."
   },
   "description": {
-    "message": "Een gratis adblocker met meer dan 50 miljoen gebruikers, die ALLE vervelende advertenties, malware en tracking blokkeert."
+    "message": "Adblock Plus wordt op meer dan 100 miljoen apparaten gebruikt, en is 's werelds populairste ad-blocker."
   },
   "disabled_for_site": {
     "message": "<strong>Uitgeschakeld</strong> op deze site"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Verwijder geselecteerde"
-  },
-  "safari_content_blocker": {
-    "message": "Gebruik Safari's eigen inhoudsblokkering (experimenteel)"
-  },
-  "safari_restart": {
-    "message": "Start Safari opnieuw op"
   },
   "show_block_element_menu": {
     "message": "Toon 'Element blokkeren' in het rechtermuisklik menu"

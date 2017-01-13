@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "ఈ చిరుతలుపుని (పాపప్) మూసివేసిన తర్వాత, పేజీలో ఒక అంశాన్ని నొక్కండి (లేదా కుడి క్లిక్ చేయండి)."
   },
+  "description": {
+    "message": "10 కోట్లకు పైగా పరికరాలలో ఉపయోగించ బడే Adblock Plus, ప్రకటనలను అడ్డగించడానికి ప్రపంచంలోనే అత్యంత ప్రసిద్ధమైన సాధనము."
+  },
   "disabled_for_site": {
     "message": "ఈ సైట్  లో <strong>ఆపివేయబడింది</strong>"
   },
@@ -71,6 +74,14 @@
     "message": "తాజా నవీనకరణ ఈరోజు $time$ కి",
     "placeholders": {
       "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "గీత $number$",
+    "placeholders": {
+      "number": {
         "content": "$1"
       }
     }
@@ -133,6 +144,9 @@
         "content": "$1"
       }
     }
+  },
+  "stats_share_title": {
+    "message": "ఈ సంఖ్యను పంచు"
   },
   "stats_show_iconnumber": {
     "message": "ఐకాన్ లో నెంబర్ చూపించు"

@@ -27,7 +27,7 @@
     "message": "Po zatvorení tohto okna, kliknite (alebo kliknite pravým tlačidlom myši) na prvok na stránke."
   },
   "description": {
-    "message": "Používa viac ako 50 miliónov ľudí. Zadarmo blokuje VŠETKY obťažujúce reklamy, malware a sledovanie."
+    "message": "Použité na viac ako 100 miliónov zariadení, Adblock Plus je celosvetovo najpopulárnejší blokovač reklám."
   },
   "disabled_for_site": {
     "message": "<strong>Zakázané</strong> na tejto stránke"
@@ -54,7 +54,7 @@
     "message": "Váš filter musí spĺňať <a>syntax filtrov Adblock Plus</a>."
   },
   "found_a_bug": {
-    "message": "Nájdené chyba? Chcete preložiť Adblock Plus do vášho jazyka? Prosím <a> zadajte žiadosť tu</a>."
+    "message": "Našli ste chybu? Chcete preložiť Adblock Plus do vášho jazyka? <a>Napíšte váš dotaz sem</a>, prosím."
   },
   "general": {
     "message": "Všeobecné"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Odstrániť vybrané"
-  },
-  "safari_content_blocker": {
-    "message": "Použite Safari natívne blokovanie obsahu (experimentálne)"
-  },
-  "safari_restart": {
-    "message": "Reštartujte Safari, prosím"
   },
   "show_block_element_menu": {
     "message": "Zobrazovať v kontextovom menu položku 'Blokovať prvok'"

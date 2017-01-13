@@ -27,7 +27,7 @@
     "message": "När denna popup stängs, klicka (eller högerklicka) ett objekt på sidan."
   },
   "description": {
-    "message": "Används av mer än 50 miljoner människor, en gratis reklam blockerare som blockerar ALL irriterande reklam, malware och spårning."
+    "message": "Adblock Plus används på över 100 miljoner enheter och är med det världens mest populära annonsblockerare."
   },
   "disabled_for_site": {
     "message": "<strong>Avaktiverat</strong> på denna webbplats"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Ta bort markerad"
-  },
-  "safari_content_blocker": {
-    "message": "Använd Safaris egna innehållsblockering (experimentell)"
-  },
-  "safari_restart": {
-    "message": "Vänligen starta om Safari"
   },
   "show_block_element_menu": {
     "message": "Visa 'Blockera objekt' i högerklicksmeny"

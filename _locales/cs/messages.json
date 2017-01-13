@@ -27,7 +27,7 @@
     "message": "Po zavření tohoto vyskakovacího okna klikněte levým (nebo pravým) tlačítkem myši na prvek na stránce."
   },
   "description": {
-    "message": "Užívaný více jak 50 miliony lidmi, ad blocker, který je zdarma a blokuje VŠECHNY otravné reklamy, malware a sledování vaší aktivity."
+    "message": "Adblock Plus je použit na více než 100 milionech zařízení, světově nejoblíbenější program na blokování reklam."
   },
   "disabled_for_site": {
     "message": "<strong>Zakázáno</strong> na této stránce"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Odebrat vybrané"
-  },
-  "safari_content_blocker": {
-    "message": "Použít Safari je nativní blokování obsahu (experimentální)"
-  },
-  "safari_restart": {
-    "message": "Prosíme, restartujte Safari"
   },
   "show_block_element_menu": {
     "message": "Zobrazit položku nabídky 'Blokovat prvek' při kliknutí pravým tlačítkem myši"

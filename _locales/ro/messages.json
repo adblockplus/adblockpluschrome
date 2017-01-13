@@ -27,7 +27,7 @@
     "message": "După închiderea acestui pop-up, clic (sau clic-dreapta) pe un element de pe pagină."
   },
   "description": {
-    "message": "Extensie gratuită, folosită de peste 50 milioane persoane, blochează TOATE reclamele enervante, malware şi tracking."
+    "message": "Instalat pe mai mult de 100 de milioane de dispozitive, Adblock Plus este cel mai popular ad blocker din lume."
   },
   "disabled_for_site": {
     "message": "<strong>Dezactivat</strong> pe acest site"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Șterge filtrul evidenţiat"
-  },
-  "safari_content_blocker": {
-    "message": "Utilizaţi Content Blocking nativ din Safari (experimental)"
-  },
-  "safari_restart": {
-    "message": "Vă rugăm să reporniţi Safari"
   },
   "show_block_element_menu": {
     "message": "Arată 'Blochează elementul' în meniul asociat unui obiect cu clic dreapta"

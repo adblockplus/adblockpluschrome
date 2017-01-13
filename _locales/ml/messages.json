@@ -27,7 +27,7 @@
     "message": "ഈ പോപ്പപ്പ് ക്ലോസ് ചെയ്ത ശേഷം താളിലെ എലമെന്റില്‍ ക്ലിക്കോ റൈറ്റ് ക്ലിക്കോ ചെയ്യുക."
   },
   "description": {
-    "message": "അഞ്ചുകോടിയിലേറെ ആളുകള്‍ ഉപയോഗിക്കുന്ന, എല്ലാ പരസ്യങ്ങളും മാല്‍വെയറും ട്രാക്കിങ്ങും തടയുന്ന ഒരു സൗജന്യ ആഡ് ബ്ലോക്കര്‍."
+    "message": "പത്തു കോടിയിലേറെ ഉപകരണങ്ങളില്‍ ഉപയോഗിക്കപ്പെടുന്ന ആഡ്ബ്ലോക്ക് പ്ലസ് ആണ് ലോകത്തെ ഏറ്റവും പ്രചാരമേറിയ ആഡ്ബ്ലോക്കര്‍."
   },
   "disabled_for_site": {
     "message": "ഈ സൈറ്റില്‍ <strong>ഡിസേബിള്‍</strong> ചെയ്തിരിക്കുന്നു"
@@ -38,11 +38,22 @@
   "edit_filters_raw": {
     "message": "അരിപ്പകള്‍ റോ ടെക്സ്റ്റ് (ഫോര്‍മാറ്റിങ് ഇല്ലാതെ) ആയി തിരുത്തുക"
   },
+  "enabled_for_site": {
+    "message": "ഈ സൈറ്റില്‍ <strong>സജീവം</strong>"
+  },
   "filter_lists": {
     "message": "പട്ടികകള്‍ അരിക്കുക"
   },
   "general": {
     "message": "പലവക"
+  },
+  "invalid_css_selector": {
+    "message": "$selector$ ഒരു ശരിയായ സി. എസ്. എസ്. സെലക്റ്റര്‍ അല്ല",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
   },
   "last_updated_at": {
     "message": "അവസാനം പുതുക്കിയത് $date$, $time$",
@@ -71,8 +82,17 @@
       }
     }
   },
+  "name_devbuild": {
+    "message": "ആഡ്ബ്ലോക്ക് പ്ലസ് ഡെവലപ്മെന്റ് ബില്‍ഡ്"
+  },
   "notification_configure": {
     "message": "നോട്ടിഫിക്കേഷന്‍ ക്രമീകരണങ്ങള്‍ ചിട്ടപ്പെടുത്തുക"
+  },
+  "notification_open_all": {
+    "message": "ഈ അറിയിപ്പില്‍നിന്നുള്ള എല്ലാ കണ്ണികളും തുറക്കുക"
+  },
+  "options": {
+    "message": "ആഡ്ബ്ലോക്ക് പ്ലസ് ഓപ്ഷനുകള്‍"
   },
   "options_short": {
     "message": "സൗകര്യങ്ങള്‍"
@@ -82,6 +102,22 @@
   },
   "remove_button": {
     "message": "തെരഞ്ഞെടുത്തത് നീക്കംചെയ്യുക"
+  },
+  "stats_label_page": {
+    "message": "ഈ താളില്‍ <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "മൊത്തം <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
   },
   "stats_over": {
     "message": "$number$-നു മേല്‍",
@@ -94,6 +130,14 @@
   "stats_share_download": {
     "message": "ആഡ്ബ്ലോക്ക് പ്ലസ് ഡൗണ്‍ലോഡ് ചെയ്യുക"
   },
+  "stats_share_message": {
+    "message": "ആഡ്ബ്ലോക്ക് പ്ലസ്സിന് നന്ദി, ഞാന്‍ $number$ പരസ്യങ്ങളും ട്രാക്കറുകളും തടഞ്ഞു.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
   "stats_share_title": {
     "message": "ഈ സംഖ്യ പങ്കുവയ്ക്കുക"
   },
@@ -102,6 +146,9 @@
   },
   "stats_title": {
     "message": "തടഞ്ഞ പരസ്യങ്ങള്‍"
+  },
+  "unexpected_filter_list_header": {
+    "message": "ഫില്‍റ്റര്‍ ലിസ്റ്റ് ഹെഡ്ഡറുകള്‍ ഇവിടെ അനുവദനീയമല്ല"
   },
   "update_now": {
     "message": "ഇപ്പോള്‍ത്തന്നെ പുതുക്കുക"

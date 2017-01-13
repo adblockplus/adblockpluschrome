@@ -27,7 +27,7 @@
     "message": "Po zamknięciu tego okna kliknij na stronie niechciany element lewym lub prawym przyciskiem myszy."
   },
   "description": {
-    "message": "Używany przez ponad 50 milionów ludzi, darmowy dodatek blokujący irytujące reklamy, złośliwe oprogramowanie i programy śledzące."
+    "message": "Używany na ponad 100 mln urządzeń, Adblock Plus jest najpopularniejszym na świecie programem do blokowania reklam."
   },
   "disabled_for_site": {
     "message": "<strong>Wyłączony</strong> na tej stronie"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Usuń zaznaczone"
-  },
-  "safari_content_blocker": {
-    "message": "Używaj natywnego sposobu blokowania treści Safari (eksperymentalne)"
-  },
-  "safari_restart": {
-    "message": "Uruchom ponownie Safari"
   },
   "show_block_element_menu": {
     "message": "Wyświetlaj element „Blokuj element” w menu kontekstowym"

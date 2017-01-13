@@ -27,7 +27,7 @@
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
   },
   "description": {
-    "message": "Yli 50 miljoonan ihmisen käyttämä ilmainen mainostenesto-ohjelma. Estää KAIKKI ärsyttävät mainokset, haittaohjelmat ja seurannan."
+    "message": "Adblock Plus on maailman suosituin mainosten esto-ohjelma, ja se on käytössä yli 100 miljoonassa laitteessa."
   },
   "disabled_for_site": {
     "message": "<strong>Poistettu</strong> tältä sivulta"
@@ -120,9 +120,6 @@
   },
   "remove_button": {
     "message": "Poista valitut"
-  },
-  "safari_restart": {
-    "message": "Ole hyvä ja uudelleen käynnistä Safari"
   },
   "show_block_element_menu": {
     "message": "Näytä 'Estä elementti' oikea-klikkaus valikossa"

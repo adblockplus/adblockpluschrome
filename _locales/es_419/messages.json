@@ -27,7 +27,7 @@
     "message": "Después de cerrar esta ventana, haga click (o click derecho) en un elemento de la página."
   },
   "description": {
-    "message": "Usado por más de 50 millones de personas, un bloqueador gratuito que bloquea TODOS los anuncios molestos, malware y tracking."
+    "message": "Utilizado en más de 100 millones de dispositivos, Adblock Plus es el bloqueador de anuncios más popular del mundo."
   },
   "disabled_for_site": {
     "message": "<strong>Deshabilitado</strong> en este sitio"
@@ -60,7 +60,7 @@
     "message": "General"
   },
   "invalid_css_selector": {
-    "message": "$selector$ no es un selecor CSS válido",
+    "message": "$selector$ no es un selector CSS válido",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -98,7 +98,7 @@
     "message": "Versión de desarrollo de Adblock Plus"
   },
   "notification_configure": {
-    "message": "Configurar opciones de notificación"
+    "message": "Configura opciones de notificación"
   },
   "notification_open_all": {
     "message": "Abrir todos los enlaces de esta notificación"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Eliminar seleccionados"
-  },
-  "safari_content_blocker": {
-    "message": "Usar el bloqueador nativo de Safari (experimental)"
-  },
-  "safari_restart": {
-    "message": "Por favor, reinicie Safari"
   },
   "show_block_element_menu": {
     "message": "Mostrar opción \"Bloquear Elemento\" al hacer click derecho en el elemento"
@@ -181,7 +175,7 @@
     "message": "Por favor selecciona una suscripción de filtros de la lista:"
   },
   "unexpected_filter_list_header": {
-    "message": "Las cabeceras de la lista del filtro no son permitidas aquí"
+    "message": "Cabeceras de la lista del filtro no son permitidas aquí"
   },
   "update_now": {
     "message": "Actualizar ahora"

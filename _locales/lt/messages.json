@@ -27,7 +27,7 @@
     "message": "Užvėrus šį iššokantį langą, paspauskite (arba dešiniu mygtuku) ant elemento esančio puslapyje."
   },
   "description": {
-    "message": "Naudojamas daugiau nei 50-ies milijonų žmonių blokuojantis VISAS erzinančias reklamas, žalingas programas ir sekimą."
+    "message": "Naudojamas daugiau nei 100 milijonų įrenginių, „Adblock Plus“ yra populiariausias reklamos blokavimo įrankis."
   },
   "disabled_for_site": {
     "message": "Šiame puslapyje <strong>išjungta</strong>"
@@ -120,12 +120,6 @@
   },
   "remove_button": {
     "message": "Pašalinti pasirinktą"
-  },
-  "safari_content_blocker": {
-    "message": "Naudoti „Safari” įmontuotą turinio blokavimą (eksperimentinis)"
-  },
-  "safari_restart": {
-    "message": "Iš naujo paleiskite „Safari”"
   },
   "show_block_element_menu": {
     "message": "Dešinio mygtuko meniu rodyti „Blokuoti elementą“"

@@ -27,7 +27,7 @@
     "message": "Després de tancar aquest Pop-up, clica (o fes clic amb el botó dret) a un element de la pàgina."
   },
   "description": {
-    "message": "Usat per més de 50 milions de persones, un bloquejador de publicitat gratuït que bloqueja TOTS els anuncis amoïnadors."
+    "message": "Usat en més de 100 milions d'aparells, Adblock Plus és el bloquejador de publicitat més popular del mon."
   },
   "disabled_for_site": {
     "message": "S'ha <strong>deshabilitat</strong> per a aquest lloc"
@@ -121,12 +121,6 @@
   "remove_button": {
     "message": "Suprimeix els seleccionats"
   },
-  "safari_content_blocker": {
-    "message": "Utilitza el bloqueig de contingut natiu de Safari (experimental)"
-  },
-  "safari_restart": {
-    "message": "Reinicia Safari per favor"
-  },
   "show_block_element_menu": {
     "message": "Mostra la opció \"Bloqueja l'element\" com a ítem del menú contextual"
   },
@@ -169,7 +163,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Comparteix aquest nom"
+    "message": "Comparteix aquest nombre"
   },
   "stats_show_iconnumber": {
     "message": "Mostra el nombre a la icona"
