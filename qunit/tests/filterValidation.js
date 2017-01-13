@@ -28,12 +28,12 @@
     ok(filter instanceof BlockingFilter, "blocking filter parsed");
     equal(filter.text, text, "blocking filter text matches");
 
-    text = '##div:first-child a[src="http://example.com"] > .foo + #bar'
+    text = '##div:first-child a[src="http://example.com"] > .foo + #bar';
     filter = parseFilter(text).filter;
     ok(filter instanceof ElemHideFilter, "elemhide filter parsed");
     equal(filter.text, text, "elemhide filter text matches");
 
-    text = "! foo bar"
+    text = "! foo bar";
     filter = parseFilter(text).filter;
     ok(filter instanceof CommentFilter, "comment filter parsed");
     equal(filter.text, text, "comment filter text matches");
