@@ -22,10 +22,10 @@
   var getBlockedPerPage = require("stats").getBlockedPerPage;
   var FilterNotifier = require("filterNotifier").FilterNotifier;
   var Prefs = require("prefs").Prefs;
-  
+
   var currentPage;
   var shareURL = "https://adblockplus.org/";
-  
+
   var messageMark = {};
   var shareLinks = {
     facebook: ["https://www.facebook.com/dialog/feed", {
@@ -50,12 +50,12 @@
       via: "AdblockPlus"
     }]
   };
-  
+
   function createShareLink(network, blockedCount)
   {
     var url = shareLinks[network][0];
     var params = shareLinks[network][1];
-    
+
     var querystring = [];
     for (var key in params)
     {
@@ -66,7 +66,7 @@
     }
     return url + "?" + querystring.join("&");
   }
-  
+
   function onLoad()
   {
     document.getElementById("share-box").addEventListener("click", share, false);
@@ -74,7 +74,7 @@
     showIconNumber.setAttribute("aria-checked", Prefs.show_statsinicon);
     showIconNumber.addEventListener("click", toggleIconNumber, false);
     document.querySelector("label[for='show-iconnumber']").addEventListener("click", toggleIconNumber, false);
-    
+
     // Update stats
     ext.pages.query({active: true, lastFocusedWindow: true}, function(pages)
     {
@@ -86,23 +86,23 @@
       document.getElementById("stats-container").removeAttribute("hidden");
     });
   }
-  
+
   function onUnload()
   {
     FilterNotifier.off("filter.hitCount", updateStats);
   }
-  
+
   function updateStats()
   {
     var statsPage = document.getElementById("stats-page");
     var blockedPage = getBlockedPerPage(currentPage).toLocaleString();
     i18n.setElementText(statsPage, "stats_label_page", [blockedPage]);
-    
+
     var statsTotal = document.getElementById("stats-total");
     var blockedTotal = Prefs.blocked_total.toLocaleString();
     i18n.setElementText(statsTotal, "stats_label_total", [blockedTotal]);
   }
-  
+
   function share(ev)
   {
     // Easter Egg
@@ -111,16 +111,16 @@
       blocked = blocked.toLocaleString();
     else
       blocked = i18n.getMessage("stats_over", (9000).toLocaleString());
-    
+
     ext.pages.open(createShareLink(ev.target.dataset.social, blocked));
   }
-  
+
   function toggleIconNumber()
   {
     Prefs.show_statsinicon = !Prefs.show_statsinicon;
     document.getElementById("show-iconnumber").setAttribute("aria-checked", Prefs.show_statsinicon);
   }
-  
+
   document.addEventListener("DOMContentLoaded", onLoad, false);
   window.addEventListener("unload", onUnload, false);
 })();
