@@ -17,16 +17,45 @@
 
 "use strict";
 
+let panelWindow = null;
+
 chrome.runtime.sendMessage(
   {
     type: "prefs.get",
     key: "show_devtools_panel"
   },
-  function(enabled)
+  enabled =>
   {
     if (enabled)
-      chrome.devtools.panels.create("Adblock Plus",
-                                    "icons/detailed/abp-48.png",
-                                    "devtools-panel.html");
+    {
+      chrome.devtools.panels.create(
+        "Adblock Plus",
+        "icons/detailed/abp-48.png",
+        "devtools-panel.html",
+        panel =>
+        {
+          panel.onShown.addListener(window =>
+          {
+            panelWindow = window;
+          });
+
+          panel.onHidden.addListener(window =>
+          {
+            panelWindow = null;
+          });
+
+          panel.onSearch.addListener((eventName, queryString) =>
+          {
+            if (panelWindow)
+            {
+              panelWindow.postMessage({
+                type: eventName,
+                queryString: queryString
+              }, "*");
+            }
+          });
+        }
+      );
+    }
   }
 );
