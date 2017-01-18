@@ -127,6 +127,7 @@
   {
     // Capture parent frame here because onCommitted doesn't get this info.
     var frame = createFrame(details.tabId, details.frameId);
+    frame.url = new URL(details.url);
     frame.parent = framesOfTabs[details.tabId][details.parentFrameId] || null;
   });
 
