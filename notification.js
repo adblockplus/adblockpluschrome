@@ -15,22 +15,21 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var backgroundPage = ext.backgroundPage.getWindow();
-var require = backgroundPage.require;
+"use strict";
 
-var Utils = require("utils").Utils;
-var Notification = require("notification").Notification;
-var notificationHelper = require("notificationHelper");
-var getActiveNotification = notificationHelper.getActiveNotification;
-var shouldDisplayNotification = notificationHelper.shouldDisplay;
+const {require} = ext.backgroundPage.getWindow();
+
+const {Utils} = require("utils");
+const {Notification} = require("notification");
+const {getActiveNotification, shouldDisplay} = require("notificationHelper");
 
 function getDocLinks(notification)
 {
   if (!notification.links)
     return [];
 
-  var docLinks = [];
-  notification.links.forEach(function(link)
+  let docLinks = [];
+  notification.links.forEach(link =>
   {
     docLinks.push(Utils.getDocLink(link));
   });
@@ -39,21 +38,21 @@ function getDocLinks(notification)
 
 function insertMessage(element, text, links)
 {
-  var match = /^(.*?)<(a|strong)>(.*?)<\/\2>(.*)$/.exec(text);
+  let match = /^(.*?)<(a|strong)>(.*?)<\/\2>(.*)$/.exec(text);
   if (!match)
   {
     element.appendChild(document.createTextNode(text));
     return;
   }
 
-  var before = match[1];
-  var tagName = match[2];
-  var value = match[3];
-  var after = match[4];
+  let before = match[1];
+  let tagName = match[2];
+  let value = match[3];
+  let after = match[4];
 
   insertMessage(element, before, links);
 
-  var newElement = document.createElement(tagName);
+  let newElement = document.createElement(tagName);
   if (tagName === "a" && links && links.length)
     newElement.href = links.shift();
   insertMessage(newElement, value, links);
@@ -62,23 +61,23 @@ function insertMessage(element, text, links)
   insertMessage(element, after, links);
 }
 
-window.addEventListener("load", function()
+window.addEventListener("load", () =>
 {
-  var notification = getActiveNotification();
-  if (!notification || !shouldDisplayNotification("popup", notification.type))
+  let notification = getActiveNotification();
+  if (!notification || !shouldDisplay("popup", notification.type))
     return;
 
-  var texts = Notification.getLocalizedTexts(notification);
-  var titleElement = document.getElementById("notification-title");
+  let texts = Notification.getLocalizedTexts(notification);
+  let titleElement = document.getElementById("notification-title");
   titleElement.textContent = texts.title;
 
-  var docLinks = getDocLinks(notification);
-  var messageElement = document.getElementById("notification-message");
+  let docLinks = getDocLinks(notification);
+  let messageElement = document.getElementById("notification-message");
   insertMessage(messageElement, texts.message, docLinks);
 
-  messageElement.addEventListener("click", function(event)
+  messageElement.addEventListener("click", event =>
   {
-    var link = event.target;
+    let link = event.target;
     while (link && link !== messageElement && link.localName !== "a")
       link = link.parentNode;
     if (!link)
@@ -88,10 +87,10 @@ window.addEventListener("load", function()
     ext.pages.open(link.href);
   });
 
-  var notificationElement = document.getElementById("notification");
+  let notificationElement = document.getElementById("notification");
   notificationElement.className = notification.type;
   notificationElement.hidden = false;
-  notificationElement.addEventListener("click", function(event)
+  notificationElement.addEventListener("click", event =>
   {
     switch (event.target.id)
     {

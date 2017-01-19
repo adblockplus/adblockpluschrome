@@ -1,17 +1,14 @@
-(function()
-{
-  var filterValidation = require("filterValidation");
-  var parseFilter = filterValidation.parseFilter;
-  var parseFilters = filterValidation.parseFilters;
+"use strict";
 
-  var filterClasses = require("filterClasses");
-  var BlockingFilter = filterClasses.BlockingFilter;
-  var ElemHideFilter = filterClasses.ElemHideFilter;
-  var CommentFilter = filterClasses.CommentFilter;
+{
+  const {parseFilter, parseFilters} = require("filterValidation");
+  const {BlockingFilter,
+         ElemHideFilter,
+         CommentFilter} = require("filterClasses");
 
   module("Filter validation");
 
-  test("Detecting invalid filters", function()
+  test("Detecting invalid filters", () =>
   {
     equal(parseFilter("||example.com^$unknown").error.type, "invalid-filter", "unknown option");
     equal(parseFilter("[foobar]").error.type, "unexpected-filter-list-header", "filter list header");
@@ -19,9 +16,9 @@
     ok(/\b4\b/.test(parseFilters("!comment\r\n||example.com^\n\n##/").errors[0]), "error contains corresponding line number");
   });
 
-  test("Allowing valid filters", function()
+  test("Allowing valid filters", () =>
   {
-    var text, filter;
+    let text, filter;
 
     text = "||example.com^";
     filter = parseFilter(text).filter;
@@ -41,17 +38,17 @@
     equal(parseFilter("").filter, null, "empty filter parsed as 'null'");
   });
 
-  test("Normalizing filters", function()
+  test("Normalizing filters", () =>
   {
-    var ws = " \t\r\n";
+    let ws = " \t\r\n";
 
     equal(parseFilter(ws + "@@" + ws + "||" + ws + "example.com" + ws + "^" + ws).filter.text, "@@||example.com^", "unnecessary spaces");
     equal(parseFilter(ws).filter, null, "only spaces");
   });
 
-  test("Parsing multiple filters", function()
+  test("Parsing multiple filters", () =>
   {
-    var result = parseFilters("||example.com^\n \n###foobar\r\n! foo bar\n");
+    let result = parseFilters("||example.com^\n \n###foobar\r\n! foo bar\n");
 
     equal(result.errors.length, 0, "no error occurred");
     equal(result.filters.length, 3, "all filters parsed");
@@ -65,4 +62,4 @@
     ok(result.filters[2] instanceof CommentFilter,  "3rd filter is comment");
     equal(result.filters[2].text, "! foo bar",      "3rd filter text matches");
   });
-})();
+}

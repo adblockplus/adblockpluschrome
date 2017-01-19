@@ -15,23 +15,25 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var RegExpFilter = require("filterClasses").RegExpFilter;
-var ElemHide = require("elemHide").ElemHide;
-var checkWhitelisted = require("whitelisting").checkWhitelisted;
-var extractHostFromFrame = require("url").extractHostFromFrame;
-var port = require("messaging").port;
-var devtools = require("devtools");
+"use strict";
 
-port.on("get-selectors", function(msg, sender)
+const {RegExpFilter} = require("filterClasses");
+const {ElemHide} = require("elemHide");
+const {checkWhitelisted} = require("whitelisting");
+const {extractHostFromFrame} = require("url");
+const {port} = require("messaging");
+const devtools = require("devtools");
+
+port.on("get-selectors", (msg, sender) =>
 {
-  var selectors;
-  var trace = devtools && devtools.hasPanel(sender.page);
+  let selectors;
+  let trace = devtools && devtools.hasPanel(sender.page);
 
   if (!checkWhitelisted(sender.page, sender.frame,
                         RegExpFilter.typeMap.DOCUMENT |
                         RegExpFilter.typeMap.ELEMHIDE))
   {
-    var specificOnly = checkWhitelisted(sender.page, sender.frame,
+    let specificOnly = checkWhitelisted(sender.page, sender.frame,
                                         RegExpFilter.typeMap.GENERICHIDE);
     selectors = ElemHide.getSelectorsForDomain(
       extractHostFromFrame(sender.frame),
@@ -46,9 +48,9 @@ port.on("get-selectors", function(msg, sender)
   return {selectors: selectors, trace: trace};
 });
 
-port.on("forward", function(msg, sender)
+port.on("forward", (msg, sender) =>
 {
-  var targetPage;
+  let targetPage;
   if (msg.targetPageId)
     targetPage = ext.getPage(msg.targetPageId);
   else

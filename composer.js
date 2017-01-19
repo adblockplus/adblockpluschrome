@@ -15,7 +15,9 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var targetPageId = null;
+"use strict";
+
+let targetPageId = null;
 
 function onKeyDown(event)
 {
@@ -38,7 +40,7 @@ function addFilters()
     type: "filters.importRaw",
     text: document.getElementById("filters").value
   },
-  function(errors)
+  errors =>
   {
     if (errors.length > 0)
       alert(errors.join("\n"));
@@ -77,7 +79,7 @@ function init()
 
   document.getElementById("filters").focus();
 
-  ext.onMessage.addListener(function(msg, sender, sendResponse)
+  ext.onMessage.addListener((msg, sender, sendResponse) =>
   {
     switch (msg.type)
     {

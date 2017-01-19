@@ -15,18 +15,17 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+"use strict";
 
-(function()
 {
-  var url = require("url");
-  var getDecodedHostname = url.getDecodedHostname;
-  var extractHostFromFrame = url.extractHostFromFrame;
-  var stringifyURL = url.stringifyURL;
-  var isThirdParty = url.isThirdParty;
+  let {getDecodedHostname,
+       extractHostFromFrame,
+       stringifyURL,
+       isThirdParty} = require("url");
 
   module("URL/host tools");
 
-  test("Extracting hostname from URL", function()
+  test("Extracting hostname from URL", () =>
   {
     function testURLHostname(url, expectedHostname, message)
     {
@@ -46,14 +45,14 @@
     testURLHostname("http://[2001:db8:85a3::8a2e:370:7334]/", "[2001:db8:85a3::8a2e:370:7334]", "IPv6 address");
   });
 
-  test("Extracting hostname from frame", function()
+  test("Extracting hostname from frame", () =>
   {
     function testFrameHostname(hierarchy, expectedHostname, message)
     {
-      var frame = null;
+      let frame = null;
 
-      for (var i = 0; i < hierarchy.length; i++)
-        frame = {parent: frame, url: new URL(hierarchy[i])};
+      for (let url of hierarchy)
+        frame = {parent: frame, url: new URL(url)};
 
       equal(extractHostFromFrame(frame), expectedHostname, message);
     }
@@ -66,7 +65,7 @@
     testFrameHostname(["http://xn--f-1gaa.com/"], "f\u00f6\u00f6.com", "with punycode");
   });
 
-  test("Stringifying URLs", function()
+  test("Stringifying URLs", () =>
   {
     function testNormalizedURL(url, expectedURL, message)
     {
@@ -89,7 +88,7 @@
     testPreservedURL("data:text/plain,foo", "data: URL");
   });
 
-  test("Third-party checks", function()
+  test("Third-party checks", () =>
   {
     function hostnameToURL(hostname)
     {
@@ -134,4 +133,4 @@
     testThirdParty("xn--f-1gaa.com", "f\u00f6\u00f6.com", false, "same IDN isn't third-party");
     testThirdParty("example.com..", "example.com....", false, "traling dots are ignored");
   });
-})();
+}

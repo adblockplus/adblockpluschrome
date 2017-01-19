@@ -32,27 +32,27 @@
  */
 function wrapper(baseMessage /* , [paramKeys] */)
 {
-  var paramKeys = [];
-  for (var i = 1; i < arguments.length; i++)
+  let paramKeys = [];
+  for (let i = 1; i < arguments.length; i++)
     paramKeys.push(arguments[i]);
 
   return function(/* [paramValues], callback */)
   {
-    var message = Object.create(null);
-    for (var key in baseMessage)
+    let message = Object.create(null);
+    for (let key in baseMessage)
       if (baseMessage.hasOwnProperty(key))
         message[key] = baseMessage[key];
 
-    var paramValues = [];
-    var callback;
+    let paramValues = [];
+    let callback;
 
     if (arguments.length > 0)
     {
-      var lastArg = arguments[arguments.length - 1];
+      let lastArg = arguments[arguments.length - 1];
       if (typeof lastArg == "function")
         callback = lastArg;
 
-      for (var i = 0; i < arguments.length - (callback ? 1 : 0); i++)
+      for (let i = 0; i < arguments.length - (callback ? 1 : 0); i++)
         message[paramKeys[i]] = arguments[i];
     }
 
@@ -60,29 +60,28 @@ function wrapper(baseMessage /* , [paramKeys] */)
   };
 }
 
-var getDocLink = wrapper({type: "app.get", what: "doclink"}, "link");
-var getInfo = wrapper({type: "app.get"}, "what");
-var getPref = wrapper({type: "prefs.get"}, "key");
-var togglePref = wrapper({type: "prefs.toggle"}, "key");
-var getSubscriptions = wrapper({type: "subscriptions.get"},
-                               "downloadable", "special");
-var removeSubscription = wrapper({type: "subscriptions.remove"}, "url");
-var addSubscription = wrapper({type: "subscriptions.add"},
+const getDocLink = wrapper({type: "app.get", what: "doclink"}, "link");
+const getInfo = wrapper({type: "app.get"}, "what");
+const getPref = wrapper({type: "prefs.get"}, "key");
+const togglePref = wrapper({type: "prefs.toggle"}, "key");
+const getSubscriptions = wrapper({type: "subscriptions.get"},
+                                 "downloadable", "special");
+const removeSubscription = wrapper({type: "subscriptions.remove"}, "url");
+const addSubscription = wrapper({type: "subscriptions.add"},
                                 "url", "title", "homepage");
-var toggleSubscription = wrapper({type: "subscriptions.toggle"},
-                                 "url", "keepInstalled");
-var updateSubscription = wrapper({type: "subscriptions.update"}, "url");
-var importRawFilters = wrapper({type: "filters.importRaw"},
-                               "text", "removeExisting");
-var addFilter = wrapper({type: "filters.add"}, "text");
-var getFilters = wrapper({type: "filters.get"}, "subscriptionUrl");
-var removeFilter = wrapper({type: "filters.remove"}, "text");
+const toggleSubscription = wrapper({type: "subscriptions.toggle"},
+                                   "url", "keepInstalled");
+const updateSubscription = wrapper({type: "subscriptions.update"}, "url");
+const importRawFilters = wrapper({type: "filters.importRaw"},
+                                 "text", "removeExisting");
+const addFilter = wrapper({type: "filters.add"}, "text");
+const getFilters = wrapper({type: "filters.get"}, "subscriptionUrl");
+const removeFilter = wrapper({type: "filters.remove"}, "text");
 
-var i18n = ext.i18n;
-var whitelistedDomainRegexp = /^@@\|\|([^\/:]+)\^\$document$/;
-var delayedSubscriptionSelection = null;
+const whitelistedDomainRegexp = /^@@\|\|([^\/:]+)\^\$document$/;
+let delayedSubscriptionSelection = null;
 
-var acceptableAdsUrl;
+let acceptableAdsUrl;
 
 // Loads options from localStorage and sets UI elements accordingly
 function loadOptions()
@@ -91,27 +90,27 @@ function loadOptions()
   document.title = i18n.getMessage("options");
 
   // Set links
-  getPref("subscriptions_exceptionsurl", function(url)
+  getPref("subscriptions_exceptionsurl", url =>
   {
     acceptableAdsUrl = url;
     $("#acceptableAdsLink").attr("href", acceptableAdsUrl);
   });
-  getDocLink("acceptable_ads", function(url)
+  getDocLink("acceptable_ads", url =>
   {
     $("#acceptableAdsDocs").attr("href", url);
   });
-  getDocLink("filterdoc", function(url)
+  getDocLink("filterdoc", url =>
   {
     setLinks("filter-must-follow-syntax", url);
   });
-  getInfo("application", function(application)
+  getInfo("application", application =>
   {
-    getInfo("platform", function(platform)
+    getInfo("platform", platform =>
     {
       if (platform == "chromium" && application != "opera")
         application = "chrome";
 
-      getDocLink(application + "_support", function(url)
+      getDocLink(application + "_support", url =>
       {
         setLinks("found-a-bug", url);
       });
@@ -143,12 +142,12 @@ function loadOptions()
   initCheckbox("show_devtools_panel");
   initCheckbox("shouldShowNotifications", "notifications_ignoredcategories");
 
-  getInfo("features", function(features)
+  getInfo("features", features =>
   {
     if (!features.devToolsPanel)
       document.getElementById("showDevtoolsPanelContainer").hidden = true;
   });
-  getPref("notifications_showui", function(notifications_showui)
+  getPref("notifications_showui", notifications_showui =>
   {
     if (!notifications_showui)
       document.getElementById("shouldShowNotificationsContainer").hidden = true;
@@ -187,15 +186,14 @@ $(loadOptions);
 
 function convertSpecialSubscription(subscription)
 {
-  getFilters(subscription.url, function(filters)
+  getFilters(subscription.url, filters =>
   {
-    for (var j = 0; j < filters.length; j++)
+    for (let filter of filters)
     {
-      var filter = filters[j].text;
-      if (whitelistedDomainRegexp.test(filter))
+      if (whitelistedDomainRegexp.test(filter.text))
         appendToListBox("excludedDomainsBox", RegExp.$1);
       else
-        appendToListBox("userFiltersBox", filter);
+        appendToListBox("userFiltersBox", filter.text);
     }
   });
 }
@@ -204,15 +202,14 @@ function convertSpecialSubscription(subscription)
 function reloadFilters()
 {
   // Load user filter URLs
-  var container = document.getElementById("filterLists");
+  let container = document.getElementById("filterLists");
   while (container.lastChild)
     container.removeChild(container.lastChild);
 
-  getSubscriptions(true, false, function(subscriptions)
+  getSubscriptions(true, false, subscriptions =>
   {
-    for (var i = 0; i < subscriptions.length; i++)
+    for (let subscription of subscriptions)
     {
-      var subscription = subscriptions[i];
       if (subscription.url == acceptableAdsUrl)
         $("#acceptableAds").prop("checked", !subscription.disabled);
       else
@@ -221,27 +218,27 @@ function reloadFilters()
   });
 
   // User-entered filters
-  getSubscriptions(false, true, function(subscriptions)
+  getSubscriptions(false, true, subscriptions =>
   {
     document.getElementById("userFiltersBox").innerHTML = "";
     document.getElementById("excludedDomainsBox").innerHTML = "";
 
-    for (var i = 0; i < subscriptions.length; i++)
-      convertSpecialSubscription(subscriptions[i]);
+    for (let subscription of subscriptions)
+      convertSpecialSubscription(subscription);
   });
 }
 
 function initCheckbox(id, key)
 {
   key = key || id;
-  var checkbox = document.getElementById(id);
+  let checkbox = document.getElementById(id);
 
-  getPref(key, function(value)
+  getPref(key, value =>
   {
     onPrefMessage(key, value);
   });
 
-  checkbox.addEventListener("click", function()
+  checkbox.addEventListener("click", () =>
   {
     togglePref(key);
   }, false);
@@ -250,24 +247,24 @@ function initCheckbox(id, key)
 function loadRecommendations()
 {
   fetch("subscriptions.xml")
-    .then(function(response)
+    .then(response =>
     {
       return response.text();
     })
-    .then(function(text)
+    .then(text =>
     {
-      var selectedIndex = 0;
-      var selectedPrefix = null;
-      var matchCount = 0;
+      let selectedIndex = 0;
+      let selectedPrefix = null;
+      let matchCount = 0;
 
-      var list = document.getElementById("subscriptionSelector");
-      var doc = new DOMParser().parseFromString(text, "application/xml");
-      var elements = doc.documentElement.getElementsByTagName("subscription");
+      let list = document.getElementById("subscriptionSelector");
+      let doc = new DOMParser().parseFromString(text, "application/xml");
+      let elements = doc.documentElement.getElementsByTagName("subscription");
 
-      for (var i = 0; i < elements.length; i++)
+      for (let i = 0; i < elements.length; i++)
       {
-        var element = elements[i];
-        var option = new Option();
+        let element = elements[i];
+        let option = new Option();
         option.text = element.getAttribute("title") + " (" +
                       element.getAttribute("specialization") + ")";
         option._data = {
@@ -276,7 +273,7 @@ function loadRecommendations()
           homepage: element.getAttribute("homepage")
         };
 
-        var prefix = element.getAttribute("prefixes");
+        let prefix = element.getAttribute("prefixes");
         if (prefix)
         {
           prefix = prefix.replace(/\W/g, "_");
@@ -307,8 +304,8 @@ function loadRecommendations()
         list.appendChild(option);
       }
 
-      var option = new Option();
-      var label = i18n.getMessage("filters_addSubscriptionOther_label");
+      let option = new Option();
+      let label = i18n.getMessage("filters_addSubscriptionOther_label");
       option.text = label + "\u2026";
       option._data = null;
       list.appendChild(option);
@@ -322,7 +319,7 @@ function loadRecommendations()
 
 function startSubscriptionSelection(title, url)
 {
-  var list = document.getElementById("subscriptionSelector");
+  let list = document.getElementById("subscriptionSelector");
   if (list.length == 0)
   {
     delayedSubscriptionSelection = [title, url];
@@ -345,8 +342,8 @@ function startSubscriptionSelection(title, url)
 
 function updateSubscriptionSelection()
 {
-  var list = document.getElementById("subscriptionSelector");
-  var data = list.options[list.selectedIndex]._data;
+  let list = document.getElementById("subscriptionSelector");
+  let data = list.options[list.selectedIndex]._data;
   if (data)
     $("#customSubscriptionContainer").hide();
   else
@@ -358,13 +355,13 @@ function updateSubscriptionSelection()
 
 function addSubscriptionClicked()
 {
-  var list = document.getElementById("subscriptionSelector");
-  var data = list.options[list.selectedIndex]._data;
+  let list = document.getElementById("subscriptionSelector");
+  let data = list.options[list.selectedIndex]._data;
   if (data)
     addSubscription(data.url, data.title, data.homepage);
   else
   {
-    var url = document.getElementById("customSubscriptionLocation").value.trim();
+    let url = document.getElementById("customSubscriptionLocation").value.trim();
     if (!/^https?:/i.test(url))
     {
       alert(i18n.getMessage("global_subscription_invalid_location"));
@@ -372,7 +369,7 @@ function addSubscriptionClicked()
       return;
     }
 
-    var title = document.getElementById("customSubscriptionTitle").value.trim();
+    let title = document.getElementById("customSubscriptionTitle").value.trim();
     if (!title)
       title = url;
 
@@ -391,10 +388,9 @@ function toggleAcceptableAds()
 
 function findSubscriptionElement(subscription)
 {
-  var children = document.getElementById("filterLists").childNodes;
-  for (var i = 0; i < children.length; i++)
-    if (children[i]._subscription.url == subscription.url)
-      return children[i];
+  for (let child of document.getElementById("filterLists").childNodes)
+    if (child._subscription.url == subscription.url)
+      return child;
   return null;
 }
 
@@ -405,7 +401,7 @@ function updateSubscriptionInfo(element, subscription)
   else
     subscription = element._subscription;
 
-  var title = element.getElementsByClassName("subscriptionTitle")[0];
+  let title = element.getElementsByClassName("subscriptionTitle")[0];
   title.textContent = subscription.title;
   title.setAttribute("title", subscription.url);
   if (subscription.homepage)
@@ -413,20 +409,20 @@ function updateSubscriptionInfo(element, subscription)
   else
     title.href = subscription.url;
 
-  var enabled = element.getElementsByClassName("subscriptionEnabled")[0];
+  let enabled = element.getElementsByClassName("subscriptionEnabled")[0];
   enabled.checked = !subscription.disabled;
 
-  var lastUpdate = element.getElementsByClassName("subscriptionUpdate")[0];
+  let lastUpdate = element.getElementsByClassName("subscriptionUpdate")[0];
   lastUpdate.classList.remove("error");
 
-  var downloadStatus = subscription.downloadStatus;
+  let downloadStatus = subscription.downloadStatus;
   if (subscription.isDownloading)
   {
     lastUpdate.textContent = i18n.getMessage("filters_subscription_lastDownload_inProgress");
   }
   else if (downloadStatus && downloadStatus != "synchronize_ok")
   {
-     var map =
+     let map =
      {
        "synchronize_invalid_url": "filters_subscription_lastDownload_invalidURL",
        "synchronize_connection_error": "filters_subscription_lastDownload_connectionError",
@@ -441,15 +437,15 @@ function updateSubscriptionInfo(element, subscription)
   }
   else if (subscription.lastDownload > 0)
   {
-    var timeDate = i18n_timeDateStrings(subscription.lastDownload * 1000);
-    var messageID = (timeDate[1] ? "last_updated_at" : "last_updated_at_today");
+    let timeDate = i18n_timeDateStrings(subscription.lastDownload * 1000);
+    let messageID = (timeDate[1] ? "last_updated_at" : "last_updated_at_today");
     lastUpdate.textContent = i18n.getMessage(messageID, timeDate);
   }
 }
 
 function onSubscriptionMessage(action, subscription)
 {
-  var element = findSubscriptionElement(subscription);
+  let element = findSubscriptionElement(subscription);
 
   switch (action)
   {
@@ -491,7 +487,7 @@ function onPrefMessage(key, value)
       value = value.indexOf("*") == -1;
       break;
   }
-  var checkbox = document.getElementById(key);
+  let checkbox = document.getElementById(key);
   if (checkbox)
     checkbox.checked = value;
 }
@@ -522,7 +518,7 @@ function onFilterMessage(action, filter)
 function appendToListBox(boxId, text)
 {
   // Note: document.createElement("option") is unreliable in Opera
-  var elt = new Option();
+  let elt = new Option();
   elt.text = text;
   elt.value = text;
   document.getElementById(boxId).appendChild(elt);
@@ -541,12 +537,12 @@ function addWhitelistDomain(event)
 {
   event.preventDefault();
 
-  var domain = document.getElementById("newWhitelistDomain").value.replace(/\s/g, "");
+  let domain = document.getElementById("newWhitelistDomain").value.replace(/\s/g, "");
   document.getElementById("newWhitelistDomain").value = "";
   if (!domain)
     return;
 
-  var filterText = "@@||" + domain + "^$document";
+  let filterText = "@@||" + domain + "^$document";
   addFilter(filterText);
 }
 
@@ -555,8 +551,8 @@ function addTypedFilter(event)
 {
   event.preventDefault();
 
-  var element = document.getElementById("newFilter");
-  addFilter(element.value, function(errors)
+  let element = document.getElementById("newFilter");
+  addFilter(element.value, errors =>
   {
     if (errors.length > 0)
       alert(errors.join("\n"));
@@ -569,16 +565,15 @@ function addTypedFilter(event)
 function removeSelectedExcludedDomain(event)
 {
   event.preventDefault();
-  var excludedDomainsBox = document.getElementById("excludedDomainsBox");
-  var remove = [];
-  for (var i = 0; i < excludedDomainsBox.length; i++)
-    if (excludedDomainsBox.options[i].selected)
-      remove.push(excludedDomainsBox.options[i].value);
+  let remove = [];
+  for (let option of document.getElementById("excludedDomainsBox").options)
+    if (option.selected)
+      remove.push(option.value);
   if (!remove.length)
     return;
 
-  for (var i = 0; i < remove.length; i++)
-    removeFilter("@@||" + remove[i] + "^$document");
+  for (let domain of remove)
+    removeFilter("@@||" + domain + "^$document");
 }
 
 // Removes all currently selected filters
@@ -614,9 +609,9 @@ function toggleFiltersInRawFormat(event)
 // Imports filters in the raw text box
 function importRawFiltersText()
 {
-  var text = document.getElementById("rawFiltersText").value;
+  let text = document.getElementById("rawFiltersText").value;
 
-  importRawFilters(text, true, function(errors)
+  importRawFilters(text, true, errors =>
   {
     if (errors.length > 0)
       alert(errors.join("\n"));
@@ -635,15 +630,15 @@ function updateFilterLists()
 // Adds a subscription entry to the UI.
 function addSubscriptionEntry(subscription)
 {
-  var template = document.getElementById("subscriptionTemplate");
-  var element = template.cloneNode(true);
+  let template = document.getElementById("subscriptionTemplate");
+  let element = template.cloneNode(true);
   element.removeAttribute("id");
   element._subscription = subscription;
 
-  var removeButton = element.getElementsByClassName("subscriptionRemoveButton")[0];
+  let removeButton = element.getElementsByClassName("subscriptionRemoveButton")[0];
   removeButton.setAttribute("title", removeButton.textContent);
   removeButton.textContent = "\xD7";
-  removeButton.addEventListener("click", function()
+  removeButton.addEventListener("click", () =>
   {
     if (!confirm(i18n.getMessage("global_remove_subscription_warning")))
       return;
@@ -651,14 +646,14 @@ function addSubscriptionEntry(subscription)
     removeSubscription(subscription.url);
   }, false);
 
-  getPref("additional_subscriptions", function(additionalSubscriptions)
+  getPref("additional_subscriptions", additionalSubscriptions =>
   {
     if (additionalSubscriptions.indexOf(subscription.url) != -1)
       removeButton.style.visibility = "hidden";
   });
 
-  var enabled = element.getElementsByClassName("subscriptionEnabled")[0];
-  enabled.addEventListener("click", function()
+  let enabled = element.getElementsByClassName("subscriptionEnabled")[0];
+  enabled.addEventListener("click", () =>
   {
     subscription.disabled = !subscription.disabled;
     toggleSubscription(subscription.url, true);
@@ -671,12 +666,12 @@ function addSubscriptionEntry(subscription)
 
 function setLinks(id)
 {
-  var element = document.getElementById(id);
+  let element = document.getElementById(id);
   if (!element)
     return;
 
-  var links = element.getElementsByTagName("a");
-  for (var i = 0; i < links.length; i++)
+  let links = element.getElementsByTagName("a");
+  for (let i = 0; i < links.length; i++)
   {
     if (typeof arguments[i + 1] == "string")
     {
@@ -691,7 +686,7 @@ function setLinks(id)
   }
 }
 
-ext.onMessage.addListener(function(message)
+ext.onMessage.addListener(message =>
 {
   switch (message.type)
   {
@@ -699,25 +694,24 @@ ext.onMessage.addListener(function(message)
       switch (message.action)
       {
         case "addSubscription":
-          var subscription = message.args[0];
+          let subscription = message.args[0];
           startSubscriptionSelection(subscription.title, subscription.url);
           break;
         case "focusSection":
-          var tabs = document.getElementsByClassName("ui-tabs-panel");
-          for (var i = 0; i < tabs.length; i++)
+          for (let tab of document.getElementsByClassName("ui-tabs-panel"))
           {
-            var found = tabs[i].querySelector(
+            let found = tab.querySelector(
               "[data-section='" + message.args[0] + "']"
             );
             if (!found)
               continue;
 
-            var previous = document.getElementsByClassName("focused");
+            let previous = document.getElementsByClassName("focused");
             if (previous.length > 0)
               previous[0].classList.remove("focused");
 
-            var tab = $("[href='#" + tabs[i].id + "']");
-            $("#tabs").tabs("select", tab.parent().index());
+            let index = $("[href='#" + tab.id + "']").parent().index();
+            $("#tabs").tabs("select", index);
             found.classList.add("focused");
           }
           break;

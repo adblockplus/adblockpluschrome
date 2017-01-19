@@ -80,14 +80,14 @@ function getBlockableElementOrAncestor(element, callback)
       let images = document.querySelectorAll("img[usemap]");
       let image = null;
 
-      for (let i = 0; i < images.length; i++)
+      for (let currentImage of images)
       {
-        let usemap = images[i].getAttribute("usemap");
+        let usemap = currentImage.getAttribute("usemap");
         let index = usemap.indexOf("#");
 
         if (index != -1 && usemap.substr(index + 1) == element.name)
         {
-          image = images[i];
+          image = currentImage;
           break;
         }
       }
@@ -165,7 +165,7 @@ function highlightElement(element, shadowColor, backgroundColor)
 {
   unhighlightElement(element);
 
-  let highlightWithOverlay = function()
+  let highlightWithOverlay = () =>
   {
     let overlay = addElementOverlay(element);
 
@@ -183,7 +183,7 @@ function highlightElement(element, shadowColor, backgroundColor)
     };
   };
 
-  let highlightWithStyleAttribute = function()
+  let highlightWithStyleAttribute = () =>
   {
     let originalBoxShadow = element.style.getPropertyValue("box-shadow");
     let originalBoxShadowPriority =

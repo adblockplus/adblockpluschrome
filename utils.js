@@ -1,20 +1,16 @@
-var backgroundPage = ext.backgroundPage.getWindow();
-var require = backgroundPage.require;
+"use strict";
 
-var Services = backgroundPage.Services;
-var Synchronizer = require("synchronizer").Synchronizer;
-var Utils = require("utils").Utils;
-var Prefs = require("prefs").Prefs;
-var FilterStorage = require("filterStorage").FilterStorage;
-var FilterNotifier = require("filterNotifier").FilterNotifier;
+const {require, Services} = ext.backgroundPage.getWindow();
 
-var subscriptionClasses = require("subscriptionClasses");
-var Subscription = subscriptionClasses.Subscription;
-var DownloadableSubscription = subscriptionClasses.DownloadableSubscription;
-var filterClasses = require("filterClasses");
-var Filter = filterClasses.Filter;
-var BlockingFilter = filterClasses.BlockingFilter;
-var defaultMatcher = require("matcher").defaultMatcher;
+const {Synchronizer} = require("synchronizer");
+const {Utils} = require("utils");
+const {Prefs} = require("prefs");
+const {FilterStorage} = require("filterStorage");
+const {FilterNotifier} = require("filterNotifier");
+
+const {Subscription, DownloadableSubscription} = require("subscriptionClasses");
+const {Filter, BlockingFilter} = require("filterClasses");
+const {defaultMatcher} = require("matcher");
 
 /**
  * Shortcut for document.getElementById(id)

@@ -15,8 +15,17 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function()
+"use strict";
+
 {
+  // Workaround since HTMLCollection and NodeList didn't have iterator support
+  // before Chrome 51.
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=401699
+  if (!(Symbol.iterator in HTMLCollection.prototype))
+    HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+  if (!(Symbol.iterator in NodeList.prototype))
+    NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
   /* Message passing */
 
   ext.onMessage = new ext._EventTarget();
@@ -26,7 +35,7 @@
 
   ext.backgroundPage = {
     sendMessage: chrome.runtime.sendMessage,
-    getWindow: function()
+    getWindow()
     {
       return chrome.extension.getBackgroundPage();
     }
@@ -37,4 +46,4 @@
 
   ext.getURL = chrome.extension.getURL;
   ext.i18n = chrome.i18n;
-})();
+}

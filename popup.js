@@ -15,20 +15,21 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var backgroundPage = ext.backgroundPage.getWindow();
-var require = backgroundPage.require;
+"use strict";
 
-var Filter = require("filterClasses").Filter;
-var FilterStorage = require("filterStorage").FilterStorage;
-var Prefs = require("prefs").Prefs;
-var checkWhitelisted = require("whitelisting").checkWhitelisted;
-var getDecodedHostname = require("url").getDecodedHostname;
+const {require} = ext.backgroundPage.getWindow();
 
-var page = null;
+const {Filter} = require("filterClasses");
+const {FilterStorage} = require("filterStorage");
+const {Prefs} = require("prefs");
+const {checkWhitelisted} = require("whitelisting");
+const {getDecodedHostname} = require("url");
+
+let page = null;
 
 function onLoad()
 {
-  ext.pages.query({active: true, lastFocusedWindow: true}, function(pages)
+  ext.pages.query({active: true, lastFocusedWindow: true}, pages =>
   {
     page = pages[0];
 
@@ -40,7 +41,7 @@ function onLoad()
     {
       document.body.classList.add("nohtml");
       require("messaging").getPort(window).on(
-        "composer.ready", function(message, sender)
+        "composer.ready", (message, sender) =>
         {
           if (sender.page.id == page.id)
             document.body.classList.remove("nohtml");
@@ -57,7 +58,7 @@ function onLoad()
       if (checkWhitelisted(page))
         document.body.classList.add("disabled");
 
-      page.sendMessage({type: "composer.content.getState"}, function(response)
+      page.sendMessage({type: "composer.content.getState"}, response =>
       {
         if (response && response.active)
           document.body.classList.add("clickhide-active");
@@ -68,16 +69,14 @@ function onLoad()
   document.getElementById("enabled").addEventListener("click", toggleEnabled, false);
   document.getElementById("clickhide").addEventListener("click", activateClickHide, false);
   document.getElementById("clickhide-cancel").addEventListener("click", cancelClickHide, false);
-  document.getElementById("options").addEventListener("click", function()
+  document.getElementById("options").addEventListener("click", () =>
   {
     ext.showOptions();
   }, false);
 
   // Set up collapsing of menu items
-  var collapsers = document.getElementsByClassName("collapse");
-  for (var i = 0; i < collapsers.length; i++)
+  for (let collapser of document.getElementsByClassName("collapse"))
   {
-    var collapser = collapsers[i];
     collapser.addEventListener("click", toggleCollapse, false);
     if (!Prefs[collapser.dataset.option])
       document.getElementById(collapser.dataset.collapsable).classList.add("collapsed");
@@ -86,11 +85,11 @@ function onLoad()
 
 function toggleEnabled()
 {
-  var disabled = document.body.classList.toggle("disabled");
+  let disabled = document.body.classList.toggle("disabled");
   if (disabled)
   {
-    var host = getDecodedHostname(page.url).replace(/^www\./, "");
-    var filter = Filter.fromText("@@||" + host + "^$document");
+    let host = getDecodedHostname(page.url).replace(/^www\./, "");
+    let filter = Filter.fromText("@@||" + host + "^$document");
     if (filter.subscriptions.length && filter.disabled)
       filter.disabled = false;
     else
@@ -102,7 +101,7 @@ function toggleEnabled()
   else
   {
     // Remove any exception rules applying to this URL
-    var filter = checkWhitelisted(page);
+    let filter = checkWhitelisted(page);
     while (filter)
     {
       FilterStorage.removeFilter(filter);
@@ -135,7 +134,7 @@ function cancelClickHide()
 
 function toggleCollapse(event)
 {
-  var collapser = event.currentTarget;
+  let collapser = event.currentTarget;
   Prefs[collapser.dataset.option] = !Prefs[collapser.dataset.option];
   collapser.parentNode.classList.toggle("collapsed");
 }

@@ -15,36 +15,36 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+"use strict";
 
-(function()
 {
-  window.ext = {};
+  var ext = {};
 
-  var EventTarget = ext._EventTarget = function()
+  let EventTarget = ext._EventTarget = function()
   {
     this._listeners = [];
   };
   EventTarget.prototype = {
-    addListener: function(listener)
+    addListener(listener)
     {
       if (this._listeners.indexOf(listener) == -1)
         this._listeners.push(listener);
     },
-    removeListener: function(listener)
+    removeListener(listener)
     {
-      var idx = this._listeners.indexOf(listener);
+      let idx = this._listeners.indexOf(listener);
       if (idx != -1)
         this._listeners.splice(idx, 1);
     },
-    _dispatch: function()
+    _dispatch()
     {
-      var results = [];
-      var listeners = this._listeners.slice();
+      let results = [];
+      let listeners = this._listeners.slice();
 
-      for (var i = 0; i < listeners.length; i++)
-        results.push(listeners[i].apply(null, arguments));
+      for (let listener of listeners)
+        results.push(listener.apply(null, arguments));
 
       return results;
     }
   };
-})();
+}

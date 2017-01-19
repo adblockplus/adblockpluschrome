@@ -15,26 +15,26 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+"use strict";
 
-(function()
 {
-  var compare = Services.vc.compare;
+  let compare = Services.vc.compare;
 
   function allPairs(array)
   {
-    var pairs = [];
-    for (var i = 0; i < array.length - 1; i++)
-      for (var j = i + 1; j < array.length; j++)
+    let pairs = [];
+    for (let i = 0; i < array.length - 1; i++)
+      for (let j = i + 1; j < array.length; j++)
         pairs.push([array[i], array[j]]);
     return pairs;
   }
 
   function versionsEqual(versions)
   {
-    allPairs(versions).forEach(function(pair)
+    allPairs(versions).forEach(pair =>
     {
-      var v1 = pair[0];
-      var v2 = pair[1];
+      let v1 = pair[0];
+      let v2 = pair[1];
       equal(compare(v1, v2), 0, "'" + v1 + "' should be equal to '" + v2 + "'");
     });
   }
@@ -48,35 +48,35 @@
   }
 
   module("Test utilities");
-  test("allPairs", 1, function()
+  test("allPairs", 1, () =>
   {
     deepEqual(allPairs([1, 2, 3]), [[1, 2], [1, 3], [2, 3]]);
   });
 
   module("versionComparator");
 
-  test("Optional zero", 12, function()
+  test("Optional zero", 12, () =>
   {
     versionsEqual(["1", "1.0", "1.0.0", "1.0.0.0"]);
     versionsEqual(["1.a", "1.0a", "1.a0", "1.0a0"]);
   });
 
-  test("+", 2, function()
+  test("+", 2, () =>
   {
     versionsEqual(["2pre", "1+"]);
     versionsEqual(["1.1pre", "1.0+"]);
   });
 
-  test("*", 6, function()
+  test("*", 6, () =>
   {
     versionSmaller("1", "*");
     versionSmaller("1.1", "1.*");
     versionSmaller("1.*", "2");
   });
 
-  test("Examples", 296, function()
+  test("Examples", 296, () =>
   {
-    var examples = [
+    let examples = [
       "1.0+a",
       "1.0a",
       "1.0pre1",
@@ -90,19 +90,19 @@
       ["1.10", "1.010", "1.00010"],
     ];
 
-    examples.forEach(function(example)
+    examples.forEach(example =>
     {
       if (example instanceof Array)
         versionsEqual(example);
     });
 
-    allPairs(examples).forEach(function(pair)
+    allPairs(examples).forEach(pair =>
     {
-      var v1 = [].concat(pair[0]);
-      var v2 = [].concat(pair[1]);
-      for (var i = 0; i < v1.length; i++)
-        for (var j = 0; j < v2.length; j++)
+      let v1 = [].concat(pair[0]);
+      let v2 = [].concat(pair[1]);
+      for (let i = 0; i < v1.length; i++)
+        for (let j = 0; j < v2.length; j++)
           versionSmaller(v1[i], v2[j]);
     });
   });
-})();
+}

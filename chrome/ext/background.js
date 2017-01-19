@@ -15,11 +15,12 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function()
+"use strict";
+
 {
   /* Pages */
 
-  var Page = ext.Page = function(tab)
+  let Page = ext.Page = function(tab)
   {
     this.id = tab.id;
     this._url = tab.url && new URL(tab.url);
@@ -38,30 +39,27 @@
       // but sometimes we only have the tab id when we create a Page object.
       // In that case we get the url from top frame of the tab, recorded by
       // the onBeforeRequest handler.
-      var frames = framesOfTabs[this.id];
+      let frames = framesOfTabs[this.id];
       if (frames)
       {
-        var frame = frames[0];
+        let frame = frames[0];
         if (frame)
           return frame.url;
       }
     },
-    sendMessage: function(message, responseCallback)
+    sendMessage(message, responseCallback)
     {
       chrome.tabs.sendMessage(this.id, message, responseCallback);
     }
   };
 
-  ext.getPage = function(id)
-  {
-    return new Page({id: parseInt(id, 10)});
-  };
+  ext.getPage = id => new Page({id: parseInt(id, 10)});
 
   function afterTabLoaded(callback)
   {
-     return function(openedTab)
+     return openedTab =>
      {
-       var onUpdated = function(tabId, changeInfo, tab)
+       let onUpdated = (tabId, changeInfo, tab) =>
        {
          if (tabId == openedTab.id && changeInfo.status == "complete")
          {
@@ -74,14 +72,14 @@
   }
 
   ext.pages = {
-    open: function(url, callback)
+    open(url, callback)
     {
       chrome.tabs.create({url: url}, callback && afterTabLoaded(callback));
     },
-    query: function(info, callback)
+    query(info, callback)
     {
-      var rawInfo = {};
-      for (var property in info)
+      let rawInfo = {};
+      for (let property in info)
       {
         switch (property)
         {
@@ -91,12 +89,9 @@
         }
       }
 
-      chrome.tabs.query(rawInfo, function(tabs)
+      chrome.tabs.query(rawInfo, tabs =>
       {
-        callback(tabs.map(function(tab)
-        {
-          return new Page(tab);
-        }));
+        callback(tabs.map(tab => new Page(tab)));
       });
     },
     onLoading: new ext._EventTarget(),
@@ -104,7 +99,7 @@
     onRemoved: new ext._EventTarget()
   };
 
-  chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab)
+  chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) =>
   {
     if (changeInfo.status == "loading")
       ext.pages.onLoading._dispatch(new Page(tab));
@@ -112,27 +107,27 @@
 
   function createFrame(tabId, frameId)
   {
-    var frames = framesOfTabs[tabId];
+    let frames = framesOfTabs[tabId];
     if (!frames)
       frames = framesOfTabs[tabId] = Object.create(null);
 
-    var frame = frames[frameId];
+    let frame = frames[frameId];
     if (!frame)
       frame = frames[frameId] = {};
 
     return frame;
   }
 
-  chrome.webNavigation.onBeforeNavigate.addListener(function(details)
+  chrome.webNavigation.onBeforeNavigate.addListener(details =>
   {
     // Capture parent frame here because onCommitted doesn't get this info.
-    var frame = createFrame(details.tabId, details.frameId);
+    let frame = createFrame(details.tabId, details.frameId);
     frame.parent = framesOfTabs[details.tabId][details.parentFrameId] || null;
   });
 
-  var eagerlyUpdatedPages = new ext.PageMap();
+  let eagerlyUpdatedPages = new ext.PageMap();
 
-  ext._updatePageFrameStructure = function(frameId, tabId, url, eager)
+  ext._updatePageFrameStructure = (frameId, tabId, url, eager) =>
   {
     if (frameId == 0)
     {
@@ -149,7 +144,7 @@
         if (eager)
           eagerlyUpdatedPages.set(page, url);
 
-        chrome.tabs.get(tabId, function()
+        chrome.tabs.get(tabId, () =>
         {
           // If the tab is prerendered, chrome.tabs.get() sets
           // chrome.runtime.lastError and we have to dispatch the onLoading event,
@@ -164,11 +159,11 @@
     }
 
     // Update frame URL in frame structure
-    var frame = createFrame(tabId, frameId);
+    let frame = createFrame(tabId, frameId);
     frame.url = new URL(url);
   };
 
-  chrome.webNavigation.onCommitted.addListener(function(details)
+  chrome.webNavigation.onCommitted.addListener(details =>
   {
     ext._updatePageFrameStructure(details.frameId, details.tabId, details.url);
   });
@@ -181,14 +176,14 @@
     delete framesOfTabs[tabId];
   }
 
-  chrome.tabs.onReplaced.addListener(function(addedTabId, removedTabId)
+  chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) =>
   {
     forgetTab(removedTabId);
   });
 
   chrome.tabs.onRemoved.addListener(forgetTab);
 
-  chrome.tabs.onActivated.addListener(function(details)
+  chrome.tabs.onActivated.addListener(details =>
   {
     ext.pages.onActivated._dispatch(new Page({id: details.tabId}));
   });
@@ -196,13 +191,13 @@
 
   /* Browser actions */
 
-  var BrowserAction = function(tabId)
+  let BrowserAction = function(tabId)
   {
     this._tabId = tabId;
     this._changes = null;
   };
   BrowserAction.prototype = {
-    _applyChanges: function()
+    _applyChanges()
     {
       if ("iconPath" in this._changes)
       {
@@ -237,7 +232,7 @@
 
       this._changes = null;
     },
-    _queueChanges: function()
+    _queueChanges()
     {
       chrome.tabs.get(this._tabId, function()
       {
@@ -247,14 +242,14 @@
         // prerendered tab. Otherwise chrome.browserAction.set* fails.
         if (chrome.runtime.lastError)
         {
-          var onReplaced = function(addedTabId, removedTabId)
+          let onReplaced = (addedTabId, removedTabId) =>
           {
             if (addedTabId == this._tabId)
             {
               chrome.tabs.onReplaced.removeListener(onReplaced);
               this._applyChanges();
             }
-          }.bind(this);
+          };
           chrome.tabs.onReplaced.addListener(onReplaced);
         }
         else
@@ -263,7 +258,7 @@
         }
       }.bind(this));
     },
-    _addChange: function(name, value)
+    _addChange(name, value)
     {
       if (!this._changes)
       {
@@ -273,11 +268,11 @@
 
       this._changes[name] = value;
     },
-    setIcon: function(path)
+    setIcon(path)
     {
       this._addChange("iconPath", path);
     },
-    setBadge: function(badge)
+    setBadge(badge)
     {
       if (!badge)
       {
@@ -297,36 +292,36 @@
 
   /* Context menus */
 
-  var contextMenuItems = new ext.PageMap();
-  var contextMenuUpdating = false;
+  let contextMenuItems = new ext.PageMap();
+  let contextMenuUpdating = false;
 
-  var updateContextMenu = function()
+  let updateContextMenu = () =>
   {
     if (contextMenuUpdating)
       return;
 
     contextMenuUpdating = true;
 
-    chrome.tabs.query({active: true, lastFocusedWindow: true}, function(tabs)
+    chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs =>
     {
-      chrome.contextMenus.removeAll(function()
+      chrome.contextMenus.removeAll(() =>
       {
         contextMenuUpdating = false;
 
         if (tabs.length == 0)
           return;
 
-        var items = contextMenuItems.get({id: tabs[0].id});
+        let items = contextMenuItems.get({id: tabs[0].id});
 
         if (!items)
           return;
 
-        items.forEach(function(item)
+        items.forEach(item =>
         {
           chrome.contextMenus.create({
             title: item.title,
             contexts: item.contexts,
-            onclick: function(info, tab)
+            onclick(info, tab)
             {
               item.onclick(new Page(tab));
             }
@@ -336,21 +331,21 @@
     });
   };
 
-  var ContextMenus = function(page)
+  let ContextMenus = function(page)
   {
     this._page = page;
   };
   ContextMenus.prototype = {
-    create: function(item)
+    create(item)
     {
-      var items = contextMenuItems.get(this._page);
+      let items = contextMenuItems.get(this._page);
       if (!items)
         contextMenuItems.set(this._page, items = []);
 
       items.push(item);
       updateContextMenu();
     },
-    remove: function(item)
+    remove(item)
     {
       let items = contextMenuItems.get(this._page);
       if (items)
@@ -367,7 +362,7 @@
 
   chrome.tabs.onActivated.addListener(updateContextMenu);
 
-  chrome.windows.onFocusChanged.addListener(function(windowId)
+  chrome.windows.onFocusChanged.addListener(windowId =>
   {
     if (windowId != chrome.windows.WINDOW_ID_NONE)
       updateContextMenu();
@@ -376,14 +371,14 @@
 
   /* Web requests */
 
-  var framesOfTabs = Object.create(null);
+  let framesOfTabs = Object.create(null);
 
-  ext.getFrame = function(tabId, frameId)
+  ext.getFrame = (tabId, frameId) =>
   {
     return (framesOfTabs[tabId] || {})[frameId];
   };
 
-  var handlerBehaviorChangedQuota = chrome.webRequest.MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES;
+  let handlerBehaviorChangedQuota = chrome.webRequest.MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES;
 
   function propagateHandlerBehaviorChange()
   {
@@ -396,40 +391,40 @@
       chrome.webRequest.handlerBehaviorChanged();
 
       handlerBehaviorChangedQuota--;
-      setTimeout(function() { handlerBehaviorChangedQuota++; }, 600000);
+      setTimeout(() => { handlerBehaviorChangedQuota++; }, 600000);
     }
   }
 
   ext.webRequest = {
     onBeforeRequest: new ext._EventTarget(),
-    handlerBehaviorChanged: function()
+    handlerBehaviorChanged()
     {
       // Defer handlerBehaviorChanged() until navigation occurs.
       // There wouldn't be any visible effect when calling it earlier,
       // but it's an expensive operation and that way we avoid to call
       // it multiple times, if multiple filters are added/removed.
-      var onBeforeNavigate = chrome.webNavigation.onBeforeNavigate;
+      let onBeforeNavigate = chrome.webNavigation.onBeforeNavigate;
       if (!onBeforeNavigate.hasListener(propagateHandlerBehaviorChange))
         onBeforeNavigate.addListener(propagateHandlerBehaviorChange);
     }
   };
 
-  chrome.tabs.query({}, function(tabs)
+  chrome.tabs.query({}, tabs =>
   {
-    tabs.forEach(function(tab)
+    tabs.forEach(tab =>
     {
-      chrome.webNavigation.getAllFrames({tabId: tab.id}, function(details)
+      chrome.webNavigation.getAllFrames({tabId: tab.id}, details =>
       {
         if (details && details.length > 0)
         {
-          var frames = framesOfTabs[tab.id] = Object.create(null);
+          let frames = framesOfTabs[tab.id] = Object.create(null);
 
-          for (var i = 0; i < details.length; i++)
+          for (let i = 0; i < details.length; i++)
             frames[details[i].frameId] = {url: new URL(details[i].url), parent: null};
 
-          for (var i = 0; i < details.length; i++)
+          for (let i = 0; i < details.length; i++)
           {
-            var parentFrameId = details[i].parentFrameId;
+            let parentFrameId = details[i].parentFrameId;
 
             if (parentFrameId != -1)
               frames[details[i].frameId].parent = frames[parentFrameId];
@@ -439,7 +434,7 @@
     });
   });
 
-  chrome.webRequest.onBeforeRequest.addListener(function(details)
+  chrome.webRequest.onBeforeRequest.addListener(details =>
   {
     // The high-level code isn't interested in requests that aren't
     // related to a tab or requests loading a top-level document,
@@ -451,8 +446,8 @@
     // has triggered this request. For most requests (e.g. images) we
     // can just use the request's frame ID, but for subdocument requests
     // (e.g. iframes) we must instead use the request's parent frame ID.
-    var frameId;
-    var requestType;
+    let frameId;
+    let requestType;
     if (details.type == "sub_frame")
     {
       frameId = details.parentFrameId;
@@ -464,10 +459,10 @@
       requestType = details.type.toUpperCase();
     }
 
-    var frame = ext.getFrame(details.tabId, frameId);
+    let frame = ext.getFrame(details.tabId, frameId);
     if (frame)
     {
-      var results = ext.webRequest.onBeforeRequest._dispatch(
+      let results = ext.webRequest.onBeforeRequest._dispatch(
         new URL(details.url),
         requestType,
         new Page({id: details.tabId}),
@@ -482,9 +477,9 @@
 
   /* Message passing */
 
-  chrome.runtime.onMessage.addListener(function(message, rawSender, sendResponse)
+  chrome.runtime.onMessage.addListener((message, rawSender, sendResponse) =>
   {
-    var sender = {};
+    let sender = {};
 
     // Add "page" and "frame" if the message was sent by a content script.
     // If sent by popup or the background page itself, there is no "tab".
@@ -495,12 +490,12 @@
         url: new URL(rawSender.url),
         get parent()
         {
-          var frames = framesOfTabs[rawSender.tab.id];
+          let frames = framesOfTabs[rawSender.tab.id];
 
           if (!frames)
             return null;
 
-          var frame = frames[rawSender.frameId];
+          let frame = frames[rawSender.frameId];
           if (frame)
             return frame.parent;
 
@@ -516,17 +511,17 @@
   /* Storage */
 
   ext.storage = {
-    get: function(keys, callback)
+    get(keys, callback)
     {
       chrome.storage.local.get(keys, callback);
     },
-    set: function(key, value, callback)
+    set(key, value, callback)
     {
       let items = {};
       items[key] = value;
       chrome.storage.local.set(items, callback);
     },
-    remove: function(key, callback)
+    remove(key, callback)
     {
       chrome.storage.local.remove(key, callback);
     },
@@ -537,7 +532,7 @@
 
   if ("openOptionsPage" in chrome.runtime)
   {
-    ext.showOptions = function(callback)
+    ext.showOptions = callback =>
     {
       if (!callback)
       {
@@ -568,12 +563,12 @@
   {
     // Edge does not yet support runtime.openOptionsPage (tested version 38)
     // and so this workaround needs to stay for now.
-    ext.showOptions = function(callback)
+    ext.showOptions = callback =>
     {
-      chrome.windows.getLastFocused(function(win)
+      chrome.windows.getLastFocused(win =>
       {
-        var optionsUrl = chrome.extension.getURL("options.html");
-        var queryInfo = {url: optionsUrl};
+        let optionsUrl = chrome.extension.getURL("options.html");
+        let queryInfo = {url: optionsUrl};
 
         // extension pages can't be accessed in incognito windows. In order to
         // correctly mimic the way in which Chrome opens extension options,
@@ -581,11 +576,11 @@
         if (!win.incognito)
           queryInfo.windowId = win.id;
 
-        chrome.tabs.query(queryInfo, function(tabs)
+        chrome.tabs.query(queryInfo, tabs =>
         {
           if (tabs.length > 0)
           {
-            var tab = tabs[0];
+            let tab = tabs[0];
 
             chrome.windows.update(tab.windowId, {focused: true});
             chrome.tabs.update(tab.id, {active: true});
@@ -604,12 +599,12 @@
 
   /* Windows */
   ext.windows = {
-    create: function(createData, callback)
+    create(createData, callback)
     {
-      chrome.windows.create(createData, function(createdWindow)
+      chrome.windows.create(createData, createdWindow =>
       {
         afterTabLoaded(callback)(createdWindow.tabs[0]);
       });
     }
   };
-})();
+}

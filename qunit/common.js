@@ -15,6 +15,7 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+"use strict";
 
 importAll("filterClasses", this);
 importAll("subscriptionClasses", this);
@@ -43,9 +44,9 @@ function restoreFilterComponents()
 function preparePrefs()
 {
   this._pbackup = Object.create(null);
-  for (var pref in Prefs)
+  for (let pref in Prefs)
   {
-    var value = Prefs[pref];
+    let value = Prefs[pref];
     this._pbackup[pref] = value;
   }
   Prefs.enabled = true;
@@ -53,7 +54,7 @@ function preparePrefs()
 
 function restorePrefs()
 {
-  for (var pref in this._pbackup)
+  for (let pref in this._pbackup)
     Prefs[pref] = this._pbackup[pref];
 }
 

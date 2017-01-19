@@ -19,7 +19,7 @@
 
 if (document instanceof HTMLDocument)
 {
-  document.addEventListener("click", function(event)
+  document.addEventListener("click", event =>
   {
     // Ignore right-clicks
     if (event.button == 2)
@@ -30,7 +30,7 @@ if (document instanceof HTMLDocument)
       return;
 
     // Search the link associated with the click
-    var link = event.target;
+    let link = event.target;
     while (!(link instanceof HTMLAnchorElement))
     {
       link = link.parentNode;
@@ -52,12 +52,11 @@ if (document instanceof HTMLDocument)
     event.stopPropagation();
 
     // Decode URL parameters
-    var params = link.search.substr(1).split("&");
-    var title = null;
-    var url = null;
-    for (var i = 0; i < params.length; i++)
+    let title = null;
+    let url = null;
+    for (let param of link.search.substr(1).split("&"))
     {
-      var parts = params[i].split("=", 2);
+      let parts = param.split("=", 2);
       if (parts.length != 2 || !/\S/.test(parts[1]))
         continue;
       switch (parts[0])

@@ -15,55 +15,56 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function()
-{
-  var nonEmptyPageMaps = Object.create(null);
-  var pageMapCounter = 0;
+"use strict";
 
-  var PageMap = ext.PageMap = function()
+{
+  let nonEmptyPageMaps = Object.create(null);
+  let pageMapCounter = 0;
+
+  let PageMap = ext.PageMap = function()
   {
     this._map = Object.create(null);
     this._id = ++pageMapCounter;
   };
   PageMap.prototype = {
-    _delete: function(id)
+    _delete(id)
     {
       delete this._map[id];
 
       if (Object.keys(this._map).length == 0)
         delete nonEmptyPageMaps[this._id];
     },
-    keys: function()
+    keys()
     {
       return Object.keys(this._map).map(ext.getPage);
     },
-    get: function(page)
+    get(page)
     {
       return this._map[page.id];
     },
-    set: function(page, value)
+    set(page, value)
     {
       this._map[page.id] = value;
       nonEmptyPageMaps[this._id] = this;
     },
-    has: function(page)
+    has(page)
     {
       return page.id in this._map;
     },
-    clear: function()
+    clear()
     {
-      for (var id in this._map)
+      for (let id in this._map)
         this._delete(id);
     },
-    delete: function(page)
+    delete(page)
     {
       this._delete(page.id);
     }
   };
 
-  ext._removeFromAllPageMaps = function(pageId)
+  ext._removeFromAllPageMaps = pageId =>
   {
-    for (var pageMapId in nonEmptyPageMaps)
+    for (let pageMapId in nonEmptyPageMaps)
       nonEmptyPageMaps[pageMapId]._delete(pageId);
   };
-})();
+}

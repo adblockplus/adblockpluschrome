@@ -1,27 +1,23 @@
-(function()
-{
-  var filterClasses = require("filterClasses");
-  var Filter = filterClasses.Filter;
-  var ElemHideFilter = filterClasses.ElemHideFilter;
+"use strict";
 
-  var filterComposer = require("filterComposer");
-  var escapeCSS = filterComposer.escapeCSS;
-  var quoteCSS = filterComposer.quoteCSS;
+{
+  const {Filter, ElemHideFilter} = require("filterClasses");
+  const {escapeCSS, quoteCSS} = require("filterComposer");
 
   module("CSS escaping");
 
-  test("CSS escaping", function()
+  test("CSS escaping", () =>
   {
     function testSelector(opts)
     {
-      var mustMatch = opts.mustMatch !== false;
-      var doc = document.implementation.createHTMLDocument();
+      let mustMatch = opts.mustMatch !== false;
+      let doc = document.implementation.createHTMLDocument();
 
-      var style = doc.createElement("style");
+      let style = doc.createElement("style");
       doc.documentElement.appendChild(style);
       style.sheet.insertRule(opts.selector + " {}", 0);
 
-      var element;
+      let element;
       try
       {
         element = doc.createElement(opts.tagName || "div");
@@ -37,14 +33,14 @@
 
       if (element)
       {
-        for (var attr in opts.attributes)
+        for (let attr in opts.attributes)
           element.setAttribute(attr, opts.attributes[attr]);
 
         doc.documentElement.appendChild(element);
       }
 
-      var foundElement = doc.querySelector(opts.selector);
-      var filter = Filter.fromText("##" + opts.selector);
+      let foundElement = doc.querySelector(opts.selector);
+      let filter = Filter.fromText("##" + opts.selector);
 
       if (!(filter instanceof ElemHideFilter))
       {
@@ -87,9 +83,9 @@
       });
     }
 
-    for (var i = 1; i < 0x80; i++)
+    for (let i = 1; i < 0x80; i++)
     {
-      var chr = String.fromCharCode(i);
+      let chr = String.fromCharCode(i);
 
       // Make sure that all ASCII characters are correctly escaped.
       testEscape(chr);
@@ -106,4 +102,4 @@
     // Test some non-ASCII characters. However, those shouldn't require escaping.
     testEscape("\uD83D\uDE3B\u2665\u00E4");
   });
-})();
+}

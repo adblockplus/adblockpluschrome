@@ -1,13 +1,14 @@
-(function()
+"use strict";
+
 {
   module("Preferences",
   {
-    setup: function()
+    setup()
     {
       preparePrefs.call(this);
     },
 
-    teardown: function()
+    teardown()
     {
       restorePrefs.call(this);
     }
@@ -17,7 +18,7 @@
   {
     let done = assert.async();
     let key = "pref:" + name;
-    chrome.storage.local.get(key, function(items)
+    chrome.storage.local.get(key, items =>
     {
       equal(key in items, expectedValue, description);
       done();
@@ -28,14 +29,14 @@
   {
     let done = assert.async();
     let key = "pref:" + name;
-    chrome.storage.local.get(key, function(items)
+    chrome.storage.local.get(key, items =>
     {
       deepEqual(items[key], expectedValue, description);
       done();
     });
   }
 
-  test("Numerical pref", function(assert)
+  test("Numerical pref", assert =>
   {
     Prefs.patternsbackups = 5;
     equal(Prefs.patternsbackups, 5, "Prefs object returns the correct value after setting pref to default value");
@@ -46,7 +47,7 @@
     checkPref("patternsbackups", 12, "Value has been written", assert);
   });
 
-  test("Boolean pref", function(assert)
+  test("Boolean pref", assert =>
   {
     Prefs.enabled = true;
     equal(Prefs.enabled, true, "Prefs object returns the correct value after setting pref to default value");
@@ -57,7 +58,7 @@
     checkPref("enabled", false, "Value has been written", assert);
   });
 
-  test("String pref", function(assert)
+  test("String pref", assert =>
   {
     let defaultValue = "https://notification.adblockplus.org/notification.json";
     Prefs.notificationurl = defaultValue;
@@ -71,7 +72,7 @@
     checkPref("notificationurl", newValue, "Value has been written", assert);
   });
 
-  test("Object pref (complete replacement)", function(assert)
+  test("Object pref (complete replacement)", assert =>
   {
     Prefs.notificationdata = {};
     deepEqual(Prefs.notificationdata, {}, "Prefs object returns the correct value after setting pref to default value");
@@ -83,7 +84,7 @@
     checkPref("notificationdata", newValue, "Value has been written", assert);
   });
 
-  test("Property-wise modification", function(assert)
+  test("Property-wise modification", assert =>
   {
     Prefs.notificationdata = {};
 
@@ -99,4 +100,4 @@
     Prefs.notificationdata = JSON.parse(JSON.stringify(Prefs.notificationdata));
     deepEqual(Prefs.notificationdata, {}, "Prefs object returns the correct value after setting pref to default value");
   });
-})();
+}

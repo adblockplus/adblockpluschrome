@@ -1,14 +1,15 @@
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse)
+"use strict";
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>
 {
   return ext.onMessage._dispatch(message, {}, sendResponse).indexOf(true) != -1;
 });
 
-ext.onExtensionUnloaded = (function()
 {
-  var port = null;
+  let port = null;
 
-  return {
-    addListener: function(listener)
+  ext.onExtensionUnloaded = {
+    addListener(listener)
     {
       if (!port)
         port = chrome.runtime.connect();
@@ -17,7 +18,7 @@ ext.onExtensionUnloaded = (function()
       // background page dies and automatically disconnects all ports
       port.onDisconnect.addListener(listener);
     },
-    removeListener: function(listener)
+    removeListener(listener)
     {
       if (port)
       {
@@ -31,4 +32,4 @@ ext.onExtensionUnloaded = (function()
       }
     }
   };
-})();
+}
