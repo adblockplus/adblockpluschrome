@@ -20,7 +20,7 @@ testScripts = ../ext/common.js
   tests/url.js
   tests/cssEscaping.js
 permissions = http://*/* https://*/*
-author = Eyeo GmbH
+author = eyeo GmbH
 
 [contentScripts]
 document_start = ext/common.js ext/content.js elemHideEmulation.js include.preload.js
