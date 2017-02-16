@@ -39,12 +39,23 @@ if (document instanceof HTMLDocument)
         return;
     }
 
+    let queryString = null;
     if (link.protocol == "http:" || link.protocol == "https:")
     {
-      if (link.host != "subscribe.adblockplus.org" || link.pathname != "/")
-        return;
+      if (link.host == "subscribe.adblockplus.org" && link.pathname == "/")
+        queryString = link.search.substr(1);
     }
-    else if (!/^abp:\/*subscribe\/*\?/i.test(link.href))
+    else
+    {
+      // Firefox 51 doesn't seem to populate the "search" property for
+      // links with non-standard URL schemes so we need to extract the query
+      // string manually.
+      let match = /^abp:\/*subscribe\/*\?(.*)/i.exec(link.href);
+      if (match)
+        queryString = match[1];
+    }
+
+    if (!queryString)
       return;
 
     // This is our link - make sure the browser doesn't handle it
@@ -54,7 +65,7 @@ if (document instanceof HTMLDocument)
     // Decode URL parameters
     let title = null;
     let url = null;
-    for (let param of link.search.substr(1).split("&"))
+    for (let param of queryString.split("&"))
     {
       let parts = param.split("=", 2);
       if (parts.length != 2 || !/\S/.test(parts[1]))
