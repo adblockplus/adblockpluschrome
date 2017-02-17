@@ -549,10 +549,10 @@
           {
             if (tabs.length > 0)
             {
-              window.setTimeout(() =>
-              {
+              if (tabs[0].status == "complete")
                 callback(new Page(tabs[0]));
-              });
+              else
+                afterTabLoaded(callback)(tabs[0]);
             }
           });
         });
