@@ -9,6 +9,9 @@ backgroundScripts = lib/polyfills/url.js
   lib/info.js
   lib/publicSuffixList.js
   lib/adblockplus.js
+  lib/sha1.js # These three scripts are strictly redundant as their counterparts
+  lib/jsbn.js # now live in adblockpluscore. We've added them back here rather
+  lib/rsa.js  # than debugging an issue with Safari compatibility. See #4902.
   messageResponder.js
   background.js
 testScripts = ../ext/common.js
@@ -83,11 +86,8 @@ lib/adblockplus.js =
   adblockpluscore/lib/filterListener.js
   adblockpluscore/lib/filterNotifier.js
   adblockpluscore/lib/filterStorage.js
-  adblockpluscore/lib/jsbn.js
   adblockpluscore/lib/matcher.js
   adblockpluscore/lib/notification.js
-  adblockpluscore/lib/rsa.js
-  adblockpluscore/lib/rusha.js
   adblockpluscore/lib/subscriptionClasses.js
   adblockpluscore/lib/synchronizer.js
 lib/adblockplus.js[module] = true
