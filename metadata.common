@@ -70,7 +70,6 @@ lib/adblockplus.js =
   lib/utils.js
   lib/whitelisting.js
   adblockpluscore/lib/coreUtils.js
-  adblockpluscore/lib/antiadblockInit.js
   adblockpluscore/lib/common.js
   adblockpluscore/lib/downloader.js
   adblockpluscore/lib/elemHide.js
@@ -87,6 +86,7 @@ lib/adblockplus.js =
   adblockpluscore/lib/rusha.js
   adblockpluscore/lib/subscriptionClasses.js
   adblockpluscore/lib/synchronizer.js
+  adblockplusui/lib/antiadblockInit.js
 lib/adblockplus.js[module] = true
 lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,subscriptionInit,filterComposer,stats,uninstall,csp
 ext/common.js = ext/common.js
