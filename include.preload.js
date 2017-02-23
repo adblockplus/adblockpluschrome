@@ -191,9 +191,10 @@ function getContentDocument(element)
   }
 }
 
-function ElementHidingTracer(selectors)
+function ElementHidingTracer()
 {
-  this.selectors = selectors;
+  this.selectors = [];
+  this.filters = [];
 
   this.changedNodes = [];
   this.timeout = null;
@@ -207,17 +208,24 @@ function ElementHidingTracer(selectors)
     this.trace();
 }
 ElementHidingTracer.prototype = {
-  checkNodes(nodes)
+  addSelectors(selectors, filters)
+  {
+    if (document.readyState != "loading")
+      this.checkNodes([document], selectors, filters);
+
+    this.selectors.push(...selectors);
+    this.filters.push(...filters);
+  },
+
+  checkNodes(nodes, selectors, filters)
   {
     let matchedSelectors = [];
 
-    // Find all selectors that match any hidden element inside the given nodes.
-    for (let selector of this.selectors)
+    for (let i = 0; i < selectors.length; i++)
     {
-      for (let node of nodes)
+      nodes: for (let node of nodes)
       {
-        let elements = node.querySelectorAll(selector);
-        let matched = false;
+        let elements = node.querySelectorAll(selectors[i]);
 
         for (let element of elements)
         {
@@ -226,14 +234,10 @@ ElementHidingTracer.prototype = {
           // priority, or haven't been circumvented in a different way.
           if (getComputedStyle(element).display == "none")
           {
-            matchedSelectors.push(selector);
-            matched = true;
-            break;
+            matchedSelectors.push(filters[i].replace(/^.*?##/, ""));
+            break nodes;
           }
         }
-
-        if (matched)
-          break;
       }
     }
 
@@ -246,7 +250,7 @@ ElementHidingTracer.prototype = {
 
   onTimeout()
   {
-    this.checkNodes(this.changedNodes);
+    this.checkNodes(this.changedNodes, this.selectors, this.filters);
     this.changedNodes = [];
     this.timeout = null;
   },
@@ -308,7 +312,7 @@ ElementHidingTracer.prototype = {
 
   trace()
   {
-    this.checkNodes([document]);
+    this.checkNodes([document], this.selectors, this.filters);
 
     this.observer.observe(
       document,
@@ -486,7 +490,7 @@ ElemHide.prototype = {
     return shadow;
   },
 
-  addSelectors(selectors)
+  addSelectors(selectors, filters)
   {
     if (selectors.length == 0)
       return;
@@ -512,16 +516,19 @@ ElemHide.prototype = {
     // If using shadow DOM, we have to add the ::content pseudo-element
     // before each selector, in order to match elements within the
     // insertion point.
+    let preparedSelectors = [];
     if (this.shadow)
     {
-      let preparedSelectors = [];
       for (let selector of selectors)
       {
         let subSelectors = splitSelector(selector);
         for (let subSelector of subSelectors)
           preparedSelectors.push("::content " + subSelector);
       }
-      selectors = preparedSelectors;
+    }
+    else
+    {
+      preparedSelectors = selectors;
     }
 
     // Safari only allows 8192 primitive selectors to be injected at once[1], we
@@ -529,24 +536,21 @@ ElemHide.prototype = {
     // (Chrome also has a limit, larger... but we're not certain exactly what it
     //  is! Edge apparently has no such limit.)
     // [1] - https://github.com/WebKit/webkit/blob/1cb2227f6b2a1035f7bdc46e5ab69debb75fc1de/Source/WebCore/css/RuleSet.h#L68
-    for (let i = 0; i < selectors.length; i += this.selectorGroupSize)
+    for (let i = 0; i < preparedSelectors.length; i += this.selectorGroupSize)
     {
-      let selector = selectors.slice(i, i + this.selectorGroupSize).join(", ");
+      let selector = preparedSelectors.slice(i, i + this.selectorGroupSize).join(", ");
       this.style.sheet.insertRule(selector + "{display: none !important;}",
                                   this.style.sheet.cssRules.length);
     }
+
+    if (this.tracer)
+      this.tracer.addSelectors(selectors, filters || selectors);
   },
 
   apply()
   {
-    let selectors = null;
-    let elemHideEmulationLoaded = false;
-
-    let checkLoaded = function()
+    ext.backgroundPage.sendMessage({type: "get-selectors"}, response =>
     {
-      if (!selectors || !elemHideEmulationLoaded)
-        return;
-
       if (this.tracer)
         this.tracer.disconnect();
       this.tracer = null;
@@ -555,23 +559,11 @@ ElemHide.prototype = {
         this.style.parentElement.removeChild(this.style);
       this.style = null;
 
-      this.addSelectors(selectors.selectors);
+      if (response.trace)
+        this.tracer = new ElementHidingTracer();
+
+      this.addSelectors(response.selectors);
       this.elemHideEmulation.apply();
-
-      if (selectors.trace)
-        this.tracer = new ElementHidingTracer(selectors.selectors);
-    }.bind(this);
-
-    ext.backgroundPage.sendMessage({type: "get-selectors"}, response =>
-    {
-      selectors = response;
-      checkLoaded();
-    });
-
-    this.elemHideEmulation.load(() =>
-    {
-      elemHideEmulationLoaded = true;
-      checkLoaded();
     });
   }
 };
