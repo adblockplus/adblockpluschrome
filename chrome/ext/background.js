@@ -118,54 +118,122 @@
     return frame;
   }
 
-  chrome.webNavigation.onBeforeNavigate.addListener(details =>
-  {
-    // Capture parent frame here because onCommitted doesn't get this info.
-    let frame = createFrame(details.tabId, details.frameId);
-    frame.parent = framesOfTabs[details.tabId][details.parentFrameId] || null;
-  });
-
-  let eagerlyUpdatedPages = new ext.PageMap();
-
-  ext._updatePageFrameStructure = (frameId, tabId, url, eager) =>
+  function updatePageFrameStructure(frameId, tabId, url, parentFrameId)
   {
     if (frameId == 0)
     {
       let page = new Page({id: tabId, url: url});
 
-      if (eagerlyUpdatedPages.get(page) != url)
+      ext._removeFromAllPageMaps(tabId);
+
+      chrome.tabs.get(tabId, () =>
       {
-        ext._removeFromAllPageMaps(tabId);
+        // If the tab is prerendered, chrome.tabs.get() sets
+        // chrome.runtime.lastError and we have to dispatch the onLoading event,
+        // since the onUpdated event isn't dispatched for prerendered tabs.
+        // However, we have to keep relying on the unUpdated event for tabs that
+        // are already visible. Otherwise browser action changes get overridden
+        // when Chrome automatically resets them on navigation.
+        if (chrome.runtime.lastError)
+          ext.pages.onLoading._dispatch(page);
+      });
+    }
 
-        // When a sitekey header is received we must immediately update the page
-        // structure in order to record and use the key. We want to avoid
-        // trashing the page structure if the onCommitted event is then fired
-        // for the page.
-        if (eager)
-          eagerlyUpdatedPages.set(page, url);
+    // Update frame parent and URL in frame structure
+    let frame = createFrame(tabId, frameId);
+    frame.url = new URL(url);
+    frame.parent = framesOfTabs[tabId][parentFrameId] || null;
+  };
 
-        chrome.tabs.get(tabId, () =>
-        {
-          // If the tab is prerendered, chrome.tabs.get() sets
-          // chrome.runtime.lastError and we have to dispatch the onLoading event,
-          // since the onUpdated event isn't dispatched for prerendered tabs.
-          // However, we have to keep relying on the unUpdated event for tabs that
-          // are already visible. Otherwise browser action changes get overridden
-          // when Chrome automatically resets them on navigation.
-          if (chrome.runtime.lastError)
-            ext.pages.onLoading._dispatch(page);
-        });
+  chrome.webRequest.onHeadersReceived.addListener(details =>
+  {
+    // We have to update the frame structure when switching to a new
+    // document, so that we process any further requests made by that
+    // document in the right context. Unfortunately, we cannot rely
+    // on webNavigation.onCommitted since it isn't guaranteed to fire
+    // before any subresources start downloading[1]. As an
+    // alternative we use webRequest.onHeadersReceived for HTTP(S)
+    // URLs, being careful to ignore any responses that won't cause
+    // the document to be replaced.
+    // [1] - https://bugs.chromium.org/p/chromium/issues/detail?id=665843
+
+    // The request has been processed without replacing the document.
+    // https://chromium.googlesource.com/chromium/src/+/02d3f50b/content/browser/frame_host/navigation_request.cc#473
+    if (details.statusCode == 204 || details.statusCode == 205)
+      return;
+
+    for (let header of details.responseHeaders)
+    {
+      let headerName = header.name.toLowerCase();
+
+      // For redirects we must wait for the next response in order
+      // to know if the document will be replaced. Note: Chrome
+      // performs a redirect only if there is a "Location" header with
+      // a non-empty value and a known redirect status code.
+      // https://chromium.googlesource.com/chromium/src/+/39a7d96/net/http/http_response_headers.cc#929
+      if (headerName == "location" && header.value &&
+          (details.statusCode == 301 || details.statusCode == 302 ||
+           details.statusCode == 303 || details.statusCode == 307 ||
+           details.statusCode == 308))
+        return;
+
+      // If the response initiates a download the document won't be
+      // replaced. Chrome initiates a download if there is a
+      // "Content-Disposition" with a valid and non-empty value other
+      // than "inline".
+      // https://chromium.googlesource.com/chromium/src/+/02d3f50b/content/browser/loader/mime_sniffing_resource_handler.cc#534
+      // https://chromium.googlesource.com/chromium/src/+/02d3f50b/net/http/http_content_disposition.cc#374
+      // https://chromium.googlesource.com/chromium/src/+/16e2688e/net/http/http_util.cc#431
+      if (headerName == "content-disposition")
+      {
+        let disposition = header.value.split(";")[0].replace(/[ \t]+$/, "");
+        if (disposition.toLowerCase() != "inline" &&
+            /^[\x21-\x7E]+$/.test(disposition) &&
+            !/[()<>@,;:\\"/\[\]?={}]/.test(disposition))
+          return;
+      }
+
+      // The value of the "Content-Type" header also determines if Chrome will
+      // initiate a download, or otherwise how the response will be rendered.
+      // We only need to consider responses which will result in a navigation
+      // and be rendered as HTML or similar.
+      // Note: Chrome might render the response as HTML if the "Content-Type"
+      // header is missing, invalid or unknown.
+      // https://chromium.googlesource.com/chromium/src/+/99f41af9/net/http/http_util.cc#66
+      // https://chromium.googlesource.com/chromium/src/+/3130418a/net/base/mime_sniffer.cc#667
+      if (headerName == "content-type")
+      {
+        let mediaType = header.value.split(/[ \t;(]/)[0].toLowerCase();
+        if (mediaType.includes("/") &&
+            mediaType != "*/*" &&
+            mediaType != "application/unknown" &&
+            mediaType != "unknown/unknown" &&
+            mediaType != "text/html" &&
+            mediaType != "text/xml" &&
+            mediaType != "application/xml" &&
+            mediaType != "application/xhtml+xml" &&
+            mediaType != "image/svg+xml")
+          return;
       }
     }
 
-    // Update frame URL in frame structure
-    let frame = createFrame(tabId, frameId);
-    frame.url = new URL(url);
-  };
+    updatePageFrameStructure(details.frameId, details.tabId, details.url,
+                             details.parentFrameId);
+  },
+  {types: ["main_frame", "sub_frame"], urls: ["http://*/*", "https://*/*"]},
+  ["responseHeaders"]);
 
-  chrome.webNavigation.onCommitted.addListener(details =>
+  chrome.webNavigation.onBeforeNavigate.addListener(details =>
   {
-    ext._updatePageFrameStructure(details.frameId, details.tabId, details.url);
+    // Since we can only listen for HTTP(S) responses using
+    // webRequest.onHeadersReceived we must update the page structure here for
+    // other navigations.
+    let url = new URL(details.url);
+    if (url.protocol != "http:" && url.protocol != "https:")
+    {
+      updatePageFrameStructure(details.frameId, details.tabId, details.url,
+                               details.parentFrameId);
+    }
   });
 
   function forgetTab(tabId)
