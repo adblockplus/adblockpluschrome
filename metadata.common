@@ -1,5 +1,7 @@
 [general]
 version = 1.12.4
+# Note: sha1.js, jsbn.js and rsa.js are redundant but we've added them back
+# here Safari compatibility. See #4902.
 backgroundScripts = lib/polyfills/url.js
   lib/polyfills/promise.js
   lib/polyfills/fetch.js
@@ -9,9 +11,9 @@ backgroundScripts = lib/polyfills/url.js
   lib/info.js
   lib/publicSuffixList.js
   lib/adblockplus.js
-  lib/sha1.js # These three scripts are strictly redundant as their counterparts
-  lib/jsbn.js # now live in adblockpluscore. We've added them back here rather
-  lib/rsa.js  # than debugging an issue with Safari compatibility. See #4902.
+  lib/sha1.js
+  lib/jsbn.js
+  lib/rsa.js
   messageResponder.js
   background.js
 testScripts = ../ext/common.js
