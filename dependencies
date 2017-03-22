@@ -3,4 +3,4 @@ _self = buildtools/ensure_dependencies.py
 buildtools = buildtools hg:1b59fbf12b07 git:6a2fb97
 adblockplus = adblockplus hg:c8ec667756d3 git:9a42447
 adblockpluscore = adblockpluscore hg:c7ae7532578a git:50ebfcf
-adblockplusui = adblockplusui hg:673e908d3bb4 git:1db1e7d
+adblockplusui = adblockplusui hg:8ceaabb9c639 git:6222fd2

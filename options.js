@@ -437,7 +437,7 @@ function updateSubscriptionInfo(element, subscription)
   }
   else if (subscription.lastDownload > 0)
   {
-    let timeDate = i18n_timeDateStrings(subscription.lastDownload * 1000);
+    let timeDate = i18nTimeDateStrings(subscription.lastDownload * 1000);
     let messageID = (timeDate[1] ? "last_updated_at" : "last_updated_at_today");
     lastUpdate.textContent = i18n.getMessage(messageID, timeDate);
   }
