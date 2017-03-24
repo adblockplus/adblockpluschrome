@@ -6,6 +6,8 @@ basename = adblockpluschrome
 permissions = tabs
   http://*/*
   https://*/*
+  ws://*/*
+  wss://*/*
   contextMenus
   webRequest
   webRequestBlocking

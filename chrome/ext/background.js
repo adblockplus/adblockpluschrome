@@ -540,7 +540,7 @@
       if (results.indexOf(false) != -1)
         return {cancel: true};
     }
-  }, {urls: ["http://*/*", "https://*/*"]}, ["blocking"]);
+  }, {urls: ["<all_urls>"]}, ["blocking"]);
 
 
   /* Message passing */

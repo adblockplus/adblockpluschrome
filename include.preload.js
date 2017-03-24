@@ -342,10 +342,10 @@ function runInPageContext(fn, arg)
   document.documentElement.removeChild(script);
 }
 
-// Chrome doesn't allow us to intercept WebSockets[1], and therefore
-// some ad networks are misusing them as a way to serve adverts and circumvent
-// us. As a workaround we wrap WebSocket, preventing blocked WebSocket
-// connections from being opened.
+// Before Chrome 58 the webRequest API didn't allow us to intercept
+// WebSockets[1], and therefore some ad networks are misusing them as a way to
+// serve adverts and circumvent us. As a workaround we wrap WebSocket,
+// preventing blocked WebSocket connections from being opened.
 // [1] - https://bugs.chromium.org/p/chromium/issues/detail?id=129353
 function wrapWebSocket()
 {
