@@ -15,8 +15,11 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* global i18n */
+
 "use strict";
 
+(function()
 {
   const {require} = ext.backgroundPage.getWindow();
 
@@ -63,18 +66,23 @@
       let value = params[key];
       if (value == messageMark)
         value = i18n.getMessage("stats_share_message", blockedCount);
-      querystring.push(encodeURIComponent(key) + "=" + encodeURIComponent(value));
+      querystring.push(
+        encodeURIComponent(key) + "=" + encodeURIComponent(value)
+      );
     }
     return url + "?" + querystring.join("&");
   }
 
   function onLoad()
   {
-    document.getElementById("share-box").addEventListener("click", share, false);
+    document.getElementById("share-box").addEventListener("click", share,
+                                                          false);
     let showIconNumber = document.getElementById("show-iconnumber");
     showIconNumber.setAttribute("aria-checked", Prefs.show_statsinicon);
     showIconNumber.addEventListener("click", toggleIconNumber, false);
-    document.querySelector("label[for='show-iconnumber']").addEventListener("click", toggleIconNumber, false);
+    document.querySelector("label[for='show-iconnumber']").addEventListener(
+      "click", toggleIconNumber, false
+    );
 
     // Update stats
     ext.pages.query({active: true, lastFocusedWindow: true}, pages =>
@@ -119,9 +127,11 @@
   function toggleIconNumber()
   {
     Prefs.show_statsinicon = !Prefs.show_statsinicon;
-    document.getElementById("show-iconnumber").setAttribute("aria-checked", Prefs.show_statsinicon);
+    document.getElementById("show-iconnumber").setAttribute(
+      "aria-checked", Prefs.show_statsinicon
+    );
   }
 
   document.addEventListener("DOMContentLoaded", onLoad, false);
   window.addEventListener("unload", onUnload, false);
-}
+}());

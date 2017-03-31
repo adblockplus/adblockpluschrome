@@ -15,45 +15,45 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* global $, i18n, i18nTimeDateStrings */
+
 "use strict";
 
 /**
  * Creates a wrapping function used to conveniently send a type of message.
  *
  * @param {Object} baseMessage The part of the message that's always sent
- * @param {..string} paramKeys Any message keys that have dynamic values. The
- *                             returned function will take the corresponding
- *                             values as arguments.
- * @return The generated messaging function, optionally taking any values as
- *         specified by the paramKeys and finally an optional callback.
- *         (Although the value arguments are optional their index must be
- *          maintained. E.g. if you omit the first value you must omit the
- *          second too.)
+ * @param {...string} paramKeys Any message keys that have dynamic values. The
+ *                              returned function will take the corresponding
+ *                              values as arguments.
+ * @return {function} The generated messaging function, optionally
+ *                    taking any values as specified by the paramKeys
+ *                    and finally an optional callback.  (Although the
+ *                    value arguments are optional their index must be
+ *                    maintained. E.g. if you omit the first value you
+ *                    must omit the second too.)
  */
-function wrapper(baseMessage /* , [paramKeys] */)
+function wrapper(baseMessage, ...paramKeys)
 {
-  let paramKeys = [];
-  for (let i = 1; i < arguments.length; i++)
-    paramKeys.push(arguments[i]);
-
-  return function(/* [paramValues], callback */)
+  return function(...paramValues /* , callback */)
   {
     let message = Object.create(null);
     for (let key in baseMessage)
+    {
       if (baseMessage.hasOwnProperty(key))
         message[key] = baseMessage[key];
+    }
 
-    let paramValues = [];
     let callback;
 
-    if (arguments.length > 0)
+    if (paramValues.length > 0)
     {
-      let lastArg = arguments[arguments.length - 1];
+      let lastArg = paramValues[paramValues.length - 1];
       if (typeof lastArg == "function")
         callback = lastArg;
 
-      for (let i = 0; i < arguments.length - (callback ? 1 : 0); i++)
-        message[paramKeys[i]] = arguments[i];
+      for (let i = 0; i < paramValues.length - (callback ? 1 : 0); i++)
+        message[paramKeys[i]] = paramValues[i];
     }
 
     ext.backgroundPage.sendMessage(message, callback);
@@ -78,9 +78,19 @@ const addFilter = wrapper({type: "filters.add"}, "text");
 const getFilters = wrapper({type: "filters.get"}, "subscriptionUrl");
 const removeFilter = wrapper({type: "filters.remove"}, "text");
 
-const whitelistedDomainRegexp = /^@@\|\|([^\/:]+)\^\$document$/;
-let delayedSubscriptionSelection = null;
+const whitelistedDomainRegexp = /^@@\|\|([^/:]+)\^\$document$/;
+const statusMessages = new Map([
+   ["synchronize_invalid_url",
+    "filters_subscription_lastDownload_invalidURL"],
+   ["synchronize_connection_error",
+    "filters_subscription_lastDownload_connectionError"],
+   ["synchronize_invalid_data",
+    "filters_subscription_lastDownload_invalidData"],
+   ["synchronize_checksum_mismatch",
+    "filters_subscription_lastDownload_checksumMismatch"]
+]);
 
+let delayedSubscriptionSelection = null;
 let acceptableAdsUrl;
 
 // Loads options from localStorage and sets UI elements accordingly
@@ -147,9 +157,9 @@ function loadOptions()
     if (!features.devToolsPanel)
       document.getElementById("showDevtoolsPanelContainer").hidden = true;
   });
-  getPref("notifications_showui", notifications_showui =>
+  getPref("notifications_showui", showNotificationsUI =>
   {
-    if (!notifications_showui)
+    if (!showNotificationsUI)
       document.getElementById("shouldShowNotificationsContainer").hidden = true;
   });
 
@@ -158,19 +168,16 @@ function loadOptions()
     type: "app.listen",
     filter: ["addSubscription", "focusSection"]
   });
-  ext.backgroundPage.sendMessage(
-  {
+  ext.backgroundPage.sendMessage({
     type: "filters.listen",
     filter: ["added", "loaded", "removed"]
   });
-  ext.backgroundPage.sendMessage(
-  {
+  ext.backgroundPage.sendMessage({
     type: "prefs.listen",
     filter: ["notifications_ignoredcategories", "notifications_showui",
              "show_devtools_panel", "shouldShowBlockElementMenu"]
   });
-  ext.backgroundPage.sendMessage(
-  {
+  ext.backgroundPage.sendMessage({
     type: "subscriptions.listen",
     filter: ["added", "disabled", "homepage", "lastDownload", "removed",
              "title", "downloadStatus", "downloading"]
@@ -313,7 +320,7 @@ function loadRecommendations()
       list.selectedIndex = selectedIndex;
 
       if (delayedSubscriptionSelection)
-        startSubscriptionSelection.apply(null, delayedSubscriptionSelection);
+        startSubscriptionSelection(...delayedSubscriptionSelection);
     });
 }
 
@@ -361,7 +368,8 @@ function addSubscriptionClicked()
     addSubscription(data.url, data.title, data.homepage);
   else
   {
-    let url = document.getElementById("customSubscriptionLocation").value.trim();
+    let url = document.getElementById("customSubscriptionLocation")
+                      .value.trim();
     if (!/^https?:/i.test(url))
     {
       alert(i18n.getMessage("global_subscription_invalid_location"));
@@ -389,8 +397,10 @@ function toggleAcceptableAds()
 function findSubscriptionElement(subscription)
 {
   for (let child of document.getElementById("filterLists").childNodes)
+  {
     if (child._subscription.url == subscription.url)
       return child;
+  }
   return null;
 }
 
@@ -415,25 +425,24 @@ function updateSubscriptionInfo(element, subscription)
   let lastUpdate = element.getElementsByClassName("subscriptionUpdate")[0];
   lastUpdate.classList.remove("error");
 
-  let downloadStatus = subscription.downloadStatus;
+  let {downloadStatus} = subscription;
   if (subscription.isDownloading)
   {
-    lastUpdate.textContent = i18n.getMessage("filters_subscription_lastDownload_inProgress");
+    lastUpdate.textContent = i18n.getMessage(
+      "filters_subscription_lastDownload_inProgress"
+    );
   }
   else if (downloadStatus && downloadStatus != "synchronize_ok")
   {
-     let map =
-     {
-       "synchronize_invalid_url": "filters_subscription_lastDownload_invalidURL",
-       "synchronize_connection_error": "filters_subscription_lastDownload_connectionError",
-       "synchronize_invalid_data": "filters_subscription_lastDownload_invalidData",
-       "synchronize_checksum_mismatch": "filters_subscription_lastDownload_checksumMismatch"
-     };
-     if (downloadStatus in map)
-       lastUpdate.textContent = i18n.getMessage(map[downloadStatus]);
-     else
-       lastUpdate.textContent = downloadStatus;
-     lastUpdate.classList.add("error");
+    if (statusMessages.has(downloadStatus))
+    {
+      lastUpdate.textContent = i18n.getMessage(
+        statusMessages.get(downloadStatus)
+      );
+    }
+    else
+      lastUpdate.textContent = downloadStatus;
+    lastUpdate.classList.add("error");
   }
   else if (subscription.lastDownload > 0)
   {
@@ -480,7 +489,9 @@ function onPrefMessage(key, value)
   switch (key)
   {
     case "notifications_showui":
-      document.getElementById("shouldShowNotificationsContainer").hidden = !value;
+      document.getElementById(
+        "shouldShowNotificationsContainer"
+      ).hidden = !value;
       return;
     case "notifications_ignoredcategories":
       key = "shouldShowNotifications";
@@ -537,7 +548,9 @@ function addWhitelistDomain(event)
 {
   event.preventDefault();
 
-  let domain = document.getElementById("newWhitelistDomain").value.replace(/\s/g, "");
+  let domain = document.getElementById(
+    "newWhitelistDomain"
+  ).value.replace(/\s/g, "");
   document.getElementById("newWhitelistDomain").value = "";
   if (!domain)
     return;
@@ -567,8 +580,10 @@ function removeSelectedExcludedDomain(event)
   event.preventDefault();
   let remove = [];
   for (let option of document.getElementById("excludedDomainsBox").options)
+  {
     if (option.selected)
       remove.push(option.value);
+  }
   if (!remove.length)
     return;
 
@@ -580,7 +595,8 @@ function removeSelectedExcludedDomain(event)
 function removeSelectedFilters(event)
 {
   event.preventDefault();
-  for (let option of document.querySelectorAll("#userFiltersBox > option:checked"))
+  let options = document.querySelectorAll("#userFiltersBox > option:checked");
+  for (let option of options)
     removeFilter(option.value);
 }
 
@@ -635,7 +651,9 @@ function addSubscriptionEntry(subscription)
   element.removeAttribute("id");
   element._subscription = subscription;
 
-  let removeButton = element.getElementsByClassName("subscriptionRemoveButton")[0];
+  let removeButton = element.getElementsByClassName(
+    "subscriptionRemoveButton"
+  )[0];
   removeButton.setAttribute("title", removeButton.textContent);
   removeButton.textContent = "\xD7";
   removeButton.addEventListener("click", () =>
@@ -664,7 +682,7 @@ function addSubscriptionEntry(subscription)
   document.getElementById("filterLists").appendChild(element);
 }
 
-function setLinks(id)
+function setLinks(id, ...args)
 {
   let element = document.getElementById(id);
   if (!element)
@@ -673,15 +691,15 @@ function setLinks(id)
   let links = element.getElementsByTagName("a");
   for (let i = 0; i < links.length; i++)
   {
-    if (typeof arguments[i + 1] == "string")
+    if (typeof args[i] == "string")
     {
-      links[i].href = arguments[i + 1];
+      links[i].href = args[i];
       links[i].setAttribute("target", "_blank");
     }
-    else if (typeof arguments[i + 1] == "function")
+    else if (typeof args[i] == "function")
     {
       links[i].href = "javascript:void(0);";
-      links[i].addEventListener("click", arguments[i + 1], false);
+      links[i].addEventListener("click", args[i], false);
     }
   }
 }

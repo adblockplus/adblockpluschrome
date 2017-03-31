@@ -5,6 +5,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>
   return ext.onMessage._dispatch(message, {}, sendResponse).indexOf(true) != -1;
 });
 
+(function()
 {
   let port = null;
 
@@ -32,4 +33,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>
       }
     }
   };
-}
+}());

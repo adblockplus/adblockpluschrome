@@ -45,7 +45,7 @@ port.on("get-selectors", (msg, sender) =>
     selectors = [];
   }
 
-  return {selectors: selectors, trace: trace};
+  return {selectors, trace};
 });
 
 port.on("forward", (msg, sender) =>

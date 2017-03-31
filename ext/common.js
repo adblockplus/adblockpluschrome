@@ -17,8 +17,9 @@
 
 "use strict";
 
+(function()
 {
-  var ext = {};
+  window.ext = {};
 
   let EventTarget = ext._EventTarget = function()
   {
@@ -36,15 +37,15 @@
       if (idx != -1)
         this._listeners.splice(idx, 1);
     },
-    _dispatch()
+    _dispatch(...args)
     {
       let results = [];
       let listeners = this._listeners.slice();
 
       for (let listener of listeners)
-        results.push(listener.apply(null, arguments));
+        results.push(listener(...args));
 
       return results;
     }
   };
-}
+}());

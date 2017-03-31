@@ -15,17 +15,23 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* globals Cu */
+
 "use strict";
 
+(function()
 {
-  let compare = Services.vc.compare;
+  const {Services} = Cu.import("resource://gre/modules/Services.jsm", {});
+  const {compare} = Services.vc;
 
   function allPairs(array)
   {
     let pairs = [];
     for (let i = 0; i < array.length - 1; i++)
+    {
       for (let j = i + 1; j < array.length; j++)
         pairs.push([array[i], array[j]]);
+    }
     return pairs;
   }
 
@@ -87,7 +93,7 @@
       "1.1pre1",
       "1.1pre10a",
       ["1.1pre10", "1.1pre010"],
-      ["1.10", "1.010", "1.00010"],
+      ["1.10", "1.010", "1.00010"]
     ];
 
     examples.forEach(example =>
@@ -101,8 +107,10 @@
       let v1 = [].concat(pair[0]);
       let v2 = [].concat(pair[1]);
       for (let i = 0; i < v1.length; i++)
+      {
         for (let j = 0; j < v2.length; j++)
           versionSmaller(v1[i], v2[j]);
+      }
     });
   });
-}
+}());

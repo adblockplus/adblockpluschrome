@@ -17,14 +17,12 @@
 
 "use strict";
 
-importAll("filterClasses", this);
-importAll("subscriptionClasses", this);
-importAll("matcher", this);
-importAll("filterStorage", this);
-importAll("filterNotifier", this);
-importAll("elemHide", this);
-importAll("prefs", this);
-importAll("utils", this);
+const {FilterStorage} = require("filterStorage");
+const {Subscription} = require("subscriptionClasses");
+const {Filter} = require("filterClasses");
+const {defaultMatcher} = require("matcher");
+const {ElemHide} = require("elemHide");
+const {Prefs} = require("prefs");
 
 function prepareFilterComponents(keepListeners)
 {
@@ -39,23 +37,6 @@ function prepareFilterComponents(keepListeners)
 
 function restoreFilterComponents()
 {
-}
-
-function preparePrefs()
-{
-  this._pbackup = Object.create(null);
-  for (let pref in Prefs)
-  {
-    let value = Prefs[pref];
-    this._pbackup[pref] = value;
-  }
-  Prefs.enabled = true;
-}
-
-function restorePrefs()
-{
-  for (let pref in this._pbackup)
-    Prefs[pref] = this._pbackup[pref];
 }
 
 function executeFirstRunActions()

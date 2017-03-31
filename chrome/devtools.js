@@ -47,12 +47,7 @@ chrome.runtime.sendMessage(
           panel.onSearch.addListener((eventName, queryString) =>
           {
             if (panelWindow)
-            {
-              panelWindow.postMessage({
-                type: eventName,
-                queryString: queryString
-              }, "*");
-            }
+              panelWindow.postMessage({type: eventName, queryString}, "*");
           });
         }
       );

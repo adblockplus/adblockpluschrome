@@ -17,6 +17,7 @@
 
 "use strict";
 
+(function()
 {
   /* Pages */
 
@@ -57,24 +58,24 @@
 
   function afterTabLoaded(callback)
   {
-     return openedTab =>
-     {
-       let onUpdated = (tabId, changeInfo, tab) =>
-       {
-         if (tabId == openedTab.id && changeInfo.status == "complete")
-         {
-           chrome.tabs.onUpdated.removeListener(onUpdated);
-           callback(new Page(openedTab));
-         }
-       };
-       chrome.tabs.onUpdated.addListener(onUpdated);
-     };
+    return openedTab =>
+    {
+      let onUpdated = (tabId, changeInfo, tab) =>
+      {
+        if (tabId == openedTab.id && changeInfo.status == "complete")
+        {
+          chrome.tabs.onUpdated.removeListener(onUpdated);
+          callback(new Page(openedTab));
+        }
+      };
+      chrome.tabs.onUpdated.addListener(onUpdated);
+    };
   }
 
   ext.pages = {
     open(url, callback)
     {
-      chrome.tabs.create({url: url}, callback && afterTabLoaded(callback));
+      chrome.tabs.create({url}, callback && afterTabLoaded(callback));
     },
     query(info, callback)
     {
@@ -122,7 +123,7 @@
   {
     if (frameId == 0)
     {
-      let page = new Page({id: tabId, url: url});
+      let page = new Page({id: tabId, url});
 
       ext._removeFromAllPageMaps(tabId);
 
@@ -143,7 +144,7 @@
     let frame = createFrame(tabId, frameId);
     frame.url = new URL(url);
     frame.parent = framesOfTabs[tabId][parentFrameId] || null;
-  };
+  }
 
   chrome.webRequest.onHeadersReceived.addListener(details =>
   {
@@ -189,7 +190,7 @@
         let disposition = header.value.split(";")[0].replace(/[ \t]+$/, "");
         if (disposition.toLowerCase() != "inline" &&
             /^[\x21-\x7E]+$/.test(disposition) &&
-            !/[()<>@,;:\\"/\[\]?={}]/.test(disposition))
+            !/[()<>@,;:\\"/[\]?={}]/.test(disposition))
           return;
       }
 
@@ -302,7 +303,7 @@
     },
     _queueChanges()
     {
-      chrome.tabs.get(this._tabId, function()
+      chrome.tabs.get(this._tabId, () =>
       {
         // If the tab is prerendered, chrome.tabs.get() sets
         // chrome.runtime.lastError and we have to delay our changes
@@ -324,7 +325,7 @@
         {
           this._applyChanges();
         }
-      }.bind(this));
+      });
     },
     _addChange(name, value)
     {
@@ -446,7 +447,8 @@
     return (framesOfTabs[tabId] || {})[frameId];
   };
 
-  let handlerBehaviorChangedQuota = chrome.webRequest.MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES;
+  let handlerBehaviorChangedQuota =
+    chrome.webRequest.MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES;
 
   function propagateHandlerBehaviorChange()
   {
@@ -455,7 +457,9 @@
     // Otherwise Chrome notifies the user that this extension is causing issues.
     if (handlerBehaviorChangedQuota > 0)
     {
-      chrome.webNavigation.onBeforeNavigate.removeListener(propagateHandlerBehaviorChange);
+      chrome.webNavigation.onBeforeNavigate.removeListener(
+        propagateHandlerBehaviorChange
+      );
       chrome.webRequest.handlerBehaviorChanged();
 
       handlerBehaviorChangedQuota--;
@@ -471,7 +475,7 @@
       // There wouldn't be any visible effect when calling it earlier,
       // but it's an expensive operation and that way we avoid to call
       // it multiple times, if multiple filters are added/removed.
-      let onBeforeNavigate = chrome.webNavigation.onBeforeNavigate;
+      let {onBeforeNavigate} = chrome.webNavigation;
       if (!onBeforeNavigate.hasListener(propagateHandlerBehaviorChange))
         onBeforeNavigate.addListener(propagateHandlerBehaviorChange);
     }
@@ -488,11 +492,16 @@
           let frames = framesOfTabs[tab.id] = Object.create(null);
 
           for (let i = 0; i < details.length; i++)
-            frames[details[i].frameId] = {url: new URL(details[i].url), parent: null};
+          {
+            frames[details[i].frameId] = {
+              url: new URL(details[i].url),
+              parent: null
+            };
+          }
 
           for (let i = 0; i < details.length; i++)
           {
-            let parentFrameId = details[i].parentFrameId;
+            let {parentFrameId} = details[i];
 
             if (parentFrameId != -1)
               frames[details[i].frameId].parent = frames[parentFrameId];
@@ -514,17 +523,11 @@
     // has triggered this request. For most requests (e.g. images) we
     // can just use the request's frame ID, but for subdocument requests
     // (e.g. iframes) we must instead use the request's parent frame ID.
-    let frameId;
-    let requestType;
-    if (details.type == "sub_frame")
+    let {frameId, type} = details;
+    if (type == "sub_frame")
     {
       frameId = details.parentFrameId;
-      requestType = "SUBDOCUMENT";
-    }
-    else
-    {
-      frameId = details.frameId;
-      requestType = details.type.toUpperCase();
+      type = "SUBDOCUMENT";
     }
 
     let frame = ext.getFrame(details.tabId, frameId);
@@ -532,7 +535,7 @@
     {
       let results = ext.webRequest.onBeforeRequest._dispatch(
         new URL(details.url),
-        requestType,
+        type.toUpperCase(),
         new Page({id: details.tabId}),
         frame
       );
@@ -572,7 +575,9 @@
       };
     }
 
-    return ext.onMessage._dispatch(message, sender, sendResponse).indexOf(true) != -1;
+    return ext.onMessage._dispatch(
+      message, sender, sendResponse
+    ).indexOf(true) != -1;
   });
 
 
@@ -675,4 +680,4 @@
       });
     }
   };
-}
+}());

@@ -95,8 +95,8 @@ if (document instanceof HTMLDocument)
 
     ext.backgroundPage.sendMessage({
       type: "subscriptions.add",
-      title: title,
-      url: url,
+      title,
+      url,
       confirm: true
     });
   }, true);

@@ -15,6 +15,8 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* eslint-env jquery */
+
 "use strict";
 
 let targetPageId = null;
@@ -35,8 +37,7 @@ function onKeyDown(event)
 
 function addFilters()
 {
-  ext.backgroundPage.sendMessage(
-  {
+  ext.backgroundPage.sendMessage({
     type: "filters.importRaw",
     text: document.getElementById("filters").value
   },
@@ -51,10 +52,9 @@ function addFilters()
 
 function closeDialog(success)
 {
-  ext.backgroundPage.sendMessage(
-  {
+  ext.backgroundPage.sendMessage({
     type: "forward",
-    targetPageId: targetPageId,
+    targetPageId,
     payload:
     {
       type: "composer.content.finished",

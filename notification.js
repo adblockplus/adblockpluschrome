@@ -90,17 +90,16 @@ window.addEventListener("load", () =>
   notificationElement.hidden = false;
   notificationElement.addEventListener("click", event =>
   {
-    switch (event.target.id)
+    if (event.target.id == "notification-close")
+      notificationElement.classList.add("closing");
+    else if (event.target.id == "notification-optout" ||
+             event.target.id == "notification-hide")
     {
-      case "notification-close":
-        notificationElement.classList.add("closing");
-        break;
-      case "notification-optout":
+      if (event.target.id == "notification-optout")
         Notification.toggleIgnoreCategory("*", true);
-      case "notification-hide":
-        notificationElement.hidden = true;
-        notification.onClicked();
-        break;
+
+      notificationElement.hidden = true;
+      notification.onClicked();
     }
   }, true);
 }, false);

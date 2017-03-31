@@ -15,19 +15,24 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* globals ElemHideEmulation, splitSelector */
+
 "use strict";
 
-const typeMap = {
-  "img": "IMAGE",
-  "input": "IMAGE",
-  "picture": "IMAGE",
-  "audio": "MEDIA",
-  "video": "MEDIA",
-  "frame": "SUBDOCUMENT",
-  "iframe": "SUBDOCUMENT",
-  "object": "OBJECT",
-  "embed": "OBJECT"
-};
+// This variable is also used by our other content scripts.
+let elemhide;
+
+const typeMap = new Map([
+  ["img", "IMAGE"],
+  ["input", "IMAGE"],
+  ["picture", "IMAGE"],
+  ["audio", "MEDIA"],
+  ["video", "MEDIA"],
+  ["frame", "SUBDOCUMENT"],
+  ["iframe", "SUBDOCUMENT"],
+  ["object", "OBJECT"],
+  ["embed", "OBJECT"]
+]);
 
 function getURLsFromObjectElement(element)
 {
@@ -41,9 +46,9 @@ function getURLsFromObjectElement(element)
       continue;
 
     let name = child.getAttribute("name");
-    if (name != "movie"  && // Adobe Flash
+    if (name != "movie" &&  // Adobe Flash
         name != "source" && // Silverlight
-        name != "src"    && // Real Media + Quicktime
+        name != "src" &&    // Real Media + Quicktime
         name != "FileName") // Windows Media
       continue;
 
@@ -84,7 +89,7 @@ function getURLsFromMediaElement(element)
   for (let child of element.children)
   {
     if (child.localName == "source" || child.localName == "track")
-      urls.push.apply(urls, getURLsFromAttributes(child));
+      urls.push(...getURLsFromAttributes(child));
   }
 
   if (element.poster)
@@ -124,7 +129,7 @@ function getURLsFromElement(element)
 
 function checkCollapse(element)
 {
-  let mediatype = typeMap[element.localName];
+  let mediatype = typeMap.get(element.localName);
   if (!mediatype)
     return;
 
@@ -135,8 +140,8 @@ function checkCollapse(element)
   ext.backgroundPage.sendMessage(
     {
       type: "filters.collapse",
-      urls: urls,
-      mediatype: mediatype,
+      urls,
+      mediatype,
       baseURL: document.location.href
     },
 
@@ -177,18 +182,6 @@ function checkSitekey()
   let attr = document.documentElement.getAttribute("data-adblockkey");
   if (attr)
     ext.backgroundPage.sendMessage({type: "filters.addKey", token: attr});
-}
-
-function getContentDocument(element)
-{
-  try
-  {
-    return element.contentDocument;
-  }
-  catch (e)
-  {
-    return null;
-  }
 }
 
 function ElementHidingTracer()
@@ -242,10 +235,12 @@ ElementHidingTracer.prototype = {
     }
 
     if (matchedSelectors.length > 0)
+    {
       ext.backgroundPage.sendMessage({
         type: "devtools.traceElemHide",
         selectors: matchedSelectors
       });
+    }
   },
 
   onTimeout()
@@ -349,18 +344,18 @@ function runInPageContext(fn, arg)
 // [1] - https://bugs.chromium.org/p/chromium/issues/detail?id=129353
 function wrapWebSocket()
 {
-  let eventName = "abpws-" + Math.random().toString(36).substr(2);
+  let randomEventName = "abpws-" + Math.random().toString(36).substr(2);
 
-  document.addEventListener(eventName, event =>
+  document.addEventListener(randomEventName, event =>
   {
     ext.backgroundPage.sendMessage({
       type: "request.websocket",
       url: event.detail.url
     }, block =>
     {
-      document.dispatchEvent(
-        new CustomEvent(eventName + "-" + event.detail.url, {detail: block})
-      );
+      document.dispatchEvent(new CustomEvent(
+        randomEventName + "-" + event.detail.url, {detail: block}
+      ));
     });
   });
 
@@ -369,11 +364,13 @@ function wrapWebSocket()
     // As far as possible we must track everything we use that could be
     // sabotaged by the website later in order to circumvent us.
     let RealWebSocket = WebSocket;
-    let closeWebSocket = Function.prototype.call.bind(RealWebSocket.prototype.close);
+    let RealCustomEvent = window.CustomEvent;
+    let closeWebSocket = Function.prototype.call.bind(
+      RealWebSocket.prototype.close
+    );
     let addEventListener = document.addEventListener.bind(document);
     let removeEventListener = document.removeEventListener.bind(document);
     let dispatchEvent = document.dispatchEvent.bind(document);
-    let CustomEvent = window.CustomEvent;
 
     function checkRequest(url, callback)
     {
@@ -385,22 +382,16 @@ function wrapWebSocket()
       }
       addEventListener(incomingEventName, listener);
 
-      dispatchEvent(new CustomEvent(eventName, {
-        detail: {url: url}
-      }));
+      dispatchEvent(new RealCustomEvent(eventName, {detail: {url}}));
     }
 
-    function WrappedWebSocket(url)
+    function WrappedWebSocket(url, ...args)
     {
       // Throw correct exceptions if the constructor is used improperly.
       if (!(this instanceof WrappedWebSocket)) return RealWebSocket();
       if (arguments.length < 1) return new RealWebSocket();
 
-      let websocket;
-      if (arguments.length == 1)
-        websocket = new RealWebSocket(url);
-      else
-        websocket = new RealWebSocket(url, arguments[1]);
+      let websocket = new RealWebSocket(url, ...args);
 
       checkRequest(websocket.url, blocked =>
       {
@@ -411,7 +402,7 @@ function wrapWebSocket()
       return websocket;
     }
     WrappedWebSocket.prototype = RealWebSocket.prototype;
-    WebSocket = WrappedWebSocket.bind();
+    window.WebSocket = WrappedWebSocket.bind();
     Object.defineProperties(WebSocket, {
       CONNECTING: {value: RealWebSocket.CONNECTING, enumerable: true},
       OPEN: {value: RealWebSocket.OPEN, enumerable: true},
@@ -421,7 +412,7 @@ function wrapWebSocket()
     });
 
     RealWebSocket.prototype.constructor = WebSocket;
-  }, eventName);
+  }, randomEventName);
 }
 
 function ElemHide()
@@ -474,14 +465,15 @@ ElemHide.prototype = {
         let ourShadowRoot = document.documentElement.shadowRoot;
         if (!ourShadowRoot)
           return;
-        let desc = Object.getOwnPropertyDescriptor(Element.prototype, "shadowRoot");
+        let desc = Object.getOwnPropertyDescriptor(Element.prototype,
+                                                   "shadowRoot");
         let shadowRoot = Function.prototype.call.bind(desc.get);
 
         Object.defineProperty(Element.prototype, "shadowRoot", {
           configurable: true, enumerable: true, get()
           {
-            let shadow = shadowRoot(this);
-            return shadow == ourShadowRoot ? null : shadow;
+            let thisShadow = shadowRoot(this);
+            return thisShadow == ourShadowRoot ? null : thisShadow;
           }
         });
       }, null);
@@ -502,8 +494,8 @@ ElemHide.prototype = {
       // <html> element. If we have injected a style element before that
       // has been removed (the sheet property is null), create a new one.
       this.style = document.createElement("style");
-      (this.shadow || document.head
-                   || document.documentElement).appendChild(this.style);
+      (this.shadow || document.head ||
+                      document.documentElement).appendChild(this.style);
 
       // It can happen that the frame already navigated to a different
       // document while we were waiting for the background page to respond.
@@ -538,7 +530,9 @@ ElemHide.prototype = {
     // [1] - https://github.com/WebKit/webkit/blob/1cb2227f6b2a1035f7bdc46e5ab69debb75fc1de/Source/WebCore/css/RuleSet.h#L68
     for (let i = 0; i < preparedSelectors.length; i += this.selectorGroupSize)
     {
-      let selector = preparedSelectors.slice(i, i + this.selectorGroupSize).join(", ");
+      let selector = preparedSelectors.slice(
+        i, i + this.selectorGroupSize
+      ).join(", ");
       this.style.sheet.insertRule(selector + "{display: none !important;}",
                                   this.style.sheet.cssRules.length);
     }
@@ -573,9 +567,7 @@ if (document instanceof HTMLDocument)
   checkSitekey();
   wrapWebSocket();
 
-  // This variable is also used by our other content scripts, outside of the
-  // current scope.
-  var elemhide = new ElemHide();
+  elemhide = new ElemHide();
   elemhide.apply();
 
   document.addEventListener("error", event =>

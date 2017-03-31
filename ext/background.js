@@ -17,6 +17,7 @@
 
 "use strict";
 
+(function()
 {
   let nonEmptyPageMaps = Object.create(null);
   let pageMapCounter = 0;
@@ -67,4 +68,4 @@
     for (let pageMapId in nonEmptyPageMaps)
       nonEmptyPageMaps[pageMapId]._delete(pageId);
   };
-}
+}());

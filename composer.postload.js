@@ -15,6 +15,8 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* globals checkCollapse, elemhide, getURLsFromElement, typeMap */
+
 "use strict";
 
 // The page ID for the popup filter selection dialog (top frame only).
@@ -43,8 +45,7 @@ let lastRightClickEventIsMostRecent = false;
 function getFiltersForElement(element, callback)
 {
   let src = element.getAttribute("src");
-  ext.backgroundPage.sendMessage(
-  {
+  ext.backgroundPage.sendMessage({
     type: "composer.getFilters",
     tagName: element.localName,
     id: element.id,
@@ -52,7 +53,7 @@ function getFiltersForElement(element, callback)
     style: element.getAttribute("style"),
     classes: Array.prototype.slice.call(element.classList),
     urls: getURLsFromElement(element),
-    mediatype: typeMap[element.localName],
+    mediatype: typeMap.get(element.localName),
     baseURL: document.location.href
   },
   response =>
@@ -388,21 +389,15 @@ function elementPicked(event)
     if (currentlyPickingElement)
       stopPickingElement();
 
-    ext.backgroundPage.sendMessage(
-    {
+    ext.backgroundPage.sendMessage({
       type: "composer.openDialog"
     },
     popupId =>
     {
-      ext.backgroundPage.sendMessage(
-      {
+      ext.backgroundPage.sendMessage({
         type: "forward",
         targetPageId: popupId,
-        payload:
-        {
-          type: "composer.dialog.init",
-          filters: filters
-        }
+        payload: {type: "composer.dialog.init", filters}
       });
 
       // Only the top frame keeps a record of the popup window's ID,
@@ -413,14 +408,9 @@ function elementPicked(event)
       }
       else
       {
-        ext.backgroundPage.sendMessage(
-        {
+        ext.backgroundPage.sendMessage({
           type: "forward",
-          payload:
-          {
-            type: "composer.content.dialogOpened",
-            popupId: popupId
-          }
+          payload: {type: "composer.content.dialogOpened", popupId}
         });
       }
     });
@@ -461,8 +451,7 @@ function deactivateBlockElement()
 
   if (blockelementPopupId != null)
   {
-    ext.backgroundPage.sendMessage(
-    {
+    ext.backgroundPage.sendMessage({
       type: "forward",
       targetPageId: blockelementPopupId,
       payload:
@@ -504,8 +493,7 @@ if (document instanceof HTMLDocument)
     lastRightClickEvent = event;
     lastRightClickEventIsMostRecent = true;
 
-    ext.backgroundPage.sendMessage(
-    {
+    ext.backgroundPage.sendMessage({
       type: "forward",
       payload:
       {
@@ -520,9 +508,11 @@ if (document instanceof HTMLDocument)
     {
       case "composer.content.getState":
         if (window == window.top)
+        {
           sendResponse({
             active: currentlyPickingElement || blockelementPopupId != null
           });
+        }
         break;
       case "composer.content.startPickingElement":
         if (window == window.top)
@@ -572,8 +562,7 @@ if (document instanceof HTMLDocument)
         // to be careful here. (This is not perfect, but best we can do.)
         if (window == window.top && blockelementPopupId == msg.popupId)
         {
-          ext.backgroundPage.sendMessage(
-          {
+          ext.backgroundPage.sendMessage({
             type: "forward",
             payload:
             {

@@ -50,3 +50,14 @@ extension's Options page, open the JavaScript Console and type in:
     location.href = "qunit/index.html";
 
 The unit tests will run automatically once the page loads.
+
+Linting
+-------
+
+You can lint the code using [ESLint](http://eslint.org).
+
+    eslint *.js lib/ qunit/ ext/ chrome/
+
+You will need to set up ESLint and our configuration first, see
+[eslint-config-eyeo](https://hg.adblockplus.org/codingtools/file/tip/eslint-config-eyeo)
+for more information.

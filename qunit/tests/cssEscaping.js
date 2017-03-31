@@ -1,5 +1,6 @@
 "use strict";
 
+(function()
 {
   const {Filter, ElemHideFilter} = require("filterClasses");
   const {escapeCSS, quoteCSS} = require("filterComposer");
@@ -43,16 +44,11 @@
       let filter = Filter.fromText("##" + opts.selector);
 
       if (!(filter instanceof ElemHideFilter))
-      {
         ok(false, opts.selector + " (not allowed in elemhide filters)");
-      }
+      else if (mustMatch)
+        equal(foundElement, element, opts.selector);
       else
-      {
-        if (mustMatch)
-          equal(foundElement, element, opts.selector);
-        else
-          ok(true, opts.selector);
-      }
+        ok(true, opts.selector);
     }
 
     function testEscape(s)
@@ -99,7 +95,8 @@
       testEscape("-" + chr);
     }
 
-    // Test some non-ASCII characters. However, those shouldn't require escaping.
+    // Test some non-ASCII characters. However, those shouldn't
+    // require escaping.
     testEscape("\uD83D\uDE3B\u2665\u00E4");
   });
-}
+}());
