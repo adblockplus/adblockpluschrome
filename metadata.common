@@ -3,7 +3,6 @@ version = 1.13.2
 backgroundScripts = ext/common.js
   ext/background.js
   lib/compat.js
-  lib/info.js
   lib/publicSuffixList.js
   lib/adblockplus.js
   messageResponder.js
@@ -11,7 +10,6 @@ backgroundScripts = ext/common.js
 testScripts = ../ext/common.js
   ../ext/background.js
   ../lib/compat.js
-  ../lib/info.js
   ../lib/adblockplus.js
   ../lib/publicSuffixList.js
   common.js
@@ -88,6 +86,7 @@ lib/adblockplus.js =
   adblockpluscore/lib/synchronizer.js
   adblockplusui/lib/antiadblockInit.js
 lib/adblockplus.js[module] = true
+lib/adblockplus.js[injectinfomodule] = true
 lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,subscriptionInit,filterComposer,stats,uninstall,csp
 ext/common.js = ext/common.js
 ext/background.js = ext/background.js
