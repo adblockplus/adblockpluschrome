@@ -1,8 +1,7 @@
-[default]
-inherit = metadata.common
-
 [general]
 basename = adblockpluschrome
+version = 1.13.2
+author = eyeo GmbH
 permissions = tabs
   http://*/*
   https://*/*
@@ -15,6 +14,23 @@ permissions = tabs
   storage
   unlimitedStorage
   notifications
+backgroundScripts = ext/common.js
+  lib/compat.js
+  lib/publicSuffixList.js
+  lib/adblockplus.js
+  messageResponder.js
+  ext/background.js
+  background.js
+testScripts = ../ext/common.js
+  ../ext/background.js
+  ../lib/compat.js
+  ../lib/adblockplus.js
+  ../lib/publicSuffixList.js
+  common.js
+  tests/prefs.js
+  tests/versionComparator.js
+  tests/url.js
+  tests/cssEscaping.js
 options = options.html
 devtools = devtools.html
 browserAction = icons/abp-16.png icons/abp-19.png icons/abp-20.png icons/abp-32.png icons/abp-38.png icons/abp-40.png popup.html
@@ -26,41 +42,112 @@ managedStorageSchema = managed-storage-schema.json
 chrome = 49.0
 opera = 36.0
 
+[contentScripts]
+document_start = ext/common.js ext/content.js elemHideEmulation.js include.preload.js
+document_end = include.postload.js
+
 [mapping]
-icons/abp-16.png = chrome/icons/abp-16.png
-icons/abp-16-whitelisted.png = chrome/icons/abp-16-whitelisted.png
-icons/abp-16-notification-critical.png = chrome/icons/abp-16-notification-critical.png
-icons/abp-16-notification-information.png = chrome/icons/abp-16-notification-information.png
-icons/abp-19.png = chrome/icons/abp-19.png
-icons/abp-19-whitelisted.png = chrome/icons/abp-19-whitelisted.png
-icons/abp-19-notification-critical.png = chrome/icons/abp-19-notification-critical.png
-icons/abp-19-notification-information.png = chrome/icons/abp-19-notification-information.png
-icons/abp-20.png = chrome/icons/abp-20.png
-icons/abp-20-whitelisted.png = chrome/icons/abp-20-whitelisted.png
-icons/abp-20-notification-critical.png = chrome/icons/abp-20-notification-critical.png
-icons/abp-20-notification-information.png = chrome/icons/abp-20-notification-information.png
-icons/abp-32.png = chrome/icons/abp-32.png
-icons/abp-32-whitelisted.png = chrome/icons/abp-32-whitelisted.png
-icons/abp-32-notification-critical.png = chrome/icons/abp-32-notification-critical.png
-icons/abp-32-notification-information.png = chrome/icons/abp-32-notification-information.png
-icons/abp-38.png = chrome/icons/abp-38.png
-icons/abp-38-whitelisted.png = chrome/icons/abp-38-whitelisted.png
-icons/abp-38-notification-critical.png = chrome/icons/abp-38-notification-critical.png
-icons/abp-38-notification-information.png = chrome/icons/abp-38-notification-information.png
-icons/abp-40.png = chrome/icons/abp-40.png
-icons/abp-40-whitelisted.png = chrome/icons/abp-40-whitelisted.png
-icons/abp-40-notification-critical.png = chrome/icons/abp-40-notification-critical.png
-icons/abp-40-notification-information.png = chrome/icons/abp-40-notification-information.png
-icons/detailed/abp-48.png = chrome/icons/detailed/abp-48.png
-ext/devtools.js = chrome/ext/devtools.js
-devtools.html = chrome/devtools.html
-devtools.js = chrome/devtools.js
+subscriptions.xml = adblockpluscore/chrome/content/ui/subscriptions.xml
+firstRun.html = adblockplusui/firstRun.html
+common.js = adblockplusui/common.js
+firstRun.js = adblockplusui/firstRun.js
+i18n.js = adblockplusui/i18n.js
+messageResponder.js = adblockplusui/messageResponder.js
+icons/detailed/abp-128.png = adblockplusui/skin/abp-128.png
+skin/common.css = adblockplusui/skin/common.css
+skin/firstRun.css = adblockplusui/skin/firstRun.css
+skin/ajax-loader.gif = adblockplusui/skin/ajax-loader.gif
+skin/background.png = adblockplusui/skin/background.png
+skin/background-main.png = adblockplusui/skin/background-main.png
+skin/background-share.png = adblockplusui/skin/background-share.png
+skin/donate.png = adblockplusui/skin/donate.png
+skin/abb-logo.png = adblockplusui/skin/abb-logo.png
+skin/fonts/CreteRound-Italic.otf = adblockplusui/skin/fonts/CreteRound-Italic.otf
+skin/fonts/CreteRound-Regular.otf = adblockplusui/skin/fonts/CreteRound-Regular.otf
+skin/social/facebook.png = adblockplusui/skin/social/facebook.png
+skin/social/googleplus.png = adblockplusui/skin/social/googleplus.png
+skin/social/renren.png = adblockplusui/skin/social/renren.png
+skin/social/twitter.png = adblockplusui/skin/social/twitter.png
+skin/social/weibo.png = adblockplusui/skin/social/weibo.png
 devtools-panel.html = adblockplusui/devtools-panel.html
 devtools-panel.js = adblockplusui/devtools-panel.js
 skin/devtools-panel.css = adblockplusui/skin/devtools-panel.css
-managed-storage-schema.json = chrome/managed-storage-schema.json
 
 [convert_js]
-lib/adblockplus.js += lib/devtools.js lib/popupBlocker.js lib/uninstall.js lib/csp.js
-ext/common.js += chrome/ext/common.js
-ext/background.js += chrome/ext/background.js
+lib/adblockplus.js =
+  lib/filterComposer.js
+  lib/filterValidation.js
+  lib/icon.js
+  lib/io.js
+  lib/messaging.js
+  lib/notificationHelper.js
+  lib/prefs.js
+  lib/punycode.js
+  lib/requestBlocker.js
+  lib/stats.js
+  lib/subscriptionInit.js
+  lib/tldjs.js
+  lib/url.js
+  lib/utils.js
+  lib/whitelisting.js
+  lib/devtools.js
+  lib/popupBlocker.js
+  lib/uninstall.js
+  lib/csp.js
+  adblockpluscore/lib/coreUtils.js
+  adblockpluscore/lib/common.js
+  adblockpluscore/lib/downloader.js
+  adblockpluscore/lib/elemHide.js
+  adblockpluscore/lib/elemHideEmulation.js
+  adblockpluscore/lib/events.js
+  adblockpluscore/lib/filterClasses.js
+  adblockpluscore/lib/filterListener.js
+  adblockpluscore/lib/filterNotifier.js
+  adblockpluscore/lib/filterStorage.js
+  adblockpluscore/lib/jsbn.js
+  adblockpluscore/lib/matcher.js
+  adblockpluscore/lib/notification.js
+  adblockpluscore/lib/rsa.js
+  adblockpluscore/lib/rusha.js
+  adblockpluscore/lib/subscriptionClasses.js
+  adblockpluscore/lib/synchronizer.js
+  adblockplusui/lib/antiadblockInit.js
+lib/adblockplus.js[module] = true
+lib/adblockplus.js[injectinfomodule] = true
+lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,subscriptionInit,filterComposer,stats,uninstall,csp
+include.postload.js = subscriptionLink.postload.js composer.postload.js
+elemHideEmulation.js = adblockpluscore/lib/common.js adblockpluscore/chrome/content/elemHideEmulation.js
+
+[import_locales]
+adblockplus/chrome/locale/*/global.properties = subscription_invalid_location
+  remove_subscription_warning
+  =notification_antiadblock_title
+  =notification_antiadblock_message
+  filter_unknown_option
+  filter_invalid_regexp
+  filter_elemhide_duplicate_id
+  filter_elemhide_nocriteria
+  filter_elemhideemulation_nodomain
+adblockplus/chrome/locale/*/overlay.dtd = hideplaceholders.label
+  notification.button.yes
+  notification.button.no
+  notification.closing.button.hide
+  notification.closing.button.optout
+  shownotifications.label
+adblockplus/chrome/locale/*/filters.dtd = subscription.lastDownload.inProgress
+  subscription.lastDownload.invalidURL
+  subscription.lastDownload.connectionError
+  subscription.lastDownload.invalidData
+  subscription.lastDownload.checksumMismatch
+  subscription.enabled.label
+  subscription.delete.label
+  addSubscription.label
+  addSubscriptionAdd.label
+  addSubscriptionOther.label
+  acceptableAds2.label
+  viewList.label
+  readMore.label
+adblockplus/chrome/locale/*/subscriptionSelection.dtd = location.label
+  title.label
+adblockplus/chrome/locale/*/meta.properties = =name
+adblockplusui/locale/*/firstRun.json = =*
