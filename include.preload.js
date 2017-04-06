@@ -187,11 +187,8 @@ function checkSitekey()
 function ElementHidingTracer()
 {
   this.selectors = [];
-  this.filters = [];
-
   this.changedNodes = [];
   this.timeout = null;
-
   this.observer = new MutationObserver(this.observe.bind(this));
   this.trace = this.trace.bind(this);
 
@@ -203,49 +200,58 @@ function ElementHidingTracer()
 ElementHidingTracer.prototype = {
   addSelectors(selectors, filters)
   {
-    if (document.readyState != "loading")
-      this.checkNodes([document], selectors, filters);
+    let pairs = selectors.map((sel, i) => [sel, filters && filters[i]]);
 
-    this.selectors.push(...selectors);
-    this.filters.push(...filters);
+    if (document.readyState != "loading")
+      this.checkNodes([document], pairs);
+
+    this.selectors.push(...pairs);
   },
 
-  checkNodes(nodes, selectors, filters)
+  checkNodes(nodes, pairs)
   {
-    let matchedSelectors = [];
+    let selectors = [];
+    let filters = [];
 
-    for (let i = 0; i < selectors.length; i++)
+    for (let [selector, filter] of pairs)
     {
       nodes: for (let node of nodes)
       {
-        let elements = node.querySelectorAll(selectors[i]);
-
-        for (let element of elements)
+        for (let element of node.querySelectorAll(selector))
         {
           // Only consider selectors that actually have an effect on the
           // computed styles, and aren't overridden by rules with higher
           // priority, or haven't been circumvented in a different way.
           if (getComputedStyle(element).display == "none")
           {
-            matchedSelectors.push(filters[i].replace(/^.*?##/, ""));
+            // For regular element hiding, we don't know the exact filter,
+            // but the background page can find it with the given selector.
+            // In case of element hiding emulation, the generated selector
+            // we got here is different from the selector part of the filter,
+            // but in this case we can send the whole filter text instead.
+            if (filter)
+              filters.push(filter);
+            else
+              selectors.push(selector);
+
             break nodes;
           }
         }
       }
     }
 
-    if (matchedSelectors.length > 0)
+    if (selectors.length > 0 || filters.length > 0)
     {
       ext.backgroundPage.sendMessage({
         type: "devtools.traceElemHide",
-        selectors: matchedSelectors
+        selectors, filters
       });
     }
   },
 
   onTimeout()
   {
-    this.checkNodes(this.changedNodes, this.selectors, this.filters);
+    this.checkNodes(this.changedNodes, this.selectors);
     this.changedNodes = [];
     this.timeout = null;
   },
@@ -307,7 +313,7 @@ ElementHidingTracer.prototype = {
 
   trace()
   {
-    this.checkNodes([document], this.selectors, this.filters);
+    this.checkNodes([document], this.selectors);
 
     this.observer.observe(
       document,
@@ -538,7 +544,7 @@ ElemHide.prototype = {
     }
 
     if (this.tracer)
-      this.tracer.addSelectors(selectors, filters || selectors);
+      this.tracer.addSelectors(selectors, filters);
   },
 
   apply()
