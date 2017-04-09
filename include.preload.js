@@ -343,44 +343,39 @@ function runInPageContext(fn, arg)
   document.documentElement.removeChild(script);
 }
 
-// Before Chrome 58 the webRequest API didn't allow us to intercept
-// WebSockets[1], and therefore some ad networks are misusing them as a way to
-// serve adverts and circumvent us. As a workaround we wrap WebSocket,
-// preventing blocked WebSocket connections from being opened.
-// [1] - https://bugs.chromium.org/p/chromium/issues/detail?id=129353
-function wrapWebSocket()
+function wrapRequestAPIs()
 {
-  let randomEventName = "abpws-" + Math.random().toString(36).substr(2);
+  let randomEventName = "abp-request-" + Math.random().toString(36).substr(2);
 
+  // Proxy "should we block?" messages from checkRequest inside the injected
+  // code to the background page and back again.
   document.addEventListener(randomEventName, event =>
   {
+    let {url, requestType} = event.detail;
+
     ext.backgroundPage.sendMessage({
-      type: "request.websocket",
-      url: event.detail.url
+      type: "request.blockedByWrapper",
+      requestType,
+      url
     }, block =>
     {
       document.dispatchEvent(new CustomEvent(
-        randomEventName + "-" + event.detail.url, {detail: block}
+        randomEventName + "-" + requestType + "-" + url, {detail: block}
       ));
     });
   });
 
   runInPageContext(eventName =>
   {
-    // As far as possible we must track everything we use that could be
-    // sabotaged by the website later in order to circumvent us.
-    let RealWebSocket = WebSocket;
     let RealCustomEvent = window.CustomEvent;
-    let closeWebSocket = Function.prototype.call.bind(
-      RealWebSocket.prototype.close
-    );
     let addEventListener = document.addEventListener.bind(document);
     let removeEventListener = document.removeEventListener.bind(document);
     let dispatchEvent = document.dispatchEvent.bind(document);
 
-    function checkRequest(url, callback)
+    function checkRequest(requestType, url, callback)
     {
-      let incomingEventName = eventName + "-" + url;
+      let incomingEventName = eventName + "-" + requestType + "-" + url;
+
       function listener(event)
       {
         callback(event.detail);
@@ -388,8 +383,31 @@ function wrapWebSocket()
       }
       addEventListener(incomingEventName, listener);
 
-      dispatchEvent(new RealCustomEvent(eventName, {detail: {url}}));
+      dispatchEvent(new RealCustomEvent(eventName,
+                                        {detail: {url, requestType}}));
     }
+
+    // Only to be called before the page's code, not hardened.
+    function copyProperties(src, dest, properties)
+    {
+      for (let name of properties)
+      {
+        Object.defineProperty(dest, name,
+                              Object.getOwnPropertyDescriptor(src, name));
+      }
+    }
+
+    /*
+     * WebSocket wrapper
+     *
+     * Required before Chrome 58, since the webRequest API didn't allow us to
+     * intercept WebSockets.
+     * See https://bugs.chromium.org/p/chromium/issues/detail?id=129353
+     */
+    let RealWebSocket = WebSocket;
+    let closeWebSocket = Function.prototype.call.bind(
+      RealWebSocket.prototype.close
+    );
 
     function WrappedWebSocket(url, ...args)
     {
@@ -399,7 +417,7 @@ function wrapWebSocket()
 
       let websocket = new RealWebSocket(url, ...args);
 
-      checkRequest(websocket.url, blocked =>
+      checkRequest("WEBSOCKET", websocket.url, blocked =>
       {
         if (blocked)
           closeWebSocket(websocket);
@@ -409,15 +427,105 @@ function wrapWebSocket()
     }
     WrappedWebSocket.prototype = RealWebSocket.prototype;
     window.WebSocket = WrappedWebSocket.bind();
-    Object.defineProperties(WebSocket, {
-      CONNECTING: {value: RealWebSocket.CONNECTING, enumerable: true},
-      OPEN: {value: RealWebSocket.OPEN, enumerable: true},
-      CLOSING: {value: RealWebSocket.CLOSING, enumerable: true},
-      CLOSED: {value: RealWebSocket.CLOSED, enumerable: true},
-      prototype: {value: RealWebSocket.prototype}
-    });
-
+    copyProperties(RealWebSocket, WebSocket,
+                   ["CONNECTING", "OPEN", "CLOSING", "CLOSED", "prototype"]);
     RealWebSocket.prototype.constructor = WebSocket;
+
+    /*
+     * RTCPeerConnection wrapper
+     *
+     * The webRequest API in Chrome does not yet allow the blocking of
+     * WebRTC connections.
+     * See https://bugs.chromium.org/p/chromium/issues/detail?id=707683
+     */
+    let RealRTCPeerConnection = window.RTCPeerConnection ||
+                                  window.webkitRTCPeerConnection;
+    let closeRTCPeerConnection = Function.prototype.call.bind(
+      RealRTCPeerConnection.prototype.close
+    );
+    let RealArray = Array;
+
+    function checkConfiguration(peerconnection, configuration)
+    {
+      // It would be nice to use the .getConfiguration method to obtain the
+      // already normalized configuration and URLs from the RTCPeerConnection
+      // instance. Unfortunately its not implemented as of Chrome unstable 59.
+      // See https://www.chromestatus.com/feature/5271355306016768
+      if (configuration && configuration.iceServers)
+      {
+        for (let iceServer of configuration.iceServers)
+        {
+          if (iceServer && iceServer.urls)
+          {
+            let {urls} = iceServer;
+
+            // RTCPeerConnection doesn't seem to iterate through pseudo Arrays.
+            if (!(urls instanceof RealArray))
+              urls = [urls];
+
+            for (let url of urls)
+            {
+              // RTCPeerConnection also calls the url's .toString method.
+              if (typeof url != "string")
+                url = url.toString();
+
+              checkRequest("WEBRTC", url, blocked =>
+              {
+                if (blocked)
+                {
+                  // Calling .close() throws if already closed.
+                  try
+                  {
+                    closeRTCPeerConnection(peerconnection);
+                  }
+                  catch (e) {}
+                }
+              });
+            }
+          }
+        }
+      }
+    }
+
+    // Chrome unstable (tested with 59) has already implemented
+    // setConfiguration, so we need to wrap that if it exists too.
+    // https://www.chromestatus.com/feature/5596193748942848
+    if (RealRTCPeerConnection.prototype.setConfiguration)
+    {
+      let realSetConfiguration = Function.prototype.call.bind(
+        RealRTCPeerConnection.prototype.setConfiguration
+      );
+
+      RealRTCPeerConnection.prototype.setConfiguration = function(configuration)
+      {
+        // Call the real method first, so that validates the configuration for
+        // us. Also we might as well since checkRequest is asynchronous anyway.
+        realSetConfiguration(this, configuration);
+        checkConfiguration(this, configuration);
+      };
+    }
+
+    function WrappedRTCPeerConnection(...args)
+    {
+      if (!(this instanceof WrappedRTCPeerConnection))
+        return WrappedRTCPeerConnection();
+
+      let peerconnection = new RealRTCPeerConnection(...args);
+      checkConfiguration(peerconnection, args[0]);
+      return peerconnection;
+    }
+
+    WrappedRTCPeerConnection.prototype = RealRTCPeerConnection.prototype;
+
+    let boundWrappedRTCPeerConnection = WrappedRTCPeerConnection.bind();
+    copyProperties(RealRTCPeerConnection, boundWrappedRTCPeerConnection,
+                   ["caller", "generateCertificate", "name", "prototype"]);
+    RealRTCPeerConnection.prototype.constructor = boundWrappedRTCPeerConnection;
+
+    if ("RTCPeerConnection" in window)
+      window.RTCPeerConnection = boundWrappedRTCPeerConnection;
+    if ("webkitRTCPeerConnection" in window)
+      window.webkitRTCPeerConnection = boundWrappedRTCPeerConnection;
   }, randomEventName);
 }
 
@@ -571,7 +679,7 @@ ElemHide.prototype = {
 if (document instanceof HTMLDocument)
 {
   checkSitekey();
-  wrapWebSocket();
+  wrapRequestAPIs();
 
   elemhide = new ElemHide();
   elemhide.apply();
