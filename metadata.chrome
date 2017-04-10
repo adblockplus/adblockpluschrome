@@ -15,11 +15,11 @@ permissions = tabs
   unlimitedStorage
   notifications
 backgroundScripts = ext/common.js
+  ext/background.js
   lib/compat.js
   lib/publicSuffixList.js
   lib/adblockplus.js
   messageResponder.js
-  ext/background.js
   background.js
 testScripts = ../ext/common.js
   ../ext/background.js
