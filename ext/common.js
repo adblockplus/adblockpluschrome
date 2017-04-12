@@ -23,24 +23,21 @@
 
   let EventTarget = ext._EventTarget = function()
   {
-    this._listeners = [];
+    this._listeners = new Set();
   };
   EventTarget.prototype = {
     addListener(listener)
     {
-      if (this._listeners.indexOf(listener) == -1)
-        this._listeners.push(listener);
+      this._listeners.add(listener);
     },
     removeListener(listener)
     {
-      let idx = this._listeners.indexOf(listener);
-      if (idx != -1)
-        this._listeners.splice(idx, 1);
+      this._listeners.delete(listener);
     },
     _dispatch(...args)
     {
       let results = [];
-      let listeners = this._listeners.slice();
+      let listeners = [...this._listeners];
 
       for (let listener of listeners)
         results.push(listener(...args));
