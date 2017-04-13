@@ -127,6 +127,33 @@ function getURLsFromElement(element)
   return urls;
 }
 
+function hideElement(element)
+{
+  function doHide(el)
+  {
+    let propertyName = "display";
+    let propertyValue = "none";
+    if (el.localName == "frame")
+    {
+      propertyName = "visibility";
+      propertyValue = "hidden";
+    }
+
+    if (el.style.getPropertyValue(propertyName) != propertyValue ||
+        el.style.getPropertyPriority(propertyName) != "important")
+      el.style.setProperty(propertyName, propertyValue, "important");
+  }
+
+  doHide(element);
+
+  new MutationObserver(doHide).observe(
+    element, {
+      attributes: true,
+      attributeFilter: ["style"]
+    }
+  );
+}
+
 function checkCollapse(element)
 {
   let mediatype = typeMap.get(element.localName);
@@ -147,31 +174,9 @@ function checkCollapse(element)
 
     collapse =>
     {
-      function collapseElement()
-      {
-        let propertyName = "display";
-        let propertyValue = "none";
-        if (element.localName == "frame")
-        {
-          propertyName = "visibility";
-          propertyValue = "hidden";
-        }
-
-        if (element.style.getPropertyValue(propertyName) != propertyValue ||
-            element.style.getPropertyPriority(propertyName) != "important")
-          element.style.setProperty(propertyName, propertyValue, "important");
-      }
-
       if (collapse)
       {
-        collapseElement();
-
-        new MutationObserver(collapseElement).observe(
-          element, {
-            attributes: true,
-            attributeFilter: ["style"]
-          }
-        );
+        hideElement(element);
       }
     }
   );
@@ -348,7 +353,8 @@ function ElemHide()
         what: "elemhideemulation"
       }, callback);
     },
-    this.addSelectors.bind(this)
+    this.addSelectors.bind(this),
+    this.hideElements.bind(this)
   );
 }
 ElemHide.prototype = {
@@ -435,6 +441,21 @@ ElemHide.prototype = {
 
     if (this.tracer)
       this.tracer.addSelectors(selectors, filters);
+  },
+
+  hideElements(elements, filters)
+  {
+    for (let element of elements)
+      hideElement(element);
+
+    if (this.tracer)
+    {
+      ext.backgroundPage.sendMessage({
+        type: "devtools.traceElemHide",
+        selectors: [],
+        filters
+      });
+    }
   },
 
   apply()
