@@ -3,10 +3,7 @@ basename = adblockpluschrome
 version = 1.13.2
 author = eyeo GmbH
 permissions = tabs
-  http://*/*
-  https://*/*
-  ws://*/*
-  wss://*/*
+  <all_urls>
   contextMenus
   webRequest
   webRequestBlocking

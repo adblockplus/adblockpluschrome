@@ -593,7 +593,7 @@
       if (results.indexOf(false) != -1)
         return {cancel: true};
     }
-  }, {urls: ["<all_urls>"]}, ["blocking"]);
+  }, {urls: ["https://*/*", "http://*/*", "ws://*/*", "wss://*/*"]}, ["blocking"]);
 
 
   /* Message passing */
