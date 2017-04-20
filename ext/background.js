@@ -569,6 +569,16 @@
     if (details.tabId == -1 || details.type == "main_frame")
       return;
 
+    // Filter out requests from non web protocols. Ideally, we'd explicitly
+    // specify the protocols we are interested in (i.e. http://, https://,
+    // ws:// and wss://) with the url patterns, given below, when adding this
+    // listener. But unfortunately, Chrome <=57 doesn't support the WebSocket
+    // protocol and is causing an error if it is given.
+    let url = new URL(details.url);
+    if (url.protocol != "http:" && url.protocol != "https:" &&
+        url.protocol != "ws:" && url.protocol != "wss:")
+      return;
+
     // We are looking for the frame that contains the element which
     // has triggered this request. For most requests (e.g. images) we
     // can just use the request's frame ID, but for subdocument requests
@@ -584,16 +594,13 @@
     if (frame)
     {
       let results = ext.webRequest.onBeforeRequest._dispatch(
-        new URL(details.url),
-        type.toUpperCase(),
-        new Page({id: details.tabId}),
-        frame
+        url, type.toUpperCase(), new Page({id: details.tabId}), frame
       );
 
       if (results.indexOf(false) != -1)
         return {cancel: true};
     }
-  }, {urls: ["https://*/*", "http://*/*", "ws://*/*", "wss://*/*"]}, ["blocking"]);
+  }, {urls: ["<all_urls>"]}, ["blocking"]);
 
 
   /* Message passing */
