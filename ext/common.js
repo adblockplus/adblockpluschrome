@@ -37,9 +37,8 @@
     _dispatch(...args)
     {
       let results = [];
-      let listeners = [...this._listeners];
 
-      for (let listener of listeners)
+      for (let listener of this._listeners)
         results.push(listener(...args));
 
       return results;
