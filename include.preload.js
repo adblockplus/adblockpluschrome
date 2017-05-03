@@ -444,43 +444,107 @@ function wrapRequestAPIs()
       RealRTCPeerConnection.prototype.close
     );
     let RealArray = Array;
+    let RealString = String;
+    let {create: createObject, defineProperty} = Object;
+
+    function normalizeUrl(url)
+    {
+      if (typeof url != "undefined")
+        return RealString(url);
+    }
+
+    function safeCopyArray(originalArray, transform)
+    {
+      if (originalArray == null || typeof originalArray != "object")
+        return originalArray;
+
+      let safeArray = RealArray(originalArray.length);
+      for (let i = 0; i < safeArray.length; i++)
+      {
+        defineProperty(safeArray, i, {
+          configurable: false, enumerable: false, writable: false,
+          value: transform(originalArray[i])
+        });
+      }
+      defineProperty(safeArray, "length", {
+        configurable: false, enumerable: false, writable: false,
+        value: safeArray.length
+      });
+      return safeArray;
+    }
+
+    // It would be much easier to use the .getConfiguration method to obtain
+    // the normalized and safe configuration from the RTCPeerConnection
+    // instance. Unfortunately its not implemented as of Chrome unstable 59.
+    // See https://www.chromestatus.com/feature/5271355306016768
+    function protectConfiguration(configuration)
+    {
+      if (configuration == null || typeof configuration != "object")
+        return configuration;
+
+      let iceServers = safeCopyArray(
+        configuration.iceServers,
+        iceServer =>
+        {
+          let {url, urls} = iceServer;
+
+          // RTCPeerConnection doesn't iterate through pseudo Arrays of urls.
+          if (typeof urls != "undefined" && !(urls instanceof RealArray))
+            urls = [urls];
+
+          return createObject(iceServer, {
+            url: {
+              configurable: false, enumerable: false, writable: false,
+              value: normalizeUrl(url)
+            },
+            urls: {
+              configurable: false, enumerable: false, writable: false,
+              value: safeCopyArray(urls, normalizeUrl)
+            }
+          });
+        }
+      );
+
+      return createObject(configuration, {
+        iceServers: {
+          configurable: false, enumerable: false, writable: false,
+          value: iceServers
+        }
+      });
+    }
+
+    function checkUrl(peerconnection, url)
+    {
+      checkRequest("WEBRTC", url, blocked =>
+      {
+        if (blocked)
+        {
+          // Calling .close() throws if already closed.
+          try
+          {
+            closeRTCPeerConnection(peerconnection);
+          }
+          catch (e) {}
+        }
+      });
+    }
 
     function checkConfiguration(peerconnection, configuration)
     {
-      // It would be nice to use the .getConfiguration method to obtain the
-      // already normalized configuration and URLs from the RTCPeerConnection
-      // instance. Unfortunately its not implemented as of Chrome unstable 59.
-      // See https://www.chromestatus.com/feature/5271355306016768
       if (configuration && configuration.iceServers)
       {
-        for (let iceServer of configuration.iceServers)
+        for (let i = 0; i < configuration.iceServers.length; i++)
         {
-          if (iceServer && iceServer.urls)
+          let iceServer = configuration.iceServers[i];
+          if (iceServer)
           {
-            let {urls} = iceServer;
+            if (iceServer.url)
+              checkUrl(peerconnection, iceServer.url);
 
-            // RTCPeerConnection doesn't seem to iterate through pseudo Arrays.
-            if (!(urls instanceof RealArray))
-              urls = [urls];
-
-            for (let url of urls)
+            if (iceServer.urls)
             {
-              // RTCPeerConnection also calls the url's .toString method.
-              if (typeof url != "string")
-                url = url.toString();
-
-              checkRequest("WEBRTC", url, blocked =>
-              {
-                if (blocked)
-                {
-                  // Calling .close() throws if already closed.
-                  try
-                  {
-                    closeRTCPeerConnection(peerconnection);
-                  }
-                  catch (e) {}
-                }
-              });
+              for (let j = 0; j < iceServer.urls.length; j++)
+                checkUrl(peerconnection, iceServer.urls[j]);
             }
           }
         }
@@ -498,6 +562,8 @@ function wrapRequestAPIs()
 
       RealRTCPeerConnection.prototype.setConfiguration = function(configuration)
       {
+        configuration = protectConfiguration(configuration);
+
         // Call the real method first, so that validates the configuration for
         // us. Also we might as well since checkRequest is asynchronous anyway.
         realSetConfiguration(this, configuration);
@@ -510,8 +576,12 @@ function wrapRequestAPIs()
       if (!(this instanceof WrappedRTCPeerConnection))
         return WrappedRTCPeerConnection();
 
-      let peerconnection = new RealRTCPeerConnection(...args);
-      checkConfiguration(peerconnection, args[0]);
+      let configuration = protectConfiguration(args[0]);
+      // Since the old webkitRTCPeerConnection constructor takes an optional
+      // second argument we need to take care to pass that through. Necessary
+      // for older versions of Chrome such as 49.
+      let peerconnection = new RealRTCPeerConnection(configuration, args[1]);
+      checkConfiguration(peerconnection, configuration);
       return peerconnection;
     }
 
