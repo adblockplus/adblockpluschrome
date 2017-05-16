@@ -37,8 +37,79 @@ document.addEventListener(randomEventName, event =>
   });
 });
 
-let injected = function(eventName)
+function injected(eventName, injectedIntoContentWindow)
 {
+  let checkRequest;
+
+  /*
+   * Frame context wrapper
+   *
+   * For some edge-cases Chrome will not run content scripts inside of frames.
+   * Website have started to abuse this fact to access unwrapped APIs via a
+   * frame's contentWindow (#4586, 5207). Therefore until Chrome runs content
+   * scripts consistently for all frames we must take care to (re)inject our
+   * wrappers when the contentWindow is accessed.
+   */
+  let injectedToString = Function.prototype.toString.bind(injected);
+  let injectedFrames = new WeakSet();
+  let injectedFramesAdd = WeakSet.prototype.add.bind(injectedFrames);
+  let injectedFramesHas = WeakSet.prototype.has.bind(injectedFrames);
+
+  function injectIntoContentWindow(contentWindow)
+  {
+    if (contentWindow && !injectedFramesHas(contentWindow))
+    {
+      injectedFramesAdd(contentWindow);
+      try
+      {
+        contentWindow[eventName] = checkRequest;
+        contentWindow.eval(
+          "(" + injectedToString() + ")('" + eventName + "', true);"
+        );
+        delete contentWindow[eventName];
+      }
+      catch (e) {}
+    }
+  }
+
+  for (let element of [HTMLFrameElement, HTMLIFrameElement, HTMLObjectElement])
+  {
+    let contentDocumentDesc = Object.getOwnPropertyDescriptor(
+      element.prototype, "contentDocument"
+    );
+    let contentWindowDesc = Object.getOwnPropertyDescriptor(
+      element.prototype, "contentWindow"
+    );
+
+    // Apparently in HTMLObjectElement.prototype.contentWindow does not exist
+    // in older versions of Chrome such as 42.
+    if (!contentWindowDesc)
+      continue;
+
+    let getContentDocument = Function.prototype.call.bind(
+      contentDocumentDesc.get
+    );
+    let getContentWindow = Function.prototype.call.bind(
+      contentWindowDesc.get
+    );
+
+    contentWindowDesc.get = function()
+    {
+      let contentWindow = getContentWindow(this);
+      injectIntoContentWindow(contentWindow);
+      return contentWindow;
+    };
+    contentDocumentDesc.get = function()
+    {
+      injectIntoContentWindow(getContentWindow(this));
+      return getContentDocument(this);
+    };
+    Object.defineProperty(element.prototype, "contentWindow",
+                          contentWindowDesc);
+    Object.defineProperty(element.prototype, "contentDocument",
+                          contentDocumentDesc);
+  }
+
   /*
    * Shadow root getter wrapper
    *
@@ -71,22 +142,31 @@ let injected = function(eventName)
    * RTCPeerConnection wrappers.
    */
   let RealCustomEvent = window.CustomEvent;
-  let addEventListener = document.addEventListener.bind(document);
-  let removeEventListener = document.removeEventListener.bind(document);
-  let dispatchEvent = document.dispatchEvent.bind(document);
 
-  function checkRequest(requestType, url, callback)
+  // If we've been injected into a frame via contentWindow then we can simply
+  // grab the copy of checkRequest left for us by the parent document. Otherwise
+  // we need to set it up now, along with the event handling functions.
+  if (injectedIntoContentWindow)
+    checkRequest = window[eventName];
+  else
   {
-    let incomingEventName = eventName + "-" + requestType + "-" + url;
-
-    function listener(event)
+    let addEventListener = document.addEventListener.bind(document);
+    let dispatchEvent = document.dispatchEvent.bind(document);
+    let removeEventListener = document.removeEventListener.bind(document);
+    checkRequest = (requestType, url, callback) =>
     {
-      callback(event.detail);
-      removeEventListener(incomingEventName, listener);
-    }
-    addEventListener(incomingEventName, listener);
+      let incomingEventName = eventName + "-" + requestType + "-" + url;
 
-    dispatchEvent(new RealCustomEvent(eventName, {detail: {url, requestType}}));
+      function listener(event)
+      {
+        callback(event.detail);
+        removeEventListener(incomingEventName, listener);
+      }
+      addEventListener(incomingEventName, listener);
+
+      dispatchEvent(new RealCustomEvent(eventName,
+                                        {detail: {url, requestType}}));
+    };
   }
 
   // Only to be called before the page's code, not hardened.
@@ -298,7 +378,7 @@ let injected = function(eventName)
     window.RTCPeerConnection = boundWrappedRTCPeerConnection;
   if ("webkitRTCPeerConnection" in window)
     window.webkitRTCPeerConnection = boundWrappedRTCPeerConnection;
-};
+}
 
 if (document instanceof HTMLDocument)
 {
