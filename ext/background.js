@@ -19,43 +19,41 @@
 
 (function()
 {
-  let nonEmptyPageMaps = Object.create(null);
-  let pageMapCounter = 0;
+  let nonEmptyPageMaps = new Set();
 
   let PageMap = ext.PageMap = function()
   {
-    this._map = Object.create(null);
-    this._id = ++pageMapCounter;
+    this._map = new Map();
   };
   PageMap.prototype = {
     _delete(id)
     {
-      delete this._map[id];
+      this._map.delete(id);
 
-      if (Object.keys(this._map).length == 0)
-        delete nonEmptyPageMaps[this._id];
+      if (this._map.size == 0)
+        nonEmptyPageMaps.delete(this);
     },
     keys()
     {
-      return Object.keys(this._map).map(ext.getPage);
+      return this._map.keys();
     },
     get(page)
     {
-      return this._map[page.id];
+      return this._map.get(page.id);
     },
     set(page, value)
     {
-      this._map[page.id] = value;
-      nonEmptyPageMaps[this._id] = this;
+      this._map.set(page.id, value);
+      nonEmptyPageMaps.add(this);
     },
     has(page)
     {
-      return page.id in this._map;
+      return this._map.has(page.id);
     },
     clear()
     {
-      for (let id in this._map)
-        this._delete(id);
+      this._map.clear();
+      nonEmptyPageMaps.delete(this);
     },
     delete(page)
     {
@@ -65,8 +63,8 @@
 
   ext._removeFromAllPageMaps = pageId =>
   {
-    for (let pageMapId in nonEmptyPageMaps)
-      nonEmptyPageMaps[pageMapId]._delete(pageId);
+    for (let pageMap of nonEmptyPageMaps)
+      pageMap._delete(pageId);
   };
 
   /* Pages */
@@ -90,10 +88,10 @@
       // but sometimes we only have the tab id when we create a Page object.
       // In that case we get the url from top frame of the tab, recorded by
       // the onBeforeRequest handler.
-      let frames = framesOfTabs[this.id];
+      let frames = framesOfTabs.get(this.id);
       if (frames)
       {
-        let frame = frames[0];
+        let frame = frames.get(0);
         if (frame)
           return frame.url;
       }
@@ -158,13 +156,19 @@
 
   function createFrame(tabId, frameId)
   {
-    let frames = framesOfTabs[tabId];
+    let frames = framesOfTabs.get(tabId);
     if (!frames)
-      frames = framesOfTabs[tabId] = Object.create(null);
+    {
+      frames = new Map();
+      framesOfTabs.set(tabId, frames);
+    }
 
-    let frame = frames[frameId];
+    let frame = frames.get(frameId);
     if (!frame)
-      frame = frames[frameId] = {};
+    {
+      frame = {};
+      frames.set(frameId, frame);
+    }
 
     return frame;
   }
@@ -190,10 +194,13 @@
       });
     }
 
-    // Update frame parent and URL in frame structure
+    // Update frame URL and parent in frame structure
     let frame = createFrame(tabId, frameId);
     frame.url = new URL(url);
-    frame.parent = framesOfTabs[tabId][parentFrameId] || null;
+
+    let parentFrame = framesOfTabs.get(tabId).get(parentFrameId);
+    if (parentFrame)
+      frame.parent = parentFrame;
   }
 
   chrome.webRequest.onHeadersReceived.addListener(details =>
@@ -292,7 +299,7 @@
     ext.pages.onRemoved._dispatch(tabId);
 
     ext._removeFromAllPageMaps(tabId);
-    delete framesOfTabs[tabId];
+    framesOfTabs.delete(tabId);
   }
 
   chrome.tabs.onReplaced.addListener((addedTabId, removedTabId) =>
@@ -490,11 +497,12 @@
 
   /* Web requests */
 
-  let framesOfTabs = Object.create(null);
+  let framesOfTabs = new Map();
 
   ext.getFrame = (tabId, frameId) =>
   {
-    return (framesOfTabs[tabId] || {})[frameId];
+    let frames = framesOfTabs.get(tabId);
+    return frames && frames.get(frameId);
   };
 
   let handlerBehaviorChangedQuota =
@@ -539,22 +547,16 @@
       {
         if (details && details.length > 0)
         {
-          let frames = framesOfTabs[tab.id] = Object.create(null);
+          let frames = new Map();
+          framesOfTabs.set(tab.id, frames);
 
-          for (let i = 0; i < details.length; i++)
+          for (let detail of details)
           {
-            frames[details[i].frameId] = {
-              url: new URL(details[i].url),
-              parent: null
-            };
-          }
+            let frame = {url: new URL(detail.url)};
+            frames.set(detail.frameId, frame);
 
-          for (let i = 0; i < details.length; i++)
-          {
-            let {parentFrameId} = details[i];
-
-            if (parentFrameId != -1)
-              frames[details[i].frameId].parent = frames[parentFrameId];
+            if (detail.parentFrameId != -1)
+              frame.parent = frames.get(detail.parentFrameId);
           }
         }
       });
@@ -615,16 +617,16 @@
         url: new URL(rawSender.url),
         get parent()
         {
-          let frames = framesOfTabs[rawSender.tab.id];
+          let frames = framesOfTabs.get(rawSender.tab.id);
 
           if (!frames)
             return null;
 
-          let frame = frames[rawSender.frameId];
+          let frame = frames.get(rawSender.frameId);
           if (frame)
-            return frame.parent;
+            return frame.parent || null;
 
-          return frames[0];
+          return frames.get(0) || null;
         }
       };
     }

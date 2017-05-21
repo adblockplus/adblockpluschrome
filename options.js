@@ -37,13 +37,7 @@ function wrapper(baseMessage, ...paramKeys)
 {
   return function(...paramValues /* , callback */)
   {
-    let message = Object.create(null);
-    for (let key in baseMessage)
-    {
-      if (baseMessage.hasOwnProperty(key))
-        message[key] = baseMessage[key];
-    }
-
+    let message = Object.assign(Object.create(null), baseMessage);
     let callback;
 
     if (paramValues.length > 0)
