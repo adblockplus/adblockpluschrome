@@ -585,16 +585,13 @@
     // (e.g. iframes) we must instead use the request's parent frame ID.
     let {frameId, type} = details;
     if (type == "sub_frame")
-    {
       frameId = details.parentFrameId;
-      type = "SUBDOCUMENT";
-    }
 
     let frame = ext.getFrame(details.tabId, frameId);
     if (frame)
     {
       let results = ext.webRequest.onBeforeRequest._dispatch(
-        url, type.toUpperCase(), new Page({id: details.tabId}), frame
+        url, type, new Page({id: details.tabId}), frame
       );
 
       if (results.indexOf(false) != -1)
