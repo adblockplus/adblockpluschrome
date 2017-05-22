@@ -359,10 +359,15 @@ function injected(eventName, injectedIntoContentWindow)
       return WrappedRTCPeerConnection();
 
     let configuration = protectConfiguration(args[0]);
+
     // Since the old webkitRTCPeerConnection constructor takes an optional
     // second argument we need to take care to pass that through. Necessary
     // for older versions of Chrome such as 49.
-    let peerconnection = new RealRTCPeerConnection(configuration, args[1]);
+    let constraints = undefined;
+    if (args.length > 1)
+      constraints = args[1];
+
+    let peerconnection = new RealRTCPeerConnection(configuration, constraints);
     checkConfiguration(peerconnection, configuration);
     return peerconnection;
   }
@@ -371,7 +376,7 @@ function injected(eventName, injectedIntoContentWindow)
 
   let boundWrappedRTCPeerConnection = WrappedRTCPeerConnection.bind();
   copyProperties(RealRTCPeerConnection, boundWrappedRTCPeerConnection,
-                 ["caller", "generateCertificate", "name", "prototype"]);
+                 ["generateCertificate", "name", "prototype"]);
   RealRTCPeerConnection.prototype.constructor = boundWrappedRTCPeerConnection;
 
   if ("RTCPeerConnection" in window)
