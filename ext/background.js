@@ -35,7 +35,7 @@
     },
     keys()
     {
-      return this._map.keys();
+      return Array.from(this._map.keys()).map(ext.getPage);
     },
     get(page)
     {
