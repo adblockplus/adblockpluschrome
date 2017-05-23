@@ -199,7 +199,7 @@ function injected(eventName, injectedIntoContentWindow)
 
     let websocket = new RealWebSocket(url, ...args);
 
-    checkRequest("WEBSOCKET", websocket.url, blocked =>
+    checkRequest("websocket", websocket.url, blocked =>
     {
       if (blocked)
         closeWebSocket(websocket);
@@ -297,7 +297,7 @@ function injected(eventName, injectedIntoContentWindow)
 
   function checkUrl(peerconnection, url)
   {
-    checkRequest("WEBRTC", url, blocked =>
+    checkRequest("webrtc", url, blocked =>
     {
       if (blocked)
       {
