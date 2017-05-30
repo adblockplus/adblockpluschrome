@@ -568,7 +568,7 @@
     // The high-level code isn't interested in requests that aren't
     // related to a tab or requests loading a top-level document,
     // those should never be blocked.
-    if (details.tabId == -1 || details.type == "main_frame")
+    if (details.type == "main_frame")
       return;
 
     // Filter out requests from non web protocols. Ideally, we'd explicitly
@@ -589,16 +589,19 @@
     if (type == "sub_frame")
       frameId = details.parentFrameId;
 
-    let frame = ext.getFrame(details.tabId, frameId);
-    if (frame)
+    // Sometimes requests are not associated with a browser tab and
+    // in this case we want to still be able to view the url being called.
+    let frame = null;
+    let page = null;
+    if (details.tabId != -1)
     {
-      let results = ext.webRequest.onBeforeRequest._dispatch(
-        url, type, new Page({id: details.tabId}), frame
-      );
-
-      if (results.indexOf(false) != -1)
-        return {cancel: true};
+      frame = ext.getFrame(details.tabId, frameId);
+      page = new Page({id: details.tabId});
     }
+
+    if (ext.webRequest.onBeforeRequest._dispatch(
+        url, type, page, frame).includes(false))
+      return {cancel: true};
   }, {urls: ["<all_urls>"]}, ["blocking"]);
 
 
