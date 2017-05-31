@@ -387,10 +387,16 @@ function injected(eventName, injectedIntoContentWindow)
 
 if (document instanceof HTMLDocument)
 {
-  let script = document.createElement("script");
-  script.type = "application/javascript";
-  script.async = false;
-  script.textContent = "(" + injected + ")('" + randomEventName + "');";
-  document.documentElement.appendChild(script);
-  document.documentElement.removeChild(script);
+  let sandbox = window.frameElement &&
+                window.frameElement.getAttribute("sandbox");
+
+  if (typeof sandbox != "string" || /(^|\s)allow-scripts(\s|$)/i.test(sandbox))
+  {
+    let script = document.createElement("script");
+    script.type = "application/javascript";
+    script.async = false;
+    script.textContent = "(" + injected + ")('" + randomEventName + "');";
+    document.documentElement.appendChild(script);
+    document.documentElement.removeChild(script);
+  }
 }
