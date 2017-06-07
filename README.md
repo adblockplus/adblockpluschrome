@@ -1,10 +1,15 @@
-Adblock Plus for Chrome and Opera
-=================================
+Adblock Plus for Chrome, Opera and Firefox
+==========================================
 
 This repository contains the platform-specific Adblock Plus source code for
-Chrome and Opera. It can be used to build Adblock Plus for these platforms,
-generic Adblock Plus code will be extracted from other repositories
+Chrome, Opera and Firefox. It can be used to build Adblock Plus for these
+platforms, generic Adblock Plus code will be extracted from other repositories
 automatically (see _dependencies_ file).
+
+Note that the Firefox extension built from this repository is the new
+[WebExtension](https://developer.mozilla.org/en-US/Add-ons/WebExtensions).
+The source code of the legacy Adblock Plus extension
+can be found [here](https://hg.adblockplus.org/adblockplus).
 
 Building
 ---------
@@ -19,24 +24,33 @@ Building
 
 ### Building the extension
 
-Run the following command in the project directory:
+Run one of the following commands in the project directory, depending on your
+target platform:
 
     ./build.py -t chrome build -k adblockpluschrome.pem
+    ./build.py -t gecko-webext build
 
 This will create a build with a name in the form
-_adblockpluschrome-1.2.3.nnnn.crx_
+_adblockpluschrome-1.2.3.nnnn.crx_ or _adblockplusfirefox-1.2.3.nnnn.xpi_
+
 Note that you don't need an existing signing key for Chrome, a new key
 will be created automatically if the file doesn't exist.
+
+The Firefox extension will be unsigned, and therefore is mostly only useful for
+upload to Mozilla Add-ons. You can also also load it for testing purposes under
+_about:debugging_ or by disabling signature enforcement in Firefox Nightly.
 
 ### Development environment
 
 To simplify the process of testing your changes you can create an unpacked
-development environment. For that run the following command:
+development environment. For that run one of the following commands:
 
     ./build.py -t chrome devenv
+    ./build.py -t gecko-webext devenv
 
-This will create a _devenv.chrome_ directory in the repository. In Chrome you
-should load the directory as an unpacked extension. After making changes to the
+This will create a _devenv.*_ directory in the repository. You can load the
+directory as an unpacked extension, under _chrome://extensions_ in Chrome,
+or under _about:debugging_ in Firefox. After making changes to the
 source code re-run the command to update the development environment, the
 extension should reload automatically after a few seconds.
 
