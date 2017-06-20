@@ -129,22 +129,22 @@ function getURLsFromElement(element)
 
 function hideElement(element)
 {
-  function doHide(el)
+  function doHide()
   {
     let propertyName = "display";
     let propertyValue = "none";
-    if (el.localName == "frame")
+    if (element.localName == "frame")
     {
       propertyName = "visibility";
       propertyValue = "hidden";
     }
 
-    if (el.style.getPropertyValue(propertyName) != propertyValue ||
-        el.style.getPropertyPriority(propertyName) != "important")
-      el.style.setProperty(propertyName, propertyValue, "important");
+    if (element.style.getPropertyValue(propertyName) != propertyValue ||
+        element.style.getPropertyPriority(propertyName) != "important")
+      element.style.setProperty(propertyName, propertyValue, "important");
   }
 
-  doHide(element);
+  doHide();
 
   new MutationObserver(doHide).observe(
     element, {
