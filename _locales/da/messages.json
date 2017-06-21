@@ -9,7 +9,7 @@
     "message": "Tilføj filter"
   },
   "add_filters_msg": {
-    "message": "Tilføj filtre"
+    "message": "Tilføj filter/filtre?"
   },
   "add_your_own_filters": {
     "message": "Tilføj dine egne filtre"
@@ -98,16 +98,16 @@
     "message": "Adblock Plus-udviklingsversion"
   },
   "notification_configure": {
-    "message": "Konfigurer underretningsindstillinger"
+    "message": "Konfigurér notifikationsindstillinger"
   },
   "notification_open_all": {
-    "message": "Åbn alle links i denne underretning"
+    "message": "Åbn alle links i denne notifikation"
   },
   "notification_with_buttons": {
-    "message": "Klik på 'OK' for åbne alle links i denne meddelelse."
+    "message": "Klik 'OK' for at åbne alle links i denne notifikation."
   },
   "notification_without_buttons": {
-    "message": "Klik på meddelelsen for at åbne alle genveje i den."
+    "message": "Klik på notifikationen for at åbne alle dens genveje."
   },
   "options": {
     "message": "Adblock Plus indstillinger"
@@ -163,7 +163,7 @@
     }
   },
   "stats_share_title": {
-    "message": "Del dette tal"
+    "message": "Del dette antal"
   },
   "stats_show_iconnumber": {
     "message": "Vis antal i ikonet"
@@ -175,7 +175,7 @@
     "message": "Vælg et filterabonnement fra listen:"
   },
   "unexpected_filter_list_header": {
-    "message": "Filterliste-toptekster er ikke tilladt her"
+    "message": "Filterlisteoverskrifter er ikke tilladt hér"
   },
   "update_now": {
     "message": "Opdater nu"

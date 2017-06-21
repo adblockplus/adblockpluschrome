@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "इस पॉपअप को बंद करने के बाद पृष्ठ के किसी एक अंग पर क्लिक (अथवा दाएं क्लिक) करे।"
   },
+  "description": {
+    "message": "Adblock Plus 10 करोड़ से अधिक उपकरणों में प्रयुक्त, दुनिया के सबसे लोकप्रिय विज्ञापन अवरोधक है।"
+  },
   "disabled_for_site": {
     "message": "इस साइट पर <strong>इस्तेमाल न करे</strong>"
   },
@@ -94,11 +97,17 @@
   "name_devbuild": {
     "message": "Adblock Plus विकास संस्करण"
   },
+  "notification_configure": {
+    "message": "सूचना विन्यास समनुरूप करें"
+  },
+  "notification_open_all": {
+    "message": "इस सूचना से सभी लिंक खोलें"
+  },
   "notification_with_buttons": {
     "message": "इस अधिसूचना के सारे लिंक खोलने के लिए \"ok\" बटन दबाये"
   },
   "notification_without_buttons": {
-    "message": "सभी लिंक को खोलने के लिए अधिसूचना पर क्लिक करें"
+    "message": "अधिसूचना पर क्लिक कर सभी लिंक खोलें।"
   },
   "options": {
     "message": "Adblock Plus विकल्प"
@@ -114,6 +123,9 @@
   },
   "show_block_element_menu": {
     "message": "'तत्वों को प्रतिबंधित करें' दाएँ क्लिक के मेनू आइटम में प्रदर्शित करे"
+  },
+  "show_devtools_panel": {
+    "message": "डेवलपर उपकरण में 'Adblock Plus' फलक दिखाएँ"
   },
   "stats_label_page": {
     "message": "इस पृष्ठ पर <strong>$number$</strong>",

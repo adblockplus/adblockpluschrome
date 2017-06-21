@@ -1,12 +1,12 @@
 {
   "add": {
-    "message": "Voeg toe"
+    "message": "Toevoegen"
   },
   "add_domain_button": {
-    "message": "Voeg domein toe"
+    "message": "Domein toevoegen"
   },
   "add_filter_button": {
-    "message": "Voeg filter toe"
+    "message": "Filter toevoegen"
   },
   "add_filters_msg": {
     "message": "Filter(s) toevoegen?"
@@ -24,43 +24,43 @@
     "message": "Annuleren"
   },
   "clickhide_instructions": {
-    "message": "Na het sluiten van deze popup, klik (of klik met de rechtermuisknop) op het pagina-element."
+    "message": "Klik (of klik met de rechtermuisknop) na het sluiten van deze pop-up op een element op de pagina."
   },
   "description": {
-    "message": "Adblock Plus wordt op meer dan 100 miljoen apparaten gebruikt, en is 's werelds populairste ad-blocker."
+    "message": "Adblock Plus wordt op meer dan 100 miljoen apparaten gebruikt, en is 's werelds populairste adblocker."
   },
   "disabled_for_site": {
-    "message": "<strong>Uitgeschakeld</strong> op deze site"
+    "message": "<strong>Uitgeschakeld</strong> op deze website"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus is uitgeschakeld voor de hieronder vermelde domeinen. U kunt een domein toevoegen via het Adblock Plus logo in de adresbalk, of door het domein (geen URL) in het vak te typen en te klikken op \"Domein toevoegen\"."
+    "message": "Adblock Plus is voor de hieronder vermelde domeinen uitgeschakeld. U kunt een domein toevoegen via het Adblock Plus-pictogram in de adresbalk, of door het domein (geen URL) in het veld te typen en op de knop 'Domein toevoegen' te klikken."
   },
   "easy_create_filter": {
     "message": "Element blokkeren"
   },
   "edit_filters_raw": {
-    "message": "Bewerk filters als tekst"
+    "message": "Filters bewerken als tekst"
   },
   "enable_only_the": {
-    "message": "Schakel alleen de filterlijsten in die u nodig heeft. Te veel filterlijsten kunnen uw browser vast laten lopen."
+    "message": "Schakel alleen de filterlijsten in die u nodig hebt. Te veel filterlijsten kunnen uw browser laten vastlopen."
   },
   "enabled_for_site": {
-    "message": "<strong>Ingeschakeld</strong> op deze site"
+    "message": "<strong>Ingeschakeld</strong> op deze website"
   },
   "filter_lists": {
     "message": "Filterlijsten"
   },
   "filter_must_follow_syntax": {
-    "message": "Je filter moet de <a>Adblock Plus filter syntax</a> volgen."
+    "message": "Uw filter moet de <a>Adblock Plus-filtersyntaxis</a> volgen."
   },
   "found_a_bug": {
-    "message": "Heb je een bug gevonden? Wil je helpen Adblock Plus te vertalen naar je eigen taal? Dien <a>hier een verzoek in</a>."
+    "message": "Een bug gevonden? Wilt u Adblock Plus naar uw eigen taal vertalen? <a>Dien hier een verzoek in</a>."
   },
   "general": {
     "message": "Algemeen"
   },
   "invalid_css_selector": {
-    "message": "$selector$ is geen geldige CSS selector",
+    "message": "$selector$ is geen geldige CSS-selector",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -68,7 +68,7 @@
     }
   },
   "last_updated_at": {
-    "message": "Laatst bijgewerkt op $time$ op $date$",
+    "message": "Laatst bijgewerkt: $date$ om $time$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -79,7 +79,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "Laatst bijgewerkt op $time$ vandaag",
+    "message": "Laatst bijgewerkt: vandaag om $time$",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -95,22 +95,22 @@
     }
   },
   "name_devbuild": {
-    "message": "Adblock Plus experimentele versie"
+    "message": "Adblock Plus-ontwikkelversie"
   },
   "notification_configure": {
-    "message": "Configureer notificatie instellingen"
+    "message": "Meldingsinstellingen configureren"
   },
   "notification_open_all": {
-    "message": "Open alle links van deze notificatie"
+    "message": "Alle koppelingen van deze melding openen"
   },
   "notification_with_buttons": {
-    "message": "Klik 'OK' om alle links in het bericht te openen"
+    "message": "Klik op 'OK' om alle koppelingen in deze melding te openen."
   },
   "notification_without_buttons": {
-    "message": "Klik op de melding om alle links erin te openen."
+    "message": "Klik op de melding om alle koppelingen erin te openen."
   },
   "options": {
-    "message": "Adblock Plus opties"
+    "message": "Adblock Plus-opties"
   },
   "options_short": {
     "message": "Opties"
@@ -119,13 +119,13 @@
     "message": "Verouderde lijsten worden regelmatig bijgewerkt."
   },
   "remove_button": {
-    "message": "Verwijder geselecteerde"
+    "message": "Geselecteerde verwijderen"
   },
   "show_block_element_menu": {
-    "message": "Toon 'Element blokkeren' in het rechtermuisklik menu"
+    "message": "Menu-item 'Element blokkeren' in contextmenu tonen"
   },
   "show_devtools_panel": {
-    "message": "Toon \"Adblock Plus\" paneel in het ontwikkellaarsscherm"
+    "message": "Paneel 'Adblock Plus' in de ontwikkelaarshulpmiddelen tonen"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> op deze pagina",
@@ -163,19 +163,19 @@
     }
   },
   "stats_share_title": {
-    "message": "Deel dit aantal"
+    "message": "Dit aantal delen"
   },
   "stats_show_iconnumber": {
-    "message": "Nummer weergeven in pictogram"
+    "message": "Aantal in pictogram tonen"
   },
   "stats_title": {
-    "message": "Advertenties geblokkeerd"
+    "message": "Geblokkeerde advertenties"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Kies a.u.b. een filterabonnement uit de lijst:"
+    "message": "Kies een filterabonnement uit de lijst:"
   },
   "unexpected_filter_list_header": {
-    "message": "Filter lijst headers zijn hier niet toegestaan"
+    "message": "Filterlijstheaders zijn hier niet toegestaan"
   },
   "update_now": {
     "message": "Nu bijwerken"

@@ -45,7 +45,7 @@
     "message": "فقط لیست های فیلتر ضروری رو فعال کنید. انتخاب زیاد، باعث کند شدن مرورگر میشه."
   },
   "enabled_for_site": {
-    "message": "<strong>فعال باشد</strong> توی این سایت"
+    "message": "برای این سایت <strong>فعال شد</strong>"
   },
   "filter_lists": {
     "message": "لیست فیلتر"
