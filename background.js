@@ -17,36 +17,7 @@
 
 "use strict";
 
-const {RegExpFilter} = require("filterClasses");
-const {ElemHide} = require("elemHide");
-const {checkWhitelisted} = require("whitelisting");
-const {extractHostFromFrame} = require("url");
 const {port} = require("messaging");
-const devtools = require("devtools");
-
-port.on("get-selectors", (msg, sender) =>
-{
-  let selectors;
-  let trace = devtools && devtools.hasPanel(sender.page);
-
-  if (!checkWhitelisted(sender.page, sender.frame,
-                        RegExpFilter.typeMap.DOCUMENT |
-                        RegExpFilter.typeMap.ELEMHIDE))
-  {
-    let specificOnly = checkWhitelisted(sender.page, sender.frame,
-                                        RegExpFilter.typeMap.GENERICHIDE);
-    selectors = ElemHide.getSelectorsForDomain(
-      extractHostFromFrame(sender.frame),
-      specificOnly ? ElemHide.SPECIFIC_ONLY : ElemHide.ALL_MATCHING
-    );
-  }
-  else
-  {
-    selectors = [];
-  }
-
-  return {selectors, trace};
-});
 
 port.on("forward", (msg, sender) =>
 {

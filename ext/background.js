@@ -617,6 +617,7 @@
     {
       sender.page = new Page(rawSender.tab);
       sender.frame = {
+        id: rawSender.frameId,
         url: new URL(rawSender.url),
         get parent()
         {
