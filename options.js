@@ -69,7 +69,6 @@ const updateSubscription = wrapper({type: "subscriptions.update"}, "url");
 const importRawFilters = wrapper({type: "filters.importRaw"},
                                  "text", "removeExisting");
 const addFilter = wrapper({type: "filters.add"}, "text");
-const getFilters = wrapper({type: "filters.get"}, "subscriptionUrl");
 const removeFilter = wrapper({type: "filters.remove"}, "text");
 
 const whitelistedDomainRegexp = /^@@\|\|([^/:]+)\^\$document$/;
@@ -187,16 +186,13 @@ $(loadOptions);
 
 function convertSpecialSubscription(subscription)
 {
-  getFilters(subscription.url, filters =>
+  for (let filter of subscription.filters)
   {
-    for (let filter of filters)
-    {
-      if (whitelistedDomainRegexp.test(filter.text))
-        appendToListBox("excludedDomainsBox", RegExp.$1);
-      else
-        appendToListBox("userFiltersBox", filter.text);
-    }
-  });
+    if (whitelistedDomainRegexp.test(filter.text))
+      appendToListBox("excludedDomainsBox", RegExp.$1);
+    else
+      appendToListBox("userFiltersBox", filter.text);
+  }
 }
 
 // Reloads the displayed subscriptions and filters
