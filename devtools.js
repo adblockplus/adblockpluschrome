@@ -44,11 +44,14 @@ chrome.runtime.sendMessage(
             panelWindow = null;
           });
 
-          panel.onSearch.addListener((eventName, queryString) =>
+          if (panel.onSearch)
           {
-            if (panelWindow)
-              panelWindow.postMessage({type: eventName, queryString}, "*");
-          });
+            panel.onSearch.addListener((eventName, queryString) =>
+            {
+              if (panelWindow)
+                panelWindow.postMessage({type: eventName, queryString}, "*");
+            });
+          }
         }
       );
     }
