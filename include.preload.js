@@ -458,8 +458,10 @@ ElemHide.prototype = {
     }
     else
     {
-      ext.backgroundPage.sendMessage({type: "elemhide.injectSelectors",
-                                      selectors});
+      ext.backgroundPage.sendMessage({
+        type: "elemhide.injectSelectors",
+        selectors
+      });
     }
 
     if (this.tracer)
