@@ -359,7 +359,7 @@ function injected(eventName, injectedIntoContentWindow)
   function WrappedRTCPeerConnection(...args)
   {
     if (!(this instanceof WrappedRTCPeerConnection))
-      return WrappedRTCPeerConnection();
+      return RealRTCPeerConnection();
 
     let configuration = protectConfiguration(args[0]);
 
