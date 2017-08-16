@@ -1,9 +1,17 @@
 "use strict";
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>
+// Firefox 55 erroneously sends messages from the content script to the
+// devtools panel:
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1383310
+// As a workaround, listen for messages only if this isn't the devtools panel.
+if (!("devtools" in chrome))
 {
-  return ext.onMessage._dispatch(message, {}, sendResponse).indexOf(true) != -1;
-});
+  // Listen for messages from the background page.
+  chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>
+  {
+    return ext.onMessage._dispatch(message, {}, sendResponse).includes(true);
+  });
+}
 
 (function()
 {
