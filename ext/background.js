@@ -423,7 +423,9 @@
 
   let updateContextMenu = () =>
   {
-    if (contextMenuUpdating)
+    // Firefox for Android does not support context menus.
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=1269062
+    if (!("contextMenus" in chrome) || contextMenuUpdating)
       return;
 
     contextMenuUpdating = true;
