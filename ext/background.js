@@ -327,33 +327,50 @@
     {
       if ("iconPath" in this._changes)
       {
-        chrome.browserAction.setIcon({
-          tabId: this._tabId,
-          path: {
-            16: this._changes.iconPath.replace("$size", "16"),
-            19: this._changes.iconPath.replace("$size", "19"),
-            20: this._changes.iconPath.replace("$size", "20"),
-            32: this._changes.iconPath.replace("$size", "32"),
-            38: this._changes.iconPath.replace("$size", "38"),
-            40: this._changes.iconPath.replace("$size", "40")
-          }
-        });
+        // Firefox for Android displays the browser action not as an icon but
+        // as a menu item. There is no icon, but such an option may be added in
+        // the future.
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=1331746
+        if ("setIcon" in chrome.browserAction)
+        {
+          chrome.browserAction.setIcon({
+            tabId: this._tabId,
+            path: {
+              16: this._changes.iconPath.replace("$size", "16"),
+              19: this._changes.iconPath.replace("$size", "19"),
+              20: this._changes.iconPath.replace("$size", "20"),
+              32: this._changes.iconPath.replace("$size", "32"),
+              38: this._changes.iconPath.replace("$size", "38"),
+              40: this._changes.iconPath.replace("$size", "40")
+            }
+          });
+        }
       }
 
       if ("badgeText" in this._changes)
       {
-        chrome.browserAction.setBadgeText({
-          tabId: this._tabId,
-          text: this._changes.badgeText
-        });
+        // There is no badge on Firefox for Android; the browser action is
+        // simply a menu item.
+        if ("setBadgeText" in chrome.browserAction)
+        {
+          chrome.browserAction.setBadgeText({
+            tabId: this._tabId,
+            text: this._changes.badgeText
+          });
+        }
       }
 
       if ("badgeColor" in this._changes)
       {
-        chrome.browserAction.setBadgeBackgroundColor({
-          tabId: this._tabId,
-          color: this._changes.badgeColor
-        });
+        // There is no badge on Firefox for Android; the browser action is
+        // simply a menu item.
+        if ("setBadgeBackgroundColor" in chrome.browserAction)
+        {
+          chrome.browserAction.setBadgeBackgroundColor({
+            tabId: this._tabId,
+            color: this._changes.badgeColor
+          });
+        }
       }
 
       this._changes = null;
