@@ -37,6 +37,7 @@ let legacyAPISupported = new Promise(resolve =>
 });
 let contentBlockingActive = false;
 let afterContentBlockingFinished = null;
+let pendingContentBlockerUpdate = null;
 let contentBlockListDirty = true;
 let lastSetContentBlockerError;
 
@@ -49,80 +50,129 @@ function clearBlockCounters()
   });
 }
 
-function setContentBlocker(callback)
+function setContentBlocker()
 {
-  // When given the same rules as last time setContentBlocker will always give
-  // null (success) to the callback, even when there was actually an error. We
-  // cache the last result therefore so that we can provide a consistent result
-  // and also to avoid wastefully regenerating an identical blocklist.
-  if (!contentBlockListDirty)
+  return new Promise((resolve, reject) =>
   {
-    callback(lastSetContentBlockerError);
-    return;
-  }
-
-  let contentBlockerList = new ContentBlockerList();
-  for (let subscription of FilterStorage.subscriptions)
-    if (!subscription.disabled)
-      for (let filter of subscription.filters)
-        contentBlockerList.addFilter(filter);
-
-  contentBlockListDirty = false;
-  safari.extension.setContentBlocker(
-    // There is a strange bug in setContentBlocker for Safari 9 where if both
-    // the callback parameter is provided and the rules aren't converted to a
-    // JSON string it fails. Worse still it actually performs the callback twice
-    // too, firstly with an empty string and then with an Error:
-    //   "Extension compilation failed: Failed to parse the JSON String."
-    // To mitigate this we convert the rules to JSON here and also ignore
-    // callback values of "". (Usually the callback is performed with either
-    // null for success or an Error on failure.)
-    // Bug #26322821 filed on bugreport.apple.com
-    JSON.stringify(contentBlockerList.generateRules()),
-    function(error)
+    // Reset state and either fulfill or reject this promise.
+    function completePromise(error)
     {
-      if (error == "")
-        return;
-
       lastSetContentBlockerError = error;
-      callback(error);
+      contentBlockListDirty = false;
+
+      if (error instanceof Error)
+        reject(error);
+      else
+        resolve();
     }
-  );
+
+    // When given the same rules as last time setContentBlocker will always
+    // resolve with null (success), even when there was actually an
+    // error. We cache the last result therefore so that we can provide a
+    // consistent result and also to avoid wastefully regenerating an identical
+    // blocklist.
+    if (!contentBlockListDirty)
+    {
+      completePromise(lastSetContentBlockerError);
+      return;
+    }
+
+    let contentBlockerList = new ContentBlockerList();
+    for (let subscription of FilterStorage.subscriptions)
+    {
+      if (!subscription.disabled)
+      {
+        for (let filter of subscription.filters)
+          contentBlockerList.addFilter(filter);
+      }
+    }
+
+    contentBlockerList.generateRules().then(rules =>
+    {
+      safari.extension.setContentBlocker(
+        // There is a strange bug in setContentBlocker for Safari 9 where if
+        // both the callback parameter is provided and the rules aren't
+        // converted to a JSON string it fails. Worse still it actually
+        // performs the callback twice too, firstly with an empty string and
+        // then with an Error: "Extension compilation failed: Failed to parse
+        // the JSON String." To mitigate this we convert the rules to JSON here
+        // and also ignore callback values of "". (Usually the callback is
+        // performed with either null for success or an Error on failure.)
+        // Bug #26322821 filed on bugreport.apple.com
+        JSON.stringify(rules),
+        function(error)
+        {
+          if (error == "")
+            return;
+
+          completePromise(error);
+        }
+      );
+    })
+    .catch(completePromise);
+  });
 }
 
 function updateContentBlocker(isStartup, legacyAPISupported)
 {
-  afterContentBlockingFinished = new Promise(resolve =>
+  // Another update can be requested while one is still in progress (e.g. the
+  // user adds filter lists in quick succession). When this happens, save the
+  // request and execute it later.
+  if (afterContentBlockingFinished)
   {
-    setContentBlocker(error =>
+    pendingContentBlockerUpdate = {
+      params: Array.from(arguments),
+      // Save the current dirty state so we can set it later before calling
+      // this function again.
+      setDirty: contentBlockListDirty
+    };
+    return;
+  }
+
+  afterContentBlockingFinished = setContentBlocker().then(() =>
+  {
+    if (!contentBlockingActive)
     {
-      if (error instanceof Error)
-      {
-        let suppressErrorMessage = false;
+      contentBlockingActive = true;
+      clearBlockCounters();
+    }
+  },
+  error =>
+  {
+    let suppressErrorMessage = false;
 
-        // If the content blocking API fails the first time it's used the
-        // legacy blocking API (if available) won't have been disabled.
-        if (!contentBlockingActive && legacyAPISupported)
-        {
-          Prefs.safariContentBlocker = false;
-          // If content blocking failed on startup and we're switching back to
-          // the legacy API anyway we don't need to show an error message.
-          if (isStartup)
-            suppressErrorMessage = true;
-        }
+    // If the content blocking API fails the first time it's used the
+    // legacy blocking API (if available) won't have been disabled.
+    if (!contentBlockingActive && legacyAPISupported)
+    {
+      Prefs.safariContentBlocker = false;
+      // If content blocking failed on startup and we're switching back to
+      // the legacy API anyway we don't need to show an error message.
+      if (isStartup)
+        suppressErrorMessage = true;
+    }
 
-        if (!suppressErrorMessage)
-          alert(error.message);
-      }
-      else if (!contentBlockingActive)
-      {
-        contentBlockingActive = true;
-        clearBlockCounters();
-      }
+    if (!suppressErrorMessage)
+      alert(error.message);
+  })
+  .then(() =>
+  {
+    afterContentBlockingFinished = null;
 
-      resolve(contentBlockingActive);
-      afterContentBlockingFinished = null;
-    });
+    // If there's another update pending, execute it now.
+    if (pendingContentBlockerUpdate)
+    {
+      let {params, setDirty} = pendingContentBlockerUpdate;
+      pendingContentBlockerUpdate = null;
+
+      if (setDirty)
+        contentBlockListDirty = true;
+
+      updateContentBlocker.apply(null, params);
+      return afterContentBlockingFinished;
+    }
+
+    return contentBlockingActive;
   });
 }
 
