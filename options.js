@@ -74,14 +74,14 @@ const quoteCSS = wrapper({type: "composer.quoteCSS"}, "CSS");
 
 const whitelistedDomainRegexp = /^@@\|\|([^/:]+)\^\$document$/;
 const statusMessages = new Map([
-   ["synchronize_invalid_url",
-    "filters_subscription_lastDownload_invalidURL"],
-   ["synchronize_connection_error",
-    "filters_subscription_lastDownload_connectionError"],
-   ["synchronize_invalid_data",
-    "filters_subscription_lastDownload_invalidData"],
-   ["synchronize_checksum_mismatch",
-    "filters_subscription_lastDownload_checksumMismatch"]
+  ["synchronize_invalid_url",
+   "filters_subscription_lastDownload_invalidURL"],
+  ["synchronize_connection_error",
+   "filters_subscription_lastDownload_connectionError"],
+  ["synchronize_invalid_data",
+   "filters_subscription_lastDownload_invalidData"],
+  ["synchronize_checksum_mismatch",
+   "filters_subscription_lastDownload_checksumMismatch"]
 ]);
 
 let delayedSubscriptionSelection = null;
