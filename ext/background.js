@@ -317,6 +317,16 @@
 
   /* Browser actions */
 
+  // On Firefox for Android, open the options page directly when the browser
+  // action is clicked.
+  if (!("getPopup" in chrome.browserAction))
+  {
+    chrome.browserAction.onClicked.addListener(() =>
+    {
+      ext.showOptions();
+    });
+  }
+
   let BrowserAction = function(tabId)
   {
     this._tabId = tabId;
@@ -684,9 +694,13 @@
 
   /* Options */
 
-  if ("openOptionsPage" in chrome.runtime)
+  ext.showOptions = callback =>
   {
-    ext.showOptions = callback =>
+    if ("openOptionsPage" in chrome.runtime &&
+        // Firefox for Android does have a runtime.openOptionsPage but it
+        // doesn't do anything.
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=1364945
+        require("info").application != "fennec")
     {
       if (!callback)
       {
@@ -711,17 +725,15 @@
           });
         });
       }
-    };
-  }
-  else
-  {
-    // Edge does not yet support runtime.openOptionsPage (tested version 38)
-    // and so this workaround needs to stay for now.
-    // We are not using extension.getURL to get the absolute path here
-    // because of the Edge issue:
-    // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/10276332/
-    ext.showOptions = callback =>
+    }
+    else
     {
+      // Edge does not yet support runtime.openOptionsPage (tested version 38)
+      // nor does Firefox for Android,
+      // and so this workaround needs to stay for now.
+      // We are not using extension.getURL to get the absolute path here
+      // because of the Edge issue:
+      // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/10276332/
       chrome.windows.getLastFocused(win =>
       {
         let optionsUrl = "options.html";
@@ -735,7 +747,7 @@
 
         chrome.tabs.query(queryInfo, tabs =>
         {
-          if (tabs.length > 0)
+          if (tabs && tabs.length > 0)
           {
             let tab = tabs[0];
 
@@ -751,8 +763,8 @@
           }
         });
       });
-    };
-  }
+    }
+  };
 
   /* Windows */
   ext.windows = {
