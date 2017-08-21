@@ -668,7 +668,7 @@
 
     return ext.onMessage._dispatch(
       message, sender, sendResponse
-    ).indexOf(true) != -1;
+    ).includes(true);
   });
 
 

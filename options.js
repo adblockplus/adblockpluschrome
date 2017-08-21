@@ -662,7 +662,7 @@ function addSubscriptionEntry(subscription)
 
   getPref("additional_subscriptions", additionalSubscriptions =>
   {
-    if (additionalSubscriptions.indexOf(subscription.url) != -1)
+    if (additionalSubscriptions.includes(subscription.url))
       removeButton.style.visibility = "hidden";
   });
 
