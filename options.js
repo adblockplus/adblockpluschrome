@@ -118,6 +118,9 @@ function loadOptions()
       {
         setLinks("found-a-bug", url);
       });
+
+      if (platform == "gecko")
+        $("#firefox-warning").removeAttr("hidden");
     });
   });
 
