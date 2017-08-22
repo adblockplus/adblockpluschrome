@@ -302,7 +302,7 @@ def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdep
     if overrideroots is not None:
         config['_root'] = overrideroots
 
-    for dir, sources in config.iteritems():
+    for dir, sources in sorted(config.iteritems()):
         if (dir.startswith('_') or
             skipdependencies.intersection([s[0] for s in sources if s[0]])):
             continue
