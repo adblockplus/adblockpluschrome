@@ -517,11 +517,14 @@
 
   chrome.tabs.onActivated.addListener(updateContextMenu);
 
-  chrome.windows.onFocusChanged.addListener(windowId =>
+  if ("windows" in chrome)
   {
-    if (windowId != chrome.windows.WINDOW_ID_NONE)
-      updateContextMenu();
-  });
+    chrome.windows.onFocusChanged.addListener(windowId =>
+    {
+      if (windowId != chrome.windows.WINDOW_ID_NONE)
+        updateContextMenu();
+    });
+  }
 
 
   /* Web requests */
@@ -734,7 +737,7 @@
       // We are not using extension.getURL to get the absolute path here
       // because of the Edge issue:
       // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/10276332/
-      chrome.windows.getLastFocused(win =>
+      let open = win =>
       {
         let optionsUrl = "options.html";
         let queryInfo = {url: optionsUrl};
@@ -742,7 +745,7 @@
         // extension pages can't be accessed in incognito windows. In order to
         // correctly mimic the way in which Chrome opens extension options,
         // we have to focus the options page in any other window.
-        if (!win.incognito)
+        if (win && !win.incognito)
           queryInfo.windowId = win.id;
 
         chrome.tabs.query(queryInfo, tabs =>
@@ -751,7 +754,9 @@
           {
             let tab = tabs[0];
 
-            chrome.windows.update(tab.windowId, {focused: true});
+            if ("windows" in chrome)
+              chrome.windows.update(tab.windowId, {focused: true});
+
             chrome.tabs.update(tab.id, {active: true});
 
             if (callback)
@@ -762,7 +767,19 @@
             ext.pages.open(optionsUrl, callback);
           }
         });
-      });
+      };
+
+      if ("windows" in chrome)
+      {
+        chrome.windows.getLastFocused(open);
+      }
+      else
+      {
+        // Firefox for Android does not support the windows API. Since there is
+        // effectively only one window on the mobile browser, there's no need
+        // to bring it into focus.
+        open();
+      }
     }
   };
 
