@@ -112,7 +112,7 @@ lib/adblockplus.js =
   adblockplusui/lib/antiadblockInit.js
 lib/adblockplus.js[module] = true
 lib/adblockplus.js[injectinfomodule] = true
-lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,subscriptionInit,filterComposer,stats,uninstall,csp,cssInjection
+lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,subscriptionInit,filterComposer,stats,uninstall,csp,cssInjection,firefoxDataCleanup
 include.preload.js = include.preload.js inject.preload.js
 include.postload.js = subscriptionLink.postload.js composer.postload.js
 elemHideEmulation.js = adblockpluscore/lib/common.js adblockpluscore/chrome/content/elemHideEmulation.js
