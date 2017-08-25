@@ -740,48 +740,46 @@
       // We are not using extension.getURL to get the absolute path here
       // because of the Edge issue:
       // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/10276332/
-      let open = win =>
-      {
-        let optionsUrl = "options.html";
-        let queryInfo = {url: optionsUrl};
-
-        // extension pages can't be accessed in incognito windows. In order to
-        // correctly mimic the way in which Chrome opens extension options,
-        // we have to focus the options page in any other window.
-        if (win && !win.incognito)
-          queryInfo.windowId = win.id;
-
-        chrome.tabs.query(queryInfo, tabs =>
-        {
-          if (tabs && tabs.length > 0)
-          {
-            let tab = tabs[0];
-
-            if ("windows" in chrome)
-              chrome.windows.update(tab.windowId, {focused: true});
-
-            chrome.tabs.update(tab.id, {active: true});
-
-            if (callback)
-              callback(new Page(tab));
-          }
-          else
-          {
-            ext.pages.open(optionsUrl, callback);
-          }
-        });
-      };
-
       if ("windows" in chrome)
       {
-        chrome.windows.getLastFocused(open);
+        chrome.windows.getLastFocused(win =>
+        {
+          let optionsUrl = "options.html";
+          let queryInfo = {url: optionsUrl};
+
+          // extension pages can't be accessed in incognito windows. In order to
+          // correctly mimic the way in which Chrome opens extension options,
+          // we have to focus the options page in any other window.
+          if (!win.incognito)
+            queryInfo.windowId = win.id;
+
+          chrome.tabs.query(queryInfo, tabs =>
+          {
+            if (tabs.length > 0)
+            {
+              let tab = tabs[0];
+
+              if ("windows" in chrome)
+                chrome.windows.update(tab.windowId, {focused: true});
+
+              chrome.tabs.update(tab.id, {active: true});
+
+              if (callback)
+                callback(new Page(tab));
+            }
+            else
+            {
+              ext.pages.open(optionsUrl, callback);
+            }
+          });
+        });
       }
       else
       {
         // Firefox for Android does not support the windows API. Since there is
         // effectively only one window on the mobile browser, there's no need
         // to bring it into focus.
-        open();
+        ext.pages.open("options.html", callback);
       }
     }
   };
