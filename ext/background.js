@@ -699,11 +699,14 @@
 
   ext.showOptions = callback =>
   {
+    let info = require("info");
+
     if ("openOptionsPage" in chrome.runtime &&
-        // Firefox for Android does have a runtime.openOptionsPage but it
-        // doesn't do anything.
+        // Some versions of Firefox for Android before version 57 do have a
+        // runtime.openOptionsPage but it doesn't do anything.
         // https://bugzilla.mozilla.org/show_bug.cgi?id=1364945
-        require("info").application != "fennec")
+        (info.application != "fennec" ||
+         parseInt(info.applicationVersion, 10) >= 57))
     {
       if (!callback)
       {
@@ -732,7 +735,7 @@
     else
     {
       // Edge does not yet support runtime.openOptionsPage (tested version 38)
-      // nor does Firefox for Android,
+      // nor does Firefox for Android before version 57,
       // and so this workaround needs to stay for now.
       // We are not using extension.getURL to get the absolute path here
       // because of the Edge issue:
