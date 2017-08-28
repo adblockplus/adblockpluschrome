@@ -747,10 +747,7 @@
           let optionsUrl = "options.html";
           let queryInfo = {url: optionsUrl};
 
-          // extension pages can't be accessed in incognito windows. In order to
-          // correctly mimic the way in which Chrome opens extension options,
-          // we have to focus the options page in any other window.
-          if (!win.incognito)
+          if (win)
             queryInfo.windowId = win.id;
 
           chrome.tabs.query(queryInfo, tabs =>
