@@ -579,13 +579,36 @@ ElemHide.prototype = {
   }
 };
 
+function whenDocumentVisible(callback)
+{
+  if (document.visibilityState == "prerender")
+  {
+    // For prerendered documents, wait until the document is made visible. We
+    // do not have access to the page property of the SafariBrowserTab object
+    // associated with this document until it is visible. Without the page
+    // property, we cannot get a response from the background page.
+    let onVisibilitychange = function()
+    {
+      document.removeEventListener("visibilitychange", onVisibilitychange);
+      callback();
+    };
+
+    document.addEventListener("visibilitychange", onVisibilitychange);
+  }
+  else
+  {
+    callback();
+  }
+}
+
 if (document instanceof HTMLDocument)
 {
   checkSitekey();
   wrapWebSocket();
 
   var elemhide = new ElemHide();
-  elemhide.apply();
+
+  whenDocumentVisible(elemhide.apply.bind(elemhide));
 
   document.addEventListener("error", function(event)
   {

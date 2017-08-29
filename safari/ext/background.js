@@ -186,17 +186,7 @@
     this.id = id;
     this._tab = tab;
     this._frames = [{url: new URL(url), parent: null}];
-
-    if (tab.page)
-      this._messageProxy = new ext._MessageProxy(tab.page);
-    else
-      // while the new tab page is shown on Safari 7, the 'page' property
-      // of the tab is undefined, and we can't send messages to that page
-      this._messageProxy = {
-        handleRequest: function() {},
-        handleResponse: function() {},
-        sendMessage: function() {}
-      };
+    this._messageProxy = null;
 
     this.browserAction = new BrowserAction(this);
     this.contextMenus = new ContextMenus(this);
@@ -213,8 +203,34 @@
         if (this._tab._documentLookup[documentId].pageId == this.id)
           documentIds.push(documentId);
 
-      this._messageProxy.sendMessage(message, responseCallback,
-                                     {targetDocuments: documentIds});
+      var messageProxy = this._getMessageProxy();
+      if (messageProxy)
+      {
+        messageProxy.sendMessage(message, responseCallback,
+                                 {targetDocuments: documentIds});
+      }
+    },
+    _getMessageProxy: function()
+    {
+      // Instantiate the message proxy only if the page object is available.
+      // For prerendered documents, the page object becomes available only once
+      // the document is made visible.
+      if (!this._messageProxy && this._tab.page)
+        this._messageProxy = new ext._MessageProxy(this._tab.page);
+
+      return this._messageProxy;
+    },
+    _handleRequest: function(request, sender)
+    {
+      var messageProxy = this._getMessageProxy();
+      if (messageProxy)
+        messageProxy.handleRequest(request, sender);
+    },
+    _handleResponse: function(response)
+    {
+      var messageProxy = this._getMessageProxy();
+      if (messageProxy)
+        messageProxy.handleResponse(response);
     }
   };
 
@@ -424,13 +440,13 @@
         }
         break;
       case "request":
-        sender.page._messageProxy.handleRequest(message, sender);
+        sender.page._handleRequest(message, sender);
         break;
       case "response":
         // All documents within a page have the same pageId and that's all we
         // care about here.
         var pageId = tab._documentLookup[message.targetDocuments[0]].pageId;
-        pages[pageId]._messageProxy.handleResponse(message);
+        pages[pageId]._handleResponse(message);
         break;
       case "replaced":
         // when a prerendered page is shown, forget the previous page

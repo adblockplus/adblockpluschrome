@@ -582,5 +582,10 @@ if (document instanceof HTMLDocument)
   });
 
   if (window == window.top)
-    ext.backgroundPage.sendMessage({type: "composer.ready"});
+  {
+    whenDocumentVisible(() =>
+    {
+      ext.backgroundPage.sendMessage({type: "composer.ready"});
+    });
+  }
 }
