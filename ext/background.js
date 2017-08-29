@@ -732,52 +732,44 @@
         });
       }
     }
-    else
+    else if ("windows" in chrome)
     {
       // Edge does not yet support runtime.openOptionsPage (tested version 38)
-      // nor does Firefox for Android before version 57,
       // and so this workaround needs to stay for now.
       // We are not using extension.getURL to get the absolute path here
       // because of the Edge issue:
       // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/10276332/
-      if ("windows" in chrome)
+      let optionsUrl = "options.html";
+      let fullOptionsUrl = ext.getURL(optionsUrl);
+
+      chrome.tabs.query({}, tabs =>
       {
-        chrome.windows.getLastFocused(win =>
+        // We find a tab ourselves because Edge has a bug when quering tabs
+        // with extension URL protocol:
+        // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/8094141/ 
+        // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/8604703/
+        let tab = tabs.find(element => element.url == fullOptionsUrl);
+        if (tab)
         {
-          let optionsUrl = "options.html";
-          let queryInfo = {url: optionsUrl};
+          chrome.windows.update(tab.windowId, {focused: true});
+          chrome.tabs.update(tab.id, {active: true});
 
-          if (win)
-            queryInfo.windowId = win.id;
-
-          chrome.tabs.query(queryInfo, tabs =>
-          {
-            if (tabs.length > 0)
-            {
-              let tab = tabs[0];
-
-              if ("windows" in chrome)
-                chrome.windows.update(tab.windowId, {focused: true});
-
-              chrome.tabs.update(tab.id, {active: true});
-
-              if (callback)
-                callback(new Page(tab));
-            }
-            else
-            {
-              ext.pages.open(optionsUrl, callback);
-            }
-          });
-        });
-      }
-      else
-      {
-        // Firefox for Android does not support the windows API. Since there is
-        // effectively only one window on the mobile browser, there's no need
-        // to bring it into focus.
-        ext.pages.open("options.html", callback);
-      }
+          if (callback)
+            callback(new Page(tab));
+        }
+        else
+        {
+          ext.pages.open(optionsUrl, callback);
+        }
+      });
+    }
+    else
+    {
+      // Firefox for Android before version 57 does not support
+      // runtime.openOptionsPage, nor does it support the windows API. Since
+      // there is effectively only one window on the mobile browser, there's no
+      // need to bring it into focus.
+      ext.pages.open("options.html", callback);
     }
   };
 
