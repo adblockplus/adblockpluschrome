@@ -14,6 +14,7 @@ import logging
 import subprocess
 import urlparse
 import argparse
+import json
 
 from collections import OrderedDict
 from ConfigParser import RawConfigParser
@@ -245,14 +246,51 @@ def get_repo_type(repo):
     return 'hg'
 
 
+def resolve_npm_dependencies(target, vcs):
+    """Install Node.js production-only dependencies if necessary and desired.
+
+    When the target dependency has additional Node.js dependencies declared
+    run "npm install --only=production --loglevel=warn" to resolve the declared
+    dependencies.
+
+    Additionally, make sure that any VCS will ignore the installed files.
+
+    Requires Node.js to be installed locally.
+    """
+    try:
+        with open(os.path.join(target, 'package.json'), 'r') as fp:
+            package_data = json.load(fp)
+
+        # In case a package.json does not exist at all or if there are no
+        # production dependencies declared, we don't need to run npm and can
+        # bail out early.
+        if not package_data.get('dependencies', False):
+            return
+    except IOError:
+        return
+
+    try:
+        cmd = ['npm', 'install', '--only=production', '--loglevel=warn']
+        subprocess.check_output(cmd, cwd=target)
+
+        repo_types[vcs].ignore(os.path.join(target, 'node_modules'), target)
+    except OSError as e:
+        import errno
+        if e.errno == errno.ENOENT:
+            logging.error('Failed to install Node.js dependencies for %s,'
+                          ' please ensure Node.js is installed.', target)
+        else:
+            raise
+
+
 def ensure_repo(parentrepo, parenttype, target, type, root, sourcename):
     if os.path.exists(target):
-        return
+        return False
 
     if SKIP_DEPENDENCY_UPDATES:
         logging.warning('SKIP_DEPENDENCY_UPDATES environment variable set, '
                         '%s not cloned', target)
-        return
+        return False
 
     postprocess_url = repo_types[type].postprocess_url
     root = postprocess_url(root)
@@ -266,6 +304,7 @@ def ensure_repo(parentrepo, parenttype, target, type, root, sourcename):
     logging.info('Cloning repository %s into %s' % (url, target))
     repo_types[type].clone(url, target)
     repo_types[parenttype].ignore(target, parentrepo)
+    return True
 
 
 def update_repo(target, type, revision):
@@ -276,7 +315,7 @@ def update_repo(target, type, revision):
         if SKIP_DEPENDENCY_UPDATES:
             logging.warning('SKIP_DEPENDENCY_UPDATES environment variable set, '
                             '%s not checked out to %s', target, revision)
-            return
+            return False
 
         if not resolved_revision:
             logging.info('Revision %s is unknown, downloading remote changes' % revision)
@@ -287,6 +326,8 @@ def update_repo(target, type, revision):
 
         logging.info('Updating repository %s to revision %s' % (target, resolved_revision))
         repo_types[type].update(target, resolved_revision, revision)
+        return True
+    return False
 
 
 def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdependencies=set()):
@@ -320,8 +361,11 @@ def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdep
             logging.warning('No valid source / revision found to create %s' % target)
             continue
 
-        ensure_repo(repodir, parenttype, target, vcs, _root.get(vcs, ''), source)
-        update_repo(target, vcs, rev)
+        repo_cloned = ensure_repo(repodir, parenttype, target, vcs,
+                                  _root.get(vcs, ''), source)
+        repo_updated = update_repo(target, vcs, rev)
+        if repo_cloned or repo_updated:
+            resolve_npm_dependencies(target, vcs)
         resolve_deps(target, level + 1, self_update=False,
                      overrideroots=overrideroots, skipdependencies=skipdependencies)
 
