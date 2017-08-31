@@ -4,7 +4,9 @@
 // devtools panel:
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1383310
 // As a workaround, listen for messages only if this isn't the devtools panel.
-if (!("devtools" in chrome))
+// Note that Firefox processes API access lazily, so chrome.devtools will always
+// exist but will have undefined as its value on other pages.
+if (!chrome.devtools)
 {
   // Listen for messages from the background page.
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) =>

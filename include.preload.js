@@ -15,9 +15,10 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* globals ElemHideEmulation, splitSelector */
-
 "use strict";
+
+let {splitSelector} = require("common");
+let {ElemHideEmulation} = require("content_elemHideEmulation");
 
 // This variable is also used by our other content scripts.
 let elemhide;

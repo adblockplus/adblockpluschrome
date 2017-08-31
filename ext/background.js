@@ -699,11 +699,14 @@
 
   ext.showOptions = callback =>
   {
+    let info = require("info");
+
     if ("openOptionsPage" in chrome.runtime &&
-        // Firefox for Android does have a runtime.openOptionsPage but it
-        // doesn't do anything.
+        // Some versions of Firefox for Android before version 57 do have a
+        // runtime.openOptionsPage but it doesn't do anything.
         // https://bugzilla.mozilla.org/show_bug.cgi?id=1364945
-        require("info").application != "fennec")
+        (info.application != "fennec" ||
+         parseInt(info.applicationVersion, 10) >= 57))
     {
       if (!callback)
       {
@@ -729,57 +732,44 @@
         });
       }
     }
-    else
+    else if ("windows" in chrome)
     {
       // Edge does not yet support runtime.openOptionsPage (tested version 38)
-      // nor does Firefox for Android,
       // and so this workaround needs to stay for now.
       // We are not using extension.getURL to get the absolute path here
       // because of the Edge issue:
       // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/10276332/
-      let open = win =>
+      let optionsUrl = "options.html";
+      let fullOptionsUrl = ext.getURL(optionsUrl);
+
+      chrome.tabs.query({}, tabs =>
       {
-        let optionsUrl = "options.html";
-        let queryInfo = {url: optionsUrl};
-
-        // extension pages can't be accessed in incognito windows. In order to
-        // correctly mimic the way in which Chrome opens extension options,
-        // we have to focus the options page in any other window.
-        if (win && !win.incognito)
-          queryInfo.windowId = win.id;
-
-        chrome.tabs.query(queryInfo, tabs =>
+        // We find a tab ourselves because Edge has a bug when quering tabs
+        // with extension URL protocol:
+        // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/8094141/ 
+        // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/8604703/
+        let tab = tabs.find(element => element.url == fullOptionsUrl);
+        if (tab)
         {
-          if (tabs && tabs.length > 0)
-          {
-            let tab = tabs[0];
+          chrome.windows.update(tab.windowId, {focused: true});
+          chrome.tabs.update(tab.id, {active: true});
 
-            if ("windows" in chrome)
-              chrome.windows.update(tab.windowId, {focused: true});
-
-            chrome.tabs.update(tab.id, {active: true});
-
-            if (callback)
-              callback(new Page(tab));
-          }
-          else
-          {
-            ext.pages.open(optionsUrl, callback);
-          }
-        });
-      };
-
-      if ("windows" in chrome)
-      {
-        chrome.windows.getLastFocused(open);
-      }
-      else
-      {
-        // Firefox for Android does not support the windows API. Since there is
-        // effectively only one window on the mobile browser, there's no need
-        // to bring it into focus.
-        open();
-      }
+          if (callback)
+            callback(new Page(tab));
+        }
+        else
+        {
+          ext.pages.open(optionsUrl, callback);
+        }
+      });
+    }
+    else
+    {
+      // Firefox for Android before version 57 does not support
+      // runtime.openOptionsPage, nor does it support the windows API. Since
+      // there is effectively only one window on the mobile browser, there's no
+      // need to bring it into focus.
+      ext.pages.open("options.html", callback);
     }
   };
 
