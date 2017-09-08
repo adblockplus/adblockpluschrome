@@ -77,7 +77,7 @@ function onLoad()
   );
   document.getElementById("options").addEventListener("click", () =>
   {
-    ext.showOptions();
+    ext.showOptions(ext.closePopup);
   }, false);
 
   // Set up collapsing of menu items
