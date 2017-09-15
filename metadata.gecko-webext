@@ -10,6 +10,4 @@ version = 2.99.0
 gecko = 50.0
 
 [convert_js]
-# See https://bugzil.la/1190687 - pop-up blocking won't work right now
-lib/adblockplus.js -= lib/popupBlocker.js
 lib/adblockplus.js += lib/firefoxDataCleanup.js
