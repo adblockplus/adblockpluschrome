@@ -77,7 +77,7 @@ function onLoad()
   );
   document.getElementById("options").addEventListener("click", () =>
   {
-    ext.showOptions(ext.closePopup);
+    ext.showOptions(window.close);
   }, false);
 
   // Set up collapsing of menu items
@@ -128,7 +128,7 @@ function activateClickHide()
   page.sendMessage({type: "composer.content.startPickingElement"});
 
   // Close the popup after a few seconds, so user doesn't have to
-  activateClickHide.timeout = window.setTimeout(ext.closePopup, 5000);
+  activateClickHide.timeout = window.setTimeout(window.close, 5000);
 }
 
 function cancelClickHide()

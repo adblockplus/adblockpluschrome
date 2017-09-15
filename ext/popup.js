@@ -7,11 +7,6 @@
   const backgroundPage = chrome.extension.getBackgroundPage();
   window.ext = Object.create(backgroundPage.ext);
 
-  window.ext.closePopup = () =>
-  {
-    window.close();
-  };
-
   // Calling i18n.getMessage from the background page causes Edge to throw an
   // exception.
   // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12793975/
