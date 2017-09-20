@@ -441,7 +441,7 @@ ElemHide.prototype = {
 
   addSelectors(selectors, filters)
   {
-    if (!selectors || selectors.length == 0)
+    if (selectors.length == 0)
       return;
 
     if (this.inject)
