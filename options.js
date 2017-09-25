@@ -139,7 +139,7 @@ function loadOptions()
 
   // Display jQuery UI elements
   $("#tabs").tabs();
-  $("button:not(.subscriptionRemoveButton)").button();
+  $("button").button();
   $(".refreshButton").button("option", "icons", {primary: "ui-icon-refresh"});
   $(".addButton").button("option", "icons", {primary: "ui-icon-plus"});
   $(".removeButton").button("option", "icons", {primary: "ui-icon-minus"});
@@ -327,7 +327,7 @@ function startSubscriptionSelection(title, url)
     return;
   }
 
-  $("#tabs").tabs("option", "active", 0);
+  $("#tabs").tabs("select", 0);
   $("#addSubscriptionContainer").show();
   $("#addSubscriptionButton").hide();
   $("#subscriptionSelector").focus();
@@ -728,7 +728,7 @@ ext.onMessage.addListener(message =>
               previous[0].classList.remove("focused");
 
             let index = $("[href='#" + tab.id + "']").parent().index();
-            $("#tabs").tabs("option", "active", index);
+            $("#tabs").tabs("select", index);
             found.classList.add("focused");
           }
           break;
