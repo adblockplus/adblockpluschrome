@@ -47,9 +47,9 @@
 
   test("Numerical pref", assert =>
   {
-    Prefs.patternsbackups = 5;
+    Prefs.patternsbackups = 0;
     equal(
-      Prefs.patternsbackups, 5,
+      Prefs.patternsbackups, 0,
       "Prefs object returns the correct value after setting pref to " +
       "default value"
     );
