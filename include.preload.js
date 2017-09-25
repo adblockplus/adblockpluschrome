@@ -345,16 +345,11 @@ function ElemHide()
   this.style = null;
   this.tracer = null;
   this.inject = true;
+  this.emulatedPatterns = null;
 
   this.elemHideEmulation = new ElemHideEmulation(
     window,
-    callback =>
-    {
-      ext.backgroundPage.sendMessage({
-        type: "filters.get",
-        what: "elemhideemulation"
-      }, callback);
-    },
+    callback => callback(this.emulatedPatterns),
     this.addSelectors.bind(this),
     this.hideElements.bind(this)
   );
@@ -506,7 +501,9 @@ ElemHide.prototype = {
       else if (this.tracer)
         this.tracer.addSelectors(response.selectors);
 
+      this.emulatedPatterns = response.emulatedPatterns;
       this.elemHideEmulation.apply();
+      this.emulatedPatterns = null;
     });
   }
 };
