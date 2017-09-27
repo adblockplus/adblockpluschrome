@@ -343,17 +343,25 @@
         // https://bugzilla.mozilla.org/show_bug.cgi?id=1331746
         if ("setIcon" in chrome.browserAction)
         {
-          chrome.browserAction.setIcon({
-            tabId: this._tabId,
-            path: {
-              16: this._changes.iconPath.replace("$size", "16"),
-              19: this._changes.iconPath.replace("$size", "19"),
-              20: this._changes.iconPath.replace("$size", "20"),
-              32: this._changes.iconPath.replace("$size", "32"),
-              38: this._changes.iconPath.replace("$size", "38"),
-              40: this._changes.iconPath.replace("$size", "40")
-            }
-          });
+          let path = {
+            16: this._changes.iconPath.replace("$size", "16"),
+            19: this._changes.iconPath.replace("$size", "19"),
+            20: this._changes.iconPath.replace("$size", "20"),
+            32: this._changes.iconPath.replace("$size", "32"),
+            38: this._changes.iconPath.replace("$size", "38"),
+            40: this._changes.iconPath.replace("$size", "40")
+          };
+          try
+          {
+            chrome.browserAction.setIcon({tabId: this._tabId, path});
+          }
+          catch (e)
+          {
+            // Edge throws if passed icon sizes different than 19,20,38,40px.
+            delete path[16];
+            delete path[32];
+            chrome.browserAction.setIcon({tabId: this._tabId, path});
+          }
         }
       }
 
