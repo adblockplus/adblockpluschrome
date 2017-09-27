@@ -15,7 +15,7 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* global i18n */
+/* global i18n, getPref, togglePref */
 
 "use strict";
 
@@ -23,11 +23,9 @@
 {
   const {require} = ext.backgroundPage.getWindow();
 
-  const {getBlockedPerPage} = require("stats");
   const {FilterNotifier} = require("filterNotifier");
-  const {Prefs} = require("prefs");
 
-  let currentPage;
+  let currentTab;
   const shareURL = "https://adblockplus.org/";
 
   let messageMark = {};
@@ -78,16 +76,19 @@
     document.getElementById("share-box").addEventListener("click", share,
                                                           false);
     let showIconNumber = document.getElementById("show-iconnumber");
-    showIconNumber.setAttribute("aria-checked", Prefs.show_statsinicon);
+    getPref("show_statsinicon", showStatsInIcon =>
+    {
+      showIconNumber.setAttribute("aria-checked", showStatsInIcon);
+    });
     showIconNumber.addEventListener("click", toggleIconNumber, false);
     document.querySelector("label[for='show-iconnumber']").addEventListener(
       "click", toggleIconNumber, false
     );
 
     // Update stats
-    ext.pages.query({active: true, lastFocusedWindow: true}, pages =>
+    chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs =>
     {
-      currentPage = pages[0];
+      currentTab = tabs[0];
       updateStats();
 
       FilterNotifier.on("filter.hitCount", updateStats);
@@ -104,32 +105,46 @@
   function updateStats()
   {
     let statsPage = document.getElementById("stats-page");
-    let blockedPage = getBlockedPerPage(currentPage).toLocaleString();
-    i18n.setElementText(statsPage, "stats_label_page", [blockedPage]);
+    chrome.runtime.sendMessage({
+      type: "stats.getBlockedPerPage",
+      tab: currentTab
+    },
+    blockedPage =>
+    {
+      i18n.setElementText(statsPage, "stats_label_page",
+                          [blockedPage.toLocaleString()]);
+    });
 
     let statsTotal = document.getElementById("stats-total");
-    let blockedTotal = Prefs.blocked_total.toLocaleString();
-    i18n.setElementText(statsTotal, "stats_label_total", [blockedTotal]);
+    getPref("blocked_total", blockedTotal =>
+    {
+      i18n.setElementText(statsTotal, "stats_label_total",
+                          [blockedTotal.toLocaleString()]);
+    });
   }
 
   function share(ev)
   {
-    // Easter Egg
-    let blocked = Prefs.blocked_total;
-    if (blocked <= 9000 || blocked >= 10000)
-      blocked = blocked.toLocaleString();
-    else
-      blocked = i18n.getMessage("stats_over", (9000).toLocaleString());
+    getPref("blocked_total", blockedTotal =>
+    {
+      // Easter Egg
+      if (blockedTotal <= 9000 || blockedTotal >= 10000)
+        blockedTotal = blockedTotal.toLocaleString();
+      else
+        blockedTotal = i18n.getMessage("stats_over", (9000).toLocaleString());
 
-    ext.pages.open(createShareLink(ev.target.dataset.social, blocked));
+      ext.pages.open(createShareLink(ev.target.dataset.social, blockedTotal));
+    });
   }
 
   function toggleIconNumber()
   {
-    Prefs.show_statsinicon = !Prefs.show_statsinicon;
-    document.getElementById("show-iconnumber").setAttribute(
-      "aria-checked", Prefs.show_statsinicon
-    );
+    togglePref("show_statsinicon", showStatsInIcon =>
+    {
+      document.getElementById("show-iconnumber").setAttribute(
+        "aria-checked", showStatsInIcon
+      );
+    });
   }
 
   document.addEventListener("DOMContentLoaded", onLoad, false);

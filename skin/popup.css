@@ -340,7 +340,7 @@ body.disabled #enabled #enabled-no
   background-position: -34px -77px;
 }
 
-.collapsed .collapsable
+.collapsed .collapsible
 {
   display: none;
 }

@@ -17,48 +17,93 @@
 
 "use strict";
 
-const {require} = ext.backgroundPage.getWindow();
+let tab = null;
 
-const {Filter} = require("filterClasses");
-const {FilterStorage} = require("filterStorage");
-const {Prefs} = require("prefs");
-const {checkWhitelisted} = require("whitelisting");
-const {getDecodedHostname} = require("url");
+function getPref(key, callback)
+{
+  chrome.runtime.sendMessage({type: "prefs.get", key}, callback);
+}
 
-let page = null;
+function togglePref(key, callback)
+{
+  chrome.runtime.sendMessage({type: "prefs.toggle", key}, callback);
+}
+
+function isPageWhitelisted(callback)
+{
+  chrome.runtime.sendMessage({type: "filters.isWhitelisted", tab}, callback);
+}
+
+function whenPageReady()
+{
+  return new Promise(resolve =>
+  {
+    function onMessage(message, sender)
+    {
+      if (message.type == "composer.ready" && sender.page &&
+          sender.page.id == tab.id)
+      {
+        ext.onMessage.removeListener(onMessage);
+        resolve();
+      }
+    }
+
+    ext.onMessage.addListener(onMessage);
+
+    chrome.runtime.sendMessage({
+      type: "composer.isPageReady",
+      pageId: tab.id
+    },
+    ready =>
+    {
+      if (ready)
+      {
+        ext.onMessage.removeListener(onMessage);
+        resolve();
+      }
+    });
+  });
+}
 
 function onLoad()
 {
-  ext.pages.query({active: true, lastFocusedWindow: true}, pages =>
+  chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs =>
   {
-    page = pages[0];
+    if (tabs.length > 0)
+      tab = {id: tabs[0].id, url: tabs[0].url};
 
-    // Mark page as 'local' or 'nohtml' to hide non-relevant elements
-    if (!page || (page.url.protocol != "http:" &&
-                  page.url.protocol != "https:"))
-      document.body.classList.add("local");
-    else if (!require("filterComposer").isPageReady(page))
+    let urlProtocol = tab && tab.url && new URL(tab.url).protocol;
+
+    // Mark page as 'local' to hide non-relevant elements
+    if (urlProtocol != "http:" && urlProtocol != "https:")
     {
-      document.body.classList.add("nohtml");
-      require("messaging").getPort(window).on(
-        "composer.ready", (message, sender) =>
-        {
-          if (sender.page.id == page.id)
-            document.body.classList.remove("nohtml");
-        }
-      );
+      document.body.classList.add("local");
+      document.body.classList.remove("nohtml");
+    }
+    else
+    {
+      whenPageReady().then(() =>
+      {
+        document.body.classList.remove("nohtml");
+      });
     }
 
     // Ask content script whether clickhide is active. If so, show
     // cancel button.  If that isn't the case, ask background.html
     // whether it has cached filters. If so, ask the user whether she
     // wants those filters. Otherwise, we are in default state.
-    if (page)
+    if (tab)
     {
-      if (checkWhitelisted(page))
-        document.body.classList.add("disabled");
+      isPageWhitelisted(whitelisted =>
+      {
+        if (whitelisted)
+          document.body.classList.add("disabled");
+      });
 
-      page.sendMessage({type: "composer.content.getState"}, response =>
+      chrome.tabs.sendMessage(tab.id, {
+        type: "composer.content.getState"
+      },
+      response =>
       {
         if (response && response.active)
           document.body.classList.add("clickhide-active");
@@ -84,48 +129,33 @@ function onLoad()
   for (let collapser of document.getElementsByClassName("collapse"))
   {
     collapser.addEventListener("click", toggleCollapse, false);
-    if (!Prefs[collapser.dataset.option])
+    getPref(collapser.dataset.option, value =>
     {
-      document.getElementById(
-        collapser.dataset.collapsable
-      ).classList.add("collapsed");
-    }
+      if (value)
+      {
+        document.getElementById(
+          collapser.dataset.collapsible
+        ).classList.remove("collapsed");
+      }
+    });
   }
 }
 
 function toggleEnabled()
 {
   let disabled = document.body.classList.toggle("disabled");
-  if (disabled)
-  {
-    let host = getDecodedHostname(page.url).replace(/^www\./, "");
-    let filter = Filter.fromText("@@||" + host + "^$document");
-    if (filter.subscriptions.length && filter.disabled)
-      filter.disabled = false;
-    else
-    {
-      filter.disabled = false;
-      FilterStorage.addFilter(filter);
-    }
-  }
-  else
-  {
-    // Remove any exception rules applying to this URL
-    let filter = checkWhitelisted(page);
-    while (filter)
-    {
-      FilterStorage.removeFilter(filter);
-      if (filter.subscriptions.length)
-        filter.disabled = true;
-      filter = checkWhitelisted(page);
-    }
-  }
+  chrome.runtime.sendMessage({
+    type: disabled ? "filters.whitelist" : "filters.unwhitelist",
+    tab
+  });
 }
 
 function activateClickHide()
 {
   document.body.classList.add("clickhide-active");
-  page.sendMessage({type: "composer.content.startPickingElement"});
+  chrome.tabs.sendMessage(tab.id, {
+    type: "composer.content.startPickingElement"
+  });
 
   // Close the popup after a few seconds, so user doesn't have to
   activateClickHide.timeout = window.setTimeout(window.close, 5000);
@@ -139,14 +169,15 @@ function cancelClickHide()
     activateClickHide.timeout = null;
   }
   document.body.classList.remove("clickhide-active");
-  page.sendMessage({type: "composer.content.finished"});
+  chrome.tabs.sendMessage(tab.id, {type: "composer.content.finished"});
 }
 
 function toggleCollapse(event)
 {
   let collapser = event.currentTarget;
-  Prefs[collapser.dataset.option] = !Prefs[collapser.dataset.option];
-  collapser.parentNode.classList.toggle("collapsed");
+  let collapsible = document.getElementById(collapser.dataset.collapsible);
+  collapsible.classList.toggle("collapsed");
+  togglePref(collapser.dataset.option);
 }
 
 document.addEventListener("DOMContentLoaded", onLoad, false);

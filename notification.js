@@ -17,6 +17,8 @@
 
 "use strict";
 
+const {require} = ext.backgroundPage.getWindow();
+
 const {Utils} = require("utils");
 const {Notification} = require("notification");
 const {getActiveNotification, shouldDisplay} = require("notificationHelper");
