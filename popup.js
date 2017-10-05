@@ -122,7 +122,8 @@ function onLoad()
   );
   document.getElementById("options").addEventListener("click", () =>
   {
-    ext.showOptions(window.close);
+    chrome.runtime.sendMessage({type: "app.open", what: "options"});
+    window.close();
   }, false);
 
   // Set up collapsing of menu items

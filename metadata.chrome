@@ -79,6 +79,7 @@ lib/adblockplus.js =
   lib/io.js
   lib/messaging.js
   lib/notificationHelper.js
+  lib/options.js
   lib/prefs.js
   lib/punycode.js
   lib/requestBlocker.js
@@ -112,7 +113,7 @@ lib/adblockplus.js =
   adblockplusui/lib/antiadblockInit.js
 lib/adblockplus.js[module] = true
 lib/adblockplus.js[injectinfomodule] = true
-lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,subscriptionInit,filterComposer,stats,uninstall,csp,cssInjection,firefoxDataCleanup
+lib/adblockplus.js[autoload] = filterListener,synchronizer,requestBlocker,popupBlocker,subscriptionInit,filterComposer,stats,uninstall,csp,cssInjection,firefoxDataCleanup,options
 include.preload.js = include.preload.js inject.preload.js
 include.postload.js = subscriptionLink.postload.js composer.postload.js
 elemHideEmulation.js = adblockpluscore/lib/common.js adblockpluscore/lib/content/elemHideEmulation.js
