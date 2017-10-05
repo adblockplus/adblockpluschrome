@@ -155,12 +155,6 @@
     "description": "Extension name to be shown for development builds. Note: this cannot be longer than 45 characters.",
     "message": "Adblock Plus development build"
   },
-  "notification_antiadblock_message": {
-    "message": "This site has been known to show targeted messages to Adblock Plus users. Do you want Adblock Plus to hide targeted messages?"
-  },
-  "notification_antiadblock_title": {
-    "message": "Hide targeted messages?"
-  },
   "notification_configure": {
     "message": "Configure notification settings"
   },
