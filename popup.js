@@ -43,12 +43,12 @@ function whenPageReady()
       if (message.type == "composer.ready" && sender.page &&
           sender.page.id == tab.id)
       {
-        ext.onMessage.removeListener(onMessage);
+        chrome.runtime.onMessage.removeListener(onMessage);
         resolve();
       }
     }
 
-    ext.onMessage.addListener(onMessage);
+    chrome.runtime.onMessage.addListener(onMessage);
 
     chrome.runtime.sendMessage({
       type: "composer.isPageReady",
@@ -58,7 +58,7 @@ function whenPageReady()
     {
       if (ready)
       {
-        ext.onMessage.removeListener(onMessage);
+        chrome.runtime.onMessage.removeListener(onMessage);
         resolve();
       }
     });
