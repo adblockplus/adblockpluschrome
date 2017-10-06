@@ -186,7 +186,6 @@ function loadOptions()
   // Show user's filters
   reloadFilters();
 }
-$(loadOptions);
 
 function convertSpecialSubscription(subscription)
 {
@@ -702,6 +701,8 @@ function setLinks(id, ...args)
     }
   }
 }
+
+document.addEventListener("DOMContentLoaded", loadOptions);
 
 ext.onMessage.addListener(message =>
 {
