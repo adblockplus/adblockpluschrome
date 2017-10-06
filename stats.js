@@ -21,10 +21,6 @@
 
 (function()
 {
-  const {require} = ext.backgroundPage.getWindow();
-
-  const {FilterNotifier} = require("filterNotifier");
-
   let currentTab;
   const shareURL = "https://adblockplus.org/";
 
@@ -91,15 +87,8 @@
       currentTab = tabs[0];
       updateStats();
 
-      FilterNotifier.on("filter.hitCount", updateStats);
-
       document.getElementById("stats-container").removeAttribute("hidden");
     });
-  }
-
-  function onUnload()
-  {
-    FilterNotifier.off("filter.hitCount", updateStats);
   }
 
   function updateStats()
@@ -148,5 +137,4 @@
   }
 
   document.addEventListener("DOMContentLoaded", onLoad, false);
-  window.addEventListener("unload", onUnload, false);
 }());
