@@ -121,10 +121,6 @@
   }
 
   ext.pages = {
-    open(url, callback)
-    {
-      chrome.tabs.create({url}, callback && afterTabLoaded(callback));
-    },
     query(info, callback)
     {
       let rawInfo = {};

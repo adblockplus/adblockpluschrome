@@ -84,7 +84,7 @@ window.addEventListener("load", () =>
       return;
     event.preventDefault();
     event.stopPropagation();
-    ext.pages.open(link.href);
+    chrome.tabs.create({url: link.href});
   });
 
   let notificationElement = document.getElementById("notification");

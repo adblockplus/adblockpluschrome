@@ -122,7 +122,9 @@
       else
         blockedTotal = i18n.getMessage("stats_over", (9000).toLocaleString());
 
-      ext.pages.open(createShareLink(ev.target.dataset.social, blockedTotal));
+      chrome.tabs.create({
+        url: createShareLink(ev.target.dataset.social, blockedTotal)
+      });
     });
   }
 
