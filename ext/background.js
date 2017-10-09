@@ -121,24 +121,6 @@
   }
 
   ext.pages = {
-    query(info, callback)
-    {
-      let rawInfo = {};
-      for (let property in info)
-      {
-        switch (property)
-        {
-          case "active":
-          case "lastFocusedWindow":
-            rawInfo[property] = info[property];
-        }
-      }
-
-      chrome.tabs.query(rawInfo, tabs =>
-      {
-        callback(tabs.map(tab => new Page(tab)));
-      });
-    },
     onLoading: new ext._EventTarget(),
     onActivated: new ext._EventTarget(),
     onRemoved: new ext._EventTarget()
