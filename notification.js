@@ -15,25 +15,28 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* global setPref */
+
 "use strict";
-
-const {require} = ext.backgroundPage.getWindow();
-
-const {Utils} = require("utils");
-const {Notification} = require("notification");
-const {getActiveNotification, shouldDisplay} = require("notificationHelper");
 
 function getDocLinks(notification)
 {
   if (!notification.links)
-    return [];
+    return Promise.resolve([]);
 
-  let docLinks = [];
-  notification.links.forEach(link =>
-  {
-    docLinks.push(Utils.getDocLink(link));
-  });
-  return docLinks;
+  return Promise.all(
+    notification.links.map(link =>
+    {
+      return new Promise((resolve, reject) =>
+      {
+        chrome.runtime.sendMessage({
+          type: "app.get",
+          what: "doclink",
+          link
+        }, resolve);
+      });
+    })
+  );
 }
 
 function insertMessage(element, text, links)
@@ -53,7 +56,7 @@ function insertMessage(element, text, links)
   insertMessage(element, before, links);
 
   let newElement = document.createElement(tagName);
-  if (tagName === "a" && links && links.length)
+  if (tagName == "a" && links && links.length)
     newElement.href = links.shift();
   insertMessage(newElement, value, links);
   element.appendChild(newElement);
@@ -63,45 +66,52 @@ function insertMessage(element, text, links)
 
 window.addEventListener("load", () =>
 {
-  let notification = getActiveNotification();
-  if (!notification || !shouldDisplay("popup", notification.type))
-    return;
-
-  let texts = Notification.getLocalizedTexts(notification);
-  let titleElement = document.getElementById("notification-title");
-  titleElement.textContent = texts.title;
-
-  let docLinks = getDocLinks(notification);
-  let messageElement = document.getElementById("notification-message");
-  insertMessage(messageElement, texts.message, docLinks);
-
-  messageElement.addEventListener("click", event =>
+  chrome.runtime.sendMessage({
+    type: "notifications.get",
+    displayMethod: "popup"
+  }, notification =>
   {
-    let link = event.target;
-    while (link && link !== messageElement && link.localName !== "a")
-      link = link.parentNode;
-    if (!link)
+    if (!notification)
       return;
-    event.preventDefault();
-    event.stopPropagation();
-    chrome.tabs.create({url: link.href});
-  });
 
-  let notificationElement = document.getElementById("notification");
-  notificationElement.className = notification.type;
-  notificationElement.hidden = false;
-  notificationElement.addEventListener("click", event =>
-  {
-    if (event.target.id == "notification-close")
-      notificationElement.classList.add("closing");
-    else if (event.target.id == "notification-optout" ||
-             event.target.id == "notification-hide")
+    let titleElement = document.getElementById("notification-title");
+    let messageElement = document.getElementById("notification-message");
+
+    titleElement.textContent = notification.texts.title;
+
+    getDocLinks(notification).then(docLinks =>
     {
-      if (event.target.id == "notification-optout")
-        Notification.toggleIgnoreCategory("*", true);
+      insertMessage(messageElement, notification.texts.message, docLinks);
 
-      notificationElement.hidden = true;
-      notification.onClicked();
-    }
-  }, true);
+      messageElement.addEventListener("click", event =>
+      {
+        let link = event.target;
+        while (link && link != messageElement && link.localName != "a")
+          link = link.parentNode;
+        if (!link)
+          return;
+        event.preventDefault();
+        event.stopPropagation();
+        chrome.tabs.create({url: link.href});
+      });
+    });
+
+    let notificationElement = document.getElementById("notification");
+    notificationElement.className = notification.type;
+    notificationElement.hidden = false;
+    notificationElement.addEventListener("click", event =>
+    {
+      if (event.target.id == "notification-close")
+        notificationElement.classList.add("closing");
+      else if (event.target.id == "notification-optout" ||
+               event.target.id == "notification-hide")
+      {
+        if (event.target.id == "notification-optout")
+          setPref("notifications_ignoredcategories", true);
+
+        notificationElement.hidden = true;
+        notification.onClicked();
+      }
+    }, true);
+  });
 }, false);

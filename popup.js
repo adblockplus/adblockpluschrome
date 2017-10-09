@@ -24,6 +24,11 @@ function getPref(key, callback)
   chrome.runtime.sendMessage({type: "prefs.get", key}, callback);
 }
 
+function setPref(key, value, callback)
+{
+  chrome.runtime.sendMessage({type: "prefs.set", key, value}, callback);
+}
+
 function togglePref(key, callback)
 {
   chrome.runtime.sendMessage({type: "prefs.toggle", key}, callback);
