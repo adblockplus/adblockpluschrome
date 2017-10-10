@@ -15,7 +15,7 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* global $, i18n, i18nTimeDateStrings */
+/* global $, i18nTimeDateStrings */
 
 "use strict";
 
@@ -91,7 +91,7 @@ let acceptableAdsUrl;
 function loadOptions()
 {
   // Set page title to i18n version of "Adblock Plus Options"
-  document.title = i18n.getMessage("options");
+  document.title = chrome.i18n.getMessage("options");
 
   // Set links
   getPref("subscriptions_exceptionsurl", url =>
@@ -305,7 +305,7 @@ function loadRecommendations()
       }
 
       let option = new Option();
-      let label = i18n.getMessage("filters_addSubscriptionOther_label");
+      let label = chrome.i18n.getMessage("filters_addSubscriptionOther_label");
       option.text = label + "\u2026";
       option._data = null;
       list.appendChild(option);
@@ -365,7 +365,7 @@ function addSubscriptionClicked()
                       .value.trim();
     if (!/^https?:/i.test(url))
     {
-      alert(i18n.getMessage("global_subscription_invalid_location"));
+      alert(chrome.i18n.getMessage("global_subscription_invalid_location"));
       $("#customSubscriptionLocation").focus();
       return;
     }
@@ -421,7 +421,7 @@ function updateSubscriptionInfo(element, subscription)
   let {downloadStatus} = subscription;
   if (subscription.isDownloading)
   {
-    lastUpdate.textContent = i18n.getMessage(
+    lastUpdate.textContent = chrome.i18n.getMessage(
       "filters_subscription_lastDownload_inProgress"
     );
   }
@@ -429,7 +429,7 @@ function updateSubscriptionInfo(element, subscription)
   {
     if (statusMessages.has(downloadStatus))
     {
-      lastUpdate.textContent = i18n.getMessage(
+      lastUpdate.textContent = chrome.i18n.getMessage(
         statusMessages.get(downloadStatus)
       );
     }
@@ -441,7 +441,7 @@ function updateSubscriptionInfo(element, subscription)
   {
     let timeDate = i18nTimeDateStrings(subscription.lastDownload * 1000);
     let messageID = (timeDate[1] ? "last_updated_at" : "last_updated_at_today");
-    lastUpdate.textContent = i18n.getMessage(messageID, timeDate);
+    lastUpdate.textContent = chrome.i18n.getMessage(messageID, timeDate);
   }
 }
 
@@ -656,7 +656,7 @@ function addSubscriptionEntry(subscription)
   removeButton.textContent = "\xD7";
   removeButton.addEventListener("click", () =>
   {
-    if (!confirm(i18n.getMessage("global_remove_subscription_warning")))
+    if (!confirm(chrome.i18n.getMessage("global_remove_subscription_warning")))
       return;
 
     removeSubscription(subscription.url);

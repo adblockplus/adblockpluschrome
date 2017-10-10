@@ -83,5 +83,4 @@
   /* Utils */
 
   ext.getURL = chrome.extension.getURL;
-  ext.i18n = chrome.i18n;
 }());

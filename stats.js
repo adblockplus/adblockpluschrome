@@ -15,7 +15,7 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* global i18n, getPref, togglePref */
+/* global getPref, togglePref */
 
 "use strict";
 
@@ -34,7 +34,7 @@
       name: messageMark,
       actions: JSON.stringify([
         {
-          name: i18n.getMessage("stats_share_download"),
+          name: chrome.i18n.getMessage("stats_share_download"),
           link: shareURL
         }
       ])
@@ -59,7 +59,7 @@
     {
       let value = params[key];
       if (value == messageMark)
-        value = i18n.getMessage("stats_share_message", blockedCount);
+        value = chrome.i18n.getMessage("stats_share_message", blockedCount);
       querystring.push(
         encodeURIComponent(key) + "=" + encodeURIComponent(value)
       );
@@ -100,15 +100,15 @@
     },
     blockedPage =>
     {
-      i18n.setElementText(statsPage, "stats_label_page",
-                          [blockedPage.toLocaleString()]);
+      ext.i18n.setElementText(statsPage, "stats_label_page",
+                              [blockedPage.toLocaleString()]);
     });
 
     let statsTotal = document.getElementById("stats-total");
     getPref("blocked_total", blockedTotal =>
     {
-      i18n.setElementText(statsTotal, "stats_label_total",
-                          [blockedTotal.toLocaleString()]);
+      ext.i18n.setElementText(statsTotal, "stats_label_total",
+                              [blockedTotal.toLocaleString()]);
     });
   }
 
@@ -118,9 +118,14 @@
     {
       // Easter Egg
       if (blockedTotal <= 9000 || blockedTotal >= 10000)
+      {
         blockedTotal = blockedTotal.toLocaleString();
+      }
       else
-        blockedTotal = i18n.getMessage("stats_over", (9000).toLocaleString());
+      {
+        blockedTotal = chrome.i18n.getMessage("stats_over",
+                                              (9000).toLocaleString());
+      }
 
       chrome.tabs.create({
         url: createShareLink(ev.target.dataset.social, blockedTotal)
