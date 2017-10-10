@@ -17,6 +17,33 @@
 
 "use strict";
 
+const shareURL = "https://adblockplus.org/";
+const messageMark = {};
+
+const shareLinks = {
+  facebook: ["https://www.facebook.com/dialog/feed", {
+    app_id: "475542399197328",
+    link: shareURL,
+    redirect_uri: "https://www.facebook.com/",
+    ref: "adcounter",
+    name: messageMark,
+    actions: JSON.stringify([
+      {
+        name: chrome.i18n.getMessage("stats_share_download"),
+        link: shareURL
+      }
+    ])
+  }],
+  gplus: ["https://plus.google.com/share", {
+    url: shareURL
+  }],
+  twitter: ["https://twitter.com/intent/tweet", {
+    text: messageMark,
+    url: shareURL,
+    via: "AdblockPlus"
+  }]
+};
+
 let tab = null;
 
 function getPref(key, callback)
@@ -70,7 +97,161 @@ function whenPageReady()
   });
 }
 
-function onLoad()
+function toggleEnabled()
+{
+  let disabled = document.body.classList.toggle("disabled");
+  chrome.runtime.sendMessage({
+    type: disabled ? "filters.whitelist" : "filters.unwhitelist",
+    tab
+  });
+}
+
+function activateClickHide()
+{
+  document.body.classList.add("clickhide-active");
+  chrome.tabs.sendMessage(tab.id, {
+    type: "composer.content.startPickingElement"
+  });
+
+  // Close the popup after a few seconds, so user doesn't have to
+  activateClickHide.timeout = window.setTimeout(window.close, 5000);
+}
+
+function cancelClickHide()
+{
+  if (activateClickHide.timeout)
+  {
+    window.clearTimeout(activateClickHide.timeout);
+    activateClickHide.timeout = null;
+  }
+  document.body.classList.remove("clickhide-active");
+  chrome.tabs.sendMessage(tab.id, {type: "composer.content.finished"});
+}
+
+function toggleCollapse(event)
+{
+  let collapser = event.currentTarget;
+  let collapsible = document.getElementById(collapser.dataset.collapsible);
+  collapsible.classList.toggle("collapsed");
+  togglePref(collapser.dataset.option);
+}
+
+function getDocLinks(notification)
+{
+  if (!notification.links)
+    return Promise.resolve([]);
+
+  return Promise.all(
+    notification.links.map(link =>
+    {
+      return new Promise((resolve, reject) =>
+      {
+        chrome.runtime.sendMessage({
+          type: "app.get",
+          what: "doclink",
+          link
+        }, resolve);
+      });
+    })
+  );
+}
+
+function insertMessage(element, text, links)
+{
+  let match = /^(.*?)<(a|strong)>(.*?)<\/\2>(.*)$/.exec(text);
+  if (!match)
+  {
+    element.appendChild(document.createTextNode(text));
+    return;
+  }
+
+  let before = match[1];
+  let tagName = match[2];
+  let value = match[3];
+  let after = match[4];
+
+  insertMessage(element, before, links);
+
+  let newElement = document.createElement(tagName);
+  if (tagName == "a" && links && links.length)
+    newElement.href = links.shift();
+  insertMessage(newElement, value, links);
+  element.appendChild(newElement);
+
+  insertMessage(element, after, links);
+}
+
+function createShareLink(network, blockedCount)
+{
+  let url = shareLinks[network][0];
+  let params = shareLinks[network][1];
+
+  let querystring = [];
+  for (let key in params)
+  {
+    let value = params[key];
+    if (value == messageMark)
+      value = chrome.i18n.getMessage("stats_share_message", blockedCount);
+    querystring.push(
+      encodeURIComponent(key) + "=" + encodeURIComponent(value)
+    );
+  }
+  return url + "?" + querystring.join("&");
+}
+
+function updateStats()
+{
+  let statsPage = document.getElementById("stats-page");
+  chrome.runtime.sendMessage({
+    type: "stats.getBlockedPerPage",
+    tab
+  },
+  blockedPage =>
+  {
+    ext.i18n.setElementText(statsPage, "stats_label_page",
+                            [blockedPage.toLocaleString()]);
+  });
+
+  let statsTotal = document.getElementById("stats-total");
+  getPref("blocked_total", blockedTotal =>
+  {
+    ext.i18n.setElementText(statsTotal, "stats_label_total",
+                            [blockedTotal.toLocaleString()]);
+  });
+}
+
+function share(event)
+{
+  getPref("blocked_total", blockedTotal =>
+  {
+    // Easter Egg
+    if (blockedTotal <= 9000 || blockedTotal >= 10000)
+    {
+      blockedTotal = blockedTotal.toLocaleString();
+    }
+    else
+    {
+      blockedTotal = chrome.i18n.getMessage("stats_over",
+                                            (9000).toLocaleString());
+    }
+
+    chrome.tabs.create({
+      url: createShareLink(event.target.dataset.social, blockedTotal)
+    });
+  });
+}
+
+function toggleIconNumber()
+{
+  togglePref("show_statsinicon", showStatsInIcon =>
+  {
+    document.getElementById("show-iconnumber").setAttribute(
+      "aria-checked", showStatsInIcon
+    );
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () =>
 {
   chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs =>
   {
@@ -114,27 +295,30 @@ function onLoad()
           document.body.classList.add("clickhide-active");
       });
     }
+
+    updateStats();
+    document.getElementById("stats-container").removeAttribute("hidden");
   });
 
   document.getElementById("enabled").addEventListener(
-    "click", toggleEnabled, false
+    "click", toggleEnabled
   );
   document.getElementById("clickhide").addEventListener(
-    "click", activateClickHide, false
+    "click", activateClickHide
   );
   document.getElementById("clickhide-cancel").addEventListener(
-    "click", cancelClickHide, false
+    "click", cancelClickHide
   );
   document.getElementById("options").addEventListener("click", () =>
   {
     chrome.runtime.sendMessage({type: "app.open", what: "options"});
     window.close();
-  }, false);
+  });
 
   // Set up collapsing of menu items
   for (let collapser of document.getElementsByClassName("collapse"))
   {
-    collapser.addEventListener("click", toggleCollapse, false);
+    collapser.addEventListener("click", toggleCollapse);
     getPref(collapser.dataset.option, value =>
     {
       if (value)
@@ -145,45 +329,67 @@ function onLoad()
       }
     });
   }
-}
 
-function toggleEnabled()
-{
-  let disabled = document.body.classList.toggle("disabled");
-  chrome.runtime.sendMessage({
-    type: disabled ? "filters.whitelist" : "filters.unwhitelist",
-    tab
-  });
-}
-
-function activateClickHide()
-{
-  document.body.classList.add("clickhide-active");
-  chrome.tabs.sendMessage(tab.id, {
-    type: "composer.content.startPickingElement"
-  });
-
-  // Close the popup after a few seconds, so user doesn't have to
-  activateClickHide.timeout = window.setTimeout(window.close, 5000);
-}
-
-function cancelClickHide()
-{
-  if (activateClickHide.timeout)
+  document.getElementById("share-box").addEventListener("click", share);
+  let showIconNumber = document.getElementById("show-iconnumber");
+  getPref("show_statsinicon", showStatsInIcon =>
   {
-    window.clearTimeout(activateClickHide.timeout);
-    activateClickHide.timeout = null;
-  }
-  document.body.classList.remove("clickhide-active");
-  chrome.tabs.sendMessage(tab.id, {type: "composer.content.finished"});
-}
+    showIconNumber.setAttribute("aria-checked", showStatsInIcon);
+  });
+  showIconNumber.addEventListener("click", toggleIconNumber);
+  document.querySelector("label[for='show-iconnumber']").addEventListener(
+    "click", toggleIconNumber
+  );
+});
 
-function toggleCollapse(event)
+window.addEventListener("load", () =>
 {
-  let collapser = event.currentTarget;
-  let collapsible = document.getElementById(collapser.dataset.collapsible);
-  collapsible.classList.toggle("collapsed");
-  togglePref(collapser.dataset.option);
-}
+  chrome.runtime.sendMessage({
+    type: "notifications.get",
+    displayMethod: "popup"
+  }, notification =>
+  {
+    if (!notification)
+      return;
 
-document.addEventListener("DOMContentLoaded", onLoad, false);
+    let titleElement = document.getElementById("notification-title");
+    let messageElement = document.getElementById("notification-message");
+
+    titleElement.textContent = notification.texts.title;
+
+    getDocLinks(notification).then(docLinks =>
+    {
+      insertMessage(messageElement, notification.texts.message, docLinks);
+
+      messageElement.addEventListener("click", event =>
+      {
+        let link = event.target;
+        while (link && link != messageElement && link.localName != "a")
+          link = link.parentNode;
+        if (!link)
+          return;
+        event.preventDefault();
+        event.stopPropagation();
+        chrome.tabs.create({url: link.href});
+      });
+    });
+
+    let notificationElement = document.getElementById("notification");
+    notificationElement.className = notification.type;
+    notificationElement.hidden = false;
+    notificationElement.addEventListener("click", event =>
+    {
+      if (event.target.id == "notification-close")
+        notificationElement.classList.add("closing");
+      else if (event.target.id == "notification-optout" ||
+               event.target.id == "notification-hide")
+      {
+        if (event.target.id == "notification-optout")
+          setPref("notifications_ignoredcategories", true);
+
+        notificationElement.hidden = true;
+        notification.onClicked();
+      }
+    }, true);
+  });
+});
