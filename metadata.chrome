@@ -120,5 +120,5 @@ elemHideEmulation.js = adblockpluscore/lib/common.js adblockpluscore/lib/content
 elemHideEmulation.js[module] = true
 
 [import_locales]
-adblockplusui/locale/*/firstRun.json = =*
-adblockplusui/locale/*/antiadblockInit.json = =*
+adblockplusui/locale/*/firstRun.json = *
+adblockplusui/locale/*/antiadblockInit.json = *

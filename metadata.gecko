@@ -42,6 +42,6 @@ skin/fonts/SourceSansPro-bold.woff = adblockplusui/skin/fonts/SourceSansPro-bold
 lib/adblockplus.js += lib/firefoxDataCleanup.js
 
 [import_locales]
-adblockplusui/locale/*/mobile-options.json = =*
-adblockplusui/locale/*/desktop-options.json = =*
-adblockplusui/locale/*/common.json = =*
+adblockplusui/locale/*/mobile-options.json = *
+adblockplusui/locale/*/desktop-options.json = *
+adblockplusui/locale/*/common.json = *

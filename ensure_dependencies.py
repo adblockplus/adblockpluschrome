@@ -136,6 +136,7 @@ class Git():
             return 'ssh://' + url.replace(':', '/', 1)
         return url
 
+
 repo_types = OrderedDict((
     ('hg', Mercurial()),
     ('git', Git()),
@@ -405,6 +406,7 @@ def _ensure_line_exists(path, pattern):
             f.truncate()
             for l in file_content:
                 print >>f, l
+
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
