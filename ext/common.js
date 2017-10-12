@@ -72,11 +72,7 @@
   /* Background page */
 
   ext.backgroundPage = {
-    sendMessage: chrome.runtime.sendMessage,
-    getWindow()
-    {
-      return chrome.extension.getBackgroundPage();
-    }
+    sendMessage: chrome.runtime.sendMessage
   };
 
 
