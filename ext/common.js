@@ -74,9 +74,4 @@
   ext.backgroundPage = {
     sendMessage: chrome.runtime.sendMessage
   };
-
-
-  /* Utils */
-
-  ext.getURL = chrome.extension.getURL;
 }());
