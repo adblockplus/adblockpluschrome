@@ -165,7 +165,7 @@ function checkCollapse(element)
   if (urls.length == 0)
     return;
 
-  ext.backgroundPage.sendMessage(
+  chrome.runtime.sendMessage(
     {
       type: "filters.collapse",
       urls,
@@ -187,7 +187,7 @@ function checkSitekey()
 {
   let attr = document.documentElement.getAttribute("data-adblockkey");
   if (attr)
-    ext.backgroundPage.sendMessage({type: "filters.addKey", token: attr});
+    chrome.runtime.sendMessage({type: "filters.addKey", token: attr});
 }
 
 function ElementHidingTracer()
@@ -248,7 +248,7 @@ ElementHidingTracer.prototype = {
 
     if (selectors.length > 0 || filters.length > 0)
     {
-      ext.backgroundPage.sendMessage({
+      chrome.runtime.sendMessage({
         type: "devtools.traceElemHide",
         selectors, filters
       });
@@ -452,7 +452,7 @@ ElemHide.prototype = {
     }
     else
     {
-      ext.backgroundPage.sendMessage({
+      chrome.runtime.sendMessage({
         type: "elemhide.injectSelectors",
         selectors
       });
@@ -469,7 +469,7 @@ ElemHide.prototype = {
 
     if (this.tracer)
     {
-      ext.backgroundPage.sendMessage({
+      chrome.runtime.sendMessage({
         type: "devtools.traceElemHide",
         selectors: [],
         filters
@@ -479,7 +479,7 @@ ElemHide.prototype = {
 
   apply()
   {
-    ext.backgroundPage.sendMessage({type: "elemhide.getSelectors"}, response =>
+    chrome.runtime.sendMessage({type: "elemhide.getSelectors"}, response =>
     {
       if (this.tracer)
         this.tracer.disconnect();

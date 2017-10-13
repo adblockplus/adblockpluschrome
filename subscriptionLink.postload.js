@@ -93,7 +93,7 @@ if (document instanceof HTMLDocument)
     if (!/^(https?|ftp):/.test(url))
       return;
 
-    ext.backgroundPage.sendMessage({
+    chrome.runtime.sendMessage({
       type: "subscriptions.add",
       title,
       url,

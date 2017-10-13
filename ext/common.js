@@ -67,11 +67,4 @@
   /* Message passing */
 
   ext.onMessage = new ext._EventTarget();
-
-
-  /* Background page */
-
-  ext.backgroundPage = {
-    sendMessage: chrome.runtime.sendMessage
-  };
 }());

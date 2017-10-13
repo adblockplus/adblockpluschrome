@@ -45,7 +45,7 @@ let lastRightClickEventIsMostRecent = false;
 function getFiltersForElement(element, callback)
 {
   let src = element.getAttribute("src");
-  ext.backgroundPage.sendMessage({
+  chrome.runtime.sendMessage({
     type: "composer.getFilters",
     tagName: element.localName,
     id: element.id,
@@ -389,12 +389,12 @@ function elementPicked(event)
     if (currentlyPickingElement)
       stopPickingElement();
 
-    ext.backgroundPage.sendMessage({
+    chrome.runtime.sendMessage({
       type: "composer.openDialog"
     },
     popupId =>
     {
-      ext.backgroundPage.sendMessage({
+      chrome.runtime.sendMessage({
         type: "forward",
         targetPageId: popupId,
         payload: {type: "composer.dialog.init", filters}
@@ -408,7 +408,7 @@ function elementPicked(event)
       }
       else
       {
-        ext.backgroundPage.sendMessage({
+        chrome.runtime.sendMessage({
           type: "forward",
           payload: {type: "composer.content.dialogOpened", popupId}
         });
@@ -451,7 +451,7 @@ function deactivateBlockElement()
 
   if (blockelementPopupId != null)
   {
-    ext.backgroundPage.sendMessage({
+    chrome.runtime.sendMessage({
       type: "forward",
       targetPageId: blockelementPopupId,
       payload:
@@ -493,7 +493,7 @@ if (document instanceof HTMLDocument)
     lastRightClickEvent = event;
     lastRightClickEventIsMostRecent = true;
 
-    ext.backgroundPage.sendMessage({
+    chrome.runtime.sendMessage({
       type: "forward",
       payload:
       {
@@ -562,7 +562,7 @@ if (document instanceof HTMLDocument)
         // to be careful here. (This is not perfect, but best we can do.)
         if (window == window.top && blockelementPopupId == msg.popupId)
         {
-          ext.backgroundPage.sendMessage({
+          chrome.runtime.sendMessage({
             type: "forward",
             payload:
             {
@@ -575,5 +575,5 @@ if (document instanceof HTMLDocument)
   });
 
   if (window == window.top)
-    ext.backgroundPage.sendMessage({type: "composer.ready"});
+    chrome.runtime.sendMessage({type: "composer.ready"});
 }

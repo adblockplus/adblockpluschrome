@@ -50,7 +50,7 @@ function wrapper(baseMessage, ...paramKeys)
         message[paramKeys[i]] = paramValues[i];
     }
 
-    ext.backgroundPage.sendMessage(message, callback);
+    chrome.runtime.sendMessage(message, callback);
   };
 }
 
@@ -161,20 +161,20 @@ function loadOptions()
   });
 
   // Register listeners in the background message responder
-  ext.backgroundPage.sendMessage({
+  chrome.runtime.sendMessage({
     type: "app.listen",
     filter: ["addSubscription", "focusSection"]
   });
-  ext.backgroundPage.sendMessage({
+  chrome.runtime.sendMessage({
     type: "filters.listen",
     filter: ["added", "loaded", "removed"]
   });
-  ext.backgroundPage.sendMessage({
+  chrome.runtime.sendMessage({
     type: "prefs.listen",
     filter: ["notifications_ignoredcategories", "notifications_showui",
              "show_devtools_panel", "shouldShowBlockElementMenu"]
   });
-  ext.backgroundPage.sendMessage({
+  chrome.runtime.sendMessage({
     type: "subscriptions.listen",
     filter: ["added", "disabled", "homepage", "lastDownload", "removed",
              "title", "downloadStatus", "downloading"]
