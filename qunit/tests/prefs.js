@@ -27,7 +27,7 @@
   {
     let done = assert.async();
     let key = "pref:" + name;
-    chrome.storage.local.get(key, items =>
+    browser.storage.local.get(key, items =>
     {
       equal(key in items, expectedValue, description);
       done();
@@ -38,7 +38,7 @@
   {
     let done = assert.async();
     let key = "pref:" + name;
-    chrome.storage.local.get(key, items =>
+    browser.storage.local.get(key, items =>
     {
       deepEqual(items[key], expectedValue, description);
       done();

@@ -17,20 +17,17 @@
 
 "use strict";
 
-let iframe = document.getElementById("content");
+// Unlike Firefox and Microsoft Edge, Chrome doesn't have a "browser" object,
+// but provides the extension API through the "chrome" namespace
+// (non-standard).
+if (typeof browser == "undefined")
+  window.browser = chrome;
 
-iframe.onload = () =>
+// Workaround since HTMLCollection, NodeList, StyleSheetList, and CSSRuleList
+// didn't have iterator support before Chrome 51.
+// https://bugs.chromium.org/p/chromium/issues/detail?id=401699
+for (let object of [HTMLCollection, NodeList, StyleSheetList, CSSRuleList])
 {
-  document.title = iframe.contentDocument.title;
-};
-
-browser.runtime.sendMessage({
-  type: "app.get",
-  what: "application"
-},
-application =>
-{
-  // Load the mobile version of the options page on Firefox for Android.
-  iframe.src = iframe.getAttribute("data-src-" + application) ||
-               iframe.getAttribute("data-src");
-});
+  if (!(Symbol.iterator in object.prototype))
+    object.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+}

@@ -165,7 +165,7 @@ function checkCollapse(element)
   if (urls.length == 0)
     return;
 
-  chrome.runtime.sendMessage(
+  browser.runtime.sendMessage(
     {
       type: "filters.collapse",
       urls,
@@ -187,7 +187,7 @@ function checkSitekey()
 {
   let attr = document.documentElement.getAttribute("data-adblockkey");
   if (attr)
-    chrome.runtime.sendMessage({type: "filters.addKey", token: attr});
+    browser.runtime.sendMessage({type: "filters.addKey", token: attr});
 }
 
 function ElementHidingTracer()
@@ -248,7 +248,7 @@ ElementHidingTracer.prototype = {
 
     if (selectors.length > 0 || filters.length > 0)
     {
-      chrome.runtime.sendMessage({
+      browser.runtime.sendMessage({
         type: "devtools.traceElemHide",
         selectors, filters
       });
@@ -441,7 +441,7 @@ ElemHide.prototype = {
     {
       // Insert the style rules inline if we have been instructed by the
       // background page to do so. This is usually the case, except on platforms
-      // that do support user stylesheets via the chrome.tabs.insertCSS API
+      // that do support user stylesheets via the browser.tabs.insertCSS API
       // (Firefox 53 onwards for now and possibly Chrome in the near future).
       // Once all supported platforms have implemented this API, we can remove
       // the code below. See issue #5090.
@@ -452,7 +452,7 @@ ElemHide.prototype = {
     }
     else
     {
-      chrome.runtime.sendMessage({
+      browser.runtime.sendMessage({
         type: "elemhide.injectSelectors",
         selectors
       });
@@ -469,7 +469,7 @@ ElemHide.prototype = {
 
     if (this.tracer)
     {
-      chrome.runtime.sendMessage({
+      browser.runtime.sendMessage({
         type: "devtools.traceElemHide",
         selectors: [],
         filters
@@ -479,7 +479,7 @@ ElemHide.prototype = {
 
   apply()
   {
-    chrome.runtime.sendMessage({type: "elemhide.getSelectors"}, response =>
+    browser.runtime.sendMessage({type: "elemhide.getSelectors"}, response =>
     {
       if (this.tracer)
         this.tracer.disconnect();

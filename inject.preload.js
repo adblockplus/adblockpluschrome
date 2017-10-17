@@ -25,7 +25,7 @@ document.addEventListener(randomEventName, event =>
 {
   let {url, requestType} = event.detail;
 
-  chrome.runtime.sendMessage({
+  browser.runtime.sendMessage({
     type: "request.blockedByWrapper",
     requestType,
     url

@@ -11,14 +11,16 @@ permissions = tabs
   storage
   unlimitedStorage
   notifications
-backgroundScripts = ext/common.js
+backgroundScripts = polyfill.js
+  ext/common.js
   ext/background.js
   lib/compat.js
   lib/publicSuffixList.js
   lib/adblockplus.js
   messageResponder.js
   background.js
-testScripts = ../ext/common.js
+testScripts = polyfill.js
+  ../ext/common.js
   ../ext/background.js
   ../lib/compat.js
   ../lib/adblockplus.js
@@ -40,7 +42,7 @@ chrome = 49.0
 opera = 36.0
 
 [contentScripts]
-document_start = ext/common.js ext/content.js elemHideEmulation.js include.preload.js
+document_start = polyfill.js ext/common.js ext/content.js elemHideEmulation.js include.preload.js
 document_end = include.postload.js
 
 [mapping]

@@ -29,7 +29,7 @@ const shareLinks = {
     name: messageMark,
     actions: JSON.stringify([
       {
-        name: chrome.i18n.getMessage("stats_share_download"),
+        name: browser.i18n.getMessage("stats_share_download"),
         link: shareURL
       }
     ])
@@ -48,22 +48,22 @@ let tab = null;
 
 function getPref(key, callback)
 {
-  chrome.runtime.sendMessage({type: "prefs.get", key}, callback);
+  browser.runtime.sendMessage({type: "prefs.get", key}, callback);
 }
 
 function setPref(key, value, callback)
 {
-  chrome.runtime.sendMessage({type: "prefs.set", key, value}, callback);
+  browser.runtime.sendMessage({type: "prefs.set", key, value}, callback);
 }
 
 function togglePref(key, callback)
 {
-  chrome.runtime.sendMessage({type: "prefs.toggle", key}, callback);
+  browser.runtime.sendMessage({type: "prefs.toggle", key}, callback);
 }
 
 function isPageWhitelisted(callback)
 {
-  chrome.runtime.sendMessage({type: "filters.isWhitelisted", tab}, callback);
+  browser.runtime.sendMessage({type: "filters.isWhitelisted", tab}, callback);
 }
 
 function whenPageReady()
@@ -75,14 +75,14 @@ function whenPageReady()
       if (message.type == "composer.ready" && sender.page &&
           sender.page.id == tab.id)
       {
-        chrome.runtime.onMessage.removeListener(onMessage);
+        browser.runtime.onMessage.removeListener(onMessage);
         resolve();
       }
     }
 
-    chrome.runtime.onMessage.addListener(onMessage);
+    browser.runtime.onMessage.addListener(onMessage);
 
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
       type: "composer.isPageReady",
       pageId: tab.id
     },
@@ -90,7 +90,7 @@ function whenPageReady()
     {
       if (ready)
       {
-        chrome.runtime.onMessage.removeListener(onMessage);
+        browser.runtime.onMessage.removeListener(onMessage);
         resolve();
       }
     });
@@ -100,7 +100,7 @@ function whenPageReady()
 function toggleEnabled()
 {
   let disabled = document.body.classList.toggle("disabled");
-  chrome.runtime.sendMessage({
+  browser.runtime.sendMessage({
     type: disabled ? "filters.whitelist" : "filters.unwhitelist",
     tab
   });
@@ -109,7 +109,7 @@ function toggleEnabled()
 function activateClickHide()
 {
   document.body.classList.add("clickhide-active");
-  chrome.tabs.sendMessage(tab.id, {
+  browser.tabs.sendMessage(tab.id, {
     type: "composer.content.startPickingElement"
   });
 
@@ -125,7 +125,7 @@ function cancelClickHide()
     activateClickHide.timeout = null;
   }
   document.body.classList.remove("clickhide-active");
-  chrome.tabs.sendMessage(tab.id, {type: "composer.content.finished"});
+  browser.tabs.sendMessage(tab.id, {type: "composer.content.finished"});
 }
 
 function toggleCollapse(event)
@@ -146,7 +146,7 @@ function getDocLinks(notification)
     {
       return new Promise((resolve, reject) =>
       {
-        chrome.runtime.sendMessage({
+        browser.runtime.sendMessage({
           type: "app.get",
           what: "doclink",
           link
@@ -191,7 +191,7 @@ function createShareLink(network, blockedCount)
   {
     let value = params[key];
     if (value == messageMark)
-      value = chrome.i18n.getMessage("stats_share_message", blockedCount);
+      value = browser.i18n.getMessage("stats_share_message", blockedCount);
     querystring.push(
       encodeURIComponent(key) + "=" + encodeURIComponent(value)
     );
@@ -202,7 +202,7 @@ function createShareLink(network, blockedCount)
 function updateStats()
 {
   let statsPage = document.getElementById("stats-page");
-  chrome.runtime.sendMessage({
+  browser.runtime.sendMessage({
     type: "stats.getBlockedPerPage",
     tab
   },
@@ -231,11 +231,11 @@ function share(event)
     }
     else
     {
-      blockedTotal = chrome.i18n.getMessage("stats_over",
+      blockedTotal = browser.i18n.getMessage("stats_over",
                                             (9000).toLocaleString());
     }
 
-    chrome.tabs.create({
+    browser.tabs.create({
       url: createShareLink(event.target.dataset.social, blockedTotal)
     });
   });
@@ -253,7 +253,7 @@ function toggleIconNumber()
 
 document.addEventListener("DOMContentLoaded", () =>
 {
-  chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs =>
+  browser.tabs.query({active: true, lastFocusedWindow: true}, tabs =>
   {
     if (tabs.length > 0)
       tab = {id: tabs[0].id, url: tabs[0].url};
@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", () =>
           document.body.classList.add("disabled");
       });
 
-      chrome.tabs.sendMessage(tab.id, {
+      browser.tabs.sendMessage(tab.id, {
         type: "composer.content.getState"
       },
       response =>
@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", () =>
   );
   document.getElementById("options").addEventListener("click", () =>
   {
-    chrome.runtime.sendMessage({type: "app.open", what: "options"});
+    browser.runtime.sendMessage({type: "app.open", what: "options"});
     window.close();
   });
 
@@ -344,7 +344,7 @@ document.addEventListener("DOMContentLoaded", () =>
 
 window.addEventListener("load", () =>
 {
-  chrome.runtime.sendMessage({
+  browser.runtime.sendMessage({
     type: "notifications.get",
     displayMethod: "popup"
   }, notification =>
@@ -370,7 +370,7 @@ window.addEventListener("load", () =>
           return;
         event.preventDefault();
         event.stopPropagation();
-        chrome.tabs.create({url: link.href});
+        browser.tabs.create({url: link.href});
       });
     });
 

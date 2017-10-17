@@ -37,7 +37,7 @@ function onKeyDown(event)
 
 function addFilters()
 {
-  chrome.runtime.sendMessage({
+  browser.runtime.sendMessage({
     type: "filters.importRaw",
     text: document.getElementById("filters").value
   },
@@ -52,7 +52,7 @@ function addFilters()
 
 function closeDialog(success)
 {
-  chrome.runtime.sendMessage({
+  browser.runtime.sendMessage({
     type: "forward",
     targetPageId,
     payload:

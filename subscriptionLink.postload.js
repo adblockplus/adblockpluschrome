@@ -93,7 +93,7 @@ if (document instanceof HTMLDocument)
     if (!/^(https?|ftp):/.test(url))
       return;
 
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
       type: "subscriptions.add",
       title,
       url,
