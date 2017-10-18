@@ -479,8 +479,11 @@ function deactivateBlockElement()
   ext.onExtensionUnloaded.removeListener(deactivateBlockElement);
 }
 
-if (document instanceof HTMLDocument)
+function initializeComposer()
 {
+  if (typeof ext == "undefined")
+    return false;
+
   // Use a contextmenu handler to save the last element the user right-clicked
   // on. To make things easier, we actually save the DOM event. We have to do
   // this because the contextMenu API only provides a URL, not the actual DOM
@@ -502,9 +505,9 @@ if (document instanceof HTMLDocument)
     });
   }, true);
 
-  ext.onMessage.addListener((msg, sender, sendResponse) =>
+  ext.onMessage.addListener((message, sender, sendResponse) =>
   {
-    switch (msg.type)
+    switch (message.type)
     {
       case "composer.content.getState":
         if (window == window.top)
@@ -534,7 +537,7 @@ if (document instanceof HTMLDocument)
         }
         break;
       case "composer.content.finished":
-        if (currentElement && msg.remove)
+        if (currentElement && message.remove)
         {
           // Hide the selected element itself if an added blocking
           // filter is causing it to collapse. Note that this
@@ -555,12 +558,12 @@ if (document instanceof HTMLDocument)
         break;
       case "composer.content.dialogOpened":
         if (window == window.top)
-          blockelementPopupId = msg.popupId;
+          blockelementPopupId = message.popupId;
         break;
       case "composer.content.dialogClosed":
         // The onRemoved hook for the popup can create a race condition, so we
         // to be careful here. (This is not perfect, but best we can do.)
-        if (window == window.top && blockelementPopupId == msg.popupId)
+        if (window == window.top && blockelementPopupId == message.popupId)
         {
           browser.runtime.sendMessage({
             type: "forward",
@@ -576,4 +579,17 @@ if (document instanceof HTMLDocument)
 
   if (window == window.top)
     browser.runtime.sendMessage({type: "composer.ready"});
+
+  return true;
+}
+
+if (document instanceof HTMLDocument)
+{
+  // There's a bug in Firefox that causes document_end content scripts to run
+  // before document_start content scripts on extension startup. In this case
+  // the ext object is undefined, we fail to initialize, and initializeComposer
+  // returns false. As a workaround, try again after a timeout.
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=1395287
+  if (!initializeComposer())
+    setTimeout(initializeComposer, 2000);
 }
