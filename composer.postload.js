@@ -15,9 +15,10 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/* globals checkCollapse, elemhide, getURLsFromElement, typeMap */
-
 "use strict";
+
+const {checkCollapse, elemhide,
+       getURLsFromElement, typeMap} = require("./include.preload");
 
 // The page ID for the popup filter selection dialog (top frame only).
 let blockelementPopupId = null;

@@ -38,7 +38,7 @@ skin/fonts/SourceSansPro-Regular.woff = adblockplusui/skin/fonts/SourceSansPro-R
 skin/fonts/SourceSansPro-Light.woff = adblockplusui/skin/fonts/SourceSansPro-Light.woff
 skin/fonts/SourceSansPro-bold.woff = adblockplusui/skin/fonts/SourceSansPro-bold.woff
 
-[convert_js]
+[bundles]
 lib/adblockplus.js += lib/firefoxDataCleanup.js
 
 [import_locales]

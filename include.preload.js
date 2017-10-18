@@ -523,3 +523,10 @@ if (document instanceof HTMLDocument)
       checkCollapse(element);
   }, true);
 }
+
+module.exports = {
+  checkCollapse,
+  elemhide,
+  typeMap,
+  getURLsFromElement
+};
