@@ -19,7 +19,6 @@
 
 "use strict";
 
-(function()
 {
   const {Services} = Cu.import("resource://gre/modules/Services.jsm", {});
   const {compare} = Services.vc;
@@ -113,4 +112,4 @@
       }
     });
   });
-}());
+}

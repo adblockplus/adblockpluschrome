@@ -17,7 +17,6 @@
 
 "use strict";
 
-(function()
 {
   let nonEmptyPageMaps = new Set();
 
@@ -681,4 +680,4 @@
       });
     }
   };
-}());
+}

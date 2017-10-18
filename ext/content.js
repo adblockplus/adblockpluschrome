@@ -15,7 +15,6 @@ if (!browser.devtools)
   });
 }
 
-(function()
 {
   let port = null;
 
@@ -43,4 +42,4 @@ if (!browser.devtools)
       }
     }
   };
-}());
+}

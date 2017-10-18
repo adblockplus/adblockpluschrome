@@ -17,7 +17,6 @@
 
 "use strict";
 
-(function()
 {
   let {getDecodedHostname,
        extractHostFromFrame,
@@ -179,4 +178,4 @@
     testThirdParty("example.com..", "example.com....", false,
                    "traling dots are ignored");
   });
-}());
+}

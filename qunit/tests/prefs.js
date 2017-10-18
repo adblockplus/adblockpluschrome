@@ -1,6 +1,5 @@
 "use strict";
 
-(function()
 {
   const {Prefs} = require("prefs");
 
@@ -160,4 +159,4 @@
       "default value"
     );
   });
-}());
+}

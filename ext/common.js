@@ -17,7 +17,6 @@
 
 "use strict";
 
-(function()
 {
   window.ext = {};
 
@@ -49,4 +48,4 @@
   /* Message passing */
 
   ext.onMessage = new ext._EventTarget();
-}());
+}
