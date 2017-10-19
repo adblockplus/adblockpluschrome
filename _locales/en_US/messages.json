@@ -290,5 +290,12 @@
         "content": "$1"
       }
     }
+  },
+  "continue": {
+    "description": "Continue button label",
+    "message": "Continue"
+  },
+  "sendReport": {
+    "message": "Report issue on this page"
   }
 }

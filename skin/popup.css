@@ -24,7 +24,8 @@ body.clickhide-active #clickhide-cancel
 
 body.local #enabled,
 body.local #clickhide,
-body.local #stats-page
+body.local #stats-page,
+body.local #issueReporter
 {
   display: none;
 }
@@ -257,6 +258,11 @@ body.disabled #enabled #enabled-no
 #stats-container .icon
 {
   background-position: -50px -49px;
+}
+
+#issueReporter .icon
+{
+  visibility: hidden;
 }
 
 

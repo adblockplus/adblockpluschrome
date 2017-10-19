@@ -128,6 +128,13 @@ function cancelClickHide()
   browser.tabs.sendMessage(tab.id, {type: "composer.content.finished"});
 }
 
+function reportIssue()
+{
+  browser.tabs.create({
+    url: browser.runtime.getURL("/issue-reporter.html?" + tab.id)
+  });
+}
+
 function toggleCollapse(event)
 {
   let collapser = event.currentTarget;
@@ -309,6 +316,9 @@ document.addEventListener("DOMContentLoaded", () =>
   document.getElementById("clickhide-cancel").addEventListener(
     "click", cancelClickHide
   );
+  document.getElementById("issueReporter").addEventListener(
+    "click", reportIssue
+  )
   document.getElementById("options").addEventListener("click", () =>
   {
     browser.runtime.sendMessage({type: "app.open", what: "options"});

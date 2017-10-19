@@ -32,6 +32,7 @@
     "storage.managed.get",
     "tabs.create",
     "tabs.get",
+    "tabs.getCurrent",
     "tabs.insertCSS",
     "tabs.query",
     "tabs.reload",
