@@ -43,6 +43,14 @@
     "windows.update"
   ];
 
+  // Since we add a callback for all messaging API calls in our wrappers,
+  // Chrome assumes we're interested in the response; when there's no response,
+  // it sets runtime.lastError
+  const portClosedBeforeResponseError =
+    // Older versions of Chrome have a typo:
+    // https://crrev.com/c33f51726eacdcc1a487b21a13611f7eab580d6d
+    /^The message port closed before a res?ponse was received\.$/;
+
   function wrapAPI(api)
   {
     let object = browser;
@@ -78,7 +86,7 @@
         func.call(object, ...args, result =>
         {
           let error = browser.runtime.lastError;
-          if (error)
+          if (error && !portClosedBeforeResponseError.test(error.message))
           {
             // runtime.lastError is already an Error instance on Edge, while on
             // Chrome it is a plain object with only a message property.
