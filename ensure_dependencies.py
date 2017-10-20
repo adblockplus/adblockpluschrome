@@ -278,8 +278,8 @@ def resolve_npm_dependencies(target, vcs):
         lockfile_path = os.path.join(target, NPM_LOCKFILE)
         open(lockfile_path, 'a').close()
 
-        cmd = ['npm', 'install', '--only=production',
-               '--loglevel=warn', '--no-package-lock']
+        cmd = ['npm', 'install', '--only=production', '--loglevel=warn',
+               '--no-package-lock', '--no-optional']
         subprocess.check_output(cmd, cwd=target)
 
         repo_types[vcs].ignore(os.path.join(target, NPM_LOCKFILE), target)
