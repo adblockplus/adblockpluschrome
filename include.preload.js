@@ -524,9 +524,7 @@ if (document instanceof HTMLDocument)
   }, true);
 }
 
-module.exports = {
-  checkCollapse,
-  elemhide,
-  typeMap,
-  getURLsFromElement
-};
+window.checkCollapse = checkCollapse;
+window.elemhide = elemhide;
+window.typeMap = typeMap;
+window.getURLsFromElement = getURLsFromElement;
