@@ -67,6 +67,9 @@
     }
 
     let func = object[name];
+    if (!func)
+      return;
+
     object[name] = function(...args)
     {
       let callStack = new Error().stack;
