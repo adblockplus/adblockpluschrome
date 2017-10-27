@@ -132,6 +132,9 @@ function reportIssue()
 {
   browser.tabs.create({
     url: browser.runtime.getURL("/issue-reporter.html?" + tab.id)
+  }).then(() =>
+  {
+    window.close();
   });
 }
 
