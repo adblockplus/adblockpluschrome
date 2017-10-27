@@ -405,8 +405,13 @@ if (document instanceof HTMLDocument)
     let script = document.createElement("script");
     script.type = "application/javascript";
     script.async = false;
-    script.textContent = "(" + injected + ")('" + randomEventName + "');";
+    // Firefox 58 only bypasses site CSPs when assigning to 'src'.
+    let url = URL.createObjectURL(new Blob([
+      "(" + injected + ")('" + randomEventName + "');"
+    ]));
+    script.src = url;
     document.documentElement.appendChild(script);
     document.documentElement.removeChild(script);
+    URL.revokeObjectURL(url);
   }
 }
