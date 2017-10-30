@@ -4,7 +4,7 @@
   const {Filter, ElemHideFilter} = require("filterClasses");
   const {escapeCSS, quoteCSS} = require("filterComposer");
 
-  module("CSS escaping");
+  QUnit.module("CSS escaping");
 
   test("CSS escaping", () =>
   {

@@ -17,17 +17,12 @@ backgroundScripts = polyfill.js
   lib/compat.js
   lib/publicSuffixList.js
   lib/adblockplus.js
-testScripts = polyfill.js
+testScripts = ../polyfill.js
   ../ext/common.js
   ../ext/background.js
   ../lib/compat.js
-  ../lib/adblockplus.js
   ../lib/publicSuffixList.js
-  common.js
-  tests/prefs.js
-  tests/versionComparator.js
-  tests/url.js
-  tests/cssEscaping.js
+  tests.js
 options = options.html
 devtools = devtools.html
 browserAction = icons/abp-16.png icons/abp-19.png icons/abp-20.png icons/abp-32.png icons/abp-38.png icons/abp-40.png popup.html
@@ -93,6 +88,11 @@ lib/adblockplus.js =
   background.js
 include.preload.js = include.preload.js inject.preload.js
 include.postload.js = subscriptionLink.postload.js composer.postload.js
+qunit/tests.js =
+  qunit/common.js
+  qunit/tests/prefs.js
+  qunit/tests/url.js
+  qunit/tests/cssEscaping.js
 
 [import_locales]
 adblockplusui/locale/*/firstRun.json = *

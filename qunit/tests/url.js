@@ -23,7 +23,7 @@
        stringifyURL,
        isThirdParty} = require("url");
 
-  module("URL/host tools");
+  QUnit.module("URL/host tools");
 
   test("Extracting hostname from URL", () =>
   {

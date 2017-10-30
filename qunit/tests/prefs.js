@@ -3,7 +3,7 @@
 {
   const {Prefs} = require("prefs");
 
-  module("Preferences", {
+  QUnit.module("Preferences", {
     setup()
     {
       this._pbackup = Object.create(null);

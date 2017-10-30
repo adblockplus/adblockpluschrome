@@ -6,7 +6,7 @@
          ElemHideFilter,
          CommentFilter} = require("filterClasses");
 
-  module("Filter validation");
+  QUnit.module("Filter validation");
 
   test("Detecting invalid filters", () =>
   {
