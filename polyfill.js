@@ -128,8 +128,8 @@
 
   if (shouldWrapAPIs())
   {
-    // Unlike Firefox and Microsoft Edge, Chrome doesn't have a "browser" object,
-    // but provides the extension API through the "chrome" namespace
+    // Unlike Firefox and Microsoft Edge, Chrome doesn't have a "browser"
+    // object, but provides the extension API through the "chrome" namespace
     // (non-standard).
     if (typeof browser == "undefined")
       window.browser = chrome;

@@ -321,7 +321,7 @@ document.addEventListener("DOMContentLoaded", () =>
   );
   document.getElementById("issueReporter").addEventListener(
     "click", reportIssue
-  )
+  );
   document.getElementById("options").addEventListener("click", () =>
   {
     browser.runtime.sendMessage({type: "app.open", what: "options"});
