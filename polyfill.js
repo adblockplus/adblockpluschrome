@@ -69,8 +69,10 @@
     let func = object[name];
     if (!func)
       return;
-
-    object[name] = function(...args)
+    let descriptor = Object.getOwnPropertyDescriptor(object, name);
+    delete descriptor["get"];
+    delete descriptor["set"];
+    descriptor.value = function(...args)
     {
       let callStack = new Error().stack;
 
@@ -111,6 +113,7 @@
         });
       });
     };
+    Object.defineProperty(object, name, descriptor);
   }
 
   function shouldWrapAPIs()
