@@ -1,0 +1,89 @@
+{
+  "add": {
+    "message": "Қосу"
+  },
+  "add_filter_button": {
+    "message": "Фильтрді қосу"
+  },
+  "cancel": {
+    "message": "Бас тарту"
+  },
+  "continue": {
+    "message": "Жалғастыру"
+  },
+  "filter_invalid_regexp": {
+    "message": "Жарамсыз тұрақты өрнек"
+  },
+  "filter_unknown_option": {
+    "message": "Белгісіз фильтр опциясы"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Зиянкес емес кейбір жарнаманы іске қосу"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Қосу"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Басқа жазылуды қосу"
+  },
+  "filters_addSubscription_label": {
+    "message": "Фильтрлерге жазылуды қосу"
+  },
+  "filters_readMore_label": {
+    "message": "Көбірек оқу"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Жою"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Қосулы"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Қате, тексеру сомасы сәйкес емес"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Қате, жүктеу мүмкін емес"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Жүктелуде..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Қате, дұрыс сүзгілер файлы емес"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Қате, дұрыс адрес емес"
+  },
+  "filters_viewList_label": {
+    "message": "Тізімді қарау"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Осы жазылуды өшіруды шынымен қалайсыз ба?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Енгізілген адрес не интернет адресі, не файл мекен-жайы ретінде анықталмады."
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
+  "options_short": {
+    "message": "Баптаулар"
+  },
+  "overlay_notification_button_no": {
+    "message": "Жоқ"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Иә"
+  },
+  "sendReport": {
+    "message": "Бұл парақтағы мәселе туралы хабарлау"
+  },
+  "subscriptionSelection_location_label": {
+    "message": "Фильтр тізім адресі:"
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Тізімнен сүзгіге жазылуды таңдаңыз:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Жазылудың аты:"
+  }
+}

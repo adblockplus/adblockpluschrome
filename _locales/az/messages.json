@@ -1,0 +1,163 @@
+{
+  "add": {
+    "message": "Əlavə et"
+  },
+  "add_domain_button": {
+    "message": "Domen əlavə et"
+  },
+  "add_filter_button": {
+    "message": "Filtr əlavə et"
+  },
+  "add_filters_msg": {
+    "message": "Filtr əlavə et?"
+  },
+  "apply_changes": {
+    "message": "Dəyişikləri tətbiq et"
+  },
+  "block_element": {
+    "message": "Elementi əngəllə"
+  },
+  "cancel": {
+    "message": "Ləğv et"
+  },
+  "continue": {
+    "message": "İrəli"
+  },
+  "easy_create_filter": {
+    "message": "Elementi əngəllə"
+  },
+  "filter_invalid_regexp": {
+    "message": "Etibarsız ifadə"
+  },
+  "filter_unknown_option": {
+    "message": "Qeyri-müəyyən filtr seçim"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Bəzi qeyri-müdaxilə reklamlarına icazə ver"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Əlavə et"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Fərqli abunəlik əlavə et"
+  },
+  "filters_addSubscription_label": {
+    "message": "Filtr abunəliyi əlavə et"
+  },
+  "filters_readMore_label": {
+    "message": "Ətraflı"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Sil"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Aktiləşdirildi"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Baş tutmadı, rəqəmsal cəm uyğunlaşmadı"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Baş tutmadı yükləmə uğursuz oldu"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Yüklənir…"
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Baş tutmadı filtr list düzgün deyil"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Baş tutmadı ünvan düzgün deyil"
+  },
+  "filters_viewList_label": {
+    "message": "Listə bax"
+  },
+  "general": {
+    "message": "Ümumi"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Bu abunəliyi ləğv etməyə əminsiniz?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Filtr list yeri üçün nə düzgün adres nə də düzgün fayl adı qeyd edilməyib."
+  },
+  "line": {
+    "message": "Sətir $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
+  "options": {
+    "message": "Adblock Plus Seçimləri"
+  },
+  "options_short": {
+    "message": "Seçimlər"
+  },
+  "overlay_notification_button_no": {
+    "message": "Xeyr"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Bəli"
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Bu bildirişi bağla"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Bildirişləri göstərməyi dayandır"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Faydalı bildirişləri göstər"
+  },
+  "remove_button": {
+    "message": "Seçiləni çıxart"
+  },
+  "sendReport": {
+    "message": "Səhifədəki səhvi bildir"
+  },
+  "stats_label_page": {
+    "message": "Bu səhifədə <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "Ümumi <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_over": {
+    "message": "$number$ üzərində",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_download": {
+    "message": "Adblock Plus Endir"
+  },
+  "stats_share_title": {
+    "message": "Bu nömrəni paylaş"
+  },
+  "stats_show_iconnumber": {
+    "message": "Nişanda nömrə göstər"
+  },
+  "stats_title": {
+    "message": "Reklamlar əngəlləndi"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Abunəliyin adı:"
+  },
+  "update_now": {
+    "message": "İndi yenilə"
+  }
+}

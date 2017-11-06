@@ -1,0 +1,71 @@
+{
+  "add": {
+    "message": "Додади"
+  },
+  "add_filter_button": {
+    "message": "Додај филтер"
+  },
+  "cancel": {
+    "message": "Откажи"
+  },
+  "continue": {
+    "message": "Продолжи"
+  },
+  "filter_invalid_regexp": {
+    "message": "Непознатo регуларно изразување"
+  },
+  "filter_unknown_option": {
+    "message": "Непозната опција за филтер"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Додади"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Додади друга претплата"
+  },
+  "filters_addSubscription_label": {
+    "message": "Додај филтер"
+  },
+  "filters_readMore_label": {
+    "message": "Прочитај повеќе"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Избриши"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Вклучено"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Неуспешно, кодовите за проверка не се совпаѓаат"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Неуспешно преземање"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Се презема…"
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Неуспешно, не е валидна листа на филтери"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Неуспешно, адресата не е валидна"
+  },
+  "filters_viewList_label": {
+    "message": "Покажи листа"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Дали сакаш да ја отсраниш оваа претплата?"
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
+  "options_short": {
+    "message": "Опции"
+  },
+  "overlay_notification_button_no": {
+    "message": "Не"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Да"
+  }
+}

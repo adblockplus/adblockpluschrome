@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "ಈ ಪಾಪ್ಅಪ್ ಮುಚ್ಚುವ ನಂತರ, ಪುಟ ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ (ಅಥವಾ ಬಲ ಕ್ಲಿಕ್ ಮಾಡಿ) ಒಂದು ಅಂಶ."
   },
+  "continue": {
+    "message": "ಮುಂದುವರೆ"
+  },
   "description": {
     "message": "Adblock Plus ಅನ್ನು 100 ಮಿಲಿಯನ್‌ಗೂ ಹೆಚ್ಚು ಸಾಧನಗಳಲ್ಲಿ ಬಳಸಲಾಗಿದ್ದು, ವಿಶ್ವದ ಹೆಚ್ಚು ಜನಪ್ರಿಯ ಜಾಹೀರಾತು ಬ್ಲಾಕರ್ ಆಗಿದೆ."
   },
@@ -53,11 +56,47 @@
   "filter_must_follow_syntax": {
     "message": "ನಿಮ್ಮ ಫಿಲ್ಟರ್ ಅನುಸರಿಸಬೇಕು<a>Adblock Plus ಫಿಲ್ಟರ್ ವಾಕ್ಯ</a>."
   },
+  "filters_addSubscriptionAdd_label": {
+    "message": "ಸೇರಿಸಿ"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "ಇನ್ನೊಂದು ಚಂದಾವನ್ನು ಸೇರಿಸಿ"
+  },
+  "filters_readMore_label": {
+    "message": "ಮತ್ತಷ್ಟು ಓದು"
+  },
+  "filters_subscription_delete_label": {
+    "message": "ಅಳಿಸಿ"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "ಶಕ್ತಗೊಂಡಿದೆ"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "ವಿಫಲವಾಗಿದೆ, ಪ್ರತಿನಿಧಿಗಳನ್ನು ಅಸಾಮರಸ್ಯವು"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "ವಿಫಲವಾಗಿದೆ, ಡೌನ್ಲೋಡ್ ವೈಫಲ್ಯ"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "ಡೌನ್‌ಲೋಡ್ ಆಗುತ್ತಿದೆ..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "ವಿಫಲವಾಗಿದೆ, ಮಾನ್ಯ ಶೋಧಕಗಳ ಪಟ್ಟಿ"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "ವಿಫಲವಾಗಿದೆ, ಮಾನ್ಯ ವಿಳಾಸ"
+  },
+  "filters_viewList_label": {
+    "message": "ಪಟ್ಟಿಯನ್ನು ವೀಕ್ಷಿಸಿ"
+  },
   "found_a_bug": {
     "message": "ಒಂದು ದೋಷ ಕಂಡುಬಂದಿದೆ? ನಿಮ್ಮ ಭಾಷೆಗೆ Adblock Plus ಭಾಷಾಂತರಿಸಲು ಬಯಸುವಿರಾ? ದಯವಿಟ್ಟು<a>ವಿನಂತಿಯನ್ನು ಫೈಲ್ ಇಲ್ಲಿ</a>."
   },
   "general": {
     "message": "ಜನರಲ್"
+  },
+  "global_remove_subscription_warning": {
+    "message": "ಈ ಚಂದಾವನ್ನು ನಿಜವಾಗಿಯೂ ತೆಗೆಯಲು ಇಚ್ಚಿಸುತ್ತೀರಾ?"
   },
   "invalid_css_selector": {
     "message": "$selector$ is not a valid CSS selector",
@@ -117,6 +156,12 @@
   },
   "out_of_date_lists": {
     "message": "ರೂಢಿಯಲ್ಲಿಲ್ಲದ ಪಟ್ಟಿಗಳನ್ನು ನಿಯತಕಾಲಿಕವಾಗಿ ನವೀಕರಿಸಲಾಗುತ್ತದೆ."
+  },
+  "overlay_notification_button_no": {
+    "message": "ಇಲ್ಲ"
+  },
+  "overlay_notification_button_yes": {
+    "message": "ಹೌದು"
   },
   "remove_button": {
     "message": "ಆಯ್ಕೆಗಳನ್ನು ತೆಗೆಯಿರಿ"

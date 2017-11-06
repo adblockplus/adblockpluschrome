@@ -1,0 +1,101 @@
+{
+  "add": {
+    "message": "დამატება"
+  },
+  "add_domain_button": {
+    "message": "დომეინის დამატება"
+  },
+  "add_filter_button": {
+    "message": "ფილტრის დამატება"
+  },
+  "add_your_own_filters": {
+    "message": "საკუთარი ფილტრის დამატება"
+  },
+  "cancel": {
+    "message": "გაუქმება"
+  },
+  "continue": {
+    "message": "გაგრძელება"
+  },
+  "enable_only_the": {
+    "message": "გამოიწერეთ მხოლოდ საჭირო ფილტრები. ბევრი ფილტრები გამოიწვევს ბრაუზერის არასტაბილურობას."
+  },
+  "filter_lists": {
+    "message": "ფილტრის წესები"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "ზოგიერთი რეკლამის დაშვება"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "დამატება"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "სხვა პოდპისკის დამატება"
+  },
+  "filters_addSubscription_label": {
+    "message": "ფილტრის გამოწერის დამატება"
+  },
+  "filters_readMore_label": {
+    "message": "დაწვრილებით"
+  },
+  "filters_subscription_delete_label": {
+    "message": "წაშლა"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "ჩართული"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "ჩამოტვირთვა წარუმატებელია"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "იტვირთება…"
+  },
+  "filters_viewList_label": {
+    "message": "სიის ნახვა"
+  },
+  "global_subscription_invalid_location": {
+    "message": "მითითებული ფილტრის მისამართი არც სწორი ბმულია და არც სწორი სახელი."
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
+  "options": {
+    "message": "AdBlock Plus-ის პარამეტრები"
+  },
+  "options_short": {
+    "message": "პარამეტრები"
+  },
+  "out_of_date_lists": {
+    "message": "მოძველებული სია პერიოდულად აქტუალიზირდება."
+  },
+  "overlay_notification_button_no": {
+    "message": "არა"
+  },
+  "overlay_notification_button_yes": {
+    "message": "დიახ"
+  },
+  "remove_button": {
+    "message": "მონიშნულის წაშლა"
+  },
+  "sendReport": {
+    "message": "განაცხადეთ ამ გვერდზე პრობლემის შესახებ"
+  },
+  "stats_share_title": {
+    "message": "ამ ციფრის გაზიარება"
+  },
+  "subscriptionSelection_location_label": {
+    "message": "ფილტრის სიის მდებარეობა:"
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "გთხოვთ აირჩიეთ არსებული ფილტრებიდან:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "გამოწერის სათაური:"
+  },
+  "update_now": {
+    "message": "აქტუალიზირება"
+  },
+  "whitelisted_domains": {
+    "message": "დაშვებული დომეინები"
+  }
+}

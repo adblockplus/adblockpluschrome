@@ -53,6 +53,36 @@
   "filter_must_follow_syntax": {
     "message": "உங்கள் Adblock Plus வடிகட்டி பின்வரும் இலக்கணத்தை பயன்படுத்தவேண்டும்: <a> </a>."
   },
+  "filters_acceptableAds2_label": {
+    "message": "சில தொல்லைபடுத்தாத விளம்பரங்களை மட்டும் காட்டவும்"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "சேர்"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "வேறு சந்தா சேர்"
+  },
+  "filters_readMore_label": {
+    "message": "மேலும் படிக்க"
+  },
+  "filters_subscription_delete_label": {
+    "message": "நீக்கு"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "செயலாக்கம்"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "தோல்வியடைந்தது, பதிவிறக்கம் தோல்வி"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "பதிவிறக்குகிறது..."
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "தோல்வி, செல்லத்தக்க இல்லை  முகவரி"
+  },
+  "filters_viewList_label": {
+    "message": "பட்டியலை பார்க்க"
+  },
   "found_a_bug": {
     "message": "ஏதேனும் பிழையா? உங்கள் மொழிக்கு Adblock Plus மொழிபெயர்க்கபட வேண்டுமா? தயவுசெய்து கோரிக்கையை <a> இங்கே பதிக்கவும் </a>."
   },
@@ -94,6 +124,9 @@
       }
     }
   },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Adblock Plus வளர்ச்சி கட்டமை"
   },
@@ -118,8 +151,17 @@
   "out_of_date_lists": {
     "message": "பழைய பட்டியல்கள் அவ்வப்போது புதுப்பிக்கப்படும்."
   },
+  "overlay_notification_button_no": {
+    "message": "இல்லை"
+  },
+  "overlay_notification_button_yes": {
+    "message": "ஆம்"
+  },
   "remove_button": {
     "message": "தேர்ந்தெடுத்ததை நீக்கு"
+  },
+  "sendReport": {
+    "message": "இந்தப் பக்கத்தில் இருக்கும் பிரச்சினைகளை தெரியப்படுத்த"
   },
   "show_block_element_menu": {
     "message": "'உறுப்பை தடு' வலது-கிளிக் மெனு உருப்படியை காண்பி"

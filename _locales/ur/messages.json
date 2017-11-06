@@ -1,0 +1,26 @@
+{
+  "add": {
+    "message": "اندراج کریں"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "کچھ غیر دخل اشتہار بازی کی اجازت دیں"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "اندراج کریں"
+  },
+  "name": {
+    "message": "ادبلاک پلس"
+  },
+  "options": {
+    "message": "ایڈ بلوک پلس کے آ پشنز"
+  },
+  "overlay_notification_button_no": {
+    "message": "نہیں"
+  },
+  "overlay_notification_button_yes": {
+    "message": "ہاں"
+  },
+  "stats_share_title": {
+    "message": "اس نمبر کا اشتراک کریں"
+  }
+}

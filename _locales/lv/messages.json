@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Pēc šī uznirstošā loga aizvēršanas, noklikšķiniet (vai noklikšķiniet ar labo pogu) uz elementa šajā lapā."
   },
+  "continue": {
+    "message": "Uz priekšu"
+  },
   "description": {
     "message": "Izmantots vairāk nekā 100 miljoni ierīču, Adblock Plus ir pasaulē populārākais reklāmu bloķētājs."
   },
@@ -53,11 +56,56 @@
   "filter_must_follow_syntax": {
     "message": "Filtram jāatbilst <a>Adblock Plus filtru sintaksei</a>."
   },
+  "filters_acceptableAds2_label": {
+    "message": "Atļaut dažas neuzbāzīgas reklāmas"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Pievienot"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Pievienot citu abonementu"
+  },
+  "filters_addSubscription_label": {
+    "message": "Pievienot filtru abonementu"
+  },
+  "filters_readMore_label": {
+    "message": "Lasīt vairāk"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Dzēst"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Iespējota"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Neizdevās, kontrolsummas neatbilstība"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Neizdevās, lejupielāde neizdevās"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Lejupielādē..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Neizdevās, nav derīgs filtru saraksts"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Neizdevās, nav derīga adrese"
+  },
+  "filters_viewList_label": {
+    "message": "Skatīt sarakstu"
+  },
   "found_a_bug": {
     "message": "Atradi defektu? Vēlies iztulkot Adblock Plus savā valodā? Lūdzu <a>iesniedz pieprasījumu šeit</a>."
   },
   "general": {
     "message": "Vispārīgi"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Vai Jūs tiešām vēlaties noņemt šo abonementu?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Filtru saraksta atrašanās vieta nav ne derīgs URL ne arī derīgs faila nosaukums."
   },
   "invalid_css_selector": {
     "message": "$selector$ nav derīgs CSS selektors",
@@ -94,6 +142,9 @@
       }
     }
   },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Adblock Plus attīstības programma"
   },
@@ -118,8 +169,17 @@
   "out_of_date_lists": {
     "message": "Novecojušie saraksti tiek periodiski atjaunināti."
   },
+  "overlay_notification_button_no": {
+    "message": "Nē"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Jā"
+  },
   "remove_button": {
     "message": "Noņemt izvēlēto"
+  },
+  "sendReport": {
+    "message": "Ziņot par problēmām šajā lapā"
   },
   "show_block_element_menu": {
     "message": "Rādīt \"Bloķēt elementu'' labā klikšķa izvēlnē"
@@ -171,8 +231,14 @@
   "stats_title": {
     "message": "Bloķētās reklāmas"
   },
+  "subscriptionSelection_location_label": {
+    "message": "Filtru saraksta atrašanās vieta:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lūdzu, izvēlieties filtru abonementu no saraksta:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Abonementa nosaukums:"
   },
   "unexpected_filter_list_header": {
     "message": "Filtra saraksta galvenes šeit nav atļautas"

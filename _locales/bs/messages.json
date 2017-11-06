@@ -1,0 +1,71 @@
+{
+  "add": {
+    "message": "Dodaj"
+  },
+  "add_filter_button": {
+    "message": "Dodaj filter"
+  },
+  "cancel": {
+    "message": "Poništiti"
+  },
+  "continue": {
+    "message": "Nastavi"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Dodaj"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Dodajte drugačiju pretplatu"
+  },
+  "filters_readMore_label": {
+    "message": "Učitaj još"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Izbriši"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Omogućeno"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Nije uspjelo, nepodudarnost checksum-a"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Nije uspjelo, download neuspjeh"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Skidam…"
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Neuspjeh, nije validan spisak filtera"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Neuspjeh, adresa nije validna"
+  },
+  "filters_viewList_label": {
+    "message": "Vidi spisak"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Da li stvarno želite ukloniti ovu pretplatu?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Filtriranje popisa lokacija nije ni važeći URL ni važeći naziv datoteke."
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
+  "options": {
+    "message": "Adblock Plus postavke"
+  },
+  "options_short": {
+    "message": "Opcije"
+  },
+  "overlay_notification_button_no": {
+    "message": "Ne"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Da"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Naslov pretplate:"
+  }
+}

@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Tämän ikkunan sulkemisen jälkeen klikkaa (tai oikea klikkaa) elementtiä jonka haluat estää."
   },
+  "continue": {
+    "message": "Jatka"
+  },
   "description": {
     "message": "Adblock Plus on maailman suosituin mainosten esto-ohjelma, ja se on käytössä yli 100 miljoonassa laitteessa."
   },
@@ -47,17 +50,68 @@
   "enabled_for_site": {
     "message": "<strong>Poistettu</strong> tältä sivulta"
   },
+  "filter_invalid_regexp": {
+    "message": "Virheellinen normaali-ilmaus"
+  },
   "filter_lists": {
     "message": "Suodatinlistat"
   },
   "filter_must_follow_syntax": {
     "message": "Suodattimesi on noudatettava <a>Adblock Plus suodattimen syntaksia</a>."
   },
+  "filter_unknown_option": {
+    "message": "Tuntematon suodatusvaihtoehto"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Salli osa ei-häiritsevästä mainonnasta"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Lisää"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Lisää jokin muu tilaus"
+  },
+  "filters_addSubscription_label": {
+    "message": "Lisää suodatintilaus"
+  },
+  "filters_readMore_label": {
+    "message": "Lue lisää"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Poista"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Käytössä"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Epäonnistui, tarkistussumma ei täsmää"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Epäonnistui, latausvirhe"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Lataa..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Epäonnistui, kelvoton suodatinlista"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Epäonnistui, kelvoton osoite"
+  },
+  "filters_viewList_label": {
+    "message": "Näytä lista"
+  },
   "found_a_bug": {
     "message": "Löysitkö vian? Haluatko kääntää Adblock Plusin omalle kielellesi? Ole hyvä ja <a>kirjoita hakemus täällä</a>."
   },
   "general": {
     "message": "Yleiset"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Haluatko varmasti poistaa tämän tilauksen?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Suodatinlistan sijainti on joko kelvoton osoite tai tiedoston nimi."
   },
   "invalid_css_selector": {
     "message": "$selector$ ei ole kelvollinen CSS-valitsin",
@@ -94,6 +148,9 @@
       }
     }
   },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Adblock Plus kehittäjän versio"
   },
@@ -118,8 +175,26 @@
   "out_of_date_lists": {
     "message": "Vanhentuneet listat päivitetään säännöllisesti."
   },
+  "overlay_notification_button_no": {
+    "message": "Ei"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Kyllä"
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Sulje tämä ilmoitus"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Lopeta ilmoitusten näyttäminen"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Näytä hyödylliset ilmoitukset"
+  },
   "remove_button": {
     "message": "Poista valitut"
+  },
+  "sendReport": {
+    "message": "Raportoi ongelma tällä sivulla"
   },
   "show_block_element_menu": {
     "message": "Näytä 'Estä elementti' oikea-klikkaus valikossa"
@@ -171,8 +246,14 @@
   "stats_title": {
     "message": "Mainokset estetty"
   },
+  "subscriptionSelection_location_label": {
+    "message": "Listan sijainti:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Valitse suodatintilaus listasta:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Tilauksen nimi:"
   },
   "unexpected_filter_list_header": {
     "message": "Suodatin-listan otsakkeet eivät ole sallittuja tässä"
