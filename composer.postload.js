@@ -393,16 +393,10 @@ function elementPicked(event)
       stopPickingElement();
 
     browser.runtime.sendMessage({
-      type: "composer.openDialog"
-    },
-    popupId =>
+      type: "composer.openDialog",
+      filters
+    }, popupId =>
     {
-      browser.runtime.sendMessage({
-        type: "forward",
-        targetPageId: popupId,
-        payload: {type: "composer.dialog.init", filters}
-      });
-
       // Only the top frame keeps a record of the popup window's ID,
       // so if this isn't the top frame we need to pass the ID on.
       if (window == window.top)
