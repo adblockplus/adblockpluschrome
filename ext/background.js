@@ -588,6 +588,18 @@
         url.protocol != "ws:" && url.protocol != "wss:")
       return;
 
+    if (details.originUrl)
+    {
+      // Firefox-only currently, ignore requests initiated by the browser and
+      // extensions.
+      let originUrl = new URL(details.originUrl);
+      if (originUrl.protocol == "chrome:" ||
+          originUrl.protocol == "moz-extension:")
+      {
+        return;
+      }
+    }
+
     // We are looking for the frame that contains the element which
     // has triggered this request. For most requests (e.g. images) we
     // can just use the request's frame ID, but for subdocument requests
