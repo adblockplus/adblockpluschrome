@@ -1,13 +1,12 @@
 "use strict";
 
-(function()
 {
   const {parseFilter, parseFilters} = require("filterValidation");
   const {BlockingFilter,
          ElemHideFilter,
          CommentFilter} = require("filterClasses");
 
-  module("Filter validation");
+  QUnit.module("Filter validation");
 
   test("Detecting invalid filters", () =>
   {
@@ -71,4 +70,4 @@
     ok(result.filters[2] instanceof CommentFilter, "3rd filter is comment");
     equal(result.filters[2].text, "! foo bar", "3rd filter text matches");
   });
-}());
+}

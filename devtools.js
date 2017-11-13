@@ -22,9 +22,9 @@ let panelWindow = null;
 // Versions of Firefox before 54 do not support the devtools.panels API; on
 // these platforms, even when the option is enabled, we cannot show the
 // devtools panel.
-if ("panels" in chrome.devtools)
+if ("panels" in browser.devtools)
 {
-  chrome.runtime.sendMessage(
+  browser.runtime.sendMessage(
     {
       type: "prefs.get",
       key: "show_devtools_panel"
@@ -33,7 +33,7 @@ if ("panels" in chrome.devtools)
     {
       if (enabled)
       {
-        chrome.devtools.panels.create(
+        browser.devtools.panels.create(
           "Adblock Plus",
           "icons/detailed/abp-48.png",
           "devtools-panel.html",

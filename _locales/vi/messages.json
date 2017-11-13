@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Sau khi đóng của sổ này, hãy ấn chuột (hoặc ấn chuột phải) vào đối tượng mà bạn cần khóa trên trang."
   },
+  "continue": {
+    "message": "Tiếp tục"
+  },
   "description": {
     "message": "Được sử dụng trên hơn 100 triệu thiết bị. Adblock Plus là trình chặn quảng cáo phổ biến nhất trên thế giới."
   },
@@ -47,17 +50,74 @@
   "enabled_for_site": {
     "message": "<strong>Đã bật</strong> trên trang này"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Không miền hoạt động quy định cho bộ lọc ẩn yếu tố mở rộng"
+  },
+  "filter_invalid_domain": {
+    "message": "Tên miền được chỉ định không hợp lệ (hoặc trống rỗng)"
+  },
+  "filter_invalid_regexp": {
+    "message": "Biểu hiện thường xuyên không hợp lệ"
+  },
   "filter_lists": {
     "message": "Danh sách các bộ lọc"
   },
   "filter_must_follow_syntax": {
     "message": "Bộ lọc của bạn phải tuân theo <a>cú pháp bộ lọc của Adblock Plusx</a>."
   },
+  "filter_unknown_option": {
+    "message": "Bộ lọc tùy chọn không rõ"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Cho phép vài quảng cáo không quấy rối"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Thêm"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Thêm bộ lọc  khác"
+  },
+  "filters_addSubscription_label": {
+    "message": "Thêm bộ lọc trọn gói"
+  },
+  "filters_readMore_label": {
+    "message": "Đọc thêm"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Xóa"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Đã được bật"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Thất bại, mã kiểm tra không phù hợp"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Thất bại, tải xuống thất bại"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Đang tải..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Thất bại, đây không phải là danh sách bộ lọc hợp lệ"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Thất bại, không phải là địa chỉ hợp lệ"
+  },
+  "filters_viewList_label": {
+    "message": "Xem danh sách"
+  },
   "found_a_bug": {
     "message": "Bạn phát hiện thấy lỗi? Bạn muốn dịch Adblock Plus sang ngôn ngữ của bạn? Hãy <a>gửi yêu cầu tại đây</a>."
   },
   "general": {
     "message": "Tổng quan"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Bạn có thật sự muốn xóa bộ trọn gói này không?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Địa chỉ để tải bộ lọc không phải là một URL hay tên tập tin hợp lệ."
   },
   "invalid_css_selector": {
     "message": "$selector$ không phải là phương thức chọn CSS hợp lệ",
@@ -94,6 +154,9 @@
       }
     }
   },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Adblock Plus bản phát triển"
   },
@@ -118,8 +181,26 @@
   "out_of_date_lists": {
     "message": "Các danh sách cũ đã được cập nhật định kỳ."
   },
+  "overlay_notification_button_no": {
+    "message": "Không"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Có"
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Đóng thông báo này"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Dừng hiện thông báo"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Hiện thông báo hữu ích"
+  },
   "remove_button": {
     "message": "Xóa mục đã chọn"
+  },
+  "sendReport": {
+    "message": "Báo cáo vấn đề trên trang này"
   },
   "show_block_element_menu": {
     "message": "Hiển thị mục 'Chặn phần tử' ở menu nhấn chuột phải"
@@ -171,8 +252,14 @@
   "stats_title": {
     "message": "Quảng cáo đã bị chặn"
   },
+  "subscriptionSelection_location_label": {
+    "message": "Địa chỉ của danh sách bộ lọc:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vui lòng chọn một bộ lọc trọn gói từ danh sách:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Tiêu đề của bộ trọn gói:"
   },
   "unexpected_filter_list_header": {
     "message": "Tiêu đề danh sách bộ lọc không được phép tại đây"

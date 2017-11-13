@@ -44,6 +44,8 @@ SKIP_DEPENDENCY_UPDATES = os.environ.get(
     'SKIP_DEPENDENCY_UPDATES', ''
 ).lower() not in ('', '0', 'false')
 
+NPM_LOCKFILE = '.npm_install_lock'
+
 
 class Mercurial():
     def istype(self, repodir):
@@ -135,6 +137,7 @@ class Git():
         if '@' in url and ':' in url and not urlparse.urlsplit(url).scheme:
             return 'ssh://' + url.replace(':', '/', 1)
         return url
+
 
 repo_types = OrderedDict((
     ('hg', Mercurial()),
@@ -270,10 +273,28 @@ def resolve_npm_dependencies(target, vcs):
         return
 
     try:
-        cmd = ['npm', 'install', '--only=production', '--loglevel=warn']
+        # Create an empty file, which gets deleted after successfully
+        # installing Node.js dependencies.
+        lockfile_path = os.path.join(target, NPM_LOCKFILE)
+        open(lockfile_path, 'a').close()
+
+        if os.name == 'nt':
+            # Windows' CreateProcess() (called by subprocess.Popen()) only
+            # resolves executables ending in .exe. The windows installation of
+            # Node.js only provides a npm.cmd, which is executable but won't
+            # be recognized as such by CreateProcess().
+            npm_exec = 'npm.cmd'
+        else:
+            npm_exec = 'npm'
+
+        cmd = [npm_exec, 'install', '--only=production', '--loglevel=warn',
+               '--no-package-lock', '--no-optional']
         subprocess.check_output(cmd, cwd=target)
 
+        repo_types[vcs].ignore(os.path.join(target, NPM_LOCKFILE), target)
         repo_types[vcs].ignore(os.path.join(target, 'node_modules'), target)
+
+        os.remove(lockfile_path)
     except OSError as e:
         import errno
         if e.errno == errno.ENOENT:
@@ -364,7 +385,8 @@ def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdep
         repo_cloned = ensure_repo(repodir, parenttype, target, vcs,
                                   _root.get(vcs, ''), source)
         repo_updated = update_repo(target, vcs, rev)
-        if repo_cloned or repo_updated:
+        recent_npm_failed = os.path.exists(os.path.join(target, NPM_LOCKFILE))
+        if repo_cloned or repo_updated or recent_npm_failed:
             resolve_npm_dependencies(target, vcs)
         resolve_deps(target, level + 1, self_update=False,
                      overrideroots=overrideroots, skipdependencies=skipdependencies)
@@ -405,6 +427,7 @@ def _ensure_line_exists(path, pattern):
             f.truncate()
             for l in file_content:
                 print >>f, l
+
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)

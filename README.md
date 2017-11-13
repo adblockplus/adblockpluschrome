@@ -29,7 +29,7 @@ target platform:
 
     ./build.py -t chrome build -k adblockpluschrome.pem
     ./build.py -t edge build
-    ./build.py -t gecko-webext build
+    ./build.py -t gecko build
 
 This will create a build with a name in the form
 _adblockpluschrome-1.2.3.nnnn.crx_, _adblockplusedge-1.2.3.nnnn.appx_ or
@@ -53,7 +53,7 @@ development environment. For that run one of the following commands:
 
     ./build.py -t chrome devenv
     ./build.py -t edge devenv
-    ./build.py -t gecko-webext devenv
+    ./build.py -t gecko devenv
 
 This will create a _devenv.*_ directory in the repository. You can load the
 directory as an unpacked extension, under _chrome://extensions_ in Chrome,

@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "請在此訊息關閉後點選網頁上的元素。"
   },
+  "continue": {
+    "message": "繼續"
+  },
   "description": {
     "message": "Adblock Plus 已在超過 1 億部設備上使用，是世界上最受歡迎的廣告攔截插件。"
   },
@@ -47,17 +50,68 @@
   "enabled_for_site": {
     "message": "在此網站上 <strong>啟用</strong>"
   },
+  "filter_invalid_regexp": {
+    "message": "無效的正規表示法"
+  },
   "filter_lists": {
     "message": "過濾列表"
   },
   "filter_must_follow_syntax": {
     "message": "您的過濾條件必須遵守 <a>Adblock Plus 的語法</a>."
   },
+  "filter_unknown_option": {
+    "message": "未知的篩選器選項"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "允許部分非侵入式廣告"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "新增"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "新增其他條件集"
+  },
+  "filters_addSubscription_label": {
+    "message": "訂閱過濾條件集"
+  },
+  "filters_readMore_label": {
+    "message": "詳細內容"
+  },
+  "filters_subscription_delete_label": {
+    "message": "刪除"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "已啟用"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "失敗，驗證碼不符"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "失敗，檔案下載失敗"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "下載中..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "失敗，無效的過濾條件列表"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "失敗，無效的位址"
+  },
+  "filters_viewList_label": {
+    "message": "檢視列表"
+  },
   "found_a_bug": {
     "message": "發現 bug？想要翻譯 Adblock Plus？請至 <a>此處詢問</a>。"
   },
   "general": {
     "message": "一般設定"
+  },
+  "global_remove_subscription_warning": {
+    "message": "您確定要移除此條件集嗎？"
+  },
+  "global_subscription_invalid_location": {
+    "message": "條件集網址或檔案名稱無效。"
   },
   "invalid_css_selector": {
     "message": "$selector$不是一個有效的CSS選擇器",
@@ -94,6 +148,9 @@
       }
     }
   },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Adblock Plus 開發版"
   },
@@ -118,8 +175,26 @@
   "out_of_date_lists": {
     "message": "過濾列表會定期自動更新。"
   },
+  "overlay_notification_button_no": {
+    "message": "否"
+  },
+  "overlay_notification_button_yes": {
+    "message": "是"
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "關閉此通知"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "停止顯示通知"
+  },
+  "overlay_shownotifications_label": {
+    "message": "顯示有用的通知"
+  },
   "remove_button": {
     "message": "刪除已選擇項目"
+  },
+  "sendReport": {
+    "message": "回報此頁面錯誤"
   },
   "show_block_element_menu": {
     "message": "在右鍵選單顯示「過濾網頁元素」"
@@ -171,8 +246,14 @@
   "stats_title": {
     "message": "已過濾廣告"
   },
+  "subscriptionSelection_location_label": {
+    "message": "過濾條件集位址:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "請從列表中選擇過濾條件集:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "訂閱項目名稱:"
   },
   "unexpected_filter_list_header": {
     "message": "這裡不允許過濾器列表標題"

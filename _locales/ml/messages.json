@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "ഈ പോപ്പപ്പ് ക്ലോസ് ചെയ്ത ശേഷം താളിലെ എലമെന്റില്‍ ക്ലിക്കോ റൈറ്റ് ക്ലിക്കോ ചെയ്യുക."
   },
+  "continue": {
+    "message": "തുടരുക"
+  },
   "description": {
     "message": "പത്തു കോടിയിലേറെ ഉപകരണങ്ങളില്‍ ഉപയോഗിക്കപ്പെടുന്ന ആഡ്ബ്ലോക്ക് പ്ലസ് ആണ് ലോകത്തെ ഏറ്റവും പ്രചാരമേറിയ ആഡ്ബ്ലോക്കര്‍."
   },
@@ -43,6 +46,33 @@
   },
   "filter_lists": {
     "message": "പട്ടികകള്‍ അരിക്കുക"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "ചേര്‍ക്കുക"
+  },
+  "filters_readMore_label": {
+    "message": "കൂടുതല്‍ വായിക്കുക"
+  },
+  "filters_subscription_delete_label": {
+    "message": "ഒഴിവാക്കുക"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "പ്രാപ്തമാക്കി"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "പരാജയം, ഡൌണ്‍ലോഡ് പരാജയപ്പെട്ടിരിക്കുന്നു"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "ഡൌണ്‍ലോഡ് ചെയ്യുന്നു…"
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "പരാജയപ്പെട്ടിരിക്കുന്നു, ഇതൊരു സാധുവായ ഫില്‍റ്റര്‍ പട്ടിക അല്ല"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "പരാജയപ്പെട്ടിരിക്കുന്നു, ഇതൊരു സാധുവായ വിലാസം അല്ല"
+  },
+  "filters_viewList_label": {
+    "message": "പട്ടിക കാണുക"
   },
   "general": {
     "message": "പലവക"
@@ -82,6 +112,9 @@
       }
     }
   },
+  "name": {
+    "message": "ആഡ്ബ്ലോക്ക്‌ പ്ലസ്‌"
+  },
   "name_devbuild": {
     "message": "ആഡ്ബ്ലോക്ക് പ്ലസ് ഡെവലപ്മെന്റ് ബില്‍ഡ്"
   },
@@ -99,6 +132,12 @@
   },
   "out_of_date_lists": {
     "message": "പഴകിയ പട്ടികകള്‍ പതിവായി പുതുക്കുന്നു."
+  },
+  "overlay_notification_button_no": {
+    "message": "അല്ല"
+  },
+  "overlay_notification_button_yes": {
+    "message": "അതെ"
   },
   "remove_button": {
     "message": "തെരഞ്ഞെടുത്തത് നീക്കംചെയ്യുക"

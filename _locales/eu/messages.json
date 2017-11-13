@@ -1,0 +1,122 @@
+{
+  "add": {
+    "message": "Gehitu"
+  },
+  "add_domain_button": {
+    "message": "Gehitu domeinua"
+  },
+  "add_filter_button": {
+    "message": "Gehitu iragazkia"
+  },
+  "add_your_own_filters": {
+    "message": "Gehitu zeure iragazkiak"
+  },
+  "cancel": {
+    "message": "Utzi bertan behera"
+  },
+  "continue": {
+    "message": "Jarraitu"
+  },
+  "enable_only_the": {
+    "message": "Gaitu behar duzun iragazki zerrenda bakarrik. Gehiegik zure nabigazioa erantzungabea egin dezake."
+  },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Ez da domeinu aktiborik zehaztu elementuak ezkutatzeko iragazki hedatuarentzat"
+  },
+  "filter_invalid_regexp": {
+    "message": "Adierazpen erregular baliogabea"
+  },
+  "filter_lists": {
+    "message": "Iragazki zerrendak"
+  },
+  "filter_unknown_option": {
+    "message": "Iragazki aukera ezezaguna"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Baimendu publizitate ez intrusiboa"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Gehitu"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Gehitu beste harpidetza bat"
+  },
+  "filters_addSubscription_label": {
+    "message": "Gehitu iragazki harpidetza"
+  },
+  "filters_readMore_label": {
+    "message": "Gehiago irakurri"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Ezabatu"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Gaituta"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Errorea; kontrol-baturak ez datoz bat"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Huts egin du; deskarga errorea"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Deskargatzen..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Huts egin du; ez da iragazki zerrenda baliagarria"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Huts egin du; ez da helbide baliagarria"
+  },
+  "filters_viewList_label": {
+    "message": "Ikusi zerrenda"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Ziur harpidetza hau ezabatu nahi duzula?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Iragazki zerrendaren kokagunea ez da balio duen URLa, ezta fitxategi baten izena ere."
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
+  "options": {
+    "message": "Adblock Plus Aukerak"
+  },
+  "options_short": {
+    "message": "Aukerak"
+  },
+  "out_of_date_lists": {
+    "message": "Eguneratu-gabeko zerrendak aldika eguneratzen dira."
+  },
+  "overlay_notification_button_no": {
+    "message": "Ez"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Bai"
+  },
+  "remove_button": {
+    "message": "Kendu hautaturikoa"
+  },
+  "sendReport": {
+    "message": "Orri honetan sortutako arazo bati buruzko txostena egin"
+  },
+  "stats_share_title": {
+    "message": "Elkarbanatu zenbaki hauek"
+  },
+  "subscriptionSelection_location_label": {
+    "message": "Iragazki zerrenda kokagunea:"
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Mesedez aukeratu iragazki harpidetza bat zerrendatik:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Harpidetza izenburua:"
+  },
+  "update_now": {
+    "message": "Eguneratu orain"
+  },
+  "whitelisted_domains": {
+    "message": "Zerrenda-zuriko domeinuak"
+  }
+}

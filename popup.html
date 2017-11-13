@@ -21,15 +21,13 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="skin/popup.css">
+  <script src="polyfill.js"></script>
   <script src="ext/common.js"></script>
-  <script src="ext/popup.js"></script>
   <script src="i18n.js"></script>
   <script src="popup.js"></script>
-  <script src="notification.js"></script>
-  <script src="stats.js"></script>
 </head>
 <!-- Set tabindex to work around Chromium issue 304532 -->
-<body tabindex="1">
+<body class="nohtml" tabindex="1">
 
 <header>
   <img id="logo" src="icons/detailed/abp-64.png" srcset="icons/detailed/abp-128.png 2x">
@@ -70,14 +68,14 @@
       <span class="i18n_cancel"></span>
     </li>
 
-    <li id="stats-container">
-      <div class="menu-item collapse" data-option="show_statsinpopup" data-collapsable="stats-container" role="button">
+    <li id="stats-container" class="collapsed">
+      <div class="menu-item collapse" data-option="show_statsinpopup" data-collapsible="stats-container" role="button">
         <div class="icon"></div>
         <span class="i18n_stats_title"></span>
         <div class="collapse-icon-placeholder"></div>
         <div class="collapse-icon"></div>
       </div>
-      <ul id="stats" class="collapsable">
+      <ul id="stats" class="collapsible">
         <li>
           <div>
             <div id="stats-page"></div>
@@ -98,6 +96,11 @@
           <label for="show-iconnumber" class="i18n_stats_show_iconnumber"></label>
         </li>
       </ul>
+    </li>
+
+    <li id="issueReporter" class="menu-item" role="button">
+      <div class="icon"></div>
+      <span class="i18n_sendReport"></span>
     </li>
   </ul>
 </div>

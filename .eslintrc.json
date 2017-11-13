@@ -8,6 +8,7 @@
   "globals": {
     "exports": true,
     "ext": true,
+    "module": true,
     "require": true
   }
 }

@@ -165,7 +165,7 @@ function checkCollapse(element)
   if (urls.length == 0)
     return;
 
-  ext.backgroundPage.sendMessage(
+  browser.runtime.sendMessage(
     {
       type: "filters.collapse",
       urls,
@@ -187,7 +187,7 @@ function checkSitekey()
 {
   let attr = document.documentElement.getAttribute("data-adblockkey");
   if (attr)
-    ext.backgroundPage.sendMessage({type: "filters.addKey", token: attr});
+    browser.runtime.sendMessage({type: "filters.addKey", token: attr});
 }
 
 function ElementHidingTracer()
@@ -248,7 +248,7 @@ ElementHidingTracer.prototype = {
 
     if (selectors.length > 0 || filters.length > 0)
     {
-      ext.backgroundPage.sendMessage({
+      browser.runtime.sendMessage({
         type: "devtools.traceElemHide",
         selectors, filters
       });
@@ -345,16 +345,9 @@ function ElemHide()
   this.style = null;
   this.tracer = null;
   this.inject = true;
+  this.emulatedPatterns = null;
 
   this.elemHideEmulation = new ElemHideEmulation(
-    window,
-    callback =>
-    {
-      ext.backgroundPage.sendMessage({
-        type: "filters.get",
-        what: "elemhideemulation"
-      }, callback);
-    },
     this.addSelectors.bind(this),
     this.hideElements.bind(this)
   );
@@ -441,14 +434,14 @@ ElemHide.prototype = {
 
   addSelectors(selectors, filters)
   {
-    if (!selectors || selectors.length == 0)
+    if (selectors.length == 0)
       return;
 
     if (this.inject)
     {
       // Insert the style rules inline if we have been instructed by the
       // background page to do so. This is usually the case, except on platforms
-      // that do support user stylesheets via the chrome.tabs.insertCSS API
+      // that do support user stylesheets via the browser.tabs.insertCSS API
       // (Firefox 53 onwards for now and possibly Chrome in the near future).
       // Once all supported platforms have implemented this API, we can remove
       // the code below. See issue #5090.
@@ -459,7 +452,7 @@ ElemHide.prototype = {
     }
     else
     {
-      ext.backgroundPage.sendMessage({
+      browser.runtime.sendMessage({
         type: "elemhide.injectSelectors",
         selectors
       });
@@ -476,7 +469,7 @@ ElemHide.prototype = {
 
     if (this.tracer)
     {
-      ext.backgroundPage.sendMessage({
+      browser.runtime.sendMessage({
         type: "devtools.traceElemHide",
         selectors: [],
         filters
@@ -486,7 +479,7 @@ ElemHide.prototype = {
 
   apply()
   {
-    ext.backgroundPage.sendMessage({type: "elemhide.getSelectors"}, response =>
+    browser.runtime.sendMessage({type: "elemhide.getSelectors"}, response =>
     {
       if (this.tracer)
         this.tracer.disconnect();
@@ -506,7 +499,7 @@ ElemHide.prototype = {
       else if (this.tracer)
         this.tracer.addSelectors(response.selectors);
 
-      this.elemHideEmulation.apply();
+      this.elemHideEmulation.apply(response.emulatedPatterns);
     });
   }
 };
@@ -530,3 +523,8 @@ if (document instanceof HTMLDocument)
       checkCollapse(element);
   }, true);
 }
+
+window.checkCollapse = checkCollapse;
+window.elemhide = elemhide;
+window.typeMap = typeMap;
+window.getURLsFromElement = getURLsFromElement;

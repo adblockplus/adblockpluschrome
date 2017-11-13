@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Bu pencere kapandığında, engelleyeceğiniz ögeye tıklayın (veya sağ tıklayın)."
   },
+  "continue": {
+    "message": "İleri"
+  },
   "description": {
     "message": "100 milyondan fazla cihazda kullanılan Adblock Plus dünyanın en popüler reklam engelleyicisidir."
   },
@@ -47,17 +50,74 @@
   "enabled_for_site": {
     "message": "Bu sitede <strong>etkin</strong>"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Genişletilmiş öğe gizleme filtresi için faal bir alan adı belirtilmedi"
+  },
+  "filter_invalid_domain": {
+    "message": "Geçersiz (veya boş) alan adı belirtildi"
+  },
+  "filter_invalid_regexp": {
+    "message": "Geçersiz düzenli ifade"
+  },
   "filter_lists": {
     "message": "Filtre listesi"
   },
   "filter_must_follow_syntax": {
     "message": "Eklediğiniz filtre <a>Adblock Plus filtre kurallarına</a> uymak zorundadır."
   },
+  "filter_unknown_option": {
+    "message": "Bilinmeyen süzme seçeneği"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Rahatsız etmeyen bazı reklamlara izin ver"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Ekle"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Başka abonelik ekle"
+  },
+  "filters_addSubscription_label": {
+    "message": "Süzgeç aboneliği ekle"
+  },
+  "filters_readMore_label": {
+    "message": "Daha fazla bilgi al"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Sil"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Etkin"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Olmadı. Sağlama yapılamadı"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Olmadı. İndirmede sorun var."
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "İndiriliyor..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Olmadı. Bu düzgün bir süzgeç listesi değil."
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Olmadı. Bu geçerli bir adres değil."
+  },
+  "filters_viewList_label": {
+    "message": "Listeye bak"
+  },
   "found_a_bug": {
     "message": "Hata mı buldunuz? Adblock Plus'ı kendi dilinize mi çevirmek istiyorsunuz? Lütfen <a>buradan dosya isteyiniz</a>."
   },
   "general": {
     "message": "Genel"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Gerçekten abonelikten çıkmak istiyor musunuz?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Dosya listesi konumu ne düzgün bir URL ne de düzgün bir ada sahip."
   },
   "invalid_css_selector": {
     "message": "$selector$ geçerli bir CSS seçicisi değildir",
@@ -94,6 +154,9 @@
       }
     }
   },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Adblock Plus geliştirme sürümü"
   },
@@ -118,8 +181,26 @@
   "out_of_date_lists": {
     "message": "Zamanı geçmiş listeler düzenli olarak güncellenmektedir."
   },
+  "overlay_notification_button_no": {
+    "message": "Hayır"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Evet"
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Bu bildirim kapat"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Bildirimleri göstermeyi durdur"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Yararlı bildirimlerini göster"
+  },
   "remove_button": {
     "message": "Seçili olanı kaldır"
+  },
+  "sendReport": {
+    "message": "Bu sayfadaki sorunu bildir"
   },
   "show_block_element_menu": {
     "message": "Sağ tık menüsünde 'Öğeyi Engelle' seçeneğini göster"
@@ -171,8 +252,14 @@
   "stats_title": {
     "message": "Engellenen reklamlar"
   },
+  "subscriptionSelection_location_label": {
+    "message": "Süzgeç listesi konumu:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lütfen listeden bir süzgeç aboneliği seçin:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Aboneliğin adı:"
   },
   "unexpected_filter_list_header": {
     "message": "Filtre liste başlıklarına burada izin verilmiyor"

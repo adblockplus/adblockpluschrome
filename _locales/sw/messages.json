@@ -50,6 +50,9 @@
   "filter_must_follow_syntax": {
     "message": "Filter yako lazima kufuata <a> Adblock Plus chujio syntax </a> ."
   },
+  "filters_addSubscriptionAdd_label": {
+    "message": "kuongeza filter watu"
+  },
   "found_a_bug": {
     "message": "Kupatikana mdudu ? Wanataka kutafsiri Adblock Plus katika lugha yako ? Tafadhali <a> faili ombi hapa </a> ."
   },

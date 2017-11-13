@@ -25,7 +25,7 @@ document.addEventListener(randomEventName, event =>
 {
   let {url, requestType} = event.detail;
 
-  ext.backgroundPage.sendMessage({
+  browser.runtime.sendMessage({
     type: "request.blockedByWrapper",
     requestType,
     url
