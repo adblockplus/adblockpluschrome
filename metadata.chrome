@@ -1,6 +1,6 @@
 [general]
 basename = adblockpluschrome
-version = 3.0
+version = 3.0.1
 author = eyeo GmbH
 permissions = tabs
   <all_urls>
