@@ -35,7 +35,7 @@ if ("panels" in browser.devtools)
       {
         browser.devtools.panels.create(
           "Adblock Plus",
-          "icons/detailed/abp-48.png",
+          "icons/abp-32.png",
           "devtools-panel.html",
           panel =>
           {
