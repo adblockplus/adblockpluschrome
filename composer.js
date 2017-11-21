@@ -50,6 +50,17 @@ function addFilters()
   });
 }
 
+// We'd rather just call window.close, but that isn't working consistently with
+// Firefox 57, even when allowScriptsToClose is passed to browser.windows.create
+// See https://bugzilla.mozilla.org/show_bug.cgi?id=1418394
+function closeMe()
+{
+  browser.runtime.sendMessage({
+    type: "app.get",
+    what: "senderId"
+  }).then(tabId => browser.tabs.remove(tabId));
+}
+
 function closeDialog(success)
 {
   browser.runtime.sendMessage({
@@ -61,7 +72,7 @@ function closeDialog(success)
       remove: (typeof success == "boolean" ? success : false)
     }
   });
-  window.close();
+  closeMe();
 }
 
 function init()
@@ -88,7 +99,7 @@ function init()
         document.getElementById("filters").value = msg.filters.join("\n");
         break;
       case "composer.dialog.close":
-        window.close();
+        closeMe();
         break;
     }
   });
