@@ -621,7 +621,7 @@
     if (ext.webRequest.onBeforeRequest._dispatch(
         url, type, page, frame).includes(false))
       return {cancel: true};
-  }, {urls: ["*://*/*"]}, ["blocking"]);
+  }, {urls: ["<all_urls>"]}, ["blocking"]);
 
 
   /* Message passing */
