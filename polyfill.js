@@ -23,6 +23,7 @@
     "devtools.panels.create",
     "notifications.clear",
     "notifications.create",
+    "runtime.getBrowserInfo",
     "runtime.openOptionsPage",
     "runtime.sendMessage",
     "runtime.setUninstallURL",
