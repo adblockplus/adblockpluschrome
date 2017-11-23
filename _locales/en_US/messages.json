@@ -148,6 +148,10 @@
       }
     }
   },
+  "loading": {
+    "description": "Placeholder text displayed when something is still loading",
+    "message": "Loading..."
+  },
   "name": {
     "message": "Adblock Plus"
   },

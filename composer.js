@@ -96,7 +96,10 @@ function init()
     {
       case "composer.dialog.init":
         targetPageId = msg.sender;
-        document.getElementById("filters").value = msg.filters.join("\n");
+        let filtersTextArea = document.getElementById("filters");
+        filtersTextArea.value = msg.filters.join("\n");
+        filtersTextArea.disabled = false;
+        $("#addButton").button("option", "disabled", false);
         break;
       case "composer.dialog.close":
         closeMe();
