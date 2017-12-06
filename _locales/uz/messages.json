@@ -2,6 +2,9 @@
   "add": {
     "message": "Qo‘shish"
   },
+  "add_domain_button": {
+    "message": "Domen qo‘shish"
+  },
   "filters_acceptableAds2_label": {
     "message": "Ba’zi dilni xira qilmaydigan reklamalarga ruxsat berish"
   },

@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "กำลังโหลด..."
+  },
   "name": {
     "message": "Adblock Plus"
   },

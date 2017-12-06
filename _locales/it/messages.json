@@ -51,7 +51,7 @@
     "message": "<strong>Attivato</strong> su questo sito"
   },
   "filter_elemhideemulation_nodomain": {
-    "message": "Nessun dominio attivo specificato per filtro esteso di nascondere l'elemento"
+    "message": "Nessun dominio attivo specificato per il filtro di occultamento dell'elemento"
   },
   "filter_invalid_domain": {
     "message": "Dominio specificato non valido (o vuoto)"
@@ -153,6 +153,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Caricamento..."
   },
   "name": {
     "message": "Adblock Plus"

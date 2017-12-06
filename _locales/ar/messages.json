@@ -53,6 +53,9 @@
   "filter_elemhideemulation_nodomain": {
     "message": "لم يتم تحديد نطاق نشط لفلتر إخفاء العناصر الموسعة"
   },
+  "filter_invalid_domain": {
+    "message": "تم تحديد نطاق غير صحيح (أو فارغ)"
+  },
   "filter_invalid_regexp": {
     "message": "تعبير منطقي غير صحيح"
   },
@@ -150,6 +153,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "جار التحميل..."
   },
   "name": {
     "message": "آدبلوك بلس"

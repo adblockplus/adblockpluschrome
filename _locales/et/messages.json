@@ -24,7 +24,7 @@
     "message": "Loobu"
   },
   "clickhide_instructions": {
-    "message": "Pärast hüpikakna sulgemist klõpsake (paremklõpsake) mõnel lehe elemendil"
+    "message": "Pärast hüpikakna sulgemist klõpsake (või paremklõpsake) mõnel lehe elemendil."
   },
   "continue": {
     "message": "Jätka"
@@ -36,13 +36,13 @@
     "message": "<strong>Keelatud</strong> sellel saidil"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus on loetletud domeenidel keelatud. Domeene saate lisada Adblock Plus ikoonil aadressiriba kõrval või kirjutades domeeni nime (mitte URL-i) lahtrisse ja klõpsates \"Lisa domeen\" nuppu."
+    "message": "Adblock Plus on loetletud domeenidel keelatud. Domeene saate lisada kas Adblock Plus ikooni kaudu aadressiriba kõrval või kirjutades domeeni nime (mitte URL-i) lahtrisse ja klõpsates nupul \"Lisa domeen\"."
   },
   "easy_create_filter": {
     "message": "Blokeeri element"
   },
   "edit_filters_raw": {
-    "message": "Muuda filtrit tekstifailina"
+    "message": "Muuda filtreid lihttekstina"
   },
   "enable_only_the": {
     "message": "Valige ainult vajalikud filtrid. Liiga paljude filtrite kasutamine võib teie brauseri uimaseks muuta."
@@ -54,7 +54,7 @@
     "message": "Laiendatud elemendi peitmise filtrile pole määratletud aktiivset domeeni"
   },
   "filter_invalid_domain": {
-    "message": "Määratletud sobimatu (või tühi) domeen"
+    "message": "Määratletud on sobimatu (või tühi) domeen"
   },
   "filter_invalid_regexp": {
     "message": "Vigane regulaaravaldis"
@@ -96,7 +96,7 @@
     "message": "Nurjus, allalaadimise viga"
   },
   "filters_subscription_lastDownload_inProgress": {
-    "message": "Laen alla..."
+    "message": "Allalaadimine…"
   },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Nurjus, vale filtrite nimekiri"
@@ -108,10 +108,10 @@
     "message": "Vaata loetelu"
   },
   "found_a_bug": {
-    "message": "Leidsid vea? Tahad tõlkida Adblock Plus'i enda keelde? <a>Esita veateade</a>."
+    "message": "Leidsid vea? Tahad tõlkida Adblock Plusi enda keelde? Palun <a>esita taotlus siin</a>."
   },
   "general": {
-    "message": "Üldine"
+    "message": "Üldised"
   },
   "global_remove_subscription_warning": {
     "message": "Kas oled kindel, et soovid selle tellimuse eemaldada?"
@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "Laadimine..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -167,16 +170,16 @@
     "message": "Ava kõik selle teate lingid"
   },
   "notification_with_buttons": {
-    "message": "Kõikide linkide avamiseks klõpsakse 'OK'."
+    "message": "Kõikide linkide avamiseks klõpsake 'OK'."
   },
   "notification_without_buttons": {
-    "message": "Klõpsake teatel, et avada kõik sisalduvad lingid."
+    "message": "Klõpsake teatel, et avada kõik sellel olevad lingid."
   },
   "options": {
     "message": "Adblock Plus valikud"
   },
   "options_short": {
-    "message": "Valikud"
+    "message": "Sätted"
   },
   "out_of_date_lists": {
     "message": "Aegunud nimekirju uuendatakse perioodiliselt."
@@ -203,10 +206,10 @@
     "message": "Teata probleemist antud lehel"
   },
   "show_block_element_menu": {
-    "message": "Näita \"Blokeeri element\" paremklõpsu menüüd"
+    "message": "Näita paremklõpsu menüüs 'Blokeeri element'"
   },
   "show_devtools_panel": {
-    "message": "Näita Adblock Plus paneeli arendaja tööriistades"
+    "message": "Näita arendaja tööriistades paneeli 'Adblock Plus'"
   },
   "stats_label_page": {
     "message": "Sellel lehel <strong>$number$</strong>",
@@ -233,10 +236,10 @@
     }
   },
   "stats_share_download": {
-    "message": "Lae Adblock Plus"
+    "message": "Laadi alla Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Olen tänu Adblock Plusile blokeerinud $number$ reklaami ja jälgimisküsist.",
+    "message": "Olen tänu Adblock Plusile blokeerinud $number$ reklaami ja jälgimiskatset.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -268,6 +271,6 @@
     "message": "Värskenda kohe"
   },
   "whitelisted_domains": {
-    "message": "Lubatud domeenide nimekiri"
+    "message": "Lubatud domeenid"
   }
 }

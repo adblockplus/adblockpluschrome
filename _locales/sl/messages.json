@@ -53,6 +53,9 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Ni določene aktivne domene za razširjeni element skrivanja filtra"
   },
+  "filter_invalid_domain": {
+    "message": "Navedena neveljavna (ali prazna) domena"
+  },
   "filter_invalid_regexp": {
     "message": "Neveljaven regularni izraz"
   },
@@ -150,6 +153,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Nalaganje …"
   },
   "name": {
     "message": "Adblock Plus"

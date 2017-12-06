@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "Загрузка..."
+  },
   "name": {
     "message": "Adblock Plus"
   },

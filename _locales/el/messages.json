@@ -53,6 +53,9 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Δεν υπάρχει ενεργός τομέας καθορισμένος ως φίλτρο εκτεταμένης απόκρυψης στοιχείων"
   },
+  "filter_invalid_domain": {
+    "message": "Έχετε εισάγει άκυρο (ή άδειο) τομέα"
+  },
   "filter_invalid_regexp": {
     "message": "Μη έγκυρη τυπική έκφραση"
   },

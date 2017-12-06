@@ -30,7 +30,7 @@
     "message": "המשך"
   },
   "description": {
-    "message": "עם התקנות ביותר מ-100 מיליון מכשירים, Adblock Plus הוא חוסם המודעות הפופולרי ביותר בעולם."
+    "message": "נמצא בשימוש ביותר מ-100 מיליון מכשירים, Adblock Plus הוא חוסם המודעות הפופולרי ביותר בעולם."
   },
   "disabled_for_site": {
     "message": "<strong>מנוטרל</strong> באתר זה"
@@ -50,6 +50,12 @@
   "enabled_for_site": {
     "message": "<strong>מאפשר</strong> באתר זה"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "לא צוין תחום פעיל עבור יסוד מורחב של מסנן הסתרה"
+  },
+  "filter_invalid_domain": {
+    "message": "צוין תחום לא תקף (או ריק)"
+  },
   "filter_invalid_regexp": {
     "message": "ביטוי רגיל לא חוקי"
   },
@@ -66,25 +72,25 @@
     "message": "אפשור קצת פרסום לא פולשני"
   },
   "filters_addSubscriptionAdd_label": {
-    "message": "הוספה"
+    "message": "הוסף"
   },
   "filters_addSubscriptionOther_label": {
-    "message": "הוספת הרשמה אחרת"
+    "message": "הוסף מנוי שונה"
   },
   "filters_addSubscription_label": {
-    "message": "הוספת הרשמת מסנן"
+    "message": "הוסף מנוי מסנן"
   },
   "filters_readMore_label": {
-    "message": "לקרוא עוד"
+    "message": "קרא עוד"
   },
   "filters_subscription_delete_label": {
-    "message": "מחיקה"
+    "message": "מחק"
   },
   "filters_subscription_enabled_label": {
-    "message": "מאפשר"
+    "message": "מאופשר"
   },
   "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "נכשל, ביקורת הסיכום לתקינות לא התאימה בצורה טובה"
+    "message": "נכשל, ביקורת סיכום לא מתאימה"
   },
   "filters_subscription_lastDownload_connectionError": {
     "message": "נכשל, ההורדה נכשלה"
@@ -93,13 +99,13 @@
     "message": "מוריד..."
   },
   "filters_subscription_lastDownload_invalidData": {
-    "message": "נכשל, רשימת המסננים לא חוקית"
+    "message": "נכשל, רשימת מסננים לא תקפה"
   },
   "filters_subscription_lastDownload_invalidURL": {
-    "message": "נכשל, הכתובת שגויה"
+    "message": "נכשל, כתובת לא תקפה"
   },
   "filters_viewList_label": {
-    "message": "הצגת רשימה"
+    "message": "הצג רשימה"
   },
   "found_a_bug": {
     "message": "מצאת באג? ברצונך לתרגם את Adblock Plus לשפתך? אנא <a>הגישו בקשתכם כאן</a>."
@@ -147,6 +153,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "טוען..."
   },
   "name": {
     "message": "Adblock Plus "

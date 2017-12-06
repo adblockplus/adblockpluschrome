@@ -50,6 +50,15 @@
   "enabled_for_site": {
     "message": "이 사이트에서 <strong>광고 차단을 사용</strong>합니다"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "확장된 요소 숨김 필터에 지정된 활성 도메인이 없음"
+  },
+  "filter_invalid_domain": {
+    "message": "잘못된 (혹은 비어 있는) 도메인이 지정되었습니다"
+  },
+  "filter_invalid_regexp": {
+    "message": "잘못된 정규 표현식"
+  },
   "filter_lists": {
     "message": "구독 필터"
   },

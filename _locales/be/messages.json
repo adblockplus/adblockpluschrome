@@ -9,7 +9,7 @@
     "message": "Дадаць фільтр"
   },
   "add_filters_msg": {
-    "message": "Дадаць фільтры?"
+    "message": "Дадаць фільтр(ы)?"
   },
   "add_your_own_filters": {
     "message": "Дадаць уласныя фільтры"
@@ -27,7 +27,7 @@
     "message": "Пасля закрыцця гэтага акна, націсніце на элемент сайта левай (або правай) кнопкай мышы."
   },
   "continue": {
-    "message": "Працяг"
+    "message": "Працягнуць"
   },
   "description": {
     "message": "Adblock Plus карыстаюцца больш чым на ста мільёнах прылад, што робіць яго найпапулярнейшым блакіроўшчыкам рэкламы ў свеце."
@@ -60,7 +60,7 @@
     "message": "Няправільны рэгулярны выраз"
   },
   "filter_lists": {
-    "message": "Спіс фільтраў"
+    "message": "Спісы фільтраў"
   },
   "filter_must_follow_syntax": {
     "message": "Ваш фільтр павінен адпавядаць <a>сінтаксісу фільтраў Adblock Plus</a>."
@@ -87,16 +87,16 @@
     "message": "Выдаліць"
   },
   "filters_subscription_enabled_label": {
-    "message": "Актыўная"
+    "message": "Уключаны"
   },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "Памылка: неадпаведная кантрольная сума"
   },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "Не атрымалася спампаваць"
+    "message": "Памылка: не атрымалася спампаваць"
   },
   "filters_subscription_lastDownload_inProgress": {
-    "message": "Абнаўляецца…"
+    "message": "Спампоўванне…"
   },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Памылка: няправільны спіс фільтраў"
@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "Загрузка..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -179,7 +182,7 @@
     "message": "Налады"
   },
   "out_of_date_lists": {
-    "message": "Перыядычна абнаўляць неактуальныя спісы."
+    "message": "Неактуальныя спісы перыядычна абнаўляюцца."
   },
   "overlay_notification_button_no": {
     "message": "Не"
@@ -206,7 +209,7 @@
     "message": "Паказваць «Заблакаваць элемент» у кантэкстным меню"
   },
   "show_devtools_panel": {
-    "message": "Паказвать панэль «Adblock Plus» у інструментах распрацоўшчыка"
+    "message": "Паказваць панэль «Adblock Plus» у інструментах распрацоўшчыка"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> на гэтай старонцы",
@@ -236,7 +239,7 @@
     "message": "Спампаваць Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Дзякуючы Adblock Plus у мяне заблакавана $number$ рэкламных аб'яў і адсочванняў.",
+    "message": "Дзякуючы Adblock Plus у мяне заблакавана $number$ рэкламных аб'яў і форм для адсочвання.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -250,13 +253,13 @@
     "message": "Паказваць колькасць на значку"
   },
   "stats_title": {
-    "message": "Заблакаванае"
+    "message": "Колькасць заблакаваных"
   },
   "subscriptionSelection_location_label": {
-    "message": "Месцазнаходжанне спіса сітаў:"
+    "message": "Размяшчэнне спіса фільтраў:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Выберыце падпіску на фільтр са спісу:"
+    "message": "Выберыце падпіску са спісу:"
   },
   "subscriptionSelection_title_label": {
     "message": "Назва падпіскі:"
