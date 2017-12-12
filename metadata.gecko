@@ -7,7 +7,7 @@ basename = adblockplusfirefox
 browserAction -= popup.html
 
 [compat]
-gecko = 50.0
+gecko = 51.0
 
 [mapping]
 mobile-options.html = adblockplusui/mobile-options.html
