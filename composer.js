@@ -100,6 +100,15 @@ function init()
         filtersTextArea.value = msg.filters.join("\n");
         filtersTextArea.disabled = false;
         $("#addButton").button("option", "disabled", false);
+
+        // Firefox sometimes tells us this window had loaded before it has[1],
+        // to work around that we send the "composer.dialog.init" message again
+        // when sending failed. Unfortunately sometimes sending is reported as
+        // successful when it's not, but with the response of `undefined`. We
+        // therefore send a response here, and check for it to see if the
+        // message really was sent successfully.
+        // [1] - https://bugzilla.mozilla.org/show_bug.cgi?id=1418655
+        sendResponse(true);
         break;
       case "composer.dialog.close":
         closeMe();
