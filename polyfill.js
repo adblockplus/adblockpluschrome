@@ -53,7 +53,13 @@
     // https://crrev.com/c33f51726eacdcc1a487b21a13611f7eab580d6d
     /^The message port closed before a res?ponse was received\.$/;
 
-  function wrapAPI(api)
+  // This is the error Firefox throws when a message listener is not a
+  // function.
+  const invalidMessageListenerError = "Invalid listener for runtime.onMessage.";
+
+  let messageListeners = new WeakMap();
+
+  function wrapAsyncAPI(api)
   {
     let object = browser;
     let path = api.split(".");
@@ -70,9 +76,12 @@
     let func = object[name];
     if (!func)
       return;
+
     let descriptor = Object.getOwnPropertyDescriptor(object, name);
+
     delete descriptor["get"];
     delete descriptor["set"];
+
     descriptor.value = function(...args)
     {
       let callStack = new Error().stack;
@@ -114,7 +123,72 @@
         });
       });
     };
+
     Object.defineProperty(object, name, descriptor);
+  }
+
+  function wrapRuntimeOnMessage()
+  {
+    let {onMessage} = browser.runtime;
+    let {addListener, removeListener, hasListener} = onMessage;
+
+    onMessage.addListener = function(listener)
+    {
+      if (typeof listener != "function")
+        throw new Error(invalidMessageListenerError);
+
+      // Don't add the same listener twice or we end up with multiple wrappers.
+      if (messageListeners.has(listener))
+        return;
+
+      let wrapper = (message, sender, sendResponse) =>
+      {
+        let wait = listener(message, sender, sendResponse);
+
+        if (wait instanceof Promise)
+        {
+          wait.then(sendResponse, reason =>
+          {
+            try
+            {
+              sendResponse();
+            }
+            finally
+            {
+              // sendResponse can throw if the internal port is closed; be sure
+              // to throw the original error.
+              throw reason;
+            }
+          });
+        }
+
+        return !!wait;
+      };
+
+      addListener.call(onMessage, wrapper);
+      messageListeners.set(listener, wrapper);
+    };
+
+    onMessage.removeListener = function(listener)
+    {
+      if (typeof listener != "function")
+        throw new Error(invalidMessageListenerError);
+
+      let wrapper = messageListeners.get(listener);
+      if (wrapper)
+      {
+        removeListener.call(onMessage, wrapper);
+        messageListeners.delete(listener);
+      }
+    };
+
+    onMessage.hasListener = function(listener)
+    {
+      if (typeof listener != "function")
+        throw new Error(invalidMessageListenerError);
+
+      return messageListeners.has(listener);
+    };
   }
 
   function shouldWrapAPIs()
@@ -139,7 +213,9 @@
       window.browser = chrome;
 
     for (let api of asyncAPIs)
-      wrapAPI(api);
+      wrapAsyncAPI(api);
+
+    wrapRuntimeOnMessage();
   }
 
   // Workaround since HTMLCollection, NodeList, StyleSheetList, and CSSRuleList
