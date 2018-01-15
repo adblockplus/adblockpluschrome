@@ -263,10 +263,14 @@
     // Since we can only listen for HTTP(S) responses using
     // webRequest.onHeadersReceived we must update the page structure here for
     // other navigations.
-    let url = new URL(details.url);
-    if (url.protocol != "http:" && url.protocol != "https:")
+    let {url} = details;
+    if (!(url.startsWith("http:") ||
+          url.startsWith("https:") &&
+          // Chrome doesn't dispatch webRequest.onHeadersReceived
+          // for Web Store URLs.
+          !url.startsWith("https://chrome.google.com/webstore/")))
     {
-      updatePageFrameStructure(details.frameId, details.tabId, details.url,
+      updatePageFrameStructure(details.frameId, details.tabId, url,
                                details.parentFrameId);
     }
   });
