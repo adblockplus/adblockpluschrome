@@ -130,7 +130,7 @@
   function wrapRuntimeOnMessage()
   {
     let {onMessage} = browser.runtime;
-    let {addListener, removeListener, hasListener} = onMessage;
+    let {addListener, removeListener} = onMessage;
 
     onMessage.addListener = function(listener)
     {
@@ -153,12 +153,13 @@
             {
               sendResponse();
             }
-            finally
+            catch (error)
             {
               // sendResponse can throw if the internal port is closed; be sure
               // to throw the original error.
-              throw reason;
             }
+
+            throw reason;
           });
         }
 
