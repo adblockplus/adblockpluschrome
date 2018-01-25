@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "Nakon zatvaranja ovog skočnog prozora, kliknite (ili desni klik miša) na element na ovoj stranici."
   },
-  "continue": {
-    "message": "Nastavi"
-  },
   "description": {
     "message": "Adblock Plus je najpopularniji program za uklanjanje reklama - koristi se na gotovo 100 milijuna uređaja."
   },
@@ -50,74 +47,17 @@
   "enabled_for_site": {
     "message": "<strong>Omogućeno</strong> na ovoj stranici"
   },
-  "filter_elemhideemulation_nodomain": {
-    "message": "Nema aktivne domene za filter sa proširenim elementima za skrivanje"
-  },
-  "filter_invalid_domain": {
-    "message": "Prazna (ili nevaljana) domena navedena"
-  },
-  "filter_invalid_regexp": {
-    "message": "Nevaljani regularni izraz"
-  },
   "filter_lists": {
     "message": "Popisi filtera"
   },
   "filter_must_follow_syntax": {
     "message": "Vaš filter mora slijediti <a>Adblock Plus filter sintaksu</a>."
   },
-  "filter_unknown_option": {
-    "message": "Nepoznata postavka filtera"
-  },
-  "filters_acceptableAds2_label": {
-    "message": "Dopusti neke nenametljive reklame"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Dodaj"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Dodaj drugu pretplatu"
-  },
-  "filters_addSubscription_label": {
-    "message": "Dodaj pretplatu filtera"
-  },
-  "filters_readMore_label": {
-    "message": "Pročitaj više"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Obriši"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Omogućeno"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Neuspješno, neusklađenost checksum-a."
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Neuspješno, greška preuzimanja"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Preuzimanje..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Neuspješno, neispravan popis filtera"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Neuspješno, neispravna adresa"
-  },
-  "filters_viewList_label": {
-    "message": "Pogledaj popis"
-  },
   "found_a_bug": {
     "message": "Pronašli ste grešku? Želite prevesti Adblock Plus na svoj jezik? <a>Podnesite zahtjev ovdje</a>."
   },
   "general": {
     "message": "Općenito"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Želite li stvarno ukloniti ovu pretplatu?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Lokacija popisa filtera nije niti valjana web adresa niti naziv datoteke."
   },
   "invalid_css_selector": {
     "message": "$selector$ nije ispravan CSS selektor",
@@ -154,9 +94,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "name_devbuild": {
     "message": "Adblock Plus razvojna inačica"
   },
@@ -181,26 +118,8 @@
   "out_of_date_lists": {
     "message": "Zastarjeli popisi redovito se ažuriraju."
   },
-  "overlay_notification_button_no": {
-    "message": "Ne"
-  },
-  "overlay_notification_button_yes": {
-    "message": "Da"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Zatvori ovu obavijest"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Ne prikazuj više obavijesti"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Prikaži korisne obavijesti"
-  },
   "remove_button": {
     "message": "Ukloni odabrano"
-  },
-  "sendReport": {
-    "message": "Prijavite problem na ovoj stranici"
   },
   "show_block_element_menu": {
     "message": "Prikaži 'Blokiraj element' stavku izbornika desnog klika"
@@ -252,14 +171,8 @@
   "stats_title": {
     "message": "Blokirano reklama"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Lokacija popisa filtera:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Molimo odaberite pretplatu na filter sa popisa:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Naslov pretplate:"
   },
   "unexpected_filter_list_header": {
     "message": "Zaglavlja filter listi nisu dozvoljena ovdje"

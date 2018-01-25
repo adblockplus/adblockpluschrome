@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "এই পপআপটি বন্ধ করার পরে, পাতার (অথবা ডান-ক্লিক করে) একটি উপাদানে ক্লিক করুন।"
   },
-  "continue": {
-    "message": "চালিয়ে যান"
-  },
   "description": {
     "message": "১০ কোটিরও বেশী ডিভাইসের ব্যবহৃত, Adblock Plus হল বিশ্বের সবচেয়ে জনপ্রিয় বিজ্ঞাপন অবরুদ্ধকারী।"
   },
@@ -50,74 +47,17 @@
   "enabled_for_site": {
     "message": "এই সাইটে <strong>সক্রিয় করা আছে</strong>"
   },
-  "filter_elemhideemulation_nodomain": {
-    "message": "বর্ধিত উপাদান লুকানোর ছাঁকনির জন্য কোনও সক্রিয় ডোমেইন নির্দিষ্ট করা নেই"
-  },
-  "filter_invalid_domain": {
-    "message": "অকার্যকর (বা ফাঁকা) ডোমেইন নির্দিষ্ট করা হয়েছে"
-  },
-  "filter_invalid_regexp": {
-    "message": "অকার্যকর নিয়মিত অভিব্যক্তি"
-  },
   "filter_lists": {
     "message": "ফিল্টারের তালিকা"
   },
   "filter_must_follow_syntax": {
     "message": "আপনার ফিল্টারকে <a>Adblock Plus ফিল্টার সিনট্যাক্স</a> অনুসরণ করা আবশ্যক।"
   },
-  "filter_unknown_option": {
-    "message": "অজানা ফিল্টার অপশন"
-  },
-  "filters_acceptableAds2_label": {
-    "message": "গোপনীয়তা অলঙ্ঘঙ্কারী বিজ্ঞাপনকে অনুমোদন দিন"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "যুক্ত করুন"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "একটি ভিন্ন ছাঁকনি সদস্যতা যুক্ত করুন"
-  },
-  "filters_addSubscription_label": {
-    "message": "ছাঁকনি সদস্যতা যুক্ত করুন"
-  },
-  "filters_readMore_label": {
-    "message": "আরো পড়ুন"
-  },
-  "filters_subscription_delete_label": {
-    "message": "মুছুন"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "সক্রিয় করা"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "ব্যর্থ, ত্রুটিনির্ধারক মেলেনি"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "ব্যর্থ, নামানো ব্যর্থতা"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "ডাউনলোড হচ্ছে…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "ব্যর্থ, একটি যুক্তিযুক্ত ছাঁকন তালিকা নয়"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "ব্যর্থ, যুক্তিযুক্ত ঠিকানা নয়"
-  },
-  "filters_viewList_label": {
-    "message": "দর্শন  তালিকা"
-  },
   "found_a_bug": {
     "message": "একটি বাগ খুঁজে পেয়েছেন? আপনার ভাষায় Adblock Plus অনুবাদ করতে চান? দয়া করে <a>এখানে একটি অনুরোধ ফাইল করুন</a>।"
   },
   "general": {
     "message": "সাধারণ"
-  },
-  "global_remove_subscription_warning": {
-    "message": "আপনি কি আসলেই এই সদস্যতা অপসারণ করতে চান?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "পরিশ্রুতক তালিকা অবস্থান কোনোটিই একটি বৈধ ইউআরএল বা কোন কার্যকর ফাইল নাম নয়।"
   },
   "invalid_css_selector": {
     "message": "$selector$ একটি বৈধ CSS নির্বাচক নয়",
@@ -154,9 +94,6 @@
       }
     }
   },
-  "name": {
-    "message": "অ্যাডব্লক প্লাস"
-  },
   "name_devbuild": {
     "message": "Adblock Plus উন্নয়ন গঠন"
   },
@@ -181,26 +118,8 @@
   "out_of_date_lists": {
     "message": "পুরনো তালিকা নিয়মিত হালনাগাদ করা হয়।"
   },
-  "overlay_notification_button_no": {
-    "message": "না"
-  },
-  "overlay_notification_button_yes": {
-    "message": "হ্যাঁ"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "এই বিজ্ঞপ্তি বন্ধ করুন"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "বিজ্ঞপ্তি দেখানো বন্ধ করুন"
-  },
-  "overlay_shownotifications_label": {
-    "message": "দরকারী বিজ্ঞপ্তি দেখান"
-  },
   "remove_button": {
     "message": "নির্বাচন করাগুলি সরান"
-  },
-  "sendReport": {
-    "message": "এই পাতায় সমস্যা জানান"
   },
   "show_block_element_menu": {
     "message": "ডান-ক্লিক মেনু আইটেমে 'উপাদান অবরুদ্ধ করুন' প্রদর্শন করান"
@@ -252,14 +171,8 @@
   "stats_title": {
     "message": "বিজ্ঞাপন অবরুদ্ধ হয়েছে"
   },
-  "subscriptionSelection_location_label": {
-    "message": "ছাঁকনি তালিকার অবস্থান:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "তালিকা থেকে একটি ফিল্টার সদস্যতা বাছাই করুন:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "সদস্যতার শিরোনাম:"
   },
   "unexpected_filter_list_header": {
     "message": "ফিল্টার তালিকার শীর্ষচরণ এখানে অনুমোদিত নয়"

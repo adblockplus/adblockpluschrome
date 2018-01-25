@@ -24,8 +24,7 @@ body.clickhide-active #clickhide-cancel
 
 body.local #enabled,
 body.local #clickhide,
-body.local #stats-page,
-body.local #issueReporter
+body.local #stats-page
 {
   display: none;
 }
@@ -260,11 +259,6 @@ body.disabled #enabled #enabled-no
   background-position: -50px -49px;
 }
 
-#issueReporter .icon
-{
-  visibility: hidden;
-}
-
 
 #stats strong
 {
@@ -346,7 +340,7 @@ body.disabled #enabled #enabled-no
   background-position: -34px -77px;
 }
 
-.collapsed .collapsible
+.collapsed .collapsable
 {
   display: none;
 }

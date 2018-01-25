@@ -26,11 +26,8 @@
   "clickhide_instructions": {
     "message": "לאחר סגירת חלון זה, לחצו (אפשרי לחיצה-ימנית) על רכיב בעמוד זה."
   },
-  "continue": {
-    "message": "המשך"
-  },
   "description": {
-    "message": "נמצא בשימוש ביותר מ-100 מיליון מכשירים, Adblock Plus הוא חוסם המודעות הפופולרי ביותר בעולם."
+    "message": "עם התקנות ביותר מ-100 מיליון מכשירים, Adblock Plus הוא חוסם המודעות הפופולרי ביותר בעולם."
   },
   "disabled_for_site": {
     "message": "<strong>מנוטרל</strong> באתר זה"
@@ -50,74 +47,17 @@
   "enabled_for_site": {
     "message": "<strong>מאפשר</strong> באתר זה"
   },
-  "filter_elemhideemulation_nodomain": {
-    "message": "לא צוין תחום פעיל עבור יסוד מורחב של מסנן הסתרה"
-  },
-  "filter_invalid_domain": {
-    "message": "צוין תחום לא תקף (או ריק)"
-  },
-  "filter_invalid_regexp": {
-    "message": "ביטוי רגיל לא חוקי"
-  },
   "filter_lists": {
     "message": "רשימות המסננים"
   },
   "filter_must_follow_syntax": {
     "message": "המסנן שלכם חייב לציית <a>לתחביר סינון Adblock Plus</a>."
   },
-  "filter_unknown_option": {
-    "message": "אפשרות סינון לא ידועה"
-  },
-  "filters_acceptableAds2_label": {
-    "message": "אפשור קצת פרסום לא פולשני"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "הוסף"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "הוסף מנוי שונה"
-  },
-  "filters_addSubscription_label": {
-    "message": "הוסף מנוי מסנן"
-  },
-  "filters_readMore_label": {
-    "message": "קרא עוד"
-  },
-  "filters_subscription_delete_label": {
-    "message": "מחק"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "מאופשר"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "נכשל, ביקורת סיכום לא מתאימה"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "נכשל, ההורדה נכשלה"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "מוריד..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "נכשל, רשימת מסננים לא תקפה"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "נכשל, כתובת לא תקפה"
-  },
-  "filters_viewList_label": {
-    "message": "הצג רשימה"
-  },
   "found_a_bug": {
     "message": "מצאת באג? ברצונך לתרגם את Adblock Plus לשפתך? אנא <a>הגישו בקשתכם כאן</a>."
   },
   "general": {
     "message": "כללי"
-  },
-  "global_remove_subscription_warning": {
-    "message": "האם להסיר את ההרשמה הזאת?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "מיקום רשימת הסינון איננו כתובת אתר חוקית ולא שם קובץ חוקי."
   },
   "invalid_css_selector": {
     "message": "$selector$ איננו בורר CSS תקף",
@@ -154,12 +94,6 @@
       }
     }
   },
-  "loading": {
-    "message": "טוען..."
-  },
-  "name": {
-    "message": "Adblock Plus "
-  },
   "name_devbuild": {
     "message": "גרסאות פיתוח Adblock Plus"
   },
@@ -184,26 +118,8 @@
   "out_of_date_lists": {
     "message": "רשימות שאינן עדכניות מתעדכנות באופן תדיר."
   },
-  "overlay_notification_button_no": {
-    "message": "לא"
-  },
-  "overlay_notification_button_yes": {
-    "message": "כן"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "סגירת התראה זו"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "הפסקת הצגת התראות"
-  },
-  "overlay_shownotifications_label": {
-    "message": "הצגת התראות שימושיות"
-  },
   "remove_button": {
     "message": "הסרת הבחירה"
-  },
-  "sendReport": {
-    "message": "דיווח על בעיה בעמוד זה"
   },
   "show_block_element_menu": {
     "message": "הצגת הפריט 'חסימת אלמנט' בתפריט הלחצן הימני"
@@ -255,14 +171,8 @@
   "stats_title": {
     "message": "מודעות חסומות"
   },
-  "subscriptionSelection_location_label": {
-    "message": "מיקום רשימת המסננים:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "יש לבחור הרשמת מסנן מהרשימה:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "כותרת ההרשמה:"
   },
   "unexpected_filter_list_header": {
     "message": "כותרות סינון רשימה אינן מותרות כאן"

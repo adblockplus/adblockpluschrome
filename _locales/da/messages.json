@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "Luk dette popup-vindue, og klik (eller højreklik) derefter på et element på siden."
   },
-  "continue": {
-    "message": "Fortsæt"
-  },
   "description": {
     "message": "Adblock Plus anvendes på over 100 millioner enheder og er således verdens mest populære ad blocker."
   },
@@ -50,74 +47,17 @@
   "enabled_for_site": {
     "message": "<strong>Aktiveret</strong> på dette websted"
   },
-  "filter_elemhideemulation_nodomain": {
-    "message": "Intet aktivt domæne er angivet til udvidet skjul elementer-filteret"
-  },
-  "filter_invalid_domain": {
-    "message": "Ugyldigt (eller tomt) domæne angivet"
-  },
-  "filter_invalid_regexp": {
-    "message": "Ugyldigt regulært udtryk"
-  },
   "filter_lists": {
     "message": "Filterlister"
   },
   "filter_must_follow_syntax": {
     "message": "Dit filter skal følge <a>Adblock Plus' filtersyntaks</a>."
   },
-  "filter_unknown_option": {
-    "message": "Ukendt filtermulighed"
-  },
-  "filters_acceptableAds2_label": {
-    "message": "Tillad upåtrængende annoncering delvist"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Tilføj"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Tilføj endnu et abonnement"
-  },
-  "filters_addSubscription_label": {
-    "message": "Tilføj filterabonnement"
-  },
-  "filters_readMore_label": {
-    "message": "Lær mere"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Slet"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Aktiveret"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Fejlede, checksum matcher ikke"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Fejlede, hentningsfejl"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Henter..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Fejlede, ikke en gyldig liste over filtre"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Fejlede, ikke en gyldig adresse"
-  },
-  "filters_viewList_label": {
-    "message": "Vis liste"
-  },
   "found_a_bug": {
     "message": "Har du fundet en fejl? Vil du oversætte Adblock Plus til dit sprog? Send <a>venligst din anmodning her</a>."
   },
   "general": {
     "message": "Generelt"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Vil du virkelig fjerne dette abonnement?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Filterlistens placering er hverken en gyldig URL eller et gyldigt filnavn."
   },
   "invalid_css_selector": {
     "message": "$selector$ er ikke en gyldig CSS-indikator",
@@ -154,9 +94,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "name_devbuild": {
     "message": "Adblock Plus-udviklingsversion"
   },
@@ -181,26 +118,8 @@
   "out_of_date_lists": {
     "message": "Forældede lister opdateres regelmæssigt."
   },
-  "overlay_notification_button_no": {
-    "message": "Nej"
-  },
-  "overlay_notification_button_yes": {
-    "message": "Ja"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Luk denne meddelelse"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Vis ikke notifikationer"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Vis nyttige notifikationer"
-  },
   "remove_button": {
     "message": "Fjern valgte"
-  },
-  "sendReport": {
-    "message": "Rapporter problem"
   },
   "show_block_element_menu": {
     "message": "Vis \"Blokér element\" i højrekliksmenu"
@@ -252,14 +171,8 @@
   "stats_title": {
     "message": "Blokerede reklamer"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Filterlistens placering:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vælg et filterabonnement fra listen:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Abonnementstitel:"
   },
   "unexpected_filter_list_header": {
     "message": "Filterlisteoverskrifter er ikke tilladt hér"

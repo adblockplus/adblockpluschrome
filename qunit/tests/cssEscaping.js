@@ -1,10 +1,11 @@
 "use strict";
 
+(function()
 {
   const {Filter, ElemHideFilter} = require("filterClasses");
   const {escapeCSS, quoteCSS} = require("filterComposer");
 
-  QUnit.module("CSS escaping");
+  module("CSS escaping");
 
   test("CSS escaping", () =>
   {
@@ -98,4 +99,4 @@
     // require escaping.
     testEscape("\uD83D\uDE3B\u2665\u00E4");
   });
-}
+}());

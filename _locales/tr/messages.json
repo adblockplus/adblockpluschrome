@@ -6,121 +6,61 @@
     "message": "Alan adı ekle"
   },
   "add_filter_button": {
-    "message": "Süzgeç ekle"
+    "message": "Filtre ekle"
   },
   "add_filters_msg": {
-    "message": "Süzgeç(ler) eklensin mi?"
+    "message": "Filtre(ler) Ekle?"
   },
   "add_your_own_filters": {
-    "message": "Kendi süzgeçlerinizi ekleyin"
+    "message": "Kendi filtrelerinizi ekleyin"
   },
   "apply_changes": {
     "message": "Değişiklikleri uygula"
   },
   "block_element": {
-    "message": "Öğeyi engelle"
+    "message": "Öğeyi Engelle"
   },
   "cancel": {
     "message": "Vazgeç"
   },
   "clickhide_instructions": {
-    "message": "Bu açılır pencereyi kapattıktan sonra, sayfadaki bir öğeye farenin sol veya sağ tuşuyla tıklayın."
-  },
-  "continue": {
-    "message": "Devam et"
+    "message": "Bu pencere kapandığında, engelleyeceğiniz ögeye tıklayın (veya sağ tıklayın)."
   },
   "description": {
-    "message": "100 milyondan fazla cihazda kullanılan Adblock Plus, dünyanın en beğenilen reklam engelleyicisidir."
+    "message": "100 milyondan fazla cihazda kullanılan Adblock Plus dünyanın en popüler reklam engelleyicisidir."
   },
   "disabled_for_site": {
     "message": "Bu sitede <strong>devre dışı</strong>"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus aşağıda sıralanan alan adlarında devre dışı bırakıldı. Konum çubuğundaki Adblock Plus simgesini kullanarak veya kutuya alan adını yazıp (URL'yi değil) \"Alan adı ekle\" düğmesine tıklayarak alan adını ekleyebilirsiniz."
+    "message": "Adblock Plus aşağıdaki adresler için devre dışı bırakıldı. Adresleri adres çubuğundaki Adblock simgesinden ekleyebilir veya alan adını (URL'yi değil) kutucuğa yazıp \"Alan adını ekle\" butonuna tıklayabilirsin."
   },
   "easy_create_filter": {
-    "message": "Öğe engelle"
+    "message": "Öğeyi Engelle"
   },
   "edit_filters_raw": {
-    "message": "Süzgeçleri salt metin olarak düzenle"
+    "message": "Filtreleri salt metin olarak düzenle"
   },
   "enable_only_the": {
-    "message": "Yalnızca ihtiyacınız olan süzgeç listelerini etkinleştirin. Çok fazla liste seçmek tarayıcınızın yanıt vermemesine yol açabilir."
+    "message": "Yalnızca ihtiyacınız olan süzgeç listelerini etkinleştirin. Çok fazla seçim yapmak tarayıcınızın akıcılığını düşürebilir."
   },
   "enabled_for_site": {
     "message": "Bu sitede <strong>etkin</strong>"
   },
-  "filter_elemhideemulation_nodomain": {
-    "message": "Genişletilmiş öğe gizleme süzgeci için etkin bir alan adı belirtilmedi"
-  },
-  "filter_invalid_domain": {
-    "message": "Geçersiz (veya boş) alan adı belirtildi"
-  },
-  "filter_invalid_regexp": {
-    "message": "Geçersiz düzenli ifade"
-  },
   "filter_lists": {
-    "message": "Süzgeç listeleri"
+    "message": "Filtre listesi"
   },
   "filter_must_follow_syntax": {
-    "message": "Süzgeciniz <a>Adblock Plus süzgeç yazım kurallarına</a> uymalı."
-  },
-  "filter_unknown_option": {
-    "message": "Bilinmeyen süzme seçeneği"
-  },
-  "filters_acceptableAds2_label": {
-    "message": "Rahatsız etmeyen bazı reklamlara izin ver"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Ekle"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Başka abonelik ekle"
-  },
-  "filters_addSubscription_label": {
-    "message": "Süzgeç aboneliği ekle"
-  },
-  "filters_readMore_label": {
-    "message": "Daha fazla bilgi al"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Sil"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Etkin"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Başarısız. Sağlama yapılamadı."
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "Başarısız. İndirmede sorun var."
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "İndiriliyor..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Başarısız. Bu düzgün bir süzgeç listesi değil."
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Başarısız. Bu geçerli bir adres değil."
-  },
-  "filters_viewList_label": {
-    "message": "Listeye bak"
+    "message": "Eklediğiniz filtre <a>Adblock Plus filtre kurallarına</a> uymak zorundadır."
   },
   "found_a_bug": {
-    "message": "Hata mı buldunuz? Adblock Plus'ı kendi dilinize mi çevirmek istiyorsunuz? Lütfen <a>buradan istekte bulunun</a>."
+    "message": "Hata mı buldunuz? Adblock Plus'ı kendi dilinize mi çevirmek istiyorsunuz? Lütfen <a>buradan dosya isteyiniz</a>."
   },
   "general": {
     "message": "Genel"
   },
-  "global_remove_subscription_warning": {
-    "message": "Gerçekten abonelikten çıkmak istiyor musunuz?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Dosya listesi konumu ne düzgün bir URL ne de düzgün bir ada sahip."
-  },
   "invalid_css_selector": {
-    "message": "$selector$ geçerli bir CSS seçicisi değil",
+    "message": "$selector$ geçerli bir CSS seçicisi değildir",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -128,7 +68,7 @@
     }
   },
   "last_updated_at": {
-    "message": "Son güncellenme: $date$ $time$",
+    "message": "Son Güncellenme: $date$ $time$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -139,7 +79,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "En son bugün ($time$) güncellendi",
+    "message": "En son bugün güncellendi. Güncelleme saati: $time$",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -147,33 +87,27 @@
     }
   },
   "line": {
-    "message": "$number$. satır",
+    "message": "Satır $number$",
     "placeholders": {
       "number": {
         "content": "$1"
       }
     }
   },
-  "loading": {
-    "message": "Yükleniyor..."
-  },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "name_devbuild": {
     "message": "Adblock Plus geliştirme sürümü"
   },
   "notification_configure": {
-    "message": "Bildirim ayarlarını yapılandır"
+    "message": "Bildirim ayarlarını yapılandırma"
   },
   "notification_open_all": {
-    "message": "Bu bildirimden gelen tüm bağlantıları aç"
+    "message": "bu bildirimden gelen tüm bağlantıları aç"
   },
   "notification_with_buttons": {
     "message": "Bu bildirimdeki tüm bağlantıları açmak için 'Tamam' düğmesine tıklayın."
   },
   "notification_without_buttons": {
-    "message": "Bildirimdeki tüm bağlantıları açmak için bildirime tıklayın."
+    "message": "Bildirimdeki tüm bağlantıları açmak için bildirim üzerine tıklayın."
   },
   "options": {
     "message": "Adblock Plus Seçenekleri"
@@ -182,28 +116,10 @@
     "message": "Seçenekler"
   },
   "out_of_date_lists": {
-    "message": "Güncel olmayan listeler belirli aralıklarla güncellenir."
-  },
-  "overlay_notification_button_no": {
-    "message": "Hayır"
-  },
-  "overlay_notification_button_yes": {
-    "message": "Evet"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "Bu bildirim kapat"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "Bildirimleri göstermeyi durdur"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Yararlı bildirimlerini göster"
+    "message": "Zamanı geçmiş listeler düzenli olarak güncellenmektedir."
   },
   "remove_button": {
     "message": "Seçili olanı kaldır"
-  },
-  "sendReport": {
-    "message": "Bu sayfadaki sorunu bildir"
   },
   "show_block_element_menu": {
     "message": "Sağ tık menüsünde 'Öğeyi Engelle' seçeneğini göster"
@@ -228,7 +144,7 @@
     }
   },
   "stats_over": {
-    "message": "$number$",
+    "message": "$number$ üzerinde",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -239,7 +155,7 @@
     "message": "Adblock Plus'ı indir"
   },
   "stats_share_message": {
-    "message": "Adblock Plus sayesinde $number$ reklam ve izleyiciyi engelledim.",
+    "message": "$number$ reklamı ve izleyiciyi Adblock Plus sayesinde engelledim.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -250,27 +166,21 @@
     "message": "Bu sayıyı paylaş"
   },
   "stats_show_iconnumber": {
-    "message": "Simgede sayıyı göster"
+    "message": "Simgede numarayı göster"
   },
   "stats_title": {
     "message": "Engellenen reklamlar"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Süzgeç listesi konumu:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Lütfen listeden bir süzgeç aboneliği seçin:"
   },
-  "subscriptionSelection_title_label": {
-    "message": "Aboneliğin adı:"
-  },
   "unexpected_filter_list_header": {
-    "message": "Süzgeç listesi üst bilgisine burada izin verilmiyor"
+    "message": "Filtre liste başlıklarına burada izin verilmiyor"
   },
   "update_now": {
     "message": "Şimdi güncelle"
   },
   "whitelisted_domains": {
-    "message": "Beyaz listedeki alan adları"
+    "message": "Güvenilir adresler"
   }
 }

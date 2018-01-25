@@ -53,9 +53,6 @@
   "filter_must_follow_syntax": {
     "message": "మీ వడపోత (ఫిల్టర్) క్రింది Adblock Plus వడపోత సింటెక్స్ <a>ను అనుసరించే ఉండాలి</a>."
   },
-  "filters_addSubscriptionAdd_label": {
-    "message": "చేర్చు"
-  },
   "found_a_bug": {
     "message": "ఒక లోపాన్ని కనుగొన్నారా? మీ భాషలోకి Adblock Plus ని అనువదించాలనుకుంటున్నారా? <a>దయచేసి మీ అభ్యర్ధనని ఇక్కడ పొందుపరచండి</a>."
   },

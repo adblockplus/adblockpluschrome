@@ -19,47 +19,41 @@
 
 let panelWindow = null;
 
-// Versions of Firefox before 54 do not support the devtools.panels API; on
-// these platforms, even when the option is enabled, we cannot show the
-// devtools panel.
-if ("panels" in browser.devtools)
-{
-  browser.runtime.sendMessage(
+chrome.runtime.sendMessage(
+  {
+    type: "prefs.get",
+    key: "show_devtools_panel"
+  },
+  enabled =>
+  {
+    if (enabled)
     {
-      type: "prefs.get",
-      key: "show_devtools_panel"
-    },
-    enabled =>
-    {
-      if (enabled)
-      {
-        browser.devtools.panels.create(
-          "Adblock Plus",
-          "icons/abp-32.png",
-          "devtools-panel.html",
-          panel =>
+      chrome.devtools.panels.create(
+        "Adblock Plus",
+        "icons/detailed/abp-48.png",
+        "devtools-panel.html",
+        panel =>
+        {
+          panel.onShown.addListener(window =>
           {
-            panel.onShown.addListener(window =>
-            {
-              panelWindow = window;
-            });
+            panelWindow = window;
+          });
 
-            panel.onHidden.addListener(window =>
-            {
-              panelWindow = null;
-            });
+          panel.onHidden.addListener(window =>
+          {
+            panelWindow = null;
+          });
 
-            if (panel.onSearch)
+          if (panel.onSearch)
+          {
+            panel.onSearch.addListener((eventName, queryString) =>
             {
-              panel.onSearch.addListener((eventName, queryString) =>
-              {
-                if (panelWindow)
-                  panelWindow.postMessage({type: eventName, queryString}, "*");
-              });
-            }
+              if (panelWindow)
+                panelWindow.postMessage({type: eventName, queryString}, "*");
+            });
           }
-        );
-      }
+        }
+      );
     }
-  );
-}
+  }
+);

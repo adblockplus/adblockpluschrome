@@ -15,12 +15,9 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
+/* globals checkCollapse, elemhide, getURLsFromElement, typeMap */
 
-// We would rather export these properly and then require("include.preload")
-// here, but that would result in include.preload running both at pre and post
-// load.
-const {checkCollapse, elemhide, getURLsFromElement, typeMap} = window;
+"use strict";
 
 // The page ID for the popup filter selection dialog (top frame only).
 let blockelementPopupId = null;
@@ -48,7 +45,7 @@ let lastRightClickEventIsMostRecent = false;
 function getFiltersForElement(element, callback)
 {
   let src = element.getAttribute("src");
-  browser.runtime.sendMessage({
+  ext.backgroundPage.sendMessage({
     type: "composer.getFilters",
     tagName: element.localName,
     id: element.id,
@@ -392,11 +389,17 @@ function elementPicked(event)
     if (currentlyPickingElement)
       stopPickingElement();
 
-    browser.runtime.sendMessage({
-      type: "composer.openDialog",
-      filters
-    }, popupId =>
+    ext.backgroundPage.sendMessage({
+      type: "composer.openDialog"
+    },
+    popupId =>
     {
+      ext.backgroundPage.sendMessage({
+        type: "forward",
+        targetPageId: popupId,
+        payload: {type: "composer.dialog.init", filters}
+      });
+
       // Only the top frame keeps a record of the popup window's ID,
       // so if this isn't the top frame we need to pass the ID on.
       if (window == window.top)
@@ -405,7 +408,7 @@ function elementPicked(event)
       }
       else
       {
-        browser.runtime.sendMessage({
+        ext.backgroundPage.sendMessage({
           type: "forward",
           payload: {type: "composer.content.dialogOpened", popupId}
         });
@@ -448,7 +451,7 @@ function deactivateBlockElement()
 
   if (blockelementPopupId != null)
   {
-    browser.runtime.sendMessage({
+    ext.backgroundPage.sendMessage({
       type: "forward",
       targetPageId: blockelementPopupId,
       payload:
@@ -476,11 +479,8 @@ function deactivateBlockElement()
   ext.onExtensionUnloaded.removeListener(deactivateBlockElement);
 }
 
-function initializeComposer()
+if (document instanceof HTMLDocument)
 {
-  if (typeof ext == "undefined")
-    return false;
-
   // Use a contextmenu handler to save the last element the user right-clicked
   // on. To make things easier, we actually save the DOM event. We have to do
   // this because the contextMenu API only provides a URL, not the actual DOM
@@ -493,7 +493,7 @@ function initializeComposer()
     lastRightClickEvent = event;
     lastRightClickEventIsMostRecent = true;
 
-    browser.runtime.sendMessage({
+    ext.backgroundPage.sendMessage({
       type: "forward",
       payload:
       {
@@ -502,9 +502,9 @@ function initializeComposer()
     });
   }, true);
 
-  ext.onMessage.addListener((message, sender, sendResponse) =>
+  ext.onMessage.addListener((msg, sender, sendResponse) =>
   {
-    switch (message.type)
+    switch (msg.type)
     {
       case "composer.content.getState":
         if (window == window.top)
@@ -534,7 +534,7 @@ function initializeComposer()
         }
         break;
       case "composer.content.finished":
-        if (currentElement && message.remove)
+        if (currentElement && msg.remove)
         {
           // Hide the selected element itself if an added blocking
           // filter is causing it to collapse. Note that this
@@ -555,14 +555,14 @@ function initializeComposer()
         break;
       case "composer.content.dialogOpened":
         if (window == window.top)
-          blockelementPopupId = message.popupId;
+          blockelementPopupId = msg.popupId;
         break;
       case "composer.content.dialogClosed":
         // The onRemoved hook for the popup can create a race condition, so we
         // to be careful here. (This is not perfect, but best we can do.)
-        if (window == window.top && blockelementPopupId == message.popupId)
+        if (window == window.top && blockelementPopupId == msg.popupId)
         {
-          browser.runtime.sendMessage({
+          ext.backgroundPage.sendMessage({
             type: "forward",
             payload:
             {
@@ -575,18 +575,5 @@ function initializeComposer()
   });
 
   if (window == window.top)
-    browser.runtime.sendMessage({type: "composer.ready"});
-
-  return true;
-}
-
-if (document instanceof HTMLDocument)
-{
-  // There's a bug in Firefox that causes document_end content scripts to run
-  // before document_start content scripts on extension startup. In this case
-  // the ext object is undefined, we fail to initialize, and initializeComposer
-  // returns false. As a workaround, try again after a timeout.
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=1395287
-  if (!initializeComposer())
-    setTimeout(initializeComposer, 2000);
+    ext.backgroundPage.sendMessage({type: "composer.ready"});
 }

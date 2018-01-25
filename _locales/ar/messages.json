@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "بعد إغلاق هذه النافذة، اضغط (أو اضغط بالزر الأيمن) على أحد العناصر في الصفحة."
   },
-  "continue": {
-    "message": "واصِل"
-  },
   "description": {
     "message": "يستخدم على أكثر من 100 مليون جهاز، آدبلوك بلس هو مانع الإعلانات الأكثر إنتشارًا في العالم."
   },
@@ -50,74 +47,17 @@
   "enabled_for_site": {
     "message": "<strong>مفعّل</strong> في هذا الموقع"
   },
-  "filter_elemhideemulation_nodomain": {
-    "message": "لم يتم تحديد نطاق نشط لفلتر إخفاء العناصر الموسعة"
-  },
-  "filter_invalid_domain": {
-    "message": "تم تحديد نطاق غير صحيح (أو فارغ)"
-  },
-  "filter_invalid_regexp": {
-    "message": "تعبير منطقي غير صحيح"
-  },
   "filter_lists": {
     "message": "قوائم المرشحات"
   },
   "filter_must_follow_syntax": {
     "message": "مرشحك يجب ان يتبع <a>قواعد ترشيح آدبلوك بلس</a>."
   },
-  "filter_unknown_option": {
-    "message": "خيار فلتر غير معروف"
-  },
-  "filters_acceptableAds2_label": {
-    "message": "السماح لب&عض الإعلانات الغير متطفّلة"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "أضف"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "إضافة اشتراك آخر"
-  },
-  "filters_addSubscription_label": {
-    "message": "إضافة إشتراك فلاتر"
-  },
-  "filters_readMore_label": {
-    "message": "قراءة المزيد"
-  },
-  "filters_subscription_delete_label": {
-    "message": "ازالة"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "مفعّل"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "فشل الأمر، عدم تطابق المجموع الإختباري"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "فشل الأمر، بسبب فشل التحميل"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "جاري التحميل…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "فشل الأمر، قائمة فلاتر ليست صحيحة"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "فشل الأمر، العنوان ليس صحيح"
-  },
-  "filters_viewList_label": {
-    "message": "إظهار القائمة"
-  },
   "found_a_bug": {
     "message": "هل وجدت خطأ برمجي؟ تريد ترجمة ﺁدبلوك بلس إلى لغتك؟ الرجاء <a>الطلب هنا</a>."
   },
   "general": {
     "message": "عام"
-  },
-  "global_remove_subscription_warning": {
-    "message": "هل أنت حقاً راغب بإزالة هذا الإشتراك؟"
-  },
-  "global_subscription_invalid_location": {
-    "message": "موقع قائمة الفلاتر ليس صحيح كعنوان ويب و لا كإسم ملف."
   },
   "invalid_css_selector": {
     "message": "$selector$ غير صالح كمحدد لـ CSS",
@@ -154,12 +94,6 @@
       }
     }
   },
-  "loading": {
-    "message": "جار التحميل..."
-  },
-  "name": {
-    "message": "آدبلوك بلس"
-  },
   "name_devbuild": {
     "message": "رقم نسخة تطوير آدبلوك بلس"
   },
@@ -184,26 +118,8 @@
   "out_of_date_lists": {
     "message": "القوائم القديمة تحدث دورياً."
   },
-  "overlay_notification_button_no": {
-    "message": "لا"
-  },
-  "overlay_notification_button_yes": {
-    "message": "نعم"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "إغلاق الإشعارات"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "إيقاف عرض الإشعارات"
-  },
-  "overlay_shownotifications_label": {
-    "message": "أظهر الأشعارات الهامة"
-  },
   "remove_button": {
     "message": "إزالة المحدد"
-  },
-  "sendReport": {
-    "message": "التبليغ عن مشكل في هذه الصفحة"
   },
   "show_block_element_menu": {
     "message": "أظهر فقرة \"حجب العنصر\" في قائمة النقرة اليمنى"
@@ -255,14 +171,8 @@
   "stats_title": {
     "message": "الإعلانات المحجوبة"
   },
-  "subscriptionSelection_location_label": {
-    "message": "موقع قائمة الفلاتر"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "الرجاء اختيار اشتراك لفلتر من القائمة:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "عنوان الاشتراك"
   },
   "unexpected_filter_list_header": {
     "message": "ترويسات قائمة المرشحات غير مسموح بها هنا"

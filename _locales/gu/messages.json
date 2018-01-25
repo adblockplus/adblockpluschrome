@@ -26,12 +26,6 @@
   "clickhide_instructions": {
     "message": "આ પોપ અપ બંધ કરીને, પેજ પરનાં એલિમેન્ટ પર ક્લિક (અથવા રાઈટ ક્લિક) કરો."
   },
-  "continue": {
-    "message": "ચાલુ રાખો"
-  },
-  "description": {
-    "message": "100 મિલિયનથી વધુ ઉપકરણો પર ઉપયોગ થાય છે, એડબ્લોક પ્લસ એ વિશ્વની સૌથી લોકપ્રિય જાહેરાત અવરોધક છે."
-  },
   "disabled_for_site": {
     "message": "આં સાઈટ પર <strong>ડિસેબલ</strong> કરો"
   },
@@ -50,74 +44,17 @@
   "enabled_for_site": {
     "message": "આં સાઈટ પર <strong>ઇનેબલ</strong> કરો"
   },
-  "filter_elemhideemulation_nodomain": {
-    "message": "વિસ્તૃત ઘટક છૂપાઇ ફિલ્ટર માટે કોઈ સક્રિય ડોમેન નિર્દિષ્ટ નથી"
-  },
-  "filter_invalid_domain": {
-    "message": "ઉલ્લેખિત અમાન્ય (અથવા ખાલી) ડોમેન"
-  },
-  "filter_invalid_regexp": {
-    "message": "અમાન્ય રેગ્યુલર એક્સપ્રેશન"
-  },
   "filter_lists": {
     "message": "ફિલ્ટરની લીસ્ટ"
   },
   "filter_must_follow_syntax": {
     "message": "તમારું ફિલ્ટર <a>Adblock Plus ફિલ્ટર સિન્ટેક્સ</a>ફોલોવ કરવું જોઈએ."
   },
-  "filter_unknown_option": {
-    "message": "અજ્ઞાત ફિલ્ટર વિકલ્પ"
-  },
-  "filters_acceptableAds2_label": {
-    "message": "કેટલાક બિન-કર્કશ જાહેરાત માટે પરવાનગી આપે છે"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "ઊમેરો"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "અલગ સબ્સ્ક્રિપ્શન ઉમેરો"
-  },
-  "filters_addSubscription_label": {
-    "message": "ફિલ્ટર સબ્સ્ક્રિપ્શન ઉમેરો"
-  },
-  "filters_readMore_label": {
-    "message": "વધુ વાંચો"
-  },
-  "filters_subscription_delete_label": {
-    "message": "કાઢી નાંખો"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "સમર્થ"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "નિષ્ફળ, checksum મેળ ખાતી નથી"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "નિષ્ફળ થયું, ડાઉનલોડ નિષ્ફળ થયું"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "ડાઉનલોડ…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "નિષ્ફળ, કોઈ માન્ય ફિલ્ટર્સ સૂચિ નથી"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "નિષ્ફળ થયું, માન્ય સરનામું નથી"
-  },
-  "filters_viewList_label": {
-    "message": "સૂચિ જુઓ"
-  },
   "found_a_bug": {
     "message": "કોઈ ભૂલ છે ? શું તમારી ભાષામાં Adblock Plus ને રૂપાંતરિત કરવા માગો છો ? તમારી <a>રીક્વેસ્ટ અહીં આપો</a>."
   },
   "general": {
     "message": "સામાન્ય"
-  },
-  "global_remove_subscription_warning": {
-    "message": "શું તમે ખરેખર આ સબ્સ્ક્રિપ્શનને દૂર કરવા માંગો છો?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "ફિલ્ટર સૂચિ સ્થાન ન તો માન્ય URL છે કે માન્ય ફાઇલનું નામ નથી."
   },
   "invalid_css_selector": {
     "message": "$selector$ એ યોગ્ય CSS selector નથી",
@@ -154,17 +91,8 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "name_devbuild": {
     "message": "Adblock Plus ડેવલોપમેન્ટ બીલ્ડ"
-  },
-  "notification_configure": {
-    "message": "સૂચના સેટિંગ્સને ગોઠવો"
-  },
-  "notification_open_all": {
-    "message": "આ સૂચનાથી તમામ લિંક્સ ખોલો"
   },
   "notification_with_buttons": {
     "message": "આ નોટીફીકેશનમાં બધી લીંક ખોલવા 'ઓકે' પર ક્લિક કરો."
@@ -181,32 +109,11 @@
   "out_of_date_lists": {
     "message": "આઉટ-ઓફ-ડેટ લીસ્ટ ક્રમવાર સુધારેલ છે."
   },
-  "overlay_notification_button_no": {
-    "message": "ના"
-  },
-  "overlay_notification_button_yes": {
-    "message": "હા"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "આ સૂચના બંધ કરો"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "સૂચનાઓ દર્શાવવાનું રોકો"
-  },
-  "overlay_shownotifications_label": {
-    "message": "ઉપયોગી અને સૂચનાઓ બતાવો"
-  },
   "remove_button": {
     "message": "પસંદ કરેલ કાઢો"
   },
-  "sendReport": {
-    "message": "આ પૃષ્ઠ પર અને સમસ્યાની જાણ કરો"
-  },
   "show_block_element_menu": {
     "message": "'બ્લોક એલિમેન્ટ' જુઓ મેનુ આઇટમ પર રાઈટ ક્લિક કરીને"
-  },
-  "show_devtools_panel": {
-    "message": "વિકાસકર્તા સાધનોમાં 'એડબ્લોક પ્લસ' પેનલ બતાવો"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> આ પેજ પર",
@@ -252,14 +159,8 @@
   "stats_title": {
     "message": "એડ્સ બ્લોક કરી"
   },
-  "subscriptionSelection_location_label": {
-    "message": "ફિલ્ટર સૂચિ સ્થાન:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "લીસ્ટમાંથી ફિલ્ટર સબક્રીપ્શન સિલેક્ટ કરો:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "સબ્સ્ક્રિપ્શન શીર્ષક:"
   },
   "unexpected_filter_list_header": {
     "message": "ફિલ્ટર લીસ્ટ હેડર આહીં વાપરી શકાય નહિ"

@@ -15,4 +15,4 @@ except subprocess.CalledProcessError as e:
     print >>sys.stderr, "Failed to ensure dependencies being up-to-date!"
 
 import buildtools.build
-buildtools.build.process_args(BASE_DIR)
+buildtools.build.processArgs(BASE_DIR, sys.argv)

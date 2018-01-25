@@ -53,9 +53,6 @@
   "filter_must_follow_syntax": {
     "message": "Ang iyong filter ay dapat nakasunod sa <a>Adblock Plus filter syntax</a>."
   },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Magdagdag"
-  },
   "found_a_bug": {
     "message": "Nakadiskobre ng bug? Gusto mo bang isalin ang Adblock Plus sa inyong wika? <a>ilagay ang inyong request dito</a>."
   },
@@ -120,12 +117,6 @@
   },
   "out_of_date_lists": {
     "message": "Ang mga listahan na hindi pa nauupdate ay maayos bawat pagkakataon."
-  },
-  "overlay_notification_button_no": {
-    "message": "Hindi"
-  },
-  "overlay_notification_button_yes": {
-    "message": "Oo"
   },
   "remove_button": {
     "message": "Alisin ang napili"

@@ -26,9 +26,6 @@
   "clickhide_instructions": {
     "message": "此消息框关闭后，请点击（或右击）网页上的一个元素。"
   },
-  "continue": {
-    "message": "继续"
-  },
   "description": {
     "message": "Adblock Plus 已被超过 1 亿台设备使用，是世界上最受欢迎的广告拦截软件。"
   },
@@ -50,74 +47,17 @@
   "enabled_for_site": {
     "message": "对当前网站<strong>启用</strong>"
   },
-  "filter_elemhideemulation_nodomain": {
-    "message": "没有为扩展元素隐藏规则指定活跃域名"
-  },
-  "filter_invalid_domain": {
-    "message": "指定的域名无效或者为空"
-  },
-  "filter_invalid_regexp": {
-    "message": "无效的正则表达式"
-  },
   "filter_lists": {
     "message": "过滤规则列表"
   },
   "filter_must_follow_syntax": {
     "message": "您的过滤规则必须遵循 <a> Adblock Plus 过滤规则语法</a>。"
   },
-  "filter_unknown_option": {
-    "message": "未知的过滤规则"
-  },
-  "filters_acceptableAds2_label": {
-    "message": "允许一些非侵入式广告"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "添加"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "添加其他过滤规则订阅组"
-  },
-  "filters_addSubscription_label": {
-    "message": "添加过滤规则订阅组"
-  },
-  "filters_readMore_label": {
-    "message": "深入了解"
-  },
-  "filters_subscription_delete_label": {
-    "message": "删除"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "启用"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "失败，检验和不匹配"
-  },
-  "filters_subscription_lastDownload_connectionError": {
-    "message": "失败，下载失败"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "正在下载……"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "失败，不是有效的过滤规则列表"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "失败，不是有效地址"
-  },
-  "filters_viewList_label": {
-    "message": "查看列表"
-  },
   "found_a_bug": {
     "message": "发现漏洞？想要帮忙翻译Adblock Plus？请前往<a>此处询问</a>"
   },
   "general": {
     "message": "常规"
-  },
-  "global_remove_subscription_warning": {
-    "message": "您确定要移除该过滤规则订阅组吗？"
-  },
-  "global_subscription_invalid_location": {
-    "message": "过滤规则列表的位置不是有效的 URL 或有效的文件名。"
   },
   "invalid_css_selector": {
     "message": "$selector$ 不是一个有效的 CSS 选择器",
@@ -154,9 +94,6 @@
       }
     }
   },
-  "name": {
-    "message": "Adblock Plus"
-  },
   "name_devbuild": {
     "message": "Adblock Plus 开发版"
   },
@@ -181,26 +118,8 @@
   "out_of_date_lists": {
     "message": "过滤列表会定期自动更新"
   },
-  "overlay_notification_button_no": {
-    "message": "否"
-  },
-  "overlay_notification_button_yes": {
-    "message": "是"
-  },
-  "overlay_notification_closing_button_hide": {
-    "message": "关闭此通知"
-  },
-  "overlay_notification_closing_button_optout": {
-    "message": "停止显示通知"
-  },
-  "overlay_shownotifications_label": {
-    "message": "显示有用的通知"
-  },
   "remove_button": {
     "message": "删除所选项"
-  },
-  "sendReport": {
-    "message": "报告该页面上的问题"
   },
   "show_block_element_menu": {
     "message": "添加‘拦截元素’到右鍵菜单"
@@ -252,14 +171,8 @@
   "stats_title": {
     "message": "已拦截广告"
   },
-  "subscriptionSelection_location_label": {
-    "message": "过滤规则列表位置:"
-  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "从列表中选择过滤规则订阅组:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "订阅组的标题:"
   },
   "unexpected_filter_list_header": {
     "message": "这里不允许过滤列表标题"
