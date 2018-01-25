@@ -342,9 +342,9 @@ ElementHidingTracer.prototype = {
 function ElemHide()
 {
   this.shadow = this.createShadowTree();
-  this.style = null;
+  this.styles = new Map();
   this.tracer = null;
-  this.inject = true;
+  this.inline = true;
   this.emulatedPatterns = null;
 
   this.elemHideEmulation = new ElemHideEmulation(
@@ -379,24 +379,37 @@ ElemHide.prototype = {
     return shadow;
   },
 
-  injectSelectors(selectors, filters)
+  addSelectorsInline(selectors, groupName)
   {
-    if (!this.style)
+    let style = this.styles.get(groupName);
+
+    if (style)
+    {
+      while (style.sheet.cssRules.length > 0)
+        style.sheet.deleteRule(0);
+    }
+
+    if (selectors.length == 0)
+      return;
+
+    if (!style)
     {
       // Create <style> element lazily, only if we add styles. Add it to
       // the shadow DOM if possible. Otherwise fallback to the <head> or
       // <html> element. If we have injected a style element before that
       // has been removed (the sheet property is null), create a new one.
-      this.style = document.createElement("style");
+      style = document.createElement("style");
       (this.shadow || document.head ||
-                      document.documentElement).appendChild(this.style);
+                      document.documentElement).appendChild(style);
 
       // It can happen that the frame already navigated to a different
       // document while we were waiting for the background page to respond.
       // In that case the sheet property will stay null, after addind the
       // <style> element to the shadow DOM.
-      if (!this.style.sheet)
+      if (!style.sheet)
         return;
+
+      this.styles.set(groupName, style);
     }
 
     // If using shadow DOM, we have to add the ::content pseudo-element
@@ -434,10 +447,7 @@ ElemHide.prototype = {
 
   addSelectors(selectors, filters)
   {
-    if (selectors.length == 0)
-      return;
-
-    if (this.inject)
+    if (this.inline)
     {
       // Insert the style rules inline if we have been instructed by the
       // background page to do so. This is usually the case, except on platforms
@@ -448,13 +458,14 @@ ElemHide.prototype = {
       // Related Chrome and Firefox issues:
       // https://bugs.chromium.org/p/chromium/issues/detail?id=632009
       // https://bugzilla.mozilla.org/show_bug.cgi?id=1310026
-      this.injectSelectors(selectors, filters);
+      this.addSelectorsInline(selectors, "emulated");
     }
     else
     {
       browser.runtime.sendMessage({
         type: "elemhide.injectSelectors",
-        selectors
+        selectors,
+        groupName: "emulated"
       });
     }
 
@@ -485,18 +496,15 @@ ElemHide.prototype = {
         this.tracer.disconnect();
       this.tracer = null;
 
-      if (this.style && this.style.parentElement)
-        this.style.parentElement.removeChild(this.style);
-      this.style = null;
-
       if (response.trace)
         this.tracer = new ElementHidingTracer();
 
-      this.inject = response.inject;
+      this.inline = response.inline;
 
-      if (this.inject)
-        this.addSelectors(response.selectors);
-      else if (this.tracer)
+      if (this.inline)
+        this.addSelectorsInline(response.selectors, "standard");
+
+      if (this.tracer)
         this.tracer.addSelectors(response.selectors);
 
       this.elemHideEmulation.apply(response.emulatedPatterns);

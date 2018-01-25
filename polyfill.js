@@ -37,6 +37,7 @@
     "tabs.insertCSS",
     "tabs.query",
     "tabs.reload",
+    "tabs.removeCSS",
     "tabs.sendMessage",
     "tabs.update",
     "webNavigation.getAllFrames",
