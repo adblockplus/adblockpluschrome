@@ -1,0 +1,23 @@
+{
+  "add": {
+    "message": "Qo‘shish"
+  },
+  "add_domain_button": {
+    "message": "Domen qo‘shish"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Ba’zi dilni xira qilmaydigan reklamalarga ruxsat berish"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Qo‘shish"
+  },
+  "options": {
+    "message": "Adblock Plus sozlamalari"
+  },
+  "overlay_notification_button_no": {
+    "message": "Yo‘q"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Ha"
+  }
+}

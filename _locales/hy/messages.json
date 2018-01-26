@@ -1,0 +1,89 @@
+{
+  "add": {
+    "message": "Ավելացնել"
+  },
+  "add_filter_button": {
+    "message": "Ավելացնել ֆիլտր"
+  },
+  "cancel": {
+    "message": "Չեղարկել"
+  },
+  "continue": {
+    "message": "Շարունակել"
+  },
+  "filter_invalid_regexp": {
+    "message": "Սխալ կանոնավոր արտահայտությունը"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Թույլատրել որոշ չկպչուն գովազդ"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Ավելացնել"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Ավելացնել այլ բաժանորդագրություն"
+  },
+  "filters_addSubscription_label": {
+    "message": "Ավելացնել ֆիլտրի բաժանորդագրություն"
+  },
+  "filters_readMore_label": {
+    "message": "Տեղեկանալ ավելին"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Ջնջել"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Միացված է"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Անհաջող."
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Անհաջող. Բեռնման սխալ"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Բեռնում..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Անհաջող.  Սխալ ֆիլտրերի ցուցակ"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Անհաջող. Սխալ հասցե"
+  },
+  "filters_viewList_label": {
+    "message": "Դիտել ցանկը"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Իրո՞ք ուզում եք հեռացնել այս բաժանորդագրությունը:"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Ֆիլտրերի ցանկի հասցեն կամ սխալ URL է, կամ սխալ ֆայլի անուն:"
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
+  "options": {
+    "message": "Կարգավումներ"
+  },
+  "options_short": {
+    "message": "Ընտրանքներ"
+  },
+  "overlay_notification_button_no": {
+    "message": "Ոչ"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Այո"
+  },
+  "sendReport": {
+    "message": "Տեղեկացնել այս էջի պրոբլեմի մասին"
+  },
+  "subscriptionSelection_location_label": {
+    "message": "Ֆիլտրերի հասցեն`"
+  },
+  "subscriptionSelection_subscriptionSelector_label": {
+    "message": "Ընտրեք ֆիլտրի բաժանարդոգրություն ցուցակից`"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Բաժանորդագրության ավանումը`"
+  }
+}

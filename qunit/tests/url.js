@@ -17,14 +17,13 @@
 
 "use strict";
 
-(function()
 {
   let {getDecodedHostname,
        extractHostFromFrame,
        stringifyURL,
        isThirdParty} = require("url");
 
-  module("URL/host tools");
+  QUnit.module("URL/host tools");
 
   test("Extracting hostname from URL", () =>
   {
@@ -179,4 +178,4 @@
     testThirdParty("example.com..", "example.com....", false,
                    "traling dots are ignored");
   });
-}());
+}

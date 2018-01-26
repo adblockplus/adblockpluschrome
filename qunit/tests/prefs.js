@@ -1,10 +1,9 @@
 "use strict";
 
-(function()
 {
   const {Prefs} = require("prefs");
 
-  module("Preferences", {
+  QUnit.module("Preferences", {
     setup()
     {
       this._pbackup = Object.create(null);
@@ -27,7 +26,7 @@
   {
     let done = assert.async();
     let key = "pref:" + name;
-    chrome.storage.local.get(key, items =>
+    browser.storage.local.get(key, items =>
     {
       equal(key in items, expectedValue, description);
       done();
@@ -38,7 +37,7 @@
   {
     let done = assert.async();
     let key = "pref:" + name;
-    chrome.storage.local.get(key, items =>
+    browser.storage.local.get(key, items =>
     {
       deepEqual(items[key], expectedValue, description);
       done();
@@ -47,9 +46,9 @@
 
   test("Numerical pref", assert =>
   {
-    Prefs.patternsbackups = 5;
+    Prefs.patternsbackups = 0;
     equal(
-      Prefs.patternsbackups, 5,
+      Prefs.patternsbackups, 0,
       "Prefs object returns the correct value after setting pref to " +
       "default value"
     );
@@ -160,4 +159,4 @@
       "default value"
     );
   });
-}());
+}

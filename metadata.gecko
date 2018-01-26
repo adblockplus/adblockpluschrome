@@ -1,0 +1,44 @@
+[default]
+inherit = metadata.chrome
+
+[general]
+id={d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}
+basename = adblockplusfirefox
+browserAction -= popup.html
+
+[compat]
+gecko = 51.0
+
+[mapping]
+mobile-options.html = adblockplusui/mobile-options.html
+mobile-options.js = adblockplusui/mobile-options.js
+desktop-options.html = adblockplusui/desktop-options.html
+desktop-options.js = adblockplusui/desktop-options.js
+skin/desktop-options.css = adblockplusui/skin/desktop-options.css
+skin/mobile-options.css = adblockplusui/skin/mobile-options.css
+skin/mobile/checkmark.svg = adblockplusui/skin/mobile/checkmark.svg
+skin/mobile/toggle.svg = adblockplusui/skin/mobile/toggle.svg
+skin/mobile/trash.svg = adblockplusui/skin/mobile/trash.svg
+skin/icons/tooltip.svg = adblockplusui/skin/icons/tooltip.svg
+skin/icons/gear.svg = adblockplusui/skin/icons/gear.svg
+skin/icons/toggle.svg = adblockplusui/skin/icons/toggle.svg
+skin/icons/reload.svg = adblockplusui/skin/icons/reload.svg
+skin/icons/globe.svg = adblockplusui/skin/icons/globe.svg
+skin/icons/code.svg = adblockplusui/skin/icons/code.svg
+skin/icons/trash.svg = adblockplusui/skin/icons/trash.svg
+skin/icons/delete.svg = adblockplusui/skin/icons/delete.svg
+skin/icons/attention.svg = adblockplusui/skin/icons/attention.svg
+skin/icons/checkmark.svg = adblockplusui/skin/icons/checkmark.svg
+skin/icons/checkbox.png = adblockplusui/skin/icons/checkbox.png
+skin/icons/checkbox.svg = adblockplusui/skin/icons/checkbox.svg
+skin/social/twitter.svg = adblockplusui/skin/social/twitter.svg
+skin/social/facebook.svg = adblockplusui/skin/social/facebook.svg
+skin/social/googleplus.svg = adblockplusui/skin/social/googleplus.svg
+
+[bundles]
+lib/adblockplus.js += lib/firefoxDataCleanup.js
+
+[import_locales]
+adblockplusui/locale/*/mobile-options.json = *
+adblockplusui/locale/*/desktop-options.json = *
+adblockplusui/locale/*/common.json = *

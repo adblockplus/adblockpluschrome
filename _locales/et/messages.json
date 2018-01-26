@@ -24,7 +24,10 @@
     "message": "Loobu"
   },
   "clickhide_instructions": {
-    "message": "Pärast hüpikakna sulgemist klõpsake (paremklõpsake) mõnel lehe elemendil"
+    "message": "Pärast hüpikakna sulgemist klõpsake (või paremklõpsake) mõnel lehe elemendil."
+  },
+  "continue": {
+    "message": "Jätka"
   },
   "description": {
     "message": "Üle 100 miljonis seadmes kasutatav Adblock Plus on maailma populaarseim reklaamiblokeerija."
@@ -33,13 +36,13 @@
     "message": "<strong>Keelatud</strong> sellel saidil"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus on loetletud domeenidel keelatud. Domeene saate lisada Adblock Plus ikoonil aadressiriba kõrval või kirjutades domeeni nime (mitte URL-i) lahtrisse ja klõpsates \"Lisa domeen\" nuppu."
+    "message": "Adblock Plus on loetletud domeenidel keelatud. Domeene saate lisada kas Adblock Plus ikooni kaudu aadressiriba kõrval või kirjutades domeeni nime (mitte URL-i) lahtrisse ja klõpsates nupul \"Lisa domeen\"."
   },
   "easy_create_filter": {
     "message": "Blokeeri element"
   },
   "edit_filters_raw": {
-    "message": "Muuda filtrit tekstifailina"
+    "message": "Muuda filtreid lihttekstina"
   },
   "enable_only_the": {
     "message": "Valige ainult vajalikud filtrid. Liiga paljude filtrite kasutamine võib teie brauseri uimaseks muuta."
@@ -47,17 +50,74 @@
   "enabled_for_site": {
     "message": "<strong>Kasutusel</strong> sellel saidil"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Laiendatud elemendi peitmise filtrile pole määratletud aktiivset domeeni"
+  },
+  "filter_invalid_domain": {
+    "message": "Määratletud on sobimatu (või tühi) domeen"
+  },
+  "filter_invalid_regexp": {
+    "message": "Vigane regulaaravaldis"
+  },
   "filter_lists": {
     "message": "Filtrite nimekirjad"
   },
   "filter_must_follow_syntax": {
     "message": "Teie filter peab järgima <a>Adblock Plus filtri süntaksit</a>."
   },
+  "filter_unknown_option": {
+    "message": "Tundmatu filtri valik"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Luba mõned mittepealetükkivad reklaamid"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Lisa"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Lisa muu tellimus"
+  },
+  "filters_addSubscription_label": {
+    "message": "Lisa filtrite tellimus"
+  },
+  "filters_readMore_label": {
+    "message": "Loe lisaks"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Kustuta"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Lubatud"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Nurjus, kontrollsumma ei klapi"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Nurjus, allalaadimise viga"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Allalaadimine…"
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Nurjus, vale filtrite nimekiri"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Nurjus, vale aadress"
+  },
+  "filters_viewList_label": {
+    "message": "Vaata loetelu"
+  },
   "found_a_bug": {
-    "message": "Leidsid vea? Tahad tõlkida Adblock Plus'i enda keelde? <a>Esita veateade</a>."
+    "message": "Leidsid vea? Tahad tõlkida Adblock Plusi enda keelde? Palun <a>esita taotlus siin</a>."
   },
   "general": {
-    "message": "Üldine"
+    "message": "Üldised"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Kas oled kindel, et soovid selle tellimuse eemaldada?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Filtrite nimekirja asukoht on kas vigane URL või failinimi."
   },
   "invalid_css_selector": {
     "message": "$selector$ ei ole kehtiv CSS valija",
@@ -94,6 +154,12 @@
       }
     }
   },
+  "loading": {
+    "message": "Laadimine..."
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Adblock Plus arendusväljalase"
   },
@@ -104,28 +170,46 @@
     "message": "Ava kõik selle teate lingid"
   },
   "notification_with_buttons": {
-    "message": "Kõikide linkide avamiseks klõpsakse 'OK'."
+    "message": "Kõikide linkide avamiseks klõpsake 'OK'."
   },
   "notification_without_buttons": {
-    "message": "Klõpsake teatel, et avada kõik sisalduvad lingid."
+    "message": "Klõpsake teatel, et avada kõik sellel olevad lingid."
   },
   "options": {
     "message": "Adblock Plus valikud"
   },
   "options_short": {
-    "message": "Valikud"
+    "message": "Sätted"
   },
   "out_of_date_lists": {
     "message": "Aegunud nimekirju uuendatakse perioodiliselt."
   },
+  "overlay_notification_button_no": {
+    "message": "Ei"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Jah"
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Sulge see teade"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Lõpeta teadete näitamine"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Näita kasulikke teateid"
+  },
   "remove_button": {
     "message": "Eemalda valitud"
   },
+  "sendReport": {
+    "message": "Teata probleemist antud lehel"
+  },
   "show_block_element_menu": {
-    "message": "Näita \"Blokeeri element\" paremklõpsu menüüd"
+    "message": "Näita paremklõpsu menüüs 'Blokeeri element'"
   },
   "show_devtools_panel": {
-    "message": "Näita Adblock Plus paneeli arendaja tööriistades"
+    "message": "Näita arendaja tööriistades paneeli 'Adblock Plus'"
   },
   "stats_label_page": {
     "message": "Sellel lehel <strong>$number$</strong>",
@@ -152,10 +236,10 @@
     }
   },
   "stats_share_download": {
-    "message": "Lae Adblock Plus"
+    "message": "Laadi alla Adblock Plus"
   },
   "stats_share_message": {
-    "message": "Olen tänu Adblock Plusile blokeerinud $number$ reklaami ja jälgimisküsist.",
+    "message": "Olen tänu Adblock Plusile blokeerinud $number$ reklaami ja jälgimiskatset.",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -171,8 +255,14 @@
   "stats_title": {
     "message": "Blokeeritud reklaame"
   },
+  "subscriptionSelection_location_label": {
+    "message": "Filtrite nimekirja asukoht:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Vali nimekirjast sobiv filtrite tellimus:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Tellimuse pealkiri:"
   },
   "unexpected_filter_list_header": {
     "message": "Filtrite loetelu päised pole siin lubatud"
@@ -181,6 +271,6 @@
     "message": "Värskenda kohe"
   },
   "whitelisted_domains": {
-    "message": "Lubatud domeenide nimekiri"
+    "message": "Lubatud domeenid"
   }
 }

@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Након што затворите овај искачући прозор, притисните левим или десним тастером миша на елемент на овој страници."
   },
+  "continue": {
+    "message": "Даље"
+  },
   "description": {
     "message": "Коришћен на преко 100 милиона уређаја, Adblock Plus је најпопуларнији блокатор огласа на свету."
   },
@@ -47,17 +50,74 @@
   "enabled_for_site": {
     "message": "<strong>Омогући</strong> на овом сајту"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Нема активних домена наведених за проширени елемент који крију филтер"
+  },
+  "filter_invalid_domain": {
+    "message": "Неважећи (или празан) домен је наведен"
+  },
+  "filter_invalid_regexp": {
+    "message": "Неважећи регуларни израз"
+  },
   "filter_lists": {
     "message": "Спискови филтера"
   },
   "filter_must_follow_syntax": {
     "message": "Ваш филтер мора да следи <a>синтаксу за филтере Adblock Plus-а</a>."
   },
+  "filter_unknown_option": {
+    "message": "Непозната опција филтера"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Дозволи ненаметљиве рекламе"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Додај"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Додај другу претплату"
+  },
+  "filters_addSubscription_label": {
+    "message": "Додај пријаву"
+  },
+  "filters_readMore_label": {
+    "message": "Сазнај више"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Избриши"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Омогућено"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Грешка: неслагање контролног збира"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Грешка при преузимању"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Преузимање..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Грешка: неисправан формат списка филтера"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Грешка: неисправна адреса"
+  },
+  "filters_viewList_label": {
+    "message": "Погледај списак"
+  },
   "found_a_bug": {
     "message": "Пронашли сте грешку или желите да преведете Adblock Plus на свој језик? <a>Овде поднесите захтев</a>."
   },
   "general": {
     "message": "Опште"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Желите ли да уклоните ову претплату?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Неисправна адреса и име датотеке са списком филтера."
   },
   "invalid_css_selector": {
     "message": "$selector$ није исправан CSS бирач",
@@ -94,6 +154,9 @@
       }
     }
   },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Развојна верзија Adblock Plus-а"
   },
@@ -118,8 +181,26 @@
   "out_of_date_lists": {
     "message": "Застарели спискови се редовно ажурирају."
   },
+  "overlay_notification_button_no": {
+    "message": "Не"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Да"
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Затвори ово обавештење"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Не приказуј обавештења"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Приказуј корисна обавештења"
+  },
   "remove_button": {
     "message": "Уклони изабрано"
+  },
+  "sendReport": {
+    "message": "Пријави проблеме на овој страници"
   },
   "show_block_element_menu": {
     "message": "Ставка „Блокирај елемент“ у контекстуалном менију"
@@ -171,8 +252,14 @@
   "stats_title": {
     "message": "Блокирани огласи"
   },
+  "subscriptionSelection_location_label": {
+    "message": "Локација списка са филтерима:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Изаберите пријаву са списка:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Назив претплате:"
   },
   "unexpected_filter_list_header": {
     "message": "Заглавља списка филтера овде нису дозвољена"

@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "После закрытия этого всплывающего окна, щёлкните на элементе левой или правой кнопкой мыши."
   },
+  "continue": {
+    "message": "Продолжить"
+  },
   "description": {
     "message": "Используется на более чем ста миллионах устройств, Adblock Plus самый популярный блокировщик рекламы. "
   },
@@ -47,17 +50,74 @@
   "enabled_for_site": {
     "message": "<strong>Включён</strong> на этом сайте"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Не указан активный домен для расширенного скрытия элементов"
+  },
+  "filter_invalid_domain": {
+    "message": "Фильтр недействительный (или пустой) домен указан"
+  },
+  "filter_invalid_regexp": {
+    "message": "Неправильное регулярное выражение"
+  },
   "filter_lists": {
     "message": "Список фильтров"
   },
   "filter_must_follow_syntax": {
     "message": "Ваш фильтр должен соответствовать <a>синтаксису фильтров Adblock Plus</a>."
   },
+  "filter_unknown_option": {
+    "message": "Неизвестная опция фильтра"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Разрешить некоторую ненавязчивую рекламу"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Добавить"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Добавить другую подписку"
+  },
+  "filters_addSubscription_label": {
+    "message": "Добавить подписку"
+  },
+  "filters_readMore_label": {
+    "message": "Дополнительная информация"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Удалить"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Включена"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Ошибка: проверочная сумма не совпадает, возможно произошла ошибка загрузки"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Ошибка: невозможно загрузить"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Загрузка..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Ошибка: неверный формат списка фильтров"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Ошибка: неверный адрес"
+  },
+  "filters_viewList_label": {
+    "message": "Открыть список"
+  },
   "found_a_bug": {
     "message": "Обнаружили ошибку? Желаете перевести Adblock Plus на свой язык? Пожалуйста, <a>оформите заявку здесь</a>."
   },
   "general": {
     "message": "Общие"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Вы уверены, что хотите удалить эту подписку?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Не удалось распознать введённый адрес ни как адрес в интернете, ни как путь файлу."
   },
   "invalid_css_selector": {
     "message": "$selector$ не является допустимым CSS-селектором",
@@ -94,6 +154,12 @@
       }
     }
   },
+  "loading": {
+    "message": "Загрузка..."
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Adblock Plus (тестовая сборка)"
   },
@@ -118,8 +184,26 @@
   "out_of_date_lists": {
     "message": "Устаревшие списки периодически обновляются."
   },
+  "overlay_notification_button_no": {
+    "message": "Нет"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Да"
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Закрыть это уведомление"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Запретить показ уведомлений"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Показывать полезные уведомления"
+  },
   "remove_button": {
     "message": "Удалить выбранное"
+  },
+  "sendReport": {
+    "message": "Сообщить о проблеме на этой странице"
   },
   "show_block_element_menu": {
     "message": "Показывать «Заблокировать элемент» в контекстном меню"
@@ -171,8 +255,14 @@
   "stats_title": {
     "message": "Статистика блокирования"
   },
+  "subscriptionSelection_location_label": {
+    "message": "Адрес списка фильтров:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Пожалуйста, выберите подписку из списка:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Название подписки:"
   },
   "unexpected_filter_list_header": {
     "message": "Заголовки списка фильтров здесь не допускаются"

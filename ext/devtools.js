@@ -17,11 +17,10 @@
 
 "use strict";
 
-(function()
 {
-  let inspectedTabId = chrome.devtools.inspectedWindow.tabId;
-  let port = chrome.runtime.connect({name: "devtools-" + inspectedTabId});
+  let inspectedTabId = browser.devtools.inspectedWindow.tabId;
+  let port = browser.runtime.connect({name: "devtools-" + inspectedTabId});
 
   ext.onMessage = port.onMessage;
-  ext.devtools = chrome.devtools;
-}());
+  ext.devtools = browser.devtools;
+}

@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "După închiderea acestui pop-up, clic (sau clic-dreapta) pe un element de pe pagină."
   },
+  "continue": {
+    "message": "Continuă"
+  },
   "description": {
     "message": "Instalat pe mai mult de 100 de milioane de dispozitive, Adblock Plus este cel mai popular ad blocker din lume."
   },
@@ -47,17 +50,74 @@
   "enabled_for_site": {
     "message": "<strong>Activat</strong> pe acest site"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Niciun domeniu activ specificat pentru filtrul extins de ascundere al elementului"
+  },
+  "filter_invalid_domain": {
+    "message": "Domeniul specificat este incorect (sau inexistent)"
+  },
+  "filter_invalid_regexp": {
+    "message": "Expresie regulată invalidă"
+  },
   "filter_lists": {
     "message": "Liste de filtre"
   },
   "filter_must_follow_syntax": {
     "message": "Filtrul tău trebuie să respecte <a> sintaxa Adblock Plus pentru filtre</a>."
   },
+  "filter_unknown_option": {
+    "message": "Opțiune filtru necunoscută"
+  },
+  "filters_acceptableAds2_label": {
+    "message": "Permite publicitatea neinvazivă"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Adaugă"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Adaugă altă listă de filtre"
+  },
+  "filters_addSubscription_label": {
+    "message": "Adaugă o listă de filtre"
+  },
+  "filters_readMore_label": {
+    "message": "Citește mai mult"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Șterge"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "Activat"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Eroare, suma de control nu se potriveşte"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Eroare, descărcare nereuşită"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Descărcare..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Eroare, lista nu este validă"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Eroare, adresa nu este validă"
+  },
+  "filters_viewList_label": {
+    "message": "Afişare listă"
+  },
   "found_a_bug": {
     "message": "Ai gasit o eroare? Dorești să traduci Adblock Plus în limba ta?  <a>scrie o cerere aici</a>."
   },
   "general": {
     "message": "General"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Sunteţi sigur că vreţi să stergeţi această listă?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Locaţia pentru filtre nu este validă"
   },
   "invalid_css_selector": {
     "message": "$selector$ nu este un selector de CSS valabil",
@@ -94,6 +154,12 @@
       }
     }
   },
+  "loading": {
+    "message": "Incărcare..."
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Versiune de test Adblock Plus"
   },
@@ -118,8 +184,26 @@
   "out_of_date_lists": {
     "message": "Listele vechi sunt actualizate periodic."
   },
+  "overlay_notification_button_no": {
+    "message": "Nu"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Da"
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Închideţi această notificare"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Opreşte afişarea notificărilor"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Arată notificări utile"
+  },
   "remove_button": {
     "message": "Șterge filtrul evidenţiat"
+  },
+  "sendReport": {
+    "message": "Raportează probleme pe această pagină"
   },
   "show_block_element_menu": {
     "message": "Arată 'Blochează elementul' în meniul asociat unui obiect cu clic dreapta"
@@ -171,8 +255,14 @@
   "stats_title": {
     "message": "Reclame blocate"
   },
+  "subscriptionSelection_location_label": {
+    "message": "Locaţia listei de filtre:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "Alegeți un set de filtre din listă:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Titlul listei de filtre:"
   },
   "unexpected_filter_list_header": {
     "message": "Antetul listei de filtre nu este permis aici"

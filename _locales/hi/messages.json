@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "इस पॉपअप को बंद करने के बाद पृष्ठ के किसी एक अंग पर क्लिक (अथवा दाएं क्लिक) करे।"
   },
+  "continue": {
+    "message": "जारी रखें"
+  },
   "description": {
     "message": "Adblock Plus 10 करोड़ से अधिक उपकरणों में प्रयुक्त, दुनिया के सबसे लोकप्रिय विज्ञापन अवरोधक है।"
   },
@@ -53,11 +56,56 @@
   "filter_must_follow_syntax": {
     "message": "आपके फ़िल्टर को <a>Adblock Plus फ़िल्टर सिंटैक्स</a> का पालन करना होगा।"
   },
+  "filters_acceptableAds2_label": {
+    "message": "कुछ बिना हस्तक्षेप करने वाले विज्ञापन की अनुमति दें"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "जोड़ें"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "भिन्न सदस्यता जोड़ें"
+  },
+  "filters_addSubscription_label": {
+    "message": "फ़िल्टर सदस्यता जोड़ें"
+  },
+  "filters_readMore_label": {
+    "message": "और पढ़ें"
+  },
+  "filters_subscription_delete_label": {
+    "message": "मिटाएँ"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "सक्षम किया गया"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "असफल, checksum मिसमैच"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "विफल रहा, डाउनलोड विफलता"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "डाउनलोड हो रहा हैं"
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "विफल रहा, एक मान्य फ़िल्टर सूची  नहीं हैं"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "विफल रहा, एक मान्य पता नहीं "
+  },
+  "filters_viewList_label": {
+    "message": "सूची देखें"
+  },
   "found_a_bug": {
     "message": "यधपि आपको किसी दोष कि जानकारी दिनी हो या Adblock Plus का अनुवाद करना हो तो कृपया <a>यहाँ एक गुजारिश करे</a>"
   },
   "general": {
     "message": "सामान्य "
+  },
+  "global_remove_subscription_warning": {
+    "message": "क्या आप वास्तव में इस सदस्यता से निकलना चाहते हैं?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "फ़िल्टर सूची स्थान न न कोई मान्य फ़ाइल नाम एक मान्य URL है।"
   },
   "invalid_css_selector": {
     "message": "$selector$ एक मान्य CSS चयनकर्ता नहीं है",
@@ -94,6 +142,9 @@
       }
     }
   },
+  "name": {
+    "message": "Adblock Plus"
+  },
   "name_devbuild": {
     "message": "Adblock Plus विकास संस्करण"
   },
@@ -118,8 +169,17 @@
   "out_of_date_lists": {
     "message": "पुराणी सूचियाँ समय-समय पर अद्यतन कि जाती हैं।"
   },
+  "overlay_notification_button_no": {
+    "message": "नहीं"
+  },
+  "overlay_notification_button_yes": {
+    "message": "हाँ"
+  },
   "remove_button": {
     "message": "चुने हुओं को हटाएँ "
+  },
+  "sendReport": {
+    "message": " इस पन्ने पर रिपोर्ट मुद्दा"
   },
   "show_block_element_menu": {
     "message": "'तत्वों को प्रतिबंधित करें' दाएँ क्लिक के मेनू आइटम में प्रदर्शित करे"
@@ -171,8 +231,14 @@
   "stats_title": {
     "message": "प्रचार अवरुद्ध किये गए "
   },
+  "subscriptionSelection_location_label": {
+    "message": "फिल्टर की सूची की लोकेशन:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "लिस्ट में से एक फ़िल्टर सब्स्क्रिप्शन चुनें: "
+  },
+  "subscriptionSelection_title_label": {
+    "message": "सबक्रिपशन का नाम:"
   },
   "unexpected_filter_list_header": {
     "message": "फ़िल्टर सूची हेडर को यहाँ होने की अनुमति नहीं है"

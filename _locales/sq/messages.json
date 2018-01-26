@@ -1,0 +1,83 @@
+{
+  "add": {
+    "message": "Shto"
+  },
+  "add_filter_button": {
+    "message": "Shto filtër"
+  },
+  "cancel": {
+    "message": "Anulo"
+  },
+  "continue": {
+    "message": "Vazhdo"
+  },
+  "filter_invalid_regexp": {
+    "message": "Shprehja e pavlefshme e rregullt"
+  },
+  "filter_unknown_option": {
+    "message": "Opsioni i filtërit te panjohur"
+  },
+  "filters_addSubscriptionAdd_label": {
+    "message": "Shto"
+  },
+  "filters_addSubscriptionOther_label": {
+    "message": "Shto nje abonim tjeter"
+  },
+  "filters_addSubscription_label": {
+    "message": "Shto abonim ne filtra"
+  },
+  "filters_readMore_label": {
+    "message": "Lexoni më tepër"
+  },
+  "filters_subscription_delete_label": {
+    "message": "Fshije"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "E aktivizuar"
+  },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "Deshtoi,mosperputhje checksumi"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Deshtoi,gabim shkarkimi"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "Duke u shkarkuar..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "Deshtoi,nje liste jo e vlefshme filtrash"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "Deshtoi,nje adrese e pavlefshme"
+  },
+  "filters_viewList_label": {
+    "message": "Shihni listën"
+  },
+  "global_remove_subscription_warning": {
+    "message": "Doni me verte ra hiqni kete subscripion?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "Filtrat ne liste nuk kane asnjë URL të vlefshme dhe as një emër i vlefshëm file."
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
+  "options_short": {
+    "message": "Mundësitë"
+  },
+  "overlay_notification_button_no": {
+    "message": "Jo"
+  },
+  "overlay_notification_button_yes": {
+    "message": "Po"
+  },
+  "sendReport": {
+    "message": "Raporti çështje në këtë faqe"
+  },
+  "subscriptionSelection_location_label": {
+    "message": "Vendi i listës së filtrit:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "Titulli i abonimit:"
+  }
+}

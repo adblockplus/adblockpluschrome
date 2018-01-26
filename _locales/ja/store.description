@@ -1,5 +1,0 @@
-{
-  "store.description": {
-    "message": "Adblock Plus はすべての迷惑な広告をブロックしつつ、デフォルトで「控えめな広告を許可」することで Web サイトも支援します (設定変更可能) 。\n\n画面上に散らばる迷惑な広告なしで Web サーフィンを楽しみましょう！Adblock Plus for Google Chrome のブロック対象は以下の通り：\n\n・バナー\n・Youtube 動画広告\n・Facebook 広告\n・ポップアップ\n・その他の目障りな広告すべて\n\nAdblock Plus は世界で最も人気のあるブラウザ拡張で、世界に数百万のユーザーがいます。迷惑な広告がきちんとすべて自動的にブロックされ、Adblock Plus がうまくいくよう数百人のボランティアが貢献しているコミュニティ主導のオープンソースプロジェクトです。\n\n注意：インストールの際は Adblock Plus for Chrome がブラウジング履歴とデータにアクセスする旨の警告が表示されます。これは普通のことで、何らかの情報を集めるということは決してありません！\n\nさきごろ Adblock Plus コミュニティは控えめな広告を許可する構想を発表しました。小さく静的な広告をある程度許可することで、目障りにならない広告に頼る Web サイトを選択的に支援します。この機能はいつでも無効にできます。詳細は http://adblockplus.org/en/acceptable-ads をご覧ください。\n\n***********\nリリースのお知らせや更新履歴はこちら： http://adblockplus.org/releases/\n\n何か問題ありましたか？ブラウザ再起動や Adblock Plus オプションの「今すぐ更新」を試してみてください。\n\n不具合を見つけましたか？我々は問題に気付いているかもしれません： http://adblockplus.org/en/known-issues-chrome 。新たな問題を見つけたりヘルプが必要ならフォーラムへお越しください： https://adblockplus.org/forum/viewforum.php?f=10\n\n*************\n冒険心はありますか？最新の Adblock Plus 機能を試せる開発版 (development build) を使ってみてください： http://adblockplus.org/en/development-builds (正式版とは別更新／別設定)。"
-  }
-}

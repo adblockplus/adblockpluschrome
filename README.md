@@ -27,9 +27,9 @@ Building
 Run one of the following commands in the project directory, depending on your
 target platform:
 
-    ./build.py -t chrome build -k adblockpluschrome.pem
-    ./build.py -t edge build
-    ./build.py -t gecko-webext build
+    ./build.py build -t chrome -k adblockpluschrome.pem
+    ./build.py build -t edge
+    ./build.py build -t gecko
 
 This will create a build with a name in the form
 _adblockpluschrome-1.2.3.nnnn.crx_, _adblockplusedge-1.2.3.nnnn.appx_ or
@@ -51,9 +51,9 @@ _about:debugging_ or by disabling signature enforcement in Firefox Nightly.
 To simplify the process of testing your changes you can create an unpacked
 development environment. For that run one of the following commands:
 
-    ./build.py -t chrome devenv
-    ./build.py -t edge devenv
-    ./build.py -t gecko-webext devenv
+    ./build.py devenv -t chrome
+    ./build.py devenv -t edge
+    ./build.py devenv -t gecko
 
 This will create a _devenv.*_ directory in the repository. You can load the
 directory as an unpacked extension, under _chrome://extensions_ in Chrome,

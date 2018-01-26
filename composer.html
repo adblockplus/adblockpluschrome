@@ -21,9 +21,10 @@
 <head>
 <meta charset="utf-8">
 <title>Block element</title>
-<link type="text/css" href="jquery-ui/css/smoothness/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
-<script type="text/javascript" src="jquery-ui/js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="jquery-ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+<link type="text/css" href="jquery-ui/css/smoothness/jquery-ui-1.12.1.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="jquery-ui/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="jquery-ui/js/jquery-ui-1.12.1.custom.min.js"></script>
+<script type="text/javascript" src="polyfill.js"></script>
 <script type="text/javascript" src="ext/common.js"></script>
 <script type="text/javascript" src="ext/content.js"></script>
 <script type="text/javascript" src="i18n.js" charset="utf-8"></script>
@@ -80,10 +81,6 @@
   {
     text-align: right;
   }
-  button
-  {
-    padding: 3px !important;
-  }
 </style>
 </head>
 <body>
@@ -93,10 +90,10 @@
   <span class="i18n_add_filters_msg"></span>
 </div>
 
-<textarea id="filters"></textarea>
+<textarea id="filters" class="i18n_loading" disabled></textarea>
 
 <div id="buttons">
-  <button id="addButton" class="i18n_add"></button>
+  <button id="addButton" class="i18n_add" disabled></button>
   <button id="cancelButton" class="i18n_cancel"></button>
 </div>
 
