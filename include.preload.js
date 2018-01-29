@@ -440,8 +440,8 @@ ElemHide.prototype = {
       let selector = preparedSelectors.slice(
         i, i + this.selectorGroupSize
       ).join(", ");
-      this.style.sheet.insertRule(selector + "{display: none !important;}",
-                                  this.style.sheet.cssRules.length);
+      style.sheet.insertRule(selector + "{display: none !important;}",
+                             style.sheet.cssRules.length);
     }
   },
 
