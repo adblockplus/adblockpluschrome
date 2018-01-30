@@ -353,7 +353,7 @@ function ElemHide()
   );
 }
 ElemHide.prototype = {
-  selectorGroupSize: 200,
+  selectorGroupSize: 1024,
 
   createShadowTree()
   {
@@ -430,11 +430,17 @@ ElemHide.prototype = {
       preparedSelectors = selectors;
     }
 
-    // Safari only allows 8192 primitive selectors to be injected at once[1], we
-    // therefore chunk the inserted selectors into groups of 200 to be safe.
-    // (Chrome also has a limit, larger... but we're not certain exactly what it
-    //  is! Edge apparently has no such limit.)
-    // [1] - https://github.com/WebKit/webkit/blob/1cb2227f6b2a1035f7bdc46e5ab69debb75fc1de/Source/WebCore/css/RuleSet.h#L68
+    // Chromium's Blink engine supports only up to 8,192 simple selectors, and
+    // even fewer compound selectors, in a rule. The exact number of selectors
+    // that would work depends on their sizes (e.g. "#foo .bar" has a
+    // size of 2). Since we don't know the sizes of the selectors here, we
+    // simply split them into groups of 1,024, based on the reasonable
+    // assumption that the average selector won't have a size greater than 8.
+    // The alternative would be to calculate the sizes of the selectors and
+    // divide them up accordingly, but this approach is more efficient and has
+    // worked well in practice. In theory this could still lead to some
+    // selectors not working on Chromium, but it is highly unlikely.
+    // See issue #6298 and https://crbug.com/804179
     for (let i = 0; i < preparedSelectors.length; i += this.selectorGroupSize)
     {
       let selector = preparedSelectors.slice(
