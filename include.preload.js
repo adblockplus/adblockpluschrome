@@ -345,6 +345,7 @@ function ElemHide()
   this.styles = new Map();
   this.tracer = null;
   this.inline = true;
+  this.inlineEmulated = true;
   this.emulatedPatterns = null;
 
   this.elemHideEmulation = new ElemHideEmulation(
@@ -453,7 +454,7 @@ ElemHide.prototype = {
 
   addSelectors(selectors, filters)
   {
-    if (this.inline)
+    if (this.inline || this.inlineEmulated)
     {
       // Insert the style rules inline if we have been instructed by the
       // background page to do so. This is usually the case, except on platforms
@@ -506,6 +507,7 @@ ElemHide.prototype = {
         this.tracer = new ElementHidingTracer();
 
       this.inline = response.inline;
+      this.inlineEmulated = !!response.inlineEmulated;
 
       if (this.inline)
         this.addSelectorsInline(response.selectors, "standard");
