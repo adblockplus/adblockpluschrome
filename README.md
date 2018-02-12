@@ -67,6 +67,15 @@ Builds for Microsoft Edge do not automatically detect changes, so after
 rebuilding the extension you should manually force reloading it in Edge by
 hitting the _Reload Extension_ button.
 
+The build script calls the ensure_dependencies script automatically to manage
+the dependencies (see _dependencies_ file). Dependencies with local
+modifications won't be updated. Otherwise during development specifying a
+feature-branch's name for a dependency's revision is sometimes useful.
+Alternatively dependency management can be disabled completely by setting the
+_SKIP_DEPENDENCY_UPDATES_ environment variable, for example:
+
+    SKIP_DEPENDENCY_UPDATES=true ./build.py devenv -t chrome
+
 Running the unit tests
 ----------------------
 
