@@ -78,60 +78,60 @@
     if (!func)
       return;
 
-    let descriptor = Object.getOwnPropertyDescriptor(object, name);
-
-    delete descriptor["get"];
-    delete descriptor["set"];
-
-    descriptor.value = function(...args)
-    {
-      let callStack = new Error().stack;
-
-      if (typeof args[args.length - 1] == "function")
-        return func.apply(object, args);
-
-      // If the last argument is undefined, we drop it from the list assuming
-      // it stands for the optional callback. We must do this, because we have
-      // to replace it with our own callback. If we simply append our own
-      // callback to the list, it won't match the signature of the function and
-      // will cause an exception.
-      if (typeof args[args.length - 1] == "undefined")
-        args.pop();
-
-      let resolvePromise = null;
-      let rejectPromise = null;
-
-      func.call(object, ...args, result =>
+    // If the property is not writable assigning it will fail, so we use
+    // Object.defineProperty here instead. Assuming the property isn't
+    // inherited its other attributes (e.g. enumerable) are preserved,
+    // except for accessor attributes (e.g. get and set) which are discarded
+    // since we're specifying a value.
+    Object.defineProperty(object, name, {
+      value(...args)
       {
-        let error = browser.runtime.lastError;
-        if (error && !portClosedBeforeResponseError.test(error.message))
+        let callStack = new Error().stack;
+
+        if (typeof args[args.length - 1] == "function")
+          return func.apply(object, args);
+
+        // If the last argument is undefined, we drop it from the list assuming
+        // it stands for the optional callback. We must do this, because we have
+        // to replace it with our own callback. If we simply append our own
+        // callback to the list, it won't match the signature of the function
+        // and will cause an exception.
+        if (typeof args[args.length - 1] == "undefined")
+          args.pop();
+
+        let resolvePromise = null;
+        let rejectPromise = null;
+
+        func.call(object, ...args, result =>
         {
-          // runtime.lastError is already an Error instance on Edge, while on
-          // Chrome it is a plain object with only a message property.
-          if (!(error instanceof Error))
+          let error = browser.runtime.lastError;
+          if (error && !portClosedBeforeResponseError.test(error.message))
           {
-            error = new Error(error.message);
+            // runtime.lastError is already an Error instance on Edge, while on
+            // Chrome it is a plain object with only a message property.
+            if (!(error instanceof Error))
+            {
+              error = new Error(error.message);
 
-            // Add a more helpful stack trace.
-            error.stack = callStack;
+              // Add a more helpful stack trace.
+              error.stack = callStack;
+            }
+
+            rejectPromise(error);
           }
+          else
+          {
+            resolvePromise(result);
+          }
+        });
 
-          rejectPromise(error);
-        }
-        else
+        return new Promise((resolve, reject) =>
         {
-          resolvePromise(result);
-        }
-      });
-
-      return new Promise((resolve, reject) =>
-      {
-        resolvePromise = resolve;
-        rejectPromise = reject;
-      });
-    };
-
-    Object.defineProperty(object, name, descriptor);
+          resolvePromise = resolve;
+          rejectPromise = reject;
+        });
+      }
+    });
   }
 
   function wrapRuntimeOnMessage()
