@@ -441,12 +441,12 @@ function stopPickingElement()
 /* Core logic */
 
 // We're done with the block element feature for now, tidy everything up.
-function deactivateBlockElement()
+function deactivateBlockElement(popupAlreadyClosed)
 {
   if (currentlyPickingElement)
     stopPickingElement();
 
-  if (blockelementPopupId != null)
+  if (blockelementPopupId != null && !popupAlreadyClosed)
   {
     browser.runtime.sendMessage({
       type: "forward",
@@ -456,10 +456,9 @@ function deactivateBlockElement()
         type: "composer.dialog.close"
       }
     });
-
-    blockelementPopupId = null;
   }
 
+  blockelementPopupId = null;
   lastRightClickEvent = null;
 
   if (currentElement)
@@ -546,7 +545,7 @@ function initializeComposer()
           // Apply added element hiding filters.
           elemhide.apply();
         }
-        deactivateBlockElement();
+        deactivateBlockElement(!!message.popupAlreadyClosed);
         break;
       case "composer.content.clearPreviousRightClickEvent":
         if (!lastRightClickEventIsMostRecent)
@@ -566,7 +565,8 @@ function initializeComposer()
             type: "forward",
             payload:
             {
-              type: "composer.content.finished"
+              type: "composer.content.finished",
+              popupAlreadyClosed: true
             }
           });
         }

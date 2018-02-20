@@ -69,6 +69,7 @@ function closeDialog(success)
     payload:
     {
       type: "composer.content.finished",
+      popupAlreadyClosed: true,
       remove: (typeof success == "boolean" ? success : false)
     }
   });
