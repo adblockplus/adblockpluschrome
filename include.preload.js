@@ -346,7 +346,6 @@ function ElemHide()
   this.tracer = null;
   this.inline = true;
   this.inlineEmulated = true;
-  this.emulatedPatterns = null;
 
   this.elemHideEmulation = new ElemHideEmulation(
     this.addSelectors.bind(this),
