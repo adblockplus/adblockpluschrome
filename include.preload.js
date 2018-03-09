@@ -365,6 +365,12 @@ ElemHide.prototype = {
     if (!("createShadowRoot" in document.documentElement))
       return null;
 
+    // Both Firefox and Chrome 66+ support user style sheets, so we can avoid
+    // creating an unnecessary shadow root on these platforms.
+    let match = /\bChrome\/(\d+)/.exec(navigator.userAgent);
+    if (!match || match[1] >= 66)
+      return null;
+
     // Using shadow DOM causes issues on some Google websites,
     // including Google Docs, Gmail and Blogger (#1770, #2602, #2687).
     if (/\.(?:google|blogger)\.com$/.test(document.domain))
@@ -375,7 +381,7 @@ ElemHide.prototype = {
     // avoid creating the shadowRoot twice.
     let shadow = document.documentElement.shadowRoot ||
                  document.documentElement.createShadowRoot();
-    shadow.appendChild(document.createElement("shadow"));
+    shadow.appendChild(document.createElement("content"));
 
     return shadow;
   },
