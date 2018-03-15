@@ -60,11 +60,12 @@
     }
   };
 
-  ext._removeFromAllPageMaps = pageId =>
+  function removeFromAllPageMaps(pageId)
   {
     for (let pageMap of nonEmptyPageMaps)
       pageMap._delete(pageId);
-  };
+  }
+
 
   /* Pages */
 
@@ -156,7 +157,7 @@
     {
       let page = new Page({id: tabId, url});
 
-      ext._removeFromAllPageMaps(tabId);
+      removeFromAllPageMaps(tabId);
 
       browser.tabs.get(tabId, () =>
       {
@@ -279,7 +280,7 @@
   {
     ext.pages.onRemoved._dispatch(tabId);
 
-    ext._removeFromAllPageMaps(tabId);
+    removeFromAllPageMaps(tabId);
     framesOfTabs.delete(tabId);
   }
 
