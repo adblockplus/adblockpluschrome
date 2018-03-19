@@ -269,6 +269,7 @@
           url.startsWith("https:") &&
           // Chrome doesn't dispatch webRequest.onHeadersReceived
           // for Web Store URLs.
+          // https://crrev.com/76882bf/extensions/common/extension_urls.cc#33
           !url.startsWith("https://chrome.google.com/webstore/")))
     {
       updatePageFrameStructure(details.frameId, details.tabId, url,
