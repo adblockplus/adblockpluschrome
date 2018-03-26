@@ -334,7 +334,7 @@ window.addEventListener("load", () =>
           setPref("notifications_ignoredcategories", true);
 
         notificationElement.hidden = true;
-        notification.onClicked();
+        browser.runtime.sendMessage({type: "notifications.clicked"});
       }
     }, true);
   });
