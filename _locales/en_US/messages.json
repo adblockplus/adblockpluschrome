@@ -65,6 +65,9 @@
   "filter_invalid_regexp": {
     "message": "Invalid regular expression"
   },
+  "filter_invalid_csp": {
+    "message": "Invalid Content Security Policy"
+  },
   "filter_lists": {
     "description": "This is a tab heading.",
     "message": "Filter lists"
