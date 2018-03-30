@@ -539,7 +539,6 @@
   }
 
   ext.webRequest = {
-    onBeforeRequest: new ext._EventTarget(),
     handlerBehaviorChanged()
     {
       // Defer handlerBehaviorChanged() until navigation occurs.
@@ -575,59 +574,6 @@
       });
     });
   });
-
-  browser.webRequest.onBeforeRequest.addListener(details =>
-  {
-    // The high-level code isn't interested in requests that aren't
-    // related to a tab or requests loading a top-level document,
-    // those should never be blocked.
-    if (details.type == "main_frame")
-      return;
-
-    // Filter out requests from non web protocols. Ideally, we'd explicitly
-    // specify the protocols we are interested in (i.e. http://, https://,
-    // ws:// and wss://) with the url patterns, given below, when adding this
-    // listener. But unfortunately, Chrome <=57 doesn't support the WebSocket
-    // protocol and is causing an error if it is given.
-    let url = new URL(details.url);
-    if (url.protocol != "http:" && url.protocol != "https:" &&
-        url.protocol != "ws:" && url.protocol != "wss:")
-      return;
-
-    if (details.originUrl)
-    {
-      // Firefox-only currently, ignore requests initiated by the browser and
-      // extensions.
-      let originUrl = new URL(details.originUrl);
-      if (originUrl.protocol == "chrome:" ||
-          originUrl.protocol == "moz-extension:")
-      {
-        return;
-      }
-    }
-
-    // We are looking for the frame that contains the element which
-    // has triggered this request. For most requests (e.g. images) we
-    // can just use the request's frame ID, but for subdocument requests
-    // (e.g. iframes) we must instead use the request's parent frame ID.
-    let {frameId, type} = details;
-    if (type == "sub_frame")
-      frameId = details.parentFrameId;
-
-    // Sometimes requests are not associated with a browser tab and
-    // in this case we want to still be able to view the url being called.
-    let frame = null;
-    let page = null;
-    if (details.tabId != -1)
-    {
-      frame = ext.getFrame(details.tabId, frameId);
-      page = new Page({id: details.tabId});
-    }
-
-    if (ext.webRequest.onBeforeRequest._dispatch(
-        url, type, page, frame).includes(false))
-      return {cancel: true};
-  }, {urls: ["<all_urls>"]}, ["blocking"]);
 
 
   /* Message passing */
