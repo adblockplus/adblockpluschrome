@@ -3,20 +3,8 @@
     "description": "This is the label for the 'Add' buttons.",
     "message": "Add"
   },
-  "add_domain_button": {
-    "message": "Add domain"
-  },
-  "add_filter_button": {
-    "message": "Add filter"
-  },
   "add_filters_msg": {
     "message": "Add filter(s)?"
-  },
-  "add_your_own_filters": {
-    "message": "Add your own filters"
-  },
-  "apply_changes": {
-    "message": "Apply changes"
   },
   "block_element": {
     "description": "Context menu item that adds a filter which blocks the selected element",
@@ -39,18 +27,9 @@
     "description": "Popup balloon label to disable blocking",
     "message": "<strong>Disabled</strong> on this site"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus is disabled for the domains listed below. You can add a domain either via the Adblock Plus icon in the address bar or by typing the domain (not a URL) in the box and clicking the \"Add domain\" button."
-  },
   "easy_create_filter": {
     "description": "Action in popup UI to add a filter which blocks an element selected from the current page",
     "message": "Block element"
-  },
-  "edit_filters_raw": {
-    "message": "Edit filters as raw text"
-  },
-  "enable_only_the": {
-    "message": "Enable only the filter lists you need. Too many can make your browser unresponsive."
   },
   "enabled_for_site": {
     "description": "Popup balloon label to enable blocking",
@@ -68,88 +47,11 @@
   "filter_invalid_csp": {
     "message": "Invalid Content Security Policy"
   },
-  "filter_lists": {
-    "description": "This is a tab heading.",
-    "message": "Filter lists"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Your filter must follow the <a>Adblock Plus filter syntax</a>."
-  },
   "filter_unknown_option": {
     "message": "Unknown filter option"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Allow some non-intrusive advertising"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Add"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Add a different subscription"
-  },
-  "filters_addSubscription_label": {
-    "message": "Add filter subscription"
-  },
-  "filters_readMore_label": {
-    "message": "Read more"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Delete"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Enabled"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Failed, checksum mismatch"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Failed, download failure"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Downloading\u2026"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Failed, not a valid filters list"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Failed, not a valid address"
-  },
-  "filters_viewList_label": {
-    "message": "View list"
-  },
-  "found_a_bug": {
-    "message": "Found a bug? Want to translate Adblock Plus into your language? Please <a>file a request here</a>."
-  },
-  "general": {
-    "description": "This is a tab heading.",
-    "message": "General"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Do you really want to remove this subscription?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Filter list location is neither a valid URL nor a valid file name."
-  },
-  "last_updated_at": {
-    "description": "e.g. Last updated at 3:00pm on Apr 1, 2011",
-    "message": "Last updated at $time$ on $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "description": "e.g. Last updated at 3:00pm today",
-    "message": "Last updated at $time$ today",
-    "placeholders": {
-      "time": {
-        "content": "$1"
-      }
-    }
   },
   "loading": {
     "description": "Placeholder text displayed when something is still loading",
@@ -174,15 +76,9 @@
   "notification_without_buttons": {
     "message": "Click on the notification to open all links in it."
   },
-  "options": {
-    "message": "Adblock Plus Options"
-  },
   "options_short": {
     "description": "Link to the options page from the popup balloon.",
     "message": "Options"
-  },
-  "out_of_date_lists": {
-    "message": "Out-of-date lists are updated periodically."
   },
   "overlay_notification_button_no": {
     "message": "No"
@@ -195,19 +91,6 @@
   },
   "overlay_notification_closing_button_optout": {
     "message": "Stop showing notifications"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Show useful notifications"
-  },
-  "remove_button": {
-    "description": "This is the label for the 'Remove selected' buttons.",
-    "message": "Remove selected"
-  },
-  "show_block_element_menu": {
-    "message": "Show 'Block Element' right-click menu item"
-  },
-  "show_devtools_panel": {
-    "message": "Show 'Adblock Plus' panel in the developer tools"
   },
   "stats_label_page": {
     "description": "This shows the number of blocked requests on a specific page in the popup.",
@@ -243,22 +126,6 @@
   "stats_title": {
     "description": "Title for the stats section in the popup.",
     "message": "Ads blocked"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Filter list location:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Please choose a filter subscription from the list:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Subscription title:"
-  },
-  "update_now": {
-    "message": "Update now"
-  },
-  "whitelisted_domains": {
-    "description": "This is a tab heading.",
-    "message": "Whitelisted domains"
   },
   "unexpected_filter_list_header": {
     "description": "Error message shown when the user attempts to add a custom filter that has the format of a header (e.g. \"[Adblock Plus 2.0]\") which are only allowed in filter lists",
