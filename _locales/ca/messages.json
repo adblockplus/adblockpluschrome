@@ -227,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "més de $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Baixa l'Adblock Plus"
-  },
   "stats_share_message": {
     "message": "He bloquejat $number$ anuncis i rastrejadors gràcies a Adblock Plus.",
     "placeholders": {
@@ -245,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Comparteix aquest número"
   },
   "stats_show_iconnumber": {
     "message": "Mostra el número a la icona"

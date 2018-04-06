@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "加载中"
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -224,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "超过$number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "下载 Adblock Plus"
-  },
   "stats_share_message": {
     "message": "感谢Adblock Plus拦截了$number$个广告和跟踪行为。",
     "placeholders": {
@@ -242,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "分享屏蔽广告总数"
   },
   "stats_show_iconnumber": {
     "message": "在图标上显示数量"

@@ -161,17 +161,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "ከ$number$ በላይ",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "አድብሎክ ፕላስን ያውርዱ"
-  },
   "stats_share_message": {
     "message": "$number$ ያህል ማስታወቂያዎች እና ተከታታዮች ከልክያለሁ እድሜ ለአድብሎክ ፕላስ።",
     "placeholders": {
@@ -179,9 +168,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "ይህን ቁጥር ያጋሩ"
   },
   "stats_show_iconnumber": {
     "message": "ቁጥር ምልክት ላይ አሳይ"

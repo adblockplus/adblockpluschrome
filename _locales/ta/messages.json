@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "இந்த விழிதிரை மூடிய பின், பக்கத்தில் உள்ள உறுப்பின் மேல் சொடுக்கவும். (அல்லது வலது விசையை சொடுக்கவும்.)"
   },
+  "continue": {
+    "message": "தொடர்ந்து"
+  },
   "description": {
     "message": "100 மில்லியன் சாதனங்களில் பயன்படுத்தப்படும், Adblock Plus என்பது உலகின் பிரபல இணைய விளம்பர முடக்கி."
   },
@@ -47,11 +50,23 @@
   "enabled_for_site": {
     "message": "இந்த தளத்தில் <strong> செயல்படுகிறது</strong>"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "செயல்பாட்டில் உள்ள களப் வடிகட்டி ஒளிந்து நீட்டிக்கப்பட்ட உறுப்பு குறிப்பிட்ட இல்லை"
+  },
+  "filter_invalid_domain": {
+    "message": "குறிப்பிட்ட தவறான (அல்லது காலி) டொமைன்"
+  },
+  "filter_invalid_regexp": {
+    "message": "செல்லாத வழக்கமான வெளிப்பாடு"
+  },
   "filter_lists": {
     "message": "வடிகட்டி பட்டியல்கள்"
   },
   "filter_must_follow_syntax": {
     "message": "உங்கள் Adblock Plus வடிகட்டி பின்வரும் இலக்கணத்தை பயன்படுத்தவேண்டும்: <a> </a>."
+  },
+  "filter_unknown_option": {
+    "message": "தெரியாத வடிகட்டி தேர்வு"
   },
   "filters_acceptableAds2_label": {
     "message": "சில தொல்லைபடுத்தாத விளம்பரங்களை மட்டும் காட்டவும்"
@@ -62,6 +77,9 @@
   "filters_addSubscriptionOther_label": {
     "message": "வேறு சந்தா சேர்"
   },
+  "filters_addSubscription_label": {
+    "message": "சேர் & சந்தா வடிகட்டு"
+  },
   "filters_readMore_label": {
     "message": "மேலும் படிக்க"
   },
@@ -71,11 +89,17 @@
   "filters_subscription_enabled_label": {
     "message": "செயலாக்கம்"
   },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "தோல்வி, செக்சம் பொருத்தமின்மை"
+  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "தோல்வியடைந்தது, பதிவிறக்கம் தோல்வி"
   },
   "filters_subscription_lastDownload_inProgress": {
     "message": "பதிவிறக்குகிறது..."
+  },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "தோல்வி, செல்லத்தக்க இல்லை  முகவரி"
   },
   "filters_subscription_lastDownload_invalidURL": {
     "message": "தோல்வி, செல்லத்தக்க இல்லை  முகவரி"
@@ -88,6 +112,12 @@
   },
   "general": {
     "message": "பொது"
+  },
+  "global_remove_subscription_warning": {
+    "message": "இந்த சந்தா நீக்க விரும்புகிறீர்களா?"
+  },
+  "global_subscription_invalid_location": {
+    "message": "வடிகட்டி பட்டியலில் இடம் செல்லத்தக்க URL அல்லது கோப்பு பெயர் அல்ல."
   },
   "invalid_css_selector": {
     "message": "$selector$ ஒரு செல்லுபடியாகும் CSS தேர்வுக்குழு இல்லை",
@@ -124,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "ஏற்றுகிறது..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -157,6 +190,15 @@
   "overlay_notification_button_yes": {
     "message": "ஆம்"
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "இந்த அறிவிப்பை மூடவும்"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "அறிவிப்புகளை நிறுத்து"
+  },
+  "overlay_shownotifications_label": {
+    "message": "பயனுள்ள அறிவிப்புகளை காட்டு"
+  },
   "remove_button": {
     "message": "தேர்ந்தெடுத்ததை நீக்கு"
   },
@@ -185,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$க்கு மேல்",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Adblock Plusஐ பதிவிறக்கவும்"
-  },
   "stats_share_message": {
     "message": "நான் $number$ விளம்பரங்கள் மற்றும் trackerகளை தடுதுள்ளேன். நன்றி Adblock Plus.",
     "placeholders": {
@@ -204,17 +235,20 @@
       }
     }
   },
-  "stats_share_title": {
-    "message": "இந்த எண்ணை பகிரவும்"
-  },
   "stats_show_iconnumber": {
     "message": "படவுருவில் எண்ணை காட்டு"
   },
   "stats_title": {
     "message": "தடுக்கப்பட்ட விளம்பரங்கள்"
   },
+  "subscriptionSelection_location_label": {
+    "message": "வடிகட்டி பட்டியல் பகுதி:"
+  },
   "subscriptionSelection_subscriptionSelector_label": {
     "message": "பட்டியலில் இருந்து ஒரு வடிகட்டி சந்தாவை தேர்ந்தெடுக்கவும்:"
+  },
+  "subscriptionSelection_title_label": {
+    "message": "சந்தா தலைப்பு:"
   },
   "unexpected_filter_list_header": {
     "message": "வடிகட்டி பட்டியலில் தலைப்புகள் இங்கே அனுமதி இல்லை"

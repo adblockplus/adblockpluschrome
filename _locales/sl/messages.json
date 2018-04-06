@@ -227,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "več kot $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Prenesi Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Blokiral sem $number$ oglasov in sledilcev z Adblock Plus.",
     "placeholders": {
@@ -245,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Deli to število"
   },
   "stats_show_iconnumber": {
     "message": "Pokaži število v ikoni"

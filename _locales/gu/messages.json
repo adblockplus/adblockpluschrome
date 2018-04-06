@@ -224,17 +224,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "ઉપર $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "ડાઉનલોડ Adblock Plus"
-  },
   "stats_share_message": {
     "message": "મેં $number$ એડ્સ અને ટ્રેકરબ્લોક કર્યા Adblock Plusનો આભાર.",
     "placeholders": {
@@ -242,9 +231,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "આ આંકડા શેર કરો"
   },
   "stats_show_iconnumber": {
     "message": "આઇકોનમાં નંબર દેખાડો"

@@ -227,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "больш за $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Спампаваць Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Дзякуючы Adblock Plus у мяне заблакавана $number$ рэкламных аб'яў і форм для адсочвання.",
     "placeholders": {
@@ -245,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Падзяліцца гэтай лічбай"
   },
   "stats_show_iconnumber": {
     "message": "Паказваць колькасць на значку"

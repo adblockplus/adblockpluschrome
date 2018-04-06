@@ -30,7 +30,7 @@
     "message": "Uz priekšu"
   },
   "description": {
-    "message": "Izmantots vairāk nekā 100 miljoni ierīču, Adblock Plus ir pasaulē populārākais reklāmu bloķētājs."
+    "message": "Izmantots vairāk nekā 100 miljonos ierīču, Adblock Plus ir pasaulē populārākais reklāmu bloķētājs."
   },
   "disabled_for_site": {
     "message": "<strong>Izslēgts</strong> šajā lapā"
@@ -45,16 +45,28 @@
     "message": "Labot filtrus kā jēlu tekstu"
   },
   "enable_only_the": {
-    "message": "Jums ir nepieciešams tikai ieslēgt filtrēšanu caur sarakstu. Daudz filtresana var nogalinat jusu internet mekletaju."
+    "message": "Izmantojiet tikai nepieciešamos filtru sarakstus. Pārāk daudzu filtru ieslēgšana var palēnināt pārlūka darbību."
   },
   "enabled_for_site": {
     "message": "<strong>Ieslēgts</strong> šajā lapā"
+  },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Nav aktīva domēna norādītais paplašinātā elements neizcelt filtrs"
+  },
+  "filter_invalid_domain": {
+    "message": "Norādīts nederīgs (vai tukšs) domēns"
+  },
+  "filter_invalid_regexp": {
+    "message": "Nederīga regulārā izteiksme"
   },
   "filter_lists": {
     "message": "Filtru saraksts"
   },
   "filter_must_follow_syntax": {
     "message": "Filtram jāatbilst <a>Adblock Plus filtru sintaksei</a>."
+  },
+  "filter_unknown_option": {
+    "message": "Nezināma filtra opcija"
   },
   "filters_acceptableAds2_label": {
     "message": "Atļaut dažas neuzbāzīgas reklāmas"
@@ -142,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "Ielāde..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -175,6 +190,15 @@
   "overlay_notification_button_yes": {
     "message": "Jā"
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "Aizvērt šo paziņojumu"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Pārtraukt rādīt paziņojumus"
+  },
+  "overlay_shownotifications_label": {
+    "message": "Rādīt noderīgus paziņojumus"
+  },
   "remove_button": {
     "message": "Noņemt izvēlēto"
   },
@@ -182,7 +206,7 @@
     "message": "Ziņot par problēmām šajā lapā"
   },
   "show_block_element_menu": {
-    "message": "Rādīt \"Bloķēt elementu'' labā klikšķa izvēlnē"
+    "message": "Rādīt \"Bloķēt elementu\" labā klikšķa izvēlnē"
   },
   "show_devtools_panel": {
     "message": "Parādīt \"Adblock Plus\" paneli izstrādātāja rīkos"
@@ -203,27 +227,13 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Lejuplādēt Adblock Plus"
-  },
   "stats_share_message": {
-    "message": "Es esmu bloķējis $number$ reklāmas un trackerus, Paldies Adblock Plus.",
+    "message": "Es esmu bloķējis $number$ reklāmas un izsekotājus, pateicoties Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Padalīties ar šo skaitli"
   },
   "stats_show_iconnumber": {
     "message": "Parādīt skaitli ikonā"

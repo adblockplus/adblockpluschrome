@@ -27,7 +27,7 @@
     "message": "このポップアップが閉じた後にページ上の要素をクリック(または右クリック)してください。"
   },
   "continue": {
-    "message": "続ける"
+    "message": "続行"
   },
   "description": {
     "message": "1億以上の端末で使用されている Adblock Plus は、世界で最も人気のある広告ブロッカーです。"
@@ -51,7 +51,10 @@
     "message": "このサイトで<strong>有効</strong>"
   },
   "filter_elemhideemulation_nodomain": {
-    "message": "拡張要素フィルターを非表示に指定されたアクティブなドメインがありません。"
+    "message": "拡張要素非表示フィルタに指定されたドメインは有効ではありません"
+  },
+  "filter_invalid_domain": {
+    "message": "不正な（または空の）ドメインが指定されました"
   },
   "filter_invalid_regexp": {
     "message": "無効な正規表現"
@@ -78,7 +81,7 @@
     "message": "購読するフィルタを追加"
   },
   "filters_readMore_label": {
-    "message": "詳細説明ページを開く"
+    "message": "詳細を開く"
   },
   "filters_subscription_delete_label": {
     "message": "削除"
@@ -90,19 +93,19 @@
     "message": "更新失敗: チェックサム不一致"
   },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "更新失敗: 接続エラー"
+    "message": "更新失敗: ダウンロード失敗"
   },
   "filters_subscription_lastDownload_inProgress": {
     "message": "ダウンロード中..."
   },
   "filters_subscription_lastDownload_invalidData": {
-    "message": "更新失敗: フィルタリスト無効"
+    "message": "更新失敗: 不正なフィルタリスト"
   },
   "filters_subscription_lastDownload_invalidURL": {
-    "message": "更新失敗: アドレス無効"
+    "message": "更新失敗: 不正なアドレス"
   },
   "filters_viewList_label": {
-    "message": "フィルタファイルを開いて確認"
+    "message": "リストを表示"
   },
   "found_a_bug": {
     "message": "バグを発見? Adblock Plus を翻訳したい? その場合は <a>ここよりリクエスト</a> 願います。"
@@ -150,6 +153,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "読み込み中..."
   },
   "name": {
     "message": "Adblock Plus"
@@ -221,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$ 以上の",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Adblock Plus をダウンロード"
-  },
   "stats_share_message": {
     "message": "Adblock Plus のおかげで累計 $number$ 箇所の広告と追跡がブロックされました。",
     "placeholders": {
@@ -239,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "この数字をシェアする"
   },
   "stats_show_iconnumber": {
     "message": "アイコン上に数字を表示"

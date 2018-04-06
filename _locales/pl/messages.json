@@ -227,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "ponad $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Pobierz Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Dzięki Adblock Plus zablokowano $number$ reklam i tropicieli.",
     "placeholders": {
@@ -245,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Udostępnij tę liczbę"
   },
   "stats_show_iconnumber": {
     "message": "Wyświetlaj liczbę na ikonie"

@@ -221,17 +221,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "yli $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Lataa Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Estin $number$ mainosta ja trackeriä kiitos Adblock Plus;an.",
     "placeholders": {
@@ -239,9 +228,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Jaa tämä numero"
   },
   "stats_show_iconnumber": {
     "message": "Näytä numerot kuvakkeessa"

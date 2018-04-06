@@ -227,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "свыше $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Скачать Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Я заблокировал $number$ объявлений и трекеров благодаря Adblock Plus.",
     "placeholders": {
@@ -245,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Поделиться этим числом"
   },
   "stats_show_iconnumber": {
     "message": "Показывать число в значке"

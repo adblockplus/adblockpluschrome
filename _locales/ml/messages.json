@@ -158,17 +158,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$-നു മേല്‍",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "ആഡ്ബ്ലോക്ക് പ്ലസ് ഡൗണ്‍ലോഡ് ചെയ്യുക"
-  },
   "stats_share_message": {
     "message": "ആഡ്ബ്ലോക്ക് പ്ലസ്സിന് നന്ദി, ഞാന്‍ $number$ പരസ്യങ്ങളും ട്രാക്കറുകളും തടഞ്ഞു.",
     "placeholders": {
@@ -176,9 +165,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "ഈ സംഖ്യ പങ്കുവയ്ക്കുക"
   },
   "stats_show_iconnumber": {
     "message": "ഐക്കണില്‍ സംഖ്യ കാണിക്കുക"

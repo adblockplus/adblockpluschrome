@@ -224,17 +224,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "over $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Last ned Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Jeg blokkerte $number$ annonser og trackere, takket være Adblock Plus.",
     "placeholders": {
@@ -242,9 +231,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Del dette tallet"
   },
   "stats_show_iconnumber": {
     "message": "Vis tall i ikonet"

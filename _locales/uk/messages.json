@@ -50,6 +50,12 @@
   "enabled_for_site": {
     "message": "<strong>Увімкнено</strong> на цьому сайті"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Не вказано активний домен для розширеного приховування елементів"
+  },
+  "filter_invalid_domain": {
+    "message": "Вказано недійсний (або порожній) домен"
+  },
   "filter_invalid_regexp": {
     "message": "Неправильний регулярний вираз"
   },
@@ -148,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "Завантаження..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -218,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "понад $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Завантажити Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Я заблокував $number$ оголошень і шпигунів завдяки Adblock Plus.",
     "placeholders": {
@@ -236,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Поділитися цим числом"
   },
   "stats_show_iconnumber": {
     "message": "Показувати число у значку"

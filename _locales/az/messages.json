@@ -134,20 +134,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$ üzərində",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Adblock Plus Endir"
-  },
-  "stats_share_title": {
-    "message": "Bu nömrəni paylaş"
-  },
   "stats_show_iconnumber": {
     "message": "Nişanda nömrə göstər"
   },

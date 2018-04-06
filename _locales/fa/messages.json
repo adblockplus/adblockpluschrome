@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "بارگذاری..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -224,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "بیش از $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "دانلود Adblock Plus"
-  },
   "stats_share_message": {
     "message": "به واسطه Adblock Plus من $number$ تبلیغ و ردگیر را مسدود کردم.",
     "placeholders": {
@@ -242,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "این عدد را به اشتراک بگذار"
   },
   "stats_show_iconnumber": {
     "message": "نمایش تعداد در آیکون"

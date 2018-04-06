@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "Учитавање..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -224,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Преузми Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Блокирао сам $number$ огласа и пратилаца захваљујући Adblock Plus-у.",
     "placeholders": {
@@ -242,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Дели овај број"
   },
   "stats_show_iconnumber": {
     "message": "Прикажи број на икони"

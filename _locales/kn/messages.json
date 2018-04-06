@@ -188,17 +188,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "ಮೇಲೆ $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Adblock Plus ಡೌನ್ಲೋಡ್"
-  },
   "stats_share_message": {
     "message": "ನಾನು ನಿರ್ಬಂಧಿಸಿದ $number$ Adblock Plus ಪ್ಲಸ್ ಜಾಹೀರಾತುಗಳು ಮತ್ತು ಅನ್ವೇಷಕಗಳು ಧನ್ಯವಾದಗಳು.",
     "placeholders": {
@@ -206,9 +195,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "ಈ ಸಂಖ್ಯೆ ಹಂಚಿಕೊಳ್ಳಿ"
   },
   "stats_show_iconnumber": {
     "message": "ಐಕಾನ್ ಸಂಖ್ಯೆ ತೋರಿಸಿ"

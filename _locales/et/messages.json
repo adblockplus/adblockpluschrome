@@ -227,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "üle $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Laadi alla Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Olen tänu Adblock Plusile blokeerinud $number$ reklaami ja jälgimiskatset.",
     "placeholders": {
@@ -245,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Jaga seda statistikat"
   },
   "stats_show_iconnumber": {
     "message": "Näita loendurit ikoonil"

@@ -218,17 +218,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": " lebih dari $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Unduh Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Saya memblokir $number$ iklan dan pelacak berkat Adblock Plus.",
     "placeholders": {
@@ -236,9 +225,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Bagikan nomor ini"
   },
   "stats_show_iconnumber": {
     "message": "Tampilkan angka didalam ikon"

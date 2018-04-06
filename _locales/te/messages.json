@@ -129,17 +129,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$ పైనే",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Adblock Plus డౌన్లోడ్"
-  },
   "stats_share_message": {
     "message": "ధన్యవాదాలు Adblock Plus $number$ ప్రకటనలు మరియు జాడ కనిపెట్టు వాటిని నిరోధించాను.",
     "placeholders": {
@@ -147,9 +136,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "ఈ సంఖ్యను పంచు"
   },
   "stats_show_iconnumber": {
     "message": "ఐకాన్ లో నెంబర్ చూపించు"

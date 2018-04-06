@@ -69,31 +69,31 @@
     "message": "অজানা ফিল্টার অপশন"
   },
   "filters_acceptableAds2_label": {
-    "message": "গোপনীয়তা অলঙ্ঘঙ্কারী বিজ্ঞাপনকে অনুমোদন দিন"
+    "message": "গোপনীয়তা অলঙ্ঘনকারী বিজ্ঞাপনকে অনুমোদন দিন"
   },
   "filters_addSubscriptionAdd_label": {
-    "message": "যুক্ত করুন"
+    "message": "যোগ করুন"
   },
   "filters_addSubscriptionOther_label": {
-    "message": "একটি ভিন্ন ছাঁকনি সদস্যতা যুক্ত করুন"
+    "message": "একটি ভিন্ন সদস্যতা যুক্ত করুন"
   },
   "filters_addSubscription_label": {
-    "message": "ছাঁকনি সদস্যতা যুক্ত করুন"
+    "message": "ছাঁকনি সদস্যতা যোগ করুন"
   },
   "filters_readMore_label": {
     "message": "আরো পড়ুন"
   },
   "filters_subscription_delete_label": {
-    "message": "মুছুন"
+    "message": "বাদ দিন"
   },
   "filters_subscription_enabled_label": {
-    "message": "সক্রিয় করা"
+    "message": "সক্রিয় করা হয়েছে"
   },
   "filters_subscription_lastDownload_checksumMismatch": {
     "message": "ব্যর্থ, ত্রুটিনির্ধারক মেলেনি"
   },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "ব্যর্থ, নামানো ব্যর্থতা"
+    "message": "ব্যর্থ, ডাউনলোড ব্যর্থতা"
   },
   "filters_subscription_lastDownload_inProgress": {
     "message": "ডাউনলোড হচ্ছে…"
@@ -102,10 +102,10 @@
     "message": "ব্যর্থ, একটি যুক্তিযুক্ত ছাঁকন তালিকা নয়"
   },
   "filters_subscription_lastDownload_invalidURL": {
-    "message": "ব্যর্থ, যুক্তিযুক্ত ঠিকানা নয়"
+    "message": "ব্যর্থ, বৈধ ঠিকানা নয়"
   },
   "filters_viewList_label": {
-    "message": "দর্শন  তালিকা"
+    "message": "দর্শন তালিকা"
   },
   "found_a_bug": {
     "message": "একটি বাগ খুঁজে পেয়েছেন? আপনার ভাষায় Adblock Plus অনুবাদ করতে চান? দয়া করে <a>এখানে একটি অনুরোধ ফাইল করুন</a>।"
@@ -139,7 +139,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "সর্বশেষ হালনাগাদ আজ $time$-এ",
+    "message": "সর্বশেষ হালনাগাদ আজ $time$-টায়",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -154,14 +154,17 @@
       }
     }
   },
+  "loading": {
+    "message": "লোড করা হচ্ছে..."
+  },
   "name": {
-    "message": "অ্যাডব্লক প্লাস"
+    "message": "এ্যাডব্লক প্লাস"
   },
   "name_devbuild": {
     "message": "Adblock Plus উন্নয়ন গঠন"
   },
   "notification_configure": {
-    "message": "বিজ্ঞপ্তি সেটিংস কনফিগার করুন"
+    "message": "বিজ্ঞপ্তি সেটিংস ঠিক করুন"
   },
   "notification_open_all": {
     "message": "এই বিজ্ঞপ্তি থেকে সমস্ত লিঙ্ক খুলুন"
@@ -224,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$ এর উপর",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Adblock Plus ডাউনলোড করুন"
-  },
   "stats_share_message": {
     "message": "আমি $number$টি বিজ্ঞাপন ও ট্রেকারকে অবরুদ্ধ করছি, এ জন্য Adblock Plus কে ধন্যবাদ।",
     "placeholders": {
@@ -242,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "এই সংখ্যা শেয়ার করুন"
   },
   "stats_show_iconnumber": {
     "message": "আইকনে সংখ্যা দেখান"
