@@ -110,15 +110,6 @@
       }
     }
   },
-  "stats_share_message": {
-    "description": "This message will be posted to social networks if the user decides to share the stats.",
-    "message": "I blocked $number$ ads and trackers thanks to Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "description": "Toggle for displaying the number of blocked ads in the icon.",
     "message": "Show number in icon"
