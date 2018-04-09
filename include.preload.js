@@ -17,8 +17,9 @@
 
 "use strict";
 
-let {splitSelector} = require("common");
-let {ElemHideEmulation} = require("content_elemHideEmulation");
+let {splitSelector} = require("./adblockpluscore/lib/common");
+let {ElemHideEmulation} =
+  require("./adblockpluscore/lib/content/elemHideEmulation");
 
 // This variable is also used by our other content scripts.
 let elemhide;

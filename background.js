@@ -17,7 +17,7 @@
 
 "use strict";
 
-const {port} = require("messaging");
+const {port} = require("./lib/messaging");
 
 port.on("forward", (msg, sender) =>
 {
