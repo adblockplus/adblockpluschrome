@@ -518,39 +518,6 @@
     return frames && frames.get(frameId);
   };
 
-  let handlerBehaviorChangedQuota =
-    browser.webRequest.MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES;
-
-  function propagateHandlerBehaviorChange()
-  {
-    // Make sure to not call handlerBehaviorChanged() more often than allowed
-    // by browser.webRequest.MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES.
-    // Otherwise Chrome notifies the user that this extension is causing issues.
-    if (handlerBehaviorChangedQuota > 0)
-    {
-      browser.webNavigation.onBeforeNavigate.removeListener(
-        propagateHandlerBehaviorChange
-      );
-      browser.webRequest.handlerBehaviorChanged();
-
-      handlerBehaviorChangedQuota--;
-      setTimeout(() => { handlerBehaviorChangedQuota++; }, 600000);
-    }
-  }
-
-  ext.webRequest = {
-    handlerBehaviorChanged()
-    {
-      // Defer handlerBehaviorChanged() until navigation occurs.
-      // There wouldn't be any visible effect when calling it earlier,
-      // but it's an expensive operation and that way we avoid to call
-      // it multiple times, if multiple filters are added/removed.
-      let {onBeforeNavigate} = browser.webNavigation;
-      if (!onBeforeNavigate.hasListener(propagateHandlerBehaviorChange))
-        onBeforeNavigate.addListener(propagateHandlerBehaviorChange);
-    }
-  };
-
   browser.tabs.query({}, tabs =>
   {
     tabs.forEach(tab =>
