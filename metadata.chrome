@@ -131,7 +131,6 @@ lib/adblockplus.js =
   lib/csp.js
   lib/cssInjection.js
   adblockplusui/messageResponder.js
-  background.js
 include.preload.js = include.preload.js inject.preload.js
 include.postload.js = subscriptionLink.postload.js composer.postload.js
 qunit/tests.js =
