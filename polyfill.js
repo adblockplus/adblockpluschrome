@@ -37,6 +37,7 @@
     "tabs.insertCSS",
     "tabs.query",
     "tabs.reload",
+    "tabs.remove",
     "tabs.removeCSS",
     "tabs.sendMessage",
     "tabs.update",
