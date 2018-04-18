@@ -259,20 +259,17 @@
   {types: ["main_frame", "sub_frame"], urls: ["http://*/*", "https://*/*"]},
   ["responseHeaders"]);
 
-  browser.webNavigation.onBeforeNavigate.addListener(details =>
+  browser.webNavigation.onCommitted.addListener(details =>
   {
-    // Since we can only listen for HTTP(S) responses using
-    // webRequest.onHeadersReceived we must update the page structure here for
-    // other navigations.
-    let {url} = details;
-    if (!(url.startsWith("http:") ||
-          url.startsWith("https:") &&
-          // Chrome doesn't dispatch webRequest.onHeadersReceived
-          // for Web Store URLs.
-          // https://crrev.com/76882bf/extensions/common/extension_urls.cc#33
-          !url.startsWith("https://chrome.google.com/webstore/")))
+    // We have to update the frame structure for documents that weren't
+    // loaded over HTTP (including documents cached by Service Workers),
+    // when the navigation occurs. However, we must be careful to not
+    // update the state of the same document twice, otherewise the number
+    // of any ads blocked already and any recorded sitekey could get lost.
+    let frame = ext.getFrame(details.tabId, details.frameId);
+    if (!frame || frame.url.href != details.url)
     {
-      updatePageFrameStructure(details.frameId, details.tabId, url,
+      updatePageFrameStructure(details.frameId, details.tabId, details.url,
                                details.parentFrameId);
     }
   });
