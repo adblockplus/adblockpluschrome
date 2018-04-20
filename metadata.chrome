@@ -2,15 +2,6 @@
 basename = adblockpluschrome
 version = 3.0.2
 author = eyeo GmbH
-permissions = tabs
-  <all_urls>
-  contextMenus
-  webRequest
-  webRequestBlocking
-  webNavigation
-  storage
-  unlimitedStorage
-  notifications
 backgroundScripts = polyfill.js
   ext/common.js
   ext/background.js
@@ -24,18 +15,45 @@ testScripts = ../polyfill.js
   ../lib/publicSuffixList.js
   tests.js
 options = options.html
-devtools = devtools.html
-browserAction = icons/abp-16.png icons/abp-19.png icons/abp-20.png icons/abp-32.png icons/abp-38.png icons/abp-40.png popup.html
-icons = icons/abp-16.png icons/abp-32.png icons/detailed/abp-48.png
-  icons/detailed/abp-64.png icons/detailed/abp-128.png
-managedStorageSchema = managed-storage-schema.json
+browserAction =
+  icons/abp-16.png
+  icons/abp-19.png
+  icons/abp-20.png
+  icons/abp-32.png
+  icons/abp-38.png
+  icons/abp-40.png
+  popup.html
+icons =
+  icons/abp-16.png
+  icons/abp-32.png
+  icons/detailed/abp-48.png
+  icons/detailed/abp-64.png
+  icons/detailed/abp-128.png
+
+[manifest]
+devtools_page = devtools.html
+storage.managed_schema = managed-storage-schema.json
+permissions =
+  tabs
+  <all_urls>
+  contextMenus
+  webRequest
+  webRequestBlocking
+  webNavigation
+  storage
+  unlimitedStorage
+  notifications
 
 [compat]
 chrome = 49.0
 opera = 36.0
 
 [contentScripts]
-document_start = polyfill.js ext/common.js ext/content.js include.preload.js
+document_start =
+  polyfill.js
+  ext/common.js
+  ext/content.js
+  include.preload.js
 document_end = include.postload.js
 
 [mapping]
@@ -131,8 +149,12 @@ lib/adblockplus.js =
   lib/csp.js
   lib/cssInjection.js
   adblockplusui/messageResponder.js
-include.preload.js = include.preload.js inject.preload.js
-include.postload.js = subscriptionLink.postload.js composer.postload.js
+include.preload.js =
+  include.preload.js
+  inject.preload.js
+include.postload.js =
+  subscriptionLink.postload.js
+  composer.postload.js
 qunit/tests.js =
   qunit/common.js
   qunit/tests/prefs.js
