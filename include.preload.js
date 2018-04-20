@@ -36,6 +36,8 @@ const typeMap = new Map([
   ["embed", "OBJECT"]
 ]);
 
+let collapsingSelectors = new Set();
+
 function getURLsFromObjectElement(element)
 {
   let url = element.getAttribute("data");
@@ -129,6 +131,43 @@ function getURLsFromElement(element)
   return urls;
 }
 
+function isCollapsibleMediaElement(element, mediatype)
+{
+  if (mediatype != "MEDIA")
+    return false;
+
+  if (!element.getAttribute("src"))
+    return false;
+
+  for (let child of element.children)
+  {
+    // If the <video> or <audio> element contains any <source> or <track>
+    // children, we cannot address it in CSS by the source URL; in that case we
+    // don't "collapse" it using a CSS selector but rather hide it directly by
+    // setting the style="..." attribute.
+    if (child.localName == "source" || child.localName == "track")
+      return false;
+  }
+
+  return true;
+}
+
+function collapseMediaElement(element, srcValue)
+{
+  if (!srcValue)
+    return;
+
+  let selector = element.localName + "[src=" + CSS.escape(srcValue) + "]";
+
+  // Adding selectors is expensive so do it only if we really have a new
+  // selector.
+  if (!collapsingSelectors.has(selector))
+  {
+    collapsingSelectors.add(selector);
+    elemhide.addSelectors([selector], null, "collapsing", true);
+  }
+}
+
 function hideElement(element)
 {
   function doHide()
@@ -166,6 +205,12 @@ function checkCollapse(element)
   if (urls.length == 0)
     return;
 
+  let collapsibleMediaElement = isCollapsibleMediaElement(element, mediatype);
+
+  // Save the value of the src attribute because it can change between now and
+  // when we get the response from the background page.
+  let srcValue = collapsibleMediaElement ? element.getAttribute("src") : null;
+
   browser.runtime.sendMessage(
     {
       type: "filters.collapse",
@@ -173,12 +218,14 @@ function checkCollapse(element)
       mediatype,
       baseURL: document.location.href
     },
-
     collapse =>
     {
       if (collapse)
       {
-        hideElement(element);
+        if (collapsibleMediaElement)
+          collapseMediaElement(element, srcValue);
+        else
+          hideElement(element);
       }
     }
   );
@@ -386,11 +433,11 @@ ElemHide.prototype = {
     return shadow;
   },
 
-  addSelectorsInline(selectors, groupName)
+  addSelectorsInline(selectors, groupName, appendOnly = false)
   {
     let style = this.styles.get(groupName);
 
-    if (style)
+    if (style && !appendOnly)
     {
       while (style.sheet.cssRules.length > 0)
         style.sheet.deleteRule(0);
@@ -458,7 +505,7 @@ ElemHide.prototype = {
     }
   },
 
-  addSelectors(selectors, filters)
+  addSelectors(selectors, filters, groupName = "emulated", appendOnly = false)
   {
     if (this.inline || this.inlineEmulated)
     {
@@ -471,18 +518,21 @@ ElemHide.prototype = {
       // Related Chrome and Firefox issues:
       // https://bugs.chromium.org/p/chromium/issues/detail?id=632009
       // https://bugzilla.mozilla.org/show_bug.cgi?id=1310026
-      this.addSelectorsInline(selectors, "emulated");
+      this.addSelectorsInline(selectors, groupName, appendOnly);
     }
     else
     {
       browser.runtime.sendMessage({
         type: "elemhide.injectSelectors",
         selectors,
-        groupName: "emulated"
+        groupName,
+        appendOnly
       });
     }
 
-    if (this.tracer)
+    // Only trace selectors that are based directly on hiding filters
+    // (i.e. leave out collapsing selectors).
+    if (this.tracer && groupName != "collapsing")
       this.tracer.addSelectors(selectors, filters);
   },
 
