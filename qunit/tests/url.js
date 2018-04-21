@@ -21,7 +21,7 @@
   let {getDecodedHostname,
        extractHostFromFrame,
        stringifyURL,
-       isThirdParty} = require("url");
+       isThirdParty} = require("../../lib/url");
 
   QUnit.module("URL/host tools");
 

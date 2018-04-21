@@ -1,7 +1,7 @@
 "use strict";
 
 {
-  const {Prefs} = require("prefs");
+  const {Prefs} = require("../../lib/prefs");
 
   QUnit.module("Preferences", {
     setup()

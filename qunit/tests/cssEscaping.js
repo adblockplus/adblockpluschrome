@@ -1,8 +1,9 @@
 "use strict";
 
 {
-  const {Filter, ElemHideFilter} = require("filterClasses");
-  const {escapeCSS, quoteCSS} = require("filterComposer");
+  const {Filter, ElemHideFilter} =
+    require("../../adblockpluscore/lib/filterClasses");
+  const {escapeCSS, quoteCSS} = require("../../lib/filterComposer");
 
   QUnit.module("CSS escaping");
 

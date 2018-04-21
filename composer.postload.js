@@ -17,7 +17,7 @@
 
 "use strict";
 
-// We would rather export these properly and then require("include.preload")
+// We would rather export these properly and then require("./include.preload")
 // here, but that would result in include.preload running both at pre and post
 // load.
 const {checkCollapse, elemhide, getURLsFromElement, typeMap} = window;
@@ -406,7 +406,7 @@ function elementPicked(event)
       else
       {
         browser.runtime.sendMessage({
-          type: "forward",
+          type: "composer.forward",
           payload: {type: "composer.content.dialogOpened", popupId}
         });
       }
@@ -449,7 +449,7 @@ function deactivateBlockElement(popupAlreadyClosed)
   if (blockelementPopupId != null && !popupAlreadyClosed)
   {
     browser.runtime.sendMessage({
-      type: "forward",
+      type: "composer.forward",
       targetPageId: blockelementPopupId,
       payload:
       {
@@ -493,7 +493,7 @@ function initializeComposer()
     lastRightClickEventIsMostRecent = true;
 
     browser.runtime.sendMessage({
-      type: "forward",
+      type: "composer.forward",
       payload:
       {
         type: "composer.content.clearPreviousRightClickEvent"
@@ -562,7 +562,7 @@ function initializeComposer()
         if (window == window.top && blockelementPopupId == message.popupId)
         {
           browser.runtime.sendMessage({
-            type: "forward",
+            type: "composer.forward",
             payload:
             {
               type: "composer.content.finished",

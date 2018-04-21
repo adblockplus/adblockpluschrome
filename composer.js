@@ -64,7 +64,7 @@ function closeMe()
 function closeDialog(success)
 {
   browser.runtime.sendMessage({
-    type: "forward",
+    type: "composer.forward",
     targetPageId,
     payload:
     {

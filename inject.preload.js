@@ -23,16 +23,15 @@ let randomEventName = "abp-request-" + Math.random().toString(36).substr(2);
 // code to the background page and back again.
 document.addEventListener(randomEventName, event =>
 {
-  let {url, requestType} = event.detail;
+  let {url} = event.detail;
 
   browser.runtime.sendMessage({
-    type: "request.blockedByWrapper",
-    requestType,
+    type: "request.blockedByRTCWrapper",
     url
   }, block =>
   {
     document.dispatchEvent(new CustomEvent(
-      randomEventName + "-" + requestType + "-" + url, {detail: block}
+      randomEventName + "-" + url, {detail: block}
     ));
   });
 });
@@ -138,8 +137,11 @@ function injected(eventName, injectedIntoContentWindow)
   }
 
   /*
-   * Shared request checking code, used by both the WebSocket and
-   * RTCPeerConnection wrappers.
+   * RTCPeerConnection wrapper
+   *
+   * The webRequest API in Chrome does not yet allow the blocking of
+   * WebRTC connections.
+   * See https://bugs.chromium.org/p/chromium/issues/detail?id=707683
    */
   let RealCustomEvent = window.CustomEvent;
 
@@ -153,9 +155,9 @@ function injected(eventName, injectedIntoContentWindow)
     let addEventListener = document.addEventListener.bind(document);
     let dispatchEvent = document.dispatchEvent.bind(document);
     let removeEventListener = document.removeEventListener.bind(document);
-    checkRequest = (requestType, url, callback) =>
+    checkRequest = (url, callback) =>
     {
-      let incomingEventName = eventName + "-" + requestType + "-" + url;
+      let incomingEventName = eventName + "-" + url;
 
       function listener(event)
       {
@@ -164,8 +166,7 @@ function injected(eventName, injectedIntoContentWindow)
       }
       addEventListener(incomingEventName, listener);
 
-      dispatchEvent(new RealCustomEvent(eventName,
-                                        {detail: {url, requestType}}));
+      dispatchEvent(new RealCustomEvent(eventName, {detail: {url}}));
     };
   }
 
@@ -182,49 +183,8 @@ function injected(eventName, injectedIntoContentWindow)
     }
   }
 
-  /*
-   * WebSocket wrapper
-   *
-   * Required before Chrome 58, since the webRequest API didn't allow us to
-   * intercept WebSockets.
-   * See https://bugs.chromium.org/p/chromium/issues/detail?id=129353
-   */
-  let RealWebSocket = WebSocket;
-  let closeWebSocket = Function.prototype.call.bind(
-    RealWebSocket.prototype.close
-  );
-
-  function WrappedWebSocket(url, ...args)
-  {
-    // Throw correct exceptions if the constructor is used improperly.
-    if (!(this instanceof WrappedWebSocket)) return RealWebSocket();
-    if (arguments.length < 1) return new RealWebSocket();
-
-    let websocket = new RealWebSocket(url, ...args);
-
-    checkRequest("websocket", websocket.url, blocked =>
-    {
-      if (blocked)
-        closeWebSocket(websocket);
-    });
-
-    return websocket;
-  }
-  WrappedWebSocket.prototype = RealWebSocket.prototype;
-  window.WebSocket = WrappedWebSocket.bind();
-  copyProperties(RealWebSocket, WebSocket,
-                 ["CONNECTING", "OPEN", "CLOSING", "CLOSED", "prototype"]);
-  RealWebSocket.prototype.constructor = WebSocket;
-
-  /*
-   * RTCPeerConnection wrapper
-   *
-   * The webRequest API in Chrome does not yet allow the blocking of
-   * WebRTC connections.
-   * See https://bugs.chromium.org/p/chromium/issues/detail?id=707683
-   */
   let RealRTCPeerConnection = window.RTCPeerConnection ||
-                                window.webkitRTCPeerConnection;
+                              window.webkitRTCPeerConnection;
 
   // Firefox has the option (media.peerconnection.enabled) to disable WebRTC
   // in which case RealRTCPeerConnection is undefined.
@@ -305,7 +265,7 @@ function injected(eventName, injectedIntoContentWindow)
 
     let checkUrl = (peerconnection, url) =>
     {
-      checkRequest("webrtc", url, blocked =>
+      checkRequest(url, blocked =>
       {
         if (blocked)
         {

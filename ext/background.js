@@ -60,11 +60,12 @@
     }
   };
 
-  ext._removeFromAllPageMaps = pageId =>
+  function removeFromAllPageMaps(pageId)
   {
     for (let pageMap of nonEmptyPageMaps)
       pageMap._delete(pageId);
-  };
+  }
+
 
   /* Pages */
 
@@ -156,7 +157,7 @@
     {
       let page = new Page({id: tabId, url});
 
-      ext._removeFromAllPageMaps(tabId);
+      removeFromAllPageMaps(tabId);
 
       browser.tabs.get(tabId, () =>
       {
@@ -268,6 +269,7 @@
           url.startsWith("https:") &&
           // Chrome doesn't dispatch webRequest.onHeadersReceived
           // for Web Store URLs.
+          // https://crrev.com/76882bf/extensions/common/extension_urls.cc#33
           !url.startsWith("https://chrome.google.com/webstore/")))
     {
       updatePageFrameStructure(details.frameId, details.tabId, url,
@@ -279,7 +281,7 @@
   {
     ext.pages.onRemoved._dispatch(tabId);
 
-    ext._removeFromAllPageMaps(tabId);
+    removeFromAllPageMaps(tabId);
     framesOfTabs.delete(tabId);
   }
 
@@ -516,40 +518,6 @@
     return frames && frames.get(frameId);
   };
 
-  let handlerBehaviorChangedQuota =
-    browser.webRequest.MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES;
-
-  function propagateHandlerBehaviorChange()
-  {
-    // Make sure to not call handlerBehaviorChanged() more often than allowed
-    // by browser.webRequest.MAX_HANDLER_BEHAVIOR_CHANGED_CALLS_PER_10_MINUTES.
-    // Otherwise Chrome notifies the user that this extension is causing issues.
-    if (handlerBehaviorChangedQuota > 0)
-    {
-      browser.webNavigation.onBeforeNavigate.removeListener(
-        propagateHandlerBehaviorChange
-      );
-      browser.webRequest.handlerBehaviorChanged();
-
-      handlerBehaviorChangedQuota--;
-      setTimeout(() => { handlerBehaviorChangedQuota++; }, 600000);
-    }
-  }
-
-  ext.webRequest = {
-    onBeforeRequest: new ext._EventTarget(),
-    handlerBehaviorChanged()
-    {
-      // Defer handlerBehaviorChanged() until navigation occurs.
-      // There wouldn't be any visible effect when calling it earlier,
-      // but it's an expensive operation and that way we avoid to call
-      // it multiple times, if multiple filters are added/removed.
-      let {onBeforeNavigate} = browser.webNavigation;
-      if (!onBeforeNavigate.hasListener(propagateHandlerBehaviorChange))
-        onBeforeNavigate.addListener(propagateHandlerBehaviorChange);
-    }
-  };
-
   browser.tabs.query({}, tabs =>
   {
     tabs.forEach(tab =>
@@ -573,59 +541,6 @@
       });
     });
   });
-
-  browser.webRequest.onBeforeRequest.addListener(details =>
-  {
-    // The high-level code isn't interested in requests that aren't
-    // related to a tab or requests loading a top-level document,
-    // those should never be blocked.
-    if (details.type == "main_frame")
-      return;
-
-    // Filter out requests from non web protocols. Ideally, we'd explicitly
-    // specify the protocols we are interested in (i.e. http://, https://,
-    // ws:// and wss://) with the url patterns, given below, when adding this
-    // listener. But unfortunately, Chrome <=57 doesn't support the WebSocket
-    // protocol and is causing an error if it is given.
-    let url = new URL(details.url);
-    if (url.protocol != "http:" && url.protocol != "https:" &&
-        url.protocol != "ws:" && url.protocol != "wss:")
-      return;
-
-    if (details.originUrl)
-    {
-      // Firefox-only currently, ignore requests initiated by the browser and
-      // extensions.
-      let originUrl = new URL(details.originUrl);
-      if (originUrl.protocol == "chrome:" ||
-          originUrl.protocol == "moz-extension:")
-      {
-        return;
-      }
-    }
-
-    // We are looking for the frame that contains the element which
-    // has triggered this request. For most requests (e.g. images) we
-    // can just use the request's frame ID, but for subdocument requests
-    // (e.g. iframes) we must instead use the request's parent frame ID.
-    let {frameId, type} = details;
-    if (type == "sub_frame")
-      frameId = details.parentFrameId;
-
-    // Sometimes requests are not associated with a browser tab and
-    // in this case we want to still be able to view the url being called.
-    let frame = null;
-    let page = null;
-    if (details.tabId != -1)
-    {
-      frame = ext.getFrame(details.tabId, frameId);
-      page = new Page({id: details.tabId});
-    }
-
-    if (ext.webRequest.onBeforeRequest._dispatch(
-        url, type, page, frame).includes(false))
-      return {cancel: true};
-  }, {urls: ["<all_urls>"]}, ["blocking"]);
 
 
   /* Message passing */
