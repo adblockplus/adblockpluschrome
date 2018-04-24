@@ -581,26 +581,6 @@
   });
 
 
-  /* Storage */
-
-  ext.storage = {
-    get(keys, callback)
-    {
-      browser.storage.local.get(keys, callback);
-    },
-    set(key, value, callback)
-    {
-      let items = {};
-      items[key] = value;
-      browser.storage.local.set(items, callback);
-    },
-    remove(key, callback)
-    {
-      browser.storage.local.remove(key, callback);
-    },
-    onChanged: browser.storage.onChanged
-  };
-
   /* Windows */
   ext.windows = {
     create(createData, callback)
