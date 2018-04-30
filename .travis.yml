@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "7"
+
+notifications:
+  email: false
+
+install:
+    - pip install --user -r requirements.txt
+
+env:
+  - TARGET=chrome
+  - TARGET=gecko
+
+before_script:
+  python ensure_dependencies.py
+
+script:
+  python build.py build -t $TARGET
