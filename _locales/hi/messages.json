@@ -203,17 +203,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$ से अधिक",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Adblock Plus डाऊनलोड करें "
-  },
   "stats_share_message": {
     "message": "मैंने $number$ विज्ञापनों और ट्रैकरों को ब्लाक किआ, Adblock Plus का धन्यवाद्।",
     "placeholders": {
@@ -221,9 +210,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "इस संख्या को शेयर करें"
   },
   "stats_show_iconnumber": {
     "message": "आइकॉन में अंक दर्शाएँ "

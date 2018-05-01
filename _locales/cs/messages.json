@@ -221,17 +221,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "více než $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Stáhnout Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Zablokoval jsem $number$ reklam a slídilů díky Adblock Plus.",
     "placeholders": {
@@ -239,9 +228,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Sdílet toto číslo"
   },
   "stats_show_iconnumber": {
     "message": "Zobrazit číslo v ikoně"

@@ -50,18 +50,30 @@ function addFilters()
   });
 }
 
+// We'd rather just call window.close, but that isn't working consistently with
+// Firefox 57, even when allowScriptsToClose is passed to browser.windows.create
+// See https://bugzilla.mozilla.org/show_bug.cgi?id=1418394
+function closeMe()
+{
+  browser.runtime.sendMessage({
+    type: "app.get",
+    what: "senderId"
+  }).then(tabId => browser.tabs.remove(tabId));
+}
+
 function closeDialog(success)
 {
   browser.runtime.sendMessage({
-    type: "forward",
+    type: "composer.forward",
     targetPageId,
     payload:
     {
       type: "composer.content.finished",
+      popupAlreadyClosed: true,
       remove: (typeof success == "boolean" ? success : false)
     }
   });
-  window.close();
+  closeMe();
 }
 
 function init()
@@ -85,10 +97,22 @@ function init()
     {
       case "composer.dialog.init":
         targetPageId = msg.sender;
-        document.getElementById("filters").value = msg.filters.join("\n");
+        let filtersTextArea = document.getElementById("filters");
+        filtersTextArea.value = msg.filters.join("\n");
+        filtersTextArea.disabled = false;
+        $("#addButton").button("option", "disabled", false);
+
+        // Firefox sometimes tells us this window had loaded before it has[1],
+        // to work around that we send the "composer.dialog.init" message again
+        // when sending failed. Unfortunately sometimes sending is reported as
+        // successful when it's not, but with the response of `undefined`. We
+        // therefore send a response here, and check for it to see if the
+        // message really was sent successfully.
+        // [1] - https://bugzilla.mozilla.org/show_bug.cgi?id=1418655
+        sendResponse(true);
         break;
       case "composer.dialog.close":
-        window.close();
+        closeMe();
         break;
     }
   });

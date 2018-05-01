@@ -18,7 +18,7 @@
     "message": "Áp dụng các thay đổi"
   },
   "block_element": {
-    "message": "Chặn quảng cáo"
+    "message": "Chặn phần từ"
   },
   "cancel": {
     "message": "Hủy bỏ"
@@ -30,34 +30,34 @@
     "message": "Tiếp tục"
   },
   "description": {
-    "message": "Được sử dụng trên hơn 100 triệu thiết bị. Adblock Plus là trình chặn quảng cáo phổ biến nhất trên thế giới."
+    "message": "Được sử dụng trên hơn 100 triệu thiết bị. Adblock Plus là chương trình chặn quảng cáo phổ biến nhất trên thế giới."
   },
   "disabled_for_site": {
     "message": "<strong>Đã loại bỏ</strong> trên trang này"
   },
   "disabled_for_these_domains": {
-    "message": "Adblock Plus không hoạt động ở các tên miền dưới đây. Bạn có thể thêm một tên miền bằng cách bấm vào biểu tượng Adblock Plus nằm trên thanh địa chỉ, hoặc gõ tên miền (không phải là URL) trong khung bên dưới và ấn nút \"Thêm tên miền\"."
+    "message": "Adblock Plus được vô hiệu hoá ở các tên miền dưới đây. Bạn có thể thêm một tên miền bằng cách bấm vào biểu tượng Adblock Plus nằm trên thanh địa chỉ, hoặc gõ tên miền (không phải là URL) trong khung bên dưới và ấn nút \"Thêm tên miền\"."
   },
   "easy_create_filter": {
-    "message": "Chặn phần từ"
+    "message": "Chặn đối tượng"
   },
   "edit_filters_raw": {
     "message": "Chỉnh sửa bộ lọc như văn bản"
   },
   "enable_only_the": {
-    "message": "Chỉ cho phép danh sách bộ lọc mà bạn cần. Quá nhiều bộ lọc có thể làm trình duyệt của bạn không đáp ứng kịp."
+    "message": "Chỉ sử dụng bộ lọc quảng cáo mà bạn cần. Quá nhiều bộ lọc có thể làm trình duyệt của bạn bị lỗi."
   },
   "enabled_for_site": {
     "message": "<strong>Đã bật</strong> trên trang này"
   },
   "filter_elemhideemulation_nodomain": {
-    "message": "Không miền hoạt động quy định cho bộ lọc ẩn yếu tố mở rộng"
+    "message": "Miền chưa được xác định để chặn phần tử"
   },
   "filter_invalid_domain": {
     "message": "Tên miền được chỉ định không hợp lệ (hoặc trống rỗng)"
   },
   "filter_invalid_regexp": {
-    "message": "Biểu hiện thường xuyên không hợp lệ"
+    "message": "Không hợp lệ"
   },
   "filter_lists": {
     "message": "Danh sách các bộ lọc"
@@ -69,16 +69,16 @@
     "message": "Bộ lọc tùy chọn không rõ"
   },
   "filters_acceptableAds2_label": {
-    "message": "Cho phép vài quảng cáo không quấy rối"
+    "message": "Cho phép quảng cáo vô hại"
   },
   "filters_addSubscriptionAdd_label": {
     "message": "Thêm"
   },
   "filters_addSubscriptionOther_label": {
-    "message": "Thêm bộ lọc  khác"
+    "message": "Thêm bộ lọc khác"
   },
   "filters_addSubscription_label": {
-    "message": "Thêm bộ lọc trọn gói"
+    "message": "Thêm bộ lọc"
   },
   "filters_readMore_label": {
     "message": "Đọc thêm"
@@ -93,7 +93,7 @@
     "message": "Thất bại, mã kiểm tra không phù hợp"
   },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "Thất bại, tải xuống thất bại"
+    "message": "Tải xuống thất bại"
   },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Đang tải..."
@@ -128,7 +128,7 @@
     }
   },
   "last_updated_at": {
-    "message": "Cập nhật lần cuối lúc $time$ ngày $date$",
+    "message": "Đã được cập nhật lần cuối vào lúc $time$ ngày $date$",
     "placeholders": {
       "date": {
         "content": "$2"
@@ -139,7 +139,7 @@
     }
   },
   "last_updated_at_today": {
-    "message": "Cập nhật lúc $time$ hôm nay",
+    "message": "Cập nhật lúc $time$ ngày hôm nay",
     "placeholders": {
       "time": {
         "content": "$1"
@@ -161,10 +161,10 @@
     "message": "Adblock Plus bản phát triển"
   },
   "notification_configure": {
-    "message": "Cấu hình thiết lập thông báo"
+    "message": "Thiết lập thông báo"
   },
   "notification_open_all": {
-    "message": "Mở tất cả liên kết từ thông báo này"
+    "message": "Mở tất cả liên kết trong thông báo này"
   },
   "notification_with_buttons": {
     "message": "Nhấn 'OK' để mở tất cả liên kết trong thông báo này."
@@ -179,7 +179,7 @@
     "message": "Tùy chỉnh"
   },
   "out_of_date_lists": {
-    "message": "Các danh sách cũ đã được cập nhật định kỳ."
+    "message": "Các danh sách cũ được cập nhật định kỳ."
   },
   "overlay_notification_button_no": {
     "message": "Không"
@@ -209,7 +209,7 @@
     "message": "Hiện bảng điều khiển 'Adblock Plus' trong công cụ của nhà phát triển"
   },
   "stats_label_page": {
-    "message": "<strong>$number$</strong> trên trang này",
+    "message": "<strong>$number$</strong> quảng cáo đã chặn trên trang này",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -224,30 +224,16 @@
       }
     }
   },
-  "stats_over": {
-    "message": "hơn $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Tải Adblock Plus"
-  },
   "stats_share_message": {
-    "message": "Tôi đã chặn $number$ quảng cáo và những phần mềm theo dõi nhờ có Adblock Plus.",
+    "message": "Tôi đã chặn $number$ quảng cáo và những phần mềm theo dõi độc hại nhờ có Adblock Plus.",
     "placeholders": {
       "number": {
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Chia sẻ"
   },
   "stats_show_iconnumber": {
-    "message": "Hiện số ads đã chặn trong icon ABP"
+    "message": "Hiện số quảng cáo đã chặn trong logo ABP"
   },
   "stats_title": {
     "message": "Quảng cáo đã bị chặn"
@@ -256,10 +242,10 @@
     "message": "Địa chỉ của danh sách bộ lọc:"
   },
   "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Vui lòng chọn một bộ lọc trọn gói từ danh sách:"
+    "message": "Vui lòng chọn một bộ lọc quảng cáo từ danh sách:"
   },
   "subscriptionSelection_title_label": {
-    "message": "Tiêu đề của bộ trọn gói:"
+    "message": "Tiêu đề của bộ lọc:"
   },
   "unexpected_filter_list_header": {
     "message": "Tiêu đề danh sách bộ lọc không được phép tại đây"

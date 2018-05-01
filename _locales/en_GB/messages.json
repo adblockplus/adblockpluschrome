@@ -224,17 +224,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "over $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Download Adblock Plus"
-  },
   "stats_share_message": {
     "message": "I blocked $number$ ads and trackers thanks to Adblock Plus.",
     "placeholders": {
@@ -242,9 +231,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Share this number"
   },
   "stats_show_iconnumber": {
     "message": "Show number in icon"

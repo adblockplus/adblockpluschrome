@@ -33,7 +33,7 @@
     "message": "Usado em mais de 100 milhões de dispositivos, Adblock Plus é o bloqueador de anúncios mais popular no mundo."
   },
   "disabled_for_site": {
-    "message": "<strong>Desativado</strong> neste site"
+    "message": "<strong>Desativado</strong> neste sítio"
   },
   "disabled_for_these_domains": {
     "message": "O Adblock Plus está desativado nos domínios abaixo listados. Pode adicionar um domínio através do ícone do Adblock Plus na barra de endereço ou digitando o domínio (não um URL) na caixa e clicando no botão \"Adicionar domínio\"."
@@ -48,7 +48,13 @@
     "message": "Ative apenas os filtros que precisa. Demasiados filtros podem reduzir o desempenho do seu navegador."
   },
   "enabled_for_site": {
-    "message": "<strong>Ativado</strong> neste site"
+    "message": "<strong>Ativado</strong> neste sítio"
+  },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Nenhum domínio ativo especificado para o filtro de ocultação de elementos estendidos"
+  },
+  "filter_invalid_domain": {
+    "message": "Domínio especificado inválido (ou vazio)"
   },
   "filter_invalid_regexp": {
     "message": "Expressão regular invalida"
@@ -57,7 +63,7 @@
     "message": "Lista de filtros"
   },
   "filter_must_follow_syntax": {
-    "message": "O filtro deve seguir a <a>sintaxe do filtro Adblock Plus</a>."
+    "message": "O teu filtro deve obedecer à <a>sintaxe de filtragem Adblock Plus</a>."
   },
   "filter_unknown_option": {
     "message": "Opção de filtro desconhecido"
@@ -114,7 +120,7 @@
     "message": "A localização da lista de filtros não é um endereço ou nome de ficheiro válido."
   },
   "invalid_css_selector": {
-    "message": "$selector$ não é um seletor CSS válido",
+    "message": "$selector$ não é um seletor de CSS válido",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -147,6 +153,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Carregando..."
   },
   "name": {
     "message": "Adblock Plus"
@@ -197,7 +206,7 @@
     "message": "Reportar erros nesta página"
   },
   "show_block_element_menu": {
-    "message": "Mostrar 'Bloquear elemento' botão direito do rato no item do menu"
+    "message": "Mostrar item 'Bloquear Elemento' no menu do botão direito do rato"
   },
   "show_devtools_panel": {
     "message": "Mostra o painel 'Adblock Plus' nas ferramentas de desenvolvedor"
@@ -218,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "mais de $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Transferir o Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Eu bloqueei $number$ anúncios e rastreamentos graças ao Adblock Plus.",
     "placeholders": {
@@ -236,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Partilha este numero"
   },
   "stats_show_iconnumber": {
     "message": "Mostrar número no ícone"

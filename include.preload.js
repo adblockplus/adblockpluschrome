@@ -17,8 +17,9 @@
 
 "use strict";
 
-let {splitSelector} = require("common");
-let {ElemHideEmulation} = require("content_elemHideEmulation");
+let {splitSelector} = require("./adblockpluscore/lib/common");
+let {ElemHideEmulation} =
+  require("./adblockpluscore/lib/content/elemHideEmulation");
 
 // This variable is also used by our other content scripts.
 let elemhide;
@@ -34,6 +35,8 @@ const typeMap = new Map([
   ["object", "OBJECT"],
   ["embed", "OBJECT"]
 ]);
+
+let collapsingSelectors = new Set();
 
 function getURLsFromObjectElement(element)
 {
@@ -128,6 +131,43 @@ function getURLsFromElement(element)
   return urls;
 }
 
+function isCollapsibleMediaElement(element, mediatype)
+{
+  if (mediatype != "MEDIA")
+    return false;
+
+  if (!element.getAttribute("src"))
+    return false;
+
+  for (let child of element.children)
+  {
+    // If the <video> or <audio> element contains any <source> or <track>
+    // children, we cannot address it in CSS by the source URL; in that case we
+    // don't "collapse" it using a CSS selector but rather hide it directly by
+    // setting the style="..." attribute.
+    if (child.localName == "source" || child.localName == "track")
+      return false;
+  }
+
+  return true;
+}
+
+function collapseMediaElement(element, srcValue)
+{
+  if (!srcValue)
+    return;
+
+  let selector = element.localName + "[src=" + CSS.escape(srcValue) + "]";
+
+  // Adding selectors is expensive so do it only if we really have a new
+  // selector.
+  if (!collapsingSelectors.has(selector))
+  {
+    collapsingSelectors.add(selector);
+    elemhide.addSelectors([selector], null, "collapsing", true);
+  }
+}
+
 function hideElement(element)
 {
   function doHide()
@@ -165,6 +205,12 @@ function checkCollapse(element)
   if (urls.length == 0)
     return;
 
+  let collapsibleMediaElement = isCollapsibleMediaElement(element, mediatype);
+
+  // Save the value of the src attribute because it can change between now and
+  // when we get the response from the background page.
+  let srcValue = collapsibleMediaElement ? element.getAttribute("src") : null;
+
   browser.runtime.sendMessage(
     {
       type: "filters.collapse",
@@ -172,12 +218,14 @@ function checkCollapse(element)
       mediatype,
       baseURL: document.location.href
     },
-
     collapse =>
     {
       if (collapse)
       {
-        hideElement(element);
+        if (collapsibleMediaElement)
+          collapseMediaElement(element, srcValue);
+        else
+          hideElement(element);
       }
     }
   );
@@ -342,10 +390,10 @@ ElementHidingTracer.prototype = {
 function ElemHide()
 {
   this.shadow = this.createShadowTree();
-  this.style = null;
+  this.styles = new Map();
   this.tracer = null;
-  this.inject = true;
-  this.emulatedPatterns = null;
+  this.inline = true;
+  this.inlineEmulated = true;
 
   this.elemHideEmulation = new ElemHideEmulation(
     this.addSelectors.bind(this),
@@ -353,7 +401,7 @@ function ElemHide()
   );
 }
 ElemHide.prototype = {
-  selectorGroupSize: 200,
+  selectorGroupSize: 1024,
 
   createShadowTree()
   {
@@ -362,6 +410,12 @@ ElemHide.prototype = {
     // a shadow root breaks running CSS transitions. So we have to create
     // the shadow root before transistions might start (#452).
     if (!("createShadowRoot" in document.documentElement))
+      return null;
+
+    // Both Firefox and Chrome 66+ support user style sheets, so we can avoid
+    // creating an unnecessary shadow root on these platforms.
+    let match = /\bChrome\/(\d+)/.exec(navigator.userAgent);
+    if (!match || match[1] >= 66)
       return null;
 
     // Using shadow DOM causes issues on some Google websites,
@@ -374,29 +428,42 @@ ElemHide.prototype = {
     // avoid creating the shadowRoot twice.
     let shadow = document.documentElement.shadowRoot ||
                  document.documentElement.createShadowRoot();
-    shadow.appendChild(document.createElement("shadow"));
+    shadow.appendChild(document.createElement("content"));
 
     return shadow;
   },
 
-  injectSelectors(selectors, filters)
+  addSelectorsInline(selectors, groupName, appendOnly = false)
   {
-    if (!this.style)
+    let style = this.styles.get(groupName);
+
+    if (style && !appendOnly)
+    {
+      while (style.sheet.cssRules.length > 0)
+        style.sheet.deleteRule(0);
+    }
+
+    if (selectors.length == 0)
+      return;
+
+    if (!style)
     {
       // Create <style> element lazily, only if we add styles. Add it to
       // the shadow DOM if possible. Otherwise fallback to the <head> or
       // <html> element. If we have injected a style element before that
       // has been removed (the sheet property is null), create a new one.
-      this.style = document.createElement("style");
+      style = document.createElement("style");
       (this.shadow || document.head ||
-                      document.documentElement).appendChild(this.style);
+                      document.documentElement).appendChild(style);
 
       // It can happen that the frame already navigated to a different
       // document while we were waiting for the background page to respond.
       // In that case the sheet property will stay null, after addind the
       // <style> element to the shadow DOM.
-      if (!this.style.sheet)
+      if (!style.sheet)
         return;
+
+      this.styles.set(groupName, style);
     }
 
     // If using shadow DOM, we have to add the ::content pseudo-element
@@ -417,27 +484,30 @@ ElemHide.prototype = {
       preparedSelectors = selectors;
     }
 
-    // Safari only allows 8192 primitive selectors to be injected at once[1], we
-    // therefore chunk the inserted selectors into groups of 200 to be safe.
-    // (Chrome also has a limit, larger... but we're not certain exactly what it
-    //  is! Edge apparently has no such limit.)
-    // [1] - https://github.com/WebKit/webkit/blob/1cb2227f6b2a1035f7bdc46e5ab69debb75fc1de/Source/WebCore/css/RuleSet.h#L68
+    // Chromium's Blink engine supports only up to 8,192 simple selectors, and
+    // even fewer compound selectors, in a rule. The exact number of selectors
+    // that would work depends on their sizes (e.g. "#foo .bar" has a
+    // size of 2). Since we don't know the sizes of the selectors here, we
+    // simply split them into groups of 1,024, based on the reasonable
+    // assumption that the average selector won't have a size greater than 8.
+    // The alternative would be to calculate the sizes of the selectors and
+    // divide them up accordingly, but this approach is more efficient and has
+    // worked well in practice. In theory this could still lead to some
+    // selectors not working on Chromium, but it is highly unlikely.
+    // See issue #6298 and https://crbug.com/804179
     for (let i = 0; i < preparedSelectors.length; i += this.selectorGroupSize)
     {
       let selector = preparedSelectors.slice(
         i, i + this.selectorGroupSize
       ).join(", ");
-      this.style.sheet.insertRule(selector + "{display: none !important;}",
-                                  this.style.sheet.cssRules.length);
+      style.sheet.insertRule(selector + "{display: none !important;}",
+                             style.sheet.cssRules.length);
     }
   },
 
-  addSelectors(selectors, filters)
+  addSelectors(selectors, filters, groupName = "emulated", appendOnly = false)
   {
-    if (selectors.length == 0)
-      return;
-
-    if (this.inject)
+    if (this.inline || this.inlineEmulated)
     {
       // Insert the style rules inline if we have been instructed by the
       // background page to do so. This is usually the case, except on platforms
@@ -448,17 +518,21 @@ ElemHide.prototype = {
       // Related Chrome and Firefox issues:
       // https://bugs.chromium.org/p/chromium/issues/detail?id=632009
       // https://bugzilla.mozilla.org/show_bug.cgi?id=1310026
-      this.injectSelectors(selectors, filters);
+      this.addSelectorsInline(selectors, groupName, appendOnly);
     }
     else
     {
       browser.runtime.sendMessage({
         type: "elemhide.injectSelectors",
-        selectors
+        selectors,
+        groupName,
+        appendOnly
       });
     }
 
-    if (this.tracer)
+    // Only trace selectors that are based directly on hiding filters
+    // (i.e. leave out collapsing selectors).
+    if (this.tracer && groupName != "collapsing")
       this.tracer.addSelectors(selectors, filters);
   },
 
@@ -485,19 +559,22 @@ ElemHide.prototype = {
         this.tracer.disconnect();
       this.tracer = null;
 
-      if (this.style && this.style.parentElement)
-        this.style.parentElement.removeChild(this.style);
-      this.style = null;
-
       if (response.trace)
         this.tracer = new ElementHidingTracer();
 
-      this.inject = response.inject;
+      this.inline = response.inline;
+      this.inlineEmulated = !!response.inlineEmulated;
 
-      if (this.inject)
-        this.addSelectors(response.selectors);
-      else if (this.tracer)
+      if (this.inline)
+        this.addSelectorsInline(response.selectors, "standard");
+
+      if (this.tracer)
         this.tracer.addSelectors(response.selectors);
+
+      // Prefer CSS selectors for -abp-has and -abp-contains unless the
+      // background page has asked us to use inline styles.
+      this.elemHideEmulation.useInlineStyles = this.inline ||
+                                               this.inlineEmulated;
 
       this.elemHideEmulation.apply(response.emulatedPatterns);
     });

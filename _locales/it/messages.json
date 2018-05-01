@@ -51,7 +51,7 @@
     "message": "<strong>Attivato</strong> su questo sito"
   },
   "filter_elemhideemulation_nodomain": {
-    "message": "Nessun dominio attivo specificato per filtro esteso di nascondere l'elemento"
+    "message": "Nessun dominio attivo specificato per il filtro di occultamento dell'elemento"
   },
   "filter_invalid_domain": {
     "message": "Dominio specificato non valido (o vuoto)"
@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "Caricamento..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -224,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "oltre $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Scarica Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Ho bloccato $number$ pubblicità e trackers grazie ad Adblock Plus.",
     "placeholders": {
@@ -242,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Condividi questo numero"
   },
   "stats_show_iconnumber": {
     "message": "Visualizza il numero nell'icona"

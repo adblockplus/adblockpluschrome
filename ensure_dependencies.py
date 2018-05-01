@@ -47,7 +47,7 @@ SKIP_DEPENDENCY_UPDATES = os.environ.get(
 NPM_LOCKFILE = '.npm_install_lock'
 
 
-class Mercurial():
+class Mercurial:
     def istype(self, repodir):
         return os.path.exists(os.path.join(repodir, '.hg'))
 
@@ -94,7 +94,7 @@ class Mercurial():
         return url
 
 
-class Git():
+class Git:
     def istype(self, repodir):
         return os.path.exists(os.path.join(repodir, '.git'))
 

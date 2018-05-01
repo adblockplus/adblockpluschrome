@@ -1,10 +1,10 @@
 "use strict";
 
 {
-  const {parseFilter, parseFilters} = require("filterValidation");
+  const {parseFilter, parseFilters} = require("../../lib/filterValidation");
   const {BlockingFilter,
          ElemHideFilter,
-         CommentFilter} = require("filterClasses");
+         CommentFilter} = require("../../adblockpluscore/lib/filterClasses");
 
   QUnit.module("Filter validation");
 

@@ -75,13 +75,13 @@
     "message": "Ajouter"
   },
   "filters_addSubscriptionOther_label": {
-    "message": "Ajouter un autre abonnement"
+    "message": "Ajouter un abonnement différent"
   },
   "filters_addSubscription_label": {
-    "message": "S'abonner à la liste de filtres"
+    "message": "Ajouter un abonnement au filtre"
   },
   "filters_readMore_label": {
-    "message": "En apprendre davantage"
+    "message": "Lire plus"
   },
   "filters_subscription_delete_label": {
     "message": "Supprimer"
@@ -93,19 +93,19 @@
     "message": "Échec, le checksum ne correspond pas !"
   },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "Échec, erreur lors du téléchargement !"
+    "message": "Échec, erreur lors du téléchargement"
   },
   "filters_subscription_lastDownload_inProgress": {
     "message": "Téléchargement en cours…"
   },
   "filters_subscription_lastDownload_invalidData": {
-    "message": "Échec, ceci n'est pas une liste de filtres valide !"
+    "message": "Échec, ceci n'est pas une liste de filtres valide"
   },
   "filters_subscription_lastDownload_invalidURL": {
-    "message": "Échec, ceci n'est pas une adresse valide !"
+    "message": "Échec, ceci n'est pas une adresse valide"
   },
   "filters_viewList_label": {
-    "message": "Afficher la liste"
+    "message": "Voir la liste"
   },
   "found_a_bug": {
     "message": "Vous avez trouvé une erreur ? Vous voulez traduire Adblock Plus dans votre langue ? N’hésitez pas à <a>déposer une demande ici</a>."
@@ -153,6 +153,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Chargement..."
   },
   "name": {
     "message": "Adblock Plus"
@@ -224,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "plus de $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Télécharger Adblock Plus"
-  },
   "stats_share_message": {
     "message": "J'ai bloqué $number$ publicités et trackers grâce à Adblock Plus.",
     "placeholders": {
@@ -242,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Partager le nombre de blocages"
   },
   "stats_show_iconnumber": {
     "message": "Afficher le nombre sur l'icône"

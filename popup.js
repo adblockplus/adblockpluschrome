@@ -17,33 +17,6 @@
 
 "use strict";
 
-const shareURL = "https://adblockplus.org/";
-const messageMark = {};
-
-const shareLinks = {
-  facebook: ["https://www.facebook.com/dialog/feed", {
-    app_id: "475542399197328",
-    link: shareURL,
-    redirect_uri: "https://www.facebook.com/",
-    ref: "adcounter",
-    name: messageMark,
-    actions: JSON.stringify([
-      {
-        name: browser.i18n.getMessage("stats_share_download"),
-        link: shareURL
-      }
-    ])
-  }],
-  gplus: ["https://plus.google.com/share", {
-    url: shareURL
-  }],
-  twitter: ["https://twitter.com/intent/tweet", {
-    text: messageMark,
-    url: shareURL,
-    via: "AdblockPlus"
-  }]
-};
-
 let tab = null;
 
 function getPref(key, callback)
@@ -191,24 +164,6 @@ function insertMessage(element, text, links)
   insertMessage(element, after, links);
 }
 
-function createShareLink(network, blockedCount)
-{
-  let url = shareLinks[network][0];
-  let params = shareLinks[network][1];
-
-  let querystring = [];
-  for (let key in params)
-  {
-    let value = params[key];
-    if (value == messageMark)
-      value = browser.i18n.getMessage("stats_share_message", blockedCount);
-    querystring.push(
-      encodeURIComponent(key) + "=" + encodeURIComponent(value)
-    );
-  }
-  return url + "?" + querystring.join("&");
-}
-
 function updateStats()
 {
   let statsPage = document.getElementById("stats-page");
@@ -227,27 +182,6 @@ function updateStats()
   {
     ext.i18n.setElementText(statsTotal, "stats_label_total",
                             [blockedTotal.toLocaleString()]);
-  });
-}
-
-function share(event)
-{
-  getPref("blocked_total", blockedTotal =>
-  {
-    // Easter Egg
-    if (blockedTotal <= 9000 || blockedTotal >= 10000)
-    {
-      blockedTotal = blockedTotal.toLocaleString();
-    }
-    else
-    {
-      blockedTotal = browser.i18n.getMessage("stats_over",
-                                            (9000).toLocaleString());
-    }
-
-    browser.tabs.create({
-      url: createShareLink(event.target.dataset.social, blockedTotal)
-    });
   });
 }
 
@@ -343,7 +277,6 @@ document.addEventListener("DOMContentLoaded", () =>
     });
   }
 
-  document.getElementById("share-box").addEventListener("click", share);
   let showIconNumber = document.getElementById("show-iconnumber");
   getPref("show_statsinicon", showStatsInIcon =>
   {
@@ -401,7 +334,7 @@ window.addEventListener("load", () =>
           setPref("notifications_ignoredcategories", true);
 
         notificationElement.hidden = true;
-        notification.onClicked();
+        browser.runtime.sendMessage({type: "notifications.clicked"});
       }
     }, true);
   });

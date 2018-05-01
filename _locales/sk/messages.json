@@ -224,17 +224,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "viac ako $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Stiahnuť Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Zablokoval som $number$ reklám a sledovačov vďaka Adblock Plus.",
     "placeholders": {
@@ -242,9 +231,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Zdieľať tento počet"
   },
   "stats_show_iconnumber": {
     "message": "Zobraziť počet v ikone"

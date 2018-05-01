@@ -3,28 +3,73 @@
     "message": "დამატება"
   },
   "add_domain_button": {
-    "message": "დომეინის დამატება"
+    "message": "დომენის დამატება"
   },
   "add_filter_button": {
     "message": "ფილტრის დამატება"
   },
+  "add_filters_msg": {
+    "message": "დაემატოს ფილტრ(ებ)ი?"
+  },
   "add_your_own_filters": {
     "message": "საკუთარი ფილტრის დამატება"
+  },
+  "apply_changes": {
+    "message": "ცვლილებების მიღება"
+  },
+  "block_element": {
+    "message": "ელემენტის შეზღუდვა"
   },
   "cancel": {
     "message": "გაუქმება"
   },
+  "clickhide_instructions": {
+    "message": "ამ სარკმლის დახურვისთანავე, დააწკაპეთ (ან მარჯვენა წკაპი) ელემენტზე მოცემულ გვერდზე."
+  },
   "continue": {
     "message": "გაგრძელება"
   },
+  "description": {
+    "message": "გამოიყენება 100 მილიონზე მეტ მოწყობილობაზე, Adblock Plus მსოფლიოში ყველაზე სასურველი რეკლამების შემზღუდავია."
+  },
+  "disabled_for_site": {
+    "message": "<strong>გამორთულია</strong> ამ საიტზე"
+  },
+  "disabled_for_these_domains": {
+    "message": "Adblock Plus-ი გამორთულია ქვემოთ მოცემული დომენებისთვის. თქვენ შეგიძლიათ დაამატოთ დომენი Adblock Plus-ის ხატულის საშუალებით ან ხელით მიუთითოთ (URL ბმული არა) არსებულ ველში და დააწკაპოთ \"დომენის დამატების\" ღილაკზე."
+  },
+  "easy_create_filter": {
+    "message": "ელემენტის შეზღუდვა"
+  },
+  "edit_filters_raw": {
+    "message": "ფილტრის ტექსტის სახით ჩასწორება"
+  },
   "enable_only_the": {
-    "message": "გამოიწერეთ მხოლოდ საჭირო ფილტრები. ბევრი ფილტრები გამოიწვევს ბრაუზერის არასტაბილურობას."
+    "message": "გამოიწერეთ მხოლოდ საჭირო ფილტრები. ზედმეტად ბევრი ფილტრი დატვირთავს ბრაუზერს."
+  },
+  "enabled_for_site": {
+    "message": "<strong>ჩართულია</strong> ამ საიტზე"
+  },
+  "filter_elemhideemulation_nodomain": {
+    "message": "მოქმედი დომენი არაა მითითებული ელემენტის დამალვის გაფართოებული ფილტრისთვის"
+  },
+  "filter_invalid_domain": {
+    "message": "მითითებულია არამართებული (ან ცარიელი) დომენი"
+  },
+  "filter_invalid_regexp": {
+    "message": "არამართებული რეგულარული გამოსახულება"
   },
   "filter_lists": {
     "message": "ფილტრის წესები"
   },
+  "filter_must_follow_syntax": {
+    "message": "თქვენი ფილტრი უნდა იყოს შედგენილი <a>Adblock Plus ფილტრის სინტაქსით</a>."
+  },
+  "filter_unknown_option": {
+    "message": "ფილტრის უცნობი პარამეტრი"
+  },
   "filters_acceptableAds2_label": {
-    "message": "ზოგიერთი რეკლამის დაშვება"
+    "message": "ზოგიერთი არაგამაღიზიანებელი რეკლამის დაშვება"
   },
   "filters_addSubscriptionAdd_label": {
     "message": "დამატება"
@@ -44,20 +89,91 @@
   "filters_subscription_enabled_label": {
     "message": "ჩართული"
   },
+  "filters_subscription_lastDownload_checksumMismatch": {
+    "message": "შეცდომა, სადარჯამი არ ემთხვევა"
+  },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "ჩამოტვირთვა წარუმატებელია"
+    "message": "შეცდომა, ჩამოტვირთვა ვერ მოხერხდა"
   },
   "filters_subscription_lastDownload_inProgress": {
     "message": "იტვირთება…"
   },
+  "filters_subscription_lastDownload_invalidData": {
+    "message": "შეცდომა, არამართებული ფილტრის წესები"
+  },
+  "filters_subscription_lastDownload_invalidURL": {
+    "message": "შეცდომა, არამართებული მისამართი"
+  },
   "filters_viewList_label": {
-    "message": "სიის ნახვა"
+    "message": "წესების ნახვა"
+  },
+  "found_a_bug": {
+    "message": "ხარვეზი აღმოაჩინეთ? გსურთ თარგმნოთ Adblock Plus თქვენს ენაზე? გთხოვთ <a>მოგვახსენეთ აქ</a>."
+  },
+  "general": {
+    "message": "ზოგადი"
+  },
+  "global_remove_subscription_warning": {
+    "message": "ნამდვილად გსურთ ამ გამოწერის გაუქმება?"
   },
   "global_subscription_invalid_location": {
-    "message": "მითითებული ფილტრის მისამართი არც სწორი ბმულია და არც სწორი სახელი."
+    "message": "მითითებული ფილტრის მისამართი არაა არც მართებული ბმული და არც მართებული დასახელება."
+  },
+  "invalid_css_selector": {
+    "message": "$selector$ არაა მართებული CSS მიმთითებელი",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at": {
+    "message": "ბოლო განახლების დროა $time$ $date$",
+    "placeholders": {
+      "date": {
+        "content": "$2"
+      },
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "last_updated_at_today": {
+    "message": "ბოლოს განახლდა დღეს, $time$ საათზე",
+    "placeholders": {
+      "time": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "ხაზი $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "loading": {
+    "message": "იტვირთება..."
   },
   "name": {
     "message": "Adblock Plus"
+  },
+  "name_devbuild": {
+    "message": "Adblock Plus საცდელი ანაწყობი"
+  },
+  "notification_configure": {
+    "message": "შეტყობინებების პარამეტრების გამართვა"
+  },
+  "notification_open_all": {
+    "message": "ყველა ბმულის გახსნა ამ შეტყობინებიდან"
+  },
+  "notification_with_buttons": {
+    "message": "დაწკაპეთ \"OK\" ამ შეტყობინებიდან ყველა ბმულის გასახსნელად."
+  },
+  "notification_without_buttons": {
+    "message": "დააწკაპეთ ამ შეტყობინებაზე მასში არსებული ყველა ბმულის გასახსნელად."
   },
   "options": {
     "message": "AdBlock Plus-ის პარამეტრები"
@@ -66,7 +182,7 @@
     "message": "პარამეტრები"
   },
   "out_of_date_lists": {
-    "message": "მოძველებული სია პერიოდულად აქტუალიზირდება."
+    "message": "მოძველებული წესები დროდადრო ახლდება."
   },
   "overlay_notification_button_no": {
     "message": "არა"
@@ -74,14 +190,56 @@
   "overlay_notification_button_yes": {
     "message": "დიახ"
   },
+  "overlay_notification_closing_button_hide": {
+    "message": "შეტყობინების დახურვა"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "შეტყობინებების შეწყვეტა"
+  },
+  "overlay_shownotifications_label": {
+    "message": "საჭირო შეტყობინებების ჩვენება"
+  },
   "remove_button": {
     "message": "მონიშნულის წაშლა"
   },
   "sendReport": {
-    "message": "განაცხადეთ ამ გვერდზე პრობლემის შესახებ"
+    "message": "მოხსენება ხარვეზის შესახებ ამ გვერდზე"
   },
-  "stats_share_title": {
-    "message": "ამ ციფრის გაზიარება"
+  "show_block_element_menu": {
+    "message": "მარჯვენა წკაპით 'ელემენტის შეზღუდვის' შესაძლებლობა"
+  },
+  "show_devtools_panel": {
+    "message": "'Adblock Plus'-ის არე შემმუშავებლის ხელსაწყოებში"
+  },
+  "stats_label_page": {
+    "message": "<strong>$number$</strong> ამ გვერდზე",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "<strong>$number$</strong> ჯამში",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_share_message": {
+    "message": "Adblock Plus-ის დახმარებით შევზღუდე $number$ სარეკლამო და მეთვალყურე ელემენტი.",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_show_iconnumber": {
+    "message": "რიცხვის ჩვენება ხატულაზე"
+  },
+  "stats_title": {
+    "message": "შეზღუდული რეკლამები"
   },
   "subscriptionSelection_location_label": {
     "message": "ფილტრის სიის მდებარეობა:"
@@ -90,12 +248,15 @@
     "message": "გთხოვთ აირჩიეთ არსებული ფილტრებიდან:"
   },
   "subscriptionSelection_title_label": {
-    "message": "გამოწერის სათაური:"
+    "message": "გამოწერილი ფილტრის დასახელება:"
+  },
+  "unexpected_filter_list_header": {
+    "message": "ფილტრის წესების თავსართები არაა აქ დაშვებული"
   },
   "update_now": {
-    "message": "აქტუალიზირება"
+    "message": "განახლება ახლავე"
   },
   "whitelisted_domains": {
-    "message": "დაშვებული დომეინები"
+    "message": "დაშვებული დომენები"
   }
 }

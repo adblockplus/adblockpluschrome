@@ -224,17 +224,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "s $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Sider Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Sweḥleɣ $number$ n udellel d inedfaṛen s Adblock Plus.",
     "placeholders": {
@@ -242,9 +231,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Bḍu uṭṭun-agi"
   },
   "stats_show_iconnumber": {
     "message": "Sken uṭṭun ɣef tignit"

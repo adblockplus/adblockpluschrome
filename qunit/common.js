@@ -17,12 +17,12 @@
 
 "use strict";
 
-const {FilterStorage} = require("filterStorage");
-const {Subscription} = require("subscriptionClasses");
-const {Filter} = require("filterClasses");
-const {defaultMatcher} = require("matcher");
-const {ElemHide} = require("elemHide");
-const {Prefs} = require("prefs");
+const {FilterStorage} = require("../adblockpluscore/lib/filterStorage");
+const {Subscription} = require("../adblockpluscore/lib/subscriptionClasses");
+const {Filter} = require("../adblockpluscore/lib/filterClasses");
+const {defaultMatcher} = require("../adblockpluscore/lib/matcher");
+const {ElemHide} = require("../adblockpluscore/lib/elemHide");
+const {Prefs} = require("../lib/prefs");
 
 function prepareFilterComponents(keepListeners)
 {

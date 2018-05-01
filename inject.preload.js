@@ -23,16 +23,15 @@ let randomEventName = "abp-request-" + Math.random().toString(36).substr(2);
 // code to the background page and back again.
 document.addEventListener(randomEventName, event =>
 {
-  let {url, requestType} = event.detail;
+  let {url} = event.detail;
 
   browser.runtime.sendMessage({
-    type: "request.blockedByWrapper",
-    requestType,
+    type: "request.blockedByRTCWrapper",
     url
   }, block =>
   {
     document.dispatchEvent(new CustomEvent(
-      randomEventName + "-" + requestType + "-" + url, {detail: block}
+      randomEventName + "-" + url, {detail: block}
     ));
   });
 });
@@ -138,8 +137,11 @@ function injected(eventName, injectedIntoContentWindow)
   }
 
   /*
-   * Shared request checking code, used by both the WebSocket and
-   * RTCPeerConnection wrappers.
+   * RTCPeerConnection wrapper
+   *
+   * The webRequest API in Chrome does not yet allow the blocking of
+   * WebRTC connections.
+   * See https://bugs.chromium.org/p/chromium/issues/detail?id=707683
    */
   let RealCustomEvent = window.CustomEvent;
 
@@ -153,9 +155,9 @@ function injected(eventName, injectedIntoContentWindow)
     let addEventListener = document.addEventListener.bind(document);
     let dispatchEvent = document.dispatchEvent.bind(document);
     let removeEventListener = document.removeEventListener.bind(document);
-    checkRequest = (requestType, url, callback) =>
+    checkRequest = (url, callback) =>
     {
-      let incomingEventName = eventName + "-" + requestType + "-" + url;
+      let incomingEventName = eventName + "-" + url;
 
       function listener(event)
       {
@@ -164,8 +166,7 @@ function injected(eventName, injectedIntoContentWindow)
       }
       addEventListener(incomingEventName, listener);
 
-      dispatchEvent(new RealCustomEvent(eventName,
-                                        {detail: {url, requestType}}));
+      dispatchEvent(new RealCustomEvent(eventName, {detail: {url}}));
     };
   }
 
@@ -182,210 +183,176 @@ function injected(eventName, injectedIntoContentWindow)
     }
   }
 
-  /*
-   * WebSocket wrapper
-   *
-   * Required before Chrome 58, since the webRequest API didn't allow us to
-   * intercept WebSockets.
-   * See https://bugs.chromium.org/p/chromium/issues/detail?id=129353
-   */
-  let RealWebSocket = WebSocket;
-  let closeWebSocket = Function.prototype.call.bind(
-    RealWebSocket.prototype.close
-  );
-
-  function WrappedWebSocket(url, ...args)
-  {
-    // Throw correct exceptions if the constructor is used improperly.
-    if (!(this instanceof WrappedWebSocket)) return RealWebSocket();
-    if (arguments.length < 1) return new RealWebSocket();
-
-    let websocket = new RealWebSocket(url, ...args);
-
-    checkRequest("websocket", websocket.url, blocked =>
-    {
-      if (blocked)
-        closeWebSocket(websocket);
-    });
-
-    return websocket;
-  }
-  WrappedWebSocket.prototype = RealWebSocket.prototype;
-  window.WebSocket = WrappedWebSocket.bind();
-  copyProperties(RealWebSocket, WebSocket,
-                 ["CONNECTING", "OPEN", "CLOSING", "CLOSED", "prototype"]);
-  RealWebSocket.prototype.constructor = WebSocket;
-
-  /*
-   * RTCPeerConnection wrapper
-   *
-   * The webRequest API in Chrome does not yet allow the blocking of
-   * WebRTC connections.
-   * See https://bugs.chromium.org/p/chromium/issues/detail?id=707683
-   */
   let RealRTCPeerConnection = window.RTCPeerConnection ||
-                                window.webkitRTCPeerConnection;
-  let closeRTCPeerConnection = Function.prototype.call.bind(
-    RealRTCPeerConnection.prototype.close
-  );
-  let RealArray = Array;
-  let RealString = String;
-  let {create: createObject, defineProperty} = Object;
+                              window.webkitRTCPeerConnection;
 
-  function normalizeUrl(url)
+  // Firefox has the option (media.peerconnection.enabled) to disable WebRTC
+  // in which case RealRTCPeerConnection is undefined.
+  if (typeof RealRTCPeerConnection != "undefined")
   {
-    if (typeof url != "undefined")
-      return RealString(url);
-  }
+    let closeRTCPeerConnection = Function.prototype.call.bind(
+      RealRTCPeerConnection.prototype.close
+    );
+    let RealArray = Array;
+    let RealString = String;
+    let {create: createObject, defineProperty} = Object;
 
-  function safeCopyArray(originalArray, transform)
-  {
-    if (originalArray == null || typeof originalArray != "object")
-      return originalArray;
-
-    let safeArray = RealArray(originalArray.length);
-    for (let i = 0; i < safeArray.length; i++)
+    let normalizeUrl = url =>
     {
-      defineProperty(safeArray, i, {
-        configurable: false, enumerable: false, writable: false,
-        value: transform(originalArray[i])
-      });
-    }
-    defineProperty(safeArray, "length", {
-      configurable: false, enumerable: false, writable: false,
-      value: safeArray.length
-    });
-    return safeArray;
-  }
+      if (typeof url != "undefined")
+        return RealString(url);
+    };
 
-  // It would be much easier to use the .getConfiguration method to obtain
-  // the normalized and safe configuration from the RTCPeerConnection
-  // instance. Unfortunately its not implemented as of Chrome unstable 59.
-  // See https://www.chromestatus.com/feature/5271355306016768
-  function protectConfiguration(configuration)
-  {
-    if (configuration == null || typeof configuration != "object")
-      return configuration;
+    let safeCopyArray = (originalArray, transform) =>
+    {
+      if (originalArray == null || typeof originalArray != "object")
+        return originalArray;
 
-    let iceServers = safeCopyArray(
-      configuration.iceServers,
-      iceServer =>
+      let safeArray = RealArray(originalArray.length);
+      for (let i = 0; i < safeArray.length; i++)
       {
-        let {url, urls} = iceServer;
-
-        // RTCPeerConnection doesn't iterate through pseudo Arrays of urls.
-        if (typeof urls != "undefined" && !(urls instanceof RealArray))
-          urls = [urls];
-
-        return createObject(iceServer, {
-          url: {
-            configurable: false, enumerable: false, writable: false,
-            value: normalizeUrl(url)
-          },
-          urls: {
-            configurable: false, enumerable: false, writable: false,
-            value: safeCopyArray(urls, normalizeUrl)
-          }
+        defineProperty(safeArray, i, {
+          configurable: false, enumerable: false, writable: false,
+          value: transform(originalArray[i])
         });
       }
-    );
-
-    return createObject(configuration, {
-      iceServers: {
+      defineProperty(safeArray, "length", {
         configurable: false, enumerable: false, writable: false,
-        value: iceServers
-      }
-    });
-  }
+        value: safeArray.length
+      });
+      return safeArray;
+    };
 
-  function checkUrl(peerconnection, url)
-  {
-    checkRequest("webrtc", url, blocked =>
+    // It would be much easier to use the .getConfiguration method to obtain
+    // the normalized and safe configuration from the RTCPeerConnection
+    // instance. Unfortunately its not implemented as of Chrome unstable 59.
+    // See https://www.chromestatus.com/feature/5271355306016768
+    let protectConfiguration = configuration =>
     {
-      if (blocked)
-      {
-        // Calling .close() throws if already closed.
-        try
+      if (configuration == null || typeof configuration != "object")
+        return configuration;
+
+      let iceServers = safeCopyArray(
+        configuration.iceServers,
+        iceServer =>
         {
-          closeRTCPeerConnection(peerconnection);
+          let {url, urls} = iceServer;
+
+          // RTCPeerConnection doesn't iterate through pseudo Arrays of urls.
+          if (typeof urls != "undefined" && !(urls instanceof RealArray))
+            urls = [urls];
+
+          return createObject(iceServer, {
+            url: {
+              configurable: false, enumerable: false, writable: false,
+              value: normalizeUrl(url)
+            },
+            urls: {
+              configurable: false, enumerable: false, writable: false,
+              value: safeCopyArray(urls, normalizeUrl)
+            }
+          });
         }
-        catch (e) {}
-      }
-    });
-  }
+      );
 
-  function checkConfiguration(peerconnection, configuration)
-  {
-    if (configuration && configuration.iceServers)
+      return createObject(configuration, {
+        iceServers: {
+          configurable: false, enumerable: false, writable: false,
+          value: iceServers
+        }
+      });
+    };
+
+    let checkUrl = (peerconnection, url) =>
     {
-      for (let i = 0; i < configuration.iceServers.length; i++)
+      checkRequest(url, blocked =>
       {
-        let iceServer = configuration.iceServers[i];
-        if (iceServer)
+        if (blocked)
         {
-          if (iceServer.url)
-            checkUrl(peerconnection, iceServer.url);
-
-          if (iceServer.urls)
+          // Calling .close() throws if already closed.
+          try
           {
-            for (let j = 0; j < iceServer.urls.length; j++)
-              checkUrl(peerconnection, iceServer.urls[j]);
+            closeRTCPeerConnection(peerconnection);
+          }
+          catch (e) {}
+        }
+      });
+    };
+
+    let checkConfiguration = (peerconnection, configuration) =>
+    {
+      if (configuration && configuration.iceServers)
+      {
+        for (let i = 0; i < configuration.iceServers.length; i++)
+        {
+          let iceServer = configuration.iceServers[i];
+          if (iceServer)
+          {
+            if (iceServer.url)
+              checkUrl(peerconnection, iceServer.url);
+
+            if (iceServer.urls)
+            {
+              for (let j = 0; j < iceServer.urls.length; j++)
+                checkUrl(peerconnection, iceServer.urls[j]);
+            }
           }
         }
       }
-    }
-  }
-
-  // Chrome unstable (tested with 59) has already implemented
-  // setConfiguration, so we need to wrap that if it exists too.
-  // https://www.chromestatus.com/feature/5596193748942848
-  if (RealRTCPeerConnection.prototype.setConfiguration)
-  {
-    let realSetConfiguration = Function.prototype.call.bind(
-      RealRTCPeerConnection.prototype.setConfiguration
-    );
-
-    RealRTCPeerConnection.prototype.setConfiguration = function(configuration)
-    {
-      configuration = protectConfiguration(configuration);
-
-      // Call the real method first, so that validates the configuration for
-      // us. Also we might as well since checkRequest is asynchronous anyway.
-      realSetConfiguration(this, configuration);
-      checkConfiguration(this, configuration);
     };
+
+    // Chrome unstable (tested with 59) has already implemented
+    // setConfiguration, so we need to wrap that if it exists too.
+    // https://www.chromestatus.com/feature/5596193748942848
+    if (RealRTCPeerConnection.prototype.setConfiguration)
+    {
+      let realSetConfiguration = Function.prototype.call.bind(
+        RealRTCPeerConnection.prototype.setConfiguration
+      );
+
+      RealRTCPeerConnection.prototype.setConfiguration = function(configuration)
+      {
+        configuration = protectConfiguration(configuration);
+
+        // Call the real method first, so that validates the configuration for
+        // us. Also we might as well since checkRequest is asynchronous anyway.
+        realSetConfiguration(this, configuration);
+        checkConfiguration(this, configuration);
+      };
+    }
+
+    let WrappedRTCPeerConnection = function(...args)
+    {
+      if (!(this instanceof WrappedRTCPeerConnection))
+        return RealRTCPeerConnection();
+
+      let configuration = protectConfiguration(args[0]);
+
+      // Since the old webkitRTCPeerConnection constructor takes an optional
+      // second argument we need to take care to pass that through. Necessary
+      // for older versions of Chrome such as 49.
+      let constraints = undefined;
+      if (args.length > 1)
+        constraints = args[1];
+
+      let peerconnection = new RealRTCPeerConnection(configuration,
+                                                     constraints);
+      checkConfiguration(peerconnection, configuration);
+      return peerconnection;
+    };
+
+    WrappedRTCPeerConnection.prototype = RealRTCPeerConnection.prototype;
+
+    let boundWrappedRTCPeerConnection = WrappedRTCPeerConnection.bind();
+    copyProperties(RealRTCPeerConnection, boundWrappedRTCPeerConnection,
+                   ["generateCertificate", "name", "prototype"]);
+    RealRTCPeerConnection.prototype.constructor = boundWrappedRTCPeerConnection;
+
+    if ("RTCPeerConnection" in window)
+      window.RTCPeerConnection = boundWrappedRTCPeerConnection;
+    if ("webkitRTCPeerConnection" in window)
+      window.webkitRTCPeerConnection = boundWrappedRTCPeerConnection;
   }
-
-  function WrappedRTCPeerConnection(...args)
-  {
-    if (!(this instanceof WrappedRTCPeerConnection))
-      return RealRTCPeerConnection();
-
-    let configuration = protectConfiguration(args[0]);
-
-    // Since the old webkitRTCPeerConnection constructor takes an optional
-    // second argument we need to take care to pass that through. Necessary
-    // for older versions of Chrome such as 49.
-    let constraints = undefined;
-    if (args.length > 1)
-      constraints = args[1];
-
-    let peerconnection = new RealRTCPeerConnection(configuration, constraints);
-    checkConfiguration(peerconnection, configuration);
-    return peerconnection;
-  }
-
-  WrappedRTCPeerConnection.prototype = RealRTCPeerConnection.prototype;
-
-  let boundWrappedRTCPeerConnection = WrappedRTCPeerConnection.bind();
-  copyProperties(RealRTCPeerConnection, boundWrappedRTCPeerConnection,
-                 ["generateCertificate", "name", "prototype"]);
-  RealRTCPeerConnection.prototype.constructor = boundWrappedRTCPeerConnection;
-
-  if ("RTCPeerConnection" in window)
-    window.RTCPeerConnection = boundWrappedRTCPeerConnection;
-  if ("webkitRTCPeerConnection" in window)
-    window.webkitRTCPeerConnection = boundWrappedRTCPeerConnection;
 }
 
 if (document instanceof HTMLDocument)
@@ -398,8 +365,13 @@ if (document instanceof HTMLDocument)
     let script = document.createElement("script");
     script.type = "application/javascript";
     script.async = false;
-    script.textContent = "(" + injected + ")('" + randomEventName + "');";
+    // Firefox 58 only bypasses site CSPs when assigning to 'src'.
+    let url = URL.createObjectURL(new Blob([
+      "(" + injected + ")('" + randomEventName + "');"
+    ]));
+    script.src = url;
     document.documentElement.appendChild(script);
     document.documentElement.removeChild(script);
+    URL.revokeObjectURL(url);
   }
 }

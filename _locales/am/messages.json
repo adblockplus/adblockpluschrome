@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "ይህን መልእክት እንደዘጉ፥ በገጹ ላይ ያለ አካል ላይ ክሊክ (ወይም የቀኝ ክሊክ) ያርጉ።"
   },
+  "continue": {
+    "message": "ቀጥል"
+  },
   "description": {
     "message": "ከ100 ሚልዮን ተጠቃሚዎች ያሉት አድብሎክ ፕላስ የአለማችን ተወዳጁ ማስታወቂያ ከልካይ ነው።"
   },
@@ -55,6 +58,18 @@
   },
   "filters_addSubscriptionAdd_label": {
     "message": "ጨምር"
+  },
+  "filters_readMore_label": {
+    "message": "ተጨማሪ አንብብ"
+  },
+  "filters_subscription_delete_label": {
+    "message": "አጥፋ"
+  },
+  "filters_subscription_enabled_label": {
+    "message": "በርቷል"
+  },
+  "filters_subscription_lastDownload_inProgress": {
+    "message": "በማውረድ ላይ…"
   },
   "found_a_bug": {
     "message": "ብልሽት አግኝተዋል? አድብሎክ ፕላስን ወደ ቋንቋዎት መተርጎም ይፈልጋሉ? እባክዎን <a>ጥያቄዎን እዚህ ያስገቡ</a>።"
@@ -146,17 +161,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "ከ$number$ በላይ",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "አድብሎክ ፕላስን ያውርዱ"
-  },
   "stats_share_message": {
     "message": "$number$ ያህል ማስታወቂያዎች እና ተከታታዮች ከልክያለሁ እድሜ ለአድብሎክ ፕላስ።",
     "placeholders": {
@@ -164,9 +168,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "ይህን ቁጥር ያጋሩ"
   },
   "stats_show_iconnumber": {
     "message": "ቁጥር ምልክት ላይ አሳይ"

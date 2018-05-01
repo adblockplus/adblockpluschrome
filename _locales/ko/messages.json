@@ -50,6 +50,15 @@
   "enabled_for_site": {
     "message": "이 사이트에서 <strong>광고 차단을 사용</strong>합니다"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "확장된 요소 숨김 필터에 지정된 활성 도메인이 없음"
+  },
+  "filter_invalid_domain": {
+    "message": "잘못된 (혹은 비어 있는) 도메인이 지정되었습니다"
+  },
+  "filter_invalid_regexp": {
+    "message": "잘못된 정규 표현식"
+  },
   "filter_lists": {
     "message": "구독 필터"
   },
@@ -212,17 +221,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$ 이상",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "애드블록 플러스를 내려받습니다."
-  },
   "stats_share_message": {
     "message": "Adblock Plus 덕분에 $number$ 개의 광고와 트래커를 차단했어요.",
     "placeholders": {
@@ -230,9 +228,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "이 숫자를 공유"
   },
   "stats_show_iconnumber": {
     "message": "아이콘에 차단된 광고 개수 표시"

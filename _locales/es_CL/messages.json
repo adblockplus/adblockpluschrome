@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "Cargando..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -224,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "más de $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Descarga Adblock Plus"
-  },
   "stats_share_message": {
     "message": "He bloqueado $number$ anuncios y rastreadores gracias a Adblock Plus.",
     "placeholders": {
@@ -242,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Comparte este número"
   },
   "stats_show_iconnumber": {
     "message": "Mostrar número en el icono"

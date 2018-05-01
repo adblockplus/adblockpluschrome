@@ -1,16 +1,7 @@
 [general]
 basename = adblockpluschrome
-version = 3.0
+version = 3.0.4
 author = eyeo GmbH
-permissions = tabs
-  <all_urls>
-  contextMenus
-  webRequest
-  webRequestBlocking
-  webNavigation
-  storage
-  unlimitedStorage
-  notifications
 backgroundScripts = polyfill.js
   ext/common.js
   ext/background.js
@@ -24,18 +15,45 @@ testScripts = ../polyfill.js
   ../lib/publicSuffixList.js
   tests.js
 options = options.html
-devtools = devtools.html
-browserAction = icons/abp-16.png icons/abp-19.png icons/abp-20.png icons/abp-32.png icons/abp-38.png icons/abp-40.png popup.html
-icons = icons/abp-16.png icons/abp-32.png icons/detailed/abp-48.png
-  icons/detailed/abp-64.png icons/detailed/abp-128.png
-managedStorageSchema = managed-storage-schema.json
+browserAction =
+  icons/abp-16.png
+  icons/abp-19.png
+  icons/abp-20.png
+  icons/abp-32.png
+  icons/abp-38.png
+  icons/abp-40.png
+  popup.html
+icons =
+  icons/abp-16.png
+  icons/abp-32.png
+  icons/detailed/abp-48.png
+  icons/detailed/abp-64.png
+  icons/detailed/abp-128.png
+
+[manifest]
+devtools_page = devtools.html
+storage.managed_schema = managed-storage-schema.json
+permissions =
+  tabs
+  <all_urls>
+  contextMenus
+  webRequest
+  webRequestBlocking
+  webNavigation
+  storage
+  unlimitedStorage
+  notifications
 
 [compat]
 chrome = 49.0
 opera = 36.0
 
 [contentScripts]
-document_start = polyfill.js ext/common.js ext/content.js include.preload.js
+document_start =
+  polyfill.js
+  ext/common.js
+  ext/content.js
+  include.preload.js
 document_end = include.postload.js
 
 [mapping]
@@ -46,6 +64,7 @@ firstRun.js = adblockplusui/firstRun.js
 i18n.js = adblockplusui/i18n.js
 icons/detailed/abp-128.png = adblockplusui/skin/abp-128.png
 skin/common.css = adblockplusui/skin/common.css
+skin/fonts.css = adblockplusui/skin/fonts.css
 skin/firstRun.css = adblockplusui/skin/firstRun.css
 skin/abp-logo.svg = adblockplusui/skin/abp-logo.svg
 skin/ajax-loader.gif = adblockplusui/skin/ajax-loader.gif
@@ -56,21 +75,66 @@ skin/donate.png = adblockplusui/skin/donate.png
 skin/abb-logo.png = adblockplusui/skin/abb-logo.png
 skin/fonts/CreteRound-Italic.otf = adblockplusui/skin/fonts/CreteRound-Italic.otf
 skin/fonts/CreteRound-Regular.otf = adblockplusui/skin/fonts/CreteRound-Regular.otf
-skin/fonts/SourceSansPro-Regular.woff = adblockplusui/skin/fonts/SourceSansPro-Regular.woff
-skin/fonts/SourceSansPro-Light.woff = adblockplusui/skin/fonts/SourceSansPro-Light.woff
-skin/fonts/SourceSansPro-bold.woff = adblockplusui/skin/fonts/SourceSansPro-bold.woff
+skin/fonts/Source-Sans-Pro/LICENSE.txt = adblockplusui/skin/fonts/Source-Sans-Pro/LICENSE.txt
+skin/fonts/Source-Sans-Pro/300/cyrillic.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/300/cyrillic.woff2
+skin/fonts/Source-Sans-Pro/300/cyrillic-ext.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/300/cyrillic-ext.woff2
+skin/fonts/Source-Sans-Pro/300/greek.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/300/greek.woff2
+skin/fonts/Source-Sans-Pro/300/greek-ext.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/300/greek-ext.woff2
+skin/fonts/Source-Sans-Pro/300/latin.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/300/latin.woff2
+skin/fonts/Source-Sans-Pro/300/latin-ext.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/300/latin-ext.woff2
+skin/fonts/Source-Sans-Pro/300/vietnamese.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/300/vietnamese.woff2
+skin/fonts/Source-Sans-Pro/400/cyrillic.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/400/cyrillic.woff2
+skin/fonts/Source-Sans-Pro/400/cyrillic-ext.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/400/cyrillic-ext.woff2
+skin/fonts/Source-Sans-Pro/400/greek.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/400/greek.woff2
+skin/fonts/Source-Sans-Pro/400/greek-ext.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/400/greek-ext.woff2
+skin/fonts/Source-Sans-Pro/400/latin.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/400/latin.woff2
+skin/fonts/Source-Sans-Pro/400/latin-ext.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/400/latin-ext.woff2
+skin/fonts/Source-Sans-Pro/400/vietnamese.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/400/vietnamese.woff2
+skin/fonts/Source-Sans-Pro/700/cyrillic.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/700/cyrillic.woff2
+skin/fonts/Source-Sans-Pro/700/cyrillic-ext.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/700/cyrillic-ext.woff2
+skin/fonts/Source-Sans-Pro/700/greek.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/700/greek.woff2
+skin/fonts/Source-Sans-Pro/700/greek-ext.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/700/greek-ext.woff2
+skin/fonts/Source-Sans-Pro/700/latin.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/700/latin.woff2
+skin/fonts/Source-Sans-Pro/700/latin-ext.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/700/latin-ext.woff2
+skin/fonts/Source-Sans-Pro/700/vietnamese.woff2 = adblockplusui/skin/fonts/Source-Sans-Pro/700/vietnamese.woff2
+skin/icons/attention.svg = adblockplusui/skin/icons/attention.svg
 skin/icons/checkbox.png = adblockplusui/skin/icons/checkbox.png
+skin/icons/checkbox.svg = adblockplusui/skin/icons/checkbox.svg
+skin/icons/checkmark.svg = adblockplusui/skin/icons/checkmark.svg
+skin/icons/code.svg = adblockplusui/skin/icons/code.svg
+skin/icons/delete.svg = adblockplusui/skin/icons/delete.svg
+skin/icons/gear.svg = adblockplusui/skin/icons/gear.svg
+skin/icons/globe.svg = adblockplusui/skin/icons/globe.svg
+skin/icons/reload.svg = adblockplusui/skin/icons/reload.svg
+skin/icons/toggle.svg = adblockplusui/skin/icons/toggle.svg
+skin/icons/tooltip.svg = adblockplusui/skin/icons/tooltip.svg
+skin/icons/trash.svg = adblockplusui/skin/icons/trash.svg
 skin/social/facebook.png = adblockplusui/skin/social/facebook.png
+skin/social/facebook.svg = adblockplusui/skin/social/facebook.svg
 skin/social/googleplus.png = adblockplusui/skin/social/googleplus.png
+skin/social/googleplus.svg = adblockplusui/skin/social/googleplus.svg
 skin/social/renren.png = adblockplusui/skin/social/renren.png
 skin/social/twitter.png = adblockplusui/skin/social/twitter.png
+skin/social/twitter.svg = adblockplusui/skin/social/twitter.svg
 skin/social/weibo.png = adblockplusui/skin/social/weibo.png
+skin/updates/appstore-bg.svg = adblockplusui/skin/updates/appstore-bg.svg
+skin/updates/base-graphic.svg = adblockplusui/skin/updates/base-graphic.svg
+skin/updates/googleplay-bg.svg = adblockplusui/skin/updates/googleplay-bg.svg
+skin/updates/icon-mobile.svg = adblockplusui/skin/updates/icon-mobile.svg
+skin/updates/icon-rocket.svg = adblockplusui/skin/updates/icon-rocket.svg
+skin/updates/icon-thumbs-up.svg = adblockplusui/skin/updates/icon-thumbs-up.svg
 devtools-panel.html = adblockplusui/devtools-panel.html
 devtools-panel.js = adblockplusui/devtools-panel.js
 skin/devtools-panel.css = adblockplusui/skin/devtools-panel.css
 issue-reporter.html = adblockplusui/issue-reporter.html
 issue-reporter.js = adblockplusui/issue-reporter.js
 skin/issue-reporter.css = adblockplusui/skin/issue-reporter.css
+desktop-options.html = adblockplusui/desktop-options.html
+desktop-options.js = adblockplusui/desktop-options.js
+skin/desktop-options.css = adblockplusui/skin/desktop-options.css
+updates.html = adblockplusui/updates.html
+updates.js = adblockplusui/updates.js
+skin/updates.css = adblockplusui/skin/updates.css
 
 [bundles]
 lib/adblockplus.js =
@@ -85,9 +149,12 @@ lib/adblockplus.js =
   lib/csp.js
   lib/cssInjection.js
   adblockplusui/messageResponder.js
-  background.js
-include.preload.js = include.preload.js inject.preload.js
-include.postload.js = subscriptionLink.postload.js composer.postload.js
+include.preload.js =
+  include.preload.js
+  inject.preload.js
+include.postload.js =
+  subscriptionLink.postload.js
+  composer.postload.js
 qunit/tests.js =
   qunit/common.js
   qunit/tests/prefs.js
@@ -95,6 +162,9 @@ qunit/tests.js =
   qunit/tests/cssEscaping.js
 
 [import_locales]
-adblockplusui/locale/*/firstRun.json = *
 adblockplusui/locale/*/antiadblockInit.json = *
+adblockplusui/locale/*/common.json = *
+adblockplusui/locale/*/desktop-options.json = *
+adblockplusui/locale/*/firstRun.json = *
 adblockplusui/locale/*/issue-reporter.json = *
+adblockplusui/locale/*/updates.json = *

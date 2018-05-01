@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "กำลังโหลด..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -224,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "มากกว่า $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "ดาวน์โหลด Adblock Plus"
-  },
   "stats_share_message": {
     "message": "ฉันบล็อกโฆษณาและแทร็คเกอร์ไป $number$ อย่าง ขอบคุณ Adblock Plus",
     "placeholders": {
@@ -242,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "แชร์จำนวนโฆษณาที่บล็อคแล้ว"
   },
   "stats_show_iconnumber": {
     "message": "แสดงหมายเลขในไอคอน"

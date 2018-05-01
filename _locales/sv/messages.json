@@ -50,6 +50,9 @@
   "enabled_for_site": {
     "message": "<strong>Aktiverat</strong> på denna webbplats"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Ingen aktiv domän som anges för utökade element hiding filter"
+  },
   "filter_invalid_domain": {
     "message": "Ogiltig (eller tom) domän angiven"
   },
@@ -221,17 +224,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "över $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Ladda ner Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Jag blockerade $number$ annonser och trackers tack vare Adblock Plus.",
     "placeholders": {
@@ -239,9 +231,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Dela detta nummer"
   },
   "stats_show_iconnumber": {
     "message": "Visa nummer vid ikon"

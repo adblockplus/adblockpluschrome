@@ -50,6 +50,12 @@
   "enabled_for_site": {
     "message": "在此網站上 <strong>啟用</strong>"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "沒有為擴展元素隱藏規則指定活躍域名"
+  },
+  "filter_invalid_domain": {
+    "message": "無效(或空) 的網域被指定"
+  },
   "filter_invalid_regexp": {
     "message": "無效的正規表示法"
   },
@@ -148,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "讀取中..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -218,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "$number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "下載 Adblock Plus"
-  },
   "stats_share_message": {
     "message": "感謝 Adblock Plus，至今我已過濾掉了 $number$ 個廣告。",
     "placeholders": {
@@ -236,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "分享這個數據"
   },
   "stats_show_iconnumber": {
     "message": "在圖示上顯示數量"

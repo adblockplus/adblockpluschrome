@@ -48,7 +48,10 @@
     "message": "Käytä vain tarvittavia suodattimia. Liian monta suodatinta voi aiheuttaa sen että selaimesi ei vastaa."
   },
   "enabled_for_site": {
-    "message": "<strong>Poistettu</strong> tältä sivulta"
+    "message": "<strong>Käytössä</strong> tällä sivulla"
+  },
+  "filter_invalid_domain": {
+    "message": "Väärä (tai tyhjä) verkkotunnus"
   },
   "filter_invalid_regexp": {
     "message": "Virheellinen normaali-ilmaus"
@@ -90,7 +93,7 @@
     "message": "Epäonnistui, latausvirhe"
   },
   "filters_subscription_lastDownload_inProgress": {
-    "message": "Lataa..."
+    "message": "Ladataan…"
   },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Epäonnistui, kelvoton suodatinlista"
@@ -161,7 +164,7 @@
     "message": "Avata kaikki linkit tästä ilmoituksesta"
   },
   "notification_with_buttons": {
-    "message": "Valitse 'OK' aukaeksesi kaikki linkit tässä ilmoituksessa."
+    "message": "Valitse 'OK', jos haluat avata kaikki linkit tässä ilmoituksessa."
   },
   "notification_without_buttons": {
     "message": "Napsauttamalla ilmoitusta voit avata kaikki linkit siitä."
@@ -194,13 +197,13 @@
     "message": "Poista valitut"
   },
   "sendReport": {
-    "message": "Raportoi ongelma tällä sivulla"
+    "message": "Ilmoita ongelma tällä sivulla"
   },
   "show_block_element_menu": {
     "message": "Näytä 'Estä elementti' oikea-klikkaus valikossa"
   },
   "show_devtools_panel": {
-    "message": "Näytä \"Adblock Plus\" -paneeli kehittäjätyökalut"
+    "message": "Näytä \"Adblock Plus\" -paneeli kehittäjäasetuksissa"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> tällä sivulla",
@@ -218,17 +221,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "yli $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Lataa Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Estin $number$ mainosta ja trackeriä kiitos Adblock Plus;an.",
     "placeholders": {
@@ -236,9 +228,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Jaa tämä numero"
   },
   "stats_show_iconnumber": {
     "message": "Näytä numerot kuvakkeessa"
@@ -256,7 +245,7 @@
     "message": "Tilauksen nimi:"
   },
   "unexpected_filter_list_header": {
-    "message": "Suodatin-listan otsakkeet eivät ole sallittuja tässä"
+    "message": "Suodatinlistan otsikot eivät ole sallittuja tässä"
   },
   "update_now": {
     "message": "Päivitä nyt"

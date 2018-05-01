@@ -18,18 +18,18 @@ Building
 
 - [Mercurial](https://www.mercurial-scm.org/) or [Git](https://git-scm.com/) (whichever you used to clone this repository)
 - [Python 2.7](https://www.python.org)
-- [The Jinja2 module](http://jinja.pocoo.org/docs) (>= 2.8)
-- [The PIL module](http://www.pythonware.com/products/pil/)
-- For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
+  - [The Jinja2 module](http://jinja.pocoo.org/docs) (>= 2.8)
+  - For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
+- [Node.js](https://nodejs.org/) (>= 7)
 
 ### Building the extension
 
 Run one of the following commands in the project directory, depending on your
 target platform:
 
-    ./build.py -t chrome build -k adblockpluschrome.pem
-    ./build.py -t edge build
-    ./build.py -t gecko build
+    ./build.py build -t chrome -k adblockpluschrome.pem
+    ./build.py build -t edge
+    ./build.py build -t gecko
 
 This will create a build with a name in the form
 _adblockpluschrome-1.2.3.nnnn.crx_, _adblockplusedge-1.2.3.nnnn.appx_ or
@@ -51,9 +51,9 @@ _about:debugging_ or by disabling signature enforcement in Firefox Nightly.
 To simplify the process of testing your changes you can create an unpacked
 development environment. For that run one of the following commands:
 
-    ./build.py -t chrome devenv
-    ./build.py -t edge devenv
-    ./build.py -t gecko devenv
+    ./build.py devenv -t chrome
+    ./build.py devenv -t edge
+    ./build.py devenv -t gecko
 
 This will create a _devenv.*_ directory in the repository. You can load the
 directory as an unpacked extension, under _chrome://extensions_ in Chrome,
@@ -66,6 +66,15 @@ automatically after a few seconds.
 Builds for Microsoft Edge do not automatically detect changes, so after
 rebuilding the extension you should manually force reloading it in Edge by
 hitting the _Reload Extension_ button.
+
+The build script calls the ensure_dependencies script automatically to manage
+the dependencies (see _dependencies_ file). Dependencies with local
+modifications won't be updated. Otherwise during development specifying a
+feature-branch's name for a dependency's revision is sometimes useful.
+Alternatively dependency management can be disabled completely by setting the
+_SKIP_DEPENDENCY_UPDATES_ environment variable, for example:
+
+    SKIP_DEPENDENCY_UPDATES=true ./build.py devenv -t chrome
 
 Running the unit tests
 ----------------------

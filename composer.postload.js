@@ -17,7 +17,7 @@
 
 "use strict";
 
-// We would rather export these properly and then require("include.preload")
+// We would rather export these properly and then require("./include.preload")
 // here, but that would result in include.preload running both at pre and post
 // load.
 const {checkCollapse, elemhide, getURLsFromElement, typeMap} = window;
@@ -406,7 +406,7 @@ function elementPicked(event)
       else
       {
         browser.runtime.sendMessage({
-          type: "forward",
+          type: "composer.forward",
           payload: {type: "composer.content.dialogOpened", popupId}
         });
       }
@@ -441,25 +441,24 @@ function stopPickingElement()
 /* Core logic */
 
 // We're done with the block element feature for now, tidy everything up.
-function deactivateBlockElement()
+function deactivateBlockElement(popupAlreadyClosed)
 {
   if (currentlyPickingElement)
     stopPickingElement();
 
-  if (blockelementPopupId != null)
+  if (blockelementPopupId != null && !popupAlreadyClosed)
   {
     browser.runtime.sendMessage({
-      type: "forward",
+      type: "composer.forward",
       targetPageId: blockelementPopupId,
       payload:
       {
         type: "composer.dialog.close"
       }
     });
-
-    blockelementPopupId = null;
   }
 
+  blockelementPopupId = null;
   lastRightClickEvent = null;
 
   if (currentElement)
@@ -494,7 +493,7 @@ function initializeComposer()
     lastRightClickEventIsMostRecent = true;
 
     browser.runtime.sendMessage({
-      type: "forward",
+      type: "composer.forward",
       payload:
       {
         type: "composer.content.clearPreviousRightClickEvent"
@@ -546,7 +545,7 @@ function initializeComposer()
           // Apply added element hiding filters.
           elemhide.apply();
         }
-        deactivateBlockElement();
+        deactivateBlockElement(!!message.popupAlreadyClosed);
         break;
       case "composer.content.clearPreviousRightClickEvent":
         if (!lastRightClickEventIsMostRecent)
@@ -563,10 +562,11 @@ function initializeComposer()
         if (window == window.top && blockelementPopupId == message.popupId)
         {
           browser.runtime.sendMessage({
-            type: "forward",
+            type: "composer.forward",
             payload:
             {
-              type: "composer.content.finished"
+              type: "composer.content.finished",
+              popupAlreadyClosed: true
             }
           });
         }

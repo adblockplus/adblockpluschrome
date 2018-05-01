@@ -26,6 +26,9 @@
   "clickhide_instructions": {
     "message": "Pagkatapos isara itong pop-up, pindutin ang kaliwang mouse button (o kanang mouse button) ang element ng pahinang ito."
   },
+  "continue": {
+    "message": "Magpatuloy"
+  },
   "description": {
     "message": "Ginagamit sa mahigit 100 milyong device, ang Adblock Plus ay ang pinakasikat na ad blocker sa mundo."
   },
@@ -46,6 +49,12 @@
   },
   "enabled_for_site": {
     "message": "<strong>Gumagana</strong> sa site na ito"
+  },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Walang aktibong domain na tinukoy para sa extended element hiding filter"
+  },
+  "filter_invalid_domain": {
+    "message": "Imbalid (o walang laman) ang domain na tinukoy"
   },
   "filter_lists": {
     "message": "Listahan ng mga Filter"
@@ -152,17 +161,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "sobra ng $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "I - download ang Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Napigilan ko ang $number$ ads at trackers salamat sa Adblock Plus.",
     "placeholders": {
@@ -170,9 +168,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Ibahagi ang numerong ito"
   },
   "stats_show_iconnumber": {
     "message": "Ipakita ang mga numero sa icon"

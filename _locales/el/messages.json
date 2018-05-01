@@ -53,6 +53,9 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Δεν υπάρχει ενεργός τομέας καθορισμένος ως φίλτρο εκτεταμένης απόκρυψης στοιχείων"
   },
+  "filter_invalid_domain": {
+    "message": "Έχετε εισάγει άκυρο (ή άδειο) τομέα"
+  },
   "filter_invalid_regexp": {
     "message": "Μη έγκυρη τυπική έκφραση"
   },
@@ -221,17 +224,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "πάνω από $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Λήψη του Adblock Plus"
-  },
   "stats_share_message": {
     "message": "Απέκλεισα $number$ διαφημίσεις και ανιχνευτές χάρη στο Adblock Plus.",
     "placeholders": {
@@ -239,9 +231,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Κοινοποίηση αυτού του αριθμού"
   },
   "stats_show_iconnumber": {
     "message": "Εμφάνιση του αριθμού στο εικονίδιο"

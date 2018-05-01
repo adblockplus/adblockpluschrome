@@ -53,6 +53,9 @@
   "filter_elemhideemulation_nodomain": {
     "message": "لم يتم تحديد نطاق نشط لفلتر إخفاء العناصر الموسعة"
   },
+  "filter_invalid_domain": {
+    "message": "تم تحديد نطاق غير صحيح (أو فارغ)"
+  },
   "filter_invalid_regexp": {
     "message": "تعبير منطقي غير صحيح"
   },
@@ -151,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "جار التحميل..."
+  },
   "name": {
     "message": "آدبلوك بلس"
   },
@@ -221,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "ما يضاهي $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "تحميل آدبلوك بلس"
-  },
   "stats_share_message": {
     "message": "أنا منعت $number$ إعلاناً و متتبعاً بفضل آدبلوك بلس.",
     "placeholders": {
@@ -239,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "مشاركة هذا الرقم"
   },
   "stats_show_iconnumber": {
     "message": "عرض الرقم في الصورة المرمزة"

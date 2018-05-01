@@ -30,7 +30,7 @@
     "message": "Tovább"
   },
   "description": {
-    "message": "Több mint 100 millió eszközön használják, az Adblock Plus a világ legnépszerűbb hirdetés szűrője."
+    "message": "Több mint 100 millió eszközön használják, az Adblock Plus a világ legnépszerűbb reklámblokkolója."
   },
   "disabled_for_site": {
     "message": "<strong>Kikapcsolva</strong> ezen a weboldalon"
@@ -96,7 +96,7 @@
     "message": "Sikertelen, letöltési hiba"
   },
   "filters_subscription_lastDownload_inProgress": {
-    "message": "Letöltés..."
+    "message": "Letöltés…"
   },
   "filters_subscription_lastDownload_invalidData": {
     "message": "Sikertelen, érvénytelen szűrőlista"
@@ -153,6 +153,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Betöltés…"
   },
   "name": {
     "message": "Adblock Plus"
@@ -224,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "több mint $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Adblock Plus letöltése"
-  },
   "stats_share_message": {
     "message": "Kiszűrtem $number$ hirdetést és nyomkövetőt az Adblock Plusnak köszönhetően.",
     "placeholders": {
@@ -242,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Statisztika megosztása"
   },
   "stats_show_iconnumber": {
     "message": "Blokkolt reklámok számának kijelzése az ikonon"

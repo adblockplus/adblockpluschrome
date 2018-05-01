@@ -154,6 +154,9 @@
       }
     }
   },
+  "loading": {
+    "message": "Laden…"
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -224,17 +227,6 @@
       }
     }
   },
-  "stats_over": {
-    "message": "meer dan $number$",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
-  "stats_share_download": {
-    "message": "Adblock Plus downloaden"
-  },
   "stats_share_message": {
     "message": "Ik heb $number$ advertenties en trackers geblokkeerd dankzij Adblock Plus.",
     "placeholders": {
@@ -242,9 +234,6 @@
         "content": "$1"
       }
     }
-  },
-  "stats_share_title": {
-    "message": "Dit aantal delen"
   },
   "stats_show_iconnumber": {
     "message": "Aantal in pictogram tonen"
