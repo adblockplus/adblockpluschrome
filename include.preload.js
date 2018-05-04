@@ -131,41 +131,42 @@ function getURLsFromElement(element)
   return urls;
 }
 
-function isCollapsibleMediaElement(element, mediatype)
+function getSelectorForBlockedElement(element)
 {
-  if (mediatype != "MEDIA")
-    return false;
+  // Microsoft Edge does not support CSS.escape(). However, it doesn't
+  // support user style sheets either. So the selector would be added
+  // with an author style sheet anyway, which doesn't provide any benefits.
+  if (!("escape" in CSS))
+    return null;
 
-  if (!element.getAttribute("src"))
-    return false;
+  // Setting the "display" CSS property to "none" doesn't have any effect on
+  // <frame> elements (in framesets). So we have to hide it inline through
+  // the "visibility" CSS property.
+  if (element.localName == "frame")
+    return null;
 
-  for (let child of element.children)
+  // If the <video> or <audio> element contains any <source> or <track>
+  // children, we cannot address it in CSS by the source URL; in that case we
+  // don't "collapse" it using a CSS selector but rather hide it directly by
+  // setting the style="..." attribute.
+  if (element.localName == "video" || element.localName == "audio")
   {
-    // If the <video> or <audio> element contains any <source> or <track>
-    // children, we cannot address it in CSS by the source URL; in that case we
-    // don't "collapse" it using a CSS selector but rather hide it directly by
-    // setting the style="..." attribute.
-    if (child.localName == "source" || child.localName == "track")
-      return false;
+    for (let child of element.children)
+    {
+      if (child.localName == "source" || child.localName == "track")
+        return null;
+    }
   }
 
-  return true;
-}
-
-function collapseMediaElement(element, srcValue)
-{
-  if (!srcValue)
-    return;
-
-  let selector = element.localName + "[src=" + CSS.escape(srcValue) + "]";
-
-  // Adding selectors is expensive so do it only if we really have a new
-  // selector.
-  if (!collapsingSelectors.has(selector))
+  let selector = "";
+  for (let attr of ["src", "srcset"])
   {
-    collapsingSelectors.add(selector);
-    elemhide.addSelectors([selector], null, "collapsing", true);
+    let value = element.getAttribute(attr);
+    if (value && attr in element)
+      selector += "[" + attr + "=" + CSS.escape(value) + "]";
   }
+
+  return selector ? element.localName + selector : null;
 }
 
 function hideElement(element)
@@ -205,11 +206,9 @@ function checkCollapse(element)
   if (urls.length == 0)
     return;
 
-  let collapsibleMediaElement = isCollapsibleMediaElement(element, mediatype);
-
-  // Save the value of the src attribute because it can change between now and
-  // when we get the response from the background page.
-  let srcValue = collapsibleMediaElement ? element.getAttribute("src") : null;
+  // Construct the selector here, because the attributes it relies on can change
+  // between now and when we get the response from the background page.
+  let selector = getSelectorForBlockedElement(element);
 
   browser.runtime.sendMessage(
     {
@@ -222,10 +221,18 @@ function checkCollapse(element)
     {
       if (collapse)
       {
-        if (collapsibleMediaElement)
-          collapseMediaElement(element, srcValue);
+        if (selector)
+        {
+          if (!collapsingSelectors.has(selector))
+          {
+            collapsingSelectors.add(selector);
+            elemhide.addSelectors([selector], null, "collapsing", true);
+          }
+        }
         else
+        {
           hideElement(element);
+        }
       }
     }
   );
