@@ -140,6 +140,7 @@ skin/updates.css = adblockplusui/skin/updates.css
 lib/adblockplus.js =
   adblockpluscore/lib/filterListener.js
   adblockpluscore/lib/synchronizer.js
+  lib/devtools.js
   lib/requestBlocker.js
   lib/popupBlocker.js
   lib/subscriptionInit.js

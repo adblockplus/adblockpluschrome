@@ -297,7 +297,7 @@ ElementHidingTracer.prototype = {
     if (selectors.length > 0 || filters.length > 0)
     {
       browser.runtime.sendMessage({
-        type: "devtools.traceElemHide",
+        type: "hitLogger.traceElemHide",
         selectors, filters
       });
     }
@@ -544,7 +544,7 @@ ElemHide.prototype = {
     if (this.tracer)
     {
       browser.runtime.sendMessage({
-        type: "devtools.traceElemHide",
+        type: "hitLogger.traceElemHide",
         selectors: [],
         filters
       });
