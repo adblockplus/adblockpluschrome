@@ -2,20 +2,8 @@
   "add": {
     "message": "Magdagdag"
   },
-  "add_domain_button": {
-    "message": "Magdagdag ng domain"
-  },
-  "add_filter_button": {
-    "message": "Magdagdag ng  filter"
-  },
   "add_filters_msg": {
     "message": "Magdagdag ng filter(s)?"
-  },
-  "add_your_own_filters": {
-    "message": "Magdagdag ng sariling filters"
-  },
-  "apply_changes": {
-    "message": "Ilapat ang mga pagbabago"
   },
   "block_element": {
     "message": "Ihinto ang element"
@@ -29,23 +17,11 @@
   "continue": {
     "message": "Magpatuloy"
   },
-  "description": {
-    "message": "Ginagamit sa mahigit 100 milyong device, ang Adblock Plus ay ang pinakasikat na ad blocker sa mundo."
-  },
   "disabled_for_site": {
     "message": "<strong>Hindi Maaari</strong> sa site na ito"
   },
-  "disabled_for_these_domains": {
-    "message": "Ang Adblock Plus ay hindi gumagana sa mga nakalistang domains. Maaari kang magdagdag ng domain sa pamamagitan ng Adblock Plus icon sa address bar o maaari ding ilagay ang domain (hindi URL) sa may kahon at pindutin ang \"Add domain\" button."
-  },
   "easy_create_filter": {
     "message": "Ihinto ang element"
-  },
-  "edit_filters_raw": {
-    "message": "Ayusin ang filter bilang texto lamang"
-  },
-  "enable_only_the": {
-    "message": "Paganahin lamang ang mga filter na nais ninyong gamitin. Kapag sobrang sobrang daming nailagay ay maaaring bumagal ang inyong browser."
   },
   "enabled_for_site": {
     "message": "<strong>Gumagana</strong> sa site na ito"
@@ -56,44 +32,10 @@
   "filter_invalid_domain": {
     "message": "Imbalid (o walang laman) ang domain na tinukoy"
   },
-  "filter_lists": {
-    "message": "Listahan ng mga Filter"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Ang iyong filter ay dapat nakasunod sa <a>Adblock Plus filter syntax</a>."
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Magdagdag"
-  },
-  "found_a_bug": {
-    "message": "Nakadiskobre ng bug? Gusto mo bang isalin ang Adblock Plus sa inyong wika? <a>ilagay ang inyong request dito</a>."
-  },
-  "general": {
-    "message": "Pangkalahatan"
-  },
   "invalid_css_selector": {
     "message": "$selector$ ay hindi valid na CSS selector",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Huling na update noong $time$ sa $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Huling na update kaninang $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -121,29 +63,14 @@
   "notification_without_buttons": {
     "message": "Pindutin ang notification para mabuksan ang mga links."
   },
-  "options": {
-    "message": "Opsyon sa Adblock Plus"
-  },
   "options_short": {
     "message": "Mga pagpipilian"
-  },
-  "out_of_date_lists": {
-    "message": "Ang mga listahan na hindi pa nauupdate ay maayos bawat pagkakataon."
   },
   "overlay_notification_button_no": {
     "message": "Hindi"
   },
   "overlay_notification_button_yes": {
     "message": "Oo"
-  },
-  "remove_button": {
-    "message": "Alisin ang napili"
-  },
-  "show_block_element_menu": {
-    "message": "Ipakita ang 'Ihinto ang element' sa right-click menu item"
-  },
-  "show_devtools_panel": {
-    "message": "Ipakita ang 'Adblock Plus' panel sa developer tools"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> sa pahinang ito",
@@ -161,30 +88,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Napigilan ko ang $number$ ads at trackers salamat sa Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Ipakita ang mga numero sa icon"
   },
   "stats_title": {
     "message": "Napigilan ang mga ads"
   },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Mamili ng filter sa listahan:"
-  },
   "unexpected_filter_list_header": {
     "message": "Hindi maaari ang Filter list headers dito"
-  },
-  "update_now": {
-    "message": "I-update ngayon"
-  },
-  "whitelisted_domains": {
-    "message": "Mga ni-whitelist na domain"
   }
 }

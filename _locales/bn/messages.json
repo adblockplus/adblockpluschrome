@@ -2,20 +2,8 @@
   "add": {
     "message": "যুক্ত করুন"
   },
-  "add_domain_button": {
-    "message": "ডোমেইন যুক্ত করুন"
-  },
-  "add_filter_button": {
-    "message": "ফিল্টার যুক্ত করুন"
-  },
   "add_filters_msg": {
     "message": "ফিল্টার(সমূহ) যুক্ত করবেন?"
-  },
-  "add_your_own_filters": {
-    "message": "আপনার নিজস্ব ফিল্টার যুক্ত করুন"
-  },
-  "apply_changes": {
-    "message": "পরিবর্তনগুলি প্রয়োগ করুন"
   },
   "block_element": {
     "message": "উপাদান অবরুদ্ধ করুন"
@@ -29,23 +17,11 @@
   "continue": {
     "message": "চালিয়ে যান"
   },
-  "description": {
-    "message": "১০ কোটিরও বেশী ডিভাইসের ব্যবহৃত, Adblock Plus হল বিশ্বের সবচেয়ে জনপ্রিয় বিজ্ঞাপন অবরুদ্ধকারী।"
-  },
   "disabled_for_site": {
     "message": "এই সাইটে <strong>নিষ্ক্রিয় করা আছে</strong>"
   },
-  "disabled_for_these_domains": {
-    "message": "নীচে তালিকাভুক্ত করা ডোমেইনের জন্য Adblock Plus নিস্ক্রিয় করা আছে। আপনি হয় ঠিকানা দণ্ডে Adblock Plus আইকনের মাধ্যমে একটি ডোমেইন যুক্ত করতে পারেন অথবা বাক্সের মধ্যে ডোমেইন লিখে (URL নয়) এবং \"ডোমেইন যুক্ত করুন\"-এ ক্লিক করে।"
-  },
   "easy_create_filter": {
     "message": "উপাদান অবরুদ্ধ করুন"
-  },
-  "edit_filters_raw": {
-    "message": "স্বাভাবিক লেখা হিসেবে ফিল্টার সম্পাদনা"
-  },
-  "enable_only_the": {
-    "message": "শুধুমাত্র ফিল্টার তালিকা সক্রিয় করুন যেটি আপনার দরকার। অনেক বেশি আপনার ব্রাউজারকে প্রতিক্রিয়াহীন তৈরী করতে পারে।"
   },
   "enabled_for_site": {
     "message": "এই সাইটে <strong>সক্রিয় করা আছে</strong>"
@@ -59,89 +35,16 @@
   "filter_invalid_regexp": {
     "message": "অকার্যকর নিয়মিত অভিব্যক্তি"
   },
-  "filter_lists": {
-    "message": "ফিল্টারের তালিকা"
-  },
-  "filter_must_follow_syntax": {
-    "message": "আপনার ফিল্টারকে <a>Adblock Plus ফিল্টার সিনট্যাক্স</a> অনুসরণ করা আবশ্যক।"
-  },
   "filter_unknown_option": {
     "message": "অজানা ফিল্টার অপশন"
   },
-  "filters_acceptableAds2_label": {
-    "message": "গোপনীয়তা অলঙ্ঘনকারী বিজ্ঞাপনকে অনুমোদন দিন"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "যোগ করুন"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "একটি ভিন্ন সদস্যতা যুক্ত করুন"
-  },
-  "filters_addSubscription_label": {
-    "message": "ছাঁকনি সদস্যতা যোগ করুন"
-  },
-  "filters_readMore_label": {
-    "message": "আরো পড়ুন"
-  },
-  "filters_subscription_delete_label": {
-    "message": "বাদ দিন"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "সক্রিয় করা হয়েছে"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "ব্যর্থ, ত্রুটিনির্ধারক মেলেনি"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "ব্যর্থ, ডাউনলোড ব্যর্থতা"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "ডাউনলোড হচ্ছে…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "ব্যর্থ, একটি যুক্তিযুক্ত ছাঁকন তালিকা নয়"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "ব্যর্থ, বৈধ ঠিকানা নয়"
-  },
-  "filters_viewList_label": {
-    "message": "দর্শন তালিকা"
-  },
-  "found_a_bug": {
-    "message": "একটি বাগ খুঁজে পেয়েছেন? আপনার ভাষায় Adblock Plus অনুবাদ করতে চান? দয়া করে <a>এখানে একটি অনুরোধ ফাইল করুন</a>।"
-  },
-  "general": {
-    "message": "সাধারণ"
-  },
-  "global_remove_subscription_warning": {
-    "message": "আপনি কি আসলেই এই সদস্যতা অপসারণ করতে চান?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "পরিশ্রুতক তালিকা অবস্থান কোনোটিই একটি বৈধ ইউআরএল বা কোন কার্যকর ফাইল নাম নয়।"
   },
   "invalid_css_selector": {
     "message": "$selector$ একটি বৈধ CSS নির্বাচক নয়",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "সর্বশেষ হালনাগাদ $date$ তারিখে $time$-এ",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "সর্বশেষ হালনাগাদ আজ $time$-টায়",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +78,8 @@
   "notification_without_buttons": {
     "message": "এটিতে সকল লিংক খোলার জন্য বিজ্ঞপ্তিতে ক্লিক করুন।"
   },
-  "options": {
-    "message": "Adblock Plus বিকল্প"
-  },
   "options_short": {
     "message": "বিকল্পসমূহ"
-  },
-  "out_of_date_lists": {
-    "message": "পুরনো তালিকা নিয়মিত হালনাগাদ করা হয়।"
   },
   "overlay_notification_button_no": {
     "message": "না"
@@ -196,20 +93,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "বিজ্ঞপ্তি দেখানো বন্ধ করুন"
   },
-  "overlay_shownotifications_label": {
-    "message": "দরকারী বিজ্ঞপ্তি দেখান"
-  },
-  "remove_button": {
-    "message": "নির্বাচন করাগুলি সরান"
-  },
   "sendReport": {
     "message": "এই পাতায় সমস্যা জানান"
-  },
-  "show_block_element_menu": {
-    "message": "ডান-ক্লিক মেনু আইটেমে 'উপাদান অবরুদ্ধ করুন' প্রদর্শন করান"
-  },
-  "show_devtools_panel": {
-    "message": "বিকাশকারী সরঞ্জামে 'Adblock Plus' প্যানেল দেখান"
   },
   "stats_label_page": {
     "message": "এই পৃষ্ঠায় <strong>$number$টি</strong>",
@@ -227,36 +112,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "আমি $number$টি বিজ্ঞাপন ও ট্রেকারকে অবরুদ্ধ করছি, এ জন্য Adblock Plus কে ধন্যবাদ।",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "আইকনে সংখ্যা দেখান"
   },
   "stats_title": {
     "message": "বিজ্ঞাপন অবরুদ্ধ হয়েছে"
   },
-  "subscriptionSelection_location_label": {
-    "message": "ছাঁকনি তালিকার অবস্থান:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "তালিকা থেকে একটি ফিল্টার সদস্যতা বাছাই করুন:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "সদস্যতার শিরোনাম:"
-  },
   "unexpected_filter_list_header": {
     "message": "ফিল্টার তালিকার শীর্ষচরণ এখানে অনুমোদিত নয়"
-  },
-  "update_now": {
-    "message": "এখন হালনাগাদ করুন"
-  },
-  "whitelisted_domains": {
-    "message": "সাদাতালিকাভুক্ত ডোমেইন"
   }
 }

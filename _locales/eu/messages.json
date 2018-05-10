@@ -2,20 +2,8 @@
   "add": {
     "message": "Gehitu"
   },
-  "add_domain_button": {
-    "message": "Gehitu domeinua"
-  },
-  "add_filter_button": {
-    "message": "Gehitu iragazkia"
-  },
   "add_filters_msg": {
     "message": "Gehitu iragazkia(k)?"
-  },
-  "add_your_own_filters": {
-    "message": "Gehitu zeure iragazkiak"
-  },
-  "apply_changes": {
-    "message": "Aplikatu aldaketak"
   },
   "block_element": {
     "message": "Blokeatu elementua"
@@ -29,23 +17,11 @@
   "continue": {
     "message": "Jarraitu"
   },
-  "description": {
-    "message": "100 milioi gailuetan erabilia, Adblock Plus munduko iragarki blokeatzaile arrakastatsuena da."
-  },
   "disabled_for_site": {
     "message": "<strong>Desgaituta</strong> gune honetan"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus desgaituta dago beheko domeinuetan. Domeinu bat gehitu dezakezu bai helbide barrako Adblock Plus ikonoaren bidez edo domeinua (ez URL bat) kutxatilan idatziz eta \"Gehitu domeinua\" botoian klik eginez."
-  },
   "easy_create_filter": {
     "message": "Blokeatu elementua"
-  },
-  "edit_filters_raw": {
-    "message": "Editatu iragazkiak testu gordin gisa"
-  },
-  "enable_only_the": {
-    "message": "Gaitu behar duzun iragazki zerrenda bakarrik. Gehiegik zure nabigazioa erantzungabea egin dezake."
   },
   "enabled_for_site": {
     "message": "<strong>Gaituta</strong> gune honetan"
@@ -59,89 +35,16 @@
   "filter_invalid_regexp": {
     "message": "Adierazpen erregular baliogabea"
   },
-  "filter_lists": {
-    "message": "Iragazki zerrendak"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Zure iragazkiak <a>Adblock Plus iragazki sintaxia</a> jarraitu behar du."
-  },
   "filter_unknown_option": {
     "message": "Iragazki aukera ezezaguna"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Baimendu publizitate ez intrusiboa"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Gehitu"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Gehitu beste harpidetza bat"
-  },
-  "filters_addSubscription_label": {
-    "message": "Gehitu iragazki harpidetza"
-  },
-  "filters_readMore_label": {
-    "message": "Gehiago irakurri"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Ezabatu"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Gaituta"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Errorea; kontrol-baturak ez datoz bat"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Huts egin du; deskarga errorea"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Deskargatzen..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Huts egin du; ez da iragazki zerrenda baliagarria"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Huts egin du; ez da helbide baliagarria"
-  },
-  "filters_viewList_label": {
-    "message": "Ikusi zerrenda"
-  },
-  "found_a_bug": {
-    "message": "Akats bat aurkitu duzu? Adblock Plus zure hizkuntzara itzuli nahi? <a>Bete eskaria hemen</a> mesedez."
-  },
-  "general": {
-    "message": "Orokorra"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Ziur harpidetza hau ezabatu nahi duzula?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Iragazki zerrendaren kokagunea ez da balio duen URLa, ezta fitxategi baten izena ere."
   },
   "invalid_css_selector": {
     "message": "$selector$ ez da baliozko CSS selektore bat",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Azken eguneraketa: $date$ $time$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Azken eguneraketa: gaur $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +78,8 @@
   "notification_without_buttons": {
     "message": "Sakatu jakinarazpenean bertako esteka guztiak irekitzeko."
   },
-  "options": {
-    "message": "Adblock Plus Aukerak"
-  },
   "options_short": {
     "message": "Aukerak"
-  },
-  "out_of_date_lists": {
-    "message": "Eguneratu-gabeko zerrendak aldika eguneratzen dira."
   },
   "overlay_notification_button_no": {
     "message": "Ez"
@@ -196,20 +93,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Utzi jakinarazpenak erakusteari"
   },
-  "overlay_shownotifications_label": {
-    "message": "Erakutsi jakinarazpen erabilgarriak"
-  },
-  "remove_button": {
-    "message": "Kendu hautaturikoa"
-  },
   "sendReport": {
     "message": "Orri honetan sortutako arazo bati buruzko txostena egin"
-  },
-  "show_block_element_menu": {
-    "message": "Erakutsi 'Blokeatu elementua' eskumako botoaren menuan"
-  },
-  "show_devtools_panel": {
-    "message": "Erakutsi 'Adblock Plus' panela garatzailearen tresnetan"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> orri honetan",
@@ -227,36 +112,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "$number$ iragarki eta jarraipen tresna blokeatu ditut Adblock Plus gehigarriari esker.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Erakutsi kopurua ikonoan"
   },
   "stats_title": {
     "message": "Blokeatutako iragarkiak"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Iragazki zerrenda kokagunea:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Mesedez aukeratu iragazki harpidetza bat zerrendatik:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Harpidetza izenburua:"
-  },
   "unexpected_filter_list_header": {
     "message": "Iragazki zerrenden goiburuak ez dira hemen onartzen"
-  },
-  "update_now": {
-    "message": "Eguneratu orain"
-  },
-  "whitelisted_domains": {
-    "message": "Zerrenda-zuriko domeinuak"
   }
 }

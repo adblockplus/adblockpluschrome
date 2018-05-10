@@ -2,20 +2,8 @@
   "add": {
     "message": "Lisää"
   },
-  "add_domain_button": {
-    "message": "Lisää sivu"
-  },
-  "add_filter_button": {
-    "message": "Lisää suodatin"
-  },
   "add_filters_msg": {
     "message": "Lisää suodatin\\suodattimia?"
-  },
-  "add_your_own_filters": {
-    "message": "Lisää omia suodattimia"
-  },
-  "apply_changes": {
-    "message": "Hyväksy muutokset"
   },
   "block_element": {
     "message": "Estä elementti"
@@ -29,26 +17,17 @@
   "continue": {
     "message": "Jatka"
   },
-  "description": {
-    "message": "Adblock Plus on maailman suosituin mainosten esto-ohjelma, ja se on käytössä yli 100 miljoonassa laitteessa."
-  },
   "disabled_for_site": {
     "message": "<strong>Poistettu</strong> tältä sivulta"
-  },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus ei estä mainoksia sivuilla jotka ovat alla listattuna. Voit lisätä sivun joko Adblock Plus kuvakkeesta osoiteriviltä tai kirjoittamalla sivun (ei osoitetta) laatikkoon ja klikkaamalla \"lisää sivu\" nappia."
   },
   "easy_create_filter": {
     "message": "Estä elementti"
   },
-  "edit_filters_raw": {
-    "message": "Editoi suodattimia tekstimuodossa"
-  },
-  "enable_only_the": {
-    "message": "Käytä vain tarvittavia suodattimia. Liian monta suodatinta voi aiheuttaa sen että selaimesi ei vastaa."
-  },
   "enabled_for_site": {
     "message": "<strong>Käytössä</strong> tällä sivulla"
+  },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Aktiivista verkkotunnusta ei ole määritetty laajennetun elementin piilotussuodattimelle"
   },
   "filter_invalid_domain": {
     "message": "Väärä (tai tyhjä) verkkotunnus"
@@ -56,89 +35,16 @@
   "filter_invalid_regexp": {
     "message": "Virheellinen normaali-ilmaus"
   },
-  "filter_lists": {
-    "message": "Suodatinlistat"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Suodattimesi on noudatettava <a>Adblock Plus suodattimen syntaksia</a>."
-  },
   "filter_unknown_option": {
     "message": "Tuntematon suodatusvaihtoehto"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Salli osa ei-häiritsevästä mainonnasta"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Lisää"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Lisää jokin muu tilaus"
-  },
-  "filters_addSubscription_label": {
-    "message": "Lisää suodatintilaus"
-  },
-  "filters_readMore_label": {
-    "message": "Lue lisää"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Poista"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Käytössä"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Epäonnistui, tarkistussumma ei täsmää"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Epäonnistui, latausvirhe"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Ladataan…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Epäonnistui, kelvoton suodatinlista"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Epäonnistui, kelvoton osoite"
-  },
-  "filters_viewList_label": {
-    "message": "Näytä lista"
-  },
-  "found_a_bug": {
-    "message": "Löysitkö vian? Haluatko kääntää Adblock Plusin omalle kielellesi? Ole hyvä ja <a>kirjoita hakemus täällä</a>."
-  },
-  "general": {
-    "message": "Yleiset"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Haluatko varmasti poistaa tämän tilauksen?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Suodatinlistan sijainti on joko kelvoton osoite tai tiedoston nimi."
   },
   "invalid_css_selector": {
     "message": "$selector$ ei ole kelvollinen CSS-valitsin",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Viimeksi päivitetty $time$ $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Viimeksi päivitetty $time$ tänään",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -150,6 +56,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Ladataan..."
   },
   "name": {
     "message": "Adblock Plus"
@@ -169,14 +78,8 @@
   "notification_without_buttons": {
     "message": "Napsauttamalla ilmoitusta voit avata kaikki linkit siitä."
   },
-  "options": {
-    "message": "Adblock Plus asetukset"
-  },
   "options_short": {
     "message": "Asetukset"
-  },
-  "out_of_date_lists": {
-    "message": "Vanhentuneet listat päivitetään säännöllisesti."
   },
   "overlay_notification_button_no": {
     "message": "Ei"
@@ -190,20 +93,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Lopeta ilmoitusten näyttäminen"
   },
-  "overlay_shownotifications_label": {
-    "message": "Näytä hyödylliset ilmoitukset"
-  },
-  "remove_button": {
-    "message": "Poista valitut"
-  },
   "sendReport": {
     "message": "Ilmoita ongelma tällä sivulla"
-  },
-  "show_block_element_menu": {
-    "message": "Näytä 'Estä elementti' oikea-klikkaus valikossa"
-  },
-  "show_devtools_panel": {
-    "message": "Näytä \"Adblock Plus\" -paneeli kehittäjäasetuksissa"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> tällä sivulla",
@@ -221,36 +112,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Estin $number$ mainosta ja trackeriä kiitos Adblock Plus;an.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Näytä numerot kuvakkeessa"
   },
   "stats_title": {
     "message": "Mainokset estetty"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Listan sijainti:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Valitse suodatintilaus listasta:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Tilauksen nimi:"
-  },
   "unexpected_filter_list_header": {
     "message": "Suodatinlistan otsikot eivät ole sallittuja tässä"
-  },
-  "update_now": {
-    "message": "Päivitä nyt"
-  },
-  "whitelisted_domains": {
-    "message": "Sallitut sivut"
   }
 }

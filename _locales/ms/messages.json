@@ -2,20 +2,8 @@
   "add": {
     "message": "Tambah"
   },
-  "add_domain_button": {
-    "message": "Tambah domain"
-  },
-  "add_filter_button": {
-    "message": "Tambah penapis"
-  },
   "add_filters_msg": {
     "message": "Tambah penapis?"
-  },
-  "add_your_own_filters": {
-    "message": "Tambah penapis anda sendiri"
-  },
-  "apply_changes": {
-    "message": "Simpan"
   },
   "block_element": {
     "message": "Halang elemen"
@@ -29,23 +17,11 @@
   "continue": {
     "message": "Teruskan"
   },
-  "description": {
-    "message": "Digunakan pada lebih dari 100 juta peranti, Adblock Plus merupakan Penyekat Iklan yang paling popular di dunia."
-  },
   "disabled_for_site": {
     "message": "<strong>Dinyahaktifkan</strong> pada laman web ini"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus dinyahaktifkan untuk domain-domain yang disenaraikan di bawah. Anda boleh menambah domain sama ada melalui ikon Adblock Plus di sebelah bar alamat atau dengan menaip domain (bukan URL) di dalam kotak dan klik butang \"Tambah domain\"."
-  },
   "easy_create_filter": {
     "message": "Halang elemen"
-  },
-  "edit_filters_raw": {
-    "message": "Edit penapis dalam format teks"
-  },
-  "enable_only_the": {
-    "message": "Hanya aktifkan senarai penapis yang diperlukan. Terlalu banyak penapis secara serentak boleh membuat pelayar anda tidak bertindak balas."
   },
   "enabled_for_site": {
     "message": "<strong>Dinyahaktifkan</strong> pada laman web ini"
@@ -53,68 +29,17 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Tiada domain aktif terpilih untuk menapis unsur penyembunyian lanjut"
   },
+  "filter_invalid_domain": {
+    "message": "Domain Tidak Sah"
+  },
   "filter_invalid_regexp": {
     "message": "Ungkapan/Kod yang tidak sah"
-  },
-  "filter_lists": {
-    "message": "Senarai penapis"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Penapis anda mesti ikut <a>Adblock Plus filter syntax</a>."
   },
   "filter_unknown_option": {
     "message": "Pilihan tapisan tidak diketahui"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Benarkan iklan yang tidak mengganggu"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Tambah"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Tambah langganan lain"
-  },
-  "filters_addSubscription_label": {
-    "message": "Tambah langganan penapis"
-  },
-  "filters_readMore_label": {
-    "message": "Baca lebih"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Padam"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Diaktifkan"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Gagal, checksum tidak sepadan"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Gagal, kegagalan memuat-turun"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Memuat-turun..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Gagal, bukan senarai penapis yang sah"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Gagal, bukan alamat yang sah"
-  },
-  "filters_viewList_label": {
-    "message": "Lihat senarai"
-  },
-  "found_a_bug": {
-    "message": "Menghadapi masalah? Ingin terjemahkan Adblock Plus kepada bahasa anda? Sila <a>failkan permohonan anda di sini</a>."
-  },
-  "general": {
-    "message": "Umum"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Adakah anda mahu membuang langganan ini?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Lokasi senarai penapis sama ada URL atau nama fail adalah tidak sah."
   },
   "invalid_css_selector": {
     "message": "$selector$ bukan pemilih CSS (CSS selector) yang sah",
@@ -124,32 +49,16 @@
       }
     }
   },
-  "last_updated_at": {
-    "message": "Terakhir dikemaskini pada $time$, $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Terakhir Dikemaskini pada $time$ semalam",
-    "placeholders": {
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
   "line": {
-    "message": "Baris $number$",
+    "message": "Baris ke $number$",
     "placeholders": {
       "number": {
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Sedang memuatkan..."
   },
   "name": {
     "message": "Adblock Plus"
@@ -169,14 +78,8 @@
   "notification_without_buttons": {
     "message": "Klik pada notifikasi untuk membuka semua pautan yang terkandung dalamnya."
   },
-  "options": {
-    "message": "Tetapan Adblock Plus"
-  },
   "options_short": {
     "message": "Tetapan"
-  },
-  "out_of_date_lists": {
-    "message": "Senarai yang telah luput tarikh akan dikemas kini dari semasa ke semasa."
   },
   "overlay_notification_button_no": {
     "message": "Tidak"
@@ -184,17 +87,14 @@
   "overlay_notification_button_yes": {
     "message": "Ya"
   },
-  "remove_button": {
-    "message": "Padamkan yang dipilih"
+  "overlay_notification_closing_button_hide": {
+    "message": "Tutup pemberitahuan ini"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Hentikan paparan pemberitahuan"
   },
   "sendReport": {
     "message": "Lapor isu pada laman ini"
-  },
-  "show_block_element_menu": {
-    "message": "Paparkan item menu 'Halang elemen' pada butang klik kanan"
-  },
-  "show_devtools_panel": {
-    "message": "Papar Panel 'Adblock Plus' pada fungsi \"Developer Tools\""
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pada halaman ini",
@@ -212,36 +112,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Saya telah menyekat $number$ iklan dan penjejak dengan berkat Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Paparkan nombor dalam ikon"
   },
   "stats_title": {
     "message": "Iklan disekat"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Lokasi senarai penapis:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Sila pilih langganan penapis dalam senarai berikut:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Tajuk langganan"
-  },
   "unexpected_filter_list_header": {
     "message": "Header penapis senarai tidak dibenarkan sini"
-  },
-  "update_now": {
-    "message": "Kemaskini sekarang"
-  },
-  "whitelisted_domains": {
-    "message": "Domain disenaraiputihkan"
   }
 }

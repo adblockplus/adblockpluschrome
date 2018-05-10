@@ -2,20 +2,8 @@
   "add": {
     "message": "Додај"
   },
-  "add_domain_button": {
-    "message": "Додај домен"
-  },
-  "add_filter_button": {
-    "message": "Додај филтер"
-  },
   "add_filters_msg": {
     "message": "Додавање филтера"
-  },
-  "add_your_own_filters": {
-    "message": "Сопствени филтери"
-  },
-  "apply_changes": {
-    "message": "Сачувај"
   },
   "block_element": {
     "message": "Блокирај елемент"
@@ -30,22 +18,13 @@
     "message": "Даље"
   },
   "description": {
-    "message": "Коришћен на преко 100 милиона уређаја, Adblock Plus је најпопуларнији блокатор огласа на свету."
+    "message": "Са преко 500 милиона преузимања, Adblock Plus је један од најпопуларнијих блокатора реклама на свету."
   },
   "disabled_for_site": {
     "message": "<strong>Онемогући</strong> на овом сајту"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus не важи за доленаведене домене. Нови домен можете додати путем иконе Adblock Plus-а или тако што ћете унети домен (не URL) у поље и кликнути на дугме „Додај домен“."
-  },
   "easy_create_filter": {
     "message": "Блокирај елемент"
-  },
-  "edit_filters_raw": {
-    "message": "Уреди филтере у режиму текста"
-  },
-  "enable_only_the": {
-    "message": "Омогућите само оне спискове филтера који су вам потребни. Превише њих може да успори прегледач."
   },
   "enabled_for_site": {
     "message": "<strong>Омогући</strong> на овом сајту"
@@ -59,89 +38,16 @@
   "filter_invalid_regexp": {
     "message": "Неважећи регуларни израз"
   },
-  "filter_lists": {
-    "message": "Спискови филтера"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Ваш филтер мора да следи <a>синтаксу за филтере Adblock Plus-а</a>."
-  },
   "filter_unknown_option": {
     "message": "Непозната опција филтера"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Дозволи ненаметљиве рекламе"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Додај"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Додај другу претплату"
-  },
-  "filters_addSubscription_label": {
-    "message": "Додај пријаву"
-  },
-  "filters_readMore_label": {
-    "message": "Сазнај више"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Избриши"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Омогућено"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Грешка: неслагање контролног збира"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Грешка при преузимању"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Преузимање..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Грешка: неисправан формат списка филтера"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Грешка: неисправна адреса"
-  },
-  "filters_viewList_label": {
-    "message": "Погледај списак"
-  },
-  "found_a_bug": {
-    "message": "Пронашли сте грешку или желите да преведете Adblock Plus на свој језик? <a>Овде поднесите захтев</a>."
-  },
-  "general": {
-    "message": "Опште"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Желите ли да уклоните ову претплату?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Неисправна адреса и име датотеке са списком филтера."
   },
   "invalid_css_selector": {
     "message": "$selector$ није исправан CSS бирач",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Последњи пут ажурирано $date$ у $time$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Последњи пут ажурирано данас у $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +81,8 @@
   "notification_without_buttons": {
     "message": "Кликните на обавештење да бисте отворили све везе у њему."
   },
-  "options": {
-    "message": "Опције Adblock Plus-а"
-  },
   "options_short": {
     "message": "Опције"
-  },
-  "out_of_date_lists": {
-    "message": "Застарели спискови се редовно ажурирају."
   },
   "overlay_notification_button_no": {
     "message": "Не"
@@ -196,20 +96,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Не приказуј обавештења"
   },
-  "overlay_shownotifications_label": {
-    "message": "Приказуј корисна обавештења"
-  },
-  "remove_button": {
-    "message": "Уклони изабрано"
-  },
   "sendReport": {
     "message": "Пријави проблеме на овој страници"
-  },
-  "show_block_element_menu": {
-    "message": "Ставка „Блокирај елемент“ у контекстуалном менију"
-  },
-  "show_devtools_panel": {
-    "message": "Прикажи панел 'Adblock Plus' у алатима за програмере"
   },
   "stats_label_page": {
     "message": "На овој страници: <strong>$number$</strong>",
@@ -227,36 +115,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Блокирао сам $number$ огласа и пратилаца захваљујући Adblock Plus-у.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Прикажи број на икони"
   },
   "stats_title": {
     "message": "Блокирани огласи"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Локација списка са филтерима:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Изаберите пријаву са списка:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Назив претплате:"
-  },
   "unexpected_filter_list_header": {
     "message": "Заглавља списка филтера овде нису дозвољена"
-  },
-  "update_now": {
-    "message": "Ажурирај"
-  },
-  "whitelisted_domains": {
-    "message": "Дозвољени домени"
   }
 }

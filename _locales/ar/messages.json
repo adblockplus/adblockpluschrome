@@ -2,20 +2,8 @@
   "add": {
     "message": "أضف"
   },
-  "add_domain_button": {
-    "message": "أضف نطاق"
-  },
-  "add_filter_button": {
-    "message": "أضف فلتر"
-  },
   "add_filters_msg": {
     "message": "إضافة فلتر\\فلاتر؟"
-  },
-  "add_your_own_filters": {
-    "message": "أضف الفلاتر الخاصة بك"
-  },
-  "apply_changes": {
-    "message": "تطبيق التغييرات"
   },
   "block_element": {
     "message": "حجب العنصر"
@@ -30,22 +18,13 @@
     "message": "واصِل"
   },
   "description": {
-    "message": "يستخدم على أكثر من 100 مليون جهاز، آدبلوك بلس هو مانع الإعلانات الأكثر إنتشارًا في العالم."
+    "message": "مع أكثر من 500 مليون عملية تحميل، يعتبر Adblock Plus أحد أكثر أدوات حظر الإعلانات شيوعًا في العالم."
   },
   "disabled_for_site": {
     "message": "<strong>معطل</strong> في هذا الموقع"
   },
-  "disabled_for_these_domains": {
-    "message": "آدبلوك بلس معطل للنطاقات التالية. تستطيع إضافة نطاق من خلال أيقونة ﺁدبلوك بلس في شريط العنوان أو من خلال كتابة اسم النطاق (وليس الرابط) في الصندوق ثم الضغط على زر \"أضف نطاق\"."
-  },
   "easy_create_filter": {
     "message": "حجب العنصر"
-  },
-  "edit_filters_raw": {
-    "message": "تعديل الفلاتر في نص عادي"
-  },
-  "enable_only_the": {
-    "message": "فعّل قائمة الترشيح التي تريد فقط. الكثير منها بإمكانه جعل متصفحك لا يستجيب."
   },
   "enabled_for_site": {
     "message": "<strong>مفعّل</strong> في هذا الموقع"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "لم يتم تحديد نطاق نشط لفلتر إخفاء العناصر الموسعة"
   },
+  "filter_invalid_csp": {
+    "message": "سياسة أمان المحتوى غير صالحة"
+  },
   "filter_invalid_domain": {
     "message": "تم تحديد نطاق غير صحيح (أو فارغ)"
   },
   "filter_invalid_regexp": {
     "message": "تعبير منطقي غير صحيح"
   },
-  "filter_lists": {
-    "message": "قوائم المرشحات"
-  },
-  "filter_must_follow_syntax": {
-    "message": "مرشحك يجب ان يتبع <a>قواعد ترشيح آدبلوك بلس</a>."
-  },
   "filter_unknown_option": {
     "message": "خيار فلتر غير معروف"
   },
-  "filters_acceptableAds2_label": {
-    "message": "السماح لب&عض الإعلانات الغير متطفّلة"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "أضف"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "إضافة اشتراك آخر"
-  },
-  "filters_addSubscription_label": {
-    "message": "إضافة إشتراك فلاتر"
-  },
-  "filters_readMore_label": {
-    "message": "قراءة المزيد"
-  },
-  "filters_subscription_delete_label": {
-    "message": "ازالة"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "مفعّل"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "فشل الأمر، عدم تطابق المجموع الإختباري"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "فشل الأمر، بسبب فشل التحميل"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "جاري التحميل…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "فشل الأمر، قائمة فلاتر ليست صحيحة"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "فشل الأمر، العنوان ليس صحيح"
-  },
-  "filters_viewList_label": {
-    "message": "إظهار القائمة"
-  },
-  "found_a_bug": {
-    "message": "هل وجدت خطأ برمجي؟ تريد ترجمة ﺁدبلوك بلس إلى لغتك؟ الرجاء <a>الطلب هنا</a>."
-  },
-  "general": {
-    "message": "عام"
-  },
-  "global_remove_subscription_warning": {
-    "message": "هل أنت حقاً راغب بإزالة هذا الإشتراك؟"
-  },
-  "global_subscription_invalid_location": {
-    "message": "موقع قائمة الفلاتر ليس صحيح كعنوان ويب و لا كإسم ملف."
   },
   "invalid_css_selector": {
     "message": "$selector$ غير صالح كمحدد لـ CSS",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "أخر تحديث في $time$ عند $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "آخر تحديث في $time$ اليوم",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "اضغط على التنبيه لفتح كل الروابط الموجودة فيه."
   },
-  "options": {
-    "message": "خيارات آدبلوك بلس"
-  },
   "options_short": {
     "message": "الخيارات"
-  },
-  "out_of_date_lists": {
-    "message": "القوائم القديمة تحدث دورياً."
   },
   "overlay_notification_button_no": {
     "message": "لا"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "إيقاف عرض الإشعارات"
   },
-  "overlay_shownotifications_label": {
-    "message": "أظهر الأشعارات الهامة"
-  },
-  "remove_button": {
-    "message": "إزالة المحدد"
-  },
   "sendReport": {
     "message": "التبليغ عن مشكل في هذه الصفحة"
-  },
-  "show_block_element_menu": {
-    "message": "أظهر فقرة \"حجب العنصر\" في قائمة النقرة اليمنى"
-  },
-  "show_devtools_panel": {
-    "message": "أظهر لوحة 'آدبلوك بلس' في أدوات المطور"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> على هذه الصفحة",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "أنا منعت $number$ إعلاناً و متتبعاً بفضل آدبلوك بلس.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "عرض الرقم في الصورة المرمزة"
   },
   "stats_title": {
     "message": "الإعلانات المحجوبة"
   },
-  "subscriptionSelection_location_label": {
-    "message": "موقع قائمة الفلاتر"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "الرجاء اختيار اشتراك لفلتر من القائمة:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "عنوان الاشتراك"
-  },
   "unexpected_filter_list_header": {
     "message": "ترويسات قائمة المرشحات غير مسموح بها هنا"
-  },
-  "update_now": {
-    "message": "التحديث الان"
-  },
-  "whitelisted_domains": {
-    "message": "نطاقات القائمة البيضاء"
   }
 }

@@ -2,20 +2,8 @@
   "add": {
     "message": "Pridėti"
   },
-  "add_domain_button": {
-    "message": "Pridėti domeną"
-  },
-  "add_filter_button": {
-    "message": "Pridėti filtrą"
-  },
   "add_filters_msg": {
     "message": "Pridėti filtrus(-ą)?"
-  },
-  "add_your_own_filters": {
-    "message": "Pridėkite savo filtrus"
-  },
-  "apply_changes": {
-    "message": "Pritaikyti pakeitimus"
   },
   "block_element": {
     "message": "Blokuoti elementą"
@@ -30,22 +18,13 @@
     "message": "Toliau"
   },
   "description": {
-    "message": "Naudojamas daugiau nei 100 milijonų įrenginių, „Adblock Plus“ yra populiariausias reklamos blokavimo įrankis."
+    "message": "Naudojamas daugiau nei 500 milijonų įrenginių, „Adblock Plus“ yra populiariausias reklamos blokavimo įrankis."
   },
   "disabled_for_site": {
     "message": "Šiame puslapyje <strong>išjungta</strong>"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus žemiau išvardytiems domenams išjungtas. Pridėti domeną galite paspaudę Adblock Plus piktogramą, adreso juostoje arba įvesdami domeną (ne URL) ir paspausdami „Pridėti domeną“ mygtuką."
-  },
   "easy_create_filter": {
     "message": "Blokuoti elementą"
-  },
-  "edit_filters_raw": {
-    "message": "Redaguoti filtrus kaip gryną tesktą"
-  },
-  "enable_only_the": {
-    "message": "Įjunkite tik tuos filtrų sąrašus kurių jums reikia. Jei įgalinsite per daug jūsų naršyklė gali sulėtėti."
   },
   "enabled_for_site": {
     "message": "Šiame puslapyje <strong>įjungta</strong>"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Nėra nurodytas aktyvus domenas išplėstam slėpimo filtrui"
   },
+  "filter_invalid_csp": {
+    "message": "Neleistino turinio saugumo politika"
+  },
   "filter_invalid_domain": {
     "message": "Nurodytas netinkamas (arba nenurodytas) domenas"
   },
   "filter_invalid_regexp": {
     "message": "Netinkama reguliarioji išraiška"
   },
-  "filter_lists": {
-    "message": "Filtrų sąrašai"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Jūsų filtras turi atitikti <a>Adblock Plus filtrų sintaksę</a>."
-  },
   "filter_unknown_option": {
     "message": "Nežinoma filtro parinktis"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Leisti neįkyrias reklamas"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Pridėti"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Pridėti kitą prenumeratą"
-  },
-  "filters_addSubscription_label": {
-    "message": "Pridėti filtro prenumeratą"
-  },
-  "filters_readMore_label": {
-    "message": "Plačiau"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Pašalinti"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Įjungta"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Nepavyko, bloga kontrolinė suma"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Nepavyko, atsiuntimo klaida"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Atsiunčiama..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Nepavyko, netinkamas filtrų sąrašas"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Nepavyko, netinkamas adresas"
-  },
-  "filters_viewList_label": {
-    "message": "Peržiūrėti sąrašą"
-  },
-  "found_a_bug": {
-    "message": "Radote klaidą? Norite išversti Adblock Plus į savo kalbą? Užpildykite <a>prašymą čia</a>."
-  },
-  "general": {
-    "message": "Bendra"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Ar tikrai norite atsisakyti šios prenumeratos?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Filtrų sąrašo adresas nėra taisyklingas URL ar failo vardas."
   },
   "invalid_css_selector": {
     "message": "$selector$ nėra tinkamas CSS selektorius",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Paskutinį kartą atnaujinta $time$ $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Paskutinį kartą atnaujinta šiandien $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Paspauskite ant pranešimo ir bus atvertos visos nuorodos jame."
   },
-  "options": {
-    "message": "Adblock Plus parinktys"
-  },
   "options_short": {
     "message": "Parinktys"
-  },
-  "out_of_date_lists": {
-    "message": "Pasenę sąrašai periodiškai atnaujinami."
   },
   "overlay_notification_button_no": {
     "message": "Ne"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Neberodyti pranešimų"
   },
-  "overlay_shownotifications_label": {
-    "message": "Rodyti naudingus pranešimus"
-  },
-  "remove_button": {
-    "message": "Pašalinti pasirinktą"
-  },
   "sendReport": {
     "message": "Pranešti apie problemą šiame puslapyje"
-  },
-  "show_block_element_menu": {
-    "message": "Dešinio mygtuko meniu rodyti „Blokuoti elementą“"
-  },
-  "show_devtools_panel": {
-    "message": "Rodyti „Adblock Plus“ valdymo pultą kūrėjo įrankiuose"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> šiame puslapyje",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Adblock Plus dėka aš užblokavau $number$ reklamų.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Piktogramoje rodyti skaičių"
   },
   "stats_title": {
     "message": "Reklamos užblokuotos"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Filtrų sąrašo vieta:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Pasirinkite filtro prenumeratą iš šio sąrašo:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Prenumeratos pavadinimas:"
-  },
   "unexpected_filter_list_header": {
     "message": "Čia negalima naudoti filtrų sąrašo antraščių"
-  },
-  "update_now": {
-    "message": "Atnaujinti"
-  },
-  "whitelisted_domains": {
-    "message": "Domenai baltajame sąraše"
   }
 }

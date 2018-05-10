@@ -2,20 +2,8 @@
   "add": {
     "message": "ചേര്‍ക്കുക"
   },
-  "add_domain_button": {
-    "message": "ഡൊമൈൻ  ചേര്‍ക്കുക"
-  },
-  "add_filter_button": {
-    "message": "ഫിൽറ്റർ ചേര്‍ക്കുക"
-  },
   "add_filters_msg": {
     "message": "ഫിൽറ്റർ / ഫിൽറ്ററുകൾ ഉള്പെടുത്തുക?"
-  },
-  "add_your_own_filters": {
-    "message": "സ്വന്തം ഫിൽറ്റർ ചേര്‍ക്കുക"
-  },
-  "apply_changes": {
-    "message": "മാറ്റങ്ങള്‍ നടപ്പിലാക്കുക"
   },
   "block_element": {
     "message": "എലമെന്റ് തടയുക"
@@ -29,77 +17,22 @@
   "continue": {
     "message": "തുടരുക"
   },
-  "description": {
-    "message": "പത്തു കോടിയിലേറെ ഉപകരണങ്ങളില്‍ ഉപയോഗിക്കപ്പെടുന്ന ആഡ്ബ്ലോക്ക് പ്ലസ് ആണ് ലോകത്തെ ഏറ്റവും പ്രചാരമേറിയ ആഡ്ബ്ലോക്കര്‍."
-  },
   "disabled_for_site": {
     "message": "ഈ സൈറ്റില്‍ <strong>ഡിസേബിള്‍</strong> ചെയ്തിരിക്കുന്നു"
   },
   "easy_create_filter": {
     "message": "എലമെന്റ് തടയുക"
   },
-  "edit_filters_raw": {
-    "message": "അരിപ്പകള്‍ റോ ടെക്സ്റ്റ് (ഫോര്‍മാറ്റിങ് ഇല്ലാതെ) ആയി തിരുത്തുക"
-  },
   "enabled_for_site": {
     "message": "ഈ സൈറ്റില്‍ <strong>സജീവം</strong>"
   },
-  "filter_lists": {
-    "message": "പട്ടികകള്‍ അരിക്കുക"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "ചേര്‍ക്കുക"
-  },
-  "filters_readMore_label": {
-    "message": "കൂടുതല്‍ വായിക്കുക"
-  },
-  "filters_subscription_delete_label": {
-    "message": "ഒഴിവാക്കുക"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "പ്രാപ്തമാക്കി"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "പരാജയം, ഡൌണ്‍ലോഡ് പരാജയപ്പെട്ടിരിക്കുന്നു"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "ഡൌണ്‍ലോഡ് ചെയ്യുന്നു…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "പരാജയപ്പെട്ടിരിക്കുന്നു, ഇതൊരു സാധുവായ ഫില്‍റ്റര്‍ പട്ടിക അല്ല"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "പരാജയപ്പെട്ടിരിക്കുന്നു, ഇതൊരു സാധുവായ വിലാസം അല്ല"
-  },
-  "filters_viewList_label": {
-    "message": "പട്ടിക കാണുക"
-  },
-  "general": {
-    "message": "പലവക"
   },
   "invalid_css_selector": {
     "message": "$selector$ ഒരു ശരിയായ സി. എസ്. എസ്. സെലക്റ്റര്‍ അല്ല",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "അവസാനം പുതുക്കിയത് $date$, $time$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "അവസാനം പുതുക്കിയത് ഇന്ന് $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -124,23 +57,14 @@
   "notification_open_all": {
     "message": "ഈ അറിയിപ്പില്‍നിന്നുള്ള എല്ലാ കണ്ണികളും തുറക്കുക"
   },
-  "options": {
-    "message": "ആഡ്ബ്ലോക്ക് പ്ലസ് ഓപ്ഷനുകള്‍"
-  },
   "options_short": {
     "message": "സൗകര്യങ്ങള്‍"
-  },
-  "out_of_date_lists": {
-    "message": "പഴകിയ പട്ടികകള്‍ പതിവായി പുതുക്കുന്നു."
   },
   "overlay_notification_button_no": {
     "message": "അല്ല"
   },
   "overlay_notification_button_yes": {
     "message": "അതെ"
-  },
-  "remove_button": {
-    "message": "തെരഞ്ഞെടുത്തത് നീക്കംചെയ്യുക"
   },
   "stats_label_page": {
     "message": "ഈ താളില്‍ <strong>$number$</strong>",
@@ -158,14 +82,6 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "ആഡ്ബ്ലോക്ക് പ്ലസ്സിന് നന്ദി, ഞാന്‍ $number$ പരസ്യങ്ങളും ട്രാക്കറുകളും തടഞ്ഞു.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "ഐക്കണില്‍ സംഖ്യ കാണിക്കുക"
   },
@@ -174,11 +90,5 @@
   },
   "unexpected_filter_list_header": {
     "message": "ഫില്‍റ്റര്‍ ലിസ്റ്റ് ഹെഡ്ഡറുകള്‍ ഇവിടെ അനുവദനീയമല്ല"
-  },
-  "update_now": {
-    "message": "ഇപ്പോള്‍ത്തന്നെ പുതുക്കുക"
-  },
-  "whitelisted_domains": {
-    "message": "നല്ലപട്ടികയില്‍പ്പെട്ട ഡൊമെയ്നുകള്‍"
   }
 }

@@ -2,20 +2,8 @@
   "add": {
     "message": "Додати"
   },
-  "add_domain_button": {
-    "message": "Додати домен"
-  },
-  "add_filter_button": {
-    "message": "Додати фільтр"
-  },
   "add_filters_msg": {
     "message": "Додати фільтр(и)?"
-  },
-  "add_your_own_filters": {
-    "message": "Додати власні фільтри"
-  },
-  "apply_changes": {
-    "message": "Застосувати зміни"
   },
   "block_element": {
     "message": "Заблокувати елемент"
@@ -30,22 +18,13 @@
     "message": "Далі"
   },
   "description": {
-    "message": "Adblock Plus використовується на понад ста мільйонах пристроїв і є найпопулярнішим блокувальником реклами."
+    "message": "Понад 500 мільйонів завантажень. Adblock Plus є одним з найбільш популярних блокувальників реклами в світі."
   },
   "disabled_for_site": {
     "message": "<strong>Вимкнено</strong> на цьому сайті"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus відключено для нижчеперерахованих доменів. Домени можна додавати за допомогою значка Adblock Plus у рядку адреси чи набравши назву домена (не адресу) у даному полі та клацнувши кнопку «Додати домен»."
-  },
   "easy_create_filter": {
     "message": "Заблокувати елемент"
-  },
-  "edit_filters_raw": {
-    "message": "Редагувати фільтри у текстовому режимі"
-  },
-  "enable_only_the": {
-    "message": "Вмикайте лише потрібні списки фільтрів. Їх надлишок може погіршити сприйнятливість переглядача."
   },
   "enabled_for_site": {
     "message": "<strong>Увімкнено</strong> на цьому сайті"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Не вказано активний домен для розширеного приховування елементів"
   },
+  "filter_invalid_csp": {
+    "message": "Невірне правило політики безпеки"
+  },
   "filter_invalid_domain": {
     "message": "Вказано недійсний (або порожній) домен"
   },
   "filter_invalid_regexp": {
     "message": "Неправильний регулярний вираз"
   },
-  "filter_lists": {
-    "message": "Списки фільтрів"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Ваш фільтр має відповідати <a>синтаксису фільтрів Adblock Plus</a>."
-  },
   "filter_unknown_option": {
     "message": "Невідома опція фільтра"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Дозволити деяку ненав'язливу рекламу"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Додати"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Додати іншу підписку"
-  },
-  "filters_addSubscription_label": {
-    "message": "Додати підписку на фільтри"
-  },
-  "filters_readMore_label": {
-    "message": "Детальніше"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Видалити"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Увімкнено"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Помилка, не збіглась контрольна сума"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Помилка, неможливо викачати"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Завантажується…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Помилка, не правильний список фільтрів"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Помилка, невірна адреса"
-  },
-  "filters_viewList_label": {
-    "message": "Перегляд списку"
-  },
-  "found_a_bug": {
-    "message": "Виявили помилку? Бажаєте перекласти Adblock Plus своєю мовою? Будь ласка, <a>оформіть заявку тут</a>."
-  },
-  "general": {
-    "message": "Загальні"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Ви впевнені, що хочете вилучити цю підписку?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Не вдалося розпізнати введену адресу ні як інтернет адресу, ні як шлях до файлу."
   },
   "invalid_css_selector": {
     "message": "$selector$ не є припустимим CSS-селектором",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Останнє оновлення: $date$ о $time$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Останнє оновлення: сьогодні о $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Клацніть по повідомленню, щоб відкрити всі посилання в ньому."
   },
-  "options": {
-    "message": "Налаштування Adblock Plus"
-  },
   "options_short": {
     "message": "Налаштування"
-  },
-  "out_of_date_lists": {
-    "message": "Застарілі списки періодично оновлюються."
   },
   "overlay_notification_button_no": {
     "message": "Ні"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Заборонити показ повідомлень"
   },
-  "overlay_shownotifications_label": {
-    "message": "Показувати корисні повідомлення"
-  },
-  "remove_button": {
-    "message": "Видалити вибране"
-  },
   "sendReport": {
     "message": "Повідомити про проблеми на сторінці"
-  },
-  "show_block_element_menu": {
-    "message": "Показувати пункт «Заблокувати елемент» у контекстному меню"
-  },
-  "show_devtools_panel": {
-    "message": "Показувати панель Adblock Plus в інструментах розробника"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> на цій сторінці",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Я заблокував $number$ оголошень і шпигунів завдяки Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Показувати число у значку"
   },
   "stats_title": {
     "message": "Статистика блокування"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Адреса списку фільтрів:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Будь ласка виберіть фільтрову підписку з переліку:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Назва підписки:"
-  },
   "unexpected_filter_list_header": {
     "message": "Заголовки списків фільтрів тут не допускаються"
-  },
-  "update_now": {
-    "message": "Оновити зараз"
-  },
-  "whitelisted_domains": {
-    "message": "Список дозволених доменів"
   }
 }

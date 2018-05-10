@@ -2,20 +2,8 @@
   "add": {
     "message": "Toevoegen"
   },
-  "add_domain_button": {
-    "message": "Domein toevoegen"
-  },
-  "add_filter_button": {
-    "message": "Filter toevoegen"
-  },
   "add_filters_msg": {
     "message": "Filter(s) toevoegen?"
-  },
-  "add_your_own_filters": {
-    "message": "Eigen filters toevoegen"
-  },
-  "apply_changes": {
-    "message": "Wijzigingen toepassen"
   },
   "block_element": {
     "message": "Element blokkeren"
@@ -30,22 +18,13 @@
     "message": "Doorgaan"
   },
   "description": {
-    "message": "Adblock Plus wordt op meer dan 100 miljoen apparaten gebruikt, en is 's werelds populairste adblocker."
+    "message": "Met meer dan 500 miljoen downloads is Adblock Plus een van de meest populaire adblockers ter wereld."
   },
   "disabled_for_site": {
     "message": "<strong>Uitgeschakeld</strong> op deze website"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus is voor de hieronder vermelde domeinen uitgeschakeld. U kunt een domein toevoegen via het Adblock Plus-pictogram in de adresbalk, of door het domein (geen URL) in het veld te typen en op de knop 'Domein toevoegen' te klikken."
-  },
   "easy_create_filter": {
     "message": "Element blokkeren"
-  },
-  "edit_filters_raw": {
-    "message": "Filters bewerken als tekst"
-  },
-  "enable_only_the": {
-    "message": "Schakel alleen de filterlijsten in die u nodig hebt. Te veel filterlijsten kunnen uw browser laten vastlopen."
   },
   "enabled_for_site": {
     "message": "<strong>Ingeschakeld</strong> op deze website"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Geen actief domein opgegeven voor uitgebreide elementverbergende filter"
   },
+  "filter_invalid_csp": {
+    "message": "Ongeldig inhoudbeveiligingsbeleid"
+  },
   "filter_invalid_domain": {
     "message": "Ongeldig (of leeg) domein opgegeven"
   },
   "filter_invalid_regexp": {
     "message": "Ongeldige reguliere expressie"
   },
-  "filter_lists": {
-    "message": "Filterlijsten"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Uw filter moet de <a>Adblock Plus-filtersyntaxis</a> volgen."
-  },
   "filter_unknown_option": {
     "message": "Onbekende filteroptie"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Enkele niet-opdringerige advertenties toestaan"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Toevoegen"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Een ander abonnement toevoegen"
-  },
-  "filters_addSubscription_label": {
-    "message": "Filterabonnement toevoegen"
-  },
-  "filters_readMore_label": {
-    "message": "Meer lezen"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Verwijderen"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Ingeschakeld"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Mislukt, ongeldige controlesom"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Mislukt, fout bij downloaden"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Downloaden…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Mislukt, geen geldige filterlijst"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Mislukt, geen geldig adres"
-  },
-  "filters_viewList_label": {
-    "message": "Lijst bekijken"
-  },
-  "found_a_bug": {
-    "message": "Een bug gevonden? Wilt u Adblock Plus naar uw eigen taal vertalen? <a>Dien hier een verzoek in</a>."
-  },
-  "general": {
-    "message": "Algemeen"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Wilt u dit abonnement echt verwijderen?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Deze filterlijstlocatie is geen geldige URL, noch een geldige bestandsnaam."
   },
   "invalid_css_selector": {
     "message": "$selector$ is geen geldige CSS-selector",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Laatst bijgewerkt: $date$ om $time$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Laatst bijgewerkt: vandaag om $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Klik op de melding om alle koppelingen erin te openen."
   },
-  "options": {
-    "message": "Adblock Plus-opties"
-  },
   "options_short": {
     "message": "Opties"
-  },
-  "out_of_date_lists": {
-    "message": "Verouderde lijsten worden regelmatig bijgewerkt."
   },
   "overlay_notification_button_no": {
     "message": "Nee"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Tonen van meldingen stoppen"
   },
-  "overlay_shownotifications_label": {
-    "message": "Nuttige meldingen tonen"
-  },
-  "remove_button": {
-    "message": "Geselecteerde verwijderen"
-  },
   "sendReport": {
     "message": "Probleem op deze pagina melden"
-  },
-  "show_block_element_menu": {
-    "message": "Menu-item 'Element blokkeren' in contextmenu tonen"
-  },
-  "show_devtools_panel": {
-    "message": "Paneel 'Adblock Plus' in de ontwikkelaarshulpmiddelen tonen"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> op deze pagina",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Ik heb $number$ advertenties en trackers geblokkeerd dankzij Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Aantal in pictogram tonen"
   },
   "stats_title": {
     "message": "Geblokkeerde advertenties"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Filterlijstlocatie:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Kies een filterabonnement uit de lijst:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Abonnementstitel:"
-  },
   "unexpected_filter_list_header": {
     "message": "Filterlijstheaders zijn hier niet toegestaan"
-  },
-  "update_now": {
-    "message": "Nu bijwerken"
-  },
-  "whitelisted_domains": {
-    "message": "Vertrouwde domeinen"
   }
 }

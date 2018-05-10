@@ -2,18 +2,6 @@
   "add": {
     "message": "Añader"
   },
-  "add_filter_button": {
-    "message": "Amestar un filtru"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Añader"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Borrar"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Descargando…"
-  },
   "name": {
     "message": "Adblock Plus"
   },

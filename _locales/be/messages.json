@@ -2,20 +2,8 @@
   "add": {
     "message": "Дадаць"
   },
-  "add_domain_button": {
-    "message": "Дадаць дамен"
-  },
-  "add_filter_button": {
-    "message": "Дадаць фільтр"
-  },
   "add_filters_msg": {
     "message": "Дадаць фільтр(ы)?"
-  },
-  "add_your_own_filters": {
-    "message": "Дадаць уласныя фільтры"
-  },
-  "apply_changes": {
-    "message": "Ужыць змены"
   },
   "block_element": {
     "message": "Заблакаваць элемент"
@@ -30,22 +18,13 @@
     "message": "Працягнуць"
   },
   "description": {
-    "message": "Adblock Plus карыстаюцца больш чым на ста мільёнах прылад, што робіць яго найпапулярнейшым блакіроўшчыкам рэкламы ў свеце."
+    "message": "Adblock Plus спампавалі больш за 500 мільёнаў разоў, што робіць яго адным з найбольш папулярных блакіроўшчыкаў рэкламы ў свеце."
   },
   "disabled_for_site": {
     "message": "<strong>Адключаны</strong> на гэтым сайце"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus адключаны для пералічаных ніжэй даменаў. Вы можаце дадаць яшчэ дамен праз значок Adblock Plus у адрасным радку або напісаць дамен (не URL-адрас) ў полі пад тэкстам і націснуць кнопку «Дадаць дамен»."
-  },
   "easy_create_filter": {
     "message": "Заблакаваць элемент"
-  },
-  "edit_filters_raw": {
-    "message": "Рэдагаваць фільтры як звычайны тэкст"
-  },
-  "enable_only_the": {
-    "message": "Уключайце толькі патрэбныя фільтры. Занадта вялікая іх колькасць можа запавольваць браўзер."
   },
   "enabled_for_site": {
     "message": "<strong>Уключаны</strong> на гэтым сайце"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Не ўказаны дамен для пашыранага фільтра хавання элементаў"
   },
+  "filter_invalid_csp": {
+    "message": "Недапушчальная палітыка бяспекі кантэнту (CSP)"
+  },
   "filter_invalid_domain": {
     "message": "Дамен указаны няправільна (або не ўказаны)"
   },
   "filter_invalid_regexp": {
     "message": "Няправільны рэгулярны выраз"
   },
-  "filter_lists": {
-    "message": "Спісы фільтраў"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Ваш фільтр павінен адпавядаць <a>сінтаксісу фільтраў Adblock Plus</a>."
-  },
   "filter_unknown_option": {
     "message": "Невядомы параметр фільтра"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Дазволіць недакучлівую рэкламу"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Дадаць"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Дадаць іншую падпіску"
-  },
-  "filters_addSubscription_label": {
-    "message": "Дадаць падпіску на фільтр"
-  },
-  "filters_readMore_label": {
-    "message": "Даведацца больш"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Выдаліць"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Уключаны"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Памылка: неадпаведная кантрольная сума"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Памылка: не атрымалася спампаваць"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Спампоўванне…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Памылка: няправільны спіс фільтраў"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Памылка: няправільны адрас"
-  },
-  "filters_viewList_label": {
-    "message": "Праглядзець спіс"
-  },
-  "found_a_bug": {
-    "message": "Знайшлі памылку? Хочаце перакласці Adblock Plus на сваю мову? Пакіньце <a>заяўку тут</a>."
-  },
-  "general": {
-    "message": "Агульныя"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Сапраўды выдаліць гэту падпіску?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Прапанаванае размяшчэнне спісу фільтраў не з'яўляецца шляхам да файла або дзейнай спасылкай."
   },
   "invalid_css_selector": {
     "message": "$selector$ недапушчальны CSS-селектар",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Апошняе абнаўленне $date$ у $time$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Апошняе абнаўленне сёння ў $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Націсніце на апавяшчэнне, каб адкрыць усе размешчаныя ў ім спасылкі."
   },
-  "options": {
-    "message": "Налады Adblock Plus"
-  },
   "options_short": {
     "message": "Налады"
-  },
-  "out_of_date_lists": {
-    "message": "Неактуальныя спісы перыядычна абнаўляюцца."
   },
   "overlay_notification_button_no": {
     "message": "Не"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Не паказваць апавяшчэнні"
   },
-  "overlay_shownotifications_label": {
-    "message": "Паказваць карысныя апавяшчэнні"
-  },
-  "remove_button": {
-    "message": "Выдаліць выбраныя"
-  },
   "sendReport": {
     "message": "Паведаміць аб праблеме на гэтай старонцы"
-  },
-  "show_block_element_menu": {
-    "message": "Паказваць «Заблакаваць элемент» у кантэкстным меню"
-  },
-  "show_devtools_panel": {
-    "message": "Паказваць панэль «Adblock Plus» у інструментах распрацоўшчыка"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> на гэтай старонцы",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Дзякуючы Adblock Plus у мяне заблакавана $number$ рэкламных аб'яў і форм для адсочвання.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Паказваць колькасць на значку"
   },
   "stats_title": {
     "message": "Колькасць заблакаваных"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Размяшчэнне спіса фільтраў:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Выберыце падпіску са спісу:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Назва падпіскі:"
-  },
   "unexpected_filter_list_header": {
     "message": "Загалоўкі для спісаў фільтраў тут не дазволеныя"
-  },
-  "update_now": {
-    "message": "Абнавіць"
-  },
-  "whitelisted_domains": {
-    "message": "Спіс дазволеных даменаў"
   }
 }

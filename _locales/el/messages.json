@@ -2,20 +2,8 @@
   "add": {
     "message": "Προσθήκη"
   },
-  "add_domain_button": {
-    "message": "Προσθήκη τομέα"
-  },
-  "add_filter_button": {
-    "message": "Προσθήκη φίλτρου"
-  },
   "add_filters_msg": {
     "message": "Προσθήκη φίλτρων;"
-  },
-  "add_your_own_filters": {
-    "message": "Προσθήκη δικών σας φίλτρων"
-  },
-  "apply_changes": {
-    "message": "Εφαρμογή αλλαγών"
   },
   "block_element": {
     "message": "Φραγή στοιχείου"
@@ -29,23 +17,11 @@
   "continue": {
     "message": "Συνέχεια"
   },
-  "description": {
-    "message": "Χρησιμοποιούμενο από πάνω από 100 εκατομμύρια συσκευές, το Adblock Plus είναι ο πιο δημοφιλές φραγέας διαφημίσεων στον κόσμο."
-  },
   "disabled_for_site": {
     "message": "<strong>Απενεργοποιημένο</strong> σε αυτή την σελίδα"
   },
-  "disabled_for_these_domains": {
-    "message": "Το Adblock Plus είναι απενεργοποιημένο για τους τομείς της ακόλουθης λίστας. Μπορείτε να προσθέσετε ένα τομέα, είτε μέσω του εικονιδίου Adblock Plus στην γραμμή διευθύνσεων είτε πληκτρολογώντας τον τομέα (όχι το URL) στο κουτί και κάνοντας κλικ στο κουμπί \"Προσθήκη τομέα\"."
-  },
   "easy_create_filter": {
     "message": "Φραγή στοιχείου"
-  },
-  "edit_filters_raw": {
-    "message": "Επεξεργασία φίλτρων ως ακατέργαστο κείμενο"
-  },
-  "enable_only_the": {
-    "message": "Ενεργοποιήστε μόνο τις λίστες φίλτρων που χρειάζεστε, καθώς πάρα πολλές μπορεί να επιβαρύνουν τον περιηγητή σας."
   },
   "enabled_for_site": {
     "message": "<strong>Ενεργοποιημένο</strong> σε αυτή την σελίδα"
@@ -59,89 +35,16 @@
   "filter_invalid_regexp": {
     "message": "Μη έγκυρη τυπική έκφραση"
   },
-  "filter_lists": {
-    "message": "Λίστες φίλτρων"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Το φίλτρο σας πρέπει να ακολουθεί τη <a>σύνταξη φίλτρου του Adblock Plus</a>."
-  },
   "filter_unknown_option": {
     "message": "Άγνωστη επιλογή φίλτρου"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Να επιτρέπονται μερικές μη-παρεμβατικές διαφημίσεις"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Προσθήκη"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Προσθήκη άλλης συνδρομής"
-  },
-  "filters_addSubscription_label": {
-    "message": "Προσθήκη συνδρομής φίλτρων"
-  },
-  "filters_readMore_label": {
-    "message": "Διαβάστε περισσότερα"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Διαγραφή"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Ενεργοποιημένο"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Απέτυχε, απόκλιση στον έλεγχο checksum"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Απέτυχε, σφάλμα κατά τη λήψη"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Σε εξέλιξη..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Απέτυχε, μη έγκυρη λίστα φίλτρων"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Απέτυχε, μη έγκυρη διεύθυνση"
-  },
-  "filters_viewList_label": {
-    "message": "Δείτε την λίστα"
-  },
-  "found_a_bug": {
-    "message": "Βρήκατε σφάλματα; Θέλετε να μεταφράσετε το Adblock Plus στην γλώσσα σας; Παρακαλώ <a>καταχωρείστε ένα αίτημα εδώ</a>."
-  },
-  "general": {
-    "message": "Γενικά"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Θέλετε να απομακρύνετε αυτή τη συνδρομή;"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Η τοποθεσία της λίστας φίλτρων δεν είναι έγκυρη URL ούτε και όνομα αρχείου."
   },
   "invalid_css_selector": {
     "message": "$selector$ δεν είναι έγκυρος επιλογέας CSS",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Τελευταία ενημέρωση $time$ στις $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Τελευταία ενημέρωση σήμερα στις $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -172,14 +75,8 @@
   "notification_without_buttons": {
     "message": "Κάντε κλικ στην ειδοποίηση για να ανοίξετε όλους τους συνδέσμους σε αυτή."
   },
-  "options": {
-    "message": "Επιλογές Adblock Plus"
-  },
   "options_short": {
     "message": "Επιλογές"
-  },
-  "out_of_date_lists": {
-    "message": "Μη ενημερωμένες λίστες ενημερώνονται περιοδικά. "
   },
   "overlay_notification_button_no": {
     "message": "Όχι"
@@ -193,20 +90,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Διακοπή εμφάνισης ειδοποιήσεων"
   },
-  "overlay_shownotifications_label": {
-    "message": "Εμφάνιση χρήσιμων ειδοποιήσεων"
-  },
-  "remove_button": {
-    "message": "Αφαίρεση επιλεγμένων"
-  },
   "sendReport": {
     "message": "Αναφορά προβλήματος σε αυτή την σελίδα"
-  },
-  "show_block_element_menu": {
-    "message": "Εμφάνιση \"Φραγή στοιχείου\" στο μενού του δεξί κλικ"
-  },
-  "show_devtools_panel": {
-    "message": "Προβολή του πίνακα 'Adblock Plus' στα εργαλεία προγραμματιστή"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> σε αυτή την σελίδα",
@@ -224,36 +109,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Απέκλεισα $number$ διαφημίσεις και ανιχνευτές χάρη στο Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Εμφάνιση του αριθμού στο εικονίδιο"
   },
   "stats_title": {
     "message": "Φραγμένες διαφημίσεις"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Τοποθεσία λίστας φίλτρων:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Παρακαλώ επιλέξτε μια συνδρομή φίλτρου από την λίστα:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Τίτλος συνδρομής:"
-  },
   "unexpected_filter_list_header": {
     "message": "Κεφαλίδες λιστών φίλτρων δεν επιτρέπονται εδώ"
-  },
-  "update_now": {
-    "message": "Ενημέρωση τώρα"
-  },
-  "whitelisted_domains": {
-    "message": "Λίστα Επιτρεπόμενων τομέων"
   }
 }

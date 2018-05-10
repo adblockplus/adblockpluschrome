@@ -2,20 +2,8 @@
   "add": {
     "message": "Lägg till"
   },
-  "add_domain_button": {
-    "message": "Lägg till domän"
-  },
-  "add_filter_button": {
-    "message": "Lägg till filter"
-  },
   "add_filters_msg": {
     "message": "Lägg till filter?"
-  },
-  "add_your_own_filters": {
-    "message": "Lägg till dina egna filter"
-  },
-  "apply_changes": {
-    "message": "Verkställ ändringar"
   },
   "block_element": {
     "message": "Blockera objekt"
@@ -30,28 +18,19 @@
     "message": "Fortsätt"
   },
   "description": {
-    "message": "Adblock Plus används på över 100 miljoner enheter och är med det världens mest populära annonsblockerare."
+    "message": "Med över 500 miljoner nedladdningar är Adblock Plus en av världens mest populära annonsblockerare."
   },
   "disabled_for_site": {
     "message": "<strong>Avaktiverat</strong> på denna webbplats"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus är avaktiverad för domänerna i denna lista. Du kan lägga till en domän via Adblock Plus-ikonen i adressfältet eller genom att skriva domännamnet (inte URL) i textboxen och klicka på \"Lägg till domän\"."
-  },
   "easy_create_filter": {
     "message": "Blockera objekt"
-  },
-  "edit_filters_raw": {
-    "message": "Redigera filter som ren text"
-  },
-  "enable_only_the": {
-    "message": "Aktivera endast de filterlistor du behöver. För många kan göra att webbläsaren inte svarar."
   },
   "enabled_for_site": {
     "message": "<strong>Aktiverat</strong> på denna webbplats"
   },
   "filter_elemhideemulation_nodomain": {
-    "message": "Ingen aktiv domän som anges för utökade element hiding filter"
+    "message": "Ingen aktiv domän angiven för utökat elementdöljarfilter"
   },
   "filter_invalid_domain": {
     "message": "Ogiltig (eller tom) domän angiven"
@@ -59,89 +38,16 @@
   "filter_invalid_regexp": {
     "message": "Ogiltigt reguljärt uttryck"
   },
-  "filter_lists": {
-    "message": "Filterlistor"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Ditt filter måste följa <a>Adblock Plus filtersyntax</a>."
-  },
   "filter_unknown_option": {
     "message": "Okänt filteralternativ"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Tillåt viss icke-störande reklam"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Lägg till"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Lägg till en ny prenumeration"
-  },
-  "filters_addSubscription_label": {
-    "message": "Lägg till filterprenumeration"
-  },
-  "filters_readMore_label": {
-    "message": "Läs mer"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Ta bort"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Aktiverat"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Fel kontrollsumma"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Fel vid hämtning"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Hämtar…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Fel vid validering av filter"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Ogiltig adress"
-  },
-  "filters_viewList_label": {
-    "message": "Visa lista"
-  },
-  "found_a_bug": {
-    "message": "Hittat ett fel? Vill du översätta Adblock Plus till ett annat språk? Vänligen, <a>skapa en förfrågan här</a>."
-  },
-  "general": {
-    "message": "Allmänt"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Vill du verkligen ta bort denna prenumeration?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Platsen du angivit är antingen ogiltig eller så har du angivit ett felaktigt filnamn."
   },
   "invalid_css_selector": {
     "message": "$selector$ är inte en giltig CSS-väljare",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Senast uppdaterad den $date$ $time$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Senast uppdaterad i dag $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -153,6 +59,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Laddar..."
   },
   "name": {
     "message": "Adblock Plus"
@@ -172,14 +81,8 @@
   "notification_without_buttons": {
     "message": "Klicka på meddelandet för att öppna alla länkar i det."
   },
-  "options": {
-    "message": "Adblock Plus Alternativ"
-  },
   "options_short": {
     "message": "Inställningar"
-  },
-  "out_of_date_lists": {
-    "message": "Utdaterade listor uppdateras periodiskt."
   },
   "overlay_notification_button_no": {
     "message": "Nej"
@@ -193,20 +96,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Sluta visa notifieringar"
   },
-  "overlay_shownotifications_label": {
-    "message": "Visa användbara notifieringar"
-  },
-  "remove_button": {
-    "message": "Ta bort markerad"
-  },
   "sendReport": {
     "message": "Rapportera problem på denna sida"
-  },
-  "show_block_element_menu": {
-    "message": "Visa 'Blockera objekt' i högerklicksmeny"
-  },
-  "show_devtools_panel": {
-    "message": "Visa 'Adblock Plus'-panelen i utvecklarverktygen"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> på den här sidan",
@@ -224,36 +115,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Jag blockerade $number$ annonser och trackers tack vare Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Visa nummer vid ikon"
   },
   "stats_title": {
     "message": "Annonser blockerade"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Plats för filter:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Vänligen välj en filterprenumeration från listan:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Rubrik för prenumeration:"
-  },
   "unexpected_filter_list_header": {
     "message": "Filterlistrubriker är inte tillåtna här"
-  },
-  "update_now": {
-    "message": "Uppdatera nu"
-  },
-  "whitelisted_domains": {
-    "message": "Vitlistade domäner"
   }
 }

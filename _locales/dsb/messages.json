@@ -2,9 +2,6 @@
   "add": {
     "message": "Pśidaś"
   },
-  "add_filter_button": {
-    "message": "Filter pśidaś"
-  },
   "cancel": {
     "message": "Pśetergnuś"
   },
@@ -17,50 +14,8 @@
   "filter_unknown_option": {
     "message": "Njeznata filtrowa opcija"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Decentne wabjenje dowóliś"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Pśidaś"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Drugi abonement pśidaś"
-  },
-  "filters_addSubscription_label": {
-    "message": "Filtrowy abonement pśidaś"
-  },
-  "filters_readMore_label": {
-    "message": "Dalšne informacije"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Lašowaś"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Zmóžnjony"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Njeraźiło, wopacna kontrolna suma"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Njeraźiło, ześěgnjeńska zmólka"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Ześěgujo se..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Njeporaźiło, žedna płaśiwa filtrowa lisćina"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Njeraźiło, žedna płaśiwa adresa"
-  },
-  "filters_viewList_label": {
-    "message": "Lisćinu pokazaś"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Cośo toś ten abonement napšawdu wótpóraś?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Městno filtroweje lisćiny njejo daniž płaśiwy URL daniž płaśiwe datajowe mě."
   },
   "name": {
     "message": "Adblock Plus"
@@ -76,14 +31,5 @@
   },
   "sendReport": {
     "message": "Problem na toś tom boku k wěsći daś"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Městno filtroweje lisćiny:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Pšosym wubjeŕśo filtrowy abonement z lisćiny:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Titel abonementa:"
   }
 }

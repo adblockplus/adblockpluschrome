@@ -2,20 +2,8 @@
   "add": {
     "message": "追加"
   },
-  "add_domain_button": {
-    "message": "ドメインを追加"
-  },
-  "add_filter_button": {
-    "message": "フィルタを追加"
-  },
   "add_filters_msg": {
     "message": "フィルタを追加しますか?"
-  },
-  "add_your_own_filters": {
-    "message": "自作フィルタを追加"
-  },
-  "apply_changes": {
-    "message": "変更を適用"
   },
   "block_element": {
     "message": "要素をブロック"
@@ -30,22 +18,13 @@
     "message": "続行"
   },
   "description": {
-    "message": "1億以上の端末で使用されている Adblock Plus は、世界で最も人気のある広告ブロッカーです。"
+    "message": "Adblock Plus は、5億回以上ダウンロードされた、世界で最も人気のある広告ブロッカーのひとつです。"
   },
   "disabled_for_site": {
     "message": "このサイトで<strong>無効</strong>"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus を以下のドメインで無効にします。アドレスバーの Adblock Plus アイコン、または下の欄にドメイン（URL ではない）を入力し「ドメインを追加」ボタンで追加できます。"
-  },
   "easy_create_filter": {
     "message": "要素をブロック"
-  },
-  "edit_filters_raw": {
-    "message": "フィルタを編集する"
-  },
-  "enable_only_the": {
-    "message": "本当に必要なフィルタのみを有効にしてください。多過ぎるフィルタはブラウザを重くします。"
   },
   "enabled_for_site": {
     "message": "このサイトで<strong>有効</strong>"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "拡張要素非表示フィルタに指定されたドメインは有効ではありません"
   },
+  "filter_invalid_csp": {
+    "message": "無効なコンテンツセキュリティポリシー"
+  },
   "filter_invalid_domain": {
     "message": "不正な（または空の）ドメインが指定されました"
   },
   "filter_invalid_regexp": {
     "message": "無効な正規表現"
   },
-  "filter_lists": {
-    "message": "フィルタリスト"
-  },
-  "filter_must_follow_syntax": {
-    "message": "<a>Adblock Plus フィルタの書式</a> に準拠したフィルタを記述しなければなりません。"
-  },
   "filter_unknown_option": {
     "message": "不明なフィルター オプション"
   },
-  "filters_acceptableAds2_label": {
-    "message": "控えめな広告を許可"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "追加"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "別の購読するフィルタを追加"
-  },
-  "filters_addSubscription_label": {
-    "message": "購読するフィルタを追加"
-  },
-  "filters_readMore_label": {
-    "message": "詳細を開く"
-  },
-  "filters_subscription_delete_label": {
-    "message": "削除"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "有効"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "更新失敗: チェックサム不一致"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "更新失敗: ダウンロード失敗"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "ダウンロード中..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "更新失敗: 不正なフィルタリスト"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "更新失敗: 不正なアドレス"
-  },
-  "filters_viewList_label": {
-    "message": "リストを表示"
-  },
-  "found_a_bug": {
-    "message": "バグを発見? Adblock Plus を翻訳したい? その場合は <a>ここよりリクエスト</a> 願います。"
-  },
-  "general": {
-    "message": "一般"
-  },
-  "global_remove_subscription_warning": {
-    "message": "本当にこのフィルタの購読を削除しますか？"
-  },
-  "global_subscription_invalid_location": {
-    "message": "購読するフィルタの URL が無効、もしくは不正なファイル名です。"
   },
   "invalid_css_selector": {
     "message": "$selector$ は有効な CSS セレクタではありません",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "最終更新日 $date$ $time$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "最終更新日  今日 $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "通知内すべてのリンクを開くにはここをクリックしてください。"
   },
-  "options": {
-    "message": "Adblock Plus オプション"
-  },
   "options_short": {
     "message": "オプション"
-  },
-  "out_of_date_lists": {
-    "message": "リストは定期的に更新されます。"
   },
   "overlay_notification_button_no": {
     "message": "いいえ"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "通知の表示を停止"
   },
-  "overlay_shownotifications_label": {
-    "message": "有用な通知を表示"
-  },
-  "remove_button": {
-    "message": "選択項目を削除"
-  },
   "sendReport": {
     "message": "このページでの不具合を報告"
-  },
-  "show_block_element_menu": {
-    "message": "右クリックメニューに「要素をブロック」を表示"
-  },
-  "show_devtools_panel": {
-    "message": "開発者ツールに「Adblock Plus」パネルを表示"
   },
   "stats_label_page": {
     "message": "このページ内で <strong>$number$</strong>",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Adblock Plus のおかげで累計 $number$ 箇所の広告と追跡がブロックされました。",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "アイコン上に数字を表示"
   },
   "stats_title": {
     "message": "ブロックした広告"
   },
-  "subscriptionSelection_location_label": {
-    "message": "フィルタリストの場所："
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "購読したいフィルタをリストから選択してください:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "フィルタ名称:"
-  },
   "unexpected_filter_list_header": {
     "message": "ここにフィルタのヘッダーを記述することはできません"
-  },
-  "update_now": {
-    "message": "今すぐ更新"
-  },
-  "whitelisted_domains": {
-    "message": "ホワイトリスト設定されたドメイン"
   }
 }

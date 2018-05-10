@@ -2,20 +2,8 @@
   "add": {
     "message": "जोड़ें"
   },
-  "add_domain_button": {
-    "message": "डोमेन जोड़ें"
-  },
-  "add_filter_button": {
-    "message": "फ़िल्टर जोड़ें"
-  },
   "add_filters_msg": {
     "message": "फ़िल्टर(ो) को जोडिए?"
-  },
-  "add_your_own_filters": {
-    "message": "आपके द्वारा बनाये फ़िल्टर्स जोड़ें"
-  },
-  "apply_changes": {
-    "message": "परिवर्तन लागू करें"
   },
   "block_element": {
     "message": "तत्वों को प्रतिबंधित करें"
@@ -29,107 +17,34 @@
   "continue": {
     "message": "जारी रखें"
   },
-  "description": {
-    "message": "Adblock Plus 10 करोड़ से अधिक उपकरणों में प्रयुक्त, दुनिया के सबसे लोकप्रिय विज्ञापन अवरोधक है।"
-  },
   "disabled_for_site": {
     "message": "इस साइट पर <strong>इस्तेमाल न करे</strong>"
-  },
-  "disabled_for_these_domains": {
-    "message": "निम्नलिखित डोमिन पर Adblock Plus का इस्ताल नहीं किआ जा रहा। आप ऄड्रेस बार मै Adblock Plus आइकॉन को क्लिक कर अथवा डिब्बी मे डोमेन (यूआरएल नहीं) टाइप कर, फिर \"ऐड डोमेन\" बटन दबा कर, नए अपवाद बना सकते है।"
   },
   "easy_create_filter": {
     "message": "तत्वों को प्रतिबंधित करें"
   },
-  "edit_filters_raw": {
-    "message": "फिल्टरों को रौ टेक्स्ट के रूप मै सम्पादित करे"
-  },
-  "enable_only_the": {
-    "message": "केवल उन्ही फिल्टरों का इस्तमाल करे जिनकी आवश्यकता हो। उनावश्यक फिल्टरों के इस्तमाल से ब्रॉउज़र अनुत्तरदायी हो सकता है।"
-  },
   "enabled_for_site": {
     "message": "इस साईट पर <strong>इस्तमाल हो रहा है </strong>"
   },
-  "filter_lists": {
-    "message": "फिल्टरों कि सूची "
+  "filter_elemhideemulation_nodomain": {
+    "message": "विस्तारित तत्व छुपा फ़िल्टर के लिए कोई सक्रिय डोमेन निर्दिष्ट नहीं है"
   },
-  "filter_must_follow_syntax": {
-    "message": "आपके फ़िल्टर को <a>Adblock Plus फ़िल्टर सिंटैक्स</a> का पालन करना होगा।"
+  "filter_invalid_domain": {
+    "message": "अमान्य (या खाली) डोमेन निर्दिष्ट"
   },
-  "filters_acceptableAds2_label": {
-    "message": "कुछ बिना हस्तक्षेप करने वाले विज्ञापन की अनुमति दें"
+  "filter_invalid_regexp": {
+    "message": "अमांय नियमित व्यंजक"
   },
-  "filters_addSubscriptionAdd_label": {
-    "message": "जोड़ें"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "भिन्न सदस्यता जोड़ें"
-  },
-  "filters_addSubscription_label": {
-    "message": "फ़िल्टर सदस्यता जोड़ें"
-  },
-  "filters_readMore_label": {
-    "message": "और पढ़ें"
-  },
-  "filters_subscription_delete_label": {
-    "message": "मिटाएँ"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "सक्षम किया गया"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "असफल, checksum मिसमैच"
+  "filter_unknown_option": {
+    "message": "अज्ञात फ़िल्टर विकल्प"
   },
   "filters_subscription_lastDownload_connectionError": {
     "message": "विफल रहा, डाउनलोड विफलता"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "डाउनलोड हो रहा हैं"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "विफल रहा, एक मान्य फ़िल्टर सूची  नहीं हैं"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "विफल रहा, एक मान्य पता नहीं "
-  },
-  "filters_viewList_label": {
-    "message": "सूची देखें"
-  },
-  "found_a_bug": {
-    "message": "यधपि आपको किसी दोष कि जानकारी दिनी हो या Adblock Plus का अनुवाद करना हो तो कृपया <a>यहाँ एक गुजारिश करे</a>"
-  },
-  "general": {
-    "message": "सामान्य "
-  },
-  "global_remove_subscription_warning": {
-    "message": "क्या आप वास्तव में इस सदस्यता से निकलना चाहते हैं?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "फ़िल्टर सूची स्थान न न कोई मान्य फ़ाइल नाम एक मान्य URL है।"
   },
   "invalid_css_selector": {
     "message": "$selector$ एक मान्य CSS चयनकर्ता नहीं है",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "पिछली अद्यतन तिथि: $time$ $date$ को संपन्न",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "अंतिम अद्यतन आज $time$ को संपन्न",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -141,6 +56,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "लोडिंग..."
   },
   "name": {
     "message": "Adblock Plus"
@@ -160,14 +78,8 @@
   "notification_without_buttons": {
     "message": "अधिसूचना पर क्लिक कर सभी लिंक खोलें।"
   },
-  "options": {
-    "message": "Adblock Plus विकल्प"
-  },
   "options_short": {
     "message": "विकल्प "
-  },
-  "out_of_date_lists": {
-    "message": "पुराणी सूचियाँ समय-समय पर अद्यतन कि जाती हैं।"
   },
   "overlay_notification_button_no": {
     "message": "नहीं"
@@ -175,17 +87,14 @@
   "overlay_notification_button_yes": {
     "message": "हाँ"
   },
-  "remove_button": {
-    "message": "चुने हुओं को हटाएँ "
+  "overlay_notification_closing_button_hide": {
+    "message": "यह सूचना बंद करें"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "सूचनाएं दिखाना रोकें"
   },
   "sendReport": {
     "message": " इस पन्ने पर रिपोर्ट मुद्दा"
-  },
-  "show_block_element_menu": {
-    "message": "'तत्वों को प्रतिबंधित करें' दाएँ क्लिक के मेनू आइटम में प्रदर्शित करे"
-  },
-  "show_devtools_panel": {
-    "message": "डेवलपर उपकरण में 'Adblock Plus' फलक दिखाएँ"
   },
   "stats_label_page": {
     "message": "इस पृष्ठ पर <strong>$number$</strong>",
@@ -203,36 +112,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "मैंने $number$ विज्ञापनों और ट्रैकरों को ब्लाक किआ, Adblock Plus का धन्यवाद्।",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "आइकॉन में अंक दर्शाएँ "
   },
   "stats_title": {
     "message": "प्रचार अवरुद्ध किये गए "
   },
-  "subscriptionSelection_location_label": {
-    "message": "फिल्टर की सूची की लोकेशन:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "लिस्ट में से एक फ़िल्टर सब्स्क्रिप्शन चुनें: "
-  },
-  "subscriptionSelection_title_label": {
-    "message": "सबक्रिपशन का नाम:"
-  },
   "unexpected_filter_list_header": {
     "message": "फ़िल्टर सूची हेडर को यहाँ होने की अनुमति नहीं है"
-  },
-  "update_now": {
-    "message": "अपडेट करें "
-  },
-  "whitelisted_domains": {
-    "message": "अधिकृत डोमेन "
   }
 }

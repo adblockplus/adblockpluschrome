@@ -2,20 +2,8 @@
   "add": {
     "message": "اضافه کردن"
   },
-  "add_domain_button": {
-    "message": "اضافه کردن سایت"
-  },
-  "add_filter_button": {
-    "message": "اضافه کردن فیلتر"
-  },
   "add_filters_msg": {
     "message": "اضافه کردن فیلتر (ها) ؟"
-  },
-  "add_your_own_filters": {
-    "message": "اضافه کردن فیلتر خودتان"
-  },
-  "apply_changes": {
-    "message": "اعمال تغییرات"
   },
   "block_element": {
     "message": "مسدود کردن این عنصر"
@@ -30,22 +18,13 @@
     "message": "ادامه"
   },
   "description": {
-    "message": "با استفاده در بیش‌از ۱۰۰ میلیون دستگاه، ادبلاک پلاس محبوب‌ترین مسدود کننده تبلیغات در جهان است."
+    "message": "با بیش‌از ۵۰۰میلیون دانلود، ادبلاک پلاس یکی از محبوب‌ترین مسدودکننده‌های تبلیغات در جهان است."
   },
   "disabled_for_site": {
     "message": "برای این سایت <strong>غیرفعال شد</strong>"
   },
-  "disabled_for_these_domains": {
-    "message": "این افزونه در سایت های زیر غیرفعاله. برای اضافه کردن یک سایت می توانید روی آیکون Adblock Plus در نوارآدرس کلیک کنید یا دامنه اون سایت (نه آدرس دقیق) را در این جعبه بنویسید و دکمه «اضافه کردن سایت» را بزنید."
-  },
   "easy_create_filter": {
     "message": "مسدود کردن این عنصر"
-  },
-  "edit_filters_raw": {
-    "message": "ویرایش لیست فیلترها بصورت متنی"
-  },
-  "enable_only_the": {
-    "message": "فقط لیست های فیلتر ضروری رو فعال کنید. انتخاب زیاد، باعث کند شدن مرورگر میشه."
   },
   "enabled_for_site": {
     "message": "برای این سایت <strong>فعال شد</strong>"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "هیچ دامنه فعال برای فیلترینگ پنهان شده مشخص نشده است"
   },
+  "filter_invalid_csp": {
+    "message": "سیاست امنیتی نامعتبر مطالب"
+  },
   "filter_invalid_domain": {
     "message": "دامنه نامعتبر (یا خالی) مشخص شده است"
   },
   "filter_invalid_regexp": {
     "message": "الگوی جستجوی نامعتبر"
   },
-  "filter_lists": {
-    "message": "لیست فیلتر"
-  },
-  "filter_must_follow_syntax": {
-    "message": "فیلترهایی که می‌نویسید باید از <a> قواعد فیلترنویسی Adblock Plus</a> پیروی کند."
-  },
   "filter_unknown_option": {
     "message": "فیلتر ناشناس"
   },
-  "filters_acceptableAds2_label": {
-    "message": "اجازه دادن به تبلیغات ناخواسته"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "اضافه کردن"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "یک اشتراک ديگر اضافه کنید"
-  },
-  "filters_addSubscription_label": {
-    "message": "افزودن اشتراک فیلتر"
-  },
-  "filters_readMore_label": {
-    "message": "بیشتر بخوانید"
-  },
-  "filters_subscription_delete_label": {
-    "message": "حذف"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "فعال شده"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "ناموفق, عدم تطابق کنترلی"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "ناموفق، فرآیند دریافت شکست خورد"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "در حال دریافت..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "ناموفق، فهرست پالایه ها نامعتبر است"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "ناموفق، نشانی معتبر نیست"
-  },
-  "filters_viewList_label": {
-    "message": "مشاهده لیست"
-  },
-  "found_a_bug": {
-    "message": "باگ پیدا کردید؟ مایلید Adblock Plus را به زبان خودتان ترجمه کنید؟ <a>درخواستتان را اینجا مطرح کنید</a>."
-  },
-  "general": {
-    "message": "صفحه اصلی"
-  },
-  "global_remove_subscription_warning": {
-    "message": "آیا برای حذف اشتراک مطمئن هستید؟"
-  },
-  "global_subscription_invalid_location": {
-    "message": "مکان وارد شده برای فهرست فیلترها نامعتبر است."
   },
   "invalid_css_selector": {
     "message": "$selector$ انتخابگر معتبری در CSS نیست",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "آخرین بروزرسانی در زمان $time$ و تاریخ $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "آخرین بروز رسانی در $time$ امروز",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -164,7 +73,7 @@
     "message": "توسعه ساخت Adblock Plus"
   },
   "notification_configure": {
-    "message": "تنظیمات هشدار ها"
+    "message": "پیکربندی تنظیمات اعلان"
   },
   "notification_open_all": {
     "message": "باز کردن همه لینک های این هشدار"
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "برای باز شدن همه لینک های داخلش ، روی هشدار کلیک کنید."
   },
-  "options": {
-    "message": "تنظیمات Adblock Plus"
-  },
   "options_short": {
     "message": "تنظیمات"
-  },
-  "out_of_date_lists": {
-    "message": "لیست های تاریخ گذشته مرتباً آپدیت می شوند."
   },
   "overlay_notification_button_no": {
     "message": "خیر"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "عدم نمایش اعلان ها"
   },
-  "overlay_shownotifications_label": {
-    "message": "نمایش اعلان های مفید"
-  },
-  "remove_button": {
-    "message": "حذف انتخاب شده"
-  },
   "sendReport": {
     "message": "گزارش مشکل در این صفحه"
-  },
-  "show_block_element_menu": {
-    "message": "نمایش گزینه «مسدود کردن این عنصر» در منوی کلیک راست"
-  },
-  "show_devtools_panel": {
-    "message": "نمایش پنل Adblock در بخش developer tools"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> در این صفحه",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "به واسطه Adblock Plus من $number$ تبلیغ و ردگیر را مسدود کردم.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "نمایش تعداد در آیکون"
   },
   "stats_title": {
     "message": "تبلیغات مسدود شده"
   },
-  "subscriptionSelection_location_label": {
-    "message": "نشانی فهرست پالایه ها:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "یک اشتراک فیلتر از لیست زیر انتخاب کنید :"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "عنوان اشتراک:"
-  },
   "unexpected_filter_list_header": {
     "message": "فیلتر لیست هدر ها ، اینجا مجاز نیست"
-  },
-  "update_now": {
-    "message": "آپدیت کن"
-  },
-  "whitelisted_domains": {
-    "message": "لیست سفید سایت ها (که تبلیغات مسدود نشه)"
   }
 }

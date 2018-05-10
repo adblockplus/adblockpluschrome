@@ -2,20 +2,8 @@
   "add": {
     "message": "Afegeix"
   },
-  "add_domain_button": {
-    "message": "Afegeix un domini"
-  },
-  "add_filter_button": {
-    "message": "Afegeix un filtre"
-  },
   "add_filters_msg": {
     "message": "Voleu afegir els filtres?"
-  },
-  "add_your_own_filters": {
-    "message": "Afegeix filtres personalitzats"
-  },
-  "apply_changes": {
-    "message": "Aplica els canvis"
   },
   "block_element": {
     "message": "Bloqueja l'element"
@@ -30,22 +18,13 @@
     "message": "Continua"
   },
   "description": {
-    "message": "Utilitzat en més de 100 milions de dispositius, Adblock Plus és el bloqueig publicitari més popular del món."
+    "message": "Amb més de 500 milions de baixades, l'Adblock Plus és un dels bloquejadors d'anuncis més populars del món."
   },
   "disabled_for_site": {
     "message": "S'ha <strong>desactivat</strong> per a aquest lloc"
   },
-  "disabled_for_these_domains": {
-    "message": "L'Adblock Plus està desactivat als dominis de la llista de sota. Podeu afegir un domini fent clic a la icona d'Adblock Plus de la barra d'adreces o bé escrivint el domini (no la URL) al quadre de text i clicant «Afegeix un domini»."
-  },
   "easy_create_filter": {
     "message": "Bloqueja l'element"
-  },
-  "edit_filters_raw": {
-    "message": "Edita els filtres com a text simple"
-  },
-  "enable_only_the": {
-    "message": "Habiliteu només les llistes de filtres que necessiteu. Massa poden alentir el navegador."
   },
   "enabled_for_site": {
     "message": "S'ha <strong>activat</strong> en aquest lloc"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "No s'ha especificat cap domini actiu per al filtre d'ocultació d'element estès"
   },
+  "filter_invalid_csp": {
+    "message": "Política de seguretat de contingut no vàlida"
+  },
   "filter_invalid_domain": {
     "message": "S'ha especificat un domini no vàlid (o buit)"
   },
   "filter_invalid_regexp": {
     "message": "Expressió regular no vàlida"
   },
-  "filter_lists": {
-    "message": "Llista de filtres"
-  },
-  "filter_must_follow_syntax": {
-    "message": "El vostre filtre ha de seguir la <a>sintaxi de filtres d'Adblock Plus</a>."
-  },
   "filter_unknown_option": {
     "message": "Opció de filtrat desconegut"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Permet la publicitat no intrusiva"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Afegeix"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Afegeix una altra subscripció"
-  },
-  "filters_addSubscription_label": {
-    "message": "Afegeix la subscripció a un filtre"
-  },
-  "filters_readMore_label": {
-    "message": "Més informació"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Suprimeix"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Activat"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Error en la suma de verificació"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Error en la baixada"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "S'està baixant..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Error, no és una llista vàlida de filtres"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Error, no és una adreça vàlida"
-  },
-  "filters_viewList_label": {
-    "message": "Mostra la llista"
-  },
-  "found_a_bug": {
-    "message": "Heu trobat un error? Voleu traduïr l'Adblock Plus al vostre idioma? <a>Demaneu-ho aquí</a>."
-  },
-  "general": {
-    "message": "General"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Realment desitgeu eliminar aquesta subscripció?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "La ubicació de la llista de filtres no és una URL vàlida ni un nom de fitxer vàlid."
   },
   "invalid_css_selector": {
     "message": "$selector$ no és un selector CSS vàlid",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Última actualització a les $time$ a $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Última actualització a les $time$ d'avui",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Feu clic a la notificació per obrir-ne tots els enllaços."
   },
-  "options": {
-    "message": "Opcions de l'Adblock Plus"
-  },
   "options_short": {
     "message": "Opcions"
-  },
-  "out_of_date_lists": {
-    "message": "Les llistes obsoletes són actualitzades periòdicament."
   },
   "overlay_notification_button_no": {
     "message": "No"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "No mostris més notificacions"
   },
-  "overlay_shownotifications_label": {
-    "message": "Mostra les notificacions útils"
-  },
-  "remove_button": {
-    "message": "Suprimeix els seleccionats"
-  },
   "sendReport": {
     "message": "Notifica un problema en aquesta pàgina"
-  },
-  "show_block_element_menu": {
-    "message": "Mostra la opció «Bloqueja l'element» com a ítem del menú contextual"
-  },
-  "show_devtools_panel": {
-    "message": "Mostra el quadre \"Adblock Plus\" a les eines de desenvolupador"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> en aquesta pàgina",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "He bloquejat $number$ anuncis i rastrejadors gràcies a Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Mostra el número a la icona"
   },
   "stats_title": {
     "message": "Anuncis bloquejats"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Filtra la localització de la llista:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Trieu una subscripció de filtres de la llista:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Títol de la subscripció:"
-  },
   "unexpected_filter_list_header": {
     "message": "Els encapçalaments de la llista de filtres no es permeten aquí"
-  },
-  "update_now": {
-    "message": "Actualitza ara"
-  },
-  "whitelisted_domains": {
-    "message": "Dominis autoritzats"
   }
 }

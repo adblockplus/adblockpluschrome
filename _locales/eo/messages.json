@@ -2,9 +2,6 @@
   "add": {
     "message": "Aldoni"
   },
-  "add_filter_button": {
-    "message": "Aldoni filtrilon"
-  },
   "cancel": {
     "message": "Nuligi"
   },
@@ -17,50 +14,8 @@
   "filter_unknown_option": {
     "message": "Nekonata filtrila opcio"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Permesi nealtrudiĝantan reklamon"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Aldoni"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Aldoni alian abonon"
-  },
-  "filters_addSubscription_label": {
-    "message": "Aldoni filtrilabonon"
-  },
-  "filters_readMore_label": {
-    "message": "Legu pli"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Forviŝi"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Ebligita"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Malsukcesis, kontrolsuma miskongruo"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Malsukcesis, elŝuta eraro"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Elŝutanta..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Malsukcesis, tio ne estas listo de validaj filtriloj"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Malsukcesis, tio ne estas valida adreso"
-  },
-  "filters_viewList_label": {
-    "message": "Montri liston"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Ĉu vi efektive volas fini ĉi tiun abonon?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "La loko de la listo de filtriloj estas nek valida URL nek valida dosiernomo."
   },
   "name": {
     "message": "Adblock Plus"
@@ -76,14 +31,5 @@
   },
   "sendReport": {
     "message": "Raporti problemon pri ĉi tiu paĝo"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Loko de la listo de filtriloj:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Bonvolu elekti filtrilabonon el la listo:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Titolo de la abono:"
   }
 }

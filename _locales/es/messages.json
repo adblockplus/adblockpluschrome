@@ -2,20 +2,8 @@
   "add": {
     "message": "Añadir"
   },
-  "add_domain_button": {
-    "message": "Añadir dominio"
-  },
-  "add_filter_button": {
-    "message": "Añadir filtro"
-  },
   "add_filters_msg": {
     "message": "¿Añadir filtro(s)?"
-  },
-  "add_your_own_filters": {
-    "message": "Añada sus filtros"
-  },
-  "apply_changes": {
-    "message": "Aplicar cambios"
   },
   "block_element": {
     "message": "Bloquear elemento"
@@ -24,124 +12,45 @@
     "message": "Cancelar"
   },
   "clickhide_instructions": {
-    "message": "Tras cerrar este menú desplegable, pulse (o con botón derecho) en un elemento de la página."
+    "message": "Tras cerrar este menú desplegable, pulse (o use botón derecho) en un elemento de la página."
   },
   "continue": {
     "message": "Continuar"
   },
   "description": {
-    "message": "Utilizado en más de 100 millones de dispositivos, Adblock Plus es el bloqueador de publicidad más popular del mundo."
+    "message": "Con más de 500 millones de descargas, Adblock Plus es uno de los bloqueadores de anuncios más populares del mundo."
   },
   "disabled_for_site": {
     "message": "<strong>Desactivado</strong> en este sitio"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus está desactivado para los dominios mostrados a continuación. Puede añadir un dominio con el icono de Adblock Plus en la barra de direcciones o escribiendo el dominio (no la URL) en el recuadro y pulsando el botón \"Añadir dominio\"."
-  },
   "easy_create_filter": {
     "message": "Bloquear elemento"
-  },
-  "edit_filters_raw": {
-    "message": "Editar los filtros como texto"
-  },
-  "enable_only_the": {
-    "message": "Active sólo las listas de filtros que necesite: si activa demasiadas su navegador puede ir muy lento o congelarse."
   },
   "enabled_for_site": {
     "message": "<strong>Activado</strong> en este sitio"
   },
   "filter_elemhideemulation_nodomain": {
-    "message": "No se ha especificado ningún dominio activo para el filtro de ocultar elementos extendidos"
+    "message": "No se ha especificado ningún dominio activo para el filtro extendido de ocultación de elementos"
+  },
+  "filter_invalid_csp": {
+    "message": "Política de seguridad de contenido no válida"
   },
   "filter_invalid_domain": {
-    "message": "Dominio especificado no válido (o vacío)"
+    "message": "El dominio especificado no es válido (o está vacío)"
   },
   "filter_invalid_regexp": {
-    "message": "Expresión regular inválida"
-  },
-  "filter_lists": {
-    "message": "Listas de filtros"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Su filtro debe seguir la <a>sintaxis de filtros para Adblock Plus</a>."
+    "message": "Expresión regular no válida"
   },
   "filter_unknown_option": {
     "message": "Opción de filtrado desconocida"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Permitir cierta publicidad no intrusiva"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Añadir"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Añadir otra suscripción"
-  },
-  "filters_addSubscription_label": {
-    "message": "Añadir suscripción de filtros"
-  },
-  "filters_readMore_label": {
-    "message": "Leer más"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Eliminar"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Activado"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Error, el checksum no coincide"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Error: error de descarga"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Descargando…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Error: lista de filtros no válida"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Error: dirección no válida"
-  },
-  "filters_viewList_label": {
-    "message": "Ver lista"
-  },
-  "found_a_bug": {
-    "message": "¿Ha encontrado un error? ¿Quiere traducir Adblock Plus a su idioma? Por favor <a>rellene una petición aquí</a>."
-  },
-  "general": {
-    "message": "General"
-  },
-  "global_remove_subscription_warning": {
-    "message": "¿Está seguro de querer eliminar esta suscripción?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "La dirección de la lista de filtros no es una URL ni una ruta de archivo válida."
   },
   "invalid_css_selector": {
     "message": "$selector$ no es un selector CSS válido",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Última actualización a las $time$ del $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Última actualización a las $time$ de hoy",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Pulse en el aviso para abrir todos los enlaces que contiene."
   },
-  "options": {
-    "message": "Opciones de Adblock Plus"
-  },
   "options_short": {
     "message": "Opciones"
-  },
-  "out_of_date_lists": {
-    "message": "Las listas obsoletas se actualizarán periódicamente."
   },
   "overlay_notification_button_no": {
     "message": "No"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Dejar de mostrar avisos"
   },
-  "overlay_shownotifications_label": {
-    "message": "Mostrar avisos útiles"
-  },
-  "remove_button": {
-    "message": "Eliminar"
-  },
   "sendReport": {
     "message": "Informar de un problema en esta página"
-  },
-  "show_block_element_menu": {
-    "message": "Mostrar la opción \"Bloquear elemento\" en el menú contextual"
-  },
-  "show_devtools_panel": {
-    "message": "Mostrar el panel de Adblock Plus en las herramientas de desarrollador"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> en esta página",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "He bloqueado $number$ anuncios y rastreadores gracias a Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Mostrar número en icono"
   },
   "stats_title": {
     "message": "Anuncios bloqueados"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Ubicación de la lista de filtros:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Por favor elija una suscripción de filtros de la lista:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Título de la suscripción:"
-  },
   "unexpected_filter_list_header": {
     "message": "Los encabezados de listas de filtros no se permiten aquí"
-  },
-  "update_now": {
-    "message": "Actualizar ahora"
-  },
-  "whitelisted_domains": {
-    "message": "Dominios autorizados"
   }
 }
