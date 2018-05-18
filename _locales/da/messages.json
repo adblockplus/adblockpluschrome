@@ -2,146 +2,55 @@
   "add": {
     "message": "Tilføj"
   },
-  "add_domain_button": {
-    "message": "Tilføj domæne"
-  },
-  "add_filter_button": {
-    "message": "Tilføj filter"
-  },
   "add_filters_msg": {
     "message": "Tilføj filter/filtre?"
-  },
-  "add_your_own_filters": {
-    "message": "Tilføj dine egne filtre"
-  },
-  "apply_changes": {
-    "message": "Anvend ændringer"
   },
   "block_element": {
     "message": "Blokér element"
   },
   "cancel": {
-    "message": "Annuller"
+    "message": "Annullér"
   },
   "clickhide_instructions": {
-    "message": "Luk dette popup-vindue, og klik (eller højreklik) derefter på et element på siden."
+    "message": "Luk dette pop op-vindue, og klik (eller højreklik) derefter på et element på siden."
   },
   "continue": {
     "message": "Fortsæt"
   },
   "description": {
-    "message": "Adblock Plus anvendes på over 100 millioner enheder og er således verdens mest populære ad blocker."
+    "message": "Adblock Plus anvendes på over 500 millioner enheder og er således verdens mest populære ad blocker."
   },
   "disabled_for_site": {
     "message": "<strong>Deaktiveret</strong> på dette websted"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus er deaktiveret for de domæner, der er angivet nedenfor. Du kan tilføje et domæne enten via ikonet Adblock Plus i adresselinjen eller ved at skrive domæne (ikke en URL) i boksen og klikke på knappen \"Tilføj domæne\"."
-  },
   "easy_create_filter": {
     "message": "Blokér element"
-  },
-  "edit_filters_raw": {
-    "message": "Rediger filtre som rå tekst"
-  },
-  "enable_only_the": {
-    "message": "Aktivér kun de filterlister, du skal bruge. For mange filterlister kan medføre lange svartider i din browser."
   },
   "enabled_for_site": {
     "message": "<strong>Aktiveret</strong> på dette websted"
   },
   "filter_elemhideemulation_nodomain": {
-    "message": "Intet aktivt domæne er angivet til udvidet skjul elementer-filteret"
+    "message": "Intet aktivt domæne er angivet til udvidet skjul elementer-filter"
+  },
+  "filter_invalid_csp": {
+    "message": "Ugyldigt indhold iht. sikkerhedspolitik"
   },
   "filter_invalid_domain": {
     "message": "Ugyldigt (eller tomt) domæne angivet"
   },
   "filter_invalid_regexp": {
-    "message": "Ugyldigt regulært udtryk"
-  },
-  "filter_lists": {
-    "message": "Filterlister"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Dit filter skal følge <a>Adblock Plus' filtersyntaks</a>."
+    "message": "Ugyldigt søgemønster"
   },
   "filter_unknown_option": {
-    "message": "Ukendt filtermulighed"
-  },
-  "filters_acceptableAds2_label": {
-    "message": "Tillad upåtrængende annoncering delvist"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Tilføj"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Tilføj endnu et abonnement"
-  },
-  "filters_addSubscription_label": {
-    "message": "Tilføj filterabonnement"
-  },
-  "filters_readMore_label": {
-    "message": "Lær mere"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Slet"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Aktiveret"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Fejlede, checksum matcher ikke"
+    "message": "Ukendt filter"
   },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "Fejlede, hentningsfejl"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Henter..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Fejlede, ikke en gyldig liste over filtre"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Fejlede, ikke en gyldig adresse"
-  },
-  "filters_viewList_label": {
-    "message": "Vis liste"
-  },
-  "found_a_bug": {
-    "message": "Har du fundet en fejl? Vil du oversætte Adblock Plus til dit sprog? Send <a>venligst din anmodning her</a>."
-  },
-  "general": {
-    "message": "Generelt"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Vil du virkelig fjerne dette abonnement?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Filterlistens placering er hverken en gyldig URL eller et gyldigt filnavn."
+    "message": "Der opstod en fejl: Download mislykket"
   },
   "invalid_css_selector": {
     "message": "$selector$ er ikke en gyldig CSS-indikator",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Senest opdateret kl. $time$ d. $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Senest opdateret kl. $time$ i dag",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -154,6 +63,9 @@
       }
     }
   },
+  "loading": {
+    "message": "Indlæser..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
@@ -161,25 +73,19 @@
     "message": "Adblock Plus-udviklingsversion"
   },
   "notification_configure": {
-    "message": "Konfigurér notifikationsindstillinger"
+    "message": "Konfigurér meddelelsesindstillinger"
   },
   "notification_open_all": {
-    "message": "Åbn alle links i denne notifikation"
+    "message": "Åbn alle links i denne meddelelse"
   },
   "notification_with_buttons": {
-    "message": "Klik 'OK' for at åbne alle links i denne notifikation."
+    "message": "Klik på OK for åbne alle links i denne meddelelse."
   },
   "notification_without_buttons": {
-    "message": "Klik på notifikationen for at åbne alle dens genveje."
-  },
-  "options": {
-    "message": "Adblock Plus indstillinger"
+    "message": "Klik på meddelelsen for at åbne alle links i den."
   },
   "options_short": {
     "message": "Indstillinger"
-  },
-  "out_of_date_lists": {
-    "message": "Forældede lister opdateres regelmæssigt."
   },
   "overlay_notification_button_no": {
     "message": "Nej"
@@ -191,22 +97,10 @@
     "message": "Luk denne meddelelse"
   },
   "overlay_notification_closing_button_optout": {
-    "message": "Vis ikke notifikationer"
-  },
-  "overlay_shownotifications_label": {
-    "message": "Vis nyttige notifikationer"
-  },
-  "remove_button": {
-    "message": "Fjern valgte"
+    "message": "Vis ikke meddelelser"
   },
   "sendReport": {
-    "message": "Rapporter problem"
-  },
-  "show_block_element_menu": {
-    "message": "Vis \"Blokér element\" i højrekliksmenu"
-  },
-  "show_devtools_panel": {
-    "message": "Vis \"Adblock Plus\"-panelet under Udviklingsværktøjer"
+    "message": "Rapportér problem"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> på denne side",
@@ -224,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Jeg har blokeret $number$ annoncer og sporingstjenester takket være Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
-    "message": "Vis antal i ikonet"
+    "message": "Vis antal i ikon"
   },
   "stats_title": {
-    "message": "Blokerede reklamer"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Filterlistens placering:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Vælg et filterabonnement fra listen:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Abonnementstitel:"
+    "message": "Blokerede annoncer"
   },
   "unexpected_filter_list_header": {
-    "message": "Filterlisteoverskrifter er ikke tilladt hér"
-  },
-  "update_now": {
-    "message": "Opdater nu"
-  },
-  "whitelisted_domains": {
-    "message": "Tilladte domæner"
+    "message": "Filterlisteoverskrifter er ikke tilladt her"
   }
 }

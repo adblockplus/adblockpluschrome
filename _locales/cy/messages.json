@@ -2,56 +2,14 @@
   "add": {
     "message": "Ychwanegu"
   },
-  "add_filter_button": {
-    "message": "Ychwanegu hidlydd"
-  },
   "cancel": {
     "message": "Yn ôl"
   },
   "continue": {
     "message": "Parhau"
   },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Ychwanegu"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Ychwanegu tanysgrifiad gwahanol"
-  },
-  "filters_addSubscription_label": {
-    "message": "Ychwanegu tanysgrifiad hidlo"
-  },
-  "filters_readMore_label": {
-    "message": "Darllen mwy"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Dileu"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Wedi'i alluogi"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Methwyd, prawfswm anghywir"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Methwyd, gwall lawrlwytho"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Yn lawrlwytho..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Methwyd, rhestr hidlyddion annilys"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Methwyd, cyfeiriad annilys"
-  },
-  "filters_viewList_label": {
-    "message": "Gweld rhestr"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Ydych chi wir am ddileu'r tanysgrifiad hwn?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Nid yw lleoliad y rhestr hidlyddion yn URL dilys na'n enw ffeil dilys."
   },
   "name": {
     "message": "Adblock Plus"
@@ -67,8 +25,5 @@
   },
   "sendReport": {
     "message": "Adrodd nam ar y dudalen hon"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Lleoliad y rhestr ffilteri:"
   }
 }

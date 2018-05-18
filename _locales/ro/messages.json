@@ -2,20 +2,8 @@
   "add": {
     "message": "Adaugă"
   },
-  "add_domain_button": {
-    "message": "Adaugă domeniu"
-  },
-  "add_filter_button": {
-    "message": "Adaugă filtru"
-  },
   "add_filters_msg": {
     "message": "Adaugă filtru/filtre?"
-  },
-  "add_your_own_filters": {
-    "message": "Adaugă propriile filtre"
-  },
-  "apply_changes": {
-    "message": "Aplică modificările"
   },
   "block_element": {
     "message": "Blochează elementul"
@@ -30,22 +18,13 @@
     "message": "Continuă"
   },
   "description": {
-    "message": "Instalat pe mai mult de 100 de milioane de dispozitive, Adblock Plus este cel mai popular ad blocker din lume."
+    "message": "Cu peste 500 de milioane de descărcări, Adblock Plus este unul dintre cele mai populare ad blocker din lume."
   },
   "disabled_for_site": {
     "message": "<strong>Dezactivat</strong> pe acest site"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus este dezactivat pentru domeniile listate mai jos. Poți adăuga un domeniu folosind iconița Adblock Plus in bara de adrese sau scriind domeniul (nu URL-ul) in spațiul de mai jos și făcând clic pe butonul \"Adaugă domeniu\"."
-  },
   "easy_create_filter": {
     "message": "Blochează elementul"
-  },
-  "edit_filters_raw": {
-    "message": "Editează filtre în mod text"
-  },
-  "enable_only_the": {
-    "message": "Folosiţi doar listele de filtre de care aveţi nevoie. Prea multe vor afecta browser-ul."
   },
   "enabled_for_site": {
     "message": "<strong>Activat</strong> pe acest site"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Niciun domeniu activ specificat pentru filtrul extins de ascundere al elementului"
   },
+  "filter_invalid_csp": {
+    "message": "Directivă CSP invalidă"
+  },
   "filter_invalid_domain": {
     "message": "Domeniul specificat este incorect (sau inexistent)"
   },
   "filter_invalid_regexp": {
     "message": "Expresie regulată invalidă"
   },
-  "filter_lists": {
-    "message": "Liste de filtre"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Filtrul tău trebuie să respecte <a> sintaxa Adblock Plus pentru filtre</a>."
-  },
   "filter_unknown_option": {
     "message": "Opțiune filtru necunoscută"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Permite publicitatea neinvazivă"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Adaugă"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Adaugă altă listă de filtre"
-  },
-  "filters_addSubscription_label": {
-    "message": "Adaugă o listă de filtre"
-  },
-  "filters_readMore_label": {
-    "message": "Citește mai mult"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Șterge"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Activat"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Eroare, suma de control nu se potriveşte"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Eroare, descărcare nereuşită"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Descărcare..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Eroare, lista nu este validă"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Eroare, adresa nu este validă"
-  },
-  "filters_viewList_label": {
-    "message": "Afişare listă"
-  },
-  "found_a_bug": {
-    "message": "Ai gasit o eroare? Dorești să traduci Adblock Plus în limba ta?  <a>scrie o cerere aici</a>."
-  },
-  "general": {
-    "message": "General"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Sunteţi sigur că vreţi să stergeţi această listă?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Locaţia pentru filtre nu este validă"
   },
   "invalid_css_selector": {
     "message": "$selector$ nu este un selector de CSS valabil",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Ultima actualizare la ora $time$ pe data $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Ultima actualizare la ora $time$ azi",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Clic pe notificare pentru a deschide toate link-urile incluse în ea."
   },
-  "options": {
-    "message": "Opţiuni Adblock Plus"
-  },
   "options_short": {
     "message": "Opţiuni"
-  },
-  "out_of_date_lists": {
-    "message": "Listele vechi sunt actualizate periodic."
   },
   "overlay_notification_button_no": {
     "message": "Nu"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Opreşte afişarea notificărilor"
   },
-  "overlay_shownotifications_label": {
-    "message": "Arată notificări utile"
-  },
-  "remove_button": {
-    "message": "Șterge filtrul evidenţiat"
-  },
   "sendReport": {
     "message": "Raportează probleme pe această pagină"
-  },
-  "show_block_element_menu": {
-    "message": "Arată 'Blochează elementul' în meniul asociat unui obiect cu clic dreapta"
-  },
-  "show_devtools_panel": {
-    "message": "Arată panoul \"Adblock Plus\" în developer tools"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pe această pagină",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Am blocat $number$ reclame si trackere datorita lui Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Arată numerele în pictograma"
   },
   "stats_title": {
     "message": "Reclame blocate"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Locaţia listei de filtre:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Alegeți un set de filtre din listă:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Titlul listei de filtre:"
-  },
   "unexpected_filter_list_header": {
     "message": "Antetul listei de filtre nu este permis aici"
-  },
-  "update_now": {
-    "message": "Actualizează acum"
-  },
-  "whitelisted_domains": {
-    "message": "Domenii permise"
   }
 }

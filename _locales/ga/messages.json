@@ -1,29 +1,8 @@
 {
-  "add_filter_button": {
-    "message": "Cuir scagaire"
-  },
   "continue": {
     "message": "Ar Aghaidh"
   },
-  "filters_addSubscriptionOther_label": {
-    "message": "Cuir síntiús eile leis"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Scrios"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Cumasaithe"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Ag íosluchtú..."
-  },
   "options_short": {
     "message": "Roghanna"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Láthair réim an scagaire:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Teideal síntiús:"
   }
 }

@@ -2,20 +2,8 @@
   "add": {
     "message": "Adicionar"
   },
-  "add_domain_button": {
-    "message": "Adicionar domínio"
-  },
-  "add_filter_button": {
-    "message": "Adicionar filtro"
-  },
   "add_filters_msg": {
     "message": "Adicionar filtro(s)?"
-  },
-  "add_your_own_filters": {
-    "message": "Adicionar os seus próprios filtros"
-  },
-  "apply_changes": {
-    "message": "Aplicar alterações"
   },
   "block_element": {
     "message": "Bloquear elemento"
@@ -30,22 +18,13 @@
     "message": "Continuar"
   },
   "description": {
-    "message": "Usado em mais de 100 milhões de dispositivos, Adblock Plus é o bloqueador de anúncios mais popular no mundo."
+    "message": "Usado em mais de 500 milhões de dispositivos, o AdBlock Plus é um dos bloqueadores de anúncios mais popular do mundo."
   },
   "disabled_for_site": {
     "message": "<strong>Desativado</strong> neste sítio"
   },
-  "disabled_for_these_domains": {
-    "message": "O Adblock Plus está desativado nos domínios abaixo listados. Pode adicionar um domínio através do ícone do Adblock Plus na barra de endereço ou digitando o domínio (não um URL) na caixa e clicando no botão \"Adicionar domínio\"."
-  },
   "easy_create_filter": {
     "message": "Bloquear elemento"
-  },
-  "edit_filters_raw": {
-    "message": "Editar filtros como texto"
-  },
-  "enable_only_the": {
-    "message": "Ative apenas os filtros que precisa. Demasiados filtros podem reduzir o desempenho do seu navegador."
   },
   "enabled_for_site": {
     "message": "<strong>Ativado</strong> neste sítio"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Nenhum domínio ativo especificado para o filtro de ocultação de elementos estendidos"
   },
+  "filter_invalid_csp": {
+    "message": "Política de Segurança de Conteúdo inválida"
+  },
   "filter_invalid_domain": {
     "message": "Domínio especificado inválido (ou vazio)"
   },
   "filter_invalid_regexp": {
     "message": "Expressão regular invalida"
   },
-  "filter_lists": {
-    "message": "Lista de filtros"
-  },
-  "filter_must_follow_syntax": {
-    "message": "O teu filtro deve obedecer à <a>sintaxe de filtragem Adblock Plus</a>."
-  },
   "filter_unknown_option": {
     "message": "Opção de filtro desconhecido"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Permitir alguma publicidade não intrusiva"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Adicionar"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Adicionar uma subscrição diferente"
-  },
-  "filters_addSubscription_label": {
-    "message": "Adicionar subscrição de filtros"
-  },
-  "filters_readMore_label": {
-    "message": "Saber mais"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Apagar"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Ativada"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Falhou, checksum errado"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Falhou, transferência inválida"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "A transferir ..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Falhou, não é uma lista de filtros válida"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Falhou, endereço inválido"
-  },
-  "filters_viewList_label": {
-    "message": "Ver lista"
-  },
-  "found_a_bug": {
-    "message": "Encontrou um erro? Quer traduzir o Adblock Plus para o seu idioma? Por favor, submeta <a>aqui</a> o seu pedido."
-  },
-  "general": {
-    "message": "Geral"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Quer mesmo remover esta subscrição?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "A localização da lista de filtros não é um endereço ou nome de ficheiro válido."
   },
   "invalid_css_selector": {
     "message": "$selector$ não é um seletor de CSS válido",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Última atualização às $time$ de $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Última atualização hoje às $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Clique na notificação para abrir todos os links nele."
   },
-  "options": {
-    "message": "Opções do Adblock Plus"
-  },
   "options_short": {
     "message": "Opções"
-  },
-  "out_of_date_lists": {
-    "message": "As listas desatualizadas são atualizadas periodicamente."
   },
   "overlay_notification_button_no": {
     "message": "Não"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Parar de mostrar notificações"
   },
-  "overlay_shownotifications_label": {
-    "message": "Mostrar notificações úteis"
-  },
-  "remove_button": {
-    "message": "Remover seleção"
-  },
   "sendReport": {
     "message": "Reportar erros nesta página"
-  },
-  "show_block_element_menu": {
-    "message": "Mostrar item 'Bloquear Elemento' no menu do botão direito do rato"
-  },
-  "show_devtools_panel": {
-    "message": "Mostra o painel 'Adblock Plus' nas ferramentas de desenvolvedor"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> nesta página",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Eu bloqueei $number$ anúncios e rastreamentos graças ao Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Mostrar número no ícone"
   },
   "stats_title": {
     "message": "Anúncios bloqueados"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Localização de lista de filtros:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Por favor, escolha uma subscrição de filtro da lista:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Título da subscrição:"
-  },
   "unexpected_filter_list_header": {
     "message": "Filtrar lista de cabeçalhos não é permitido aqui"
-  },
-  "update_now": {
-    "message": "Atualizar agora"
-  },
-  "whitelisted_domains": {
-    "message": "Domínios na lista branca"
   }
 }

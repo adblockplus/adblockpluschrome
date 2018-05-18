@@ -2,20 +2,8 @@
   "add": {
     "message": "ጨምር"
   },
-  "add_domain_button": {
-    "message": "አድራሻ ጨምር"
-  },
-  "add_filter_button": {
-    "message": "ማጣሪያ ጨምር"
-  },
   "add_filters_msg": {
     "message": "ማጣሪያ(ዎች) ጨምር?"
-  },
-  "add_your_own_filters": {
-    "message": "የራስዎትን ማጣሪያ ይጨምሩ"
-  },
-  "apply_changes": {
-    "message": "ለውጡን ተቀበል"
   },
   "block_element": {
     "message": "ይሄንን አካል ከልክል"
@@ -29,77 +17,19 @@
   "continue": {
     "message": "ቀጥል"
   },
-  "description": {
-    "message": "ከ100 ሚልዮን ተጠቃሚዎች ያሉት አድብሎክ ፕላስ የአለማችን ተወዳጁ ማስታወቂያ ከልካይ ነው።"
-  },
   "disabled_for_site": {
     "message": "በዚህ ድር ገጾች ላይ <strong>ጠፍቷል</strong>"
-  },
-  "disabled_for_these_domains": {
-    "message": "አድብሎክ ፕላስ ለሚከተሉት አድራሻዎች ጠፍቷል። ተጨማሪ አድራሻዎችን ለመጨመር የአድራሻ አሞሌ ላይ ባለው አድብሎክ ፕላስ ምልክት በኩል ወይም አድራሻውን (ዩአርኤሉን ሳይሆን ጎራውን ብቻ) በሳጥን ውስጥ ይጻፉና አድራሻ ጨምርን ይንኩ።"
   },
   "easy_create_filter": {
     "message": "ይህን አካል ይከልክሉ"
   },
-  "edit_filters_raw": {
-    "message": "ማጣሪያዎችን እንደ ጥሬ ጽሁፍ ያርሙ"
-  },
-  "enable_only_the": {
-    "message": "የሚፈልጉትን የማጣሪያ ዝርዝር ብቻ ያብሩ። ብዙ ካበሩ የመረብ መዘወሪያዎን ሊያደነዝዝ ይችላል።"
-  },
   "enabled_for_site": {
     "message": "በዚህ ድር ገጾች ላይ <strong>በርቷል</strong>"
-  },
-  "filter_lists": {
-    "message": "የማጣሪያ ዝርዝር"
-  },
-  "filter_must_follow_syntax": {
-    "message": "ማጣሪያዎ የ <a>አድብሎክ ፕላስ ማጣሪያ ጽሁፍ ሥርዓት</a> መጠበቅ አለበት።"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "ጨምር"
-  },
-  "filters_readMore_label": {
-    "message": "ተጨማሪ አንብብ"
-  },
-  "filters_subscription_delete_label": {
-    "message": "አጥፋ"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "በርቷል"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "በማውረድ ላይ…"
-  },
-  "found_a_bug": {
-    "message": "ብልሽት አግኝተዋል? አድብሎክ ፕላስን ወደ ቋንቋዎት መተርጎም ይፈልጋሉ? እባክዎን <a>ጥያቄዎን እዚህ ያስገቡ</a>።"
-  },
-  "general": {
-    "message": "አጠቃላይ"
   },
   "invalid_css_selector": {
     "message": "$selector$ ትክክለኛ የሲኤስኤስ መራጭ አይደለም።",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "መጨረሻ የታደሰው በ$time$ $date$ ላይ ነው",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "መጨረሻ የታደሰው በ$time$ ዛሬ",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -127,23 +57,8 @@
   "notification_without_buttons": {
     "message": "በውስጡ ያሉ አገናኞች ሁሉ ለመክፈት ማስታወሻውን ይጫኑት።"
   },
-  "options": {
-    "message": "የአድብሎክ ፕላስ ምርጫዎች"
-  },
   "options_short": {
     "message": "ምርጫዎች"
-  },
-  "out_of_date_lists": {
-    "message": "ቀናቸው ያለፈባቸው ዝርዝሮች በየጊዜው ይታደሳሉ።"
-  },
-  "remove_button": {
-    "message": "የተመረጠውን አጥፋ"
-  },
-  "show_block_element_menu": {
-    "message": "በቀኝ ክሊክ ምርጫ ውስጥ 'ይሄንን አካል ከልክል' ምርጫ አሳይ"
-  },
-  "show_devtools_panel": {
-    "message": "የ 'አድብሎክ ፕላስ' መቆጣጠሪያ የአበልጻጊ መገልገያ ውስጥ አሳይ"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> በዚህ ገጽ ላይ",
@@ -161,30 +76,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "$number$ ያህል ማስታወቂያዎች እና ተከታታዮች ከልክያለሁ እድሜ ለአድብሎክ ፕላስ።",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "ቁጥር ምልክት ላይ አሳይ"
   },
   "stats_title": {
     "message": "የተከለከሉ ማስታወቂያዎች"
   },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "እባክዎን ከዝርዝሩ የማጣሪያ ምዝገባ ይምረጡ:"
-  },
   "unexpected_filter_list_header": {
     "message": "የማጣሪያ ዝርዝር ራስጌ እዚህ ጋር አይፈቀድም"
-  },
-  "update_now": {
-    "message": "ማሻሻያ አሁን አርግ"
-  },
-  "whitelisted_domains": {
-    "message": "የተፈቀዱ አድራሻዎች"
   }
 }

@@ -2,20 +2,8 @@
   "add": {
     "message": "Добави"
   },
-  "add_domain_button": {
-    "message": "Добави домейна"
-  },
-  "add_filter_button": {
-    "message": "Добави филтър"
-  },
   "add_filters_msg": {
     "message": "Добавяне на филтърa/филтрите?"
-  },
-  "add_your_own_filters": {
-    "message": "Собствени филтри"
-  },
-  "apply_changes": {
-    "message": "Приложи промените"
   },
   "block_element": {
     "message": "Блокирай елемента"
@@ -30,22 +18,13 @@
     "message": "Напред"
   },
   "description": {
-    "message": "Ползван в над 100 милиона устройства, Adblock Plus е най-популярният блокер на реклами в света."
+    "message": "С над 500 милиона изтегляния, Adblock Plus е един от най-популярните блокери на реклами в света."
   },
   "disabled_for_site": {
     "message": "<strong>Забранено</strong> за сайта"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus е забранен за домейните от долния списък. Добавянето на домейн става или чрез иконата на Adblock Plus в адресната лента или чрез въвеждане на домейна (не на целия URL) в полето и натискане на бутон „Добави домейна“."
-  },
   "easy_create_filter": {
     "message": "Блокирай елемента"
-  },
-  "edit_filters_raw": {
-    "message": "Редактиране на филтрите в чист текст"
-  },
-  "enable_only_the": {
-    "message": "Разрешете само необходимите филтри. Колкото повече са, толкова по-бавно ще работи вашият браузър."
   },
   "enabled_for_site": {
     "message": "<strong>Разрешено</strong> за сайта"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Незададен действен домейн към правилото за скриване"
   },
+  "filter_invalid_csp": {
+    "message": "Недействителна политика за сигурност на съдържанието"
+  },
   "filter_invalid_domain": {
     "message": "Недействително зададен (или празен) домейн"
   },
   "filter_invalid_regexp": {
     "message": "Недействителен регулярен израз"
   },
-  "filter_lists": {
-    "message": "Списък с филтри"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Вашият филтър трябва да спазва <a>синтаксиса за филтри на Adblock Plus</a>."
-  },
   "filter_unknown_option": {
     "message": "Неизвестна настройка на филтъра"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Позволи определени натрапчиви реклами"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Добави"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Добави друг абонамент"
-  },
-  "filters_addSubscription_label": {
-    "message": "Добавяне на абонамент за филтър"
-  },
-  "filters_readMore_label": {
-    "message": "Повече"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Изтрий"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Разрешен"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Провален — несъвпадаща контролна сума"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Провален — при изтегляне"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Изтегляне…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Провален — недействителен абонамент"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Провален — недействителен адрес"
-  },
-  "filters_viewList_label": {
-    "message": "Покажи списъка"
-  },
-  "found_a_bug": {
-    "message": "Открихте грешка? Искате да преведете Adblock Plus на вашия език? Моля, <a>попълнете тази заявка</a>."
-  },
-  "general": {
-    "message": "Общи"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Наистина ли премахвате абонамента?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Местоположението на филтъра е или с недействителен адрес (URL) или с недействително име на файл."
   },
   "invalid_css_selector": {
     "message": "Недействителен селектор на каскаден лист със стилове [CSS]: $selector$",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Последно обновен на $date$ в $time$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Последно обновен днес в $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Щракнете по известие за отваряне на съдържащите се препратки."
   },
-  "options": {
-    "message": "Настройки на Adblock Plus"
-  },
   "options_short": {
     "message": "Настройки"
-  },
-  "out_of_date_lists": {
-    "message": "Остарелите списъци се обновяват периодично."
   },
   "overlay_notification_button_no": {
     "message": "Не"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Спри показването на известия"
   },
-  "overlay_shownotifications_label": {
-    "message": "Показвай полезни известия"
-  },
-  "remove_button": {
-    "message": "Премахни избрания"
-  },
   "sendReport": {
     "message": "Докладвай неизправност в страницата"
-  },
-  "show_block_element_menu": {
-    "message": "Показвай „Блокирай елемента“ в контекстното меню"
-  },
-  "show_devtools_panel": {
-    "message": "Показвай панел Adblock Plus към инструментите за разработка"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> — в страницата",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "С Adblock Plus блокирах $number$ реклами и проследявания.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Отброявай блокираните в иконата"
   },
   "stats_title": {
     "message": "Блокирани реклами"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Местоположение на списъка с филтри:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Моля, посочете абонамент за филтър от списъка:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Заглавие на абонамента:"
-  },
   "unexpected_filter_list_header": {
     "message": "Непозволени заглавия на филтри"
-  },
-  "update_now": {
-    "message": "Обнови"
-  },
-  "whitelisted_domains": {
-    "message": "Изключени домейни"
   }
 }

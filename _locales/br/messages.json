@@ -2,62 +2,14 @@
   "add": {
     "message": "Ouzhpennañ"
   },
-  "add_filter_button": {
-    "message": "Ouzhpenn ur sil"
-  },
   "cancel": {
     "message": "Nullañ"
   },
   "continue": {
     "message": "Kenderc'hel"
   },
-  "filter_lists": {
-    "message": "Filter lists"
-  },
-  "filters_acceptableAds2_label": {
-    "message": "Aotren bruderezh nann-intrudus"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Ouzhpennañ"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Ouzhpenn ur c'houmanant all"
-  },
-  "filters_addSubscription_label": {
-    "message": "Koumanantiñ el listenn siloù"
-  },
-  "filters_readMore_label": {
-    "message": "Lenn muioc'h"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Diverkañ"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Gweredekaet"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Fazi, n'eo ket ar memes checksum"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Fazi, pellgargañ torret"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "O pellgargañ..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Fazi, n'eo ket ul listenn siloù mat"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Fazi, n'eo ket ur chomlec'h"
-  },
-  "filters_viewList_label": {
-    "message": "Gwelet al listenn"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Sur oc'h da skarzhañ kuit ar c'houmanant-se?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "N'eo ket un URL mat al lec'hiadur restr sil pe n'eo ket un anv mat."
   },
   "name": {
     "message": "Adblock Plus"
@@ -73,14 +25,5 @@
   },
   "sendReport": {
     "message": "Danevelliñ ur gudenn war ar bajenn"
-  },
-  "subscriptionSelection_location_label": {
-    "message": "Lec'hiadur al listenn :"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Diuzit ur c'houmanant el listenn da heul :"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Anv ar c'houmanant :"
   }
 }

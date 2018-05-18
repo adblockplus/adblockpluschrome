@@ -2,20 +2,8 @@
   "add": {
     "message": "Přidat"
   },
-  "add_domain_button": {
-    "message": "Přidat doménu"
-  },
-  "add_filter_button": {
-    "message": "Přidat filtr"
-  },
   "add_filters_msg": {
     "message": "Přidat filtr(y)?"
-  },
-  "add_your_own_filters": {
-    "message": "Přidejte své vlastní filtry"
-  },
-  "apply_changes": {
-    "message": "Použít změny"
   },
   "block_element": {
     "message": "Blokovat prvek"
@@ -30,22 +18,13 @@
     "message": "Pokračovat"
   },
   "description": {
-    "message": "Adblock Plus je použit na více než 100 milionech zařízení, světově nejoblíbenější program na blokování reklam."
+    "message": "Více než 500 milionů stažení, Adblock Plus je jedním z nejvíce používaných programu na blokování reklamy."
   },
   "disabled_for_site": {
     "message": "<strong>Zakázáno</strong> na této stránce"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus je zakázán pro níže uvedené domény. Doménu můžete přidat buď pomocí ikony Adblock Plus v adresním řádku, nebo napsáním domény (ne URL) do pole a kliknutím na tlačítko \"Přidat doménu\"."
-  },
   "easy_create_filter": {
     "message": "Blokovat prvek"
-  },
-  "edit_filters_raw": {
-    "message": "Upravit filtry jako běžný text"
-  },
-  "enable_only_the": {
-    "message": "Povolte pouze seznamy filtrů, které potřebujete. Příliš mnoho seznamů může způsobit, že váš prohlížeč přestane reagovat."
   },
   "enabled_for_site": {
     "message": "<strong>Povoleno</strong> na této stránce"
@@ -53,92 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Není žádná aktivní doména určená pro vylepšený filtr prvků"
   },
+  "filter_invalid_csp": {
+    "message": "Neplatná politika beypečností obsahu"
+  },
+  "filter_invalid_domain": {
+    "message": "Neplatné (nebo prázdné) zadané domény"
+  },
   "filter_invalid_regexp": {
     "message": "Neplatný regulární výraz"
-  },
-  "filter_lists": {
-    "message": "Seznamy filtrů"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Váš filtr musí odpovídat <a>syntaxi filtru Adblock Plus</a>."
   },
   "filter_unknown_option": {
     "message": "Neznámá možnost filtru"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Povolit některé nerušivé reklamy"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Přidat"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Přidat další sadu cizích filtrů"
-  },
-  "filters_addSubscription_label": {
-    "message": "Přidat sadu cizích filtrů"
-  },
-  "filters_readMore_label": {
-    "message": "Zjistit více"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Smazat"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Povoleno"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Chyba, neodpovídá kontrolní součet"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Chyba, nepodařilo se stáhnout soubor"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Stahuji..."
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Chyba, stažený soubor není souborem filtrů Adblock Plus"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Chyba, toto je nekorektní adresa."
-  },
-  "filters_viewList_label": {
-    "message": "Zobrazit seznam"
-  },
-  "found_a_bug": {
-    "message": "Našli jste chybu? Chcete přeložit Adblock Plus do svého jazyka? <a>Zde vyplňte žádost</a>, prosím."
-  },
-  "general": {
-    "message": "Obecné"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Skutečně si přejete odstranit tuto sadu cizích filtrů ?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Zadaná adresa seznamu cizích filtrů je buď nesprávná URL nebo obsahuje nesprávné jméno souboru."
   },
   "invalid_css_selector": {
     "message": "$selector$ není platný selektor CSS",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Naposledy aktualizováno v $time$ $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Naposled aktualizováno dnes v $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -150,6 +62,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Načítání..."
   },
   "name": {
     "message": "Adblock Plus"
@@ -169,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Klepněte na oznámení pro otevření všech obsažených odkazů."
   },
-  "options": {
-    "message": "Možnosti Adblock Plus"
-  },
   "options_short": {
     "message": "Možnosti"
-  },
-  "out_of_date_lists": {
-    "message": "Zastaralé seznamy jsou pravidelně aktualizovány."
   },
   "overlay_notification_button_no": {
     "message": "Ne"
@@ -190,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Přestaň ukazovat oznámení"
   },
-  "overlay_shownotifications_label": {
-    "message": "Zobrazovat užitečná upozornění"
-  },
-  "remove_button": {
-    "message": "Odebrat vybrané"
-  },
   "sendReport": {
     "message": "Nahlásit problém na této stránce"
-  },
-  "show_block_element_menu": {
-    "message": "Zobrazit položku nabídky 'Blokovat prvek' při kliknutí pravým tlačítkem myši"
-  },
-  "show_devtools_panel": {
-    "message": "Zobrazit panel 'Adblock plus' v nástrojích pro vývojáře"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> na této stránce",
@@ -221,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Zablokoval jsem $number$ reklam a slídilů díky Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Zobrazit číslo v ikoně"
   },
   "stats_title": {
     "message": "Blokovaných reklam"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Umístění sady filtrů:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Zvolte odběr filtrů ze seznamu, prosím:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Označení cizích filtrů:"
-  },
   "unexpected_filter_list_header": {
     "message": "Záhlaví seznamů filtrů zde nejsou povoleny"
-  },
-  "update_now": {
-    "message": "Aktualizovat nyní"
-  },
-  "whitelisted_domains": {
-    "message": "Povolené domény"
   }
 }

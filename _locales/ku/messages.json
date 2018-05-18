@@ -1,6 +1,30 @@
 {
-  "add_filter_button": {
-    "message": "زیادکردنی فلتەر"
+  "add": {
+    "message": "دانان"
+  },
+  "add_filters_msg": {
+    "message": "دانانی فلتەر(ەکان)?"
+  },
+  "block_element": {
+    "message": "بلۆک کردنی بابەت"
+  },
+  "cancel": {
+    "message": "لابردن"
+  },
+  "clickhide_instructions": {
+    "message": "دوایە داخستنی ئەم ریکلامە. کلیک (یان کلیکی لای راست) لەسەر ریکلامەکە بکە لە پەرەکە."
+  },
+  "continue": {
+    "message": "بەردەوامبوون"
+  },
+  "disabled_for_site": {
+    "message": "<strong>کارا نیە</strong> لەم ماڵپەرە"
+  },
+  "easy_create_filter": {
+    "message": "بلۆک کردنی بابەت"
+  },
+  "enabled_for_site": {
+    "message": "<strong>کارایە</strong> لەم وێبسایتە"
   },
   "options_short": {
     "message": "هەڵبژاردنەکان"
@@ -10,8 +34,5 @@
   },
   "overlay_notification_button_yes": {
     "message": "بەڵێ"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "ناونیشانی بەشداریکردن:"
   }
 }

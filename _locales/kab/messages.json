@@ -2,20 +2,8 @@
   "add": {
     "message": "Rnu"
   },
-  "add_domain_button": {
-    "message": "Rnu taɣult"
-  },
-  "add_filter_button": {
-    "message": "Rnu imsizdeg"
-  },
   "add_filters_msg": {
     "message": "Rnu imsizdeg?"
-  },
-  "add_your_own_filters": {
-    "message": "Rnu imsizdeg-ik"
-  },
-  "apply_changes": {
-    "message": "Snes abddel"
   },
   "block_element": {
     "message": "Sewḥel aferdis"
@@ -29,23 +17,11 @@
   "continue": {
     "message": "Kemmel"
   },
-  "description": {
-    "message": "Yettwaseqdec ugar n 100 imelyan n ibenkan. Adblock Plus d amsewḥal aɣerfan ugar deg umaḍal."
-  },
   "disabled_for_site": {
     "message": "<strong>Insa </strong> ɣef usmel-agi"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock Plus insa di tɣula ddaw-agi. Ad tizmireḍ ad ternuḍ taɣult s tignit Adblock Plus n ufeggag n tensa, neɣ s tira n taɣult (mačči n tensa URL) di tnaka n uḍris s susiti ɣef tqeffalt \"rnu taɣult\"."
-  },
   "easy_create_filter": {
     "message": "Sewḥel aferid"
-  },
-  "edit_filters_raw": {
-    "message": "Ẓreg imsizdigen s uḍris arewway"
-  },
-  "enable_only_the": {
-    "message": "Rmed kan tidbarin n imsiẓdigen i tesriḍ. Ma tremdeḍ aṭas, ad yaẓay iminig-ik."
   },
   "enabled_for_site": {
     "message": "<strong>Irmed</strong> ɣef usmel-agi"
@@ -59,89 +35,16 @@
   "filter_invalid_regexp": {
     "message": "Yir tanfalit talugant"
   },
-  "filter_lists": {
-    "message": "Tibdarin n imsizdeg"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Imsizdeg-ik yessefk ad yeḍfeṛ <a> tasaddast n imsizdeg Adblock Plus</a>."
-  },
   "filter_unknown_option": {
     "message": "Aɣewwaṛ n imsizdeg arussin"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Sireg kra n udellel uer d-yeggaren ara iman-is"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Rnu"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Rnu ejerred nniḍen"
-  },
-  "filters_addSubscription_label": {
-    "message": "Rnu ajerred n imsizdeg"
-  },
-  "filters_readMore_label": {
-    "message": "Ɣer ugar"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Kkes"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Irmed"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Icceḍ, checksum ur imenṭaḍ ara"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Icceḍ, asider ur yeddi ara"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Asider…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Icceḍ, mačči d tabdart n imsizdifen tameɣtut"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Icceḍ, mačči d tansa tameɣtut"
-  },
-  "filters_viewList_label": {
-    "message": "Sken tabdart"
-  },
-  "found_a_bug": {
-    "message": "Tufiḍ abug? Tebɣiḍ ad tsuqqleḍ Adblock Plus ar tutlayt-ik? Ma ulac aɣilif, <a> azen-d asuter dagi</a>."
-  },
-  "general": {
-    "message": "Amatu"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Tebɣiḍ ad tekkseḍ ajerred-agi?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Tansa yemmalen adig n tebdart n imsizdigen mačču d URL tameɣtut, neɣ isem n ufaylu ameɣtu."
   },
   "invalid_css_selector": {
     "message": "$selector$ nmačči d amsefran CSS ameɣtu",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Aleqqem aneggaru af $time$ di $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Aleqqem aneggaru af $time$ ass-a",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -153,6 +56,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Asider..."
   },
   "name": {
     "message": "Adblock Plus"
@@ -167,19 +73,13 @@
     "message": "Ldi akk iseɣwan seg ulɣu"
   },
   "notification_with_buttons": {
-    "message": "Si ɣef 'IH4 akken ad d-ldiḍ akk iseɣwan deg ulɣu-agi."
+    "message": "Si ɣef 'IH' akken ad d-ldiḍ akk iseɣwan deg ulɣu-agi."
   },
   "notification_without_buttons": {
     "message": "Sit ɣef ulɣu akken ad d-ldiḍ akk iseɣwan deg-s."
   },
-  "options": {
-    "message": "Iɣewwaṛen Adblock Plus"
-  },
   "options_short": {
     "message": "Iɣewwaṛen"
-  },
-  "out_of_date_lists": {
-    "message": "Tibdarin ifaten ad ttwaleqment si sya ar da."
   },
   "overlay_notification_button_no": {
     "message": "Ih"
@@ -193,20 +93,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Seḥbes askan n yilɣa"
   },
-  "overlay_shownotifications_label": {
-    "message": "Sken ilɣa ilaqen"
-  },
-  "remove_button": {
-    "message": "Kkes ayen yettwafernen"
-  },
   "sendReport": {
     "message": "Azen-d uhur ɣef usebter-agi"
-  },
-  "show_block_element_menu": {
-    "message": "Sken \"Sewḥel aferdes\" deg umuɣ s tqeffalt tayeffust"
-  },
-  "show_devtools_panel": {
-    "message": "Sken agalis 'Adblock Plus' deg ifecka n tnefli"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> ɣef usebter-agi",
@@ -224,36 +112,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Sweḥleɣ $number$ n udellel d inedfaṛen s Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Sken uṭṭun ɣef tignit"
   },
   "stats_title": {
     "message": "Adellel iweḥlen"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Sizdeg adig n tebdart:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Fren imsizdeg n ujerred seg tebdart:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Azwel n ujerred:"
-  },
   "unexpected_filter_list_header": {
     "message": "Iqerra n tibdarin n imsizdigen ad ttwasirgen dagi"
-  },
-  "update_now": {
-    "message": "Leqqem tura"
-  },
-  "whitelisted_domains": {
-    "message": "Tiɣula n tebdarin timellalin"
   }
 }

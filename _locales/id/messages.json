@@ -2,20 +2,8 @@
   "add": {
     "message": "Tambah"
   },
-  "add_domain_button": {
-    "message": "Tambah domain"
-  },
-  "add_filter_button": {
-    "message": "Tambah penyaring"
-  },
   "add_filters_msg": {
     "message": "Tambahkan filter?"
-  },
-  "add_your_own_filters": {
-    "message": "Tambahkan filter sendiri"
-  },
-  "apply_changes": {
-    "message": "Terapkan perubahan"
   },
   "block_element": {
     "message": "Blokir elemen"
@@ -30,112 +18,39 @@
     "message": "Lanjut"
   },
   "description": {
-    "message": "Digunakan pada lebih dari 100 juta perangkat, Adblock Plus merupakan pemblok Iklan terpopuler di dunia."
+    "message": "Dengan lebih dari 500 juta unduh, Adblock Plus adalah salah satu pemblok Iklan terpopuler di dunia."
   },
   "disabled_for_site": {
     "message": "<strong>Nonaktifkan</strong> pada situs ini"
   },
-  "disabled_for_these_domains": {
-    "message": "Adblock menonaktifkan daftar domain di bawah. Anda dapat menambah sebuah domain melalui ikon Adblock Plus pada alamat bar atau dengan mengetikan domain (tidak sebuah URL) di sebuah boks dan klik tombol \"Tambah Domain\""
-  },
   "easy_create_filter": {
     "message": "Blokir elemen"
-  },
-  "edit_filters_raw": {
-    "message": "Ubah penyaring sebagai teks mentah"
-  },
-  "enable_only_the": {
-    "message": "Aktifkan hanya daftar filter yang diperlukan. Terlalu banyak dapat membuat peramban menjadi tidak responsif."
   },
   "enabled_for_site": {
     "message": "<strong>Aktifkan</strong> pada situs ini"
   },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Tidak ada domain aktif yang digunakan untuk saringan penyembunyian elemen yang diperpanjang"
+  },
+  "filter_invalid_csp": {
+    "message": "Kebijakan Kemanan Konten Tidak Valid"
+  },
+  "filter_invalid_domain": {
+    "message": "Domain yang ditetapkan tidak valid (atau kosong)"
+  },
   "filter_invalid_regexp": {
     "message": "Kalimat biasa yang tidak valid"
-  },
-  "filter_lists": {
-    "message": "Daftar penyaring"
-  },
-  "filter_must_follow_syntax": {
-    "message": "Daftar penyaring Anda harus mengikuti <a>Sintaks Penyaring Adblock Plus</a>"
   },
   "filter_unknown_option": {
     "message": "Opsi filter yang tidak diketahui"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Izinkan beberapa iklan yang tidak mengganggu"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Tambah"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Tambah langganan yang lainnya"
-  },
-  "filters_addSubscription_label": {
-    "message": "Tambahkan filter langganan"
-  },
-  "filters_readMore_label": {
-    "message": "Baca lebih lanjut"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Hapus"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Diaktifkan"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Gagal, checksum tidak cocok"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Gagal, kesalahan pengunduhan"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Mengunduh…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Gagal, daftar penyaring tidak sah"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Gagal, alamat tidak sah"
-  },
-  "filters_viewList_label": {
-    "message": "Lihat daftar"
-  },
-  "found_a_bug": {
-    "message": "Menemukan sebuah celah? Ingin menerjemahkan Adblock Plus ke bahasa Anda? Silakan <a>berkaskan permintaan Anda di sini</a>."
-  },
-  "general": {
-    "message": "Umum"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Apakah Anda yakin ingin menghapus langganan ini?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "Lokasi daftar penyaring bukan merupakan sebuah URL atau nama berkas yang sah."
   },
   "invalid_css_selector": {
     "message": "$selector$ bukan selector CSS yang benar",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Terakhir diperbaharui pada pukul $time$ tanggal $date$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Terakhir diperbaharui pada hari ini pukul $time$",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -147,6 +62,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "Sedang memuat..."
   },
   "name": {
     "message": "Adblock Plus"
@@ -166,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Klik pada pemberitahuan untuk membuka semua link di dalamnya."
   },
-  "options": {
-    "message": "Pengaturan Adblock Plus"
-  },
   "options_short": {
     "message": "Pilihan"
-  },
-  "out_of_date_lists": {
-    "message": "Daftar lama akan diperbaharui secara berkala."
   },
   "overlay_notification_button_no": {
     "message": "Tidak"
@@ -187,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Berhenti menampilkan pemberitahuan"
   },
-  "overlay_shownotifications_label": {
-    "message": "Tampilkan pemberitahuan yang berguna"
-  },
-  "remove_button": {
-    "message": "Hapus yang dipilih"
-  },
   "sendReport": {
     "message": "Laporkan masalah pada halaman ini"
-  },
-  "show_block_element_menu": {
-    "message": "Tampilkan butir menu \"Blokir Elemen\" saat klik kanan"
-  },
-  "show_devtools_panel": {
-    "message": "Tampilkan panel 'Adblock Plus' pada peralatan pengembang"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> pada halaman ini",
@@ -218,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Saya memblokir $number$ iklan dan pelacak berkat Adblock Plus.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Tampilkan angka didalam ikon"
   },
   "stats_title": {
     "message": "Iklan terblokir"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Filter daftar lokasi:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Silakan pilih langganan penyaring dari daftar:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Judul berlangganan:"
-  },
   "unexpected_filter_list_header": {
     "message": "Daftar saringan header tidak diperbolehkan disini"
-  },
-  "update_now": {
-    "message": "Perbaharui sekarang"
-  },
-  "whitelisted_domains": {
-    "message": "Daftar putih domain"
   }
 }

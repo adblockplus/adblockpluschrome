@@ -2,20 +2,8 @@
   "add": {
     "message": "Hozzáadás"
   },
-  "add_domain_button": {
-    "message": "Domain hozzáadása"
-  },
-  "add_filter_button": {
-    "message": "Szűrő hozzáadása"
-  },
   "add_filters_msg": {
     "message": "Szűrő(k) hozzáadása?"
-  },
-  "add_your_own_filters": {
-    "message": "Add hozzá a saját szűrőidet"
-  },
-  "apply_changes": {
-    "message": "Változtatások alkalmazása"
   },
   "block_element": {
     "message": "Elem blokkolása"
@@ -30,22 +18,13 @@
     "message": "Tovább"
   },
   "description": {
-    "message": "Több mint 100 millió eszközön használják, az Adblock Plus a világ legnépszerűbb reklámblokkolója."
+    "message": "Több mint 500 millió letöltéssel az Adblock Plus a világ egyik legnépszerűbb hirdetésblokkolója."
   },
   "disabled_for_site": {
     "message": "<strong>Kikapcsolva</strong> ezen a weboldalon"
   },
-  "disabled_for_these_domains": {
-    "message": "Az Adblock Plus le van tiltva az alább felsorolt oldalakon. Egy domaint megadhatsz az Adblock Plus ikonra kattintva a címsorban, vagy beírhatod a domaint (nem az URL-t) a dobozba és kattints a \"Domain hozzáadása\" gombra."
-  },
   "easy_create_filter": {
     "message": "Elem blokkolása"
-  },
-  "edit_filters_raw": {
-    "message": "Szűrők szerkesztése nyers szövegként"
-  },
-  "enable_only_the": {
-    "message": "Csak azokat a szűrőlistákat engedélyezze amelyekre feltétlenül szüksége van. Túl sok lista esetén számottevően lelassulhat a böngészés."
   },
   "enabled_for_site": {
     "message": "<strong>Engedélyezve</strong> ezen a weboldalon"
@@ -53,95 +32,25 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Nincs megadva domain a kiterjesztett elemszűréshez"
   },
+  "filter_invalid_csp": {
+    "message": "Érvénytelen tartalombiztonsági irányelv"
+  },
   "filter_invalid_domain": {
     "message": "Érvénytelen (vagy üres) domain"
   },
   "filter_invalid_regexp": {
     "message": "Érvénytelen reguláris kifejezés"
   },
-  "filter_lists": {
-    "message": "Szűrő lista"
-  },
-  "filter_must_follow_syntax": {
-    "message": "A szűrőd kövesse az <a>Adblock Plus szintaxisát</a>."
-  },
   "filter_unknown_option": {
     "message": "Ismeretlen szűrőlehetőség"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Néhány nem tolakodó hirdetés engedélyezése"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Hozzáadás"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "Külső szűrő hozzáadása"
-  },
-  "filters_addSubscription_label": {
-    "message": "Feliratkozás szűrőre"
-  },
-  "filters_readMore_label": {
-    "message": "Mi ez?"
-  },
-  "filters_subscription_delete_label": {
-    "message": "Törlés"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "Engedélyezve"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "Sikertelen, érvénytelen ellenőrző összeg"
-  },
   "filters_subscription_lastDownload_connectionError": {
     "message": "Sikertelen, letöltési hiba"
-  },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "Letöltés…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "Sikertelen, érvénytelen szűrőlista"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "Sikertelen, érvénytelen cím"
-  },
-  "filters_viewList_label": {
-    "message": "Lista megtekintése"
-  },
-  "found_a_bug": {
-    "message": "Találtál egy hibát az Adblock Plus-ban? Kérlek <a>jelentsd itt</a>."
-  },
-  "general": {
-    "message": "Általános"
-  },
-  "global_remove_subscription_warning": {
-    "message": "Valóban el kívánja távolítani ezt a szűrőt?"
-  },
-  "global_subscription_invalid_location": {
-    "message": "A szűrő helye URL-ként és fájlnévként is érvénytelen."
   },
   "invalid_css_selector": {
     "message": "Érvénytelen CSS kiválasztó: $selector$",
     "placeholders": {
       "selector": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at": {
-    "message": "Utoljára ekkor lett frissítve: $date$ $time$",
-    "placeholders": {
-      "date": {
-        "content": "$2"
-      },
-      "time": {
-        "content": "$1"
-      }
-    }
-  },
-  "last_updated_at_today": {
-    "message": "Utoljára ekkor lett frissítve: ma $time$-kor",
-    "placeholders": {
-      "time": {
         "content": "$1"
       }
     }
@@ -175,14 +84,8 @@
   "notification_without_buttons": {
     "message": "Kattints az értesítésre a benne lévő összes link megnyitásához."
   },
-  "options": {
-    "message": "Adblock Plus beállítások"
-  },
   "options_short": {
     "message": "Beállítások"
-  },
-  "out_of_date_lists": {
-    "message": "Az elavult listák időközönként frissülnek."
   },
   "overlay_notification_button_no": {
     "message": "Nem"
@@ -196,20 +99,8 @@
   "overlay_notification_closing_button_optout": {
     "message": "Ne jelenjenek meg értesítések"
   },
-  "overlay_shownotifications_label": {
-    "message": "Hasznos értesítések megjelenítése"
-  },
-  "remove_button": {
-    "message": "Kijelölt eltávolítása"
-  },
   "sendReport": {
     "message": "Hibás webhely bejelentése"
-  },
-  "show_block_element_menu": {
-    "message": "'Elem blokkolása' megjelenítése a környezeti menüben"
-  },
-  "show_devtools_panel": {
-    "message": "'Adblock Plus' panel megjelenítése a fejlesztői eszközökben"
   },
   "stats_label_page": {
     "message": "<strong>$number$</strong> ezen az oldalon",
@@ -227,36 +118,13 @@
       }
     }
   },
-  "stats_share_message": {
-    "message": "Kiszűrtem $number$ hirdetést és nyomkövetőt az Adblock Plusnak köszönhetően.",
-    "placeholders": {
-      "number": {
-        "content": "$1"
-      }
-    }
-  },
   "stats_show_iconnumber": {
     "message": "Blokkolt reklámok számának kijelzése az ikonon"
   },
   "stats_title": {
     "message": "Blokkolt reklámok:"
   },
-  "subscriptionSelection_location_label": {
-    "message": "Szűrőlista címe:"
-  },
-  "subscriptionSelection_subscriptionSelector_label": {
-    "message": "Kérem válassza ki a szűrőt a listából:"
-  },
-  "subscriptionSelection_title_label": {
-    "message": "Külső szűrő neve:"
-  },
   "unexpected_filter_list_header": {
     "message": "A szűrő lista fejlécek itt nem engedélyezettek"
-  },
-  "update_now": {
-    "message": "Frissítés most"
-  },
-  "whitelisted_domains": {
-    "message": "Engedélyezett domainek"
   }
 }

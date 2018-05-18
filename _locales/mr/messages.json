@@ -2,50 +2,14 @@
   "add": {
     "message": "जोडा"
   },
-  "add_filter_button": {
-    "message": "फिल्टर जोडा"
-  },
   "cancel": {
     "message": "रद्द करा"
-  },
-  "filters_addSubscriptionAdd_label": {
-    "message": "जोडा"
-  },
-  "filters_addSubscriptionOther_label": {
-    "message": "दुसरा सदस्यता जोडा"
-  },
-  "filters_readMore_label": {
-    "message": "अधिक वाचा"
-  },
-  "filters_subscription_delete_label": {
-    "message": "कडून टाका"
-  },
-  "filters_subscription_enabled_label": {
-    "message": "चालू आहे"
-  },
-  "filters_subscription_lastDownload_checksumMismatch": {
-    "message": "अयशस्वी, चेकसम जुळत नाही"
   },
   "filters_subscription_lastDownload_connectionError": {
     "message": "अयशस्वी, डाउनलोड अयशस्वी"
   },
-  "filters_subscription_lastDownload_inProgress": {
-    "message": "डाउनलोड होत आहे…"
-  },
-  "filters_subscription_lastDownload_invalidData": {
-    "message": "अयशस्वी, वैध फिल्टर यादी नाही"
-  },
-  "filters_subscription_lastDownload_invalidURL": {
-    "message": "अयशस्वी, वैध पत्ता नाही"
-  },
-  "filters_viewList_label": {
-    "message": "सूची पहा"
-  },
   "name": {
     "message": "Adblock प्लस"
-  },
-  "options": {
-    "message": "अॅडब्लॉक प्लस पर्याय"
   },
   "options_short": {
     "message": "पर्याय"

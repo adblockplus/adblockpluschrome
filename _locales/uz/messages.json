@@ -1,23 +1,124 @@
 {
   "add": {
-    "message": "Qo‘shish"
+    "message": "Қўшиш"
   },
-  "add_domain_button": {
-    "message": "Domen qo‘shish"
+  "add_filters_msg": {
+    "message": "Фильтр(лар) қўшилсинми?"
   },
-  "filters_acceptableAds2_label": {
-    "message": "Ba’zi dilni xira qilmaydigan reklamalarga ruxsat berish"
+  "block_element": {
+    "message": "Элементни блоклаш"
   },
-  "filters_addSubscriptionAdd_label": {
-    "message": "Qo‘shish"
+  "cancel": {
+    "message": "Бекор"
   },
-  "options": {
-    "message": "Adblock Plus sozlamalari"
+  "clickhide_instructions": {
+    "message": "Бу қалқиб чиқувчи ойнани ёпгандан кейин, саҳифадаги элемент устида сичқончанинг ўнг ёки чап тугмасини босинг."
+  },
+  "continue": {
+    "message": "Давом этиш"
+  },
+  "disabled_for_site": {
+    "message": "Бу сайтда <strong>фаолсизлантирилган</strong>"
+  },
+  "easy_create_filter": {
+    "message": "Элементни блоклаш"
+  },
+  "enabled_for_site": {
+    "message": "Бу сайтда <strong>ёқилган</strong>"
+  },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Беркитиладиган элементларнинг кенгайтирилган фильтри учун ҳеч қандай домен кўрсатилмаган"
+  },
+  "filter_invalid_domain": {
+    "message": "Яроқсиз (ёки бўш) домен киритилди"
+  },
+  "filter_invalid_regexp": {
+    "message": "Регуляр ифода яроқсиз"
+  },
+  "filter_unknown_option": {
+    "message": "Фильтр параметри номаълум"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "Хато: юклаб олинмади"
+  },
+  "invalid_css_selector": {
+    "message": "$selector$ яроқли CSS селектор эмас",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "$number$-қатор",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "loading": {
+    "message": "Юкланмоқда..."
+  },
+  "name": {
+    "message": "Adblock Plus"
+  },
+  "name_devbuild": {
+    "message": "Adblock Plus синов версияси"
+  },
+  "notification_configure": {
+    "message": "Билдиришнома параметрларини созлаш"
+  },
+  "notification_open_all": {
+    "message": "Бу билдиришномадаги барча ҳаволалар очилсин"
+  },
+  "notification_with_buttons": {
+    "message": "Бу билдиришномадаги барча ҳаволаларни очиш учун \"ОК\" тугмасини босинг."
+  },
+  "notification_without_buttons": {
+    "message": "Барча иловаларни очиш учун билдиришномага босинг."
+  },
+  "options_short": {
+    "message": "Параметрлар"
   },
   "overlay_notification_button_no": {
-    "message": "Yo‘q"
+    "message": "Йўқ"
   },
   "overlay_notification_button_yes": {
-    "message": "Ha"
+    "message": "Ҳа"
+  },
+  "overlay_notification_closing_button_hide": {
+    "message": "Билдиришномани ёпиш"
+  },
+  "overlay_notification_closing_button_optout": {
+    "message": "Билдиришномалар кўрсатилмасин"
+  },
+  "sendReport": {
+    "message": "Саҳифадаги муаммо ҳақида хабар бериш"
+  },
+  "stats_label_page": {
+    "message": "Бу саҳифада: <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_label_total": {
+    "message": "Жами: <strong>$number$</strong>",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "stats_show_iconnumber": {
+    "message": "Иконкада рақам кўрсатилсин"
+  },
+  "stats_title": {
+    "message": "Блокланган рекламалар"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Бу ерда фильтрлар рўйхати сарлавҳалари қўшилмайди"
   }
 }
