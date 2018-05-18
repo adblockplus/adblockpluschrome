@@ -6,7 +6,6 @@ app_id_release={d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}
 app_id_devbuild=devbuild@adblockplus.org
 devbuildUpdateURL=https://downloads.adblockplus.org/devbuilds/adblockplusfirefox/updates.json
 basename = adblockplusfirefox
-browserAction -= popup.html
 
 [compat]
 gecko = 51.0
