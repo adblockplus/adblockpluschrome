@@ -19,6 +19,7 @@
 
 {
   const asyncAPIs = [
+    "browserAction.getPopup",
     "contextMenus.removeAll",
     "devtools.panels.create",
     "notifications.clear",
