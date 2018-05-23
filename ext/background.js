@@ -576,16 +576,4 @@
       message, sender, sendResponse
     ).includes(true);
   });
-
-
-  /* Windows */
-  ext.windows = {
-    create(createData, callback)
-    {
-      browser.windows.create(createData, createdWindow =>
-      {
-        afterTabLoaded(callback)(createdWindow.tabs[0]);
-      });
-    }
-  };
 }
