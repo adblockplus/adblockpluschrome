@@ -43,7 +43,7 @@ is only useful for uploading into Windows Store, where it will be signed. For
 testing use the devenv build.
 
 The Firefox extension will be unsigned, and therefore is mostly only useful for
-upload to Mozilla Add-ons. You can also also load it for testing purposes under
+upload to Mozilla Add-ons. You can also load it for testing purposes under
 _about:debugging_ or by disabling signature enforcement in Firefox Nightly.
 
 ### Development environment
