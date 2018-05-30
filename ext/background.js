@@ -259,6 +259,18 @@
   {types: ["main_frame", "sub_frame"], urls: ["http://*/*", "https://*/*"]},
   ["responseHeaders"]);
 
+  browser.webNavigation.onBeforeNavigate.addListener(details =>
+  {
+    // Requests can be made by about:blank frames before the frame's
+    // onCommitted event has fired, so we update the frame structure
+    // for those now.
+    if (details.url == "about:blank")
+    {
+      updatePageFrameStructure(details.frameId, details.tabId, details.url,
+                               details.parentFrameId);
+    }
+  });
+
   browser.webNavigation.onCommitted.addListener(details =>
   {
     // We have to update the frame structure for documents that weren't
