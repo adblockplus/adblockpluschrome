@@ -18,7 +18,7 @@
     "message": "המשך"
   },
   "description": {
-    "message": "עם יותר מ־500 מיליון הורדות, Adblock Plus הוא אחד מחוסמי המודעות הפופולריים ביותר בעולם."
+    "message": "עם יותר מ־500 מיליון הורדות, Adblock Plus הוא אחד מחוסמי הפרסומות הפופולריים ביותר בעולם."
   },
   "disabled_for_site": {
     "message": "<strong>מושבת</strong> באתר זה"
@@ -122,7 +122,7 @@
     "message": "הראה מספרים בצלמית"
   },
   "stats_title": {
-    "message": "מודעות חסומות"
+    "message": "פרסומות חסומות"
   },
   "unexpected_filter_list_header": {
     "message": "כותרות רשימת מסננים אינן מותרות כאן"

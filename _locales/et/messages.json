@@ -17,6 +17,9 @@
   "continue": {
     "message": "Jätka"
   },
+  "description": {
+    "message": "Üle 500 miljoni allalaadimisega on Adblock Plus üks maailma populaarsemaid reklaamide blokeerijaid."
+  },
   "disabled_for_site": {
     "message": "<strong>Keelatud</strong> sellel saidil"
   },
@@ -28,6 +31,9 @@
   },
   "filter_elemhideemulation_nodomain": {
     "message": "Laiendatud elemendi peitmise filtrile pole määratletud aktiivset domeeni"
+  },
+  "filter_invalid_csp": {
+    "message": "Vigane sisuturbepoliitika"
   },
   "filter_invalid_domain": {
     "message": "Määratletud on sobimatu (või tühi) domeen"

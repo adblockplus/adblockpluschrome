@@ -6,16 +6,19 @@
     "message": "ફિલ્ટર ઉમેરવા છે?"
   },
   "block_element": {
-    "message": "બ્લોક એલિમેન્ટ"
+    "message": "અવરોધિત તત્વ"
   },
   "cancel": {
     "message": "રદ"
   },
   "clickhide_instructions": {
-    "message": "આ પોપ અપ બંધ કરીને, પેજ પરનાં એલિમેન્ટ પર ક્લિક (અથવા રાઈટ ક્લિક) કરો."
+    "message": "આ પોપઅપને બંધ કર્યા પછી, પૃષ્ઠ પર એક ઘટક (અથવા જમણું ક્લિક કરો) પર ક્લિક કરો."
   },
   "continue": {
     "message": "ચાલુ રાખો"
+  },
+  "description": {
+    "message": "500 મિલિયનથી વધુ ઉપકરણો પર ઉપયોગ થાય છે, એડબ્લોક પ્લસ એ વિશ્વની સૌથી લોકપ્રિય જાહેરાત અવરોધક છે."
   },
   "disabled_for_site": {
     "message": "આં સાઈટ પર <strong>ડિસેબલ</strong> કરો"
@@ -28,6 +31,9 @@
   },
   "filter_elemhideemulation_nodomain": {
     "message": "વિસ્તૃત ઘટક છૂપાઇ ફિલ્ટર માટે કોઈ સક્રિય ડોમેન નિર્દિષ્ટ નથી"
+  },
+  "filter_invalid_csp": {
+    "message": "અમાન્ય સામગ્રી સુરક્ષા નીતિ"
   },
   "filter_invalid_domain": {
     "message": "ઉલ્લેખિત અમાન્ય (અથવા ખાલી) ડોમેન"
@@ -56,6 +62,9 @@
         "content": "$1"
       }
     }
+  },
+  "loading": {
+    "message": "લોડ કરી રહ્યું છે..."
   },
   "name": {
     "message": "Adblock Plus"

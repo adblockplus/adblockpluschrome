@@ -2,11 +2,75 @@
   "add": {
     "message": "اندراج کریں"
   },
+  "add_filters_msg": {
+    "message": "فلٹر شامل کریں؟"
+  },
+  "block_element": {
+    "message": "بلاک عنصر"
+  },
+  "cancel": {
+    "message": "منسوخ کریں"
+  },
+  "clickhide_instructions": {
+    "message": "اس پاپ اپ کو بند کرنے کے بعد، صفحے پر موجود عنصر پر کلک (یا دایاں کلک) کریں۔"
+  },
+  "continue": {
+    "message": "جاری رکھیں"
+  },
+  "description": {
+    "message": "ایڈ بلاک پلس، 5 کروڑ بار ڈاؤن لوڈ کیا جانے والا سب سے مقبول غیر ضروری اشتہارات کو روکنے والا سافٹ ویئر ہے۔"
+  },
+  "disabled_for_site": {
+    "message": "</strong>غیر فعال شدہ<strong>اس سائٹ پر"
+  },
+  "easy_create_filter": {
+    "message": "بلاک عنصر"
+  },
+  "enabled_for_site": {
+    "message": "</strong>بحال ہوگیا<strong> اس سائٹ پر"
+  },
+  "filter_elemhideemulation_nodomain": {
+    "message": "فلٹر چھپانے والے عنصر کے لئے کوئی فعال ڈومین متعین نہیں ہے۔"
+  },
+  "filter_invalid_csp": {
+    "message": "غلط مواد کی سیکیورٹی پالیسی"
+  },
+  "filter_invalid_domain": {
+    "message": "غلط (یا خالی) ڈومین متعین کیا گیا ہے"
+  },
+  "filter_invalid_regexp": {
+    "message": "غیر مستقل اظہار"
+  },
+  "filter_unknown_option": {
+    "message": "نامعلوم فلٹر کے اختیارات"
+  },
+  "filters_subscription_lastDownload_connectionError": {
+    "message": "ناکام ہوگیا، ڈاؤن لوڈ کرنے میں ناکامی کا سامنا"
+  },
+  "invalid_css_selector": {
+    "message": "$selector$ صحیح CSS سلیکٹر نہیں ہے",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "لائن$number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "loading": {
+    "message": "لوڈ کر رہا ہے..."
+  },
   "name": {
-    "message": "ادبلاک پلس"
+    "message": "ایڈ بلاک پلس"
   },
   "overlay_notification_button_no": {
-    "message": "نہیں"
+    "message": "نہيں"
   },
   "overlay_notification_button_yes": {
     "message": "ہاں"

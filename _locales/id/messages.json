@@ -18,7 +18,7 @@
     "message": "Lanjut"
   },
   "description": {
-    "message": "Dengan lebih dari 500 juta unduh, Adblock Plus adalah salah satu pemblok Iklan terpopuler di dunia."
+    "message": "Dengan lebih dari 500 juta unduh, Adblock Plus adalah salah satu pemblokir Iklan terpopuler di dunia."
   },
   "disabled_for_site": {
     "message": "<strong>Nonaktifkan</strong> pada situs ini"
@@ -27,13 +27,13 @@
     "message": "Blokir elemen"
   },
   "enabled_for_site": {
-    "message": "<strong>Aktifkan</strong> pada situs ini"
+    "message": "<strong>Diaktifkan</strong> pada situs ini"
   },
   "filter_elemhideemulation_nodomain": {
     "message": "Tidak ada domain aktif yang digunakan untuk saringan penyembunyian elemen yang diperpanjang"
   },
   "filter_invalid_csp": {
-    "message": "Kebijakan Kemanan Konten Tidak Valid"
+    "message": "Kebijakan Keamanan Konten Tidak Valid"
   },
   "filter_invalid_domain": {
     "message": "Domain yang ditetapkan tidak valid (atau kosong)"
@@ -94,10 +94,10 @@
     "message": "Ya"
   },
   "overlay_notification_closing_button_hide": {
-    "message": "Tutup pemberitahuan"
+    "message": "Tutup pemberitahuan ini"
   },
   "overlay_notification_closing_button_optout": {
-    "message": "Berhenti menampilkan pemberitahuan"
+    "message": "Hentikan menampilkan pemberitahuan"
   },
   "sendReport": {
     "message": "Laporkan masalah pada halaman ini"
