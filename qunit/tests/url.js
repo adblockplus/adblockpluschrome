@@ -18,9 +18,7 @@
 "use strict";
 
 {
-  let {getDecodedHostname,
-       extractHostFromFrame,
-       stringifyURL,
+  let {extractHostFromFrame,
        isThirdParty} = require("../../lib/url");
 
   QUnit.module("URL/host tools");
@@ -29,7 +27,7 @@
   {
     function testURLHostname(url, expectedHostname, message)
     {
-      equal(getDecodedHostname(new URL(url)), expectedHostname, message);
+      equal(new URL(url).hostname, expectedHostname, message);
     }
 
     testURLHostname("http://example.com/foo", "example.com", "with path");
@@ -38,7 +36,7 @@
     testURLHostname("http://example.com:8080/", "example.com", "with port");
     testURLHostname("http://user:password@example.com/", "example.com",
                     "with auth credentials");
-    testURLHostname("http://xn--f-1gaa.com/", "f\u00f6\u00f6.com",
+    testURLHostname("http://xn--f-1gaa.com/", "xn--f-1gaa.com",
                     "with punycode");
     testURLHostname("about:blank", "", "about:blank");
     testURLHostname("data:text/plain,foo", "", "data: URL");
@@ -69,34 +67,8 @@
                       "example.com", "about:blank, hostname in ancestor");
     testFrameHostname(["about:blank", "about:blank"], "",
                       "about:blank, no hostname");
-    testFrameHostname(["http://xn--f-1gaa.com/"], "f\u00f6\u00f6.com",
+    testFrameHostname(["http://xn--f-1gaa.com/"], "xn--f-1gaa.com",
                       "with punycode");
-  });
-
-  test("Stringifying URLs", () =>
-  {
-    function testNormalizedURL(url, expectedURL, message)
-    {
-      equal(stringifyURL(new URL(url)), expectedURL, message);
-    }
-
-    function testPreservedURL(url, message)
-    {
-      testNormalizedURL(url, url, message);
-    }
-
-    testPreservedURL("http://example.com/foo", "includes path");
-    testPreservedURL("http://example.com/?foo=bar", "includes query");
-    testPreservedURL("http://example.com:8080/", "includes port");
-    testPreservedURL("http://example.com/?", "with empty query string");
-    testNormalizedURL("http://example.com/#top", "http://example.com/",
-                      "stripped hash");
-    testNormalizedURL("http://example.com/#top?", "http://example.com/",
-                      "stripped hash with trailing question mark");
-    testNormalizedURL("http://xn--f-1gaa.com/", "http://f\u00f6\u00f6.com/",
-                      "decoded punycode");
-    testPreservedURL("about:blank", "about:blank");
-    testPreservedURL("data:text/plain,foo", "data: URL");
   });
 
   test("Third-party checks", () =>
@@ -114,7 +86,7 @@
 
           // Chrome's URL object normalizes IP addresses. So some test
           // will fail if we don't normalize the document host as well.
-          getDecodedHostname(hostnameToURL(documentHost))
+          hostnameToURL(documentHost).hostname
         ),
         expected,
         message
