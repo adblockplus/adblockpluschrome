@@ -156,11 +156,6 @@ include.preload.js =
 include.postload.js =
   subscriptionLink.postload.js
   composer.postload.js
-qunit/tests.js =
-  qunit/common.js
-  qunit/tests/prefs.js
-  qunit/tests/url.js
-  qunit/tests/cssEscaping.js
 
 [import_locales]
 adblockplusui/locale/*/antiadblockInit.json = *
