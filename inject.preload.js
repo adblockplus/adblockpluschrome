@@ -363,15 +363,26 @@ if (document instanceof HTMLDocument)
   if (typeof sandbox != "string" || /(^|\s)allow-scripts(\s|$)/i.test(sandbox))
   {
     let script = document.createElement("script");
+    let code = "(" + injected + ")('" + randomEventName + "');";
+
     script.type = "application/javascript";
     script.async = false;
-    // Firefox 58 only bypasses site CSPs when assigning to 'src'.
-    let url = URL.createObjectURL(new Blob([
-      "(" + injected + ")('" + randomEventName + "');"
-    ]));
-    script.src = url;
-    document.documentElement.appendChild(script);
+
+    // Firefox 58 only bypasses site CSPs when assigning to 'src',
+    // while Chrome 67 only bypasses site CSPs when using 'textContent'.
+    if (browser.runtime.getURL("").startsWith("chrome-extension://"))
+    {
+      script.textContent = code;
+      document.documentElement.appendChild(script);
+    }
+    else
+    {
+      let url = URL.createObjectURL(new Blob([code]));
+      script.src = url;
+      document.documentElement.appendChild(script);
+      URL.revokeObjectURL(url);
+    }
+
     document.documentElement.removeChild(script);
-    URL.revokeObjectURL(url);
   }
 }
