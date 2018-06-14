@@ -104,22 +104,6 @@
 
   ext.getPage = id => new Page({id: parseInt(id, 10)});
 
-  function afterTabLoaded(callback)
-  {
-    return openedTab =>
-    {
-      let onUpdated = (tabId, changeInfo, tab) =>
-      {
-        if (tabId == openedTab.id && changeInfo.status == "complete")
-        {
-          browser.tabs.onUpdated.removeListener(onUpdated);
-          callback(new Page(openedTab));
-        }
-      };
-      browser.tabs.onUpdated.addListener(onUpdated);
-    };
-  }
-
   ext.pages = {
     onLoading: new ext._EventTarget(),
     onActivated: new ext._EventTarget(),
