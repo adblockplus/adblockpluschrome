@@ -264,7 +264,7 @@
     // Requests can be made by about:blank frames before the frame's
     // onCommitted event has fired, so we update the frame structure
     // for those now.
-    if (details.url == "about:blank")
+    if (details.url.startsWith("about:"))
     {
       updatePageFrameStructure(details.frameId, details.tabId, details.url,
                                details.parentFrameId);
