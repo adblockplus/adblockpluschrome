@@ -2,6 +2,7 @@
 
 {
   const {IO} = require("io");
+  const info = require("info");
 
   const testFileNames = {
     testData: "testData",
@@ -16,7 +17,9 @@
     lastModified: Date.now()
   };
 
-  QUnit.module("IO tests", {
+  let testEdge = info.platform == "edgehtml" ? QUnit.test : QUnit.skip;
+
+  QUnit.module("Microsoft Edge filter storage", {
     beforeEach()
     {
       return prePopulateStorage();
@@ -27,7 +30,7 @@
     }
   });
 
-  test("statFile", assert =>
+  testEdge("statFile", assert =>
   {
     const noFileMsg = "returns correct value if file doesn't exist";
     const fileExistsMsg = "returns correct value if file exists";
@@ -50,7 +53,7 @@
       assert);
   });
 
-  test("writeToFile", assert =>
+  testEdge("writeToFile", assert =>
   {
     ok(IO.writeToFile(testFileNames.simpleCheck, ["test"]) instanceof Promise,
       "returns a promise");
@@ -84,7 +87,7 @@
       });
   }
 
-  test("readFromFile", assert =>
+  testEdge("readFromFile", assert =>
   {
     const noFileMsg = "returns correct value if file doesn't exist";
 
@@ -118,7 +121,7 @@
       });
   }
 
-  test("renameFile", assert =>
+  testEdge("renameFile", assert =>
   {
     ok(IO.renameFile(testFileNames.simpleCheck) instanceof Promise,
       "returns a promise");
