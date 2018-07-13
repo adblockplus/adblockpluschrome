@@ -403,7 +403,7 @@ function addSubscriptionClicked()
 
 function toggleAcceptableAds()
 {
-  toggleSubscription(acceptableAdsUrl, true);
+  toggleSubscription(acceptableAdsUrl, false);
 }
 
 function findSubscriptionElement(subscription)
