@@ -183,7 +183,7 @@ if (contentBlockingSupported)
                legacyAPISupported]).then(resolvedValues =>
   {
     let legacyAPISupported = resolvedValues[2];
-    if (!legacyAPISupported)
+    if (!legacyAPISupported || Services.vc.compare(require("info").applicationVersion, "12") >= 0)
       Prefs.safariContentBlocker = true;
 
     if (Prefs.safariContentBlocker)

@@ -25,23 +25,32 @@
 
   /* Intialization */
 
-  var beforeLoadEvent = document.createEvent("Event");
-  beforeLoadEvent.initEvent("beforeload", false, true);
+  var majorApplicationVersion = parseInt(navigator.userAgent.match(/Version\/([\d]+)/)[1]);
 
-  // Decide if we should use the new content blocker API or not. (Note when the
-  // API is used Safari breaks the canLoad function, making it either throw an
-  // exception or return true when used.)
+  var beforeLoadEvent;
   var usingContentBlockerAPI = true;
-  try
+
+  // Safari 12 automatically disables extensions which use the old canLoad API,
+  // so avoid using the old APIs on Safari 12!
+  if (majorApplicationVersion < 12)
   {
-    if (safari.self.tab.canLoad(beforeLoadEvent,
-                                {category: "request",
-                                 payload: {type: "prefs.get",
-                                           key: "safariContentBlocker"}}) != true)
-      usingContentBlockerAPI = false;
-  }
-  catch (e)
-  {
+    beforeLoadEvent = document.createEvent("Event");
+    beforeLoadEvent.initEvent("beforeload", false, true);
+
+    // Decide if we should use the new content blocker API or not. (Note when the
+    // API is used Safari breaks the canLoad function, making it either throw an
+    // exception or return true when used.)
+    try
+    {
+      if (safari.self.tab.canLoad(beforeLoadEvent,
+                                  {category: "request",
+                                   payload: {type: "prefs.get",
+                                             key: "safariContentBlocker"}}) != true)
+        usingContentBlockerAPI = false;
+    }
+    catch (e)
+    {
+    }
   }
 
   var isTopLevel;
@@ -63,7 +72,8 @@
       isTopLevel: isTopLevel,
       isPrerendered: isPrerendered,
       documentId: documentId,
-      legacyAPISupported: "canLoad" in safari.self.tab &&
+      legacyAPISupported: majorApplicationVersion < 12 &&
+                          "canLoad" in safari.self.tab &&
                           "onbeforeload" in Element.prototype
     });
   }
@@ -183,14 +193,17 @@
     },
     sendMessageSync: function(message)
     {
-      return safari.self.tab.canLoad(
-        beforeLoadEvent,
-        {
-          category: "request",
-          documentId: documentId,
-          payload: message
-        }
-      );
+      if (majorApplicationVersion < 12)
+      {
+        return safari.self.tab.canLoad(
+          beforeLoadEvent,
+          {
+            category: "request",
+            documentId: documentId,
+            payload: message
+          }
+        );
+      }
     }
   };
 

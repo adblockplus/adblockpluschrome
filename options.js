@@ -17,6 +17,8 @@
 
 "use strict";
 
+var majorApplicationVersion = parseInt(navigator.userAgent.match(/Version\/([\d]+)/)[1]);
+
 /**
  * Creates a wrapping function used to conveniently send a type of message.
  *
@@ -158,11 +160,14 @@ function loadOptions()
     // running Safari and both the legacy and content blocking APIs are
     // available.
     document.getElementById("safariContentBlockerContainer").hidden = !(
-      features.safariContentBlocker &&
-      typeof safari != "undefined" &&
-      "canLoad" in safari.self.tab &&
-      "onbeforeload" in Element.prototype
+      majorApplicationVersion >= 12 || (
+        features.safariContentBlocker &&
+        typeof safari != "undefined" &&
+        "canLoad" in safari.self.tab &&
+        "onbeforeload" in Element.prototype
+      )
     );
+    document.getElementById("safariContentBlocker").disabled = majorApplicationVersion >= 12;
   });
   getPref("notifications_showui", function(notifications_showui)
   {
