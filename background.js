@@ -62,3 +62,25 @@ port.on("forward", function(msg, sender)
     targetPage.sendMessage(msg.payload);
   }
 });
+
+// Display a page to explain to users of Safari 10 and higher that they need
+// to migrate to our Safari App extension, but only once the migration page
+// is online. If it's not online yet, retry in 24 hours.
+function showMigrationPageWhenReady()
+{
+  fetch("https://eyeo.to/adblockplus/safari-app-extension-migration", {method: "HEAD"})
+    .then(function(response)
+    {
+      if (response.ok)
+        ext.pages.open(response.url);
+      else
+        throw "";
+    })
+    .catch(function()
+    {
+      window.setTimeout(showMigrationPageWhenReady, 1000 * 60 * 60 * 24);
+    });
+}
+
+if (Services.vc.compare(require("info").applicationVersion, "10") >= 0)
+  showMigrationPageWhenReady();
