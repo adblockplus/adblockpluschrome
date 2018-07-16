@@ -19,6 +19,10 @@
   if (document.domain != "www.youtube.com")
     return;
 
+  var majorApplicationVersion = parseInt(navigator.userAgent.match(/Version\/([\d]+)/)[1]);
+  if (majorApplicationVersion >= 12)
+    return;
+
   var usingContentBlockerAPI = true;
   try
   {
