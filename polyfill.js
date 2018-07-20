@@ -33,6 +33,7 @@
     "storage.local.set",
     "storage.managed.get",
     "tabs.create",
+    "tabs.executeScript",
     "tabs.get",
     "tabs.getCurrent",
     "tabs.insertCSS",

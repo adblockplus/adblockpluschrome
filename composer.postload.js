@@ -20,7 +20,7 @@
 // We would rather export these properly and then require("./include.preload")
 // here, but that would result in include.preload running both at pre and post
 // load.
-const {checkCollapse, elemhide, getURLsFromElement, typeMap} = window;
+const {checkCollapse, contentFiltering, getURLsFromElement, typeMap} = window;
 
 // The page ID for the popup filter selection dialog (top frame only).
 let blockelementPopupId = null;
@@ -543,7 +543,7 @@ function initializeComposer()
           checkCollapse(currentElement.prisoner || currentElement);
 
           // Apply added element hiding filters.
-          elemhide.apply();
+          contentFiltering.apply({elemhide: true});
         }
         deactivateBlockElement(!!message.popupAlreadyClosed);
         break;

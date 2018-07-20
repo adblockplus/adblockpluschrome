@@ -135,6 +135,7 @@ skin/desktop-options.css = adblockplusui/skin/desktop-options.css
 updates.html = adblockplusui/updates.html
 updates.js = adblockplusui/updates.js
 skin/updates.css = adblockplusui/skin/updates.css
+snippets.js = adblockpluscore/lib/content/snippets.js
 
 [bundles]
 lib/adblockplus.js =
@@ -148,7 +149,7 @@ lib/adblockplus.js =
   lib/stats.js
   lib/uninstall.js
   lib/csp.js
-  lib/cssInjection.js
+  lib/contentFiltering.js
   adblockplusui/messageResponder.js
 include.preload.js =
   include.preload.js
