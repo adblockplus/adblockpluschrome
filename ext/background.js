@@ -104,22 +104,6 @@
 
   ext.getPage = id => new Page({id: parseInt(id, 10)});
 
-  function afterTabLoaded(callback)
-  {
-    return openedTab =>
-    {
-      let onUpdated = (tabId, changeInfo, tab) =>
-      {
-        if (tabId == openedTab.id && changeInfo.status == "complete")
-        {
-          browser.tabs.onUpdated.removeListener(onUpdated);
-          callback(new Page(openedTab));
-        }
-      };
-      browser.tabs.onUpdated.addListener(onUpdated);
-    };
-  }
-
   ext.pages = {
     onLoading: new ext._EventTarget(),
     onActivated: new ext._EventTarget(),
@@ -575,10 +559,34 @@
           if (!frames)
             return null;
 
-          let frame = frames.get(rawSender.frameId);
+          let frame;
+          // In Microsoft Edge (version 42.17134.1.0) we don't have frameId
+          // so we fall back to iterating over the tab's frames
+          // see https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11716733
+          if (rawSender.frameId != undefined)
+            frame = frames.get(rawSender.frameId);
+          else if (rawSender.url)
+          {
+            let rawSenderHref = rawSender.url.replace(/#.*/, "");
+
+            for (let [frameId, frameInfo] of frames)
+            {
+              let frameInfoHref = frameInfo.url.href.replace(/#.*/, "");
+
+              // If we have two frames with the same URL
+              // we are going to pick the first one we find
+              // as we have no other way of distinguishing between them.
+              if (frameInfoHref == rawSenderHref)
+              {
+                frame = frameInfo;
+                this.id = frameId;
+                break;
+              }
+            }
+          }
+
           if (frame)
             return frame.parent || null;
-
           return frames.get(0) || null;
         }
       };
