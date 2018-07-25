@@ -160,7 +160,11 @@
     let frame = createFrame(tabId, frameId);
     frame.url = new URL(url);
 
-    let parentFrame = framesOfTabs.get(tabId).get(parentFrameId);
+    let frames = framesOfTabs.get(tabId);
+    let parentFrame = frames.get(parentFrameId);
+    if (!parentFrame && parentFrameId > 0)
+      parentFrame = frames.get(0);
+
     if (parentFrame)
       frame.parent = parentFrame;
   }
@@ -528,7 +532,12 @@
             frames.set(detail.frameId, frame);
 
             if (detail.parentFrameId != -1)
+            {
               frame.parent = frames.get(detail.parentFrameId);
+
+              if (!frame.parent && detail.parentFrameId > 0)
+                frame.parent = frames.get(0);
+            }
           }
         }
       });
