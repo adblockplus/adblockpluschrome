@@ -2,11 +2,17 @@
   "add": {
     "message": "Shto"
   },
+  "block_element": {
+    "message": "Elementi bllok"
+  },
   "cancel": {
     "message": "Anulo"
   },
   "continue": {
     "message": "Vazhdo"
+  },
+  "description": {
+    "message": "Me mbi 500 milionë shkarkime, Adblock Plus është një nga blockers më të njohura në botë."
   },
   "filter_invalid_regexp": {
     "message": "Shprehja e pavlefshme e rregullt"

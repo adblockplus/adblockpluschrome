@@ -11,20 +11,49 @@
   "cancel": {
     "message": "Ləğv et"
   },
+  "clickhide_instructions": {
+    "message": "Bu popap pəncərəni bağlayandan sonra, səhifədə lazım olan elementə klik (sol və ya sağ klik) edin."
+  },
   "continue": {
     "message": "İrəli"
   },
+  "description": {
+    "message": "Adblock Plus əlavəni 500 milyondan çox insan istifadə edir. Bu, dünyanın ən məşhir reklama qarşı əlavədir."
+  },
+  "disabled_for_site": {
+    "message": "Bu saytda <strong>söndürülüb</strong>"
+  },
   "easy_create_filter": {
     "message": "Elementi əngəllə"
+  },
+  "enabled_for_site": {
+    "message": "Bu saytda <strong>aktivdir</strong>"
+  },
+  "filter_elemhideemulation_nodomain": {
+    "message": "Elementlərin geniş gizlədilməsi üçün aktiv domen qeyd olunmayıb"
+  },
+  "filter_invalid_csp": {
+    "message": "Məzmunun təhlükəsizlik siyasətində səhv var"
+  },
+  "filter_invalid_domain": {
+    "message": "Qeyd olunmuş domendə səhv tapıldı"
   },
   "filter_invalid_regexp": {
     "message": "Etibarsız ifadə"
   },
   "filter_unknown_option": {
-    "message": "Qeyri-müəyyən filtr seçim"
+    "message": "Qeyri-müəyyən filtr seçimi"
   },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "Baş tutmadı yükləmə uğursuz oldu"
+    "message": "Baş tutmadı, yükləmə uğursuz oldu"
+  },
+  "invalid_css_selector": {
+    "message": "$selector$ etibarsız CSS-selektorudur",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
   },
   "line": {
     "message": "Sətir $number$",
@@ -34,11 +63,29 @@
       }
     }
   },
+  "loading": {
+    "message": "Yüklənir..."
+  },
   "name": {
     "message": "Adblock Plus"
   },
+  "name_devbuild": {
+    "message": "Adblock Plus (sınaq versiyası)"
+  },
+  "notification_configure": {
+    "message": "Bildirişlərin ayarlarını seç"
+  },
+  "notification_open_all": {
+    "message": "Bu bildirişə aid bütün keçidləri aç"
+  },
+  "notification_with_buttons": {
+    "message": "Bu bildirişə aid bütün keçidləri açmaq üçün 'OK' düyməsini basın."
+  },
+  "notification_without_buttons": {
+    "message": "Bütün keçidləri açmaq üçün, bildirişin üzərinə klik edin."
+  },
   "options_short": {
-    "message": "Seçimlər"
+    "message": "Ayarlar"
   },
   "overlay_notification_button_no": {
     "message": "Xeyr"
@@ -75,6 +122,9 @@
     "message": "Nişanda nömrə göstər"
   },
   "stats_title": {
-    "message": "Reklamlar əngəlləndi"
+    "message": "Cəmi blok edilib"
+  },
+  "unexpected_filter_list_header": {
+    "message": "Filtr siyahının başlıqları burada istifadə olunmur"
   }
 }

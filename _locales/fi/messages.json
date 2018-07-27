@@ -29,6 +29,9 @@
   "filter_elemhideemulation_nodomain": {
     "message": "Aktiivista verkkotunnusta ei ole määritetty laajennetun elementin piilotussuodattimelle"
   },
+  "filter_invalid_csp": {
+    "message": "Virheellinen sisältöturvapolitiikka"
+  },
   "filter_invalid_domain": {
     "message": "Väärä (tai tyhjä) verkkotunnus"
   },

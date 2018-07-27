@@ -21,7 +21,7 @@
     "message": "Được sử dụng trên hơn 500 triệu thiết bị. Adblock Plus là tiện ích chặn quảng cáo phổ biến nhất trên thế giới."
   },
   "disabled_for_site": {
-    "message": "<strong>Đã loại bỏ</strong> trên trang này"
+    "message": "<strong>Quảng cáo đã loại bỏ</strong> trên trang này"
   },
   "easy_create_filter": {
     "message": "Chặn phần tử"

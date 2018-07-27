@@ -2,6 +2,12 @@
   "add": {
     "message": "එකතු කරන්න"
   },
+  "add_filters_msg": {
+    "message": "වෙබ් ලින්කුව ඇතුළත් කරන්න?"
+  },
+  "block_element": {
+    "message": "මෙම කොටස අවහිර කරන්න"
+  },
   "cancel": {
     "message": "අවලංගු කරන්න"
   },

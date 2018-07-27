@@ -17,6 +17,9 @@
   "continue": {
     "message": "Uz priekšu"
   },
+  "description": {
+    "message": "Izmantots vairāk nekā 500 miljonos ierīču, Adblock Plus ir pasaulē populārākais reklāmu bloķētājs."
+  },
   "disabled_for_site": {
     "message": "<strong>Izslēgts</strong> šajā lapā"
   },

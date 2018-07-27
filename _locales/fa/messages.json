@@ -18,7 +18,7 @@
     "message": "ادامه"
   },
   "description": {
-    "message": "با بیش‌از ۵۰۰میلیون دانلود، ادبلاک پلاس یکی از محبوب‌ترین مسدودکننده‌های تبلیغات در جهان است."
+    "message": "با بیش‌ از ۵۰۰ میلیون دانلود، اد بلاک پلاس یکی از محبوب‌ترین مسدود کننده‌ های تبلیغات در جهان است."
   },
   "disabled_for_site": {
     "message": "برای این سایت <strong>غیرفعال شد</strong>"
@@ -36,13 +36,13 @@
     "message": "سیاست امنیتی نامعتبر مطالب"
   },
   "filter_invalid_domain": {
-    "message": "دامنه نامعتبر (یا خالی) مشخص شده است"
+    "message": "دامنه نامعتبر (یا خالی) انتخاب شده است"
   },
   "filter_invalid_regexp": {
     "message": "الگوی جستجوی نامعتبر"
   },
   "filter_unknown_option": {
-    "message": "فیلتر ناشناس"
+    "message": "فیلتر ناشناخته"
   },
   "filters_subscription_lastDownload_connectionError": {
     "message": "ناموفق، فرآیند دریافت شکست خورد"

@@ -17,6 +17,9 @@
   "continue": {
     "message": "जारी रखें"
   },
+  "description": {
+    "message": "500 मिलियन से अधिक डाउनलोड के साथ, एडब्लॉक प्लस दुनिया का एक सबसे लोकप्रिय विज्ञापन अवरोधक है।"
+  },
   "disabled_for_site": {
     "message": "इस साइट पर <strong>इस्तेमाल न करे</strong>"
   },
@@ -27,22 +30,25 @@
     "message": "इस साईट पर <strong>इस्तमाल हो रहा है </strong>"
   },
   "filter_elemhideemulation_nodomain": {
-    "message": "विस्तारित तत्व छुपा फ़िल्टर के लिए कोई सक्रिय डोमेन निर्दिष्ट नहीं है"
+    "message": "एक्सटेंडेड एलिमेंट छिपाव फ़िल्टर के लिए कोई सक्रिय डोमेन निर्दिष्ट नहीं किया गया"
+  },
+  "filter_invalid_csp": {
+    "message": "अमान्य सामग्री सुरक्षा नीति"
   },
   "filter_invalid_domain": {
-    "message": "अमान्य (या खाली) डोमेन निर्दिष्ट"
+    "message": "अमान्य (या रिक्त) डोमेन निर्दिष्ट किया गया"
   },
   "filter_invalid_regexp": {
-    "message": "अमांय नियमित व्यंजक"
+    "message": "अमान्य नियमित अभिव्यक्ति"
   },
   "filter_unknown_option": {
     "message": "अज्ञात फ़िल्टर विकल्प"
   },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "विफल रहा, डाउनलोड विफलता"
+    "message": "विफल रहा, विफलता को डाउनलोड करें"
   },
   "invalid_css_selector": {
-    "message": "$selector$ एक मान्य CSS चयनकर्ता नहीं है",
+    "message": "$selector$ कोई मान्य CSS चयनकर्ता नहीं है",
     "placeholders": {
       "selector": {
         "content": "$1"
@@ -50,7 +56,7 @@
     }
   },
   "line": {
-    "message": "रेखा $number$",
+    "message": "लाइन $number$",
     "placeholders": {
       "number": {
         "content": "$1"
@@ -58,25 +64,25 @@
     }
   },
   "loading": {
-    "message": "लोडिंग..."
+    "message": "लोड हो रहा है..."
   },
   "name": {
     "message": "Adblock Plus"
   },
   "name_devbuild": {
-    "message": "Adblock Plus विकास संस्करण"
+    "message": "Adblock Plus डेवलपमेंट बिल्ड"
   },
   "notification_configure": {
-    "message": "सूचना विन्यास समनुरूप करें"
+    "message": "नोटिफिकेशन सेटिंग्स कॉंफ़िगर करें"
   },
   "notification_open_all": {
-    "message": "इस सूचना से सभी लिंक खोलें"
+    "message": "इस नोटिफिकेशन से सभी लिंक खोलें"
   },
   "notification_with_buttons": {
     "message": "इस अधिसूचना के सारे लिंक खोलने के लिए \"ok\" बटन दबाये"
   },
   "notification_without_buttons": {
-    "message": "अधिसूचना पर क्लिक कर सभी लिंक खोलें।"
+    "message": "इसके सभी लिंक खोलने के लिए नोटिफिकेशन पर क्लिक करें।"
   },
   "options_short": {
     "message": "विकल्प "
@@ -88,13 +94,13 @@
     "message": "हाँ"
   },
   "overlay_notification_closing_button_hide": {
-    "message": "यह सूचना बंद करें"
+    "message": "इस नोटिफिकेशन को बंद करें"
   },
   "overlay_notification_closing_button_optout": {
-    "message": "सूचनाएं दिखाना रोकें"
+    "message": "नोटिफिकेशन दिखाना बंद करें"
   },
   "sendReport": {
-    "message": " इस पन्ने पर रिपोर्ट मुद्दा"
+    "message": "इस पृष्ठ पर समस्या की रिपोर्ट करें"
   },
   "stats_label_page": {
     "message": "इस पृष्ठ पर <strong>$number$</strong>",

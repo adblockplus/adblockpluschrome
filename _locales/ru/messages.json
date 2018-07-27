@@ -36,16 +36,16 @@
     "message": "Неверная политика безопасности содержимого"
   },
   "filter_invalid_domain": {
-    "message": "Фильтр недействительный (или пустой) домен указан"
+    "message": "Фильтр недействительный (или пустой) в указанном домене"
   },
   "filter_invalid_regexp": {
-    "message": "Неправильное регулярное выражение"
+    "message": "Недопустимое регулярное выражение"
   },
   "filter_unknown_option": {
     "message": "Неизвестная опция фильтра"
   },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "Ошибка: невозможно загрузить"
+    "message": "Ошибка, загрузка невозможна"
   },
   "invalid_css_selector": {
     "message": "$selector$ не является допустимым CSS-селектором",
@@ -67,7 +67,7 @@
     "message": "Загрузка..."
   },
   "name": {
-    "message": "Adblock Plus"
+    "message": "Блокировщик рекламы Adblock Plus"
   },
   "name_devbuild": {
     "message": "Adblock Plus (тестовая сборка)"
@@ -88,7 +88,7 @@
     "message": "Настройки"
   },
   "overlay_notification_button_no": {
-    "message": "Нет"
+    "message": "Неа"
   },
   "overlay_notification_button_yes": {
     "message": "Да"

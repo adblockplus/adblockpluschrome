@@ -29,6 +29,9 @@
   "filter_elemhideemulation_nodomain": {
     "message": "ไม่มีโดเมนที่ใช้งานอยู่ในตัวกรองการซ่อนองค์ประกอบ"
   },
+  "filter_invalid_csp": {
+    "message": "นโยบายความปลอดภัยของเนื้อหาไม่ถูกต้อง"
+  },
   "filter_invalid_domain": {
     "message": "โดเมนที่ระบุไม่ถูกต้อง (หรือว่างเปล่า)"
   },

@@ -2,14 +2,84 @@
   "add": {
     "message": "जोडा"
   },
+  "add_filters_msg": {
+    "message": "गाळणी जोडायची?"
+  },
+  "block_element": {
+    "message": "घटक रोखा"
+  },
   "cancel": {
     "message": "रद्द करा"
+  },
+  "clickhide_instructions": {
+    "message": "हि पॉपअप बंद केल्यावर, पृष्ठावरील घटकावर टिचकी (किंवा उजवी-टिचकी) मारा."
+  },
+  "continue": {
+    "message": "सुरु ठेवा"
+  },
+  "description": {
+    "message": "५०० दशलक्ष पेक्षा जास्त उतरवण्या, अॅडब्लॉक प्लस जगातील सर्वात लोकप्रिय जाहिरात रोधक आहे."
+  },
+  "disabled_for_site": {
+    "message": "या स्थानी <strong>अक्षम</strong> आहे"
+  },
+  "easy_create_filter": {
+    "message": "घटक रोखा"
+  },
+  "enabled_for_site": {
+    "message": "या स्थानी <strong>सक्षम</strong> आहे"
+  },
+  "filter_elemhideemulation_nodomain": {
+    "message": "विस्तारित घटक लपवण्याच्या गाळणीसाठी सक्रीय डोमेन निर्धारित केलेले नाहीत"
+  },
+  "filter_invalid_csp": {
+    "message": "अवैध मजकूर सुरक्षा धोरण"
+  },
+  "filter_invalid_domain": {
+    "message": "अवैध (किंवा रिक्त) डोमेन निर्धारित"
+  },
+  "filter_invalid_regexp": {
+    "message": "अवैध सामान्य अविर्भाव"
+  },
+  "filter_unknown_option": {
+    "message": "अज्ञात गाळणी पर्याय"
   },
   "filters_subscription_lastDownload_connectionError": {
     "message": "अयशस्वी, डाउनलोड अयशस्वी"
   },
+  "invalid_css_selector": {
+    "message": "$selector$ हा वैध CSS Selector नाही",
+    "placeholders": {
+      "selector": {
+        "content": "$1"
+      }
+    }
+  },
+  "line": {
+    "message": "ओळ $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "loading": {
+    "message": "आणत आहे..."
+  },
   "name": {
     "message": "Adblock प्लस"
+  },
+  "name_devbuild": {
+    "message": "अॅडब्लॉक प्लस विकासक बांधणी"
+  },
+  "notification_configure": {
+    "message": "अधिसूचना प्राधान्ये संयोजित करा"
+  },
+  "notification_open_all": {
+    "message": "या अधिसूचनेमधील सर्व दुवे उघडा"
+  },
+  "notification_with_buttons": {
+    "message": "'ठीक' वर टिचकी मारून या अधिसूचनेतील सर्व दुवे उघडा."
   },
   "options_short": {
     "message": "पर्याय"
@@ -19,5 +89,11 @@
   },
   "overlay_notification_button_yes": {
     "message": "होय"
+  },
+  "stats_title": {
+    "message": "जाहिराती रोखल्या"
+  },
+  "unexpected_filter_list_header": {
+    "message": "गाळणी यादी मधील हेडर ला यथे परवानगी नाही"
   }
 }

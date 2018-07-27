@@ -2,23 +2,58 @@
   "add": {
     "message": "Ավելացնել"
   },
+  "add_filters_msg": {
+    "message": "Ավելացնել ֆիլտր?"
+  },
+  "block_element": {
+    "message": "Արգելափակել Ելեմենտը"
+  },
   "cancel": {
     "message": "Չեղարկել"
+  },
+  "clickhide_instructions": {
+    "message": "Այս Փոպ-ապը փակելուց հետո սեղմեք( կամ աջկլիկ) տարրի վրա."
   },
   "continue": {
     "message": "Շարունակել"
   },
+  "description": {
+    "message": "Ավելի քան 500 միլիոն բերբեռնումներով Adblock Plus- ը աշխարհի ամենատարածված գովազդային արգելափակողներից մեկն է."
+  },
+  "disabled_for_site": {
+    "message": "<strong>Ակտիվ չէ</strong> այս կայքի համար"
+  },
+  "easy_create_filter": {
+    "message": "Արգելապակել Ելեմենտը"
+  },
+  "enabled_for_site": {
+    "message": "<strong>Ակտիվ է</strong> այս կայքի համար"
+  },
   "filter_invalid_regexp": {
-    "message": "Սխալ կանոնավոր արտահայտությունը"
+    "message": "Սխալ կանոնավոր արտահայտություն"
+  },
+  "filter_unknown_option": {
+    "message": "Չճանաչված ֆիլտր"
   },
   "filters_subscription_lastDownload_connectionError": {
-    "message": "Անհաջող. Բեռնման սխալ"
+    "message": "Բեռնման րնթացքում առաջացել են խնդիրներ"
+  },
+  "line": {
+    "message": "Տող $number$",
+    "placeholders": {
+      "number": {
+        "content": "$1"
+      }
+    }
+  },
+  "loading": {
+    "message": "Մեռնվում է..."
   },
   "name": {
     "message": "Adblock Plus"
   },
   "options_short": {
-    "message": "Ընտրանքներ"
+    "message": "Կարգավորումներ"
   },
   "overlay_notification_button_no": {
     "message": "Ոչ"
