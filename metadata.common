@@ -1,5 +1,5 @@
 [general]
-version = 1.12.4
+version = 1.12.5
 # Note: sha1.js, jsbn.js and rsa.js are redundant but we've added them back
 # here Safari compatibility. See #4902.
 backgroundScripts = lib/polyfills/url.js
