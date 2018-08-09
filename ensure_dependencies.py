@@ -41,7 +41,7 @@ A dependencies file should look like this:
 '''
 
 SKIP_DEPENDENCY_UPDATES = os.environ.get(
-    'SKIP_DEPENDENCY_UPDATES', ''
+    'SKIP_DEPENDENCY_UPDATES', '',
 ).lower() not in ('', '0', 'false')
 
 NPM_LOCKFILE = '.npm_install_lock'
@@ -147,13 +147,13 @@ repo_types = OrderedDict((
 # [vcs:]value
 item_regexp = re.compile(
     '^(?:(' + '|'.join(map(re.escape, repo_types.keys())) + '):)?'
-    '(.+)$'
+    '(.+)$',
 )
 
 # [url@]rev
 source_regexp = re.compile(
     '^(?:(.*)@)?'
-    '(.+)$'
+    '(.+)$',
 )
 
 
