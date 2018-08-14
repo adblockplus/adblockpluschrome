@@ -1,0 +1,14 @@
+{
+  "name": "adblockpluschrome",
+  "repository": "https://hg.adblockplus.org/adblockpluschrome",
+  "license": "GPL-3.0",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.1.0",
+    "eslint-config-eyeo": "^2.1.0"
+  },
+  "scripts": {
+    "lint": "eslint *.js lib/ qunit/ ext/",
+    "posttest": "npm run lint"
+  }
+}

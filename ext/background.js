@@ -95,6 +95,8 @@
         if (frame)
           return frame.url;
       }
+
+      return undefined;
     },
     sendMessage(message, responseCallback)
     {

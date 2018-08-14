@@ -92,8 +92,13 @@ Linting
 
 You can lint the code using [ESLint](http://eslint.org).
 
-    eslint *.js lib/ qunit/ ext/ chrome/
-
-You will need to set up ESLint and our configuration first, see
+You will need to setup first. This will install our configuration
 [eslint-config-eyeo](https://hg.adblockplus.org/codingtools/file/tip/eslint-config-eyeo)
-for more information.
+and everything needed after you run:
+
+    npm install
+
+Then you can run to lint the code:
+
+    npm run lint
+
