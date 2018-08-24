@@ -4,11 +4,23 @@
   "license": "GPL-3.0",
   "dependencies": {},
   "devDependencies": {
+    "//": [
+      "'dmg', 'extract-zip' and 'ncp' are needed by the module",
+      "adblockpluscore/test/download_firefox.js."
+    ],
+    "dmg": "^0.1.0",
     "eslint": "^5.1.0",
-    "eslint-config-eyeo": "^2.1.0"
+    "eslint-config-eyeo": "^2.1.0",
+    "extract-zip": "^1.6.5",
+    "geckodriver": "^1.9.0",
+    "ncp": "^2.0.0",
+    "nodeunit": "^0.9.1",
+    "selenium-webdriver": "^3.6.0"
   },
   "scripts": {
-    "lint": "eslint *.js lib/ qunit/ ext/",
+    "lint": "eslint *.js lib/ qunit/ ext/ test/",
+    "pretest": "python build.py devenv -t gecko",
+    "test": "nodeunit test/*",
     "posttest": "npm run lint"
   }
 }
