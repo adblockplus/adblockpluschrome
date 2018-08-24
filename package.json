@@ -14,13 +14,13 @@
     "extract-zip": "^1.6.5",
     "geckodriver": "^1.9.0",
     "ncp": "^2.0.0",
-    "nodeunit": "^0.9.1",
+    "mocha": "^5.2.0",
     "selenium-webdriver": "^3.6.0"
   },
   "scripts": {
     "lint": "eslint *.js lib/ qunit/ ext/ test/",
     "pretest": "python build.py devenv -t gecko",
-    "test": "nodeunit test/*",
+    "test": "mocha",
     "posttest": "npm run lint"
   }
 }
