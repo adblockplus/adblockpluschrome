@@ -94,15 +94,9 @@ exports.runFirefox = function(test)
     ).then(() => Promise.all([
       reportElements(test, driver, true),
       reportElements(test, driver, false)
-    ])).then(() =>
-    {
-      driver.quit();
-      test.done();
-    }, err =>
-      driver.quit().then(() =>
-      {
-        throw err;
-      })
+    ])).then(
+      () => driver.quit().then(() => test.done()),
+      err => driver.quit().then(() => { throw err; })
     );
   });
 };
