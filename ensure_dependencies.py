@@ -246,7 +246,7 @@ def get_repo_type(repo):
     for name, repotype in repo_types.iteritems():
         if repotype.istype(repo):
             return name
-    return 'hg'
+    return None
 
 
 def resolve_npm_dependencies(target, vcs):
@@ -291,8 +291,9 @@ def resolve_npm_dependencies(target, vcs):
                '--no-package-lock', '--no-optional']
         subprocess.check_output(cmd, cwd=target)
 
-        repo_types[vcs].ignore(os.path.join(target, NPM_LOCKFILE), target)
-        repo_types[vcs].ignore(os.path.join(target, 'node_modules'), target)
+        if vcs:
+            repo_types[vcs].ignore(os.path.join(target, NPM_LOCKFILE), target)
+            repo_types[vcs].ignore(os.path.join(target, 'node_modules'), target)
 
         os.remove(lockfile_path)
     except OSError as e:
@@ -351,7 +352,8 @@ def update_repo(target, type, revision):
     return False
 
 
-def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdependencies=set()):
+def resolve_deps(repodir, repotype, level=0, self_update=True,
+                 overrideroots=None, skipdependencies=set()):
     config = read_deps(repodir)
     if config is None:
         if level == 0:
@@ -370,7 +372,7 @@ def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdep
             continue
 
         target = safe_join(repodir, dir)
-        parenttype = get_repo_type(repodir)
+        parenttype = repotype or 'hg'
         _root = config.get('_root', {})
 
         for key in sources.keys() + _root.keys():
@@ -384,11 +386,20 @@ def resolve_deps(repodir, level=0, self_update=True, overrideroots=None, skipdep
 
         repo_cloned = ensure_repo(repodir, parenttype, target, vcs,
                                   _root.get(vcs, ''), source)
-        repo_updated = update_repo(target, vcs, rev)
+        if repo_types[vcs].istype(target):
+            repo_updated = update_repo(target, vcs, rev)
+            npm_outdated = repo_cloned or repo_updated
+        else:
+            vcs = None
+            npm_outdated = not os.path.exists(
+                os.path.join(target, 'node_modules'),
+            )
+
         recent_npm_failed = os.path.exists(os.path.join(target, NPM_LOCKFILE))
-        if repo_cloned or repo_updated or recent_npm_failed:
+        if npm_outdated or recent_npm_failed:
             resolve_npm_dependencies(target, vcs)
-        resolve_deps(target, level + 1, self_update=False,
+
+        resolve_deps(target, vcs, level + 1, self_update=False,
                      overrideroots=overrideroots, skipdependencies=skipdependencies)
 
     if self_update and '_self' in config and '*' in config['_self']:
@@ -444,4 +455,4 @@ if __name__ == '__main__':
     if not len(repos):
         repos = [os.path.dirname(__file__)]
     for repo in repos:
-        resolve_deps(repo)
+        resolve_deps(repo, get_repo_type(repo))
