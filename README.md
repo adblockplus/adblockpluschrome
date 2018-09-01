@@ -86,14 +86,18 @@ extension's Options page, open the JavaScript Console and type in:
     location.href = "qunit/index.html";
 
 The unit tests will run automatically once the page loads.
-You can also run these tests with a headless Firefox process. Install the
-dependencies first:
+You can also run these tests with a headless Firefox or Chromium process.
+Install the dependencies first:
 
     npm install
 
-Start the testing process:
+Start the testing process for all browsers:
 
     npm test
+
+Start the testing process in one browser only:
+
+    npm test -- -g <gecko/chrome>
 
 Linting
 -------
