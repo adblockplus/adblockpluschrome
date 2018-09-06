@@ -25,7 +25,8 @@
   "scripts": {
     "pretest": "python ensure_dependencies.py",
     "lint": "eslint *.js lib/ qunit/ ext/ test/",
-    "test": "mocha",
+    "test-only": "mocha",
+    "test": "npm run test-only",
     "posttest": "npm run lint"
   }
 }

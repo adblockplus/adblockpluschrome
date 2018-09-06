@@ -14,12 +14,46 @@
 # along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
 
 stages:
-  - test_ext
+  - prepare
+  - test
 
-qunit:gecko:
-  stage: test_ext
-  script:
+.dependencies:
+  script: &dependencies
     - mkdir -p .git/info
     - pip install --user Jinja2 cryptography
-    - npm install
-    - npm test
+    - python ensure_dependencies.py
+    - "[ -d node_modules ] || npm install"
+
+.test_template: &test_template
+  stage: test
+  before_script: *dependencies
+  cache:
+    key: cache_$CI_COMMIT_SHA
+    paths:
+      - ./
+    policy: pull
+
+
+prepare-dependencies:
+  stage: prepare
+  script: *dependencies
+  cache:
+    key: cache_$CI_COMMIT_SHA
+    paths:
+      - ./
+    policy: push
+
+tests:gecko:
+  <<: *test_template
+  script:
+    - npm run test-only -- -g gecko
+
+tests:chrome:
+  <<: *test_template
+  script:
+    - xvfb-run npm run test-only -- -g chrome
+
+lint:
+  <<: *test_template
+  script:
+    - npm run lint
