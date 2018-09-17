@@ -1,0 +1,32 @@
+{
+  "name": "adblockpluschrome",
+  "repository": "https://hg.adblockplus.org/adblockpluschrome",
+  "license": "GPL-3.0",
+  "dependencies": {},
+  "devDependencies": {
+    "//": [
+      "'dmg', 'extract-zip' and 'ncp' are needed by `download_*.js` modules",
+      "in adblockpluscore/test/.",
+      "The chromedriver version was pinned to that exact version, due to",
+      "incompatibilities with the configured chromium version and newer",
+      "drivers."
+    ],
+    "chromedriver": "2.36.0",
+    "dmg": "^0.1.0",
+    "eslint": "^5.1.0",
+    "eslint-config-eyeo": "^2.1.0",
+    "extract-zip": "^1.6.5",
+    "geckodriver": "^1.9.0",
+    "jimp": "^0.3.11",
+    "ncp": "^2.0.0",
+    "mocha": "^5.2.0",
+    "selenium-webdriver": "^3.6.0"
+  },
+  "scripts": {
+    "pretest": "python ensure_dependencies.py",
+    "lint": "eslint *.js lib/ qunit/ ext/ test/",
+    "test-only": "mocha",
+    "test": "npm run test-only",
+    "posttest": "npm run lint"
+  }
+}

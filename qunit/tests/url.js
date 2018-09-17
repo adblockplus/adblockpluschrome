@@ -18,33 +18,10 @@
 "use strict";
 
 {
-  let {extractHostFromFrame,
-       isThirdParty} = require("../../lib/url");
+  const {extractHostFromFrame, isThirdParty} = require("../../lib/url");
+  const {platform} = require("info");
 
   QUnit.module("URL/host tools");
-
-  test("Extracting hostname from URL", () =>
-  {
-    function testURLHostname(url, expectedHostname, message)
-    {
-      equal(new URL(url).hostname, expectedHostname, message);
-    }
-
-    testURLHostname("http://example.com/foo", "example.com", "with path");
-    testURLHostname("http://example.com/?foo=bar", "example.com", "with query");
-    testURLHostname("http://example.com/#top", "example.com", "with hash");
-    testURLHostname("http://example.com:8080/", "example.com", "with port");
-    testURLHostname("http://user:password@example.com/", "example.com",
-                    "with auth credentials");
-    testURLHostname("http://xn--f-1gaa.com/", "xn--f-1gaa.com",
-                    "with punycode");
-    testURLHostname("about:blank", "", "about:blank");
-    testURLHostname("data:text/plain,foo", "", "data: URL");
-    testURLHostname("ftp://example.com/", "example.com", "ftp: URL");
-    testURLHostname("http://1.2.3.4:8000/", "1.2.3.4", "IPv4 address");
-    testURLHostname("http://[2001:db8:85a3::8a2e:370:7334]/",
-                    "[2001:db8:85a3::8a2e:370:7334]", "IPv6 address");
-  });
 
   test("Extracting hostname from frame", () =>
   {
@@ -67,8 +44,20 @@
                       "example.com", "about:blank, hostname in ancestor");
     testFrameHostname(["about:blank", "about:blank"], "",
                       "about:blank, no hostname");
-    testFrameHostname(["http://xn--f-1gaa.com/"], "xn--f-1gaa.com",
-                      "with punycode");
+
+    // Currently there are two bugs in Microsoft Edge (EdgeHTML 17.17134)
+    // that would make this two assertions fail,
+    // so for now we are not running them on this platform.
+    // See:
+    // with punycode: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/18861990/
+    // with auth credentials: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/8004284/
+    if (platform != "edgehtml")
+    {
+      testFrameHostname(["http://xn--f-1gaa.com/"], "xn--f-1gaa.com",
+                        "with punycode");
+      testFrameHostname(["http://user:password@example.com/"], "example.com",
+                        "with auth credentials");
+    }
   });
 
   test("Third-party checks", () =>

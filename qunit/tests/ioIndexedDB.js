@@ -3,12 +3,15 @@
 {
   const {IO} = require("io");
   const info = require("info");
+  const {IndexedDBBackup} = require("../../lib/indexedDBBackup");
 
   const testFileNames = {
     testData: "testData",
+    stat: "stat",
     simpleCheck: "simpleCheck",
     write: "writeCheck",
     read: "readCheck",
+    readBackup: "readBackup",
     rename: "renameCheck"
   };
   const testData = {
@@ -17,23 +20,41 @@
     lastModified: Date.now()
   };
 
+  let _backupName = "test";
+  let _storageData = new Map();
+
+  IndexedDBBackup.getBackupData = () =>
+  {
+    return new Promise((resolve, reject) =>
+    {
+      if (_storageData.size)
+      {
+        resolve(_storageData.get(_backupName));
+      }
+      else
+        reject({type: "NoSuchFile"});
+    });
+  };
+
   let testEdge = info.platform == "edgehtml" ? QUnit.test : QUnit.skip;
 
   QUnit.module("Microsoft Edge filter storage", {
-    beforeEach()
+    beforeEach(assert)
     {
-      return prePopulateStorage();
+      prePopulateStorage(assert);
     },
-    afterEach()
+    afterEach(assert)
     {
-      return clearStorage();
+      _storageData.clear();
+      clearStorage(assert);
     }
   });
 
   testEdge("statFile", assert =>
   {
-    const noFileMsg = "returns correct value if file doesn't exist";
-    const fileExistsMsg = "returns correct value if file exists";
+    const noFileMsg = "returns correct value if file doesn't exist" +
+      " and there is no backup";
+    const fileExistsMsg = "returns correct value if file exists in indexedDB";
 
     ok(IO.statFile(testFileNames.simpleCheck) instanceof Promise,
       "returns a promise");
@@ -51,6 +72,29 @@
       {exists: false},
       noFileMsg,
       assert);
+  });
+
+  testEdge("restore backup", assert =>
+  {
+    let backupData = {
+      content: ["backup data"],
+      lastModified: Date.now()
+    };
+    let readFromFileMessage = "readFromFile return correct value," +
+      " if a data restore is performed";
+    _storageData.set(_backupName, backupData);
+
+    asyncReadHelper(
+      IO.statFile,
+      testFileNames.stat,
+      {exists: true, lastModified: backupData.lastModified},
+      "statFile return correct value, if a data restore is performed",
+      assert);
+
+    callsListeners(
+      testFileNames.readBackup,
+      assert, backupData.content,
+      readFromFileMessage);
   });
 
   testEdge("writeToFile", assert =>
@@ -89,7 +133,9 @@
 
   testEdge("readFromFile", assert =>
   {
-    const noFileMsg = "returns correct value if file doesn't exist";
+    const noFileMsg = "returns correct value if file doesn't exist" +
+      " and there is no backup";
+    const fileExistsMsg = "calls listeners with the correct values";
 
     ok(IO.readFromFile(testFileNames.simpleCheck) instanceof Promise,
     "returns a promise");
@@ -102,21 +148,22 @@
       assert
     );
 
-    callsListeners(assert);
+    callsListeners(
+      testFileNames.testData,
+      assert,
+      testData.content,
+      fileExistsMsg);
   });
 
-  function callsListeners(assert)
+  function callsListeners(fileName, assert, expected, message)
   {
     let done = assert.async();
     let called = [];
 
-    IO.readFromFile(testFileNames.testData, (entry) => called.push(entry))
+    IO.readFromFile(fileName, (entry) => called.push(entry))
       .then(() =>
       {
-        deepEqual(
-          called,
-          testData.content,
-          "calls listeners with the correct values");
+        deepEqual(called, expected, message);
         done();
       });
   }
@@ -176,55 +223,48 @@
           .transaction(["file"], "readwrite")
           .objectStore("file");
 
-        store.get(fileName).onsuccess = (evt =>
-          resolve(evt.currentTarget.result)
-        );
+        store.get(fileName).onsuccess = evt =>
+          resolve(evt.currentTarget.result);
       };
     });
   }
 
-  function prePopulateStorage()
+  function prePopulateStorage(assert)
   {
-    return new Promise(resolve =>
-    {
-      let db;
-      let req = indexedDB.open("adblockplus", 1);
+    let done = assert.async();
+    let db;
+    let req = indexedDB.open("adblockplus", 1);
 
-      req.onsuccess = (event) =>
+    req.onsuccess = (event) =>
+    {
+      db = event.currentTarget.result;
+      let store = db
+        .transaction(["file"], "readwrite")
+        .objectStore("file");
+
+      store.put(testData).onsuccess = done;
+    };
+  }
+
+  function clearStorage(assert)
+  {
+    let done = assert.async();
+    let db;
+    let req = indexedDB.open("adblockplus", 1);
+    req.onsuccess = event =>
+    {
+      db = event.currentTarget.result;
+      Promise.all(Object.values(testFileNames)
+      .map(fileName => new Promise(resolveFile =>
       {
-        db = event.currentTarget.result;
         let store = db
           .transaction(["file"], "readwrite")
           .objectStore("file");
 
-        store.put(testData).onsuccess = resolve;
-      };
-    });
-  }
-
-  function clearStorage()
-  {
-    return new Promise(resolve =>
-      {
-      let db;
-      let req = indexedDB.open("adblockplus", 1);
-
-      req.onsuccess = (event) =>
-      {
-        db = event.currentTarget.result;
-        let files = Object.keys(testFileNames)
-          .map(fileName => new Promise((resolveFile, reject) =>
-          {
-            let store = db
-              .transaction(["file"], "readwrite")
-              .objectStore("file");
-
-            store.delete("file:" + fileName).onsuccess = resolveFile;
-          }));
-
-        Promise.all(files).then(resolve);
-      };
-    });
+        store.delete("file:" + fileName).onsuccess = resolveFile;
+      })))
+      .then(() => done());
+    };
   }
 }
 
