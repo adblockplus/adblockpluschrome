@@ -140,15 +140,43 @@ it("test pages", function()
           }).then(() =>
             getSections(this.driver)
           ).then(sections =>
-            takeScreenshot(sections[i][1])
-          ).then(screenshot =>
-            assert.ok(
-              screenshot.width == expectedScreenshot.width &&
-              screenshot.height == expectedScreenshot.height &&
-              screenshot.data.compare(expectedScreenshot.data) == 0,
-              title
-            )
-          );
+          {
+            let element = sections[i][1];
+
+            if (title.startsWith("$popup "))
+            {
+              return element.findElement(
+                By.css("a[href],button")
+              ).click().then(() =>
+                this.driver.sleep(100)
+              ).then(() =>
+                this.driver.getAllWindowHandles()
+              ).then(handles =>
+              {
+                if (title.startsWith("$popup Exception -"))
+                {
+                  assert.equal(handles.length, 3, title);
+
+                  return this.driver.switchTo().window(handles[2]).then(() =>
+                    this.driver.close()
+                  ).then(() =>
+                    this.driver.switchTo().window(handles[1])
+                  );
+                }
+
+                assert.equal(handles.length, 2, title);
+              });
+            }
+
+            return takeScreenshot(element).then(screenshot =>
+              assert.ok(
+                screenshot.width == expectedScreenshot.width &&
+                screenshot.height == expectedScreenshot.height &&
+                screenshot.data.compare(expectedScreenshot.data) == 0,
+                title
+              )
+            );
+          });
         }
         return p2;
       });
