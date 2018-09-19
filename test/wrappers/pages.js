@@ -23,6 +23,75 @@ const assert = require("assert");
 const Jimp = require("jimp");
 const {By} = require("selenium-webdriver");
 
+// Once we require Node.js >= 10 this should be replaced with
+// the built-in finally() method of the Promise object.
+function promiseFinally(p, callback)
+{
+  return p.then(callback, callback);
+}
+
+function closeWindow(driver, goTo, returnTo, callback)
+{
+  return promiseFinally(
+    driver.switchTo().window(goTo).then(() =>
+      promiseFinally(
+        new Promise(resolve => resolve(callback && callback())),
+        () => driver.close()
+      )
+    ),
+    () => driver.switchTo().window(returnTo)
+  );
+}
+
+function testSubscribeLink(driver)
+{
+  return driver.findElement(By.id("subscribe-button")).click().then(() =>
+    driver.wait(() =>
+      driver.getAllWindowHandles().then(handles =>
+        handles.length > 2 ? handles : null
+      ), 1000
+    )
+  ).then(handles =>
+    closeWindow(driver, handles[2], handles[1], () =>
+      driver.switchTo().frame(0).then(() =>
+        driver.findElement(By.id("dialog-content-predefined"))
+      ).then(dialog =>
+        Promise.all([
+          dialog.isDisplayed(),
+          dialog.findElement(By.css("h3")).getText()
+        ]).then(([displayed, title]) =>
+        {
+          assert.ok(displayed, "subscribe link: dialog shown");
+          assert.equal(title, "ABP Testcase Subscription",
+                       "subscribe link: title shown in dialog");
+
+          return dialog.findElement(By.css("button")).click();
+        })
+      ).then(() =>
+        driver.executeAsyncScript(`
+          let callback = arguments[arguments.length - 1];
+          browser.runtime.sendMessage({type: "subscriptions.get",
+                                       ignoreDisabled: true,
+                                       downloadable: true}).then(subs =>
+            subs.some(s =>
+              s.url.endsWith("${TEST_PAGES_URL.replace(/^[^:]+/, "")}" +
+                             "abp-testcase-subscription.txt")
+            )
+          ).then(
+            res => callback([res, null]),
+            err => callback([null, err])
+          );
+        `)
+      ).then(([added, err]) =>
+      {
+        if (err)
+          throw err;
+        assert.ok(added, "subscribe link: subscription added");
+      })
+    )
+  );
+}
+
 function imageFromBase64(s)
 {
   return Jimp.read(Buffer.from(s, "base64"));
@@ -81,7 +150,7 @@ it("test pages", function()
     Promise.all(elements.map(elem => elem.getAttribute("href")))
   ).then(urls =>
   {
-    let p1 = Promise.resolve();
+    let p1 = testSubscribeLink(this.driver);
     for (let url of urls)
       p1 = p1.then(() =>
         this.driver.navigate().to(url)
@@ -156,12 +225,7 @@ it("test pages", function()
                 if (title.startsWith("$popup Exception -"))
                 {
                   assert.equal(handles.length, 3, title);
-
-                  return this.driver.switchTo().window(handles[2]).then(() =>
-                    this.driver.close()
-                  ).then(() =>
-                    this.driver.switchTo().window(handles[1])
-                  );
+                  return closeWindow(this.driver, handles[2], handles[1]);
                 }
 
                 assert.equal(handles.length, 2, title);
