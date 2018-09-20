@@ -27,7 +27,12 @@ const {By} = require("selenium-webdriver");
 // the built-in finally() method of the Promise object.
 function promiseFinally(p, callback)
 {
-  return p.then(callback, callback);
+  return p.then(
+    callback,
+    err => Promise.resolve(callback()).then(() =>
+      Promise.reject(err)
+    )
+  );
 }
 
 function closeWindow(driver, goTo, returnTo, callback)
