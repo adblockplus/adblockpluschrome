@@ -22,6 +22,11 @@ Building
   - For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
 - [Node.js](https://nodejs.org/) (>= 7)
 
+### Building on Windows
+
+On Windows, you need a [Linux environment running on WSL](https://docs.microsoft.com/windows/wsl/install-win10).
+Then install the above requirements and run the commands below from within Bash.
+
 ### Building the extension
 
 Run one of the following commands in the project directory, depending on your
@@ -76,8 +81,10 @@ _SKIP_DEPENDENCY_UPDATES_ environment variable, for example:
 
     SKIP_DEPENDENCY_UPDATES=true ./build.py devenv -t chrome
 
-Running the unit tests
-----------------------
+Running tests
+-------------
+
+### Unit tests
 
 To verify your changes you can use the unit test suite located in the _qunit_
 directory of the repository. In order to run the unit tests go to the
@@ -86,8 +93,19 @@ extension's Options page, open the JavaScript Console and type in:
     location.href = "qunit/index.html";
 
 The unit tests will run automatically once the page loads.
-You can also run these tests with a headless Firefox or Chromium process.
-Install the dependencies first:
+
+### External test runner
+
+There is also an external test runner that can be invoked from the
+command line in order to run the unit tests along some integration
+tests on different browsers, and automatically run the linter as well.
+
+On Windows, in order to use the test runner, in addition to setting up a Linux
+environment as outlined above, you need to have Node.js installed in your native
+Windows environment. Then run the commands below from within PowerShell or
+cmd.exe (unlike when building the extension which needs to be done from Bash).
+
+Make sure the required packages are installed and up-to-date:
 
     npm install
 

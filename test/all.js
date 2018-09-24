@@ -35,7 +35,8 @@ for (let browser of glob.sync("./test/browsers/*.js"))
         module.ensureBrowser(),
         new Promise((resolve, reject) =>
         {
-          exec(`python build.py devenv -t ${module.platform}`,
+          exec(
+            `bash -c "python build.py devenv -t ${module.platform}"`,
             (error, stdout, stderr) =>
             {
               if (error)
@@ -44,7 +45,8 @@ for (let browser of glob.sync("./test/browsers/*.js"))
                 reject(error);
               }
               else resolve(stdout);
-            });
+            }
+          );
         })
       ]).then(([browserBinary]) =>
       {

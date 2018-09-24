@@ -23,10 +23,10 @@
     "selenium-webdriver": "^3.6.0"
   },
   "scripts": {
-    "pretest": "python ensure_dependencies.py",
+    "pretest": "bash -c \"python ensure_dependencies.py\"",
     "lint": "eslint *.js lib/ qunit/ ext/ test/",
     "test-only": "mocha",
-    "test": "npm run test-only",
+    "test": "npm run test-only --",
     "posttest": "npm run lint"
   }
 }
