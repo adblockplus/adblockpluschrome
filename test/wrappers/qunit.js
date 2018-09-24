@@ -23,19 +23,13 @@ const assert = require("assert");
 it("qunit", function()
 {
   return this.driver.navigate().to(this.origin + "/qunit/index.html").then(() =>
-    // Wait for qunit-results to be present
     this.driver.wait(until.elementLocated(By.id("qunit-testresult")))
+  ).then(elem =>
+    this.driver.wait(until.elementTextContains(elem, "Tests completed"))
   ).then(() =>
-    // Wait for tests to finish
-    this.driver.wait(() =>
-      this.driver.findElement(By.id("qunit-testresult"))
-        .getAttribute("innerHTML").then(data =>
-           data.includes("Tests completed")))
-  ).then(() => Promise.all([[true, ".pass"], [false, ".fail"]].map(
-    ([success, sel]) => this.driver.findElements(
-      By.css(`#qunit-tests ${sel} .test-name`)
-    ).then(elements => Promise.all(elements.map(elem =>
-      elem.getAttribute("textContent").then(data => assert.ok(success, data))
-    )))
-  )));
+    this.driver.findElement(By.css("#qunit-tests .fail .test-name")).then(
+      elem => elem.getAttribute("textContent").then(name => assert.fail(name)),
+      () => null
+    )
+  );
 });
