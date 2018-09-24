@@ -357,8 +357,17 @@ function injected(eventName, injectedIntoContentWindow)
 
 if (document instanceof HTMLDocument)
 {
-  let sandbox = window.frameElement &&
-                window.frameElement.getAttribute("sandbox");
+  let sandbox;
+
+  // We have to wrap the following code in a try catch
+  // because of this Microsoft Edge bug:
+  // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/19082980/
+  try
+  {
+    sandbox = window.frameElement &&
+              window.frameElement.getAttribute("sandbox");
+  }
+  catch (e) {}
 
   if (typeof sandbox != "string" || /(^|\s)allow-scripts(\s|$)/i.test(sandbox))
   {
