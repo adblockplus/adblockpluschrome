@@ -21,7 +21,7 @@ const TEST_PAGES_URL = "https://testpages.adblockplus.org/en/";
 
 const assert = require("assert");
 const Jimp = require("jimp");
-const {By} = require("selenium-webdriver");
+const {By, until} = require("selenium-webdriver");
 
 // Once we require Node.js >= 10 this should be replaced with
 // the built-in finally() method of the Promise object.
@@ -54,12 +54,13 @@ function testSubscribeLink(driver)
     driver.wait(() =>
       driver.getAllWindowHandles().then(handles =>
         handles.length > 2 ? handles : null
-      ), 1000
+      ), 3000
     )
   ).then(handles =>
     closeWindow(driver, handles[2], handles[1], () =>
-      driver.switchTo().frame(0).then(() =>
-        driver.findElement(By.id("dialog-content-predefined"))
+      driver.wait(until.ableToSwitchToFrame(0), 1000).then(() =>
+        driver.wait(until.elementLocated(By.id("dialog-content-predefined")),
+                    1000)
       ).then(dialog =>
         Promise.all([
           dialog.isDisplayed(),
