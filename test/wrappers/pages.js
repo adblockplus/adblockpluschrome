@@ -17,7 +17,7 @@
 
 "use strict";
 
-const TEST_PAGES_URL = "https://testpages.adblockplus.org/";
+const TEST_PAGES_URL = "https://testpages.adblockplus.org/en/";
 
 const assert = require("assert");
 const Jimp = require("jimp");
@@ -79,8 +79,7 @@ function testSubscribeLink(driver)
                                        ignoreDisabled: true,
                                        downloadable: true}).then(subs =>
             subs.some(s =>
-              s.url.endsWith("${TEST_PAGES_URL.replace(/^[^:]+/, "")}" +
-                             "abp-testcase-subscription.txt")
+              s.url == "${TEST_PAGES_URL}abp-testcase-subscription.txt"
             )
           ).then(
             res => callback([res, null]),
