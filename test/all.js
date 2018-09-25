@@ -77,7 +77,8 @@ for (let browser of glob.sync("./test/browsers/*.js"))
 
     after(function()
     {
-      this.driver.quit();
+      if (this.driver)
+        return this.driver.quit();
     });
   });
 }
