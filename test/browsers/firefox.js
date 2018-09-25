@@ -17,8 +17,6 @@
 
 "use strict";
 
-const FIREFOX_VERSION = "57.0";
-
 const webdriver = require("selenium-webdriver");
 const firefox = require("selenium-webdriver/firefox");
 const {Command} = require("selenium-webdriver/lib/command");
@@ -26,20 +24,18 @@ const {ensureFirefox} = require("../../adblockpluscore/test/runners/" +
                                 "firefox_download");
 
 exports.platform = "gecko";
-
-exports.ensureBrowser = function()
-{
-  return ensureFirefox(FIREFOX_VERSION);
-};
+exports.oldestCompatibleVersion = "57.0";
+exports.ensureBrowser = ensureFirefox;
 
 exports.getDriver = function(browserBinary, devenvPath)
 {
-  let binary = new firefox.Binary(browserBinary);
-  binary.addArguments("-headless");
+  let options = new firefox.Options();
+  options.setBinary(browserBinary);
+  options.headless();
 
   let driver = new webdriver.Builder()
     .forBrowser("firefox")
-    .setFirefoxOptions(new firefox.Options().setBinary(binary))
+    .setFirefoxOptions(options)
     .build();
 
   let cmd = new Command("moz-install-web-ext")

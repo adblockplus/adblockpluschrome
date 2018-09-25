@@ -21,6 +21,24 @@ const glob = require("glob");
 const path = require("path");
 const {exec} = require("child_process");
 
+function getBrowserBinary(module, browser)
+{
+  let spec = process.env[`${browser.toUpperCase()}_BINARY`];
+  let version = module.oldestCompatibleVersion;
+
+  if (spec)
+  {
+    if (spec == "installed")
+      return Promise.resolve("");
+    if (spec.startswith("path:"))
+      return Promise.resolve(spec.substr(5));
+    if (spec.startsWith("download:"))
+      version = spec.substr(9);
+  }
+
+  return module.ensureBrowser(version);
+}
+
 for (let browser of glob.sync("./test/browsers/*.js"))
 {
   let module = require(path.resolve(browser));
@@ -32,7 +50,7 @@ for (let browser of glob.sync("./test/browsers/*.js"))
     before(function()
     {
       return Promise.all([
-        module.ensureBrowser(),
+        getBrowserBinary(module, path.basename(browser, ".js")),
         new Promise((resolve, reject) =>
         {
           exec(

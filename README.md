@@ -117,6 +117,19 @@ Start the testing process in one browser only:
 
     npm test -- -g <gecko/chrome>
 
+By default it downloads (and caches) the oldest compatible version
+of each browser. In order to run the tests against a different version
+set the CHROMIUM_BINARY or FIREFOX_BINARY environment variables.
+Following values are accepted:
+
+* `installed`
+  * Uses the version installed on the system.
+* `path:<path>`
+  * Uses the binary located at the given path.
+* `download:<version>`
+  * Downloads the given version (for Firefox the version must be in the
+    form `<major>.<minor>`, for Chromium this must be the revision number).
+
 Linting
 -------
 

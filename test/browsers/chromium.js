@@ -17,24 +17,20 @@
 
 "use strict";
 
-// The Chromium version is a build number, quite obscure.
-// Chromium 63.0.3239.x is 508578
-// Chromium 65.0.3325.0 is 530368
-// We currently want Chromiun 63, as we still support it and that's the
-// loweset version that supports WebDriver.
-const CHROMIUM_REVISION = 508578;
-
 const webdriver = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const {ensureChromium} = require("../../adblockpluscore/test/runners/" +
                                 "chromium_download");
 
 exports.platform = "chrome";
+exports.ensureBrowser = ensureChromium;
 
-exports.ensureBrowser = function()
-{
-  return ensureChromium(CHROMIUM_REVISION);
-};
+// The Chromium version is a build number, quite obscure.
+// Chromium 63.0.3239.x is 508578
+// Chromium 65.0.3325.0 is 530368
+// We currently want Chromiun 63, as we still support it and that's the
+// loweset version that supports WebDriver.
+exports.oldestCompatibleVersion = 508578;
 
 exports.getDriver = function(browserBinary, devenvPath)
 {
