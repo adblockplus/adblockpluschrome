@@ -23,6 +23,10 @@ const {Command} = require("selenium-webdriver/lib/command");
 const {ensureFirefox} = require("../../adblockpluscore/test/runners/" +
                                 "firefox_download");
 
+// We need to require the geckodriver,
+// otherwise on Windows the geckodriver path is not added to process.env.PATH.
+require("geckodriver");
+
 exports.platform = "gecko";
 exports.oldestCompatibleVersion = "57.0";
 exports.ensureBrowser = ensureFirefox;

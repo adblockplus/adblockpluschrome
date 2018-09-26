@@ -22,6 +22,10 @@ const chrome = require("selenium-webdriver/chrome");
 const {ensureChromium} = require("../../adblockpluscore/test/runners/" +
                                 "chromium_download");
 
+// We need to require the chromedriver,
+// otherwise on Windows the chromedriver path is not added to process.env.PATH.
+require("chromedriver");
+
 exports.platform = "chrome";
 exports.ensureBrowser = ensureChromium;
 
