@@ -48,55 +48,6 @@ function closeWindow(driver, goTo, returnTo, callback)
   );
 }
 
-function testSubscribeLink(driver)
-{
-  return driver.findElement(By.id("subscribe-button")).click().then(() =>
-    driver.wait(() =>
-      driver.getAllWindowHandles().then(handles =>
-        handles.length > 2 ? handles : null
-      ), 3000
-    )
-  ).then(handles =>
-    closeWindow(driver, handles[2], handles[1], () =>
-      driver.wait(until.ableToSwitchToFrame(0), 1000).then(() =>
-        driver.wait(until.elementLocated(By.id("dialog-content-predefined")),
-                    1000)
-      ).then(dialog =>
-        Promise.all([
-          dialog.isDisplayed(),
-          dialog.findElement(By.css("h3")).getText()
-        ]).then(([displayed, title]) =>
-        {
-          assert.ok(displayed, "subscribe link: dialog shown");
-          assert.equal(title, "ABP Testcase Subscription",
-                       "subscribe link: title shown in dialog");
-
-          return dialog.findElement(By.css("button")).click();
-        })
-      ).then(() =>
-        driver.executeAsyncScript(`
-          let callback = arguments[arguments.length - 1];
-          browser.runtime.sendMessage({type: "subscriptions.get",
-                                       ignoreDisabled: true,
-                                       downloadable: true}).then(subs =>
-            subs.some(s =>
-              s.url == "${TEST_PAGES_URL}abp-testcase-subscription.txt"
-            )
-          ).then(
-            res => callback([res, null]),
-            err => callback([null, err])
-          );
-        `)
-      ).then(([added, err]) =>
-      {
-        if (err)
-          throw err;
-        assert.ok(added, "subscribe link: subscription added");
-      })
-    )
-  );
-}
-
 function imageFromBase64(s)
 {
   return Jimp.read(Buffer.from(s, "base64"));
@@ -155,7 +106,7 @@ it("test pages", function()
     Promise.all(elements.map(elem => elem.getAttribute("href")))
   ).then(urls =>
   {
-    let p1 = testSubscribeLink(this.driver);
+    let p1 = Promise.resolve();
     for (let url of urls)
       p1 = p1.then(() =>
         this.driver.navigate().to(url)
@@ -251,4 +202,55 @@ it("test pages", function()
       });
     return p1;
   });
+});
+
+it("subscribe link", function()
+{
+  return this.driver.navigate().to(TEST_PAGES_URL).then(() =>
+    this.driver.findElement(By.id("subscribe-button")).click()
+  ).then(() =>
+    this.driver.wait(() =>
+      this.driver.getAllWindowHandles().then(handles =>
+        handles.length > 2 ? handles : null
+      ), 3000
+    )
+  ).then(handles =>
+    closeWindow(this.driver, handles[2], handles[1], () =>
+      this.driver.wait(until.ableToSwitchToFrame(0), 1000).then(() =>
+        this.driver.wait(
+          until.elementLocated(By.id("dialog-content-predefined")), 1000
+        )
+      ).then(dialog =>
+        Promise.all([
+          dialog.isDisplayed(),
+          dialog.findElement(By.css("h3")).getText()
+        ]).then(([displayed, title]) =>
+        {
+          assert.ok(displayed, "dialog shown");
+          assert.equal(title, "ABP Testcase Subscription", "title matches");
+
+          return dialog.findElement(By.css("button")).click();
+        })
+      ).then(() =>
+        this.driver.executeAsyncScript(`
+          let callback = arguments[arguments.length - 1];
+          browser.runtime.sendMessage({type: "subscriptions.get",
+                                       ignoreDisabled: true,
+                                       downloadable: true}).then(subs =>
+            subs.some(s =>
+              s.url == "${TEST_PAGES_URL}abp-testcase-subscription.txt"
+            )
+          ).then(
+            res => callback([res, null]),
+            err => callback([null, err])
+          );
+        `)
+      ).then(([added, err]) =>
+      {
+        if (err)
+          throw err;
+        assert.ok(added, "subscription added");
+      })
+    )
+  );
 });
