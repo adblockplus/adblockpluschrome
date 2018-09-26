@@ -453,7 +453,7 @@
         if (!items)
           return;
 
-        items.forEach(item =>
+        for (let item of items)
         {
           browser.contextMenus.create({
             title: item.title,
@@ -463,7 +463,7 @@
               item.onclick(new Page(tab));
             }
           });
-        });
+        }
       });
     });
   };
