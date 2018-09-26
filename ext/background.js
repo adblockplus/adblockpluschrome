@@ -252,9 +252,11 @@
   browser.webNavigation.onBeforeNavigate.addListener(details =>
   {
     // Requests can be made by about:blank frames before the frame's
-    // onCommitted event has fired, so we update the frame structure
-    // for those now.
-    if (details.url.startsWith("about:"))
+    // onCommitted event has fired; besides, the parent frame's ID is not
+    // available in onCommitted, nor is the onHeadersReceived event fired for
+    // about: and data: frames; so we update the frame structure for such
+    // frames here.
+    if (details.url.startsWith("about:") || details.url.startsWith("data:"))
     {
       updatePageFrameStructure(details.frameId, details.tabId, details.url,
                                details.parentFrameId);
