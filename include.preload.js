@@ -17,7 +17,6 @@
 
 "use strict";
 
-let {splitSelector} = require("./adblockpluscore/lib/common");
 let {ElemHideEmulation} =
   require("./adblockpluscore/lib/content/elemHideEmulation");
 
@@ -396,7 +395,6 @@ ElementHidingTracer.prototype = {
 
 function ContentFiltering()
 {
-  this.shadow = this.createShadowTree();
   this.styles = new Map();
   this.tracer = null;
   this.inline = true;
@@ -409,36 +407,6 @@ function ContentFiltering()
 }
 ContentFiltering.prototype = {
   selectorGroupSize: 1024,
-
-  createShadowTree()
-  {
-    // Use Shadow DOM if available as to not mess with with web pages that
-    // rely on the order of their own <style> tags (#309). However, creating
-    // a shadow root breaks running CSS transitions. So we have to create
-    // the shadow root before transistions might start (#452).
-    if (!("createShadowRoot" in document.documentElement))
-      return null;
-
-    // Both Firefox and Chrome 66+ support user style sheets, so we can avoid
-    // creating an unnecessary shadow root on these platforms.
-    let match = /\bChrome\/(\d+)/.exec(navigator.userAgent);
-    if (!match || match[1] >= 66)
-      return null;
-
-    // Using shadow DOM causes issues on some Google websites,
-    // including Google Docs, Gmail and Blogger (#1770, #2602, #2687).
-    if (/\.(?:google|blogger)\.com$/.test(document.domain))
-      return null;
-
-    // Finally since some users have both AdBlock and Adblock Plus installed we
-    // have to consider how the two extensions interact. For example we want to
-    // avoid creating the shadowRoot twice.
-    let shadow = document.documentElement.shadowRoot ||
-                 document.documentElement.createShadowRoot();
-    shadow.appendChild(document.createElement("content"));
-
-    return shadow;
-  },
 
   addSelectorsInline(selectors, groupName, appendOnly = false)
   {
@@ -456,39 +424,20 @@ ContentFiltering.prototype = {
     if (!style)
     {
       // Create <style> element lazily, only if we add styles. Add it to
-      // the shadow DOM if possible. Otherwise fallback to the <head> or
-      // <html> element. If we have injected a style element before that
-      // has been removed (the sheet property is null), create a new one.
+      // the <head> or <html> element. If we have injected a style element
+      // before that has been removed (the sheet property is null), create a
+      // new one.
       style = document.createElement("style");
-      (this.shadow || document.head ||
-                      document.documentElement).appendChild(style);
+      (document.head || document.documentElement).appendChild(style);
 
       // It can happen that the frame already navigated to a different
       // document while we were waiting for the background page to respond.
-      // In that case the sheet property will stay null, after addind the
-      // <style> element to the shadow DOM.
+      // In that case the sheet property may stay null, after adding the
+      // <style> element.
       if (!style.sheet)
         return;
 
       this.styles.set(groupName, style);
-    }
-
-    // If using shadow DOM, we have to add the ::content pseudo-element
-    // before each selector, in order to match elements within the
-    // insertion point.
-    let preparedSelectors = [];
-    if (this.shadow)
-    {
-      for (let selector of selectors)
-      {
-        let subSelectors = splitSelector(selector);
-        for (let subSelector of subSelectors)
-          preparedSelectors.push("::content " + subSelector);
-      }
-    }
-    else
-    {
-      preparedSelectors = selectors;
     }
 
     // Chromium's Blink engine supports only up to 8,192 simple selectors, and
@@ -502,11 +451,9 @@ ContentFiltering.prototype = {
     // worked well in practice. In theory this could still lead to some
     // selectors not working on Chromium, but it is highly unlikely.
     // See issue #6298 and https://crbug.com/804179
-    for (let i = 0; i < preparedSelectors.length; i += this.selectorGroupSize)
+    for (let i = 0; i < selectors.length; i += this.selectorGroupSize)
     {
-      let selector = preparedSelectors.slice(
-        i, i + this.selectorGroupSize
-      ).join(", ");
+      let selector = selectors.slice(i, i + this.selectorGroupSize).join(", ");
       style.sheet.insertRule(selector + "{display: none !important;}",
                              style.sheet.cssRules.length);
     }
