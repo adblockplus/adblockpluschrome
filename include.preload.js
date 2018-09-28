@@ -477,7 +477,7 @@ ContentFiltering.prototype = {
     else
     {
       browser.runtime.sendMessage({
-        type: "elemhide.injectSelectors",
+        type: "content.injectSelectors",
         selectors,
         groupName,
         appendOnly
