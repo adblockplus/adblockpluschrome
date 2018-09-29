@@ -89,8 +89,6 @@
     Object.defineProperty(object, name, {
       value(...args)
       {
-        let callStack = new Error().stack;
-
         if (typeof args[args.length - 1] == "function")
           return func.apply(object, args);
 
@@ -104,6 +102,8 @@
 
         let resolvePromise = null;
         let rejectPromise = null;
+
+        let callStack = new Error().stack;
 
         func.call(object, ...args, result =>
         {
