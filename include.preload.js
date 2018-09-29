@@ -398,10 +398,9 @@ function ContentFiltering()
   this.styles = new Map();
   this.tracer = null;
   this.inline = true;
-  this.inlineEmulated = true;
 
   this.elemHideEmulation = new ElemHideEmulation(
-    this.addSelectors.bind(this),
+    () => {},
     this.hideElements.bind(this)
   );
 }
@@ -461,7 +460,7 @@ ContentFiltering.prototype = {
 
   addSelectors(selectors, filters, groupName = "emulated", appendOnly = false)
   {
-    if (this.inline || this.inlineEmulated)
+    if (this.inline)
     {
       // Insert the style rules inline if we have been instructed by the
       // background page to do so. This is usually the case, except on platforms
@@ -521,18 +520,12 @@ ContentFiltering.prototype = {
         this.tracer = new ElementHidingTracer();
 
       this.inline = response.inline;
-      this.inlineEmulated = !!response.inlineEmulated;
 
       if (this.inline)
         this.addSelectorsInline(response.selectors, "standard");
 
       if (this.tracer)
         this.tracer.addSelectors(response.selectors);
-
-      // Prefer CSS selectors for -abp-has and -abp-contains unless the
-      // background page has asked us to use inline styles.
-      this.elemHideEmulation.useInlineStyles = this.inline ||
-                                               this.inlineEmulated;
 
       this.elemHideEmulation.apply(response.emulatedPatterns);
     });
