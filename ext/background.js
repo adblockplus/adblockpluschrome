@@ -75,7 +75,6 @@
     this._url = tab.url && new URL(tab.url);
 
     this.browserAction = new BrowserAction(tab.id);
-    this.contextMenus = new ContextMenus(this);
   };
   Page.prototype = {
     get url()
@@ -423,90 +422,6 @@
       }
     }
   };
-
-
-  /* Context menus */
-
-  let contextMenuItems = new ext.PageMap();
-  let contextMenuUpdating = false;
-
-  let updateContextMenu = () =>
-  {
-    // Firefox for Android does not support context menus.
-    // https://bugzilla.mozilla.org/show_bug.cgi?id=1269062
-    if (!("contextMenus" in browser) || contextMenuUpdating)
-      return;
-
-    contextMenuUpdating = true;
-
-    browser.tabs.query({active: true, lastFocusedWindow: true}, tabs =>
-    {
-      browser.contextMenus.removeAll(() =>
-      {
-        contextMenuUpdating = false;
-
-        if (tabs.length == 0)
-          return;
-
-        let items = contextMenuItems.get({id: tabs[0].id});
-
-        if (!items)
-          return;
-
-        for (let item of items)
-        {
-          browser.contextMenus.create({
-            title: item.title,
-            contexts: item.contexts,
-            onclick(info, tab)
-            {
-              item.onclick(new Page(tab));
-            }
-          });
-        }
-      });
-    });
-  };
-
-  let ContextMenus = function(page)
-  {
-    this._page = page;
-  };
-  ContextMenus.prototype = {
-    create(item)
-    {
-      let items = contextMenuItems.get(this._page);
-      if (!items)
-        contextMenuItems.set(this._page, items = []);
-
-      items.push(item);
-      updateContextMenu();
-    },
-    remove(item)
-    {
-      let items = contextMenuItems.get(this._page);
-      if (items)
-      {
-        let index = items.indexOf(item);
-        if (index != -1)
-        {
-          items.splice(index, 1);
-          updateContextMenu();
-        }
-      }
-    }
-  };
-
-  browser.tabs.onActivated.addListener(updateContextMenu);
-
-  if ("windows" in browser)
-  {
-    browser.windows.onFocusChanged.addListener(windowId =>
-    {
-      if (windowId != browser.windows.WINDOW_ID_NONE)
-        updateContextMenu();
-    });
-  }
 
 
   /* Web requests */
