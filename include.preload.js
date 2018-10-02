@@ -225,7 +225,7 @@ function checkCollapse(element)
           if (!collapsingSelectors.has(selector))
           {
             collapsingSelectors.add(selector);
-            contentFiltering.addSelectors([selector], null, "collapsing", true);
+            contentFiltering.addSelectors([selector], "collapsing", true);
           }
         }
         else
@@ -258,22 +258,19 @@ function ElementHidingTracer()
     this.trace();
 }
 ElementHidingTracer.prototype = {
-  addSelectors(selectors, filters)
+  addSelectors(selectors)
   {
-    let pairs = selectors.map((sel, i) => [sel, filters && filters[i]]);
-
     if (document.readyState != "loading")
-      this.checkNodes([document], pairs);
+      this.checkNodes([document], selectors);
 
-    this.selectors.push(...pairs);
+    this.selectors.push(...selectors);
   },
 
-  checkNodes(nodes, pairs)
+  checkNodes(nodes, selectors)
   {
-    let selectors = [];
-    let filters = [];
+    let effectiveSelectors = [];
 
-    for (let [selector, filter] of pairs)
+    for (let selector of selectors)
     {
       nodes: for (let node of nodes)
       {
@@ -284,27 +281,19 @@ ElementHidingTracer.prototype = {
           // priority, or haven't been circumvented in a different way.
           if (getComputedStyle(element).display == "none")
           {
-            // For regular element hiding, we don't know the exact filter,
-            // but the background page can find it with the given selector.
-            // In case of element hiding emulation, the generated selector
-            // we got here is different from the selector part of the filter,
-            // but in this case we can send the whole filter text instead.
-            if (filter)
-              filters.push(filter);
-            else
-              selectors.push(selector);
-
+            effectiveSelectors.push(selector);
             break nodes;
           }
         }
       }
     }
 
-    if (selectors.length > 0 || filters.length > 0)
+    if (effectiveSelectors.length > 0)
     {
       browser.runtime.sendMessage({
         type: "hitLogger.traceElemHide",
-        selectors, filters
+        selectors: effectiveSelectors,
+        filters: []
       });
     }
   },
@@ -397,17 +386,11 @@ function ContentFiltering()
 {
   this.styles = new Map();
   this.tracer = null;
-  this.inline = true;
 
-  this.elemHideEmulation = new ElemHideEmulation(
-    () => {},
-    this.hideElements.bind(this)
-  );
+  this.elemHideEmulation = new ElemHideEmulation(this.hideElements.bind(this));
 }
 ContentFiltering.prototype = {
-  selectorGroupSize: 1024,
-
-  addSelectorsInline(selectors, groupName, appendOnly = false)
+  addRulesInline(rules, groupName = "standard", appendOnly = false)
   {
     let style = this.styles.get(groupName);
 
@@ -417,7 +400,7 @@ ContentFiltering.prototype = {
         style.sheet.deleteRule(0);
     }
 
-    if (selectors.length == 0)
+    if (rules.length == 0)
       return;
 
     if (!style)
@@ -439,54 +422,34 @@ ContentFiltering.prototype = {
       this.styles.set(groupName, style);
     }
 
-    // Chromium's Blink engine supports only up to 8,192 simple selectors, and
-    // even fewer compound selectors, in a rule. The exact number of selectors
-    // that would work depends on their sizes (e.g. "#foo .bar" has a
-    // size of 2). Since we don't know the sizes of the selectors here, we
-    // simply split them into groups of 1,024, based on the reasonable
-    // assumption that the average selector won't have a size greater than 8.
-    // The alternative would be to calculate the sizes of the selectors and
-    // divide them up accordingly, but this approach is more efficient and has
-    // worked well in practice. In theory this could still lead to some
-    // selectors not working on Chromium, but it is highly unlikely.
-    // See issue #6298 and https://crbug.com/804179
-    for (let i = 0; i < selectors.length; i += this.selectorGroupSize)
-    {
-      let selector = selectors.slice(i, i + this.selectorGroupSize).join(", ");
-      style.sheet.insertRule(selector + "{display: none !important;}",
-                             style.sheet.cssRules.length);
-    }
+    for (let rule of rules)
+      style.sheet.insertRule(rule, style.sheet.cssRules.length);
   },
 
-  addSelectors(selectors, filters, groupName = "emulated", appendOnly = false)
+  addSelectors(selectors, groupName = "standard", appendOnly = false)
   {
-    if (this.inline)
+    browser.runtime.sendMessage({
+      type: "content.injectSelectors",
+      selectors,
+      groupName,
+      appendOnly
+    },
+    rules =>
     {
-      // Insert the style rules inline if we have been instructed by the
-      // background page to do so. This is usually the case, except on platforms
-      // that do support user stylesheets via the browser.tabs.insertCSS API
-      // (Firefox 53 onwards for now and possibly Chrome in the near future).
-      // Once all supported platforms have implemented this API, we can remove
-      // the code below. See issue #5090.
-      // Related Chrome and Firefox issues:
-      // https://bugs.chromium.org/p/chromium/issues/detail?id=632009
-      // https://bugzilla.mozilla.org/show_bug.cgi?id=1310026
-      this.addSelectorsInline(selectors, groupName, appendOnly);
-    }
-    else
-    {
-      browser.runtime.sendMessage({
-        type: "content.injectSelectors",
-        selectors,
-        groupName,
-        appendOnly
-      });
-    }
-
-    // Only trace selectors that are based directly on hiding filters
-    // (i.e. leave out collapsing selectors).
-    if (this.tracer && groupName != "collapsing")
-      this.tracer.addSelectors(selectors, filters);
+      if (rules)
+      {
+        // Insert the rules inline if we have been instructed by the background
+        // page to do so. This is rarely the case, except on platforms that do
+        // not support user stylesheets via the browser.tabs.insertCSS API
+        // (Firefox <53, Chrome <66, and Edge).
+        // Once all supported platforms have implemented this API, we can remove
+        // the code below. See issue #5090.
+        // Related Chrome and Firefox issues:
+        // https://bugs.chromium.org/p/chromium/issues/detail?id=632009
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=1310026
+        this.addRulesInline(rules, groupName, appendOnly);
+      }
+    });
   },
 
   hideElements(elements, filters)
@@ -519,10 +482,8 @@ ContentFiltering.prototype = {
       if (response.trace)
         this.tracer = new ElementHidingTracer();
 
-      this.inline = response.inline;
-
-      if (this.inline)
-        this.addSelectorsInline(response.selectors, "standard");
+      if (response.inline)
+        this.addRulesInline(response.rules);
 
       if (this.tracer)
         this.tracer.addSelectors(response.selectors);
