@@ -188,13 +188,12 @@ it("test pages", function()
               });
             }
 
-            return takeScreenshot(element).then(screenshot =>
-              assert.ok(
+            return this.driver.wait(() =>
+              takeScreenshot(element).then(screenshot =>
                 screenshot.width == expectedScreenshot.width &&
                 screenshot.height == expectedScreenshot.height &&
                 screenshot.data.compare(expectedScreenshot.data) == 0,
-                title
-              )
+              ), 1000, title
             );
           });
         }
