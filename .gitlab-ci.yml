@@ -30,7 +30,7 @@ stages:
     - python ensure_dependencies.py
     - "[ -d node_modules ] || npm install"
 
-.test_template: &test_template
+.test_template:
   stage: test
   before_script: *dependencies
   cache:
@@ -50,16 +50,16 @@ prepare-dependencies:
     policy: push
 
 tests:gecko:
-  <<: *test_template
+  extends: .test_template
   script:
     - npm run test-only -- -g gecko
 
 tests:chrome:
-  <<: *test_template
+  extends: .test_template
   script:
     - xvfb-run npm run test-only -- -g chrome
 
 lint:
-  <<: *test_template
+  extends: .test_template
   script:
     - npm run lint
