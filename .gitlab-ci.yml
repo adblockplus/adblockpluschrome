@@ -22,6 +22,7 @@
 stages:
   - prepare
   - test
+  - build
 
 .dependencies:
   script: &dependencies
@@ -30,15 +31,31 @@ stages:
     - python ensure_dependencies.py
     - "[ -d node_modules ] || npm install"
 
-.test_template:
-  stage: test
-  before_script: *dependencies
+.pull_cache:
   cache:
     key: cache_$CI_COMMIT_SHA
     paths:
       - ./
     policy: pull
 
+.test_template:
+  extends: .pull_cache
+  stage: test
+  before_script: *dependencies
+
+.build:
+  extends: .pull_cache
+  before_script: *dependencies
+  stage: build
+  only:
+    - master
+  script:
+    - python build.py build -t $PLATFORM
+  artifacts:
+    paths:
+      - adblockplusfirefox-*.xpi
+      - adblockpluschrome-*.zip
+      - adblockplusedge-*.appx
 
 prepare-dependencies:
   stage: prepare
@@ -63,3 +80,20 @@ lint:
   extends: .test_template
   script:
     - npm run lint
+
+build:chrome:
+  extends: .build
+  variables:
+    PLATFORM: chrome
+
+build:gecko:
+  extends: .build
+  variables:
+    PLATFORM: gecko
+
+build:edge:
+  extends: .build
+  variables:
+    PLATFORM: edge
+  # see https://issues.adblockplus.org/ticket/7024
+  allow_failure: true
