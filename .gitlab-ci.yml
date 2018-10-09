@@ -66,12 +66,12 @@ prepare-dependencies:
       - ./
     policy: push
 
-tests:gecko:
+test:gecko:
   extends: .test_template
   script:
     - npm run test-only -- -g gecko
 
-tests:chrome:
+test:chrome:
   extends: .test_template
   script:
     - xvfb-run npm run test-only -- -g chrome
