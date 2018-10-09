@@ -21,8 +21,8 @@
 
 stages:
   - prepare
-  - test
   - build
+  - test
 
 .dependencies:
   script: &dependencies
@@ -57,25 +57,6 @@ stages:
       - adblockpluschrome-*.zip
       - adblockplusedge-*.appx
 
-prepare-dependencies:
-  stage: prepare
-  script: *dependencies
-  cache:
-    key: cache_$CI_COMMIT_SHA
-    paths:
-      - ./
-    policy: push
-
-test:gecko:
-  extends: .test_template
-  script:
-    - npm run test-only -- -g gecko
-
-test:chrome:
-  extends: .test_template
-  script:
-    - xvfb-run npm run test-only -- -g chrome
-
 lint:
   extends: .test_template
   script:
@@ -97,3 +78,22 @@ build:edge:
     PLATFORM: edge
   # see https://issues.adblockplus.org/ticket/7024
   allow_failure: true
+
+prepare-dependencies:
+  stage: prepare
+  script: *dependencies
+  cache:
+    key: cache_$CI_COMMIT_SHA
+    paths:
+      - ./
+    policy: push
+
+test:gecko:
+  extends: .test_template
+  script:
+    - npm run test-only -- -g gecko
+
+test:chrome:
+  extends: .test_template
+  script:
+    - xvfb-run npm run test-only -- -g chrome
