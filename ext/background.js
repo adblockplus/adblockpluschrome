@@ -607,4 +607,20 @@
       message, sender, sendResponse
     ).includes(true);
   });
+
+  /* External message passing */
+  browser.runtime.onMessageExternal.addListener(
+    // we could theoretically whitelist extension ids we agree
+    // to communicate with (if it's not additional overhead)
+    // e.g if (whitelistedExtensions.includes(sender.id)){ handle and respond }
+    (message, sender, sendResponse) =>
+    {
+      // for now handle only prefs and stats requests
+      if (message.type === "prefs.get" || message.type.test(/stats./))
+      {
+        ext.onMessage._dispatch(
+          message, sender, sendResponse
+        ).includes(true);
+      }
+    });
 }
