@@ -76,8 +76,6 @@ build:edge:
   extends: .build
   variables:
     PLATFORM: edge
-  # see https://issues.adblockplus.org/ticket/7024
-  allow_failure: true
 
 prepare-dependencies:
   stage: prepare
