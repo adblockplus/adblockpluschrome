@@ -13,10 +13,15 @@
 # You should have received a copy of the GNU General Public License
 # along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
 #
-# NOTE:
-# This CI configuration is meant to be run on private runners, which can be
-# provisioned with the Ansible roles from
-# https://gitlab.com/eyeo/devops/ansible-role-adblockplus-builder and
+# This file specifies how GitLab should run the tests, linting and other checks
+# automatically when merge requests are opened. By default, this will all run
+# on GitLab provided "shared runners", without further work. However, the tests
+# will run more quickly on a "specific runner" if you'd like to set that up.
+#
+# If you'd like to provision your own specific runners for your fork of the
+# repository, you can use these Ansible roles:
+#
+# https://gitlab.com/eyeo/devops/ansible-role-adblockplus-builder
 # https://gitlab.com/eyeo/devops/ansible-role-gitlab-runner
 
 stages:
@@ -26,9 +31,23 @@ stages:
 
 .dependencies:
   script: &dependencies
+    # Since we already use the "before_script" in order to setup dependencies
+    # we must also install other dependencies here, which would have already
+    # been available on the specific runners. Unfortunately, YAML doesn't
+    # support proper mutli-inheritance, so we need to fallback to the following
+    # inline shell script.
+    - |
+      if [[ "$CI_RUNNER_DESCRIPTION" == *gitlab.com ]]; then
+        apt-get update;
+        apt-get install -y apt-transport-https python-pip libgtk-3-0 libxt6 \
+          xvfb libnss3 libxss1 libgconf-2-4 libasound2;
+        curl -sL https://deb.nodesource.com/setup_8.x | bash -;
+        apt-get update -y;
+        apt-get install -y nodejs;
+      fi
     - mkdir -p .git/info
     - pip install --user Jinja2 cryptography
-    - python ensure_dependencies.py
+    - "npm_config_unsafe_perm=true python ensure_dependencies.py"
     - "[ -d node_modules ] || npm install"
 
 .pull_cache:
