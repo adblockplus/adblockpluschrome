@@ -31,11 +31,11 @@ let subParser = parser.addSubparsers({
   dest: "platform_name"
 });
 
-for (let file of fs.readdirSync(path.resolve("automation/target/")))
+for (let file of fs.readdirSync(path.resolve("build/target/")))
 {
   let target = path.basename(file, ".js");
   let platformSubParser = subParser.addParser(target, {addHelp: true});
-  let module = require(path.resolve(`automation/target/${file}`));
+  let module = require(path.resolve(`build/target/${file}`));
   module.addArguments(platformSubParser);
   platforms[target] = module;
 }

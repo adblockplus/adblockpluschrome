@@ -22,7 +22,7 @@ Building
 - [Python 2.7](https://www.python.org)
   - [The Jinja2 module](http://jinja.pocoo.org/docs) (>= 2.8)
   - For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
-- [Node.js](https://nodejs.org/) (>= 7)
+- [Node.js](https://nodejs.org/) (>= 8)
 
 ### Building on Windows
 
