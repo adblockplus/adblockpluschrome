@@ -19,6 +19,9 @@
 
 {
   const asyncAPIs = [
+    "browserAction.setIcon",
+    "browserAction.setBadgeText",
+    "browserAction.setBadgeBackgroundColor",
     "browserAction.getPopup",
     "contextMenus.removeAll",
     "devtools.panels.create",
