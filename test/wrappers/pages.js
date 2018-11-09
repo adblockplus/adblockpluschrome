@@ -23,6 +23,8 @@ const assert = require("assert");
 const Jimp = require("jimp");
 const {By, until} = require("selenium-webdriver");
 
+let lastScreenshot = Promise.resolve();
+
 // Once we require Node.js >= 10 this should be replaced with
 // the built-in finally() method of the Promise object.
 function promiseFinally(p, callback)
@@ -63,23 +65,22 @@ function takeScreenshot(element)
     // of the viewport and crop it to the size and position of our element.
     // This is not guaranteed to work on other browsers (mostly because
     // the behavior of Driver.takeScreenshot() may vary across browsers).
-    () => element.getLocation().then(loc =>
-      element.getDriver().executeScript(`
-        window.scrollTo(${loc.x}, ${loc.y});
-        return [window.scrollX, window.scrollY];
-      `).then(result =>
-      {
-        let x = loc.x - result[0];
-        let y = loc.y - result[1];
+    () =>
+      lastScreenshot = Promise.all([element.getRect(),
+                                    lastScreenshot]).then(([rect]) =>
+        element.getDriver().executeScript(`
+          window.scrollTo(${rect.x}, ${rect.y});
+          return [window.scrollX, window.scrollY];
+        `).then(result =>
+        {
+          let x = rect.x - result[0];
+          let y = rect.y - result[1];
 
-        return Promise.all([
-          element.getDriver().takeScreenshot().then(imageFromBase64),
-          element.getSize()
-        ]).then(([img, size]) =>
-          img.crop(x, y, size.width, size.height)
-        );
-      })
-    )
+          return element.getDriver().takeScreenshot()
+            .then(imageFromBase64)
+            .then(img => img.crop(x, y, rect.width, rect.height));
+        })
+      )
   ).then(img => img.bitmap);
 }
 

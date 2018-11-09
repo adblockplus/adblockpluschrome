@@ -33,24 +33,15 @@ exports.ensureBrowser = ensureFirefox;
 
 exports.getDriver = function(browserBinary, devenvPath)
 {
-  let options = new firefox.Options();
-  options.setBinary(browserBinary);
-  options.headless();
-
+  let options = new firefox.Options().setBinary(browserBinary).headless();
   let driver = new webdriver.Builder()
     .forBrowser("firefox")
     .setFirefoxOptions(options)
     .build();
 
-  let cmd = new Command("moz-install-web-ext")
+  driver.execute(new Command("install addon")
     .setParameter("path", devenvPath)
-    .setParameter("temporary", true);
-
-  driver.getExecutor().defineCommand(
-    cmd.getName(), "POST",
-    "/session/:sessionId/moz/addon/install"
-  );
-  driver.schedule(cmd, `installWebExt(${devenvPath})`);
+    .setParameter("temporary", true));
 
   return driver;
 };
