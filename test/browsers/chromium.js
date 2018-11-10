@@ -39,9 +39,11 @@ exports.oldestCompatibleVersion = 508578;
 exports.getDriver = function(browserBinary, devenvPath)
 {
   let options = new chrome.Options()
-    .setChromeBinaryPath(browserBinary)
     .addArguments("--no-sandbox")
     .addArguments(`load-extension=${devenvPath}`);
+
+  if (browserBinary != null)
+    options.setChromeBinaryPath(browserBinary);
 
   return new webdriver.Builder()
     .forBrowser("chrome")

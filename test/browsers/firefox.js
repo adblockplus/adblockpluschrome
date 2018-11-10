@@ -33,7 +33,10 @@ exports.ensureBrowser = ensureFirefox;
 
 exports.getDriver = function(browserBinary, devenvPath)
 {
-  let options = new firefox.Options().setBinary(browserBinary).headless();
+  let options = new firefox.Options().headless();
+  if (browserBinary != null)
+    options.setBinary(browserBinary);
+
   let driver = new webdriver.Builder()
     .forBrowser("firefox")
     .setFirefoxOptions(options)

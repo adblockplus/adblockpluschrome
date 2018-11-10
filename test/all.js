@@ -29,8 +29,8 @@ function getBrowserBinary(module, browser)
   if (spec)
   {
     if (spec == "installed")
-      return Promise.resolve("");
-    if (spec.startswith("path:"))
+      return Promise.resolve(null);
+    if (spec.startsWith("path:"))
       return Promise.resolve(spec.substr(5));
     if (spec.startsWith("download:"))
       version = spec.substr(9);
