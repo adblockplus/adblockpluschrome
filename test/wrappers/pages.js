@@ -50,38 +50,29 @@ function closeWindow(driver, goTo, returnTo, callback)
   );
 }
 
-function imageFromBase64(s)
-{
-  return Jimp.read(Buffer.from(s, "base64"));
-}
-
 function takeScreenshot(element)
 {
-  return element.takeScreenshot().then(
-    imageFromBase64,
+  // It would be preferable if we could use WebElement.takeScreenshot(),
+  // but it's not supported on Chrome, and produces incorrect output when
+  // called repeatedly, on Firefox >=58 or when using geckodriver >=1.13.
+  // So as a workaround, we scroll to the position of the element, take a
+  // screenshot of the viewport and crop it to the element's size and position.
+  lastScreenshot = Promise.all([element.getRect(),
+                                lastScreenshot]).then(([rect]) =>
+    element.getDriver().executeScript(`
+      window.scrollTo(${rect.x}, ${rect.y});
+      return [window.scrollX, window.scrollY];
+    `).then(result =>
+    {
+      let x = rect.x - result[0];
+      let y = rect.y - result[1];
 
-    // Chrome doesn't support taking screenshots of individual elements. So as
-    // a workaround, we scroll to the position of the element, take a screenshot
-    // of the viewport and crop it to the size and position of our element.
-    // This is not guaranteed to work on other browsers (mostly because
-    // the behavior of Driver.takeScreenshot() may vary across browsers).
-    () =>
-      lastScreenshot = Promise.all([element.getRect(),
-                                    lastScreenshot]).then(([rect]) =>
-        element.getDriver().executeScript(`
-          window.scrollTo(${rect.x}, ${rect.y});
-          return [window.scrollX, window.scrollY];
-        `).then(result =>
-        {
-          let x = rect.x - result[0];
-          let y = rect.y - result[1];
-
-          return element.getDriver().takeScreenshot()
-            .then(imageFromBase64)
-            .then(img => img.crop(x, y, rect.width, rect.height));
-        })
-      )
-  ).then(img => img.bitmap);
+      return element.getDriver().takeScreenshot()
+        .then(s => Jimp.read(Buffer.from(s, "base64")))
+        .then(img => img.crop(x, y, rect.width, rect.height).bitmap);
+    })
+  );
+  return lastScreenshot;
 }
 
 function getSections(driver)
