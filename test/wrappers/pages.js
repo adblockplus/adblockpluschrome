@@ -124,12 +124,12 @@ it("test pages", function()
         for (let i = 0; i < testCases.length; i++)
         {
           let [title, expectedScreenshot, filters] = testCases[i];
-          let platform = this.test.parent.title;
+          let browser = this.test.parent.title.replace(/\s.*$/, "");
 
           if (// https://issues.adblockplus.org/ticket/6917
-              title == "$subdocument - Test case" && platform == "gecko" ||
+              title == "$subdocument - Test case" && browser == "Firefox" ||
               // Chromium doesn't support Flash
-              /^\$object(-subrequest)? /.test(title) && platform == "chrome")
+              /^\$object(-subrequest)? /.test(title) && browser == "Chromium")
             continue;
 
           p2 = p2.then(() =>

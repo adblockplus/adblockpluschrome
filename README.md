@@ -117,12 +117,12 @@ Start the testing process for all browsers:
 
 Start the testing process in one browser only:
 
-    npm test -- -g <gecko/chrome>
+    npm test -- -g <Firefox|Chromium>
 
-By default it downloads (and caches) the oldest compatible version
-of each browser. In order to run the tests against a different version
-set the CHROMIUM_BINARY or FIREFOX_BINARY environment variables.
-Following values are accepted:
+By default it downloads (and caches) and runs the tests against the
+oldest compatible version and the latest release version of each browser.
+In order to run the tests against a different version set the CHROMIUM_BINARY
+or FIREFOX_BINARY environment variables. Following values are accepted:
 
 * `installed`
   * Uses the version installed on the system.

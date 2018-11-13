@@ -105,12 +105,22 @@ prepare-dependencies:
       - ./
     policy: push
 
-test:gecko:
+test:firefox:oldest:
   extends: .test_template
   script:
-    - npm run test-only -- -g gecko
+    - npm run test-only -- -g 'Firefox \(oldest\)'
 
-test:chrome:
+test:firefox:latest:
   extends: .test_template
   script:
-    - xvfb-run npm run test-only -- -g chrome
+    - npm run test-only -- -g 'Firefox \(latest\)'
+
+test:chromium:oldest:
+  extends: .test_template
+  script:
+    - xvfb-run -a npm run test-only -- -g 'Chromium \(oldest\)'
+
+test:chromium:latest:
+  extends: .test_template
+  script:
+    - xvfb-run -a npm run test-only -- -g 'Chromium \(latest\)'

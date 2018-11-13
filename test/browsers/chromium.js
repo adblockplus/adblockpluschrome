@@ -21,6 +21,7 @@ const webdriver = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const {ensureChromium} = require("../../adblockpluscore/test/runners/" +
                                 "chromium_download");
+const {downloadJSON} = require("../misc/utils.js");
 
 // We need to require the chromedriver,
 // otherwise on Windows the chromedriver path is not added to process.env.PATH.
@@ -49,4 +50,18 @@ exports.getDriver = function(browserBinary, devenvPath)
     .forBrowser("chrome")
     .setChromeOptions(options)
     .build();
+};
+
+exports.getLatestVersion = function()
+{
+  let os = process.platform;
+  if (os == "win32")
+    os = process.arch == "x64" ? "win64" : "win";
+  else if (os == "darwin")
+    os = "mac";
+
+  return downloadJSON(`https://omahaproxy.appspot.com/all.json?os=${os}`).then(
+    data =>
+      data[0].versions.find(ver => ver.channel == "stable").branch_base_position
+  );
 };

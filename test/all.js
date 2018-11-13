@@ -21,82 +21,100 @@ const glob = require("glob");
 const path = require("path");
 const {exec} = require("child_process");
 
-function getBrowserBinary(module, browser)
+function getBrowserBinaries(module, browser)
 {
   let spec = process.env[`${browser.toUpperCase()}_BINARY`];
-  let version = module.oldestCompatibleVersion;
-
   if (spec)
   {
     if (spec == "installed")
-      return Promise.resolve(null);
+      return [{getPath: () => Promise.resolve(null)}];
     if (spec.startsWith("path:"))
-      return Promise.resolve(spec.substr(5));
+      return [{getPath: () => Promise.resolve(spec.substr(5))}];
     if (spec.startsWith("download:"))
-      version = spec.substr(9);
+      return [{getPath: () => module.ensureBrowser(spec.substr(9))}];
   }
 
-  return module.ensureBrowser(version);
+  return [
+    {
+      version: "oldest",
+      getPath: () => module.ensureBrowser(module.oldestCompatibleVersion)
+    },
+    {
+      version: "latest",
+      getPath: () => module.getLatestVersion().then(module.ensureBrowser)
+    }
+  ];
 }
 
-for (let browser of glob.sync("./test/browsers/*.js"))
+for (let backend of glob.sync("./test/browsers/*.js"))
 {
-  let module = require(path.resolve(browser));
+  let module = require(path.resolve(backend));
+  let browser = path.basename(backend, ".js");
+  let devenvCreated = null;
 
-  describe(module.platform, function()
+  for (let binary of getBrowserBinaries(module, browser))
   {
-    this.timeout(0);
+    let description = browser.replace(/./, c => c.toUpperCase());
+    if (binary.version)
+      description += ` (${binary.version})`;
 
-    before(function()
+    describe(description, function()
     {
-      return Promise.all([
-        getBrowserBinary(module, path.basename(browser, ".js")),
-        new Promise((resolve, reject) =>
-        {
-          exec(
-            `bash -c "python build.py devenv -t ${module.platform}"`,
-            (error, stdout, stderr) =>
-            {
-              if (error)
+      this.timeout(0);
+
+      before(function()
+      {
+        if (!devenvCreated)
+          devenvCreated = new Promise((resolve, reject) =>
+          {
+            exec(
+              `bash -c "python build.py devenv -t ${module.platform}"`,
+              (error, stdout, stderr) =>
               {
-                console.error(stderr);
-                reject(error);
+                if (error)
+                {
+                  console.error(stderr);
+                  reject(error);
+                }
+                else resolve(stdout);
               }
-              else resolve(stdout);
-            }
-          );
-        })
-      ]).then(([browserBinary]) =>
+            );
+          });
+
+        return Promise.all([binary.getPath(), devenvCreated]).then(
+          ([browserBinary]) =>
+          {
+            this.driver = module.getDriver(
+              browserBinary,
+              path.resolve(`./devenv.${module.platform}`)
+            );
+            return this.driver.wait(() =>
+              this.driver.getAllWindowHandles().then(handles => handles[1])
+            );
+          }
+        ).then(handle =>
+          this.driver.switchTo().window(handle)
+        ).then(() =>
+          this.driver.executeScript("return location.origin;")
+        ).then(origin =>
+        {
+          this.origin = origin;
+        });
+      });
+
+      for (let file of glob.sync("./test/wrappers/*.js"))
       {
-        this.driver = module.getDriver(
-          browserBinary,
-          path.resolve(`./devenv.${module.platform}`)
-        );
-        return this.driver.wait(() =>
-          this.driver.getAllWindowHandles().then(handles => handles[1])
-        );
-      }).then(handle =>
-        this.driver.switchTo().window(handle)
-      ).then(() =>
-        this.driver.executeScript("return location.origin;")
-      ).then(origin =>
+        // Reload the module(s) for every browser
+        let modulePath = path.resolve(file);
+        delete require.cache[require.resolve(modulePath)];
+        require(modulePath);
+      }
+
+      after(function()
       {
-        this.origin = origin;
+        if (this.driver)
+          return this.driver.quit();
       });
     });
-
-    for (let file of glob.sync("./test/wrappers/*.js"))
-    {
-      // Reload the module(s) for every browser
-      let modulePath = path.resolve(file);
-      delete require.cache[require.resolve(modulePath)];
-      require(modulePath);
-    }
-
-    after(function()
-    {
-      if (this.driver)
-        return this.driver.quit();
-    });
-  });
+  }
 }
