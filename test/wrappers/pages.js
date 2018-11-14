@@ -155,16 +155,12 @@ it("test pages", function()
               throw error;
             return this.driver.navigate().to(url);
           }).then(() =>
-            getSections(this.driver)
-          ).then(sections =>
           {
-            let element = sections[i][1];
-
             if (title.startsWith("$popup "))
             {
-              return element.findElement(
-                By.css("a[href],button")
-              ).click().then(() =>
+              return getSections(this.driver).then(sections =>
+                sections[i][1].findElement(By.css("a[href],button")).click()
+              ).then(() =>
                 this.driver.sleep(100)
               ).then(() =>
                 this.driver.getAllWindowHandles()
@@ -180,12 +176,22 @@ it("test pages", function()
               });
             }
 
-            return this.driver.wait(() =>
-              takeScreenshot(element).then(screenshot =>
-                screenshot.width == expectedScreenshot.width &&
-                screenshot.height == expectedScreenshot.height &&
-                screenshot.data.compare(expectedScreenshot.data) == 0,
-              ), 1000, title
+            let checkTestCase = () =>
+              getSections(this.driver).then(sections =>
+                this.driver.wait(() =>
+                  takeScreenshot(sections[i][1]).then(screenshot =>
+                    screenshot.width == expectedScreenshot.width &&
+                    screenshot.height == expectedScreenshot.height &&
+                    screenshot.data.compare(expectedScreenshot.data) == 0
+                  ), 1000, title
+                )
+              );
+
+            // Sometimes on Firefox there is a delay until the added
+            // filters become effective. So if the test case fails once,
+            // we reload the page and try once again.
+            return checkTestCase().catch(() =>
+              this.driver.navigate().refresh().then(checkTestCase)
             );
           });
         }
