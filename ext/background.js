@@ -269,20 +269,22 @@
 
   browser.webNavigation.onCommitted.addListener(details =>
   {
+    // Unfortunately, Chrome doesn't provide the parent frame ID in the
+    // onCommitted event[1]. So, unless the navigation is for a top-level
+    // frame, we assume its parent frame is the top-level frame.
+    // [1] - https://bugs.chromium.org/p/chromium/issues/detail?id=908380
+    let {frameId, tabId, parentFrameId, url} = details;
+    if (typeof parentFrameId == "undefined")
+      parentFrameId = frameId == 0 ? -1 : 0;
+
     // We have to update the frame structure for documents that weren't
     // loaded over HTTP (including documents cached by Service Workers),
     // when the navigation occurs. However, we must be careful to not
     // update the state of the same document twice, otherewise the number
     // of any ads blocked already and any recorded sitekey could get lost.
-    //   Unfortunately, onCommitted doesn't give us the parent frame ID,
-    // so unless the navigation is for a top-level frame, we assume its
-    // parent frame is the top-level frame.
-    let frame = ext.getFrame(details.tabId, details.frameId);
-    if (!frame || frame.url.href != details.url)
-    {
-      updatePageFrameStructure(details.frameId, details.tabId, details.url,
-                               details.frameId == 0 ? -1 : 0);
-    }
+    let frame = ext.getFrame(tabId, frameId);
+    if (!frame || frame.url.href != url)
+      updatePageFrameStructure(frameId, tabId, url, parentFrameId);
   });
 
   function forgetTab(tabId)
