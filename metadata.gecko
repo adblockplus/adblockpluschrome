@@ -11,6 +11,10 @@ browserAction -= popup.html
 [compat]
 gecko = 51.0
 
+[contentScripts]
+document_start += include.postload.js
+document_end -= include.postload.js
+
 [mapping]
 mobile-options.html = adblockplusui/mobile-options.html
 mobile-options.js = adblockplusui/mobile-options.js
