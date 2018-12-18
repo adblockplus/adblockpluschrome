@@ -11,22 +11,27 @@
       "incompatibilities with the configured chromium version and newer",
       "drivers."
     ],
+    "argparse": "^1.0.10",
     "chromedriver": "2.36.0",
     "dmg": "^0.1.0",
     "eslint": "^5.1.0",
     "eslint-config-eyeo": "^2.1.0",
     "extract-zip": "^1.6.5",
-    "geckodriver": "^1.9.0",
+    "geckodriver": "^1.14.1",
+    "handlebars": "^4.0.12",
     "jimp": "^0.3.11",
     "ncp": "^2.0.0",
     "mocha": "^5.2.0",
-    "selenium-webdriver": "^3.6.0"
+    "request": "^2.88.0",
+    "selenium-webdriver": "^4.0.0-alpha",
+    "sign-addon": "^0.3.1"
   },
   "scripts": {
     "pretest": "bash -c \"python ensure_dependencies.py\"",
-    "lint": "eslint *.js lib/ qunit/ ext/ test/",
+    "lint": "eslint *.js lib/ qunit/ ext/ test/ build/",
     "test-only": "mocha",
     "test": "npm run test-only --",
-    "posttest": "npm run lint"
+    "posttest": "npm run lint",
+    "publish": "node build/publish.js"
   }
 }

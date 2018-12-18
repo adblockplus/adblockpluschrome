@@ -21,64 +21,100 @@ const glob = require("glob");
 const path = require("path");
 const {exec} = require("child_process");
 
-for (let browser of glob.sync("./test/browsers/*.js"))
+function getBrowserBinaries(module, browser)
 {
-  let module = require(path.resolve(browser));
-
-  describe(module.platform, function()
+  let spec = process.env[`${browser.toUpperCase()}_BINARY`];
+  if (spec)
   {
-    this.timeout(0);
+    if (spec == "installed")
+      return [{getPath: () => Promise.resolve(null)}];
+    if (spec.startsWith("path:"))
+      return [{getPath: () => Promise.resolve(spec.substr(5))}];
+    if (spec.startsWith("download:"))
+      return [{getPath: () => module.ensureBrowser(spec.substr(9))}];
+  }
 
-    before(function()
+  return [
     {
-      return Promise.all([
-        module.ensureBrowser(),
-        new Promise((resolve, reject) =>
-        {
-          exec(
-            `bash -c "python build.py devenv -t ${module.platform}"`,
-            (error, stdout, stderr) =>
-            {
-              if (error)
+      version: "oldest",
+      getPath: () => module.ensureBrowser(module.oldestCompatibleVersion)
+    },
+    {
+      version: "latest",
+      getPath: () => module.getLatestVersion().then(module.ensureBrowser)
+    }
+  ];
+}
+
+for (let backend of glob.sync("./test/browsers/*.js"))
+{
+  let module = require(path.resolve(backend));
+  let browser = path.basename(backend, ".js");
+  let devenvCreated = null;
+
+  for (let binary of getBrowserBinaries(module, browser))
+  {
+    let description = browser.replace(/./, c => c.toUpperCase());
+    if (binary.version)
+      description += ` (${binary.version})`;
+
+    describe(description, function()
+    {
+      this.timeout(0);
+
+      before(function()
+      {
+        if (!devenvCreated)
+          devenvCreated = new Promise((resolve, reject) =>
+          {
+            exec(
+              `bash -c "python build.py devenv -t ${module.platform}"`,
+              (error, stdout, stderr) =>
               {
-                console.error(stderr);
-                reject(error);
+                if (error)
+                {
+                  console.error(stderr);
+                  reject(error);
+                }
+                else resolve(stdout);
               }
-              else resolve(stdout);
-            }
-          );
-        })
-      ]).then(([browserBinary]) =>
+            );
+          });
+
+        return Promise.all([binary.getPath(), devenvCreated]).then(
+          ([browserBinary]) =>
+          {
+            this.driver = module.getDriver(
+              browserBinary,
+              path.resolve(`./devenv.${module.platform}`)
+            );
+            return this.driver.wait(() =>
+              this.driver.getAllWindowHandles().then(handles => handles[1])
+            );
+          }
+        ).then(handle =>
+          this.driver.switchTo().window(handle)
+        ).then(() =>
+          this.driver.executeScript("return location.origin;")
+        ).then(origin =>
+        {
+          this.origin = origin;
+        });
+      });
+
+      for (let file of glob.sync("./test/wrappers/*.js"))
       {
-        this.driver = module.getDriver(
-          browserBinary,
-          path.resolve(`./devenv.${module.platform}`)
-        );
-        return this.driver.wait(() =>
-          this.driver.getAllWindowHandles().then(handles => handles[1])
-        );
-      }).then(handle =>
-        this.driver.switchTo().window(handle)
-      ).then(() =>
-        this.driver.executeScript("return location.origin;")
-      ).then(origin =>
+        // Reload the module(s) for every browser
+        let modulePath = path.resolve(file);
+        delete require.cache[require.resolve(modulePath)];
+        require(modulePath);
+      }
+
+      after(function()
       {
-        this.origin = origin;
+        if (this.driver)
+          return this.driver.quit();
       });
     });
-
-    for (let file of glob.sync("./test/wrappers/*.js"))
-    {
-      // Reload the module(s) for every browser
-      let modulePath = path.resolve(file);
-      delete require.cache[require.resolve(modulePath)];
-      require(modulePath);
-    }
-
-    after(function()
-    {
-      if (this.driver)
-        return this.driver.quit();
-    });
-  });
+  }
 }

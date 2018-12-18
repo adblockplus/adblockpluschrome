@@ -1,0 +1,49 @@
+<!--
+  - This file is part of the Adblock Plus web scripts,
+  - Copyright (C) 2006-present eyeo GmbH
+  -
+  - Adblock Plus is free software: you can redistribute it and/or modify
+  - it under the terms of the GNU General Public License version 3 as
+  - published by the Free Software Foundation.
+  -
+  - Adblock Plus is distributed in the hope that it will be useful,
+  - but WITHOUT ANY WARRANTY; without even the implied warranty of
+  - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  - GNU General Public License for more details.
+  -
+  - You should have received a copy of the GNU General Public License
+  - along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Development build listing for {{config.name}}</title></head>
+<body>
+
+<p style="border: 1px solid black; background-color: #FEE; color: #000; margin-left: 5px; margin-right: 5px; padding: 5px;">
+  <strong>Warning</strong>: The files in this directory are development
+  builds and as such they have not been fully tested and might not work
+  properly.
+
+  Use them at your own risk, see <a href="https://adblockplus.org/en/development-builds">development builds introduction</a> for more information.
+
+  Latest <em>stable {{config.name}} release</em> can be downloaded from
+  <a href="{{ config.stableUrl }}">{{ config.stableUrlLable }}</a>
+</p>
+
+<h2>Development build listing for {{config.name}}</h2>
+<hr />
+<table border="0" cellspacing="10">
+{{#each list}}
+<tr{{#if @first}} style="font-weight: bold;"{{/if}}>
+  <td>
+    <a href="{{filename}}">{{../config.name}} {{version}}</a>
+    <a href="{{ ../commitUrl }}/{{ commit }}"> (changelog)</a>
+  </td>
+  <td>{{timeCreated}} UTC</td>
+  <td>{{fileSize}} MB</td>
+</tr>
+{{/each}}
+</table>
+<hr />
+</body>
+</html>

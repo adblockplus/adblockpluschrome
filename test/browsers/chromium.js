@@ -17,34 +17,51 @@
 
 "use strict";
 
+const webdriver = require("selenium-webdriver");
+const chrome = require("selenium-webdriver/chrome");
+const {ensureChromium} = require("../../adblockpluscore/test/runners/" +
+                                "chromium_download");
+const {downloadJSON} = require("../misc/utils.js");
+
+// We need to require the chromedriver,
+// otherwise on Windows the chromedriver path is not added to process.env.PATH.
+require("chromedriver");
+
+exports.platform = "chrome";
+exports.ensureBrowser = ensureChromium;
+
 // The Chromium version is a build number, quite obscure.
 // Chromium 63.0.3239.x is 508578
 // Chromium 65.0.3325.0 is 530368
 // We currently want Chromiun 63, as we still support it and that's the
 // loweset version that supports WebDriver.
-const CHROMIUM_REVISION = 508578;
-
-const webdriver = require("selenium-webdriver");
-const chrome = require("selenium-webdriver/chrome");
-const {ensureChromium} = require("../../adblockpluscore/test/runners/" +
-                                "chromium_download");
-
-exports.platform = "chrome";
-
-exports.ensureBrowser = function()
-{
-  return ensureChromium(CHROMIUM_REVISION);
-};
+exports.oldestCompatibleVersion = 508578;
 
 exports.getDriver = function(browserBinary, devenvPath)
 {
   let options = new chrome.Options()
-    .setChromeBinaryPath(browserBinary)
     .addArguments("--no-sandbox")
     .addArguments(`load-extension=${devenvPath}`);
+
+  if (browserBinary != null)
+    options.setChromeBinaryPath(browserBinary);
 
   return new webdriver.Builder()
     .forBrowser("chrome")
     .setChromeOptions(options)
     .build();
+};
+
+exports.getLatestVersion = function()
+{
+  let os = process.platform;
+  if (os == "win32")
+    os = process.arch == "x64" ? "win64" : "win";
+  else if (os == "darwin")
+    os = "mac";
+
+  return downloadJSON(`https://omahaproxy.appspot.com/all.json?os=${os}`).then(
+    data =>
+      data[0].versions.find(ver => ver.channel == "stable").branch_base_position
+  );
 };

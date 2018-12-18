@@ -162,9 +162,15 @@
     frame.url = new URL(url);
 
     let frames = framesOfTabs.get(tabId);
-    let parentFrame = frames.get(parentFrameId);
-    if (!parentFrame && parentFrameId > 0)
-      parentFrame = frames.get(0);
+    let parentFrame;
+
+    if (parentFrameId > -1)
+    {
+      if (parentFrameId != frameId)
+        parentFrame = frames.get(parentFrameId);
+      if (!parentFrame && parentFrameId != 0 && frameId != 0)
+        parentFrame = frames.get(0);
+    }
 
     if (parentFrame)
       frame.parent = parentFrame;
@@ -264,17 +270,22 @@
 
   browser.webNavigation.onCommitted.addListener(details =>
   {
+    // Unfortunately, Chrome doesn't provide the parent frame ID in the
+    // onCommitted event[1]. So, unless the navigation is for a top-level
+    // frame, we assume its parent frame is the top-level frame.
+    // [1] - https://bugs.chromium.org/p/chromium/issues/detail?id=908380
+    let {frameId, tabId, parentFrameId, url} = details;
+    if (typeof parentFrameId == "undefined")
+      parentFrameId = frameId == 0 ? -1 : 0;
+
     // We have to update the frame structure for documents that weren't
     // loaded over HTTP (including documents cached by Service Workers),
     // when the navigation occurs. However, we must be careful to not
     // update the state of the same document twice, otherewise the number
     // of any ads blocked already and any recorded sitekey could get lost.
-    let frame = ext.getFrame(details.tabId, details.frameId);
-    if (!frame || frame.url.href != details.url)
-    {
-      updatePageFrameStructure(details.frameId, details.tabId, details.url,
-                               details.parentFrameId);
-    }
+    let frame = ext.getFrame(tabId, frameId);
+    if (!frame || frame.url.href != url)
+      updatePageFrameStructure(frameId, tabId, url, parentFrameId);
   });
 
   function forgetTab(tabId)
@@ -434,12 +445,16 @@
             let frame = {url: new URL(detail.url)};
             frames.set(detail.frameId, frame);
 
-            if (detail.parentFrameId != -1)
+            if (detail.parentFrameId > -1)
             {
-              frame.parent = frames.get(detail.parentFrameId);
+              if (detail.frameId != detail.parentFrameId)
+                frame.parent = frames.get(detail.parentFrameId);
 
-              if (!frame.parent && detail.parentFrameId > 0)
+              if (!frame.parent &&
+                  detail.frameId != 0 && detail.parentFrameId != 0)
+              {
                 frame.parent = frames.get(0);
+              }
             }
           }
         }

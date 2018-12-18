@@ -1,3 +1,5 @@
+[![Pipeline status](https://gitlab.com/eyeo/adblockplus/adblockpluschrome/badges/master/build.svg)](https://gitlab.com/eyeo/adblockplus/adblockpluschrome/pipelines/)
+
 Adblock Plus for Chrome, Opera, Microsoft Edge and Firefox
 ==========================================================
 
@@ -20,7 +22,7 @@ Building
 - [Python 2.7](https://www.python.org)
   - [The Jinja2 module](http://jinja.pocoo.org/docs) (>= 2.8)
   - For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
-- [Node.js](https://nodejs.org/) (>= 7)
+- [Node.js](https://nodejs.org/) (>= 8.9)
 
 ### Building on Windows
 
@@ -115,7 +117,20 @@ Start the testing process for all browsers:
 
 Start the testing process in one browser only:
 
-    npm test -- -g <gecko/chrome>
+    npm test -- -g <Firefox|Chromium>
+
+By default it downloads (and caches) and runs the tests against the
+oldest compatible version and the latest release version of each browser.
+In order to run the tests against a different version set the CHROMIUM_BINARY
+or FIREFOX_BINARY environment variables. Following values are accepted:
+
+* `installed`
+  * Uses the version installed on the system.
+* `path:<path>`
+  * Uses the binary located at the given path.
+* `download:<version>`
+  * Downloads the given version (for Firefox the version must be in the
+    form `<major>.<minor>`, for Chromium this must be the revision number).
 
 Linting
 -------

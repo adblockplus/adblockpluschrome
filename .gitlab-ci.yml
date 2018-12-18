@@ -12,27 +12,89 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
+#
+# This file specifies how GitLab should run the tests, linting and other checks
+# automatically when merge requests are opened. By default, this will all run
+# on GitLab provided "shared runners", without further work. However, the tests
+# will run more quickly on a "specific runner" if you'd like to set that up.
+#
+# If you'd like to provision your own specific runners for your fork of the
+# repository, you can use these Ansible roles:
+#
+# https://gitlab.com/eyeo/devops/ansible-role-adblockplus-builder
+# https://gitlab.com/eyeo/devops/ansible-role-gitlab-runner
 
 stages:
   - prepare
+  - build
   - test
 
 .dependencies:
   script: &dependencies
+    # Since we already use the "before_script" in order to setup dependencies
+    # we must also install other dependencies here, which would have already
+    # been available on the specific runners. Unfortunately, YAML doesn't
+    # support proper mutli-inheritance, so we need to fallback to the following
+    # inline shell script.
+    - |
+      if [[ "$CI_RUNNER_DESCRIPTION" == *gitlab.com ]]; then
+        apt-get update;
+        apt-get install -y apt-transport-https python-pip libgtk-3-0 libxt6 \
+          xvfb libnss3 libxss1 libgconf-2-4 libasound2;
+        curl -sL https://deb.nodesource.com/setup_8.x | bash -;
+        apt-get update -y;
+        apt-get install -y nodejs;
+      fi
     - mkdir -p .git/info
     - pip install --user Jinja2 cryptography
-    - python ensure_dependencies.py
+    - "npm_config_unsafe_perm=true python ensure_dependencies.py"
     - "[ -d node_modules ] || npm install"
 
-.test_template: &test_template
-  stage: test
-  before_script: *dependencies
+.pull_cache:
   cache:
     key: cache_$CI_COMMIT_SHA
     paths:
       - ./
     policy: pull
 
+.test_template:
+  extends: .pull_cache
+  stage: test
+  before_script: *dependencies
+
+.build:
+  extends: .pull_cache
+  before_script: *dependencies
+  stage: build
+  only:
+    - master
+  script:
+    - python build.py build -t $PLATFORM
+  artifacts:
+    paths:
+      - adblockplusfirefox-*.xpi
+      - adblockpluschrome-*.zip
+      - adblockplusedge-*.appx
+
+lint:
+  extends: .test_template
+  script:
+    - npm run lint
+
+build:chrome:
+  extends: .build
+  variables:
+    PLATFORM: chrome
+
+build:gecko:
+  extends: .build
+  variables:
+    PLATFORM: gecko
+
+build:edge:
+  extends: .build
+  variables:
+    PLATFORM: edge
 
 prepare-dependencies:
   stage: prepare
@@ -43,17 +105,22 @@ prepare-dependencies:
       - ./
     policy: push
 
-tests:gecko:
-  <<: *test_template
+test:firefox:oldest:
+  extends: .test_template
   script:
-    - npm run test-only -- -g gecko
+    - npm run test-only -- -g 'Firefox \(oldest\)'
 
-tests:chrome:
-  <<: *test_template
+test:firefox:latest:
+  extends: .test_template
   script:
-    - xvfb-run npm run test-only -- -g chrome
+    - npm run test-only -- -g 'Firefox \(latest\)'
 
-lint:
-  <<: *test_template
+test:chromium:oldest:
+  extends: .test_template
   script:
-    - npm run lint
+    - xvfb-run -a npm run test-only -- -g 'Chromium \(oldest\)'
+
+test:chromium:latest:
+  extends: .test_template
+  script:
+    - xvfb-run -a npm run test-only -- -g 'Chromium \(latest\)'

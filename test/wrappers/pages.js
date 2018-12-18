@@ -21,7 +21,9 @@ const TEST_PAGES_URL = "https://testpages.adblockplus.org/en/";
 
 const assert = require("assert");
 const Jimp = require("jimp");
-const {By} = require("selenium-webdriver");
+const {By, until} = require("selenium-webdriver");
+
+let lastScreenshot = Promise.resolve();
 
 // Once we require Node.js >= 10 this should be replaced with
 // the built-in finally() method of the Promise object.
@@ -48,87 +50,29 @@ function closeWindow(driver, goTo, returnTo, callback)
   );
 }
 
-function testSubscribeLink(driver)
-{
-  return driver.findElement(By.id("subscribe-button")).click().then(() =>
-    driver.wait(() =>
-      driver.getAllWindowHandles().then(handles =>
-        handles.length > 2 ? handles : null
-      ), 1000
-    )
-  ).then(handles =>
-    closeWindow(driver, handles[2], handles[1], () =>
-      driver.switchTo().frame(0).then(() =>
-        driver.findElement(By.id("dialog-content-predefined"))
-      ).then(dialog =>
-        Promise.all([
-          dialog.isDisplayed(),
-          dialog.findElement(By.css("h3")).getText()
-        ]).then(([displayed, title]) =>
-        {
-          assert.ok(displayed, "subscribe link: dialog shown");
-          assert.equal(title, "ABP Testcase Subscription",
-                       "subscribe link: title shown in dialog");
-
-          return dialog.findElement(By.css("button")).click();
-        })
-      ).then(() =>
-        driver.executeAsyncScript(`
-          let callback = arguments[arguments.length - 1];
-          browser.runtime.sendMessage({type: "subscriptions.get",
-                                       ignoreDisabled: true,
-                                       downloadable: true}).then(subs =>
-            subs.some(s =>
-              s.url == "${TEST_PAGES_URL}abp-testcase-subscription.txt"
-            )
-          ).then(
-            res => callback([res, null]),
-            err => callback([null, err])
-          );
-        `)
-      ).then(([added, err]) =>
-      {
-        if (err)
-          throw err;
-        assert.ok(added, "subscribe link: subscription added");
-      })
-    )
-  );
-}
-
-function imageFromBase64(s)
-{
-  return Jimp.read(Buffer.from(s, "base64"));
-}
-
 function takeScreenshot(element)
 {
-  return element.takeScreenshot().then(
-    imageFromBase64,
+  // It would be preferable if we could use WebElement.takeScreenshot(),
+  // but it's not supported on Chrome, and produces incorrect output when
+  // called repeatedly, on Firefox >=58 or when using geckodriver >=1.13.
+  // So as a workaround, we scroll to the position of the element, take a
+  // screenshot of the viewport and crop it to the element's size and position.
+  lastScreenshot = Promise.all([element.getRect(),
+                                lastScreenshot]).then(([rect]) =>
+    element.getDriver().executeScript(`
+      window.scrollTo(${rect.x}, ${rect.y});
+      return [window.scrollX, window.scrollY];
+    `).then(result =>
+    {
+      let x = rect.x - result[0];
+      let y = rect.y - result[1];
 
-    // Chrome doesn't support taking screenshots of individual elements. So as
-    // a workaround, we scroll to the position of the element, take a screenshot
-    // of the viewport and crop it to the size and position of our element.
-    // This is not guaranteed to work on other browsers (mostly because
-    // the behavior of Driver.takeScreenshot() may vary across browsers).
-    () => element.getLocation().then(loc =>
-      element.getDriver().executeScript(`
-        window.scrollTo(${loc.x}, ${loc.y});
-        return [window.scrollX, window.scrollY];
-      `).then(result =>
-      {
-        let x = loc.x - result[0];
-        let y = loc.y - result[1];
-
-        return Promise.all([
-          element.getDriver().takeScreenshot().then(imageFromBase64),
-          element.getSize()
-        ]).then(([img, size]) =>
-          img.crop(x, y, size.width, size.height)
-        );
-      })
-    )
-  ).then(img => img.bitmap);
+      return element.getDriver().takeScreenshot()
+        .then(s => Jimp.read(Buffer.from(s, "base64")))
+        .then(img => img.crop(x, y, rect.width, rect.height).bitmap);
+    })
+  );
+  return lastScreenshot;
 }
 
 function getSections(driver)
@@ -154,7 +98,7 @@ it("test pages", function()
     Promise.all(elements.map(elem => elem.getAttribute("href")))
   ).then(urls =>
   {
-    let p1 = testSubscribeLink(this.driver);
+    let p1 = Promise.resolve();
     for (let url of urls)
       p1 = p1.then(() =>
         this.driver.navigate().to(url)
@@ -180,12 +124,12 @@ it("test pages", function()
         for (let i = 0; i < testCases.length; i++)
         {
           let [title, expectedScreenshot, filters] = testCases[i];
-          let platform = this.test.parent.title;
+          let browser = this.test.parent.title.replace(/\s.*$/, "");
 
           if (// https://issues.adblockplus.org/ticket/6917
-              title == "$subdocument - Test case" && platform == "gecko" ||
+              title == "$subdocument - Test case" && browser == "Firefox" ||
               // Chromium doesn't support Flash
-              /^\$object(-subrequest)? /.test(title) && platform == "chrome")
+              /^\$object(-subrequest)? /.test(title) && browser == "Chromium")
             continue;
 
           p2 = p2.then(() =>
@@ -211,16 +155,12 @@ it("test pages", function()
               throw error;
             return this.driver.navigate().to(url);
           }).then(() =>
-            getSections(this.driver)
-          ).then(sections =>
           {
-            let element = sections[i][1];
-
             if (title.startsWith("$popup "))
             {
-              return element.findElement(
-                By.css("a[href],button")
-              ).click().then(() =>
+              return getSections(this.driver).then(sections =>
+                sections[i][1].findElement(By.css("a[href],button")).click()
+              ).then(() =>
                 this.driver.sleep(100)
               ).then(() =>
                 this.driver.getAllWindowHandles()
@@ -236,13 +176,22 @@ it("test pages", function()
               });
             }
 
-            return takeScreenshot(element).then(screenshot =>
-              assert.ok(
-                screenshot.width == expectedScreenshot.width &&
-                screenshot.height == expectedScreenshot.height &&
-                screenshot.data.compare(expectedScreenshot.data) == 0,
-                title
-              )
+            let checkTestCase = () =>
+              getSections(this.driver).then(sections =>
+                this.driver.wait(() =>
+                  takeScreenshot(sections[i][1]).then(screenshot =>
+                    screenshot.width == expectedScreenshot.width &&
+                    screenshot.height == expectedScreenshot.height &&
+                    screenshot.data.compare(expectedScreenshot.data) == 0
+                  ), 1000, title
+                )
+              );
+
+            // Sometimes on Firefox there is a delay until the added
+            // filters become effective. So if the test case fails once,
+            // we reload the page and try once again.
+            return checkTestCase().catch(() =>
+              this.driver.navigate().refresh().then(checkTestCase)
             );
           });
         }
@@ -250,4 +199,55 @@ it("test pages", function()
       });
     return p1;
   });
+});
+
+it("subscribe link", function()
+{
+  return this.driver.navigate().to(TEST_PAGES_URL).then(() =>
+    this.driver.findElement(By.id("subscribe-button")).click()
+  ).then(() =>
+    this.driver.wait(() =>
+      this.driver.getAllWindowHandles().then(handles =>
+        handles.length > 2 ? handles : null
+      ), 3000
+    )
+  ).then(handles =>
+    closeWindow(this.driver, handles[2], handles[1], () =>
+      this.driver.wait(until.ableToSwitchToFrame(0), 1000).then(() =>
+        this.driver.wait(
+          until.elementLocated(By.id("dialog-content-predefined")), 1000
+        )
+      ).then(dialog =>
+        Promise.all([
+          dialog.isDisplayed(),
+          dialog.findElement(By.css("h3")).getText()
+        ]).then(([displayed, title]) =>
+        {
+          assert.ok(displayed, "dialog shown");
+          assert.equal(title, "ABP Testcase Subscription", "title matches");
+
+          return dialog.findElement(By.css("button")).click();
+        })
+      ).then(() =>
+        this.driver.executeAsyncScript(`
+          let callback = arguments[arguments.length - 1];
+          browser.runtime.sendMessage({type: "subscriptions.get",
+                                       ignoreDisabled: true,
+                                       downloadable: true}).then(subs =>
+            subs.some(s =>
+              s.url == "${TEST_PAGES_URL}abp-testcase-subscription.txt"
+            )
+          ).then(
+            res => callback([res, null]),
+            err => callback([null, err])
+          );
+        `)
+      ).then(([added, err]) =>
+      {
+        if (err)
+          throw err;
+        assert.ok(added, "subscription added");
+      })
+    )
+  );
 });
