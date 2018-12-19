@@ -3,7 +3,7 @@
 {
   const {IndexedDBBackup} = require("../../lib/indexedDBBackup");
   const info = require("info");
-  const {FilterStorage} = require("../../adblockpluscore/lib/filterStorage");
+  const {filterStorage} = require("../../adblockpluscore/lib/filterStorage");
   const {Filter} = require("../../adblockpluscore/lib/filterClasses");
   const {Subscription, SpecialSubscription} =
     require("../../adblockpluscore/lib/subscriptionClasses");
@@ -84,8 +84,8 @@
             "saved data has the correct information"
           );
 
-          FilterStorage.removeSubscription(subscription);
-          FilterStorage.removeSubscription(specialSubscription);
+          filterStorage.removeSubscription(subscription);
+          filterStorage.removeSubscription(specialSubscription);
         }
       },
       {
@@ -120,7 +120,7 @@
       {value: mockSave, enumerable: true}
     );
 
-    FilterStorage.addSubscription(specialSubscription);
-    FilterStorage.addSubscription(subscription);
+    filterStorage.addSubscription(specialSubscription);
+    filterStorage.addSubscription(subscription);
   }
 }
