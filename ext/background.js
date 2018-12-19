@@ -133,6 +133,8 @@
       frames.set(frameId, frame);
     }
 
+    frame.state = Object.create(null);
+
     return frame;
   }
 
