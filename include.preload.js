@@ -36,7 +36,7 @@ const typeMap = new Map([
   ["embed", "OBJECT"]
 ]);
 
-let collapsingSelectors = new Set();
+let checkedSelectors = new Set();
 
 function getURLsFromObjectElement(element)
 {
@@ -70,7 +70,7 @@ function getURLsFromAttributes(element)
 {
   let urls = [];
 
-  if (element.src)
+  if (element.getAttribute("src") && "src" in element)
     urls.push(element.src);
 
   if (element.srcset)
@@ -206,9 +206,13 @@ function checkCollapse(element)
   if (urls.length == 0)
     return;
 
-  // Construct the selector here, because the attributes it relies on can change
-  // between now and when we get the response from the background page.
   let selector = getSelectorForBlockedElement(element);
+  if (selector)
+  {
+    if (checkedSelectors.has(selector))
+      return;
+    checkedSelectors.add(selector);
+  }
 
   browser.runtime.sendMessage(
     {
@@ -222,17 +226,9 @@ function checkCollapse(element)
       if (collapse)
       {
         if (selector)
-        {
-          if (!collapsingSelectors.has(selector))
-          {
-            collapsingSelectors.add(selector);
-            contentFiltering.addSelectors([selector], null, "collapsing", true);
-          }
-        }
+          contentFiltering.addSelectors([selector], null, "collapsing", true);
         else
-        {
           hideElement(element);
-        }
       }
     }
   );
