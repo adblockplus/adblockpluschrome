@@ -1,5 +1,6 @@
 ^devenv.*$
 ^node_modules$
+^docs$
 
 syntax:glob
 *.zip

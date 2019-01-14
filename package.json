@@ -20,6 +20,7 @@
     "geckodriver": "^1.14.1",
     "handlebars": "^4.0.12",
     "jimp": "^0.3.11",
+    "jsdoc": "^3.5.5",
     "ncp": "^2.0.0",
     "mocha": "^5.2.0",
     "request": "^2.88.0",
@@ -32,6 +33,7 @@
     "test-only": "mocha",
     "test": "npm run test-only --",
     "posttest": "npm run lint",
-    "publish": "node build/publish.js"
+    "publish": "node build/publish.js",
+    "docs": "jsdoc --configure jsdoc.conf --destination docs lib"
   }
 }
