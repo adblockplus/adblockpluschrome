@@ -86,7 +86,7 @@
 
     asyncReadHelper(
       IO.statFile,
-      testFileNames.stat,
+      testFileNames.readBackup,
       {exists: true, lastModified: backupData.lastModified},
       "statFile return correct value, if a data restore is performed",
       assert);
