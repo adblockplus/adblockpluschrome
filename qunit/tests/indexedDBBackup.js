@@ -110,7 +110,7 @@
 
       setTimeout(() =>
       {
-        step.check(data["file:indexedDB-backup"]);
+        step.check(data["file:patterns.ini"]);
         step.done();
       }, 0);
     };
