@@ -95,20 +95,34 @@ it("test pages", function()
   return this.driver.navigate().to(TEST_PAGES_URL).then(() =>
     this.driver.findElements(By.css(".site-pagelist a"))
   ).then(elements =>
-    Promise.all(elements.map(elem => elem.getAttribute("href")))
+    Promise.all(elements.map(elem => Promise.all([elem.getAttribute("href"),
+                                                  elem.getText()])))
   ).then(urls =>
   {
     let p1 = Promise.resolve();
-    for (let url of urls)
+    for (let [url, pageTitle] of urls)
+    {
+      let browser = this.test.parent.title.replace(/\s.*$/, "");
+      if (// https://issues.adblockplus.org/ticket/6917
+          pageTitle == "$subdocument" && browser == "Firefox" ||
+          // Chromium doesn't support Flash
+          pageTitle.startsWith("$object") && browser == "Chromium" ||
+          // Chromium 63 doesn't have user stylesheets (required to
+          // overrule inline styles) and doesn't run content scripts
+          // in dynamically written documents.
+          this.test.parent.title == "Chromium (oldest)" &&
+          (pageTitle == "Inline style !important" ||
+           pageTitle == "Anonymous iframe document.write()"))
+        continue;
+
       p1 = p1.then(() =>
         this.driver.navigate().to(url)
       ).then(() =>
         Promise.all([
           getSections(this.driver),
-          this.driver.findElement(By.css("h2")).getAttribute("textContent"),
           this.driver.executeScript("document.body.classList.add('expected');")
         ])
-      ).then(([sections, pageTitle]) =>
+      ).then(([sections]) =>
         Promise.all(sections.map(([title, demo, filters]) =>
           Promise.all([
             title.getAttribute("textContent").then(testTitle =>
@@ -124,13 +138,6 @@ it("test pages", function()
         for (let i = 0; i < testCases.length; i++)
         {
           let [title, expectedScreenshot, filters] = testCases[i];
-          let browser = this.test.parent.title.replace(/\s.*$/, "");
-
-          if (// https://issues.adblockplus.org/ticket/6917
-              title == "$subdocument - Test case" && browser == "Firefox" ||
-              // Chromium doesn't support Flash
-              /^\$object(-subrequest)? /.test(title) && browser == "Chromium")
-            continue;
 
           p2 = p2.then(() =>
             this.driver.navigate().to(this.origin + "/options.html")
@@ -156,7 +163,7 @@ it("test pages", function()
             return this.driver.navigate().to(url);
           }).then(() =>
           {
-            if (title.startsWith("$popup "))
+            if (pageTitle.startsWith("$popup"))
             {
               return getSections(this.driver).then(sections =>
                 sections[i][1].findElement(By.css("a[href],button")).click()
@@ -166,7 +173,7 @@ it("test pages", function()
                 this.driver.getAllWindowHandles()
               ).then(handles =>
               {
-                if (title.startsWith("$popup Exception -"))
+                if (pageTitle == "$popup - Exception")
                 {
                   assert.equal(handles.length, 3, title);
                   return closeWindow(this.driver, handles[2], handles[1]);
@@ -197,6 +204,7 @@ it("test pages", function()
         }
         return p2;
       });
+    }
     return p1;
   });
 });
