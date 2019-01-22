@@ -61,6 +61,9 @@ stages:
   extends: .pull_cache
   stage: test
   before_script: *dependencies
+  retry:
+    max: 2
+    when: stuck_or_timeout_failure
 
 .build:
   extends: .pull_cache
