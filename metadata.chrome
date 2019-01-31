@@ -6,13 +6,11 @@ backgroundScripts = polyfill.js
   ext/common.js
   ext/background.js
   lib/compat.js
-  lib/publicSuffixList.js
   lib/adblockplus.js
 testScripts = ../polyfill.js
   ../ext/common.js
   ../ext/background.js
   ../lib/compat.js
-  ../lib/publicSuffixList.js
   tests.js
 options = options.html
 browserAction =
