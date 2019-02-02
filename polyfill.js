@@ -106,8 +106,6 @@
         let resolvePromise = null;
         let rejectPromise = null;
 
-        let callStack = new Error().stack;
-
         func.call(object, ...args, result =>
         {
           let error = browser.runtime.lastError;
@@ -116,12 +114,7 @@
             // runtime.lastError is already an Error instance on Edge, while on
             // Chrome it is a plain object with only a message property.
             if (!(error instanceof Error))
-            {
               error = new Error(error.message);
-
-              // Add a more helpful stack trace.
-              error.stack = callStack;
-            }
 
             rejectPromise(error);
           }
