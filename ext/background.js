@@ -348,6 +348,14 @@
           }
         }
 
+        if (change == "iconImageData" && "setIcon" in browser.browserAction)
+        {
+          return browser.browserAction.setIcon({
+            tabId: this._tabId,
+            imageData: this._changes.iconImageData
+          });
+        }
+
         // There is no badge on Firefox for Android; the browser action is
         // simply a menu item.
         if (change == "badgeText" && "setBadgeText" in browser.browserAction)
@@ -397,9 +405,13 @@
         });
       }
     },
-    setIcon(path)
+    setIconPath(path)
     {
       this._addChange("iconPath", path);
+    },
+    setIconImageData(imageData)
+    {
+      this._addChange("iconImageData", imageData);
     },
     setBadge(badge)
     {
