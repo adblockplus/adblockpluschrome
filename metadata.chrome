@@ -15,10 +15,8 @@ testScripts = ../polyfill.js
 options = options.html
 browserAction =
   icons/abp-16.png
-  icons/abp-19.png
   icons/abp-20.png
   icons/abp-32.png
-  icons/abp-38.png
   icons/abp-40.png
   popup.html
 icons =
