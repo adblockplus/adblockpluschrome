@@ -1,5 +1,8 @@
 "use strict";
 
+// Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=1408996
+let ext = window.ext;
+
 // Firefox 55 erroneously sends messages from the content script to the
 // devtools panel:
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1383310

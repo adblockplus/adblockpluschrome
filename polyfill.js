@@ -19,6 +19,9 @@
 
 {
   const asyncAPIs = [
+    "browserAction.setIcon",
+    "browserAction.setBadgeText",
+    "browserAction.setBadgeBackgroundColor",
     "browserAction.getPopup",
     "contextMenus.removeAll",
     "devtools.panels.create",
@@ -89,8 +92,6 @@
     Object.defineProperty(object, name, {
       value(...args)
       {
-        let callStack = new Error().stack;
-
         if (typeof args[args.length - 1] == "function")
           return func.apply(object, args);
 
@@ -113,12 +114,7 @@
             // runtime.lastError is already an Error instance on Edge, while on
             // Chrome it is a plain object with only a message property.
             if (!(error instanceof Error))
-            {
               error = new Error(error.message);
-
-              // Add a more helpful stack trace.
-              error.stack = callStack;
-            }
 
             rejectPromise(error);
           }
