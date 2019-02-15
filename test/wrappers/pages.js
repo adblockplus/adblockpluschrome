@@ -104,7 +104,8 @@ it("test pages", function()
     let p1 = Promise.resolve();
     for (let [elemClass, url, pageTitle] of urls)
     {
-      let onlineTestCase = elemClass && elemClass.split("/\s+/").includes("online");
+      let onlineTestCase = elemClass &&
+                           elemClass.split(/\s+/).includes("online");
       if (SKIP_ONLINE_TESTS && onlineTestCase)
         continue;
 
