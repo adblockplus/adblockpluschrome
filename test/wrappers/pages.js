@@ -18,6 +18,7 @@
 "use strict";
 
 const TEST_PAGES_URL = "https://testpages.adblockplus.org/en/";
+const SKIP_ONLINE_TESTS = false;
 
 const assert = require("assert");
 const Jimp = require("jimp");
@@ -95,13 +96,18 @@ it("test pages", function()
   return this.driver.navigate().to(TEST_PAGES_URL).then(() =>
     this.driver.findElements(By.css(".site-pagelist a"))
   ).then(elements =>
-    Promise.all(elements.map(elem => Promise.all([elem.getAttribute("href"),
+    Promise.all(elements.map(elem => Promise.all([elem.getAttribute("class"),
+                                                  elem.getAttribute("href"),
                                                   elem.getText()])))
   ).then(urls =>
   {
     let p1 = Promise.resolve();
-    for (let [url, pageTitle] of urls)
+    for (let [elemClass, url, pageTitle] of urls)
     {
+      let onlineTestCase = elemClass && elemClass.split("/\s+/").includes("online");
+      if (SKIP_ONLINE_TESTS && onlineTestCase)
+        continue;
+
       let browser = this.test.parent.title.replace(/\s.*$/, "");
       if (// https://issues.adblockplus.org/ticket/6917
           pageTitle == "$subdocument" && browser == "Firefox" ||
