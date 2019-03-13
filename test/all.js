@@ -95,7 +95,11 @@ for (let backend of glob.sync("./test/browsers/*.js"))
         ).then(handle =>
           this.driver.switchTo().window(handle)
         ).then(() =>
-          this.driver.executeScript("return location.origin;")
+          this.driver.wait(() =>
+            this.driver.executeScript("return location.origin;").then(
+              origin => origin != "null" ? origin : null
+            ), 1000, "unknown extension page origin"
+          )
         ).then(origin =>
         {
           this.origin = origin;
