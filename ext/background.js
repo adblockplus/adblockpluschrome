@@ -96,10 +96,6 @@
       }
 
       return undefined;
-    },
-    sendMessage(message, responseCallback)
-    {
-      browser.tabs.sendMessage(this.id, message, responseCallback);
     }
   };
 
