@@ -40,8 +40,7 @@ function addFilters()
   browser.runtime.sendMessage({
     type: "filters.importRaw",
     text: document.getElementById("filters").value
-  },
-  errors =>
+  }).then(errors =>
   {
     if (errors.length > 0)
       alert(errors.join("\n"));

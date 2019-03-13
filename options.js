@@ -27,8 +27,7 @@ iframe.onload = () =>
 browser.runtime.sendMessage({
   type: "app.get",
   what: "application"
-},
-application =>
+}).then(application =>
 {
   // Load the mobile version of the options page on Firefox for Android.
   iframe.src = iframe.getAttribute("data-src-" + application) ||

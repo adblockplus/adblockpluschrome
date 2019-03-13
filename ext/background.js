@@ -146,7 +146,7 @@
 
       removeFromAllPageMaps(tabId);
 
-      browser.tabs.get(tabId, () =>
+      browser.tabs.get(tabId).catch(error =>
       {
         // If the tab is prerendered, browser.tabs.get() sets
         // browser.runtime.lastError and we have to dispatch the onLoading
@@ -154,8 +154,7 @@
         // tabs. However, we have to keep relying on the onUpdated event for
         // tabs that are already visible. Otherwise browser action changes get
         // overridden when Chrome automatically resets them on navigation.
-        if (browser.runtime.lastError)
-          ext.pages.onLoading._dispatch(page);
+        ext.pages.onLoading._dispatch(page);
       });
     }
 
@@ -441,11 +440,11 @@
     return frames && frames.get(frameId);
   };
 
-  browser.tabs.query({}, tabs =>
+  browser.tabs.query({}).then(tabs =>
   {
     tabs.forEach(tab =>
     {
-      browser.webNavigation.getAllFrames({tabId: tab.id}, details =>
+      browser.webNavigation.getAllFrames({tabId: tab.id}).then(details =>
       {
         if (details && details.length > 0)
         {

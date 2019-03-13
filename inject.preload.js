@@ -28,7 +28,7 @@ document.addEventListener(randomEventName, event =>
   browser.runtime.sendMessage({
     type: "request.blockedByRTCWrapper",
     url
-  }, block =>
+  }).then(block =>
   {
     document.dispatchEvent(new CustomEvent(
       randomEventName + "-" + url, {detail: block}

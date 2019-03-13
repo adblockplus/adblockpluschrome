@@ -219,8 +219,7 @@ function checkCollapse(element)
       urls,
       mediatype,
       baseURL: document.location.href
-    },
-    collapse =>
+    }).then(collapse =>
     {
       if (collapse)
       {
@@ -229,8 +228,7 @@ function checkCollapse(element)
         else
           hideElement(element);
       }
-    }
-  );
+    });
 }
 
 function checkSitekey()
@@ -429,8 +427,7 @@ ContentFiltering.prototype = {
       selectors,
       groupName,
       appendOnly
-    },
-    rules =>
+    }).then(rules =>
     {
       if (rules)
       {
@@ -468,8 +465,7 @@ ContentFiltering.prototype = {
     browser.runtime.sendMessage({
       type: "content.applyFilters",
       filterTypes
-    },
-    response =>
+    }).then(response =>
     {
       if (this.tracer)
         this.tracer.disconnect();

@@ -26,7 +26,7 @@
   {
     let done = assert.async();
     let key = "pref:" + name;
-    browser.storage.local.get(key, items =>
+    browser.storage.local.get(key).then(items =>
     {
       equal(key in items, expectedValue, description);
       done();
@@ -37,7 +37,7 @@
   {
     let done = assert.async();
     let key = "pref:" + name;
-    browser.storage.local.get(key, items =>
+    browser.storage.local.get(key).then(items =>
     {
       deepEqual(items[key], expectedValue, description);
       done();
