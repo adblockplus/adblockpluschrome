@@ -226,16 +226,16 @@ it("subscribe link", function()
           until.elementLocated(By.id("dialog-content-predefined")), 1000
         )
       ).then(dialog =>
-        Promise.all([
-          dialog.isDisplayed(),
-          dialog.findElement(By.css("h3")).getText()
-        ]).then(([displayed, title]) =>
-        {
-          assert.ok(displayed, "dialog shown");
-          assert.equal(title, "ABP Testcase Subscription", "title matches");
-
-          return dialog.findElement(By.css("button")).click();
-        })
+        this.driver.wait(() =>
+          Promise.all([
+            dialog.isDisplayed(),
+            dialog.findElement(By.css("h3")).getText()
+          ]).then(([displayed, title]) =>
+            displayed && title == "ABP Testcase Subscription"
+          ), 1000, "dialog shown"
+        ).then(() =>
+          dialog.findElement(By.css("button")).click()
+        )
       ).then(() =>
         this.driver.executeAsyncScript(`
           let callback = arguments[arguments.length - 1];
