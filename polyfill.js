@@ -33,6 +33,7 @@
     "storage.local.remove",
     "storage.local.set",
     "storage.managed.get",
+    "tabs.captureVisibleTab",
     "tabs.create",
     "tabs.executeScript",
     "tabs.get",
