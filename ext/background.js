@@ -290,6 +290,22 @@
       updatePageFrameStructure(frameId, tabId, url, parentFrameId);
   });
 
+  browser.webRequest.onBeforeRequest.addListener(details =>
+  {
+    // Chromium fails to fire webNavigation events for anonymous iframes in
+    // certain edge cases[1]. As a workaround, we keep track of the originating
+    // frame for requests where the frame was previously unknown.
+    // 1 - https://bugs.chromium.org/p/chromium/issues/detail?id=937264
+    let {tabId, frameId, parentFrameId} = details;
+
+    if (frameId > 0 && !ext.getFrame(tabId, frameId))
+      updatePageFrameStructure(frameId, tabId, "about:blank", parentFrameId);
+  }, {
+    types: ["stylesheet", "script", "image", "font", "object", "xmlhttprequest",
+            "ping", "csp_report", "media", "websocket", "other"],
+    urls: ["<all_urls>"]
+  });
+
   function forgetTab(tabId)
   {
     ext.pages.onRemoved._dispatch(tabId);
