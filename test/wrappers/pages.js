@@ -120,7 +120,22 @@ it("test pages", function()
       ).then(() =>
         Promise.all([
           getSections(this.driver),
-          this.driver.executeScript("document.body.classList.add('expected');")
+          this.driver.executeScript(`
+            let documents = [document];
+            while (documents.length > 0)
+            {
+              let doc = documents.shift();
+              doc.body.classList.add('expected');
+              for (let i = 0; i < doc.defaultView.frames.length; i++)
+              {
+                try
+                {
+                  documents.push(doc.defaultView.frames[i].document);
+                }
+                catch (e) {}
+              }
+            }
+          `)
         ])
       ).then(([sections]) =>
         Promise.all(sections.map(([title, demo, filters]) =>
