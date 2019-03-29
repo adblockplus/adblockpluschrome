@@ -287,13 +287,6 @@
 
   browser.webRequest.onBeforeRequest.addListener(details =>
   {
-    // Edge doesn't support all the same resource types as Chrome, doesn't
-    // silently ignore unexpected resource types and also doesn't implement
-    // browser.browser.webRequest.ResourceType. So we manually filter unwanted
-    // types away here instead.
-    if (details.type == "main_frame" || details.type == "sub_frame")
-      return;
-
     // Chromium fails to fire webNavigation events for anonymous iframes in
     // certain edge cases[1]. As a workaround, we keep track of the originating
     // frame for requests where the frame was previously unknown.
@@ -303,6 +296,8 @@
     if (frameId > 0 && !ext.getFrame(tabId, frameId))
       updatePageFrameStructure(frameId, tabId, "about:blank", parentFrameId);
   }, {
+    types: Object.values(browser.webRequest.ResourceType)
+                 .filter(type => type != "main_frame" && type != "sub_frame"),
     urls: ["<all_urls>"]
   });
 

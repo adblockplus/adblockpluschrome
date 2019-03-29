@@ -299,3 +299,33 @@
       object.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
   }
 }
+
+// Object.values is not supported in Chrome <54.
+if (!("values" in Object))
+  Object.values = obj => Object.keys(obj).map(key => obj[key]);
+
+// Microsoft Edge (42.17134.1.0) doesn't support webRequest.ResourceType, but
+// we can obtain the list of accepted resource types from the error message
+// when creating an onBeforeRequest event listener with an unsupported resource
+// type.
+if (!("ResourceType" in browser.webRequest))
+{
+  try
+  {
+    browser.webRequest.onBeforeRequest.addListener(
+      details => {}, {urls: ["<all_urls>"], types: ["foo"]}
+    );
+  }
+  catch (error)
+  {
+    let errorMessage = error.toString();
+    errorMessage = errorMessage.substr(errorMessage.lastIndexOf(":"));
+
+    browser.webRequest.ResourceType = {};
+    if (errorMessage.includes("main_frame"))
+    {
+      for (let type of errorMessage.match(/[a-z_]+/g))
+        browser.webRequest.ResourceType[type.toUpperCase()] = type;
+    }
+  }
+}
