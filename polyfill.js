@@ -308,7 +308,7 @@ if (!("values" in Object))
 // we can obtain the list of accepted resource types from the error message
 // when creating an onBeforeRequest event listener with an unsupported resource
 // type.
-if (!("ResourceType" in browser.webRequest))
+if ("webRequest" in browser && !("ResourceType" in browser.webRequest))
 {
   try
   {
