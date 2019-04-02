@@ -329,3 +329,41 @@ if (!("ResourceType" in browser.webRequest))
     }
   }
 }
+
+// Chrome <50 does not support createImageBitmap, this is a simplistic
+// polyfill which only fulfills the usecase of accepting a Blob containing
+// an image and returning something which CanvasRenderingContext2D.drawImage()
+// accepts.
+if (typeof createImageBitmap == "undefined")
+{
+  self.createImageBitmap = blob =>
+  {
+    return new Promise((resolve, reject) =>
+    {
+      let image = new Image();
+      image.src = URL.createObjectURL(blob);
+      image.addEventListener("load", () =>
+      {
+        URL.revokeObjectURL(image.src);
+        resolve(image);
+      });
+      image.addEventListener("error", () =>
+      {
+        URL.revokeObjectURL(image.src);
+        reject("createImageBitmap failed");
+      });
+    });
+  };
+}
+
+// Chrome <69 does not support OffscreenCanvas
+if (typeof OffscreenCanvas == "undefined")
+{
+  self.OffscreenCanvas = function(width, height)
+  {
+    let canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    return canvas;
+  };
+}
