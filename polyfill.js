@@ -267,7 +267,7 @@
     // object, but provides the extension API through the "chrome" namespace
     // (non-standard).
     if (typeof browser == "undefined")
-      window.browser = chrome;
+      self.browser = chrome;
 
     for (let [api, ...testArgs] of maybeAsyncAPIs)
     {
