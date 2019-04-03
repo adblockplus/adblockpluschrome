@@ -378,18 +378,19 @@ if (document instanceof HTMLDocument)
     script.async = false;
 
     // Firefox 58 only bypasses site CSPs when assigning to 'src',
-    // while Chrome 67 only bypasses site CSPs when using 'textContent'.
-    if (browser.runtime.getURL("").startsWith("chrome-extension://"))
-    {
-      script.textContent = code;
-      document.documentElement.appendChild(script);
-    }
-    else
+    // while Chrome 67 and Microsoft Edge 44.17763.1.0
+    // only bypass site CSPs when using 'textContent'.
+    if (browser.runtime.getURL("").startsWith("moz-extension://"))
     {
       let url = URL.createObjectURL(new Blob([code]));
       script.src = url;
       document.documentElement.appendChild(script);
       URL.revokeObjectURL(url);
+    }
+    else
+    {
+      script.textContent = code;
+      document.documentElement.appendChild(script);
     }
 
     document.documentElement.removeChild(script);
