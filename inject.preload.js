@@ -110,33 +110,6 @@ function injected(eventName, injectedIntoContentWindow)
   }
 
   /*
-   * Shadow root getter wrapper
-   *
-   * After creating our shadowRoot we must wrap the getter to prevent the
-   * website from accessing it (#4191, #4298). This is required as a
-   * workaround for the lack of user style support in Chrome.
-   * See https://bugs.chromium.org/p/chromium/issues/detail?id=632009&desc=2
-   */
-  if ("shadowRoot" in Element.prototype)
-  {
-    let ourShadowRoot = document.documentElement.shadowRoot;
-    if (ourShadowRoot)
-    {
-      let desc = Object.getOwnPropertyDescriptor(Element.prototype,
-                                                 "shadowRoot");
-      let shadowRoot = Function.prototype.call.bind(desc.get);
-
-      Object.defineProperty(Element.prototype, "shadowRoot", {
-        configurable: true, enumerable: true, get()
-        {
-          let thisShadow = shadowRoot(this);
-          return thisShadow == ourShadowRoot ? null : thisShadow;
-        }
-      });
-    }
-  }
-
-  /*
    * RTCPeerConnection wrapper
    *
    * The webRequest API in Chrome does not yet allow the blocking of
