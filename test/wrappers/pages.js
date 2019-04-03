@@ -170,13 +170,14 @@ it("test pages", function()
               browser.runtime.sendMessage({type: "subscriptions.get",
                                            downloadable: true,
                                            special: true}).then(subs =>
-              {
-                for (let subscription of subs)
+                Promise.all(subs.map(subscription =>
                   browser.runtime.sendMessage({type: "subscriptions.remove",
-                                               url: subscription.url});
-                return browser.runtime.sendMessage({type: "filters.importRaw",
-                                                    text: filters});
-              }).then(() => callback(), callback);
+                                               url: subscription.url})
+                ))
+              ).then(() =>
+                browser.runtime.sendMessage({type: "filters.importRaw",
+                                             text: filters})
+              ).then(errors => callback(errors[0]), callback);
             `, filters.join("\n"))
           ).then(error =>
           {
@@ -190,7 +191,7 @@ it("test pages", function()
               return getSections(this.driver).then(sections =>
                 sections[i][1].findElement(By.css("a[href],button")).click()
               ).then(() =>
-                this.driver.sleep(100)
+                this.driver.sleep(500)
               ).then(() =>
                 this.driver.getAllWindowHandles()
               ).then(handles =>
