@@ -255,8 +255,8 @@
   {
     // Requests can be made by about:blank frames before the frame's
     // onCommitted event has fired; besides, the parent frame's ID is not
-    // available in onCommitted, nor is the onHeadersReceived event fired for
-    // about: and data: frames; so we update the frame structure for such
+    // always available in onCommitted, nor is the onHeadersReceived event fired
+    // for about: and data: frames; so we update the frame structure for such
     // frames here.
     if (details.url.startsWith("about:") || details.url.startsWith("data:"))
     {
@@ -267,9 +267,9 @@
 
   browser.webNavigation.onCommitted.addListener(details =>
   {
-    // Unfortunately, Chrome doesn't provide the parent frame ID in the
-    // onCommitted event[1]. So, unless the navigation is for a top-level
-    // frame, we assume its parent frame is the top-level frame.
+    // Chrome <74 doesn't provide the parent frame ID in the onCommitted
+    // event[1]. So, unless the navigation is for a top-level frame, we assume
+    // its parent frame is the top-level frame.
     // [1] - https://bugs.chromium.org/p/chromium/issues/detail?id=908380
     let {frameId, tabId, parentFrameId, url} = details;
     if (typeof parentFrameId == "undefined")
