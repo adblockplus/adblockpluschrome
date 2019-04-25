@@ -112,17 +112,6 @@
     Object.defineProperty(object, name, {
       value(...args)
       {
-        if (typeof args[args.length - 1] == "function")
-          return func.apply(object, args);
-
-        // If the last argument is undefined, we drop it from the list assuming
-        // it stands for the optional callback. We must do this, because we have
-        // to replace it with our own callback. If we simply append our own
-        // callback to the list, it won't match the signature of the function
-        // and will cause an exception.
-        if (typeof args[args.length - 1] == "undefined")
-          args.pop();
-
         let resolvePromise = null;
         let rejectPromise = null;
 
