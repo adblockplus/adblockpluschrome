@@ -3,160 +3,125 @@
 {
   const {Prefs} = require("../../lib/prefs");
 
-  QUnit.module("Preferences", {
-    setup()
-    {
-      this._pbackup = Object.create(null);
-      for (let pref in Prefs)
+  QUnit.module("Preferences");
+
+  function afterWrite(prefKey)
+  {
+    return Promise.race([
+      new Promise((resolve, reject) =>
       {
-        let value = Prefs[pref];
-        this._pbackup[pref] = value;
+        let onChange = (changes, area) =>
+        {
+          if (area == "local" && prefKey in changes)
+          {
+            browser.storage.onChanged.removeListener(onChange);
+            resolve();
+          }
+        };
+        browser.storage.onChanged.addListener(onChange);
+      }),
+      // We take care to timeout after 500ms in case the onChange event doesn't
+      // fire when we expect it to. For example, Firefox 66 has a bug[1] whereby
+      // the event doesn't fire for falsey values.
+      // 1 - https://bugzilla.mozilla.org/show_bug.cgi?id=1541449
+      new Promise((resolve, reject) =>
+      {
+        setTimeout(() => { resolve(); }, 500);
+      })
+    ]);
+  }
+
+  function performStorageTests(prefName, prefKey, defaultValue, newValue, tests)
+  {
+    let [method, whichValue] = tests.shift();
+    let value = whichValue == "default" ? defaultValue : newValue;
+
+    return browser.storage.local.get(prefKey).then(items =>
+    {
+      let expectingWrite = typeof defaultValue == "object" ||
+                           prefKey in items ||
+                           whichValue == "new";
+      let promise = expectingWrite ? afterWrite(prefKey) : Promise.resolve();
+
+      if (method == "property")
+        Prefs[prefName] = value;
+      else
+        Prefs.set(prefName, value);
+
+      deepEqual(Prefs[prefName], value,
+                "Assigned Prefs['" + prefName + "'] " + whichValue + " value");
+
+      return promise;
+    }).then(() =>
+      browser.storage.local.get(prefKey)
+    ).then(items =>
+    {
+      if (whichValue == "default" && typeof defaultValue != "object")
+      {
+        equal(prefKey in items, false,
+              prefKey + " shouldn't be present in stoage.local");
       }
-      Prefs.enabled = true;
-    },
+      else
+      {
+        equal(prefKey in items, true,
+              prefKey + " should be present in stoage.local");
 
-    teardown()
-    {
-      for (let pref in this._pbackup)
-        Prefs[pref] = this._pbackup[pref];
-    }
-  });
+        deepEqual(items[prefKey], value,
+                  prefKey + " in storage.local should have the value " +
+                  JSON.stringify(value));
+      }
 
-  function checkPrefExists(name, expectedValue, description, assert)
-  {
-    let done = assert.async();
-    let key = "pref:" + name;
-    browser.storage.local.get(key).then(items =>
-    {
-      equal(key in items, expectedValue, description);
-      done();
+      if (tests.length)
+      {
+        return performStorageTests(prefName, prefKey,
+                                   defaultValue, newValue, tests);
+      }
     });
   }
 
-  function checkPref(name, expectedValue, description, assert)
+  function testPrefStorage(prefName, defaultValue, newValue)
   {
-    let done = assert.async();
-    let key = "pref:" + name;
-    browser.storage.local.get(key).then(items =>
-    {
-      deepEqual(items[key], expectedValue, description);
-      done();
-    });
+    let prefKey = "pref:" + prefName;
+    let tests = [["property", "default"],
+                 ["property", "new"],
+                 ["property", "default"],
+                 ["set", "new"],
+                 ["set", "default"]];
+
+    let backupValue = Prefs[prefName];
+    return performStorageTests(prefName, prefKey, defaultValue, newValue, tests)
+        .catch(exception => { ok(false, exception); })
+        .then(() => Prefs.set(prefName, backupValue));
   }
 
-  test("Numerical pref", assert =>
+  test("Numerical preference", assert =>
   {
-    Prefs.patternsbackups = 0;
-    equal(
-      Prefs.patternsbackups, 0,
-      "Prefs object returns the correct value after setting pref to " +
-      "default value"
-    );
-    checkPrefExists(
-      "patternsbackups", false, "User-defined pref has been removed", assert
-    );
-    Prefs.patternsbackups = 12;
-    equal(
-      Prefs.patternsbackups, 12,
-      "Prefs object returns the correct value after setting pref to " +
-      "non-default value"
-    );
-    checkPrefExists(
-      "patternsbackups", true, "User-defined pref has been created", assert
-    );
-    checkPref("patternsbackups", 12, "Value has been written", assert);
+    let done = assert.async();
+
+    testPrefStorage("patternsbackups", 0, 12).then(done);
   });
 
-  test("Boolean pref", assert =>
+  test("Boolean preference", assert =>
   {
-    Prefs.enabled = true;
-    equal(
-      Prefs.enabled, true,
-      "Prefs object returns the correct value after setting pref to " +
-      "default value"
-    );
-    checkPrefExists("enabled", false, "User-defined pref has been removed",
-                    assert);
-    Prefs.enabled = false;
-    equal(
-      Prefs.enabled, false,
-      "Prefs object returns the correct value after setting pref to " +
-      "non-default value"
-    );
-    checkPrefExists("enabled", true, "User-defined pref has been created",
-                    assert);
-    checkPref("enabled", false, "Value has been written", assert);
+    let done = assert.async();
+
+    testPrefStorage("enabled", true, false).then(done);
   });
 
-  test("String pref", assert =>
+  test("String preference", assert =>
   {
+    let done = assert.async();
+
     let defaultValue = "https://notification.adblockplus.org/notification.json";
-    Prefs.notificationurl = defaultValue;
-    equal(
-      Prefs.notificationurl, defaultValue,
-      "Prefs object returns the correct value after setting pref to " +
-      "default value"
-    );
-    checkPrefExists("notificationurl", false,
-                    "User-defined pref has been removed", assert);
-
     let newValue = "https://notification.adblockplus.org/foo\u1234bar.json";
-    Prefs.notificationurl = newValue;
-    equal(
-      Prefs.notificationurl, newValue,
-      "Prefs object returns the correct value after setting pref to " +
-      "non-default value"
-    );
-    checkPrefExists("notificationurl", true,
-                    "User-defined pref has been created", assert);
-    checkPref("notificationurl", newValue, "Value has been written", assert);
+
+    testPrefStorage("notificationurl", defaultValue, newValue).then(done);
   });
 
-  test("Object pref (complete replacement)", assert =>
+  test("Object preference", assert =>
   {
-    Prefs.notificationdata = {};
-    deepEqual(
-      Prefs.notificationdata, {},
-      "Prefs object returns the correct value after setting pref to " +
-      "default value"
-    );
+    let done = assert.async();
 
-    let newValue = {foo: 1, bar: "adsf\u1234"};
-    Prefs.notificationdata = newValue;
-    equal(
-      Prefs.notificationdata, newValue,
-      "Prefs object returns the correct value after setting pref to " +
-      "non-default value"
-    );
-    checkPrefExists("notificationdata", true,
-                    "User-defined pref has been created", assert);
-    checkPref("notificationdata", newValue, "Value has been written", assert);
-  });
-
-  test("Property-wise modification", assert =>
-  {
-    Prefs.notificationdata = {};
-
-    Prefs.notificationdata.foo = 1;
-    Prefs.notificationdata.bar = 2;
-    Prefs.notificationdata = JSON.parse(JSON.stringify(Prefs.notificationdata));
-    deepEqual(
-      Prefs.notificationdata, {foo: 1, bar: 2},
-      "Prefs object returns the correct value after setting pref to " +
-      "non-default value"
-    );
-    checkPrefExists("notificationdata", true,
-                    "User-defined pref has been created", assert);
-    checkPref("notificationdata", {foo: 1, bar: 2}, "Value has been written",
-              assert);
-
-    delete Prefs.notificationdata.foo;
-    delete Prefs.notificationdata.bar;
-    Prefs.notificationdata = JSON.parse(JSON.stringify(Prefs.notificationdata));
-    deepEqual(
-      Prefs.notificationdata, {},
-      "Prefs object returns the correct value after setting pref to " +
-      "default value"
-    );
+    testPrefStorage("notificationdata", {}, {foo: 1, bar: 2}).then(done);
   });
 }
