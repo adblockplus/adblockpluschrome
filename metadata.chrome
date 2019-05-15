@@ -53,7 +53,8 @@ document_start =
 document_end = include.postload.js
 
 [mapping]
-subscriptions.xml = adblockpluscore/chrome/content/ui/subscriptions.xml
+subscriptions.json = adblockpluscore/data/subscriptions.json
+data/languages.json = adblockplusui/data/languages.json
 first-run.html = adblockplusui/first-run.html
 common.js = adblockplusui/common.js
 first-run.js = adblockplusui/first-run.js

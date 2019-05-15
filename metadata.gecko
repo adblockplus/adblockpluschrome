@@ -23,8 +23,5 @@ skin/mobile/checkmark.svg = adblockplusui/skin/mobile/checkmark.svg
 skin/mobile/toggle.svg = adblockplusui/skin/mobile/toggle.svg
 skin/mobile/trash.svg = adblockplusui/skin/mobile/trash.svg
 
-[bundles]
-lib/adblockplus.js += lib/firefoxDataCleanup.js
-
 [import_locales]
 adblockplusui/locale/*/mobile-options.json = *
