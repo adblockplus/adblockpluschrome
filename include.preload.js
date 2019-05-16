@@ -238,9 +238,10 @@ function checkSitekey()
     browser.runtime.sendMessage({type: "filters.addKey", token: attr});
 }
 
-function ElementHidingTracer()
+function ElementHidingTracer(selectors, exceptions)
 {
-  this.selectors = [];
+  this.selectors = selectors;
+  this.exceptions = exceptions;
   this.changedNodes = [];
   this.timeout = null;
   this.observer = new MutationObserver(this.observe.bind(this));
@@ -252,19 +253,12 @@ function ElementHidingTracer()
     this.trace();
 }
 ElementHidingTracer.prototype = {
-  addSelectors(selectors)
-  {
-    if (document.readyState != "loading")
-      this.checkNodes([document], selectors);
-
-    this.selectors.push(...selectors);
-  },
-
-  checkNodes(nodes, selectors)
+  checkNodes(nodes)
   {
     let effectiveSelectors = [];
+    let effectiveExceptions = [];
 
-    for (let selector of selectors)
+    for (let selector of this.selectors)
     {
       nodes: for (let node of nodes)
       {
@@ -282,19 +276,31 @@ ElementHidingTracer.prototype = {
       }
     }
 
-    if (effectiveSelectors.length > 0)
+    for (let exception of this.exceptions)
+    {
+      for (let node of nodes)
+      {
+        if (node.querySelector(exception.selector))
+        {
+          effectiveExceptions.push(exception.text);
+          break;
+        }
+      }
+    }
+
+    if (effectiveSelectors.length > 0 || effectiveExceptions.length > 0)
     {
       browser.runtime.sendMessage({
         type: "hitLogger.traceElemHide",
         selectors: effectiveSelectors,
-        filters: []
+        filters: effectiveExceptions
       });
     }
   },
 
   onTimeout()
   {
-    this.checkNodes(this.changedNodes, this.selectors);
+    this.checkNodes(this.changedNodes);
     this.changedNodes = [];
     this.timeout = null;
   },
@@ -356,7 +362,7 @@ ElementHidingTracer.prototype = {
 
   trace()
   {
-    this.checkNodes([document], this.selectors);
+    this.checkNodes([document]);
 
     this.observer.observe(
       document,
@@ -468,17 +474,21 @@ ContentFiltering.prototype = {
     }).then(response =>
     {
       if (this.tracer)
+      {
         this.tracer.disconnect();
-      this.tracer = null;
-
-      if (response.trace)
-        this.tracer = new ElementHidingTracer();
+        this.tracer = null;
+      }
 
       if (response.inline)
         this.addRulesInline(response.rules);
 
-      if (this.tracer)
-        this.tracer.addSelectors(response.selectors);
+      if (response.trace)
+      {
+        this.tracer = new ElementHidingTracer(
+          response.selectors,
+          response.exceptions
+        );
+      }
 
       this.elemHideEmulation.apply(response.emulatedPatterns);
     });
