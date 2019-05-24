@@ -32,32 +32,15 @@
 
   test("Choosing filter subscriptions", assert =>
   {
-    let done = assert.async();
-    fetch("subscriptions.xml")
-      .then(response => response.text())
-      .then(text =>
-      {
-        let doc = new DOMParser().parseFromString(text, "application/xml");
-        let nodes = doc.getElementsByTagName("subscription");
+    let subs = chooseFilterSubscriptions(require("../subscriptions.json"));
+    assert.ok(subs);
+    assert.ok(subs.has("circumvention"));
+    assert.ok(subs.has("ads"));
 
-        let subs = chooseFilterSubscriptions(nodes);
-        assert.ok(subs);
-        assert.ok(subs.circumvention);
-        assert.ok(subs.ads);
-
-        assert.equal(subs.circumvention.getAttribute("prefixes"),
-                     "de,en,en-US");
-        assert.equal(subs.circumvention.getAttribute("type"), "circumvention");
-        assert.equal(subs.ads.getAttribute("prefixes"), "en");
-        assert.equal(subs.ads.getAttribute("type"), "ads");
-
-        done();
-      })
-      .catch(() =>
-      {
-        assert.ok(false);
-
-        done();
-      });
+    assert.deepEqual(subs.get("circumvention").languages,
+                     ["de", "en", "en-US"]);
+    assert.equal(subs.get("circumvention").type, "circumvention");
+    assert.deepEqual(subs.get("ads").languages, ["en"]);
+    assert.equal(subs.get("ads").type, "ads");
   });
 }

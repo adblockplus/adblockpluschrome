@@ -28,16 +28,14 @@ if ("panels" in browser.devtools)
     {
       type: "prefs.get",
       key: "show_devtools_panel"
-    },
-    enabled =>
+    }).then(enabled =>
     {
       if (enabled)
       {
         browser.devtools.panels.create(
           "Adblock Plus",
           "icons/abp-32.png",
-          "devtools-panel.html",
-          panel =>
+          "devtools-panel.html").then(panel =>
           {
             panel.onShown.addListener(window =>
             {

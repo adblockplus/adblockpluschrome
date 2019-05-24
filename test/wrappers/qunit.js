@@ -27,9 +27,25 @@ it("qunit", function()
   ).then(elem =>
     this.driver.wait(until.elementTextContains(elem, "Tests completed"))
   ).then(() =>
-    this.driver.findElement(By.css("#qunit-tests .fail .test-name")).then(
-      elem => elem.getAttribute("textContent").then(name => assert.fail(name)),
-      () => null
+    this.driver.findElements(
+      By.css("#qunit-tests > .fail")
     )
+  ).then(failures =>
+    Promise.all(
+      failures.map(failure =>
+        failure.findElements(
+          By.css(".module-name, .test-name, .fail > .test-message")
+        ).then(messages =>
+          Promise.all(messages.map(e => e.getText()))
+        ).then(messages => messages.join(", "))
+      )
+    ).then(failureDescriptions =>
+    {
+      if (failureDescriptions.length > 0)
+      {
+        failureDescriptions.unshift("");
+        assert.fail(failureDescriptions.join("\n      - "));
+      }
+    })
   );
 });

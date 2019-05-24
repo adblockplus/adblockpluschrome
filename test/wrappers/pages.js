@@ -18,10 +18,11 @@
 "use strict";
 
 const TEST_PAGES_URL = "https://testpages.adblockplus.org/en/";
+const SKIP_ONLINE_TESTS = false;
 
 const assert = require("assert");
 const Jimp = require("jimp");
-const {By, until} = require("selenium-webdriver");
+const {By, until, error: {TimeoutError}} = require("selenium-webdriver");
 
 let lastScreenshot = Promise.resolve();
 
@@ -90,18 +91,24 @@ function getSections(driver)
   ));
 }
 
-it("test pages", function()
+it("Test pages", function()
 {
   return this.driver.navigate().to(TEST_PAGES_URL).then(() =>
     this.driver.findElements(By.css(".site-pagelist a"))
   ).then(elements =>
-    Promise.all(elements.map(elem => Promise.all([elem.getAttribute("href"),
+    Promise.all(elements.map(elem => Promise.all([elem.getAttribute("class"),
+                                                  elem.getAttribute("href"),
                                                   elem.getText()])))
   ).then(urls =>
   {
     let p1 = Promise.resolve();
-    for (let [url, pageTitle] of urls)
+    for (let [elemClass, url, pageTitle] of urls)
     {
+      let onlineTestCase = elemClass &&
+                           elemClass.split(/\s+/).includes("online");
+      if (SKIP_ONLINE_TESTS && onlineTestCase)
+        continue;
+
       let browser = this.test.parent.title.replace(/\s.*$/, "");
       if (// https://issues.adblockplus.org/ticket/6917
           pageTitle == "$subdocument" && browser == "Firefox" ||
@@ -153,6 +160,7 @@ it("test pages", function()
         for (let i = 0; i < testCases.length; i++)
         {
           let [title, expectedScreenshot, filters] = testCases[i];
+          let description = ["", "Test case: " + title, url].join("\n       ");
 
           p2 = p2.then(() =>
             this.driver.navigate().to(this.origin + "/options.html")
@@ -191,11 +199,13 @@ it("test pages", function()
               {
                 if (pageTitle == "$popup - Exception")
                 {
-                  assert.equal(handles.length, 3, title);
+                  assert.equal(handles.length, 3,
+                               "Popup is whitelisted" + description);
                   return closeWindow(this.driver, handles[2], handles[1]);
                 }
 
-                assert.equal(handles.length, 2, title);
+                assert.equal(handles.length, 2,
+                             "Popup is blocked" + description);
               });
             }
 
@@ -206,8 +216,13 @@ it("test pages", function()
                     screenshot.width == expectedScreenshot.width &&
                     screenshot.height == expectedScreenshot.height &&
                     screenshot.data.compare(expectedScreenshot.data) == 0
-                  ), 1000, title
-                )
+                  ), 1000
+                ).catch(e =>
+                {
+                  if (e instanceof TimeoutError)
+                    e = new Error("Screenshots don't match" + description);
+                  throw e;
+                })
               );
 
             // Sometimes on Firefox there is a delay until the added

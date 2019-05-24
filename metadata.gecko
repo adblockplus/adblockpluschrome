@@ -19,12 +19,9 @@ document_end -= include.postload.js
 mobile-options.html = adblockplusui/mobile-options.html
 mobile-options.js = adblockplusui/mobile-options.js
 skin/mobile-options.css = adblockplusui/skin/mobile-options.css
-skin/mobile/checkmark.svg = adblockplusui/skin/mobile/checkmark.svg
-skin/mobile/toggle.svg = adblockplusui/skin/mobile/toggle.svg
-skin/mobile/trash.svg = adblockplusui/skin/mobile/trash.svg
-
-[bundles]
-lib/adblockplus.js += lib/firefoxDataCleanup.js
+skin/icons/mobile/checkmark.svg = adblockplusui/skin/icons/mobile/checkmark.svg
+skin/icons/mobile/toggle.svg = adblockplusui/skin/icons/mobile/toggle.svg
+skin/icons/mobile/trash.svg = adblockplusui/skin/icons/mobile/trash.svg
 
 [import_locales]
 adblockplusui/locale/*/mobile-options.json = *

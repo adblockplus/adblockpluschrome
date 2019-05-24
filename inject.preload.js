@@ -28,7 +28,7 @@ document.addEventListener(randomEventName, event =>
   browser.runtime.sendMessage({
     type: "request.blockedByRTCWrapper",
     url
-  }, block =>
+  }).then(block =>
   {
     document.dispatchEvent(new CustomEvent(
       randomEventName + "-" + url, {detail: block}
@@ -107,33 +107,6 @@ function injected(eventName, injectedIntoContentWindow)
                           contentWindowDesc);
     Object.defineProperty(element.prototype, "contentDocument",
                           contentDocumentDesc);
-  }
-
-  /*
-   * Shadow root getter wrapper
-   *
-   * After creating our shadowRoot we must wrap the getter to prevent the
-   * website from accessing it (#4191, #4298). This is required as a
-   * workaround for the lack of user style support in Chrome.
-   * See https://bugs.chromium.org/p/chromium/issues/detail?id=632009&desc=2
-   */
-  if ("shadowRoot" in Element.prototype)
-  {
-    let ourShadowRoot = document.documentElement.shadowRoot;
-    if (ourShadowRoot)
-    {
-      let desc = Object.getOwnPropertyDescriptor(Element.prototype,
-                                                 "shadowRoot");
-      let shadowRoot = Function.prototype.call.bind(desc.get);
-
-      Object.defineProperty(Element.prototype, "shadowRoot", {
-        configurable: true, enumerable: true, get()
-        {
-          let thisShadow = shadowRoot(this);
-          return thisShadow == ourShadowRoot ? null : thisShadow;
-        }
-      });
-    }
   }
 
   /*
@@ -378,18 +351,19 @@ if (document instanceof HTMLDocument)
     script.async = false;
 
     // Firefox 58 only bypasses site CSPs when assigning to 'src',
-    // while Chrome 67 only bypasses site CSPs when using 'textContent'.
-    if (browser.runtime.getURL("").startsWith("chrome-extension://"))
-    {
-      script.textContent = code;
-      document.documentElement.appendChild(script);
-    }
-    else
+    // while Chrome 67 and Microsoft Edge 44.17763.1.0
+    // only bypass site CSPs when using 'textContent'.
+    if (browser.runtime.getURL("").startsWith("moz-extension://"))
     {
       let url = URL.createObjectURL(new Blob([code]));
       script.src = url;
       document.documentElement.appendChild(script);
       URL.revokeObjectURL(url);
+    }
+    else
+    {
+      script.textContent = code;
+      document.documentElement.appendChild(script);
     }
 
     document.documentElement.removeChild(script);
