@@ -68,7 +68,6 @@ issue-reporter.js = adblockplusui/issue-reporter.js
 popup.html = adblockplusui/popup.html
 popup.js = adblockplusui/popup.js
 snippets.js = adblockpluscore/lib/content/snippets.js
-subscriptions.json = adblockpluscore/data/subscriptions.json
 updates.html = adblockplusui/updates.html
 updates.js = adblockplusui/updates.js
 data/languages.json = adblockplusui/data/languages.json
