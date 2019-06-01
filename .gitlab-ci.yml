@@ -111,6 +111,14 @@ prepare-dependencies:
       - ./
     policy: push
 
+docs:
+  extends: .test_template
+  script:
+    - npm run docs
+  artifacts:
+    paths:
+      - docs/
+
 test:firefox:oldest:
   extends: .test_template
   script:
