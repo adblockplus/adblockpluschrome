@@ -297,7 +297,11 @@ if (!("values" in Object))
 // we can obtain the list of accepted resource types from the error message
 // when creating an onBeforeRequest event listener with an unsupported resource
 // type.
-if ("webRequest" in browser && !("ResourceType" in browser.webRequest))
+//
+// Note: that while `browser.webRequest` is `undefined` for content scripts,
+// with Firefox for Android `"webRequest" in browser` is actually `true`!
+// See https://bugzil.la/1556773
+if (browser.webRequest && !("ResourceType" in browser.webRequest))
 {
   try
   {
