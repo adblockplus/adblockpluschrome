@@ -41,10 +41,7 @@ stages:
       if [[ "$CI_RUNNER_DESCRIPTION" == *gitlab.com ]]; then
         apt-get update;
         apt-get install -y apt-transport-https python-pip libgtk-3-0 libxt6 \
-          xvfb libnss3 libxss1 libgconf-2-4 libasound2;
-        curl -sL https://deb.nodesource.com/setup_8.x | bash -;
-        apt-get update -y;
-        apt-get install -y nodejs;
+          xvfb libnss3 libxss1 libgconf-2-4 libasound2 nodejs npm;
       fi
     - mkdir -p .git/info
     - pip install --user Jinja2 cryptography
