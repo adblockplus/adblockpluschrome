@@ -5,12 +5,10 @@ author = eyeo GmbH
 backgroundScripts = polyfill.js
   ext/common.js
   ext/background.js
-  lib/compat.js
   lib/adblockplus.js
 testScripts = ../polyfill.js
   ../ext/common.js
   ../ext/background.js
-  ../lib/compat.js
   tests.js
 options = options.html
 browserAction =
