@@ -173,6 +173,45 @@
       frame.parent = parentFrame;
   }
 
+  let enableCORSListener = details =>
+  {
+    // In order to allow CORS for every image, so that we can draw it
+    // on a canvas and analyze it, we need to intercept all images headers
+    // and set their Access-Control-Allow-Origin header to `*`
+    let fixture = {
+      name: "access-control-allow-origin",
+      value: "*"
+    };
+    let header = details.responseHeaders.find(
+      item => item.name.toLowerCase() === fixture.name
+    );
+    if (header)
+    {
+      header.value = fixture.value;
+    }
+    else
+    {
+      details.responseHeaders.push(fixture);
+    }
+    return {responseHeaders: details.responseHeaders};
+  };
+
+  let enableCORSFilter = {types: ["image"], urls: ["<all_urls>"]};
+  let enableCORSDetails = ["blocking", "responseHeaders", "extraHeaders"];
+
+  // extraHeaders is mandatory on Chrome but not supported in other browsers
+  try
+  {
+    browser.webRequest.onHeadersReceived.addListener(
+      enableCORSListener, enableCORSFilter, enableCORSDetails);
+  }
+  catch (olderBrowsersOrFirefox)
+  {
+    enableCORSDetails.pop();
+    browser.webRequest.onHeadersReceived.addListener(
+      enableCORSListener, enableCORSFilter, enableCORSDetails);
+  }
+
   browser.webRequest.onHeadersReceived.addListener(details =>
   {
     // We have to update the frame structure when switching to a new
