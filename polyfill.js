@@ -21,10 +21,16 @@
   let asyncAPIs = [
     "browserAction.setIcon",
     "browserAction.getPopup",
+    "contentSettings.cookies.get",
+    "contentSettings.javascript.get",
     "contextMenus.removeAll",
     "devtools.panels.create",
+    "management.getAll",
     "notifications.clear",
     "notifications.create",
+    "permissions.contains",
+    "permissions.remove",
+    "permissions.request",
     "runtime.getBrowserInfo",
     "runtime.openOptionsPage",
     "runtime.sendMessage",
@@ -278,15 +284,6 @@
 
     wrapRuntimeOnMessage();
   }
-
-  // Workaround since HTMLCollection, NodeList, StyleSheetList, and CSSRuleList
-  // didn't have iterator support before Chrome 51.
-  // https://bugs.chromium.org/p/chromium/issues/detail?id=401699
-  for (let object of [HTMLCollection, NodeList, StyleSheetList, CSSRuleList])
-  {
-    if (!(Symbol.iterator in object.prototype))
-      object.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
-  }
 }
 
 // Object.values is not supported in Chrome <54.
@@ -321,32 +318,6 @@ if (browser.webRequest && !("ResourceType" in browser.webRequest))
         browser.webRequest.ResourceType[type.toUpperCase()] = type;
     }
   }
-}
-
-// Chrome <50 does not support createImageBitmap, this is a simplistic
-// polyfill which only fulfills the usecase of accepting a Blob containing
-// an image and returning something which CanvasRenderingContext2D.drawImage()
-// accepts.
-if (typeof createImageBitmap == "undefined")
-{
-  self.createImageBitmap = blob =>
-  {
-    return new Promise((resolve, reject) =>
-    {
-      let image = new Image();
-      image.src = URL.createObjectURL(blob);
-      image.addEventListener("load", () =>
-      {
-        URL.revokeObjectURL(image.src);
-        resolve(image);
-      });
-      image.addEventListener("error", () =>
-      {
-        URL.revokeObjectURL(image.src);
-        reject("createImageBitmap failed");
-      });
-    });
-  };
 }
 
 // Chrome <69 does not support OffscreenCanvas
