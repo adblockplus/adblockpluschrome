@@ -44,7 +44,12 @@ stages:
           xvfb libnss3 libxss1 libgconf-2-4 libasound2 nodejs npm;
       fi
     - mkdir -p .git/info
-    - pip install --user Jinja2 cryptography
+    - pip install --user Jinja2 cryptography fonttools brotli
+    # This pipeline runs on a custom runner as an unpriviliged user.
+    # Therefore the pyftsubset executable of the fonttools dependency above is
+    # installed to `~/.local/bin` and needs to be added to the $PATH variable
+    # in order to be available.
+    - export PATH=$PATH:~/.local/bin
     - "npm_config_unsafe_perm=true python ensure_dependencies.py"
     - "[ -d node_modules ] || npm install"
 
