@@ -1,0 +1,183 @@
+[general]
+basename = adblockpluschrome
+version = 3.6.3
+author = eyeo GmbH
+backgroundScripts = polyfill.js
+  ext/common.js
+  ext/background.js
+  lib/adblockplus.js
+testScripts = ../polyfill.js
+  ../ext/common.js
+  ../ext/background.js
+  tests.js
+options = options.html
+browserAction =
+  icons/abp-16.png
+  icons/abp-20.png
+  icons/abp-32.png
+  icons/abp-40.png
+  popup.html
+icons =
+  icons/abp-16.png
+  icons/abp-32.png
+  icons/detailed/abp-48.png
+  icons/detailed/abp-64.png
+  icons/detailed/abp-128.png
+
+[manifest]
+devtools_page = devtools.html
+storage.managed_schema = managed-storage-schema.json
+permissions =
+  tabs
+  <all_urls>
+  contextMenus
+  webRequest
+  webRequestBlocking
+  webNavigation
+  storage
+  unlimitedStorage
+  notifications
+
+[compat]
+chrome = 51.0
+opera = 38.0
+
+[contentScripts]
+document_start =
+  polyfill.js
+  ext/common.js
+  ext/content.js
+  include.preload.js
+document_end = include.postload.js
+
+[mapping]
+common.js = adblockplusui/common.js
+composer.html = adblockplusui/composer.html
+composer.js = adblockplusui/composer.js
+day1.html = adblockplusui/day1.html
+day1.js = adblockplusui/day1.js
+desktop-options.html = adblockplusui/desktop-options.html
+desktop-options.js = adblockplusui/desktop-options.js
+devtools-panel.html = adblockplusui/devtools-panel.html
+devtools-panel.js = adblockplusui/devtools-panel.js
+first-run.html = adblockplusui/first-run.html
+first-run.js = adblockplusui/first-run.js
+i18n.js = adblockplusui/i18n.js
+issue-reporter.html = adblockplusui/issue-reporter.html
+issue-reporter.js = adblockplusui/issue-reporter.js
+popup.html = adblockplusui/popup.html
+popup.js = adblockplusui/popup.js
+popup-dummy.html = adblockplusui/popup-dummy.html
+popup-dummy.js = adblockplusui/popup-dummy.js
+proxy.html = adblockplusui/proxy.html
+snippets.js = adblockpluscore/lib/content/snippets.js
+updates.html = adblockplusui/updates.html
+updates.js = adblockplusui/updates.js
+data/languages.json = adblockplusui/data/languages.json
+icons/detailed/abp-128.png = adblockplusui/skin/icons/abp-128.png
+skin/common.css = adblockplusui/skin/common.css
+skin/composer.css = adblockplusui/skin/composer.css
+skin/day1.css = adblockplusui/skin/day1.css
+skin/desktop-options.css = adblockplusui/skin/desktop-options.css
+skin/devtools-panel.css = adblockplusui/skin/devtools-panel.css
+skin/first-run.css = adblockplusui/skin/first-run.css
+skin/fonts.css = adblockplusui/skin/fonts/font.css
+skin/issue-reporter.css = adblockplusui/skin/issue-reporter.css
+skin/popup.css = adblockplusui/skin/popup.css
+skin/popup-dummy.css = adblockplusui/skin/popup-dummy.css
+skin/updates.css = adblockplusui/skin/updates.css
+skin/web.css = adblockplusui/skin/web.css
+skin/backgrounds/appstore.svg = adblockplusui/skin/backgrounds/appstore.svg
+skin/backgrounds/googleplay.svg = adblockplusui/skin/backgrounds/googleplay.svg
+skin/backgrounds/toolbar.svg = adblockplusui/skin/backgrounds/toolbar.svg
+skin/fonts/300/Athiti.woff2 = adblockplusui/skin/fonts/300/Athiti.woff2
+skin/fonts/300/Cairo.woff2 = adblockplusui/skin/fonts/300/Cairo.woff2
+skin/fonts/300/SourceSansPro.woff2 = adblockplusui/skin/fonts/300/SourceSansPro.woff2
+skin/fonts/400/Athiti.woff2 = adblockplusui/skin/fonts/400/Athiti.woff2
+skin/fonts/400/Cairo.woff2 = adblockplusui/skin/fonts/400/Cairo.woff2
+skin/fonts/400/SourceSansPro.woff2 = adblockplusui/skin/fonts/400/SourceSansPro.woff2
+skin/fonts/700/Athiti.woff2 = adblockplusui/skin/fonts/700/Athiti.woff2
+skin/fonts/700/Cairo.woff2 = adblockplusui/skin/fonts/700/Cairo.woff2
+skin/fonts/700/SourceSansPro.woff2 = adblockplusui/skin/fonts/700/SourceSansPro.woff2
+skin/fonts/font.css = adblockplusui/skin/fonts/font.css
+skin/icons/abp-full-logo.svg = adblockplusui/skin/icons/abp-full-logo.svg
+skin/icons/abp-logo.svg = adblockplusui/skin/icons/abp-logo.svg
+skin/icons/alert.svg = adblockplusui/skin/icons/alert.svg
+skin/icons/android.svg = adblockplusui/skin/icons/android.svg
+skin/icons/apple.svg = adblockplusui/skin/icons/apple.svg
+skin/icons/attention.svg = adblockplusui/skin/icons/attention.svg
+skin/icons/block-element.svg = adblockplusui/skin/icons/block-element.svg
+skin/icons/checkbox.svg = adblockplusui/skin/icons/checkbox.svg
+skin/icons/checkmark.svg = adblockplusui/skin/icons/checkmark.svg
+skin/icons/code.svg = adblockplusui/skin/icons/code.svg
+skin/icons/copy.svg = adblockplusui/skin/icons/copy.svg
+skin/icons/critical.svg = adblockplusui/skin/icons/critical.svg
+skin/icons/delete.svg = adblockplusui/skin/icons/delete.svg
+skin/icons/error.svg = adblockplusui/skin/icons/error.svg
+skin/icons/facebook.svg = adblockplusui/skin/icons/facebook.svg
+skin/icons/gear.svg = adblockplusui/skin/icons/gear.svg
+skin/icons/globe.svg = adblockplusui/skin/icons/globe.svg
+skin/icons/heart.svg = adblockplusui/skin/icons/heart.svg
+skin/icons/hide.svg = adblockplusui/skin/icons/hide.svg
+skin/icons/highlight.svg = adblockplusui/skin/icons/highlight.svg
+skin/icons/iconOff.svg = adblockplusui/skin/icons/iconOff.svg
+skin/icons/iconOn.svg = adblockplusui/skin/icons/iconOn.svg
+skin/icons/info.svg = adblockplusui/skin/icons/info.svg
+skin/icons/radio.svg = adblockplusui/skin/icons/radio.svg
+skin/icons/reload.svg = adblockplusui/skin/icons/reload.svg
+skin/icons/report-issue.svg = adblockplusui/skin/icons/report-issue.svg
+skin/icons/star.svg = adblockplusui/skin/icons/star.svg
+skin/icons/toggle.svg = adblockplusui/skin/icons/toggle.svg
+skin/icons/tooltip.svg = adblockplusui/skin/icons/tooltip.svg
+skin/icons/trash.svg = adblockplusui/skin/icons/trash.svg
+skin/icons/twitter.svg = adblockplusui/skin/icons/twitter.svg
+skin/icons/weibo.svg = adblockplusui/skin/icons/weibo.svg
+skin/icons/day1/bug.svg = adblockplusui/skin/icons/day1/bug.svg
+skin/icons/day1/tower.svg = adblockplusui/skin/icons/day1/tower.svg
+skin/icons/day1/wave.svg = adblockplusui/skin/icons/day1/wave.svg
+skin/icons/first-run/checkmark-header.svg = adblockplusui/skin/icons/first-run/checkmark-header.svg
+skin/icons/first-run/checkmark.svg = adblockplusui/skin/icons/first-run/checkmark.svg
+skin/icons/first-run/lock.svg = adblockplusui/skin/icons/first-run/lock.svg
+skin/icons/first-run/rocket.svg = adblockplusui/skin/icons/first-run/rocket.svg
+skin/icons/updates/base-graphic.svg = adblockplusui/skin/icons/updates/base-graphic.svg
+skin/icons/updates/mobile.svg = adblockplusui/skin/icons/updates/mobile.svg
+skin/icons/updates/rocket.svg = adblockplusui/skin/icons/updates/rocket.svg
+skin/icons/updates/thumbs-up.svg = adblockplusui/skin/icons/updates/thumbs-up.svg
+skin/icons/waving.svg = adblockplusui/skin/icons/waving.svg
+skin/icons/web/navbar-logo.svg = adblockplusui/skin/icons/web/navbar-logo.svg
+
+[bundles]
+lib/adblockplus.js =
+  adblockpluscore/lib/filterListener.js
+  adblockpluscore/lib/synchronizer.js
+  lib/devtools.js
+  lib/requestBlocker.js
+  lib/popupBlocker.js
+  lib/subscriptionInit.js
+  lib/filterComposer.js
+  lib/stats.js
+  lib/uninstall.js
+  lib/csp.js
+  lib/contentFiltering.js
+  lib/messageResponder.js
+include.preload.js =
+  include.preload.js
+  inject.preload.js
+include.postload.js =
+  subscriptionLink.postload.js
+  composer.postload.js
+
+[import_locales]
+adblockplusui/locale/*/antiadblockInit.json = *
+adblockplusui/locale/*/common.json = *
+adblockplusui/locale/*/composer.json = *
+adblockplusui/locale/*/day1.json = *
+adblockplusui/locale/*/desktop-options.json = *
+adblockplusui/locale/*/devtools-panel.json = *
+adblockplusui/locale/*/filter-validation.json = *
+adblockplusui/locale/*/first-run.json = *
+adblockplusui/locale/*/issue-reporter.json = *
+adblockplusui/locale/*/manifest.json = *
+adblockplusui/locale/*/notification-helper.json = *
+adblockplusui/locale/*/popup.json = *
+adblockplusui/locale/*/updates.json = *

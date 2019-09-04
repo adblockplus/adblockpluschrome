@@ -1,5 +1,5 @@
 [default]
-inherit = metadata.chrome
+inherit = metadata.base
 
 [general]
 app_id_release={d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}
