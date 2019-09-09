@@ -1,6 +1,7 @@
 /devenv*/
 /node_modules/
 /docs/
+/test/screenshots/
 *.zip
 *.crx
 *.xpi

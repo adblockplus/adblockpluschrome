@@ -21,10 +21,17 @@ const TEST_PAGES_URL = "https://testpages.adblockplus.org/en/";
 const SKIP_ONLINE_TESTS = false;
 
 const assert = require("assert");
+const fs = require("fs");
+const path = require("path");
+const {promisify} = require("util");
 const Jimp = require("jimp");
 const {By, until, error: {TimeoutError}} = require("selenium-webdriver");
 
+const readdirAsync = promisify(fs.readdir);
+const unlinkAsync = promisify(fs.unlink);
+
 let lastScreenshot = Promise.resolve();
+let screenshotFolder = path.join(__dirname, "..", "screenshots");
 
 // Once we require Node.js >= 10 this should be replaced with
 // the built-in finally() method of the Promise object.
@@ -51,6 +58,22 @@ function closeWindow(driver, goTo, returnTo, callback)
   );
 }
 
+function normalize(input)
+{
+  return input.replace(/[\W]+/g, "_").toLowerCase();
+}
+
+function removeOutdatedScreenshots(browser)
+{
+  return readdirAsync(screenshotFolder).then(files =>
+    Promise.all(files.filter(f => f.startsWith(browser)).map(f =>
+      unlinkAsync(path.join(screenshotFolder, f))
+    ))
+  ).catch(err =>
+    null
+  );
+}
+
 function takeScreenshot(element)
 {
   // It would be preferable if we could use WebElement.takeScreenshot(),
@@ -70,7 +93,7 @@ function takeScreenshot(element)
 
       return element.getDriver().takeScreenshot()
         .then(s => Jimp.read(Buffer.from(s, "base64")))
-        .then(img => img.crop(x, y, rect.width, rect.height).bitmap);
+        .then(img => img.crop(x, y, rect.width, rect.height));
     })
   );
   return lastScreenshot;
@@ -93,6 +116,9 @@ function getSections(driver)
 
 it("Test pages", function()
 {
+  let vBrowser = normalize(this.test.parent.title);
+  let screenshotsRemoved = removeOutdatedScreenshots(vBrowser);
+
   return this.driver.navigate().to(TEST_PAGES_URL).then(() =>
     this.driver.findElements(By.css(".site-pagelist a"))
   ).then(elements =>
@@ -209,21 +235,50 @@ it("Test pages", function()
               });
             }
 
+            let fileNamePrefix = `${vBrowser}_${normalize(title)}`;
+
             let checkTestCase = () =>
               getSections(this.driver).then(sections =>
-                this.driver.wait(() =>
+              {
+                let bitmap = null;
+                let expectedBitmap = null;
+                let actualScreenshot = null;
+
+                return this.driver.wait(() =>
                   takeScreenshot(sections[i][1]).then(screenshot =>
-                    screenshot.width == expectedScreenshot.width &&
-                    screenshot.height == expectedScreenshot.height &&
-                    screenshot.data.compare(expectedScreenshot.data) == 0
-                  ), 1000
+                  {
+                    actualScreenshot = screenshot;
+                    ({bitmap} = screenshot);
+                    ({bitmap: expectedBitmap} = expectedScreenshot);
+                    return (bitmap.width == expectedBitmap.width &&
+                            bitmap.height == expectedBitmap.height &&
+                            bitmap.data.compare(expectedBitmap.data) == 0);
+                  }), 1000
                 ).catch(e =>
                 {
                   if (e instanceof TimeoutError)
-                    e = new Error("Screenshots don't match" + description);
+                  {
+                    screenshotsRemoved.then(() =>
+                    {
+                      for (let [postfix, data] of [
+                        ["actual", actualScreenshot],
+                        ["expected", expectedScreenshot]
+                      ])
+                      {
+                        data.write(path.join(
+                          screenshotFolder,
+                          `${fileNamePrefix}_${postfix}.png`
+                        ));
+                      }
+                    });
+                    e = new Error(
+                      "Screenshots don't match" + description + "\n       " +
+                      "(See " + fileNamePrefix + "_*.png in test/screenshots.)"
+                    );
+                  }
                   throw e;
-                })
-              );
+                });
+              });
 
             // Sometimes on Firefox there is a delay until the added
             // filters become effective. So if the test case fails once,

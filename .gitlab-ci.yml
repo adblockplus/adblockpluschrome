@@ -69,6 +69,10 @@ stages:
   retry:
     max: 2
     when: stuck_or_timeout_failure
+  artifacts:
+    paths:
+      - test/screenshots/
+    when: on_failure
 
 .build:
   extends: .pull_cache
