@@ -28,6 +28,7 @@ stages:
   - prepare
   - build
   - test
+  - download
 
 .dependencies:
   script: &dependencies
@@ -73,6 +74,8 @@ stages:
     paths:
       - test/screenshots/
     when: on_failure
+  except:
+    - schedules
 
 .build:
   extends: .pull_cache
@@ -80,6 +83,8 @@ stages:
   stage: build
   only:
     - master
+  except:
+    - schedules
   script:
     - python build.py build -t $PLATFORM
   artifacts:
@@ -116,6 +121,8 @@ prepare-dependencies:
     paths:
       - ./
     policy: push
+  except:
+    - schedules
 
 docs:
   extends: .test_template
@@ -144,3 +151,24 @@ test:chromium:latest:
   extends: .test_template
   script:
     - xvfb-run -a npm run test-only -- -g 'Chromium \(latest\)'
+
+.download:
+  stage: download
+  script:
+    - npm install
+    - npm run archive -- $EXTENSION_ID
+  artifacts:
+    paths:
+      - adblockpluschrome-*.crx
+  only:
+    - schedules
+
+download:release:
+  extends: .download
+  variables:
+    EXTENSION_ID: "cfhdojbkjhnklbpkdaibdccddilifddb"
+
+download:devbuild:
+  extends: .download
+  variables:
+    EXTENSION_ID: "ldcecbkkoecffmfljeihcmifjjdoepkn"
