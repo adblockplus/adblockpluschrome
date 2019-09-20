@@ -29,6 +29,7 @@ stages:
   - build
   - test
   - download
+  - rsync
 
 .dependencies:
   script: &dependencies
@@ -172,3 +173,26 @@ download:devbuild:
   extends: .download
   variables:
     EXTENSION_ID: "ldcecbkkoecffmfljeihcmifjjdoepkn"
+
+.rsync:
+  stage: rsync
+  only:
+    - schedules
+  tags:
+    - protected
+  script:
+    - "rsync -aR --ignore-existing *.crx $DESTINATION"
+
+rsync:release:
+  extends: .rsync
+  dependencies:
+    - download:release
+  variables:
+    DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/releases/"
+
+rsync:devbuild:
+  extends: .rsync
+  dependencies:
+    - download:devbuild
+  variables:
+    DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome"
