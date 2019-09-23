@@ -24,12 +24,12 @@
 # https://gitlab.com/eyeo/devops/ansible-role-adblockplus-builder
 # https://gitlab.com/eyeo/devops/ansible-role-gitlab-runner
 
-#stages:
-#  - prepare
-#  - build
-#  - test
-#  - download
-#  - scp
+stages:
+  - prepare
+  - build
+  - test
+  - download
+  - scp
 #
 #.dependencies:
 #  script: &dependencies
