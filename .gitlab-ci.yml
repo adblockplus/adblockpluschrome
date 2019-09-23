@@ -29,7 +29,7 @@ stages:
   - build
   - test
   - download
-  - rsync
+  - scp
 
 .dependencies:
   script: &dependencies
@@ -174,25 +174,25 @@ download:devbuild:
   variables:
     EXTENSION_ID: "ldcecbkkoecffmfljeihcmifjjdoepkn"
 
-.rsync:
-  stage: rsync
+.scp:
+  stage: scp
   only:
     - schedules
   tags:
     - protected
   script:
-    - "rsync -aR --ignore-existing *.crx $DESTINATION"
+    - "scp *.crx $DESTINATION"
 
-rsync:release:
-  extends: .rsync
+scp:release:
+  extends: .scp
   dependencies:
     - download:release
   variables:
     DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/releases/"
 
-rsync:devbuild:
-  extends: .rsync
+scp:devbuild:
+  extends: .scp
   dependencies:
     - download:devbuild
   variables:
-    DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome"
+    DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome/"
