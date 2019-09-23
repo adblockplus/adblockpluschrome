@@ -197,7 +197,7 @@ scp:devbuild:
   dependencies:
     - download:devbuild
   script:
-    - ssh builds_user@eyeofiles.com -- mkdir/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome -p ls -la /var/adblockplus/fileserver/builds/devbuilds
-    - ssh builds_user@eyeofiles.com -- mkdir -p ls -la /var/adblockplus/fileserver/builds/devbuilds
+    - ssh builds_user@eyeofiles.com -- mkdir -p /var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome
+    - ssh builds_user@eyeofiles.com -- ls -la /var/adblockplus/fileserver/builds/devbuilds
   variables:
     DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome/"
