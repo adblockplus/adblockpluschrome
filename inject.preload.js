@@ -148,7 +148,7 @@ function injected(eventName, injectedIntoContentWindow)
   {
     for (let name of properties)
     {
-      if (src.hasOwnProperty(name))
+      if (Object.prototype.hasOwnProperty.call(src, name))
       {
         Object.defineProperty(dest, name,
                               Object.getOwnPropertyDescriptor(src, name));
