@@ -80,6 +80,7 @@ stages:
     paths:
       - test/screenshots/
     when: on_failure
+    expire_in: 1 mo
 
 .build:
   extends: .pull_cache
@@ -135,6 +136,7 @@ docs:
   artifacts:
     paths:
       - docs/
+    expire_in: 3 mos
 
 test:firefox:oldest:
   extends: .test_screenshots_template
