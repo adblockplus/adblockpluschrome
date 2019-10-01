@@ -71,12 +71,15 @@ stages:
   retry:
     max: 2
     when: stuck_or_timeout_failure
+  except:
+    - schedules
+
+.test_screenshots_template:
+  extends: .test_template
   artifacts:
     paths:
       - test/screenshots/
     when: on_failure
-  except:
-    - schedules
 
 .build:
   extends: .pull_cache
@@ -134,22 +137,22 @@ docs:
       - docs/
 
 test:firefox:oldest:
-  extends: .test_template
+  extends: .test_screenshots_template
   script:
     - npm run test-only -- -g 'Firefox \(oldest\)'
 
 test:firefox:latest:
-  extends: .test_template
+  extends: .test_screenshots_template
   script:
     - npm run test-only -- -g 'Firefox \(latest\)'
 
 test:chromium:oldest:
-  extends: .test_template
+  extends: .test_screenshots_template
   script:
     - xvfb-run -a npm run test-only -- -g 'Chromium \(oldest\)'
 
 test:chromium:latest:
-  extends: .test_template
+  extends: .test_screenshots_template
   script:
     - xvfb-run -a npm run test-only -- -g 'Chromium \(latest\)'
 
