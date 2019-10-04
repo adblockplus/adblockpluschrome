@@ -160,6 +160,7 @@ lib/adblockplus.js =
   lib/csp.js
   lib/contentFiltering.js
   lib/messageResponder.js
+  lib/filterConfiguration.js
 include.preload.js =
   include.preload.js
   inject.preload.js
