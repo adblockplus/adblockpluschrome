@@ -320,21 +320,6 @@ if (browser.webRequest && !("ResourceType" in browser.webRequest))
   }
 }
 
-// Microsoft Edge doesn't support i18n.getMessage("@@bidi_dir").
-if (!browser.i18n.getMessage("@@bidi_dir"))
-{
-  let getMessage = browser.i18n.getMessage;
-  browser.i18n.getMessage = function(msgId, substitutions)
-  {
-    if (msgId == "@@bidi_dir")
-    {
-      let locale = browser.i18n.getUILanguage();
-      return /^(?:ar|fa|he|ug|ur)\b/.test(locale) ? "rtl" : "ltr";
-    }
-    return getMessage(msgId, substitutions);
-  };
-}
-
 // Chrome <69 does not support OffscreenCanvas
 if (typeof OffscreenCanvas == "undefined")
 {
