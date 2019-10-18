@@ -10,6 +10,6 @@ optional_permissions =
   management
 
 [compat]
-chrome = 51.0
-opera = 38.0
+chrome = 52.0
+opera = 39.0
 

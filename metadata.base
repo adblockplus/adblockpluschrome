@@ -38,10 +38,6 @@ permissions =
   unlimitedStorage
   notifications
 
-[compat]
-chrome = 52.0
-opera = 39.0
-
 [contentScripts]
 document_start =
   polyfill.js
