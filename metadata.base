@@ -165,7 +165,6 @@ include.postload.js =
   composer.postload.js
 
 [import_locales]
-adblockplusui/locale/*/antiadblockInit.json = *
 adblockplusui/locale/*/common.json = *
 adblockplusui/locale/*/composer.json = *
 adblockplusui/locale/*/day1.json = *
