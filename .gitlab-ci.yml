@@ -86,8 +86,6 @@ stages:
   extends: .pull_cache
   before_script: *dependencies
   stage: build
-  only:
-    - master
   except:
     - schedules
   script:
