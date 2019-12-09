@@ -119,6 +119,7 @@ skin/icons/highlight.svg = adblockplusui/skin/icons/highlight.svg
 skin/icons/iconOff.svg = adblockplusui/skin/icons/iconOff.svg
 skin/icons/iconOn.svg = adblockplusui/skin/icons/iconOn.svg
 skin/icons/info.svg = adblockplusui/skin/icons/info.svg
+skin/icons/info-big.svg = adblockplusui/skin/icons/info-big.svg
 skin/icons/radio.svg = adblockplusui/skin/icons/radio.svg
 skin/icons/reload.svg = adblockplusui/skin/icons/reload.svg
 skin/icons/report-issue.svg = adblockplusui/skin/icons/report-issue.svg
