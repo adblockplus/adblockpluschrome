@@ -18,7 +18,7 @@
 "use strict";
 
 {
-  window.ext = {};
+  self.ext = {};
 
   let EventTarget = ext._EventTarget = function()
   {

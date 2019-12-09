@@ -23,9 +23,7 @@
   QUnit.module("Subscription", {
     setup()
     {
-      let {Utils} = require("../../lib/utils");
-      Object.defineProperty(Utils, "appLocale",
-                            {value: "en", enumerable: true});
+      browser.i18n.getUILanguage = () => "en";
     }
   });
 

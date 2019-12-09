@@ -320,6 +320,29 @@ if (browser.webRequest && !("ResourceType" in browser.webRequest))
   }
 }
 
+// Microsoft Edge doesn't support i18n.getMessage("@@bidi_dir").
+if (!browser.i18n.getMessage("@@bidi_dir"))
+{
+  let {getMessage} = browser.i18n;
+  browser.i18n.getMessage = function(msgId, substitutions)
+  {
+    if (msgId == "@@bidi_dir")
+    {
+      let locale = browser.i18n.getUILanguage();
+      return /^(?:ar|fa|he|ug|ur)\b/.test(locale) ? "rtl" : "ltr";
+    }
+    return getMessage(msgId, substitutions);
+  };
+}
+
+// Firefox <56 separates the locale parts with an underscore instead of a dash.
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1374552
+let {getUILanguage} = browser.i18n;
+browser.i18n.getUILanguage = function()
+{
+  return getUILanguage().replace("_", "-");
+};
+
 // Chrome <69 does not support OffscreenCanvas
 if (typeof OffscreenCanvas == "undefined")
 {
@@ -331,3 +354,6 @@ if (typeof OffscreenCanvas == "undefined")
     return canvas;
   };
 }
+
+// Some Node.js modules rely on the global reference.
+self.global = self;

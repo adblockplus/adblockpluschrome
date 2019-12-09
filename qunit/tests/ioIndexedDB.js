@@ -160,7 +160,7 @@
     let done = assert.async();
     let called = [];
 
-    IO.readFromFile(fileName, (entry) => called.push(entry))
+    IO.readFromFile(fileName, entry => called.push(entry))
       .then(() =>
       {
         deepEqual(called, expected, message);
@@ -216,7 +216,7 @@
     {
       let db;
       let req = indexedDB.open("adblockplus", 1);
-      req.onsuccess = (event) =>
+      req.onsuccess = event =>
       {
         db = event.currentTarget.result;
         let store = db
@@ -235,7 +235,7 @@
     let db;
     let req = indexedDB.open("adblockplus", 1);
 
-    req.onsuccess = (event) =>
+    req.onsuccess = event =>
     {
       db = event.currentTarget.result;
       let store = db
