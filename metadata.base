@@ -61,6 +61,8 @@ first-run.js = adblockplusui/first-run.js
 i18n.js = adblockplusui/i18n.js
 issue-reporter.html = adblockplusui/issue-reporter.html
 issue-reporter.js = adblockplusui/issue-reporter.js
+data/mlHideIfGraphMatches/model.json = adblockpluscore/lib/data/mlHideIfGraphMatches/model.json
+data/mlHideIfGraphMatches/group1-shard1of1.bin = adblockpluscore/lib/data/mlHideIfGraphMatches/group1-shard1of1.bin
 popup.html = adblockplusui/popup.html
 popup.js = adblockplusui/popup.js
 popup-dummy.html = adblockplusui/popup-dummy.html
@@ -158,6 +160,7 @@ lib/adblockplus.js =
   lib/contentFiltering.js
   lib/messageResponder.js
   lib/filterConfiguration.js
+  lib/ml.js
 include.preload.js =
   include.preload.js
   inject.preload.js

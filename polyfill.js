@@ -354,3 +354,6 @@ if (typeof OffscreenCanvas == "undefined")
     return canvas;
   };
 }
+
+// Some Node.js modules rely on the global reference.
+self.global = self;
