@@ -37,11 +37,9 @@ parser.addArgument(
 let args = parser.parseArgs();
 
 let url = `${CWS_URL}${args["extension-id"]}%26uc`;
-request(url, (httpError, response, body) =>
-{
-  if (httpError)
-    throw httpError;
 
+let r = request(url).on("response", response =>
+{
   if (response.statusCode != 200)
   {
     throw new Error("Request failed with status code " +
@@ -53,9 +51,5 @@ request(url, (httpError, response, body) =>
   let filename = remoteFilename.replace("extension_", filenamePrefix)
                                .replace(/_/g, ".");
 
-  fs.writeFile(filename, body, fsError =>
-  {
-    if (fsError)
-      throw fsError;
-  });
+  r.pipe(fs.createWriteStream(filename));
 });
