@@ -122,211 +122,253 @@ async function getSections(driver)
   );
 }
 
-it("Test pages", async function()
+async function getUrls(driver)
 {
-  let vBrowser = normalize(this.test.parent.title);
-  let screenshotsRemoved = removeOutdatedScreenshots(vBrowser);
-
-  await this.driver.navigate().to(TEST_PAGES_URL);
-  let elements = await this.driver.findElements(By.css(".site-pagelist a"));
-  let urls = await Promise.all(elements.map(elem =>
+  await driver.navigate().to(TEST_PAGES_URL);
+  let elements = await driver.findElements(By.css(".site-pagelist a"));
+  return await Promise.all(elements.map(elem =>
     Promise.all([
       elem.getAttribute("class"),
       elem.getAttribute("href"),
       elem.getText()
     ])
   ));
+}
 
+function isExcluded(elemClass, pageTitle, testTitle)
+{
+  let onlineTestCase = elemClass && elemClass.split(/\s+/).includes("online");
+  if (SKIP_ONLINE_TESTS && onlineTestCase)
+    return true;
+
+  let browser = testTitle.replace(/\s.*$/, "");
+  if (// https://issues.adblockplus.org/ticket/6917
+      pageTitle == "$subdocument" && browser == "Firefox" ||
+      // Chromium doesn't support Flash
+      pageTitle.startsWith("$object") && browser == "Chromium" ||
+      // Chromium 63 doesn't have user stylesheets (required to
+      // overrule inline styles) and doesn't run content scripts
+      // in dynamically written documents.
+      testTitle == "Chromium (oldest)" &&
+      (pageTitle == "Inline style !important" ||
+       pageTitle == "Anonymous iframe document.write()"))
+    return true;
+
+  return false;
+}
+
+async function getTestCases(driver, url, pageTitle)
+{
+  await driver.navigate().to(url);
+  let [sections] = await Promise.all([
+    getSections(driver),
+    driver.executeScript(`
+      let documents = [document];
+      while (documents.length > 0)
+      {
+        let doc = documents.shift();
+        doc.body.classList.add('expected');
+        for (let i = 0; i < doc.defaultView.frames.length; i++)
+        {
+          try
+          {
+            documents.push(doc.defaultView.frames[i].document);
+          }
+          catch (e) {}
+        }
+      }
+      `)
+  ]);
+  let testCases = await Promise.all(
+    sections.map(([title, demo, filters]) =>
+      Promise.all([
+        title.getAttribute("textContent").then(testTitle =>
+          `${pageTitle.trim()} - ${testTitle.trim()}`
+        ),
+        takeScreenshot(demo),
+        Promise.all(filters.map(elem => elem.getAttribute("textContent")))
+      ])
+    ));
+  return testCases;
+}
+
+async function updateFilters(driver, origin, filters)
+{
+  await driver.navigate().to(origin + "/options.html");
+  let error = await driver.executeAsyncScript(`
+    let filters = arguments[0];
+    let callback = arguments[arguments.length - 1];
+    browser.runtime.sendMessage({type: "subscriptions.get",
+                                 downloadable: true,
+                                 special: true}).then(subs =>
+      Promise.all(subs.map(subscription =>
+        browser.runtime.sendMessage({type: "subscriptions.remove",
+                                     url: subscription.url})
+      ))
+    ).then(() =>
+      browser.runtime.sendMessage({type: "filters.importRaw",
+                                   text: filters})
+    ).then(errors => callback(errors[0]), callback);
+  `, filters.join("\n"));
+  if (error)
+    throw error;
+}
+
+async function popupTest(driver, sectionIndex, pageTitle, description)
+{
+  let sections = await getSections(driver);
+  await sections[sectionIndex][1].findElement(By.css("a[href],button")).click();
+  await driver.sleep(500);
+  let handles = await driver.getAllWindowHandles();
+  if (pageTitle == "$popup - Exception")
+  {
+    assert.equal(handles.length, 3, "Popup is whitelisted" + description);
+    await closeWindow(driver, handles[2], handles[1]);
+  }
+  else
+    assert.equal(handles.length, 2, "Popup is blocked" + description);
+}
+
+async function genericTest(driver, parentTitle, title, sectionIndex,
+  expectedScreenshot, description, url)
+{
+  let vBrowser = normalize(parentTitle);
+  let fileNamePrefix = `${vBrowser}_${normalize(title)}`;
+
+  let checkTestCase = async() =>
+  {
+    let tSections = await getSections(driver);
+    let bitmap = null;
+    let expectedBitmap = null;
+    let actualScreenshot = null;
+
+    try
+    {
+      await driver.wait(async() =>
+      {
+        actualScreenshot = await takeScreenshot(tSections[sectionIndex][1]);
+        ({bitmap} = actualScreenshot);
+        ({bitmap: expectedBitmap} = expectedScreenshot);
+        return (bitmap.width == expectedBitmap.width &&
+                bitmap.height == expectedBitmap.height &&
+                bitmap.data.compare(expectedBitmap.data) == 0);
+      }, 1000);
+    }
+    catch (e)
+    {
+      if (e instanceof TimeoutError)
+      {
+        await removeOutdatedScreenshots(vBrowser);
+        for (let [postfix, data] of [["actual", actualScreenshot],
+          ["expected", expectedScreenshot]])
+        {
+          await data.write(path.join(
+            screenshotFolder, `${fileNamePrefix}_${postfix}.png`));
+        }
+        throw new Error("Screenshots don't match" + description +
+          "\n       " +
+          "(See " + fileNamePrefix + "_*.png in test/screenshots.)"
+        );
+      }
+      throw e;
+    }
+  };
+
+  // Sometimes on Firefox there is a delay until the added
+  // filters become effective. So if the test case fails once,
+  // we reload the page and try once again.
+  try
+  {
+    await checkTestCase(expectedScreenshot, title, sectionIndex, url);
+  }
+  catch (e)
+  {
+    await driver.navigate().refresh();
+    await checkTestCase(expectedScreenshot, title, sectionIndex, url);
+  }
+}
+
+async function clickSubscribeLink(driver)
+{
+  await driver.navigate().to(TEST_PAGES_URL);
+  await driver.findElement(By.id("subscribe-button")).click();
+}
+
+function getSubscribeHandles(driver)
+{
+  return driver.wait(() => driver.getAllWindowHandles()
+    .then(allHandles => allHandles.length > 2 ? allHandles : null), 3000);
+}
+
+async function confirmSubscribeDialog(driver)
+{
+  await driver.wait(until.ableToSwitchToFrame(0), 1000);
+  let dialog = await driver.wait(
+    until.elementLocated(By.id("dialog-content-predefined")), 1000);
+  await driver.wait(async() =>
+  {
+    let [displayed, title] = await Promise.all([
+      dialog.isDisplayed(),
+      dialog.findElement(By.css("h3")).getText()
+    ]);
+    return displayed && title == "ABP Testcase Subscription";
+  }, 1000, "dialog shown");
+  await dialog.findElement(By.css("button")).click();
+}
+
+async function checkSubscriptionAdded(driver)
+{
+  let [added, err] = await driver.executeAsyncScript(`
+     let callback = arguments[arguments.length - 1];
+     browser.runtime.sendMessage({type: "subscriptions.get",
+                                  ignoreDisabled: true,
+                                  downloadable: true}).then(subs =>
+       subs.some(s =>
+         s.url == "${TEST_PAGES_URL}abp-testcase-subscription.txt"
+       )
+     ).then(
+       res => callback([res, null]),
+       err => callback([null, err])
+     );
+   `);
+  if (err)
+    throw err;
+  assert.ok(added, "subscription added");
+}
+
+it("Test pages", async function()
+{
+  let urls = await getUrls(this.driver);
   for (let [elemClass, url, pageTitle] of urls)
   {
-    let onlineTestCase = elemClass && elemClass.split(/\s+/).includes("online");
-    if (SKIP_ONLINE_TESTS && onlineTestCase)
+    if (isExcluded(elemClass, pageTitle, this.test.parent.title))
       continue;
 
-    let browser = this.test.parent.title.replace(/\s.*$/, "");
-    if (// https://issues.adblockplus.org/ticket/6917
-        pageTitle == "$subdocument" && browser == "Firefox" ||
-        // Chromium doesn't support Flash
-        pageTitle.startsWith("$object") && browser == "Chromium" ||
-        // Chromium 63 doesn't have user stylesheets (required to
-        // overrule inline styles) and doesn't run content scripts
-        // in dynamically written documents.
-        this.test.parent.title == "Chromium (oldest)" &&
-        (pageTitle == "Inline style !important" ||
-         pageTitle == "Anonymous iframe document.write()"))
-      continue;
-
-    await this.driver.navigate().to(url);
-    let sections = await Promise.all([
-      getSections(this.driver),
-      this.driver.executeScript(`
-        let documents = [document];
-        while (documents.length > 0)
-        {
-          let doc = documents.shift();
-          doc.body.classList.add('expected');
-          for (let i = 0; i < doc.defaultView.frames.length; i++)
-          {
-            try
-            {
-              documents.push(doc.defaultView.frames[i].document);
-            }
-            catch (e) {}
-          }
-        }
-        `)
-    ]);
-    let testCases = await Promise.all(
-      sections[0].map(([title, demo, filters]) =>
-        Promise.all([
-          title.getAttribute("textContent").then(testTitle =>
-            `${pageTitle.trim()} - ${testTitle.trim()}`
-          ),
-          takeScreenshot(demo),
-          Promise.all(filters.map(elem => elem.getAttribute("textContent")))
-        ])
-      ));
-
+    let testCases = await getTestCases(this.driver, url, pageTitle);
     for (let i = 0; i < testCases.length; i++)
     {
       let [title, expectedScreenshot, filters] = testCases[i];
       let description = ["", "Test case: " + title, url].join("\n       ");
 
-      await this.driver.navigate().to(this.origin + "/options.html");
-      let error = await this.driver.executeAsyncScript(`
-        let filters = arguments[0];
-        let callback = arguments[arguments.length - 1];
-        browser.runtime.sendMessage({type: "subscriptions.get",
-                                     downloadable: true,
-                                     special: true}).then(subs =>
-          Promise.all(subs.map(subscription =>
-            browser.runtime.sendMessage({type: "subscriptions.remove",
-                                         url: subscription.url})
-          ))
-        ).then(() =>
-          browser.runtime.sendMessage({type: "filters.importRaw",
-                                       text: filters})
-        ).then(errors => callback(errors[0]), callback);
-      `, filters.join("\n"));
-      if (error)
-        throw error;
+      await updateFilters(this.driver, this.origin, filters);
 
       await this.driver.navigate().to(url);
       if (pageTitle.startsWith("$popup"))
-      {
-        let pSections = await getSections(this.driver);
-        await pSections[i][1].findElement(By.css("a[href],button"))
-          .click();
-        await this.driver.sleep(500);
-        let handles = await this.driver.getAllWindowHandles();
-        if (pageTitle == "$popup - Exception")
-        {
-          assert.equal(handles.length, 3, "Popup is whitelisted" + description);
-          await closeWindow(this.driver, handles[2], handles[1]);
-        }
-        else
-        {
-          assert.equal(handles.length, 2, "Popup is blocked" + description);
-        }
-      }
+        await popupTest(this.driver, i, pageTitle, description);
       else
-      {
-        let fileNamePrefix = `${vBrowser}_${normalize(title)}`;
-
-        let checkTestCase = async() =>
-        {
-          let tSections = await getSections(this.driver);
-          let bitmap = null;
-          let expectedBitmap = null;
-          let actualScreenshot = null;
-
-          try
-          {
-            await this.driver.wait(async() =>
-            {
-              actualScreenshot = await takeScreenshot(tSections[i][1]);
-              ({bitmap} = actualScreenshot);
-              ({bitmap: expectedBitmap} = expectedScreenshot);
-              return (bitmap.width == expectedBitmap.width &&
-                      bitmap.height == expectedBitmap.height &&
-                      bitmap.data.compare(expectedBitmap.data) == 0);
-            }, 1000);
-          }
-          catch (e)
-          {
-            if (e instanceof TimeoutError)
-            {
-              await screenshotsRemoved;
-              for (let [postfix, data] of [["actual", actualScreenshot],
-                ["expected", expectedScreenshot]])
-              {
-                await data.write(path.join(
-                  screenshotFolder, `${fileNamePrefix}_${postfix}.png`));
-              }
-              throw new Error("Screenshots don't match" + description +
-                "\n       " +
-                "(See " + fileNamePrefix + "_*.png in test/screenshots.)"
-              );
-            }
-            throw e;
-          }
-        };
-
-        // Sometimes on Firefox there is a delay until the added
-        // filters become effective. So if the test case fails once,
-        // we reload the page and try once again.
-        try
-        {
-          await checkTestCase(expectedScreenshot, title, i, url);
-        }
-        catch (e)
-        {
-          await this.driver.navigate().refresh();
-          await checkTestCase(expectedScreenshot, title, i, url);
-        }
-      }
+        await genericTest(this.driver, this.test.parent.title, title, i,
+                          expectedScreenshot, description, url);
     }
   }
 });
 
 it("subscribe link", async function()
 {
-  await this.driver.navigate().to(TEST_PAGES_URL);
-  await this.driver.findElement(By.id("subscribe-button")).click();
-  let handles = await this.driver.wait(() =>
-      this.driver.getAllWindowHandles().then(allHandles =>
-        allHandles.length > 2 ? allHandles : null
-      ), 3000
-    );
-  return closeWindow(this.driver, handles[2], handles[1], async() =>
+  clickSubscribeLink(this.driver);
+  let handles = await getSubscribeHandles(this.driver);
+  await closeWindow(this.driver, handles[2], handles[1], async() =>
   {
-    await this.driver.wait(until.ableToSwitchToFrame(0), 1000);
-    let dialog = await this.driver.wait(
-      until.elementLocated(By.id("dialog-content-predefined")), 1000);
-    await this.driver.wait(async() =>
-    {
-      let [displayed, title] = await Promise.all([
-        dialog.isDisplayed(),
-        dialog.findElement(By.css("h3")).getText()
-      ]);
-      return displayed && title == "ABP Testcase Subscription";
-    }, 1000, "dialog shown");
-    await dialog.findElement(By.css("button")).click();
-    let [added, err] = await this.driver.executeAsyncScript(`
-       let callback = arguments[arguments.length - 1];
-       browser.runtime.sendMessage({type: "subscriptions.get",
-                                    ignoreDisabled: true,
-                                    downloadable: true}).then(subs =>
-         subs.some(s =>
-           s.url == "${TEST_PAGES_URL}abp-testcase-subscription.txt"
-         )
-       ).then(
-         res => callback([res, null]),
-         err => callback([null, err])
-       );
-     `);
-    if (err)
-      throw err;
-    assert.ok(added, "subscription added");
+    await confirmSubscribeDialog(this.driver);
+    await checkSubscriptionAdded(this.driver);
   });
 });
