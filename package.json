@@ -37,11 +37,11 @@
     "webpack-stream": "~5.0.0"
   },
   "scripts": {
-    "pretest": "bash -c \"python ensure_dependencies.py\"",
     "generate-buildnum": "node --experimental-modules --no-warnings build/utils/git.mjs",
     "lint": "eslint --ext .js,.mjs *.js *.mjs lib/ qunit/ ext/ test/ build/",
     "test-only": "mocha --experimental-modules --unhandled-rejections=strict --delay",
     "test": "npm run test-only --",
+    "postinstall": "cd adblockplusui && npm install --only=production --loglevel=warn --no-package-lock --no-optional",
     "posttest": "npm run lint",
     "docs": "jsdoc --configure jsdoc.conf --destination docs lib",
     "download-test-browsers": "node --experimental-modules test/bin/downloadBrowsers.mjs"

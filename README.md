@@ -5,16 +5,13 @@ Adblock Plus for Chrome, Opera, Microsoft Edge and Firefox
 
 This repository contains the platform-specific Adblock Plus source code for
 Chrome, Opera, Microsoft Edge and Firefox. It can be used to build
-Adblock Plus for these platforms, generic Adblock Plus code will be extracted
-from other repositories automatically (see _dependencies_ file).
+Adblock Plus for these platforms.
 
 Building
 ---------
 
 ### Requirements
 
-- [Git](https://git-scm.com/) (only required when building from version control)
-- [Python 2.7](https://www.python.org)
 - [Node.js](https://nodejs.org/) (>= 10.17.0, >= 12 on Windows)
 
 ### Building on Windows
@@ -26,7 +23,9 @@ Then install the above requirements and run the commands below from within Bash.
 
 Clone the external repositories:
 
-    ./ensure_dependencies.py
+    git submodule update --init --recursive
+
+_Note: when building from a source archive, this step must be skipped._
 
 Install the required npm packages:
 

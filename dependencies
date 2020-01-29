@@ -1,3 +1,0 @@
-_root = git:https://gitlab.com/eyeo/adblockplus/
-adblockpluscore = adblockpluscore git:7663a03
-adblockplusui = adblockplusui git:697149d

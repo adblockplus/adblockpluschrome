@@ -25,28 +25,24 @@ stages:
   - "test"
 
 variables:
+  GIT_SUBMODULE_STRATEGY: "recursive"
   npm_config_audit: "false"
   npm_config_prefer_offline: "true"
   npm_config_unsafe_perm: "true"
-
-.dependencies:
-  script: &dependencies
-    - "mkdir -p .git/info"
-    - "python ensure_dependencies.py"
-    - "npm install"
 
 .cache:
   cache: &cache
     key: "global-cache"
     untracked: true
     paths:
-      - "adblockpluscore/"
-      - "adblockplusui/"
+      - "adblockpluscore/*-snapshots/"
+      - "adblockplusui/node_modules/"
 
 .default_template:
   needs:
     - job: "prepare-dependencies"
-  before_script: *dependencies
+  before_script:
+    - "npm install"
   retry:
     max: 2
     when: "stuck_or_timeout_failure"
@@ -60,10 +56,10 @@ variables:
 prepare-dependencies:
   stage: "prepare"
   script:
-    - "mv -t /tmp adblockpluscore/*-snapshots 2>/dev/null || true"
     - "git clean -x -d -ff"
-    - *dependencies
-    - "mv -t adblockpluscore /tmp/*-snapshots 2>/dev/null || true"
+    - "git -C adblockpluscore clean -e '/*-snapshots' -x -d -ff"
+    - "git -C adblockplusui clean -x -d -ff"
+    - "npm install"
     - "npm run download-test-browsers"
   except:
     - "schedules"
@@ -117,8 +113,8 @@ docs:
   extends: ".default_template"
   stage: "test"
   before_script:
+    - "npm install"
     - "unzip -q $EXTENSION_FILE -d devenv.*"
-    - *dependencies
   variables:
     SKIP_BUILD: "true"
   artifacts:
