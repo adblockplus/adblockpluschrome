@@ -338,6 +338,7 @@ async function checkSubscriptionAdded(driver)
 
 it("Test pages", async function()
 {
+  let testsExecuted = 0;
   let urls = await getUrls(this.driver);
   for (let [elemClass, url, pageTitle] of urls)
   {
@@ -358,8 +359,13 @@ it("Test pages", async function()
       else
         await genericTest(this.driver, this.test.parent.title, title, i,
                           expectedScreenshot, description, url);
+      testsExecuted += 1;
     }
   }
+  if (testsExecuted == 0)
+    throw new Error("No tests executed. Check that test pages can be parsed");
+  this.test.title =
+    `${this.test.title} (Tests executed: ${testsExecuted})`;
 });
 
 it("subscribe link", async function()
