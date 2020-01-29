@@ -324,15 +324,17 @@ if (browser.webRequest && !("ResourceType" in browser.webRequest))
 if (!browser.i18n.getMessage("@@bidi_dir"))
 {
   let {getMessage} = browser.i18n;
-  browser.i18n.getMessage = function(msgId, substitutions)
-  {
-    if (msgId == "@@bidi_dir")
+  Object.defineProperty(browser.i18n, "getMessage", {
+    value(msgId, substitutions)
     {
-      let locale = browser.i18n.getUILanguage();
-      return /^(?:ar|fa|he|ug|ur)\b/.test(locale) ? "rtl" : "ltr";
+      if (msgId == "@@bidi_dir")
+      {
+        let locale = browser.i18n.getUILanguage();
+        return /^(?:ar|fa|he|ug|ur)\b/.test(locale) ? "rtl" : "ltr";
+      }
+      return getMessage(msgId, substitutions);
     }
-    return getMessage(msgId, substitutions);
-  };
+  });
 }
 
 // Firefox <56 separates the locale parts with an underscore instead of a dash.
