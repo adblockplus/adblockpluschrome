@@ -20,32 +20,26 @@
 const {By, until} = require("selenium-webdriver");
 const assert = require("assert");
 
-it("qunit", function()
+it("qunit", async function()
 {
-  return this.driver.navigate().to(this.origin + "/qunit/index.html").then(() =>
-    this.driver.wait(until.elementLocated(By.id("qunit-testresult")))
-  ).then(elem =>
-    this.driver.wait(until.elementTextContains(elem, "Tests completed"))
-  ).then(() =>
-    this.driver.findElements(
-      By.css("#qunit-tests > .fail")
-    )
-  ).then(failures =>
-    Promise.all(
-      failures.map(failure =>
-        failure.findElements(
-          By.css(".module-name, .test-name, .fail > .test-message")
-        ).then(messages =>
-          Promise.all(messages.map(e => e.getText()))
-        ).then(messages => messages.join(", "))
-      )
-    ).then(failureDescriptions =>
-    {
-      if (failureDescriptions.length > 0)
-      {
-        failureDescriptions.unshift("");
-        assert.fail(failureDescriptions.join("\n      - "));
-      }
-    })
+  await this.driver.navigate().to(this.origin + "/qunit/index.html");
+  let elem = await this.driver.wait(
+    until.elementLocated(By.id("qunit-testresult"))
   );
+  await this.driver.wait(until.elementTextContains(elem, "Tests completed"));
+
+  let failures = await this.driver.findElements(By.css("#qunit-tests > .fail"));
+  let failureDescriptions = await Promise.all(failures.map(async failure =>
+  {
+    let messages = await failure.findElements(
+      By.css(".module-name, .test-name, .fail > .test-message")
+    );
+    return (await Promise.all(messages.map(e => e.getText()))).join(", ");
+  }));
+
+  if (failureDescriptions.length > 0)
+  {
+    failureDescriptions.unshift("");
+    assert.fail(failureDescriptions.join("\n      - "));
+  }
 });
