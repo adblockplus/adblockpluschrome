@@ -62,7 +62,7 @@ for (let backend of glob.sync("./test/browsers/*.js"))
     {
       this.timeout(0);
 
-      before(function()
+      before(async function()
       {
         if (!devenvCreated)
           devenvCreated = new Promise((resolve, reject) =>
@@ -81,29 +81,21 @@ for (let backend of glob.sync("./test/browsers/*.js"))
             );
           });
 
-        return Promise.all([binary.getPath(), devenvCreated]).then(
-          ([browserBinary]) =>
-          {
-            this.driver = module.getDriver(
-              browserBinary,
-              path.resolve(`./devenv.${module.platform}`)
-            );
-            return this.driver.wait(() =>
-              this.driver.getAllWindowHandles().then(handles => handles[1])
-            );
-          }
-        ).then(handle =>
-          this.driver.switchTo().window(handle)
-        ).then(() =>
-          this.driver.wait(() =>
-            this.driver.executeScript("return location.origin;").then(
-              origin => origin != "null" ? origin : null
-            ), 1000, "unknown extension page origin"
-          )
-        ).then(origin =>
+        let [browserBin] = await Promise.all([binary.getPath(), devenvCreated]);
+        this.driver = module.getDriver(
+          browserBin,
+          path.resolve(`./devenv.${module.platform}`)
+        );
+
+        let handle = await this.driver.wait(
+          async() => (await this.driver.getAllWindowHandles())[1]
+        );
+        await this.driver.switchTo().window(handle);
+        this.origin = await this.driver.wait(async() =>
         {
-          this.origin = origin;
-        });
+          let orig = await this.driver.executeScript("return location.origin;");
+          return orig != "null" ? orig : null;
+        }, 1000, "unknown extension page origin");
       });
 
       for (let file of glob.sync("./test/wrappers/*.js"))
