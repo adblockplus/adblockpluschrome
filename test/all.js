@@ -46,6 +46,55 @@ function getBrowserBinaries(module, browser)
   ];
 }
 
+function createDevenv(platform)
+{
+  return new Promise((resolve, reject) =>
+  {
+    exec(
+      `bash -c "python build.py devenv -t ${platform}"`,
+      (error, stdout, stderr) =>
+      {
+        if (error)
+        {
+          console.error(stderr);
+          reject(error);
+        }
+        else resolve(stdout);
+      }
+    );
+  });
+}
+
+async function getDriver(binary, devenvCreated, module)
+{
+  let [browserBin] = await Promise.all([binary.getPath(), devenvCreated]);
+  return module.getDriver(
+    browserBin,
+    path.resolve(`./devenv.${module.platform}`)
+  );
+}
+
+async function getOrigin(driver)
+{
+  let handle = await driver.wait(
+    async() => (await driver.getAllWindowHandles())[1]
+  );
+  await driver.switchTo().window(handle);
+  return driver.wait(async() =>
+  {
+    let origin = await driver.executeScript("return location.origin;");
+    return origin != "null" ? origin : null;
+  }, 1000, "unknown extension page origin");
+}
+
+function reloadModulesForBrowser(file)
+{
+  let modulePath = path.resolve(file);
+  delete require.cache[require.resolve(modulePath)];
+  require(modulePath);
+}
+
+
 for (let backend of glob.sync("./test/browsers/*.js"))
 {
   let module = require(path.resolve(backend));
@@ -65,46 +114,14 @@ for (let backend of glob.sync("./test/browsers/*.js"))
       before(async function()
       {
         if (!devenvCreated)
-          devenvCreated = new Promise((resolve, reject) =>
-          {
-            exec(
-              `bash -c "python build.py devenv -t ${module.platform}"`,
-              (error, stdout, stderr) =>
-              {
-                if (error)
-                {
-                  console.error(stderr);
-                  reject(error);
-                }
-                else resolve(stdout);
-              }
-            );
-          });
+          devenvCreated = createDevenv(module.platform);
 
-        let [browserBin] = await Promise.all([binary.getPath(), devenvCreated]);
-        this.driver = module.getDriver(
-          browserBin,
-          path.resolve(`./devenv.${module.platform}`)
-        );
-
-        let handle = await this.driver.wait(
-          async() => (await this.driver.getAllWindowHandles())[1]
-        );
-        await this.driver.switchTo().window(handle);
-        this.origin = await this.driver.wait(async() =>
-        {
-          let orig = await this.driver.executeScript("return location.origin;");
-          return orig != "null" ? orig : null;
-        }, 1000, "unknown extension page origin");
+        this.driver = await getDriver(binary, devenvCreated, module);
+        this.origin = await getOrigin(this.driver);
       });
 
       for (let file of glob.sync("./test/wrappers/*.js"))
-      {
-        // Reload the module(s) for every browser
-        let modulePath = path.resolve(file);
-        delete require.cache[require.resolve(modulePath)];
-        require(modulePath);
-      }
+        reloadModulesForBrowser(file);
 
       after(function()
       {
