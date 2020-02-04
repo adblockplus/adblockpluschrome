@@ -50,9 +50,8 @@ exports.getDriver = function(browserBinary, devenvPath)
   return driver;
 };
 
-exports.getLatestVersion = function()
+exports.getLatestVersion = async function()
 {
-  return downloadJSON(
-    "https://product-details.mozilla.org/1.0/firefox_versions.json"
-  ).then(data => data.LATEST_FIREFOX_VERSION);
+  let data = await downloadJSON("https://product-details.mozilla.org/1.0/firefox_versions.json");
+  return data.LATEST_FIREFOX_VERSION;
 };

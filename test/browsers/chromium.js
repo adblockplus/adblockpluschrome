@@ -52,7 +52,7 @@ exports.getDriver = function(browserBinary, devenvPath)
     .build();
 };
 
-exports.getLatestVersion = function()
+exports.getLatestVersion = async function()
 {
   let os = process.platform;
   if (os == "win32")
@@ -60,8 +60,7 @@ exports.getLatestVersion = function()
   else if (os == "darwin")
     os = "mac";
 
-  return downloadJSON(`https://omahaproxy.appspot.com/all.json?os=${os}`).then(
-    data =>
-      data[0].versions.find(ver => ver.channel == "stable").branch_base_position
-  );
+  let data = await downloadJSON(`https://omahaproxy.appspot.com/all.json?os=${os}`);
+  let version = data[0].versions.find(ver => ver.channel == "stable");
+  return version.branch_base_position;
 };
