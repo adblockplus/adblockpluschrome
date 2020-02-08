@@ -33,29 +33,25 @@ const unlinkAsync = promisify(fs.unlink);
 let lastScreenshot = Promise.resolve();
 let screenshotFolder = path.join(__dirname, "..", "screenshots");
 
-// Once we require Node.js >= 10 this should be replaced with
-// the built-in finally() method of the Promise object.
-function promiseFinally(p, callback)
+async function closeWindow(driver, goTo, returnTo, callback)
 {
-  return p.then(
-    callback,
-    err => Promise.resolve(callback()).then(() =>
-      Promise.reject(err)
-    )
-  );
-}
-
-function closeWindow(driver, goTo, returnTo, callback)
-{
-  return promiseFinally(
-    driver.switchTo().window(goTo).then(() =>
-      promiseFinally(
-        new Promise(resolve => resolve(callback && callback())),
-        () => driver.close()
-      )
-    ),
-    () => driver.switchTo().window(returnTo)
-  );
+  try
+  {
+    await driver.switchTo().window(goTo);
+    try
+    {
+      if (callback)
+        await callback();
+    }
+    finally
+    {
+      await driver.close();
+    }
+  }
+  finally
+  {
+    await driver.switchTo().window(returnTo);
+  }
 }
 
 function normalize(input)
