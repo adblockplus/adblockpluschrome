@@ -20,7 +20,7 @@
 const webdriver = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const {ensureChromium} = require("../../adblockpluscore/test/runners/" +
-                                "chromium_download");
+                                 "chromium_download");
 const {downloadJSON} = require("../misc/utils.js");
 
 // We need to require the chromedriver,
