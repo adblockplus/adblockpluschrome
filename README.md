@@ -24,7 +24,7 @@ Building
   - For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
   - For font generation using pyftsubset: [fonttools](https://github.com/fonttools/fonttools)
   - Enabling fonttools to generate WOFF 2.0 fonts: [brotli](https://github.com/google/brotli)
-- [Node.js](https://nodejs.org/) (>= 8.9)
+- [Node.js](https://nodejs.org/) (>= 10.12.0)
 
 ### Building on Windows
 
