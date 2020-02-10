@@ -24,6 +24,8 @@
 # https://gitlab.com/eyeo/devops/ansible-role-adblockplus-builder
 # https://gitlab.com/eyeo/devops/ansible-role-gitlab-runner
 
+image: "registry.gitlab.com/eyeo/docker/adblockplus-ci:node10"
+
 stages:
   - prepare
   - build
@@ -39,19 +41,7 @@ stages:
     # support proper mutli-inheritance, so we need to fallback to the following
     # inline shell script.
     - "[ -z $BROWSER_SNAPSHOT_DIR ] || mkdir -p $BROWSER_SNAPSHOT_DIR"
-    - |
-      if [[ "$CI_RUNNER_DESCRIPTION" == *gitlab.com ]]; then
-        apt-get update;
-        apt-get install -y apt-transport-https python-pip libgtk-3-0 libxt6 \
-          xvfb libnss3 libxss1 libgconf-2-4 libasound2 nodejs npm;
-      fi
     - mkdir -p .git/info
-    - pip install --user Jinja2 cryptography fonttools brotli
-    # This pipeline runs on a custom runner as an unpriviliged user.
-    # Therefore the pyftsubset executable of the fonttools dependency above is
-    # installed to `~/.local/bin` and needs to be added to the $PATH variable
-    # in order to be available.
-    - export PATH=$PATH:~/.local/bin
     - "npm_config_unsafe_perm=true python ensure_dependencies.py"
     - "[ -d node_modules ] || npm install"
 
