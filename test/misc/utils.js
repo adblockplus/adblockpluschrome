@@ -19,7 +19,7 @@
 
 const request = require("request");
 
-exports.downloadJSON = function(url)
+let download = exports.download = function(url)
 {
   return new Promise((resolve, reject) =>
   {
@@ -31,16 +31,12 @@ exports.downloadJSON = function(url)
         reject(new Error("Request failed with status code " +
                          response.statusCode));
       else
-      {
-        try
-        {
-          resolve(JSON.parse(body));
-        }
-        catch (e)
-        {
-          reject(e);
-        }
-      }
+        resolve(body);
     });
   });
+};
+
+exports.downloadJSON = async function(url)
+{
+  return JSON.parse(await download(url));
 };

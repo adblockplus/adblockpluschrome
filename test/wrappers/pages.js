@@ -17,7 +17,6 @@
 
 "use strict";
 
-const TEST_PAGES_URL = "https://testpages.adblockplus.org/en/";
 const SKIP_ONLINE_TESTS = false;
 
 const assert = require("assert");
@@ -111,19 +110,6 @@ async function getSections(driver)
   );
 }
 
-async function getUrls(driver)
-{
-  await driver.navigate().to(TEST_PAGES_URL);
-  let elements = await driver.findElements(By.css(".site-pagelist a"));
-  return await Promise.all(elements.map(elem =>
-    Promise.all([
-      elem.getAttribute("class"),
-      elem.getAttribute("href"),
-      elem.getText()
-    ])
-  ));
-}
-
 function isExcluded(elemClass, pageTitle, testTitle)
 {
   let onlineTestCase = elemClass && elemClass.split(/\s+/).includes("online");
@@ -146,7 +132,7 @@ function isExcluded(elemClass, pageTitle, testTitle)
   return false;
 }
 
-async function getTestCases(driver, url, pageTitle)
+async function getTestCases(driver, url)
 {
   await driver.navigate().to(url);
   await driver.executeScript(`
@@ -170,7 +156,7 @@ async function getTestCases(driver, url, pageTitle)
   for (let [title, demo, filters] of await getSections(driver))
   {
     tests.push(await Promise.all([
-      title.getText().then(s => `${pageTitle.trim()} - ${s.trim()}`),
+      title.getText(),
       takeScreenshot(demo),
       Promise.all(filters.map(elem => elem.getText()))
     ]));
@@ -275,9 +261,9 @@ async function genericTest(driver, parentTitle, title, sectionIndex,
   }
 }
 
-async function clickSubscribeLink(driver)
+async function clickSubscribeLink(driver, url)
 {
-  await driver.navigate().to(TEST_PAGES_URL);
+  await driver.navigate().to(url);
   await driver.findElement(By.id("subscribe-button")).click();
 }
 
@@ -303,7 +289,7 @@ async function confirmSubscribeDialog(driver)
   await dialog.findElement(By.css("button")).click();
 }
 
-async function checkSubscriptionAdded(driver)
+async function checkSubscriptionAdded(driver, url)
 {
   let [added, err] = await driver.executeAsyncScript(`
      let callback = arguments[arguments.length - 1];
@@ -311,7 +297,7 @@ async function checkSubscriptionAdded(driver)
                                   ignoreDisabled: true,
                                   downloadable: true}).then(subs =>
        subs.some(s =>
-         s.url == "${TEST_PAGES_URL}abp-testcase-subscription.txt"
+         s.url == "${url}abp-testcase-subscription.txt"
        )
      ).then(
        res => callback([res, null]),
@@ -323,45 +309,54 @@ async function checkSubscriptionAdded(driver)
   assert.ok(added, "subscription added");
 }
 
-it("Test pages", async function()
+describe("Test pages", async() =>
 {
-  let testsExecuted = 0;
-  let urls = await getUrls(this.driver);
-  for (let [elemClass, url, pageTitle] of urls)
+  it("discovered filter test cases", function()
   {
-    if (isExcluded(elemClass, pageTitle, this.test.parent.title))
-      continue;
+    assert.ok(this.test.parent.parent.pageTests.length > 0);
+  });
 
-    let testCases = await getTestCases(this.driver, url, pageTitle);
-    for (let i = 0; i < testCases.length; i++)
+  it("subscribe link", async function()
+  {
+    clickSubscribeLink(this.driver, this.test.parent.parent.testPagesURL);
+    let handles = await getSubscribeHandles(this.driver);
+    await closeWindow(this.driver, handles[2], handles[1], async() =>
     {
-      let [title, expectedScreenshot, filters] = testCases[i];
-      let description = ["", "Test case: " + title, url].join("\n       ");
+      await confirmSubscribeDialog(this.driver);
+      await checkSubscriptionAdded(this.driver,
+                                   this.test.parent.parent.testPagesURL);
+    });
+  });
 
-      await updateFilters(this.driver, this.origin, filters);
-
-      await this.driver.navigate().to(url);
-      if (pageTitle.startsWith("$popup"))
-        await popupTest(this.driver, i, pageTitle, description);
-      else
-        await genericTest(this.driver, this.test.parent.title, title, i,
-                          expectedScreenshot, description, url);
-      testsExecuted += 1;
-    }
-  }
-  if (testsExecuted == 0)
-    throw new Error("No tests executed. Check that test pages can be parsed");
-  this.test.title =
-    `${this.test.title} (Tests executed: ${testsExecuted})`;
-});
-
-it("subscribe link", async function()
-{
-  clickSubscribeLink(this.driver);
-  let handles = await getSubscribeHandles(this.driver);
-  await closeWindow(this.driver, handles[2], handles[1], async() =>
+  describe("Filter test cases", async function()
   {
-    await confirmSubscribeDialog(this.driver);
-    await checkSubscriptionAdded(this.driver);
+    for (let [elemClass, url, pageTitle] of this.parent.parent.pageTests)
+    {
+      if (isExcluded(elemClass, pageTitle, this.parent.parent.title))
+        continue;
+
+      it(pageTitle, async function()
+      {
+        let testsExecuted = 0;
+        let testCases = await getTestCases(this.driver, url);
+        for (let i = 0; i < testCases.length; i++)
+        {
+          let [title, expectedScreenshot, filters] = testCases[i];
+          let description = ["", "Test case: " + title, url].join("\n       ");
+
+          await updateFilters(this.driver, this.origin, filters);
+
+          await this.driver.navigate().to(url);
+          if (pageTitle.startsWith("$popup"))
+            await popupTest(this.driver, i, pageTitle, description);
+          else
+            await genericTest(this.driver, this.test.parent.parent.parent.title,
+                              title, i, expectedScreenshot, description, url);
+          testsExecuted += 1;
+        }
+
+        this.test.title += ` (Tests: ${testsExecuted})`;
+      });
+    }
   });
 });

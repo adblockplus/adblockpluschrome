@@ -17,9 +17,13 @@
 
 "use strict";
 
+const TEST_PAGES_URL = "https://testpages.adblockplus.org/en/";
+
 const glob = require("glob");
 const path = require("path");
+const url = require("url");
 const {exec} = require("child_process");
+const {download} = require("./misc/utils");
 
 function getBrowserBinaries(module, browser)
 {
@@ -94,40 +98,72 @@ function reloadModulesForBrowser(file)
   require(modulePath);
 }
 
-
-for (let backend of glob.sync("./test/browsers/*.js"))
+async function getPageTests()
 {
-  let module = require(path.resolve(backend));
-  let browser = path.basename(backend, ".js");
-  let devenvCreated = null;
-
-  for (let binary of getBrowserBinaries(module, browser))
+  let html;
+  try
   {
-    let description = browser.replace(/./, c => c.toUpperCase());
-    if (binary.version)
-      description += ` (${binary.version})`;
-
-    describe(description, function()
-    {
-      this.timeout(0);
-
-      before(async function()
-      {
-        if (!devenvCreated)
-          devenvCreated = createDevenv(module.platform);
-
-        this.driver = await getDriver(binary, devenvCreated, module);
-        this.origin = await getOrigin(this.driver);
-      });
-
-      for (let file of glob.sync("./test/wrappers/*.js"))
-        reloadModulesForBrowser(file);
-
-      after(function()
-      {
-        if (this.driver)
-          return this.driver.quit();
-      });
-    });
+    html = await download(TEST_PAGES_URL);
   }
+  catch (e)
+  {
+    return [];
+  }
+
+  let regexp = /<li>[\S\s]*?<a (?:class="(.*?)" )?href="(.*?)"[\S\s]*?<h3>(.*)<\/h3>/gm;
+  let tests = [];
+  let match;
+  while (match = regexp.exec(html))
+    tests.push([match[1], url.resolve(TEST_PAGES_URL, match[2]), match[3]]);
+
+  return tests;
 }
+
+if (typeof run == "undefined")
+{
+  console.error("--delay option required");
+  process.exit(1);
+}
+
+(async() =>
+{
+  let pageTests = await getPageTests();
+  for (let backend of glob.sync("./test/browsers/*.js"))
+  {
+    let module = require(path.resolve(backend));
+    let browser = path.basename(backend, ".js");
+    let devenvCreated = null;
+    for (let binary of getBrowserBinaries(module, browser))
+    {
+      let description = browser.replace(/./, c => c.toUpperCase());
+      if (binary.version)
+        description += ` (${binary.version})`;
+
+      describe(description, function()
+      {
+        this.timeout(0);
+        this.pageTests = pageTests;
+        this.testPagesURL = TEST_PAGES_URL;
+
+        before(async function()
+        {
+          if (!devenvCreated)
+            devenvCreated = createDevenv(module.platform);
+
+          this.driver = await getDriver(binary, devenvCreated, module);
+          this.origin = await getOrigin(this.driver);
+        });
+
+        for (let file of glob.sync("./test/wrappers/*.js"))
+          reloadModulesForBrowser(file, pageTests);
+
+        after(async function()
+        {
+          if (this.driver)
+            await this.driver.quit();
+        });
+      });
+    }
+  }
+  run();
+})();
