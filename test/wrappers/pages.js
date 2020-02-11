@@ -30,8 +30,7 @@ const {By, until, error: {TimeoutError}} = require("selenium-webdriver");
 const readdirAsync = promisify(fs.readdir);
 const unlinkAsync = promisify(fs.unlink);
 
-let lastScreenshot = Promise.resolve();
-let screenshotFolder = path.join(__dirname, "..", "screenshots");
+const SCREENSHOT_DIR = path.join(__dirname, "..", "screenshots");
 
 async function closeWindow(driver, goTo, returnTo, callback)
 {
@@ -61,14 +60,14 @@ function normalize(input)
 
 async function removeOutdatedScreenshots(browser)
 {
-  let files = await readdirAsync(screenshotFolder);
+  let files = await readdirAsync(SCREENSHOT_DIR);
   for (let filename of files)
   {
     if (filename.startsWith(browser))
     {
       try
       {
-        await unlinkAsync(path.join(screenshotFolder, filename));
+        await unlinkAsync(path.join(SCREENSHOT_DIR, filename));
       }
       catch (e)
       {
@@ -77,30 +76,24 @@ async function removeOutdatedScreenshots(browser)
   }
 }
 
-async function lastScreenshotFunc(elem, lastScreenshotPromise)
+async function takeScreenshot(element)
 {
   // It would be preferable if we could use WebElement.takeScreenshot(),
   // but it's not supported on Chrome, and produces incorrect output when
   // called repeatedly, on Firefox >=58 or when using geckodriver >=1.13.
   // So as a workaround, we scroll to the position of the element, take a
   // screenshot of the viewport and crop it to the element's size and position.
-  let [rect] = await Promise.all([elem.getRect(), lastScreenshotPromise]);
-  let result = await elem.getDriver().executeScript(`
+  let rect = await element.getRect();
+  let result = await element.getDriver().executeScript(`
     window.scrollTo(${rect.x}, ${rect.y});
     return [window.scrollX, window.scrollY];
   `);
   let x = rect.x - result[0];
   let y = rect.y - result[1];
 
-  let s = await elem.getDriver().takeScreenshot();
+  let s = await element.getDriver().takeScreenshot();
   let img = await Jimp.read(Buffer.from(s, "base64"));
   return img.crop(x, y, rect.width, rect.height);
-}
-
-function takeScreenshot(element)
-{
-  lastScreenshot = lastScreenshotFunc(element, lastScreenshot);
-  return lastScreenshot;
 }
 
 async function getSections(driver)
@@ -156,36 +149,34 @@ function isExcluded(elemClass, pageTitle, testTitle)
 async function getTestCases(driver, url, pageTitle)
 {
   await driver.navigate().to(url);
-  let [sections] = await Promise.all([
-    getSections(driver),
-    driver.executeScript(`
-      let documents = [document];
-      while (documents.length > 0)
+  await driver.executeScript(`
+    let documents = [document];
+    while (documents.length > 0)
+    {
+      let doc = documents.shift();
+      doc.body.classList.add('expected');
+      for (let i = 0; i < doc.defaultView.frames.length; i++)
       {
-        let doc = documents.shift();
-        doc.body.classList.add('expected');
-        for (let i = 0; i < doc.defaultView.frames.length; i++)
+        try
         {
-          try
-          {
-            documents.push(doc.defaultView.frames[i].document);
-          }
-          catch (e) {}
+          documents.push(doc.defaultView.frames[i].document);
         }
+        catch (e) {}
       }
-      `)
-  ]);
-  let testCases = await Promise.all(
-    sections.map(([title, demo, filters]) =>
-      Promise.all([
-        title.getAttribute("textContent").then(testTitle =>
-          `${pageTitle.trim()} - ${testTitle.trim()}`
-        ),
-        takeScreenshot(demo),
-        Promise.all(filters.map(elem => elem.getAttribute("textContent")))
-      ])
-    ));
-  return testCases;
+    }
+  `);
+
+  let tests = [];
+  for (let [title, demo, filters] of await getSections(driver))
+  {
+    tests.push(await Promise.all([
+      title.getText().then(s => `${pageTitle.trim()} - ${s.trim()}`),
+      takeScreenshot(demo),
+      Promise.all(filters.map(elem => elem.getText()))
+    ]));
+  }
+
+  return tests;
 }
 
 async function updateFilters(driver, origin, filters)
@@ -258,8 +249,8 @@ async function genericTest(driver, parentTitle, title, sectionIndex,
         for (let [postfix, data] of [["actual", actualScreenshot],
           ["expected", expectedScreenshot]])
         {
-          await data.write(path.join(
-            screenshotFolder, `${fileNamePrefix}_${postfix}.png`));
+          await data.write(path.join(SCREENSHOT_DIR,
+                                     `${fileNamePrefix}_${postfix}.png`));
         }
         throw new Error("Screenshots don't match" + description +
           "\n       " +
