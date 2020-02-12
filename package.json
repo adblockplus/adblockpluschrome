@@ -43,6 +43,7 @@
     "test": "npm run test-only --",
     "posttest": "npm run lint",
     "publish": "node build/publish.js",
-    "docs": "jsdoc --configure jsdoc.conf --destination docs lib"
+    "docs": "jsdoc --configure jsdoc.conf --destination docs lib",
+    "download-test-browsers": "node test/bin/downloadBrowsers.js"
   }
 }

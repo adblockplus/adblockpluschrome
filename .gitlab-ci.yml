@@ -35,34 +35,30 @@ stages:
 
 .dependencies:
   script: &dependencies
-    # Since we already use the "before_script" in order to setup dependencies
-    # we must also install other dependencies here, which would have already
-    # been available on the specific runners. Unfortunately, YAML doesn't
-    # support proper mutli-inheritance, so we need to fallback to the following
-    # inline shell script.
-    - "[ -z $BROWSER_SNAPSHOT_DIR ] || mkdir -p $BROWSER_SNAPSHOT_DIR"
     - mkdir -p .git/info
     - "npm_config_unsafe_perm=true python ensure_dependencies.py"
     - "[ -d node_modules ] || npm install"
 
-.pull_cache:
-  cache:
-    key: cache_$CI_COMMIT_SHA
+.cache:
+  cache: &cache
+    key: global-cache
+    untracked: true
     paths:
-      - ./
-    policy: pull
+      - adblockpluscore/
+      - adblockplusui/
+      - buildtools/
 
 .test_template:
-  extends: .pull_cache
   stage: test
   before_script: *dependencies
-  variables:
-    BROWSER_SNAPSHOT_DIR: "/tmp/browser-snapshots/"
   retry:
     max: 2
     when: stuck_or_timeout_failure
   except:
     - schedules
+  cache:
+    <<: *cache
+    policy: pull
 
 .test_screenshots_template:
   extends: .test_template
@@ -73,7 +69,6 @@ stages:
     expire_in: 1 mo
 
 .build:
-  extends: .pull_cache
   before_script: *dependencies
   stage: build
   except:
@@ -85,6 +80,10 @@ stages:
       - adblockplusfirefox-*.xpi
       - adblockpluschrome-*.zip
       - adblockplusedge-*.appx
+  cache:
+    <<: *cache
+    policy: pull
+
 
 lint:
   extends: .test_template
@@ -108,12 +107,13 @@ build:edge:
 
 prepare-dependencies:
   stage: prepare
-  script: *dependencies
-  cache:
-    key: cache_$CI_COMMIT_SHA
-    paths:
-      - ./
-    policy: push
+  script:
+    - "mv -t /tmp adblockpluscore/*-snapshots 2>/dev/null || true"
+    - "git clean -x -d -ff"
+    - *dependencies
+    - "mv -t adblockpluscore /tmp/*-snapshots 2>/dev/null || true"
+    - "npm run download-test-browsers"
+  cache: *cache
   except:
     - schedules
 
