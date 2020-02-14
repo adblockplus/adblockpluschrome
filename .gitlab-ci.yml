@@ -29,8 +29,9 @@ image: "registry.gitlab.com/eyeo/docker/adblockplus-ci:node10"
 stages:
   - prepare
   - build
-  - test
   - download
+  - publish
+  - test
   - scp
 
 .dependencies:
@@ -48,8 +49,9 @@ stages:
       - adblockplusui/
       - buildtools/
 
-.test_template:
+.default_template:
   stage: test
+  dependencies: []
   before_script: *dependencies
   retry:
     max: 2
@@ -60,8 +62,9 @@ stages:
     <<: *cache
     policy: pull
 
-.test_screenshots_template:
-  extends: .test_template
+.test_template:
+  extends: .default_template
+  stage: test
   artifacts:
     paths:
       - test/screenshots/
@@ -84,9 +87,9 @@ stages:
     <<: *cache
     policy: pull
 
-
 lint:
-  extends: .test_template
+  extends: .default_template
+  stage: test
   script:
     - npm run lint
 
@@ -118,31 +121,32 @@ prepare-dependencies:
     - schedules
 
 docs:
-  extends: .test_template
+  extends: .default_template
+  stage: build
   script:
     - npm run docs
   artifacts:
     paths:
       - docs/
-    expire_in: 3 mos
+    expire_in: 1 week
 
 test:firefox:oldest:
-  extends: .test_screenshots_template
+  extends: .test_template
   script:
     - npm run test-only -- -g 'Firefox \(oldest\)'
 
 test:firefox:latest:
-  extends: .test_screenshots_template
+  extends: .test_template
   script:
     - npm run test-only -- -g 'Firefox \(latest\)'
 
 test:chromium:oldest:
-  extends: .test_screenshots_template
+  extends: .test_template
   script:
     - xvfb-run -a npm run test-only -- -g 'Chromium \(oldest\)'
 
 test:chromium:latest:
-  extends: .test_screenshots_template
+  extends: .test_template
   script:
     - xvfb-run -a npm run test-only -- -g 'Chromium \(latest\)'
 
@@ -189,3 +193,14 @@ scp:devbuild:
     - download:devbuild
   variables:
     DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome/"
+
+.pages:
+  stage: publish
+  dependencies:
+    - docs
+  except:
+    - schedules
+
+include:
+  project: "eyeo/adblockplus/adblockpluscore"
+  file: ".gitlab-pages.yml"
