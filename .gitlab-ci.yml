@@ -97,6 +97,13 @@ lint:
   script:
     - npm run lint
 
+audit:
+  extends: .default_template
+  stage: test
+  script:
+    - npm audit
+  allow_failure: true
+
 build:chrome:
   extends: .build
   variables:

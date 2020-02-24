@@ -12,13 +12,6 @@
     "seedrandom": "./node_stubs/seedrandom"
   },
   "devDependencies": {
-    "//": [
-      "'dmg', 'extract-zip' and 'ncp' are needed by `download_*.js` modules",
-      "in adblockpluscore/test/.",
-      "The chromedriver version was pinned to that exact version, due to",
-      "incompatibilities with the configured chromium version and newer",
-      "drivers."
-    ],
     "argparse": "^1.0.10",
     "chromedriver": "2.36.0",
     "dmg": "^0.1.0",
