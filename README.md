@@ -137,6 +137,10 @@ or FIREFOX_BINARY environment variables. Following values are accepted:
   * Downloads the given version (for Firefox the version must be in the
     form `<major>.<minor>`, for Chromium this must be the revision number).
 
+Filter tests subset uses [ABP Test pages](https://testpages.adblockplus.org/).
+In order to run those tests on a different version of the test pages, set
+the _TEST_PAGES_URL_ environment variable.
+
 Linting
 -------
 

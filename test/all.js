@@ -17,7 +17,8 @@
 
 "use strict";
 
-const TEST_PAGES_URL = "https://testpages.adblockplus.org/en/";
+const TEST_PAGES_URL = process.env.TEST_PAGES_URL ||
+                       "https://testpages.adblockplus.org/en/";
 
 const glob = require("glob");
 const path = require("path");

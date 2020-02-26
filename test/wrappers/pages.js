@@ -17,8 +17,6 @@
 
 "use strict";
 
-const SKIP_ONLINE_TESTS = false;
-
 const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
@@ -113,7 +111,8 @@ async function getSections(driver)
 function isExcluded(elemClass, pageTitle, testTitle)
 {
   let onlineTestCase = elemClass && elemClass.split(/\s+/).includes("online");
-  if (SKIP_ONLINE_TESTS && onlineTestCase)
+  // Skip online tests whenever a custom TEST_PAGES_URL is used
+  if (process.env.TEST_PAGES_URL && onlineTestCase)
     return true;
 
   let browser = testTitle.replace(/\s.*$/, "");
