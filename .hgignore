@@ -2,6 +2,7 @@
 ^node_modules$
 ^docs$
 ^test/screenshots$
+^\.last_ui_build$
 
 syntax:glob
 *.zip
