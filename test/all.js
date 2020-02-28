@@ -155,8 +155,8 @@ if (typeof run == "undefined")
           this.origin = await getOrigin(this.driver);
         });
 
-        for (let file of glob.sync("./test/wrappers/*.js"))
-          reloadModulesForBrowser(file, pageTests);
+        for (let file of glob.sync("./test/wrappers/*"))
+          reloadModulesForBrowser(file);
 
         after(async function()
         {

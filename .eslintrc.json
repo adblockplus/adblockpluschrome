@@ -10,5 +10,8 @@
     "ext": true,
     "module": true,
     "require": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 11
   }
 }

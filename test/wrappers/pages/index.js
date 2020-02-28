@@ -23,32 +23,12 @@ const path = require("path");
 const {promisify} = require("util");
 const Jimp = require("jimp");
 const {By, until, error: {TimeoutError}} = require("selenium-webdriver");
+const {closeWindow} = require("./utils");
 
 const readdirAsync = promisify(fs.readdir);
 const unlinkAsync = promisify(fs.unlink);
 
-const SCREENSHOT_DIR = path.join(__dirname, "..", "screenshots");
-
-async function closeWindow(driver, goTo, returnTo, callback)
-{
-  try
-  {
-    await driver.switchTo().window(goTo);
-    try
-    {
-      if (callback)
-        await callback();
-    }
-    finally
-    {
-      await driver.close();
-    }
-  }
-  finally
-  {
-    await driver.switchTo().window(returnTo);
-  }
-}
+const SCREENSHOT_DIR = path.join(__dirname, "../..", "screenshots");
 
 function normalize(input)
 {
@@ -93,29 +73,42 @@ async function takeScreenshot(element)
   return img.crop(x, y, rect.width, rect.height);
 }
 
-async function getSections(driver)
+async function* getSections(driver)
 {
-  let elements = await driver.findElements(By.css("section"));
-  let sections = await Promise.all(elements.map(e =>
-    Promise.all([
-      e.findElement(By.css("h2")).catch(() => null),
-      e.findElement(By.className("testcase-container")).catch(() => null),
-      e.findElements(By.css("pre"))
-    ])
-  ));
-  return sections.filter(([title, demo, filters]) =>
-    title && demo && filters.length > 0
-  );
+  for (let element of await driver.findElements(By.css("section")))
+  {
+    try
+    {
+      yield await Promise.all([
+        element.findElement(By.css("h2")),
+        element.findElement(By.className("testcase-container")),
+        element.findElements(By.css("pre"))
+      ]);
+    }
+    catch (e) {}
+  }
 }
 
-function isExcluded(elemClass, pageTitle, testTitle)
+async function getSection(driver, index)
 {
-  let onlineTestCase = elemClass && elemClass.split(/\s+/).includes("online");
-  // Skip online tests whenever a custom TEST_PAGES_URL is used
-  if (process.env.TEST_PAGES_URL && onlineTestCase)
+  for await (let section of getSections(driver))
+  {
+    if (index-- == 0)
+      return section[1];
+  }
+}
+
+function isExcluded(elemClass, pageTitle, testTitle, specializedTest)
+{
+  if (process.env.TEST_PAGES_URL && elemClass &&
+      elemClass.split(/\s+/).includes("online"))
     return true;
 
   let browser = testTitle.replace(/\s.*$/, "");
+  if (specializedTest)
+    return typeof specializedTest.isExcluded == "function" &&
+           specializedTest.isExcluded(browser);
+
   return (
     // https://issues.adblockplus.org/ticket/6917
     pageTitle == "$subdocument" && browser == "Firefox" ||
@@ -151,7 +144,7 @@ async function getTestCases(driver, url)
   `);
 
   let tests = [];
-  for (let [title, demo, filters] of await getSections(driver))
+  for await (let [title, demo, filters] of getSections(driver))
   {
     tests.push(await Promise.all([
       title.getText(),
@@ -185,77 +178,63 @@ async function updateFilters(driver, origin, filters)
     throw error;
 }
 
-async function popupTest(driver, sectionIndex, pageTitle, description)
+async function checkTestCase(driver, vBrowser, fileNamePrefix, section,
+                             expectedScreenshot, description)
 {
-  let sections = await getSections(driver);
-  await sections[sectionIndex][1].findElement(By.css("a[href],button")).click();
-  await driver.sleep(500);
-  let handles = await driver.getAllWindowHandles();
-  if (pageTitle == "$popup - Exception")
+  let actualScreenshot = null;
+  try
   {
-    assert.equal(handles.length, 3, "Popup is whitelisted" + description);
-    await closeWindow(driver, handles[2], handles[1]);
+    await driver.wait(async() =>
+    {
+      actualScreenshot = await takeScreenshot(section);
+      let actualBitmap = actualScreenshot.bitmap;
+      let expectedBitmap = expectedScreenshot.bitmap;
+      return (actualBitmap.width == expectedBitmap.width &&
+              actualBitmap.height == expectedBitmap.height &&
+              actualBitmap.data.compare(expectedBitmap.data) == 0);
+    }, 1000);
   }
-  else
-    assert.equal(handles.length, 2, "Popup is blocked" + description);
+  catch (e)
+  {
+    if (e instanceof TimeoutError)
+    {
+      await removeOutdatedScreenshots(vBrowser);
+      for (let [postfix, data] of [["actual", actualScreenshot],
+                                   ["expected", expectedScreenshot]])
+      {
+        await data.write(path.join(SCREENSHOT_DIR,
+                                   `${fileNamePrefix}_${postfix}.png`));
+      }
+      throw new Error("Screenshots don't match" + description +
+        "\n       " +
+        "(See " + fileNamePrefix + "_*.png in test/screenshots.)"
+      );
+    }
+    throw e;
+  }
 }
 
 async function genericTest(driver, parentTitle, title, sectionIndex,
-                           expectedScreenshot, description, url)
+                           expectedScreenshot, description)
 {
   let vBrowser = normalize(parentTitle);
   let fileNamePrefix = `${vBrowser}_${normalize(title)}`;
-
-  let checkTestCase = async() =>
-  {
-    let tSections = await getSections(driver);
-    let bitmap = null;
-    let expectedBitmap = null;
-    let actualScreenshot = null;
-
-    try
-    {
-      await driver.wait(async() =>
-      {
-        actualScreenshot = await takeScreenshot(tSections[sectionIndex][1]);
-        ({bitmap} = actualScreenshot);
-        ({bitmap: expectedBitmap} = expectedScreenshot);
-        return (bitmap.width == expectedBitmap.width &&
-                bitmap.height == expectedBitmap.height &&
-                bitmap.data.compare(expectedBitmap.data) == 0);
-      }, 1000);
-    }
-    catch (e)
-    {
-      if (e instanceof TimeoutError)
-      {
-        await removeOutdatedScreenshots(vBrowser);
-        for (let [postfix, data] of [["actual", actualScreenshot],
-                                     ["expected", expectedScreenshot]])
-        {
-          await data.write(path.join(SCREENSHOT_DIR,
-                                     `${fileNamePrefix}_${postfix}.png`));
-        }
-        throw new Error("Screenshots don't match" + description +
-          "\n       " +
-          "(See " + fileNamePrefix + "_*.png in test/screenshots.)"
-        );
-      }
-      throw e;
-    }
-  };
+  let section = await getSection(driver, sectionIndex);
 
   // Sometimes on Firefox there is a delay until the added
   // filters become effective. So if the test case fails once,
   // we reload the page and try once again.
   try
   {
-    await checkTestCase(expectedScreenshot, title, sectionIndex, url);
+    await checkTestCase(driver, vBrowser, fileNamePrefix, section,
+                        expectedScreenshot, description);
   }
   catch (e)
   {
     await driver.navigate().refresh();
-    await checkTestCase(expectedScreenshot, title, sectionIndex, url);
+    section = await getSection(driver, sectionIndex);
+    await checkTestCase(driver, vBrowser, fileNamePrefix, section,
+                        expectedScreenshot, description);
   }
 }
 
@@ -307,6 +286,20 @@ async function checkSubscriptionAdded(driver, url)
   assert.ok(added, "subscription added");
 }
 
+function loadSpecializedTest(url)
+{
+  try
+  {
+    return require("./specialized/" + url.split("/").slice(-2).join("_"));
+  }
+  catch (e)
+  {
+    if (e.code != "MODULE_NOT_FOUND")
+      throw e;
+  }
+  return null;
+}
+
 describe("Test pages", async() =>
 {
   it("discovered filter test cases", function()
@@ -330,12 +323,16 @@ describe("Test pages", async() =>
   {
     for (let [elemClass, url, pageTitle] of this.parent.parent.pageTests)
     {
-      if (isExcluded(elemClass, pageTitle, this.parent.parent.title))
+      let specializedTest = loadSpecializedTest(url);
+
+      if (isExcluded(elemClass, pageTitle, this.parent.parent.title,
+                     specializedTest))
         continue;
 
       it(pageTitle, async function()
       {
         let testsExecuted = 0;
+        let testKind = "Tests";
         let testCases = await getTestCases(this.driver, url);
         for (let i = 0; i < testCases.length; i++)
         {
@@ -345,15 +342,19 @@ describe("Test pages", async() =>
           await updateFilters(this.driver, this.origin, filters);
 
           await this.driver.navigate().to(url);
-          if (pageTitle.startsWith("$popup"))
-            await popupTest(this.driver, i, pageTitle, description);
+          if (specializedTest)
+          {
+            testKind = "Specialized tests";
+            let section = await getSection(this.driver, i);
+            await specializedTest.run(this.driver, section, description);
+          }
           else
             await genericTest(this.driver, this.test.parent.parent.parent.title,
-                              title, i, expectedScreenshot, description, url);
+                              title, i, expectedScreenshot, description);
           testsExecuted += 1;
         }
 
-        this.test.title += ` (Tests: ${testsExecuted})`;
+        this.test.title += ` (${testKind}: ${testsExecuted})`;
       });
     }
   });
