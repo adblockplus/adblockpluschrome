@@ -57,7 +57,7 @@
     const fileExistsMsg = "returns correct value if file exists in indexedDB";
 
     ok(IO.statFile(testFileNames.simpleCheck) instanceof Promise,
-      "returns a promise");
+       "returns a promise");
 
     asyncReadHelper(
       IO.statFile,
@@ -100,7 +100,7 @@
   testEdge("writeToFile", assert =>
   {
     ok(IO.writeToFile(testFileNames.simpleCheck, ["test"]) instanceof Promise,
-      "returns a promise");
+       "returns a promise");
 
     writesCorrectValue(assert);
   });
@@ -138,7 +138,7 @@
     const fileExistsMsg = "calls listeners with the correct values";
 
     ok(IO.readFromFile(testFileNames.simpleCheck) instanceof Promise,
-    "returns a promise");
+       "returns a promise");
 
     asyncReadHelper(
       IO.readFromFile,
@@ -171,7 +171,7 @@
   testEdge("renameFile", assert =>
   {
     ok(IO.renameFile(testFileNames.simpleCheck) instanceof Promise,
-      "returns a promise");
+       "returns a promise");
 
     checkRename(assert);
   });

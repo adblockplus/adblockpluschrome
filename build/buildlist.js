@@ -50,8 +50,8 @@ exports.cycleBuilds = function(folder, newBuild)
     buildList.unshift(newBuild);
 
     return Promise.all(
-     buildList.splice(MAXKEPTBUILDS)
-       .map(({filename}) => unlinkAsync(path.join(folder, filename)))
+      buildList.splice(MAXKEPTBUILDS)
+               .map(({filename}) => unlinkAsync(path.join(folder, filename)))
     ).then(() => writeFileAsync(absFilename, JSON.stringify(buildList)
     ).then(() => buildList));
   });

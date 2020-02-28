@@ -97,12 +97,12 @@ async function getSections(driver)
 {
   let elements = await driver.findElements(By.css("section"));
   let sections = await Promise.all(elements.map(e =>
-      Promise.all([
-        e.findElement(By.css("h2")).catch(() => null),
-        e.findElement(By.className("testcase-container")).catch(() => null),
-        e.findElements(By.css("pre"))
-      ])
-    ));
+    Promise.all([
+      e.findElement(By.css("h2")).catch(() => null),
+      e.findElement(By.className("testcase-container")).catch(() => null),
+      e.findElements(By.css("pre"))
+    ])
+  ));
   return sections.filter(([title, demo, filters]) =>
     title && demo && filters.length > 0
   );
@@ -116,19 +116,18 @@ function isExcluded(elemClass, pageTitle, testTitle)
     return true;
 
   let browser = testTitle.replace(/\s.*$/, "");
-  if (// https://issues.adblockplus.org/ticket/6917
-      pageTitle == "$subdocument" && browser == "Firefox" ||
-      // Chromium doesn't support Flash
-      pageTitle.startsWith("$object") && browser == "Chromium" ||
-      // Chromium 63 doesn't have user stylesheets (required to
-      // overrule inline styles) and doesn't run content scripts
-      // in dynamically written documents.
-      testTitle == "Chromium (oldest)" &&
-      (pageTitle == "Inline style !important" ||
-       pageTitle == "Anonymous iframe document.write()"))
-    return true;
-
-  return false;
+  return (
+    // https://issues.adblockplus.org/ticket/6917
+    pageTitle == "$subdocument" && browser == "Firefox" ||
+    // Chromium doesn't support Flash
+    pageTitle.startsWith("$object") && browser == "Chromium" ||
+    // Chromium 63 doesn't have user stylesheets (required to
+    // overrule inline styles) and doesn't run content scripts
+    // in dynamically written documents.
+    testTitle == "Chromium (oldest)" &&
+    (pageTitle == "Inline style !important" ||
+     pageTitle == "Anonymous iframe document.write()")
+  );
 }
 
 async function getTestCases(driver, url)
@@ -202,7 +201,7 @@ async function popupTest(driver, sectionIndex, pageTitle, description)
 }
 
 async function genericTest(driver, parentTitle, title, sectionIndex,
-  expectedScreenshot, description, url)
+                           expectedScreenshot, description, url)
 {
   let vBrowser = normalize(parentTitle);
   let fileNamePrefix = `${vBrowser}_${normalize(title)}`;
@@ -232,7 +231,7 @@ async function genericTest(driver, parentTitle, title, sectionIndex,
       {
         await removeOutdatedScreenshots(vBrowser);
         for (let [postfix, data] of [["actual", actualScreenshot],
-          ["expected", expectedScreenshot]])
+                                     ["expected", expectedScreenshot]])
         {
           await data.write(path.join(SCREENSHOT_DIR,
                                      `${fileNamePrefix}_${postfix}.png`));

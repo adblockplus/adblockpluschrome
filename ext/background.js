@@ -95,7 +95,7 @@
           return frame.url;
       }
 
-      return undefined;
+      return null;
     }
   };
 
@@ -247,9 +247,8 @@
 
     updatePageFrameStructure(details.frameId, details.tabId, details.url,
                              details.parentFrameId);
-  },
-  {types: ["main_frame", "sub_frame"], urls: ["http://*/*", "https://*/*"]},
-  ["responseHeaders"]);
+  }, {types: ["main_frame", "sub_frame"],
+      urls: ["http://*/*", "https://*/*"]}, ["responseHeaders"]);
 
   browser.webNavigation.onBeforeNavigate.addListener(details =>
   {
@@ -513,7 +512,7 @@
           // In Microsoft Edge (version 42.17134.1.0) we don't have frameId
           // so we fall back to iterating over the tab's frames
           // see https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11716733
-          if (rawSender.frameId != undefined)
+          if (typeof rawSender.frameId != "undefined")
             frame = frames.get(rawSender.frameId);
           else if (rawSender.url)
           {

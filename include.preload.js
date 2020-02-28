@@ -213,22 +213,18 @@ function checkCollapse(element)
     checkedSelectors.add(selector);
   }
 
-  browser.runtime.sendMessage(
+  browser.runtime.sendMessage({type: "filters.collapse",
+                               baseURL: document.location.href,
+                               urls, mediatype}).then(collapse =>
+  {
+    if (collapse)
     {
-      type: "filters.collapse",
-      urls,
-      mediatype,
-      baseURL: document.location.href
-    }).then(collapse =>
-    {
-      if (collapse)
-      {
-        if (selector)
-          contentFiltering.addSelectors([selector], "collapsing", true);
-        else
-          hideElement(element);
-      }
-    });
+      if (selector)
+        contentFiltering.addSelectors([selector], "collapsing", true);
+      else
+        hideElement(element);
+    }
+  });
 }
 
 function checkSitekey()

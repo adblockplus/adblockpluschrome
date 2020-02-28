@@ -304,7 +304,7 @@ function injected(eventName, injectedIntoContentWindow)
       // Since the old webkitRTCPeerConnection constructor takes an optional
       // second argument we need to take care to pass that through. Necessary
       // for older versions of Chrome such as 51.
-      let constraints = undefined;
+      let constraints;
       if (args.length > 1)
         constraints = args[1];
 

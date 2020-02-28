@@ -10,8 +10,5 @@
     "ext": true,
     "module": true,
     "require": true
-  },
-  "rules": {
-    "arrow-parens": ["error", "as-needed"]
   }
 }
