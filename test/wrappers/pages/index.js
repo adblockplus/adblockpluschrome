@@ -37,7 +37,16 @@ function normalize(input)
 
 async function removeOutdatedScreenshots(browser)
 {
-  let files = await readdirAsync(SCREENSHOT_DIR);
+  let files;
+  try
+  {
+    files = await readdirAsync(SCREENSHOT_DIR);
+  }
+  catch (e)
+  {
+    return;
+  }
+
   for (let filename of files)
   {
     if (filename.startsWith(browser))
@@ -46,9 +55,7 @@ async function removeOutdatedScreenshots(browser)
       {
         await unlinkAsync(path.join(SCREENSHOT_DIR, filename));
       }
-      catch (e)
-      {
-      }
+      catch (e) {}
     }
   }
 }
