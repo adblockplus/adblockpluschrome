@@ -24,15 +24,17 @@
 # https://gitlab.com/eyeo/devops/ansible-role-adblockplus-builder
 # https://gitlab.com/eyeo/devops/ansible-role-gitlab-runner
 
+---
+
 image: "registry.gitlab.com/eyeo/docker/adblockplus-ci:node10"
 
 stages:
-  - prepare
-  - build
-  - download
-  - publish
-  - test
-  - scp
+  - "prepare"
+  - "build"
+  - "download"
+  - "publish"
+  - "test"
+  - "scp"
 
 variables:
   npm_config_unsafe_perm: "true"
@@ -41,92 +43,99 @@ variables:
 
 .dependencies:
   script: &dependencies
-    - mkdir -p .git/info
+    - "mkdir -p .git/info"
     - "python ensure_dependencies.py"
     - "npm install"
 
 .cache:
   cache: &cache
-    key: global-cache
+    key: "global-cache"
     untracked: true
     paths:
-      - adblockpluscore/
-      - adblockplusui/
-      - buildtools/
+      - "adblockpluscore/"
+      - "adblockplusui/"
+      - "buildtools/"
       # npm audit fails if the node_modules folder is cached
       # but the changes in package-lock.json are not.
       # That is a bug (https://github.com/npm/npm/issues/20604)
       # which in our case is triggerred by using stubs in package.json.
-      - package-lock.json
+      - "package-lock.json"
 
 .default_template:
-  stage: test
+  stage: "test"
   dependencies: []
   before_script: *dependencies
   retry:
     max: 2
-    when: stuck_or_timeout_failure
+    when: "stuck_or_timeout_failure"
   except:
-    - schedules
+    - "schedules"
   cache:
     <<: *cache
-    policy: pull
+    policy: "pull"
 
 .test_template:
-  extends: .default_template
-  stage: test
+  extends: ".default_template"
+  stage: "test"
   artifacts:
     paths:
-      - test/screenshots/
-    when: on_failure
-    expire_in: 1 mo
+      - "test/screenshots/"
+    when: "on_failure"
+    expire_in: "1 mo"
 
 .build:
   before_script: *dependencies
-  stage: build
+  stage: "build"
   except:
-    - schedules
+    - "schedules"
   script:
-    - python build.py build -t $PLATFORM
+    - "python build.py build -t $PLATFORM"
   artifacts:
     paths:
-      - adblockplusfirefox-*.xpi
-      - adblockpluschrome-*.zip
-      - adblockplusedge-*.appx
+      - "adblockplusfirefox-*.xpi"
+      - "adblockpluschrome-*.zip"
+      - "adblockplusedge-*.appx"
   cache:
     <<: *cache
-    policy: pull
+    policy: "pull"
 
-lint:
-  extends: .default_template
-  stage: test
+lint:yaml:
+  image: "registry.gitlab.com/eyeo/docker/yamllint:1.14.0-configured"
+  stage: "test"
+  dependencies: []
   script:
-    - npm run lint
+    - "yamllint .gitlab-ci.yml"
+
+lint:js:
+  extends: ".default_template"
+  stage: "test"
+  script:
+    - "npm run lint"
 
 audit:
-  extends: .default_template
-  stage: test
+  extends: ".default_template"
+  stage: "test"
   script:
-    - npm audit
+    - "npm audit"
   allow_failure: true
 
 build:chrome:
-  extends: .build
+  extends: ".build"
   variables:
-    PLATFORM: chrome
+    PLATFORM: "chrome"
 
 build:gecko:
-  extends: .build
+  extends: ".build"
   variables:
-    PLATFORM: gecko
+    PLATFORM: "gecko"
 
 build:edge:
-  extends: .build
+  extends: ".build"
   variables:
-    PLATFORM: edge
+    PLATFORM: "edge"
 
 prepare-dependencies:
-  stage: prepare
+  stage: "prepare"
   script:
     - "mv -t /tmp adblockpluscore/*-snapshots 2>/dev/null || true"
     - "git clean -x -d -ff"
@@ -135,88 +144,88 @@ prepare-dependencies:
     - "npm run download-test-browsers"
   cache: *cache
   except:
-    - schedules
+    - "schedules"
 
 docs:
-  extends: .default_template
-  stage: build
+  extends: ".default_template"
+  stage: "build"
   script:
-    - npm run docs
+    - "npm run docs"
   artifacts:
     paths:
-      - docs/
-    expire_in: 1 week
+      - "docs/"
+    expire_in: "1 week"
 
 test:firefox:oldest:
-  extends: .test_template
+  extends: ".test_template"
   script:
-    - npm run test-only -- -g 'Firefox \(oldest\)'
+    - "npm run test-only -- -g 'Firefox \\(oldest\\)'"
 
 test:firefox:latest:
-  extends: .test_template
+  extends: ".test_template"
   script:
-    - npm run test-only -- -g 'Firefox \(latest\)'
+    - "npm run test-only -- -g 'Firefox \\(latest\\)'"
 
 test:chromium:oldest:
-  extends: .test_template
+  extends: ".test_template"
   script:
-    - xvfb-run -a npm run test-only -- -g 'Chromium \(oldest\)'
+    - "xvfb-run -a npm run test-only -- -g 'Chromium \\(oldest\\)'"
 
 test:chromium:latest:
-  extends: .test_template
+  extends: ".test_template"
   script:
-    - xvfb-run -a npm run test-only -- -g 'Chromium \(latest\)'
+    - "xvfb-run -a npm run test-only -- -g 'Chromium \\(latest\\)'"
 
 .download:
-  stage: download
+  stage: "download"
   script:
-    - npm install
-    - npm run archive -- $EXTENSION_ID
+    - "npm install"
+    - "npm run archive -- $EXTENSION_ID"
   artifacts:
     paths:
-      - adblockpluschrome-*.crx
+      - "adblockpluschrome-*.crx"
   only:
-    - schedules
+    - "schedules"
 
 download:release:
-  extends: .download
+  extends: ".download"
   variables:
     EXTENSION_ID: "cfhdojbkjhnklbpkdaibdccddilifddb"
 
 download:devbuild:
-  extends: .download
+  extends: ".download"
   variables:
     EXTENSION_ID: "ldcecbkkoecffmfljeihcmifjjdoepkn"
 
 .scp:
-  stage: scp
+  stage: "scp"
   only:
-    - schedules
+    - "schedules"
   tags:
-    - protected
+    - "protected"
   script:
     - "scp *.crx $DESTINATION"
 
 scp:release:
-  extends: .scp
+  extends: ".scp"
   dependencies:
-    - download:release
+    - "download:release"
   variables:
     DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/releases/"
 
 scp:devbuild:
-  extends: .scp
+  extends: ".scp"
   dependencies:
-    - download:devbuild
+    - "download:devbuild"
   variables:
     DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome/"
 
 .pages:
-  stage: publish
+  stage: "publish"
   dependencies:
-    - docs
+    - "docs"
   except:
-    - schedules
+    - "schedules"
 
 include:
   project: "eyeo/adblockplus/adblockpluscore"
