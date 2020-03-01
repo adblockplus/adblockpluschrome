@@ -37,9 +37,9 @@ stages:
   - "scp"
 
 variables:
-  npm_config_unsafe_perm: "true"
-  npm_config_prefer_offline: "true"
   npm_config_audit: "false"
+  npm_config_prefer_offline: "true"
+  npm_config_unsafe_perm: "true"
 
 .dependencies:
   script: &dependencies
@@ -74,6 +74,59 @@ variables:
     <<: *cache
     policy: "pull"
 
+prepare-dependencies:
+  stage: "prepare"
+  script:
+    - "mv -t /tmp adblockpluscore/*-snapshots 2>/dev/null || true"
+    - "git clean -x -d -ff"
+    - *dependencies
+    - "mv -t adblockpluscore /tmp/*-snapshots 2>/dev/null || true"
+    - "npm run download-test-browsers"
+  except:
+    - "schedules"
+  cache: *cache
+
+.build:
+  stage: "build"
+  before_script: *dependencies
+  script:
+    - "python build.py build -t $PLATFORM"
+  except:
+    - "schedules"
+  cache:
+    <<: *cache
+    policy: "pull"
+  artifacts:
+    paths:
+      - "adblockplusfirefox-*.xpi"
+      - "adblockpluschrome-*.zip"
+      - "adblockplusedge-*.appx"
+
+build:chrome:
+  extends: ".build"
+  variables:
+    PLATFORM: "chrome"
+
+build:gecko:
+  extends: ".build"
+  variables:
+    PLATFORM: "gecko"
+
+build:edge:
+  extends: ".build"
+  variables:
+    PLATFORM: "edge"
+
+docs:
+  extends: ".default_template"
+  stage: "build"
+  script:
+    - "npm run docs"
+  artifacts:
+    paths:
+      - "docs/"
+    expire_in: "1 week"
+
 .test_template:
   extends: ".default_template"
   stage: "test"
@@ -82,22 +135,6 @@ variables:
       - "test/screenshots/"
     when: "on_failure"
     expire_in: "1 mo"
-
-.build:
-  before_script: *dependencies
-  stage: "build"
-  except:
-    - "schedules"
-  script:
-    - "python build.py build -t $PLATFORM"
-  artifacts:
-    paths:
-      - "adblockplusfirefox-*.xpi"
-      - "adblockpluschrome-*.zip"
-      - "adblockplusedge-*.appx"
-  cache:
-    <<: *cache
-    policy: "pull"
 
 lint:yaml:
   image: "registry.gitlab.com/eyeo/docker/yamllint:1.14.0-configured"
@@ -118,43 +155,6 @@ audit:
   script:
     - "npm audit"
   allow_failure: true
-
-build:chrome:
-  extends: ".build"
-  variables:
-    PLATFORM: "chrome"
-
-build:gecko:
-  extends: ".build"
-  variables:
-    PLATFORM: "gecko"
-
-build:edge:
-  extends: ".build"
-  variables:
-    PLATFORM: "edge"
-
-prepare-dependencies:
-  stage: "prepare"
-  script:
-    - "mv -t /tmp adblockpluscore/*-snapshots 2>/dev/null || true"
-    - "git clean -x -d -ff"
-    - *dependencies
-    - "mv -t adblockpluscore /tmp/*-snapshots 2>/dev/null || true"
-    - "npm run download-test-browsers"
-  cache: *cache
-  except:
-    - "schedules"
-
-docs:
-  extends: ".default_template"
-  stage: "build"
-  script:
-    - "npm run docs"
-  artifacts:
-    paths:
-      - "docs/"
-    expire_in: "1 week"
 
 test:firefox:oldest:
   extends: ".test_template"
@@ -181,11 +181,20 @@ test:chromium:latest:
   script:
     - "npm install"
     - "npm run archive -- $EXTENSION_ID"
+  only:
+    - "schedules"
   artifacts:
     paths:
       - "adblockpluschrome-*.crx"
+
+.scp:
+  stage: "scp"
+  script:
+    - "scp *.crx $DESTINATION"
   only:
     - "schedules"
+  tags:
+    - "protected"
 
 download:release:
   extends: ".download"
@@ -196,15 +205,6 @@ download:devbuild:
   extends: ".download"
   variables:
     EXTENSION_ID: "ldcecbkkoecffmfljeihcmifjjdoepkn"
-
-.scp:
-  stage: "scp"
-  only:
-    - "schedules"
-  tags:
-    - "protected"
-  script:
-    - "scp *.crx $DESTINATION"
 
 scp:release:
   extends: ".scp"
