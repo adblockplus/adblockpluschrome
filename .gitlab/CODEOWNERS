@@ -2,5 +2,5 @@
 
 # Automation
 /build/ sebastian@adblockplus.org tristan@adblockplus.org
-/test/ sebastian@adblockplus.org tristan@adblockplus.org
+/test/ sebastian@adblockplus.org t.feliu@eyeo.com
 /.gitlab-ci.yml sebastian@adblockplus.org tristan@adblockplus.org
