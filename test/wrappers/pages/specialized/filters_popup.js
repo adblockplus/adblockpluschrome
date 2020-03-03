@@ -17,9 +17,15 @@
 
 "use strict";
 
-const {checkPopup} = require("../utils");
+const {By} = require("selenium-webdriver");
 
 exports.run = async function(driver, section, description)
 {
-  await checkPopup(driver, section, false, description);
+  let nHandles = (await driver.getAllWindowHandles()).length;
+  await section.findElement(By.css("a[href],button")).click();
+  await driver.sleep(500);
+  await driver.wait(
+    async() => (await driver.getAllWindowHandles()).length <= nHandles,
+    2000, description
+  );
 };

@@ -22,7 +22,7 @@ const assert = require("assert");
 
 it("qunit", async function()
 {
-  await this.driver.navigate().to(this.origin + "/qunit/index.html");
+  await this.driver.navigate().to(this.extensionOrigin + "/qunit/index.html");
   let elem = await this.driver.wait(
     until.elementLocated(By.id("qunit-testresult"))
   );

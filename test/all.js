@@ -79,17 +79,22 @@ async function getDriver(binary, devenvCreated, module)
   );
 }
 
-async function getOrigin(driver)
+async function waitForExtension(driver)
 {
   let handle = await driver.wait(
-    async() => (await driver.getAllWindowHandles())[1]
+    async() => (await driver.getAllWindowHandles())[1],
+    5000, "extension page didn't open"
   );
+
+  let origin;
   await driver.switchTo().window(handle);
-  return driver.wait(async() =>
+  await driver.wait(async() =>
   {
-    let origin = await driver.executeScript("return location.origin;");
-    return origin != "null" ? origin : null;
+    origin = await driver.executeScript("return location.origin;");
+    return origin != "null";
   }, 1000, "unknown extension page origin");
+
+  return [handle, origin];
 }
 
 function reloadModulesForBrowser(file)
@@ -152,7 +157,29 @@ if (typeof run == "undefined")
             devenvCreated = createDevenv(module.platform);
 
           this.driver = await getDriver(binary, devenvCreated, module);
-          this.origin = await getOrigin(this.driver);
+          [this.extensionHandle,
+           this.extensionOrigin] = await waitForExtension(this.driver);
+        });
+
+        beforeEach(async function()
+        {
+          let handles = await this.driver.getAllWindowHandles();
+          let defaultHandle = handles.shift();
+
+          for (let handle of handles)
+          {
+            if (handle != this.extensionHandle)
+            {
+              try
+              {
+                await this.driver.switchTo().window(handle);
+                await this.driver.close();
+              }
+              catch (e) {}
+            }
+          }
+
+          await this.driver.switchTo().window(defaultHandle);
         });
 
         for (let file of glob.sync("./test/wrappers/*"))

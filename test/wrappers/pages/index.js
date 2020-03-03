@@ -23,7 +23,6 @@ const path = require("path");
 const {promisify} = require("util");
 const Jimp = require("jimp");
 const {By, until, error: {TimeoutError}} = require("selenium-webdriver");
-const {closeWindow} = require("./utils");
 
 const readdirAsync = promisify(fs.readdir);
 const unlinkAsync = promisify(fs.unlink);
@@ -130,9 +129,8 @@ function isExcluded(elemClass, pageTitle, testTitle, specializedTest)
   );
 }
 
-async function getTestCases(driver, url)
+async function getTestCases(driver)
 {
-  await driver.navigate().to(url);
   await driver.executeScript(`
     let documents = [document];
     while (documents.length > 0)
@@ -163,9 +161,11 @@ async function getTestCases(driver, url)
   return tests;
 }
 
-async function updateFilters(driver, origin, filters)
+async function updateFilters(driver, extensionHandle, filters)
 {
-  await driver.navigate().to(origin + "/options.html");
+  let currentHandle = await driver.getWindowHandle();
+  await driver.switchTo().window(extensionHandle);
+
   let error = await driver.executeAsyncScript(`
     let filters = arguments[0];
     let callback = arguments[arguments.length - 1];
@@ -181,8 +181,12 @@ async function updateFilters(driver, origin, filters)
                                    text: filters})
     ).then(errors => callback(errors[0]), callback);
   `, filters.join("\n"));
+
   if (error)
     throw error;
+
+  await driver.switchTo().window(currentHandle);
+  await driver.navigate().refresh();
 }
 
 async function checkTestCase(driver, vBrowser, fileNamePrefix, section,
@@ -251,10 +255,12 @@ async function clickSubscribeLink(driver, url)
   await driver.findElement(By.id("subscribe-button")).click();
 }
 
-function getSubscribeHandles(driver)
+async function waitForSubscriptionHandle(driver)
 {
-  return driver.wait(() => driver.getAllWindowHandles()
-    .then(allHandles => allHandles.length > 2 ? allHandles : null), 3000);
+  await driver.switchTo().window(
+    await driver.wait(async() => (await driver.getAllWindowHandles())[2],
+                      3000, "extension page didn't open")
+  );
 }
 
 async function confirmSubscribeDialog(driver)
@@ -316,14 +322,11 @@ describe("Test pages", async() =>
 
   it("subscribe link", async function()
   {
-    clickSubscribeLink(this.driver, this.test.parent.parent.testPagesURL);
-    let handles = await getSubscribeHandles(this.driver);
-    await closeWindow(this.driver, handles[2], handles[1], async() =>
-    {
-      await confirmSubscribeDialog(this.driver);
-      await checkSubscriptionAdded(this.driver,
-                                   this.test.parent.parent.testPagesURL);
-    });
+    await clickSubscribeLink(this.driver, this.test.parent.parent.testPagesURL);
+    await waitForSubscriptionHandle(this.driver);
+    await confirmSubscribeDialog(this.driver);
+    await checkSubscriptionAdded(this.driver,
+                                 this.test.parent.parent.testPagesURL);
   });
 
   describe("Filter test cases", async function()
@@ -340,15 +343,17 @@ describe("Test pages", async() =>
       {
         let testsExecuted = 0;
         let testKind = "Tests";
-        let testCases = await getTestCases(this.driver, url);
+
+        await this.driver.navigate().to(url);
+        let testCases = await getTestCases(this.driver);
+
         for (let i = 0; i < testCases.length; i++)
         {
           let [title, expectedScreenshot, filters] = testCases[i];
           let description = ["", "Test case: " + title, url].join("\n       ");
 
-          await updateFilters(this.driver, this.origin, filters);
+          await updateFilters(this.driver, this.extensionHandle, filters);
 
-          await this.driver.navigate().to(url);
           if (specializedTest)
           {
             testKind = "Specialized tests";

@@ -18,7 +18,6 @@
 "use strict";
 
 const {By} = require("selenium-webdriver");
-const {closeWindow} = require("../utils");
 
 exports.isExcluded = function(browser)
 {
@@ -30,20 +29,10 @@ exports.isExcluded = function(browser)
 exports.run = async function(driver, section, description)
 {
   await section.findElement(By.css("a[href],button")).click();
-
-  try
+  await driver.wait(async() =>
   {
-    await driver.wait(async() =>
-    {
-      let logs = await driver.manage().logs().get("browser");
-      let expected = "filters/ping - Failed to load resource";
-      return logs.some(entry => entry.message.includes(expected));
-    }, 2000, description);
-  }
-  finally
-  {
-    let handles = await driver.getAllWindowHandles();
-    if (handles.length > 2)
-      await closeWindow(driver, handles[2], handles[1]);
-  }
+    let logs = await driver.manage().logs().get("browser");
+    let expected = "filters/ping - Failed to load resource";
+    return logs.some(entry => entry.message.includes(expected));
+  }, 2000, description);
 };
