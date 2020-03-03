@@ -330,17 +330,8 @@ function injected(eventName, injectedIntoContentWindow)
 
 if (document instanceof HTMLDocument)
 {
-  let sandbox;
-
-  // We have to wrap the following code in a try catch
-  // because of this Microsoft Edge bug:
-  // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/19082980/
-  try
-  {
-    sandbox = window.frameElement &&
-              window.frameElement.getAttribute("sandbox");
-  }
-  catch (e) {}
+  let sandbox = window.frameElement &&
+                window.frameElement.getAttribute("sandbox");
 
   if (typeof sandbox != "string" || /(^|\s)allow-scripts(\s|$)/i.test(sandbox))
   {
@@ -351,8 +342,7 @@ if (document instanceof HTMLDocument)
     script.async = false;
 
     // Firefox 58 only bypasses site CSPs when assigning to 'src',
-    // while Chrome 67 and Microsoft Edge 44.17763.1.0
-    // only bypass site CSPs when using 'textContent'.
+    // while Chrome 67 only bypass site CSPs when using 'textContent'.
     if (browser.runtime.getURL("").startsWith("moz-extension://"))
     {
       let url = URL.createObjectURL(new Blob([code]));

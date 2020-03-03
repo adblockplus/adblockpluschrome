@@ -88,26 +88,22 @@ prepare-dependencies:
   cache:
     <<: *cache
     policy: "pull"
-  artifacts:
-    paths:
-      - "adblockplusfirefox-*.xpi"
-      - "adblockpluschrome-*.zip"
-      - "adblockplusedge-*.appx"
 
 build:chrome:
   extends: ".build"
   variables:
     PLATFORM: "chrome"
+  artifacts:
+    paths:
+      - "adblockpluschrome-*.zip"
 
 build:gecko:
   extends: ".build"
   variables:
     PLATFORM: "gecko"
-
-build:edge:
-  extends: ".build"
-  variables:
-    PLATFORM: "edge"
+  artifacts:
+    paths:
+      - "adblockplusfirefox-*.xpi"
 
 docs:
   extends: ".default_template"

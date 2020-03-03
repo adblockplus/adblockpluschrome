@@ -339,23 +339,15 @@
         // https://bugzilla.mozilla.org/show_bug.cgi?id=1331746
         if (change == "iconPath" && "setIcon" in browser.browserAction)
         {
-          let path = {
-            16: this._changes.iconPath.replace("$size", "16"),
-            20: this._changes.iconPath.replace("$size", "20"),
-            32: this._changes.iconPath.replace("$size", "32"),
-            40: this._changes.iconPath.replace("$size", "40")
-          };
-          try
-          {
-            return browser.browserAction.setIcon({tabId: this._tabId, path});
-          }
-          catch (e)
-          {
-            // Edge throws if passed icon sizes different than 19,20,38,40px.
-            delete path[16];
-            delete path[32];
-            return browser.browserAction.setIcon({tabId: this._tabId, path});
-          }
+          return browser.browserAction.setIcon({
+            tabId: this._tabId,
+            path: {
+              16: this._changes.iconPath.replace("$size", "16"),
+              20: this._changes.iconPath.replace("$size", "20"),
+              32: this._changes.iconPath.replace("$size", "32"),
+              40: this._changes.iconPath.replace("$size", "40")
+            }
+          });
         }
 
         if (change == "iconImageData" && "setIcon" in browser.browserAction)
@@ -498,45 +490,15 @@
       sender.page = new Page(rawSender.tab);
       sender.frame = {
         id: rawSender.frameId,
-        // In Edge requests from internal extension pages
-        // (protocol ms-browser-extension://) do no have a sender URL.
-        url: rawSender.url ? new URL(rawSender.url) : null,
+        url: new URL(rawSender.url),
         get parent()
         {
           let frames = framesOfTabs.get(rawSender.tab.id);
-
           if (!frames)
             return null;
 
-          let frame;
-          // In Microsoft Edge (version 42.17134.1.0) we don't have frameId
-          // so we fall back to iterating over the tab's frames
-          // see https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11716733
-          if (typeof rawSender.frameId != "undefined")
-            frame = frames.get(rawSender.frameId);
-          else if (rawSender.url)
-          {
-            let rawSenderHref = rawSender.url.replace(/#.*/, "");
-
-            for (let [frameId, frameInfo] of frames)
-            {
-              let frameInfoHref = frameInfo.url.href.replace(/#.*/, "");
-
-              // If we have two frames with the same URL
-              // we are going to pick the first one we find
-              // as we have no other way of distinguishing between them.
-              if (frameInfoHref == rawSenderHref)
-              {
-                frame = frameInfo;
-                this.id = frameId;
-                break;
-              }
-            }
-          }
-
-          if (frame)
-            return frame.parent || null;
-          return frames.get(0) || null;
+          let frame = frames.get(rawSender.frameId);
+          return (frame ? frame.parent : frames.get(0)) || null;
         }
       };
     }

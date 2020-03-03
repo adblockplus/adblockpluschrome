@@ -57,8 +57,7 @@
     "windows.update"
   ];
 
-  // Microsoft Edge (44.17763.1.0), Chrome (<= 66) and Opera (<= 54)
-  // don't accept passing a callback for
+  // Chrome (<= 66) and Opera (<= 54) don't accept passing a callback for
   // browserAction.setBadgeText and browserAction.setBadgeBackgroundColor
   const maybeAsyncAPIs = [
     ["browserAction.setBadgeText", {text: ""}],
@@ -125,18 +124,9 @@
         {
           let error = browser.runtime.lastError;
           if (error && !portClosedBeforeResponseError.test(error.message))
-          {
-            // runtime.lastError is already an Error instance on Edge, while on
-            // Chrome it is a plain object with only a message property.
-            if (!(error instanceof Error))
-              error = new Error(error.message);
-
-            rejectPromise(error);
-          }
+            rejectPromise(new Error(error.message));
           else
-          {
             resolvePromise(result);
-          }
         });
 
         return new Promise((resolve, reject) =>
@@ -258,9 +248,8 @@
 
   if (shouldWrapAPIs())
   {
-    // Unlike Firefox and Microsoft Edge, Chrome doesn't have a "browser"
-    // object, but provides the extension API through the "chrome" namespace
-    // (non-standard).
+    // Unlike Firefox, Chrome doesn't have a "browser" object, but provides
+    // the extension API through the "chrome" namespace (non-standard).
     if (typeof browser == "undefined")
       self.browser = chrome;
 
@@ -289,53 +278,6 @@
 // Object.values is not supported in Chrome <54.
 if (!("values" in Object))
   Object.values = obj => Object.keys(obj).map(key => obj[key]);
-
-// Microsoft Edge (42.17134.1.0) doesn't support webRequest.ResourceType, but
-// we can obtain the list of accepted resource types from the error message
-// when creating an onBeforeRequest event listener with an unsupported resource
-// type.
-//
-// Note: that while `browser.webRequest` is `undefined` for content scripts,
-// with Firefox for Android `"webRequest" in browser` is actually `true`!
-// See https://bugzil.la/1556773
-if (browser.webRequest && !("ResourceType" in browser.webRequest))
-{
-  try
-  {
-    browser.webRequest.onBeforeRequest.addListener(
-      details => {}, {urls: ["<all_urls>"], types: ["foo"]}
-    );
-  }
-  catch (error)
-  {
-    let errorMessage = error.toString();
-    errorMessage = errorMessage.substr(errorMessage.lastIndexOf(":"));
-
-    browser.webRequest.ResourceType = {};
-    if (errorMessage.includes("main_frame"))
-    {
-      for (let type of errorMessage.match(/[a-z_]+/g))
-        browser.webRequest.ResourceType[type.toUpperCase()] = type;
-    }
-  }
-}
-
-// Microsoft Edge doesn't support i18n.getMessage("@@bidi_dir").
-if (!browser.i18n.getMessage("@@bidi_dir"))
-{
-  let {getMessage} = browser.i18n;
-  Object.defineProperty(browser.i18n, "getMessage", {
-    value(msgId, substitutions)
-    {
-      if (msgId == "@@bidi_dir")
-      {
-        let locale = browser.i18n.getUILanguage();
-        return /^(?:ar|fa|he|ug|ur)\b/.test(locale) ? "rtl" : "ltr";
-      }
-      return getMessage(msgId, substitutions);
-    }
-  });
-}
 
 // Firefox <56 separates the locale parts with an underscore instead of a dash.
 // https://bugzilla.mozilla.org/show_bug.cgi?id=1374552

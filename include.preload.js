@@ -132,12 +132,6 @@ function getURLsFromElement(element)
 
 function getSelectorForBlockedElement(element)
 {
-  // Microsoft Edge does not support CSS.escape(). However, it doesn't
-  // support user style sheets either. So the selector would be added
-  // with an author style sheet anyway, which doesn't provide any benefits.
-  if (!("escape" in CSS))
-    return null;
-
   // Setting the "display" CSS property to "none" doesn't have any effect on
   // <frame> elements (in framesets). So we have to hide it inline through
   // the "visibility" CSS property.
@@ -435,8 +429,8 @@ ContentFiltering.prototype = {
       {
         // Insert the rules inline if we have been instructed by the background
         // page to do so. This is rarely the case, except on platforms that do
-        // not support user stylesheets via the browser.tabs.insertCSS API
-        // (Firefox <53, Chrome <66, and Edge).
+        // not support user stylesheets via the browser.tabs.insertCSS API, i.e.
+        // Firefox <53 and Chrome <66.
         // Once all supported platforms have implemented this API, we can remove
         // the code below. See issue #5090.
         // Related Chrome and Firefox issues:

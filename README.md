@@ -37,19 +37,13 @@ Run one of the following commands in the project directory, depending on your
 target platform:
 
     ./build.py build -t chrome -k adblockpluschrome.pem
-    ./build.py build -t edge
     ./build.py build -t gecko
 
 This will create a build with a name in the form
-_adblockpluschrome-1.2.3.nnnn.crx_, _adblockplusedge-1.2.3.nnnn.appx_ or
-_adblockplusfirefox-1.2.3.nnnn.xpi_.
+_adblockpluschrome-1.2.3.nnnn.crx_ or _adblockplusfirefox-1.2.3.nnnn.xpi_.
 
 Note that you don't need an existing signing key for Chrome, a new key
 will be created automatically if the file doesn't exist.
-
-The Microsoft Edge build _adblockplusedge-1.2.3.nnnn.appx_ is unsigned and
-is only useful for uploading into Windows Store, where it will be signed. For
-testing use the devenv build.
 
 The Firefox extension will be unsigned, and therefore is mostly only useful for
 upload to Mozilla Add-ons. You can also load it for testing purposes under
@@ -61,20 +55,13 @@ To simplify the process of testing your changes you can create an unpacked
 development environment. For that run one of the following commands:
 
     ./build.py devenv -t chrome
-    ./build.py devenv -t edge
     ./build.py devenv -t gecko
 
 This will create a _devenv.*_ directory in the repository. You can load the
-directory as an unpacked extension, under _chrome://extensions_ in Chrome,
-under _about:debugging_ in Firefox or in _Extensions_ menu in Microsoft Edge,
-after enabling extension development features in _about:flags_.
-After making changes to the source code re-run the command to update the
-development environment. In Chrome and Firefox the extension should reload
-automatically after a few seconds.
-
-Builds for Microsoft Edge do not automatically detect changes, so after
-rebuilding the extension you should manually force reloading it in Edge by
-hitting the _Reload Extension_ button.
+directory as an unpacked extension under _chrome://extensions_ in Chrome
+and under _about:debugging_ in Firefox. After making changes to the source code
+re-run the command to update the development environment, and the extension
+should reload automatically after a few seconds.
 
 The build script calls the ensure_dependencies script automatically to manage
 the dependencies (see _dependencies_ file). Dependencies with local
