@@ -26,13 +26,13 @@ exports.isExcluded = function(browser)
   return browser == "Firefox";
 };
 
-exports.run = async function(driver, section, description)
+exports.run = async function(driver, testCase)
 {
-  await section.findElement(By.css("a[href],button")).click();
+  await testCase.element.findElement(By.css("a[href],button")).click();
   await driver.wait(async() =>
   {
     let logs = await driver.manage().logs().get("browser");
     let expected = "filters/ping - Failed to load resource";
     return logs.some(entry => entry.message.includes(expected));
-  }, 2000, description);
+  }, 2000, "request wasn't blocked");
 };

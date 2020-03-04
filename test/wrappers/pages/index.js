@@ -18,46 +18,11 @@
 "use strict";
 
 const assert = require("assert");
-const fs = require("fs");
 const path = require("path");
-const {promisify} = require("util");
 const Jimp = require("jimp");
-const {By, until, error: {TimeoutError}} = require("selenium-webdriver");
-
-const readdirAsync = promisify(fs.readdir);
-const unlinkAsync = promisify(fs.unlink);
+const {By, until} = require("selenium-webdriver");
 
 const SCREENSHOT_DIR = path.join(__dirname, "../..", "screenshots");
-
-function normalize(input)
-{
-  return input.replace(/[\W]+/g, "_").toLowerCase();
-}
-
-async function removeOutdatedScreenshots(browser)
-{
-  let files;
-  try
-  {
-    files = await readdirAsync(SCREENSHOT_DIR);
-  }
-  catch (e)
-  {
-    return;
-  }
-
-  for (let filename of files)
-  {
-    if (filename.startsWith(browser))
-    {
-      try
-      {
-        await unlinkAsync(path.join(SCREENSHOT_DIR, filename));
-      }
-      catch (e) {}
-    }
-  }
-}
 
 async function takeScreenshot(element)
 {
@@ -79,29 +44,14 @@ async function takeScreenshot(element)
   return img.crop(x, y, rect.width, rect.height);
 }
 
-async function* getSections(driver)
+async function getTestCases(driver)
 {
-  for (let element of await driver.findElements(By.css("section")))
-  {
-    try
-    {
-      yield await Promise.all([
-        element.findElement(By.css("h2")),
-        element.findElement(By.className("testcase-container")),
-        element.findElements(By.css("pre"))
-      ]);
-    }
-    catch (e) {}
-  }
-}
-
-async function getSection(driver, index)
-{
-  for await (let section of getSections(driver))
-  {
-    if (index-- == 0)
-      return section[1];
-  }
+  let elements = await driver.findElements(By.css("section"));
+  let sections = await Promise.all(elements.map(element =>
+    Promise.all([element.findElement(By.className("testcase-container")),
+                 element.findElement(By.css("h2")).getText()]).catch(() => null)
+  ));
+  return sections.filter(x => x).map(([element, title]) => ({element, title}));
 }
 
 function isExcluded(elemClass, pageTitle, testTitle, specializedTest)
@@ -129,7 +79,7 @@ function isExcluded(elemClass, pageTitle, testTitle, specializedTest)
   );
 }
 
-async function getTestCases(driver)
+async function getExpectedScreenshots(driver)
 {
   await driver.executeScript(`
     let documents = [document];
@@ -148,22 +98,28 @@ async function getTestCases(driver)
     }
   `);
 
-  let tests = [];
-  for await (let [title, demo, filters] of getSections(driver))
-  {
-    tests.push(await Promise.all([
-      title.getText(),
-      takeScreenshot(demo),
-      Promise.all(filters.map(elem => elem.getText()))
-    ]));
-  }
-
-  return tests;
+  let screenshots = [];
+  for (let {element} of await getTestCases(driver))
+    screenshots.push(await takeScreenshot(element));
+  return screenshots;
 }
 
-async function updateFilters(driver, extensionHandle, filters)
+async function getFilters(driver)
 {
-  let currentHandle = await driver.getWindowHandle();
+  let filters = new Set();
+  for (let element of await driver.findElements(By.css("pre")))
+  {
+    for (let line of (await element.getText()).split("\n"))
+      filters.add(line);
+  }
+  return Array.from(filters).join("\n");
+}
+
+async function updateFilters(driver, extensionHandle)
+{
+  let [filters, currentHandle] = await Promise.all([getFilters(driver),
+                                                    driver.getWindowHandle()]);
+
   await driver.switchTo().window(extensionHandle);
 
   let error = await driver.executeAsyncScript(`
@@ -180,7 +136,7 @@ async function updateFilters(driver, extensionHandle, filters)
       browser.runtime.sendMessage({type: "filters.importRaw",
                                    text: filters})
     ).then(errors => callback(errors[0]), callback);
-  `, filters.join("\n"));
+  `, filters);
 
   if (error)
     throw error;
@@ -189,63 +145,58 @@ async function updateFilters(driver, extensionHandle, filters)
   await driver.navigate().refresh();
 }
 
-async function checkTestCase(driver, vBrowser, fileNamePrefix, section,
-                             expectedScreenshot, description)
+async function runGenericTests(driver, testCases, expectedScreenshots,
+                               browser, pageTitle, url)
 {
-  let actualScreenshot = null;
-  try
+  let actualScreenshot;
+  let i = 0;
+
+  async function compareScreenshots()
   {
-    await driver.wait(async() =>
+    for (; i < testCases.length; i++)
     {
-      actualScreenshot = await takeScreenshot(section);
-      let actualBitmap = actualScreenshot.bitmap;
-      let expectedBitmap = expectedScreenshot.bitmap;
-      return (actualBitmap.width == expectedBitmap.width &&
-              actualBitmap.height == expectedBitmap.height &&
-              actualBitmap.data.compare(expectedBitmap.data) == 0);
-    }, 1000);
-  }
-  catch (e)
-  {
-    if (e instanceof TimeoutError)
-    {
-      await removeOutdatedScreenshots(vBrowser);
-      for (let [postfix, data] of [["actual", actualScreenshot],
-                                   ["expected", expectedScreenshot]])
+      await driver.wait(async() =>
       {
-        await data.write(path.join(SCREENSHOT_DIR,
-                                   `${fileNamePrefix}_${postfix}.png`));
-      }
-      throw new Error("Screenshots don't match" + description +
-        "\n       " +
-        "(See " + fileNamePrefix + "_*.png in test/screenshots.)"
-      );
+        actualScreenshot = await takeScreenshot(testCases[i].element);
+        let actualBitmap = actualScreenshot.bitmap;
+        let expectedBitmap = expectedScreenshots[i].bitmap;
+        return (actualBitmap.width == expectedBitmap.width &&
+                actualBitmap.height == expectedBitmap.height &&
+                actualBitmap.data.compare(expectedBitmap.data) == 0);
+      }, 1000);
     }
-    throw e;
   }
-}
 
-async function genericTest(driver, parentTitle, title, sectionIndex,
-                           expectedScreenshot, description)
-{
-  let vBrowser = normalize(parentTitle);
-  let fileNamePrefix = `${vBrowser}_${normalize(title)}`;
-  let section = await getSection(driver, sectionIndex);
-
-  // Sometimes on Firefox there is a delay until the added
-  // filters become effective. So if the test case fails once,
-  // we reload the page and try once again.
   try
   {
-    await checkTestCase(driver, vBrowser, fileNamePrefix, section,
-                        expectedScreenshot, description);
+    try
+    {
+      await compareScreenshots();
+    }
+    catch (e)
+    {
+      // Sometimes on Firefox there is a delay until the added
+      // filters become effective. So if a test case fails,
+      // we reload the page and try once again.
+      await driver.navigate().refresh();
+      testCases = await getTestCases(driver);
+      await compareScreenshots();
+    }
   }
   catch (e)
   {
-    await driver.navigate().refresh();
-    section = await getSection(driver, sectionIndex);
-    await checkTestCase(driver, vBrowser, fileNamePrefix, section,
-                        expectedScreenshot, description);
+    let token = `${browser}_${pageTitle}_${testCases[i].title}`;
+    let prefix = token.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+
+    for (let [postfix, data] of [["actual", actualScreenshot],
+                                 ["expected", expectedScreenshots[i]]])
+      await data.write(path.join(SCREENSHOT_DIR,
+                                 `${prefix}_${postfix}.png`));
+
+    throw new Error(`Screenshots don't match
+       Test case: ${testCases[i].title}
+       ${url}
+       (see ${prefix}_*.png in test/screenshots)`);
   }
 }
 
@@ -341,32 +292,31 @@ describe("Test pages", async() =>
 
       it(pageTitle, async function()
       {
-        let testsExecuted = 0;
         let testKind = "Tests";
+        let testCases;
 
         await this.driver.navigate().to(url);
-        let testCases = await getTestCases(this.driver);
 
-        for (let i = 0; i < testCases.length; i++)
+        if (specializedTest)
         {
-          let [title, expectedScreenshot, filters] = testCases[i];
-          let description = ["", "Test case: " + title, url].join("\n       ");
+          testKind = "Specialized tests";
+          await updateFilters(this.driver, this.extensionHandle);
+          testCases = await getTestCases(this.driver);
 
-          await updateFilters(this.driver, this.extensionHandle, filters);
-
-          if (specializedTest)
-          {
-            testKind = "Specialized tests";
-            let section = await getSection(this.driver, i);
-            await specializedTest.run(this.driver, section, description);
-          }
-          else
-            await genericTest(this.driver, this.test.parent.parent.parent.title,
-                              title, i, expectedScreenshot, description);
-          testsExecuted += 1;
+          for (let testCase of testCases)
+            await specializedTest.run(this.driver, testCase);
+        }
+        else
+        {
+          let expetedScreenshots = await getExpectedScreenshots(this.driver);
+          await updateFilters(this.driver, this.extensionHandle);
+          testCases = await getTestCases(this.driver);
+          await runGenericTests(this.driver, testCases, expetedScreenshots,
+                                this.test.parent.parent.parent.title,
+                                pageTitle, url);
         }
 
-        this.test.title += ` (${testKind}: ${testsExecuted})`;
+        this.test.title += ` (${testKind}: ${testCases.length})`;
       });
     }
   });

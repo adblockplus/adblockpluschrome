@@ -19,13 +19,13 @@
 
 const {By} = require("selenium-webdriver");
 
-exports.run = async function(driver, section, description)
+exports.run = async function(driver, testCase)
 {
   let nHandles = (await driver.getAllWindowHandles()).length;
-  await section.findElement(By.css("a[href],button")).click();
+  await testCase.element.findElement(By.css("a[href],button")).click();
   await driver.sleep(500);
   await driver.wait(
     async() => (await driver.getAllWindowHandles()).length > nHandles,
-    2000, description
+    2000, "no popup found"
   );
 };
