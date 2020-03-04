@@ -187,7 +187,7 @@ if (typeof run == "undefined")
           await checkLastError(this.driver, this.extensionHandle);
         });
 
-        for (let file of glob.sync("./test/wrappers/*"))
+        for (let file of glob.sync("./test/suites/*"))
           reloadModulesForBrowser(file);
 
         after(async function()
