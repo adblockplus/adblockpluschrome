@@ -21,6 +21,7 @@ const assert = require("assert");
 const path = require("path");
 const Jimp = require("jimp");
 const {By, until} = require("selenium-webdriver");
+const {checkLastError} = require("../../misc/utils");
 
 const SCREENSHOT_DIR = path.join(__dirname, "../..", "screenshots");
 
@@ -278,6 +279,7 @@ describe("Test pages", async() =>
     await confirmSubscribeDialog(this.driver);
     await checkSubscriptionAdded(this.driver,
                                  this.test.parent.parent.testPagesURL);
+    await checkLastError(this.driver, this.extensionHandle);
   });
 
   describe("Filter test cases", async function()
@@ -316,6 +318,7 @@ describe("Test pages", async() =>
                                 pageTitle, url);
         }
 
+        await checkLastError(this.driver, this.extensionHandle);
         this.test.title += ` (${testKind}: ${testCases.length})`;
       });
     }

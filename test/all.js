@@ -24,7 +24,7 @@ const glob = require("glob");
 const path = require("path");
 const url = require("url");
 const {exec} = require("child_process");
-const {download} = require("./misc/utils");
+const {download, checkLastError} = require("./misc/utils");
 
 function getBrowserBinaries(module, browser)
 {
@@ -180,6 +180,11 @@ if (typeof run == "undefined")
           }
 
           await this.driver.switchTo().window(defaultHandle);
+        });
+
+        it("extension loaded without errors", async function()
+        {
+          await checkLastError(this.driver, this.extensionHandle);
         });
 
         for (let file of glob.sync("./test/wrappers/*"))

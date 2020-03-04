@@ -147,6 +147,7 @@ skin/icons/web/navbar-logo.svg = adblockplusui/skin/icons/web/navbar-logo.svg
 
 [bundles]
 lib/adblockplus.js =
+  lib/debug.js
   adblockpluscore/lib/filterListener.js
   adblockpluscore/lib/synchronizer.js
   lib/devtools.js

@@ -17,6 +17,7 @@
 
 "use strict";
 
+const assert = require("assert");
 const request = require("request");
 
 let download = exports.download = function(url)
@@ -39,4 +40,16 @@ let download = exports.download = function(url)
 exports.downloadJSON = async function(url)
 {
   return JSON.parse(await download(url));
+};
+
+exports.checkLastError = async function(driver, handle)
+{
+  await driver.switchTo().window(handle);
+
+  let error = await driver.executeAsyncScript(`
+    let callback = arguments[arguments.length - 1];
+    browser.runtime.sendMessage({type: "debug.getLastError"}).then(callback);`);
+
+  if (error != null)
+    assert.fail("Unhandled error in background page: " + error);
 };

@@ -19,6 +19,7 @@
 
 const {By, until} = require("selenium-webdriver");
 const assert = require("assert");
+const {checkLastError} = require("../misc/utils");
 
 it("qunit", async function()
 {
@@ -42,4 +43,6 @@ it("qunit", async function()
     failureDescriptions.unshift("");
     assert.fail(failureDescriptions.join("\n      - "));
   }
+
+  await checkLastError(this.driver, this.extensionHandle);
 });
