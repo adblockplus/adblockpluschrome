@@ -51,7 +51,8 @@ variables:
       - "package-lock.json"
 
 .default_template:
-  dependencies: []
+  needs:
+    - job: "prepare-dependencies"
   before_script: *dependencies
   retry:
     max: 2
@@ -128,7 +129,7 @@ docs:
 lint:yaml:
   image: "registry.gitlab.com/eyeo/docker/yamllint:1.14.0-configured"
   stage: "test"
-  dependencies: []
+  needs: []
   script:
     - "yamllint .gitlab-ci.yml"
   interruptible: true
@@ -202,15 +203,17 @@ download:devbuild:
 
 scp:release:
   extends: ".scp"
-  dependencies:
-    - "download:release"
+  needs:
+    - job: "download:release"
+      artifacts: true
   variables:
     DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/releases/"
 
 scp:devbuild:
   extends: ".scp"
-  dependencies:
-    - "download:devbuild"
+  needs:
+    - job: "download:devbuild"
+      artifacts: true
   variables:
     DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome/"
 
@@ -220,8 +223,9 @@ scp:devbuild:
 
 .pages:
   stage: "publish"
-  dependencies:
-    - "docs"
+  needs:
+    - job: "docs"
+      artifacts: true
   except:
     - "schedules"
 
