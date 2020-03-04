@@ -189,10 +189,9 @@ async function runGenericTests(driver, testCases, expectedScreenshots,
     let token = `${browser}_${pageTitle}_${testCases[i].title}`;
     let prefix = token.toLowerCase().replace(/[^a-z0-9]+/g, "_");
 
-    for (let [postfix, data] of [["actual", actualScreenshot],
+    for (let [suffix, image] of [["actual", actualScreenshot],
                                  ["expected", expectedScreenshots[i]]])
-      await data.write(path.join(SCREENSHOT_DIR,
-                                 `${prefix}_${postfix}.png`));
+      await image.write(path.join(SCREENSHOT_DIR, `${prefix}_${suffix}.png`));
 
     throw new Error(`Screenshots don't match
        Test case: ${testCases[i].title}
