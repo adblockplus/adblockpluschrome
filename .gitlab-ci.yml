@@ -61,6 +61,7 @@ variables:
   cache:
     <<: *cache
     policy: "pull"
+  interruptible: true
 
 prepare-dependencies:
   stage: "prepare"
@@ -73,21 +74,17 @@ prepare-dependencies:
   except:
     - "schedules"
   cache: *cache
+  interruptible: true
 
 ###############################################################################
 #                               Build & document                              #
 ###############################################################################
 
 .build:
+  extends: ".default_template"
   stage: "build"
-  before_script: *dependencies
   script:
     - "python build.py build -t $PLATFORM"
-  except:
-    - "schedules"
-  cache:
-    <<: *cache
-    policy: "pull"
 
 build:chrome:
   extends: ".build"
@@ -134,6 +131,7 @@ lint:yaml:
   dependencies: []
   script:
     - "yamllint .gitlab-ci.yml"
+  interruptible: true
 
 lint:js:
   extends: ".default_template"
