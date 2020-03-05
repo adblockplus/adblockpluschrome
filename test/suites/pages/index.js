@@ -216,9 +216,9 @@ async function waitForSubscriptionHandle(driver)
 
 async function confirmSubscribeDialog(driver)
 {
-  await driver.wait(until.ableToSwitchToFrame(0), 1000);
+  await driver.wait(until.ableToSwitchToFrame(0), 3000);
   let dialog = await driver.wait(
-    until.elementLocated(By.id("dialog-content-predefined")), 1000);
+    until.elementLocated(By.id("dialog-content-predefined")), 3000);
   await driver.wait(async() =>
   {
     let [displayed, title] = await Promise.all([
