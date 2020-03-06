@@ -21,7 +21,8 @@ const assert = require("assert");
 const path = require("path");
 const Jimp = require("jimp");
 const {By} = require("selenium-webdriver");
-const {checkLastError, reloadModule} = require("../../misc/utils");
+const {checkLastError, runWithHandle,
+       reloadModule} = require("../../misc/utils");
 const specializedTests = require("./specialized");
 
 const SCREENSHOT_DIR = path.join(__dirname, "../..", "screenshots");
@@ -121,12 +122,9 @@ async function getFilters(driver)
 
 async function updateFilters(driver, extensionHandle)
 {
-  let [filters, currentHandle] = await Promise.all([getFilters(driver),
-                                                    driver.getWindowHandle()]);
-
-  await driver.switchTo().window(extensionHandle);
-
-  let error = await driver.executeAsyncScript(`
+  let filters = await getFilters(driver);
+  let error = await runWithHandle(driver, extensionHandle,
+                                  () => driver.executeAsyncScript(`
     let filters = arguments[0];
     let callback = arguments[arguments.length - 1];
     browser.runtime.sendMessage({type: "subscriptions.get",
@@ -139,13 +137,11 @@ async function updateFilters(driver, extensionHandle)
     ).then(() =>
       browser.runtime.sendMessage({type: "filters.importRaw",
                                    text: filters})
-    ).then(errors => callback(errors[0]), callback);
-  `, filters);
+    ).then(errors => callback(errors[0]), callback);`, filters));
 
   if (error)
     throw error;
 
-  await driver.switchTo().window(currentHandle);
   await driver.navigate().refresh();
 }
 
@@ -235,7 +231,8 @@ describe("Test pages", async() =>
           testCases = await getTestCases(this.driver);
 
           for (let testCase of testCases)
-            await specializedTests[page].run(this.driver, testCase);
+            await specializedTests[page].run(this.driver, testCase,
+                                             this.extensionHandle);
         }
         else
         {

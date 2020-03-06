@@ -54,6 +54,20 @@ exports.checkLastError = async function(driver, handle)
     assert.fail("Unhandled error in background page: " + error);
 };
 
+exports.runWithHandle = async function(driver, handle, callback)
+{
+  let currentHandle = await driver.getWindowHandle();
+  await driver.switchTo().window(handle);
+  try
+  {
+    return await callback();
+  }
+  finally
+  {
+    await driver.switchTo().window(currentHandle);
+  }
+};
+
 exports.reloadModule = function(path)
 {
   delete require.cache[path];

@@ -17,7 +17,9 @@
 
 "use strict";
 
+const assert = require("assert");
 const {By} = require("selenium-webdriver");
+const {runWithHandle} = require("../../misc/utils");
 
 function clickButtonOrLink(element)
 {
@@ -46,27 +48,39 @@ async function getNumberOfHandles(driver)
   return (await driver.getAllWindowHandles()).length;
 }
 
-async function testPopup(driver, element, expected, message)
+async function checkPopup(driver, extensionHandle, element)
 {
   let nHandles = await getNumberOfHandles(driver);
+  let token = Math.floor(Math.random() * 1e8);
+  await runWithHandle(driver, extensionHandle, () => driver.executeScript(`
+    browser.webNavigation.onCreatedNavigationTarget.addListener(() =>
+    {
+      self.done${token} = true;
+      if (typeof callback${token} == "function")
+        callback${token}();
+    });`));
   await clickButtonOrLink(element);
-  await driver.sleep(500);
-  await driver.wait(
-    async() => ((await getNumberOfHandles(driver)) > nHandles) == expected,
-    2000, message
-  );
+  await runWithHandle(driver, extensionHandle, () => driver.executeAsyncScript(`
+    let callback = arguments[arguments.length - 1];
+    if (self.done${token})
+      callback();
+    else
+      self.callback${token} = callback;`));
+  return await getNumberOfHandles(driver) > nHandles;
 }
 
 exports["filters/popup"] = {
-  run(driver, testCase)
+  async run(driver, testCase, extensionHandle)
   {
-    return testPopup(driver, testCase.element, false, "popup wasn't closed");
+    let hasPopup = await checkPopup(driver, extensionHandle, testCase.element);
+    assert.ok(!hasPopup, "popup was closed");
   }
 };
 
 exports["exceptions/popup"] = {
-  run(driver, testCase)
+  async run(driver, testCase, extensionHandle)
   {
-    return testPopup(driver, testCase.element, true, "no popup found");
+    let hasPopup = await checkPopup(driver, extensionHandle, testCase.element);
+    assert.ok(hasPopup, "popup remained open");
   }
 };
