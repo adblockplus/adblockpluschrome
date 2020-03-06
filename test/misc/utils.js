@@ -53,3 +53,9 @@ exports.checkLastError = async function(driver, handle)
   if (error != null)
     assert.fail("Unhandled error in background page: " + error);
 };
+
+exports.reloadModule = function(path)
+{
+  delete require.cache[path];
+  require(path);
+};

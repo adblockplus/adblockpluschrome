@@ -20,8 +20,8 @@
 const assert = require("assert");
 const path = require("path");
 const Jimp = require("jimp");
-const {By, until} = require("selenium-webdriver");
-const {checkLastError} = require("../../misc/utils");
+const {By} = require("selenium-webdriver");
+const {checkLastError, reloadModule} = require("../../misc/utils");
 
 const SCREENSHOT_DIR = path.join(__dirname, "../..", "screenshots");
 
@@ -200,56 +200,6 @@ async function runGenericTests(driver, testCases, expectedScreenshots,
   }
 }
 
-async function clickSubscribeLink(driver, url)
-{
-  await driver.navigate().to(url);
-  await driver.findElement(By.id("subscribe-button")).click();
-}
-
-async function waitForSubscriptionHandle(driver)
-{
-  await driver.switchTo().window(
-    await driver.wait(async() => (await driver.getAllWindowHandles())[2],
-                      3000, "extension page didn't open")
-  );
-}
-
-async function confirmSubscribeDialog(driver)
-{
-  await driver.wait(until.ableToSwitchToFrame(0), 3000);
-  let dialog = await driver.wait(
-    until.elementLocated(By.id("dialog-content-predefined")), 3000);
-  await driver.wait(async() =>
-  {
-    let [displayed, title] = await Promise.all([
-      dialog.isDisplayed(),
-      dialog.findElement(By.css("h3")).getText()
-    ]);
-    return displayed && title == "ABP Testcase Subscription";
-  }, 1000, "dialog shown");
-  await dialog.findElement(By.css("button")).click();
-}
-
-async function checkSubscriptionAdded(driver, url)
-{
-  let [added, err] = await driver.executeAsyncScript(`
-     let callback = arguments[arguments.length - 1];
-     browser.runtime.sendMessage({type: "subscriptions.get",
-                                  ignoreDisabled: true,
-                                  downloadable: true}).then(subs =>
-       subs.some(s =>
-         s.url == "${url}abp-testcase-subscription.txt"
-       )
-     ).then(
-       res => callback([res, null]),
-       err => callback([null, err])
-     );
-   `);
-  if (err)
-    throw err;
-  assert.ok(added, "subscription added");
-}
-
 function loadSpecializedTest(url)
 {
   try
@@ -271,15 +221,7 @@ describe("Test pages", async() =>
     assert.ok(this.test.parent.parent.pageTests.length > 0);
   });
 
-  it("subscribe link", async function()
-  {
-    await clickSubscribeLink(this.driver, this.test.parent.parent.testPagesURL);
-    await waitForSubscriptionHandle(this.driver);
-    await confirmSubscribeDialog(this.driver);
-    await checkSubscriptionAdded(this.driver,
-                                 this.test.parent.parent.testPagesURL);
-    await checkLastError(this.driver, this.extensionHandle);
-  });
+  reloadModule(require.resolve("./subscribe"));
 
   describe("Filter test cases", async function()
   {

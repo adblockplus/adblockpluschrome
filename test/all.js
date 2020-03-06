@@ -24,7 +24,7 @@ const glob = require("glob");
 const path = require("path");
 const url = require("url");
 const {exec} = require("child_process");
-const {download, checkLastError} = require("./misc/utils");
+const {download, checkLastError, reloadModule} = require("./misc/utils");
 
 function getBrowserBinaries(module, browser)
 {
@@ -95,13 +95,6 @@ async function waitForExtension(driver)
   }, 1000, "unknown extension page origin");
 
   return [handle, origin];
-}
-
-function reloadModulesForBrowser(file)
-{
-  let modulePath = path.resolve(file);
-  delete require.cache[require.resolve(modulePath)];
-  require(modulePath);
 }
 
 async function getPageTests()
@@ -188,7 +181,7 @@ if (typeof run == "undefined")
         });
 
         for (let file of glob.sync("./test/suites/*"))
-          reloadModulesForBrowser(file);
+          reloadModule(require.resolve(path.resolve(file)));
 
         after(async function()
         {
