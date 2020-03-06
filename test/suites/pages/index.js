@@ -22,6 +22,7 @@ const path = require("path");
 const Jimp = require("jimp");
 const {By} = require("selenium-webdriver");
 const {checkLastError, reloadModule} = require("../../misc/utils");
+const specializedTests = require("./specialized");
 
 const SCREENSHOT_DIR = path.join(__dirname, "../..", "screenshots");
 
@@ -55,29 +56,31 @@ async function getTestCases(driver)
   return sections.filter(x => x).map(([element, title]) => ({element, title}));
 }
 
-function isExcluded(elemClass, pageTitle, testTitle, specializedTest)
+function isExcluded(page, browser, elemClass)
 {
   if (process.env.TEST_PAGES_URL && elemClass &&
       elemClass.split(/\s+/).includes("online"))
     return true;
 
-  let browser = testTitle.replace(/\s.*$/, "");
-  if (specializedTest)
-    return typeof specializedTest.isExcluded == "function" &&
-           specializedTest.isExcluded(browser);
+  let excluded;
+  if (page in specializedTests)
+    excluded = specializedTests[page].excludedBrowsers;
+  // https://issues.adblockplus.org/ticket/6917
+  else if (page == "filters/subdocument")
+    excluded = ["Firefox"];
+  // Chromium doesn't support Flash
+  else if (page == "filters/object")
+    excluded = ["Chromium"];
+  // Chromium 63 doesn't have user stylesheets (required to
+  // overrule inline styles) and doesn't run content scripts
+  // in dynamically written documents.
+  else if (page == "circumvention/inline-style-important" ||
+           page == "circumvention/anoniframe-documentwrite")
+    excluded = ["Chromium (oldest)"];
 
-  return (
-    // https://issues.adblockplus.org/ticket/6917
-    pageTitle == "$subdocument" && browser == "Firefox" ||
-    // Chromium doesn't support Flash
-    pageTitle.startsWith("$object") && browser == "Chromium" ||
-    // Chromium 63 doesn't have user stylesheets (required to
-    // overrule inline styles) and doesn't run content scripts
-    // in dynamically written documents.
-    testTitle == "Chromium (oldest)" &&
-    (pageTitle == "Inline style !important" ||
-     pageTitle == "Anonymous iframe document.write()")
-  );
+  return !!excluded && excluded.some(s => s.includes(" ") ?
+                                            browser == s :
+                                            browser.startsWith(s));
 }
 
 async function getExpectedScreenshots(driver)
@@ -200,20 +203,6 @@ async function runGenericTests(driver, testCases, expectedScreenshots,
   }
 }
 
-function loadSpecializedTest(url)
-{
-  try
-  {
-    return require("./specialized/" + url.split("/").slice(-2).join("_"));
-  }
-  catch (e)
-  {
-    if (e.code != "MODULE_NOT_FOUND")
-      throw e;
-  }
-  return null;
-}
-
 describe("Test pages", async() =>
 {
   it("discovered filter test cases", function()
@@ -227,10 +216,9 @@ describe("Test pages", async() =>
   {
     for (let [elemClass, url, pageTitle] of this.parent.parent.pageTests)
     {
-      let specializedTest = loadSpecializedTest(url);
+      let page = url.substr(url.lastIndexOf("/", url.lastIndexOf("/") - 1) + 1);
 
-      if (isExcluded(elemClass, pageTitle, this.parent.parent.title,
-                     specializedTest))
+      if (isExcluded(page, this.parent.parent.title, elemClass))
         continue;
 
       it(pageTitle, async function()
@@ -240,14 +228,14 @@ describe("Test pages", async() =>
 
         await this.driver.navigate().to(url);
 
-        if (specializedTest)
+        if (page in specializedTests)
         {
           testKind = "Specialized tests";
           await updateFilters(this.driver, this.extensionHandle);
           testCases = await getTestCases(this.driver);
 
           for (let testCase of testCases)
-            await specializedTest.run(this.driver, testCase);
+            await specializedTests[page].run(this.driver, testCase);
         }
         else
         {
