@@ -31,9 +31,10 @@ exports["filters/ping"] = {
   // https://github.com/mozilla/geckodriver/issues/284
   excludedBrowsers: ["Firefox"],
 
-  async run(driver, testCase)
+  async run(element)
   {
-    await clickButtonOrLink(testCase.element);
+    let driver = element.getDriver();
+    await clickButtonOrLink(element);
     await driver.wait(async() =>
     {
       let logs = await driver.manage().logs().get("browser");
@@ -48,8 +49,9 @@ async function getNumberOfHandles(driver)
   return (await driver.getAllWindowHandles()).length;
 }
 
-async function checkPopup(driver, extensionHandle, element)
+async function checkPopup(element, extensionHandle)
 {
+  let driver = element.getDriver();
   let nHandles = await getNumberOfHandles(driver);
   let token = Math.floor(Math.random() * 1e8);
   await runWithHandle(driver, extensionHandle, () => driver.executeScript(`
@@ -70,17 +72,17 @@ async function checkPopup(driver, extensionHandle, element)
 }
 
 exports["filters/popup"] = {
-  async run(driver, testCase, extensionHandle)
+  async run(element, extensionHandle)
   {
-    let hasPopup = await checkPopup(driver, extensionHandle, testCase.element);
+    let hasPopup = await checkPopup(element, extensionHandle);
     assert.ok(!hasPopup, "popup was closed");
   }
 };
 
 exports["exceptions/popup"] = {
-  async run(driver, testCase, extensionHandle)
+  async run(element, extensionHandle)
   {
-    let hasPopup = await checkPopup(driver, extensionHandle, testCase.element);
+    let hasPopup = await checkPopup(element, extensionHandle);
     assert.ok(hasPopup, "popup remained open");
   }
 };
