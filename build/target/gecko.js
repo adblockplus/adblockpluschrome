@@ -93,7 +93,9 @@ function metadataFromPython(section, option)
           reject(error);
         }
         else
+        {
           resolve(stdout.trim());
+        }
       }
     );
   });

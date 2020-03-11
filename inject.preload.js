@@ -122,7 +122,9 @@ function injected(eventName, injectedIntoContentWindow)
   // grab the copy of checkRequest left for us by the parent document. Otherwise
   // we need to set it up now, along with the event handling functions.
   if (injectedIntoContentWindow)
+  {
     checkRequest = window[eventName];
+  }
   else
   {
     let addEventListener = document.addEventListener.bind(document);

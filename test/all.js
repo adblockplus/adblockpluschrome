@@ -64,7 +64,10 @@ function createDevenv(platform)
           console.error(stderr);
           reject(error);
         }
-        else resolve(stdout);
+        else
+        {
+          resolve(stdout);
+        }
       }
     );
   });

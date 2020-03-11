@@ -361,19 +361,23 @@
         // There is no badge on Firefox for Android; the browser action is
         // simply a menu item.
         if (change == "badgeText" && "setBadgeText" in browser.browserAction)
+        {
           return browser.browserAction.setBadgeText({
             tabId: this._tabId,
             text: this._changes.badgeText
           });
+        }
 
         // There is no badge on Firefox for Android; the browser action is
         // simply a menu item.
         if (change == "badgeColor" &&
             "setBadgeBackgroundColor" in browser.browserAction)
+        {
           return browser.browserAction.setBadgeBackgroundColor({
             tabId: this._tabId,
             color: this._changes.badgeColor
           });
+        }
       }));
     },
     _addChange(name, value)
@@ -466,9 +470,7 @@
 
               if (!frame.parent &&
                   detail.frameId != 0 && detail.parentFrameId != 0)
-              {
                 frame.parent = frames.get(0);
-              }
             }
           }
         }
