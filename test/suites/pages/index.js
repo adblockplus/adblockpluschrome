@@ -29,31 +29,36 @@ const SCREENSHOT_DIR = path.join(__dirname, "../..", "screenshots");
 
 async function takeScreenshot(driver)
 {
-  let [width, height] = await driver.executeScript(`
-    // On macOS scrollbars appear and disappear overlapping
-    // the content as scrolling occurs. So we have to hide
-    // the scrollbars to get reproducible screenshots.
+  // On macOS scrollbars appear and disappear overlapping
+  // the content as scrolling occurs. So we have to hide
+  // the scrollbars to get reproducible screenshots.
+  await driver.executeScript(`
     let style = document.createElement("style");
-    style.textContent = "html::-webkit-scrollbar { opacity: 0; }";
+    style.textContent = "html { overflow-y: scroll; }"
     document.head.appendChild(style);
+    if (document.documentElement.clientWidth == window.innerWidth)
+      style.textContent = "html::-webkit-scrollbar { display: none; }";
+    else
+      document.head.removeChild(style);`);
 
-    window.scrollTo(0, 0);
-    return [document.documentElement.clientWidth,
-            document.documentElement.scrollHeight]`);
-  let fullScreenshot = new Jimp(width, height);
-  let offset = 0;
+  let fullScreenshot = new Jimp(0, 0);
   while (true)
   {
+    let [width, height, offset] = await driver.executeScript(`
+      window.scrollTo(0, arguments[0]);
+      return [document.documentElement.clientWidth,
+              document.documentElement.scrollHeight,
+              window.scrollY];`, fullScreenshot.bitmap.height);
     let data = await driver.takeScreenshot();
     let partialScreenshot = await Jimp.read(Buffer.from(data, "base64"));
-    offset += partialScreenshot.bitmap.height;
-    fullScreenshot.composite(
-      partialScreenshot,
-      0, Math.min(offset, height) - partialScreenshot.bitmap.height
-    );
-    if (offset >= height)
+    let combinedScreenshot = new Jimp(width, offset +
+                                             partialScreenshot.bitmap.height);
+    combinedScreenshot.composite(fullScreenshot, 0, 0);
+    combinedScreenshot.composite(partialScreenshot, 0, offset);
+    fullScreenshot = combinedScreenshot;
+
+    if (fullScreenshot.bitmap.height >= height)
       break;
-    await driver.executeScript("window.scrollTo(0, arguments[0]);", offset);
   }
   return fullScreenshot;
 }
