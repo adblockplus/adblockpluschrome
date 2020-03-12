@@ -162,21 +162,21 @@ function getSelectorForBlockedElement(element)
   return selector ? element.localName + selector : null;
 }
 
-function hideElement(element)
+function hideElement(element, properties)
 {
+  if (element.localName == "frame")
+    properties = [["visibility", "hidden"]];
+  else if (!properties)
+    properties = [["display", "none"]];
+
   function doHide()
   {
-    let propertyName = "display";
-    let propertyValue = "none";
-    if (element.localName == "frame")
+    for (let [property, value] of properties)
     {
-      propertyName = "visibility";
-      propertyValue = "hidden";
+      if (element.style.getPropertyValue(property) != value ||
+          element.style.getPropertyPriority(property) != "important")
+        element.style.setProperty(property, value, "important");
     }
-
-    if (element.style.getPropertyValue(propertyName) != propertyValue ||
-        element.style.getPropertyPriority(propertyName) != "important")
-      element.style.setProperty(propertyName, propertyValue, "important");
   }
 
   doHide();
@@ -376,7 +376,7 @@ function ContentFiltering()
 {
   this.styles = new Map();
   this.tracer = null;
-
+  this.cssProperties = null;
   this.elemHideEmulation = new ElemHideEmulation(this.hideElements.bind(this));
 }
 ContentFiltering.prototype = {
@@ -444,7 +444,7 @@ ContentFiltering.prototype = {
   hideElements(elements, filters)
   {
     for (let element of elements)
-      hideElement(element);
+      hideElement(element, this.cssProperties);
 
     if (this.tracer)
     {
@@ -480,6 +480,7 @@ ContentFiltering.prototype = {
         );
       }
 
+      this.cssProperties = response.cssProperties;
       this.elemHideEmulation.apply(response.emulatedPatterns);
     });
   }
