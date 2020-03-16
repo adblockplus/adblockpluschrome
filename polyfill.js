@@ -26,6 +26,7 @@
     "contextMenus.removeAll",
     "devtools.panels.create",
     "management.getAll",
+    "management.getSelf",
     "notifications.clear",
     "notifications.create",
     "permissions.contains",
