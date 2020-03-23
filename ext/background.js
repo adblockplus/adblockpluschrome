@@ -72,7 +72,7 @@
   let Page = ext.Page = function(tab)
   {
     this.id = tab.id;
-    this._url = tab.url && new URL(tab.url);
+    this._url = new URL(tab.url || "about:blank");
   };
   Page.prototype = {
     get url()
