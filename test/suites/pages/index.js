@@ -84,6 +84,10 @@ function isExcluded(page, browser, elemClass)
   else if (page == "circumvention/inline-style-important" ||
            page == "circumvention/anoniframe-documentwrite")
     excluded = ["Chromium (oldest)"];
+  // shadowing requires Firefox 63+ or 59+ with flag
+  // dom.webcomponents.shadowdom.enabled
+  else if (page == "snippets/hide-if-shadow-contains")
+    excluded = ["Firefox (oldest)"];
 
   return !!excluded && excluded.some(s => s.includes(" ") ?
                                             browser == s :
