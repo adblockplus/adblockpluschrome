@@ -24,12 +24,12 @@ let download = exports.download = function(url)
 {
   return new Promise((resolve, reject) =>
   {
-    request(url, (err, {statusCode}, body) =>
+    request(url, (err, res, body) =>
     {
       if (err)
         reject(err);
-      else if (statusCode != 200)
-        reject(new Error("Request failed with status code " + statusCode));
+      else if (res.statusCode != 200)
+        reject(new Error("Request failed with status code " + res.statusCode));
       else
         resolve(body);
     });

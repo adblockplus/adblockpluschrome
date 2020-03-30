@@ -109,6 +109,7 @@ async function getPageTests()
   }
   catch (e)
   {
+    console.warn(`Warning: Test pages not parsed at "${TEST_PAGES_URL}"\n${e}`);
     return [];
   }
 
