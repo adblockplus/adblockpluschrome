@@ -165,7 +165,7 @@ async function runGenericTests(driver, expectedScreenshot,
       return (actualBitmap.width == expectedBitmap.width &&
               actualBitmap.height == expectedBitmap.height &&
               actualBitmap.data.compare(expectedBitmap.data) == 0);
-    }, 2000);
+    }, 3000);
   }
 
   try
