@@ -26,6 +26,11 @@ const {checkLastError, runWithHandle,
 const specializedTests = require("./specialized");
 
 const SCREENSHOT_DIR = path.join(__dirname, "../..", "screenshots");
+// diff.percent examples on screenshots:
+// 0.02558039532430121 - all Blocking page tests failed
+// 0.00426475605595359 - one Blocking page test failed
+// 0.00000107250107250 - one pixel difference
+const SCREENSHOT_DIFF = 0.00001;
 
 async function takeScreenshot(driver)
 {
@@ -160,11 +165,8 @@ async function runGenericTests(driver, expectedScreenshot,
     await driver.wait(async() =>
     {
       actualScreenshot = await takeScreenshot(driver);
-      let actualBitmap = actualScreenshot.bitmap;
-      let expectedBitmap = expectedScreenshot.bitmap;
-      return (actualBitmap.width == expectedBitmap.width &&
-              actualBitmap.height == expectedBitmap.height &&
-              actualBitmap.data.compare(expectedBitmap.data) == 0);
+      let diff = Jimp.diff(actualScreenshot, expectedScreenshot, 0.001);
+      return diff.percent < SCREENSHOT_DIFF;
     }, 3000);
   }
 
