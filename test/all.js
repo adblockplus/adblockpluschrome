@@ -113,11 +113,11 @@ async function getPageTests()
     return [];
   }
 
-  let regexp = /<li>[\S\s]*?<a (?:class="(.*?)" )?href="(.*?)"[\S\s]*?<h3>(.*)<\/h3>/gm;
+  let regexp = /<li>[\S\s]*?<a\s(?:[^>]*\s)?href="(.*?)"[\S\s]*?<h3>(.*)<\/h3>/gm;
   let tests = [];
   let match;
   while (match = regexp.exec(html))
-    tests.push([match[1], url.resolve(TEST_PAGES_URL, match[2]), match[3]]);
+    tests.push([url.resolve(TEST_PAGES_URL, match[1]), match[2]]);
 
   return tests;
 }

@@ -68,10 +68,9 @@ async function takeScreenshot(driver)
   return fullScreenshot;
 }
 
-function isExcluded(page, browser, elemClass)
+function isExcluded(page, browser)
 {
-  if (process.env.TEST_PAGES_URL && elemClass &&
-      elemClass.split(/\s+/).includes("online"))
+  if (process.env.TEST_PAGES_URL && page == "exceptions/sitekey")
     return true;
 
   let excluded;
@@ -211,11 +210,11 @@ describe("Test pages", async() =>
 
   describe("Filter test cases", async function()
   {
-    for (let [elemClass, url, pageTitle] of this.parent.parent.pageTests)
+    for (let [url, pageTitle] of this.parent.parent.pageTests)
     {
       let page = url.substr(url.lastIndexOf("/", url.lastIndexOf("/") - 1) + 1);
 
-      if (isExcluded(page, this.parent.parent.title, elemClass))
+      if (isExcluded(page, this.parent.parent.title))
         continue;
 
       it(pageTitle, async function()
