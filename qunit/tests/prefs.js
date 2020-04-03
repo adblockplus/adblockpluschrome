@@ -105,7 +105,7 @@
   {
     let done = assert.async();
 
-    testPrefStorage("enabled", true, false).then(done);
+    testPrefStorage("savestats", false, true).then(done);
   });
 
   test("String preference", assert =>
