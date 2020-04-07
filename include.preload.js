@@ -250,18 +250,12 @@ ElementHidingTracer.prototype = {
 
     for (let selector of this.selectors)
     {
-      nodes: for (let node of nodes)
+      for (let node of nodes)
       {
-        for (let element of node.querySelectorAll(selector))
+        if (node.querySelector(selector))
         {
-          // Only consider selectors that actually have an effect on the
-          // computed styles, and aren't overridden by rules with higher
-          // priority, or haven't been circumvented in a different way.
-          if (getComputedStyle(element).display == "none")
-          {
-            effectiveSelectors.push(selector);
-            break nodes;
-          }
+          effectiveSelectors.push(selector);
+          break;
         }
       }
     }
