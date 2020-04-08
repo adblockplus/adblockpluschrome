@@ -132,6 +132,8 @@ lint:yaml:
   needs: []
   script:
     - "yamllint .gitlab-ci.yml"
+  except:
+    - "schedules"
   interruptible: true
 
 lint:js:
