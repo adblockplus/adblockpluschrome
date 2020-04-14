@@ -163,10 +163,17 @@ async function runGenericTests(driver, expectedScreenshot,
   {
     await driver.wait(async() =>
     {
+      let elements =
+        await driver.findElements(By.className("testcase-waitingcontent"));
+      return elements.length == 0;
+    }, 2000, "Waiting content still present");
+
+    await driver.wait(async() =>
+    {
       actualScreenshot = await takeScreenshot(driver);
       let diff = Jimp.diff(actualScreenshot, expectedScreenshot, 0.001);
       return diff.percent < SCREENSHOT_DIFF;
-    }, 3000);
+    }, 3000, "Screenshots don't match");
   }
 
   try
@@ -186,6 +193,9 @@ async function runGenericTests(driver, expectedScreenshot,
   }
   catch (e)
   {
+    if (!actualScreenshot)
+      throw e;
+
     let title = `${browser}_${pageTitle}`;
     let prefix = title.toLowerCase().replace(/[^a-z0-9]+/g, "_");
 
@@ -193,7 +203,7 @@ async function runGenericTests(driver, expectedScreenshot,
                                  ["expected", expectedScreenshot]])
       await image.write(path.join(SCREENSHOT_DIR, `${prefix}_${suffix}.png`));
 
-    throw new Error(`Screenshots don't match
+    throw new Error(`${e.message}
        ${url}
        (see ${path.join(SCREENSHOT_DIR, prefix)}_*.png)`);
   }
