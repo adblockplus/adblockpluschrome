@@ -96,6 +96,8 @@ environment as outlined above, you need to have Node.js installed in your native
 Windows environment. Then run the commands below from within PowerShell or
 cmd.exe (unlike when building the extension which needs to be done from Bash).
 
+On Linux, newer versions of Chromium require `libgbm`.
+
 Make sure the required packages are installed and up-to-date:
 
     npm install

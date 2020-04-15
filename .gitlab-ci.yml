@@ -166,6 +166,9 @@ test:chromium:oldest:
 
 test:chromium:latest:
   extends: ".test_template"
+  before_script:
+    - "apt-get install -y libgbm1"
+    - *dependencies
   script:
     - "xvfb-run -a npm run test-only -- -g 'Chromium \\(latest\\)'"
 
