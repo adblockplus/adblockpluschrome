@@ -98,23 +98,9 @@ function isExcluded(page, browser)
                                             browser.startsWith(s));
 }
 
-async function getExpectedScreenshot(driver)
+async function getExpectedScreenshot(driver, url)
 {
-  await driver.executeScript(`
-    let documents = [document];
-    while (documents.length > 0)
-    {
-      let doc = documents.shift();
-      doc.body.classList.add('expected');
-      for (let i = 0; i < doc.defaultView.frames.length; i++)
-      {
-        try
-        {
-          documents.push(doc.defaultView.frames[i].document);
-        }
-        catch (e) {}
-      }
-    }`);
+  await driver.navigate().to(`${url}?expected=1`);
   return await takeScreenshot(driver);
 }
 
@@ -129,8 +115,9 @@ async function getFilters(driver)
   return Array.from(filters).join("\n");
 }
 
-async function updateFilters(driver, extensionHandle)
+async function updateFilters(driver, extensionHandle, url)
 {
+  await driver.navigate().to(url);
   let filters = await getFilters(driver);
   let error = await runWithHandle(driver, extensionHandle,
                                   () => driver.executeAsyncScript(`
@@ -229,19 +216,17 @@ describe("Test pages", async() =>
 
       it(pageTitle, async function()
       {
-        await this.driver.navigate().to(url);
-
         if (page in specializedTests)
         {
-          await updateFilters(this.driver, this.extensionHandle);
+          await updateFilters(this.driver, this.extensionHandle, url);
           let locator = By.className("testcase-container");
           for (let element of await this.driver.findElements(locator))
             await specializedTests[page].run(element, this.extensionHandle);
         }
         else
         {
-          let expetedScreenshot = await getExpectedScreenshot(this.driver);
-          await updateFilters(this.driver, this.extensionHandle);
+          let expetedScreenshot = await getExpectedScreenshot(this.driver, url);
+          await updateFilters(this.driver, this.extensionHandle, url);
           await runGenericTests(this.driver, expetedScreenshot,
                                 this.test.parent.parent.parent.title,
                                 pageTitle, url);
