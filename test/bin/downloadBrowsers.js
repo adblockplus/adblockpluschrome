@@ -25,12 +25,12 @@ const path = require("path");
   for (let backend of glob.sync("./test/browsers/*.js"))
   {
     let module = require(path.resolve(backend));
-    for (let fn of [() => module.ensureBrowser(module.oldestCompatibleVersion),
-                    () => module.getLatestVersion().then(module.ensureBrowser)])
+    for (let version of [module.oldestCompatibleVersion,
+                         module.getLatestVersion()])
     {
       try
       {
-        await fn();
+        await module.ensureBrowser(await version, false);
       }
       catch (e)
       {
