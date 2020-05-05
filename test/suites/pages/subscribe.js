@@ -41,11 +41,11 @@ async function confirmSubscribeDialog(driver)
   {
     let [displayed, title] = await Promise.all([
       dialog.isDisplayed(),
-      dialog.findElement(By.css("h3")).getText()
+      dialog.findElement(By.css(".title span")).getText()
     ]);
     return displayed && title == "ABP Testcase Subscription";
   }, 1000, "dialog shown");
-  await dialog.findElement(By.css("button")).click();
+  await dialog.findElement(By.css(".default-focus")).click();
 }
 
 async function checkSubscriptionAdded(driver, url)
