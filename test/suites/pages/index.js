@@ -153,7 +153,7 @@ async function runGenericTests(driver, expectedScreenshot,
       actualScreenshot = await takeScreenshot(driver);
       let diff = Jimp.diff(actualScreenshot, expectedScreenshot, 0.001);
       return diff.percent < SCREENSHOT_DIFF;
-    }, 4000, "Screenshots don't match");
+    }, 5000, "Screenshots don't match");
   }
 
   try
