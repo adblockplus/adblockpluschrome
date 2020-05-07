@@ -19,10 +19,11 @@
 
 const {By, until} = require("selenium-webdriver");
 const assert = require("assert");
+const {checkLastError} = require("../misc/utils");
 
 it("qunit", async function()
 {
-  await this.driver.navigate().to(this.origin + "/qunit/index.html");
+  await this.driver.navigate().to(this.extensionOrigin + "/qunit/index.html");
   let elem = await this.driver.wait(
     until.elementLocated(By.id("qunit-testresult"))
   );
@@ -42,4 +43,6 @@ it("qunit", async function()
     failureDescriptions.unshift("");
     assert.fail(failureDescriptions.join("\n      - "));
   }
+
+  await checkLastError(this.driver, this.extensionHandle);
 });

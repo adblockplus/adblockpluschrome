@@ -62,5 +62,17 @@ exports.getLatestVersion = async function()
 
   let data = await downloadJSON(`https://omahaproxy.appspot.com/all.json?os=${os}`);
   let version = data[0].versions.find(ver => ver.channel == "stable");
-  return version.branch_base_position;
+  let base = version.branch_base_position;
+
+  if (version.true_branch.includes("_"))
+  {
+    // A wrong base may be caused by a mini-branch (patched) release
+    // In that case, the base is taken from the unpatched version
+    let cv = version.current_version.split(".");
+    let unpatched = `${cv[0]}.${cv[1]}.${cv[2]}.0`;
+    let unpatchedVersion = await downloadJSON(`https://omahaproxy.appspot.com/deps.json?version=${unpatched}`);
+    base = unpatchedVersion.chromium_base_position;
+  }
+
+  return base;
 };

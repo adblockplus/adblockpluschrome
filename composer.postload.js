@@ -74,8 +74,9 @@ function getBlockableElementOrAncestor(element, callback)
     // We can't handle non-HTML (like SVG) elements, as well as
     // <area> elements (see below). So fall back to the parent element.
     if (!(element instanceof HTMLElement) || element.localName == "area")
+    {
       element = element.parentElement;
-
+    }
     // If image maps are used mouse events occur for the <area> element.
     // But we have to block the image associated with the <map> element.
     else if (element.localName == "map")

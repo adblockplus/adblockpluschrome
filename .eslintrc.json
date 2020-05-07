@@ -11,7 +11,11 @@
     "module": true,
     "require": true
   },
+  "parserOptions": {
+    "ecmaVersion": 11
+  },
   "rules": {
-    "arrow-parens": ["error", "as-needed"]
+    "curly": ["error", "multi-or-nest", "consistent"],
+    "nonblock-statement-body-position": ["error", "below"]
   }
 }

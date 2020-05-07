@@ -122,7 +122,9 @@ function injected(eventName, injectedIntoContentWindow)
   // grab the copy of checkRequest left for us by the parent document. Otherwise
   // we need to set it up now, along with the event handling functions.
   if (injectedIntoContentWindow)
+  {
     checkRequest = window[eventName];
+  }
   else
   {
     let addEventListener = document.addEventListener.bind(document);
@@ -304,7 +306,7 @@ function injected(eventName, injectedIntoContentWindow)
       // Since the old webkitRTCPeerConnection constructor takes an optional
       // second argument we need to take care to pass that through. Necessary
       // for older versions of Chrome such as 51.
-      let constraints = undefined;
+      let constraints;
       if (args.length > 1)
         constraints = args[1];
 
@@ -330,17 +332,8 @@ function injected(eventName, injectedIntoContentWindow)
 
 if (document instanceof HTMLDocument)
 {
-  let sandbox;
-
-  // We have to wrap the following code in a try catch
-  // because of this Microsoft Edge bug:
-  // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/19082980/
-  try
-  {
-    sandbox = window.frameElement &&
-              window.frameElement.getAttribute("sandbox");
-  }
-  catch (e) {}
+  let sandbox = window.frameElement &&
+                window.frameElement.getAttribute("sandbox");
 
   if (typeof sandbox != "string" || /(^|\s)allow-scripts(\s|$)/i.test(sandbox))
   {
@@ -351,8 +344,7 @@ if (document instanceof HTMLDocument)
     script.async = false;
 
     // Firefox 58 only bypasses site CSPs when assigning to 'src',
-    // while Chrome 67 and Microsoft Edge 44.17763.1.0
-    // only bypass site CSPs when using 'textContent'.
+    // while Chrome 67 only bypass site CSPs when using 'textContent'.
     if (browser.runtime.getURL("").startsWith("moz-extension://"))
     {
       let url = URL.createObjectURL(new Blob([code]));

@@ -73,8 +73,6 @@
   {
     this.id = tab.id;
     this._url = new URL(tab.url || "about:blank");
-
-    this.browserAction = new BrowserAction(tab.id);
   };
   Page.prototype = {
     get url()
@@ -95,7 +93,7 @@
           return frame.url;
       }
 
-      return undefined;
+      return null;
     }
   };
 
@@ -247,9 +245,8 @@
 
     updatePageFrameStructure(details.frameId, details.tabId, details.url,
                              details.parentFrameId);
-  },
-  {types: ["main_frame", "sub_frame"], urls: ["http://*/*", "https://*/*"]},
-  ["responseHeaders"]);
+  }, {types: ["main_frame", "sub_frame"],
+      urls: ["http://*/*", "https://*/*"]}, ["responseHeaders"]);
 
   browser.webNavigation.onBeforeNavigate.addListener(details =>
   {
@@ -322,126 +319,6 @@
   });
 
 
-  /* Browser actions */
-
-  let BrowserAction = function(tabId)
-  {
-    this._tabId = tabId;
-    this._changes = null;
-  };
-  BrowserAction.prototype = {
-    _applyChanges()
-    {
-      return Promise.all(Object.keys(this._changes).map(change =>
-      {
-        // Firefox for Android displays the browser action not as an icon but
-        // as a menu item. There is no icon, but such an option may be added
-        // in the future.
-        // https://bugzilla.mozilla.org/show_bug.cgi?id=1331746
-        if (change == "iconPath" && "setIcon" in browser.browserAction)
-        {
-          let path = {
-            16: this._changes.iconPath.replace("$size", "16"),
-            20: this._changes.iconPath.replace("$size", "20"),
-            32: this._changes.iconPath.replace("$size", "32"),
-            40: this._changes.iconPath.replace("$size", "40")
-          };
-          try
-          {
-            return browser.browserAction.setIcon({tabId: this._tabId, path});
-          }
-          catch (e)
-          {
-            // Edge throws if passed icon sizes different than 19,20,38,40px.
-            delete path[16];
-            delete path[32];
-            return browser.browserAction.setIcon({tabId: this._tabId, path});
-          }
-        }
-
-        if (change == "iconImageData" && "setIcon" in browser.browserAction)
-        {
-          return browser.browserAction.setIcon({
-            tabId: this._tabId,
-            imageData: this._changes.iconImageData
-          });
-        }
-
-        // There is no badge on Firefox for Android; the browser action is
-        // simply a menu item.
-        if (change == "badgeText" && "setBadgeText" in browser.browserAction)
-          return browser.browserAction.setBadgeText({
-            tabId: this._tabId,
-            text: this._changes.badgeText
-          });
-
-        // There is no badge on Firefox for Android; the browser action is
-        // simply a menu item.
-        if (change == "badgeColor" &&
-            "setBadgeBackgroundColor" in browser.browserAction)
-          return browser.browserAction.setBadgeBackgroundColor({
-            tabId: this._tabId,
-            color: this._changes.badgeColor
-          });
-      }));
-    },
-    _addChange(name, value)
-    {
-      let onReplaced = (addedTabId, removedTabId) =>
-      {
-        if (addedTabId == this._tabId)
-        {
-          browser.tabs.onReplaced.removeListener(onReplaced);
-          this._applyChanges().then(() =>
-          {
-            this._changes = null;
-          });
-        }
-      };
-      if (!this._changes)
-        this._changes = {};
-
-      this._changes[name] = value;
-      if (!browser.tabs.onReplaced.hasListener(onReplaced))
-      {
-        this._applyChanges().then(() =>
-        {
-          this._changes = null;
-        }).catch(() =>
-        {
-          // If the tab is prerendered, browser.browserAction.set* fails
-          // and we have to delay our changes until the currently visible tab
-          // is replaced with the prerendered tab.
-          browser.tabs.onReplaced.addListener(onReplaced);
-        });
-      }
-    },
-    setIconPath(path)
-    {
-      this._addChange("iconPath", path);
-    },
-    setIconImageData(imageData)
-    {
-      this._addChange("iconImageData", imageData);
-    },
-    setBadge(badge)
-    {
-      if (!badge)
-      {
-        this._addChange("badgeText", "");
-      }
-      else
-      {
-        if ("number" in badge)
-          this._addChange("badgeText", badge.number.toString());
-
-        if ("color" in badge)
-          this._addChange("badgeColor", badge.color);
-      }
-    }
-  };
-
-
   /* Web requests */
 
   let framesOfTabs = new Map();
@@ -475,9 +352,7 @@
 
               if (!frame.parent &&
                   detail.frameId != 0 && detail.parentFrameId != 0)
-              {
                 frame.parent = frames.get(0);
-              }
             }
           }
         }
@@ -499,45 +374,15 @@
       sender.page = new Page(rawSender.tab);
       sender.frame = {
         id: rawSender.frameId,
-        // In Edge requests from internal extension pages
-        // (protocol ms-browser-extension://) do no have a sender URL.
-        url: rawSender.url ? new URL(rawSender.url) : null,
+        url: new URL(rawSender.url),
         get parent()
         {
           let frames = framesOfTabs.get(rawSender.tab.id);
-
           if (!frames)
             return null;
 
-          let frame;
-          // In Microsoft Edge (version 42.17134.1.0) we don't have frameId
-          // so we fall back to iterating over the tab's frames
-          // see https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11716733
-          if (rawSender.frameId != undefined)
-            frame = frames.get(rawSender.frameId);
-          else if (rawSender.url)
-          {
-            let rawSenderHref = rawSender.url.replace(/#.*/, "");
-
-            for (let [frameId, frameInfo] of frames)
-            {
-              let frameInfoHref = frameInfo.url.href.replace(/#.*/, "");
-
-              // If we have two frames with the same URL
-              // we are going to pick the first one we find
-              // as we have no other way of distinguishing between them.
-              if (frameInfoHref == rawSenderHref)
-              {
-                frame = frameInfo;
-                this.id = frameId;
-                break;
-              }
-            }
-          }
-
-          if (frame)
-            return frame.parent || null;
-          return frames.get(0) || null;
+          let frame = frames.get(rawSender.frameId);
+          return (frame ? frame.parent : frames.get(0)) || null;
         }
       };
     }

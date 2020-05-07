@@ -17,13 +17,14 @@
 
 "use strict";
 
-const TEST_PAGES_URL = "https://testpages.adblockplus.org/en/";
+const TEST_PAGES_URL = process.env.TEST_PAGES_URL ||
+                       "https://testpages.adblockplus.org/en/";
 
 const glob = require("glob");
 const path = require("path");
 const url = require("url");
 const {exec} = require("child_process");
-const {download} = require("./misc/utils");
+const {download, checkLastError, reloadModule} = require("./misc/utils");
 
 function getBrowserBinaries(module, browser)
 {
@@ -63,7 +64,10 @@ function createDevenv(platform)
           console.error(stderr);
           reject(error);
         }
-        else resolve(stdout);
+        else
+        {
+          resolve(stdout);
+        }
       }
     );
   });
@@ -78,24 +82,22 @@ async function getDriver(binary, devenvCreated, module)
   );
 }
 
-async function getOrigin(driver)
+async function waitForExtension(driver)
 {
   let handle = await driver.wait(
-    async() => (await driver.getAllWindowHandles())[1]
+    async() => (await driver.getAllWindowHandles())[1],
+    5000, "extension page didn't open"
   );
-  await driver.switchTo().window(handle);
-  return driver.wait(async() =>
-  {
-    let origin = await driver.executeScript("return location.origin;");
-    return origin != "null" ? origin : null;
-  }, 1000, "unknown extension page origin");
-}
 
-function reloadModulesForBrowser(file)
-{
-  let modulePath = path.resolve(file);
-  delete require.cache[require.resolve(modulePath)];
-  require(modulePath);
+  let origin;
+  await driver.switchTo().window(handle);
+  await driver.wait(async() =>
+  {
+    origin = await driver.executeScript("return location.origin;");
+    return origin != "null";
+  }, 1000, "unknown extension page origin");
+
+  return [handle, origin];
 }
 
 async function getPageTests()
@@ -107,14 +109,15 @@ async function getPageTests()
   }
   catch (e)
   {
+    console.warn(`Warning: Test pages not parsed at "${TEST_PAGES_URL}"\n${e}`);
     return [];
   }
 
-  let regexp = /<li>[\S\s]*?<a (?:class="(.*?)" )?href="(.*?)"[\S\s]*?<h3>(.*)<\/h3>/gm;
+  let regexp = /<li>[\S\s]*?<a\s(?:[^>]*\s)?href="(.*?)"[\S\s]*?<h3>(.*)<\/h3>/gm;
   let tests = [];
   let match;
   while (match = regexp.exec(html))
-    tests.push([match[1], url.resolve(TEST_PAGES_URL, match[2]), match[3]]);
+    tests.push([url.resolve(TEST_PAGES_URL, match[1]), match[2]]);
 
   return tests;
 }
@@ -151,11 +154,38 @@ if (typeof run == "undefined")
             devenvCreated = createDevenv(module.platform);
 
           this.driver = await getDriver(binary, devenvCreated, module);
-          this.origin = await getOrigin(this.driver);
+          [this.extensionHandle,
+           this.extensionOrigin] = await waitForExtension(this.driver);
         });
 
-        for (let file of glob.sync("./test/wrappers/*.js"))
-          reloadModulesForBrowser(file, pageTests);
+        beforeEach(async function()
+        {
+          let handles = await this.driver.getAllWindowHandles();
+          let defaultHandle = handles.shift();
+
+          for (let handle of handles)
+          {
+            if (handle != this.extensionHandle)
+            {
+              try
+              {
+                await this.driver.switchTo().window(handle);
+                await this.driver.close();
+              }
+              catch (e) {}
+            }
+          }
+
+          await this.driver.switchTo().window(defaultHandle);
+        });
+
+        it("extension loaded without errors", async function()
+        {
+          await checkLastError(this.driver, this.extensionHandle);
+        });
+
+        for (let file of glob.sync("./test/suites/*"))
+          reloadModule(require.resolve(path.resolve(file)));
 
         after(async function()
         {

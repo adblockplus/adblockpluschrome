@@ -24,40 +24,34 @@ let panelWindow = null;
 // devtools panel.
 if ("panels" in browser.devtools)
 {
-  browser.runtime.sendMessage(
+  browser.runtime.sendMessage({type: "prefs.get",
+                               key: "show_devtools_panel"}).then(enabled =>
+  {
+    if (enabled)
     {
-      type: "prefs.get",
-      key: "show_devtools_panel"
-    }).then(enabled =>
-    {
-      if (enabled)
+      browser.devtools.panels.create("Adblock Plus",
+                                     "icons/abp-32.png",
+                                     "devtools-panel.html").then(panel =>
       {
-        browser.devtools.panels.create(
-          "Adblock Plus",
-          "icons/abp-32.png",
-          "devtools-panel.html").then(panel =>
+        panel.onShown.addListener(window =>
+        {
+          panelWindow = window;
+        });
+
+        panel.onHidden.addListener(window =>
+        {
+          panelWindow = null;
+        });
+
+        if (panel.onSearch)
+        {
+          panel.onSearch.addListener((eventName, queryString) =>
           {
-            panel.onShown.addListener(window =>
-            {
-              panelWindow = window;
-            });
-
-            panel.onHidden.addListener(window =>
-            {
-              panelWindow = null;
-            });
-
-            if (panel.onSearch)
-            {
-              panel.onSearch.addListener((eventName, queryString) =>
-              {
-                if (panelWindow)
-                  panelWindow.postMessage({type: eventName, queryString}, "*");
-              });
-            }
-          }
-        );
-      }
+            if (panelWindow)
+              panelWindow.postMessage({type: eventName, queryString}, "*");
+          });
+        }
+      });
     }
-  );
+  });
 }

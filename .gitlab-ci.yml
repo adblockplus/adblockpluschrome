@@ -51,7 +51,8 @@ variables:
       - "package-lock.json"
 
 .default_template:
-  dependencies: []
+  needs:
+    - job: "prepare-dependencies"
   before_script: *dependencies
   retry:
     max: 2
@@ -61,6 +62,7 @@ variables:
   cache:
     <<: *cache
     policy: "pull"
+  interruptible: true
 
 prepare-dependencies:
   stage: "prepare"
@@ -73,41 +75,33 @@ prepare-dependencies:
   except:
     - "schedules"
   cache: *cache
+  interruptible: true
 
 ###############################################################################
 #                               Build & document                              #
 ###############################################################################
 
 .build:
+  extends: ".default_template"
   stage: "build"
-  before_script: *dependencies
   script:
     - "python build.py build -t $PLATFORM"
-  except:
-    - "schedules"
-  cache:
-    <<: *cache
-    policy: "pull"
-  artifacts:
-    paths:
-      - "adblockplusfirefox-*.xpi"
-      - "adblockpluschrome-*.zip"
-      - "adblockplusedge-*.appx"
 
 build:chrome:
   extends: ".build"
   variables:
     PLATFORM: "chrome"
+  artifacts:
+    paths:
+      - "adblockpluschrome-*.zip"
 
 build:gecko:
   extends: ".build"
   variables:
     PLATFORM: "gecko"
-
-build:edge:
-  extends: ".build"
-  variables:
-    PLATFORM: "edge"
+  artifacts:
+    paths:
+      - "adblockplusfirefox-*.xpi"
 
 docs:
   extends: ".default_template"
@@ -135,9 +129,12 @@ docs:
 lint:yaml:
   image: "registry.gitlab.com/eyeo/docker/yamllint:1.14.0-configured"
   stage: "test"
-  dependencies: []
+  needs: []
   script:
     - "yamllint .gitlab-ci.yml"
+  except:
+    - "schedules"
+  interruptible: true
 
 lint:js:
   extends: ".default_template"
@@ -208,15 +205,17 @@ download:devbuild:
 
 scp:release:
   extends: ".scp"
-  dependencies:
-    - "download:release"
+  needs:
+    - job: "download:release"
+      artifacts: true
   variables:
     DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/releases/"
 
 scp:devbuild:
   extends: ".scp"
-  dependencies:
-    - "download:devbuild"
+  needs:
+    - job: "download:devbuild"
+      artifacts: true
   variables:
     DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome/"
 
@@ -226,8 +225,9 @@ scp:devbuild:
 
 .pages:
   stage: "publish"
-  dependencies:
-    - "docs"
+  needs:
+    - job: "docs"
+      artifacts: true
   except:
     - "schedules"
 
