@@ -26,21 +26,32 @@ function clickButtonOrLink(element)
   return element.findElement(By.css("a[href],button")).click();
 }
 
+async function checkPing(element)
+{
+  let driver = element.getDriver();
+  await clickButtonOrLink(element);
+  await driver.wait(async() =>
+  {
+    let logs = await driver.manage().logs().get("browser");
+    let expected = "ping - Failed to load resource: net::ERR_BLOCKED_BY_CLIENT";
+    return logs.some(entry => entry.message.includes(expected));
+  }, 2000, "request wasn't blocked");
+}
+
 exports["filters/ping"] = {
   // ping test needs access to browser logs
   // https://github.com/mozilla/geckodriver/issues/284
   excludedBrowsers: ["Firefox"],
 
+  run: checkPing
+};
+
+exports["exceptions/ping"] = {
+  excludedBrowsers: ["Firefox"],
+
   async run(element)
   {
-    let driver = element.getDriver();
-    await clickButtonOrLink(element);
-    await driver.wait(async() =>
-    {
-      let logs = await driver.manage().logs().get("browser");
-      let expected = "filters/ping - Failed to load resource";
-      return logs.some(entry => entry.message.includes(expected));
-    }, 2000, "request wasn't blocked");
+    await assert.rejects(async() => checkPing(element), /request wasn't blocked/);
   }
 };
 

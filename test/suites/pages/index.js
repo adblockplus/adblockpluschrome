@@ -79,9 +79,6 @@ function isExcluded(page, browser)
   // https://issues.adblockplus.org/ticket/6917
   else if (page == "filters/subdocument")
     excluded = ["Firefox"];
-  // Chromium doesn't support Flash
-  else if (page == "filters/object")
-    excluded = ["Chromium"];
   // Chromium 63 doesn't have user stylesheets (required to
   // overrule inline styles) and doesn't run content scripts
   // in dynamically written documents.
