@@ -19,6 +19,7 @@
 
 const TEST_PAGES_URL = process.env.TEST_PAGES_URL ||
                        "https://testpages.adblockplus.org/en/";
+const TEST_PAGES_INSECURE = process.env.TEST_PAGES_INSECURE == "true";
 
 const glob = require("glob");
 const path = require("path");
@@ -78,7 +79,8 @@ async function getDriver(binary, devenvCreated, module)
   let [browserBin] = await Promise.all([binary.getPath(), devenvCreated]);
   return module.getDriver(
     browserBin,
-    path.resolve(`./devenv.${module.platform}`)
+    path.resolve(`./devenv.${module.platform}`),
+    TEST_PAGES_INSECURE
   );
 }
 
@@ -105,7 +107,7 @@ async function getPageTests()
   let html;
   try
   {
-    html = await download(TEST_PAGES_URL);
+    html = await download(TEST_PAGES_URL, TEST_PAGES_INSECURE);
   }
   catch (e)
   {

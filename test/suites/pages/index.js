@@ -70,9 +70,6 @@ async function takeScreenshot(driver)
 
 function isExcluded(page, browser)
 {
-  if (process.env.TEST_PAGES_URL && page == "exceptions/sitekey")
-    return true;
-
   let excluded;
   if (page in specializedTests)
     excluded = specializedTests[page].excludedBrowsers;

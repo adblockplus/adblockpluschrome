@@ -33,7 +33,7 @@ async function followSubscribeLink(driver, url)
 
 async function confirmSubscribeDialog(driver)
 {
-  await driver.wait(until.ableToSwitchToFrame(0), 3000);
+  await driver.wait(until.ableToSwitchToFrame(0), 4000);
   let dialog = await driver.wait(
     until.elementLocated(By.id("dialog-content-predefined")), 3000
   );

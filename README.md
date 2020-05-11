@@ -126,7 +126,9 @@ or FIREFOX_BINARY environment variables. Following values are accepted:
 
 Filter tests subset uses [ABP Test pages](https://testpages.adblockplus.org/).
 In order to run those tests on a different version of the test pages, set
-the _TEST_PAGES_URL_ environment variable.
+the _TEST_PAGES_URL_ environment variable. Additionally, in order to accept
+insecure `https` certificates set the _TEST_PAGES_INSECURE_ environment variable
+to `"true"`.
 
 Linting
 -------

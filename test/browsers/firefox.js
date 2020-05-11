@@ -32,11 +32,13 @@ exports.platform = "gecko";
 exports.oldestCompatibleVersion = "57.0";
 exports.ensureBrowser = ensureFirefox;
 
-exports.getDriver = function(browserBinary, devenvPath)
+exports.getDriver = function(browserBinary, devenvPath, insecure)
 {
   let options = new firefox.Options().headless();
   if (browserBinary != null)
     options.setBinary(browserBinary);
+  if (insecure)
+    options.set("acceptInsecureCerts", true);
 
   let driver = new webdriver.Builder()
     .forBrowser("firefox")
