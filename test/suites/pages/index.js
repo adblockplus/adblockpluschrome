@@ -180,6 +180,11 @@ async function runGenericTests(driver, expectedScreenshot,
   }
 }
 
+function getPage(url)
+{
+  return url.substr(url.lastIndexOf("/", url.lastIndexOf("/") - 1) + 1);
+}
+
 describe("Test pages", async() =>
 {
   it("discovered filter test cases", function()
@@ -193,7 +198,7 @@ describe("Test pages", async() =>
   {
     for (let [url, pageTitle] of this.parent.parent.pageTests)
     {
-      let page = url.substr(url.lastIndexOf("/", url.lastIndexOf("/") - 1) + 1);
+      let page = getPage(url);
 
       if (isExcluded(page, this.parent.parent.title))
         continue;
@@ -219,5 +224,28 @@ describe("Test pages", async() =>
         await checkLastError(this.driver, this.extensionHandle);
       });
     }
+  });
+
+  describe("Final checks", async() =>
+  {
+    it("does not block unfiltered content", async function()
+    {
+      let {pageTests, title} = this.test.parent.parent.parent;
+      let url;
+      let pageTitle;
+      for ([url, pageTitle] of pageTests)
+      {
+        let page = getPage(url);
+        if (!(isExcluded(page, title) || page in specializedTests))
+          break;
+      }
+
+      let expectedScreenshot = await getExpectedScreenshot(this.driver, url);
+      await this.driver.navigate().to(url);
+      await assert.rejects(
+        runGenericTests(this.driver, expectedScreenshot, title, pageTitle, url),
+        /Screenshots don't match/
+      );
+    });
   });
 });
