@@ -20,9 +20,9 @@
 const assert = require("assert");
 const request = require("request");
 
-let download = exports.download = function(url, insecure = false)
+let download = exports.download = function(url, strictSSL = true)
 {
-  let options = {url, insecure};
+  let options = {url, strictSSL};
   return new Promise((resolve, reject) =>
   {
     request(options, (err, res, body) =>

@@ -107,7 +107,7 @@ async function getPageTests()
   let html;
   try
   {
-    html = await download(TEST_PAGES_URL, TEST_PAGES_INSECURE);
+    html = await download(TEST_PAGES_URL, !TEST_PAGES_INSECURE);
   }
   catch (e)
   {
