@@ -19,9 +19,9 @@
 
 const webdriver = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
+const got = require("got");
 const {ensureChromium} = require("../../adblockpluscore/test/runners/" +
                                  "chromium_download");
-const {downloadJSON} = require("../misc/utils.js");
 
 // We need to require the chromedriver,
 // otherwise on Windows the chromedriver path is not added to process.env.PATH.
@@ -60,7 +60,7 @@ exports.getLatestVersion = async function()
   else if (os == "darwin")
     os = "mac";
 
-  let data = await downloadJSON(`https://omahaproxy.appspot.com/all.json?os=${os}`);
+  let data = await got(`https://omahaproxy.appspot.com/all.json?os=${os}`).json();
   let version = data[0].versions.find(ver => ver.channel == "stable");
   let base = version.branch_base_position;
 
@@ -70,7 +70,7 @@ exports.getLatestVersion = async function()
     // In that case, the base is taken from the unpatched version
     let cv = version.current_version.split(".");
     let unpatched = `${cv[0]}.${cv[1]}.${cv[2]}.0`;
-    let unpatchedVersion = await downloadJSON(`https://omahaproxy.appspot.com/deps.json?version=${unpatched}`);
+    let unpatchedVersion = await got(`https://omahaproxy.appspot.com/deps.json?version=${unpatched}`).json();
     base = unpatchedVersion.chromium_base_position;
   }
 

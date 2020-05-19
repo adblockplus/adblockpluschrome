@@ -20,9 +20,9 @@
 const webdriver = require("selenium-webdriver");
 const firefox = require("selenium-webdriver/firefox");
 const {Command} = require("selenium-webdriver/lib/command");
+const got = require("got");
 const {ensureFirefox} = require("../../adblockpluscore/test/runners/" +
                                 "firefox_download");
-const {downloadJSON} = require("../misc/utils.js");
 
 // We need to require the geckodriver,
 // otherwise on Windows the geckodriver path is not added to process.env.PATH.
@@ -54,6 +54,6 @@ exports.getDriver = function(browserBinary, devenvPath, insecure)
 
 exports.getLatestVersion = async function()
 {
-  let data = await downloadJSON("https://product-details.mozilla.org/1.0/firefox_versions.json");
+  let data = await got("https://product-details.mozilla.org/1.0/firefox_versions.json").json();
   return data.LATEST_FIREFOX_VERSION;
 };

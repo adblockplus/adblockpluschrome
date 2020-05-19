@@ -25,7 +25,8 @@ const glob = require("glob");
 const path = require("path");
 const url = require("url");
 const {exec} = require("child_process");
-const {download, checkLastError, reloadModule} = require("./misc/utils");
+const got = require("got");
+const {checkLastError, reloadModule} = require("./misc/utils");
 
 function getBrowserBinaries(module, browser)
 {
@@ -104,10 +105,12 @@ async function waitForExtension(driver)
 
 async function getPageTests()
 {
-  let html;
+  let options = TEST_PAGES_INSECURE ? {rejectUnauthorized: false} : {};
+  let response;
+
   try
   {
-    html = await download(TEST_PAGES_URL, !TEST_PAGES_INSECURE);
+    response = await got(TEST_PAGES_URL, options);
   }
   catch (e)
   {
@@ -118,7 +121,7 @@ async function getPageTests()
   let regexp = /<li>[\S\s]*?<a\s(?:[^>]*\s)?href="(.*?)"[\S\s]*?<h3>(.*)<\/h3>/gm;
   let tests = [];
   let match;
-  while (match = regexp.exec(html))
+  while (match = regexp.exec(response.body))
     tests.push([url.resolve(TEST_PAGES_URL, match[1]), match[2]]);
 
   return tests;

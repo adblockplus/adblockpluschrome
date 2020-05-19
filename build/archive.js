@@ -21,7 +21,7 @@ const fs = require("fs");
 const path = require("path");
 
 const {ArgumentParser} = require("argparse");
-const request = require("request");
+const got = require("got");
 
 const CWS_URL = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=32&acceptformat=crx3&x=id%3D";
 
@@ -35,21 +35,19 @@ parser.addArgument(
 );
 
 let args = parser.parseArgs();
+let stream = got.stream(`${CWS_URL}${args["extension-id"]}%26uc`);
 
-let url = `${CWS_URL}${args["extension-id"]}%26uc`;
-
-let r = request(url).on("response", response =>
+stream.on("response", response =>
 {
-  if (response.statusCode != 200)
-  {
-    throw new Error("Request failed with status code " +
-                    response.statusCode);
-  }
-
-  const filenamePrefix = "adblockpluschrome-";
-  let remoteFilename = path.basename(response.request.path);
-  let filename = remoteFilename.replace("extension_", filenamePrefix)
+  let remoteFilename = path.basename(response.req.path);
+  let filename = remoteFilename.replace("extension_", "adblockpluschrome-")
                                .replace(/_/g, ".");
 
-  r.pipe(fs.createWriteStream(filename));
+  stream.pipe(fs.createWriteStream(filename));
+});
+
+stream.on("error", error =>
+{
+  console.error(error);
+  process.exit(1);
 });

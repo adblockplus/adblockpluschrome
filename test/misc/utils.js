@@ -18,29 +18,6 @@
 "use strict";
 
 const assert = require("assert");
-const request = require("request");
-
-let download = exports.download = function(url, strictSSL = true)
-{
-  let options = {url, strictSSL};
-  return new Promise((resolve, reject) =>
-  {
-    request(options, (err, res, body) =>
-    {
-      if (err)
-        reject(err);
-      else if (res.statusCode != 200)
-        reject(new Error("Request failed with status code " + res.statusCode));
-      else
-        resolve(body);
-    });
-  });
-};
-
-exports.downloadJSON = async function(url)
-{
-  return JSON.parse(await download(url));
-};
 
 exports.checkLastError = async function(driver, handle)
 {
