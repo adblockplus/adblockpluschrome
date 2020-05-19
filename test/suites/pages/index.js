@@ -18,85 +18,12 @@
 "use strict";
 
 const assert = require("assert");
-const path = require("path");
-const Jimp = require("jimp");
 const {By} = require("selenium-webdriver");
 const {checkLastError, runWithHandle,
        reloadModule} = require("../../misc/utils");
 const specializedTests = require("./specialized");
-
-const SCREENSHOT_DIR = path.join(__dirname, "../..", "screenshots");
-// diff.percent examples on screenshots:
-// 0.02558039532430121 - all Blocking page tests failed
-// 0.00426475605595359 - one Blocking page test failed
-// 0.00000107250107250 - one pixel difference
-const SCREENSHOT_DIFF = 0.00001;
-
-async function takeScreenshot(driver)
-{
-  // On macOS scrollbars appear and disappear overlapping
-  // the content as scrolling occurs. So we have to hide
-  // the scrollbars to get reproducible screenshots.
-  await driver.executeScript(`
-    let style = document.createElement("style");
-    style.textContent = "html { overflow-y: scroll; }"
-    document.head.appendChild(style);
-    if (document.documentElement.clientWidth == window.innerWidth)
-      style.textContent = "html::-webkit-scrollbar { display: none; }";
-    else
-      document.head.removeChild(style);`);
-
-  let fullScreenshot = new Jimp(0, 0);
-  while (true)
-  {
-    let [width, height, offset] = await driver.executeScript(`
-      window.scrollTo(0, arguments[0]);
-      return [document.documentElement.clientWidth,
-              document.documentElement.scrollHeight,
-              window.scrollY];`, fullScreenshot.bitmap.height);
-    let data = await driver.takeScreenshot();
-    let partialScreenshot = await Jimp.read(Buffer.from(data, "base64"));
-    let combinedScreenshot = new Jimp(width, offset +
-                                             partialScreenshot.bitmap.height);
-    combinedScreenshot.composite(fullScreenshot, 0, 0);
-    combinedScreenshot.composite(partialScreenshot, 0, offset);
-    fullScreenshot = combinedScreenshot;
-
-    if (fullScreenshot.bitmap.height >= height)
-      break;
-  }
-  return fullScreenshot;
-}
-
-function isExcluded(page, browser)
-{
-  let excluded;
-  if (page in specializedTests)
-    excluded = specializedTests[page].excludedBrowsers;
-  // https://issues.adblockplus.org/ticket/6917
-  else if (page == "filters/subdocument")
-    excluded = ["Firefox"];
-  // Chromium 63 doesn't have user stylesheets (required to
-  // overrule inline styles) and doesn't run content scripts
-  // in dynamically written documents.
-  else if (page == "circumvention/inline-style-important" ||
-           page == "circumvention/anoniframe-documentwrite")
-    excluded = ["Chromium (oldest)"];
-  // shadowing requires Firefox 63+ or 59+ with flag
-  // dom.webcomponents.shadowdom.enabled
-  else if (page == "snippets/hide-if-shadow-contains")
-    excluded = ["Firefox (oldest)"];
-
-  return !!excluded && excluded.some(s => s.includes(" ") ?
-                                            browser == s :
-                                            browser.startsWith(s));
-}
-
-async function getExpectedScreenshot(driver, url)
-{
-  await driver.navigate().to(`${url}?expected=1`);
-  return await takeScreenshot(driver);
-}
+const {getExpectedScreenshot, runFirstTest, getPage, isExcluded,
+       runGenericTests} = require("./utils");
 
 async function getFilters(driver)
 {
@@ -135,57 +62,7 @@ async function updateFilters(driver, extensionHandle, url)
   await driver.navigate().refresh();
 }
 
-async function runGenericTests(driver, expectedScreenshot,
-                               browser, pageTitle, url)
-{
-  let actualScreenshot;
-
-  async function compareScreenshots()
-  {
-    await driver.wait(async() =>
-    {
-      actualScreenshot = await takeScreenshot(driver);
-      let diff = Jimp.diff(actualScreenshot, expectedScreenshot, 0.001);
-      return diff.percent < SCREENSHOT_DIFF;
-    }, 5000, "Screenshots don't match", 500);
-  }
-
-  try
-  {
-    try
-    {
-      await compareScreenshots();
-    }
-    catch (e)
-    {
-      // Sometimes on Firefox there is a delay until the added
-      // filters become effective. So if a test case fails,
-      // we reload the page and try once again.
-      await driver.navigate().refresh();
-      await compareScreenshots();
-    }
-  }
-  catch (e)
-  {
-    let title = `${browser}_${pageTitle}`;
-    let prefix = title.toLowerCase().replace(/[^a-z0-9]+/g, "_");
-
-    for (let [suffix, image] of [["actual", actualScreenshot],
-                                 ["expected", expectedScreenshot]])
-      await image.write(path.join(SCREENSHOT_DIR, `${prefix}_${suffix}.png`));
-
-    throw new Error(`${e.message}
-       ${url}
-       (see ${path.join(SCREENSHOT_DIR, prefix)}_*.png)`);
-  }
-}
-
-function getPage(url)
-{
-  return url.substr(url.lastIndexOf("/", url.lastIndexOf("/") - 1) + 1);
-}
-
-describe("Test pages", async() =>
+describe("Test pages", () =>
 {
   it("discovered filter test cases", function()
   {
@@ -194,7 +71,7 @@ describe("Test pages", async() =>
 
   reloadModule(require.resolve("./subscribe"));
 
-  describe("Filter test cases", async function()
+  describe("Filters", () =>
   {
     for (let [url, pageTitle] of this.parent.parent.pageTests)
     {
@@ -214,9 +91,10 @@ describe("Test pages", async() =>
         }
         else
         {
-          let expetedScreenshot = await getExpectedScreenshot(this.driver, url);
+          let expectedScreenshot = await getExpectedScreenshot(this.driver,
+                                                               url);
           await updateFilters(this.driver, this.extensionHandle, url);
-          await runGenericTests(this.driver, expetedScreenshot,
+          await runGenericTests(this.driver, expectedScreenshot,
                                 this.test.parent.parent.parent.title,
                                 pageTitle, url);
         }
@@ -226,24 +104,12 @@ describe("Test pages", async() =>
     }
   });
 
-  describe("Final checks", async() =>
+  describe("Final checks", () =>
   {
     it("does not block unfiltered content", async function()
     {
-      let {pageTests, title} = this.test.parent.parent.parent;
-      let url;
-      let pageTitle;
-      for ([url, pageTitle] of pageTests)
-      {
-        let page = getPage(url);
-        if (!(isExcluded(page, title) || page in specializedTests))
-          break;
-      }
-
-      let expectedScreenshot = await getExpectedScreenshot(this.driver, url);
-      await this.driver.navigate().to(url);
       await assert.rejects(
-        runGenericTests(this.driver, expectedScreenshot, title, pageTitle, url),
+        runFirstTest(this.driver, this.test.parent.parent.parent),
         /Screenshots don't match/
       );
     });

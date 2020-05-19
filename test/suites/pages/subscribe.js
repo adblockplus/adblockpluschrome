@@ -20,8 +20,9 @@
 const assert = require("assert");
 const {By, until} = require("selenium-webdriver");
 const {checkLastError} = require("../../misc/utils");
+const {runFirstTest} = require("./utils");
 
-async function followSubscribeLink(driver, url)
+async function clickSubscribe(driver, url)
 {
   await driver.navigate().to(url);
   await driver.findElement(By.id("subscribe-button")).click();
@@ -31,7 +32,7 @@ async function followSubscribeLink(driver, url)
   );
 }
 
-async function confirmSubscribeDialog(driver)
+async function confirmSubscribe(driver)
 {
   await driver.wait(until.ableToSwitchToFrame(0), 4000);
   let dialog = await driver.wait(
@@ -44,7 +45,7 @@ async function confirmSubscribeDialog(driver)
       dialog.findElement(By.css(".title span")).getText()
     ]);
     return displayed && title == "ABP Testcase Subscription";
-  }, 1000, "dialog shown");
+  }, 2000, "dialog shown");
   await dialog.findElement(By.css(".default-focus")).click();
 }
 
@@ -67,11 +68,13 @@ async function checkSubscriptionAdded(driver, url)
   assert.ok(added, "subscription added");
 }
 
-it("subscribe link", async function()
+it("subscribes to a link", async function()
 {
   let {testPagesURL} = this.test.parent.parent;
-  await followSubscribeLink(this.driver, testPagesURL);
-  await confirmSubscribeDialog(this.driver);
+  await clickSubscribe(this.driver, testPagesURL);
+  await confirmSubscribe(this.driver);
   await checkSubscriptionAdded(this.driver, testPagesURL);
+
+  await runFirstTest(this.driver, this.test.parent.parent);
   await checkLastError(this.driver, this.extensionHandle);
 });
