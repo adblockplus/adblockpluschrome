@@ -71,7 +71,7 @@ describe("Test pages", () =>
 
   reloadModule(require.resolve("./subscribe"));
 
-  describe("Filters", () =>
+  describe("Filters", function()
   {
     for (let [url, pageTitle] of this.parent.parent.pageTests)
     {
