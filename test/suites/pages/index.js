@@ -85,7 +85,7 @@ describe("Test pages", () =>
         if (page in specializedTests)
         {
           await updateFilters(this.driver, this.extensionHandle, url);
-          let locator = By.className("testcase-container");
+          let locator = By.className("testcase-area");
           for (let element of await this.driver.findElements(locator))
             await specializedTests[page].run(element, this.extensionHandle);
         }
