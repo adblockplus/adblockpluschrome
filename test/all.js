@@ -118,7 +118,7 @@ async function getPageTests()
     return [];
   }
 
-  let regexp = /<li>[\S\s]*?<a\s(?:[^>]*\s)?href="(.*?)"[\S\s]*?<h3>(.*)<\/h3>/gm;
+  let regexp = /"test-link" href="(.*?)"[\S\s]*?>(?:<h3>)?(.*?)</gm;
   let tests = [];
   let match;
   while (match = regexp.exec(response.body))
