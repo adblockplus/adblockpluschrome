@@ -15,7 +15,6 @@
     "ecmaVersion": 11
   },
   "rules": {
-    "curly": ["error", "multi-or-nest", "consistent"],
-    "nonblock-statement-body-position": ["error", "below"]
+    "curly": ["error", "multi-or-nest", "consistent"]
   }
 }
