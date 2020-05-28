@@ -15,17 +15,14 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
-
-const fs = require("fs");
-const path = require("path");
-
-const {ArgumentParser} = require("argparse");
-const got = require("got");
+import fs from "fs";
+import path from "path";
+import argparse from "argparse";
+import got from "got";
 
 const CWS_URL = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=32&acceptformat=crx3&x=id%3D";
 
-let parser = new ArgumentParser({
+let parser = new argparse.ArgumentParser({
   description: "Download an Adblock Plus build from the Chrome Web Store."
 });
 

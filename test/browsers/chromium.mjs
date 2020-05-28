@@ -15,29 +15,27 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
-
-const webdriver = require("selenium-webdriver");
-const chrome = require("selenium-webdriver/chrome");
-const got = require("got");
-const {ensureChromium} = require("../../adblockpluscore/test/runners/" +
-                                 "chromium_download");
+import webdriver from "selenium-webdriver";
+import chrome from "selenium-webdriver/chrome.js";
+import got from "got";
+import chromiumDownload
+  from "../../adblockpluscore/test/runners/chromium_download.js";
 
 // We need to require the chromedriver,
 // otherwise on Windows the chromedriver path is not added to process.env.PATH.
-require("chromedriver");
+import "chromedriver";
 
-exports.platform = "chrome";
-exports.ensureBrowser = ensureChromium;
+export let platform = "chrome";
+export let ensureBrowser = chromiumDownload.ensureChromium;
 
 // The Chromium version is a build number, quite obscure.
 // Chromium 63.0.3239.x is 508578
 // Chromium 65.0.3325.0 is 530368
 // We currently want Chromiun 63, as we still support it and that's the
 // loweset version that supports WebDriver.
-exports.oldestCompatibleVersion = 508578;
+export let oldestCompatibleVersion = 508578;
 
-exports.getDriver = function(browserBinary, devenvPath)
+export function getDriver(browserBinary, devenvPath)
 {
   let options = new chrome.Options()
     .addArguments("--no-sandbox")
@@ -50,9 +48,9 @@ exports.getDriver = function(browserBinary, devenvPath)
     .forBrowser("chrome")
     .setChromeOptions(options)
     .build();
-};
+}
 
-exports.getLatestVersion = async function()
+export async function getLatestVersion()
 {
   let os = process.platform;
   if (os == "win32")
@@ -75,4 +73,4 @@ exports.getLatestVersion = async function()
   }
 
   return base;
-};
+}

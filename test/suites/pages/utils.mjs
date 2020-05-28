@@ -15,13 +15,11 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
+import path from "path";
+import Jimp from "jimp";
+import specializedTests from "./specialized.mjs";
 
-const path = require("path");
-const Jimp = require("jimp");
-const specializedTests = require("./specialized");
-
-const SCREENSHOT_DIR = path.join(__dirname, "../..", "screenshots");
+const SCREENSHOT_DIR = path.join("test", "screenshots");
 // diff.percent examples on screenshots:
 // 0.02558039532430121 - all Blocking page tests failed
 // 0.00426475605595359 - one Blocking page test failed
@@ -64,7 +62,7 @@ async function takeScreenshot(driver)
   return fullScreenshot;
 }
 
-let isExcluded = exports.isExcluded = function(page, browser)
+export function isExcluded(page, browser)
 {
   let excluded;
   if (page in specializedTests)
@@ -86,18 +84,16 @@ let isExcluded = exports.isExcluded = function(page, browser)
   return !!excluded && excluded.some(s => s.includes(" ") ?
                                             browser == s :
                                             browser.startsWith(s));
-};
+}
 
-let getExpectedScreenshot =
-exports.getExpectedScreenshot = async function(driver, url)
+export async function getExpectedScreenshot(driver, url)
 {
   await driver.navigate().to(`${url}?expected=1`);
   return await takeScreenshot(driver);
-};
+}
 
-let runGenericTests =
-exports.runGenericTests = async function(driver, expectedScreenshot,
-                                         browser, pageTitle, url)
+export async function runGenericTests(driver, expectedScreenshot,
+                                      browser, pageTitle, url)
 {
   let actualScreenshot;
 
@@ -139,14 +135,14 @@ exports.runGenericTests = async function(driver, expectedScreenshot,
        ${url}
        (see ${path.join(SCREENSHOT_DIR, prefix)}_*.png)`);
   }
-};
+}
 
-let getPage = exports.getPage = function(url)
+export function getPage(url)
 {
   return url.substr(url.lastIndexOf("/", url.lastIndexOf("/") - 1) + 1);
-};
+}
 
-exports.runFirstTest = async function(driver, topLevelTestSuite)
+export async function runFirstTest(driver, topLevelTestSuite)
 {
   let {pageTests, title} = topLevelTestSuite;
   for (let [url, pageTitle] of pageTests)
@@ -161,4 +157,4 @@ exports.runFirstTest = async function(driver, topLevelTestSuite)
     }
   }
   throw new Error("No generic test did run");
-};
+}

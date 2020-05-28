@@ -15,11 +15,10 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
+import {promisify} from "util";
+import fs from "fs";
+import path from "path";
 
-const {promisify} = require("util");
-const fs = require("fs");
-const path = require("path");
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 const unlinkAsync = promisify(fs.unlink);
@@ -36,7 +35,7 @@ const MAXKEPTBUILDS = 150;
  * @param {string} newBuild - the newly added Build.
  * @return {object} the update build_list as a JSON object.
  */
-exports.cycleBuilds = function(folder, newBuild)
+export function cycleBuilds(folder, newBuild)
 {
   let absFilename = path.join(folder, FILENAME);
   return Promise.resolve(
@@ -55,4 +54,4 @@ exports.cycleBuilds = function(folder, newBuild)
     ).then(() => writeFileAsync(absFilename, JSON.stringify(buildList)
     ).then(() => buildList));
   });
-};
+}

@@ -15,16 +15,13 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
-
-const glob = require("glob");
-const path = require("path");
+import path from "path";
+import {loadModules} from "../misc/utils.mjs";
 
 (async() =>
 {
-  for (let backend of glob.sync("./test/browsers/*.js"))
+  for (let [module] of await loadModules(path.join("test", "browsers")))
   {
-    let module = require(path.resolve(backend));
     for (let version of [module.oldestCompatibleVersion,
                          module.getLatestVersion()])
     {

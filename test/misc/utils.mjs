@@ -15,11 +15,11 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
+import assert from "assert";
+import fs from "fs";
+import path from "path";
 
-const assert = require("assert");
-
-exports.checkLastError = async function(driver, handle)
+export async function checkLastError(driver, handle)
 {
   await driver.switchTo().window(handle);
 
@@ -29,9 +29,9 @@ exports.checkLastError = async function(driver, handle)
 
   if (error != null)
     assert.fail("Unhandled error in background page: " + error);
-};
+}
 
-exports.runWithHandle = async function(driver, handle, callback)
+export async function runWithHandle(driver, handle, callback)
 {
   let currentHandle = await driver.getWindowHandle();
   await driver.switchTo().window(handle);
@@ -43,10 +43,17 @@ exports.runWithHandle = async function(driver, handle, callback)
   {
     await driver.switchTo().window(currentHandle);
   }
-};
+}
 
-exports.reloadModule = function(path)
+export async function loadModules(dirname)
 {
-  delete require.cache[path];
-  require(path);
-};
+  let entries = await fs.promises.readdir(dirname, {withFileTypes: true});
+  return await Promise.all(entries.map(async dirent =>
+  {
+    let filename = path.resolve(dirname, dirent.name);
+    let basename = path.parse(dirent.name).name;
+    if (dirent.isDirectory())
+      filename = path.join(filename, "index.mjs");
+    return [await import(filename), basename];
+  }));
+}

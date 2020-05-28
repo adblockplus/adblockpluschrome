@@ -15,11 +15,13 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
+import assert from "assert";
+import webdriver from "selenium-webdriver";
+import {runWithHandle} from "../../misc/utils.mjs";
 
-const assert = require("assert");
-const {By} = require("selenium-webdriver");
-const {runWithHandle} = require("../../misc/utils");
+const {By} = webdriver;
+
+let specialized = {};
 
 function clickButtonOrLink(element)
 {
@@ -38,7 +40,7 @@ async function checkPing(element)
   }, 2000, "request wasn't blocked");
 }
 
-exports["filters/ping"] = {
+specialized["filters/ping"] = {
   // ping test needs access to browser logs
   // https://github.com/mozilla/geckodriver/issues/284
   excludedBrowsers: ["Firefox"],
@@ -46,7 +48,7 @@ exports["filters/ping"] = {
   run: checkPing
 };
 
-exports["exceptions/ping"] = {
+specialized["exceptions/ping"] = {
   excludedBrowsers: ["Firefox"],
 
   async run(element)
@@ -82,7 +84,7 @@ async function checkPopup(element, extensionHandle)
   return await getNumberOfHandles(driver) > nHandles;
 }
 
-exports["filters/popup"] = {
+specialized["filters/popup"] = {
   async run(element, extensionHandle)
   {
     let hasPopup = await checkPopup(element, extensionHandle);
@@ -90,10 +92,12 @@ exports["filters/popup"] = {
   }
 };
 
-exports["exceptions/popup"] = {
+specialized["exceptions/popup"] = {
   async run(element, extensionHandle)
   {
     let hasPopup = await checkPopup(element, extensionHandle);
     assert.ok(hasPopup, "popup remained open");
   }
 };
+
+export {specialized as default};

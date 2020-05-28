@@ -16,5 +16,13 @@
   },
   "rules": {
     "curly": ["error", "multi-or-nest", "consistent"]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.mjs"],
+      "parserOptions": {
+        "sourceType": "module"
+      }
+    }
+  ]
 }

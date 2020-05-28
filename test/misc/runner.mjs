@@ -15,18 +15,15 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
-
 const TEST_PAGES_URL = process.env.TEST_PAGES_URL ||
                        "https://testpages.adblockplus.org/en/";
 const TEST_PAGES_INSECURE = process.env.TEST_PAGES_INSECURE == "true";
 
-const glob = require("glob");
-const path = require("path");
-const url = require("url");
-const {exec} = require("child_process");
-const got = require("got");
-const {checkLastError, reloadModule} = require("./misc/utils");
+import path from "path";
+import url from "url";
+import {exec} from "child_process";
+import got from "got";
+import {checkLastError, loadModules} from "./utils.mjs";
 
 function getBrowserBinaries(module, browser)
 {
@@ -135,11 +132,14 @@ if (typeof run == "undefined")
 
 (async() =>
 {
-  let pageTests = await getPageTests();
-  for (let backend of glob.sync("./test/browsers/*.js"))
+  let [pageTests, browsers, suites] = await Promise.all([
+    getPageTests(),
+    loadModules(path.join("test", "browsers")),
+    loadModules(path.join("test", "suites"))
+  ]);
+
+  for (let [module, browser] of browsers)
   {
-    let module = require(path.resolve(backend));
-    let browser = path.basename(backend, ".js");
     let devenvCreated = null;
     for (let binary of getBrowserBinaries(module, browser))
     {
@@ -189,8 +189,8 @@ if (typeof run == "undefined")
           await checkLastError(this.driver, this.extensionHandle);
         });
 
-        for (let file of glob.sync("./test/suites/*"))
-          reloadModule(require.resolve(path.resolve(file)));
+        for (let [{default: defineSuite}] of suites)
+          defineSuite();
 
         after(async function()
         {

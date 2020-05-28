@@ -15,12 +15,12 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
+import assert from "assert";
+import webdriver from "selenium-webdriver";
+import {checkLastError} from "../../misc/utils.mjs";
+import {runFirstTest} from "./utils.mjs";
 
-const assert = require("assert");
-const {By, until} = require("selenium-webdriver");
-const {checkLastError} = require("../../misc/utils");
-const {runFirstTest} = require("./utils");
+const {By, until} = webdriver;
 
 async function clickSubscribe(driver, url)
 {
@@ -68,13 +68,16 @@ async function checkSubscriptionAdded(driver, url)
   assert.ok(added, "subscription added");
 }
 
-it("subscribes to a link", async function()
+export default () =>
 {
-  let {testPagesURL} = this.test.parent.parent;
-  await clickSubscribe(this.driver, testPagesURL);
-  await confirmSubscribe(this.driver);
-  await checkSubscriptionAdded(this.driver, testPagesURL);
+  it("subscribes to a link", async function()
+  {
+    let {testPagesURL} = this.test.parent.parent;
+    await clickSubscribe(this.driver, testPagesURL);
+    await confirmSubscribe(this.driver);
+    await checkSubscriptionAdded(this.driver, testPagesURL);
 
-  await runFirstTest(this.driver, this.test.parent.parent);
-  await checkLastError(this.driver, this.extensionHandle);
-});
+    await runFirstTest(this.driver, this.test.parent.parent);
+    await checkLastError(this.driver, this.extensionHandle);
+  });
+};

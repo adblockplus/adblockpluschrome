@@ -15,24 +15,22 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
-
-const webdriver = require("selenium-webdriver");
-const firefox = require("selenium-webdriver/firefox");
-const {Command} = require("selenium-webdriver/lib/command");
-const got = require("got");
-const {ensureFirefox} = require("../../adblockpluscore/test/runners/" +
-                                "firefox_download");
+import webdriver from "selenium-webdriver";
+import firefox from "selenium-webdriver/firefox.js";
+import command from "selenium-webdriver/lib/command.js";
+import got from "got";
+import firefoxDownload
+  from "../../adblockpluscore/test/runners/firefox_download.js";
 
 // We need to require the geckodriver,
 // otherwise on Windows the geckodriver path is not added to process.env.PATH.
-require("geckodriver");
+import "geckodriver";
 
-exports.platform = "gecko";
-exports.oldestCompatibleVersion = "57.0";
-exports.ensureBrowser = ensureFirefox;
+export let platform = "gecko";
+export let oldestCompatibleVersion = "57.0";
+export let ensureBrowser = firefoxDownload.ensureFirefox;
 
-exports.getDriver = function(browserBinary, devenvPath, insecure)
+export function getDriver(browserBinary, devenvPath, insecure)
 {
   let options = new firefox.Options().headless();
   if (browserBinary != null)
@@ -45,15 +43,15 @@ exports.getDriver = function(browserBinary, devenvPath, insecure)
     .setFirefoxOptions(options)
     .build();
 
-  driver.execute(new Command("install addon")
+  driver.execute(new command.Command("install addon")
     .setParameter("path", devenvPath)
     .setParameter("temporary", true));
 
   return driver;
-};
+}
 
-exports.getLatestVersion = async function()
+export async function getLatestVersion()
 {
   let data = await got("https://product-details.mozilla.org/1.0/firefox_versions.json").json();
   return data.LATEST_FIREFOX_VERSION;
-};
+}

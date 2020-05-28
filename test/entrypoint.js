@@ -17,28 +17,7 @@
 
 "use strict";
 
-const {ArgumentParser} = require("argparse");
-const fs = require("fs");
-const path = require("path");
-
-let platforms = {};
-
-let parser = new ArgumentParser({
-  help: "Deploy an Adblock Plus development build."
-});
-let subParser = parser.addSubparsers({
-  title: "Platforms",
-  dest: "platform_name"
-});
-
-for (let file of fs.readdirSync(path.resolve("build/target/")))
-{
-  let target = path.basename(file, ".js");
-  let platformSubParser = subParser.addParser(target, {addHelp: true});
-  let module = require(path.resolve(`build/target/${file}`));
-  module.addArguments(platformSubParser);
-  platforms[target] = module;
-}
-
-let args = parser.parseArgs();
-platforms[args.platform_name].run(args);
+// Mocha doesn't load tests from ES modules on Node.js <12.11. So we have to
+// provide a CJS module as entry point, and then call into ESM from there.
+// https://github.com/mochajs/mocha/issues/4297
+import("./misc/runner.mjs");

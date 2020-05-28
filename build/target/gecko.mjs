@@ -15,15 +15,13 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
-
-const path = require("path");
-const {exec} = require("child_process");
-const {compile} = require("handlebars");
-const signAddon = require("sign-addon").default;
-const {promisify} = require("util");
-const fs = require("fs");
-const {cycleBuilds} = require("../buildlist.js");
+import path from "path";
+import {exec} from "child_process";
+import {promisify} from "util";
+import fs from "fs";
+import handlebars from "handlebars";
+import signAddon from "sign-addon";
+import {cycleBuilds} from "../buildlist.mjs";
 
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
@@ -34,7 +32,7 @@ const STABLEURLLABLE = "Mozilla Add-ons";
 const UPDATEURL = "https://downloads.adblockplus.org/devbuilds/" +
                   "adblockplusfirefox/";
 
-exports.addArguments = function(parser)
+export function addArguments(parser)
 {
   parser.addArgument(["-p", "--package"], {required: true});
   parser.addArgument(["-c", "--credentials"], {required: true});
@@ -50,7 +48,7 @@ exports.addArguments = function(parser)
     ["-n", "--name"],
     {defaultValue: "Adblock Plus for Firefox"}
   );
-};
+}
 
 
 function renderBuildList(name, urlChangelog, buildList, target)
@@ -59,7 +57,7 @@ function renderBuildList(name, urlChangelog, buildList, target)
 
   return readFileAsync(INDEXTEMPLATE, "utf-8").then(data =>
   {
-    let template = compile(data, {strict: true});
+    let template = handlebars.compile(data, {strict: true});
     let context = {
       commitUrl: urlChangelog,
       config:
@@ -101,7 +99,7 @@ function metadataFromPython(section, option)
   });
 }
 
-exports.run = function(args)
+export function run(args)
 {
   let version = path.parse(args.package).name.split("-").pop();
   let symLinkName = path.join(args.target, "00latest.xpi");
@@ -114,7 +112,7 @@ exports.run = function(args)
     readFileAsync(path.resolve(args.credentials)).then(fileContent =>
     {
       let {AMO_KEY: apiKey, AMO_SECRET: apiSecret} = JSON.parse(fileContent);
-      return signAddon({
+      return signAddon.default({
         xpiPath: args.package,
         channel: "unlisted",
         id: appId,
@@ -177,4 +175,4 @@ exports.run = function(args)
     console.error(err);
     process.exit(1);
   });
-};
+}

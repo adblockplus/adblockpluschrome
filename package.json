@@ -29,14 +29,14 @@
     "sign-addon": "^0.3.1"
   },
   "scripts": {
-    "archive": "node build/archive.js",
+    "archive": "node --experimental-modules build/archive.mjs",
     "pretest": "bash -c \"python ensure_dependencies.py\"",
-    "lint": "eslint *.js lib/ qunit/ ext/ test/ build/",
-    "test-only": "mocha --delay",
+    "lint": "eslint --ext .js,.mjs *.js lib/ qunit/ ext/ test/ build/",
+    "test-only": "mocha --experimental-modules --delay",
     "test": "npm run test-only --",
     "posttest": "npm run lint",
-    "publish": "node build/publish.js",
+    "publish": "node --experimental-modules build/publish.mjs",
     "docs": "jsdoc --configure jsdoc.conf --destination docs lib",
-    "download-test-browsers": "node test/bin/downloadBrowsers.js"
+    "download-test-browsers": "node --experimental-modules test/bin/downloadBrowsers.mjs"
   }
 }
