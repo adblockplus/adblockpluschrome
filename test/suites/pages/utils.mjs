@@ -93,7 +93,8 @@ export async function getExpectedScreenshot(driver, url)
 }
 
 export async function runGenericTests(driver, expectedScreenshot,
-                                      browser, pageTitle, url)
+                                      browser, testTitle, url,
+                                      writeScreenshots = true)
 {
   let actualScreenshot;
 
@@ -124,7 +125,10 @@ export async function runGenericTests(driver, expectedScreenshot,
   }
   catch (e)
   {
-    let title = `${browser}_${pageTitle}`;
+    if (!writeScreenshots)
+      throw e;
+
+    let title = `${browser}_${testTitle}`;
     let prefix = title.toLowerCase().replace(/[^a-z0-9]+/g, "_");
 
     for (let [suffix, image] of [["actual", actualScreenshot],
@@ -142,17 +146,19 @@ export function getPage(url)
   return url.substr(url.lastIndexOf("/", url.lastIndexOf("/") - 1) + 1);
 }
 
-export async function runFirstTest(driver, topLevelTestSuite)
+export async function runFirstTest(driver, topLevelTestSuite, testTitle,
+                                   writeScreenshots = true)
 {
-  let {pageTests, title} = topLevelTestSuite;
-  for (let [url, pageTitle] of pageTests)
+  let {pageTests, title: browser} = topLevelTestSuite;
+  for (let [url] of pageTests)
   {
     let page = getPage(url);
-    if (!(isExcluded(page, title) || page in specializedTests))
+    if (!(isExcluded(page, browser) || page in specializedTests))
     {
       let expectedScreenshot = await getExpectedScreenshot(driver, url);
       await driver.navigate().to(url);
-      await runGenericTests(driver, expectedScreenshot, title, pageTitle, url);
+      await runGenericTests(driver, expectedScreenshot, browser,
+                            testTitle, url, writeScreenshots);
       return;
     }
   }

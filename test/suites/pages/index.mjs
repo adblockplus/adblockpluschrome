@@ -111,7 +111,8 @@ export default () =>
       it("does not block unfiltered content", async function()
       {
         await assert.rejects(
-          runFirstTest(this.driver, this.test.parent.parent.parent),
+          runFirstTest(this.driver, this.test.parent.parent.parent,
+                       this.test.title, false),
           /Screenshots don't match/
         );
       });

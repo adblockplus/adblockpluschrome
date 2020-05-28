@@ -76,8 +76,7 @@ export default () =>
     await clickSubscribe(this.driver, testPagesURL);
     await confirmSubscribe(this.driver);
     await checkSubscriptionAdded(this.driver, testPagesURL);
-
-    await runFirstTest(this.driver, this.test.parent.parent);
+    await runFirstTest(this.driver, this.test.parent.parent, this.test.title);
     await checkLastError(this.driver, this.extensionHandle);
   });
 };
