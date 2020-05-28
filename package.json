@@ -32,7 +32,7 @@
     "archive": "node --experimental-modules build/archive.mjs",
     "pretest": "bash -c \"python ensure_dependencies.py\"",
     "lint": "eslint --ext .js,.mjs *.js lib/ qunit/ ext/ test/ build/",
-    "test-only": "mocha --experimental-modules --delay",
+    "test-only": "mocha --experimental-modules --unhandled-rejections=strict --delay",
     "test": "npm run test-only --",
     "posttest": "npm run lint",
     "publish": "node --experimental-modules build/publish.mjs",
