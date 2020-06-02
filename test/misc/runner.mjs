@@ -22,6 +22,7 @@ const TEST_PAGES_INSECURE = process.env.TEST_PAGES_INSECURE == "true";
 import path from "path";
 import url from "url";
 import {exec} from "child_process";
+import {promisify} from "util";
 import got from "got";
 import {checkLastError, loadModules} from "./utils.mjs";
 
@@ -50,26 +51,10 @@ function getBrowserBinaries(module, browser)
   ];
 }
 
-function createDevenv(platform)
+async function createDevenv(platform)
 {
-  return new Promise((resolve, reject) =>
-  {
-    exec(
-      `bash -c "python build.py devenv -t ${platform}"`,
-      (error, stdout, stderr) =>
-      {
-        if (error)
-        {
-          console.error(stderr);
-          reject(error);
-        }
-        else
-        {
-          resolve(stdout);
-        }
-      }
-    );
-  });
+  if (process.env.SKIP_BUILD != "true")
+    await promisify(exec)(`bash -c "python build.py devenv -t ${platform}"`);
 }
 
 async function getDriver(binary, devenvCreated, module)

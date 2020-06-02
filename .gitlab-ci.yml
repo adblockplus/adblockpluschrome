@@ -15,7 +15,8 @@
 
 ---
 
-image: "registry.gitlab.com/eyeo/docker/adblockplus-ci:node10"
+default:
+  image: "registry.gitlab.com/eyeo/docker/adblockplus-ci:node10"
 
 stages:
   - "prepare"
@@ -86,6 +87,7 @@ prepare-dependencies:
   stage: "build"
   script:
     - "python build.py build -t $PLATFORM"
+    - "python build.py devenv -t $PLATFORM"
 
 build:chrome:
   extends: ".build"
@@ -94,6 +96,7 @@ build:chrome:
   artifacts:
     paths:
       - "adblockpluschrome-*.zip"
+      - "devenv.chrome/qunit/"
 
 build:gecko:
   extends: ".build"
@@ -102,6 +105,7 @@ build:gecko:
   artifacts:
     paths:
       - "adblockplusfirefox-*.xpi"
+      - "devenv.gecko/qunit/"
 
 docs:
   extends: ".default_template"
@@ -120,11 +124,32 @@ docs:
 .test_template:
   extends: ".default_template"
   stage: "test"
+  before_script:
+    - "unzip -q $EXTENSION_FILE -d devenv.*"
+    - *dependencies
+  variables:
+    SKIP_BUILD: "true"
   artifacts:
     paths:
       - "test/screenshots/"
     when: "on_failure"
     expire_in: "1 mo"
+
+.test_template_chromium:
+  extends: ".test_template"
+  needs:
+    - job: "build:chrome"
+      artifacts: true
+  variables:
+    EXTENSION_FILE: "adblockpluschrome-*.zip"
+
+.test_template_firefox:
+  extends: ".test_template"
+  needs:
+    - job: "build:gecko"
+      artifacts: true
+  variables:
+    EXTENSION_FILE: "adblockplusfirefox-*.xpi"
 
 lint:yaml:
   image: "registry.gitlab.com/eyeo/docker/yamllint:1.14.0-configured"
@@ -150,22 +175,22 @@ audit:
   allow_failure: true
 
 test:firefox:oldest:
-  extends: ".test_template"
+  extends: ".test_template_firefox"
   script:
     - "npm run test-only -- -g 'Firefox \\(oldest\\)'"
 
 test:firefox:latest:
-  extends: ".test_template"
+  extends: ".test_template_firefox"
   script:
     - "npm run test-only -- -g 'Firefox \\(latest\\)'"
 
 test:chromium:oldest:
-  extends: ".test_template"
+  extends: ".test_template_chromium"
   script:
     - "xvfb-run -a npm run test-only -- -g 'Chromium \\(oldest\\)'"
 
 test:chromium:latest:
-  extends: ".test_template"
+  extends: ".test_template_chromium"
   script:
     - "xvfb-run -a npm run test-only -- -g 'Chromium \\(latest\\)'"
 
