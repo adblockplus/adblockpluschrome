@@ -26,16 +26,22 @@ function clickButtonOrLink(element)
   return element.findElement(By.css("a[href],button")).click();
 }
 
+async function checkRequestBlocked(driver, resource)
+{
+  await driver.wait(async() =>
+  {
+    let logs = await driver.manage().logs().get("browser");
+    let expected =
+      `${resource} - Failed to load resource: net::ERR_BLOCKED_BY_CLIENT`;
+    return logs.some(entry => entry.message.includes(expected));
+  }, 2000, "request wasn't blocked");
+}
+
 async function checkPing(element)
 {
   let driver = element.getDriver();
   await clickButtonOrLink(element);
-  await driver.wait(async() =>
-  {
-    let logs = await driver.manage().logs().get("browser");
-    let expected = "ping - Failed to load resource: net::ERR_BLOCKED_BY_CLIENT";
-    return logs.some(entry => entry.message.includes(expected));
-  }, 2000, "request wasn't blocked");
+  await checkRequestBlocked(driver, "ping");
 }
 
 exports["filters/ping"] = {
@@ -95,5 +101,17 @@ exports["exceptions/popup"] = {
   {
     let hasPopup = await checkPopup(element, extensionHandle);
     assert.ok(hasPopup, "popup remained open");
+  }
+};
+
+exports["filters/other"] = {
+  // other test needs access to browser logs
+  // https://github.com/mozilla/geckodriver/issues/284
+  excludedBrowsers: ["Firefox"],
+
+  async run(element)
+  {
+    let driver = element.getDriver();
+    await checkRequestBlocked(driver, "other/image.png");
   }
 };
