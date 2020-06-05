@@ -71,11 +71,15 @@ export function isExcluded(page, browser)
   else if (page == "filters/subdocument")
     excluded = ["Firefox"];
   // Chromium 63 doesn't have user stylesheets (required to
-  // overrule inline styles) and doesn't run content scripts
-  // in dynamically written documents.
-  else if (page == "circumvention/inline-style-important" ||
-           page == "circumvention/anoniframe-documentwrite")
+  // overrule inline styles).
+  else if (page == "circumvention/inline-style-important")
     excluded = ["Chromium (oldest)"];
+  // Older versions of Chromium don't run content
+  // scripts in dynamically written documents.
+  // Firefox <67 had a bug that resets the document:
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=1528146
+  else if (page == "circumvention/anoniframe-documentwrite")
+    excluded = ["Chromium (oldest)", "Firefox (oldest)"];
   // shadowing requires Firefox 63+ or 59+ with flag
   // dom.webcomponents.shadowdom.enabled
   else if (page == "snippets/hide-if-shadow-contains")
