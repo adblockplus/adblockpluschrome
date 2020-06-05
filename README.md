@@ -108,8 +108,8 @@ Start the testing process in one browser only:
 
     npm test -- -g <Firefox|Chromium>
 
-In order to run other test subsets, please check [Mocha's documentation]
-(https://mochajs.org/#-grep-regexp-g-regexp) on `-g` option.
+In order to run other test subsets, please check `-g` option on
+[Mocha's documentation](https://mochajs.org/#-grep-regexp-g-regexp).
 
 By default it downloads (and caches) and runs the tests against the
 oldest compatible version and the latest release version of each browser.
