@@ -165,21 +165,26 @@ function getSelectorForBlockedElement(element)
 function hideElement(element, properties)
 {
   let {style} = element;
-  let newProperties = [];
+  let actualProperties = [];
+
   if (element.localName == "frame")
-    properties = [["visibility", "hidden"]];
+    actualProperties = properties = [["visibility", "hidden"]];
   else if (!properties)
-    properties = [["display", "none"]];
+    actualProperties = properties = [["display", "none"]];
 
   for (let [key, value] of properties)
-  {
     style.setProperty(key, value, "important");
-    newProperties.push([key, style.getPropertyValue(key)]);
+
+  if (!actualProperties)
+  {
+    actualProperties = [];
+    for (let [key] of properties)
+      actualProperties.push([key, style.getPropertyValue(key)]);
   }
 
   new MutationObserver(() =>
   {
-    for (let [key, value] of newProperties)
+    for (let [key, value] of actualProperties)
     {
       if (style.getPropertyValue(key) != value ||
           style.getPropertyPriority(key) != "important")
