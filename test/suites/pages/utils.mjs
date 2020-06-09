@@ -24,7 +24,7 @@ const SCREENSHOT_DIR = path.join("test", "screenshots");
 // 0.02558039532430121 - all Blocking page tests failed
 // 0.00426475605595359 - one Blocking page test failed
 // 0.00000107250107250 - one pixel difference
-const SCREENSHOT_DIFF = 0.00001;
+const SCREENSHOT_DIFF = 0.0005;
 
 async function takeScreenshot(driver)
 {
