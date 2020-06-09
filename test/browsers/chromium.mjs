@@ -18,15 +18,12 @@
 import webdriver from "selenium-webdriver";
 import chrome from "selenium-webdriver/chrome.js";
 import got from "got";
-import chromiumDownload
-  from "../../adblockpluscore/test/runners/chromium_download.js";
 
 // We need to require the chromedriver,
 // otherwise on Windows the chromedriver path is not added to process.env.PATH.
 import "chromedriver";
 
 export let platform = "chrome";
-export let ensureBrowser = chromiumDownload.ensureChromium;
 
 // The Chromium version is a build number, quite obscure.
 // Chromium 63.0.3239.x is 508578
@@ -34,6 +31,12 @@ export let ensureBrowser = chromiumDownload.ensureChromium;
 // We currently want Chromiun 63, as we still support it and that's the
 // loweset version that supports WebDriver.
 export let oldestCompatibleVersion = 508578;
+
+export async function ensureBrowser(build)
+{
+  let module = "../../adblockpluscore/test/runners/chromium_download.js";
+  return await (await import(module)).default.ensureChromium(build);
+}
 
 export function getDriver(browserBinary, devenvPath)
 {

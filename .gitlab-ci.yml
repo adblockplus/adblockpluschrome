@@ -151,6 +151,23 @@ docs:
   variables:
     EXTENSION_FILE: "adblockplusfirefox-*.xpi"
 
+.test_template_edge:
+  extends: ".test_template_chromium"
+  before_script:
+    - "Expand-Archive -Path $EXTENSION_FILE -DestinationPath devenv.chrome"
+    - "Invoke-WebRequest
+         -Uri \"http://dl.delivery.mp.microsoft.com/filestreamingservice/files/\
+           07367ab9-ceee-4409-a22f-c50d77a8ae06/MicrosoftEdgeEnterpriseX64.msi\"
+         -OutFile \"MicrosoftEdgeEnterpriseX64.msi\""
+    - "msiexec /i MicrosoftEdgeEnterpriseX64.msi /norestart /qn"
+    - "npm install"
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
+  # https://gitlab.com/gitlab-org/gitlab-runner/-/issues/25980
+  cache: null
+
 lint:yaml:
   image: "registry.gitlab.com/eyeo/docker/yamllint:1.14.0-configured"
   stage: "test"
@@ -193,6 +210,11 @@ test:chromium:latest:
   extends: ".test_template_chromium"
   script:
     - "xvfb-run -a npm run test-only -- -g 'Chromium \\(latest\\)'"
+
+test:edge:
+  extends: ".test_template_edge"
+  script:
+    - "npm run test-only -- -g 'Edge'"
 
 ###############################################################################
 #                                Scheduled jobs                               #

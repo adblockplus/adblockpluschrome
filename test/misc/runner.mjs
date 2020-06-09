@@ -39,6 +39,13 @@ function getBrowserBinaries(module, browser)
       return [{getPath: () => module.ensureBrowser(spec.substr(9))}];
   }
 
+  if (!module.ensureBrowser)
+  {
+    if (module.isBrowserInstalled())
+      return [{getPath: () => Promise.resolve(null)}];
+    return [];
+  }
+
   return [
     {
       version: "oldest",
@@ -181,6 +188,9 @@ if (typeof run == "undefined")
         {
           if (this.driver)
             await this.driver.quit();
+
+          if (module.shutdown)
+            module.shutdown();
         });
       });
     }

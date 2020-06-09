@@ -22,6 +22,9 @@ import {loadModules} from "../misc/utils.mjs";
 {
   for (let [module] of await loadModules(path.join("test", "browsers")))
   {
+    if (!module.ensureBrowser)
+      continue;
+
     for (let version of [module.oldestCompatibleVersion,
                          module.getLatestVersion()])
     {

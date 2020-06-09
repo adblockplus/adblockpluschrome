@@ -19,8 +19,6 @@ import webdriver from "selenium-webdriver";
 import firefox from "selenium-webdriver/firefox.js";
 import command from "selenium-webdriver/lib/command.js";
 import got from "got";
-import firefoxDownload
-  from "../../adblockpluscore/test/runners/firefox_download.js";
 
 // We need to require the geckodriver,
 // otherwise on Windows the geckodriver path is not added to process.env.PATH.
@@ -28,7 +26,12 @@ import "geckodriver";
 
 export let platform = "gecko";
 export let oldestCompatibleVersion = "57.0";
-export let ensureBrowser = firefoxDownload.ensureFirefox;
+
+export async function ensureBrowser(version)
+{
+  let module = "../../adblockpluscore/test/runners/firefox_download.js";
+  return await (await import(module)).default.ensureFirefox(version);
+}
 
 export function getDriver(browserBinary, devenvPath, insecure)
 {

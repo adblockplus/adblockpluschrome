@@ -24,8 +24,9 @@
     "jimp": "^0.10.2",
     "jsdoc": "^3.6.3",
     "mocha": "^7.1.1",
+    "msedgedriver": "^79.0.4",
     "ncp": "^2.0.0",
-    "selenium-webdriver": "^4.0.0-alpha",
+    "selenium-webdriver": "^4.0.0-alpha.7",
     "sign-addon": "^0.3.1"
   },
   "scripts": {

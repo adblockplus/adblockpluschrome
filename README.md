@@ -56,7 +56,7 @@ development environment. For that run one of the following commands:
     ./build.py devenv -t gecko
 
 This will create a _devenv.*_ directory in the repository. You can load the
-directory as an unpacked extension under _chrome://extensions_ in Chrome
+directory as an unpacked extension under _chrome://extensions_ in Chrome or Edge
 and under _about:debugging_ in Firefox. After making changes to the source code
 re-run the command to update the development environment, and the extension
 should reload automatically after a few seconds.
@@ -106,7 +106,7 @@ Start the testing process for all browsers:
 
 Start the testing process in one browser only:
 
-    npm test -- -g <Firefox|Chromium>
+    npm test -- -g <Firefox|Chromium|Edge>
 
 In order to run other test subsets, please check `-g` option on
 [Mocha's documentation](https://mochajs.org/#-grep-regexp-g-regexp).
@@ -129,6 +129,9 @@ In order to run those tests on a different version of the test pages, set
 the _TEST_PAGES_URL_ environment variable. Additionally, in order to accept
 insecure `https` certificates set the _TEST_PAGES_INSECURE_ environment variable
 to `"true"`.
+
+[Edge Chromium](https://www.microsoft.com/en-us/edge/business/download) needs to
+be installed before running the Edge tests, using `79 stable` version.
 
 Linting
 -------

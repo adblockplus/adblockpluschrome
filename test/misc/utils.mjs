@@ -18,6 +18,7 @@
 import assert from "assert";
 import fs from "fs";
 import path from "path";
+import url from "url";
 
 export async function checkLastError(driver, handle)
 {
@@ -54,6 +55,7 @@ export async function loadModules(dirname)
     let basename = path.parse(dirent.name).name;
     if (dirent.isDirectory())
       filename = path.join(filename, "index.mjs");
-    return [await import(filename), basename];
+    // file:// URLs are used here because they are portable in Windows
+    return [await import(url.pathToFileURL(filename)), basename];
   }));
 }
