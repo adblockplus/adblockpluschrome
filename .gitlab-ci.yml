@@ -31,6 +31,14 @@ variables:
   npm_config_prefer_offline: "true"
   npm_config_unsafe_perm: "true"
 
+foo:
+  stage: "prepare"
+  script:
+    - "git rev-list --count origin/next origin/master"
+  variables:
+    XGIT_DEPTH: "0"
+    XGIT_FETCH_EXTRA_FLAGS: "master next"
+
 .dependencies:
   script: &dependencies
     - "mkdir -p .git/info"
