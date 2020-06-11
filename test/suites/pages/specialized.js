@@ -28,12 +28,14 @@ function clickButtonOrLink(element)
 
 async function checkRequestBlocked(driver, resource)
 {
+  let removeTimestamp = s => s.replace(/\?.\d*/, "");
+
   await driver.wait(async() =>
   {
     let logs = await driver.manage().logs().get("browser");
     let expected =
       `${resource} - Failed to load resource: net::ERR_BLOCKED_BY_CLIENT`;
-    return logs.some(entry => entry.message.includes(expected));
+    return logs.some(l => removeTimestamp(l.message).includes(expected));
   }, 2000, "request wasn't blocked");
 }
 
