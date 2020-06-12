@@ -20,6 +20,7 @@ import webdriver from "selenium-webdriver";
 import {checkLastError, runWithHandle} from "../../misc/utils.mjs";
 import specializedTests from "./specialized.mjs";
 import defineSubscribeTest from "./subscribe.mjs";
+import defineUninstallTest from "./uninstall.mjs";
 import {getExpectedScreenshot, runFirstTest,
         getPage, isExcluded, runGenericTests} from "./utils.mjs";
 
@@ -116,6 +117,8 @@ export default () =>
           /Screenshots don't match/
         );
       });
+
+      defineUninstallTest();
     });
   });
 };
