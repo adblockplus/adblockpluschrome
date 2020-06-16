@@ -86,7 +86,7 @@ prepare-dependencies:
   extends: ".default_template"
   stage: "build"
   script:
-    - "python build.py build -t $PLATFORM"
+    - "python build.py build -t $PLATFORM -b `npm run -s generate-buildnum`"
     - "python build.py devenv -t $PLATFORM"
 
 build:chrome:
