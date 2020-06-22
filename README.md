@@ -22,7 +22,7 @@ Building
 - [Python 2.7](https://www.python.org)
   - [The Jinja2 module](http://jinja.pocoo.org/docs) (>= 2.8)
   - For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
-- [Node.js](https://nodejs.org/) (>= 10.12.0)
+- [Node.js](https://nodejs.org/) (>= 10.12.0, >= 12 on Windows)
 
 ### Building on Windows
 
@@ -113,8 +113,9 @@ In order to run other test subsets, please check `-g` option on
 
 By default it downloads (and caches) and runs the tests against the
 oldest compatible version and the latest release version of each browser.
-In order to run the tests against a different version set the CHROMIUM_BINARY
-or FIREFOX_BINARY environment variables. Following values are accepted:
+In order to run the tests against a different version set the `CHROMIUM_BINARY`,
+`FIREFOX_BINARY` or `EDGE_BINARY` environment variables. Following values are
+accepted:
 
 * `installed`
   * Uses the version installed on the system.
@@ -123,6 +124,7 @@ or FIREFOX_BINARY environment variables. Following values are accepted:
 * `download:<version>`
   * Downloads the given version (for Firefox the version must be in the
     form `<major>.<minor>`, for Chromium this must be the revision number).
+    This option is not available for Edge.
 
 Filter tests subset uses [ABP Test pages](https://testpages.adblockplus.org/).
 In order to run those tests on a different version of the test pages, set
@@ -131,7 +133,7 @@ insecure `https` certificates set the _TEST_PAGES_INSECURE_ environment variable
 to `"true"`.
 
 [Edge Chromium](https://www.microsoft.com/en-us/edge/business/download) needs to
-be installed before running the Edge tests, using `79 stable` version.
+be installed before running the Edge tests.
 
 Linting
 -------

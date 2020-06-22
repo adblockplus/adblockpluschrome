@@ -18,34 +18,67 @@
 import webdriver from "selenium-webdriver";
 import msedgedriver from "msedgedriver";
 import fs from "fs";
+import path from "path";
+import {exec, execFile} from "child_process";
+import {promisify} from "util";
 
 export let platform = "chrome";
+
+const MACOS_BINARY_PATH = "/Applications/Microsoft Edge.app" +
+                          "/Contents/MacOS/Microsoft Edge";
 
 export function isBrowserInstalled()
 {
   if (process.platform == "win32")
     return true;
-  else if (process.platform == "darwin")
-    return fs.existsSync("/Applications/Microsoft Edge.app/");
-
+  if (process.platform == "darwin")
+    return fs.existsSync(MACOS_BINARY_PATH);
   return false;
 }
 
-export function getDriver(browserBinary, devenvPath)
+async function ensureDriver(browserBinary)
 {
-  msedgedriver.start(["--silent"]); // Starts on localhost:9515
+  let version;
+  if (process.platform == "win32")
+  {
+    let arg = browserBinary ?
+      `'${browserBinary.split("'").join("''")}'` :
+      "${Env:ProgramFiles(x86)}\\Microsoft\\Edge\\Application\\msedge.exe";
+    let command = `(Get-ItemProperty ${arg}).VersionInfo.ProductVersion`;
+    let {stdout} = await promisify(exec)(command, {shell: "powershell.exe"});
+    version = stdout.trim();
+  }
+  else
+  {
+    let binary = browserBinary || MACOS_BINARY_PATH;
+    let {stdout} = await promisify(execFile)(binary, ["--version"]);
+    version = stdout.trim().replace(/.*\s/, "");
+  }
+
+  await promisify(execFile)(
+    process.execPath,
+    [path.join("node_modules", "msedgedriver", "install.js")],
+    {env: {...process.env, EDGECHROMIUMDRIVER_VERSION: version,
+           npm_config_edgechromiumdriver_skip_download: false}}
+  );
+}
+
+export async function getDriver(browserBinary, devenvPath)
+{
+  await ensureDriver(browserBinary);
+  await msedgedriver.start(["--silent"], true); // Starts on localhost:9515
+
+  let options = {args: ["--no-sandbox", `load-extension=${devenvPath}`]};
+  if (browserBinary)
+    options.binary = browserBinary;
 
   return new webdriver.Builder()
     .forBrowser("MicrosoftEdge")
-    .withCapabilities(
-      {
-        "browserName": "MicrosoftEdge",
-        "ms:edgeChromium": true,
-        "ms:edgeOptions":
-        {
-          args: ["--no-sandbox", `load-extension=${devenvPath}`]
-        }
-      })
+    .withCapabilities({
+      "browserName": "MicrosoftEdge",
+      "ms:edgeChromium": true,
+      "ms:edgeOptions": options
+    })
     .usingServer("http://localhost:9515")
     .build();
 }

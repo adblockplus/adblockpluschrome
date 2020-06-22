@@ -36,7 +36,11 @@ function getBrowserBinaries(module, browser)
     if (spec.startsWith("path:"))
       return [{getPath: () => Promise.resolve(spec.substr(5))}];
     if (spec.startsWith("download:"))
-      return [{getPath: () => module.ensureBrowser(spec.substr(9))}];
+    {
+      if (module.ensureBrowser)
+        return [{getPath: () => module.ensureBrowser(spec.substr(9))}];
+      console.warn(`WARNING: Downloading ${browser} is not supported`);
+    }
   }
 
   if (!module.ensureBrowser)
