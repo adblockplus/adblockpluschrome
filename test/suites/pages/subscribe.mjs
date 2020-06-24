@@ -18,7 +18,7 @@
 import assert from "assert";
 import webdriver from "selenium-webdriver";
 import {checkLastError} from "../../misc/utils.mjs";
-import {runFirstTest} from "./utils.mjs";
+import {runFirstTest, takeScreenshot, writeScreenshotFile} from "./utils.mjs";
 
 const {By, until} = webdriver;
 
@@ -73,9 +73,20 @@ export default () =>
   it("subscribes to a link", async function()
   {
     let {testPagesURL} = this.test.parent.parent;
-    await clickSubscribe(this.driver, testPagesURL);
-    await confirmSubscribe(this.driver);
-    await checkSubscriptionAdded(this.driver, testPagesURL);
+    try
+    {
+      await clickSubscribe(this.driver, testPagesURL);
+      await confirmSubscribe(this.driver);
+      await checkSubscriptionAdded(this.driver, testPagesURL);
+    }
+    catch (e)
+    {
+      let screenshot = await takeScreenshot(this.driver);
+      let scrPath = await writeScreenshotFile(screenshot,
+                                              this.test.parent.parent.title,
+                                              this.test.title, "actual");
+      throw new Error(`${e.message}\n${testPagesURL}\n(see ${scrPath})`);
+    }
     await runFirstTest(this.driver, this.test.parent.parent, this.test.title);
     await checkLastError(this.driver, this.extensionHandle);
   });

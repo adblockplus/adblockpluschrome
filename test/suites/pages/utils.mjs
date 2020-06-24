@@ -26,7 +26,7 @@ const SCREENSHOT_DIR = path.join("test", "screenshots");
 // 0.00000107250107250 - one pixel difference
 const SCREENSHOT_DIFF = 0.0005;
 
-async function takeScreenshot(driver)
+export async function takeScreenshot(driver)
 {
   // On macOS scrollbars appear and disappear overlapping
   // the content as scrolling occurs. So we have to hide
@@ -96,6 +96,15 @@ export async function getExpectedScreenshot(driver, url)
   return await takeScreenshot(driver);
 }
 
+export async function writeScreenshotFile(image, browser, testTitle, suffix)
+{
+  let title = `${browser}_${testTitle}`;
+  let prefix = title.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+  let screenshotPath = path.join(SCREENSHOT_DIR, `${prefix}_${suffix}.png`);
+  await image.write(screenshotPath);
+  return screenshotPath;
+}
+
 export async function runGenericTests(driver, expectedScreenshot,
                                       browser, testTitle, url,
                                       writeScreenshots = true)
@@ -132,16 +141,12 @@ export async function runGenericTests(driver, expectedScreenshot,
     if (!writeScreenshots)
       throw e;
 
-    let title = `${browser}_${testTitle}`;
-    let prefix = title.toLowerCase().replace(/[^a-z0-9]+/g, "_");
-
+    let paths = [];
     for (let [suffix, image] of [["actual", actualScreenshot],
                                  ["expected", expectedScreenshot]])
-      await image.write(path.join(SCREENSHOT_DIR, `${prefix}_${suffix}.png`));
+      paths.push(await writeScreenshotFile(image, browser, testTitle, suffix));
 
-    throw new Error(`${e.message}
-       ${url}
-       (see ${path.join(SCREENSHOT_DIR, prefix)}_*.png)`);
+    throw new Error(`${e.message}\n${url}\n(see ${paths})`);
   }
 }
 
