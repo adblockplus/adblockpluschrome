@@ -155,11 +155,7 @@ docs:
   extends: ".test_template_chromium"
   before_script:
     - "Expand-Archive -Path $EXTENSION_FILE -DestinationPath devenv.chrome"
-    - "Invoke-WebRequest
-         -Uri \"http://dl.delivery.mp.microsoft.com/filestreamingservice/files/\
-           07367ab9-ceee-4409-a22f-c50d77a8ae06/MicrosoftEdgeEnterpriseX64.msi\"
-         -OutFile \"MicrosoftEdgeEnterpriseX64.msi\""
-    - "msiexec /i MicrosoftEdgeEnterpriseX64.msi /norestart /qn"
+    - "choco install -y microsoft-edge --version=79.0.309.71"
     - "npm install"
   tags:
     - shared-windows
