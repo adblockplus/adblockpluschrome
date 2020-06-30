@@ -36,7 +36,7 @@ async function confirmSubscribe(driver)
 {
   await driver.wait(until.ableToSwitchToFrame(0), 4000);
   let dialog = await driver.wait(
-    until.elementLocated(By.id("dialog-content-predefined")), 3000
+    until.elementLocated(By.id("dialog-content-predefined")), 4000
   );
   await driver.wait(async() =>
   {
@@ -45,7 +45,7 @@ async function confirmSubscribe(driver)
       dialog.findElement(By.css(".title span")).getText()
     ]);
     return displayed && title == "ABP Testcase Subscription";
-  }, 2000, "dialog shown");
+  }, 3000, "dialog shown");
   await dialog.findElement(By.css(".default-focus")).click();
 }
 
