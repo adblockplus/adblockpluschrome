@@ -63,7 +63,7 @@ async function ensureDriver(browserBinary)
   );
 }
 
-export async function getDriver(browserBinary, devenvPath)
+export async function getDriver(browserBinary, devenvPath, insecure)
 {
   await ensureDriver(browserBinary);
   await msedgedriver.start(["--silent"], true); // Starts on localhost:9515
@@ -77,7 +77,8 @@ export async function getDriver(browserBinary, devenvPath)
     .withCapabilities({
       "browserName": "MicrosoftEdge",
       "ms:edgeChromium": true,
-      "ms:edgeOptions": options
+      "ms:edgeOptions": options,
+      "acceptInsecureCerts": insecure
     })
     .usingServer("http://localhost:9515")
     .build();

@@ -80,20 +80,27 @@ async function getDriver(binary, devenvCreated, module)
 
 async function waitForExtension(driver)
 {
-  let handle = await driver.wait(
-    async() => (await driver.getAllWindowHandles())[1],
-    5000, "extension page didn't open"
-  );
-
+  let handles;
   let origin;
-  await driver.switchTo().window(handle);
+  let extensionUrl;
   await driver.wait(async() =>
   {
-    origin = await driver.executeScript("return location.origin;");
-    return origin != "null";
-  }, 1000, "unknown extension page origin");
+    handles = await driver.getAllWindowHandles();
+    for (let handle of handles)
+    {
+      await driver.switchTo().window(handle);
+      [origin, extensionUrl] =
+        await driver.executeScript("return [location.origin, location.href];");
+      if (origin != "null" && extensionUrl.endsWith("first-run.html"))
+        return true;
+    }
+    return false;
+  }, 5000, "unknown extension page origin");
 
-  return [handle, origin];
+  await driver.switchTo().window(handles[1]);
+  await driver.navigate().to(extensionUrl);
+
+  return [handles[1], origin];
 }
 
 async function getPageTests()
