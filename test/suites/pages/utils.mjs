@@ -21,10 +21,10 @@ import specializedTests from "./specialized.mjs";
 
 const SCREENSHOT_DIR = path.join("test", "screenshots");
 // diff.percent examples on screenshots:
-// 0.02558039532430121 - all Blocking page tests failed
-// 0.00426475605595359 - one Blocking page test failed
-// 0.00000107250107250 - one pixel difference
-const SCREENSHOT_DIFF = 0.0005;
+// 0.025580 - all Blocking page tests failed
+// 0.004264 - one Blocking page test failed
+// 0.000001 - one pixel difference
+const SCREENSHOT_DIFF = 0.003;
 
 export async function takeScreenshot(driver)
 {
