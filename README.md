@@ -22,7 +22,7 @@ Building
 - [Python 2.7](https://www.python.org)
   - [The Jinja2 module](http://jinja.pocoo.org/docs) (>= 2.8)
   - For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
-- [Node.js](https://nodejs.org/) (>= 10.12.0, >= 12 on Windows)
+- [Node.js](https://nodejs.org/) (>= 10.17.0, >= 12 on Windows)
 
 ### Building on Windows
 
@@ -69,6 +69,58 @@ Alternatively dependency management can be disabled completely by setting the
 _SKIP_DEPENDENCY_UPDATES_ environment variable, for example:
 
     SKIP_DEPENDENCY_UPDATES=true ./build.py devenv -t chrome
+
+Alternative building
+--------------------
+
+An alternative build system that uses Node.js and [Gulp](https://gulpjs.com)
+instead of Python is available.
+For now it's meant to be used in parallel with the current build system.
+
+### Usage
+
+To build with Node, first, make sure to call the ensure_dependencies script:
+
+    ./ensure_dependencies.py
+
+And install the npm packages with:
+
+    npm install
+
+Building is available for Chrome and Firefox:
+
+    npx gulp devenv -t {chrome|gecko} --experimental-modules
+
+By default, these commands create an unpacked development build.
+If that's not what you want, use this instead:
+
+    npx gulp build -t {chrome|gecko} -c {development|release} --experimental-modules
+
+### Notes
+
+- If you have the `gulp-cli` npm package installed globally,
+you don't need to use `npx` for the above commands,
+just make sure that the version is 2.3.0 or above.
+- On Windows, you still need to have WSL installed and run the commands
+from within Bash.
+
+### Customization
+If you wish to create an extension based on our code and use the same
+build tools, we offer some customization options.
+
+This can be done by:
+
+ - Specifying a path to a new configuration file relative to `gulpfile.mjs`
+(it should match the structure found in `build/config/`).
+    
+        npx gulp <devenv|build> -t {chrome|gecko} --config "pathToConfig.mjs" --experimental-modules
+
+ - Specifying a path to a new `manifest.json` file relative to `gulpfile.mjs`.
+You should check `build/manifest.json` and `build/tasks/manifest.mjs` to see
+how we modify it.
+
+        npx gulp <devenv|build> -t {chrome|gecko} -m "pathToManifest.json" --experimental-modules
+
 
 Running tests
 -------------

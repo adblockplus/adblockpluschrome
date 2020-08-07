@@ -16,13 +16,19 @@
  */
 
 import argparse from "argparse";
-import {exec} from "child_process";
 import {pathToFileURL} from "url";
+import {exec} from "child_process";
 import {promisify} from "util";
 
-const execPromise = promisify(exec);
-
 const BUILDNUM_OFFSET = 10000;
+
+let execPromise = promisify(exec);
+
+export async function getRevision()
+{
+  let {stdout} = await execPromise("git rev-parse HEAD");
+  return stdout;
+}
 
 export async function getBuildnum(revision = "HEAD")
 {
