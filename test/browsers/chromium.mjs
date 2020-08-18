@@ -34,8 +34,8 @@ export let oldestCompatibleVersion = 508578;
 
 export async function ensureBrowser(build)
 {
-  let module = "../../adblockpluscore/test/runners/chromium_download.js";
-  return await (await import(module)).default.ensureChromium(build);
+  let module = "../../adblockpluscore/test/runners/chromium_download.mjs";
+  return await (await import(module)).ensureChromium(build);
 }
 
 export function getDriver(browserBinary, devenvPath)

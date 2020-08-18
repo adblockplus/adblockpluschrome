@@ -29,8 +29,8 @@ export let oldestCompatibleVersion = "57.0";
 
 export async function ensureBrowser(version)
 {
-  let module = "../../adblockpluscore/test/runners/firefox_download.js";
-  return await (await import(module)).default.ensureFirefox(version);
+  let module = "../../adblockpluscore/test/runners/firefox_download.mjs";
+  return await (await import(module)).ensureFirefox(version);
 }
 
 export function getDriver(browserBinary, devenvPath, insecure)
