@@ -17,18 +17,17 @@
 
 "use strict";
 
-{
-  let {chooseFilterSubscriptions} = require("../../lib/subscriptionInit");
+let {chooseFilterSubscriptions} = require("../../lib/subscriptionInit");
 
-  QUnit.module("Subscription", {
-    setup()
-    {
-      browser.i18n.getUILanguage = () => "en";
-    }
+QUnit.module("Subscription", hooks =>
+{
+  hooks.before(assert =>
+  {
+    browser.i18n.getUILanguage = () => "en";
+    assert.ok(true);
   });
 
-
-  test("Choosing filter subscriptions", assert =>
+  QUnit.test("Choosing filter subscriptions", assert =>
   {
     let subs = chooseFilterSubscriptions(require("../subscriptions.json"));
     assert.ok(subs);
@@ -41,4 +40,4 @@
     assert.deepEqual(subs.get("ads").languages, ["en"]);
     assert.equal(subs.get("ads").type, "ads");
   });
-}
+});

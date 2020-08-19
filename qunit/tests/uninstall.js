@@ -17,26 +17,27 @@
 
 "use strict";
 
+const {analytics} = require("../../adblockpluscore/lib/analytics");
+const {filterStorage} = require("../../adblockpluscore/lib/filterStorage");
+const {Prefs} = require("../../lib/prefs");
+const {setUninstallURL} = require("../../lib/uninstall");
+
+const realSetUninstallURL = browser.runtime.setUninstallURL;
+
+let uninstallURL;
+let urlParams = () => new URL(uninstallURL).search.substr(1).split("&");
+
+QUnit.module("Uninstall URL", hooks =>
 {
-  const {analytics} = require("../../adblockpluscore/lib/analytics");
-  const {filterStorage} = require("../../adblockpluscore/lib/filterStorage");
-  const {Prefs} = require("../../lib/prefs");
-  const {setUninstallURL} = require("../../lib/uninstall");
-
-  const realSetUninstallURL = browser.runtime.setUninstallURL;
-  let uninstallURL;
-
-  let urlParams = () => new URL(uninstallURL).search.substr(1).split("&");
-
-  QUnit.module("Uninstall URL", {
-    beforeEach()
-    {
-      browser.runtime.setUninstallURL = url => uninstallURL = url;
-    },
-    afterEach()
-    {
-      browser.runtime.setUninstalLURL = realSetUninstallURL;
-    }
+  hooks.beforeEach(assert =>
+  {
+    browser.runtime.setUninstallURL = url => uninstallURL = url;
+    assert.ok(true);
+  });
+  hooks.afterEach(assert =>
+  {
+    browser.runtime.setUninstalLURL = realSetUninstallURL;
+    assert.ok(true);
   });
 
   QUnit.test("parameters in uninstall URL", assert =>
@@ -131,4 +132,4 @@
       "subscription parameter 's' has the expected value '2'" + urlParams()
     );
   });
-}
+});

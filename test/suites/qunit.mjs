@@ -29,7 +29,7 @@ export default () =>
     let elem = await this.driver.wait(
       until.elementLocated(By.id("qunit-testresult"))
     );
-    await this.driver.wait(until.elementTextContains(elem, "Tests completed"));
+    await this.driver.wait(until.elementTextContains(elem, "tests completed"));
 
     let failures = await this.driver.findElements(
       By.css("#qunit-tests > .fail")
