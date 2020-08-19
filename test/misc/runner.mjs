@@ -78,6 +78,15 @@ async function getDriver(binary, devenvCreated, module)
   );
 }
 
+async function logBrowserVersion(driver)
+{
+  let capabilities = await driver.getCapabilities();
+  let browserVersion =
+    capabilities.getBrowserVersion() || capabilities.get("version");
+  // eslint-disable-next-line no-console
+  console.log(`Browser: ${capabilities.getBrowserName()} ${browserVersion}`);
+}
+
 async function waitForExtension(driver)
 {
   let handles;
@@ -162,6 +171,7 @@ if (typeof run == "undefined")
             devenvCreated = createDevenv(module.platform);
 
           this.driver = await getDriver(binary, devenvCreated, module);
+          await logBrowserVersion(this.driver);
           [this.extensionHandle,
            this.extensionOrigin] = await waitForExtension(this.driver);
         });
