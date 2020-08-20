@@ -113,7 +113,7 @@ export default {
         src: "adblockplusui/skin/icons/toolbar/notification-16.png"
       },
       {
-        dest: "icons/abp-16-whitelisted.png",
+        dest: "icons/abp-16-allowlisted.png",
         src: "adblockplusui/skin/icons/toolbar/disabled-16.png"
       },
       {
@@ -125,7 +125,7 @@ export default {
         src: "adblockplusui/skin/icons/toolbar/notification-20.png"
       },
       {
-        dest: "icons/abp-20-whitelisted.png",
+        dest: "icons/abp-20-allowlisted.png",
         src: "adblockplusui/skin/icons/toolbar/disabled-20.png"
       },
       {
@@ -137,7 +137,7 @@ export default {
         src: "adblockplusui/skin/icons/toolbar/notification-32.png"
       },
       {
-        dest: "icons/abp-32-whitelisted.png",
+        dest: "icons/abp-32-allowlisted.png",
         src: "adblockplusui/skin/icons/toolbar/disabled-32.png"
       },
       {
@@ -149,7 +149,7 @@ export default {
         src: "adblockplusui/skin/icons/toolbar/notification-40.png"
       },
       {
-        dest: "icons/abp-40-whitelisted.png",
+        dest: "icons/abp-40-allowlisted.png",
         src: "adblockplusui/skin/icons/toolbar/disabled-40.png"
       },
       {
