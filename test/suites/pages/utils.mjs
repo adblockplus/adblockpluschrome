@@ -131,8 +131,8 @@ export async function runGenericTests(driver, expectedScreenshot,
     {
       // Sometimes on Firefox there is a delay until the added
       // filters become effective. So if a test case fails,
-      // we reload the page and try once again.
-      await driver.navigate().refresh();
+      // we load the same page and try once again.
+      await driver.navigate().to(url);
       await compareScreenshots();
     }
   }
