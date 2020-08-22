@@ -76,7 +76,7 @@ async function checkPopup(element, extensionHandle)
   let nHandles = await getNumberOfHandles(driver);
   let token = Math.floor(Math.random() * 1e8);
   await runWithHandle(driver, extensionHandle, () => driver.executeScript(`
-    browser.webNavigation.onCreatedNavigationTarget.addListener(() =>
+    browser.tabs.onCreated.addListener(() =>
     {
       self.done${token} = true;
       if (typeof callback${token} == "function")
