@@ -17,27 +17,28 @@
 
 import argparse from "argparse";
 import {pathToFileURL} from "url";
-import {exec} from "child_process";
+import {execFile} from "child_process";
 import {promisify} from "util";
 
 const BUILDNUM_OFFSET = 10000;
 
-let execPromise = promisify(exec);
-
 export async function getRevision()
 {
-  let {stdout} = await execPromise("git rev-parse HEAD");
+  let {stdout} = await promisify(execFile)("git", ["rev-parse", "HEAD"]);
   return stdout;
 }
 
 export async function getBuildnum(revision = "HEAD")
 {
-  let until = await execPromise(`git log --pretty='%ct' -n1 ${revision}`);
+  let until = (await promisify(execFile)("git", ["log", "--pretty=%ct", "-n1",
+                                                 revision])).stdout.trim();
 
-  return BUILDNUM_OFFSET + parseInt((await execPromise(
-    `git rev-list --count --until=${until.stdout.trim()} ` +
-    `origin/next origin/master ${revision}`
-  )).stdout, 10);
+  return BUILDNUM_OFFSET +
+         parseInt((await promisify(execFile)("git", ["rev-list", "--count",
+                                                     "--until", until,
+                                                     "origin/next",
+                                                     "origin/master",
+                                                     revision])).stdout, 10);
 }
 
 if (import.meta.url == pathToFileURL(process.argv[1]))
