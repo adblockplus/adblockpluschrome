@@ -31,7 +31,7 @@ async function getMTime(file)
 
 function createBuild()
 {
-  return (promisify(exec))("npm run --prefix adblockplusui/ dist");
+  return (promisify(exec))("bash -c \"npm run --prefix adblockplusui/ dist\"");
 }
 
 async function mustBuildUI(lastUIBuildTime)

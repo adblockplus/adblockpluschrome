@@ -86,8 +86,8 @@ prepare-dependencies:
   extends: ".default_template"
   stage: "build"
   script:
-    - "python build.py build -t $PLATFORM -b `npm run -s generate-buildnum`"
-    - "python build.py devenv -t $PLATFORM"
+    - "npx gulp build -t $PLATFORM -c development --experimental-modules"
+    - "npx gulp devenv -t $PLATFORM --experimental-modules"
 
 build:chrome:
   extends: ".build"
