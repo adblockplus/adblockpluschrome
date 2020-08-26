@@ -75,7 +75,7 @@ Alternative building
 
 An alternative build system that uses Node.js and [Gulp](https://gulpjs.com)
 instead of Python is available.
-For now it's meant to be used in parallel with the current build system.
+It's currently used on the CI pipeline and on local test execution.
 
 ### Usage
 

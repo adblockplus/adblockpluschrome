@@ -65,7 +65,7 @@ function getBrowserBinaries(module, browser)
 async function createDevenv(platform)
 {
   if (process.env.SKIP_BUILD != "true")
-    await promisify(exec)(`bash -c "python build.py devenv -t ${platform}"`);
+    await promisify(exec)(`gulp devenv -t ${platform} --experimental-modules`);
 }
 
 async function getDriver(binary, devenvCreated, module)
