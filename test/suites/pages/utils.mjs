@@ -128,12 +128,22 @@ export async function runGenericTests(driver, expectedScreenshot,
     {
       await compareScreenshots();
     }
-    catch (e)
+    catch (e2)
     {
-      // Sometimes on Firefox there is a delay until the added
-      // filters become effective. So if a test case fails,
-      // we load the same page and try once again.
-      await driver.navigate().to(url);
+      // In newer Firefox versions (79+) CSS might be cached:
+      // https://bugzil.la/1657575.
+      // We execute the test in a new tab to ensure the cache isn't used.
+      try
+      {
+        await driver.switchTo().newWindow("tab");
+        await driver.navigate().to(url);
+      }
+      catch (e3)
+      {
+        // Older browsers don't support `newWindow`, fall-back to just refresh.
+        await driver.navigate().refresh();
+      }
+
       await compareScreenshots();
     }
   }
