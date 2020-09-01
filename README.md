@@ -18,93 +18,56 @@ Building
 
 ### Requirements
 
-- [Mercurial](https://www.mercurial-scm.org/) or [Git](https://git-scm.com/) (whichever you used to clone this repository)
-- [Python 2.7](https://www.python.org)
-  - [The Jinja2 module](http://jinja.pocoo.org/docs) (>= 2.8)
-  - For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
+- [Mercurial](https://www.mercurial-scm.org/) or [Git](https://git-scm.com/) (whichever you used to clone this repository) [^1]
+- [Python 2.7](https://www.python.org) [^1]
 - [Node.js](https://nodejs.org/) (>= 10.17.0, >= 12 on Windows)
+
+[^1]: Only required when building from version control.
 
 ### Building on Windows
 
 On Windows, you need a [Linux environment running on WSL](https://docs.microsoft.com/windows/wsl/install-win10).
 Then install the above requirements and run the commands below from within Bash.
 
+### Updating the dependencies
+
+If building from version control, clone the external repositories:
+
+    ./ensure_dependencies.py
+
+Install the required npm packages:
+
+    npm install
+
+Rerun the above commands when the dependencies might have changed,
+e.g. after checking out a new revison.
+
 ### Building the extension
 
-Run one of the following commands in the project directory, depending on your
-target platform:
+Run the following command in the project directory:
 
-    ./build.py build -t chrome -k adblockpluschrome.pem
-    ./build.py build -t gecko
+    npx gulp build -t {chrome|gecko} [-c development] --experimental-modules
 
 This will create a build with a name in the form
-_adblockpluschrome-1.2.3.nnnn.crx_ or _adblockplusfirefox-1.2.3.nnnn.xpi_.
-
-Note that you don't need an existing signing key for Chrome, a new key
-will be created automatically if the file doesn't exist.
-
-The Firefox extension will be unsigned, and therefore is mostly only useful for
-upload to Mozilla Add-ons. You can also load it for testing purposes under
-_about:debugging_ or by disabling signature enforcement in Firefox Nightly.
+_adblockpluschrome-n.n.n.zip_ or _adblockplusfirefox-n.n.n.xpi_. These builds
+are unsigned. They can be submitted as-is to the extension stores, or if
+unpacked loaded in development mode for testing (same as devenv builds below).
 
 ### Development environment
 
 To simplify the process of testing your changes you can create an unpacked
-development environment. For that run one of the following commands:
-
-    ./build.py devenv -t chrome
-    ./build.py devenv -t gecko
-
-This will create a _devenv.*_ directory in the repository. You can load the
-directory as an unpacked extension under _chrome://extensions_ in Chrome or Edge
-and under _about:debugging_ in Firefox. After making changes to the source code
-re-run the command to update the development environment, and the extension
-should reload automatically after a few seconds.
-
-The build script calls the ensure_dependencies script automatically to manage
-the dependencies (see _dependencies_ file). Dependencies with local
-modifications won't be updated. Otherwise during development specifying a
-feature-branch's name for a dependency's revision is sometimes useful.
-Alternatively dependency management can be disabled completely by setting the
-_SKIP_DEPENDENCY_UPDATES_ environment variable, for example:
-
-    SKIP_DEPENDENCY_UPDATES=true ./build.py devenv -t chrome
-
-Alternative building
---------------------
-
-An alternative build system that uses Node.js and [Gulp](https://gulpjs.com)
-instead of Python is available.
-It's currently used on the CI pipeline and on local test execution.
-
-### Usage
-
-To build with Node, first, make sure to call the ensure_dependencies script:
-
-    ./ensure_dependencies.py
-
-And install the npm packages with:
-
-    npm install
-
-Building is available for Chrome and Firefox:
+development environment. For that run one of the following command:
 
     npx gulp devenv -t {chrome|gecko} --experimental-modules
 
-By default, these commands create an unpacked development build.
-If that's not what you want, use this instead:
-
-    npx gulp build -t {chrome|gecko} -c {development|release} --experimental-modules
-
-### Notes
-
-- If you have the `gulp-cli` npm package installed globally,
-you don't need to use `npx` for the above commands,
-just make sure that the version is 2.3.0 or above.
-- On Windows, you still need to have WSL installed and run the commands
-from within Bash.
+This will create a _devenv.*_ directory in the project directory. You can load
+the directory as an unpacked extension under _chrome://extensions_ in
+Chromium-based browsers, and under _about:debugging_ in Firefox. After making
+changes to the source code re-run the command to update the development
+environment, and the extension should reload automatically after a few seconds.
 
 ### Customization
+
 If you wish to create an extension based on our code and use the same
 build tools, we offer some customization options.
 
@@ -112,15 +75,14 @@ This can be done by:
 
  - Specifying a path to a new configuration file relative to `gulpfile.mjs`
 (it should match the structure found in `build/config/`).
-    
-        npx gulp <devenv|build> -t {chrome|gecko} --config "pathToConfig.mjs" --experimental-modules
+
+        npx gulp {build|devenv} -t {chrome|gecko} --config config.mjs --experimental-modules
 
  - Specifying a path to a new `manifest.json` file relative to `gulpfile.mjs`.
 You should check `build/manifest.json` and `build/tasks/manifest.mjs` to see
 how we modify it.
 
-        npx gulp <devenv|build> -t {chrome|gecko} -m "pathToManifest.json" --experimental-modules
-
+        npx gulp {build|devenv} -t {chrome|gecko} -m manifest.json --experimental-modules
 
 Running tests
 -------------
