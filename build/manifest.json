@@ -54,7 +54,6 @@
 
   "minimum_chrome_version": "52.0", 
   "minimum_opera_version": "39.0",
-  "minimum_edge_version": "41.16299.0.0",
 
   "name": "__MSG_name_releasebuild__",
   "short_name": "__MSG_name__",

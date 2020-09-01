@@ -28,10 +28,7 @@ function editManifest(data, version, channel, target)
   data.name = `__MSG_name_${channel == "development" ? "dev" : channel}build__`;
 
   if (target == "chrome")
-  {
     delete data.applications;
-    delete data.minimum_edge_version;
-  }
 
   if (target == "gecko")
   {
@@ -54,7 +51,6 @@ function editManifest(data, version, channel, target)
 
     delete data.minimum_chrome_version;
     delete data.minimum_opera_version;
-    delete data.minimum_edge_version;
     delete data.browser_action.default_popup;
 
     data.applications.gecko = gecko;
