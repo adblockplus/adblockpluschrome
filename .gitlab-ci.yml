@@ -220,12 +220,17 @@ test:edge:
   stage: "download"
   script:
     - "npm install"
-    - "npm run archive -- $EXTENSION_ID"
+    - "npm run archive -- $EXTENSION_ID -p $PLATFORM"
   only:
     - "schedules"
+
+.download:chrome:
+  extends: ".download"
   artifacts:
     paths:
       - "adblockpluschrome-*.crx"
+  variables:
+    PLATFORM: "chrome"
 
 .scp:
   stage: "scp"
@@ -237,12 +242,12 @@ test:edge:
     - "protected"
 
 download:release:
-  extends: ".download"
+  extends: ".download:chrome"
   variables:
     EXTENSION_ID: "cfhdojbkjhnklbpkdaibdccddilifddb"
 
 download:devbuild:
-  extends: ".download"
+  extends: ".download:chrome"
   variables:
     EXTENSION_ID: "ldcecbkkoecffmfljeihcmifjjdoepkn"
 
@@ -261,6 +266,18 @@ scp:devbuild:
       artifacts: true
   variables:
     DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome/"
+
+download:firefox:release:
+  extends: ".download"
+  artifacts:
+    paths:
+      - "adblockplusfirefox-*.xpi"
+  variables:
+    EXTENSION_ID: "adblock-plus"
+    PLATFORM: "gecko"
+  only:
+    - "master"
+  when: "manual"
 
 ###############################################################################
 #                                 Public pages                                #

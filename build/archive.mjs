@@ -20,31 +20,40 @@ import path from "path";
 import argparse from "argparse";
 import got from "got";
 
-const CWS_URL = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=32&acceptformat=crx3&x=id%3D";
-
-let parser = new argparse.ArgumentParser({
-  description: "Download an Adblock Plus build from the Chrome Web Store."
-});
-
-parser.addArgument(
-  "extension-id",
-  {help: "The id of the extension."}
-);
-
-let args = parser.parseArgs();
-let stream = got.stream(`${CWS_URL}${args["extension-id"]}%26uc`);
-
-stream.on("response", response =>
+(async() =>
 {
-  let remoteFilename = path.basename(response.req.path);
-  let filename = remoteFilename.replace("extension_", "adblockpluschrome-")
-                               .replace(/_/g, ".");
+  let parser = new argparse.ArgumentParser({
+    description: "Download an Adblock Plus build from the Chrome Web Store."
+  });
 
-  stream.pipe(fs.createWriteStream(filename));
-});
+  parser.addArgument(
+    "extension-id",
+    {help: "The id of the extension."}
+  );
 
-stream.on("error", error =>
-{
-  console.error(error);
-  process.exit(1);
-});
+  parser.addArgument(
+    ["-p", "--platform"],
+    {choices: ["gecko", "chrome"], default: "chrome"}
+  );
+
+  let args = parser.parseArgs();
+  let dirname = path.join("build", "downloadInfo");
+  let module = await import(path.resolve(dirname, `${args["platform"]}.mjs`));
+
+  let downloadUrl = await module.getLatestFileUrl(args["extension-id"]);
+  console.error(downloadUrl);
+  let stream = got.stream(downloadUrl);
+
+  stream.on("response", response =>
+  {
+    let remoteFilename = path.basename(response.req.path);
+    let filename = module.filenameFormat(remoteFilename);
+    stream.pipe(fs.createWriteStream(filename));
+  });
+
+  stream.on("error", error =>
+  {
+    console.error(error);
+    process.exit(1);
+  });
+})();
