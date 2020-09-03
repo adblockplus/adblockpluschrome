@@ -76,19 +76,18 @@ async function checkPopup(element, extensionHandle)
   let nHandles = await getNumberOfHandles(driver);
   let token = Math.floor(Math.random() * 1e8);
   await runWithHandle(driver, extensionHandle, () => driver.executeScript(`
-    browser.tabs.onCreated.addListener(() =>
+    self.tabCreated${token} = new Promise(resolve =>
     {
-      self.done${token} = true;
-      if (typeof callback${token} == "function")
-        callback${token}();
+      browser.tabs.onCreated.addListener(function listener()
+      {
+        browser.tabs.onCreated.removeListener(listener);
+        resolve();
+      });
     });`));
   await clickButtonOrLink(element);
   await runWithHandle(driver, extensionHandle, () => driver.executeAsyncScript(`
     let callback = arguments[arguments.length - 1];
-    if (self.done${token})
-      callback();
-    else
-      self.callback${token} = callback;`));
+    self.tabCreated${token}.then(callback);`));
   await driver.sleep(1000);
   return await getNumberOfHandles(driver) > nHandles;
 }
