@@ -89,6 +89,7 @@ async function checkPopup(element, extensionHandle)
       callback();
     else
       self.callback${token} = callback;`));
+  await driver.sleep(1000);
   return await getNumberOfHandles(driver) > nHandles;
 }
 
