@@ -45,11 +45,6 @@ variables:
       - "adblockpluscore/"
       - "adblockplusui/"
       - ".chromedriver/"
-      # npm audit fails if the node_modules folder is cached
-      # but the changes in package-lock.json are not.
-      # That is a bug (https://github.com/npm/npm/issues/20604)
-      # which in our case is triggerred by using stubs in package.json.
-      - "package-lock.json"
 
 .default_template:
   needs:
