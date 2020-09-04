@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "argparse": "^1.0.10",
-    "chromedriver": "2.36.0",
+    "chromedriver": "^85.0.0",
     "del": "^5.1.0",
     "dmg": "^0.1.0",
     "eslint": "^7.2.0",

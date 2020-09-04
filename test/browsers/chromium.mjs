@@ -18,6 +18,9 @@
 import webdriver from "selenium-webdriver";
 import chrome from "selenium-webdriver/chrome.js";
 import got from "got";
+import path from "path";
+import {exec, execFile} from "child_process";
+import {promisify} from "util";
 
 // We need to require the chromedriver,
 // otherwise on Windows the chromedriver path is not added to process.env.PATH.
@@ -31,6 +34,7 @@ export let platform = "chrome";
 // We currently want Chromiun 63, as we still support it and that's the
 // loweset version that supports WebDriver.
 export let oldestCompatibleVersion = 508578;
+const OLDEST_DRIVER_VERSION = "2.36"; // Chromium 63
 
 export async function ensureBrowser(build)
 {
@@ -38,10 +42,48 @@ export async function ensureBrowser(build)
   return await (await import(module)).ensureChromium(build);
 }
 
-export function getDriver(browserBinary, devenvPath)
+export async function ensureDriver(browserBinary)
 {
+  let env = {...process.env, npm_config_chromedriver_skip_download: false,
+             npm_config_tmp: path.resolve(".chromedriver")};
+  if (browserBinary)
+  {
+    let browserVersion;
+    if (process.platform == "win32")
+    {
+      let arg = `'${browserBinary.split("'").join("''")}'`;
+      let command = `(Get-ItemProperty ${arg}).VersionInfo.ProductVersion`;
+      let {stdout} = await promisify(exec)(command, {shell: "powershell.exe"});
+      browserVersion = stdout.trim();
+    }
+    else
+    {
+      let {stdout} = await promisify(execFile)(browserBinary, ["--version"]);
+      browserVersion = stdout.trim().replace(/.*\s/, "");
+    }
+
+    let majorBrowserVersion = parseInt(browserVersion.split(".")[0], 10);
+    env.CHROMEDRIVER_VERSION = majorBrowserVersion >= 70 ?
+      `LATEST_${browserVersion}` : OLDEST_DRIVER_VERSION;
+  }
+  else
+  {
+    env.DETECT_CHROMEDRIVER_VERSION = true;
+  }
+
+  await promisify(execFile)(
+    process.execPath,
+    [path.join("node_modules", "chromedriver", "install.js")],
+    {env}
+  );
+}
+
+export async function getDriver(browserBinary, devenvPath, insecure)
+{
+  await ensureDriver(browserBinary);
+
   let options = new chrome.Options()
-    .addArguments("--no-sandbox")
+    .addArguments("--no-sandbox", "--disable-gpu")
     .addArguments(`load-extension=${devenvPath}`);
 
   if (browserBinary != null)

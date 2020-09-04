@@ -30,7 +30,9 @@ import {loadModules} from "../misc/utils.mjs";
     {
       try
       {
-        await module.ensureBrowser(await version, false);
+        let binary = await module.ensureBrowser(await version, false);
+        if (module.ensureDriver)
+          await module.ensureDriver(binary);
       }
       catch (e)
       {

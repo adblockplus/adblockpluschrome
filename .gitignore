@@ -3,6 +3,7 @@
 /docs/
 /test/screenshots/
 /.last_ui_build
+/.chromedriver
 *.zip
 *.crx
 *.xpi
