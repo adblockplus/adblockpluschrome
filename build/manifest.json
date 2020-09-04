@@ -1,102 +1,91 @@
 {
   "author": "eyeo GmbH",
-
   "applications": {
     "gecko": {
-      "strict_min_version": "51.0",
+      "strict_min_version": "52.0",
       "app_id_release": "{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}",
       "app_id_devbuild": "devbuild@adblockplus.org",
       "devbuildUpdateURL": "https://downloads.adblockplus.org/devbuilds/adblockplusfirefox/updates.json"
     }
   },
-
   "background": {
-    "persistent": true, 
+    "persistent": true,
     "scripts": [
-      "polyfill.js", 
-      "ext/common.js", 
-      "ext/background.js", 
+      "polyfill.js",
+      "ext/common.js",
+      "ext/background.js",
       "background.js"
     ]
   },
-  
   "content_scripts": [
     {
-      "all_frames": true, 
+      "all_frames": true,
       "js": [
-        "polyfill.js", 
-        "ext/common.js", 
-        "ext/content.js", 
+        "polyfill.js",
+        "ext/common.js",
+        "ext/content.js",
         "include.preload.js"
-      ], 
-      "match_about_blank": true, 
+      ],
+      "match_about_blank": true,
       "matches": [
-        "http://*/*", 
+        "http://*/*",
         "https://*/*"
-      ], 
+      ],
       "run_at": "document_start"
-    }, 
+    },
     {
-      "all_frames": true, 
+      "all_frames": true,
       "js": [
         "include.postload.js"
-      ], 
-      "match_about_blank": true, 
+      ],
+      "match_about_blank": true,
       "matches": [
-        "http://*/*", 
+        "http://*/*",
         "https://*/*"
-      ], 
+      ],
       "run_at": "document_end"
     }
-  ], 
-
+  ],
   "manifest_version": 2,
-
-  "minimum_chrome_version": "52.0", 
-  "minimum_opera_version": "39.0",
-
+  "minimum_chrome_version": "55.0",
+  "minimum_opera_version": "42.0",
   "name": "__MSG_name_releasebuild__",
   "short_name": "__MSG_name__",
-  "description": "__MSG_description__", 
-
+  "description": "__MSG_description__",
   "browser_action": {
     "default_icon": {
-      "16": "icons/abp-16.png", 
-      "20": "icons/abp-20.png", 
-      "32": "icons/abp-32.png", 
+      "16": "icons/abp-16.png",
+      "20": "icons/abp-20.png",
+      "32": "icons/abp-32.png",
       "40": "icons/abp-40.png"
-    }, 
-    "default_popup": "popup.html", 
+    },
+    "default_popup": "popup.html",
     "default_title": "__MSG_name__"
   },
-  
-  "default_locale": "en_US", 
-  "devtools_page": "devtools.html", 
+  "default_locale": "en_US",
+  "devtools_page": "devtools.html",
   "icons": {
-    "128": "icons/detailed/abp-128.png", 
-    "16": "icons/abp-16.png", 
-    "32": "icons/abp-32.png", 
-    "48": "icons/detailed/abp-48.png", 
+    "128": "icons/detailed/abp-128.png",
+    "16": "icons/abp-16.png",
+    "32": "icons/abp-32.png",
+    "48": "icons/detailed/abp-48.png",
     "64": "icons/detailed/abp-64.png"
-  }, 
-
-
+  },
   "options_ui": {
-    "open_in_tab": true, 
+    "open_in_tab": true,
     "page": "options.html"
-  }, 
+  },
   "permissions": [
-    "tabs", 
-    "<all_urls>", 
-    "contextMenus", 
-    "webRequest", 
-    "webRequestBlocking", 
-    "webNavigation", 
-    "storage", 
-    "unlimitedStorage", 
+    "tabs",
+    "<all_urls>",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "storage",
+    "unlimitedStorage",
     "notifications"
-  ], 
-  
+  ],
   "storage": {
     "managed_schema": "managed-storage-schema.json"
   }

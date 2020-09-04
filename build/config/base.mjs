@@ -64,6 +64,7 @@ export default {
           "!adblockplusui/skin/icons/abp-128.png",
           "!adblockplusui/skin/icons/arrow.svg",
           "!adblockplusui/skin/icons/iconClose.svg",
+          "!adblockplusui/skin/icons/iconCritical.svg",
           "!adblockplusui/skin/icons/mobile/**",
           "!adblockplusui/skin/mobile-options.css"
         ]
@@ -162,8 +163,7 @@ export default {
     dest: "_locales",
     src: [
       "adblockplusui/locale/**/*.json",
-      "!adblockplusui/locale/*/mobile-options.json",
-      "!adblockplusui/locale/*/antiadblockInit.json"
+      "!adblockplusui/locale/*/mobile-options.json"
     ]
   }
 };

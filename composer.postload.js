@@ -165,7 +165,7 @@ function addElementOverlay(element)
   return overlay;
 }
 
-function highlightElement(element, shadowColor, backgroundColor)
+function highlightElement(element, border, backgroundColor)
 {
   unhighlightElement(element);
 
@@ -178,7 +178,7 @@ function highlightElement(element, shadowColor, backgroundColor)
     if (!overlay)
       return;
 
-    highlightElement(overlay, shadowColor, backgroundColor);
+    highlightElement(overlay, border, backgroundColor);
     overlay.style.pointerEvents = "none";
 
     element._unhighlight = () =>
@@ -189,25 +189,24 @@ function highlightElement(element, shadowColor, backgroundColor)
 
   let highlightWithStyleAttribute = () =>
   {
-    let originalBoxShadow = element.style.getPropertyValue("box-shadow");
-    let originalBoxShadowPriority =
+    let originalBorder = element.style.getPropertyValue("border");
+    let originalBorderPriority =
       element.style.getPropertyPriority("box-shadow");
     let originalBackgroundColor =
       element.style.getPropertyValue("background-color");
     let originalBackgroundColorPriority =
       element.style.getPropertyPriority("background-color");
 
-    element.style.setProperty("box-shadow", "inset 0px 0px 5px " + shadowColor,
-                              "important");
+    element.style.setProperty("border", `2px solid ${border}`, "important");
     element.style.setProperty("background-color", backgroundColor, "important");
 
     element._unhighlight = () =>
     {
       element.style.removeProperty("box-shadow");
       element.style.setProperty(
-        "box-shadow",
-        originalBoxShadow,
-        originalBoxShadowPriority
+        "border",
+        originalBorder,
+        originalBorderPriority
       );
 
       element.style.removeProperty("background-color");
@@ -256,7 +255,7 @@ function highlightElements(selectorString)
     {
       let element = elements.shift();
       if (element != currentElement)
-        highlightElement(element, "#fd6738", "#f6e1e5");
+        highlightElement(element, "#CA0000", "#CA0000");
     }
     else
     {
@@ -311,7 +310,7 @@ function mouseOver(event)
           unhighlightElement(currentElement);
 
         if (element)
-          highlightElement(element, "#d6d84b", "#f8fa47");
+          highlightElement(element, "#CA0000", "#CA0000");
 
         currentElement = element;
       }
@@ -379,6 +378,39 @@ function startPickingElement()
   ext.onExtensionUnloaded.addListener(deactivateBlockElement);
 }
 
+// Used to hide/show blocked elements on composer.content.preview
+function previewBlockedElements(active)
+{
+  if (!currentElement)
+    return;
+
+  let element = currentElement.prisoner || currentElement;
+  let overlays = document.querySelectorAll(".__adblockplus__overlay");
+
+  previewBlockedElement(element, active, overlays);
+
+  getFiltersForElement(element, (filters, selectors) =>
+  {
+    if (selectors.length > 0)
+    {
+      let cssQuery = selectors.join(",");
+      for (let node of document.querySelectorAll(cssQuery))
+        previewBlockedElement(node, active, overlays);
+    }
+  });
+}
+
+// the previewBlockedElements helper to avoid duplicated code
+function previewBlockedElement(element, active, overlays)
+{
+  let display = active ? "none" : null;
+  let find = Array.prototype.find;
+  let overlay = find.call(overlays, ({prisoner}) => prisoner === element);
+  if (overlay)
+    overlay.style.display = display;
+  element.style.display = display;
+}
+
 // The user has picked an element - currentElement. Highlight it red, generate
 // filters for it and open a popup dialog so that the user can confirm.
 function elementPicked(event)
@@ -392,9 +424,20 @@ function elementPicked(event)
     if (currentlyPickingElement)
       stopPickingElement();
 
+    highlightElement(currentElement, "#CA0000", "#CA0000");
+
+    let highlights = 1;
+    if (selectors.length > 0)
+    {
+      let cssQuery = selectors.join(",");
+      highlightElements(cssQuery);
+      highlights = document.querySelectorAll(cssQuery).length;
+    }
+
     browser.runtime.sendMessage({
       type: "composer.openDialog",
-      filters
+      filters,
+      highlights
     }).then(popupId =>
     {
       // Only the top frame keeps a record of the popup window's ID,
@@ -411,11 +454,6 @@ function elementPicked(event)
         });
       }
     });
-
-    if (selectors.length > 0)
-      highlightElements(selectors.join(","));
-
-    highlightElement(currentElement, "#fd1708", "#f6a1b5");
   });
 
   event.preventDefault();
@@ -443,6 +481,8 @@ function stopPickingElement()
 // We're done with the block element feature for now, tidy everything up.
 function deactivateBlockElement(popupAlreadyClosed)
 {
+  previewBlockedElements(false);
+
   if (currentlyPickingElement)
     stopPickingElement();
 
@@ -505,6 +545,9 @@ function initializeComposer()
   {
     switch (message.type)
     {
+      case "composer.content.preview":
+        previewBlockedElements(message.active);
+        break;
       case "composer.content.getState":
         if (window == window.top)
         {
