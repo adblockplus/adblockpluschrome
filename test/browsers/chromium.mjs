@@ -44,8 +44,10 @@ export async function ensureBrowser(build)
 
 export async function ensureDriver(browserBinary)
 {
+  let chromedriverPath =
+    path.resolve("adblockpluscore", "chromium-snapshots", "chromedriver");
   let env = {...process.env, npm_config_chromedriver_skip_download: false,
-             npm_config_tmp: path.resolve(".chromedriver")};
+             npm_config_tmp: chromedriverPath};
   if (browserBinary)
   {
     let browserVersion;

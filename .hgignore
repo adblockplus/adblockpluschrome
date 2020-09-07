@@ -3,7 +3,6 @@
 ^docs$
 ^test/screenshots$
 ^\.last_ui_build$
-^\.chromedriver$
 
 syntax:glob
 *.zip
