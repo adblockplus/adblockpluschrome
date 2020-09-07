@@ -15,17 +15,8 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import base from "./base.mjs";
-import chrome from "./chrome.mjs";
-import gecko from "./gecko.mjs";
-import webpack from "./webpack.config.mjs";
-import {chromeDev, geckoDev} from "./devenv.mjs";
-
-export default {
-  base,
-  chrome,
-  chromeDev,
-  gecko,
-  geckoDev,
-  webpack
-};
+export {default as base} from "./base.mjs";
+export {default as chrome} from "./chrome.mjs";
+export {default as gecko} from "./gecko.mjs";
+export {default as webpack} from "./webpack.config.mjs";
+export {chromeDev, geckoDev} from "./devenv.mjs";

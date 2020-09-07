@@ -20,9 +20,10 @@ import argparse from "argparse";
 import merge from "merge-stream";
 import zip from "gulp-vinyl-zip";
 import * as tasks from "./build/tasks/index.mjs";
-import config from "./build/config/index.mjs";
+import * as config from "./build/config/index.mjs";
 import * as configParser from "./build/configParser.mjs";
 import * as gitUtils from "./build/utils/git.mjs";
+import url from "url";
 
 let argumentParser = new argparse.ArgumentParser({
   description: "Build the extension"
@@ -52,11 +53,6 @@ let targetDir = {
   chrome: "devenv.chrome",
   gecko: "devenv.gecko"
 };
-
-if (args.config)
-  configParser.setConfig(require(args.config));
-else
-  configParser.setConfig(config);
 
 async function getBuildSteps(options)
 {
@@ -108,6 +104,11 @@ async function getBuildOptions(isDevenv)
   let configName = isDevenv && configParser.hasTarget(`${opts.target}Dev`) ?
                     `${opts.target}Dev` :
                     opts.target;
+
+  if (args.config)
+    configParser.setConfig(await import(url.pathToFileURL(args.config)));
+  else
+    configParser.setConfig(config);
 
   opts.webpackInfo = configParser.getSection(configName, "webpack");
   opts.mapping = configParser.getSection(configName, "mapping");
