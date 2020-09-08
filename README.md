@@ -8,21 +8,14 @@ Chrome, Opera, Microsoft Edge and Firefox. It can be used to build
 Adblock Plus for these platforms, generic Adblock Plus code will be extracted
 from other repositories automatically (see _dependencies_ file).
 
-Note that the Firefox extension built from this repository is the new
-[WebExtension](https://developer.mozilla.org/en-US/Add-ons/WebExtensions).
-The source code of the legacy Adblock Plus extension
-can be found [here](https://hg.adblockplus.org/adblockplus).
-
 Building
 ---------
 
 ### Requirements
 
-- [Mercurial](https://www.mercurial-scm.org/) or [Git](https://git-scm.com/) (whichever you used to clone this repository) [^1]
-- [Python 2.7](https://www.python.org) [^1]
+- [Git](https://git-scm.com/) (only required when building from version control)
+- [Python 2.7](https://www.python.org)
 - [Node.js](https://nodejs.org/) (>= 10.17.0, >= 12 on Windows)
-
-[^1]: Only required when building from version control.
 
 ### Building on Windows
 
@@ -31,7 +24,7 @@ Then install the above requirements and run the commands below from within Bash.
 
 ### Updating the dependencies
 
-If building from version control, clone the external repositories:
+Clone the external repositories:
 
     ./ensure_dependencies.py
 
@@ -155,7 +148,7 @@ Linting
 You can lint the code using [ESLint](http://eslint.org).
 
 You will need to setup first. This will install our configuration
-[eslint-config-eyeo](https://hg.adblockplus.org/codingtools/file/tip/eslint-config-eyeo)
+[eslint-config-eyeo](https://gitlab.com/eyeo/auxiliary/eyeo-coding-style/-/tree/master/eslint-config-eyeo)
 and everything needed after you run:
 
     npm install

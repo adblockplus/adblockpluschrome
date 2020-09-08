@@ -1,3 +1,3 @@
-_root = hg:https://hg.adblockplus.org/ git:https://github.com/adblockplus/
-adblockpluscore = adblockpluscore hg:f6d83c2687f6 git:7663a03
-adblockplusui = adblockplusui hg:7b76422235a0 git:697149d
+_root = git:https://gitlab.com/eyeo/adblockplus/
+adblockpluscore = adblockpluscore git:7663a03
+adblockplusui = adblockplusui git:697149d

@@ -1,6 +1,6 @@
 {
   "name": "adblockpluschrome",
-  "repository": "https://hg.adblockplus.org/adblockpluschrome",
+  "repository": "https://gitlab.com/eyeo/adblockplus/adblockpluschrome",
   "license": "GPL-3.0",
   "engines": {
     "node": ">=10.17.0"
