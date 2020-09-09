@@ -21,11 +21,6 @@ import semver from "semver";
 import specializedTests from "./specialized.mjs";
 
 const SCREENSHOT_DIR = path.join("test", "screenshots");
-// diff.percent examples on screenshots:
-// 0.025580 - all Blocking page tests failed
-// 0.004264 - one Blocking page test failed
-// 0.000001 - one pixel difference
-const SCREENSHOT_DIFF = 0.003;
 
 export async function takeScreenshot(driver)
 {
@@ -118,8 +113,11 @@ export async function runGenericTests(driver, expectedScreenshot,
     await driver.wait(async() =>
     {
       actualScreenshot = await takeScreenshot(driver);
-      let diff = Jimp.diff(actualScreenshot, expectedScreenshot, 0.001);
-      return diff.percent < SCREENSHOT_DIFF;
+      let actualBitmap = actualScreenshot.bitmap;
+      let expectedBitmap = expectedScreenshot.bitmap;
+      return (actualBitmap.width == expectedBitmap.width &&
+              actualBitmap.height == expectedBitmap.height &&
+              actualBitmap.data.compare(expectedBitmap.data) == 0);
     }, 5000, "Screenshots don't match", 500);
   }
 
