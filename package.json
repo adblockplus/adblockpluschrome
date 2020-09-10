@@ -32,20 +32,17 @@
     "ncp": "^2.0.0",
     "selenium-webdriver": "^4.0.0-alpha.7",
     "semver": "^7.3.2",
-    "sign-addon": "^0.3.1",
     "through": "^2.3.8",
     "webpack-merge": "^4.2.2",
     "webpack-stream": "~5.0.0"
   },
   "scripts": {
-    "archive": "node --experimental-modules build/archive.mjs",
     "pretest": "bash -c \"python ensure_dependencies.py\"",
     "generate-buildnum": "node --experimental-modules --no-warnings build/utils/git.mjs",
     "lint": "eslint --ext .js,.mjs *.js *.mjs lib/ qunit/ ext/ test/ build/",
     "test-only": "mocha --experimental-modules --unhandled-rejections=strict --delay",
     "test": "npm run test-only --",
     "posttest": "npm run lint",
-    "publish": "node --experimental-modules build/publish.mjs",
     "docs": "jsdoc --configure jsdoc.conf --destination docs lib",
     "download-test-browsers": "node --experimental-modules test/bin/downloadBrowsers.mjs"
   }

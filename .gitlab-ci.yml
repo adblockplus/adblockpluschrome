@@ -21,10 +21,8 @@ default:
 stages:
   - "prepare"
   - "build"
-  - "download"
   - "publish"
   - "test"
-  - "scp"
 
 variables:
   npm_config_audit: "false"
@@ -205,56 +203,6 @@ test:edge:
   extends: ".test_template_edge"
   script:
     - "npm run test-only -- -g 'Edge'"
-
-###############################################################################
-#                                Scheduled jobs                               #
-###############################################################################
-
-.download:
-  stage: "download"
-  script:
-    - "npm install"
-    - "npm run archive -- $EXTENSION_ID"
-  only:
-    - "schedules"
-  artifacts:
-    paths:
-      - "adblockpluschrome-*.crx"
-
-.scp:
-  stage: "scp"
-  script:
-    - "scp *.crx $DESTINATION"
-  only:
-    - "schedules"
-  tags:
-    - "protected"
-
-download:release:
-  extends: ".download"
-  variables:
-    EXTENSION_ID: "cfhdojbkjhnklbpkdaibdccddilifddb"
-
-download:devbuild:
-  extends: ".download"
-  variables:
-    EXTENSION_ID: "ldcecbkkoecffmfljeihcmifjjdoepkn"
-
-scp:release:
-  extends: ".scp"
-  needs:
-    - job: "download:release"
-      artifacts: true
-  variables:
-    DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/releases/"
-
-scp:devbuild:
-  extends: ".scp"
-  needs:
-    - job: "download:devbuild"
-      artifacts: true
-  variables:
-    DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome/"
 
 ###############################################################################
 #                                 Public pages                                #
