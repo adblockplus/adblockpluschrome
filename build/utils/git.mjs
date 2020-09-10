@@ -22,12 +22,6 @@ import {promisify} from "util";
 
 const BUILDNUM_OFFSET = 10000;
 
-export async function getRevision()
-{
-  let {stdout} = await promisify(execFile)("git", ["rev-parse", "HEAD"]);
-  return stdout;
-}
-
 export async function getBuildnum(revision = "HEAD")
 {
   let until = (await promisify(execFile)("git", ["log", "--pretty=%ct", "-n1",

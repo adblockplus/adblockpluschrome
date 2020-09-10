@@ -15,7 +15,6 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {cleanDir, createRevision} from "./utils.mjs";
 export {createManifest, getManifestContent} from "./manifest.mjs";
 export {default as webpack} from "./webpack.mjs";
 export {default as mapping} from "./mapping.mjs";

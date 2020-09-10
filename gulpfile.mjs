@@ -19,6 +19,7 @@ import gulp from "gulp";
 import argparse from "argparse";
 import merge from "merge-stream";
 import zip from "gulp-vinyl-zip";
+import del from "del";
 import * as tasks from "./build/tasks/index.mjs";
 import * as config from "./build/config/index.mjs";
 import * as configParser from "./build/configParser.mjs";
@@ -82,8 +83,7 @@ async function getBuildSteps(options)
       sourceMapType: options.sourceMapType
     }),
     tasks.createManifest(options.manifest),
-    translations(options.translations, options.manifest),
-    tasks.createRevision(await gitUtils.getRevision())
+    translations(options.translations, options.manifest)
   );
 
   return buildSteps;
@@ -161,8 +161,13 @@ async function buildPacked()
     .pipe(options.output);
 }
 
+function cleanDir()
+{
+  return del(targetDir[args.target]);
+}
+
 export let devenv = gulp.series(
-  tasks.cleanDir(targetDir[args.target]),
+  cleanDir,
   tasks.buildUI,
   buildDevenv
 );
@@ -189,7 +194,7 @@ function startWatch()
       ignoreInitial: false
     },
     gulp.series(
-      tasks.cleanDir(targetDir[args.target]),
+      cleanDir,
       buildDevenv
     )
   );
