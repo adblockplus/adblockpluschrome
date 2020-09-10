@@ -78,13 +78,12 @@ export default () =>
     {
       for (let [url, pageTitle] of this.parent.parent.pageTests)
       {
-        let page = getPage(url);
-
-        if (isExcluded(page, this.parent.parent.title))
-          continue;
-
         it(pageTitle, async function()
         {
+          let page = getPage(url);
+          if (isExcluded(page, this.browserName, this.browserVersion))
+            this.skip();
+
           if (page in specializedTests)
           {
             await updateFilters(this.driver, this.extensionHandle, url);
@@ -98,7 +97,7 @@ export default () =>
                                                                  url);
             await updateFilters(this.driver, this.extensionHandle, url);
             await runGenericTests(this.driver, expectedScreenshot,
-                                  this.test.parent.parent.parent.title,
+                                  this.browserName, this.browserVersion,
                                   pageTitle, url);
           }
 
@@ -112,7 +111,8 @@ export default () =>
       it("does not block unfiltered content", async function()
       {
         await assert.rejects(
-          runFirstTest(this.driver, this.test.parent.parent.parent,
+          runFirstTest(this.driver, this.browserName, this.browserVersion,
+                       this.test.parent.parent.parent.pageTests,
                        this.test.title, false),
           /Screenshots don't match/
         );

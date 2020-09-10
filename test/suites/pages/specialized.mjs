@@ -51,13 +51,13 @@ async function checkPing(element)
 specialized["filters/ping"] = {
   // ping test needs access to browser logs
   // https://github.com/mozilla/geckodriver/issues/284
-  excludedBrowsers: ["Firefox"],
+  excludedBrowsers: {firefox: ""},
 
   run: checkPing
 };
 
 specialized["exceptions/ping"] = {
-  excludedBrowsers: ["Firefox"],
+  excludedBrowsers: {firefox: ""},
 
   async run(element)
   {
@@ -111,7 +111,7 @@ specialized["exceptions/popup"] = {
 specialized["filters/other"] = {
   // other test needs access to browser logs
   // https://github.com/mozilla/geckodriver/issues/284
-  excludedBrowsers: ["Firefox"],
+  excludedBrowsers: {firefox: ""},
 
   async run(element)
   {

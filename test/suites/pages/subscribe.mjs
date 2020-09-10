@@ -82,12 +82,13 @@ export default () =>
     catch (e)
     {
       let screenshot = await takeScreenshot(this.driver);
-      let scrPath = await writeScreenshotFile(screenshot,
-                                              this.test.parent.parent.title,
+      let scrPath = await writeScreenshotFile(screenshot, this.browserName,
+                                              this.browserVersion,
                                               this.test.title, "actual");
       throw new Error(`${e.message}\n${testPagesURL}\n(see ${scrPath})`);
     }
-    await runFirstTest(this.driver, this.test.parent.parent, this.test.title);
+    await runFirstTest(this.driver, this.browserName, this.browserVersion,
+                       this.test.parent.parent.pageTests, this.test.title);
     await checkLastError(this.driver, this.extensionHandle);
   });
 };

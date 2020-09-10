@@ -17,6 +17,7 @@
 
 import path from "path";
 import Jimp from "jimp";
+import semver from "semver";
 import specializedTests from "./specialized.mjs";
 
 const SCREENSHOT_DIR = path.join("test", "screenshots");
@@ -62,32 +63,31 @@ export async function takeScreenshot(driver)
   return fullScreenshot;
 }
 
-export function isExcluded(page, browser)
+export function isExcluded(page, browserName, browserVersion)
 {
   let excluded;
   if (page in specializedTests)
     excluded = specializedTests[page].excludedBrowsers;
   // https://issues.adblockplus.org/ticket/6917
   else if (page == "filters/subdocument")
-    excluded = ["Firefox"];
+    excluded = {firefox: ""};
   // Chromium 63 doesn't have user stylesheets (required to
   // overrule inline styles).
   else if (page == "circumvention/inline-style-important")
-    excluded = ["Chromium (oldest)"];
+    excluded = {chrome: "<64"};
   // Older versions of Chromium don't run content
   // scripts in dynamically written documents.
   // Firefox <67 had a bug that resets the document:
   // https://bugzilla.mozilla.org/show_bug.cgi?id=1528146
   else if (page == "circumvention/anoniframe-documentwrite")
-    excluded = ["Chromium (oldest)", "Firefox (oldest)"];
+    excluded = {chrome: "<64", firefox: "<67"};
   // shadowing requires Firefox 63+ or 59+ with flag
   // dom.webcomponents.shadowdom.enabled
   else if (page == "snippets/hide-if-shadow-contains")
-    excluded = ["Firefox (oldest)"];
+    excluded = {firefox: "<63"};
 
-  return !!excluded && excluded.some(s => s.includes(" ") ?
-                                            browser == s :
-                                            browser.startsWith(s));
+  return !!excluded && browserName in excluded &&
+         semver.satisfies(semver.coerce(browserVersion), excluded[browserName]);
 }
 
 export async function getExpectedScreenshot(driver, url)
@@ -96,18 +96,19 @@ export async function getExpectedScreenshot(driver, url)
   return await takeScreenshot(driver);
 }
 
-export async function writeScreenshotFile(image, browser, testTitle, suffix)
+export async function writeScreenshotFile(image, browserName, browserVersion,
+                                          testTitle, suffix)
 {
-  let title = `${browser}_${testTitle}`;
-  let prefix = title.toLowerCase().replace(/[^a-z0-9]+/g, "_");
-  let screenshotPath = path.join(SCREENSHOT_DIR, `${prefix}_${suffix}.png`);
+  let title = testTitle.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+  let filename = `${browserName}_${browserVersion}_${title}_${suffix}.png`;
+  let screenshotPath = path.join(SCREENSHOT_DIR, filename);
   await image.write(screenshotPath);
   return screenshotPath;
 }
 
 export async function runGenericTests(driver, expectedScreenshot,
-                                      browser, testTitle, url,
-                                      writeScreenshots = true)
+                                      browserName, browserVersion, testTitle,
+                                      url, writeScreenshots = true)
 {
   let actualScreenshot;
 
@@ -144,7 +145,10 @@ export async function runGenericTests(driver, expectedScreenshot,
     let paths = [];
     for (let [suffix, image] of [["actual", actualScreenshot],
                                  ["expected", expectedScreenshot]])
-      paths.push(await writeScreenshotFile(image, browser, testTitle, suffix));
+    {
+      paths.push(await writeScreenshotFile(image, browserName, browserVersion,
+                                           testTitle, suffix));
+    }
 
     throw new Error(`${e.message}\n${url}\n(see ${paths})`);
   }
@@ -155,18 +159,20 @@ export function getPage(url)
   return url.substr(url.lastIndexOf("/", url.lastIndexOf("/") - 1) + 1);
 }
 
-export async function runFirstTest(driver, topLevelTestSuite, testTitle,
+export async function runFirstTest(driver, browserName, browserVersion,
+                                   pageTests, testTitle,
                                    writeScreenshots = true)
 {
-  let {pageTests, title: browser} = topLevelTestSuite;
   for (let [url] of pageTests)
   {
     let page = getPage(url);
-    if (!(isExcluded(page, browser) || page in specializedTests))
+    if (!(isExcluded(page, browserName, browserVersion) ||
+          page in specializedTests))
     {
       let expectedScreenshot = await getExpectedScreenshot(driver, url);
       await driver.navigate().to(url);
-      await runGenericTests(driver, expectedScreenshot, browser,
+      await runGenericTests(driver, expectedScreenshot,
+                            browserName, browserVersion,
                             testTitle, url, writeScreenshots);
       return;
     }
