@@ -101,14 +101,15 @@ async function getBuildOptions(isDevenv)
   opts.sourceMapType = opts.target == "chrome" ?
                         isDevenv == true ? "inline-cheap-source-maps" : "none" :
                         "source-maps";
-  let configName = isDevenv && configParser.hasTarget(`${opts.target}Dev`) ?
-                    `${opts.target}Dev` :
-                    opts.target;
 
   if (args.config)
     configParser.setConfig(await import(url.pathToFileURL(args.config)));
   else
     configParser.setConfig(config);
+
+  let configName = isDevenv && configParser.hasTarget(`${opts.target}Dev`) ?
+                    `${opts.target}Dev` :
+                    opts.target;
 
   opts.webpackInfo = configParser.getSection(configName, "webpack");
   opts.mapping = configParser.getSection(configName, "mapping");
