@@ -22,6 +22,9 @@ import path from "path";
 import {exec, execFile} from "child_process";
 import {promisify} from "util";
 
+export {ensureChromium as ensureBrowser}
+  from "../../adblockpluscore/test/runners/chromium_download.mjs";
+
 // We need to require the chromedriver,
 // otherwise on Windows the chromedriver path is not added to process.env.PATH.
 import "chromedriver";
@@ -35,12 +38,6 @@ export let platform = "chrome";
 // loweset version that supports WebDriver.
 export let oldestCompatibleVersion = 508578;
 const OLDEST_DRIVER_VERSION = "2.36"; // Chromium 63
-
-export async function ensureBrowser(build)
-{
-  let module = "../../adblockpluscore/test/runners/chromium_download.mjs";
-  return await (await import(module)).ensureChromium(build);
-}
 
 export async function ensureDriver(browserBinary)
 {

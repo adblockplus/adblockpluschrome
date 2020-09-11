@@ -35,7 +35,8 @@ variables:
     key: "global-cache"
     untracked: true
     paths:
-      - "adblockpluscore/*-snapshots/"
+      - "adblockpluscore/*-snapshots/download-cache/"
+      - "adblockpluscore/chromium-snapshots/chromedriver/"
       - "adblockplusui/node_modules/"
 
 .default_template:
