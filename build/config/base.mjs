@@ -45,10 +45,15 @@ export default {
         ]
       },
       {
-        dest: "include.postload.js",
+        dest: "composer.postload.js",
         src: [
-          "subscriptionLink.postload.js",
           "composer.postload.js"
+        ]
+      },
+      {
+        dest: "subscriptionLink.postload.js",
+        src: [
+          "subscriptionLink.postload.js"
         ]
       }
     ]

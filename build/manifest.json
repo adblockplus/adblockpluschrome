@@ -36,12 +36,42 @@
     {
       "all_frames": true,
       "js": [
-        "include.postload.js"
+        "composer.postload.js"
       ],
       "match_about_blank": true,
       "matches": [
         "http://*/*",
         "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "subscriptionLink.postload.js"
+      ],
+      "matches": [
+        "*://*.abpchina.org/*",
+        "*://*.abpindo.blogspot.com/*",
+        "*://*.abpvn.com/*",
+        "*://*.adblock.ee/*",
+        "*://*.adblock.gardar.net/*",
+        "*://*.adblockplus.me/*",
+        "*://*.adblockplus.org/*",
+        "*://*.easylist.to/*",
+        "*://*.eyeo.com/*",
+        "*://*.fanboy.co.nz/*",
+        "*://*.filterlists.com/*",
+        "*://*.forums.lanik.us/*",
+        "*://*.github.com/*",
+        "*://*.gitlab.com/*",
+        "*://*.gurud.ee/*",
+        "*://*.i-dont-care-about-cookies.eu/*",
+        "*://*.spam404.com/*",
+        "*://*.stanev.org/*",
+        "*://*.void.gr/*",
+        "*://*.xfiles.noads.it/*",
+        "*://*.zoso.ro/*"
       ],
       "run_at": "document_end"
     }
