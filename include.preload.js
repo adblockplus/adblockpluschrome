@@ -20,114 +20,26 @@
 let {ElemHideEmulation} =
   require("./adblockpluscore/lib/content/elemHideEmulation");
 
-// This variable is also used by our other content scripts.
 let contentFiltering;
+let collapsedSelectors = new Set();
 
-const typeMap = new Map([
-  ["img", "IMAGE"],
-  ["input", "IMAGE"],
-  ["picture", "IMAGE"],
-  ["audio", "MEDIA"],
-  ["video", "MEDIA"],
-  ["frame", "SUBDOCUMENT"],
-  ["iframe", "SUBDOCUMENT"],
-  ["object", "OBJECT"],
-  ["embed", "OBJECT"]
-]);
-
-let checkedSelectors = new Set();
-
-function getURLsFromObjectElement(element)
+function getURLFromElement(element)
 {
-  let url = element.getAttribute("data");
-  if (url)
-    return [url];
-
-  for (let child of element.children)
+  if (element.localName == "object")
   {
-    if (child.localName != "param")
-      continue;
+    if (element.data)
+      return element.data;
 
-    let name = child.getAttribute("name");
-    if (name != "movie" &&  // Adobe Flash
-        name != "source" && // Silverlight
-        name != "src" &&    // Real Media + Quicktime
-        name != "FileName") // Windows Media
-      continue;
-
-    let value = child.getAttribute("value");
-    if (!value)
-      continue;
-
-    return [value];
-  }
-
-  return [];
-}
-
-function getURLsFromAttributes(element)
-{
-  let urls = [];
-
-  if (element.getAttribute("src") && "src" in element)
-    urls.push(element.src);
-
-  if (element.srcset)
-  {
-    for (let candidate of element.srcset.split(","))
+    for (let child of element.children)
     {
-      let url = candidate.trim().replace(/\s+\S+$/, "");
-      if (url)
-        urls.push(url);
+      if (child.localName == "param" && child.name == "movie" && child.value)
+        return new URL(child.value, document.baseURI).href;
     }
+
+    return null;
   }
 
-  return urls;
-}
-
-function getURLsFromMediaElement(element)
-{
-  let urls = getURLsFromAttributes(element);
-
-  for (let child of element.children)
-  {
-    if (child.localName == "source" || child.localName == "track")
-      urls.push(...getURLsFromAttributes(child));
-  }
-
-  if (element.poster)
-    urls.push(element.poster);
-
-  return urls;
-}
-
-function getURLsFromElement(element)
-{
-  let urls;
-  switch (element.localName)
-  {
-    case "object":
-      urls = getURLsFromObjectElement(element);
-      break;
-
-    case "video":
-    case "audio":
-    case "picture":
-      urls = getURLsFromMediaElement(element);
-      break;
-
-    default:
-      urls = getURLsFromAttributes(element);
-      break;
-  }
-
-  for (let i = 0; i < urls.length; i++)
-  {
-    if (/^(?!https?:)[\w-]+:/i.test(urls[i]))
-      urls.splice(i--, 1);
-  }
-
-  return urls;
+  return element.currentSrc || element.src;
 }
 
 function getSelectorForBlockedElement(element)
@@ -138,15 +50,15 @@ function getSelectorForBlockedElement(element)
   if (element.localName == "frame")
     return null;
 
-  // If the <video> or <audio> element contains any <source> or <track>
-  // children, we cannot address it in CSS by the source URL; in that case we
+  // If the <video> or <audio> element contains any <source> children,
+  // we cannot address it in CSS by the source URL; in that case we
   // don't "collapse" it using a CSS selector but rather hide it directly by
   // setting the style="..." attribute.
   if (element.localName == "video" || element.localName == "audio")
   {
     for (let child of element.children)
     {
-      if (child.localName == "source" || child.localName == "track")
+      if (child.localName == "source")
         return null;
     }
   }
@@ -198,34 +110,63 @@ function hideElement(element, properties)
   );
 }
 
-function checkCollapse(element)
+function collapseElement(element)
 {
-  let mediatype = typeMap.get(element.localName);
-  if (!mediatype)
-    return;
-
-  let urls = getURLsFromElement(element);
-  if (urls.length == 0)
-    return;
-
   let selector = getSelectorForBlockedElement(element);
   if (selector)
   {
-    if (checkedSelectors.has(selector))
-      return;
-    checkedSelectors.add(selector);
-  }
-
-  browser.runtime.sendMessage({type: "filters.collapse",
-                               baseURL: document.location.href,
-                               urls, mediatype}).then(collapse =>
-  {
-    if (collapse)
+    if (!collapsedSelectors.has(selector))
     {
-      if (selector)
-        contentFiltering.addSelectors([selector], "collapsing", true);
-      else
-        hideElement(element);
+      contentFiltering.addSelectors([selector], "collapsing", true);
+      collapsedSelectors.add(selector);
+    }
+  }
+  else
+  {
+    hideElement(element);
+  }
+}
+
+function startElementCollapsing()
+{
+  let deferred = null;
+
+  browser.runtime.onMessage.addListener((message, sender) =>
+  {
+    if (message.type != "filters.collapse")
+      return;
+
+    if (document.readyState == "loading")
+    {
+      if (!deferred)
+      {
+        deferred = new Map();
+        document.addEventListener("DOMContentLoaded", () =>
+        {
+          for (let [selector, urls] of deferred)
+          {
+            for (let element of document.querySelectorAll(selector))
+            {
+              if (urls.has(getURLFromElement(element)))
+                collapseElement(element);
+            }
+          }
+
+          deferred = null;
+        });
+      }
+
+      let urls = deferred.get(message.selector) || new Set();
+      deferred.set(message.selector, urls);
+      urls.add(message.url);
+    }
+    else
+    {
+      for (let element of document.querySelectorAll(message.selector))
+      {
+        if (getURLFromElement(element) == message.url)
+          collapseElement(element);
+      }
     }
   });
 }
@@ -496,20 +437,9 @@ if (document instanceof HTMLDocument)
   contentFiltering = new ContentFiltering();
   contentFiltering.apply();
 
-  document.addEventListener("error", event =>
-  {
-    checkCollapse(event.target);
-  }, true);
-
-  document.addEventListener("load", event =>
-  {
-    let element = event.target;
-    if (/^i?frame$/.test(element.localName))
-      checkCollapse(element);
-  }, true);
+  startElementCollapsing();
 }
 
-window.checkCollapse = checkCollapse;
+window.collapseElement = collapseElement;
 window.contentFiltering = contentFiltering;
-window.typeMap = typeMap;
-window.getURLsFromElement = getURLsFromElement;
+window.getURLFromElement = getURLFromElement;

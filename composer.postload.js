@@ -20,7 +20,7 @@
 // We would rather export these properly and then require("./include.preload")
 // here, but that would result in include.preload running both at pre and post
 // load.
-const {checkCollapse, contentFiltering, getURLsFromElement, typeMap} = window;
+const {collapseElement, contentFiltering, getURLFromElement} = window;
 
 // The page ID for the popup filter selection dialog (top frame only).
 let blockelementPopupId = null;
@@ -55,9 +55,7 @@ function getFiltersForElement(element, callback)
     src: src && src.length <= 1000 ? src : null,
     style: element.getAttribute("style"),
     classes: Array.prototype.slice.call(element.classList),
-    urls: getURLsFromElement(element),
-    mediatype: typeMap.get(element.localName),
-    baseURL: document.location.href
+    url: getURLFromElement(element)
   }).then(response =>
   {
     callback(response.filters, response.selectors);
@@ -578,12 +576,11 @@ function initializeComposer()
       case "composer.content.finished":
         if (currentElement && message.remove)
         {
-          // Hide the selected element itself if an added blocking
-          // filter is causing it to collapse. Note that this
+          // Hide the selected element itself. Note that this
           // behavior is incomplete, but the best we can do here,
           // e.g. if an added blocking filter matches other elements,
           // the effect won't be visible until the page is is reloaded.
-          checkCollapse(currentElement.prisoner || currentElement);
+          collapseElement(currentElement.prisoner || currentElement);
 
           // Apply added element hiding filters.
           contentFiltering.apply({elemhide: true});
