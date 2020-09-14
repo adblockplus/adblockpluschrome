@@ -96,6 +96,14 @@ build:firefox:
       - "adblockplusfirefox-*.xpi"
       - "devenv.firefox/qunit/"
 
+build:source:
+  extends: ".build"
+  script:
+    - "npx gulp source -c development --experimental-modules"
+  artifacts:
+    paths:
+      - "adblockplus-*.tar.gz"
+
 docs:
   extends: ".default_template"
   stage: "build"

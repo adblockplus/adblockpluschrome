@@ -19,6 +19,7 @@ import argparse from "argparse";
 import {pathToFileURL} from "url";
 import {execFile} from "child_process";
 import {promisify} from "util";
+import {EOL} from "os";
 
 const BUILDNUM_OFFSET = 10000;
 
@@ -33,6 +34,14 @@ export async function getBuildnum(revision = "HEAD")
                                                      "origin/next",
                                                      "origin/master",
                                                      revision])).stdout, 10);
+}
+
+export async function lsFiles()
+{
+  let {stdout} = await promisify(execFile)(
+    "git", ["ls-files", "--recurse-submodules"]
+  );
+  return stdout.trim().split(EOL);
 }
 
 if (import.meta.url == pathToFileURL(process.argv[1]))

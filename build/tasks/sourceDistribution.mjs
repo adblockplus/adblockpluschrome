@@ -15,10 +15,16 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {createManifest, getManifestContent} from "./manifest.mjs";
-export {default as webpack} from "./webpack.mjs";
-export {default as mapping} from "./mapping.mjs";
-export {translations, chromeTranslations} from "./translations.mjs";
-export {addDevEnvVersion, addTestsPage} from "./devenv.mjs";
-export {buildUI} from "./dependencies.mjs";
-export {default as sourceDistribution} from "./sourceDistribution.mjs";
+import gulp from "gulp";
+import tar from "gulp-tar";
+import gzip from "gulp-gzip";
+import {lsFiles} from "../utils/git.mjs";
+
+export default async function sourceDistribution(filename)
+{
+  let sourceFiles = await lsFiles();
+  return gulp.src(sourceFiles, {base: process.cwd()})
+    .pipe(tar(`${filename}.tar`))
+    .pipe(gzip())
+    .pipe(gulp.dest(process.cwd()));
+}

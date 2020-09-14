@@ -32,10 +32,7 @@ let argumentParser = new argparse.ArgumentParser({
 
 argumentParser.addArgument(
   ["-t", "--target"],
-  {
-    choices: ["chrome", "firefox"],
-    required: true
-  }
+  {choices: ["chrome", "firefox"]}
 );
 argumentParser.addArgument(
   ["-c", "--channel"],
@@ -83,8 +80,11 @@ async function getBuildSteps(options)
   return buildSteps;
 }
 
-async function getBuildOptions(isDevenv)
+async function getBuildOptions(isDevenv, isSource)
 {
+  if (!isSource && !args.target)
+    argumentParser.error("Argument \"-t/--target\" is required");
+
   let opts = {
     isDevenv,
     target: args.target,
@@ -101,9 +101,13 @@ async function getBuildOptions(isDevenv)
   else
     configParser.setConfig(config);
 
-  let configName = isDevenv && configParser.hasTarget(`${opts.target}Dev`) ?
-                    `${opts.target}Dev` :
-                    opts.target;
+  let configName;
+  if (isSource)
+    configName = "base";
+  else if (isDevenv && configParser.hasTarget(`${opts.target}Dev`))
+    configName = `${opts.target}Dev`;
+  else
+    configName = opts.target;
 
   opts.webpackInfo = configParser.getSection(configName, "webpack");
   opts.mapping = configParser.getSection(configName, "mapping");
@@ -171,6 +175,12 @@ export let build = gulp.series(
   tasks.buildUI,
   buildPacked
 );
+
+export async function source()
+{
+  let options = await getBuildOptions(false, true);
+  return tasks.sourceDistribution(`${options.basename}-${options.version}`);
+}
 
 function startWatch()
 {
