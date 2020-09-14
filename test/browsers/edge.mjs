@@ -22,7 +22,7 @@ import path from "path";
 import {exec, execFile} from "child_process";
 import {promisify} from "util";
 
-export let platform = "chrome";
+export let target = "chrome";
 
 const MACOS_BINARY_PATH = "/Applications/Microsoft Edge.app" +
                           "/Contents/MacOS/Microsoft Edge";

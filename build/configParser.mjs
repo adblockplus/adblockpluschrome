@@ -57,7 +57,6 @@ function removeDuplicates(base, override = [])
 function mergeWebpack(base, override)
 {
   return {
-    addonName: override.addonName || base.addonName,
     alias: {...base.alias, ...override.alias},
     bundles: mergeObjectArray(base.bundles, override.bundles)
   };
@@ -118,6 +117,7 @@ function mergeConfig(target)
   webpack.baseConfig = configs.webpack;
 
   parsedConfigs[target] = {
+    basename: baseConfig.basename,
     version,
     webpack,
     mapping: mergeMapping(baseConfig.mapping, config.mapping),

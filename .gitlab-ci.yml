@@ -75,26 +75,26 @@ prepare-dependencies:
   extends: ".default_template"
   stage: "build"
   script:
-    - "npx gulp build -t $PLATFORM -c development --experimental-modules"
-    - "npx gulp devenv -t $PLATFORM --experimental-modules"
+    - "npx gulp build -t $TARGET -c development --experimental-modules"
+    - "npx gulp devenv -t $TARGET --experimental-modules"
 
 build:chrome:
   extends: ".build"
   variables:
-    PLATFORM: "chrome"
+    TARGET: "chrome"
   artifacts:
     paths:
       - "adblockpluschrome-*.zip"
       - "devenv.chrome/qunit/"
 
-build:gecko:
+build:firefox:
   extends: ".build"
   variables:
-    PLATFORM: "gecko"
+    TARGET: "firefox"
   artifacts:
     paths:
       - "adblockplusfirefox-*.xpi"
-      - "devenv.gecko/qunit/"
+      - "devenv.firefox/qunit/"
 
 docs:
   extends: ".default_template"
@@ -135,7 +135,7 @@ docs:
 .test_template_firefox:
   extends: ".test_template"
   needs:
-    - job: "build:gecko"
+    - job: "build:firefox"
       artifacts: true
   variables:
     EXTENSION_FILE: "adblockplusfirefox-*.xpi"

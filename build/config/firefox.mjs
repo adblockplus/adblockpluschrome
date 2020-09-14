@@ -20,8 +20,7 @@ export default {
   webpack: {
     alias: {
       info$: "info.gecko.js.tmpl"
-    },
-    addonName: "adblockplusfirefox"
+    }
   },
   mapping: {
     copy: [

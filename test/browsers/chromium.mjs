@@ -29,7 +29,7 @@ export {ensureChromium as ensureBrowser}
 // otherwise on Windows the chromedriver path is not added to process.env.PATH.
 import "chromedriver";
 
-export let platform = "chrome";
+export let target = "chrome";
 
 // The Chromium version is a build number, quite obscure.
 // Chromium 63.0.3239.x is 508578

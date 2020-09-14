@@ -47,8 +47,5 @@ let common = {
   }
 };
 
-let chromeDev = {...common, extends: "chrome"};
-let geckoDev = {...common, extends: "gecko"};
-
-export {chromeDev, geckoDev};
-
+export let chromeDev = {...common, extends: "chrome"};
+export let firefoxDev = {...common, extends: "firefox"};

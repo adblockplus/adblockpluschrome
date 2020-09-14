@@ -17,6 +17,6 @@
 
 export {default as base} from "./base.mjs";
 export {default as chrome} from "./chrome.mjs";
-export {default as gecko} from "./gecko.mjs";
+export {default as firefox} from "./firefox.mjs";
 export {default as webpack} from "./webpack.config.mjs";
-export {chromeDev, geckoDev} from "./devenv.mjs";
+export {chromeDev, firefoxDev} from "./devenv.mjs";

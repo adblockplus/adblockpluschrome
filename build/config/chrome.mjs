@@ -20,8 +20,7 @@ export default {
   webpack: {
     alias: {
       info$: "info.chrome.js.tmpl"
-    },
-    addonName: "adblockpluschrome"
+    }
   },
   translations: {
     dest: "_locales",

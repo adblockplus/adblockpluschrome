@@ -27,7 +27,7 @@ export {ensureFirefox as ensureBrowser}
 // otherwise on Windows the geckodriver path is not added to process.env.PATH.
 import "geckodriver";
 
-export let platform = "gecko";
+export let target = "firefox";
 export let oldestCompatibleVersion = "57.0";
 
 export function getDriver(browserBinary, devenvPath, insecure)

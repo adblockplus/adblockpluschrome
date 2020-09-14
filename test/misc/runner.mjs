@@ -62,10 +62,10 @@ function getBrowserBinaries(module, browser)
   ];
 }
 
-async function createDevenv(platform)
+async function createDevenv(target)
 {
   if (process.env.SKIP_BUILD != "true")
-    await promisify(exec)(`gulp devenv -t ${platform} --experimental-modules`);
+    await promisify(exec)(`gulp devenv -t ${target} --experimental-modules`);
 }
 
 async function getDriver(binary, devenvCreated, module)
@@ -73,7 +73,7 @@ async function getDriver(binary, devenvCreated, module)
   let [browserBin] = await Promise.all([binary.getPath(), devenvCreated]);
   return module.getDriver(
     browserBin,
-    path.resolve(`./devenv.${module.platform}`),
+    path.resolve(`./devenv.${module.target}`),
     TEST_PAGES_INSECURE
   );
 }
@@ -159,7 +159,7 @@ if (typeof run == "undefined")
         before(async function()
         {
           if (!devenvCreated)
-            devenvCreated = createDevenv(module.platform);
+            devenvCreated = createDevenv(module.target);
 
           this.driver = await getDriver(binary, devenvCreated, module);
 

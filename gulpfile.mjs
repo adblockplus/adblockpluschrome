@@ -33,7 +33,7 @@ let argumentParser = new argparse.ArgumentParser({
 argumentParser.addArgument(
   ["-t", "--target"],
   {
-    choices: ["chrome", "gecko"],
+    choices: ["chrome", "firefox"],
     required: true
   }
 );
@@ -50,10 +50,7 @@ argumentParser.addArgument(["-m", "--manifest"]);
 
 let args = argumentParser.parseKnownArgs()[0];
 
-let targetDir = {
-  chrome: "devenv.chrome",
-  gecko: "devenv.gecko"
-};
+let targetDir = `devenv.${args.target}`;
 
 async function getBuildSteps(options)
 {
@@ -61,17 +58,13 @@ async function getBuildSteps(options)
     tasks.chromeTranslations :
     tasks.translations;
   let buildSteps = [];
+  let addonName = `${options.basename}${options.target}`;
 
   if (options.isDevenv)
   {
     buildSteps.push(
       tasks.addDevEnvVersion(),
-      await tasks.addTestsPage(
-        {
-          scripts: options.tests.scripts,
-          addonName: options.webpackInfo.addonName
-        }
-      )
+      await tasks.addTestsPage({scripts: options.tests.scripts, addonName})
     );
   }
 
@@ -79,7 +72,8 @@ async function getBuildSteps(options)
     tasks.mapping(options.mapping),
     tasks.webpack({
       webpackInfo: options.webpackInfo,
-      version: options.version,
+      addonName,
+      addonVersion: options.version,
       sourceMapType: options.sourceMapType
     }),
     tasks.createManifest(options.manifest),
@@ -114,12 +108,13 @@ async function getBuildOptions(isDevenv)
   opts.webpackInfo = configParser.getSection(configName, "webpack");
   opts.mapping = configParser.getSection(configName, "mapping");
   opts.tests = configParser.getSection(configName, "tests");
+  opts.basename = configParser.getSection(configName, "basename");
   opts.version = configParser.getSection(configName, "version");
   opts.translations = configParser.getSection(configName, "translations");
 
   if (isDevenv)
   {
-    opts.output = gulp.dest(targetDir[opts.target]);
+    opts.output = gulp.dest(targetDir);
   }
   else
   {
@@ -131,7 +126,7 @@ async function getBuildOptions(isDevenv)
     }
 
     opts.output = zip.dest(
-      `${opts.webpackInfo.addonName}-${opts.version}${opts.archiveType}`
+      `${opts.basename}${opts.target}-${opts.version}${opts.archiveType}`
     );
   }
 
@@ -163,7 +158,7 @@ async function buildPacked()
 
 function cleanDir()
 {
-  return del(targetDir[args.target]);
+  return del(targetDir);
 }
 
 export let devenv = gulp.series(

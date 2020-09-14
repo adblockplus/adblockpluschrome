@@ -20,7 +20,8 @@ import merge from "merge-stream";
 import webpackStream from "webpack-stream";
 import webpackMerge from "webpack-merge";
 
-export default function webpack({webpackInfo, version, sourceMapType})
+export default function webpack({webpackInfo, addonName, addonVersion,
+                                 sourceMapType})
 {
   return merge(webpackInfo.bundles.map(bundle =>
     gulp.src(bundle.src)
@@ -44,10 +45,7 @@ export default function webpack({webpackInfo, version, sourceMapType})
                   test: /info.?/,
                   loader: "wp-template-loader",
                   options: {
-                    data: {
-                      addonName: webpackInfo.addonName,
-                      addonVersion: version
-                    }
+                    data: {addonName, addonVersion}
                   }
                 }
               ]

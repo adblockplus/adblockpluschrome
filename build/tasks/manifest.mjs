@@ -30,7 +30,7 @@ function editManifest(data, version, channel, target)
   if (target == "chrome")
     delete data.applications;
 
-  if (target == "gecko")
+  if (target == "firefox")
   {
     let gecko = {
       strict_min_version: data.applications.gecko.strict_min_version
