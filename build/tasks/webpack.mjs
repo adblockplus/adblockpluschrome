@@ -35,7 +35,8 @@ export default function webpack({webpackInfo, version, sourceMapType})
               filename: bundle.dest
             },
             resolve: {
-              alias: webpackInfo.alias
+              alias: webpackInfo.alias,
+              symlinks: false
             },
             module: {
               rules: [
