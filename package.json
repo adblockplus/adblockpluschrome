@@ -41,7 +41,7 @@
     "archive": "node --experimental-modules build/archive.mjs",
     "pretest": "bash -c \"python ensure_dependencies.py\"",
     "generate-buildnum": "node --experimental-modules --no-warnings build/utils/git.mjs",
-    "lint": "eslint --ext .js,.mjs *.js lib/ qunit/ ext/ test/ build/",
+    "lint": "eslint --ext .js,.mjs *.js *.mjs lib/ qunit/ ext/ test/ build/",
     "test-only": "mocha --experimental-modules --unhandled-rejections=strict --delay",
     "test": "npm run test-only --",
     "posttest": "npm run lint",
