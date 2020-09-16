@@ -46,15 +46,21 @@ function editManifest(data, version, channel, target)
       gecko.id = data.applications.gecko.app_id_release;
     }
 
-    let contentScripts = data.content_scripts[0];
-    contentScripts.js.push("include.postload.js");
+    let composerScriptIndex = data.content_scripts.findIndex(
+      script => script.js.includes("composer.postload.js")
+    );
+    let preloadScript = data.content_scripts.find(
+      script => script.run_at == "document_start"
+    );
+
+    preloadScript.js.push(...data.content_scripts[composerScriptIndex].js);
+    data.content_scripts.splice(composerScriptIndex, 1);
 
     delete data.minimum_chrome_version;
     delete data.minimum_opera_version;
     delete data.browser_action.default_popup;
 
     data.applications.gecko = gecko;
-    data.content_scripts = [contentScripts];
   }
 
   return data;
