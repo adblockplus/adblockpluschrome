@@ -18,7 +18,7 @@
 import gulp from "gulp";
 import merge from "merge-stream";
 import webpackStream from "webpack-stream";
-import mergeConfig from "webpack-merge";
+import webpackMerge from "webpack-merge";
 
 export default function webpack({webpackInfo, version, sourceMapType})
 {
@@ -27,7 +27,7 @@ export default function webpack({webpackInfo, version, sourceMapType})
     .pipe(webpackStream(
       {
         quiet: true,
-        config: mergeConfig(
+        config: webpackMerge.merge(
           webpackInfo.baseConfig,
           {
             devtool: sourceMapType,

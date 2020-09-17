@@ -31,8 +31,8 @@
     "selenium-webdriver": "^4.0.0-alpha.7",
     "semver": "^7.3.2",
     "through": "^2.3.8",
-    "webpack-merge": "^4.2.2",
-    "webpack-stream": "~5.0.0"
+    "webpack-merge": "^5.1.4",
+    "webpack-stream": "^6.1.0"
   },
   "scripts": {
     "generate-buildnum": "node --experimental-modules --no-warnings build/utils/git.mjs",
