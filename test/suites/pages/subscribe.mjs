@@ -25,10 +25,12 @@ const {By, until} = webdriver;
 async function clickSubscribe(driver, url)
 {
   await driver.navigate().to(url);
-  await driver.findElement(By.id("subscribe-button")).click();
   await driver.switchTo().window(
-    await driver.wait(async() => (await driver.getAllWindowHandles())[2],
-                      3000, "extension page didn't open")
+    await driver.wait(async() =>
+    {
+      await driver.findElement(By.id("subscribe-button")).click();
+      return (await driver.getAllWindowHandles())[2];
+    }, 3000, "extension page didn't open")
   );
 }
 
