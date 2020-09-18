@@ -87,6 +87,8 @@ export async function getDriver(browserBinary, devenvPath, insecure)
 
   if (browserBinary != null)
     options.setChromeBinaryPath(browserBinary);
+  if (insecure)
+    options.addArguments("--ignore-certificate-errors");
 
   return new webdriver.Builder()
     .forBrowser("chrome")
