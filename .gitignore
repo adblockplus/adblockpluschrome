@@ -1,12 +1,8 @@
-/devenv*/
+/devenv.*/
 /node_modules/
 /docs/
 /test/screenshots/
 /.last_ui_build
-*.zip
-*.crx
-*.xpi
-*.pyc
-*.pyo
-*.sh
-*.tar.gz
+/adblockpluschrome-*.zip
+/adblockplusfirefox-*.xpi
+/adblockplus-*.tar.gz
