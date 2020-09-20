@@ -1,5 +1,3 @@
-[![Pipeline status](https://gitlab.com/eyeo/adblockplus/adblockpluschrome/badges/master/build.svg)](https://gitlab.com/eyeo/adblockplus/adblockpluschrome/pipelines/)
-
 Adblock Plus for Chrome, Opera, Microsoft Edge and Firefox
 ==========================================================
 
