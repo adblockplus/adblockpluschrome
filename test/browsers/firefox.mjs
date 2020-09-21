@@ -30,7 +30,7 @@ import "geckodriver";
 export let target = "firefox";
 export let oldestCompatibleVersion = "57.0";
 
-export function getDriver(browserBinary, devenvPath, insecure)
+export async function getDriver(browserBinary, extensionPaths, insecure)
 {
   let options = new firefox.Options().headless();
   if (browserBinary != null)
@@ -43,9 +43,14 @@ export function getDriver(browserBinary, devenvPath, insecure)
     .setFirefoxOptions(options)
     .build();
 
-  driver.execute(new command.Command("install addon")
-    .setParameter("path", devenvPath)
-    .setParameter("temporary", true));
+  for (let extensionPath of extensionPaths)
+  {
+    await driver.execute(
+      new command.Command("install addon")
+        .setParameter("path", extensionPath)
+        .setParameter("temporary", true)
+    );
+  }
 
   return driver;
 }

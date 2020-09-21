@@ -70,37 +70,45 @@ async function createDevenv(target)
 
 async function getDriver(binary, devenvCreated, module)
 {
-  let [browserBin] = await Promise.all([binary.getPath(), devenvCreated]);
-  return module.getDriver(
-    browserBin,
+  let extensionPaths = [
     path.resolve(`./devenv.${module.target}`),
-    TEST_PAGES_INSECURE
-  );
+    path.resolve("test", "helper-extension")
+  ];
+  let [browserBin] = await Promise.all([binary.getPath(), devenvCreated]);
+  return module.getDriver(browserBin, extensionPaths, TEST_PAGES_INSECURE);
 }
 
 async function waitForExtension(driver)
 {
-  let handles;
   let origin;
-  let extensionUrl;
+  let handle;
   await driver.wait(async() =>
   {
-    handles = await driver.getAllWindowHandles();
-    for (let handle of handles)
+    for (handle of await driver.getAllWindowHandles())
     {
       await driver.switchTo().window(handle);
-      [origin, extensionUrl] =
-        await driver.executeScript("return [location.origin, location.href];");
-      if (origin != "null" && extensionUrl.endsWith("first-run.html"))
+      origin = await driver.executeAsyncScript(`
+        let callback = arguments[arguments.length - 1];
+        (async() =>
+        {
+          if (typeof browser != "undefined")
+          {
+            let info = await browser.management.getSelf();
+            if (info.optionsUrl == location.href)
+            {
+              callback(location.origin);
+              return;
+            }
+          }
+          callback(null);
+        })();`);
+      if (origin)
         return true;
     }
     return false;
-  }, 5000, "unknown extension page origin");
+  }, 5000, "options page not found");
 
-  await driver.switchTo().window(handles[1]);
-  await driver.navigate().to(extensionUrl);
-
-  return [handles[1], origin];
+  return [handle, origin];
 }
 
 async function getPageTests()

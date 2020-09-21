@@ -20,26 +20,16 @@ import webdriver from "selenium-webdriver";
 import {checkLastError} from "../../misc/utils.mjs";
 import {runFirstTest, takeScreenshot, writeScreenshotFile} from "./utils.mjs";
 
-const {By, until} = webdriver;
+const {By} = webdriver;
 
-async function clickSubscribe(driver, url)
+async function addSubscription(driver, extensionHandle)
 {
-  await driver.navigate().to(url);
-  await driver.switchTo().window(
-    await driver.wait(async() =>
-    {
-      await driver.findElement(By.id("subscribe-button")).click();
-      return (await driver.getAllWindowHandles())[2];
-    }, 3000, "extension page didn't open")
-  );
-}
+  await driver.switchTo().window((await driver.getAllWindowHandles())[0]);
+  await driver.findElement(By.id("subscribe-button")).click();
 
-async function confirmSubscribe(driver)
-{
-  await driver.wait(until.ableToSwitchToFrame(0), 4000);
-  let dialog = await driver.wait(
-    until.elementLocated(By.id("dialog-content-predefined")), 4000
-  );
+  await driver.switchTo().window(extensionHandle);
+  await driver.switchTo().frame(0);
+  let dialog = driver.findElement(By.id("dialog-content-predefined"));
   await driver.wait(async() =>
   {
     let [displayed, title] = await Promise.all([
@@ -47,7 +37,7 @@ async function confirmSubscribe(driver)
       dialog.findElement(By.css(".title span")).getText()
     ]);
     return displayed && title == "ABP Testcase Subscription";
-  }, 3000, "dialog shown");
+  }, 2000, "subscribe dialog not shown");
   await dialog.findElement(By.css(".default-focus")).click();
 }
 
@@ -77,8 +67,12 @@ export default () =>
     let {testPagesURL} = this.test.parent.parent;
     try
     {
-      await clickSubscribe(this.driver, testPagesURL);
-      await confirmSubscribe(this.driver);
+      await this.driver.navigate().to(testPagesURL);
+      await this.driver.wait(async() =>
+      {
+        await addSubscription(this.driver, this.extensionHandle);
+        return true;
+      }, 4000);
       await checkSubscriptionAdded(this.driver, testPagesURL);
     }
     catch (e)
@@ -89,6 +83,9 @@ export default () =>
                                               this.test.title, "actual");
       throw new Error(`${e.message}\n${testPagesURL}\n(see ${scrPath})`);
     }
+    await this.driver.switchTo().window(
+      (await this.driver.getAllWindowHandles())[0]
+    );
     await runFirstTest(this.driver, this.browserName, this.browserVersion,
                        this.test.parent.parent.pageTests, this.test.title);
     await checkLastError(this.driver, this.extensionHandle);

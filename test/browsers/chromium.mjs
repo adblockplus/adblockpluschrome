@@ -77,13 +77,13 @@ export async function ensureDriver(browserBinary)
   );
 }
 
-export async function getDriver(browserBinary, devenvPath, insecure)
+export async function getDriver(browserBinary, extensionPaths, insecure)
 {
   await ensureDriver(browserBinary);
 
   let options = new chrome.Options()
     .addArguments("--no-sandbox", "--disable-gpu")
-    .addArguments(`load-extension=${devenvPath}`);
+    .addArguments(`load-extension=${extensionPaths.join(",")}`);
 
   if (browserBinary != null)
     options.setChromeBinaryPath(browserBinary);

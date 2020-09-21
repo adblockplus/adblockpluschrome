@@ -63,13 +63,15 @@ async function ensureDriver(browserBinary)
   );
 }
 
-export async function getDriver(browserBinary, devenvPath, insecure)
+export async function getDriver(browserBinary, extensionPaths, insecure)
 {
   await ensureDriver(browserBinary);
   await msedgedriver.start(["--silent"], true); // Starts on localhost:9515
 
-  let options = {args: ["--no-sandbox", "--disable-partial-raster",
-                        `load-extension=${devenvPath}`]};
+  let options = {
+    args: ["--no-sandbox", "--disable-partial-raster",
+           `load-extension=${extensionPaths.join(",")}`]
+  };
   if (browserBinary)
     options.binary = browserBinary;
 
