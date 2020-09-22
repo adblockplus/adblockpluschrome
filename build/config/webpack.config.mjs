@@ -30,17 +30,11 @@ export default {
     global: false
   },
   resolve: {
-    alias: {
-      events$: "events.js",
-      punycode$: "punycode.js",
-      url$: "url.js",
-      prefs: path.resolve("", "lib/prefs.js")
-    },
     modules: [
-      "lib",
-      "adblockpluscore/lib",
-      "adblockplusui/lib",
-      "build/templates",
+      path.resolve("lib"),
+      path.resolve("adblockpluscore/lib"),
+      path.resolve("adblockplusui/lib"),
+      path.resolve("build/templates"),
       "node_modules"
     ]
   },
