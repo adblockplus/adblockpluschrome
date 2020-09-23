@@ -19,7 +19,7 @@
   },
   "overrides": [
     {
-      "files": ["*.mjs"],
+      "files": ["*.mjs", "./test/unit-tests/**/*.js"],
       "parserOptions": {
         "sourceType": "module"
       }

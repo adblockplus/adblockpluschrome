@@ -32,16 +32,18 @@ export function addDevEnvVersion()
   ]);
 }
 
-export async function addTestsPage(templateData)
+export async function addUnitTestsPage(templateData)
 {
-  let file = await fs.promises.readFile("build/templates/testIndex.html.tmpl");
-  let template = handlebars.compile(file.toString());
+  let file = await fs.promises.readFile(
+    "build/templates/unitTestsIndex.html.tmpl", "utf8"
+  );
+  let template = handlebars.compile(file);
   let data = template(templateData);
 
   return new Readable.from([
     new Vinyl({
       contents: Buffer.from(data),
-      path: "qunit/index.html"
+      path: "tests/index.html"
     })
   ]);
 }

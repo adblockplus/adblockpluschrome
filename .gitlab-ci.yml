@@ -85,7 +85,7 @@ build:chrome:
   artifacts:
     paths:
       - "adblockpluschrome-*.zip"
-      - "devenv.chrome/qunit/"
+      - "devenv.chrome/tests/"
 
 build:firefox:
   extends: ".build"
@@ -94,7 +94,7 @@ build:firefox:
   artifacts:
     paths:
       - "adblockplusfirefox-*.xpi"
-      - "devenv.firefox/qunit/"
+      - "devenv.firefox/tests/"
 
 build:source:
   extends: ".build"

@@ -20,16 +20,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="qunit.css" />
+    <title>{{ addonName }} unit tests</title>
+    <link rel="stylesheet" href="mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
     {{#each scripts }}
     <script src="{{ this }}"></script>
     {{/each}}
-  </head>
-  <body>
-    <h1 id="qunit-header">{{ addonName }} unit tests</h1>
-    <h2 id="qunit-banner"></h2>
-    <div id="qunit-testrunner-toolbar"></div>
-    <h2 id="qunit-userAgent"></h2>
-    <ol id="qunit-tests"></ol>
   </body>
 </html>

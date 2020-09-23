@@ -15,13 +15,12 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
+import assert from "assert";
+import {extractHostFromFrame} from "../../lib/url";
 
-const {extractHostFromFrame} = require("../../lib/url");
-
-QUnit.module("URL/host tools", () =>
+describe("URL/host tools", () =>
 {
-  QUnit.test("Extracting hostname from frame", assert =>
+  it("extracts hostname from frame", () =>
   {
     function testFrameHostname(hierarchy, expectedHostname, message)
     {

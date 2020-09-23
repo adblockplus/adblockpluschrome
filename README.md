@@ -79,11 +79,11 @@ Running tests
 
 ### Unit tests
 
-To verify your changes you can use the unit test suite located in the _qunit_
-directory of the repository. In order to run the unit tests go to the
-extension's Options page, open the JavaScript Console and type in:
+To verify your changes you can use the unit test suite located in the
+`test/unit-tests` directory of the repository. In order to run the unit tests
+go to the extension's Options page, open the JavaScript Console and type in:
 
-    location.href = "qunit/index.html";
+    location.href = "tests/index.html";
 
 The unit tests will run automatically once the page loads.
 

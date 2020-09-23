@@ -15,28 +15,27 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
+import assert from "assert";
+import {chooseFilterSubscriptions} from "../../lib/subscriptionInit";
+import subscriptions from "./resources/subscriptions";
 
-let {chooseFilterSubscriptions} = require("../../lib/subscriptionInit");
-
-QUnit.module("Subscription initialization", hooks =>
+describe("Subscription initialization", () =>
 {
-  let subscriptions = require("../subscriptions.json");
   let origGetUILanguage;
   let language;
 
-  hooks.before(() =>
+  before(() =>
   {
     origGetUILanguage = browser.i18n.getUILanguage;
     browser.i18n.getUILanguage = () => language;
   });
 
-  hooks.after(() =>
+  after(() =>
   {
     browser.i18n.getUILanguage = origGetUILanguage;
   });
 
-  QUnit.test("chooses default filter subscriptions", assert =>
+  it("chooses default filter subscriptions", () =>
   {
     language = "en";
 
@@ -52,7 +51,7 @@ QUnit.module("Subscription initialization", hooks =>
     assert.deepEqual(sub2.languages, ["en"]);
   });
 
-  QUnit.test("falls back to default language", assert =>
+  it("falls back to default language", () =>
   {
     language = "sl";
 

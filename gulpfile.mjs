@@ -61,7 +61,9 @@ async function getBuildSteps(options)
   {
     buildSteps.push(
       tasks.addDevEnvVersion(),
-      await tasks.addTestsPage({scripts: options.tests.scripts, addonName})
+      await tasks.addUnitTestsPage(
+        {scripts: options.unitTests.scripts, addonName}
+      )
     );
   }
 
@@ -112,6 +114,7 @@ async function getBuildOptions(isDevenv, isSource)
   opts.webpackInfo = configParser.getSection(configName, "webpack");
   opts.mapping = configParser.getSection(configName, "mapping");
   opts.tests = configParser.getSection(configName, "tests");
+  opts.unitTests = configParser.getSection(configName, "unitTests");
   opts.basename = configParser.getSection(configName, "basename");
   opts.version = configParser.getSection(configName, "version");
   opts.translations = configParser.getSection(configName, "translations");
@@ -188,7 +191,7 @@ function startWatch()
     [
       "*.js",
       "*.html",
-      "qunit/**",
+      "test/unit-tests/**",
       "lib/*",
       "ext/*",
       "adblockpluscore/lib/*",

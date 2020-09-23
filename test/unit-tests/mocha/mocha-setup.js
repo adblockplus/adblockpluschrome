@@ -1,6 +1,6 @@
 /*
  * This file is part of Adblock Plus <https://adblockplus.org/>,
- * Copyright (C) 2006-present eyeo GmbH
+ * Copyright (C) 2020-present eyeo GmbH
  *
  * Adblock Plus is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as
@@ -15,10 +15,5 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {createManifest, getManifestContent} from "./manifest.mjs";
-export {default as webpack} from "./webpack.mjs";
-export {default as mapping} from "./mapping.mjs";
-export {translations, chromeTranslations} from "./translations.mjs";
-export {addDevEnvVersion, addUnitTestsPage} from "./devenv.mjs";
-export {buildUI} from "./dependencies.mjs";
-export {default as sourceDistribution} from "./sourceDistribution.mjs";
+mocha.setup("bdd");
+mocha.timeout(8000);

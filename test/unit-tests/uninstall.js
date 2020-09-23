@@ -15,32 +15,29 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
-
-const {analytics} = require("../../adblockpluscore/lib/analytics");
-const {filterStorage} = require("../../adblockpluscore/lib/filterStorage");
-const {Prefs} = require("../../lib/prefs");
-const {setUninstallURL} = require("../../lib/uninstall");
+import assert from "assert";
+import {analytics} from "../../adblockpluscore/lib/analytics";
+import {filterStorage} from "../../adblockpluscore/lib/filterStorage";
+import {Prefs} from "../../lib/prefs";
+import {setUninstallURL} from "../../lib/uninstall";
 
 const realSetUninstallURL = browser.runtime.setUninstallURL;
 
 let uninstallURL;
 let urlParams = () => new URL(uninstallURL).search.substr(1).split("&");
 
-QUnit.module("Uninstall URL", hooks =>
+describe("Uninstall URL", () =>
 {
-  hooks.beforeEach(assert =>
+  beforeEach(() =>
   {
     browser.runtime.setUninstallURL = url => uninstallURL = url;
-    assert.ok(true);
   });
-  hooks.afterEach(assert =>
+  afterEach(() =>
   {
     browser.runtime.setUninstalLURL = realSetUninstallURL;
-    assert.ok(true);
   });
 
-  QUnit.test("parameters in uninstall URL", assert =>
+  it("adds parameters to uninstall URL", () =>
   {
     const info = require("info");
     const expectedParams = [
@@ -68,7 +65,7 @@ QUnit.module("Uninstall URL", hooks =>
     }
   });
 
-  QUnit.test("uninstall URL length", assert =>
+  it("limits uninstall URL length", () =>
   {
     const maxLength = 255;
     setUninstallURL();
@@ -78,58 +75,59 @@ QUnit.module("Uninstall URL", hooks =>
     );
   });
 
-  let initialSubscriptions;
+  describe("Subscription parameter", () =>
+  {
+    let initialSubscriptions;
 
-  QUnit.module("subscription parameter", {
-    beforeEach()
+    beforeEach(() =>
     {
       browser.runtime.setUninstallURL = url => uninstallURL = url;
       initialSubscriptions = Array.from(filterStorage.subscriptions());
-    },
-    afterEach()
+    });
+    afterEach(() =>
     {
       for (let subscription of initialSubscriptions)
         filterStorage.addSubscription(subscription);
       browser.runtime.setUninstalLURL = realSetUninstallURL;
-    }
-  });
+    });
 
-  QUnit.test("parameter s=0", assert =>
-  {
-    for (let subscription of initialSubscriptions)
-      filterStorage.removeSubscription(subscription);
-    setUninstallURL();
-    assert.ok(
-      urlParams().includes("s=0"),
-      "subscription parameter 's' has the expected value '0'"
-    );
-  });
-
-  QUnit.test("parameter s=1", assert =>
-  {
-    for (let subscription of initialSubscriptions)
+    it("produces parameter s=0", () =>
     {
-      if (subscription.type != "ads")
+      for (let subscription of initialSubscriptions)
         filterStorage.removeSubscription(subscription);
-    }
-    setUninstallURL();
-    assert.ok(
-      urlParams().includes("s=1"),
-      "subscription parameter 's' has the expected value '1'" + urlParams()
-    );
-  });
+      setUninstallURL();
+      assert.ok(
+        urlParams().includes("s=0"),
+        "subscription parameter 's' has the expected value '0'"
+      );
+    });
 
-  QUnit.test("parameter s=2", assert =>
-  {
-    for (let subscription of initialSubscriptions)
+    it("produces parameter s=1", () =>
     {
-      if (subscription.url != Prefs.subscriptions_exceptionsurl)
-        filterStorage.removeSubscription(subscription);
-    }
-    setUninstallURL();
-    assert.ok(
-      urlParams().includes("s=2"),
-      "subscription parameter 's' has the expected value '2'" + urlParams()
-    );
+      for (let subscription of initialSubscriptions)
+      {
+        if (subscription.type != "ads")
+          filterStorage.removeSubscription(subscription);
+      }
+      setUninstallURL();
+      assert.ok(
+        urlParams().includes("s=1"),
+        "subscription parameter 's' has the expected value '1'" + urlParams()
+      );
+    });
+
+    it("produces parameter s=2", () =>
+    {
+      for (let subscription of initialSubscriptions)
+      {
+        if (subscription.url != Prefs.subscriptions_exceptionsurl)
+          filterStorage.removeSubscription(subscription);
+      }
+      setUninstallURL();
+      assert.ok(
+        urlParams().includes("s=2"),
+        "subscription parameter 's' has the expected value '2'" + urlParams()
+      );
+    });
   });
 });

@@ -19,8 +19,8 @@ let common = {
   webpack: {
     bundles: [
       {
-        dest: "qunit/tests.js",
-        src: ["qunit/tests/*"]
+        dest: "tests/unit-tests.js",
+        src: ["test/unit-tests/*"]
       },
       {
         dest: "background.js",
@@ -31,18 +31,24 @@ let common = {
   mapping: {
     copy: [
       {
-        dest: "qunit",
-        src: ["qunit/qunit.*"]
+        dest: "tests",
+        src: [
+          "node_modules/mocha/mocha.js",
+          "node_modules/mocha/mocha.css",
+          "test/unit-tests/mocha/*"
+        ]
       }
     ]
   },
-  tests: {
+  unitTests: {
     scripts: [
-      "qunit.js",
+      "mocha.js",
+      "mocha-setup.js",
       "../polyfill.js",
-      " ../ext/common.js",
+      "../ext/common.js",
       "../ext/background.js",
-      "tests.js"
+      "unit-tests.js",
+      "mocha-runner.js"
     ]
   }
 };

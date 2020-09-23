@@ -122,7 +122,8 @@ function mergeConfig(target)
     webpack,
     mapping: mergeMapping(baseConfig.mapping, config.mapping),
     translations,
-    tests: mergeTests(baseConfig.tests, config.tests)
+    tests: mergeTests(baseConfig.tests, config.tests),
+    unitTests: mergeTests(baseConfig.unitTests, config.unitTests)
   };
 
   return parsedConfigs[target];

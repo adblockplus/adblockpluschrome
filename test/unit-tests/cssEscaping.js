@@ -1,12 +1,27 @@
-"use strict";
+/*
+ * This file is part of Adblock Plus <https://adblockplus.org/>,
+ * Copyright (C) 2006-present eyeo GmbH
+ *
+ * Adblock Plus is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * Adblock Plus is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-const {Filter, ElemHideFilter} =
-  require("../../adblockpluscore/lib/filterClasses");
-const {escapeCSS, quoteCSS} = require("../../lib/filterComposer");
+import assert from "assert";
+import {Filter, ElemHideFilter} from "../../adblockpluscore/lib/filterClasses";
+import {escapeCSS, quoteCSS} from "../../lib/filterComposer";
 
-QUnit.module("CSS escaping", () =>
+describe("CSS escaping", () =>
 {
-  QUnit.test("CSS escaping", assert =>
+  it("escapes CSS", () =>
   {
     function testSelector(opts)
     {
