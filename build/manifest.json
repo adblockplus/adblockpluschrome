@@ -77,8 +77,8 @@
     }
   ],
   "manifest_version": 2,
-  "minimum_chrome_version": "55.0",
-  "minimum_opera_version": "42.0",
+  "minimum_chrome_version": "60.0",
+  "minimum_opera_version": "47.0",
   "name": "__MSG_name_releasebuild__",
   "short_name": "__MSG_name__",
   "description": "__MSG_description__",
