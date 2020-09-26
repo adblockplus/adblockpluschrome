@@ -10,7 +10,7 @@ Building
 
 ### Requirements
 
-- [Node.js](https://nodejs.org/) (>= 10.17.0, >= 12 on Windows)
+- [Node.js](https://nodejs.org/) (>= 12.17.0)
 
 ### Building on Windows
 
@@ -36,7 +36,7 @@ e.g. after checking out a new revison.
 
 Run the following command in the project directory:
 
-    npx gulp build -t {chrome|firefox} [-c development] --experimental-modules
+    npx gulp build -t {chrome|firefox} [-c development]
 
 This will create a build with a name in the form
 _adblockpluschrome-n.n.n.zip_ or _adblockplusfirefox-n.n.n.xpi_. These builds
@@ -48,7 +48,7 @@ unpacked loaded in development mode for testing (same as devenv builds below).
 To simplify the process of testing your changes you can create an unpacked
 development environment. For that run one of the following command:
 
-    npx gulp devenv -t {chrome|firefox} --experimental-modules
+    npx gulp devenv -t {chrome|firefox}
 
 This will create a _devenv.*_ directory in the project directory. You can load
 the directory as an unpacked extension under _chrome://extensions_ in
@@ -66,13 +66,13 @@ This can be done by:
  - Specifying a path to a new configuration file relative to `gulpfile.mjs`
 (it should match the structure found in `build/config/`).
 
-        npx gulp {build|devenv} -t {chrome|firefox} --config config.mjs --experimental-modules
+        npx gulp {build|devenv} -t {chrome|firefox} --config config.mjs
 
  - Specifying a path to a new `manifest.json` file relative to `gulpfile.mjs`.
 You should check `build/manifest.json` and `build/tasks/manifest.mjs` to see
 how we modify it.
 
-        npx gulp {build|devenv} -t {chrome|firefox} -m manifest.json --experimental-modules
+        npx gulp {build|devenv} -t {chrome|firefox} -m manifest.json
 
 Running tests
 -------------

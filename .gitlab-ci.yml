@@ -16,7 +16,7 @@
 ---
 
 default:
-  image: "registry.gitlab.com/eyeo/docker/adblockplus-ci:node10"
+  image: "registry.gitlab.com/eyeo/docker/adblockplus-ci:node12"
 
 stages:
   - "prepare"
@@ -75,8 +75,8 @@ prepare-dependencies:
   extends: ".default_template"
   stage: "build"
   script:
-    - "npx gulp build -t $TARGET -c development --experimental-modules"
-    - "npx gulp devenv -t $TARGET --experimental-modules"
+    - "npx gulp build -t $TARGET -c development"
+    - "npx gulp devenv -t $TARGET"
 
 build:chrome:
   extends: ".build"
@@ -99,7 +99,7 @@ build:firefox:
 build:source:
   extends: ".build"
   script:
-    - "npx gulp source -c development --experimental-modules"
+    - "npx gulp source -c development"
   artifacts:
     paths:
       - "adblockplus-*.tar.gz"
@@ -148,19 +148,6 @@ docs:
   variables:
     EXTENSION_FILE: "adblockplusfirefox-*.xpi"
 
-.test_template_edge:
-  extends: ".test_template_chromium"
-  before_script:
-    - "Expand-Archive -Path $EXTENSION_FILE -DestinationPath devenv.chrome"
-    - "choco install -y microsoft-edge --version=79.0.309.71"
-    - "npm install"
-  tags:
-    - shared-windows
-    - windows
-    - windows-1809
-  # https://gitlab.com/gitlab-org/gitlab-runner/-/issues/25980
-  cache: null
-
 lint:yaml:
   image: "registry.gitlab.com/eyeo/docker/yamllint:1.14.0-configured"
   stage: "test"
@@ -205,9 +192,20 @@ test:chromium:latest:
     - "xvfb-run -a npm run test-only -- -g 'Chromium \\(latest\\)'"
 
 test:edge:
-  extends: ".test_template_edge"
+  extends: ".test_template_chromium"
+  before_script:
+    - "Expand-Archive -Path $EXTENSION_FILE -DestinationPath devenv.chrome"
+    - "choco upgrade -y nodejs --version=12.17.0"
+    - "choco install -y microsoft-edge --version=79.0.309.71"
+    - "npm install"
   script:
     - "npm run test-only -- -g 'Edge'"
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
+  # https://gitlab.com/gitlab-org/gitlab-runner/-/issues/25980
+  cache: null
 
 ###############################################################################
 #                                 Public pages                                #

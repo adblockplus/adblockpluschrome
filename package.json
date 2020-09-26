@@ -3,7 +3,7 @@
   "repository": "https://gitlab.com/eyeo/adblockplus/adblockpluschrome",
   "license": "GPL-3.0",
   "engines": {
-    "node": ">=10.17.0",
+    "node": ">=12.17.0",
     "npm": ">=6"
   },
   "dependencies": {
@@ -38,13 +38,13 @@
     "webpack-stream": "^6.1.0"
   },
   "scripts": {
-    "generate-buildnum": "node --experimental-modules --no-warnings build/utils/git.mjs",
+    "generate-buildnum": "node --no-warnings build/utils/git.mjs",
     "lint": "eslint --ext .js,.mjs *.js *.mjs lib/ qunit/ ext/ test/ build/",
-    "test-only": "mocha --experimental-modules --unhandled-rejections=strict --delay",
+    "test-only": "mocha --unhandled-rejections=strict --delay",
     "test": "npm run test-only --",
     "postinstall": "cd adblockplusui && npm install --only=production --loglevel=error --no-audit --no-fund --no-package-lock --no-optional",
     "posttest": "npm run lint",
     "docs": "jsdoc --configure jsdoc.conf --destination docs lib",
-    "download-test-browsers": "node --experimental-modules test/bin/downloadBrowsers.mjs"
+    "download-test-browsers": "node test/bin/downloadBrowsers.mjs"
   }
 }

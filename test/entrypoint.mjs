@@ -24,7 +24,7 @@ import url from "url";
 import {exec} from "child_process";
 import {promisify} from "util";
 import got from "got";
-import {checkLastError, loadModules} from "./utils.mjs";
+import {checkLastError, loadModules} from "./misc/utils.mjs";
 
 function getBrowserBinaries(module, browser)
 {
@@ -65,7 +65,7 @@ function getBrowserBinaries(module, browser)
 async function createDevenv(target)
 {
   if (process.env.SKIP_BUILD != "true")
-    await promisify(exec)(`gulp devenv -t ${target} --experimental-modules`);
+    await promisify(exec)(`gulp devenv -t ${target}`);
 }
 
 async function getDriver(binary, devenvCreated, module)
