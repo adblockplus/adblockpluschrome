@@ -48,14 +48,14 @@ export async function runWithHandle(driver, handle, callback)
 
 export async function loadModules(dirname)
 {
-  let entries = await fs.promises.readdir(dirname, {withFileTypes: true});
-  return await Promise.all(entries.map(async dirent =>
+  let modules = [];
+  for (let dirent of await fs.promises.readdir(dirname, {withFileTypes: true}))
   {
     let filename = path.resolve(dirname, dirent.name);
     let basename = path.parse(dirent.name).name;
     if (dirent.isDirectory())
       filename = path.join(filename, "index.mjs");
-    // file:// URLs are used here because they are portable in Windows
-    return [await import(url.pathToFileURL(filename)), basename];
-  }));
+    modules.push([await import(url.pathToFileURL(filename)), basename]);
+  }
+  return modules;
 }
