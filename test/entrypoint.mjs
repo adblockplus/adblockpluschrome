@@ -143,11 +143,9 @@ if (typeof run == "undefined")
 
 (async() =>
 {
-  let [pageTests, browsers, suites] = await Promise.all([
-    getPageTests(),
-    loadModules(path.join("test", "browsers")),
-    loadModules(path.join("test", "suites"))
-  ]);
+  let pageTests = await getPageTests();
+  let browsers = await loadModules(path.join("test", "browsers"));
+  let suites = await loadModules(path.join("test", "suites"));
 
   for (let [module, browser] of browsers)
   {
