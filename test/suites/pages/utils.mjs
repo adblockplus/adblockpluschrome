@@ -60,10 +60,6 @@ export async function takeScreenshot(driver)
 
 export function isExcluded(page, browserName, browserVersion)
 {
-  // https://gitlab.com/eyeo/adblockplus/testpages.adblockplus.org/-/issues/55
-  if (page == "filters/object" || page == "exceptions/object")
-    return true;
-
   let excluded;
   if (page in specializedTests)
     excluded = specializedTests[page].excludedBrowsers;
