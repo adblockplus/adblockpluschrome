@@ -26,18 +26,20 @@ async function addSubscription(driver, extensionHandle)
 {
   await driver.switchTo().window((await driver.getAllWindowHandles())[0]);
   await driver.findElement(By.id("subscribe-button")).click();
-
   await driver.switchTo().window(extensionHandle);
-  await driver.switchTo().frame(0);
-  let dialog = driver.findElement(By.id("dialog-content-predefined"));
+
+  let dialog;
   await driver.wait(async() =>
   {
+    await driver.switchTo().defaultContent();
+    await driver.switchTo().frame(0);
+    dialog = driver.findElement(By.id("dialog-content-predefined"));
     let [displayed, title] = await Promise.all([
       dialog.isDisplayed(),
       dialog.findElement(By.css(".title span")).getText()
     ]);
     return displayed && title == "ABP Testcase Subscription";
-  }, 2000, "subscribe dialog not shown");
+  }, 4000, "subscribe dialog not shown");
   await dialog.findElement(By.css(".default-focus")).click();
 }
 
@@ -45,12 +47,10 @@ async function checkSubscriptionAdded(driver, url)
 {
   let [added, err] = await driver.executeAsyncScript(`
      let callback = arguments[arguments.length - 1];
-     browser.runtime.sendMessage({type: "subscriptions.get",
-                                  ignoreDisabled: true,
-                                  downloadable: true}).then(subs =>
-       subs.some(s =>
-         s.url == "${url}abp-testcase-subscription.txt"
-       )
+     browser.runtime.sendMessage(
+       {type: "subscriptions.get", ignoreDisabled: true, downloadable: true}
+     ).then(
+       subs => subs.some(s => s.url == "${url}")
      ).then(
        res => callback([res, null]),
        err => callback([null, err])
@@ -60,20 +60,28 @@ async function checkSubscriptionAdded(driver, url)
   assert.ok(added, "subscription added");
 }
 
+async function removeSubscription(driver, extensionHandle, url)
+{
+  await driver.switchTo().window(extensionHandle);
+  await driver.executeAsyncScript(`
+    let callback = arguments[arguments.length - 1];
+    browser.runtime.sendMessage(
+      {type: "subscriptions.remove", url: "${url}"}
+    ).then(() => callback(), () => callback());`
+  );
+}
+
 export default () =>
 {
   it("subscribes to a link", async function()
   {
-    let {testPagesURL} = this.test.parent.parent;
+    let {testPagesURL, pageTests} = this.test.parent.parent.parent;
+    let subscription = `${testPagesURL}abp-testcase-subscription.txt`;
     try
     {
       await this.driver.navigate().to(testPagesURL);
-      await this.driver.wait(async() =>
-      {
-        await addSubscription(this.driver, this.extensionHandle);
-        return true;
-      }, 4000);
-      await checkSubscriptionAdded(this.driver, testPagesURL);
+      await addSubscription(this.driver, this.extensionHandle);
+      await checkSubscriptionAdded(this.driver, subscription);
     }
     catch (e)
     {
@@ -87,7 +95,8 @@ export default () =>
       (await this.driver.getAllWindowHandles())[0]
     );
     await runFirstTest(this.driver, this.browserName, this.browserVersion,
-                       this.test.parent.parent.pageTests, this.test.title);
+                       pageTests, this.test.title);
+    await removeSubscription(this.driver, this.extensionHandle, subscription);
     await checkLastError(this.driver, this.extensionHandle);
   });
 };

@@ -72,8 +72,6 @@ export default () =>
       assert.ok(this.test.parent.parent.pageTests.length > 0);
     });
 
-    defineSubscribeTest();
-
     describe("Filters", function()
     {
       for (let [url, pageTitle] of this.parent.parent.pageTests)
@@ -104,6 +102,11 @@ export default () =>
           await checkLastError(this.driver, this.extensionHandle);
         });
       }
+    });
+
+    describe("Subscriptions", () =>
+    {
+      defineSubscribeTest();
     });
 
     describe("Final checks", () =>
