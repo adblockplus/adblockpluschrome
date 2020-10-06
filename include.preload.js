@@ -178,21 +178,23 @@ function checkSitekey()
     browser.runtime.sendMessage({type: "filters.addKey", token: attr});
 }
 
-function ElementHidingTracer(selectors, exceptions)
+class ElementHidingTracer
 {
-  this.selectors = selectors;
-  this.exceptions = exceptions;
-  this.changedNodes = [];
-  this.timeout = null;
-  this.observer = new MutationObserver(this.observe.bind(this));
-  this.trace = this.trace.bind(this);
+  constructor(selectors, exceptions)
+  {
+    this.selectors = selectors;
+    this.exceptions = exceptions;
+    this.changedNodes = [];
+    this.timeout = null;
+    this.observer = new MutationObserver(this.observe.bind(this));
+    this.trace = this.trace.bind(this);
 
-  if (document.readyState == "loading")
-    document.addEventListener("DOMContentLoaded", this.trace);
-  else
-    this.trace();
-}
-ElementHidingTracer.prototype = {
+    if (document.readyState == "loading")
+      document.addEventListener("DOMContentLoaded", this.trace);
+    else
+      this.trace();
+  }
+
   checkNodes(nodes)
   {
     let effectiveSelectors = [];
@@ -230,14 +232,14 @@ ElementHidingTracer.prototype = {
         filters: effectiveExceptions
       });
     }
-  },
+  }
 
   onTimeout()
   {
     this.checkNodes(this.changedNodes);
     this.changedNodes = [];
     this.timeout = null;
-  },
+  }
 
   observe(mutations)
   {
@@ -292,7 +294,7 @@ ElementHidingTracer.prototype = {
     // (like YouTube) freeze when the devtools panel is active.
     if (this.timeout == null)
       this.timeout = setTimeout(this.onTimeout.bind(this), 1000);
-  },
+  }
 
   trace()
   {
@@ -306,7 +308,7 @@ ElementHidingTracer.prototype = {
         subtree: true
       }
     );
-  },
+  }
 
   disconnect()
   {
@@ -314,16 +316,19 @@ ElementHidingTracer.prototype = {
     this.observer.disconnect();
     clearTimeout(this.timeout);
   }
-};
-
-function ContentFiltering()
-{
-  this.styles = new Map();
-  this.tracer = null;
-  this.cssProperties = null;
-  this.elemHideEmulation = new ElemHideEmulation(this.hideElements.bind(this));
 }
-ContentFiltering.prototype = {
+
+class ContentFiltering
+{
+  constructor()
+  {
+    this.styles = new Map();
+    this.tracer = null;
+    this.cssProperties = null;
+    this.elemHideEmulation =
+      new ElemHideEmulation(this.hideElements.bind(this));
+  }
+
   addRulesInline(rules, groupName = "standard", appendOnly = false)
   {
     let style = this.styles.get(groupName);
@@ -358,7 +363,7 @@ ContentFiltering.prototype = {
 
     for (let rule of rules)
       style.sheet.insertRule(rule, style.sheet.cssRules.length);
-  },
+  }
 
   addSelectors(selectors, groupName = "standard", appendOnly = false)
   {
@@ -383,7 +388,7 @@ ContentFiltering.prototype = {
         this.addRulesInline(rules, groupName, appendOnly);
       }
     });
-  },
+  }
 
   hideElements(elements, filters)
   {
@@ -398,7 +403,7 @@ ContentFiltering.prototype = {
         filters
       });
     }
-  },
+  }
 
   apply(filterTypes)
   {
@@ -428,7 +433,7 @@ ContentFiltering.prototype = {
       this.elemHideEmulation.apply(response.emulatedPatterns);
     });
   }
-};
+}
 
 if (document instanceof HTMLDocument)
 {

@@ -20,40 +20,48 @@
 {
   let nonEmptyPageMaps = new Set();
 
-  let PageMap = ext.PageMap = function()
+  ext.PageMap = class PageMap
   {
-    this._map = new Map();
-  };
-  PageMap.prototype = {
+    constructor()
+    {
+      this._map = new Map();
+    }
+
     _delete(id)
     {
       this._map.delete(id);
 
       if (this._map.size == 0)
         nonEmptyPageMaps.delete(this);
-    },
+    }
+
     keys()
     {
       return Array.from(this._map.keys()).map(ext.getPage);
-    },
+    }
+
     get(page)
     {
       return this._map.get(page.id);
-    },
+    }
+
     set(page, value)
     {
       this._map.set(page.id, value);
       nonEmptyPageMaps.add(this);
-    },
+    }
+
     has(page)
     {
       return this._map.has(page.id);
-    },
+    }
+
     clear()
     {
       this._map.clear();
       nonEmptyPageMaps.delete(this);
-    },
+    }
+
     delete(page)
     {
       this._delete(page.id);
@@ -69,12 +77,14 @@
 
   /* Pages */
 
-  let Page = ext.Page = function(tab)
+  let Page = ext.Page = class Page
   {
-    this.id = tab.id;
-    this._url = new URL(tab.url || "about:blank");
-  };
-  Page.prototype = {
+    constructor(tab)
+    {
+      this.id = tab.id;
+      this._url = new URL(tab.url || "about:blank");
+    }
+
     get url()
     {
       // usually our Page objects are created from Chrome's Tab objects, which
