@@ -86,22 +86,31 @@ async function waitForExtension(driver)
   {
     for (handle of await driver.getAllWindowHandles())
     {
-      await driver.switchTo().window(handle);
-      origin = await driver.executeAsyncScript(`
-        let callback = arguments[arguments.length - 1];
-        (async() =>
-        {
-          if (typeof browser != "undefined")
+      try
+      {
+        await driver.switchTo().window(handle);
+        origin = await driver.executeAsyncScript(`
+          let callback = arguments[arguments.length - 1];
+          (async() =>
           {
-            let info = await browser.management.getSelf();
-            if (info.optionsUrl == location.href)
+            if (typeof browser != "undefined")
             {
-              callback(location.origin);
-              return;
+              let info = await browser.management.getSelf();
+              if (info.optionsUrl == location.href)
+              {
+                callback(location.origin);
+                return;
+              }
             }
-          }
-          callback(null);
-        })();`);
+            callback(null);
+          })();`);
+      }
+      catch (ex)
+      {
+        // Ignore windows that we're unable to switch to
+        // or execute our script in
+      }
+
       if (origin)
         return true;
     }

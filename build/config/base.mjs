@@ -28,6 +28,7 @@ export default {
           "lib/requestBlocker.js",
           "lib/popupBlocker.js",
           "lib/subscriptionInit.js",
+          "adblockplusui/lib/init.js",
           "lib/filterComposer.js",
           "lib/stats.js",
           "lib/uninstall.js",
