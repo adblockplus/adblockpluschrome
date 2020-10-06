@@ -15,45 +15,35 @@
 
 ---
 
-image: "registry.gitlab.com/eyeo/docker/adblockplus-ci:node10"
+default:
+  image: "registry.gitlab.com/eyeo/docker/adblockplus-ci:node12"
 
 stages:
   - "prepare"
   - "build"
-  - "download"
   - "publish"
   - "test"
-  - "scp"
 
 variables:
+  GIT_SUBMODULE_STRATEGY: "recursive"
   npm_config_audit: "false"
   npm_config_prefer_offline: "true"
   npm_config_unsafe_perm: "true"
-
-.dependencies:
-  script: &dependencies
-    - "mkdir -p .git/info"
-    - "python ensure_dependencies.py"
-    - "npm install"
 
 .cache:
   cache: &cache
     key: "global-cache"
     untracked: true
     paths:
-      - "adblockpluscore/"
-      - "adblockplusui/"
-      - "buildtools/"
-      # npm audit fails if the node_modules folder is cached
-      # but the changes in package-lock.json are not.
-      # That is a bug (https://github.com/npm/npm/issues/20604)
-      # which in our case is triggerred by using stubs in package.json.
-      - "package-lock.json"
+      - "adblockpluscore/*-snapshots/download-cache/"
+      - "adblockpluscore/chromium-snapshots/chromedriver/"
+      - "adblockplusui/node_modules/"
 
 .default_template:
   needs:
     - job: "prepare-dependencies"
-  before_script: *dependencies
+  before_script:
+    - "npm install"
   retry:
     max: 2
     when: "stuck_or_timeout_failure"
@@ -67,10 +57,10 @@ variables:
 prepare-dependencies:
   stage: "prepare"
   script:
-    - "mv -t /tmp adblockpluscore/*-snapshots 2>/dev/null || true"
     - "git clean -x -d -ff"
-    - *dependencies
-    - "mv -t adblockpluscore /tmp/*-snapshots 2>/dev/null || true"
+    - "git -C adblockpluscore clean -e '/*-snapshots' -x -d -ff"
+    - "git -C adblockplusui clean -x -d -ff"
+    - "npm install"
     - "npm run download-test-browsers"
   except:
     - "schedules"
@@ -85,23 +75,34 @@ prepare-dependencies:
   extends: ".default_template"
   stage: "build"
   script:
-    - "python build.py build -t $PLATFORM"
+    - "npx gulp build -t $TARGET -c development"
+    - "npx gulp devenv -t $TARGET"
 
 build:chrome:
   extends: ".build"
   variables:
-    PLATFORM: "chrome"
+    TARGET: "chrome"
   artifacts:
     paths:
       - "adblockpluschrome-*.zip"
+      - "devenv.chrome/qunit/"
 
-build:gecko:
+build:firefox:
   extends: ".build"
   variables:
-    PLATFORM: "gecko"
+    TARGET: "firefox"
   artifacts:
     paths:
       - "adblockplusfirefox-*.xpi"
+      - "devenv.firefox/qunit/"
+
+build:source:
+  extends: ".build"
+  script:
+    - "npx gulp source -c development"
+  artifacts:
+    paths:
+      - "adblockplus-*.tar.gz"
 
 docs:
   extends: ".default_template"
@@ -120,11 +121,32 @@ docs:
 .test_template:
   extends: ".default_template"
   stage: "test"
+  before_script:
+    - "npm install"
+    - "unzip -q $EXTENSION_FILE -d devenv.*"
+  variables:
+    SKIP_BUILD: "true"
   artifacts:
     paths:
       - "test/screenshots/"
     when: "on_failure"
     expire_in: "1 mo"
+
+.test_template_chromium:
+  extends: ".test_template"
+  needs:
+    - job: "build:chrome"
+      artifacts: true
+  variables:
+    EXTENSION_FILE: "adblockpluschrome-*.zip"
+
+.test_template_firefox:
+  extends: ".test_template"
+  needs:
+    - job: "build:firefox"
+      artifacts: true
+  variables:
+    EXTENSION_FILE: "adblockplusfirefox-*.xpi"
 
 lint:yaml:
   image: "registry.gitlab.com/eyeo/docker/yamllint:1.14.0-configured"
@@ -150,74 +172,40 @@ audit:
   allow_failure: true
 
 test:firefox:oldest:
-  extends: ".test_template"
+  extends: ".test_template_firefox"
   script:
     - "npm run test-only -- -g 'Firefox \\(oldest\\)'"
 
 test:firefox:latest:
-  extends: ".test_template"
+  extends: ".test_template_firefox"
   script:
     - "npm run test-only -- -g 'Firefox \\(latest\\)'"
 
 test:chromium:oldest:
-  extends: ".test_template"
+  extends: ".test_template_chromium"
   script:
     - "xvfb-run -a npm run test-only -- -g 'Chromium \\(oldest\\)'"
 
 test:chromium:latest:
-  extends: ".test_template"
+  extends: ".test_template_chromium"
   script:
     - "xvfb-run -a npm run test-only -- -g 'Chromium \\(latest\\)'"
 
-###############################################################################
-#                                Scheduled jobs                               #
-###############################################################################
-
-.download:
-  stage: "download"
-  script:
+test:edge:
+  extends: ".test_template_chromium"
+  before_script:
+    - "Expand-Archive -Path $EXTENSION_FILE -DestinationPath devenv.chrome"
+    - "choco upgrade -y nodejs --version=12.17.0"
+    - "choco install -y microsoft-edge --version=79.0.309.71"
     - "npm install"
-    - "npm run archive -- $EXTENSION_ID"
-  only:
-    - "schedules"
-  artifacts:
-    paths:
-      - "adblockpluschrome-*.crx"
-
-.scp:
-  stage: "scp"
   script:
-    - "scp *.crx $DESTINATION"
-  only:
-    - "schedules"
+    - "npm run test-only -- -g 'Edge'"
   tags:
-    - "protected"
-
-download:release:
-  extends: ".download"
-  variables:
-    EXTENSION_ID: "cfhdojbkjhnklbpkdaibdccddilifddb"
-
-download:devbuild:
-  extends: ".download"
-  variables:
-    EXTENSION_ID: "ldcecbkkoecffmfljeihcmifjjdoepkn"
-
-scp:release:
-  extends: ".scp"
-  needs:
-    - job: "download:release"
-      artifacts: true
-  variables:
-    DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/releases/"
-
-scp:devbuild:
-  extends: ".scp"
-  needs:
-    - job: "download:devbuild"
-      artifacts: true
-  variables:
-    DESTINATION: "builds_user@eyeofiles.com:/var/adblockplus/fileserver/builds/devbuilds/adblockpluschrome/"
+    - shared-windows
+    - windows
+    - windows-1809
+  # https://gitlab.com/gitlab-org/gitlab-runner/-/issues/25980
+  cache: null
 
 ###############################################################################
 #                                 Public pages                                #

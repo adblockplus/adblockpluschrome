@@ -1,13 +1,12 @@
 "use strict";
 
+const {Filter, ElemHideFilter} =
+  require("../../adblockpluscore/lib/filterClasses");
+const {escapeCSS, quoteCSS} = require("../../lib/filterComposer");
+
+QUnit.module("CSS escaping", () =>
 {
-  const {Filter, ElemHideFilter} =
-    require("../../adblockpluscore/lib/filterClasses");
-  const {escapeCSS, quoteCSS} = require("../../lib/filterComposer");
-
-  QUnit.module("CSS escaping");
-
-  test("CSS escaping", () =>
+  QUnit.test("CSS escaping", assert =>
   {
     function testSelector(opts)
     {
@@ -44,11 +43,11 @@
       let filter = Filter.fromText("##" + opts.selector);
 
       if (!(filter instanceof ElemHideFilter))
-        ok(false, opts.selector + " (not allowed in elemhide filters)");
+        assert.ok(false, opts.selector + " (not allowed in elemhide filters)");
       else if (mustMatch)
-        equal(foundElement, element, opts.selector);
+        assert.equal(foundElement, element, opts.selector);
       else
-        ok(true, opts.selector);
+        assert.ok(true, opts.selector);
     }
 
     function testEscape(s)
@@ -99,4 +98,4 @@
     // require escaping.
     testEscape("\uD83D\uDE3B\u2665\u00E4");
   });
-}
+});

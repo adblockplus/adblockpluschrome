@@ -17,12 +17,11 @@
 
 "use strict";
 
+const {extractHostFromFrame} = require("../../lib/url");
+
+QUnit.module("URL/host tools", () =>
 {
-  const {extractHostFromFrame} = require("../../lib/url");
-
-  QUnit.module("URL/host tools");
-
-  test("Extracting hostname from frame", () =>
+  QUnit.test("Extracting hostname from frame", assert =>
   {
     function testFrameHostname(hierarchy, expectedHostname, message)
     {
@@ -31,7 +30,7 @@
       for (let url of hierarchy)
         frame = {parent: frame, url: new URL(url)};
 
-      equal(extractHostFromFrame(frame), expectedHostname, message);
+      assert.equal(extractHostFromFrame(frame), expectedHostname, message);
     }
 
     testFrameHostname(["http://example.com/"], "example.com", "single frame");
@@ -48,4 +47,4 @@
     testFrameHostname(["http://user:password@example.com/"], "example.com",
                       "with auth credentials");
   });
-}
+});

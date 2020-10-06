@@ -1,6 +1,11 @@
-* sebastian@adblockplus.org dave@adblockplus.org geo@adblockplus.org
+* sebastian@adblockplus.org geo@adblockplus.org t.feliu@eyeo.com
 
-# Automation
-/build/ sebastian@adblockplus.org tristan@adblockplus.org
+# Build and CI
+/build/ sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
+/.gitlab-ci.yml sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
+/gulpfile.mjs sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
+/package.json sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
+/package-lock.json sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
+
+# Test automation
 /test/ sebastian@adblockplus.org t.feliu@eyeo.com
-/.gitlab-ci.yml sebastian@adblockplus.org tristan@adblockplus.org

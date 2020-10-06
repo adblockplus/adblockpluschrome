@@ -17,28 +17,49 @@
 
 "use strict";
 
+let {chooseFilterSubscriptions} = require("../../lib/subscriptionInit");
+
+QUnit.module("Subscription initialization", hooks =>
 {
-  let {chooseFilterSubscriptions} = require("../../lib/subscriptionInit");
+  let subscriptions = require("../subscriptions.json");
+  let origGetUILanguage;
+  let language;
 
-  QUnit.module("Subscription", {
-    setup()
-    {
-      browser.i18n.getUILanguage = () => "en";
-    }
-  });
-
-
-  test("Choosing filter subscriptions", assert =>
+  hooks.before(() =>
   {
-    let subs = chooseFilterSubscriptions(require("../subscriptions.json"));
-    assert.ok(subs);
-    assert.ok(subs.has("circumvention"));
-    assert.ok(subs.has("ads"));
-
-    assert.deepEqual(subs.get("circumvention").languages,
-                     ["de", "en", "en-US"]);
-    assert.equal(subs.get("circumvention").type, "circumvention");
-    assert.deepEqual(subs.get("ads").languages, ["en"]);
-    assert.equal(subs.get("ads").type, "ads");
+    origGetUILanguage = browser.i18n.getUILanguage;
+    browser.i18n.getUILanguage = () => language;
   });
-}
+
+  hooks.after(() =>
+  {
+    browser.i18n.getUILanguage = origGetUILanguage;
+  });
+
+  QUnit.test("chooses default filter subscriptions", assert =>
+  {
+    language = "en";
+
+    let subs = chooseFilterSubscriptions(subscriptions);
+    assert.ok(subs);
+
+    let sub1 = subs.find(sub => sub.type == "circumvention");
+    assert.ok(sub1);
+    let sub2 = subs.find(sub => sub.type == "ads");
+    assert.ok(sub1);
+
+    assert.deepEqual(sub1.languages, ["de", "en"]);
+    assert.deepEqual(sub2.languages, ["en"]);
+  });
+
+  QUnit.test("falls back to default language", assert =>
+  {
+    language = "sl";
+
+    let subs = chooseFilterSubscriptions(subscriptions);
+    assert.ok(subs);
+    let sub1 = subs.find(sub => sub.type == "ads");
+    assert.ok(sub1);
+    assert.deepEqual(sub1.languages, ["en"]);
+  });
+});

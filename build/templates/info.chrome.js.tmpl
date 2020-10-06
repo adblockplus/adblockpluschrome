@@ -1,0 +1,68 @@
+/*
+ * This file is part of Adblock Plus <https://adblockplus.org/>,
+ * Copyright (C) 2006-present eyeo GmbH
+ *
+ * Adblock Plus is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * Adblock Plus is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+ "use strict";
+
+ let platformVersion = null;
+ let application = null;
+ let applicationVersion;
+
+ let regexp = /(\S+)\/(\S+)(?:\s*\(.*?\))?/g;
+ let match;
+
+ while (match = regexp.exec(navigator.userAgent))
+ {
+   let app = match[1];
+   let ver = match[2];
+
+   if (app == "Chrome")
+   {
+     platformVersion = ver;
+   }
+   else if (app != "Mozilla" && app != "AppleWebKit" && app != "Safari")
+   {
+     // For compatibility with legacy websites, Chrome's UA
+     // also includes a Mozilla, AppleWebKit and Safari token.
+     // Any further name/version pair indicates a fork.
+     application = app == "OPR" ? "opera" : app.toLowerCase();
+     applicationVersion = ver;
+   }
+ }
+
+ // not a Chromium-based UA, probably modifed by the user
+ if (!platformVersion)
+ {
+   application = "unknown";
+   applicationVersion = platformVersion = "0";
+ }
+
+ // no additional name/version, so this is upstream Chrome
+ if (!application)
+ {
+   application = "chrome";
+   applicationVersion = platformVersion;
+ }
+
+
+ exports.addonName = "{{addonName}}";
+ exports.addonVersion = "{{addonVersion}}";
+
+ exports.application = application;
+ exports.applicationVersion = applicationVersion;
+
+ exports.platform = "chromium";
+ exports.platformVersion = platformVersion;

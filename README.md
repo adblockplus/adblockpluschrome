@@ -1,74 +1,78 @@
-[![Pipeline status](https://gitlab.com/eyeo/adblockplus/adblockpluschrome/badges/master/build.svg)](https://gitlab.com/eyeo/adblockplus/adblockpluschrome/pipelines/)
-
 Adblock Plus for Chrome, Opera, Microsoft Edge and Firefox
 ==========================================================
 
 This repository contains the platform-specific Adblock Plus source code for
 Chrome, Opera, Microsoft Edge and Firefox. It can be used to build
-Adblock Plus for these platforms, generic Adblock Plus code will be extracted
-from other repositories automatically (see _dependencies_ file).
-
-Note that the Firefox extension built from this repository is the new
-[WebExtension](https://developer.mozilla.org/en-US/Add-ons/WebExtensions).
-The source code of the legacy Adblock Plus extension
-can be found [here](https://hg.adblockplus.org/adblockplus).
+Adblock Plus for these platforms.
 
 Building
 ---------
 
 ### Requirements
 
-- [Mercurial](https://www.mercurial-scm.org/) or [Git](https://git-scm.com/) (whichever you used to clone this repository)
-- [Python 2.7](https://www.python.org)
-  - [The Jinja2 module](http://jinja.pocoo.org/docs) (>= 2.8)
-  - For signed builds: [PyCrypto module](https://www.dlitz.net/software/pycrypto/)
-- [Node.js](https://nodejs.org/) (>= 10.12.0)
+- [Node.js](https://nodejs.org/) (>= 12.17.0)
 
 ### Building on Windows
 
 On Windows, you need a [Linux environment running on WSL](https://docs.microsoft.com/windows/wsl/install-win10).
 Then install the above requirements and run the commands below from within Bash.
 
+### Updating the dependencies
+
+Clone the external repositories:
+
+    git submodule update --init --recursive
+
+_Note: when building from a source archive, this step must be skipped._
+
+Install the required npm packages:
+
+    npm install
+
+Rerun the above commands when the dependencies might have changed,
+e.g. after checking out a new revison.
+
 ### Building the extension
 
-Run one of the following commands in the project directory, depending on your
-target platform:
+Run the following command in the project directory:
 
-    ./build.py build -t chrome -k adblockpluschrome.pem
-    ./build.py build -t gecko
+    npx gulp build -t {chrome|firefox} [-c development]
 
 This will create a build with a name in the form
-_adblockpluschrome-1.2.3.nnnn.crx_ or _adblockplusfirefox-1.2.3.nnnn.xpi_.
-
-Note that you don't need an existing signing key for Chrome, a new key
-will be created automatically if the file doesn't exist.
-
-The Firefox extension will be unsigned, and therefore is mostly only useful for
-upload to Mozilla Add-ons. You can also load it for testing purposes under
-_about:debugging_ or by disabling signature enforcement in Firefox Nightly.
+_adblockpluschrome-n.n.n.zip_ or _adblockplusfirefox-n.n.n.xpi_. These builds
+are unsigned. They can be submitted as-is to the extension stores, or if
+unpacked loaded in development mode for testing (same as devenv builds below).
 
 ### Development environment
 
 To simplify the process of testing your changes you can create an unpacked
-development environment. For that run one of the following commands:
+development environment. For that run one of the following command:
 
-    ./build.py devenv -t chrome
-    ./build.py devenv -t gecko
+    npx gulp devenv -t {chrome|firefox}
 
-This will create a _devenv.*_ directory in the repository. You can load the
-directory as an unpacked extension under _chrome://extensions_ in Chrome
-and under _about:debugging_ in Firefox. After making changes to the source code
-re-run the command to update the development environment, and the extension
-should reload automatically after a few seconds.
+This will create a _devenv.*_ directory in the project directory. You can load
+the directory as an unpacked extension under _chrome://extensions_ in
+Chromium-based browsers, and under _about:debugging_ in Firefox. After making
+changes to the source code re-run the command to update the development
+environment, and the extension should reload automatically after a few seconds.
 
-The build script calls the ensure_dependencies script automatically to manage
-the dependencies (see _dependencies_ file). Dependencies with local
-modifications won't be updated. Otherwise during development specifying a
-feature-branch's name for a dependency's revision is sometimes useful.
-Alternatively dependency management can be disabled completely by setting the
-_SKIP_DEPENDENCY_UPDATES_ environment variable, for example:
+### Customization
 
-    SKIP_DEPENDENCY_UPDATES=true ./build.py devenv -t chrome
+If you wish to create an extension based on our code and use the same
+build tools, we offer some customization options.
+
+This can be done by:
+
+ - Specifying a path to a new configuration file relative to `gulpfile.mjs`
+(it should match the structure found in `build/config/`).
+
+        npx gulp {build|devenv} -t {chrome|firefox} --config config.mjs
+
+ - Specifying a path to a new `manifest.json` file relative to `gulpfile.mjs`.
+You should check `build/manifest.json` and `build/tasks/manifest.mjs` to see
+how we modify it.
+
+        npx gulp {build|devenv} -t {chrome|firefox} -m manifest.json
 
 Running tests
 -------------
@@ -106,15 +110,16 @@ Start the testing process for all browsers:
 
 Start the testing process in one browser only:
 
-    npm test -- -g <Firefox|Chromium>
+    npm test -- -g <Firefox|Chromium|Edge>
 
-In order to run other test subsets, please check [Mocha's documentation]
-(https://mochajs.org/#-grep-regexp-g-regexp) on `-g` option.
+In order to run other test subsets, please check `-g` option on
+[Mocha's documentation](https://mochajs.org/#-grep-regexp-g-regexp).
 
 By default it downloads (and caches) and runs the tests against the
 oldest compatible version and the latest release version of each browser.
-In order to run the tests against a different version set the CHROMIUM_BINARY
-or FIREFOX_BINARY environment variables. Following values are accepted:
+In order to run the tests against a different version set the `CHROMIUM_BINARY`,
+`FIREFOX_BINARY` or `EDGE_BINARY` environment variables. Following values are
+accepted:
 
 * `installed`
   * Uses the version installed on the system.
@@ -123,6 +128,7 @@ or FIREFOX_BINARY environment variables. Following values are accepted:
 * `download:<version>`
   * Downloads the given version (for Firefox the version must be in the
     form `<major>.<minor>`, for Chromium this must be the revision number).
+    This option is not available for Edge.
 
 Filter tests subset uses [ABP Test pages](https://testpages.adblockplus.org/).
 In order to run those tests on a different version of the test pages, set
@@ -130,13 +136,16 @@ the _TEST_PAGES_URL_ environment variable. Additionally, in order to accept
 insecure `https` certificates set the _TEST_PAGES_INSECURE_ environment variable
 to `"true"`.
 
+[Edge Chromium](https://www.microsoft.com/en-us/edge/business/download) needs to
+be installed before running the Edge tests.
+
 Linting
 -------
 
 You can lint the code using [ESLint](http://eslint.org).
 
 You will need to setup first. This will install our configuration
-[eslint-config-eyeo](https://hg.adblockplus.org/codingtools/file/tip/eslint-config-eyeo)
+[eslint-config-eyeo](https://gitlab.com/eyeo/auxiliary/eyeo-coding-style/-/tree/master/eslint-config-eyeo)
 and everything needed after you run:
 
     npm install
