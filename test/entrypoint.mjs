@@ -24,7 +24,8 @@ import url from "url";
 import {exec} from "child_process";
 import {promisify} from "util";
 import got from "got";
-import {checkLastError, loadModules} from "./misc/utils.mjs";
+import {checkLastError, loadModules,
+        executeScriptCompliant} from "./misc/utils.mjs";
 import {writeScreenshot} from "./misc/screenshots.mjs";
 
 function getBrowserBinaries(module, browser)
@@ -58,7 +59,7 @@ function getBrowserBinaries(module, browser)
     },
     {
       version: "latest",
-      getPath: () => module.getLatestVersion().then(module.ensureBrowser)
+      getPath: async() => module.ensureBrowser(await module.getLatestVersion())
     }
   ];
 }
@@ -90,21 +91,14 @@ async function waitForExtension(driver)
       try
       {
         await driver.switchTo().window(handle);
-        origin = await driver.executeAsyncScript(`
-          let callback = arguments[arguments.length - 1];
-          (async() =>
+        origin = await executeScriptCompliant(driver, `
+          if (typeof browser != "undefined")
           {
-            if (typeof browser != "undefined")
-            {
-              let info = await browser.management.getSelf();
-              if (info.optionsUrl == location.href)
-              {
-                callback(location.origin);
-                return;
-              }
-            }
-            callback(null);
-          })();`);
+            let info = await browser.management.getSelf();
+            if (info.optionsUrl == location.href)
+              return location.origin;
+          }
+          return null;`);
       }
       catch (ex)
       {

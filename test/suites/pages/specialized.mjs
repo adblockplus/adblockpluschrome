@@ -17,7 +17,7 @@
 
 import assert from "assert";
 import webdriver from "selenium-webdriver";
-import {runWithHandle} from "../../misc/utils.mjs";
+import {runWithHandle, executeScriptCompliant} from "../../misc/utils.mjs";
 
 const {By} = webdriver;
 
@@ -85,9 +85,9 @@ async function checkPopup(element, extensionHandle)
       });
     });`));
   await clickButtonOrLink(element);
-  await runWithHandle(driver, extensionHandle, () => driver.executeAsyncScript(`
-    let callback = arguments[arguments.length - 1];
-    self.tabCreated${token}.then(callback);`));
+  await runWithHandle(driver, extensionHandle, () =>
+    executeScriptCompliant(driver, `await self.tabCreated${token};`)
+  );
   await driver.sleep(1000);
   return await getNumberOfHandles(driver) > nHandles;
 }

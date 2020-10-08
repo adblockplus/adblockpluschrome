@@ -17,7 +17,8 @@
 
 import assert from "assert";
 import webdriver from "selenium-webdriver";
-import {checkLastError, runWithHandle} from "../../misc/utils.mjs";
+import {checkLastError, runWithHandle,
+        executeScriptCompliant} from "../../misc/utils.mjs";
 import specializedTests from "./specialized.mjs";
 import defineSubscribeTest from "./subscribe.mjs";
 import defineUninstallTest from "./uninstall.mjs";
@@ -42,21 +43,19 @@ async function updateFilters(driver, extensionHandle, url)
   await driver.navigate().to(url);
   let filters = await getFilters(driver);
   let error = await runWithHandle(driver, extensionHandle,
-                                  () => driver.executeAsyncScript(`
+                                  () => executeScriptCompliant(driver, `
     let filters = arguments[0];
-    let callback = arguments[arguments.length - 1];
-    browser.runtime.sendMessage({type: "subscriptions.get",
-                                 downloadable: true,
-                                 special: true}).then(subs =>
-      Promise.all(subs.map(subscription =>
-        browser.runtime.sendMessage({type: "subscriptions.remove",
-                                     url: subscription.url})
-      ))
-    ).then(() =>
-      browser.runtime.sendMessage({type: "filters.importRaw",
-                                   text: filters})
-    ).then(errors => callback(errors[0]), callback);`, filters));
-
+    let subs = await browser.runtime.sendMessage(
+      {type: "subscriptions.get", downloadable: true, special: true}
+    );
+    await Promise.all(subs.map(subscription => browser.runtime.sendMessage(
+      {type: "subscriptions.remove", url: subscription.url}
+    )));
+    let errors = await browser.runtime.sendMessage(
+      {type: "filters.importRaw", text: filters}
+    );
+    return errors[0];`, filters)
+  );
   if (error)
     throw error;
 

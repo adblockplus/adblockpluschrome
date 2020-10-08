@@ -20,14 +20,34 @@ import fs from "fs";
 import path from "path";
 import url from "url";
 
+/*
+ * Standard-compliant polyfill for WebDriver#executeScript,
+ * working around limitations of ChromeDriver <77,
+ * enabling scripts to return a promise.
+ */
+export async function executeScriptCompliant(driver, script, ...args)
+{
+  let [isError, value] = await driver.executeAsyncScript(`
+    let [script, args, callback] = arguments;
+    let AsyncFunction = (async() => {}).constructor;
+    new AsyncFunction(script).apply(null, args).then(
+      res => callback([false, res]),
+      err => callback([true, err instanceof Error ? err.message : err])
+    );`, script, args);
+
+  if (isError)
+    throw new Error(value);
+  return value;
+}
+
 export async function checkLastError(driver, handle)
 {
   await driver.switchTo().window(handle);
 
-  let error = await driver.executeAsyncScript(`
-    let callback = arguments[arguments.length - 1];
-    browser.runtime.sendMessage({type: "debug.getLastError"}).then(callback);`);
-
+  let error = await executeScriptCompliant(
+    driver,
+    "return browser.runtime.sendMessage({type: \"debug.getLastError\"});"
+  );
   if (error != null)
     assert.fail("Unhandled error in background page: " + error);
 }
