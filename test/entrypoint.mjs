@@ -115,7 +115,7 @@ async function waitForExtension(driver)
         return true;
     }
     return false;
-  }, 5000, "options page not found");
+  }, 8000, "options page not found");
 
   return [handle, origin];
 }
