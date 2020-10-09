@@ -26,11 +26,11 @@ iframe.onload = () =>
 
 (async() =>
 {
-  let application = await browser.runtime.sendMessage({
+  let os = await browser.runtime.sendMessage({
     type: "app.get",
-    what: "application"
+    what: "os"
   });
-  // Load the mobile version of the options page on Firefox for Android.
-  iframe.src = iframe.getAttribute("data-src-" + application) ||
+  // Load the mobile version of the options page on Android.
+  iframe.src = iframe.getAttribute("data-src-" + os) ||
                iframe.getAttribute("data-src");
 })();

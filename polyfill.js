@@ -33,6 +33,7 @@
     "permissions.remove",
     "permissions.request",
     "runtime.getBrowserInfo",
+    "runtime.getPlatformInfo",
     "runtime.openOptionsPage",
     "runtime.sendMessage",
     "runtime.setUninstallURL",
