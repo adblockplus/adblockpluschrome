@@ -15,48 +15,9 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import path from "path";
-import Jimp from "jimp";
 import semver from "semver";
 import specializedTests from "./specialized.mjs";
-
-const SCREENSHOT_DIR = path.join("test", "screenshots");
-
-export async function takeScreenshot(driver)
-{
-  // On macOS scrollbars appear and disappear overlapping
-  // the content as scrolling occurs. So we have to hide
-  // the scrollbars to get reproducible screenshots.
-  await driver.executeScript(`
-    let style = document.createElement("style");
-    style.textContent = "html { overflow-y: scroll; }"
-    document.head.appendChild(style);
-    if (document.documentElement.clientWidth == window.innerWidth)
-      style.textContent = "html::-webkit-scrollbar { display: none; }";
-    else
-      document.head.removeChild(style);`);
-
-  let fullScreenshot = new Jimp(0, 0);
-  while (true)
-  {
-    let [width, height, offset] = await driver.executeScript(`
-      window.scrollTo(0, arguments[0]);
-      return [document.documentElement.clientWidth,
-              document.documentElement.scrollHeight,
-              window.scrollY];`, fullScreenshot.bitmap.height);
-    let data = await driver.takeScreenshot();
-    let partialScreenshot = await Jimp.read(Buffer.from(data, "base64"));
-    let combinedScreenshot = new Jimp(width, offset +
-                                             partialScreenshot.bitmap.height);
-    combinedScreenshot.composite(fullScreenshot, 0, 0);
-    combinedScreenshot.composite(partialScreenshot, 0, offset);
-    fullScreenshot = combinedScreenshot;
-
-    if (fullScreenshot.bitmap.height >= height)
-      break;
-  }
-  return fullScreenshot;
-}
+import {takeScreenshot, writeScreenshotFile} from "../../misc/screenshots.mjs";
 
 export function isExcluded(page, browserName, browserVersion)
 {
@@ -86,16 +47,6 @@ export async function getExpectedScreenshot(driver, url)
 {
   await driver.navigate().to(`${url}?expected=1`);
   return await takeScreenshot(driver);
-}
-
-export async function writeScreenshotFile(image, browserName, browserVersion,
-                                          testTitle, suffix)
-{
-  let title = testTitle.toLowerCase().replace(/[^a-z0-9]+/g, "_");
-  let filename = `${browserName}_${browserVersion}_${title}_${suffix}.png`;
-  let screenshotPath = path.join(SCREENSHOT_DIR, filename);
-  await image.write(screenshotPath);
-  return screenshotPath;
 }
 
 export async function runGenericTests(driver, expectedScreenshot,

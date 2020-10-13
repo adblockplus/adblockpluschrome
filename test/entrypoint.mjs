@@ -25,6 +25,7 @@ import {exec} from "child_process";
 import {promisify} from "util";
 import got from "got";
 import {checkLastError, loadModules} from "./misc/utils.mjs";
+import {writeScreenshot} from "./misc/screenshots.mjs";
 
 function getBrowserBinaries(module, browser)
 {
@@ -184,8 +185,15 @@ if (typeof run == "undefined")
           // eslint-disable-next-line no-console
           console.log(`Browser: ${this.browserName} ${this.browserVersion}`);
 
-          [this.extensionHandle,
-           this.extensionOrigin] = await waitForExtension(this.driver);
+          try
+          {
+            [this.extensionHandle,
+             this.extensionOrigin] = await waitForExtension(this.driver);
+          }
+          catch (e)
+          {
+            await writeScreenshot(this, e);
+          }
         });
 
         beforeEach(async function()

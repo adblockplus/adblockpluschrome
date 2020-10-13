@@ -18,7 +18,7 @@
 import assert from "assert";
 import webdriver from "selenium-webdriver";
 import {checkLastError} from "../misc/utils.mjs";
-import {takeScreenshot, writeScreenshotFile} from "./pages/utils.mjs";
+import {writeScreenshot} from "../misc/screenshots.mjs";
 
 const {By, until} = webdriver;
 
@@ -50,11 +50,7 @@ export default () =>
     }
     catch (e)
     {
-      let screenshot = await takeScreenshot(this.driver);
-      let scrPath = await writeScreenshotFile(screenshot, this.browserName,
-                                              this.browserVersion,
-                                              this.test.title, "actual");
-      throw new Error(`${e.message}\n(see ${scrPath})`);
+      await writeScreenshot(this, e);
     }
 
     await checkLastError(this.driver, this.extensionHandle);
