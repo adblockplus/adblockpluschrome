@@ -108,7 +108,7 @@ export async function getLatestVersion()
   let version = data[0].versions.find(ver => ver.channel == "stable");
   let base = version.branch_base_position;
 
-  if (version.true_branch.includes("_"))
+  if (version.true_branch && version.true_branch.includes("_"))
   {
     // A wrong base may be caused by a mini-branch (patched) release
     // In that case, the base is taken from the unpatched version
