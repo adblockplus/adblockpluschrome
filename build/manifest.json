@@ -36,18 +36,6 @@
     {
       "all_frames": true,
       "js": [
-        "composer.postload.js"
-      ],
-      "match_about_blank": true,
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "run_at": "document_end"
-    },
-    {
-      "all_frames": true,
-      "js": [
         "subscriptionLink.postload.js"
       ],
       "matches": [

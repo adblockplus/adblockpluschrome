@@ -17,10 +17,8 @@
 
 "use strict";
 
-// We would rather export these properly and then require("./include.preload")
-// here, but that would result in include.preload running both at pre and post
-// load.
-const {collapseElement, contentFiltering, getURLFromElement} = window;
+const {collapseElement, contentFiltering,
+       getURLFromElement} = require("./include.preload");
 
 // The page ID for the popup filter selection dialog (top frame only).
 let blockelementPopupId = null;
@@ -515,9 +513,6 @@ function deactivateBlockElement(popupAlreadyClosed)
 
 function initializeComposer()
 {
-  if (typeof ext == "undefined")
-    return false;
-
   // Use a contextmenu handler to save the last element the user right-clicked
   // on. To make things easier, we actually save the DOM event. We have to do
   // this because the contextMenu API only provides a URL, not the actual DOM
@@ -616,17 +611,7 @@ function initializeComposer()
 
   if (window == window.top)
     browser.runtime.sendMessage({type: "composer.ready"});
-
-  return true;
 }
 
 if (document instanceof HTMLDocument)
-{
-  // There's a bug in Firefox that causes document_end content scripts to run
-  // before document_start content scripts on extension startup. In this case
-  // the ext object is undefined, we fail to initialize, and initializeComposer
-  // returns false. As a workaround, try again after a timeout.
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=1395287
-  if (!initializeComposer())
-    setTimeout(initializeComposer, 2000);
-}
+  initializeComposer();

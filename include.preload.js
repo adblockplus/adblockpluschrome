@@ -23,7 +23,7 @@ let {ElemHideEmulation} =
 let contentFiltering;
 let collapsedSelectors = new Set();
 
-function getURLFromElement(element)
+let getURLFromElement = exports.getURLFromElement = function(element)
 {
   if (element.localName == "object")
   {
@@ -40,7 +40,7 @@ function getURLFromElement(element)
   }
 
   return element.currentSrc || element.src;
-}
+};
 
 function getSelectorForBlockedElement(element)
 {
@@ -110,7 +110,7 @@ function hideElement(element, properties)
   );
 }
 
-function collapseElement(element)
+let collapseElement = exports.collapseElement = function(element)
 {
   let selector = getSelectorForBlockedElement(element);
   if (selector)
@@ -125,7 +125,7 @@ function collapseElement(element)
   {
     hideElement(element);
   }
-}
+};
 
 function startElementCollapsing()
 {
@@ -439,12 +439,8 @@ if (document instanceof HTMLDocument)
 {
   checkSitekey();
 
-  contentFiltering = new ContentFiltering();
+  contentFiltering = exports.contentFiltering = new ContentFiltering();
   contentFiltering.apply();
 
   startElementCollapsing();
 }
-
-window.collapseElement = collapseElement;
-window.contentFiltering = contentFiltering;
-window.getURLFromElement = getURLFromElement;

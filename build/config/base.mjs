@@ -43,13 +43,8 @@ export default {
         dest: "include.preload.js",
         src: [
           "include.preload.js",
-          "inject.preload.js"
-        ]
-      },
-      {
-        dest: "composer.postload.js",
-        src: [
-          "composer.postload.js"
+          "inject.preload.js",
+          "composer.preload.js"
         ]
       },
       {
