@@ -28,12 +28,12 @@ import url from "url";
 export async function executeScriptCompliant(driver, script, ...args)
 {
   let [isError, value] = await driver.executeAsyncScript(`
-    let [script, args, callback] = arguments;
-    let AsyncFunction = (async() => {}).constructor;
-    new AsyncFunction(script).apply(null, args).then(
+    let promise = (async function() { ${script} }).apply(null, arguments[0]);
+    let callback = arguments[arguments.length - 1];
+    promise.then(
       res => callback([false, res]),
       err => callback([true, err instanceof Error ? err.message : err])
-    );`, script, args);
+    );`, args);
 
   if (isError)
     throw new Error(value);

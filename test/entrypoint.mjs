@@ -24,9 +24,9 @@ import url from "url";
 import {exec} from "child_process";
 import {promisify} from "util";
 import got from "got";
-import {checkLastError, loadModules,
-        executeScriptCompliant} from "./misc/utils.mjs";
+import {checkLastError, loadModules} from "./misc/utils.mjs";
 import {writeScreenshot} from "./misc/screenshots.mjs";
+import fs from "fs";
 
 function getBrowserBinaries(module, browser)
 {
@@ -80,37 +80,36 @@ async function getDriver(binary, devenvCreated, module)
   return module.getDriver(browserBin, extensionPaths, TEST_PAGES_INSECURE);
 }
 
-async function waitForExtension(driver)
+async function waitForExtension(driver, target)
 {
-  let origin;
-  let handle;
+  let manifestFile = await fs.promises.readFile(
+    path.resolve(`./devenv.${target}`, "manifest.json")
+  );
+  let optionsPage = JSON.parse(manifestFile).options_ui.page;
+
+  let handles = [];
   await driver.wait(async() =>
   {
-    for (handle of await driver.getAllWindowHandles())
-    {
-      try
-      {
-        await driver.switchTo().window(handle);
-        origin = await executeScriptCompliant(driver, `
-          if (typeof browser != "undefined")
-          {
-            let info = await browser.management.getSelf();
-            if (info.optionsUrl == location.href)
-              return location.origin;
-          }
-          return null;`);
-      }
-      catch (ex)
-      {
-        // Ignore windows that we're unable to switch to
-        // or execute our script in
-      }
+    let seenHandles = handles;
+    handles = await driver.getAllWindowHandles();
+    return handles.every(handle => seenHandles.includes(handle));
+  }, 8000, "Handles kept changing after timeout", 2000);
 
-      if (origin)
-        return true;
+  let origin;
+  let handle;
+  for (handle of handles)
+  {
+    await driver.switchTo().window(handle);
+    let handleUrl = new URL(await driver.getCurrentUrl());
+    if (handleUrl.pathname == "/" + optionsPage)
+    {
+      origin = `${handleUrl.protocol}//${handleUrl.host}`;
+      break;
     }
-    return false;
-  }, 8000, "options page not found");
+  }
+
+  if (!origin)
+    throw new Error("options page not found");
 
   return [handle, origin];
 }
@@ -181,8 +180,8 @@ if (typeof run == "undefined")
 
           try
           {
-            [this.extensionHandle,
-             this.extensionOrigin] = await waitForExtension(this.driver);
+            [this.extensionHandle, this.extensionOrigin] =
+              await waitForExtension(this.driver, module.target);
           }
           catch (e)
           {
