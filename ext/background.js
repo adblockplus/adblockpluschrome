@@ -339,35 +339,33 @@
     return frames && frames.get(frameId);
   };
 
-  browser.tabs.query({}).then(tabs =>
+  browser.tabs.query({}).then(async tabs =>
   {
-    tabs.forEach(tab =>
+    for (let tab of tabs)
     {
-      browser.webNavigation.getAllFrames({tabId: tab.id}).then(details =>
+      let details = await browser.webNavigation.getAllFrames({tabId: tab.id});
+      if (details && details.length > 0)
       {
-        if (details && details.length > 0)
+        let frames = new Map();
+        framesOfTabs.set(tab.id, frames);
+
+        for (let detail of details)
         {
-          let frames = new Map();
-          framesOfTabs.set(tab.id, frames);
+          let frame = {url: new URL(detail.url)};
+          frames.set(detail.frameId, frame);
 
-          for (let detail of details)
+          if (detail.parentFrameId > -1)
           {
-            let frame = {url: new URL(detail.url)};
-            frames.set(detail.frameId, frame);
+            if (detail.frameId != detail.parentFrameId)
+              frame.parent = frames.get(detail.parentFrameId);
 
-            if (detail.parentFrameId > -1)
-            {
-              if (detail.frameId != detail.parentFrameId)
-                frame.parent = frames.get(detail.parentFrameId);
-
-              if (!frame.parent &&
-                  detail.frameId != 0 && detail.parentFrameId != 0)
-                frame.parent = frames.get(0);
-            }
+            if (!frame.parent &&
+                detail.frameId != 0 && detail.parentFrameId != 0)
+              frame.parent = frames.get(0);
           }
         }
-      });
-    });
+      }
+    }
   });
 
 
