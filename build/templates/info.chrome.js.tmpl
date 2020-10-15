@@ -15,11 +15,12 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
-
-let platformVersion = null;
-let application = null;
-let applicationVersion;
+export let addonName = "{{addonName}}";
+export let addonVersion = "{{addonVersion}}";
+export let application = null;
+export let applicationVersion;
+export let platform = "chromium";
+export let platformVersion = null;
 
 let regexp = /(\S+)\/(\S+)(?:\s*\(.*?\))?/g;
 let match;
@@ -56,13 +57,3 @@ if (!application)
   application = "chrome";
   applicationVersion = platformVersion;
 }
-
-
-exports.addonName = "{{addonName}}";
-exports.addonVersion = "{{addonVersion}}";
-
-exports.application = application;
-exports.applicationVersion = applicationVersion;
-
-exports.platform = "chromium";
-exports.platformVersion = platformVersion;

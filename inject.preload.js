@@ -15,7 +15,7 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
+export default void 0; // adblockpluschrome#296
 
 let randomEventName = "abp-request-" + Math.random().toString(36).substr(2);
 

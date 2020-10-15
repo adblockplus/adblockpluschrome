@@ -15,10 +15,8 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
-
-const {collapseElement, contentFiltering,
-       getURLFromElement} = require("./include.preload");
+import {collapseElement, contentFiltering,
+        getURLFromElement} from "./include.preload.js";
 
 // The page ID for the popup filter selection dialog (top frame only).
 let blockelementPopupId = null;

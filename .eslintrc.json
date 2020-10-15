@@ -12,16 +12,18 @@
     "require": true
   },
   "parserOptions": {
-    "ecmaVersion": 11
+    "ecmaVersion": 11,
+    "sourceType": "module"
   },
   "rules": {
     "curly": ["error", "multi-or-nest", "consistent"]
   },
   "overrides": [
     {
-      "files": ["*.mjs", "./test/unit-tests/**/*.js"],
+      "files": ["./devtools.js", "./options.js", "./polyfill.js",
+                "./ext/*.js", "./build/utils/wp-template-loader.js"],
       "parserOptions": {
-        "sourceType": "module"
+        "sourceType": "script"
       }
     }
   ]

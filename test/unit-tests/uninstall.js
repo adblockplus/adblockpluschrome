@@ -20,6 +20,7 @@ import {analytics} from "../../adblockpluscore/lib/analytics";
 import {filterStorage} from "../../adblockpluscore/lib/filterStorage";
 import {Prefs} from "../../lib/prefs";
 import {setUninstallURL} from "../../lib/uninstall";
+import * as info from "info";
 
 const realSetUninstallURL = browser.runtime.setUninstallURL;
 
@@ -39,7 +40,6 @@ describe("Uninstall URL", () =>
 
   it("adds parameters to uninstall URL", () =>
   {
-    const info = require("info");
     const expectedParams = [
       ["an", info.addonName],
       ["av", info.addonVersion],

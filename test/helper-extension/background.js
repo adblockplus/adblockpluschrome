@@ -15,8 +15,6 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
-
 // The timeout allows the APB extension being ready on Firefox
 setTimeout(() =>
 {

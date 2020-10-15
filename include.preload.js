@@ -15,15 +15,13 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-"use strict";
+import {ElemHideEmulation}
+  from "./adblockpluscore/lib/content/elemHideEmulation.js";
 
-let {ElemHideEmulation} =
-  require("./adblockpluscore/lib/content/elemHideEmulation");
-
-let contentFiltering;
+export let contentFiltering;
 let collapsedSelectors = new Set();
 
-let getURLFromElement = exports.getURLFromElement = function(element)
+export function getURLFromElement(element)
 {
   if (element.localName == "object")
   {
@@ -40,7 +38,7 @@ let getURLFromElement = exports.getURLFromElement = function(element)
   }
 
   return element.currentSrc || element.src;
-};
+}
 
 function getSelectorForBlockedElement(element)
 {
@@ -110,7 +108,7 @@ function hideElement(element, properties)
   );
 }
 
-let collapseElement = exports.collapseElement = function(element)
+export function collapseElement(element)
 {
   let selector = getSelectorForBlockedElement(element);
   if (selector)
@@ -125,7 +123,7 @@ let collapseElement = exports.collapseElement = function(element)
   {
     hideElement(element);
   }
-};
+}
 
 function startElementCollapsing()
 {
@@ -436,7 +434,7 @@ if (document instanceof HTMLDocument)
 {
   checkSitekey();
 
-  contentFiltering = exports.contentFiltering = new ContentFiltering();
+  contentFiltering = new ContentFiltering();
   contentFiltering.apply();
 
   startElementCollapsing();
