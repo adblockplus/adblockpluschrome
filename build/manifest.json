@@ -103,6 +103,10 @@
     "unlimitedStorage",
     "notifications"
   ],
+  "optional_permissions": [
+    "contentSettings",
+    "management"
+  ],
   "storage": {
     "managed_schema": "managed-storage-schema.json"
   }

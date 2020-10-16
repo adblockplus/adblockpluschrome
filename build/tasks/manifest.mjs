@@ -45,6 +45,7 @@ function editManifest(data, version, channel, target)
     delete data.minimum_chrome_version;
     delete data.minimum_opera_version;
     delete data.browser_action.default_popup;
+    delete data.optional_permissions;
     delete data.storage;
   }
 
