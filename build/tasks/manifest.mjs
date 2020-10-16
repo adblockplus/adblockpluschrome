@@ -32,25 +32,19 @@ function editManifest(data, version, channel, target)
 
   if (target == "firefox")
   {
-    let gecko = {
-      strict_min_version: data.applications.gecko.strict_min_version
-    };
+    let {gecko} = data.applications;
 
     if (channel == "development")
-    {
-      gecko.id = data.applications.gecko.app_id_devbuild;
-      gecko.update_url = data.applications.gecko.devbuildUpdateURL;
-    }
+      gecko.id = gecko.app_id_devbuild;
     else
-    {
-      gecko.id = data.applications.gecko.app_id_release;
-    }
+      gecko.id = gecko.app_id_release;
+
+    delete gecko.app_id_devbuild;
+    delete gecko.app_id_release;
 
     delete data.minimum_chrome_version;
     delete data.minimum_opera_version;
     delete data.browser_action.default_popup;
-
-    data.applications.gecko = gecko;
   }
 
   return data;
