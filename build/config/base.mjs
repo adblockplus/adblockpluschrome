@@ -103,7 +103,6 @@ export default {
           "adblockpluscore/lib/content/snippets.js",
           "options.*",
           "devtools.*",
-          "managed-storage-schema.json",
           "polyfill.js",
           "!adblockplusui/polyfill.js",
           "!adblockplusui/mobile-options.*"

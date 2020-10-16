@@ -22,6 +22,14 @@ export default {
       info$: "info.chrome.js.tmpl"
     }
   },
+  mapping: {
+    copy: [
+      {
+        dest: "",
+        src: ["managed-storage-schema.json"]
+      }
+    ]
+  },
   translations: {
     dest: "_locales",
     src: [
