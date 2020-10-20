@@ -43,10 +43,10 @@ let lastRightClickEventIsMostRecent = false;
 
 /* Utilities */
 
-function getFiltersForElement(element, callback)
+function getFiltersForElement(element)
 {
   let src = element.getAttribute("src");
-  browser.runtime.sendMessage({
+  return browser.runtime.sendMessage({
     type: "composer.getFilters",
     tagName: element.localName,
     id: element.id,
@@ -54,13 +54,10 @@ function getFiltersForElement(element, callback)
     style: element.getAttribute("style"),
     classes: Array.prototype.slice.call(element.classList),
     url: getURLFromElement(element)
-  }).then(response =>
-  {
-    callback(response.filters, response.selectors);
   });
 }
 
-function getBlockableElementOrAncestor(element, callback)
+async function getBlockableElementOrAncestor(element)
 {
   // We assume that the user doesn't want to block the whole page.
   // So we never consider the <html> or <body> element.
@@ -99,20 +96,15 @@ function getBlockableElementOrAncestor(element, callback)
     // any filters for this element. Otherwise fall back to its parent element.
     else
     {
-      getFiltersForElement(element, filters =>
-      {
-        if (filters.length > 0)
-          callback(element);
-        else
-          getBlockableElementOrAncestor(element.parentElement, callback);
-      });
-
-      return;
+      let {filters} = await getFiltersForElement(element);
+      if (filters.length > 0)
+        return element;
+      return getBlockableElementOrAncestor(element.parentElement);
     }
   }
 
   // We reached the document root without finding a blockable element.
-  callback(null);
+  return null;
 }
 
 
@@ -290,28 +282,26 @@ function stopEventPropagation(event)
 }
 
 // Hovering over an element so highlight it.
-function mouseOver(event)
+async function mouseOver(event)
 {
   lastMouseOverEvent = event;
 
-  getBlockableElementOrAncestor(event.target, element =>
+  let element = await getBlockableElementOrAncestor(event.target);
+  if (event == lastMouseOverEvent)
   {
-    if (event == lastMouseOverEvent)
+    lastMouseOverEvent = null;
+
+    if (currentlyPickingElement)
     {
-      lastMouseOverEvent = null;
+      if (currentElement)
+        unhighlightElement(currentElement);
 
-      if (currentlyPickingElement)
-      {
-        if (currentElement)
-          unhighlightElement(currentElement);
+      if (element)
+        highlightElement(element, "#CA0000", "#CA0000");
 
-        if (element)
-          highlightElement(element, "#CA0000", "#CA0000");
-
-        currentElement = element;
-      }
+      currentElement = element;
     }
-  });
+  }
 
   event.stopPropagation();
 }
@@ -351,13 +341,11 @@ function startPickingElement()
   // mouse events, so that they can still be selected.
   Array.prototype.forEach.call(
     document.querySelectorAll("object,embed,iframe,frame"),
-    element =>
+    async element =>
     {
-      getFiltersForElement(element, filters =>
-      {
-        if (filters.length > 0)
-          addElementOverlay(element);
-      });
+      let {filters} = await getFiltersForElement(element);
+      if (filters.length > 0)
+        addElementOverlay(element);
     }
   );
 
@@ -375,7 +363,7 @@ function startPickingElement()
 }
 
 // Used to hide/show blocked elements on composer.content.preview
-function previewBlockedElements(active)
+async function previewBlockedElements(active)
 {
   if (!currentElement)
     return;
@@ -385,15 +373,13 @@ function previewBlockedElements(active)
 
   previewBlockedElement(element, active, overlays);
 
-  getFiltersForElement(element, (filters, selectors) =>
+  let {selectors} = await getFiltersForElement(element);
+  if (selectors.length > 0)
   {
-    if (selectors.length > 0)
-    {
-      let cssQuery = selectors.join(",");
-      for (let node of document.querySelectorAll(cssQuery))
-        previewBlockedElement(node, active, overlays);
-    }
-  });
+    let cssQuery = selectors.join(",");
+    for (let node of document.querySelectorAll(cssQuery))
+      previewBlockedElement(node, active, overlays);
+  }
 }
 
 // the previewBlockedElements helper to avoid duplicated code
@@ -409,48 +395,44 @@ function previewBlockedElement(element, active, overlays)
 
 // The user has picked an element - currentElement. Highlight it red, generate
 // filters for it and open a popup dialog so that the user can confirm.
-function elementPicked(event)
+async function elementPicked(event)
 {
   if (!currentElement)
     return;
 
   let element = currentElement.prisoner || currentElement;
-  getFiltersForElement(element, (filters, selectors) =>
+  let {filters, selectors} = await getFiltersForElement(element);
+  if (currentlyPickingElement)
+    stopPickingElement();
+
+  highlightElement(currentElement, "#CA0000", "#CA0000");
+
+  let highlights = 1;
+  if (selectors.length > 0)
   {
-    if (currentlyPickingElement)
-      stopPickingElement();
+    let cssQuery = selectors.join(",");
+    highlightElements(cssQuery);
+    highlights = document.querySelectorAll(cssQuery).length;
+  }
 
-    highlightElement(currentElement, "#CA0000", "#CA0000");
-
-    let highlights = 1;
-    if (selectors.length > 0)
-    {
-      let cssQuery = selectors.join(",");
-      highlightElements(cssQuery);
-      highlights = document.querySelectorAll(cssQuery).length;
-    }
-
-    browser.runtime.sendMessage({
-      type: "composer.openDialog",
-      filters,
-      highlights
-    }).then(popupId =>
-    {
-      // Only the top frame keeps a record of the popup window's ID,
-      // so if this isn't the top frame we need to pass the ID on.
-      if (window == window.top)
-      {
-        blockelementPopupId = popupId;
-      }
-      else
-      {
-        browser.runtime.sendMessage({
-          type: "composer.forward",
-          payload: {type: "composer.content.dialogOpened", popupId}
-        });
-      }
-    });
+  let popupId = await browser.runtime.sendMessage({
+    type: "composer.openDialog",
+    filters,
+    highlights
   });
+  // Only the top frame keeps a record of the popup window's ID,
+  // so if this isn't the top frame we need to pass the ID on.
+  if (window == window.top)
+  {
+    blockelementPopupId = popupId;
+  }
+  else
+  {
+    browser.runtime.sendMessage({
+      type: "composer.forward",
+      payload: {type: "composer.content.dialogOpened", popupId}
+    });
+  }
 
   event.preventDefault();
   event.stopPropagation();
@@ -534,7 +516,7 @@ function initializeComposer()
     });
   }, true);
 
-  ext.onMessage.addListener((message, sender, sendResponse) =>
+  ext.onMessage.addListener(async(message, sender, sendResponse) =>
   {
     switch (message.type)
     {
@@ -558,7 +540,7 @@ function initializeComposer()
         deactivateBlockElement();
         if (event)
         {
-          getBlockableElementOrAncestor(event.target, element =>
+          getBlockableElementOrAncestor(event.target).then(element =>
           {
             if (element)
             {

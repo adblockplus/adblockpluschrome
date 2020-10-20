@@ -365,29 +365,27 @@ class ContentFiltering
       style.sheet.insertRule(rule, style.sheet.cssRules.length);
   }
 
-  addSelectors(selectors, groupName = "standard", appendOnly = false)
+  async addSelectors(selectors, groupName = "standard", appendOnly = false)
   {
-    browser.runtime.sendMessage({
+    let rules = await browser.runtime.sendMessage({
       type: "content.injectSelectors",
       selectors,
       groupName,
       appendOnly
-    }).then(rules =>
-    {
-      if (rules)
-      {
-        // Insert the rules inline if we have been instructed by the background
-        // page to do so. This is rarely the case, except on platforms that do
-        // not support user stylesheets via the browser.tabs.insertCSS API, i.e.
-        // Firefox <53 and Chrome <66.
-        // Once all supported platforms have implemented this API, we can remove
-        // the code below. See issue #5090.
-        // Related Chrome and Firefox issues:
-        // https://bugs.chromium.org/p/chromium/issues/detail?id=632009
-        // https://bugzilla.mozilla.org/show_bug.cgi?id=1310026
-        this.addRulesInline(rules, groupName, appendOnly);
-      }
     });
+    if (rules)
+    {
+      // Insert the rules inline if we have been instructed by the background
+      // page to do so. This is rarely the case, except on platforms that do
+      // not support user stylesheets via the browser.tabs.insertCSS API, i.e.
+      // Firefox <53 and Chrome <66.
+      // Once all supported platforms have implemented this API, we can remove
+      // the code below. See issue #5090.
+      // Related Chrome and Firefox issues:
+      // https://bugs.chromium.org/p/chromium/issues/detail?id=632009
+      // https://bugzilla.mozilla.org/show_bug.cgi?id=1310026
+      this.addRulesInline(rules, groupName, appendOnly);
+    }
   }
 
   hideElements(elements, filters)
@@ -405,33 +403,32 @@ class ContentFiltering
     }
   }
 
-  apply(filterTypes)
+  async apply(filterTypes)
   {
-    browser.runtime.sendMessage({
+    let response = await browser.runtime.sendMessage({
       type: "content.applyFilters",
       filterTypes
-    }).then(response =>
-    {
-      if (this.tracer)
-      {
-        this.tracer.disconnect();
-        this.tracer = null;
-      }
-
-      if (response.inline)
-        this.addRulesInline(response.rules);
-
-      if (response.trace)
-      {
-        this.tracer = new ElementHidingTracer(
-          response.selectors,
-          response.exceptions
-        );
-      }
-
-      this.cssProperties = response.cssProperties;
-      this.elemHideEmulation.apply(response.emulatedPatterns);
     });
+
+    if (this.tracer)
+    {
+      this.tracer.disconnect();
+      this.tracer = null;
+    }
+
+    if (response.inline)
+      this.addRulesInline(response.rules);
+
+    if (response.trace)
+    {
+      this.tracer = new ElementHidingTracer(
+        response.selectors,
+        response.exceptions
+      );
+    }
+
+    this.cssProperties = response.cssProperties;
+    this.elemHideEmulation.apply(response.emulatedPatterns);
   }
 }
 

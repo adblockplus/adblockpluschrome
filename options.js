@@ -24,12 +24,13 @@ iframe.onload = () =>
   document.title = iframe.contentDocument.title;
 };
 
-browser.runtime.sendMessage({
-  type: "app.get",
-  what: "application"
-}).then(application =>
+(async() =>
 {
+  let application = await browser.runtime.sendMessage({
+    type: "app.get",
+    what: "application"
+  });
   // Load the mobile version of the options page on Firefox for Android.
   iframe.src = iframe.getAttribute("data-src-" + application) ||
                iframe.getAttribute("data-src");
-});
+})();

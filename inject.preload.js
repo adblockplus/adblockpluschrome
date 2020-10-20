@@ -21,19 +21,17 @@ let randomEventName = "abp-request-" + Math.random().toString(36).substr(2);
 
 // Proxy "should we block?" messages from checkRequest inside the injected
 // code to the background page and back again.
-document.addEventListener(randomEventName, event =>
+document.addEventListener(randomEventName, async event =>
 {
   let {url} = event.detail;
 
-  browser.runtime.sendMessage({
+  let block = await browser.runtime.sendMessage({
     type: "request.blockedByRTCWrapper",
     url
-  }).then(block =>
-  {
-    document.dispatchEvent(new CustomEvent(
-      randomEventName + "-" + url, {detail: block}
-    ));
   });
+  document.dispatchEvent(new CustomEvent(
+    randomEventName + "-" + url, {detail: block}
+  ));
 });
 
 function injected(eventName, injectedIntoContentWindow)

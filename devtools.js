@@ -19,39 +19,40 @@
 
 let panelWindow = null;
 
-// Versions of Firefox before 54 do not support the devtools.panels API; on
-// these platforms, even when the option is enabled, we cannot show the
-// devtools panel.
-if ("panels" in browser.devtools)
+(async() =>
 {
-  browser.runtime.sendMessage({type: "prefs.get",
-                               key: "show_devtools_panel"}).then(enabled =>
+  // Versions of Firefox before 54 do not support the devtools.panels API; on
+  // these platforms, even when the option is enabled, we cannot show the
+  // devtools panel.
+  if ("panels" in browser.devtools)
   {
+    let enabled = await browser.runtime.sendMessage(
+      {type: "prefs.get", key: "show_devtools_panel"}
+    );
     if (enabled)
     {
-      browser.devtools.panels.create("Adblock Plus",
-                                     "icons/abp-32.png",
-                                     "devtools-panel.html").then(panel =>
+      let panel = await browser.devtools.panels.create(
+        "Adblock Plus", "icons/abp-32.png", "devtools-panel.html"
+      );
+
+      panel.onShown.addListener(window =>
       {
-        panel.onShown.addListener(window =>
-        {
-          panelWindow = window;
-        });
-
-        panel.onHidden.addListener(window =>
-        {
-          panelWindow = null;
-        });
-
-        if (panel.onSearch)
-        {
-          panel.onSearch.addListener((eventName, queryString) =>
-          {
-            if (panelWindow)
-              panelWindow.postMessage({type: eventName, queryString}, "*");
-          });
-        }
+        panelWindow = window;
       });
+
+      panel.onHidden.addListener(window =>
+      {
+        panelWindow = null;
+      });
+
+      if (panel.onSearch)
+      {
+        panel.onSearch.addListener((eventName, queryString) =>
+        {
+          if (panelWindow)
+            panelWindow.postMessage({type: eventName, queryString}, "*");
+        });
+      }
     }
-  });
-}
+  }
+})();
