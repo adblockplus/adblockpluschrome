@@ -39,7 +39,7 @@
   },
   "scripts": {
     "generate-buildnum": "node --no-warnings build/utils/git.mjs",
-    "lint": "eslint --ext .js,.mjs *.js *.mjs lib/ ext/ test/ build/",
+    "lint": "eslint --ext .js,.mjs,.js.tmpl *.js *.mjs lib/ ext/ test/ build/",
     "test-only": "mocha --unhandled-rejections=strict --delay",
     "test": "npm run test-only --",
     "postinstall": "cd adblockplusui && npm install --only=production --loglevel=error --no-audit --no-fund --no-package-lock --no-optional",

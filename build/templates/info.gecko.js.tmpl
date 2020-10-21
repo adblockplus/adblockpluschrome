@@ -15,23 +15,23 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- "use strict";
+"use strict";
 
- exports.addonName = "{{addonName}}";
- exports.addonVersion = "{{addonVersion}}";
+exports.addonName = "{{addonName}}";
+exports.addonVersion = "{{addonVersion}}";
 
- exports.application = "unknown";
- exports.applicationVersion = "0";
+exports.application = "unknown";
+exports.applicationVersion = "0";
 
- exports.platform = "gecko";
- exports.platformVersion = "0";
+exports.platform = "gecko";
+exports.platformVersion = "0";
 
- let match = /\brv:(\d+(?:\.\d+)?)\b/.exec(navigator.userAgent);
- if (match)
-   exports.platformVersion = match[1];
+let match = /\brv:(\d+(?:\.\d+)?)\b/.exec(navigator.userAgent);
+if (match)
+  exports.platformVersion = match[1];
 
- browser.runtime.getBrowserInfo().then(browserInfo =>
- {
-   exports.application = browserInfo.name.toLowerCase();
-   exports.applicationVersion = browserInfo.version;
- });
+browser.runtime.getBrowserInfo().then(browserInfo =>
+{
+  exports.application = browserInfo.name.toLowerCase();
+  exports.applicationVersion = browserInfo.version;
+});
