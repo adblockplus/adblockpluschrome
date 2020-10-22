@@ -56,6 +56,13 @@ Chromium-based browsers, and under _about:debugging_ in Firefox. After making
 changes to the source code re-run the command to update the development
 environment, and the extension should reload automatically after a few seconds.
 
+### Source distribution
+
+In order to build a source distribution `.tar.gz` file, run the following
+command:
+
+        npx gulp source
+
 ### Customization
 
 If you wish to create an extension based on our code and use the same
