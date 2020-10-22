@@ -15,20 +15,32 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import gulp from "gulp";
-import merge from "merge-stream";
-import changePath from "../utils/gulp-change-path.mjs";
+import path from "path";
 
-export default function mapping(bundles)
-{
-  return merge(
-    bundles.copy.map(bundle =>
-      gulp.src(bundle.src)
-      .pipe(changePath(bundle.dest))
-    ),
-    bundles.rename.map(bundle =>
-      gulp.src(bundle.src)
-      .pipe(changePath(bundle.dest, {rename: true}))
-    )
-  );
-}
+let tmplLoaderPath = path.resolve("build", "utils", "wp-template-loader.cjs");
+
+export default {
+  optimization: {
+    minimize: false
+  },
+  output: {
+    path: path.resolve("")
+  },
+  node: {
+    global: false
+  },
+  resolve: {
+    modules: [
+      path.resolve("lib"),
+      path.resolve("adblockpluscore/lib"),
+      path.resolve("adblockplusui/lib"),
+      path.resolve("build/templates"),
+      "node_modules"
+    ]
+  },
+  resolveLoader: {
+    alias: {
+      "wp-template-loader": tmplLoaderPath
+    }
+  }
+};

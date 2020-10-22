@@ -16,8 +16,8 @@
  */
 
 import semver from "semver";
-import specializedTests from "./specialized.mjs";
-import {takeScreenshot, writeScreenshotFile} from "../../misc/screenshots.mjs";
+import specializedTests from "./specialized.js";
+import {takeScreenshot, writeScreenshotFile} from "../../misc/screenshots.js";
 
 export function isExcluded(page, browserName, browserVersion)
 {

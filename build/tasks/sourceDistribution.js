@@ -15,29 +15,16 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import path from "path";
-import {loadModules} from "../misc/utils.mjs";
+import gulp from "gulp";
+import tar from "gulp-tar";
+import gzip from "gulp-gzip";
+import {lsFiles} from "../utils/git.js";
 
-(async() =>
+export default async function sourceDistribution(filename)
 {
-  for (let [module] of await loadModules(path.join("test", "browsers")))
-  {
-    if (!module.ensureBrowser)
-      continue;
-
-    for (let version of [module.oldestCompatibleVersion,
-                         module.getLatestVersion()])
-    {
-      try
-      {
-        let binary = await module.ensureBrowser(await version);
-        if (module.ensureDriver)
-          await module.ensureDriver(binary);
-      }
-      catch (e)
-      {
-        console.warn(e);
-      }
-    }
-  }
-})();
+  let sourceFiles = await lsFiles();
+  return gulp.src(sourceFiles, {base: process.cwd()})
+    .pipe(tar(`${filename}.tar`))
+    .pipe(gzip())
+    .pipe(gulp.dest(process.cwd()));
+}

@@ -38,13 +38,14 @@
     "webpack-stream": "^6.1.0"
   },
   "scripts": {
-    "generate-buildnum": "node --no-warnings build/utils/git.mjs",
-    "lint": "eslint --ext .js,.mjs,.js.tmpl *.js *.mjs lib/ ext/ test/ build/",
+    "generate-buildnum": "node --no-warnings build/utils/git.js",
+    "lint": "eslint --ext .js,.cjs,.js.tmpl *.js lib/ ext/ test/ build/",
     "test-only": "mocha --unhandled-rejections=strict --delay",
     "test": "npm run test-only --",
     "postinstall": "cd adblockplusui && npm install --only=production --loglevel=error --no-audit --no-fund --no-package-lock --no-optional",
     "posttest": "npm run lint",
     "docs": "jsdoc --configure jsdoc.conf --destination docs lib",
-    "download-test-browsers": "node test/bin/downloadBrowsers.mjs"
-  }
+    "download-test-browsers": "node test/bin/downloadBrowsers.js"
+  },
+  "type": "module"
 }

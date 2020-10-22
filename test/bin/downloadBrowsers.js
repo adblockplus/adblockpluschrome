@@ -16,31 +16,28 @@
  */
 
 import path from "path";
+import {loadModules} from "../misc/utils.js";
 
-let tmplLoaderPath = path.resolve("build", "utils", "wp-template-loader.js");
+(async() =>
+{
+  for (let [module] of await loadModules(path.join("test", "browsers")))
+  {
+    if (!module.ensureBrowser)
+      continue;
 
-export default {
-  optimization: {
-    minimize: false
-  },
-  output: {
-    path: path.resolve("")
-  },
-  node: {
-    global: false
-  },
-  resolve: {
-    modules: [
-      path.resolve("lib"),
-      path.resolve("adblockpluscore/lib"),
-      path.resolve("adblockplusui/lib"),
-      path.resolve("build/templates"),
-      "node_modules"
-    ]
-  },
-  resolveLoader: {
-    alias: {
-      "wp-template-loader": tmplLoaderPath
+    for (let version of [module.oldestCompatibleVersion,
+                         module.getLatestVersion()])
+    {
+      try
+      {
+        let binary = await module.ensureBrowser(await version);
+        if (module.ensureDriver)
+          await module.ensureDriver(binary);
+      }
+      catch (e)
+      {
+        console.warn(e);
+      }
     }
   }
-};
+})();

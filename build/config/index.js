@@ -15,16 +15,8 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import gulp from "gulp";
-import tar from "gulp-tar";
-import gzip from "gulp-gzip";
-import {lsFiles} from "../utils/git.mjs";
-
-export default async function sourceDistribution(filename)
-{
-  let sourceFiles = await lsFiles();
-  return gulp.src(sourceFiles, {base: process.cwd()})
-    .pipe(tar(`${filename}.tar`))
-    .pipe(gzip())
-    .pipe(gulp.dest(process.cwd()));
-}
+export {default as base} from "./base.js";
+export {default as chrome} from "./chrome.js";
+export {default as firefox} from "./firefox.js";
+export {default as webpack} from "./webpack.config.js";
+export {chromeDev, firefoxDev} from "./devenv.js";

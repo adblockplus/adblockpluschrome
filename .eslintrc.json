@@ -20,8 +20,9 @@
   },
   "overrides": [
     {
-      "files": ["./devtools.js", "./options.js", "./polyfill.js",
-                "./ext/*.js", "./build/utils/wp-template-loader.js"],
+      "files": [
+        "./devtools.js", "./options.js", "./polyfill.js", "./ext/*.js", "*.cjs"
+      ],
       "parserOptions": {
         "sourceType": "script"
       }

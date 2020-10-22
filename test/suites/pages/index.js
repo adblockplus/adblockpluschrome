@@ -18,12 +18,12 @@
 import assert from "assert";
 import webdriver from "selenium-webdriver";
 import {checkLastError, runWithHandle,
-        executeScriptCompliant} from "../../misc/utils.mjs";
-import specializedTests from "./specialized.mjs";
-import defineSubscribeTest from "./subscribe.mjs";
-import defineUninstallTest from "./uninstall.mjs";
+        executeScriptCompliant} from "../../misc/utils.js";
+import specializedTests from "./specialized.js";
+import defineSubscribeTest from "./subscribe.js";
+import defineUninstallTest from "./uninstall.js";
 import {getExpectedScreenshot, runFirstTest,
-        getPage, isExcluded, runGenericTests} from "./utils.mjs";
+        getPage, isExcluded, runGenericTests} from "./utils.js";
 
 const {By} = webdriver;
 

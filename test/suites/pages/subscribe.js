@@ -17,9 +17,9 @@
 
 import assert from "assert";
 import webdriver from "selenium-webdriver";
-import {checkLastError, executeScriptCompliant} from "../../misc/utils.mjs";
-import {writeScreenshot} from "../../misc/screenshots.mjs";
-import {runFirstTest} from "./utils.mjs";
+import {checkLastError, executeScriptCompliant} from "../../misc/utils.js";
+import {writeScreenshot} from "../../misc/screenshots.js";
+import {runFirstTest} from "./utils.js";
 
 const {By} = webdriver;
 

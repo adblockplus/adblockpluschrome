@@ -15,8 +15,10 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {default as base} from "./base.mjs";
-export {default as chrome} from "./chrome.mjs";
-export {default as firefox} from "./firefox.mjs";
-export {default as webpack} from "./webpack.config.mjs";
-export {chromeDev, firefoxDev} from "./devenv.mjs";
+export {createManifest, getManifestContent} from "./manifest.js";
+export {default as webpack} from "./webpack.js";
+export {default as mapping} from "./mapping.js";
+export {translations, chromeTranslations} from "./translations.js";
+export {addDevEnvVersion, addUnitTestsPage} from "./devenv.js";
+export {buildUI} from "./dependencies.js";
+export {default as sourceDistribution} from "./sourceDistribution.js";

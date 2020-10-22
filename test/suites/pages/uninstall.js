@@ -15,7 +15,7 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import {runWithHandle} from "../../misc/utils.mjs";
+import {runWithHandle} from "../../misc/utils.js";
 
 export default () =>
 {

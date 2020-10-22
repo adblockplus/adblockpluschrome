@@ -74,7 +74,7 @@ export async function loadModules(dirname)
     let filename = path.resolve(dirname, dirent.name);
     let basename = path.parse(dirent.name).name;
     if (dirent.isDirectory())
-      filename = path.join(filename, "index.mjs");
+      filename = path.join(filename, "index.js");
     modules.push([await import(url.pathToFileURL(filename)), basename]);
   }
   return modules;

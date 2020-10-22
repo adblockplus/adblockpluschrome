@@ -15,10 +15,20 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export {createManifest, getManifestContent} from "./manifest.mjs";
-export {default as webpack} from "./webpack.mjs";
-export {default as mapping} from "./mapping.mjs";
-export {translations, chromeTranslations} from "./translations.mjs";
-export {addDevEnvVersion, addUnitTestsPage} from "./devenv.mjs";
-export {buildUI} from "./dependencies.mjs";
-export {default as sourceDistribution} from "./sourceDistribution.mjs";
+import gulp from "gulp";
+import merge from "merge-stream";
+import changePath from "../utils/gulp-change-path.js";
+
+export default function mapping(bundles)
+{
+  return merge(
+    bundles.copy.map(bundle =>
+      gulp.src(bundle.src)
+      .pipe(changePath(bundle.dest))
+    ),
+    bundles.rename.map(bundle =>
+      gulp.src(bundle.src)
+      .pipe(changePath(bundle.dest, {rename: true}))
+    )
+  );
+}

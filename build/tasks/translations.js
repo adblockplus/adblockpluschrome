@@ -16,8 +16,8 @@
  */
 
 import gulp from "gulp";
-import mergeTranslations from "../utils/gulp-merge-translations.mjs";
-import changePath from "../utils/gulp-change-path.mjs";
+import mergeTranslations from "../utils/gulp-merge-translations.js";
+import changePath from "../utils/gulp-change-path.js";
 
 export function translations(locales)
 {

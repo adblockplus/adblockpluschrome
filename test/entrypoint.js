@@ -24,8 +24,8 @@ import url from "url";
 import {exec} from "child_process";
 import {promisify} from "util";
 import got from "got";
-import {checkLastError, loadModules} from "./misc/utils.mjs";
-import {writeScreenshot} from "./misc/screenshots.mjs";
+import {checkLastError, loadModules} from "./misc/utils.js";
+import {writeScreenshot} from "./misc/screenshots.js";
 import fs from "fs";
 
 function getBrowserBinaries(module, browser)

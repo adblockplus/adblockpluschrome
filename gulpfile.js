@@ -20,10 +20,10 @@ import argparse from "argparse";
 import merge from "merge-stream";
 import zip from "gulp-vinyl-zip";
 import del from "del";
-import * as tasks from "./build/tasks/index.mjs";
-import * as config from "./build/config/index.mjs";
-import * as configParser from "./build/configParser.mjs";
-import * as gitUtils from "./build/utils/git.mjs";
+import * as tasks from "./build/tasks/index.js";
+import * as config from "./build/config/index.js";
+import * as configParser from "./build/configParser.js";
+import * as gitUtils from "./build/utils/git.js";
 import url from "url";
 
 let argumentParser = new argparse.ArgumentParser({

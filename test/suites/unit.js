@@ -17,8 +17,8 @@
 
 import assert from "assert";
 import webdriver from "selenium-webdriver";
-import {checkLastError} from "../misc/utils.mjs";
-import {writeScreenshot} from "../misc/screenshots.mjs";
+import {checkLastError} from "../misc/utils.js";
+import {writeScreenshot} from "../misc/screenshots.js";
 
 const {By, until} = webdriver;
 

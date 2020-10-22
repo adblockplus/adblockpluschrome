@@ -3,7 +3,7 @@
 # Build and CI
 /build/ sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
 /.gitlab-ci.yml sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
-/gulpfile.mjs sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
+/gulpfile.js sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
 /package.json sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
 /package-lock.json sebastian@adblockplus.org tristan@adblockplus.org t.feliu@eyeo.com
 

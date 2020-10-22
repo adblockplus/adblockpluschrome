@@ -17,7 +17,7 @@
 
 import assert from "assert";
 import webdriver from "selenium-webdriver";
-import {runWithHandle, executeScriptCompliant} from "../../misc/utils.mjs";
+import {runWithHandle, executeScriptCompliant} from "../../misc/utils.js";
 
 const {By} = webdriver;
 

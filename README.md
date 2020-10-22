@@ -70,13 +70,13 @@ build tools, we offer some customization options.
 
 This can be done by:
 
- - Specifying a path to a new configuration file relative to `gulpfile.mjs`
+ - Specifying a path to a new configuration file relative to `gulpfile.js`
 (it should match the structure found in `build/config/`).
 
-        npx gulp {build|devenv} -t {chrome|firefox} --config config.mjs
+        npx gulp {build|devenv} -t {chrome|firefox} --config config.js
 
- - Specifying a path to a new `manifest.json` file relative to `gulpfile.mjs`.
-You should check `build/manifest.json` and `build/tasks/manifest.mjs` to see
+ - Specifying a path to a new `manifest.json` file relative to `gulpfile.js`.
+You should check `build/manifest.json` and `build/tasks/manifest.js` to see
 how we modify it.
 
         npx gulp {build|devenv} -t {chrome|firefox} -m manifest.json
