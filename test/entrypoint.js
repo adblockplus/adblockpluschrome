@@ -93,7 +93,7 @@ async function waitForExtension(driver, target)
     let seenHandles = handles;
     handles = await driver.getAllWindowHandles();
     return handles.every(handle => seenHandles.includes(handle));
-  }, 8000, "Handles kept changing after timeout", 2000);
+  }, 10000, "Handles kept changing after timeout", 3000);
 
   let origin;
   let handle;
