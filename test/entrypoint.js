@@ -24,9 +24,9 @@ import url from "url";
 import {exec} from "child_process";
 import {promisify} from "util";
 import got from "got";
-import {checkLastError, loadModules} from "./misc/utils.js";
+import {checkLastError, loadModules, executeScriptCompliant}
+  from "./misc/utils.js";
 import {writeScreenshot} from "./misc/screenshots.js";
-import fs from "fs";
 
 function getBrowserBinaries(module, browser)
 {
@@ -80,13 +80,8 @@ async function getDriver(binary, devenvCreated, module)
   return module.getDriver(browserBin, extensionPaths, TEST_PAGES_INSECURE);
 }
 
-async function waitForExtension(driver, target)
+async function waitForExtension(driver)
 {
-  let manifestFile = await fs.promises.readFile(
-    path.resolve(`./devenv.${target}`, "manifest.json")
-  );
-  let optionsPage = JSON.parse(manifestFile).options_ui.page;
-
   let handles = [];
   await driver.wait(async() =>
   {
@@ -100,12 +95,16 @@ async function waitForExtension(driver, target)
   for (handle of handles)
   {
     await driver.switchTo().window(handle);
-    let handleUrl = new URL(await driver.getCurrentUrl());
-    if (handleUrl.pathname == "/" + optionsPage)
-    {
-      origin = `${handleUrl.protocol}//${handleUrl.host}`;
+    origin = await executeScriptCompliant(driver, `
+      if (typeof browser != "undefined")
+      {
+        let info = await browser.management.getSelf();
+        if (info.optionsUrl == location.href)
+          return location.origin;
+      }
+      return null;`);
+    if (origin)
       break;
-    }
   }
 
   if (!origin)
@@ -181,7 +180,7 @@ if (typeof run == "undefined")
           try
           {
             [this.extensionHandle, this.extensionOrigin] =
-              await waitForExtension(this.driver, module.target);
+              await waitForExtension(this.driver);
           }
           catch (e)
           {
