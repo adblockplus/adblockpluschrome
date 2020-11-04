@@ -351,7 +351,7 @@
 
         for (let detail of details)
         {
-          let frame = {url: new URL(detail.url)};
+          let frame = {url: new URL(detail.url), state: Object.create(null)};
           frames.set(detail.frameId, frame);
 
           if (detail.parentFrameId > -1)
