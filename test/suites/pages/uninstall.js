@@ -21,7 +21,7 @@ export default () =>
 {
   it("opens uninstall page when extension is uninstalled", async function()
   {
-    await runWithHandle(this.driver, this.extensionHandle, () =>
+    await runWithHandle(this.driver, this.extensionHandle, this.test, () =>
       this.driver.executeScript("browser.management.uninstallSelf();")
     );
 

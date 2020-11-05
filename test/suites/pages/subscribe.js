@@ -18,7 +18,7 @@
 import assert from "assert";
 import webdriver from "selenium-webdriver";
 import {checkLastError, executeScriptCompliant} from "../../misc/utils.js";
-import {writeScreenshot} from "../../misc/screenshots.js";
+import {writeScreenshotAndThrow} from "../../misc/screenshots.js";
 import {runFirstTest} from "./utils.js";
 
 const {By} = webdriver;
@@ -76,7 +76,7 @@ export default () =>
     }
     catch (e)
     {
-      await writeScreenshot(this, e);
+      await writeScreenshotAndThrow(this, e);
     }
     await this.driver.switchTo().window(
       (await this.driver.getAllWindowHandles())[0]

@@ -19,6 +19,7 @@ import assert from "assert";
 import fs from "fs";
 import path from "path";
 import url from "url";
+import {writeScreenshotAndThrow} from "./screenshots.js";
 
 /*
  * Standard-compliant polyfill for WebDriver#executeScript,
@@ -52,13 +53,28 @@ export async function checkLastError(driver, handle)
     assert.fail("Unhandled error in background page: " + error);
 }
 
-export async function runWithHandle(driver, handle, callback)
+export async function getBrowserInfo(driver)
+{
+  let caps = await driver.getCapabilities();
+  return [caps.getBrowserName(),
+          caps.getBrowserVersion() || caps.get("version")];
+}
+
+export async function runWithHandle(driver, handle, test, callback)
 {
   let currentHandle = await driver.getWindowHandle();
   await driver.switchTo().window(handle);
   try
   {
     return await callback();
+  }
+  catch (err)
+  {
+    let [browserName, browserVersion] = await getBrowserInfo(driver);
+    await writeScreenshotAndThrow(
+      {driver, browserName, browserVersion, test},
+      err
+    );
   }
   finally
   {

@@ -18,7 +18,7 @@
 import assert from "assert";
 import webdriver from "selenium-webdriver";
 import {checkLastError} from "../misc/utils.js";
-import {writeScreenshot} from "../misc/screenshots.js";
+import {writeScreenshotAndThrow} from "../misc/screenshots.js";
 
 const {By, until} = webdriver;
 
@@ -50,7 +50,7 @@ export default () =>
     }
     catch (e)
     {
-      await writeScreenshot(this, e);
+      await writeScreenshotAndThrow(this, e);
     }
 
     await checkLastError(this.driver, this.extensionHandle);

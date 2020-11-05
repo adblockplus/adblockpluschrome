@@ -38,11 +38,11 @@ async function getFilters(driver)
   return Array.from(filters).join("\n");
 }
 
-async function updateFilters(driver, extensionHandle, url)
+async function updateFilters(driver, extensionHandle, test, url)
 {
   await driver.navigate().to(url);
   let filters = await getFilters(driver);
-  let error = await runWithHandle(driver, extensionHandle,
+  let error = await runWithHandle(driver, extensionHandle, test,
                                   () => executeScriptCompliant(driver, `
     let filters = arguments[0];
     let subs = await browser.runtime.sendMessage(
@@ -83,7 +83,8 @@ export default () =>
 
           if (page in specializedTests)
           {
-            await updateFilters(this.driver, this.extensionHandle, url);
+            await updateFilters(this.driver, this.extensionHandle, this.test,
+                                url);
             let locator = By.className("testcase-area");
             for (let element of await this.driver.findElements(locator))
               await specializedTests[page].run(element, this.extensionHandle);
@@ -92,7 +93,8 @@ export default () =>
           {
             let expectedScreenshot = await getExpectedScreenshot(this.driver,
                                                                  url);
-            await updateFilters(this.driver, this.extensionHandle, url);
+            await updateFilters(this.driver, this.extensionHandle, this.test,
+                                url);
             await runGenericTests(this.driver, expectedScreenshot,
                                   this.browserName, this.browserVersion,
                                   pageTitle, url);

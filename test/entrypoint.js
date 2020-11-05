@@ -24,9 +24,9 @@ import url from "url";
 import {exec} from "child_process";
 import {promisify} from "util";
 import got from "got";
-import {checkLastError, loadModules, executeScriptCompliant}
+import {checkLastError, loadModules, executeScriptCompliant, getBrowserInfo}
   from "./misc/utils.js";
-import {writeScreenshot} from "./misc/screenshots.js";
+import {writeScreenshotAndThrow} from "./misc/screenshots.js";
 
 function getBrowserBinaries(module, browser)
 {
@@ -171,9 +171,8 @@ if (typeof run == "undefined")
 
           this.driver = await getDriver(binary, devenvCreated, module);
 
-          let caps = await this.driver.getCapabilities();
-          this.browserName = caps.getBrowserName();
-          this.browserVersion = caps.getBrowserVersion() || caps.get("version");
+          [this.browserName, this.browserVersion] =
+            await getBrowserInfo(this.driver);
           // eslint-disable-next-line no-console
           console.log(`Browser: ${this.browserName} ${this.browserVersion}`);
 
@@ -184,7 +183,7 @@ if (typeof run == "undefined")
           }
           catch (e)
           {
-            await writeScreenshot(this, e);
+            await writeScreenshotAndThrow(this, e);
           }
         });
 

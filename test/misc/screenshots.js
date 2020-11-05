@@ -67,7 +67,7 @@ export async function writeScreenshotFile(image, browserName, browserVersion,
   return screenshotPath;
 }
 
-export async function writeScreenshot(context, error)
+export async function writeScreenshotAndThrow(context, error)
 {
   let {driver, browserName, browserVersion, test} = context;
   let screenshot = await takeScreenshot(driver);
