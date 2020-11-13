@@ -16,10 +16,10 @@
  */
 
 import assert from "assert";
-import {analytics} from "../../adblockpluscore/lib/analytics";
-import {filterStorage} from "../../adblockpluscore/lib/filterStorage";
-import {Prefs} from "../../lib/prefs";
-import {setUninstallURL} from "../../lib/uninstall";
+import {analytics} from "../../adblockpluscore/lib/analytics.js";
+import {filterStorage} from "../../adblockpluscore/lib/filterStorage.js";
+import {Prefs} from "../../lib/prefs.js";
+import {setUninstallURL} from "../../lib/uninstall.js";
 import * as info from "info";
 
 const realSetUninstallURL = browser.runtime.setUninstallURL;

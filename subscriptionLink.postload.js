@@ -15,8 +15,6 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export default void 0; // adblockpluschrome#296
-
 if (document instanceof HTMLDocument)
 {
   document.addEventListener("click", event =>

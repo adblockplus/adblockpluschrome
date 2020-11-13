@@ -16,8 +16,8 @@
  */
 
 import assert from "assert";
-import {chooseFilterSubscriptions} from "../../lib/subscriptionInit";
-import subscriptions from "./resources/subscriptions";
+import {chooseFilterSubscriptions} from "../../lib/subscriptionInit.js";
+import subscriptions from "./resources/subscriptions.js";
 
 describe("Subscription initialization", () =>
 {

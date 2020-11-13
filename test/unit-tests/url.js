@@ -16,7 +16,7 @@
  */
 
 import assert from "assert";
-import {extractHostFromFrame} from "../../lib/url";
+import {extractHostFromFrame} from "../../lib/url.js";
 
 describe("URL/host tools", () =>
 {

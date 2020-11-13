@@ -15,8 +15,6 @@
  * along with Adblock Plus.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-export default void 0; // adblockpluschrome#296
-
 let randomEventName = "abp-request-" + Math.random().toString(36).substr(2);
 
 // Proxy "should we block?" messages from checkRequest inside the injected

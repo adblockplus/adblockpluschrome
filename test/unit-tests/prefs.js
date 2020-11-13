@@ -16,7 +16,7 @@
  */
 
 import assert from "assert";
-import {Prefs} from "../../lib/prefs";
+import {Prefs} from "../../lib/prefs.js";
 
 describe("Preferences", () =>
 {

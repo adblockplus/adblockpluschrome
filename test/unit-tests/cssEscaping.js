@@ -16,8 +16,9 @@
  */
 
 import assert from "assert";
-import {Filter, ElemHideFilter} from "../../adblockpluscore/lib/filterClasses";
-import {escapeCSS, quoteCSS} from "../../lib/filterComposer";
+import {Filter, ElemHideFilter}
+  from "../../adblockpluscore/lib/filterClasses.js";
+import {escapeCSS, quoteCSS} from "../../lib/filterComposer.js";
 
 describe("CSS escaping", () =>
 {

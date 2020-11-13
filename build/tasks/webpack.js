@@ -19,6 +19,7 @@ import gulp from "gulp";
 import merge from "merge-stream";
 import webpackStream from "webpack-stream";
 import webpackMerge from "webpack-merge";
+import webpackMain from "webpack";
 
 export default function webpack({webpackInfo, addonName, addonVersion,
                                  sourceMapType})
@@ -51,6 +52,6 @@ export default function webpack({webpackInfo, addonName, addonVersion,
               ]
             }
           })
-      }))
+      }, webpackMain))
   ));
 }
