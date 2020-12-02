@@ -191,11 +191,12 @@ if (typeof run == "undefined")
         beforeEach(async function()
         {
           let handles = await this.driver.getAllWindowHandles();
-          let defaultHandle = handles.shift();
+          let defaultHandle =
+            handles.find(handle => handle != this.extensionHandle);
 
           for (let handle of handles)
           {
-            if (handle != this.extensionHandle)
+            if (handle != this.extensionHandle && handle != defaultHandle)
             {
               try
               {
