@@ -70,12 +70,12 @@ async function getNumberOfHandles(driver)
   return (await driver.getAllWindowHandles()).length;
 }
 
-async function checkPopup(element, extensionHandle, test)
+async function checkPopup(element, extensionHandle)
 {
   let driver = element.getDriver();
   let nHandles = await getNumberOfHandles(driver);
   let token = Math.floor(Math.random() * 1e8);
-  await runWithHandle(driver, extensionHandle, test, () =>
+  await runWithHandle(driver, extensionHandle, () =>
     driver.executeScript(`
     self.tabCreated${token} = new Promise(resolve =>
     {
@@ -86,7 +86,7 @@ async function checkPopup(element, extensionHandle, test)
       });
     });`));
   await clickButtonOrLink(element);
-  await runWithHandle(driver, extensionHandle, test, () =>
+  await runWithHandle(driver, extensionHandle, () =>
     executeScriptCompliant(driver, `await self.tabCreated${token};`)
   );
   await driver.sleep(1000);

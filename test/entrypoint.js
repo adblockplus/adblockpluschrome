@@ -24,7 +24,7 @@ import url from "url";
 import {exec} from "child_process";
 import {promisify} from "util";
 import got from "got";
-import {checkLastError, loadModules, executeScriptCompliant, getBrowserInfo}
+import {checkLastError, loadModules, executeScriptCompliant}
   from "./misc/utils.js";
 import {writeScreenshotAndThrow} from "./misc/screenshots.js";
 
@@ -171,8 +171,9 @@ if (typeof run == "undefined")
 
           this.driver = await getDriver(binary, devenvCreated, module);
 
-          [this.browserName, this.browserVersion] =
-            await getBrowserInfo(this.driver);
+          let caps = await this.driver.getCapabilities();
+          this.browserName = caps.getBrowserName();
+          this.browserVersion = caps.getBrowserVersion() || caps.get("version");
           // eslint-disable-next-line no-console
           console.log(`Browser: ${this.browserName} ${this.browserVersion}`);
 
