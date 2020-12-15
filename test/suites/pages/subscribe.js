@@ -23,9 +23,9 @@ import {runFirstTest} from "./utils.js";
 
 const {By} = webdriver;
 
-async function addSubscription(driver, extensionHandle)
+async function addSubscription(driver, extensionHandle, currentHandle)
 {
-  await driver.switchTo().window((await driver.getAllWindowHandles())[0]);
+  await driver.switchTo().window(currentHandle);
   await driver.findElement(By.id("subscribe-button")).click();
   await driver.switchTo().window(extensionHandle);
 
@@ -68,19 +68,18 @@ export default () =>
   {
     let {testPagesURL, pageTests} = this.test.parent.parent.parent;
     let subscription = `${testPagesURL}abp-testcase-subscription.txt`;
+    let currentHandle = await this.driver.getWindowHandle();
     try
     {
       await this.driver.navigate().to(testPagesURL);
-      await addSubscription(this.driver, this.extensionHandle);
+      await addSubscription(this.driver, this.extensionHandle, currentHandle);
       await checkSubscriptionAdded(this.driver, subscription);
     }
     catch (e)
     {
       await writeScreenshotAndThrow(this, e);
     }
-    await this.driver.switchTo().window(
-      (await this.driver.getAllWindowHandles())[0]
-    );
+    await this.driver.switchTo().window(currentHandle);
     await runFirstTest(this.driver, this.browserName, this.browserVersion,
                        pageTests, this.test.title);
     await removeSubscription(this.driver, this.extensionHandle, subscription);
