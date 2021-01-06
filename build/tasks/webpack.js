@@ -50,6 +50,9 @@ export default function webpack({webpackInfo, addonName, addonVersion,
                   }
                 }
               ]
+            },
+            externals: {
+              perf_hooks: "self"
             }
           })
       }, webpackMain))
