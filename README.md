@@ -1,5 +1,17 @@
-Adblock Plus for Chrome, Opera, Microsoft Edge and Firefox
-==========================================================
+Adblock Plus for Chrome, Opera, Microsoft Edge and Firefox (DEPRECATED!)
+========================================================================
+
+IMPORTANT: Deprecation notice
+-----------------------------
+
+This codebase is deprecated. As of Adblock Plus 3.11, Adblock Plus for Chrome,
+Firefox, Microsoft Edge and Opera is based on the
+[adblockplusui repository](https://gitlab.com/eyeo/adblockplus/abpui/adblockplusui/).
+
+Development of the core ad blocking integration for web extensions has moved to
+the [webext-sdk repository](https://gitlab.com/eyeo/adblockplus/webext-sdk).
+
+---
 
 This repository contains the platform-specific Adblock Plus source code for
 Chrome, Opera, Microsoft Edge and Firefox. It can be used to build
